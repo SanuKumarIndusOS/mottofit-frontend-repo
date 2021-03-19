@@ -10,6 +10,9 @@ import Icon3 from "../../../assests/Home/Experience/icon/Icon3.png";
 import Icon4 from "../../../assests/Home/Experience/icon/Icon4.png";
 import Icon5 from "../../../assests/Home/Experience/icon/Icon5.png";
 import Icon6 from "../../../assests/Home/Experience/icon/Icon6.png";
+import { Link } from "react-router-dom";
+import Circle from "../../../assests/SVG/circle.png";
+import Arrow from "../../../assests/SVG/arrow.png";
 
 export default class Experience extends Component {
   render() {
@@ -47,7 +50,15 @@ export default class Experience extends Component {
               Boxing, Yoga & Pilates. Train virtually <br /> from anywhere or
               locally in Motto markets.
             </div>
-            <div className="link">FIND YOUR BEST MATCH </div>
+            <div className="link">
+                        <div className='button-text'>
+                            <Link to="/">APPLY AS A TRAINER</Link>
+                        </div>
+                        <div className="button-custom">
+                            <img src={Arrow} alt="" srcSet="" />
+                            <img src={Circle} alt="" srcSet="" />
+                        </div>
+                    </div>
           </div>
           <div className="personal_trainer_props_2">
             <div className="icon_1">

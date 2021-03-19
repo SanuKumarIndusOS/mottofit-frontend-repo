@@ -1,9 +1,6 @@
 import React from "react";
 import "./styles.scss";
-// const personal_img_1 = require("../../../assests/Home/Benfit/personal.png");
-
 import personal_img from "../../../assests/Home/Benfit/personal.png";
-import social_img from "../../../assests/Home/Benfit/personal.png";
 import season_img from "../../../assests/Home/Benfit/season.png";
 import Benifit from "../../../assests/Home/Benfit/Icon4.png";
 

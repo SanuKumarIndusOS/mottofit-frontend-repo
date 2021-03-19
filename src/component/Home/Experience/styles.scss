@@ -1,214 +1,260 @@
 .big_container {
-  min-width: 1400px;
-  max-width: 1920px;
-
-  .experience_upper_container {
-    opacity: 1;
-
-    .heading {
-      padding-top: 130px;
-      padding-bottom: 80px;
-      font: var(--unnamed-font-style-normal) normal
-        var(--unnamed-font-weight-bold) var(--unnamed-font-size-45) /
-        var(--unnamed-line-spacing-55)
-        var(--unnamed-font-family-cormorant-garamond);
-      letter-spacing: var(--unnamed-character-spacing--0-45);
-      color: var(--unnamed-color-161616);
-      text-align: center;
-      font: normal normal bold 45px/55px Cormorant Garamond;
-      letter-spacing: -0.45px;
-      color: #161616;
-      opacity: 1;
-    }
-    .image_Container {
-      display: flex;
-      justify-content: center;
-      height: 450px;
-
-      .image_strength_main {
-        display: flex;
-        justify-content: space-between;
-      }
-    }
-  }
-
-  .personal_container {
-    display: flex;
-    justify-content: space-around;
-    padding: 150px 70px;
-    .personal_trainer_description {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      .heading {
-        padding-bottom: 15px;
-        font: var(--unnamed-font-style-normal) normal
-          var(--unnamed-font-weight-600) var(--unnamed-font-size-40) /
-          var(--unnamed-line-spacing-58) var(--unnamed-font-family-montserrat);
-        letter-spacing: var(--unnamed-character-spacing-0);
-        color: var(--unnamed-color-161616);
-        text-align: left;
-        font: normal normal 600 40px/58px Montserrat;
-        letter-spacing: 0px;
-        color: #161616;
+    // min-width: 1400px;
+    // max-width: 1920px;
+    width: 100%;
+    .experience_upper_container {
         opacity: 1;
-      }
-      .discription {
-        padding-bottom: 30px;
+        padding: 2em;
 
-        font: var(--unnamed-font-style-normal) normal
-          var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
-          var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
-        letter-spacing: var(--unnamed-character-spacing-0-27);
-        color: var(--unnamed-color-2c2c2c);
-        text-align: left;
-        font: normal normal normal 18px/32px Montserrat;
-        letter-spacing: 0.27px;
-        color: #2c2c2c;
-        opacity: 1;
-      }
-      .link {
-        font: var(--unnamed-font-style-normal) normal
-          var(--unnamed-font-weight-bold) var(--unnamed-font-size-18) /
-          var(--unnamed-line-spacing-22) var(--unnamed-font-family-montserrat);
-        color: var(--unnamed-color-161616);
-        text-align: right;
-        font: normal normal bold 18px/22px Montserrat;
-        letter-spacing: 0.45px;
-        color: #161616;
-        text-transform: uppercase;
-        opacity: 1;
-      }
+        .heading {
+            // padding-top: 130px;
+            padding-bottom: 80px;
+            font: var(--unnamed-font-style-normal) normal
+                var(--unnamed-font-weight-bold) var(--unnamed-font-size-45) /
+                var(--unnamed-line-spacing-55)
+                var(--unnamed-font-family-cormorant-garamond);
+            letter-spacing: var(--unnamed-character-spacing--0-45);
+            color: var(--unnamed-color-161616);
+            text-align: center;
+            font: normal normal bold 45px/55px Cormorant Garamond;
+            letter-spacing: -0.45px;
+            color: #161616;
+            opacity: 1;
+        }
+        .image_Container {
+            display: flex;
+            justify-content: center;
+            height: 300px;
+            width: 100%;
+
+            .image_strength_main {
+                display: flex;
+                width: 20%;
+                margin: 0 1em;
+                justify-content: space-around;
+            }
+        }
     }
-    .personal_trainer_props_2 {
-      display: flex;
-      flex-direction: column;
-      .icon_1 {
+
+    .personal_container {
         display: flex;
-        padding: 2px;
-        .image {
-          padding-bottom: 20px;
+        justify-content: space-around;
+        padding: 150px 70px;
+        .personal_trainer_description {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .heading {
+                padding-bottom: 15px;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-600) var(--unnamed-font-size-40) /
+                    var(--unnamed-line-spacing-58)
+                    var(--unnamed-font-family-montserrat);
+                letter-spacing: var(--unnamed-character-spacing-0);
+                color: var(--unnamed-color-161616);
+                text-align: left;
+                font: normal normal 600 40px/58px Montserrat;
+                letter-spacing: 0px;
+                color: #161616;
+                opacity: 1;
+            }
+            .discription {
+                padding-bottom: 30px;
+
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-normal)
+                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32)
+                    var(--unnamed-font-family-montserrat);
+                letter-spacing: var(--unnamed-character-spacing-0-27);
+                color: var(--unnamed-color-2c2c2c);
+                text-align: left;
+                font: normal normal normal 18px/32px Montserrat;
+                letter-spacing: 0.27px;
+                color: #2c2c2c;
+                opacity: 1;
+            }
+            .link {
+                height: 22px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                color: var(--unnamed-color-161616);
+                text-align: left;
+                font: 18px 900/12px Montserrat;
+                letter-spacing: 0.45px;
+                color: #161616;
+                text-transform: uppercase;
+                opacity: 1;
+                margin-top: 2em;
+                text-decoration: none;
+                position: relative;
+            }
+            .button-text {
+                text-align: left;
+            }
+            .button-custom {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0 2em;
+            }
+            .button-custom img {
+                width: 30px;
+                height: auto;
+            }
+            img:nth-child(1) {
+                position: absolute;
+                top: 25%;
+                left: 55%;
+                right: 0;
+            }
+            a {
+                text-decoration: none;
+                color: #161616;
+                font-weight: 900;
+            }
         }
-        .discription {
-          padding: 20px;
-          font: var(--unnamed-font-style-normal) normal
-            var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
-            var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
-          letter-spacing: var(--unnamed-character-spacing-0-3);
-          color: var(--unnamed-color-2c2c2c);
-          text-align: left;
-          font: normal normal normal 20px/32px Montserrat;
-          letter-spacing: 0.3px;
-          color: #2c2c2c;
-          opacity: 1;
+        .personal_trainer_props_2 {
+            display: flex;
+            flex-direction: column;
+            .icon_1 {
+                display: flex;
+                padding: 2px;
+                .image {
+                    padding-bottom: 20px;
+                }
+                .discription {
+                    padding: 20px;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-20) /
+                        var(--unnamed-line-spacing-32)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0-3);
+                    color: var(--unnamed-color-2c2c2c);
+                    text-align: left;
+                    font: normal normal normal 20px/32px Montserrat;
+                    letter-spacing: 0.3px;
+                    color: #2c2c2c;
+                    opacity: 1;
+                }
+            }
+            .icon_2 {
+                display: flex;
+                padding: 2px;
+                .image {
+                    padding-bottom: 20px;
+                }
+                .discription {
+                    padding: 20px;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-20) /
+                        var(--unnamed-line-spacing-32)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0-3);
+                    color: var(--unnamed-color-2c2c2c);
+                    text-align: left;
+                    font: normal normal normal 20px/32px Montserrat;
+                    letter-spacing: 0.3px;
+                    color: #2c2c2c;
+                    opacity: 1;
+                }
+            }
+            .icon_3 {
+                display: flex;
+                padding: 2px;
+                .image {
+                    padding-bottom: 20px;
+                }
+                .discription {
+                    padding: 20px;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-20) /
+                        var(--unnamed-line-spacing-32)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0-3);
+                    color: var(--unnamed-color-2c2c2c);
+                    text-align: left;
+                    font: normal normal normal 20px/32px Montserrat;
+                    letter-spacing: 0.3px;
+                    color: #2c2c2c;
+                    opacity: 1;
+                }
+            }
         }
-      }
-      .icon_2 {
-        display: flex;
-        padding: 2px;
-        .image {
-          padding-bottom: 20px;
+        .personal_trainer_props_3 {
+            display: flex;
+            flex-direction: column;
+            display: flex;
+            flex-direction: column;
+            .icon_1 {
+                display: flex;
+                padding: 2px;
+                .image {
+                    padding-bottom: 20px;
+                }
+                .discription {
+                    padding: 20px;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-20) /
+                        var(--unnamed-line-spacing-32)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0-3);
+                    color: var(--unnamed-color-2c2c2c);
+                    text-align: left;
+                    font: normal normal normal 20px/32px Montserrat;
+                    letter-spacing: 0.3px;
+                    color: #2c2c2c;
+                    opacity: 1;
+                }
+            }
+            .icon_2 {
+                display: flex;
+                padding: 2px;
+                .image {
+                    padding-bottom: 20px;
+                }
+                .discription {
+                    padding: 20px;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-20) /
+                        var(--unnamed-line-spacing-32)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0-3);
+                    color: var(--unnamed-color-2c2c2c);
+                    text-align: left;
+                    font: normal normal normal 20px/32px Montserrat;
+                    letter-spacing: 0.3px;
+                    color: #2c2c2c;
+                    opacity: 1;
+                }
+            }
+            .icon_3 {
+                display: flex;
+                padding: 2px;
+                .image {
+                    padding-bottom: 20px;
+                }
+                .discription {
+                    padding: 20px;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-20) /
+                        var(--unnamed-line-spacing-32)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0-3);
+                    color: var(--unnamed-color-2c2c2c);
+                    text-align: left;
+                    font: normal normal normal 20px/32px Montserrat;
+                    letter-spacing: 0.3px;
+                    color: #2c2c2c;
+                    opacity: 1;
+                }
+            }
         }
-        .discription {
-          padding: 20px;
-          font: var(--unnamed-font-style-normal) normal
-            var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
-            var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
-          letter-spacing: var(--unnamed-character-spacing-0-3);
-          color: var(--unnamed-color-2c2c2c);
-          text-align: left;
-          font: normal normal normal 20px/32px Montserrat;
-          letter-spacing: 0.3px;
-          color: #2c2c2c;
-          opacity: 1;
-        }
-      }
-      .icon_3 {
-        display: flex;
-        padding: 2px;
-        .image {
-          padding-bottom: 20px;
-        }
-        .discription {
-          padding: 20px;
-          font: var(--unnamed-font-style-normal) normal
-            var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
-            var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
-          letter-spacing: var(--unnamed-character-spacing-0-3);
-          color: var(--unnamed-color-2c2c2c);
-          text-align: left;
-          font: normal normal normal 20px/32px Montserrat;
-          letter-spacing: 0.3px;
-          color: #2c2c2c;
-          opacity: 1;
-        }
-      }
     }
-    .personal_trainer_props_3 {
-      display: flex;
-      flex-direction: column;
-      display: flex;
-      flex-direction: column;
-      .icon_1 {
-        display: flex;
-        padding: 2px;
-        .image {
-          padding-bottom: 20px;
-        }
-        .discription {
-          padding: 20px;
-          font: var(--unnamed-font-style-normal) normal
-            var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
-            var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
-          letter-spacing: var(--unnamed-character-spacing-0-3);
-          color: var(--unnamed-color-2c2c2c);
-          text-align: left;
-          font: normal normal normal 20px/32px Montserrat;
-          letter-spacing: 0.3px;
-          color: #2c2c2c;
-          opacity: 1;
-        }
-      }
-      .icon_2 {
-        display: flex;
-        padding: 2px;
-        .image {
-          padding-bottom: 20px;
-        }
-        .discription {
-          padding: 20px;
-          font: var(--unnamed-font-style-normal) normal
-            var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
-            var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
-          letter-spacing: var(--unnamed-character-spacing-0-3);
-          color: var(--unnamed-color-2c2c2c);
-          text-align: left;
-          font: normal normal normal 20px/32px Montserrat;
-          letter-spacing: 0.3px;
-          color: #2c2c2c;
-          opacity: 1;
-        }
-      }
-      .icon_3 {
-        display: flex;
-        padding: 2px;
-        .image {
-          padding-bottom: 20px;
-        }
-        .discription {
-          padding: 20px;
-          font: var(--unnamed-font-style-normal) normal
-            var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
-            var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
-          letter-spacing: var(--unnamed-character-spacing-0-3);
-          color: var(--unnamed-color-2c2c2c);
-          text-align: left;
-          font: normal normal normal 20px/32px Montserrat;
-          letter-spacing: 0.3px;
-          color: #2c2c2c;
-          opacity: 1;
-        }
-      }
-    }
-  }
 }

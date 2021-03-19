@@ -17,17 +17,28 @@
 // };
 
 // export default Navbar;
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { BsPerson } from "react-icons/bs";
 
-import "./styles.scss";
+import "./styles.css";
 
 const NavBar = () => {
+
+  const [navbar, setNavebar] = useState(false);
+  const changeBackground = () => {
+    if (window.scrollY >= 100) {
+        setNavebar(true);
+    } else {
+        setNavebar(false);
+    }
+};
+window.addEventListener("scroll", changeBackground);
+
   return (
     <>
-      <nav className="navbar-sass ">
+      <nav className={navbar ? "navbaractive active" : "navbar-sass"}>
         <div className="navbar-container">
           <div className="header-links">
             <Link to="/findtrainer">How it works</Link>

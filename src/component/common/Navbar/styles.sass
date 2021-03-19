@@ -1,37 +1,45 @@
-$primary-bg: #ffffff;
-$text-color: #000000;
-$logo: #53BFD2;
-$icon-color: #bcbcbc;
+$primary-bg: #ffffff
+$text-color: #000000
+$logo: #53BFD2
+$icon-color: #bcbcbc
 
-.navbar-sass{
-    background:$primary-bg;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    .navbar-container{
+.navbar.active
+    transition: 0.8s ease-in-out
+    background: $logo
+    position: sticky
+    display: flex
+    justify-content: space-around
+    flex-direction: row
+    align-items: center
+    top: 0
+    z-index: 999
+
+.navbar-sass
+    background: transparent
+
+    .navbar-container
         display: flex
         justify-content: space-around
         flex-direction: row
         align-items: center
+        margin-bottom: -100px
+
         .header-links
             display: flex
             justify-content: space-around
             flex-direction: row
             align-items: center
             color: $text-color
-    
-            a {
+
+            a
                 color: $text-color
                 padding: 0 0.5em
                 text-decoration: none
-            }
-        .logo-content{
-            svg{
+        .logo-content
+            svg
                 height: 80px
                 padding: 0.5em
-        }
-    }
-        .search-items{
+        .search-items
             display: flex
             justify-content: space-around
             align-items: center
@@ -47,7 +55,7 @@ $icon-color: #bcbcbc;
                     border: 1px solid $logo
                     border-radius: 50px
                     padding: 0.5em
-                    width: 230px
+                    width: 200px
                     position: relative
                 ::placeholder
                     color: $text-color
@@ -58,22 +66,17 @@ $icon-color: #bcbcbc;
                     right: 15%
                     padding: 10px
                     min-width: 0
-                    font-size: 2.5em
+                    font-size: 1.5em
                     text-align: center
                     color: $icon-color
-        }
-        .login-item{
+        .login-item
             display: flex
             justify-content: center
             align-items: center
-        }
 
-            svg{
+            svg
                 width: 40px
-            &:nth-child(2) svg{
+                font-size: 1em
+            &:nth-child(2) svg
                 color: $icon-color
                 font-size: 2em
-            }
-        }
-}
-}

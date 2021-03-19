@@ -1,0 +1,142 @@
+$primary-light: #dbdbdb
+$text-color: #fff
+$footer-first: #161616
+$footer-second: #2C2C2C
+$hr-color: #454545
+$rights: #898989
+$icons: #53BFD2
+
+.footer
+    display: flex
+    flex-direction: row
+    position: relative
+    z-index: 999
+    .left
+        background: $footer-first
+        width: 100%
+        height: 200px
+        display: flex
+        align-items: center
+        position: relative
+        @media screen and ( max-width: 1023px  )
+            height: 150px
+        .left-footer
+            p
+                margin-left: 3em
+                color: $text-color
+                text-align: left
+        .icons
+            display: flex
+            justify-content: space-evenly
+            margin: 0 auto
+
+        li
+            list-style-type: none
+            svg
+                position: relative
+                font-size: 2em
+                margin: 0 0.2em
+                color: $icons
+
+    .middle
+        svg
+            right: 37%
+            bottom: 0
+            height: 300px
+            width: 400px
+            position: absolute
+            @media screen and ( max-width: 1023px  )
+                height: 240px
+                right: 30%
+
+    .right
+        background: $footer-second
+        width: 55%
+        top: 50
+        left: 50
+        right: 0
+        bottom: 0
+        height: 300px
+        position: absolute
+        @media screen and ( max-width: 1023px  )
+            height: 240px
+            top: 20
+
+    .right
+        ul
+            display: flex
+            width: 80%
+            position: absolute
+            top: 45%
+            flex-direction: row
+            justify-content: space-between
+            text-decoration: none
+            color: $text-color
+            padding: 0
+
+            li
+                list-style-type: none
+
+                a
+                    list-style-type: none
+                    color: $text-color
+                    text-decoration: none
+
+        .logo-content
+            display: flex
+            width: 85%
+            position: absolute
+            top: 50
+            flex-direction: row
+            justify-content: space-between
+            align-items: center
+            margin-top: 3em
+            color: $icons
+
+            svg
+                height: 60px
+                width: 80px
+                padding: 0
+                margin: 0
+            a
+                color: $icons
+                text-decoration: none
+
+        hr
+            position: absolute
+            left: 0
+            top: 180px
+            border: 1px solid $hr-color
+            width: 90%
+    .content-rights
+        display: flex
+        flex-direction: row
+        position: absolute
+        width: 100%
+        .rights
+            color: $rights
+            left: 0
+            position: absolute
+            top: 200px
+            width: 50%
+            font-size: 12px
+            display: flex
+            justify-content: flex-start
+            text-transform: uppercase
+
+            .span-text
+                text-transform: none
+        .content-privacy
+            ul
+                left: 50
+                right: 10%
+                position: absolute
+                top: 200px
+                width: auto
+                font-size: 12px
+                color: $rights
+
+                li
+                    padding: 0 0.5em
+                    list-style-type: none
+                    color: $rights
