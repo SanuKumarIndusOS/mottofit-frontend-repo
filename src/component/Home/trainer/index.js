@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-import Circle from "../../../assests/SVG/circle.png";
-import Arrow from "../../../assests/SVG/arrow.png";
+import Arrow from "../../../assests/Home/Experience/icon/arrow-orignal.png";
+import TrainerImage from '../../../assests/Home/trainer/Woman Image.png'
+import Watermark from '../../../assests/Home/trainer/M Watermark.png'
 
 export default class Trainer extends Component {
     render() {
@@ -21,12 +22,11 @@ export default class Trainer extends Component {
 
                     <div className="link">
                         <div className='button-text'>
-                            <Link to="/">APPLY AS A TRAINER</Link>
+                            <Link to="/">APPLY AS A TRAINER <img src={Arrow} alt="logo"/></Link>
                         </div>
-                        <div className="button-custom">
-                            <img src={Arrow} alt="" srcSet="" />
-                            <img src={Circle} alt="" srcSet="" />
-                        </div>
+                    </div>
+                    <div className='watermark'>
+                        <img src={Watermark} alt=''/>
                     </div>
                 </div>
             </div>

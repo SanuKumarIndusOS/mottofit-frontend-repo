@@ -1,14 +1,9 @@
 .big_container {
-    // min-width: 1400px;
-    // max-width: 1920px;
     width: 100%;
     .experience_upper_container {
         opacity: 1;
-        padding: 2em;
-
         .heading {
-            // padding-top: 130px;
-            padding-bottom: 80px;
+            padding-bottom: 40px;
             font: var(--unnamed-font-style-normal) normal
                 var(--unnamed-font-weight-bold) var(--unnamed-font-size-45) /
                 var(--unnamed-line-spacing-55)
@@ -20,26 +15,90 @@
             letter-spacing: -0.45px;
             color: #161616;
             opacity: 1;
+            @media screen and (max-width: 920px) {
+                font: normal normal bold 25px/35px Cormorant Garamond;
+            }
+        }
+        .svgBG {
+            position: absolute;
+            right: 5%;
+            // top: 50;
+            bottom: -120%;
+            @media screen and (max-width: 920px) {
+                position: unset;
+                padding: 2em 0 0 0;
+            }
         }
         .image_Container {
             display: flex;
             justify-content: center;
             height: 300px;
             width: 100%;
+            flex-wrap: wrap;
+            @media screen and (max-width: 1024px) {
+                justify-content: space-evenly;
+                height: auto;
+                flex-wrap: wrap;
+            }
 
             .image_strength_main {
                 display: flex;
                 width: 20%;
                 margin: 0 1em;
-                justify-content: space-around;
+                flex-direction: column;
+
+                @media screen and (max-width: 1023px) {
+                    width: 40%;
+                    margin-top: 2em;
+                }
+
+                .link_button {
+                    display: flex;
+                    text-transform: uppercase;
+                    align-items: center;
+                    background: #53bfd2;
+                    height: 50px;
+                    color: #fff;
+                    font-size: 16px;
+                    font-weight: bold;
+                    padding: 0 0.5em;
+                    text-decoration: none;
+                    @media screen and (max-width: 919px) {
+                        font-size: 10px;
+                    }
+                    @media screen and (max-width: 1023px) and (min-width: 920px) {
+                        font-size: 16px;
+                    }
+
+                    img {
+                        width: 45px;
+                        padding: 0 0 0 0.5em;
+                        height: 30px;
+                        @media screen and (max-width: 919px) {
+                            width: 20px;
+                            height: 15px;
+                        }
+                        @media screen and (max-width: 1023px) and (min-width: 920px) {
+                            width: 30px;
+                            height: 15px;
+                        }
+                    }
+                }
             }
         }
     }
 
     .personal_container {
-        display: flex;
-        justify-content: space-around;
-        padding: 150px 70px;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        grid-column-gap: 50px;
+        padding: 150px 0;
+        width: 100%;
+        height: 100vh;
+        @media screen and (max-width: 1023px) {
+            grid-template-columns: auto;
+            height: auto;
+        }
         .personal_trainer_description {
             display: flex;
             flex-direction: column;
@@ -57,6 +116,10 @@
                 letter-spacing: 0px;
                 color: #161616;
                 opacity: 1;
+                @media screen and (max-width: 1023px) {
+                    text-align: center;
+                    font: normal normal 600 24px/38px Montserrat;
+                }
             }
             .discription {
                 padding-bottom: 30px;
@@ -72,6 +135,10 @@
                 letter-spacing: 0.27px;
                 color: #2c2c2c;
                 opacity: 1;
+                @media screen and (max-width: 1023px) {
+                    text-align: center;
+                    font: normal normal normal 14px/32px Montserrat;
+                }
             }
             .link {
                 height: 22px;
@@ -104,8 +171,8 @@
             }
             img:nth-child(1) {
                 position: absolute;
-                top: 25%;
-                left: 55%;
+                top: 50;
+                left: 45%;
                 right: 0;
             }
             a {
@@ -114,145 +181,43 @@
                 font-weight: 900;
             }
         }
-        .personal_trainer_props_2 {
-            display: flex;
-            flex-direction: column;
-            .icon_1 {
-                display: flex;
-                padding: 2px;
-                .image {
-                    padding-bottom: 20px;
-                }
-                .discription {
-                    padding: 20px;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-20) /
-                        var(--unnamed-line-spacing-32)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-3);
-                    color: var(--unnamed-color-2c2c2c);
-                    text-align: left;
-                    font: normal normal normal 20px/32px Montserrat;
-                    letter-spacing: 0.3px;
-                    color: #2c2c2c;
-                    opacity: 1;
-                }
-            }
-            .icon_2 {
-                display: flex;
-                padding: 2px;
-                .image {
-                    padding-bottom: 20px;
-                }
-                .discription {
-                    padding: 20px;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-20) /
-                        var(--unnamed-line-spacing-32)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-3);
-                    color: var(--unnamed-color-2c2c2c);
-                    text-align: left;
-                    font: normal normal normal 20px/32px Montserrat;
-                    letter-spacing: 0.3px;
-                    color: #2c2c2c;
-                    opacity: 1;
-                }
-            }
-            .icon_3 {
-                display: flex;
-                padding: 2px;
-                .image {
-                    padding-bottom: 20px;
-                }
-                .discription {
-                    padding: 20px;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-20) /
-                        var(--unnamed-line-spacing-32)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-3);
-                    color: var(--unnamed-color-2c2c2c);
-                    text-align: left;
-                    font: normal normal normal 20px/32px Montserrat;
-                    letter-spacing: 0.3px;
-                    color: #2c2c2c;
-                    opacity: 1;
-                }
+        .right_container {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto;
+            grid-column-gap: 10px;
+            height: 100px;
+            @media screen and (max-width: 1023px) {
+                grid-template-columns: auto;
+                height: auto;
             }
         }
-        .personal_trainer_props_3 {
+        .flex-contents {
             display: flex;
-            flex-direction: column;
-            display: flex;
-            flex-direction: column;
-            .icon_1 {
-                display: flex;
-                padding: 2px;
-                .image {
-                    padding-bottom: 20px;
-                }
-                .discription {
-                    padding: 20px;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-20) /
-                        var(--unnamed-line-spacing-32)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-3);
-                    color: var(--unnamed-color-2c2c2c);
-                    text-align: left;
-                    font: normal normal normal 20px/32px Montserrat;
-                    letter-spacing: 0.3px;
-                    color: #2c2c2c;
-                    opacity: 1;
-                }
+            align-items: center;
+            margin: 1em;
+            @media screen and (max-width: 1023px) {
+                justify-content: space-between;
+                padding: 0 1em;
             }
-            .icon_2 {
-                display: flex;
-                padding: 2px;
-                .image {
-                    padding-bottom: 20px;
-                }
-                .discription {
-                    padding: 20px;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-20) /
-                        var(--unnamed-line-spacing-32)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-3);
-                    color: var(--unnamed-color-2c2c2c);
-                    text-align: left;
-                    font: normal normal normal 20px/32px Montserrat;
-                    letter-spacing: 0.3px;
-                    color: #2c2c2c;
-                    opacity: 1;
-                }
+            .image img {
+                width: 100px;
+                height: 100px;
             }
-            .icon_3 {
-                display: flex;
-                padding: 2px;
-                .image {
-                    padding-bottom: 20px;
-                }
-                .discription {
-                    padding: 20px;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-20) /
-                        var(--unnamed-line-spacing-32)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-3);
-                    color: var(--unnamed-color-2c2c2c);
-                    text-align: left;
-                    font: normal normal normal 20px/32px Montserrat;
-                    letter-spacing: 0.3px;
-                    color: #2c2c2c;
-                    opacity: 1;
+            .discription {
+                text-align: left;
+                padding: 0 0 0 0.7em;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-normal)
+                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32)
+                    var(--unnamed-font-family-montserrat);
+                letter-spacing: var(--unnamed-character-spacing-0-27);
+                color: var(--unnamed-color-2c2c2c);
+                font: normal normal normal 15px/32px Montserrat;
+                letter-spacing: 0.27px;
+                @media screen and (max-width: 1023px) {
+                    font: normal normal normal 16px/22px Montserrat;
+                    padding: 0 0 0 1em;
                 }
             }
         }

@@ -1,21 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../component/Home/Banner/index";
 import Benfit from "../../component/Home/Benfit/index";
 import Experience from "../../component/Home/Experience/index";
 import Location from "../../component/Home/Location/index";
 import Trainer from "../../component/Home/trainer/index";
-import Navbar from "../../component/common/Navbar/index";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Footer from "../../component/common/Footer";
+import SideBar from "../../component/common/SideBar";
+import {NavBar }from "../../component/common/Navbar/NavBar";
 
 const Home = () => {
+    const [isOpen, setisOpen] = useState(false);
+
+    const toggle = () => {
+        setisOpen(!isOpen);
+    };
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
     return (
         <>
             <Router>
-                <Route  path='/' component={Navbar} />
+                <NavBar toggle={toggle}/>
+                {/* <Navbar toggle={toggle}/> */}
+                <SideBar isOpen={isOpen} toggle={toggle} />
+
                 <Route  path='/' component={Banner} />
                 <Route  path='/' component={Benfit} />
                 <Route  path='/' component={Experience} />

@@ -17,12 +17,14 @@
 .navbar-sass {
     background: transparent;
 }
+
 .navbar-container {
     display: flex;
     justify-content: space-around;
     align-content: center;
     margin-bottom: -100px;
 }
+
 .header-links {
     display: flex;
     justify-content: space-around;
@@ -38,6 +40,8 @@
 .logo-content svg {
     height: 80px;
     padding: 0.5em;
+    display: flex;
+    justify-content: center;
 }
 .search-items {
     display: flex;
@@ -69,7 +73,7 @@ input::placeholder {
 }
 .search-icon {
     position: absolute;
-    right: 15%;
+    right: 9%;
     font-size: 1.5em;
     margin: 0 0.4em;
     color: var(--icon-color);
@@ -86,4 +90,43 @@ input::placeholder {
 .login-item svg:nth-child(1) {
     color: var(--icon-color);
     font-size: 3em;
+}
+.nav_icon {
+    display: none;
+    color: var(--icon-color);
+}
+@media screen and (max-width: 1024px) {
+    .nav_icon {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 75%);
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+
+    .header-links {
+        display: none;
+    }
+    .logo-content svg {
+        display: flex;
+        justify-content: center;
+    }
+    .input-item input {
+        display: none;
+    }
+    .search-icon {
+        display: none;
+    }
+    .login-item svg {
+        display: none;
+    }
+    .link-icons svg {
+        display: flex;
+    }
+    .navbaractive.active {
+        position: sticky;
+        top: 0;
+    }
 }

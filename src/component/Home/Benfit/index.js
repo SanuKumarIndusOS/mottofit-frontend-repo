@@ -1,46 +1,46 @@
 import React from "react";
 import "./styles.scss";
-import personal_img from "../../../assests/Home/Benfit/personal.png";
-import season_img from "../../../assests/Home/Benfit/season.png";
-import Benifit from "../../../assests/Home/Benfit/Icon4.png";
+import Personal from "../../../assests/Home/Benfit/personal.png";
+import Session from "../../../assests/Home/Benfit/season.png";
+import Social from "../../../assests/Home/Benfit/social.png";
 
 const Benifet = () => {
-  return (
-    <div className="container">
-      <div className="smallContainer">
-        <div className="personal">
-          <div className="personal_img">
-            <img src={personal_img} alt="" />
-          </div>
-          <div className="personal_heading">Keep it Personal with a 1 on 1</div>
-          <div className="personal_description">
-            Train individually with a top trainer for the highest quality of
-            training and a personalized experience.
-          </div>
+    return (
+        <div className="container">
+            <div className="smallContainer">
+                <BenifetParent
+                    imageAsset={Personal}
+                    heading="Keep it Personal with a 1 on 1"
+                    description="Train individually with a top trainer for the highest quality of
+                  training and a personalized experience."
+                />
+                <BenifetParent
+                    imageAsset={Social}
+                    heading="Make a Date as a Social Session"
+                    description="Add up to 3 friends to your session. Get personal attention, while you enjoy a social experience at lower costs."
+                />
+                <BenifetParent
+                    imageAsset={Session}
+                    heading="Create a class"
+                    description=" Design your very own workout party. Choose a top trainer, and add up to 14 more friends to split the cost evenly."
+                />
+            </div>
         </div>
-        <div className="socialSession">
-          <div className="personal_img">
-            <img src={Benifit} alt="" />
-          </div>
-          <div className="social_heading">Make a Date as a Social Session</div>
-          <div className="social_description">
-            Add up to 3 friends to your session. Get personal attention, while
-            you enjoy a social experience at lower costs.
-          </div>
-        </div>
-        <div className="classSession">
-          <div className="personal_img">
-            <img src={season_img} alt="" />
-          </div>
-          <div className="class_heading">Keep it Personal with a 1 on 1</div>
-          <div className="class_description">
-            Train individually with a top trainer for the highest quality of
-            training and a personalized experience.
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
+};
+
+const BenifetParent = (props) => {
+    return (
+        <>
+            <div className="personal">
+                <div className="personal_img">
+                    <img src={props.imageAsset} alt="logo" />
+                </div>
+                <h2 className="personal_heading">{props.heading}</h2>
+                <p className="personal_description">{props.description}</p>
+            </div>
+        </>
+    );
 };
 
 export default Benifet;

@@ -15,27 +15,14 @@ const Banner = () => {
     return (
         <div className="background">
             <div className="cntr_cotainer">
-                <div className="heading_txt">Train with the Best</div>
-                <div className="sub_heading_txt">
-                    Discover & book trusted personal trainers for
-                    <br />
-                    Strength & HIIT, Boxing, Yoga & Pilates
+                <div className="heading_items">
+                    <h2 className="heading_txt">Train with the Best</h2>
+                    <p className="sub_heading_txt">
+                        Discover & book trusted personal trainers for
+                        <br />
+                        Strength & HIIT, Boxing, Yoga & Pilates
+                    </p>
                 </div>
-                {/* <div className="search-box">
-          <div className="inner-choice-1">Location</div>
-          <div className="inner-choice-2">|</div>
-
-          <div className="inner-choice">Training Type</div>
-          <div className="inner-choice-2">|</div>
-
-          <div className="inner-choice">Schedule</div>
-          <div className="inner-choice-2">|</div>
-
-          <div className="inner-choice">Availability</div>
-          <div className="inner-choice">
-            <img src={SearchButton} alt="" srcSet="" />
-          </div>
-        </div> */}
                 <div className="card-box ">
                     <div className="card-wrapper">
                         <div className="item1">

@@ -4,15 +4,17 @@
     background-size: cover;
     opacity: 1;
     width: 100%;
-    // min-width: 1200px;
-    // max-width: 1920px;
-    //   top: 0px;
-    //   left: 0px;
     height: 650px;
-    // height: 100%;
-    //   padding-bottom: 905px;
     display: flex;
     justify-content: flex-end;
+    position: relative;
+
+    @media screen and (max-width: 1024px) {
+        background: url("../../../assests/Home/trainer/Woman Image.png") 0% 0%
+            no-repeat;
+        width: 100%;
+    }
+
     .container_trainer {
         display: flex;
         flex-direction: column;
@@ -21,15 +23,17 @@
         max-height: 97px;
         padding-right: 200px;
         padding-top: 140px;
+        position: relative;
+
         @media screen and (max-width: 1024px) {
-            max-width: 551px;
+            margin-top: 10em;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            padding: 8em 0;
         }
 
         .qustion {
-            //   top: 4226px;
-            //   left: 960px;
-            //   width: 551px;
-            //   height: 97px;
             font: var(--unnamed-font-style-normal) normal
                 var(--unnamed-font-weight-bold) var(--unnamed-font-size-35) /
                 var(--unnamed-line-spacing-54)
@@ -42,12 +46,19 @@
             color: #161616;
             opacity: 1;
             width: 100%;
+            position: relative;
+
+            @media screen and (max-width: 1024px) {
+                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                padding-left: 1em;
+                font: normal normal bold 22px/30px Montserrat;
+
+                margin: 2em 0 0 0;
+            }
         }
         .answer {
-            //   top: 4358px;
-            //   left: 960px;
-            //   width: 551px;
-            //   height: 120px;
             font: var(--unnamed-font-style-normal) normal
                 var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
                 var(--unnamed-line-spacing-32)
@@ -59,12 +70,18 @@
             letter-spacing: 0.27px;
             color: #2c2c2c;
             opacity: 1;
+            position: relative;
+
+            @media screen and (max-width: 1024px) {
+                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                padding-left: 1.5em;
+                margin-top: 1.5em;
+                font: normal normal normal 14px/22px Montserrat;
+            }
         }
         .link {
-            //   top: 4559px;
-            //   left: 960px;
-            //   width: 208px;
-            //   height: 22px;
             width: 100%;
             display: flex;
             align-items: center;
@@ -84,31 +101,41 @@
             text-decoration: none;
             position: relative;
 
-            // background-color: aqua;
+            @media screen and (max-width: 1024px) {
+                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                padding-left: 1.5em;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
         }
         .button-text {
             text-align: left;
+            position: relative;
+
+            a {
+                text-decoration: none;
+                color: #161616;
+                font-weight: 900;
+                display: flex;
+                align-items: center;
+                padding-right: 1em;
+            }
+            img {
+                margin-left: 1em;
+            }
         }
-        .button-custom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0 2em;
-        }
-        .button-custom img {
-            width: 30px;
-            height: auto;
-        }
-        img:nth-child(1) {
+        .watermark {
             position: absolute;
-            top: 25%;
-            left: 44%;
             right: 0;
-        }
-        a {
-            text-decoration: none;
-            color: #161616;
-            font-weight: 900;
+            top: 350px;
+
+            img {
+                width: 200px;
+                height: 200px;
+            }
         }
     }
 }

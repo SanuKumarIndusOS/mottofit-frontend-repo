@@ -169,6 +169,7 @@ const Location = () => {
                         return (
                             <div className="main-slide" key={index}>
                                 <div className="slide-content">
+                               
                                     <img
                                         src={slide.image}
                                         alt={slide.name}
