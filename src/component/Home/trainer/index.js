@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 import Arrow from "../../../assests/Home/Experience/icon/arrow-orignal.png";
-import TrainerImage from '../../../assests/Home/trainer/Woman Image.png'
 import Watermark from '../../../assests/Home/trainer/M Watermark.png'
 
 export default class Trainer extends Component {

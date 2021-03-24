@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import {Link as Link} from 'react-router-dom';
-import {Link as LinkScroll} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {FaTimes} from 'react-icons/fa'
 
@@ -50,7 +49,7 @@ export const SidebarMenu = styled.div`
         grid-template-rows:repeat(6, 60px);
     }
 `
-export const SidebarLink = styled(LinkScroll)`
+export const SidebarLink = styled(Link)`
     display: flex;
     align-items:center;
     justify-content:center;

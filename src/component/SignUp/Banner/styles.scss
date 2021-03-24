@@ -1,0 +1,167 @@
+.main_container {
+    background: url("../../../assests/SignUp/BG Image.png") 0% 0% no-repeat;
+    height: auto;
+    width: 100%;
+    background-size: cover;
+    // margin-bottom: -100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6em;
+
+    .wrapper {
+        background-color: rgb(255, 255, 255);
+        height: auto;
+        width: 35%;
+        margin: 5em 0 8em 0;
+        border-radius: 10px;
+        @media screen and (max-width: 1023px) {
+            width: 80%;
+        }
+    }
+    .inner_items {
+        margin: 2em;
+        padding: 2em 0;
+
+        h3 {
+            font: var(--unnamed-font-style-normal) normal
+                var(--unnamed-font-weight-bold) var(--unnamed-font-size-22) /
+                var(--unnamed-line-spacing-38)
+                var(--unnamed-font-family-garamond);
+            font: normal normal bold 35px/40px Garamond;
+        }
+    }
+    .form_items form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .input_items {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0.5em 0;
+            width: 80%;
+        }
+        input {
+            border: 1px solid #bcbcbc;
+            padding: 0.3em 1em;
+            width: 100%;
+        }
+
+        img {
+            position: absolute;
+            right: 0;
+            margin: 1em;
+        }
+    }
+    .or_items {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 1em 3em;
+
+        p {
+            margin: 0;
+            padding: 0 1em;
+            text-transform: uppercase;
+        }
+
+        .hr_line {
+            background-color: #bcbcbc;
+            height: 1px;
+            width: 120px;
+        }
+    }
+    .social_buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .facebook-auth {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            outline: none;
+            border: 1px solid #bcbcbc;
+            width: 80%;
+            background-color: #fff;
+            color: #bcbcbc;
+            border-radius: 50px;
+            margin: 0.2em 1em;
+
+            img {
+                margin: 0.5em 1.3em;
+                width: 10px;
+            }
+        }
+        .google-auth {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #fff;
+            color: #bcbcbc;
+            outline: none;
+            border: 1px solid #bcbcbc;
+            border-radius: 50px;
+            margin: 0.2em 1em;
+            width: 80%;
+
+            img {
+                margin: 0.5em 1em;
+                width: 20px;
+            }
+        }
+    }
+    .submit_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            outline: none;
+            background: #53bfd2;
+            border: 0;
+            margin: 1.5em 1em 1em 1em;
+            width: 80%;
+            padding: 0.5em;
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: bold;
+        }
+    }
+    .login_items {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h4 {
+            font: var(--unnamed-font-style-normal) normal
+                var(--unnamed-font-weight-500) var(--unnamed-font-size-22) /
+                var(--unnamed-line-spacing-38)
+                var(--unnamed-font-family-montserrat);
+            font: normal normal 500 20px/38px Montserrat;
+            margin: 0.5em 0 0 0;
+        }
+        a {
+            text-transform: uppercase;
+            text-decoration: none;
+            font: var(--unnamed-font-style-normal) normal
+                var(--unnamed-font-weight-800) var(--unnamed-font-size-18) /
+                var(--unnamed-line-spacing-30)
+                var(--unnamed-font-family-montserrat);
+            font: normal normal 800 18px/30px Montserrat;
+            color: #000;
+            margin: 0.5em 0 0 0;
+            padding: 0 1em;
+        }
+        img {
+            margin: 0.5em 1em;
+            width: 40px;
+        }
+    }
+}

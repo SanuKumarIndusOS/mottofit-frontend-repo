@@ -8,7 +8,6 @@ import {
     SidebarWraper,
     SidebarLink,
     SidebarMenu,
-    NavBtnLink
 } from "./SidebarStyled";
 const SideBar = ({ isOpen, toggle }) => {
     return (

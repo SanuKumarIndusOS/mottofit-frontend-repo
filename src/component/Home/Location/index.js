@@ -175,21 +175,12 @@ const Location = () => {
                                         alt={slide.name}
                                         className="slide-image"
                                     />
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="325"
-                                        height="5"
-                                        viewBox="0 0 325 5"
-                                        className='svg-line'
-                                    >
-                                        <rect
-                                            id="Rectangle_6281"
-                                            data-name="Rectangle 6281"
-                                            width="325"
-                                            height="5"
-                                            fill="#53bfd2"
-                                        />
-                                    </svg>
+                                    <img
+                                    src={slide.line}
+                                    alt={slide.name}
+                                    className="slide-line"
+                                />
+
                                     <p>{slide.name}</p>
                                 </div>
                             </div>
