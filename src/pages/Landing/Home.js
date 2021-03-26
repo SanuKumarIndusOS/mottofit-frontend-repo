@@ -4,7 +4,7 @@ import Benfit from "../../component/Home/Benfit/index";
 import Experience from "../../component/Home/Experience/index";
 import Location from "../../component/Home/Location/index";
 import Trainer from "../../component/Home/trainer/index";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {   BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import Footer from "../../component/common/Footer";
 import SideBar from "../../component/common/SideBar";
 // import {NavBar }from "../../component/common/Navbar/NavBar";
@@ -18,9 +18,12 @@ import LocationTrainer from "../../component/TrainerSignUp/LocationTrainer";
 import FindTrainer from "../../component/FindYourTrainer/TrainerFilter/FindTrainer";
 import TrainerCards from '../../component/FindYourTrainer/TrainersDetails/index'
 import TrainerCardOutside from "../../component/FindYourTrainer/TrainerOutsideTime";
+
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+
 
     const toggle = () => {
         setisOpen(!isOpen);
@@ -32,10 +35,13 @@ const Home = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        setRedirect(true)
     }, []);
     return (
         <>
             <Router>
+        
+
                 <Route exact path="/"> <NavBarHome toggle={toggle} modalToggle={modalToggle} /></Route>
                 <SideBar isOpen={isOpen} toggle={toggle} />
                 <Route exact path="/" component={Banner} />
@@ -51,6 +57,7 @@ const Home = () => {
                 <Route exact path="/" component={Footer} />
 
                 {/* User SignUp Screen */}
+                {redirect? <Redirect to = '/'/>: null }
                 <Route exact path="/signup"><NavBar toggle={toggle} /></Route>
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signup" component={Footer} />

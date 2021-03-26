@@ -3,7 +3,7 @@ import { TrainerData } from "../TrainersDetails/TrainerData";
 import "./styles.sass";
 import onHoverImage from "../../../assests/FindTrainer/onHover.svg";
 import onImage from "../../../assests/SignUp/Arrow.svg";
-import Arrow from "../../../assests/SignUp/ArrowSecondary.svg";
+// import Arrow from "../../../assests/SignUp/ArrowSecondary.svg";
 
 
 function useHover() {
@@ -27,7 +27,7 @@ function useHover() {
                 };
             }
         },
-        [ref.current] // Recall only if ref changes
+        [ref] // Recall only if ref changes
     );
 
     return [ref, value];

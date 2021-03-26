@@ -7,17 +7,21 @@ import Facebook from "../../../assests/SignUp/Fb Logo.svg";
 import Google from "../../../assests/SignUp/Google Logo.svg";
 import Arrow from "../../../assests/SignUp/Arrow.svg";
 import ArrowSecondary from "../../../assests/SignUp/ArrowSecondary.svg";
-// import { useHistory } from 'react-router-dom'
 import "./styles.scss";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
+
 
 const SignUp = () => {
+    // const history = useHistory();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, setCPassword] = useState("");
-    // const history = useHistory();
+    const [redirect, setRedirect] = useState(false);
+
 
     // async function signUp(){
     //     let item = { name, email, phone, password, cpassword};
@@ -37,11 +41,19 @@ const SignUp = () => {
     // }
 
 
+
+
      function signUp(){
         let item = { name, email, phone, password, cpassword};
+        if(name && email){
+        setRedirect(true)
+        } else {
+            setRedirect(false, 'not found')
+        }
         console.log(item)
 
         localStorage.setItem('user-info', JSON.stringify(item))
+
         // history.push('/findtrainer')
     }
 
@@ -49,6 +61,7 @@ const SignUp = () => {
 
     return (
         <>
+        {redirect ? <Redirect to={'/findtrainer'}/>: null}
             <div className="main_container">
                 <div className="wrapper">
                     <div className="inner_wrapper">
