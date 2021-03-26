@@ -29,6 +29,10 @@
                 var(--unnamed-line-spacing-38)
                 var(--unnamed-font-family-garamond);
             font: normal normal bold 35px/40px Garamond;
+            text-align: center;
+        }
+        p {
+            text-align: center;
         }
     }
     .form_items form {

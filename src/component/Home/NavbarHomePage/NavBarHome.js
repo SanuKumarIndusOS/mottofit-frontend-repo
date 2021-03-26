@@ -8,18 +8,13 @@ import "./stylesHome.css";
 import SignIn from "../../SignIn/Banner";
 // import SignIn from '../../component/SignIn/Banner/index'
 
-
 const NavBarHome = ({ toggle }) => {
     const [navbar, setNavbar] = useState(false);
     const [showModel, setShowModel] = useState(false);
 
-    
-    const openModal = () =>{
-        setShowModel(prev => !prev)
-    }
-   
-
-  
+    const openModal = () => {
+        setShowModel((prev) => !prev);
+    };
 
     useEffect(() => {
         setNavbar(true);
@@ -133,8 +128,8 @@ const NavBarHome = ({ toggle }) => {
                             />
                         </g>
                     </svg>
-        <img src={Person} alt="icon"  onClick={openModal} />
-                        <SignIn showModel={showModel} setShowModel={setShowModel}/>
+                    <img src={Person} alt="icon" onClick={openModal} />
+                    <SignIn showModel={showModel} setShowModel={setShowModel} />
                 </div>
             </div>
         </Nav>

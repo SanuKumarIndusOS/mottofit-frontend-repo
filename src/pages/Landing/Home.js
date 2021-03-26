@@ -15,6 +15,9 @@ import SignIn from "../../component/SignIn/Banner/index";
 import BannerTrainer from "../../component/TrainerSignUp/Banner";
 import ExperienceTrainer from '../../component/TrainerSignUp/Experience/index'
 import LocationTrainer from "../../component/TrainerSignUp/LocationTrainer";
+import FindTrainer from "../../component/FindYourTrainer/TrainerFilter/FindTrainer";
+import TrainerCards from '../../component/FindYourTrainer/TrainersDetails/index'
+import TrainerCardOutside from "../../component/FindYourTrainer/TrainerOutsideTime";
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -58,6 +61,15 @@ const Home = () => {
                 <Route path="/trainersignup" component={ExperienceTrainer} />
                 <Route path="/trainersignup" component={LocationTrainer} />
                 <Route path="/trainersignup" component={Footer} />
+
+                {/* Find Your Trainer */}
+                <Route exact path="/findtrainer"><NavBar toggle={toggle} /></Route>
+                <Route path="/findtrainer" component={FindTrainer} />
+                <Route path="/findtrainer" component={TrainerCards} />
+                <Route path="/findtrainer" component={TrainerCardOutside} />
+                <Route path="/findtrainer" component={Footer} />
+
+
             </Router>
 
         </>

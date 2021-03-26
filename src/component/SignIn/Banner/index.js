@@ -22,8 +22,8 @@ const SignIn = ({showModel, setShowModel}) => {
                     onRequestClose={() => setShowModel(false)}
                     style={{
                         overlay: {
-                            opacity: "0.9",
-                            backgroundColor:"black"
+                            backgroundColor:"#000000ca",
+                            opacity:'1'
                         },
                     }}
                 >
