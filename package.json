@@ -1,6 +1,6 @@
 {
   "name": "mottofit",
-  "homepage":"http://doodlebluelive.com:2307/v1",
+  "homepage":"http://doodlebluelive.com:2307",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
