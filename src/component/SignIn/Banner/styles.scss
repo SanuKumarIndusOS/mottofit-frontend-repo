@@ -3,7 +3,6 @@
     margin-top: 1.5em;
     width: 40%;
     height: auto;
-    padding: 2em 1em;
     opacity: 1;
     position: relative;
     @media screen and (max-width: 1024px) {
@@ -15,8 +14,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 500px;
+    height: auto;
     position: relative;
+    width: 100%;
 
     .inner_container {
         display: flex;
@@ -33,6 +33,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 100%;
 
         h2 {
             text-align: center;
@@ -53,20 +54,13 @@
             justify-content: center;
             width: 100%;
 
-            form {
+            .input_items {
                 display: flex;
                 flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-                width: 80%;
+                position: relative;
+                padding: 0.5em 0;
+                width: 100%;
 
-                .input_items {
-                    display: flex;
-                    align-items: center;
-                    position: relative;
-                    padding: 0.5em 0;
-                    width: 100%;
-                }
                 input {
                     border: 1px solid #bcbcbc;
                     padding: 0.3em 2em;
@@ -77,7 +71,38 @@
                 img {
                     position: absolute;
                     right: 0;
+                    margin: 0 auto;
+                    padding: 0.5em 1em;
+                }
+                span {
+                    font-size: 10px;
+                    padding: 0em 1em 0 1em;
+                    text-align: left !important;
+                    color: red;
+                    font-weight: bold;
+                }
+            }
+
+            .submit_button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+
+                button {
+                    outline: none;
+                    background: #53bfd2;
+                    border: 0;
                     margin: 1em;
+                    width: 100%;
+                    padding: 0.5em;
+                    text-transform: uppercase;
+                    color: #fff;
+                    font-weight: bold;
+                    img {
+                        width: auto;
+                        margin-left: 1em;
+                    }
                 }
             }
         }
@@ -124,7 +149,7 @@
             display: flex;
             align-items: center;
             justify-content: space-evenly;
-            padding: 1em 3em;
+            padding: 0.5em 3em;
 
             p {
                 margin: 0;

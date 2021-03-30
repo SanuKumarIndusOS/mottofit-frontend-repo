@@ -41,6 +41,7 @@
             background-color: #fff;
             height: 50vh;
             margin: 0 2em;
+            text-align: center;
         }
     }
     .wrapper {
@@ -77,77 +78,90 @@
 
         .input_items {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             position: relative;
             padding: 0.5em 0;
             width: 80%;
-        }
-        input {
-            border: 1px solid #bcbcbc;
-            padding: 0.3em 1em;
-            width: 100%;
+
+            input {
+                border: 1px solid #bcbcbc;
+                padding: 0.3em 1em;
+                width: 100%;
+            }
+
+            img {
+                position: absolute;
+                right: 0;
+                padding: 0.5em 1em;
+                margin: 0 auto;
+            }
+            span {
+                font-size: 10px;
+                padding: 0em 1em 0 1em;
+                text-align: left !important;
+                color: red;
+                font-weight: bold;
+            }
         }
 
-        img {
-            position: absolute;
-            right: 0;
-            margin: 1em;
-        }
-    }
-    .or_items {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        padding: 1em 3em;
+        .or_items {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 1em 3em;
 
-        p {
-            margin: 0;
-            padding: 0 1em;
-            text-transform: uppercase;
-        }
+            p {
+                margin: 0;
+                padding: 0 1em;
+                text-transform: uppercase;
+            }
 
-        .hr_line {
-            background-color: #bcbcbc;
-            height: 1px;
-            width: 120px;
+            .hr_line {
+                background-color: #bcbcbc;
+                height: 1px;
+                width: 120px;
+            }
         }
-    }
-    .submit_button {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-
-        button {
-            outline: none;
-            background: #53bfd2;
-            border: 0;
-            margin: 1.5em 1em 1em 1em;
-            width: 80%;
-            padding: 0.5em;
-            font-size: 16px;
-            text-transform: uppercase;
-            color: #fff;
-            font-weight: bold;
+        .submit_button {
             display: flex;
             align-items: center;
             justify-content: center;
 
-            p {
-                font-size: 16px;
-                text-align: center;
-                padding: 0 1em 0 0;
-                display: flex;
-                margin: 0;
+            width: 100%;
 
+            button {
+                outline: none;
+                background: #53bfd2;
+                border: 0;
+                margin: 1.5em 1em 1em 1em;
+                width: 80%;
+                padding: 0.5em;
+                font-size: 16px;
+                text-transform: uppercase;
+                color: #fff;
+                font-weight: bold;
+                display: flex;
                 align-items: center;
-                @media screen and (max-width: 1125px) {
-                    font-size: 10px;
+                justify-content: center;
+
+                p {
+                    font-size: 16px;
+                    text-align: center;
+                    padding: 0 1em 0 0;
+                    display: flex;
+                    margin: 0;
+
+                    align-items: center;
+                    @media screen and (max-width: 1125px) {
+                        font-size: 10px;
+                    }
                 }
-            }
-            img {
-                width: 30px;
-                @media screen and (max-width: 1125px) {
-                    width: 20px;
+                img {
+                    width: auto;
+                    margin-left: 1em;
+                    @media screen and (max-width: 1125px) {
+                        width: 20px;
+                    }
                 }
             }
         }

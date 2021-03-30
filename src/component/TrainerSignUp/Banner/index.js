@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import Person from "../../../assests/SignUp/Person Icon.svg";
 import Mail from "../../../assests/SignUp/Email Icon.svg";
@@ -6,7 +6,8 @@ import Phone from "../../../assests/SignUp/Phone Icon.svg";
 import Password from "../../../assests/SignUp/Password Icon.svg";
 import Arrow from "../../../assests/SignUp/Arrow.svg";
 import ArrowSecondary from "../../../assests/SignUp/ArrowSecondary.svg";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const BannerTrainer = () => {
     const [name, setName] = useState("");
@@ -14,11 +15,13 @@ const BannerTrainer = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, setCPassword] = useState("");
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+    const [redirect, setRedirect] = useState(false);
 
+    const { register, errors, handleSubmit, watch } = useForm();
 
-
-
-        // const history = useHistory();
+    // const history = useHistory();
 
     // async function signUp(){
     //     let item = { name, email, phone, password, cpassword};
@@ -37,16 +40,29 @@ const BannerTrainer = () => {
     //     history.push('/findtrainer')
     // }
 
+    const showPassword = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
+    const showConfirmPassword = () => {
+        setConfirmPasswordShown(confirmPasswordShown ? false : true);
+    };
 
-    function signUp(){
-        let item = { name, email, phone, password, cpassword};
-        console.log(item)
+    function trainerSignUp() {
+        let item = { name, email, phone, password, cpassword };
+        if (name && email) {
+            setRedirect(true);
+        } else {
+            setRedirect(false, "not found");
+        }
+        console.log(item);
 
-        localStorage.setItem('user-info', JSON.stringify(item))
+        localStorage.setItem("user-info", JSON.stringify(item));
         // history.push('/findtrainer')
     }
     return (
         <>
+            {redirect ? <Redirect to={"/findtrainer"} /> : null}
+
             <div className="banner_container">
                 <div className="wrapper_main">
                     <div className="item_left">
@@ -73,26 +89,70 @@ const BannerTrainer = () => {
                                                     placeholder="Name"
                                                     type="text"
                                                     value={name}
+                                                    name="name"
                                                     onChange={(e) =>
                                                         setName(e.target.value)
                                                     }
+                                                    ref={register({
+                                                        pattern: /^[A-Za-z]+$/i,
+                                                        required: true,
+                                                        minLength: 2,
+                                                    })}
                                                 />
                                                 <img src={Person} alt="icon" />
-                                                <span></span>
+                                                {errors.name && (
+                                                    <span>
+                                                        {errors.name.message}
+                                                    </span>
+                                                )}
+                                                {errors.name?.type ===
+                                                    "required" && (
+                                                    <span>
+                                                        This input is required
+                                                    </span>
+                                                )}
+                                                {errors.name?.type ===
+                                                    "minLength" && (
+                                                    <span>
+                                                        This field should
+                                                        contain more then one
+                                                        charater
+                                                    </span>
+                                                )}
+                                                {errors.name?.type ===
+                                                    "pattern" && (
+                                                    <span>
+                                                        This field accept only
+                                                        alphabets
+                                                    </span>
+                                                )}
                                             </div>
 
                                             <div className="input_items">
                                                 <input
                                                     placeholder="Email"
-                                                    type="text"
+                                                    type="email"
                                                     value={email}
+                                                    name="email"
                                                     onChange={(e) =>
                                                         setEmail(e.target.value)
                                                     }
+                                                    ref={register({
+                                                        required:
+                                                            "This filed is required",
+                                                        minLength: {
+                                                            value: 2,
+                                                            message:
+                                                                "Enter a valid name",
+                                                        },
+                                                    })}
                                                 />
                                                 <img src={Mail} alt="icon" />
-
-                                                <span></span>
+                                                {errors.email && (
+                                                    <span>
+                                                        {errors.email.message}
+                                                    </span>
+                                                )}
                                             </div>
 
                                             <div className="input_items">
@@ -100,56 +160,173 @@ const BannerTrainer = () => {
                                                     placeholder="Phone"
                                                     type="text"
                                                     value={phone}
+                                                    name="phone"
                                                     onChange={(e) =>
                                                         setPhone(e.target.value)
                                                     }
+                                                    ref={register({
+                                                        required: true,
+                                                        minLength: 6,
+                                                        maxLength: 11,
+                                                    })}
                                                 />
                                                 <img src={Phone} alt="icon" />
-
-                                                <span></span>
+                                                {errors.phone && (
+                                                    <span>
+                                                        {errors.phone.message}
+                                                    </span>
+                                                )}
+                                                {errors.phone?.type ===
+                                                    "required" && (
+                                                    <span>
+                                                        This input is required
+                                                    </span>
+                                                )}
+                                                {errors.phone?.type ===
+                                                    "minLength" && (
+                                                    <span>
+                                                        Enter a valid number
+                                                    </span>
+                                                )}
+                                                {errors.phone?.type ===
+                                                    "maxLength" && (
+                                                    <span>
+                                                        This field exceed max
+                                                        length
+                                                    </span>
+                                                )}
                                             </div>
 
                                             <div className="input_items">
                                                 <input
                                                     placeholder="Create Password"
-                                                    type="password"
+                                                    type={passwordShown ? 'text': 'password'}
                                                     value={password}
+                                                    name="password"
                                                     onChange={(e) =>
-                                                        setPassword(e.target.value)
+                                                        setPassword(
+                                                            e.target.value
+                                                        )
                                                     }
+                                                    ref={register({
+                                                        required: true,
+                                                        minLength: 6,
+                                                        maxLength: 16,
+                                                        pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                                                    })}
                                                 />
                                                 <img
                                                     src={Password}
                                                     alt="icon"
+                                                    onClick={showPassword}
                                                 />
-                                                <span></span>
+                                                {errors.password?.type ===
+                                                    "required" && (
+                                                    <span>
+                                                        This input is required
+                                                    </span>
+                                                )}
+                                                {errors.password?.type ===
+                                                    "minLength" && (
+                                                    <span>
+                                                        Password should be more
+                                                        then 6 Charcters
+                                                    </span>
+                                                )}
+                                                {errors.password?.type ===
+                                                    "maxLength" && (
+                                                    <span>
+                                                        This field exceed max
+                                                        length
+                                                    </span>
+                                                )}
+                                                {errors.password?.type ===
+                                                    "pattern" && (
+                                                    <span>
+                                                        Password should contain
+                                                        atleast one number and
+                                                        one special character
+                                                    </span>
+                                                )}
                                             </div>
 
                                             <div className="input_items">
                                                 <input
                                                     placeholder="Confirm Password"
-                                                    type="password"
+                                                    type={confirmPasswordShown? 'text': 'password'}
                                                     value={cpassword}
+                                                    name="cpassword"
                                                     onChange={(e) =>
-                                                        setCPassword(e.target.value)
+                                                        setCPassword(
+                                                            e.target.value
+                                                        )
                                                     }
+                                                    ref={register({
+                                                        validate: (value) =>
+                                                            value ===
+                                                            watch("password"),
+                                                        required: true,
+                                                        minLength: 6,
+                                                        maxLength: 16,
+                                                        pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                                                    })}
                                                 />
                                                 <img
                                                     src={Password}
                                                     alt="icon"
+                                                    onClick={showConfirmPassword}
                                                 />
-                                                <span></span>
+                                                {errors.cpassword?.type ===
+                                                    "required" && (
+                                                    <span>
+                                                        This input is required
+                                                    </span>
+                                                )}
+                                                {errors.cpassword?.type ===
+                                                    "minLength" && (
+                                                    <span>
+                                                        Password should be more
+                                                        then 6 Charcters
+                                                    </span>
+                                                )}
+                                                {errors.cpassword?.type ===
+                                                    "maxLength" && (
+                                                    <span>
+                                                        This field exceed max
+                                                        length
+                                                    </span>
+                                                )}
+                                                {errors.cpassword?.type ===
+                                                    "pattern" && (
+                                                    <span>
+                                                        Password should contain
+                                                        atleast one number and
+                                                        one special character
+                                                    </span>
+                                                )}
+                                                {errors.cpassword?.type !==
+                                                    errors.password && (
+                                                    <span>
+                                                        The passwords do not
+                                                        match
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            <div className="submit_button">
+                                                <button
+                                                    onClick={handleSubmit(
+                                                        trainerSignUp
+                                                    )}
+                                                >
+                                                    <p>Continue to Account</p>
+                                                    <img
+                                                        src={Arrow}
+                                                        alt="icon"
+                                                    />
+                                                </button>
                                             </div>
                                         </form>
-                                    </div>
-
-                                    <div className="submit_button">
-                                        <button
-                                        onClick={signUp}
-                                        >
-                                            <p>Continue to Account</p>
-                                            <img src={Arrow} alt="icon" />
-                                        </button>
                                     </div>
                                     <div className="login_items">
                                         <h4>Already have an account?</h4>
