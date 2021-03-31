@@ -6,40 +6,30 @@ import Phone from "../../../assests/SignUp/Phone Icon.svg";
 import Password from "../../../assests/SignUp/Password Icon.svg";
 import Arrow from "../../../assests/SignUp/Arrow.svg";
 import ArrowSecondary from "../../../assests/SignUp/ArrowSecondary.svg";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 const BannerTrainer = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [cpassword, setCPassword] = useState("");
+
+    const history = useHistory()
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        cpassword: "",
+        signUpType: "email",
+    });
+
+    const onChangeValue = (e) => {
+        e.persist();
+        setData({ ...data, [e.target.name]: e.target.value });
+    };
+
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-    const [redirect, setRedirect] = useState(false);
-
+    const [apiError, setApiError] = useState('')
     const { register, errors, handleSubmit, watch } = useForm();
-
-    // const history = useHistory();
-
-    // async function signUp(){
-    //     let item = { name, email, phone, password, cpassword};
-    //     console.log(item)
-
-    //    let result = await fetch('',{
-    //         method:'POST',
-    //         body:JSON.stringify(item),
-    //         headers:{
-    //             "Content-Type":'application/json',
-    //             "Accept":'application/json'
-    //         }
-    //     })
-    //     result = await result.json()
-    //     localStorage.setItem('user-info', JSON.stringify(result))
-    //     history.push('/findtrainer')
-    // }
-
     const showPassword = () => {
         setPasswordShown(passwordShown ? false : true);
     };
@@ -47,21 +37,42 @@ const BannerTrainer = () => {
         setConfirmPasswordShown(confirmPasswordShown ? false : true);
     };
 
-    function trainerSignUp() {
-        let item = { name, email, phone, password, cpassword };
-        if (name && email) {
-            setRedirect(true);
-        } else {
-            setRedirect(false, "not found");
-        }
+    async function trainerSignUp() {
+        const item = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            cpassword: data.cpassword,
+            phoneNumber: data.phoneNumber,
+            signUpType: data.signUpType,
+        };
         console.log(item);
 
-        localStorage.setItem("user-info", JSON.stringify(item));
-        // history.push('/findtrainer')
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(item),
+        };
+        fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
+            .then(async (response) => {
+                const data = await response.json();
+                localStorage.setItem("user-info", JSON.stringify(data));
+                if (response.ok) {
+                    history.push("/findtrainer");
+                } else {
+                    setApiError('Email already registered',response.statusText);
+                }
+            })
+            .catch((error) => {
+                setApiError('Sorry, something went wrong.',error.message);
+            });
     }
     return (
         <>
-            {redirect ? <Redirect to={"/findtrainer"} /> : null}
+            {/* {redirect ? <Redirect to={"/findtrainer"} /> : null} */}
 
             <div className="banner_container">
                 <div className="wrapper_main">
@@ -88,11 +99,9 @@ const BannerTrainer = () => {
                                                 <input
                                                     placeholder="Name"
                                                     type="text"
-                                                    value={name}
+                                                    value={data.name}
                                                     name="name"
-                                                    onChange={(e) =>
-                                                        setName(e.target.value)
-                                                    }
+                                                    onChange={onChangeValue}
                                                     ref={register({
                                                         pattern: /^[A-Za-z]+$/i,
                                                         required: true,
@@ -132,11 +141,9 @@ const BannerTrainer = () => {
                                                 <input
                                                     placeholder="Email"
                                                     type="email"
-                                                    value={email}
+                                                    value={data.email}
                                                     name="email"
-                                                    onChange={(e) =>
-                                                        setEmail(e.target.value)
-                                                    }
+                                                    onChange={onChangeValue}
                                                     ref={register({
                                                         required:
                                                             "This filed is required",
@@ -159,11 +166,9 @@ const BannerTrainer = () => {
                                                 <input
                                                     placeholder="Phone"
                                                     type="text"
-                                                    value={phone}
-                                                    name="phone"
-                                                    onChange={(e) =>
-                                                        setPhone(e.target.value)
-                                                    }
+                                                    value={data.phoneNumber}
+                                                    name="phoneNumber"
+                                                    onChange={onChangeValue}
                                                     ref={register({
                                                         required: true,
                                                         minLength: 6,
@@ -171,24 +176,24 @@ const BannerTrainer = () => {
                                                     })}
                                                 />
                                                 <img src={Phone} alt="icon" />
-                                                {errors.phone && (
+                                                {errors.phoneNumber && (
                                                     <span>
-                                                        {errors.phone.message}
+                                                        {errors.phoneNumber.message}
                                                     </span>
                                                 )}
-                                                {errors.phone?.type ===
+                                                {errors.phoneNumber?.type ===
                                                     "required" && (
                                                     <span>
                                                         This input is required
                                                     </span>
                                                 )}
-                                                {errors.phone?.type ===
+                                                {errors.phoneNumber?.type ===
                                                     "minLength" && (
                                                     <span>
                                                         Enter a valid number
                                                     </span>
                                                 )}
-                                                {errors.phone?.type ===
+                                                {errors.phoneNumber?.type ===
                                                     "maxLength" && (
                                                     <span>
                                                         This field exceed max
@@ -200,14 +205,14 @@ const BannerTrainer = () => {
                                             <div className="input_items">
                                                 <input
                                                     placeholder="Create Password"
-                                                    type={passwordShown ? 'text': 'password'}
-                                                    value={password}
-                                                    name="password"
-                                                    onChange={(e) =>
-                                                        setPassword(
-                                                            e.target.value
-                                                        )
+                                                    type={
+                                                        passwordShown
+                                                            ? "text"
+                                                            : "password"
                                                     }
+                                                    value={data.password}
+                                                    name="password"
+                                                    onChange={onChangeValue}
                                                     ref={register({
                                                         required: true,
                                                         minLength: 6,
@@ -253,14 +258,14 @@ const BannerTrainer = () => {
                                             <div className="input_items">
                                                 <input
                                                     placeholder="Confirm Password"
-                                                    type={confirmPasswordShown? 'text': 'password'}
-                                                    value={cpassword}
-                                                    name="cpassword"
-                                                    onChange={(e) =>
-                                                        setCPassword(
-                                                            e.target.value
-                                                        )
+                                                    type={
+                                                        confirmPasswordShown
+                                                            ? "text"
+                                                            : "password"
                                                     }
+                                                    value={data.cpassword}
+                                                    name="cpassword"
+                                                    onChange={onChangeValue}
                                                     ref={register({
                                                         validate: (value) =>
                                                             value ===
@@ -274,7 +279,9 @@ const BannerTrainer = () => {
                                                 <img
                                                     src={Password}
                                                     alt="icon"
-                                                    onClick={showConfirmPassword}
+                                                    onClick={
+                                                        showConfirmPassword
+                                                    }
                                                 />
                                                 {errors.cpassword?.type ===
                                                     "required" && (
@@ -312,6 +319,8 @@ const BannerTrainer = () => {
                                                     </span>
                                                 )}
                                             </div>
+                                        {apiError && <span className='errorMessage'>{apiError}</span>}
+
 
                                             <div className="submit_button">
                                                 <button

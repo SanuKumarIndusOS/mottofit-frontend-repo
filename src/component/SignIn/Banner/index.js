@@ -8,7 +8,7 @@ import Password from "../../../assests/SignUp/Password Icon.svg";
 import ArrowSecondary from "../../../assests/SignUp/ArrowSecondary.svg";
 import { IoIosClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Arrow from "../../../assests/SignUp/Arrow.svg";
 
 Modal.setAppElement("#root");
@@ -21,8 +21,8 @@ const SignIn = ({ showModel, setShowModel }) => {
         signUpType: "email",
         deviceName: "email",
     });
-    // const [redirect, setRedirect] = useState(false);
     const [passwordShown, setPasswordShown] = useState(false);
+    const [apiError, setApiError] = useState('')
 
     const onChangeValue = (e) => {
         e.persist();
@@ -34,54 +34,47 @@ const SignIn = ({ showModel, setShowModel }) => {
         setPasswordShown(passwordShown ? false : true);
     };
 
+    
+
     async function logIn() {
+
         const item = {
             email: data.email,
             password: data.password,
             signUpType: data.signUpType,
             deviceName: data.deviceName,
         };
-        console.log(item);
-        let result = await fetch(
-            "http://doodlebluelive.com:2307/v1/user/login",
-            {
-                method: "POST",
-                body: JSON.stringify(item),
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-            }
-        );
-        result = await result.json();
-        localStorage.setItem("user-info", JSON.stringify(result));
-            history.push("/findtrainer");
+            console.log(item);
 
-        // if (result.status == "200") {
-        //     history.push("/");
-        // } else  {
-        //     alert("invalid user");
-        // }
-        // return false
-       
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(item),
+        };
+        fetch("http://doodlebluelive.com:2307/v1/user/login", requestOptions)
+            .then(async (response) => {
+                const data = await response.json();
+                localStorage.setItem("user-info", JSON.stringify(data));
+                if (response.ok) {
+                    history.push("/findtrainer");
+                } else {
+                setApiError('User Not Found',response.statusText)
+                }
+            })
+            .catch((error) => {
+                setApiError('Sorry, something went wrong.',error.message)
+            });
+    }
+    const preventSubmit = (e) => {
+        e.preventDefault()
     }
 
-    // function Login() {
-    //     let item = {  email, password };
-    //     if (email && password) {
-    //         setRedirect(true);
-    //     } else {
-    //         setRedirect(false, "not found");
-    //     }
-    //     console.log(item);
-    //     localStorage.setItem("user-info", JSON.stringify(item));
-    //     // history.push('/findtrainer')
-    // }
 
     return (
         <>
-            {/* {redirect ? <Redirect to={"/findtrainer"} /> : null} */}
-
             <div className="modal-container">
                 {showModel ? (
                     <Modal
@@ -107,7 +100,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                                     details below
                                 </p>
                                 <div className="form_items">
-                                    <form onSubmit={(e) => e.preventDefault()}>
+                                    <form onSubmit={preventSubmit}>
                                         <div className="input_items">
                                             <input
                                                 placeholder="Email"
@@ -199,6 +192,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                                                 </Link>
                                             </div>
                                         </div>
+                                        {apiError && <span className='errorMessage'>{apiError}</span>}
 
                                         <div className="submit_button">
                                             <button

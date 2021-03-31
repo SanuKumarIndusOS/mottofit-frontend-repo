@@ -9,13 +9,11 @@ import Arrow from "../../../assests/SignUp/Arrow.svg";
 import ArrowSecondary from "../../../assests/SignUp/ArrowSecondary.svg";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
-
 const SignUp = () => {
-
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -23,11 +21,12 @@ const SignUp = () => {
         phoneNo: "",
         password: "",
         cpassword: "",
-        location:"",
-        signUpType:'email'
+        location: "",
+        signUpType: "email",
     });
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+    const [apiError, setApiError] = useState('')
     const { register, errors, handleSubmit, watch } = useForm();
     const onChangeValue = (e) => {
         e.persist();
@@ -36,7 +35,6 @@ const SignUp = () => {
 
     const history = useHistory();
 
-    
     async function signUp() {
         const item = {
             firstName: data.firstName,
@@ -45,24 +43,32 @@ const SignUp = () => {
             phoneNo: data.phoneNo,
             password: data.password,
             cpassword: data.cpassword,
-            location:data.location,
-            signUpType:data.signUpType
+            location: data.location,
+            signUpType: data.signUpType,
         };
         console.log(item);
-        let result = await fetch(
-            "http://doodlebluelive.com:2307/v1/user/sign-up",
-            {
-                method: "POST",
-                body: JSON.stringify(item),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-            }
-        );
-        result = await result.json();
-        localStorage.setItem("user-info", JSON.stringify(result));
-        history.push("/findtrainer");
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify(item),
+        };
+        fetch("http://doodlebluelive.com:2307/v1/user/sign-up", requestOptions)
+            .then(async (response) => {
+                const data = await response.json();
+                localStorage.setItem("user-info", JSON.stringify(data));
+
+                if (response.ok) {
+                    history.push("/findtrainer");
+                } else {
+                    setApiError('Email already registered',response.statusText);
+                }
+            })
+            .catch((error) => {
+                setApiError('Sorry, something went wrong.',error.message);
+            });
     }
 
     const showPassword = () => {
@@ -85,9 +91,7 @@ const SignUp = () => {
                                 account
                             </p>
                             <div className="form_items">
-                                <form
-                                    onSubmit={(e) => e.preventDefault()}
-                                >
+                                <form onSubmit={(e) => e.preventDefault()}>
                                     <div className="input_items">
                                         <input
                                             placeholder="Name"
@@ -201,13 +205,11 @@ const SignUp = () => {
                                         )}
                                     </div>
 
-
                                     <div className="input_items">
                                         <input
                                             placeholder="Email"
                                             type="email"
                                             value={data.email}
-                                            
                                             name="email"
                                             onChange={onChangeValue}
                                             ref={register({
@@ -369,6 +371,8 @@ const SignUp = () => {
                                             </span>
                                         )}
                                     </div>
+                                    {apiError && <span className='errorMessage'>{apiError}</span>}
+
 
                                     <div className="or_items">
                                         <div className="hr_line"></div>
