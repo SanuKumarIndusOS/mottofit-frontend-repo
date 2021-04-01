@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
-import Banner from "../../component/Home/Banner/index";
-import Benfit from "../../component/Home/Benfit/index";
-import Experience from "../../component/Home/Experience/index";
-import Location from "../../component/Home/Location/index";
-import Trainer from "../../component/Home/trainer/index";
+import Banner from "../../components/Home/Banner/index";
+import Benfit from "../../components/Home/Benfit/index";
+import Experience from "../../components/Home/Experience/index";
+import Location from "../../components/Home/Location/index";
+import Trainer from "../../components/Home/trainer/index";
 import {   BrowserRouter as Router, Redirect, Route } from "react-router-dom";
-import Footer from "../../component/common/Footer";
-import SideBar from "../../component/common/SideBar";
+import Footer from "../../components/common/Footer";
+import SideBar from "../../components/common/SideBar";
 // import {NavBar }from "../../component/common/Navbar/NavBar";
-import SignUp from "../../component/SignUp/Banner/index";
-import NavBarHome from "../../component/Home/NavbarHomePage/NavBarHome";
-import { NavBar } from "../../component/common/Navbar/NavBar";
-import SignIn from "../../component/SignIn/Banner/index";
-import BannerTrainer from "../../component/TrainerSignUp/Banner";
-import ExperienceTrainer from '../../component/TrainerSignUp/Experience/index'
-import LocationTrainer from "../../component/TrainerSignUp/LocationTrainer";
-import FindTrainer from "../../component/FindYourTrainer/TrainerFilter/FindTrainer";
-import TrainerCards from '../../component/FindYourTrainer/TrainersDetails/index'
-import TrainerCardOutside from "../../component/FindYourTrainer/TrainerOutsideTime";
+import SignUp from "../../components/SignUp/Banner/index";
+import NavBarHome from "../../components/Home/NavbarHomePage/NavBarHome";
+import { NavBar } from "../../components/common/Navbar/NavBar";
+import SignIn from "../../components/SignIn/Banner/index";
+import BannerTrainer from "../../components/TrainerSignUp/Banner";
+import ExperienceTrainer from '../../components/TrainerSignUp/Experience/index'
+import LocationTrainer from "../../components/TrainerSignUp/LocationTrainer";
+import FindTrainer from "../../components/FindYourTrainer/TrainerFilter/FindTrainer";
+import TrainerCards from '../../components/FindYourTrainer/TrainersDetails/index'
+import TrainerCardOutside from "../../components/FindYourTrainer/TrainerOutsideTime";
+import AboutTrainer from "../../components/TrainerOnBoard/TrainerAboutYou";
+import TrainerTracker from "../../components/TrainerOnBoard/CommonTrackerBar";
+import TrainerBackground from "../../components/TrainerOnBoard/TrainerBackground";
 
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
@@ -57,7 +60,7 @@ const Home = () => {
                 <Route exact path="/" component={Footer} />
 
                 {/* User SignUp Screen */}
-                {redirect? <Redirect to = '/'/>: null }
+                {/* {redirect? <Redirect to = '/'/>: null } */}
                 <Route exact path="/signup"><NavBar toggle={toggle} /></Route>
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signup" component={Footer} />
@@ -76,6 +79,19 @@ const Home = () => {
                 <Route path="/findtrainer" component={TrainerCardOutside} />
                 <Route path="/findtrainer" component={Footer} />
 
+
+                {/* Trainer OnBoard */}
+                <Route exact path="/aboutTrainer"><NavBar toggle={toggle} /></Route>
+                <Route path='/aboutTrainer' component={TrainerTracker}  />
+                <Route path='/aboutTrainer' component={AboutTrainer}  />
+                <Route path="/aboutTrainer" component={Footer} />
+{/* 
+                <Route exact path="/trainerbackground"><NavBar toggle={toggle} /></Route>
+                <Route path='/trainerbackground' component={TrainerTracker}  />
+                <Route path="/trainerbackground" component={TrainerBackground} /> */}
+
+
+                
 
             </Router>
 

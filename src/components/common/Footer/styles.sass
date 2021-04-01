@@ -1,0 +1,204 @@
+$primary-light: #dbdbdb
+$text-color: #fff
+$footer-first: #161616
+$footer-second: #2C2C2C
+$hr-color: #454545
+$rights: #898989
+$icons: #53BFD2
+
+.footer
+    display: flex
+    flex-direction: row
+    position: relative
+    z-index: 999
+    width: 100%
+    height: auto
+
+    .left
+        background: $footer-first
+        width: 100%
+        height: 220px
+        display: flex
+        align-items: center
+        position: relative
+        @media screen and ( max-width: 1023px  )
+            height: 800px
+            align-items: flex-start
+            justify-content: center
+        .left-footer
+            p
+                margin-left: 4em
+                color: $text-color
+                text-align: left
+                @media screen and ( max-width: 1023px  )
+                    text-align: center
+                    margin: 3em 0 2em 0
+
+        .icons
+            display: flex
+            align-items: center
+            justify-content: space-evenly
+            margin: 0 auto
+            @media screen and ( max-width: 1023px  )
+                padding: 0
+                margin: 0
+
+        li
+            list-style-type: none
+            margin-left: 1em
+            @media screen and ( max-width: 1023px  )
+                padding: 0
+                margin: 0 1em
+
+            svg
+                position: relative
+                font-size: 2em
+                margin: 0 0.2em
+                color: $icons
+                @media screen and ( max-width: 1023px  )
+                    margin: 0
+                    justify-content: center
+
+    .middle
+        svg
+            right: 37%
+            bottom: 0
+            height: 300px
+            width: 400px
+            position: absolute
+            @media screen and ( max-width: 1023px  )
+
+                display: none
+
+    .right
+        background: $footer-second
+        width: 55%
+        top: 50
+        left: 50
+        right: 0
+        bottom: 0
+        height: 300px
+        position: absolute
+        @media screen and ( max-width: 1023px  )
+            height: 100vh
+            width: 100%
+            background: url('../../../assets/SVG/Grey BG.png') no-repeat
+            background-size: cover
+
+    .right
+        ul
+            display: flex
+            width: 90%
+            position: absolute
+            top: 45%
+            font-size: 18px
+            flex-direction: row
+            justify-content: space-between
+            text-decoration: none
+            color: $text-color
+            padding: 0
+            @media screen and ( max-width: 1023px  )
+                flex-direction: column
+                justify-content: center
+                width: 100%
+                top: 30%
+                text-align: center
+
+            li
+                list-style-type: none
+                @media screen and ( max-width: 1023px  )
+                    margin: 1em 0
+                    text-align: center
+
+                a
+                    list-style-type: none
+                    color: $text-color
+                    text-decoration: none
+
+        .logo-content
+            display: flex
+            width: 85%
+            position: absolute
+            top: 50
+            flex-direction: row
+            justify-content: space-between
+            align-items: center
+            margin-top: 3em
+            color: $icons
+            @media screen and ( max-width: 1023px  )
+                flex-direction: column
+                justify-content: center
+                width: 100%
+                padding: 1em 0
+
+            svg
+                height: 60px
+                width: 80px
+                padding: 0
+                margin: 0
+            a
+                color: $icons
+                text-decoration: none
+
+        hr
+            position: absolute
+            left: 0
+            top: 180px
+            border: 1px solid $hr-color
+            width: 90%
+            @media screen and ( max-width: 1023px  )
+                display: flex
+                justify-content: center
+                align-items: center
+                width: 80%
+                top: 510px
+                left: 40px
+                right: 0
+    .content-rights
+        display: flex
+        flex-direction: row
+        position: absolute
+        width: 100%
+        .rights
+            color: $rights
+            left: 0
+            position: absolute
+            top: 200px
+            width: 50%
+            font-size: 12px
+            display: flex
+            justify-content: flex-start
+            text-transform: uppercase
+            @media screen and ( max-width: 1023px  )
+                flex-direction: column
+                justify-content: flex-end
+                width: 100%
+                top: 550px
+                padding: 0 0 2em 0
+                text-align: center
+
+            .span-text
+                text-transform: none
+        .content-privacy
+            ul
+                left: 50
+                right: 10%
+                position: absolute
+                top: 200px
+                width: auto
+                font-size: 12px
+                font-family: 'Montserrat'
+
+                color: $rights
+                @media screen and ( max-width: 1023px  )
+                    flex-direction: row
+                    justify-content: center
+                    width: 100%
+                    top: 480px
+                    left: 0
+
+                li
+                    padding: 0 0.8em
+                    font-family: 'Montserrat'
+                    list-style-type: none
+                    color: $rights
