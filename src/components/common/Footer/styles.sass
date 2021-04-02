@@ -10,9 +10,11 @@ $icons: #53BFD2
     display: flex
     flex-direction: row
     position: relative
-    z-index: 999
+    z-index: 9999
     width: 100%
     height: auto
+    max-width: 100%
+    min-width: 100%
 
     .left
         background: $footer-first
@@ -26,19 +28,31 @@ $icons: #53BFD2
             align-items: flex-start
             justify-content: center
         .left-footer
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+            margin: 0
+            padding: 0
+            width: 30%
             p
-                margin-left: 4em
+                margin: 1em
                 color: $text-color
                 text-align: left
+                font-size: 22px
                 @media screen and ( max-width: 1023px  )
                     text-align: center
                     margin: 3em 0 2em 0
+            svg
+                display: flex
+                align-items: center
 
         .icons
             display: flex
             align-items: center
             justify-content: space-evenly
             margin: 0 auto
+            padding: 0
             @media screen and ( max-width: 1023px  )
                 padding: 0
                 margin: 0
@@ -61,13 +75,15 @@ $icons: #53BFD2
 
     .middle
         svg
-            right: 37%
+            right: 0
+            left: 30%
             bottom: 0
             height: 300px
-            width: 400px
+            max-width: 100%
+            max-width: 100%
+            width: 500px
             position: absolute
             @media screen and ( max-width: 1023px  )
-
                 display: none
 
     .right
@@ -80,7 +96,7 @@ $icons: #53BFD2
         height: 300px
         position: absolute
         @media screen and ( max-width: 1023px  )
-            height: 100vh
+            height: 80%
             width: 100%
             background: url('../../../assets/SVG/Grey BG.png') no-repeat
             background-size: cover
@@ -91,7 +107,8 @@ $icons: #53BFD2
             width: 90%
             position: absolute
             top: 45%
-            font-size: 18px
+            font-size: 20px
+            font-weight: 300
             flex-direction: row
             justify-content: space-between
             text-decoration: none
@@ -157,10 +174,10 @@ $icons: #53BFD2
     .content-rights
         display: flex
         flex-direction: row
-        position: absolute
         width: 100%
         .rights
             color: $rights
+            margin: 1em 0
             left: 0
             position: absolute
             top: 200px
@@ -179,9 +196,17 @@ $icons: #53BFD2
 
             .span-text
                 text-transform: none
+                display: flex
+                a
+                    text-decoration: none
+                    display: flex !important
+                    color: $rights
+                    margin-left: 0.3em !important
+
         .content-privacy
             ul
                 left: 50
+                margin: 1em 0
                 right: 10%
                 position: absolute
                 top: 200px

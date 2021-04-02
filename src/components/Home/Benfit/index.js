@@ -6,8 +6,8 @@ import Social from "../../../assets/Home/Benfit/social.png";
 
 const Benifet = () => {
     return (
-        <div className="container">
-            <div className="smallContainer">
+        <div className="content">
+            <div className="smallContainer container">
                 <BenifetParent
                     imageAsset={Personal}
                     heading="Keep it Personal with a 1 on 1"

@@ -4,10 +4,11 @@ import Person from "../../../assets/SignUp/Person Icon.svg";
 import Mail from "../../../assets/SignUp/Email Icon.svg";
 import Phone from "../../../assets/SignUp/Phone Icon.svg";
 import Password from "../../../assets/SignUp/Password Icon.svg";
-import Arrow from "../../../assets/SignUp/Arrow.svg";
-import ArrowSecondary from "../../../assets/SignUp/ArrowSecondary.svg";
-import { Link, Redirect, useHistory } from "react-router-dom";
+
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import ArrowHover from "../../common/ButtonIcon/ArrowHover";
+import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
 
 const BannerTrainer = () => {
 
@@ -61,7 +62,7 @@ const BannerTrainer = () => {
                 const data = await response.json();
                 localStorage.setItem("user-info", JSON.stringify(data));
                 if (response.ok) {
-                    history.push("/findtrainer");
+                    history.push("/aboutTrainer");
                 } else {
                     setApiError('Email already registered',response.statusText);
                 }
@@ -323,17 +324,14 @@ const BannerTrainer = () => {
 
 
                                             <div className="submit_button">
-                                                <button
+                                                <Link
                                                     onClick={handleSubmit(
                                                         trainerSignUp
                                                     )}
                                                 >
                                                     <p>Continue to Account</p>
-                                                    <img
-                                                        src={Arrow}
-                                                        alt="icon"
-                                                    />
-                                                </button>
+                                                    <ArrowBlackHover/>
+                                                </Link>
                                             </div>
                                         </form>
                                     </div>
@@ -342,10 +340,7 @@ const BannerTrainer = () => {
 
                                         <Link to="/">
                                             Sign In now
-                                            <img
-                                                src={ArrowSecondary}
-                                                alt="icon"
-                                            />
+                                            <ArrowHover/>
                                         </Link>
                                     </div>
                                 </div>

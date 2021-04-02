@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-import Arrow from "../../../assets/Home/Experience/icon/arrow-orignal.png";
 import Watermark from '../../../assets/Home/trainer/M Watermark.png'
+import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 
 export default class Trainer extends Component {
     render() {
@@ -21,7 +21,7 @@ export default class Trainer extends Component {
 
                     <div className="link">
                         <div className='button-text'>
-                            <Link to="/">APPLY AS A TRAINER <img src={Arrow} alt="logo"/></Link>
+                            <Link to="/">APPLY AS A TRAINER <ArrowHover/></Link>
                         </div>
                     </div>
                     <div className='watermark'>

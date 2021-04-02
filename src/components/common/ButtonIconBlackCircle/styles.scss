@@ -1,0 +1,42 @@
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+
+    .arrow-icon {
+        position: relative;
+        width: 1em;
+    }
+
+    .arrow-hoverBlack {
+        border: 2px solid #000;
+        border-radius: 50%;
+        position: relative;
+        display: block;
+        width: 2.5rem;
+        height: 2.5rem;
+        margin: 0.5em 2em;
+        padding: 0;
+        cursor: pointer;
+
+        svg {
+            position: absolute;
+            top: 50%;
+            left: -1.1rem;
+            width: 2.2rem;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            transition: left ease 0.15s;
+            fill: #ffff;
+            cursor: pointer;
+        }
+    }
+
+    &:hover {
+        .arrow-icon {
+            transition: 0.2s ease-in-out;
+            left: 0rem;
+        }
+    }
+}

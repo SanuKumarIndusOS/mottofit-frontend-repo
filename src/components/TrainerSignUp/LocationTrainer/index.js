@@ -153,7 +153,7 @@ const LocationTrainer = () => {
         ],
     };
     return (
-        <div className="slide-container">
+        <div className="slide-container container">
             <div className="header-content">
                 <h1>We are in these Cities</h1>
                 <p>

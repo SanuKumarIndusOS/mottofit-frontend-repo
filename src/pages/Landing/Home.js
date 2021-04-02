@@ -4,7 +4,7 @@ import Benfit from "../../components/Home/Benfit/index";
 import Experience from "../../components/Home/Experience/index";
 import Location from "../../components/Home/Location/index";
 import Trainer from "../../components/Home/trainer/index";
-import {   BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import {   BrowserRouter as Router, Route } from "react-router-dom";
 import Footer from "../../components/common/Footer";
 import SideBar from "../../components/common/SideBar";
 // import {NavBar }from "../../component/common/Navbar/NavBar";
@@ -21,11 +21,12 @@ import TrainerCardOutside from "../../components/FindYourTrainer/TrainerOutsideT
 import AboutTrainer from "../../components/TrainerOnBoard/TrainerAboutYou";
 import TrainerTracker from "../../components/TrainerOnBoard/CommonTrackerBar";
 import TrainerBackground from "../../components/TrainerOnBoard/TrainerBackground";
+import TrainerAvailability from "../../components/TrainerOnBoard/TrainerAvailability";
 
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [redirect, setRedirect] = useState(false);
+    const [, setRedirect] = useState(false);
 
 
     const toggle = () => {
@@ -82,13 +83,19 @@ const Home = () => {
 
                 {/* Trainer OnBoard */}
                 <Route exact path="/aboutTrainer"><NavBar toggle={toggle} /></Route>
-                <Route path='/aboutTrainer' component={TrainerTracker}  />
-                <Route path='/aboutTrainer' component={AboutTrainer}  />
-                <Route path="/aboutTrainer" component={Footer} />
-{/* 
+                <Route  path='/aboutTrainer' component={TrainerTracker}  />
+                <Route  path='/aboutTrainer' component={AboutTrainer}  />
+                <Route  path="/aboutTrainer" component={Footer} />
+
                 <Route exact path="/trainerbackground"><NavBar toggle={toggle} /></Route>
                 <Route path='/trainerbackground' component={TrainerTracker}  />
-                <Route path="/trainerbackground" component={TrainerBackground} /> */}
+                <Route path="/trainerbackground" component={TrainerBackground} />
+                <Route path="/trainerbackground" component={Footer} />
+
+                <Route exact path="/trainer-avaliability"><NavBar toggle={toggle} /></Route>
+                <Route path='/trainer-avaliability' component={TrainerTracker}  />
+                <Route path="/trainer-avaliability" component={TrainerAvailability} />
+                <Route path="/trainer-avaliability" component={Footer} />
 
 
                 

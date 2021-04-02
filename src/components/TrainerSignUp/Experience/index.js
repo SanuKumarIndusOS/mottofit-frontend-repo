@@ -10,7 +10,8 @@ import Icon6 from "../../../assets/TrainerSignUp/ExperienceTrainer/Icon 6.svg";
 export default class ExperienceTrainer extends Component {
     render() {
         return (
-            <div className="big_container container">
+            <div className='container'>
+            <div className="big_container">
                 <div className="personal_container container">
                     <div className="personal_trainer_description">
                         <h2 className="heading">
@@ -49,6 +50,7 @@ export default class ExperienceTrainer extends Component {
                         />
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

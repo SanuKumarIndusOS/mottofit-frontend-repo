@@ -134,21 +134,19 @@
             align-items: center;
             justify-content: center;
             width: 100%;
+            margin: 1rem;
 
-            button {
+            a {
                 outline: none;
                 background: #53bfd2;
                 border: 0;
-                margin: 1.5em 1em 1em 1em;
-                width: 80%;
-                padding: 0.5em;
+                display: flex;
+                align-items: center;
+                padding: 0.5em 0 0.5em 0.8em !important;
                 text-transform: uppercase;
                 color: #fff;
                 font-weight: bold;
-                img {
-                    width: auto;
-                    margin-left: 1em;
-                }
+                text-decoration: none;
             }
         }
         .errorMessage {
@@ -187,10 +185,6 @@
             color: #000;
             margin: 0.5em 0 0 0;
             padding: 0 1em;
-        }
-        img {
-            margin: 0.5em 1em;
-            width: 40px;
         }
     }
 }

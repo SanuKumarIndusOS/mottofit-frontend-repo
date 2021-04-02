@@ -5,11 +5,11 @@ import Facebook from "../../../assets/SignUp/Fb Logo.svg";
 import Google from "../../../assets/SignUp/Google Logo.svg";
 import Mail from "../../../assets/SignUp/Email Icon.svg";
 import Password from "../../../assets/SignUp/Password Icon.svg";
-import ArrowSecondary from "../../../assets/SignUp/ArrowSecondary.svg";
 import { IoIosClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
-import Arrow from "../../../assets/SignUp/Arrow.svg";
+import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
+import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 
 Modal.setAppElement("#root");
 const SignIn = ({ showModel, setShowModel }) => {
@@ -195,13 +195,14 @@ const SignIn = ({ showModel, setShowModel }) => {
                                         {apiError && <span className='errorMessage'>{apiError}</span>}
 
                                         <div className="submit_button">
-                                            <button
+                                            <Link
+            className='login_button'
                                                 type="submit"
                                                 onClick={handleSubmit(logIn)}
                                             >
-                                                Login into Motto{" "}
-                                                <img src={Arrow} alt="icon" />
-                                            </button>
+                                                Login into Motto
+                                                <ArrowBlackHover/>
+                                            </Link>
                                         </div>
                                     </form>
                                 </div>
@@ -229,17 +230,12 @@ const SignIn = ({ showModel, setShowModel }) => {
                                     <div className="links_item">
                                         <Link to="/signup">
                                             User Sign Up
-                                            <img
-                                                src={ArrowSecondary}
-                                                alt="icon"
-                                            />
+                                            <ArrowHover/>
+
                                         </Link>
                                         <Link to="/trainersignup">
                                             Trainer Sign Up
-                                            <img
-                                                src={ArrowSecondary}
-                                                alt="icon"
-                                            />
+                                            <ArrowHover/>
                                         </Link>
                                     </div>
                                 </div>

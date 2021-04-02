@@ -5,13 +5,13 @@ import Phone from "../../../assets/SignUp/Phone Icon.svg";
 import Password from "../../../assets/SignUp/Password Icon.svg";
 import Facebook from "../../../assets/SignUp/Fb Logo.svg";
 import Google from "../../../assets/SignUp/Google Logo.svg";
-import Arrow from "../../../assets/SignUp/Arrow.svg";
-import ArrowSecondary from "../../../assets/SignUp/ArrowSecondary.svg";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
+import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
+import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 
 const SignUp = () => {
     const [data, setData] = useState({
@@ -393,13 +393,13 @@ const SignUp = () => {
                                         </button>
                                     </div>
                                     <div className="submit_button">
-                                        <button
+                                        <Link
                                             type="submit"
                                             onClick={handleSubmit(signUp)}
                                         >
                                             Continue to Account{" "}
-                                            <img src={Arrow} alt="icon" />
-                                        </button>
+                                            <ArrowBlackHover/>
+                                        </Link>
                                     </div>
                                 </form>
                             </div>
@@ -407,8 +407,8 @@ const SignUp = () => {
                                 <h4>Already have an account?</h4>
 
                                 <Link to="/">
-                                    Sign In now
-                                    <img src={ArrowSecondary} alt="icon" />
+                                    Sign In now 
+                                    <ArrowHover/>
                                 </Link>
                             </div>
                         </div>

@@ -1,7 +1,14 @@
 .big_container {
     width: 100%;
+    margin: 3em 0;
+
     .experience_upper_container {
+        margin: 2em 0;
         opacity: 1;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         .heading {
             padding-bottom: 40px;
             font: var(--unnamed-font-style-normal) normal
@@ -15,30 +22,42 @@
             letter-spacing: -0.45px;
             color: #161616;
             opacity: 1;
+            width: 50%;
             @media screen and (max-width: 920px) {
                 font: normal normal bold 25px/35px Cormorant Garamond;
+                width: 100%;
             }
         }
         .svgBG {
             position: absolute;
-            right: 5%;
-            // top: 50;
-            bottom: -120%;
-            @media screen and (max-width: 920px) {
-                position: unset;
-                padding: 2em 0 0 0;
+            right: 6%;
+            left: random($limit: 1);
+            bottom: center;
+            @media screen and (max-width: 1023px) {
+                display: none;
             }
         }
+
         .image_Container {
             display: flex;
-            justify-content: center;
-            height: 300px;
+            justify-content: space-around;
+            height: auto;
             width: 100%;
             flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
             @media screen and (max-width: 1024px) {
                 justify-content: space-evenly;
                 height: auto;
                 flex-wrap: wrap;
+            }
+            .svgBGMobile {
+                display: none;
+                @media screen and (max-width: 1023px) {
+                    position: unset;
+                    display: block;
+                    padding: 2em;
+                }
             }
 
             .image_strength_main {
@@ -91,10 +110,11 @@
     .personal_container {
         display: grid;
         grid-template-columns: 40% 60%;
-        grid-column-gap: 50px;
-        padding: 150px 0;
+        grid-column-gap: 30px;
+        padding: 0 2em;
+        align-items: center;
         width: 100%;
-        height: 100vh;
+        height: 400px;
         @media screen and (max-width: 1023px) {
             grid-template-columns: auto;
             height: auto;
@@ -151,34 +171,22 @@
                 letter-spacing: 0.45px;
                 color: #161616;
                 text-transform: uppercase;
-                opacity: 1;
                 margin-top: 2em;
-                text-decoration: none;
                 position: relative;
-            }
-            .button-text {
-                text-align: left;
-            }
-            .button-custom {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin: 0 2em;
-            }
-            .button-custom img {
-                width: 30px;
-                height: auto;
-            }
-            img:nth-child(1) {
-                position: absolute;
-                top: 50;
-                left: 45%;
-                right: 0;
-            }
-            a {
-                text-decoration: none;
-                color: #161616;
-                font-weight: 900;
+
+                a {
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    color: #161616;
+                    font-weight: 900;
+
+                    .button-text {
+                        text-align: left;
+                        align-items: center;
+                        margin-right: 1em;
+                    }
+                }
             }
         }
         .right_container {
@@ -186,7 +194,6 @@
             grid-template-columns: auto auto;
             grid-template-rows: auto;
             grid-column-gap: 10px;
-            height: 100px;
             @media screen and (max-width: 1023px) {
                 grid-template-columns: auto;
                 height: auto;

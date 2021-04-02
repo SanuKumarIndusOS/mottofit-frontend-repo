@@ -3,6 +3,7 @@ import "./styles.sass";
 import { AiOutlineInstagram, AiFillYoutube } from "react-icons/ai";
 import { FaTwitter, FaFacebookF } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import Line from '../../../assets/SVG/Line 2.svg'
 
 const Footer = () => {
     return (
@@ -10,7 +11,7 @@ const Footer = () => {
             <div className="footer">
                 <div className="left">
                     <div className="left-footer">
-                        <p>Talk us for updates</p>
+                        <p>Stalk us for updates</p>
                         <ul className="icons">
                             <li>
                                 <Link to="/">
@@ -108,13 +109,16 @@ const Footer = () => {
                                     Rights reserved,{" "}
                                 </span>
                                 <span className="span-text">
-                                    Designed by doodleblue
+                                    Designed by <a href='/'>Lucid</a>
                                 </span>
                             </div>
                             <div className="content-privacy">
                                 <ul>
-                                    <li>Privacy Policy</li>
+                                    <li>Privacy Policy</li> 
+                                    <img src={Line} alt='svg'/>
                                     <li>Terms of Use</li>
+                                    <img src={Line} alt='svg'/>
+
                                     <li>Legal</li>
                                 </ul>
                             </div>

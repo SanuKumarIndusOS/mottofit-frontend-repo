@@ -4,14 +4,17 @@ import Arrow from "../../../assets/SignUp/Arrow.svg";
 import Instagram from "../../../assets/SVG/Insta Icon.svg";
 import Web from "../../../assets/SVG/Web Icon.svg";
 import DropDown from "../../../assets/SVG/Drop Down 4.svg";
-import TrainerBackground from "../TrainerBackground";
-import { Link } from "react-router-dom";
+// import TrainerBackground from "../TrainerBackground";
+import {  useHistory } from "react-router-dom";
 
 const AboutTrainer = () => {
 
+    const history = useHistory()
 
     const handleTrainerBackground = () => {
-        console.log('kekkek')
+        history.push('/trainerbackground')
+
+        
         // return (
         //     <>
         //         <TrainerBackground path='/trainerbackground'/>
@@ -45,10 +48,13 @@ const AboutTrainer = () => {
                             <div className="wrapper_innerInput">
                                 <label>Gender*</label>
                                 <div className="iconwrapper">
-                                    <select name="gender" id="gender">
-                                        <option value="mail">Mail</option>
-                                        <option value="femail">Femail</option>
-                                        <option value="others">Others</option>
+                                    <select 
+                                    // name="gender" 
+                                    // id="gender"
+                                    >
+                                        <option>Mail</option>
+                                        <option >Femail</option>
+                                        <option >Others</option>
                                     </select>
                                     <img src={DropDown} alt="icon" />
                                 </div>
