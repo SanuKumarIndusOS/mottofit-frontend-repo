@@ -31,6 +31,8 @@
                     width: 100%;
                     margin: 0.5em 1em 0.5em 0;
                     display: flex;
+                    padding: 0.3em 1em;
+                    border-radius: 50px;
                     justify-content: space-around;
                     border: 1px solid #bcbcbc;
                 }
@@ -39,6 +41,9 @@
                     color: #bcbcbc;
                     margin: 0;
                     padding: 0;
+                }
+                input:focus {
+                    outline: none;
                 }
 
                 select {
@@ -66,13 +71,14 @@
                 align-items: center;
                 justify-content: center;
 
-                button {
+                a {
                     outline: none;
                     background: #53bfd2;
                     border: 0;
                     margin: 1em;
                     width: 100%;
-                    padding: 0.5em 2em;
+                    text-decoration: none;
+                    padding: 0.2em 0.5em 0.2em 2em !important;
                     text-transform: uppercase;
                     color: #fff;
                     font-weight: bold;

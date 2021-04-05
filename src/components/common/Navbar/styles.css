@@ -19,7 +19,7 @@
 
 .main_navbar1 {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 0 3em !important;
     width: 100%;
 }
@@ -53,6 +53,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 20%;
 }
 .search-items1 .input-item1 {
     display: flex;
@@ -67,11 +68,12 @@
     padding: 0.3em 0.5em;
     width: 250px;
 }
+input:focus {
+    outline: none;
+}
 .search-icon1 {
-    display: flex;
-    position: absolute;
-    left: 85%;
-    right: 100px;
+    margin: 0 1em 0 -1.5em;
+    padding: 0;
     font-size: 1.5em;
     color: var(--icon-color);
 }

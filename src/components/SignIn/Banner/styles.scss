@@ -69,6 +69,10 @@
                     padding: 0.3em 2em;
                     width: 100%;
                     background: #fff;
+                    border-radius: 50px;
+                }
+                input:focus {
+                    outline: none;
                 }
 
                 img {

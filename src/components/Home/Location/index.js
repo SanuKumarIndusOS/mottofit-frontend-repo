@@ -123,6 +123,9 @@ const Location = () => {
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 1,
+        autoplay: true,
+      speed: 2000,
+      autoplaySpeed: 2000,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
@@ -157,8 +160,8 @@ const Location = () => {
             <div className="header-content">
                 <h1>Browse by location</h1>
                 <p>
-                    In-Person training available in New York City, Hamptons &
-                    Miami, with more locations coming soon. Live virtual
+                    In-Person training available in New York City, Hamptons,
+                    Miami & Plam Beach with more locations coming soon. Live virtual
                     training available anywhere!
                 </p>
             </div>

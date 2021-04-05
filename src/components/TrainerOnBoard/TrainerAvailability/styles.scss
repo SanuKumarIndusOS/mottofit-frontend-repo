@@ -42,12 +42,17 @@
                     input {
                         width: 90%;
                         border: 1px solid #bcbcbc;
+                        padding: 0.3em 1em;
+                        border-radius: 50px;
                     }
                     input::placeholder {
                         font-size: 16px;
                         color: #bcbcbc;
                         margin: 0;
                         padding: 0;
+                    }
+                    input:focus {
+                        outline: none;
                     }
                 }
             }
@@ -93,12 +98,17 @@
                     input {
                         width: 100%;
                         border: 1px solid #bcbcbc;
+                        padding: 0.3em 1em;
+                        border-radius: 50px;
                     }
                     input::placeholder {
                         font-size: 16px;
                         color: #bcbcbc;
                         margin: 0;
                         padding: 0;
+                    }
+                    input:focus {
+                        outline: none;
                     }
                 }
             }
@@ -120,12 +130,17 @@
                     input {
                         width: 100%;
                         border: 1px solid #bcbcbc;
+                        padding: 0.3em 1em;
+                        border-radius: 50px;
                     }
                     input::placeholder {
                         font-size: 16px;
                         color: #bcbcbc;
                         margin: 0;
                         padding: 0;
+                    }
+                    input:focus {
+                        outline: none;
                     }
                 }
             }

@@ -1,11 +1,11 @@
 import React from "react";
 import "./styles.scss";
-import Arrow from "../../../assets/SignUp/Arrow.svg";
 import Instagram from "../../../assets/SVG/Insta Icon.svg";
 import Web from "../../../assets/SVG/Web Icon.svg";
 import DropDown from "../../../assets/SVG/Drop Down 4.svg";
 // import TrainerBackground from "../TrainerBackground";
-import {  useHistory } from "react-router-dom";
+import {  Link,NavLink,useHistory } from "react-router-dom";
+import ArrowBlackHover from '../../common/ButtonIconBlackCircle/ArrowBlackHover'
 
 const AboutTrainer = () => {
 
@@ -83,10 +83,10 @@ const AboutTrainer = () => {
                             </div>
 
                             <div className="submit_button">
-                                <button type="submit" onClick={handleTrainerBackground} >
+                                <Link type="submit" onClick={handleTrainerBackground} >
                                     Continue
-                                    <img src={Arrow} alt="icon" />
-                                </button>
+                                    <ArrowBlackHover/>
+                                </Link>
                             </div>
                         </form>
                     </div>

@@ -123,6 +123,9 @@ const LocationTrainer = () => {
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 1,
+        autoplay: true,
+        speed: 2000,
+        autoplaySpeed: 2000,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
@@ -158,7 +161,7 @@ const LocationTrainer = () => {
                 <h1>We are in these Cities</h1>
                 <p>
                     Currently available for in-person live training in Miami,
-                    New York City & the Hamptons. We will be launching in other
+                    New York City, Hamptons & Plam Beach. We will be launching in other
                     cities across the United States soon.
                 </p>
             </div>
