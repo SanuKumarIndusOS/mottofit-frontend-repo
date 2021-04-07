@@ -22,6 +22,7 @@ import AboutTrainer from "../../components/TrainerOnBoard/TrainerAboutYou";
 import TrainerTracker from "../../components/TrainerOnBoard/CommonTrackerBar";
 import TrainerBackground from "../../components/TrainerOnBoard/TrainerBackground";
 import TrainerAvailability from "../../components/TrainerOnBoard/TrainerAvailability";
+import TrainerCard from "../../components/TrainerOnBoard/TrainerCard";
 
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
@@ -97,8 +98,12 @@ const Home = () => {
                 <Route path="/trainer-avaliability" component={TrainerAvailability} />
                 <Route path="/trainer-avaliability" component={Footer} />
 
+                <Route exact path="/trainer-card"><NavBar toggle={toggle} /></Route>
 
-                
+                <Route path="/trainer-card" component={TrainerCard} />
+                <Route path="/trainer-card" component={Footer} />
+
+
 
             </Router>
 

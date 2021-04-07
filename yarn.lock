@@ -9952,6 +9952,11 @@ react-slick@^0.28.1:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-tabbordion@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-tabbordion/-/react-tabbordion-1.0.6.tgz#6f83f032608370d45baf0310933a8d511d99264f"
+  integrity sha512-OJrpzAQuBV7Znw3CxlB8g0wCeLvwG9t8oujC1ltl1xShXsMgoL41IphUcu3Ebn+xrOYbBNqLSo0aZUivAFrVDA==
+
 react-transition-group@^4.3.0, react-transition-group@^4.4.0:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"

@@ -18,8 +18,7 @@ export const NavBar = ({ toggle }) => {
 
     return (
         <>
-            <Nav className="navbar1 ">
-                <div className="main_navbar1 ">
+            <nav className="navbar1 container ">
                     <div className="header-links1">
                         <Link to="/findtrainer">How it works</Link>
                         <img src={Line} alt="icon" />
@@ -54,8 +53,7 @@ export const NavBar = ({ toggle }) => {
                             />
                         </div>
                     </div>
-                </div>
-            </Nav>
+            </nav>
         </>
     );
 };

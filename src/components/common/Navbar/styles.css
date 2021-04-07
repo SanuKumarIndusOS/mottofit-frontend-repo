@@ -6,34 +6,21 @@
     --active-text: #000;
 }
 
-.navbar1 {
+nav {
     transition: 0.8s ease-in-out;
     background: var(--primary-bg);
     position: sticky;
-    top: 0;
-    z-index: 999;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.main_navbar1 {
-    display: flex;
-    justify-content: space-around;
-    margin: 0 3em !important;
-    width: 100%;
-}
-.navbar-container1 {
     display: flex;
     justify-content: space-between;
-    align-content: center;
-
-    /* margin-bottom: -100px; */
+    align-items: center;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
 }
 
 .header-links1 {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     align-items: center;
     color: var(--text-color);
@@ -44,29 +31,23 @@
     text-decoration: none;
 }
 .logo-content1 img {
-    height: 80px;
-    padding: 1em;
-    display: flex;
-    justify-content: center;
+    padding: 1em 0;
+    width: 100px;
 }
 .search-items1 {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    width: 20%;
 }
-.search-items1 .input-item1 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
+
 .input {
     background: transparent;
     border: 1px solid var(--logo);
     border-radius: 50px;
     padding: 0.3em 0.5em;
-    width: 250px;
+    width: 200px;
+}
+input::placeholder {
+    font-size: 0.8em;
 }
 input:focus {
     outline: none;
@@ -74,7 +55,7 @@ input:focus {
 .search-icon1 {
     margin: 0 1em 0 -1.5em;
     padding: 0;
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: var(--icon-color);
 }
 .login-item1 {
@@ -83,7 +64,7 @@ input:focus {
     align-items: center;
 }
 .login-item1 img {
-    margin: 0 1em;
+    margin: 0 0em 0 1em;
     cursor: pointer;
 }
 

@@ -21,6 +21,7 @@
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
     "react-slick": "^0.28.1",
+    "react-tabbordion": "^1.0.6",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^1.0.1"

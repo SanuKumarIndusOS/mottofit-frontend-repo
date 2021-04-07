@@ -16,13 +16,11 @@ const GreenRadio = withStyles({
 })((props) => <Radio color="default" {...props} />);
 
 const TrainerBackground = () => {
-    const history = useHistory()
+    const history = useHistory();
 
     const handleTrainerAvailability = () => {
-        history.push('/trainer-avaliability')
-    }
-
-
+        history.push("/trainer-avaliability");
+    };
 
     const [selectedValue, setSelectedValue] = useState("a");
     const [inputFields, setInputField] = useState([
@@ -44,9 +42,8 @@ const TrainerBackground = () => {
         const values = [...inputFields];
         values[index][event.target.name] = event.target.value;
         setInputField(values);
-
     };
-    const handleChangeCertificateInput = ( index, event) => {
+    const handleChangeCertificateInput = (index, event) => {
         const values = [...inputCertificatesFields];
         values[index][event.target.name] = event.target.value;
         setinputCertificatesField(values);
@@ -69,8 +66,6 @@ const TrainerBackground = () => {
             { certificate: "", year: "", upload: "" },
         ]);
     };
-
- 
 
     // const handleRemoveFields = (index) => {
     //     const values = [...inputFields];
@@ -155,27 +150,38 @@ const TrainerBackground = () => {
                                                 <input
                                                     type="text"
                                                     placeholder="Name of the Orgnisation/GYM"
-                                                    value={
-                                                        input.orgnization
+                                                    value={input.orgnization}
+                                                    name="orgnization"
+                                                    onChange={(event) =>
+                                                        handleChangeInput(
+                                                            index,
+                                                            event
+                                                        )
                                                     }
-                                                    name='orgnization'
-                                                    onChange={event => handleChangeInput( index, event)}
                                                 />
                                                 <input
                                                     type="text"
                                                     placeholder="Job Title"
                                                     value={input.job}
-                                                    name='job'
-                                                    onChange={event => handleChangeInput( index, event)}
-
+                                                    name="job"
+                                                    onChange={(event) =>
+                                                        handleChangeInput(
+                                                            index,
+                                                            event
+                                                        )
+                                                    }
                                                 />
                                                 <input
                                                     type="Number"
                                                     placeholder="Years"
-                                                    name='years'
+                                                    name="years"
                                                     value={input.years}
-                                                    onChange={event => handleChangeInput( index, event)}
-
+                                                    onChange={(event) =>
+                                                        handleChangeInput(
+                                                            index,
+                                                            event
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         );
@@ -206,9 +212,13 @@ const TrainerBackground = () => {
                                                     value={
                                                         inputCertificatesField.certificate
                                                     }
-                                                    name='certificate'
-                                                    onChange={event => handleChangeCertificateInput( index, event)}
-
+                                                    name="certificate"
+                                                    onChange={(event) =>
+                                                        handleChangeCertificateInput(
+                                                            index,
+                                                            event
+                                                        )
+                                                    }
                                                 />
                                                 <input
                                                     type="text"
@@ -216,9 +226,13 @@ const TrainerBackground = () => {
                                                     value={
                                                         inputCertificatesField.year
                                                     }
-                                                    name='year'
-                                                    onChange={event => handleChangeCertificateInput( index, event)}
-
+                                                    name="year"
+                                                    onChange={(event) =>
+                                                        handleChangeCertificateInput(
+                                                            index,
+                                                            event
+                                                        )
+                                                    }
                                                 />
                                                 <input
                                                     type="file"
@@ -226,9 +240,12 @@ const TrainerBackground = () => {
                                                     value={
                                                         inputCertificatesField.upload
                                                     }
-                                                    onChange={event => handleChangeCertificateInput( index, event)}
-                                                
-
+                                                    onChange={(event) =>
+                                                        handleChangeCertificateInput(
+                                                            index,
+                                                            event
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         )
@@ -307,7 +324,10 @@ const TrainerBackground = () => {
                                 </div>
 
                                 <div className="submit_button">
-                                    <button type="submit" onClick={handleTrainerAvailability}>
+                                    <button
+                                        type="submit"
+                                        onClick={handleTrainerAvailability}
+                                    >
                                         Continue
                                         <img src={Arrow} alt="icon" />
                                     </button>
