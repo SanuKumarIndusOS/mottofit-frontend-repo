@@ -22,7 +22,8 @@ import AboutTrainer from "../../components/TrainerOnBoard/TrainerAboutYou";
 import TrainerTracker from "../../components/TrainerOnBoard/CommonTrackerBar";
 import TrainerBackground from "../../components/TrainerOnBoard/TrainerBackground";
 import TrainerAvailability from "../../components/TrainerOnBoard/TrainerAvailability";
-import TrainerCard from "../../components/TrainerOnBoard/TrainerCard";
+import TrainerCard from "../../components/TrainerOnBoard/TrainerCaptures/TrainerCard";
+import TrainerSetUpProfile from "../../components/TrainerOnBoard/TrainerCaptures/TrainerSetUpProfile";
 
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
@@ -99,11 +100,13 @@ const Home = () => {
                 <Route path="/trainer-avaliability" component={Footer} />
 
                 <Route exact path="/trainer-card"><NavBar toggle={toggle} /></Route>
-
                 <Route path="/trainer-card" component={TrainerCard} />
                 <Route path="/trainer-card" component={Footer} />
 
 
+                <Route exact path="/trainer-setup"><NavBar toggle={toggle} /></Route>
+                <Route path="/trainer-setup" component={TrainerSetUpProfile} />
+                <Route path="/trainer-setup" component={Footer} />
 
             </Router>
 

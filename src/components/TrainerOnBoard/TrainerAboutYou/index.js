@@ -13,13 +13,6 @@ const AboutTrainer = () => {
 
     const handleTrainerBackground = () => {
         history.push('/trainerbackground')
-
-        
-        // return (
-        //     <>
-        //         <TrainerBackground path='/trainerbackground'/>
-        //     </>
-        // )
     }
     return (
         <>

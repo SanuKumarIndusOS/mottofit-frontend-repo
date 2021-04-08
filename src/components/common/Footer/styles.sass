@@ -6,11 +6,10 @@ $hr-color: #454545
 $rights: #898989
 $icons: #53BFD2
 
-.footer
+footer
     display: flex
     flex-direction: row
     position: relative
-    z-index: 9999
     width: 100%
     height: auto
     max-width: 100%
@@ -74,21 +73,24 @@ $icons: #53BFD2
                     justify-content: center
 
     .middle
-        svg
+        .box
             right: 0
             left: 30%
             bottom: 0
             height: 300px
-            max-width: 100%
-            max-width: 100%
-            width: 500px
+            width: 40%
+            background: $footer-second
+            clip-path: polygon(20% 0, 100% 0%, 100% 100%, 0% 100%)
+
+            // max-width: 100%
+            // max-width: 100%
             position: absolute
             @media screen and ( max-width: 1023px  )
                 display: none
 
     .right
         background: $footer-second
-        width: 55%
+        width: 60%
         top: 50
         left: 50
         right: 0
