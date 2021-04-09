@@ -1,3 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="6.811" height="12.121" viewBox="0 0 6.811 12.121">
-  <path id="Arrow" d="M10,0,5,5,0,0" transform="translate(5.75 1.061) rotate(90)" fill="none" stroke="#53bfd2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="30.527" height="16.604" viewBox="0 0 30.527 16.604">
+  <g id="Group_9567" data-name="Group 9567" transform="translate(1.25 14.836) rotate(-90)">
+    <path id="Path_7512" data-name="Path 7512" d="M0,0V27" transform="translate(6.534 0)" fill="none" stroke="#161616" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+    <path id="Path_7513" data-name="Path 7513" d="M13.068,0,6.534,6.534,0,0" transform="translate(0 21.493)" fill="none" stroke="#161616" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+  </g>
 </svg>
