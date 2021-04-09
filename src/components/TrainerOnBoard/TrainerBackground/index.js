@@ -88,7 +88,7 @@ const TrainerBackground = () => {
                         <p>
                             We want to know it all! Share with us your
                             experience & philosophy as a trainer to progress in
-                            your application process and join the Motto family.{" "}
+                            your application process and join the Motto Family.{" "}
                         </p>
                         <div className="contents_wrapper">
                             <form>
