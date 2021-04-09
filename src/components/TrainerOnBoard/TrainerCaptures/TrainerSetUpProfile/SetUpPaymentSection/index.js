@@ -25,124 +25,100 @@ const PaymentSection = () => {
                         <p>{data.describe}</p>
                     </div>
                     <div className="payment_inner container">
-                        <form>
-                            <div className="payment_item1">
-                                <h6>{data.id}</h6>
-                                <div className="inputs_payment">
-                                    <select
-                                        name="bank"
-                                        id="banks"
-                                        className={
-                                            dropdowm ? "active" : "option"
-                                        }
-                                        onChange={dropdowmColorChange}
-                                    >
-                                        <option
-                                            value=""
-                                            disabled
-                                            selected
-                                            hidden
-                                        >
-                                            Select type of ID
-                                        </option>
-                                        <option value="USA">USA</option>
-                                        <option value="FBI">FBI</option>
-                                        <option value="National">
-                                            National
-                                        </option>
-                                        <option value="United">United</option>
-                                    </select>
-                                    <input
-                                        type="text"
-                                        placeholder="Add your ID Number"
-                                    />
-                                    <input
-                                        type="file"
-                                        name="file"
-                                        className="custom-file-input"
-                                    />
-                                    <a className="checkarrow">
-                                        <ArrowHover />
-                                    </a>
-                                </div>
+                        {/* <form> */}
+                        <div className="payment_item1">
+                            <h6>{data.id}</h6>
+                            <div className="inputs_payment">
+                                <select
+                                    name="bank"
+                                    id="id"
+                                    className={dropdowm ? "active" : "option"}
+                                    defaultValue={"Default"}
+                                    onChange={dropdowmColorChange}
+                                >
+                                    <option value="Default" disabled hidden>
+                                        Select type of ID
+                                    </option>
+                                    <option value="USA">USA</option>
+                                    <option value="FBI">FBI</option>
+                                    <option value="National">National</option>
+                                    <option value="United">United</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Add your ID Number"
+                                />
+                                <input
+                                    type="file"
+                                    name="file"
+                                    className="custom-file-input"
+                                />
+                                <a className="checkarrow">
+                                    <ArrowHover />
+                                </a>
                             </div>
-                            <div className="payment_item1">
-                                <h6>{data.insurance}</h6>
-                                <div className="inputs_payment">
-                                    <select
-                                        name="bank"
-                                        id="banks"
-                                        className={
-                                            dropdowm ? "active" : "option"
-                                        }
-                                        onChange={dropdowmColorChange}
-                                    >
-                                        <option
-                                            value=""
-                                            disabled
-                                            selected
-                                            hidden
-                                        >
-                                            Select your Insurance
-                                        </option>
+                        </div>
+                        <div className="payment_item1">
+                            <h6>{data.insurance}</h6>
+                            <div className="inputs_payment">
+                                <select
+                                    name="bank"
+                                    id="insurance"
+                                    className={dropdowm ? "active" : "option"}
+                                    defaultValue={"Default"}
+                                    onChange={dropdowmColorChange}
+                                >
+                                    <option value="Default" disabled hidden>
+                                        Select your Insurance
+                                    </option>
 
-                                        <option value="USA">USA</option>
-                                        <option value="FBI">FBI</option>
-                                        <option value="National">
-                                            National
-                                        </option>
-                                        <option value="United">United</option>
-                                    </select>
-                                    <input
-                                        type="text"
-                                        placeholder="Add your Cover Amount"
-                                    />
-                                    <input
-                                        type="file"
-                                        name="file"
-                                        className="custom-file-input"
-                                    />
-                                    <a className="checkarrow">
-                                        <ArrowHover />
-                                    </a>
-                                </div>
+                                    <option value="USA">USA</option>
+                                    <option value="FBI">FBI</option>
+                                    <option value="National">National</option>
+                                    <option value="United">United</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Add your Cover Amount"
+                                />
+                                <input
+                                    type="file"
+                                    name="file"
+                                    className="custom-file-input"
+                                />
+                                <a className="checkarrow">
+                                    <ArrowHover />
+                                </a>
                             </div>
-                            <div className="payment_item2">
-                                <h6>{data.payment}</h6>
-                                <div className="inputs_payment">
-                                    <select
-                                        name="bank"
-                                        id="banks"
-                                        className={
-                                            dropdowm ? "active" : "option"
-                                        }
-                                        onChange={dropdowmColorChange}
-                                    >
-                                        <option
-                                            value=""
-                                            disabled
-                                            selected
-                                            hidden
-                                        >
-                                            Bank Name
-                                        </option>
+                        </div>
+                        <div className="payment_item2">
+                            <h6>{data.payment}</h6>
+                            <div className="inputs_payment">
+                                <select
+                                    name="bank"
+                                    id="payment"
+                                    defaultValue={"Default"}
+                                    className={dropdowm ? "active" : "option"}
+                                    onChange={dropdowmColorChange}
+                                >
+                                    <option value="Default" disabled hidden>
+                                        Bank Name
+                                    </option>
 
-                                        <option value="hdfc">HDFC</option>
-                                        <option value="america">
-                                            American Bank
-                                        </option>
-                                        <option value="national">
-                                            National
-                                        </option>
-                                        <option value="united">United</option>
-                                    </select>
-                                    <input
-                                        type="text"
-                                        placeholder="Add your Account Number"
-                                    />
-                                </div>
+                                    <option value="hdfc">HDFC</option>
+                                    <option value="america">
+                                        American Bank
+                                    </option>
+                                    <option value="national">National</option>
+                                    <option value="united">United</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Add your Account Number"
+                                />
                             </div>
-                        </form>
+                        </div>
+                        {/* </form> */}
                     </div>
                 </div>
             </div>

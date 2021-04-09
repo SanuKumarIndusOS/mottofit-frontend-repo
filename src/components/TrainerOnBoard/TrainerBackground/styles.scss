@@ -128,6 +128,42 @@
                         margin: 0;
                         padding: 0;
                     }
+                    .custom-file-input {
+                        color: transparent;
+                        width: 65%;
+                    }
+                    .custom-file-input::-webkit-file-upload-button {
+                        visibility: hidden;
+                    }
+                    .custom-file-input::before {
+                        content: "upload";
+                        outline: none;
+
+                        border: 0;
+                        // margin: 0 1em;
+                        // padding: 0.5em 2em;
+                        text-transform: uppercase;
+                        color: black;
+                        font-weight: bold;
+                    }
+                    .custom-file-input:hover::before {
+                        border-color: black;
+                    }
+                    .custom-file-input:active {
+                        outline: 0;
+                    }
+                    .custom-file-input:active::before {
+                        background: -webkit-linear-gradient(
+                            top,
+                            #e3e3e3,
+                            #f9f9f9
+                        );
+                    }
+
+                    .checkarrow {
+                        position: relative;
+                        right: 150px;
+                    }
                 }
             }
             .item4 {

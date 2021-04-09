@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.76f6df7a.chunk.css",
-    "main.js": "/static/js/main.42e615b4.chunk.js",
-    "main.js.map": "/static/js/main.42e615b4.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.47639be4.js",
-    "runtime-main.js.map": "/static/js/runtime-main.47639be4.js.map",
-    "static/css/2.27453f24.chunk.css": "/static/css/2.27453f24.chunk.css",
-    "static/js/2.4e6b3fbc.chunk.js": "/static/js/2.4e6b3fbc.chunk.js",
-    "static/js/2.4e6b3fbc.chunk.js.map": "/static/js/2.4e6b3fbc.chunk.js.map",
-    "static/js/3.c4a7c788.chunk.js": "/static/js/3.c4a7c788.chunk.js",
-    "static/js/3.c4a7c788.chunk.js.map": "/static/js/3.c4a7c788.chunk.js.map",
+    "main.css": "/static/css/main.194467a5.chunk.css",
+    "main.js": "/static/js/main.768fed88.chunk.js",
+    "main.js.map": "/static/js/main.768fed88.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.4aa436da.js",
+    "runtime-main.js.map": "/static/js/runtime-main.4aa436da.js.map",
+    "static/css/2.94349cce.chunk.css": "/static/css/2.94349cce.chunk.css",
+    "static/js/2.e8cc058f.chunk.js": "/static/js/2.e8cc058f.chunk.js",
+    "static/js/2.e8cc058f.chunk.js.map": "/static/js/2.e8cc058f.chunk.js.map",
+    "static/js/3.280deeaf.chunk.js": "/static/js/3.280deeaf.chunk.js",
+    "static/js/3.280deeaf.chunk.js.map": "/static/js/3.280deeaf.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.27453f24.chunk.css.map": "/static/css/2.27453f24.chunk.css.map",
-    "static/css/main.76f6df7a.chunk.css.map": "/static/css/main.76f6df7a.chunk.css.map",
-    "static/js/2.4e6b3fbc.chunk.js.LICENSE.txt": "/static/js/2.4e6b3fbc.chunk.js.LICENSE.txt",
+    "static/css/2.94349cce.chunk.css.map": "/static/css/2.94349cce.chunk.css.map",
+    "static/css/main.194467a5.chunk.css.map": "/static/css/main.194467a5.chunk.css.map",
+    "static/js/2.e8cc058f.chunk.js.LICENSE.txt": "/static/js/2.e8cc058f.chunk.js.LICENSE.txt",
     "static/media/Arrow 1.2a75d61e.svg": "/static/media/Arrow 1.2a75d61e.svg",
+    "static/media/Arrow Back.d3693c0f.svg": "/static/media/Arrow Back.d3693c0f.svg",
     "static/media/Arrow.43fbbb90.svg": "/static/media/Arrow.43fbbb90.svg",
     "static/media/ArrowSecondary.2dfb6299.svg": "/static/media/ArrowSecondary.2dfb6299.svg",
     "static/media/Arrow_active.75efc204.svg": "/static/media/Arrow_active.75efc204.svg",
@@ -68,10 +69,10 @@
     "static/media/tessa-wilson.b4101337.jpeg": "/static/media/tessa-wilson.b4101337.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.47639be4.js",
-    "static/css/2.27453f24.chunk.css",
-    "static/js/2.4e6b3fbc.chunk.js",
-    "static/css/main.76f6df7a.chunk.css",
-    "static/js/main.42e615b4.chunk.js"
+    "static/js/runtime-main.4aa436da.js",
+    "static/css/2.94349cce.chunk.css",
+    "static/js/2.e8cc058f.chunk.js",
+    "static/css/main.194467a5.chunk.css",
+    "static/js/main.768fed88.chunk.js"
   ]
 }

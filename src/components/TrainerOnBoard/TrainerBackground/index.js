@@ -5,6 +5,7 @@ import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import Arrow from "../../../assets/SignUp/Arrow.svg";
 import { Link, useHistory } from "react-router-dom";
+import ArrowHover from "../../../components/common/ButtonIcon/ArrowHover";
 
 const GreenRadio = withStyles({
     root: {
@@ -240,6 +241,7 @@ const TrainerBackground = () => {
                                                     value={
                                                         inputCertificatesField.upload
                                                     }
+                                                    className="custom-file-input"
                                                     onChange={(event) =>
                                                         handleChangeCertificateInput(
                                                             index,
@@ -247,6 +249,9 @@ const TrainerBackground = () => {
                                                         )
                                                     }
                                                 />
+                                                <a className="checkarrow">
+                                                    <ArrowHover />
+                                                </a>
                                             </div>
                                         )
                                     )}
