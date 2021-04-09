@@ -2,7 +2,7 @@ import { FaBars } from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Nav = styled.nav`
+export const Nav = styled.div`
     margin-bottom: -100px;
     width:100%;
     display: flex;
@@ -10,7 +10,8 @@ export const Nav = styled.nav`
     top:0;
     position:sticky;
     top:0;
-    z-index:999;
+    /* z-index:9999; */
+
 
     @media screen and (max-width: 1024px) {
     margin-bottom: 0;

@@ -6,7 +6,8 @@ import Instagram from "../../../../assets/SVG/Insta Icon.svg";
 import Web from "../../../../assets/SVG/Web Icon.svg";
 import Youtube from "../../../../assets/SVG/Youtube.svg";
 import Location from "../../../../assets/SVG/Location Icon.svg";
-
+import ArrowBack from "../../../../assets/SVG/arrow.svg";
+import { Link } from "react-router-dom";
 import ArrowBlackHover from "../../../common/ButtonIconBlackCircle/ArrowBlackHover";
 import ArrowHover from "../../../common/ButtonIcon/ArrowHover";
 
@@ -57,8 +58,14 @@ const TrainerSetUpProfile = () => {
     return (
         <>
             <div className="container">
-                <div className="setup_container">
-                    <div className="setup_link"></div>
+                <div className="setup_container container">
+                    <div className="setup_link">
+                        <img src={ArrowBack} alt="icon" />
+                        <div className="inner_link">
+                            <Link to="/trainer-card"> Edit Trainer Card </Link>
+                            <div></div>
+                        </div>
+                    </div>
                     <div className="setup_headings">
                         <h2>{data.heading}</h2>
                         <p>{data.describe}</p>
@@ -204,7 +211,10 @@ const TrainerSetUpProfile = () => {
                                                         type="number"
                                                         placeholder="Select your Location"
                                                     />
-                                                    <img src={Location} alt="icon" />
+                                                    <img
+                                                        src={Location}
+                                                        alt="icon"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -216,7 +226,7 @@ const TrainerSetUpProfile = () => {
                                                         type="text"
                                                         placeholder="Add your Web Link"
                                                     />
-                                                <img src={Web} alt="icon" />
+                                                    <img src={Web} alt="icon" />
                                                 </div>
                                             </div>
                                         </div>
@@ -228,7 +238,10 @@ const TrainerSetUpProfile = () => {
                                                         type="text"
                                                         placeholder="Add your Instagram Handle"
                                                     />
-                                                    <img src={Instagram} alt="icon" />
+                                                    <img
+                                                        src={Instagram}
+                                                        alt="icon"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -240,7 +253,10 @@ const TrainerSetUpProfile = () => {
                                                         type="text"
                                                         placeholder="Add your Youtube Channel"
                                                     />
-                                                    <img src={Youtube} alt="icon" />
+                                                    <img
+                                                        src={Youtube}
+                                                        alt="icon"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -293,8 +309,8 @@ const ImageReander = () => {
                         src={previewImage}
                         style={{
                             objectFit: "cover",
-                            width: "150px",
-                            height: "150px",
+                            width: "180px",
+                            height: "180px",
                         }}
                         onClick={() => {
                             setPreviewTmage(null);
@@ -314,8 +330,8 @@ const ImageReander = () => {
                                 alt="icon"
                                 style={{
                                     objectFit: "cover",
-                                    width: "150px",
-                                    height: "150px",
+                                    width: "180px",
+                                    height: "180px",
                                 }}
                             />
                         </button>

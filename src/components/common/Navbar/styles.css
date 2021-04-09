@@ -15,7 +15,12 @@ nav {
     align-items: center;
     top: 0;
     width: 100%;
-    z-index: 9999;
+    z-index: 999 !important;
+}
+.nav_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .header-links1 {
@@ -73,6 +78,14 @@ input:focus {
     color: var(--icon-color);
 }
 @media screen and (max-width: 1024px) {
+    nav {
+        margin-bottom: 0;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
     .nav_icon1 {
         display: block;
         position: absolute;

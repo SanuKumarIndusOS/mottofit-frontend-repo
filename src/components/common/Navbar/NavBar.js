@@ -18,7 +18,8 @@ export const NavBar = ({ toggle }) => {
 
     return (
         <>
-            <nav className="navbar1 container ">
+            <nav className="navbar1 ">
+                <div className="nav_wrapper container">
                     <div className="header-links1">
                         <Link to="/findtrainer">How it works</Link>
                         <img src={Line} alt="icon" />
@@ -26,18 +27,18 @@ export const NavBar = ({ toggle }) => {
                     </div>
                     <Bars onClick={toggle} />
                     <div className="logo-content1">
-                        <Link to=''>
-                        <img
-                            src={LogoImage}
-                            alt="logo"
-                            className="changeLogo1"
-                        />
+                        <Link to="">
+                            <img
+                                src={LogoImage}
+                                alt="logo"
+                                className="changeLogo1"
+                            />
                         </Link>
                     </div>
                     <div className="search-items1">
                         <div className="input-item1">
                             <input
-                            className='input'
+                                className="input"
                                 type="text"
                                 placeholder="Rotating prompts go here"
                             ></input>
@@ -53,6 +54,7 @@ export const NavBar = ({ toggle }) => {
                             />
                         </div>
                     </div>
+                </div>
             </nav>
         </>
     );
