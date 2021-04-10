@@ -21,9 +21,9 @@ export const NavBar = ({ toggle }) => {
             <nav className="navbar1 ">
                 <div className="nav_wrapper container">
                     <div className="header-links1">
-                        <Link to="/findtrainer">How it works</Link>
+                        <Link to="/how-it-works">How it works</Link>
                         <img src={Line} alt="icon" />
-                        <Link to="/">Who we are</Link>
+                        <Link to="/findtrainer">Who we are</Link>
                     </div>
                     <Bars onClick={toggle} />
                     <div className="logo-content1">

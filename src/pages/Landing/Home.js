@@ -24,108 +24,129 @@ import TrainerBackground from "../../components/TrainerOnBoard/TrainerBackground
 import TrainerAvailability from "../../components/TrainerOnBoard/TrainerAvailability";
 import TrainerCard from "../../components/TrainerOnBoard/TrainerCaptures/TrainerCard";
 import TrainerSetUpProfile from "../../components/TrainerOnBoard/TrainerCaptures/TrainerSetUpProfile";
-
+import HowItWork from "../../components/HowItWork/Banner/index";
+import Book from "../../components/HowItWork/Book";
+import CustomizeSection from "../../components/HowItWork/Customize/index";
+import TrainerMotto from "../../components/HowItWork/TrainerMotto";
 const Home = () => {
-  const [isOpen, setisOpen] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [, setRedirect] = useState(false);
+    const [isOpen, setisOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [, setRedirect] = useState(false);
 
-  const toggle = () => {
-    setisOpen(!isOpen);
-  };
+    const toggle = () => {
+        setisOpen(!isOpen);
+    };
 
-  const modalToggle = () => {
-    setModalIsOpen(!modalIsOpen);
-  };
+    const modalToggle = () => {
+        setModalIsOpen(!modalIsOpen);
+    };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setRedirect(true);
-  }, []);
-  return (
-    <>
-      <Router>
-        <Route exact path="/">
-          {" "}
-          <NavBarHome toggle={toggle} modalToggle={modalToggle} />
-        </Route>
-        <SideBar isOpen={isOpen} toggle={toggle} />
-        <Route exact path="/" component={Banner} />
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        setRedirect(true);
+    }, []);
+    return (
+        <>
+            <Router>
+                <Route exact path="/">
+                    {" "}
+                    <NavBarHome toggle={toggle} modalToggle={modalToggle} />
+                </Route>
+                <SideBar isOpen={isOpen} toggle={toggle} />
+                <Route exact path="/" component={Banner} />
 
-        {/* User SignIn Screen */}
-        <Route exact path="/">
-          <SignIn />
-        </Route>
+                {/* User SignIn Screen */}
+                <Route exact path="/">
+                    <SignIn />
+                </Route>
 
-        {/* Home Page */}
-        <Route exact path="/" component={Benfit} />
-        <Route exact path="/" component={Experience} />
-        <Route exact path="/" component={Location} />
-        <Route exact path="/" component={Trainer} />
-        <Route exact path="/" component={Footer} />
+                {/* Home Page */}
+                <Route exact path="/" component={Benfit} />
+                <Route exact path="/" component={Experience} />
+                <Route exact path="/" component={Location} />
+                <Route exact path="/" component={Trainer} />
+                <Route exact path="/" component={Footer} />
 
-        {/* User SignUp Screen */}
-        {/* {redirect? <Redirect to = '/'/>: null } */}
-        <Route exact path="/signup">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/signup" component={SignUp} />
-        <Route path="/signup" component={Footer} />
+                {/* User SignUp Screen */}
+                {/* {redirect? <Redirect to = '/'/>: null } */}
+                <Route exact path="/signup">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/signup" component={SignUp} />
+                <Route path="/signup" component={Footer} />
 
-        {/* Trainer Sign Up */}
-        <Route exact path="/trainersignup">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/trainersignup" component={BannerTrainer} />
-        <Route path="/trainersignup" component={ExperienceTrainer} />
-        <Route path="/trainersignup" component={LocationTrainer} />
-        <Route path="/trainersignup" component={Footer} />
+                {/* Trainer Sign Up */}
+                <Route exact path="/trainersignup">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/trainersignup" component={BannerTrainer} />
+                <Route path="/trainersignup" component={ExperienceTrainer} />
+                <Route path="/trainersignup" component={LocationTrainer} />
+                <Route path="/trainersignup" component={Footer} />
 
-        {/* Find Your Trainer */}
-        <Route exact path="/findtrainer">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/findtrainer" component={FindTrainer} />
-        <Route path="/findtrainer" component={TrainerCards} />
-        <Route path="/findtrainer" component={TrainerCardOutside} />
-        <Route path="/findtrainer" component={Footer} />
+                {/* Find Your Trainer */}
+                <Route exact path="/findtrainer">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/findtrainer" component={FindTrainer} />
+                <Route path="/findtrainer" component={TrainerCards} />
+                <Route path="/findtrainer" component={TrainerCardOutside} />
+                <Route path="/findtrainer" component={Footer} />
 
-        {/* Trainer OnBoard */}
-        <Route exact path="/aboutTrainer">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/aboutTrainer" component={TrainerTracker} />
-        <Route path="/aboutTrainer" component={AboutTrainer} />
-        <Route path="/aboutTrainer" component={Footer} />
+                {/* Trainer OnBoard */}
+                <Route exact path="/aboutTrainer">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/aboutTrainer" component={TrainerTracker} />
+                <Route path="/aboutTrainer" component={AboutTrainer} />
+                <Route path="/aboutTrainer" component={Footer} />
 
-        <Route exact path="/trainerbackground">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/trainerbackground" component={TrainerTracker} />
-        <Route path="/trainerbackground" component={TrainerBackground} />
-        <Route path="/trainerbackground" component={Footer} />
+                <Route exact path="/trainerbackground">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/trainerbackground" component={TrainerTracker} />
+                <Route
+                    path="/trainerbackground"
+                    component={TrainerBackground}
+                />
+                <Route path="/trainerbackground" component={Footer} />
 
-        <Route exact path="/trainer-avaliability">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/trainer-avaliability" component={TrainerTracker} />
-        <Route path="/trainer-avaliability" component={TrainerAvailability} />
-        <Route path="/trainer-avaliability" component={Footer} />
+                <Route exact path="/trainer-avaliability">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route
+                    path="/trainer-avaliability"
+                    component={TrainerTracker}
+                />
+                <Route
+                    path="/trainer-avaliability"
+                    component={TrainerAvailability}
+                />
+                <Route path="/trainer-avaliability" component={Footer} />
 
-        <Route exact path="/trainer-card">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/trainer-card" component={TrainerCard} />
-        <Route path="/trainer-card" component={Footer} />
+                <Route exact path="/trainer-card">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/trainer-card" component={TrainerCard} />
+                <Route path="/trainer-card" component={Footer} />
 
-        <Route exact path="/trainer-setup">
-          <NavBar toggle={toggle} />
-        </Route>
-        <Route path="/trainer-setup" component={TrainerSetUpProfile} />
-        <Route path="/trainer-setup" component={Footer} />
-      </Router>
-    </>
-  );
+                <Route exact path="/trainer-setup">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/trainer-setup" component={TrainerSetUpProfile} />
+                <Route path="/trainer-setup" component={Footer} />
+
+                <Route exact path="/how-it-works">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/how-it-works" component={HowItWork} />
+                <Route path="/how-it-works" component={Book} />
+                <Route path="/how-it-works" component={CustomizeSection} />
+                <Route path="/how-it-works" component={TrainerMotto} />
+                <Route path="/how-it-works" component={Footer} />
+            </Router>
+        </>
+    );
 };
 
 export default Home;
