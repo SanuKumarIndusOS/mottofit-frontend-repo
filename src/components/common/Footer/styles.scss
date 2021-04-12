@@ -310,6 +310,11 @@
                                                 text-align: center;
                                                 margin: 0 auto;
                                             }
+                                            a {
+                                                display: inline;
+                                                text-decoration: none;
+                                                color: #898989;
+                                            }
                                         }
                                         img {
                                             @media screen and (max-width: 1023px) {

@@ -109,13 +109,13 @@ const Footer = () => {
 
                                         <div className="footer_privacy">
                                             <ul className="footer_privacy_ul">
-                                                <li>FAQs</li>
+                                                <li><Link to='/'>FAQs</Link></li>
                                                 <img src={Line} alt="svg" />
-                                                <li>Privacy Policy</li>
+                                                <li><Link to='/'>Privacy Policy </Link></li>
                                                 <img src={Line} alt="svg" />
-                                                <li>Terms of Use</li>
+                                                <li><Link to='/'>Terms of Use </Link></li>
                                                 <img src={Line} alt="svg" />
-                                                <li>Legal</li>
+                                                <li><Link to='/'>Legal </Link></li>
                                             </ul>
                                             <div className='hr_mobile' ></div>
 

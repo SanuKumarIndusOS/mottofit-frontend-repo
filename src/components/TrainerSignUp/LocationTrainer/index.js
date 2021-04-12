@@ -156,37 +156,39 @@ const LocationTrainer = () => {
         ],
     };
     return (
-        <div className="slide-container container">
-            <div className="header-content">
-                <h1>We are in these Cities</h1>
-                <p>
-                    Currently available for in-person live training in Miami,
-                    New York City, Hamptons & Plam Beach. We will be launching in other
-                    cities across the United States soon.
-                </p>
-            </div>
+        <div className="slide-container">
+            <div className="inner_location container">
+                <div className="header-content">
+                    <h1>We are in these Cities</h1>
+                    <p>
+                        Currently available for in-person live training in
+                        Miami, New York City, Hamptons & Plam Beach. We will be
+                        launching in other cities across the United States soon.
+                    </p>
+                </div>
 
-            <Slider {...settings}>
-                {SlideData.map((slide, index) => {
-                    return (
-                        <div className="main-slide" key={index}>
-                            <div className="slide-content">
-                                <img
-                                    src={slide.image}
-                                    alt={slide.name}
-                                    className="slide-image"
-                                />
-                                <img
-                                    src={slide.line}
-                                    alt={slide.name}
-                                    className="slide-line"
-                                />
-                                <p>{slide.name}</p>
+                <Slider {...settings}>
+                    {SlideData.map((slide, index) => {
+                        return (
+                            <div className="main-slide" key={index}>
+                                <div className="slide-content">
+                                    <img
+                                        src={slide.image}
+                                        alt={slide.name}
+                                        className="slide-image"
+                                    />
+                                    <img
+                                        src={slide.line}
+                                        alt={slide.name}
+                                        className="slide-line"
+                                    />
+                                    <p>{slide.name}</p>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
-            </Slider>
+                        );
+                    })}
+                </Slider>
+            </div>
         </div>
     );
 };

@@ -156,7 +156,8 @@ const Location = () => {
         ],
     };
     return (
-        <div className="slide-container container">
+        <div className='slide-container'>
+        <div className="inner_location container ">
             <div className="header-content">
                 <h1>Browse by location</h1>
                 <p>
@@ -188,6 +189,7 @@ const Location = () => {
                     );
                 })}
             </Slider>
+        </div>
         </div>
     );
 };
