@@ -167,21 +167,7 @@
                                 justify-content: space-between;
                                 margin: 1em 0;
                                 padding: 0;
-                                font: var(--unnamed-font-style-normal) normal
-                                    var(--unnamed-font-weight-200)
-                                    var(--unnamed-font-size-28) /
-                                    var(--unnamed-line-spacing-54)
-                                    var(--unnamed-font-family-montserrat);
-                                letter-spacing: var(
-                                    --unnamed-character-spacing-0
-                                );
-                                color: var(--unnamed-color-ffffff);
-                                text-align: left;
-                                font: normal normal 200 28px/54px Montserrat;
-                                letter-spacing: 0px;
-                                color: #ffffff;
-                                text-transform: lowercase;
-                                opacity: 0.5;
+
                                 list-style-type: none;
                                 @media screen and (max-width: 1023px) {
                                     flex-direction: column;
@@ -190,8 +176,14 @@
                                 }
                                 li {
                                     a {
+                                        font-weight: 1;
+                                        font-size: 28px;
+                                        font-family: Montserrat;
+                                        letter-spacing: 0px;
+                                        color: #ffffffbd;
+                                        text-transform: lowercase;
+                                        opacity: 1;
                                         text-decoration: none;
-                                        color: #ffffff;
                                         @media screen and (max-width: 1023px) {
                                             margin: 0.5em 0;
                                         }

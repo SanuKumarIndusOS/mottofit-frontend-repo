@@ -79,20 +79,19 @@ const BannerTrainer = () => {
                 <div className="wrapper_main">
                     <div className="item_left">
                         <h2>Sign Up to be a part of the Motto Family</h2>
-                        <p>
+                        <h6>
                             Create an account to start the application process
                             of becoming a Motto trainer in one of our live
                             cities.
-                        </p>
+                        </h6>
                     </div>
                     <div className="wrapper">
                         <div className="item_right">
                             <div className="inner_wrapper">
                                 <div className="inner_items">
-                                    <h3>Sign Up with Motto!</h3>
+                                    <h3>Train with Motto!</h3>
                                     <p>
-                                        Fill up the following details to create
-                                        your account
+                                    Sign up & apply to become a Motto Trainer
                                     </p>
                                     <div className="form_items">
                                         <form>

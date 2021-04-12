@@ -1,7 +1,8 @@
 .ReactModal__Content {
     margin: 0 auto;
     margin-top: 2em;
-    width: 40%;
+    width: 32%;
+    height: auto;
     overflow: auto;
     opacity: 1;
     position: relative;
@@ -26,6 +27,9 @@
 
         svg {
             cursor: pointer;
+            width: 28px;
+            height: 28px;
+            opacity: 1;
         }
     }
     .wrapper_inner {
@@ -36,28 +40,39 @@
         width: 100%;
 
         h2 {
-            text-align: center;
             font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-bold) var(--unnamed-font-size-22) /
-                var(--unnamed-line-spacing-38)
-                var(--unnamed-font-family-garamond);
-            font: normal normal bold 35px/40px Garamond;
+                var(--unnamed-font-weight-bold) var(--unnamed-font-size-45) /
+                var(--unnamed-line-spacing-55)
+                var(--unnamed-font-family-cormorant-garamond);
+            letter-spacing: var(--unnamed-character-spacing--0-45);
+            color: var(--unnamed-color-161616);
+            text-align: center;
+            font: normal normal bold 45px/55px Cormorant Garamond;
+            letter-spacing: -0.45px;
+            color: #161616;
+            opacity: 1;
         }
         p {
+            font: var(--unnamed-font-style-normal) normal
+                var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
+                var(--unnamed-line-spacing-32)
+                var(--unnamed-font-family-montserrat);
+            letter-spacing: var(--unnamed-character-spacing-0-27);
+            color: var(--unnamed-color-2c2c2c);
             text-align: center;
+            font: normal normal normal 18px/32px Montserrat;
+            letter-spacing: 0.27px;
+            color: #2c2c2c;
+            opacity: 1;
         }
 
-        .form_items {
+        .form_item_login {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 80%;
-            form {
-                width: 100%;
-            }
 
-            .input_items {
+            .input_item1_signin {
                 display: flex;
                 flex-direction: column;
                 position: relative;
@@ -65,11 +80,16 @@
                 width: 100%;
 
                 input {
-                    border: 1px solid #bcbcbc;
-                    padding: 0.3em 2em;
-                    width: 100%;
-                    background: #fff;
-                    border-radius: 50px;
+                    width: 425px !important;
+                    height: 45px;
+                    align-items: center;
+                    border: 1.5px solid var(--unnamed-color-bcbcbc);
+                    border: 2px solid #bcbcbc;
+                    border-radius: 30px;
+                    opacity: 1;
+                    padding: 1em 1em;
+
+                    background: transparent;
                 }
                 input:focus {
                     outline: none;
@@ -79,7 +99,7 @@
                     position: absolute;
                     right: 0;
                     margin: 0 auto;
-                    padding: 0.5em 1em;
+                    padding: 1em 3em;
                 }
                 span {
                     font-size: 10px;
@@ -94,20 +114,23 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-top: 2em;
+                margin-top: 1em;
                 .login_button {
                     outline: none;
                     background: #53bfd2;
                     border: 0;
-                    margin: 1em 2em 0 0;
-                    margin: 0;
-                    width: 100%;
+                    width: 425px;
                     padding: 0.8em;
                     text-align: center;
                     text-decoration: none;
                     text-transform: uppercase;
                     color: #fff;
                     font-weight: bold;
+                    height: 52px;
+                    background: var(--unnamed-color-53bfd2) 0% 0% no-repeat
+                        padding-box;
+                    background: #53bfd2 0% 0% no-repeat padding-box;
+                    opacity: 1;
                     img {
                         width: auto;
                         margin-left: 1em;
@@ -148,6 +171,15 @@
                     font-size: 15px;
                     padding: 0 0 0 0.5em;
                     color: #898989;
+                    font: var(--unnamed-font-style-normal) normal 300 15px /
+                        var(--unnamed-line-spacing-42)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0);
+                    color: var(--unnamed-color-898989);
+                    text-align: left;
+                    font: normal normal 300 15px/42px Montserrat;
+                    letter-spacing: 0px;
+                    color: #898989;
                 }
             }
 
@@ -156,11 +188,17 @@
                 display: flex;
                 justify-content: flex-end;
 
-                a {
-                    font-size: 15px;
+                .forgotpass {
+                    font: italic normal var(--unnamed-font-weight-medium) 15px /
+                        var(--unnamed-line-spacing-42)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0);
+                    color: var(--unnamed-color-53bfd2);
+                    text-align: left;
+                    text-decoration: underline;
+                    font: italic normal medium 15px/42px Montserrat;
+                    letter-spacing: 0px;
                     color: #53bfd2;
-                    font-style: italic;
-                    font-weight: bold;
                 }
             }
         }
@@ -168,7 +206,7 @@
             display: flex;
             align-items: center;
             justify-content: space-evenly;
-            padding: 0.5em 3em;
+            padding: 0.5em 0em;
 
             p {
                 margin: 0;
@@ -200,6 +238,12 @@
                 color: #bcbcbc;
                 border-radius: 50px;
                 margin: 0.2em 1em;
+                width: 425px;
+                height: 45px;
+                border: 1.5px solid var(--unnamed-color-bcbcbc);
+                border: 2px solid #bcbcbc;
+                border-radius: 30px;
+                opacity: 1;
 
                 img {
                     margin: 0.5em 1.3em;
@@ -215,8 +259,13 @@
                 outline: none;
                 border: 1px solid #bcbcbc;
                 border-radius: 50px;
-                margin: 0.2em 1em;
-                width: 80%;
+                margin: 0.7em 1em;
+                width: 425px;
+                height: 45px;
+                border: 1.5px solid var(--unnamed-color-bcbcbc);
+                border: 2px solid #bcbcbc;
+                border-radius: 30px;
+                opacity: 1;
 
                 img {
                     margin: 0.5em 1em;
@@ -231,30 +280,35 @@
             justify-content: center;
 
             h4 {
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-500) var(--unnamed-font-size-22) /
-                    var(--unnamed-line-spacing-38)
-                    var(--unnamed-font-family-montserrat);
-                font: normal normal 500 16px/38px Montserrat;
-                margin: 0.5em 0 0 0;
+                letter-spacing: var(--unnamed-character-spacing-0);
+                color: var(--unnamed-color-222222);
+                text-align: center;
+                font-size: 22px;
+                font-family: Montserrat;
+                font-weight: 800;
+                letter-spacing: 0px;
+                color: #222222;
+                opacity: 1;
+                margin-top: 2em;
             }
-            .links_item {
+            .links_item_signup {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
                 padding: 1em 0;
+
                 a {
-                    display: flex;
-                    align-items: center;
+                    text-align: right;
+                    letter-spacing: 0.45px;
+                    color: #161616;
                     text-transform: uppercase;
+                    opacity: 1;
+                    font-family: Montserrat !important;
+                    font-weight: 800 !important;
+                    font-size: 18px;
+                    letter-spacing: 0px;
+                    color: #222222 !important;
                     text-decoration: none;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-800)
-                        var(--unnamed-font-size-18) /
-                        var(--unnamed-line-spacing-30)
-                        var(--unnamed-font-family-montserrat);
-                    font: normal normal 800 14px/20px Montserrat;
-                    color: #000;
                 }
             }
         }

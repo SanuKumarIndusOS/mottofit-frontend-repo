@@ -50,7 +50,7 @@ const NavBarHome = ({ toggle }) => {
                     <Link to="/findtrainer">Who we are</Link>
                 </div>
                 <Bars onClick={toggle} />
-                <div className="logo-content">
+                <div className="logo-content_home">
                     {logo ? (
                         <img
                             src={LogoImage}

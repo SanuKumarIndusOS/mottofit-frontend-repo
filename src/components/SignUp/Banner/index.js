@@ -85,7 +85,7 @@ const SignUp = () => {
                 <div className="wrapper">
                     <div className="inner_wrapper">
                         <div className="inner_items">
-                            <h3>Sign Up with Motto!</h3>
+                            <h2>Sign Up with Motto!</h2>
                             <p>
                                 Fill up the following details to create your
                                 account
@@ -403,8 +403,8 @@ const SignUp = () => {
                                     </div>
                                 </form>
                             </div>
-                            <div className="login_items">
-                                <h4>Already have an account?</h4>
+                            <div className="login_content_signup">
+                                <h1>Already have an account?</h1>
 
                                 <Link to="/">
                                     Sign In now 

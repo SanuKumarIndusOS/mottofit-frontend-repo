@@ -64,7 +64,7 @@
             .image_strength_main {
                 display: flex;
                 width: 270px;
-                // height: 450px;
+                height: 480px;
                 margin: 0 1em;
                 flex-direction: column;
 
@@ -129,7 +129,7 @@
         width: 100%;
         align-items: flex-start;
         height: 500px;
-        margin-top: 8em;
+        margin-top: 0em !important;
 
         padding: 0 2em !important;
         @media screen and (max-width: 1023px) {

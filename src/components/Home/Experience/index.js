@@ -23,9 +23,8 @@ export default class Experience extends Component {
           <div className="experience_upper_container">
             <div className="heading">
               Experience the Best Training in these Categories
-              {/* <img src={svgBG} className="svgBG" alt="svg" /> */}
+              
             </div>
-
             <div className="image_Container">
               <div className="image_strength_main">
                 <img src={strength_img} alt={this.props.description} />

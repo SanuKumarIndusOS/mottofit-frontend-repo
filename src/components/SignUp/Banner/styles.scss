@@ -23,16 +23,31 @@
         margin: 2em;
         padding: 2em 0;
 
-        h3 {
+        h2 {
             font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-bold) var(--unnamed-font-size-22) /
-                var(--unnamed-line-spacing-38)
-                var(--unnamed-font-family-garamond);
-            font: normal normal bold 35px/40px Garamond;
+                var(--unnamed-font-weight-bold) var(--unnamed-font-size-45) /
+                var(--unnamed-line-spacing-55)
+                var(--unnamed-font-family-cormorant-garamond);
+            letter-spacing: var(--unnamed-character-spacing--0-45);
+            color: var(--unnamed-color-161616);
             text-align: center;
+            font: normal normal bold 45px/55px Cormorant Garamond;
+            letter-spacing: -0.45px;
+            color: #161616;
+            opacity: 1;
         }
         p {
+            font: var(--unnamed-font-style-normal) normal
+                var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
+                var(--unnamed-line-spacing-32)
+                var(--unnamed-font-family-montserrat);
+            letter-spacing: var(--unnamed-character-spacing-0-27);
+            color: var(--unnamed-color-2c2c2c);
             text-align: center;
+            font: normal normal normal 18px/32px Montserrat;
+            letter-spacing: 0.27px;
+            color: #2c2c2c;
+            opacity: 1;
         }
     }
     .form_items form {
@@ -50,10 +65,14 @@
             width: 80%;
 
             input {
-                border: 1px solid #bcbcbc;
                 padding: 0.3em 1em;
-                width: 100%;
+                width: 425px;
+                height: 45px;
                 border-radius: 50px;
+                border: 1.5px solid var(--unnamed-color-bcbcbc);
+                border: 2px solid #bcbcbc;
+                border-radius: 30px;
+                opacity: 1;
             }
             input:focus {
                 outline: none;
@@ -63,7 +82,7 @@
                 position: absolute;
                 right: 0;
                 margin: 0 auto;
-                padding: 0.5em 1em;
+                padding: 0.8em 1em;
             }
             span {
                 font-size: 10px;
@@ -138,12 +157,15 @@
             align-items: center;
             justify-content: center;
             width: 100%;
+
             margin: 1rem;
 
             a {
                 outline: none;
                 background: #53bfd2;
                 border: 0;
+                width: 425px;
+                height: 52px;
                 display: flex;
                 align-items: center;
                 padding: 0.5em 0 0.5em 0.8em !important;
@@ -164,31 +186,35 @@
             font-weight: bold;
         }
     }
-    .login_items {
+    .login_content_signup {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
-        h4 {
+        h1 {
             font: var(--unnamed-font-style-normal) normal
                 var(--unnamed-font-weight-500) var(--unnamed-font-size-22) /
                 var(--unnamed-line-spacing-38)
                 var(--unnamed-font-family-montserrat);
-            font: normal normal 500 20px/38px Montserrat;
+            font: normal normal 600 28px/38px Montserrat;
             margin: 0.5em 0 0 0;
+            color: #222222 !important;
         }
         a {
             text-transform: uppercase;
             text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 0.45px;
             font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-800) var(--unnamed-font-size-18) /
-                var(--unnamed-line-spacing-30)
+                var(--unnamed-font-weight-bold) var(--unnamed-font-size-18) /
+                var(--unnamed-line-spacing-22)
                 var(--unnamed-font-family-montserrat);
-            font: normal normal 800 18px/30px Montserrat;
-            color: #000;
+            font: normal normal bold 18px/22px Montserrat;
+            color: #161616 !important;
             margin: 0.5em 0 0 0;
             padding: 0 1em;
+            font-size: 20px;
         }
     }
 }
