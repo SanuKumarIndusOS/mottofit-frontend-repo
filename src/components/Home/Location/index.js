@@ -160,7 +160,7 @@ const Location = () => {
         <div className="inner_location container ">
             <div className="header-content">
                 <h1>Browse by location</h1>
-                <p>
+                <p >
                     In-Person training available in New York City, Hamptons,
                     Miami & Plam Beach with more locations coming soon. Live virtual
                     training available anywhere!
