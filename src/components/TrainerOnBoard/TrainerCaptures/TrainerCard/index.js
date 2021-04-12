@@ -6,6 +6,7 @@ import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import DollarIcon from "../../../../assets/SVG/dollar Icon.svg";
 import { Link, useHistory } from "react-router-dom";
+import Footer from "../../../common/Footer/index";
 // import { Tabbordion, TabPanel, TabLabel, TabContent } from "react-tabbordion";
 import "./accordion.scss";
 import "./styles.scss";
@@ -294,7 +295,10 @@ const TrainerCard = () => {
                         </div>
                     </div>
                 </div>
+
+                
             </div>
+            <Footer></Footer>
         </>
     );
 };

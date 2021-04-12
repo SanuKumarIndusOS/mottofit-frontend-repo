@@ -128,13 +128,13 @@ const Home = () => {
                     <NavBar toggle={toggle} />
                 </Route>
                 <Route path="/trainer-card" component={TrainerCard} />
-                <Route path="/trainer-card" component={Footer} />
+                {/* <Route path="/trainer-card" component={Footer} /> */}
 
                 <Route exact path="/trainer-setup">
                     <NavBar toggle={toggle} />
                 </Route>
                 <Route path="/trainer-setup" component={TrainerSetUpProfile} />
-                <Route path="/trainer-setup" component={Footer} />
+                {/* <Route path="/trainer-setup" component={Footer} /> */}
 
                 <Route exact path="/how-it-works">
                     <NavBar toggle={toggle} />

@@ -16,121 +16,106 @@ import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
 
 export default class Experience extends Component {
-    render(props) {
-        return (
-            <div className="container">
-                <div className="big_container">
-                    <div className="experience_upper_container">
-                        <div className="heading">
-                            Experience the Best Training in these Categories
-                            <img src={svgBG} className="svgBG" alt="svg" />
-                        </div>
-
-                        <div className="image_Container">
-                            <div className="image_strength_main">
-                                <img
-                                    src={strength_img}
-                                    alt={this.props.description}
-                                />
-                                <Link to="/" className="link_button">
-                                    Strength & hiit <ArrowBlackHover />
-                                </Link>
-                            </div>
-                            <div className="image_strength_main">
-                                <img
-                                    src={boxing_img}
-                                    alt={this.props.description}
-                                />
-                                <Link to="/" className="link_button">
-                                    Boxing <ArrowBlackHover />
-                                </Link>
-                            </div>
-                            <div className="image_strength_main">
-                                <img
-                                    src={yoga_img}
-                                    alt={this.props.description}
-                                />
-                                <Link to="/" className="link_button">
-                                    Yoga <ArrowBlackHover />
-                                </Link>
-                            </div>
-                            <div className="image_strength_main">
-                                <img
-                                    src={pilates_img}
-                                    alt={this.props.description}
-                                />
-                                <Link to="/" className="link_button">
-                                    Pilates <ArrowBlackHover />
-                                </Link>
-                            </div>
-                            <img
-                                src={svgBG}
-                                className="svgBGMobile"
-                                alt="svg"
-                            />
-                        </div>
-                    </div>
-                    {/* ------------------------------------personal--------------- */}
-
-                    <div className="personal_container">
-                        <div className="personal_trainer_description">
-                            <h2 className="heading">
-                                The Top Personal Trainer Marketplace
-                            </h2>
-                            <p className="discription">
-                                Your personal trainer marketplace for Strength &
-                                HIIT, Boxing, Yoga & Pilates. Train virtually
-                                from anywhere or locally in Motto markets.
-                            </p>
-                            <div className="link">
-                                <div className="button-text">
-                                    <Link to="/" className="btn">
-                                        Find Your Best Match <ArrowHover />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="right_container">
-                            <ExperienceParent
-                                icon={Icon1}
-                                description="Discover only the top training talent"
-                            />
-                            <ExperienceParent
-                                icon={Icon4}
-                                description="A community of vetted personal trainers"
-                            />
-                            <ExperienceParent
-                                icon={Icon2}
-                                description="Personalized sessions to meet specific goals"
-                            />
-                            <ExperienceParent
-                                icon={Icon5}
-                                description="Save with cost-efficient social & group sessions "
-                            />
-                            <ExperienceParent
-                                icon={Icon3}
-                                description="Easy booking method & secure transactions "
-                            />
-                            <ExperienceParent
-                                icon={Icon6}
-                                description="Contactless & virtual training available"
-                            />
-                        </div>
-                    </div>
-                </div>
+  render(props) {
+    return (
+      <div className="container">
+        <div className="big_container">
+          <div className="experience_upper_container">
+            <div className="heading">
+              Experience the Best Training in these Categories
+              {/* <img src={svgBG} className="svgBG" alt="svg" /> */}
             </div>
-        );
-    }
+
+            <div className="image_Container">
+              <div className="image_strength_main">
+                <img src={strength_img} alt={this.props.description} />
+                <Link to="/" className="link_button">
+                  Strength & hiit <ArrowBlackHover />
+                </Link>
+              </div>
+              <div className="image_strength_main">
+                <img src={boxing_img} alt={this.props.description} />
+                <Link to="/" className="link_button">
+                  Boxing <ArrowBlackHover />
+                </Link>
+              </div>
+              <div className="image_strength_main">
+                <img src={yoga_img} alt={this.props.description} />
+                <Link to="/" className="link_button">
+                  Yoga <ArrowBlackHover />
+                </Link>
+              </div>
+              <div className="image_strength_main">
+                <img src={pilates_img} alt={this.props.description} />
+                <Link to="/" className="link_button">
+                  Pilates <ArrowBlackHover />
+                </Link>
+                <img src={svgBG} className="svgBG" alt="svg" />
+              </div>
+              <img src={svgBG} className="svgBGMobile" alt="svg" />
+
+              
+            </div>
+          </div>
+          {/* ------------------------------------personal--------------- */}
+
+          <div className="personal_container">
+            <div className="personal_trainer_description">
+              <h2 className="heading">The Top Personal Trainer Marketplace</h2>
+              <p className="discription">
+                Your personal trainer marketplace for Strength & HIIT, Boxing,
+                Yoga & Pilates. Train virtually from anywhere or locally in
+                Motto markets.
+              </p>
+              <div className="link">
+                <div className="button-text">
+                  <Link to="/" className="btn">
+                    Find Your Best Match <ArrowHover />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="right_container">
+              <ExperienceParent
+                icon={Icon1}
+                description="Discover only the top training talent"
+              />
+              <ExperienceParent
+                icon={Icon4}
+                description="A community of vetted personal trainers"
+              />
+              <ExperienceParent
+                icon={Icon2}
+                description="Personalized sessions to meet specific goals"
+              />
+              <ExperienceParent
+                icon={Icon5}
+                description="Save with cost-efficient social & group sessions "
+              />
+              <ExperienceParent
+                icon={Icon3}
+                description="Easy booking method & secure transactions "
+              />
+              <ExperienceParent
+                icon={Icon6}
+                description="Contactless & virtual training available"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 const ExperienceParent = (props) => {
-    return (
-        <>
-            <div className="flex-contents">
-                <div className="image">
-                    <img src={props.icon} alt="icon" />
-                </div>
-                <p className="discription">{props.description}</p>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="flex-contents">
+        <div className="image">
+          <img src={props.icon} alt="icon" />
+        </div>
+        <p className="discription">{props.description}</p>
+      </div>
+    </>
+  );
 };

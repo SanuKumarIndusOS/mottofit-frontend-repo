@@ -29,9 +29,11 @@
             }
         }
         .svgBG {
-            position: absolute;
-            right: 6%;
-            left: random($limit: 1);
+            position: relative;
+            top: -533px;
+            right: -214px;
+            height: 230px;
+            width: 175px;
             bottom: center;
             @media screen and (max-width: 1023px) {
                 display: none;
@@ -62,7 +64,7 @@
             .image_strength_main {
                 display: flex;
                 width: 270px;
-                height: 450px;
+                // height: 450px;
                 margin: 0 1em;
                 flex-direction: column;
 
