@@ -101,8 +101,8 @@ const Footer = () => {
                                     <div className="footer_policy">
                                         <p>
                                             © {new Date().getFullYear()} Motto
-                                            All Rights reserved, Designed by{" "}
-                                            <span>
+                                            All Rights reserved, <span> Designed by{" "}
+                                           
                                                 <Link to="/">Lucid</Link>
                                             </span>
                                         </p>
@@ -117,7 +117,10 @@ const Footer = () => {
                                                 <img src={Line} alt="svg" />
                                                 <li>Legal</li>
                                             </ul>
+                                            <div className='hr_mobile' ></div>
+
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
