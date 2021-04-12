@@ -40,10 +40,9 @@
 
         .image_Container {
             display: flex;
-            justify-content: space-around;
             height: auto;
             width: 100%;
-            flex-wrap: wrap;
+            justify-content: space-around;
             margin: 0;
             padding: 0;
             @media screen and (max-width: 1024px) {
@@ -62,7 +61,8 @@
 
             .image_strength_main {
                 display: flex;
-                width: 20%;
+                width: 270px;
+                height: 450px;
                 margin: 0 1em;
                 flex-direction: column;
 
@@ -74,13 +74,26 @@
                 .link_button {
                     display: flex;
                     text-transform: uppercase;
+                    justify-content: flex-start !important;
                     align-items: center;
                     background: #53bfd2;
-                    height: 50px;
+                    height: 70px;
                     color: #fff;
                     font-size: 16px;
                     font-weight: bold;
-                    padding: 0 0.5em;
+                    padding: 0 0 0 0.8em !important;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-bold)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-22)
+                        var(--unnamed-font-family-montserrat);
+                    color: var(--unnamed-color-ffffff);
+                    text-align: right;
+                    font: normal normal bold 16px/22px Montserrat;
+                    letter-spacing: 0.45px;
+                    color: #ffffff;
+                    text-transform: uppercase;
+                    opacity: 1;
                     text-decoration: none;
                     @media screen and (max-width: 919px) {
                         font-size: 10px;
@@ -109,12 +122,14 @@
 
     .personal_container {
         display: grid;
-        grid-template-columns: 40% 60%;
+        grid-template-columns: 35% 65%;
         grid-column-gap: 30px;
-        padding: 0 2em;
-        align-items: center;
         width: 100%;
-        height: 400px;
+        align-items: flex-start;
+        height: 500px;
+        margin-top: 8em;
+
+        padding: 0 2em !important;
         @media screen and (max-width: 1023px) {
             grid-template-columns: auto;
             height: auto;
@@ -194,6 +209,7 @@
             grid-template-columns: auto auto;
             grid-template-rows: auto;
             grid-column-gap: 10px;
+            height: 550px;
             @media screen and (max-width: 1023px) {
                 grid-template-columns: auto;
                 height: auto;
@@ -202,7 +218,6 @@
         .flex-contents {
             display: flex;
             align-items: center;
-            margin: 1em;
             @media screen and (max-width: 1023px) {
                 justify-content: space-between;
                 padding: 0 1em;
