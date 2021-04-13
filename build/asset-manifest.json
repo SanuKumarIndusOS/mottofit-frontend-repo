@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.ff42757c.chunk.css",
-    "main.js": "/static/js/main.e5596b58.chunk.js",
-    "main.js.map": "/static/js/main.e5596b58.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.47639be4.js",
-    "runtime-main.js.map": "/static/js/runtime-main.47639be4.js.map",
+    "main.css": "/static/css/main.4a60fc00.chunk.css",
+    "main.js": "/static/js/main.b7cb61ad.chunk.js",
+    "main.js.map": "/static/js/main.b7cb61ad.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c31ad853.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c31ad853.js.map",
     "static/css/2.94349cce.chunk.css": "/static/css/2.94349cce.chunk.css",
-    "static/js/2.32128299.chunk.js": "/static/js/2.32128299.chunk.js",
-    "static/js/2.32128299.chunk.js.map": "/static/js/2.32128299.chunk.js.map",
-    "static/js/3.c4a7c788.chunk.js": "/static/js/3.c4a7c788.chunk.js",
-    "static/js/3.c4a7c788.chunk.js.map": "/static/js/3.c4a7c788.chunk.js.map",
+    "static/js/2.b36937e1.chunk.js": "/static/js/2.b36937e1.chunk.js",
+    "static/js/2.b36937e1.chunk.js.map": "/static/js/2.b36937e1.chunk.js.map",
+    "static/js/3.28ec38e0.chunk.js": "/static/js/3.28ec38e0.chunk.js",
+    "static/js/3.28ec38e0.chunk.js.map": "/static/js/3.28ec38e0.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.94349cce.chunk.css.map": "/static/css/2.94349cce.chunk.css.map",
-    "static/css/main.ff42757c.chunk.css.map": "/static/css/main.ff42757c.chunk.css.map",
-    "static/js/2.32128299.chunk.js.LICENSE.txt": "/static/js/2.32128299.chunk.js.LICENSE.txt",
+    "static/css/main.4a60fc00.chunk.css.map": "/static/css/main.4a60fc00.chunk.css.map",
+    "static/js/2.b36937e1.chunk.js.LICENSE.txt": "/static/js/2.b36937e1.chunk.js.LICENSE.txt",
+    "static/media/styles.scss": "/static/media/Woman Image.482ef378.png",
     "static/media/Arrow 1.2a75d61e.svg": "/static/media/Arrow 1.2a75d61e.svg",
     "static/media/Arrow Back.d3693c0f.svg": "/static/media/Arrow Back.d3693c0f.svg",
     "static/media/Arrow Next.3e4f580d.svg": "/static/media/Arrow Next.3e4f580d.svg",
     "static/media/Arrow.43fbbb90.svg": "/static/media/Arrow.43fbbb90.svg",
     "static/media/ArrowSecondary.2dfb6299.svg": "/static/media/ArrowSecondary.2dfb6299.svg",
     "static/media/Arrow_active.75efc204.svg": "/static/media/Arrow_active.75efc204.svg",
-    "static/media/styles.scss": "/static/media/trainer.7cadf638.png",
     "static/media/style.scss": "/static/media/Banner.e1b8c00e.png",
     "static/media/Blue Line 2.34048a1c.svg": "/static/media/Blue Line 2.34048a1c.svg",
     "static/media/Blue Line.4affacbf.svg": "/static/media/Blue Line.4affacbf.svg",
@@ -72,10 +72,10 @@
     "static/media/tessa-wilson.b4101337.jpeg": "/static/media/tessa-wilson.b4101337.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.47639be4.js",
+    "static/js/runtime-main.c31ad853.js",
     "static/css/2.94349cce.chunk.css",
-    "static/js/2.32128299.chunk.js",
-    "static/css/main.ff42757c.chunk.css",
-    "static/js/main.e5596b58.chunk.js"
+    "static/js/2.b36937e1.chunk.js",
+    "static/css/main.4a60fc00.chunk.css",
+    "static/js/main.b7cb61ad.chunk.js"
   ]
 }

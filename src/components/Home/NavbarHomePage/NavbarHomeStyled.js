@@ -3,12 +3,14 @@ import styled from "styled-components";
 
 export const Nav = styled.div`
     margin-bottom: -100px;
-    width:100%;
     display: flex;
     justify-content: space-between;
-    top:0;
-    position:sticky;
-    top:0;
+    height: 100px;
+   /* Fix your navbar by using below two lines of code */
+   position: sticky;
+   top:0;
+   /* Fix your navbar by using above two lines of code */
+   z-index: 10;
     /* z-index:9999; */
 
 

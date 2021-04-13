@@ -25,7 +25,7 @@ const NavBarHome = ({ toggle }) => {
     }, []);
 
     const changeBackground = () => {
-        if (window.scrollY >= 100) {
+        if (window.scrollY >= 80) {
             setNavbar(true);
             setLogo(true);
         } else {
