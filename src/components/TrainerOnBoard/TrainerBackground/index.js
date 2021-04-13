@@ -79,7 +79,7 @@ const TrainerBackground = () => {
             <div className="container">
                 <div className="main_wrapper">
                     <div className="links_wrapper">
-                        <Link to="/aboutTrainer">Back to About You</Link>
+                        <Link to="/aboutTrainer" > Back to About You</Link>
                         <Link to="/trainer-avaliability">
                             Go to Avaliability
                         </Link>

@@ -19,6 +19,7 @@
     .wrapper_inneritem {
         width: 80%;
         margin: 0 auto;
+        
         h1 {
             text-align: center;
             font-size: 35px;
@@ -28,6 +29,11 @@
             font-size: 18px;
             width: 80%;
             margin: 0 auto;
+            color: #696969;
+            letter-spacing: 0.27px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 30px;
         }
 
         .content_wrapper {

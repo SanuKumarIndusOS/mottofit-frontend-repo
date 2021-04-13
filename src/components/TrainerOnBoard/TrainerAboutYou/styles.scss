@@ -9,10 +9,14 @@
     }
     p {
       text-align: center;
-      display: flex;
-      justify-content: center;
-      padding: 0 3em;
+      font-size: 18px;
+      width: 80%;
+      margin: 0 auto;
       color: #696969;
+      letter-spacing: 0.27px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 15px;
+      line-height: 30px;
     }
     .wrapper_inputs {
       display: flex;
