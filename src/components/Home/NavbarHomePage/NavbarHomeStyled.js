@@ -6,12 +6,9 @@ export const Nav = styled.div`
     display: flex;
     justify-content: space-between;
     height: 100px;
-   /* Fix your navbar by using below two lines of code */
    position: sticky;
    top:0;
-   /* Fix your navbar by using above two lines of code */
-   z-index: 10;
-    /* z-index:9999; */
+  
 
 
     @media screen and (max-width: 1024px) {

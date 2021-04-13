@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
-import Arrow from "../../../assets/SignUp/Arrow.svg";
 import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
+import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 const CyanRadio = withStyles({
     root: {
@@ -139,7 +139,7 @@ const TrainerAvailability = () => {
                             <div className="submit_button">
                                 <button type="submit">
                                     Continue
-                                    <img src={Arrow} alt="icon" />
+                                    <ArrowHoverBlacked/>
                                 </button>
                             </div>
                         </form>

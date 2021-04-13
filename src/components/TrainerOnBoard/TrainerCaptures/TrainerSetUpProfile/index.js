@@ -8,8 +8,7 @@ import Youtube from "../../../../assets/SVG/Youtube.svg";
 import Location from "../../../../assets/SVG/Location Icon.svg";
 import ArrowBack from "../../../../assets/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
-import ArrowBlackHover from "../../../common/ButtonIconBlackCircle/ArrowBlackHover";
-import ArrowHover from "../../../common/ButtonIcon/ArrowHover";
+import ArrowHoverBlacked from '../../../common/BlackCircleButton/ArrowHoverBlacked'
 
 import Footer from "../../../common/Footer/index";
 
@@ -229,7 +228,8 @@ const TrainerSetUpProfile = () => {
                   >
                     <a>
                       {" "}
-                      Continue to account <ArrowBlackHover />
+                      Continue to account 
+                      <ArrowHoverBlacked/>
                     </a>
                     {/* <img src={Arrow} alt="icon" /> */}
                   </button>

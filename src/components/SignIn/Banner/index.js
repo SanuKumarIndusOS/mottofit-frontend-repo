@@ -10,8 +10,8 @@ import Password from "../../../assets/SignUp/Password Icon.svg";
 import { IoIosClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
-import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
+import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 Modal.setAppElement("#root");
 const SignIn = ({ showModel, setShowModel }) => {
@@ -225,7 +225,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                                                 onClick={handleSubmit(logIn)}
                                             >
                                                 Signin
-                                                <ArrowBlackHover />
+                                                <ArrowHoverBlacked/>
                                             </Link>
                                         </div>
                                     </form>

@@ -166,10 +166,9 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-
             margin: 1rem;
 
-            a {
+            button {
                 outline: none;
                 background: #53bfd2;
                 border: 0;
@@ -180,6 +179,7 @@
                 padding: 0.5em 0 0.5em 0.8em !important;
                 text-transform: uppercase;
                 color: #fff;
+                justify-content: center;
                 font-weight: bold;
                 text-decoration: none;
             }

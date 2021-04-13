@@ -7,11 +7,9 @@ import Radio from "@material-ui/core/Radio";
 import DollarIcon from "../../../../assets/SVG/dollar Icon.svg";
 import { Link, useHistory } from "react-router-dom";
 import Footer from "../../../common/Footer/index";
-// import { Tabbordion, TabPanel, TabLabel, TabContent } from "react-tabbordion";
 import "./accordion.scss";
 import "./styles.scss";
-import ArrowBlackHover from "../../../common/ButtonIconBlackCircle/ArrowBlackHover";
-// import { Accordion } from "@material-ui/core";
+import ArrowHoverBlacked from '../../../common/BlackCircleButton/ArrowHoverBlacked'
 
 const CyanRadio = withStyles({
     root: {
@@ -307,7 +305,7 @@ const TrainerCard = () => {
                                         type="submit"
                                         // onClick={handleTrainerAvailability}
                                     >
-                                        Continue <ArrowBlackHover />
+                                        Continue <ArrowHoverBlacked/>
                                         {/* <img src={Arrow} alt="icon" /> */}
                                     </Link>
                                 </div>

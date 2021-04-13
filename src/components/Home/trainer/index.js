@@ -3,6 +3,7 @@ import "./styles.scss";
 import { Link } from "react-router-dom";
 import Watermark from '../../../assets/Home/trainer/M Watermark.png'
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
+import BlueHoverButton from "../../common/BlueArrowButton";
 
 export default class Trainer extends Component {
     render() {
@@ -21,7 +22,7 @@ export default class Trainer extends Component {
 
                     <div className="link">
                         <div className='button-text'>
-                            <Link to="/">APPLY AS A TRAINER <ArrowHover/></Link>
+                            <Link to="/">APPLY AS A TRAINER <BlueHoverButton/></Link>
                         </div>
                     </div>
                     <div className='watermark'>

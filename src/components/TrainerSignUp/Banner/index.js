@@ -8,7 +8,7 @@ import Password from "../../../assets/SignUp/Password Icon.svg";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
-import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
+import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 const BannerTrainer = () => {
 
@@ -323,14 +323,14 @@ const BannerTrainer = () => {
 
 
                                             <div className="submit_button">
-                                                <Link
+                                                <button
                                                     onClick={handleSubmit(
                                                         trainerSignUp
                                                     )}
                                                 >
                                                     <p>Continue to Account</p>
-                                                    <ArrowBlackHover/>
-                                                </Link>
+                                                    <ArrowHoverBlacked/>
+                                                </button>
                                             </div>
                                         </form>
                                     </div>

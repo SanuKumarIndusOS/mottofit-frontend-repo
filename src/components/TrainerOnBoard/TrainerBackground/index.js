@@ -3,11 +3,10 @@ import "./styles.scss";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
-import Arrow from "../../../assets/SignUp/Arrow.svg";
 import { Link, useHistory } from "react-router-dom";
-import ArrowHover from "../../../components/common/ButtonIcon/ArrowHover";
 import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
 import ArrowNext from "../../../assets/SVG/Arrow Next.svg";
+import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 
 const GreenRadio = withStyles({
@@ -353,7 +352,7 @@ const TrainerBackground = () => {
                                         onClick={handleTrainerAvailability}
                                     >
                                         Continue
-                                        <img src={Arrow} alt="icon" />
+                                      <ArrowHoverBlacked/>
                                     </button>
                                 </div>
                             </form>

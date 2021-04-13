@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles.scss";
-import Upload_Arrow from "../../../../../assets/SVG/arrow.svg";
 import ArrowHover from "../../../../common/ButtonIcon/ArrowHover";
 const PaymentSection = () => {
     const data = {

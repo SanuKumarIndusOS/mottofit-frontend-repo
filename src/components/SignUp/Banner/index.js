@@ -8,10 +8,9 @@ import Google from "../../../assets/SignUp/Google Logo.svg";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
 import { useForm } from "react-hook-form";
-import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
+import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 const SignUp = () => {
     const [data, setData] = useState({
@@ -393,13 +392,13 @@ const SignUp = () => {
                                         </button>
                                     </div>
                                     <div className="submit_button">
-                                        <Link
+                                        <button
                                             type="submit"
                                             onClick={handleSubmit(signUp)}
                                         >
                                             Continue to Account{" "}
-                                            <ArrowBlackHover/>
-                                        </Link>
+                                            <ArrowHoverBlacked/>
+                                        </button>
                                     </div>
                                 </form>
                             </div>

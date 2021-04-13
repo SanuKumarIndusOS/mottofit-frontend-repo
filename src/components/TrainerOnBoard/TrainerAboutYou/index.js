@@ -3,11 +3,8 @@ import "./styles.scss";
 import Instagram from "../../../assets/SVG/Insta Icon.svg";
 import Web from "../../../assets/SVG/Web Icon.svg";
 import DropDown from "../../../assets/SVG/Drop Down 4.svg";
-
-import ArrowHover from '../../common/ButtonIcon2/ArrowHover'
-// import TrainerBackground from "../TrainerBackground";
 import { Link, NavLink, useHistory } from "react-router-dom";
-import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
+import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 const AboutTrainer = () => {
     const history = useHistory();
@@ -96,7 +93,7 @@ const AboutTrainer = () => {
 
                                 >
                                     Continue 
-                                   <ArrowHover/>
+                                   <ArrowHoverBlacked/>
                                  
                                     {/* <ArrowBlackHover /> */}
                                 </Link>
