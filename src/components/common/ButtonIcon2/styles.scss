@@ -1,0 +1,111 @@
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //   height: 52px;
+  //   width: 210px;
+  position: relative;
+  right: 25px;
+  //   background-color: #53bfd2;
+}
+.arrow_anim {
+  transition: transform 200ms, opacity 400ms;
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  position: relative;
+  top: 6px;
+  left: 100px;
+}
+
+/* .arrow_anim:hover ~ #cube {
+    display: block;
+  } */
+
+.line {
+  height: 3px;
+  width: 27px;
+  background-color: white;
+  position: relative;
+  right: 9px;
+  bottom: 1px;
+}
+
+.arrow {
+  height: 13px;
+  width: 13px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  position: relative;
+  right: 22px;
+  bottom: 6px;
+}
+
+.arrow2 {
+  height: 13px;
+  width: 13px;
+  border: solid #161616;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  position: relative;
+  left: 71px;
+  bottom: 0px;
+  opacity: 0;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.arrow_container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  right: 40px;
+  //   background-color: #53bfd2;
+  align-items: center;
+  justify-content: center;
+  //   padding-right: 70px;
+}
+
+.check:hover #cube {
+  opacity: 1;
+}
+
+.check:hover #arrow_anim {
+  transform: translate(10px);
+  transition: ease-out;
+  transition-duration: 0.2s;
+  opacity: 0;
+}
+
+.circle {
+  height: 35px;
+  width: 35px;
+  border-radius: 60px;
+  border: 2.5px solid #161616;
+  position: relative;
+  left: 50px;
+  bottom: 0px;
+  /* background-color: brown; */
+}
+
+.button_text {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-22)
+    var(--unnamed-font-family-montserrat);
+  color: var(--unnamed-color-ffffff);
+  text-align: right;
+  font: normal normal bold 18px/22px Montserrat;
+  letter-spacing: 0.45px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 1;
+  position: relative;
+  left: 65px;
+}

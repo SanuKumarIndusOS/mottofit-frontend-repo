@@ -3,6 +3,8 @@ import "./styles.scss";
 import Instagram from "../../../assets/SVG/Insta Icon.svg";
 import Web from "../../../assets/SVG/Web Icon.svg";
 import DropDown from "../../../assets/SVG/Drop Down 4.svg";
+
+import ArrowHover from '../../common/ButtonIcon2/ArrowHover'
 // import TrainerBackground from "../TrainerBackground";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
@@ -86,16 +88,19 @@ const AboutTrainer = () => {
                                     <img src={Instagram} alt="icon" />
                                 </div>
                             </div>
-
-                            <div className="submit_button">
+                            
+                         <div className="submit_button"> 
                                 <Link
                                     type="submit"
                                     onClick={handleTrainerBackground}
+
                                 >
-                                    Continue
-                                    <ArrowBlackHover />
+                                    Continue 
+                                   <ArrowHover/>
+                                 
+                                    {/* <ArrowBlackHover /> */}
                                 </Link>
-                            </div>
+                            </div> 
                         </form>
                     </div>
                 </div>
