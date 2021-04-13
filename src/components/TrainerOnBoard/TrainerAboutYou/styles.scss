@@ -1,93 +1,98 @@
 .main {
-    height: 800px;
-    .wrapper_about {
-        height: 100vh;
+  height: 800px;
+  .wrapper_about {
+    height: 100vh;
 
-        h2 {
-            margin-top: 2em;
-            text-align: center;
-        }
-        p {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            padding: 0 3em;
-        }
-        .wrapper_inputs {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            padding: 2em;
-
-            .wrapper_innerInput {
-                margin: 1em;
-                width: 40%;
-
-                label {
-                    font-size: 22px;
-                }
-                input {
-                    width: 100%;
-                    margin: 0.5em 1em 0.5em 0;
-                    display: flex;
-                    padding: 0.3em 1em;
-                    border-radius: 50px;
-                    justify-content: space-around;
-                    border: 1px solid #bcbcbc;
-                }
-                input::placeholder {
-                    font-size: 16px;
-                    color: #bcbcbc;
-                    margin: 0;
-                    padding: 0;
-                }
-                input:focus {
-                    outline: none;
-                }
-
-                select {
-                    background: transparent;
-                    width: 100%;
-                    margin: 0.5em 1em 0.5em 0;
-                    padding: 0.4em 0.5em;
-                    border-radius: 50px;
-                    border: 1px solid #bcbcbc;
-                    outline: none;
-                    appearance: none;
-                }
-                .iconwrapper {
-                    display: flex;
-                    margin: 0;
-                    padding: 0;
-                    img {
-                        margin-left: -3em;
-                    }
-                }
-            }
-            .submit_button {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                a {
-                    outline: none;
-                    background: #53bfd2;
-                    border: 0;
-                    margin: 1em;
-                    width: 100%;
-                    text-decoration: none;
-                    padding: 0.2em 0.5em 0.2em 2em !important;
-                    text-transform: uppercase;
-                    color: #fff;
-                    font-weight: bold;
-                    img {
-                        width: auto;
-                        margin-left: 1em;
-                        color: red;
-                    }
-                }
-            }
-        }
+    h2 {
+      margin-top: 2em;
+      text-align: center;
     }
+    p {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      padding: 0 3em;
+      color: #696969;
+    }
+    .wrapper_inputs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 2em;
+
+      .wrapper_innerInput {
+        margin: 1em;
+        width: 40%;
+
+        label {
+          font-size: 22px;
+        }
+        input {
+          width: 100%;
+          margin: 0.5em 1em 0.5em 0;
+          display: flex;
+          padding: 0.3em 1em;
+          border-radius: 50px;
+          justify-content: space-around;
+          border: 1px solid #bcbcbc;
+        }
+        input::placeholder {
+          font-size: 16px;
+          color: #bcbcbc;
+          margin: 0;
+          padding: 0;
+        }
+        input:focus {
+          outline: none;
+        }
+
+        select {
+          background: transparent;
+          width: 100%;
+          margin: 0.5em 1em 0.5em 0;
+          padding: 0.4em 0.5em;
+          border-radius: 50px;
+          border: 1px solid #bcbcbc;
+          outline: none;
+          appearance: none;
+        }
+
+        select:invalid {
+          color: #bcbcbc;
+        }
+        .iconwrapper {
+          display: flex;
+          margin: 0;
+          padding: 0;
+          img {
+            margin-left: -3em;
+          }
+        }
+      }
+      .submit_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+          outline: none;
+          background: #53bfd2;
+          border: 0;
+          margin: 1em;
+          width: 100%;
+          text-decoration: none;
+          padding: 0.2em 0.5em 0.2em 2em !important;
+          text-transform: uppercase;
+          color: #fff;
+          font-weight: bold;
+          img {
+            width: auto;
+            margin-left: 1em;
+            color: red;
+          }
+        }
+      }
+    }
+  }
 }

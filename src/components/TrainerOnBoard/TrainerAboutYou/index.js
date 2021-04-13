@@ -36,17 +36,18 @@ const AboutTrainer = () => {
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
-                                <input placeholder="DOB" type="date" />
+                                <input placeholder="DOB"  type="date" />
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Gender*</label>
                                 <div className="iconwrapper">
-                                    <select 
+                                    <select required 
                                     // name="gender" 
                                     // id="gender"
                                     >
-                                        <option>Mail</option>
-                                        <option >Femail</option>
+                                         <option value="" disabled selected >Select your Gender</option>
+                                        <option>Male</option>
+                                        <option >Female</option>
                                         <option >Others</option>
                                     </select>
                                     <img src={DropDown} alt="icon" />
