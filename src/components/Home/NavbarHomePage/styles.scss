@@ -1,0 +1,223 @@
+.navbar-sass {
+    display: flex;
+    height: 100px;
+    margin-top: -2em;
+    align-items: center;
+    position: relative;
+
+    background-color: transparent;
+    @media screen and (max-width: 1024px) {
+        margin: 0;
+        background-color: #fff;
+    }
+    .main_navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 0px !important;
+        position: relative;
+        @media screen and (max-width: 1024px) {
+            width: 100%;
+            height: 100px;
+            background-color: #fff;
+        }
+        .header-links {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            a {
+                padding: 0 0.5em !important;
+                text-decoration: none;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-medium)
+                    var(--unnamed-font-size-17) / var(--unnamed-line-spacing-42)
+                    var(--unnamed-font-family-montserrat);
+                letter-spacing: var(--unnamed-character-spacing-0);
+                color: var(--unnamed-color-2c2c2c);
+                text-align: center;
+                font: normal normal medium 17px/42px Montserrat;
+                letter-spacing: 0px;
+                color: #2c2c2c;
+                text-transform: capitalize;
+                opacity: 1;
+            }
+            @media screen and (max-width: 1024px) {
+                display: none;
+            }
+        }
+        .logo-content_home img {
+            width: 150px;
+            height: 90px;
+            opacity: 1;
+
+            .defaultLogo {
+                padding: 1em;
+                margin-top: 1em !important;
+                display: flex;
+                width: 100px;
+                height: 97px;
+                justify-content: center;
+                position: relative;
+                @media screen and (max-width: 1024px) {
+                    width: 100px;
+                    padding: 1em;
+                    height: 67px;
+                }
+            }
+        }
+        .search-items {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .input-item {
+                input {
+                    width: 229px;
+                    height: 40px;
+                    border: 1.5px solid var(--unnamed-color-53bfd2);
+                    border: 2px solid #53bfd2;
+                    border-radius: 30px;
+                    opacity: 1;
+                }
+                input::placeholder {
+                    padding: 0 1em;
+                }
+                .search-icon {
+                    width: 20px;
+                    height: 20px;
+                    opacity: 1;
+                    position: relative;
+                    right: 40px;
+                    color: #bcbcbc;
+                }
+                @media screen and (max-width: 1024px) {
+                    display: none;
+                }
+            }
+            .login-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    margin: 0 1em;
+                    cursor: pointer;
+                }
+                img:nth-child(1) {
+                    @media screen and (max-width: 1024px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+.navbaractive.active {
+    transition: 0.4s ease;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 5px 10px -8px rgb(0, 0, 0);
+    @media screen and (max-width: 1024px) {
+        position: sticky;
+        top: 0;
+    }
+    .main_navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 90px;
+        position: relative;
+        .header-links {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            a {
+                padding: 0 0.5em !important;
+                text-decoration: none;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-medium)
+                    var(--unnamed-font-size-17) / var(--unnamed-line-spacing-42)
+                    var(--unnamed-font-family-montserrat);
+                letter-spacing: var(--unnamed-character-spacing-0);
+                color: var(--unnamed-color-2c2c2c);
+                text-align: center;
+                font: normal normal medium 17px/42px Montserrat;
+                letter-spacing: 0px;
+                color: #2c2c2c;
+                text-transform: capitalize;
+                opacity: 1;
+            }
+            @media screen and (max-width: 1024px) {
+                display: none;
+            }
+        }
+        .logo-content_home {
+            width: 150px;
+            height: 87px;
+            padding: 1em;
+            opacity: 1;
+        }
+        .logo-content_home {
+            width: 150px;
+            height: 87px;
+            opacity: 1;
+            .defaultLogo img {
+                padding: 1em;
+                margin-top: 1em !important;
+                display: flex;
+                width: 100px;
+                height: 87px;
+                justify-content: center;
+                position: relative;
+            }
+        }
+        .search-items {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .input-item {
+                input {
+                    width: 229px;
+                    height: 40px;
+                    border: 1.5px solid var(--unnamed-color-53bfd2);
+                    border: 2px solid #53bfd2;
+                    border-radius: 30px;
+                    opacity: 1;
+                }
+                input::placeholder {
+                    padding: 0 1em;
+                }
+                .search-icon {
+                    width: 20px;
+                    height: 20px;
+                    opacity: 1;
+                    position: relative;
+                    right: 40px;
+                    color: #bcbcbc;
+                }
+                @media screen and (max-width: 1024px) {
+                    display: none;
+                }
+            }
+            .login-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    margin: 0 1em;
+                    cursor: pointer;
+                }
+                img:nth-child(1) {
+                    @media screen and (max-width: 1024px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

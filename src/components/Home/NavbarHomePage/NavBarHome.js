@@ -7,10 +7,8 @@ import Logo from "../../../assets/SVG/Motto Logo Home.svg";
 import LogoImage from "../../../assets/SVG/Motto Logo.svg";
 import Line from "../../../assets/SVG/Blue Line.svg";
 import Line2 from "../../../assets/SVG/Blue Line 2.svg";
-
-import "./stylesHome.css";
+import './styles.scss'
 import SignIn from "../../SignIn/Banner";
-// import SignIn from '../../component/SignIn/Banner/index'
 
 const NavBarHome = ({ toggle }) => {
     const [navbar, setNavbar] = useState(false);
@@ -27,7 +25,7 @@ const NavBarHome = ({ toggle }) => {
     }, []);
 
     const changeBackground = () => {
-        if (window.scrollY >= 200) {
+        if (window.scrollY >= 100) {
             setNavbar(true);
             setLogo(true);
         } else {

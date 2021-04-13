@@ -38,47 +38,51 @@ const TrainerMotto = () => {
     };
     return (
         <>
-            <div className="container">
-                <div className="motto_main">
-                    <div className="motto_grid">
-                        <div className="motto_left">
-                            <div className="motto_heading">
-                                <h2>
-                                    What makes training with Motto different?
-                                </h2>
-                                {accordionData.map((item, index) => (
-                                    <div className="motto_item" key={index}>
-                                        <div
-                                            className="motto_title"
-                                            onClick={() => toggle(index)}
-                                        >
-                                            <h3>{item.title}</h3>
+            <div className="outter_containerWork">
+                <div className="container">
+                    <div className="motto_main">
+                        <div className="motto_grid">
+                            <div className="motto_left">
+                                <div className="motto_heading">
+                                    <h2>
+                                        What makes training with Motto
+                                        different?
+                                    </h2>
+                                    {accordionData.map((item, index) => (
+                                        <div className="motto_item" key={index}>
+                                            <div
+                                                className="motto_title"
+                                                onClick={() => toggle(index)}
+                                            >
+                                                <h3>{item.title}</h3>
+                                                <div
+                                                    className={
+                                                        selected === index
+                                                            ? "line show"
+                                                            : "line"
+                                                    }
+                                                ></div>
+                                            </div>
                                             <div
                                                 className={
                                                     selected === index
-                                                        ? "line show"
-                                                        : "line"
+                                                        ? "motto_contentshow"
+                                                        : "motto_content"
                                                 }
-                                            ></div>
+                                            >
+                                                <p>{item.desc}</p>
+                                                <div></div>
+                                            </div>
                                         </div>
-                                        <div
-                                            className={
-                                                selected === index
-                                                    ? "motto_contentshow"
-                                                    : "motto_content"
-                                            }
-                                        >
-                                            <p>{item.desc}</p>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                        <div className="motto_right">
-                            <img src={svgBG} alt="icon" className="stamp" />
-                            <div className="motto_img">
-                                <img src={Image2} alt="image" />
+                            <div className="motto_right">
+                                <div className="motto_img">
+                                    <img src={Image2} alt="image" />
+                                </div>
+                                <img src={svgBG} alt="icon" className="stamp" />
+
                             </div>
                         </div>
                     </div>

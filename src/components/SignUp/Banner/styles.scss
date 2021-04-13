@@ -12,7 +12,9 @@
     .wrapper {
         background-color: rgb(255, 255, 255);
         height: auto;
-        width: 35%;
+        // width: 40%;
+        width: 550px;
+        height: 1119px;
         margin: 5em 0 8em 0;
         border-radius: 10px;
         @media screen and (max-width: 1023px) {
@@ -20,7 +22,7 @@
         }
     }
     .inner_items {
-        margin: 2em;
+        margin: 0 auto;
         padding: 2em 0;
 
         h2 {
@@ -35,6 +37,7 @@
             letter-spacing: -0.45px;
             color: #161616;
             opacity: 1;
+            margin-top: 1em;
         }
         p {
             font: var(--unnamed-font-style-normal) normal
@@ -82,7 +85,7 @@
                 position: absolute;
                 right: 0;
                 margin: 0 auto;
-                padding: 0.8em 1em;
+                padding: 0.8em 3em 0.8em 0;
             }
             span {
                 font-size: 10px;
@@ -122,12 +125,16 @@
                 justify-content: flex-start;
                 align-items: center;
                 outline: none;
-                border: 1px solid #bcbcbc;
                 width: 80%;
+                height: 45px;
                 background-color: #fff;
+
+                border: 1.5px solid var(--unnamed-color-bcbcbc);
+                border: 2px solid #bcbcbc;
+                border-radius: 30px;
+                opacity: 1;
                 color: #bcbcbc;
-                border-radius: 50px;
-                margin: 0.2em 1em;
+                margin: 0.5em 1em;
 
                 img {
                     margin: 0.5em 1.3em;
@@ -138,12 +145,14 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                background-color: #fff;
                 color: #bcbcbc;
+                background-color: #fff;
                 outline: none;
-                border: 1px solid #bcbcbc;
-                border-radius: 50px;
-                margin: 0.2em 1em;
+                height: 45px;
+                border: 1.5px solid var(--unnamed-color-bcbcbc);
+                border: 2px solid #bcbcbc;
+                border-radius: 30px;
+                opacity: 1;
                 width: 80%;
 
                 img {
