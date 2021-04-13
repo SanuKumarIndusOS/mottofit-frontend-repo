@@ -134,7 +134,7 @@ const TrainerSetUpProfile = () => {
                             handleChangeCertificateInput(index, event)
                           }
                         />
-                        <input
+                        {/* <input
                           type="file"
                           name="file"
                           value={inputCertificatesField.upload}
@@ -145,7 +145,7 @@ const TrainerSetUpProfile = () => {
                         />
                         <a className="checkarrow">
                           <ArrowHover />
-                        </a>
+                        </a> */}
                       </div>
                     )
                   )}

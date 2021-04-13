@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 .main_wrapper {
     // background-color: yellowgreen;
     width: 100%;
@@ -5,17 +6,48 @@
     margin-bottom: 8em;
     .links_wrapper {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row;
         align-items: center;
-        width: 100%;
-        height: 100px;
-        a {
-            color: #000;
+        justify-content: space-between;
+        margin-top: 2em;
+        .outter_links {
+            display: flex;
+            align-items: center;
+            .inner_links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                a {
+                    margin-left: 1em;
+                    margin-right: 1em;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-42)
+                        var(--unnamed-font-family-montserrat);
+                    color: var(--unnamed-color-161616);
+                    text-align: left;
+                    font: normal normal normal 16px/22px Montserrat;
+                    letter-spacing: 0.18px;
+                    color: #161616;
+                    opacity: 1;
+                    text-decoration: none;
+                }
+
+                div {
+                    width: 85%;
+                    height: 2px;
+                    // margin-left: 1.5em;
+                    background-color: #53bfd2;
+                }
+            }
         }
     }
     .wrapper_inneritems {
         width: 80%;
         margin: 0 auto;
+
         h1 {
             text-align: center;
             font-size: 35px;
@@ -25,6 +57,11 @@
             font-size: 18px;
             width: 80%;
             margin: 0 auto;
+            color: #696969;
+            letter-spacing: 0.27px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 15px;
+            line-height: 30px;
         }
 
         .contents_wrapper {
@@ -65,9 +102,13 @@
                     input {
                         width: 50%;
                         margin-right: 1em;
-                        border: 1px solid #bcbcbc;
                         padding: 0.3em 1em;
                         border-radius: 50px;
+                        height: 45px;
+                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+                        border: 2px solid #bcbcbc;
+                        border-radius: 30px;
+                        opacity: 1;
 
                         &:nth-child(2) {
                             width: 30%;
@@ -89,6 +130,10 @@
             }
             .item3 {
                 margin: 1em 0 2em 0;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
                 h6 {
                     margin-bottom: 1em;
                 }
@@ -98,21 +143,26 @@
                     color: #53bfd2;
                 }
 
-                .inputs_experience {
+                .inputs_background {
                     display: flex;
                     justify-content: space-between;
                     width: 100%;
                     margin-bottom: 0.5em;
                     align-items: center;
                     input {
-                        width: 50%;
+                        // width: 50%;
                         margin-right: 1em;
                         border: 1px solid #bcbcbc;
                         padding: 0.3em 1em;
-                        border-radius: 50px;
+                        width: 650px;
+                        height: 45px;
+                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+                        border: 2px solid #bcbcbc;
+                        border-radius: 30px;
+                        opacity: 1;
 
                         &:nth-child(2) {
-                            width: 30%;
+                            width: 650px;
                         }
                         &:nth-child(3) {
                             width: 30%;
@@ -173,7 +223,15 @@
                 }
                 textarea {
                     width: 100%;
-                    height: 120px;
+                    height: 135px;
+                    border: 1.5px solid var(--unnamed-color-bcbcbc);
+                    border: 2px solid #bcbcbc;
+                    border-radius: 20px;
+                    opacity: 1;
+                    padding: 0.5em 1em;
+                }
+                textarea:focus {
+                    outline: none;
                 }
 
                 .inputs_experience {
@@ -193,9 +251,14 @@
                     input {
                         width: 50%;
                         margin-right: 1em;
-                        border: 1px solid #bcbcbc;
                         padding: 0.3em 1em;
                         border-radius: 50px;
+                        width: 650px;
+                        height: 45px;
+                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+                        border: 2px solid #bcbcbc;
+                        border-radius: 30px;
+                        opacity: 1;
                     }
                     input::placeholder {
                         font-size: 16px;
@@ -215,7 +278,15 @@
                 }
                 textarea {
                     width: 100%;
-                    height: 120px;
+                    height: 135px;
+                    border: 1.5px solid var(--unnamed-color-bcbcbc);
+                    border: 2px solid #bcbcbc;
+                    border-radius: 20px;
+                    opacity: 1;
+                    padding: 0.5em 1em;
+                }
+                textarea:focus {
+                    outline: none;
                 }
             }
             .submit_button {
@@ -241,4 +312,13 @@
             }
         }
     }
+}
+
+textarea::placeholder {
+    /* Firefox, Chrome, Opera */
+    padding-left: 15px !important;
+    padding-top: 10px;
+    color: #898989;
+    font-style: italic;
+    opacity: 0.7;
 }

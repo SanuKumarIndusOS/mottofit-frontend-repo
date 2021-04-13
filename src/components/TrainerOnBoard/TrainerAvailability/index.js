@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import Arrow from "../../../assets/SignUp/Arrow.svg";
+import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
 
 const CyanRadio = withStyles({
     root: {
@@ -18,7 +19,6 @@ const TrainerAvailability = () => {
     const [selectedValue, setSelectedValue] = React.useState("a");
     const [selectedOneValue, setSelectedOneValue] = React.useState("a");
 
-
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
     };
@@ -31,9 +31,13 @@ const TrainerAvailability = () => {
             <div className="container">
                 <div className="main_wrappercontainer">
                     <div className="link_wrapper">
-                        <Link to="/trainerbackground">
-                            Back to Trainer Background
-                        </Link>
+                        <img src={ArrowBack} alt="icon" />
+                        <div className="inner_links">
+                            <Link to="/trainerbackground">
+                                Back to Trainer Background
+                            </Link>
+                            <div></div>
+                        </div>
                     </div>
                     <div className="wrapper_inneritem">
                         <h1>Highlight your availability on the platform</h1>
@@ -46,24 +50,21 @@ const TrainerAvailability = () => {
                             <div className="content_wrapper">
                                 <div className="item_1">
                                     <h6>
-                                    How many hours will you list on Motto?
+                                        How many hours will you list on Motto?
                                     </h6>
                                     <div className="inputs_platform">
                                         <input
                                             type="number"
-                                            placeholder='10 Hours/Week'
+                                            placeholder="10 Hours/Week"
                                         />
                                     </div>
                                 </div>
                                 <div className="item_2">
-                                    <h6>
-                                    Where are you willing to train?
-                                    </h6>
+                                    <h6>Where are you willing to train?</h6>
                                     <div className="inputs_platform">
-                                       <button>Virtual</button>
-                                       <button>In Person</button>
-                                       <button>Outdoors</button>
-
+                                        <button>Virtual</button>
+                                        <button>In Person</button>
+                                        <button>Outdoors</button>
                                     </div>
                                 </div>
                                 <div className="item_3">
@@ -72,27 +73,27 @@ const TrainerAvailability = () => {
                                         verticals that apply
                                     </h6>
                                     <CyanRadio
-                                            checked={selectedValue === "a"}
-                                            onChange={handleChange}
-                                            value="a"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "a" }}
-                                        />
-                                        <label>Yes</label>
-                                        <CyanRadio
-                                            checked={selectedValue === "b"}
-                                            onChange={handleChange}
-                                            value="b"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "b" }}
-                                        />
-                                        <label>No</label>
+                                        checked={selectedValue === "a"}
+                                        onChange={handleChange}
+                                        value="a"
+                                        name="radio-button-demo"
+                                        label="Strength & Hitt"
+                                        inputProps={{ "aria-label": "a" }}
+                                    />
+                                    <label>Yes</label>
+                                    <CyanRadio
+                                        checked={selectedValue === "b"}
+                                        onChange={handleChange}
+                                        value="b"
+                                        name="radio-button-demo"
+                                        label="Strength & Hitt"
+                                        inputProps={{ "aria-label": "b" }}
+                                    />
+                                    <label>No</label>
                                 </div>
                                 <div className="item_4">
                                     <h6>
-                                    Select the location of your facility
+                                        Select the location of your facility
                                     </h6>
                                     <div className="inputs_platform">
                                         <input
@@ -103,31 +104,30 @@ const TrainerAvailability = () => {
                                 </div>
                                 <div className="item_5">
                                     <h6>
-                                    Are you willing to travel in the selected area?
+                                        Are you willing to travel in the
+                                        selected area?
                                     </h6>
                                     <CyanRadio
-                                            checked={selectedOneValue === "c"}
-                                            onChange={handleOneChange}
-                                            value="c"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "c" }}
-                                        />
-                                        <label>Hell, Yes!</label>
-                                        <CyanRadio
-                                            checked={selectedOneValue === "d"}
-                                            onChange={handleOneChange}
-                                            value="d"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "d" }}
-                                        />
-                                        <label>No</label>
+                                        checked={selectedOneValue === "c"}
+                                        onChange={handleOneChange}
+                                        value="c"
+                                        name="radio-button-demo"
+                                        label="Strength & Hitt"
+                                        inputProps={{ "aria-label": "c" }}
+                                    />
+                                    <label>Hell, Yes!</label>
+                                    <CyanRadio
+                                        checked={selectedOneValue === "d"}
+                                        onChange={handleOneChange}
+                                        value="d"
+                                        name="radio-button-demo"
+                                        label="Strength & Hitt"
+                                        inputProps={{ "aria-label": "d" }}
+                                    />
+                                    <label>No</label>
                                 </div>
                                 <div className="item_6">
-                                    <h6>
-                                    Serviceable Locations
-                                    </h6>
+                                    <h6>Serviceable Locations</h6>
                                     <div className="inputs_platform">
                                         <input
                                             type="text"
@@ -137,11 +137,11 @@ const TrainerAvailability = () => {
                                 </div>
                             </div>
                             <div className="submit_button">
-                                    <button type="submit">
-                                        Continue
-                                        <img src={Arrow} alt="icon" />
-                                    </button>
-                                </div>
+                                <button type="submit">
+                                    Continue
+                                    <img src={Arrow} alt="icon" />
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -6,6 +6,9 @@ import Radio from "@material-ui/core/Radio";
 import Arrow from "../../../assets/SignUp/Arrow.svg";
 import { Link, useHistory } from "react-router-dom";
 import ArrowHover from "../../../components/common/ButtonIcon/ArrowHover";
+import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
+import ArrowNext from "../../../assets/SVG/Arrow Next.svg";
+
 
 const GreenRadio = withStyles({
     root: {
@@ -79,10 +82,26 @@ const TrainerBackground = () => {
             <div className="container">
                 <div className="main_wrapper">
                     <div className="links_wrapper">
-                        <Link to="/aboutTrainer">Back to About You</Link>
-                        <Link to="/trainer-avaliability">
-                            Go to Avaliability
-                        </Link>
+                        <div className="outter_links">
+                            <img src={ArrowBack} alt="icon" />
+                            <div className="inner_links">
+                                <Link to="/aboutTrainer">
+                                    {" "}
+                                    Back to About You
+                                </Link>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div className="outter_links">
+                            <div className="inner_links">
+                                <Link to="/trainer-avaliability">
+                                    Go to Avaliability
+                                </Link>
+                                <div></div>
+                            </div>
+                            <img src={ArrowNext} alt="icon" />
+
+                        </div>
                     </div>
                     <div className="wrapper_inneritems">
                         <h1>Detail out your training background</h1>
@@ -204,7 +223,7 @@ const TrainerBackground = () => {
                                     {inputCertificatesFields.map(
                                         (inputCertificatesField, index) => (
                                             <div
-                                                className="inputs_experience"
+                                                className="inputs_background"
                                                 key={index}
                                             >
                                                 <input
@@ -235,23 +254,23 @@ const TrainerBackground = () => {
                                                         )
                                                     }
                                                 />
-                                                <input
+                                                {/* <input
                                                     type="file"
                                                     name="file"
                                                     value={
                                                         inputCertificatesField.upload
                                                     }
-                                                    className="custom-file-input"
+                                                    // className="custom-file-input"
                                                     onChange={(event) =>
                                                         handleChangeCertificateInput(
                                                             index,
                                                             event
                                                         )
                                                     }
-                                                />
-                                                <a className="checkarrow">
+                                                /> */}
+                                                {/* <a className="checkarrow">
                                                     <ArrowHover />
-                                                </a>
+                                                </a> */}
                                             </div>
                                         )
                                     )}

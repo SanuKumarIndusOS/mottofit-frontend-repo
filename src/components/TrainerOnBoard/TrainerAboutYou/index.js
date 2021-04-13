@@ -4,16 +4,15 @@ import Instagram from "../../../assets/SVG/Insta Icon.svg";
 import Web from "../../../assets/SVG/Web Icon.svg";
 import DropDown from "../../../assets/SVG/Drop Down 4.svg";
 // import TrainerBackground from "../TrainerBackground";
-import {  Link,NavLink,useHistory } from "react-router-dom";
-import ArrowBlackHover from '../../common/ButtonIconBlackCircle/ArrowBlackHover'
+import { Link, NavLink, useHistory } from "react-router-dom";
+import ArrowBlackHover from "../../common/ButtonIconBlackCircle/ArrowBlackHover";
 
 const AboutTrainer = () => {
-
-    const history = useHistory()
+    const history = useHistory();
 
     const handleTrainerBackground = () => {
-        history.push('/trainerbackground')
-    }
+        history.push("/trainerbackground");
+    };
     return (
         <>
             <div className="container main">
@@ -41,44 +40,60 @@ const AboutTrainer = () => {
                             <div className="wrapper_innerInput">
                                 <label>Gender*</label>
                                 <div className="iconwrapper">
-                                    <select 
-                                    // name="gender" 
-                                    // id="gender"
+                                    <select
+                                        required
+                                        // name="gender"
+                                        // id="gender"
                                     >
-                                        <option>Mail</option>
-                                        <option >Femail</option>
-                                        <option >Others</option>
+                                        <option value="" disabled selected>
+                                            Select your Gender
+                                        </option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Others</option>
                                     </select>
                                     <img src={DropDown} alt="icon" />
                                 </div>
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Email*</label>
-                                <input placeholder="Email" type='email' />
+                                <input placeholder="Email" type="email" />
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Phone*</label>
-                                <input placeholder="Phone Number" type='phone'/>
+                                <input
+                                    placeholder="Phone Number"
+                                    type="phone"
+                                />
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Website</label>
                                 <div className="iconwrapper">
-                                    <input placeholder="Add your website"  type='text'/>
+                                    <input
+                                        placeholder="Add your website"
+                                        type="text"
+                                    />
                                     <img src={Web} alt="icon" />
                                 </div>
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Instagram</label>
                                 <div className="iconwrapper">
-                                    <input placeholder="Add yor Instagram Handle" type='text' />
+                                    <input
+                                        placeholder="Add yor Instagram Handle"
+                                        type="text"
+                                    />
                                     <img src={Instagram} alt="icon" />
                                 </div>
                             </div>
 
                             <div className="submit_button">
-                                <Link type="submit" onClick={handleTrainerBackground} >
+                                <Link
+                                    type="submit"
+                                    onClick={handleTrainerBackground}
+                                >
                                     Continue
-                                    <ArrowBlackHover/>
+                                    <ArrowBlackHover />
                                 </Link>
                             </div>
                         </form>

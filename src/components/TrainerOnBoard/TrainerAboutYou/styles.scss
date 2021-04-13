@@ -9,9 +9,14 @@
         }
         p {
             text-align: center;
-            display: flex;
-            justify-content: center;
-            padding: 0 3em;
+            font-size: 18px;
+            width: 80%;
+            margin: 0 auto;
+            color: #696969;
+            letter-spacing: 0.27px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 15px;
+            line-height: 30px;
         }
         .wrapper_inputs {
             display: flex;
@@ -34,7 +39,12 @@
                     padding: 0.3em 1em;
                     border-radius: 50px;
                     justify-content: space-around;
-                    border: 1px solid #bcbcbc;
+                    width: 500px;
+                    height: 45px;
+                    border: 1.5px solid var(--unnamed-color-bcbcbc);
+                    border: 2px solid #bcbcbc;
+                    border-radius: 30px;
+                    opacity: 1;
                 }
                 input::placeholder {
                     font-size: 16px;
@@ -55,6 +65,10 @@
                     border: 1px solid #bcbcbc;
                     outline: none;
                     appearance: none;
+                }
+
+                select:invalid {
+                    color: #bcbcbc;
                 }
                 .iconwrapper {
                     display: flex;

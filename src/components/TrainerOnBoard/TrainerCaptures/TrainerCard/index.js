@@ -234,7 +234,7 @@ const TrainerCard = () => {
                                             <div className="iconwrapper">
                                                 <input
                                                     type="text"
-                                                    placeholder="Social Session (Total Charge for 2 People)"
+                                                    placeholder="Social Session (Total Charge for 3 People)"
                                                 />
                                                 <img
                                                     src={DollarIcon}
@@ -244,7 +244,7 @@ const TrainerCard = () => {
                                             <div className="iconwrapper">
                                                 <input
                                                     type="text"
-                                                    placeholder="Social Session (Total Charge for 2 People)"
+                                                    placeholder="Social Session (Total Charge for 4 People)"
                                                 />
                                                 <img
                                                     src={DollarIcon}
@@ -254,7 +254,27 @@ const TrainerCard = () => {
                                             <div className="iconwrapper">
                                                 <input
                                                     type="text"
-                                                    placeholder="Class Flat (5-15 People)"
+                                                    placeholder="Class Flat Rate (5-15 People)"
+                                                />
+                                                <img
+                                                    src={DollarIcon}
+                                                    alt="icon"
+                                                />
+                                            </div>
+                                            <div className="iconwrapper">
+                                                <input
+                                                    type="text"
+                                                    placeholder="3 Session Rate"
+                                                />
+                                                <img
+                                                    src={DollarIcon}
+                                                    alt="icon"
+                                                />
+                                            </div>
+                                            <div className="iconwrapper">
+                                                <input
+                                                    type="text"
+                                                    placeholder="10 Session Pass Rate"
                                                 />
                                                 <img
                                                     src={DollarIcon}

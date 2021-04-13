@@ -24,6 +24,9 @@ const TrainerTracker = () => {
   let ScheduleBarIcon;
   let Arrow_one;
   let Arrow_two;
+  let ABout_you_text;
+  let Training_background_text;
+  let Availability_text;
 
   //PeopleBarIcon
   if (window.location.pathname === "/aboutTrainer") {
@@ -32,6 +35,9 @@ const TrainerTracker = () => {
     ScheduleBarIcon = <img src={Schedule_inactive} alt="icon" />;
     Arrow_one =  <img src={Arrow_inactive} alt="icon" />;
     Arrow_two = <img src={Arrow_inactive} alt="icon" />;
+    ABout_you_text =  <p className="active">About you</p>;
+    Training_background_text = <p className="inactive">Training background</p>;
+    Availability_text =   <p className="inactive">Avaliability</p>;
   }
 
   //TrainerBarIcon
@@ -41,6 +47,9 @@ const TrainerTracker = () => {
     ScheduleBarIcon = <img src={Schedule_inactive} alt="icon" />;
     Arrow_one =  <img src={Arrow_active} alt="icon" />;
     Arrow_two = <img src={Arrow_inactive} alt="icon" />;
+    ABout_you_text =  <p className="completed">About you</p>;
+    Training_background_text = <p className="active">Training background</p>;
+    Availability_text =   <p className="inactive">Avaliability</p>;
   }
 
   //ScheduleBarIcon
@@ -50,27 +59,33 @@ const TrainerTracker = () => {
     ScheduleBarIcon = <img src={Schedule_active} alt="icon" />;
      Arrow_one =  <img src={Arrow_active} alt="icon" />;
     Arrow_two = <img src={Arrow_active} alt="icon" />;
+    ABout_you_text =  <p className="completed">About you</p>;
+    Training_background_text = <p className="completed">Training background</p>;
+    Availability_text =   <p className="active">Avaliability</p>;
   }
 
   return (
     <>
       <div className="tracker_main">
-        <div className="wrapper_item">
+        <div className="wrapper_item container">
           <div className="items">
             {PeopleBarIcon}
-            <p activeClassName="active">About you</p>
+            {/* <p className="completed">About you</p> */}
+            {ABout_you_text}
           </div>
           {/* <img src={Arrow1} alt="icon" /> */}
           {Arrow_one}
           <div className="items">
             {TrainerBarIcon}
-            <p activeClassName="active">Training background</p>
+            {Training_background_text}
+            {/* <p className="active">Training background</p> */}
           </div>
           {/* <img src={Arrow1} alt="icon" /> */}
           {Arrow_two}
           <div className="items">
             {ScheduleBarIcon}
-            <p activeClassName="active">Avaliability</p>
+            {Availability_text}
+            {/* <p className="inactive">Avaliability</p> */}
           </div>
         </div>
       </div>
