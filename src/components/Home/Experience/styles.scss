@@ -30,8 +30,8 @@
         }
         .svgBG {
             position: relative;
-            top: -533px;
-            right: -214px;
+            top: -490px;
+            right: -150px;
             height: 230px;
             width: 175px;
             bottom: center;
@@ -63,8 +63,8 @@
 
             .image_strength_main {
                 display: flex;
-                width: 270px;
-                height: 480px;
+                width: 240px;
+                height: 310px;
                 margin: 0 1em;
                 flex-direction: column;
 
@@ -129,7 +129,7 @@
         width: 100%;
         align-items: flex-start;
         height: 500px;
-        margin-top: 0em !important;
+        margin-top: 7em !important;
 
         padding: 0 2em !important;
         @media screen and (max-width: 1023px) {
