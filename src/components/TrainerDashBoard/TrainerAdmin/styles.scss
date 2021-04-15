@@ -1,0 +1,99 @@
+.admin_container {
+    height: 900px;
+    width: 100%;
+    display: flex;
+    .admin_sidenav {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        background-color: #f7f7f7;
+        color: rgb(0, 0, 0);
+        .admin_profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            h2 {
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-bold) var(--unnamed-font-size-35) /
+                    var(--unnamed-line-spacing-42)
+                    var(--unnamed-font-family-cormorant-garamond);
+                color: var(--unnamed-color-161616);
+                text-align: center;
+                font: normal normal bold 35px/42px Cormorant Garamond;
+                letter-spacing: -0.35px;
+                color: #161616;
+                opacity: 1;
+            }
+            .profile_pic {
+                height: 80px;
+                width: 80px;
+                border-radius: 100px;
+                background-color: #53bfd2;
+                margin: 1rem;
+            }
+        }
+
+        .admin_sidenav_links {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: space-around;
+            width: 100%;
+            text-align: left;
+
+            a {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 1.5em 1em 1.5em 3.5em;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-medium)
+                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-42)
+                    var(--unnamed-font-family-montserrat);
+                color: var(--unnamed-color-161616);
+                text-align: left !important;
+                font: normal normal medium 18px/42px Montserrat;
+                letter-spacing: 1.17px;
+                color: #161616;
+                text-transform: uppercase;
+                text-decoration: none;
+                opacity: 1;
+                img {
+                    text-align: left;
+                    width: 25px;
+                    margin-right: 2em;
+                }
+            }
+            a:active {
+                background: #53bfd2;
+                color: #000;
+                font-weight: 500;
+                padding: 1.5em 1em 1.5em 3.5em;
+            }
+            a:hover {
+                padding: 1.5em 1em 1.5em 3.5em;
+
+                background: #53bfd2;
+                color: #000;
+                font-weight: 500;
+            }
+            a:focus {
+                background: #53bfd2;
+            }
+        }
+    }
+    .admin_content {
+        height: 100%;
+        flex: auto;
+        .top_bar {
+            margin: 2rem;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    }
+}
