@@ -4,6 +4,7 @@ import "./trainer.sass";
 import onHoverImage from "../../../assets/FindTrainer/onHover.svg";
 import onImage from "../../../assets/SignUp/Arrow.svg";
 import Arrow from "../../../assets/SignUp/ArrowSecondary.svg";
+import { Link } from "react-router-dom";
 
 function useHover() {
     const [value, setValue] = useState(false);
@@ -57,9 +58,10 @@ const TrainerCards = () => {
                                 <div className="card-body">
                                     <h3>{data.name}</h3>
                                     <h6>{data.role}</h6>
-                                    <ReadMore maxChar={110}>
-                                        {data.describe}
-                                    </ReadMore>
+                                    <p>{data.describe}
+                                    <Link to='trainer-profile'>Read More</Link>
+                                    </p>
+                                    
                                 </div>
                                 <div className="card-button">
                                     <button
@@ -116,25 +118,5 @@ const HeadingTrainer = () => {
     );
 };
 
-const ReadMore = ({ children, maxChar = 110 }) => {
-    const text = children;
-    const [isTruncated, setIsTruncated] = useState(true);
-
-    const resultString = isTruncated ? text.slice(0, maxChar) : text;
-    function toggleIsTruncated() {
-        setIsTruncated(!isTruncated);
-    }
-
-    return (
-        <>
-            <p className="has-text-left">
-                {resultString}
-                <span onClick={toggleIsTruncated} className="readmore">
-                    {isTruncated ? "Read more" : "Read less"}
-                </span>
-            </p>
-        </>
-    );
-};
 
 export default TrainerCards;

@@ -28,6 +28,7 @@ import HowItWork from "../../components/HowItWork/Banner/index";
 import Book from "../../components/HowItWork/Book";
 import CustomizeSection from "../../components/HowItWork/Customize/index";
 import TrainerMotto from "../../components/HowItWork/TrainerMotto";
+import TrainerProfile from '../../components/TrainerProfile/Profile/index'
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -144,6 +145,20 @@ const Home = () => {
                 <Route path="/how-it-works" component={CustomizeSection} />
                 <Route path="/how-it-works" component={TrainerMotto} />
                 <Route path="/how-it-works" component={Footer} />
+
+
+
+
+                {/* tariner profile */}
+                <Route exact path="/trainer-profile">
+                    <NavBar toggle={toggle} />
+                </Route>
+                <Route path="/trainer-profile" component={TrainerProfile} />
+
+
+
+
+
             </Router>
         </>
     );
