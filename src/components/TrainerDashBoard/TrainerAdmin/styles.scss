@@ -1,5 +1,5 @@
 .admin_container {
-    height: 900px;
+    height: 1000px;
     width: 100%;
     display: flex;
     .admin_sidenav {
@@ -8,7 +8,7 @@
         flex-direction: column;
         align-items: center;
         text-align: left;
-        background-color: #f7f7f7;
+        background-color: #ffffff;
         color: rgb(0, 0, 0);
         .admin_profile {
             display: flex;
@@ -90,6 +90,7 @@
     .admin_content {
         height: 100%;
         flex: auto;
+        background-color: #f6f6f6;
         .top_bar {
             margin: 2rem;
             display: flex;

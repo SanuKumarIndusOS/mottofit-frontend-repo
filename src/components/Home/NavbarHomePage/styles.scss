@@ -3,8 +3,8 @@
     height: 100px;
     margin-top: -2em;
     align-items: center;
-    position: relative;
-
+    position: sticky;
+    top: 0;
     background-color: transparent;
     @media screen and (max-width: 1024px) {
         margin: 0;
@@ -72,15 +72,20 @@
             align-items: center;
             .input-item {
                 input {
-                    width: 229px;
+                    width: 250px;
                     height: 40px;
                     border: 1.5px solid var(--unnamed-color-53bfd2);
                     border: 2px solid #53bfd2;
                     border-radius: 30px;
                     opacity: 1;
+                    font-size: 18px;
+                    font-family: Montserrat;
+                    letter-spacing: 0px;
+                    color: #161616;
+                    opacity: 1;
                 }
                 input::placeholder {
-                    padding: 0 1em;
+                    padding: 0 0em 0 0.5em;
                 }
                 .search-icon {
                     width: 20px;
@@ -182,15 +187,17 @@
             align-items: center;
             .input-item {
                 input {
-                    width: 229px;
+                    width: 250px;
                     height: 40px;
                     border: 1.5px solid var(--unnamed-color-53bfd2);
                     border: 2px solid #53bfd2;
                     border-radius: 30px;
                     opacity: 1;
+                    font-size: 18px;
+                    font-family: Montserrat;
                 }
                 input::placeholder {
-                    padding: 0 1em;
+                    padding: 0 0 0 0.5em;
                 }
                 .search-icon {
                     width: 20px;
