@@ -3,6 +3,7 @@ import { TrainerData } from "../TrainersDetails/TrainerData";
 import "./styles.sass";
 import onHoverImage from "../../../assets/FindTrainer/onHover.svg";
 import onImage from "../../../assets/SignUp/Arrow.svg";
+import {Link} from  'react-router-dom'
 // import Arrow from "../../../assests/SignUp/ArrowSecondary.svg";
 
 
@@ -53,9 +54,7 @@ const TrainerCardOutside = () => {
                                 <div className="card-body">
                                     <h3>{data.name}</h3>
                                     <h6>{data.role}</h6>
-                                    <ReadMore maxChar={110}>
-                                        {data.describe}
-                                    </ReadMore>
+                                    <Link to='/trainer-profile'>Read More</Link>
                                 </div>
                                 <div className="card-button">
                                     <button

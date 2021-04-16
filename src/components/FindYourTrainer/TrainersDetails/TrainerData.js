@@ -5,7 +5,7 @@ export const TrainerData = [
         name: "John Doe",
         role: "Boxing, Strength & Hiit",
         describe:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem psum has been the industry’s standard. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem psum has been the industry’s standard.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem psum has.",
         book: "Book a session",
         price: " $50",
     },
