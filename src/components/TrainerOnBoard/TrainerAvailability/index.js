@@ -58,22 +58,22 @@ const TrainerAvailability = (props) => {
 
     console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
 
-    console.log(props.location.state[0]["areaOfExpertise"]);
+    console.log();
 
     let data = {
-      location: "chennai",
-      DOB: "1995-05-15",
-      gender: "Male",
-      instagramProfile: "https://instagram.com/kljdhpersonaltrainer",
+      location: props.location.state[0]["location"],
+      DOB: props.location.state[0]["dob"],
+      gender:  props.location.state[0]["gender"],
+      instagramProfile:  props.location.state[0]["instagram"],
       facebookProfile: "https://facebook.com/kljdhpersonaltrainer",
       linkedInProfile: "https://linkedin.com/kljdhpersonaltrainer",
       referalCode: "gh678lJJ",
-      areaOfExpertise: "Yoga",
+      areaOfExpertise: props.location.state[0]["areaOfExpertise"],
       trainingAvailability: "Fulltime",
-      preferedTrainingMode: "Online",
-      willingToTravel: "0",
-      servicableLocation: "Chennai",
-      currentExperience: { workMode: "OwnGym", workLocation: "Chennai" },
+      preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
+      willingToTravel: trainerAvailabilityData.willingToTravel,
+      servicableLocation: trainerAvailabilityData.servicableLocation,
+      currentExperience: props.location.state[1]["currentExperience"],
       previousExperience: [
         {
           workMode: "S FITNESS & CROSSFIT STUDIO",
@@ -81,13 +81,12 @@ const TrainerAvailability = (props) => {
           yearsOfExperience: "2 Years",
         },
       ],
-      trainingProcess:
-        "Will work with clients, either in a small group setting or one-on-one, on their fitness goals, which includes improving a client's muscular endurance, strengthening a client's cardiovascular capabilities, and increasing a client's physical flexibility.",
+      trainingProcess: props.location.state[1]["trainingProcess"],
       profilePicture: "img location",
-      interestInMotto: "",
-      clientAssessment: "",
+      interestInMotto: props.location.state[1]["interestInMotto"],
+      clientAssessment: props.location.state[1]["clientAssessment"],
       trainingFacility: true,
-      trainingFacilityLocation: ["Chennai"],
+      trainingFacilityLocation: [trainerAvailabilityData.trainingFacilityLocation],
       description: "",
       myMotto: "",
       images: ["img Location"],
@@ -98,9 +97,9 @@ const TrainerAvailability = (props) => {
       },
       insuranceInformation: {},
       stripeId: "",
-      hoursPerWeek: 3,
-      serviceableCity: "Chennai",
-      websiteLink: "fdfl",
+      hoursPerWeek: trainerAvailabilityData.hoursPerWeek,
+      serviceableCity: trainerAvailabilityData.servicableLocation,
+      websiteLink: props.location.state[0]["websiteURL"],
       youtubeLink: "jfjdld",
       certification: [
         { certificateName: "", certfiedYear: "", certification: "" },
@@ -143,7 +142,8 @@ const TrainerAvailability = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-      })
+      
+    })
       .catch((error) => {
         console.error("Error:", error);
       });
