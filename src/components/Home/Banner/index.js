@@ -11,35 +11,32 @@ import TrainerVerticalIcon from "../../../assets/Home/Banner/SearchBar/Training 
 import Dropdown from "./Dropdown";
 
 // import SearchButton from "../../../assests/Home/Banner/Search Button.png";
-const Banner = () => {
-    const items = [
-        {
-            id: 0,
-            data: "Yoga",
-        },
-        {
-            id: 1,
-            data: "Strength & hiit",
-        },
-        {
-            id: 2,
-            data: "Pilates",
-        },
-        {
-            id: 3,
-            data: "Boxing",
-        },
-    ];
 
+const items = [
+    {
+        id: 0,
+        data: "Yoga",
+    },
+    {
+        id: 1,
+        data: "Strength & hiit",
+    },
+    {
+        id: 2,
+        data: "Pilates",
+    },
+    {
+        id: 3,
+        data: "Boxing",
+    },
+];
+const Banner = () => {
+ 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const onClickHandle = () => {
         setSelectedDate(selectedDate);
         console.log(selectedDate);
     };
-
-    // const toggleDropDown = () => {
-    //     setCustomDropdown((prev) => !prev);
-    // };
     return (
         <div className="background">
             <div className="cntr_cotainer">
@@ -72,7 +69,7 @@ const Banner = () => {
                             <div className="custom_dropdown">
                                     <h2>Select a Category</h2>
                                 </div>
-                                {/* <Dropdown title="select ur" items={items} className='select' /> */}
+                                
                                 <img src={SheduleIcon} ali="icon" />
                             </div>
                         </div>
@@ -100,6 +97,7 @@ const Banner = () => {
                                 <div className="custom_dropdown">
                                     <h2>Select a Category</h2>
                                 </div>
+                                {/* <Dropdown title="Select a Category" items={items} className='select' /> */}
                                 <img src={AvailabilityIcon} ali="icon" />
                             </div>
                         </div>
@@ -112,6 +110,7 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 };
