@@ -93,12 +93,13 @@
 
                 .inputs_platform {
                     display: flex;
-                    justify-content: space-around;
-
+                   
                     button {
                         border-radius: 50px;
                         padding: 0.5em 2.5em;
                         border: 0;
+                        margin-right: 20px;
+
                     }
                     :active {
                         background-color: #000;

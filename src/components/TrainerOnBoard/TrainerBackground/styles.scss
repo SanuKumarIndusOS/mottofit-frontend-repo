@@ -72,8 +72,16 @@
                 margin: 1em 0 2em 0;
 
                 .inputs_experience {
-                    label {
-                        margin-right: 3em;
+                    // label {
+                    //     margin-right: 3em;
+                    // }
+
+                    display: flex;
+                    align-items: center;
+
+                    .checkbox_label
+                    {
+                       color: #2C2C2C;
                     }
                 }
             }

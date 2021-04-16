@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
@@ -7,253 +7,283 @@ import { Link, useHistory } from "react-router-dom";
 import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
 import ArrowNext from "../../../assets/SVG/Arrow Next.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import Checkbox from "@material-ui/core/Checkbox";
+/* areaOfExpertise
+   previousExperience
+   currentExperience
+   interestInMotto
+   trainingProcess
+   clientAssessment
+   "myMotto":"",
+   certification
 
+   hoursPerWeek
+   preferedTrainingMode
+//    serviceableCity
+   servicableLocation
+   trainingFacilityLocation
+   willingToTravel
+
+
+   
+*/
 
 const GreenRadio = withStyles({
-    root: {
-        "&$checked": {
-            color: cyan[600],
-        },
+  root: {
+    "&$checked": {
+      color: cyan[600],
     },
-    checked: {},
+  },
+  checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-const TrainerBackground = () => {
-    const history = useHistory();
+const TrainerBackground = (props) => {
 
-    const handleTrainerAvailability = () => {
-        history.push("/trainer-avaliability");
-    };
+  const [currentExperiencee, setCurrentExperiencee] = useState({
+    workMode: "",
+    workLocation: "",
+  });
+  const [trainerbackgroundData, setTrainerbackgroundData] = useState({
+    areaOfExpertise: "",
+    previousExperience: [],
+    certification: [],
+    clientAssessment: "",
+    trainingProcess: "",
+    interestInMotto: "",
+    currentExperience: '', 
+  });
 
-    const [selectedValue, setSelectedValue] = useState("a");
-    const [inputFields, setInputField] = useState([
-        {
-            orgnization: "",
-            job: "",
-            years: "",
-        },
+ 
+
+  const [checkstate, setCheckState] = React.useState("");
+
+  // useEffect(() => {
+  //   // Update the document title using the browser API
+  //   console.log("trainerBackground", props.location.state);
+  // });
+
+  const history = useHistory();
+  const AboutTrainer = props.location.state
+
+  const handleTrainerAvailability = (event) => {
+    console.log(trainerbackgroundData,  props.location.state);
+    // history.push("/trainer-avaliability");
+    event.preventDefault();
+  };
+
+  const [selectedValue, setSelectedValue] = useState("a");
+  const [inputFields, setInputField] = useState([
+    {
+      orgnization: "",
+      job: "",
+      years: "",
+    },
+  ]);
+
+  const [inputCertificatesFields, setinputCertificatesField] = useState([
+    {
+      certificate: "",
+      year: "",
+      upload: "",
+    },
+  ]);
+  const handleChangeInput = (index, event) => {
+    const values = [...inputFields];
+    values[index][event.target.name] = event.target.value;
+    setInputField(values);
+
+    console.log(inputFields);
+
+    setTrainerbackgroundData({
+      ...trainerbackgroundData,
+      previousExperience: inputFields,
+    });
+  };
+  const handleChangeCertificateInput = (index, event) => {
+    const values = [...inputCertificatesFields];
+    values[index][event.target.name] = event.target.value;
+    setinputCertificatesField(values);
+
+    // console.log(inputCertificatesFields);
+    setTrainerbackgroundData({
+      ...trainerbackgroundData,
+      certification: inputCertificatesFields,
+    });
+  };
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const handleAddFields = () => {
+    setInputField([...inputFields, { orgnization: "", job: "", years: "" }]);
+  };
+
+  const handleAddCertificateFields = () => {
+    setinputCertificatesField([
+      ...inputCertificatesFields,
+      { certificate: "", year: "", upload: "" },
     ]);
 
-    const [inputCertificatesFields, setinputCertificatesField] = useState([
-        {
-            certificate: "",
-            year: "",
-            upload: "",
-        },
-    ]);
-    const handleChangeInput = (index, event) => {
-        const values = [...inputFields];
-        values[index][event.target.name] = event.target.value;
-        setInputField(values);
-    };
-    const handleChangeCertificateInput = (index, event) => {
-        const values = [...inputCertificatesFields];
-        values[index][event.target.name] = event.target.value;
-        setinputCertificatesField(values);
-    };
+    console.log(inputCertificatesFields);
+  };
 
-    const handleChange = (event) => {
-        setSelectedValue(event.target.value);
-    };
+  // const handleRemoveFields = (index) => {
+  //     const values = [...inputFields];
+  //     values.splice(index, 1);
+  //     setInputField(values);
+  // };
 
-    const handleAddFields = () => {
-        setInputField([
-            ...inputFields,
-            { orgnization: "", job: "", years: "" },
-        ]);
-    };
+  return (
+    <>
+      <div className="container">
+        <div className="main_wrapper">
+          <div className="links_wrapper">
+            <div className="outter_links">
+              <img src={ArrowBack} alt="icon" />
+              <div className="inner_links">
+                <Link to="/aboutTrainer"> Back to About You</Link>
+                <div></div>
+              </div>
+            </div>
+            <div className="outter_links">
+              <div className="inner_links">
+                <Link to="/trainer-avaliability">Go to Avaliability</Link>
+                <div></div>
+              </div>
+              <img src={ArrowNext} alt="icon" />
+            </div>
+          </div>
+          <div className="wrapper_inneritems">
+            <h1>Detail out your training background</h1>
 
-    const handleAddCertificateFields = () => {
-        setinputCertificatesField([
-            ...inputCertificatesFields,
-            { certificate: "", year: "", upload: "" },
-        ]);
-    };
+            <p>
+              We want to know it all! Share with us your experience & philosophy
+              as a trainer to progress in your application process and join the
+              Motto Family.{" "}
+            </p>
+            <div className="contents_wrapper">
+              <form>
+                <div className="item1">
+                  <h6>
+                    Tell us what you train! Select all the verticals that apply
+                  </h6>
+                  <div className="inputs_experience">
+                    <Checkbox
+                      value={trainerbackgroundData.areaOfExpertise}
+                      onChange={(e) => {
+                        setTrainerbackgroundData({
+                          ...trainerbackgroundData,
+                          areaOfExpertise: "Strength & HIIT",
+                        });
 
-    // const handleRemoveFields = (index) => {
-    //     const values = [...inputFields];
-    //     values.splice(index, 1);
-    //     setInputField(values);
-    // };
+                        console.log(trainerbackgroundData);
+                      }}
 
-    return (
-        <>
-            <div className="container">
-                <div className="main_wrapper">
-                    <div className="links_wrapper">
-                        <div className="outter_links">
-                            <img src={ArrowBack} alt="icon" />
-                            <div className="inner_links">
-                                <Link to="/aboutTrainer">
-                                    {" "}
-                                    Back to About You
-                                </Link>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div className="outter_links">
-                            <div className="inner_links">
-                                <Link to="/trainer-avaliability">
-                                    Go to Avaliability
-                                </Link>
-                                <div></div>
-                            </div>
-                            <img src={ArrowNext} alt="icon" />
+                      // onChange={() => {
+                      //   setCheckState("Strength & HIIT");
+                      // }}
+                    />
+                    <div className="checkbox_label">Strength & HIIT</div>
+                    <Checkbox
+                      value={trainerbackgroundData.areaOfExpertise}
+                      onChange={(e) => {
+                        setTrainerbackgroundData({
+                          ...trainerbackgroundData,
+                          areaOfExpertise: "Boxing",
+                        });
 
-                        </div>
-                    </div>
-                    <div className="wrapper_inneritems">
-                        <h1>Detail out your training background</h1>
-                        <p>
-                            We want to know it all! Share with us your
-                            experience & philosophy as a trainer to progress in
-                            your application process and join the Motto Family.{" "}
-                        </p>
-                        <div className="contents_wrapper">
-                            <form>
-                                <div className="item1">
-                                    <h6>
-                                        Tell us what you train! Select all the
-                                        verticals that apply
-                                    </h6>
-                                    <div className="inputs_experience">
-                                        <GreenRadio
-                                            checked={selectedValue === "a"}
-                                            onChange={handleChange}
-                                            value="a"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "a" }}
-                                        />
-                                        <label>Strength & Hitt</label>
-                                        <GreenRadio
-                                            checked={selectedValue === "b"}
-                                            onChange={handleChange}
-                                            value="b"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "b" }}
-                                        />
-                                        <label>Boxing</label>
-                                        <GreenRadio
-                                            checked={selectedValue === "c"}
-                                            onChange={handleChange}
-                                            value="c"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "C" }}
-                                        />
-                                        <label>Yoga</label>
-                                        <GreenRadio
-                                            checked={selectedValue === "d"}
-                                            onChange={handleChange}
-                                            value="d"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "d" }}
-                                        />
-                                        <label>Pilates</label>
-                                    </div>
-                                </div>
-                                <div className="item2">
-                                    <h6>
-                                        Prior training experience or gym
-                                        affiliations
-                                    </h6>
-                                    {inputFields.map((input, index) => {
-                                        return (
-                                            <div
-                                                className="inputs_experience"
-                                                key={index}
-                                            >
-                                                <input
-                                                    type="text"
-                                                    placeholder="Name of the Orgnisation/GYM"
-                                                    value={input.orgnization}
-                                                    name="orgnization"
-                                                    onChange={(event) =>
-                                                        handleChangeInput(
-                                                            index,
-                                                            event
-                                                        )
-                                                    }
-                                                />
-                                                <input
-                                                    type="text"
-                                                    placeholder="Job Title"
-                                                    value={input.job}
-                                                    name="job"
-                                                    onChange={(event) =>
-                                                        handleChangeInput(
-                                                            index,
-                                                            event
-                                                        )
-                                                    }
-                                                />
-                                                <input
-                                                    type="Number"
-                                                    placeholder="Years"
-                                                    name="years"
-                                                    value={input.years}
-                                                    onChange={(event) =>
-                                                        handleChangeInput(
-                                                            index,
-                                                            event
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        );
-                                    })}
+                        console.log(trainerbackgroundData);
+                      }}
+                    />
+                    <div className="checkbox_label">Boxing</div>
+                    <Checkbox
+                      value={trainerbackgroundData.areaOfExpertise}
+                      onChange={(e) => {
+                        setTrainerbackgroundData({
+                          ...trainerbackgroundData,
+                          areaOfExpertise: "Yoga",
+                        });
+                      }}
+                    />
+                    <div className="checkbox_label">Yoga</div>
+                    <Checkbox
+                      value={trainerbackgroundData.areaOfExpertise}
+                      onChange={(e) => {
+                        setTrainerbackgroundData({
+                          ...trainerbackgroundData,
+                          areaOfExpertise: "Pilates",
+                        });
+                      }}
+                    />
+                    <div className="checkbox_label">Pilates</div>
+                  </div>
+                </div>
+                <div className="item2">
+                  <h6>Prior training experience or gym affiliations</h6>
+                  {inputFields.map((input, index) => {
+                    return (
+                      <div className="inputs_experience" key={index}>
+                        <input
+                          type="text"
+                          placeholder="Name of the Orgnisation/GYM"
+                          value={input.orgnization}
+                          name="orgnization"
+                          onChange={(event) => handleChangeInput(index, event)}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Job Title"
+                          value={input.job}
+                          name="job"
+                          onChange={(event) => handleChangeInput(index, event)}
+                        />
+                        <input
+                          type="Number"
+                          placeholder="Years"
+                          name="years"
+                          value={input.years}
+                          onChange={(event) => handleChangeInput(index, event)}
+                        />
+                      </div>
+                    );
+                  })}
 
-                                    <h5 onClick={() => handleAddFields()}>
-                                        + Add Work Experience
-                                    </h5>
-                                    {/* {inputFields ? (
+                  <h5 onClick={() => handleAddFields()}>
+                    + Add Work Experience
+                  </h5>
+                  {/* {inputFields ? (
                                         <span
                                             onClick={() => handleRemoveFields()}
                                         >
                                             Remove
                                         </span>
                                     ) : null} */}
-                                </div>
-                                <div className="item3">
-                                    <h6>Certifications</h6>
-                                    {inputCertificatesFields.map(
-                                        (inputCertificatesField, index) => (
-                                            <div
-                                                className="inputs_background"
-                                                key={index}
-                                            >
-                                                <input
-                                                    type="text"
-                                                    placeholder="Certification Title"
-                                                    value={
-                                                        inputCertificatesField.certificate
-                                                    }
-                                                    name="certificate"
-                                                    onChange={(event) =>
-                                                        handleChangeCertificateInput(
-                                                            index,
-                                                            event
-                                                        )
-                                                    }
-                                                />
-                                                <input
-                                                    type="text"
-                                                    placeholder="Year you were Certified"
-                                                    value={
-                                                        inputCertificatesField.year
-                                                    }
-                                                    name="year"
-                                                    onChange={(event) =>
-                                                        handleChangeCertificateInput(
-                                                            index,
-                                                            event
-                                                        )
-                                                    }
-                                                />
-                                                {/* <input
+                </div>
+                <div className="item3">
+                  <h6>Certifications</h6>
+                  {inputCertificatesFields.map(
+                    (inputCertificatesField, index) => (
+                      <div className="inputs_background" key={index}>
+                        <input
+                          type="text"
+                          placeholder="Certification Title"
+                          value={inputCertificatesField.certificate}
+                          name="certificate"
+                          onChange={(event) =>
+                            handleChangeCertificateInput(index, event)
+                          }
+                        />
+                        <input
+                          type="text"
+                          placeholder="Year you were Certified"
+                          value={inputCertificatesField.year}
+                          name="year"
+                          onChange={(event) =>
+                            handleChangeCertificateInput(index, event)
+                          }
+                        />
+                        {/* <input
                                                     type="file"
                                                     name="file"
                                                     value={
@@ -267,101 +297,138 @@ const TrainerBackground = () => {
                                                         )
                                                     }
                                                 /> */}
-                                                {/* <a className="checkarrow">
+                        {/* <a className="checkarrow">
                                                     <ArrowHover />
                                                 </a> */}
-                                            </div>
-                                        )
-                                    )}
+                      </div>
+                    )
+                  )}
 
-                                    <h5 onClick={handleAddCertificateFields}>
-                                        + Add Certificate's
-                                    </h5>
-                                </div>
-                                <div className="item4">
-                                    <h6>
-                                        Are you currently enrolled in any
-                                        continued education programs?
-                                    </h6>
-                                    <div className="inputs_experience">
-                                        <textarea
-                                            type="text"
-                                            name="comment"
-                                            placeholder="Tell us about any awaiting certifications "
-                                        />
-                                    </div>
-                                </div>
-                                <div className="item5">
-                                    <h6>
-                                        Are you currently enrolled in any
-                                        continued education programs?
-                                    </h6>
-                                    <div className="inputs_experience">
-                                        <input
-                                            type="text"
-                                            placeholder="Select your Answer"
-                                        />
-                                        <input
-                                            type="text"
-                                            placeholder="Select your Location"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="item6">
-                                    <h6>
-                                        Why are you interested in joining Motto?
-                                    </h6>
-                                    <div className="inputs_experience">
-                                        <textarea
-                                            type="text"
-                                            name="comment"
-                                            placeholder="Tell us all about it in not more than 150 words"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="item6">
-                                    <h6>
-                                        Describe how you assess a client before
-                                        their first session?
-                                    </h6>
-                                    <div className="inputs_experience">
-                                        <textarea
-                                            type="text"
-                                            name="comment"
-                                            placeholder="Tell us all about it in not more than 150 words"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="item6">
-                                    <h6>
-                                        Describe your training process &
-                                        philosophy
-                                    </h6>
-                                    <div className="inputs_experience">
-                                        <textarea
-                                            type="text"
-                                            name="comment"
-                                            placeholder="Tell us all about it in not more than 150 words"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="submit_button">
-                                    <button
-                                        type="submit"
-                                        onClick={handleTrainerAvailability}
-                                    >
-                                        Continue
-                                      <ArrowHoverBlacked/>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                  <h5 onClick={handleAddCertificateFields}>
+                    + Add Certificate's
+                  </h5>
                 </div>
+                <div className="item4">
+                  <h6>
+                    Are you currently enrolled in any continued education
+                    programs?
+                  </h6>
+                  <div className="inputs_experience">
+                    <textarea
+                      type="text"
+                      name="comment"
+                      placeholder="Tell us about any awaiting certifications "
+                    />
+                  </div>
+                </div>
+                <div className="item5">
+                  <h6>Do you currently own/work at a gym?</h6>
+                  <div className="inputs_experience">
+                    <input
+                      type="text"
+                      placeholder="Role"
+                      value={currentExperiencee.workMode}
+                      onChange={(e) =>
+                        {setCurrentExperiencee({
+                          ...currentExperiencee,
+                          workMode: e.target.value,
+                        })
+                        
+                        // setTrainerbackgroundData({...trainerbackgroundData, currentExperience: currentExperiencee})
+                      }
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="Select your Location"
+                      value={currentExperiencee.workLocation}
+                      onChange={(e) =>
+                       { setCurrentExperiencee({
+                          ...currentExperiencee,
+                          workLocation: e.target.value,
+                        })
+                        setTrainerbackgroundData({...trainerbackgroundData, currentExperience: currentExperiencee})
+                      }
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="item6">
+                  <h6>Why are you interested in joining Motto?</h6>
+                  <div className="inputs_experience">
+                    <textarea
+                      type="text"
+                      name="comment"
+                      placeholder="Tell us all about it in not more than 150 words"
+                      value={trainerbackgroundData.interestInMotto}
+                      onChange={(e) =>
+                        setTrainerbackgroundData({
+                          ...trainerbackgroundData,
+                          interestInMotto: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="item6">
+                  <h6>
+                    Describe how you assess a client before their first session?
+                  </h6>
+                  <div className="inputs_experience">
+                    <textarea
+                      type="text"
+                      name="comment"
+                      placeholder="Tell us all about it in not more than 150 words"
+                      value={trainerbackgroundData.clientAssessment}
+                      onChange={(e) =>
+                        setTrainerbackgroundData({
+                          ...trainerbackgroundData,
+                          clientAssessment: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="item6">
+                  <h6>Describe your training process & philosophy</h6>
+                  <div className="inputs_experience">
+                    <textarea
+                      type="text"
+                      name="comment"
+                      placeholder="Tell us all about it in not more than 150 words"
+                      value={trainerbackgroundData.trainingProcess}
+                      onChange={(e) =>
+                        setTrainerbackgroundData({
+                          ...trainerbackgroundData,
+                          trainingProcess: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="submit_button">
+                   <button type="submit" > 
+                  <Link style={{textDecoration:"none", color:"#FFFFFF"}}
+                  type="submit"
+                  //  onClick={handleTrainerAvailability}
+                  to={{
+                    pathname: "/trainer-avaliability",
+                    state: [trainerbackgroundData, AboutTrainer],
+                  }}
+                >
+                    Continue
+                    <ArrowHoverBlacked />
+                  </Link>
+                  </button>
+                </div>
+              </form>
             </div>
-        </>
-    );
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default TrainerBackground;
