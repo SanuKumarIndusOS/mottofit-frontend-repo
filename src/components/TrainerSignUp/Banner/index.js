@@ -11,8 +11,7 @@ import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 const BannerTrainer = () => {
-
-    const history = useHistory()
+    const history = useHistory();
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -29,7 +28,7 @@ const BannerTrainer = () => {
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-    const [apiError, setApiError] = useState('')
+    const [apiError, setApiError] = useState("");
     const { register, errors, handleSubmit, watch } = useForm();
     const showPassword = () => {
         setPasswordShown(passwordShown ? false : true);
@@ -53,22 +52,28 @@ const BannerTrainer = () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json",
+                Accept: "application/json",
             },
             body: JSON.stringify(item),
         };
-        fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
+        fetch(
+            "http://doodlebluelive.com:2307/v1/trainer/sign-up",
+            requestOptions
+        )
             .then(async (response) => {
                 const data = await response.json();
                 localStorage.setItem("user-info", JSON.stringify(data));
                 if (response.ok) {
                     history.push("/aboutTrainer");
                 } else {
-                    setApiError('Email already registered',response.statusText);
+                    setApiError(
+                        "Email already registered",
+                        response.statusText
+                    );
                 }
             })
             .catch((error) => {
-                setApiError('Sorry, something went wrong.',error.message);
+                setApiError("Sorry, something went wrong.", error.message);
             });
     }
     return (
@@ -91,7 +96,8 @@ const BannerTrainer = () => {
                                 <div className="inner_items">
                                     <h3>Train with Motto!</h3>
                                     <p>
-                                    Sign up & apply to become a Motto Trainer
+                                        Sign up & apply to become a Motto
+                                        Trainer
                                     </p>
                                     <div className="form_items">
                                         <form>
@@ -145,19 +151,36 @@ const BannerTrainer = () => {
                                                     name="email"
                                                     onChange={onChangeValue}
                                                     ref={register({
-                                                        required:
-                                                            "This filed is required",
-                                                        minLength: {
-                                                            value: 2,
-                                                            message:
-                                                                "Enter a valid name",
-                                                        },
+                                                        pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
+                                                        required: true,
+                                                        minLength: 8,
                                                     })}
                                                 />
                                                 <img src={Mail} alt="icon" />
                                                 {errors.email && (
                                                     <span>
                                                         {errors.email.message}
+                                                    </span>
+                                                )}
+                                                {errors.email?.type ===
+                                                    "required" && (
+                                                    <span>
+                                                        This input is required
+                                                    </span>
+                                                )}
+                                                {errors.email?.type ===
+                                                    "minLength" && (
+                                                    <span>
+                                                        This field should
+                                                        contain greater then 8
+                                                        charater
+                                                    </span>
+                                                )}
+                                                {errors.email?.type ===
+                                                    "pattern" && (
+                                                    <span>
+                                                        Please enter a valid
+                                                        email address
                                                     </span>
                                                 )}
                                             </div>
@@ -178,7 +201,10 @@ const BannerTrainer = () => {
                                                 <img src={Phone} alt="icon" />
                                                 {errors.phoneNumber && (
                                                     <span>
-                                                        {errors.phoneNumber.message}
+                                                        {
+                                                            errors.phoneNumber
+                                                                .message
+                                                        }
                                                     </span>
                                                 )}
                                                 {errors.phoneNumber?.type ===
@@ -319,8 +345,11 @@ const BannerTrainer = () => {
                                                     </span>
                                                 )}
                                             </div>
-                                        {apiError && <span className='errorMessage'>{apiError}</span>}
-
+                                            {apiError && (
+                                                <span className="errorMessage">
+                                                    {apiError}
+                                                </span>
+                                            )}
 
                                             <div className="submit_button">
                                                 <button
@@ -329,7 +358,7 @@ const BannerTrainer = () => {
                                                     )}
                                                 >
                                                     <p>Continue to Account</p>
-                                                    <ArrowHoverBlacked/>
+                                                    <ArrowHoverBlacked />
                                                 </button>
                                             </div>
                                         </form>
@@ -339,7 +368,7 @@ const BannerTrainer = () => {
 
                                         <Link to="/">
                                             Sign In now
-                                            <ArrowHover/>
+                                            <ArrowHover />
                                         </Link>
                                     </div>
                                 </div>

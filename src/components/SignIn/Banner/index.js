@@ -108,7 +108,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                                                 onChange={onChangeValue}
                                                 ref={register({
                                                     required:
-                                                        "This filed is required",
+                                                        "This field is required",
                                                     minLength: {
                                                         value: 2,
                                                         message:

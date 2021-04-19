@@ -101,7 +101,6 @@ const Home = () => {
                 </Route>
                 <Route path="/aboutTrainer" component={TrainerTracker} />
                 <Route path="/aboutTrainer" component={AboutTrainer} />
-                <Route path="/aboutTrainer" component={Footer} />
 
                 <Route exact path="/trainerbackground">
                     <NavBar toggle={toggle} />

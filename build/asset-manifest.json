@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.9606d1c3.chunk.css",
-    "main.js": "/static/js/main.b9328f1c.chunk.js",
-    "main.js.map": "/static/js/main.b9328f1c.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.47f80dc5.js",
-    "runtime-main.js.map": "/static/js/runtime-main.47f80dc5.js.map",
+    "main.css": "/static/css/main.4083144f.chunk.css",
+    "main.js": "/static/js/main.71715168.chunk.js",
+    "main.js.map": "/static/js/main.71715168.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1ae1ebb2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1ae1ebb2.js.map",
     "static/css/2.bbc5337f.chunk.css": "/static/css/2.bbc5337f.chunk.css",
-    "static/js/2.fe7181ae.chunk.js": "/static/js/2.fe7181ae.chunk.js",
-    "static/js/2.fe7181ae.chunk.js.map": "/static/js/2.fe7181ae.chunk.js.map",
-    "static/js/3.15890419.chunk.js": "/static/js/3.15890419.chunk.js",
-    "static/js/3.15890419.chunk.js.map": "/static/js/3.15890419.chunk.js.map",
+    "static/js/2.edc9ab7b.chunk.js": "/static/js/2.edc9ab7b.chunk.js",
+    "static/js/2.edc9ab7b.chunk.js.map": "/static/js/2.edc9ab7b.chunk.js.map",
+    "static/js/3.d124c4e3.chunk.js": "/static/js/3.d124c4e3.chunk.js",
+    "static/js/3.d124c4e3.chunk.js.map": "/static/js/3.d124c4e3.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.bbc5337f.chunk.css.map": "/static/css/2.bbc5337f.chunk.css.map",
-    "static/css/main.9606d1c3.chunk.css.map": "/static/css/main.9606d1c3.chunk.css.map",
-    "static/js/2.fe7181ae.chunk.js.LICENSE.txt": "/static/js/2.fe7181ae.chunk.js.LICENSE.txt",
+    "static/css/main.4083144f.chunk.css.map": "/static/css/main.4083144f.chunk.css.map",
+    "static/js/2.edc9ab7b.chunk.js.LICENSE.txt": "/static/js/2.edc9ab7b.chunk.js.LICENSE.txt",
     "static/media/styles.scss": "/static/media/Woman Image.482ef378.png",
     "static/media/Arrow 1.2a75d61e.svg": "/static/media/Arrow 1.2a75d61e.svg",
     "static/media/Arrow Back.d3693c0f.svg": "/static/media/Arrow Back.d3693c0f.svg",
@@ -93,10 +93,10 @@
     "static/media/tessa-wilson.b4101337.jpeg": "/static/media/tessa-wilson.b4101337.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.47f80dc5.js",
+    "static/js/runtime-main.1ae1ebb2.js",
     "static/css/2.bbc5337f.chunk.css",
-    "static/js/2.fe7181ae.chunk.js",
-    "static/css/main.9606d1c3.chunk.css",
-    "static/js/main.b9328f1c.chunk.js"
+    "static/js/2.edc9ab7b.chunk.js",
+    "static/css/main.4083144f.chunk.css",
+    "static/js/main.71715168.chunk.js"
   ]
 }

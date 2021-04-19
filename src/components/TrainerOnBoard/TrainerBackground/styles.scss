@@ -9,7 +9,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        margin-top: 2em;
+        margin: 2em 0;
         .outter_links {
             display: flex;
             align-items: center;
@@ -79,9 +79,8 @@
                     display: flex;
                     align-items: center;
 
-                    .checkbox_label
-                    {
-                       color: #2C2C2C;
+                    .checkbox_label {
+                        color: #2c2c2c;
                     }
                 }
             }

@@ -3,189 +3,285 @@ import "./styles.scss";
 import Instagram from "../../../assets/SVG/Insta Icon.svg";
 import Web from "../../../assets/SVG/Web Icon.svg";
 import DropDown from "../../../assets/SVG/Drop Down 4.svg";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
-
+import { useForm } from "react-hook-form";
+import Footer from "../../../components/common/Footer/index";
+import validation from "../Validation/validation";
 const AboutTrainer = () => {
-  //   const [location, setLocation] = useState("");
-  //   const [dob, setDob] = useState(0 - 0 - 0);
-  //   const [email, setEmail] = useState("");
-  //   const [gender, setGender] = useState("");
-  //   const [phone, setPhone] = useState("");
-  //   const [websiteURL, setWebsiteURL] = useState("");
-  //   const [instagram, setInstagram] = useState("");
+    //   const [location, setLocation] = useState("");
+    //   const [dob, setDob] = useState(0 - 0 - 0);
+    //   const [email, setEmail] = useState("");
+    //   const [gender, setGender] = useState("");
+    //   const [phone, setPhone] = useState("");
+    //   const [websiteURL, setWebsiteURL] = useState("");
+    //   const [instagram, setInstagram] = useState("");
 
-  const [aboutTrainerData, setAboutTrainerData] = useState({
-    location: "",
-    dob: "",
-    email: "",
-    gender: "",
-    phone: "",
-    websiteURL: "",
-    instagram: "",
-  });
+    const { register, errors, handleSubmit } = useForm();
 
-  const history = useHistory();
+    const [aboutTrainerData, setAboutTrainerData] = useState({
+        location: "",
+        dob: "",
+        email: "",
+        gender: "",
+        phone: "",
+        websiteURL: "",
+        instagram: "",
+    });
+    const [error, setError] = useState({});
 
-  const handleTrainerBackground = () => {
-    console.log(aboutTrainerData);
-    // history.push("/trainerbackground");
-  };
+    // const history = useHistory();
 
-  return (
-    <>
-      <div className="container main">
-        <div className="wrapper_about">
-          <h2>Tell us a little bit about you</h2>
-          <p>
-            *Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem ipsum has been the. *All these fields are mandatory.{" "}
-          </p>
-          <div className="">
-            <form className="wrapper_inputs">
-              <div className="wrapper_innerInput">
-                <label>Name*</label>
-                <input placeholder="Name" type="name" />
-              </div>
+    const handleTrainerBackground = () => {
+        // history.push("/trainerbackground");
+        console.log(aboutTrainerData);
+        setError(validation(aboutTrainerData));
+    };
 
-              <div className="wrapper_innerInput">
-                <label>Location*</label>
-                <input
-                  placeholder="Location"
-                  type="name"
-                  value={aboutTrainerData.location}
-                  onChange={(e) =>
-                    setAboutTrainerData({
-                      ...aboutTrainerData,
-                      location: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="wrapper_innerInput">
-                <label>Date of Birth*</label>
-                <input
-                  placeholder="DOB"
-                  type="date"
-                  value={aboutTrainerData.dob}
-                  onChange={(e) =>
-                    setAboutTrainerData({
-                      ...aboutTrainerData,
-                      dob: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="wrapper_innerInput">
-                <label>Gender*</label>
-                <div className="iconwrapper">
-                  <select
-                    required
-                    // name="gender"
-                    // id="gender"
-                    value={aboutTrainerData.gender}
-                    onChange={(e) =>
-                      setAboutTrainerData({
-                        ...aboutTrainerData,
-                        gender: e.target.value,
-                      })
-                    }
-                  >
-                    <option value="" disabled selected>
-                      Select your Gender
-                    </option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Others</option>
-                  </select>
-                  <img src={DropDown} alt="icon" />
+    return (
+        <>
+            <div className="container main">
+                <div className="wrapper_about">
+                    <h2>Tell us a little bit about you</h2>
+                    <p>
+                        *Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem ipsum has been the. *All
+                        these fields are mandatory.{" "}
+                    </p>
+                    <div className="">
+                        <form className="wrapper_inputs">
+                            <div className="wrapper_innerInput">
+                                <label>Name*</label>
+                                <input
+                                    placeholder="Name"
+                                    type="name"
+                                    name="name"
+                                    ref={register({
+                                        required: "This filed is required",
+                                        minLength: {
+                                            value: 2,
+                                            message: "Enter a valid name",
+                                        },
+                                    })}
+                                />
+                                {errors.name && (
+                                    <span>{errors.name.message}</span>
+                                )}
+                            </div>
+
+                            <div className="wrapper_innerInput">
+                                <label>Location*</label>
+                                <div className="iconwrapper">
+                                    <select
+                                        required
+                                        value={aboutTrainerData.location}
+                                        onChange={(e) =>
+                                            setAboutTrainerData({
+                                                ...aboutTrainerData,
+                                                location: e.target.value,
+                                            })
+                                        }
+                                        name="location"
+                                        ref={register({
+                                            required:
+                                                "Please select the location",
+                                        })}
+                                    >
+                                        <option value="" disabled selected>
+                                            Select your location
+                                        </option>
+                                        <option>New York</option>
+                                        <option>Miami</option>
+                                        <option>Hampton</option>
+                                        <option>Palm Beach</option>
+                                    </select>
+                                    <img src={DropDown} alt="icon" />
+                                </div>
+                                {errors.location && (
+                                    <span>{errors.location.message}</span>
+                                )}
+                            </div>
+                            <div className="wrapper_innerInput">
+                                <label>Date of Birth*</label>
+                                <input
+                                    placeholder="DOB"
+                                    type="date"
+                                    value={aboutTrainerData.dob}
+                                    onChange={(e) =>
+                                        setAboutTrainerData({
+                                            ...aboutTrainerData,
+                                            dob: e.target.value,
+                                        })
+                                    }
+                                    name="dob"
+                                    ref={register({
+                                        required: "Please select the DOB",
+                                    })}
+                                />
+                                {errors.dob && (
+                                    <span>{errors.dob.message}</span>
+                                )}
+                            </div>
+                            <div className="wrapper_innerInput">
+                                <label>Gender*</label>
+                                <div className="iconwrapper">
+                                    <select
+                                        required
+                                        // name="gender"
+                                        // id="gender"
+                                        value={aboutTrainerData.gender}
+                                        onChange={(e) =>
+                                            setAboutTrainerData({
+                                                ...aboutTrainerData,
+                                                gender: e.target.value,
+                                            })
+                                        }
+                                        name="gender"
+                                        ref={register({
+                                            required:
+                                                "Please select the gender",
+                                        })}
+                                    >
+                                        <option value="" disabled selected>
+                                            Select your Gender
+                                        </option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Others</option>
+                                    </select>
+                                    <img src={DropDown} alt="icon" />
+                                </div>
+                                {errors.gender && (
+                                    <span>{errors.gender.message}</span>
+                                )}
+                            </div>
+                            <div className="wrapper_innerInput">
+                                <label>Email*</label>
+                                <input
+                                    placeholder="Email"
+                                    type="email"
+                                    value={aboutTrainerData.email}
+                                    onChange={(e) =>
+                                        setAboutTrainerData({
+                                            ...aboutTrainerData,
+                                            email: e.target.value,
+                                        })
+                                    }
+                                    name="email"
+                                    ref={register({
+                                        pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
+                                        required: true,
+                                        minLength: 8,
+                                    })}
+                                />
+                                {/* {error.email && (<span>{error.email}</span>)} */}
+                                
+                                {errors.email?.type === "required" && (
+                                    <span>This input is required</span>
+                                )}
+                                {errors.email?.type === "minLength" && (
+                                    <span>
+                                        This field should contain greater then 8
+                                        charater
+                                    </span>
+                                )}
+                                {errors.email?.type === "pattern" && (
+                                    <span>
+                                        Please enter a valid email address
+                                    </span>
+                                )}
+                            </div>
+                            <div className="wrapper_innerInput">
+                                <label>Phone*</label>
+                                <input
+                                    placeholder="Phone Number"
+                                    type="phone"
+                                    value={aboutTrainerData.phone}
+                                    onChange={(e) =>
+                                        setAboutTrainerData({
+                                            ...aboutTrainerData,
+                                            phone: e.target.value,
+                                        })
+                                    }
+                                    name="phone"
+                                    ref={register({
+                                        pattern: /^[0-9]*$/i,
+                                        required: true,
+                                        minLength: 10,
+                                    })}
+                                />
+                                {errors.phone?.type === "required" && (
+                                    <span>This input is required</span>
+                                )}
+                                {errors.phone?.type === "minLength" && (
+                                    <span>
+                                        Phone Number should contain 10 digits
+                                    </span>
+                                )}
+                                {errors.phone?.type === "pattern" && (
+                                    <span>
+                                        Please enter a valid phone number
+                                    </span>
+                                )}
+                            </div>
+                            <div className="wrapper_innerInput">
+                                <label>Website</label>
+                                <div className="iconwrapper">
+                                    <input
+                                        placeholder="Add your website"
+                                        type="text"
+                                        value={aboutTrainerData.websiteURL}
+                                        onChange={(e) =>
+                                            setAboutTrainerData({
+                                                ...aboutTrainerData,
+                                                websiteURL: e.target.value,
+                                            })
+                                        }
+                                    />
+                                    <img src={Web} alt="icon" />
+                                </div>
+                            </div>
+                            <div className="wrapper_innerInput">
+                                <label>Instagram</label>
+                                <div className="iconwrapper">
+                                    <input
+                                        placeholder="Add your Instagram Handle"
+                                        type="text"
+                                        value={aboutTrainerData.instagram}
+                                        onChange={(e) =>
+                                            setAboutTrainerData({
+                                                ...aboutTrainerData,
+                                                instagram: e.target.value,
+                                            })
+                                        }
+                                    />
+                                    <img src={Instagram} alt="icon" />
+                                </div>
+                            </div>
+
+                            <div className="submit_button">
+                                <Link
+                                    type="submit"
+                                    to={{
+                                        pathname: "/trainerbackground",
+                                        state: aboutTrainerData,
+                                    }}
+                                    onClick={handleTrainerBackground}
+
+                                    //react hook form
+                                    // onClick={handleSubmit(handleTrainerBackground)}
+                                >
+                                    Continue
+                                    <ArrowHoverBlacked />
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </div>
-              <div className="wrapper_innerInput">
-                <label>Email*</label>
-                <input
-                  placeholder="Email"
-                  type="email"
-                  value={aboutTrainerData.email}
-                  onChange={(e) =>
-                    setAboutTrainerData({
-                      ...aboutTrainerData,
-                      email: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="wrapper_innerInput">
-                <label>Phone*</label>
-                <input
-                  placeholder="Phone Number"
-                  type="phone"
-                  value={aboutTrainerData.phone}
-                  onChange={(e) =>
-                    setAboutTrainerData({
-                      ...aboutTrainerData,
-                      phone: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="wrapper_innerInput">
-                <label>Website</label>
-                <div className="iconwrapper">
-                  <input
-                    placeholder="Add your website"
-                    type="text"
-                    value={aboutTrainerData.websiteURL}
-                    onChange={(e) =>
-                      setAboutTrainerData({
-                        ...aboutTrainerData,
-                        websiteURL: e.target.value,
-                      })
-                    }
-                  />
-                  <img src={Web} alt="icon" />
-                </div>
-              </div>
-              <div className="wrapper_innerInput">
-                <label>Instagram</label>
-                <div className="iconwrapper">
-                  <input
-                    placeholder="Add yor Instagram Handle"
-                    type="text"
-                    value={aboutTrainerData.instagram}
-                    onChange={(e) =>
-                      setAboutTrainerData({
-                        ...aboutTrainerData,
-                        instagram: e.target.value,
-                      })
-                    }
-                  />
-                  <img src={Instagram} alt="icon" />
-                </div>
-              </div>
-
-              <div className="submit_button">
-             
-                <Link
-                  type="submit"
-                  onClick={handleTrainerBackground}
-                  to={{
-                    pathname: "/trainerbackground",
-                    state: aboutTrainerData,
-                  }}
-                >
-                  Continue
-                  <ArrowHoverBlacked />
-                  {/* <ArrowBlackHover /> */}
-                </Link>
-                
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+            </div>
+            <Footer />
+        </>
+    );
 };
 
 export default AboutTrainer;
