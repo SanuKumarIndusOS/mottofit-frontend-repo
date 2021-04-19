@@ -70,22 +70,17 @@ const TrainerTracker = () => {
         <div className="wrapper_item container">
           <div className="items">
             {PeopleBarIcon}
-            {/* <p className="completed">About you</p> */}
             {ABout_you_text}
           </div>
-          {/* <img src={Arrow1} alt="icon" /> */}
           {Arrow_one}
           <div className="items">
             {TrainerBarIcon}
             {Training_background_text}
-            {/* <p className="active">Training background</p> */}
           </div>
-          {/* <img src={Arrow1} alt="icon" /> */}
           {Arrow_two}
           <div className="items">
             {ScheduleBarIcon}
             {Availability_text}
-            {/* <p className="inactive">Avaliability</p> */}
           </div>
         </div>
       </div>

@@ -30,6 +30,11 @@ import CustomizeSection from "../../components/HowItWork/Customize/index";
 import TrainerMotto from "../../components/HowItWork/TrainerMotto";
 import TrainerProfile from "../../components/TrainerProfile/Profile/index";
 import TrainerDashboard from "../../components/TrainerDashBoard/TrainerAdmin";
+import UserTracker from "../../components/UserBookSession/UserTrackerBar";
+import UserEventSchedular from "../../components/UserBookSession/UserSchedular";
+import UserBookSession from "../../components/UserBookSession/UserSessionType";
+import UserMottoPass from "../../components/UserBookSession/UserMottoPass";
+import UserPayments from "../../components/UserBookSession/UserPayments";
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -156,6 +161,25 @@ const Home = () => {
                
                 <Route  path="/trainer-dashboard/" component={TrainerDashboard} />
                 <Route  path="/trainer-dashboard/" component={Footer} />
+
+
+                <Route  path="/user-onboard/schedule" component={UserTracker} />
+                <Route  path="/user-onboard/schedule" component={UserEventSchedular} />
+
+
+                <Route  path="/user-onboard/book-session" component={UserTracker} />
+                <Route  path="/user-onboard/book-session" component={UserBookSession} />
+
+
+                <Route  path="/user-onboard/motto-pass" component={UserTracker} />
+                <Route  path="/user-onboard/motto-pass" component={UserMottoPass} />
+
+                <Route  path="/user-onboard/user-payments" component={UserTracker} />
+                <Route  path="/user-onboard/user-payments" component={UserPayments} />
+
+
+              
+
 
             </Router>
         </>
