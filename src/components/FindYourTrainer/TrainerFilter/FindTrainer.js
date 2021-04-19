@@ -14,7 +14,7 @@ const FindTrainer = () => {
 
     return (
         <>
-            <div className="card container">
+            <div className="card container" style={{border:"none"}}>
                 <div className="card-wrapper">
                     <div className="item1">
                         <h3>Location</h3>
