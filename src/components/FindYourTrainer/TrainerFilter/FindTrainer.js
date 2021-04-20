@@ -13,6 +13,8 @@ import { Schedule } from "@material-ui/icons";
 const FindTrainer = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  var Training_vertical = []
+
   const [DropdownState, setDropdownState] = useState(false);
   const [DropdownValue, setDropdownValue] = useState([]);
 
@@ -36,33 +38,34 @@ const FindTrainer = () => {
             className="boxing"
             onClick={() => {
               setddBoxingState(!ddBoxingState);
-              console.log(ddBoxingState, 'boxing');
+              console.log(ddBoxingState, "boxing");
+
+              
             }}
-          ></div>
+          >Boxing</div>
           <div
             className="pilates"
             onClick={() => {
               setddPilatesState(!ddPilatesState);
-              console.log(ddPilatesState, 'pilates');
+              console.log(ddPilatesState, "pilates");
             }}
-          ></div>
+          >Pilates</div>
         </div>
         <div className="dd_row_two">
           <div
             className="hiit"
             onClick={() => {
               setddHiitState(!ddHiitState);
-              console.log(ddHiitState, 'hiit');
-              
+              console.log(ddHiitState, "hiit");
             }}
-          ></div>
+          >hiit</div>
           <div
             className="yoga"
             onClick={() => {
               setddYogaState(!ddYogaState);
-              console.log(ddYogaState, 'yoga');
+              console.log(ddYogaState, "yoga");
             }}
-          ></div>
+          >yoga</div>
         </div>
       </div>
     );
@@ -76,6 +79,13 @@ const FindTrainer = () => {
     console.log(DropdownState);
   };
   console.log(selectedDate);
+
+  const search_action = () => 
+  {
+    console.log("search action");
+    var search_query;
+    
+  }
 
   return (
     <>
@@ -158,7 +168,7 @@ const FindTrainer = () => {
           {/* <LineBetween /> */}
 
           <div className="item5">
-            <div className="circle_search">
+            <div className="circle_search" onClick={search_action}>
               <BiSearch />
             </div>
           </div>
