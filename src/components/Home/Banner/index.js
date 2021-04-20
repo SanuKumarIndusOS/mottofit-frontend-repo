@@ -103,9 +103,9 @@ const Banner = () => {
                         </div>
                         <LineBetween />
                         <div className="item5">
-                            <div className="circle">
+                            <button className="circle">
                                 <BiSearch />
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>

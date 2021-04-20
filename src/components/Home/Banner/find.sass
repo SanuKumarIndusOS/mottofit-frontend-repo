@@ -3,37 +3,55 @@ $text-color: #161616
 $logo: #53BFD2
 $secondary-bg: #F8F8F8
 .card-box
-    width: 100%
     display: flex
     flex-direction: row
     align-items: center
     justify-content: center
+    width: 1190px
+    height: 100px
     border-radius: 50px
     padding: 0 4em
+    border: 2px solid #70707046
+    background: $primary-bg
 
     .card-wrapper
-        background: $primary-bg
-        width: 1100px
-        height: 100px
+        display: grid
+        grid-template-columns: auto auto auto auto auto
+        grid-template-rows: auto
+        grid-column-gap: 10px
+        align-items: center
+        justify-content: center
+        // background: $primary-bg
+        padding: 1em
         border-radius: 50px
-        border: 2px solid #70707046
+        border: none
         display: flex
         justify-content: center
         flex-direction: row
-        margin: 2em
 
         .item1, .item2, .item3, .item4
-            width: 50%
             text-align: left
-            padding: 0 0 0 1.5em
+            display: flex
+            flex-direction: column
+            align-items: flex-start
+            justify-content: center
+            padding: 0 0 0 1em
+            border: none
             h3
+                text-align: left
+                letter-spacing: 0px
+                color: #161616
+                text-transform: capitalize
+                opacity: 1
                 font-size: 18px
-                padding: 1em 1em 0 0.5em
-                color: $text-color
+                font-family: Montserrat
+                font-weight: 700
+
             .card-item
                 display: flex
                 align-items: center
-                padding: 0 0.5em
+                margin: 0
+                height: 33px
                 button
                     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-42) var(--unnamed-font-family-montserrat)
                     letter-spacing: var(--unnamed-character-spacing-0)
@@ -43,39 +61,52 @@ $secondary-bg: #F8F8F8
                     letter-spacing: 0px
                     color: #898989
                     opacity: 1
+                    background: transparent
                     outline: none
                     border: none
                     padding: 0 0.5em 0 0em
+                    margin: 0
                 button:focus
                     color: $logo
                 button:hover
                     color: $logo
-
+                input
+                    border: none
+                    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-42) var(--unnamed-font-family-montserrat)
+                    letter-spacing: var(--unnamed-character-spacing-0)
+                    color: var(--unnamed-color-898989)
+                    text-align: left
+                    font: normal normal normal 18px/42px Montserrat
+                    letter-spacing: 0px
+                    color: #898989
+                    opacity: 1
+                    width: 132px
+                    height: 24px
                 img
                     padding: 0 0.5em
                 .custom_dropdown
                     h2
                         width: 175px
-                        height: 24px
+                        height: 34px
                         font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-42) var(--unnamed-font-family-montserrat)
                         letter-spacing: var(--unnamed-character-spacing-0)
                         color: var(--unnamed-color-898989)
                         text-align: left
-                        font: normal normal normal 20px/42px Montserrat
+                        font: normal normal normal 18px/42px Montserrat
                         letter-spacing: 0px
                         color: #898989
                         opacity: 1
                         cursor: pointer
 
     .item5
-        display: flex
-        align-items: center
+        margin: 0
         .circle
             background: $logo
             border-radius: 100px
             width: 80px
             height: 80px
             display: flex
+            border: none
             align-items: center
             svg
                 display: flex

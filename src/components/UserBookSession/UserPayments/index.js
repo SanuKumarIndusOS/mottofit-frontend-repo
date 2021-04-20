@@ -12,11 +12,16 @@ import Footer from "../../common/Footer";
 import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
 
 const UserPayments = () => {
+
+
+
+    //for material ui radio buttom (temp)
     const [selectedValue, setSelectedValue] = React.useState("a");
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
     };
+    //
     return (
         <>
             <div className="user_payment_outer_container">
@@ -26,7 +31,7 @@ const UserPayments = () => {
                             <div className="outter_links">
                                 <img src={ArrowBack} alt="icon" />
                                 <div className="inner_links">
-                                    <Link to="/aboutTrainer">
+                                    <Link to="/user-onboard/motto-pass">
                                         {" "}
                                         Get a Motto Pass
                                     </Link>
