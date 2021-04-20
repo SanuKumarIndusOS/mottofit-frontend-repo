@@ -3,7 +3,7 @@ $text-color: #161616
 $logo: #53BFD2
 $secondary-bg: #F8F8F8
 .card
-    width: 100%
+    width: 1400px
     height: 250px
     display: flex
     flex-direction: row
@@ -12,25 +12,73 @@ $secondary-bg: #F8F8F8
 
     .card-wrapper
         // background: $primary-bg
-        width: 100%
+        width: 1400px
         height: 100px
-        border-radius: 50px
-        border: 2px solid #70707046
+        border-radius: 150px
+        border: none
+        box-shadow: 0px 3px 12px #DEDEDE;
         display: flex
-        justify-content: center
+        
         background: $secondary-bg
         flex-direction: row
 
+        .item1
+            
+            svg
+                bottom: 8px
+                position: relative
+                left: 5px
+        .item2
+            
+            cursor: pointer
+            user-select: none
+            img
+               position: relative
+               bottom: 5px
+               left: 5px
+        .item3
+            h3 
+              padding-left: 0px !important
+            img
+                position: relative
+                right: 9px  
+            input
+                margin-left: 0px !important
+                font-size: 20px 
+                color:  #898989
+                font-family: 'Montserrat'
+                font-weight: 600
+                
+        .item4
+            img
+                position: relative 
+                bottom: 9px
+                left: 5px       
+           
+                     
         .item1, .item2, .item3, .item4
-            width: 20%
+            margin-left: 25px
+            margin-right: 25px
+            width: 250px
+            p
+                margin-left: 10px
+                font-size: 20px 
+                color:  #898989
+                font-family: 'Montserrat'
+                font-weight: 600
             h3
                 font-size: 18px
                 padding: 1em 1em 0 1em
                 color: $text-color
                 text-align: left
+                font-family: 'Montserrat'
+                font-weight: 600
             .card-item
                 display: flex
                 align-items: center
+                position: relative
+                bottom: 5px
+
                 padding: 0 0.5em
                 input
                     width: 100%
@@ -41,11 +89,7 @@ $secondary-bg: #F8F8F8
                 &:nth-child(3)
                     width: 100%
 
-                svg
-                    margin: 0 0.5em
-                    align-items: center
-                    width: 27.08px
-                    height: 23.94px
+                
                 select
                     background: transparent
                     outline: none
@@ -55,11 +99,14 @@ $secondary-bg: #F8F8F8
     .item5
         display: flex
         align-items: center
-        .circle
+        
+        .circle_search
             background: $logo
             border-radius: 100px
             width: 80px
             height: 80px
+            position: absolute
+            right: 25px
             display: flex
             align-items: center
             svg
@@ -72,3 +119,51 @@ $secondary-bg: #F8F8F8
     display: flex
     align-items: center
     justify-content: center
+
+.box_3_active
+     display: block
+     height: 240px
+     width: 305px
+     background-color: grey
+     position: relative
+     right: 25px
+     top: 10px
+     box-shadow: 0px 3px 12px #1616160D
+     opacity: 1
+     display: flex
+     flex-direction: column
+     
+     
+
+.box_3_inactive
+    display: none
+    opacity: 0
+    
+
+.dd_row_one
+    flex: 1
+    background-color: black
+    display: flex
+
+.dd_row_two
+    flex: 1
+    background-color: grey
+    display: flex
+  
+.boxing
+    flex: 1
+    background-color: red
+
+
+.pilates
+    flex: 1 
+    background-color: green  
+
+.hiit
+   flex: 1 
+   background-color: blue  
+
+.yoga
+   flex: 1 
+   background-color: yellow  
+
