@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.bfa427ac.chunk.css",
-    "main.js": "/static/js/main.0c29bb3e.chunk.js",
-    "main.js.map": "/static/js/main.0c29bb3e.chunk.js.map",
+    "main.css": "/static/css/main.099314af.chunk.css",
+    "main.js": "/static/js/main.e8790b6a.chunk.js",
+    "main.js.map": "/static/js/main.e8790b6a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.d509bc5f.js",
     "runtime-main.js.map": "/static/js/runtime-main.d509bc5f.js.map",
     "static/css/2.bbc5337f.chunk.css": "/static/css/2.bbc5337f.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.363962ce.chunk.js.map": "/static/js/3.363962ce.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.bbc5337f.chunk.css.map": "/static/css/2.bbc5337f.chunk.css.map",
-    "static/css/main.bfa427ac.chunk.css.map": "/static/css/main.bfa427ac.chunk.css.map",
+    "static/css/main.099314af.chunk.css.map": "/static/css/main.099314af.chunk.css.map",
     "static/js/2.f58c305e.chunk.js.LICENSE.txt": "/static/js/2.f58c305e.chunk.js.LICENSE.txt",
     "static/media/styles.scss": "/static/media/Woman Image.482ef378.png",
     "static/media/Arrow 1.2a75d61e.svg": "/static/media/Arrow 1.2a75d61e.svg",
@@ -108,7 +108,7 @@
     "static/js/runtime-main.d509bc5f.js",
     "static/css/2.bbc5337f.chunk.css",
     "static/js/2.f58c305e.chunk.js",
-    "static/css/main.bfa427ac.chunk.css",
-    "static/js/main.0c29bb3e.chunk.js"
+    "static/css/main.099314af.chunk.css",
+    "static/js/main.e8790b6a.chunk.js"
   ]
 }

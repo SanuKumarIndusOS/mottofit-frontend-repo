@@ -1,16 +1,19 @@
 .navbar-sass {
     display: flex;
     height: 100px;
-    margin-top: -2em;
+    margin-top: -3em;
     align-items: center;
     position: sticky;
     top: 0;
+
     background-color: transparent;
     @media screen and (max-width: 1024px) {
         margin: 0;
         background-color: #fff;
     }
     .main_navbar {
+        margin-top: 2em;
+        padding: 5em 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -50,6 +53,8 @@
             width: 150px;
             height: 90px;
             opacity: 1;
+            position: relative;
+            left: 4pc;
 
             .defaultLogo {
                 padding: 1em;
@@ -59,6 +64,7 @@
                 height: 97px;
                 justify-content: center;
                 position: relative;
+                left: 2pc;
                 @media screen and (max-width: 1024px) {
                     width: 100px;
                     padding: 1em;
@@ -72,7 +78,8 @@
             align-items: center;
             .input-item {
                 input {
-                    width: 250px;
+                    width: 299px;
+
                     height: 40px;
                     border: 1.5px solid var(--unnamed-color-53bfd2);
                     border: 2px solid #53bfd2;
@@ -86,6 +93,11 @@
                 }
                 input::placeholder {
                     padding: 0 0em 0 0.5em;
+                    color: #161616;
+                    opacity: 1;
+                    font-size: 17px;
+                    font-family: Montserrat;
+                    font-weight: 600;
                 }
                 .search-icon {
                     width: 20px;
@@ -142,20 +154,20 @@
             justify-content: space-around;
             align-items: center;
             a {
-                padding: 0 0.5em !important;
-                text-decoration: none;
+                padding: 0 0.7em !important;
                 font: var(--unnamed-font-style-normal) normal
                     var(--unnamed-font-weight-medium)
                     var(--unnamed-font-size-17) / var(--unnamed-line-spacing-42)
                     var(--unnamed-font-family-montserrat);
                 letter-spacing: var(--unnamed-character-spacing-0);
-                color: var(--unnamed-color-2c2c2c);
+                color: var(--unnamed-color-898989);
                 text-align: center;
                 font: normal normal medium 17px/42px Montserrat;
                 letter-spacing: 0px;
-                color: #2c2c2c;
+                color: #898989;
                 text-transform: capitalize;
                 opacity: 1;
+                text-decoration: none;
             }
             @media screen and (max-width: 1024px) {
                 display: none;
@@ -171,6 +183,8 @@
             width: 150px;
             height: 87px;
             opacity: 1;
+            position: relative;
+            left: 2pc;
             .defaultLogo img {
                 padding: 1em;
                 margin-top: 1em !important;
@@ -187,17 +201,27 @@
             align-items: center;
             .input-item {
                 input {
-                    width: 250px;
+                    width: 299px;
                     height: 40px;
                     border: 1.5px solid var(--unnamed-color-53bfd2);
                     border: 2px solid #53bfd2;
                     border-radius: 30px;
                     opacity: 1;
-                    font-size: 18px;
+                    letter-spacing: 0px;
+                    font-size: 17px;
                     font-family: Montserrat;
+                    font-weight: 600;
+                    color: #161616;
+                    opacity: 1;
                 }
                 input::placeholder {
                     padding: 0 0 0 0.5em;
+                    letter-spacing: 0px;
+                    color: #161616;
+                    opacity: 1;
+                    font-size: 17px;
+                    font-family: Montserrat;
+                    font-weight: 600;
                 }
                 .search-icon {
                     width: 20px;

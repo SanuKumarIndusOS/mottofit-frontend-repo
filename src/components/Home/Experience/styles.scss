@@ -31,9 +31,9 @@
         .svgBG {
             position: relative;
             top: -490px;
-            right: -150px;
-            height: 230px;
-            width: 175px;
+            right: -200px;
+            width: 175px !important;
+            height: 229px !important;
             bottom: center;
             @media screen and (max-width: 1023px) {
                 display: none;
@@ -67,6 +67,10 @@
                 height: 310px;
                 margin: 0 1em;
                 flex-direction: column;
+                img {
+                    width: 270px;
+                    height: 450px;
+                }
 
                 @media screen and (max-width: 1023px) {
                     width: 40%;
@@ -75,6 +79,8 @@
 
                 .link_button {
                     display: flex;
+                    width: 270px;
+
                     text-transform: uppercase;
                     justify-content: flex-start !important;
                     align-items: center;
@@ -129,7 +135,7 @@
         width: 100%;
         align-items: flex-start;
         height: 500px;
-        margin-top: 7em !important;
+        margin-top: 15em !important;
 
         padding: 0 2em !important;
         @media screen and (max-width: 1023px) {
@@ -206,11 +212,11 @@
                 }
             }
         }
-        .right_container {
+        .right_container_home {
             display: grid;
             grid-template-columns: auto auto;
             grid-template-rows: auto;
-            grid-column-gap: 10px;
+            grid-column-gap: 50px;
             height: 550px;
             @media screen and (max-width: 1023px) {
                 grid-template-columns: auto;

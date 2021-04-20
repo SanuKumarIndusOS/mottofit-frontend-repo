@@ -26,40 +26,28 @@ export default class Experience extends Component {
                         </div>
                         <div className="image_Container">
                             <div className="image_strength_main">
-                                <img
-                                    src={strength_img}
-                                    alt={this.props.description}
-                                />
+                                <img src={strength_img} alt="image" />
                                 <Link to="/" className="link_button">
                                     Strength & hiit
                                     <ArrowHoverBlacked />
                                 </Link>
                             </div>
                             <div className="image_strength_main">
-                                <img
-                                    src={boxing_img}
-                                    alt={this.props.description}
-                                />
+                                <img src={boxing_img} alt="image" />
                                 <Link to="/" className="link_button">
                                     Boxing
                                     <ArrowHoverBlacked />
                                 </Link>
                             </div>
                             <div className="image_strength_main">
-                                <img
-                                    src={yoga_img}
-                                    alt={this.props.description}
-                                />
+                                <img src={yoga_img} alt="image" />
                                 <Link to="/" className="link_button">
                                     Yoga
                                     <ArrowHoverBlacked />
                                 </Link>
                             </div>
                             <div className="image_strength_main">
-                                <img
-                                    src={pilates_img}
-                                    alt={this.props.description}
-                                />
+                                <img src={pilates_img} alt="image" />
                                 <Link to="/" className="link_button">
                                     Pilates
                                     <ArrowHoverBlacked />
@@ -88,12 +76,12 @@ export default class Experience extends Component {
                             <div className="link">
                                 <div className="button-text">
                                     <Link to="/" className="btn">
-                                        Find Your Best Match <BlueHoverButton/>
+                                        Find Your Best Match <BlueHoverButton />
                                     </Link>
                                 </div>
                             </div>
                         </div>
-                        <div className="right_container">
+                        <div className="right_container_home">
                             <ExperienceParent
                                 icon={Icon1}
                                 description="Discover only the top training talent"

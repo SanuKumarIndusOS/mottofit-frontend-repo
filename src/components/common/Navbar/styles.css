@@ -53,6 +53,8 @@ nav {
 .logo-content1 img {
     padding: 1em 0;
     width: 100px;
+    position: relative;
+    left: 2pc;
 }
 .search-items1 {
     display: flex;
