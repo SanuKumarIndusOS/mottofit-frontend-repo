@@ -4,11 +4,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BiSearch } from "react-icons/bi";
 
-import Slash from "../../../assets/SVG/findTrainer/slash.svg";
+// import Slash from "../../../assets/SVG/findTrainer/slash.svg";
 import Weight from "../../../assets/SVG/findTrainer/weight.svg";
 import SheduleIcon from "../../../assets/Home/Banner/SearchBar/Shedule Icon.svg";
 import AvailabilityIcon from "../../../assets/Home/Banner/SearchBar/Availability Icon.svg";
-import { Schedule } from "@material-ui/icons";
+// import { Schedule } from "@material-ui/icons";
 
 const FindTrainer = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
