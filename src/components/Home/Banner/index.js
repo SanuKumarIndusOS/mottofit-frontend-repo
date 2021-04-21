@@ -9,33 +9,47 @@ import AvailabilityIcon from "../../../assets/Home/Banner/SearchBar/Availability
 import SheduleIcon from "../../../assets/Home/Banner/SearchBar/Shedule Icon.svg";
 import TrainerVerticalIcon from "../../../assets/Home/Banner/SearchBar/Training Vertical Icon.svg";
 import Dropdown from "./Dropdown";
+import DropdownAvailability from "./DropdownAvailability";
 
-// import SearchButton from "../../../assests/Home/Banner/Search Button.png";
-
-const items = [
-    {
-        id: 0,
-        data: "Yoga",
-    },
-    {
-        id: 1,
-        data: "Strength & hiit",
-    },
-    {
-        id: 2,
-        data: "Pilates",
-    },
-    {
-        id: 3,
-        data: "Boxing",
-    },
-];
 const Banner = () => {
- 
+    const [DropdownState, setDropdownState] = useState(false);
+    const [DropdownValue, setDropdownValue] = useState([]);
+
+    const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
+        false
+    );
+    const [DropdownAvailabilityValue, setDropdownAvailabilityValue] = useState(
+        []
+    );
     const [selectedDate, setSelectedDate] = useState(new Date());
     const onClickHandle = () => {
         setSelectedDate(selectedDate);
         console.log(selectedDate);
+    };
+    let DropdownTraining;
+    if (DropdownState) {
+        DropdownTraining = <Dropdown />;
+    } else {
+        <div>hello</div>;
+    }
+
+    let DropdownHomeAvailability;
+    if (DropdownAvailabilityState) {
+        DropdownHomeAvailability = <DropdownAvailability />;
+    } else {
+        <div>hello</div>;
+    }
+
+    const TriggerDropDownAvailability = () => {
+        setDropdownAvailabilityState(!DropdownAvailabilityState);
+        setDropdownAvailabilityValue("Boxing");
+        console.log(DropdownAvailabilityState);
+    };
+
+    const TriggerVerticalDropDown = () => {
+        setDropdownState(!DropdownState);
+        setDropdownValue("Boxing");
+        console.log(DropdownState);
     };
     return (
         <div className="background">
@@ -49,34 +63,41 @@ const Banner = () => {
                     </p>
                 </div>
                 <div className="card-box ">
-                    <div className="card-wrapper">
+                    <div className="card-wrapper_home">
                         <div className="item1">
                             <h3>Location</h3>
-                            <div className="card-item">
-                                <button className="location_item">
-                                    Virtual
-                                </button>
-                                <img src={Between} ali="icon" />
-                                <button className="location_item">
-                                    In Personal
-                                </button>
+                            <div className="card_item_home">
+                                <div className="custom_dropdown">
+                                    <button className="location_item">
+                                        Virtual
+                                    </button>
+                                    <img src={Between} ali="icon" />
+                                    <button className="location_item">
+                                        In Personal
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <LineBetween />
                         <div className="item2">
                             <h3>Training Vertical</h3>
-                            <div className="card-item">
-                            <div className="custom_dropdown">
+                            <div className="card_item_home">
+                                <div
+                                    className="custom_dropdown"
+                                    onClick={TriggerVerticalDropDown}
+                                >
                                     <h2>Select a Category</h2>
+                                    <img src={SheduleIcon} ali="icon" />
                                 </div>
-                                
-                                <img src={SheduleIcon} ali="icon" />
+                                <div className="home_dropdown">
+                                    {DropdownTraining}
+                                </div>
                             </div>
                         </div>
                         <LineBetween />
                         <div className="item3">
                             <h3>Schedule</h3>
-                            <div className="card-item">
+                            <div className="card_item_home_item3 mt-2">
                                 <DatePicker
                                     onChange={(date) => setSelectedDate(date)}
                                     selected={selectedDate}
@@ -85,20 +106,23 @@ const Banner = () => {
                                     showYearDropdown
                                     scrollableMonthYearDropdown
                                 ></DatePicker>
-
-                                <DropDownSVG onClick={onClickHandle} />
                                 <img src={TrainerVerticalIcon} ali="icon" />
                             </div>
                         </div>
                         <LineBetween />
                         <div className="item4">
                             <h3>Availability</h3>
-                            <div className="card-item">
-                                <div className="custom_dropdown">
+                            <div className="card_item_home">
+                                <div
+                                    className="custom_dropdown"
+                                    onClick={TriggerDropDownAvailability}
+                                >
                                     <h2>Select a Category</h2>
+                                    <img src={AvailabilityIcon} ali="icon" />
                                 </div>
-                                {/* <Dropdown title="Select a Category" items={items} className='select' /> */}
-                                <img src={AvailabilityIcon} ali="icon" />
+                                <div className="home_dropdown">
+                                    {DropdownHomeAvailability}
+                                </div>
                             </div>
                         </div>
                         <LineBetween />
@@ -110,7 +134,6 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
-            
         </div>
     );
 };

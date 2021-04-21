@@ -146,12 +146,6 @@ const FindTrainer = () => {
                         >
                             <img src={Weight} alt="icon" />
                             <p>Boxing</p>
-                            {/* <select className="grids">
-                <option value="Boxing">Boxinnng</option>
-                <option value="Pilates">Pilates</option>
-                <option value="Strength">Strength & hiit</option>
-                <option value="Yoga">Yoga</option>
-              </select> */}
                         </div>
                         {Dropdown}
                     </div>
