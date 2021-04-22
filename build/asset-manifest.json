@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.56f9ff1a.chunk.css",
-    "main.js": "/static/js/main.43e5270a.chunk.js",
-    "main.js.map": "/static/js/main.43e5270a.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.355d98a0.js",
-    "runtime-main.js.map": "/static/js/runtime-main.355d98a0.js.map",
-    "static/css/2.6a35941a.chunk.css": "/static/css/2.6a35941a.chunk.css",
-    "static/js/2.80d00fb3.chunk.js": "/static/js/2.80d00fb3.chunk.js",
-    "static/js/2.80d00fb3.chunk.js.map": "/static/js/2.80d00fb3.chunk.js.map",
-    "static/js/3.1356bf19.chunk.js": "/static/js/3.1356bf19.chunk.js",
-    "static/js/3.1356bf19.chunk.js.map": "/static/js/3.1356bf19.chunk.js.map",
+    "main.css": "/static/css/main.ebcad667.chunk.css",
+    "main.js": "/static/js/main.d6317a28.chunk.js",
+    "main.js.map": "/static/js/main.d6317a28.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.21d3179d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.21d3179d.js.map",
+    "static/css/2.bbc5337f.chunk.css": "/static/css/2.bbc5337f.chunk.css",
+    "static/js/2.d2aa9271.chunk.js": "/static/js/2.d2aa9271.chunk.js",
+    "static/js/2.d2aa9271.chunk.js.map": "/static/js/2.d2aa9271.chunk.js.map",
+    "static/js/3.dd6d702d.chunk.js": "/static/js/3.dd6d702d.chunk.js",
+    "static/js/3.dd6d702d.chunk.js.map": "/static/js/3.dd6d702d.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.6a35941a.chunk.css.map": "/static/css/2.6a35941a.chunk.css.map",
-    "static/css/main.56f9ff1a.chunk.css.map": "/static/css/main.56f9ff1a.chunk.css.map",
-    "static/js/2.80d00fb3.chunk.js.LICENSE.txt": "/static/js/2.80d00fb3.chunk.js.LICENSE.txt",
+    "static/css/2.bbc5337f.chunk.css.map": "/static/css/2.bbc5337f.chunk.css.map",
+    "static/css/main.ebcad667.chunk.css.map": "/static/css/main.ebcad667.chunk.css.map",
+    "static/js/2.d2aa9271.chunk.js.LICENSE.txt": "/static/js/2.d2aa9271.chunk.js.LICENSE.txt",
     "static/media/styles.scss": "/static/media/Woman Image.482ef378.png",
     "static/media/Arrow 1.2a75d61e.svg": "/static/media/Arrow 1.2a75d61e.svg",
     "static/media/Arrow Active.29c0a0c4.svg": "/static/media/Arrow Active.29c0a0c4.svg",
@@ -55,7 +55,6 @@
     "static/media/Location Icon.c8540d80.svg": "/static/media/Location Icon.c8540d80.svg",
     "static/media/Location Icon.cbb0b32d.svg": "/static/media/Location Icon.cbb0b32d.svg",
     "static/media/Logout Icon.97acadbd.svg": "/static/media/Logout Icon.97acadbd.svg",
-    "static/media/M Watermark.fd5fd8b5.png": "/static/media/M Watermark.fd5fd8b5.png",
     "static/media/Message Icon.9b7bba91.svg": "/static/media/Message Icon.9b7bba91.svg",
     "static/media/Miami Image.a63d3986.png": "/static/media/Miami Image.a63d3986.png",
     "static/media/Motto Logo Home.805f339a.svg": "/static/media/Motto Logo Home.805f339a.svg",
@@ -113,10 +112,18 @@
     "static/media/weight.3f4f4e3a.svg": "/static/media/weight.3f4f4e3a.svg"
   },
   "entrypoints": [
+<<<<<<< HEAD
     "static/js/runtime-main.355d98a0.js",
     "static/css/2.6a35941a.chunk.css",
     "static/js/2.80d00fb3.chunk.js",
     "static/css/main.56f9ff1a.chunk.css",
     "static/js/main.43e5270a.chunk.js"
+=======
+    "static/js/runtime-main.21d3179d.js",
+    "static/css/2.bbc5337f.chunk.css",
+    "static/js/2.d2aa9271.chunk.js",
+    "static/css/main.ebcad667.chunk.css",
+    "static/js/main.d6317a28.chunk.js"
+>>>>>>> f52671bd7cc95b980ad7a026ab29c08cfde0bc8f
   ]
 }

@@ -166,29 +166,30 @@ const Location = () => {
                         virtual training available anywhere!
                     </p>
                 </div>
+                <div className="slider_wrapper_container">
+                    <Slider {...settings}>
+                        {SlideData.map((slide, index) => {
+                            return (
+                                <div className="main-slide" key={index}>
+                                    <div className="slide-content">
+                                        <img
+                                            src={slide.image}
+                                            alt={slide.name}
+                                            className="slide-image"
+                                        />
+                                        <img
+                                            src={slide.line}
+                                            alt={slide.name}
+                                            className="slide-line"
+                                        />
 
-                <Slider {...settings}>
-                    {SlideData.map((slide, index) => {
-                        return (
-                            <div className="main-slide" key={index}>
-                                <div className="slide-content">
-                                    <img
-                                        src={slide.image}
-                                        alt={slide.name}
-                                        className="slide-image"
-                                    />
-                                    <img
-                                        src={slide.line}
-                                        alt={slide.name}
-                                        className="slide-line"
-                                    />
-
-                                    <p>{slide.name}</p>
+                                        <p>{slide.name}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </Slider>
+                            );
+                        })}
+                    </Slider>
+                </div>
             </div>
         </div>
     );

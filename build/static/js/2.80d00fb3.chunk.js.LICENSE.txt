@@ -5,6 +5,7 @@ object-assign
 */
 
 /*!
+<<<<<<< HEAD:build/static/js/2.80d00fb3.chunk.js.LICENSE.txt
   Copyright (c) 2015 Jed Watson.
   Based on code that is Copyright 2013-2015, Facebook, Inc.
   All rights reserved.
@@ -12,21 +13,12 @@ object-assign
 
 /*!
   Copyright (c) 2018 Jed Watson.
+=======
+  Copyright (c) 2017 Jed Watson.
+>>>>>>> f52671bd7cc95b980ad7a026ab29c08cfde0bc8f:build/static/js/2.d2aa9271.chunk.js.LICENSE.txt
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
-
-/*!
- * Adapted from jQuery UI core
- *
- * http://jqueryui.com
- *
- * Copyright 2014 jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- *
- * http://api.jqueryui.com/category/ui-core/
- */
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
