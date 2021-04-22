@@ -19,6 +19,8 @@ const FindTrainer = () => {
 
     var Training_vertical = [];
 
+    const [LocationState, setLocationState] = useState('Virtual')
+
     const [DropdownState, setDropdownState] = useState(false);
     const [DropdownValue, setDropdownValue] = useState([]);
 
@@ -102,6 +104,19 @@ const FindTrainer = () => {
     };
     console.log(selectedDate);
 
+    const SetLocation = (value) => {
+       console.log(value);
+
+       if(value === "Virtual")
+       {
+           console.log("virtual_p");
+       }else
+       {
+           console.log("pp");
+       }
+    }
+
+
     const search_action = () => {
         console.log("search action");
         var search_query;
@@ -114,7 +129,8 @@ const FindTrainer = () => {
                     <div className="item1">
                         <h3>Location</h3>
                         <div className="card-item">
-                            <p>Virtual</p>
+                            
+                            <div onClick={()=> SetLocation('Virtual')}><p style={{textDecoration:"underline"}}>Virtual</p></div>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="9"
@@ -134,7 +150,7 @@ const FindTrainer = () => {
                                     </tspan>
                                 </text>
                             </svg>
-                            <p>In Person</p>
+                            <div onClick={() => SetLocation('InPerson')}><p>In Person</p></div>
                         </div>
                     </div>
                     <LineBetween />
