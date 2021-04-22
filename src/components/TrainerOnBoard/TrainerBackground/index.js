@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.scss";
-import { withStyles } from "@material-ui/core/styles";
-import { cyan } from "@material-ui/core/colors";
-import Radio from "@material-ui/core/Radio";
-import { Link, useHistory } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
 import ArrowNext from "../../../assets/SVG/Arrow Next.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import Checkbox from "@material-ui/core/Checkbox";
-import { createMuiTheme } from "@material-ui/core/styles";
 /* areaOfExpertise
    previousExperience
    currentExperience
@@ -28,14 +25,6 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
    
 */
-
-const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#00acc1',
-      },
-    },
-});
 
 const TrainerBackground = (props) => {
     const [currentExperiencee, setCurrentExperiencee] = useState({
@@ -59,7 +48,7 @@ const TrainerBackground = (props) => {
     //   console.log("trainerBackground", props.location.state);
     // });
 
-    const history = useHistory();
+    // const history = useHistory();
     const AboutTrainer = props.location.state;
 
     const handleTrainerAvailability = (event) => {
@@ -190,8 +179,8 @@ const TrainerBackground = (props) => {
                                                     trainerbackgroundData
                                                 );
                                             }}
-                                            style ={{
-                                              color: "#53BFD2",
+                                            style={{
+                                                color: "#53BFD2",
                                             }}
 
                                             // onChange={() => {
@@ -215,8 +204,8 @@ const TrainerBackground = (props) => {
                                                     trainerbackgroundData
                                                 );
                                             }}
-                                            style ={{
-                                              color: "#53BFD2",
+                                            style={{
+                                                color: "#53BFD2",
                                             }}
                                         />
                                         <div className="checkbox_label">
@@ -232,8 +221,8 @@ const TrainerBackground = (props) => {
                                                     areaOfExpertise: "Yoga",
                                                 });
                                             }}
-                                            style ={{
-                                              color: "#53BFD2",
+                                            style={{
+                                                color: "#53BFD2",
                                             }}
                                         />
                                         <div className="checkbox_label">
@@ -249,8 +238,8 @@ const TrainerBackground = (props) => {
                                                     areaOfExpertise: "Pilates",
                                                 });
                                             }}
-                                            style ={{
-                                              color: "#53BFD2",
+                                            style={{
+                                                color: "#53BFD2",
                                             }}
                                         />
                                         <div className="checkbox_label">

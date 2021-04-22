@@ -135,8 +135,7 @@
         width: 100%;
         align-items: flex-start;
         height: 500px;
-        margin-top: 15em !important;
-
+        margin-top: 10em;
         padding: 0 2em !important;
         @media screen and (max-width: 1023px) {
             grid-template-columns: auto;
@@ -225,7 +224,7 @@
         }
         .flex-contents {
             display: flex;
-            align-items: center;
+            // align-items: center;
             @media screen and (max-width: 1023px) {
                 justify-content: space-between;
                 padding: 0 1em;
@@ -234,17 +233,18 @@
                 width: 100px;
                 height: 100px;
             }
-            .discription {
-                text-align: left;
-                padding: 0 0 0 0.7em;
+            .discription_home {
                 font: var(--unnamed-font-style-normal) normal
                     var(--unnamed-font-weight-normal)
-                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32)
+                    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-32)
                     var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0-27);
+                letter-spacing: var(--unnamed-character-spacing-0-3);
                 color: var(--unnamed-color-2c2c2c);
-                font: normal normal normal 15px/32px Montserrat;
-                letter-spacing: 0.27px;
+                text-align: left;
+                font: normal normal normal 20px/32px Montserrat;
+                letter-spacing: 0.3px;
+                color: #2c2c2c;
+                opacity: 1;
                 @media screen and (max-width: 1023px) {
                     font: normal normal normal 16px/22px Montserrat;
                     padding: 0 0 0 1em;

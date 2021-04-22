@@ -4,11 +4,10 @@ import Person from "../../../assets/SignUp/Person Icon.svg";
 import Mail from "../../../assets/SignUp/Email Icon.svg";
 import Phone from "../../../assets/SignUp/Phone Icon.svg";
 import Password from "../../../assets/SignUp/Password Icon.svg";
-
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import BlueHoverButton from "../../common/BlueArrowButton";
 
 const BannerTrainer = () => {
     const history = useHistory();
@@ -80,8 +79,8 @@ const BannerTrainer = () => {
         <>
             {/* {redirect ? <Redirect to={"/findtrainer"} /> : null} */}
 
-            <div className="banner_container">
-                <div className="wrapper_main">
+            <div className="banner_container_trainer">
+                <div className="wrapper_main container">
                     <div className="item_left">
                         <h2>Sign Up to be a part of the Motto Family</h2>
                         <h6>
@@ -92,7 +91,7 @@ const BannerTrainer = () => {
                     </div>
                     <div className="wrapper">
                         <div className="item_right">
-                            <div className="inner_wrapper">
+                            <div className="inner_wrapper ">
                                 <div className="inner_items">
                                     <h3>Train with Motto!</h3>
                                     <p>
@@ -368,7 +367,7 @@ const BannerTrainer = () => {
 
                                         <Link to="/">
                                             Sign In now
-                                            <ArrowHover />
+                                            <BlueHoverButton />
                                         </Link>
                                     </div>
                                 </div>

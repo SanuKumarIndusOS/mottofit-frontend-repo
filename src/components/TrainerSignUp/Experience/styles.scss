@@ -22,15 +22,14 @@
         }
     }
 
-    .personal_container {
+    .personal_container_trainer {
         display: grid;
         grid-template-columns: 35% 65%;
         grid-column-gap: 30px;
         width: 100%;
         align-items: flex-start;
         height: 500px;
-        margin-top: 8em;
-
+        margin-top: 2em;
         padding: 0 2em !important;
         @media screen and (max-width: 1023px) {
             grid-template-columns: auto;

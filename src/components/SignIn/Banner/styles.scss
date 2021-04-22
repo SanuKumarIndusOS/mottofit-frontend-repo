@@ -17,7 +17,7 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    width: 100%;
+    width: 590px;
     overflow: auto;
 
     .inner_container {
@@ -25,6 +25,7 @@
         flex-direction: column;
         align-items: flex-end;
         justify-content: flex-end;
+        height: 40px;
 
         svg {
             cursor: pointer;
@@ -77,20 +78,23 @@
                 display: flex;
                 flex-direction: column;
                 position: relative;
+                justify-content: center;
+                align-items: center;
                 padding: 0.5em 0;
                 width: 100%;
 
                 input {
-                    width: 425px !important;
                     height: 45px;
-                    align-items: center;
+                    width: 425px;
                     border: 1.5px solid var(--unnamed-color-bcbcbc);
                     border: 2px solid #bcbcbc;
                     border-radius: 30px;
                     opacity: 1;
-                    padding: 1em 1em;
-                    margin: 0.2em 1em;
-                    background: transparent;
+                    padding: 1em 1.5em;
+                }
+                input::placeholder {
+                    font-size: 18px;
+                    font-family: Montserrat;
                 }
                 input:focus {
                     outline: none;
@@ -117,6 +121,7 @@
                 justify-content: center;
                 margin-top: 1em;
                 .login_button {
+                    margin-top: 1em;
                     outline: none;
                     background: #53bfd2;
                     border: 0;
@@ -153,13 +158,14 @@
         .remember_container {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin: 0.2em 1em;
+            justify-content: space-evenly;
+            padding: 0 1em 0 2em;
 
             .remember_left {
                 display: flex;
+                justify-content: space-around;
                 align-items: center;
-                width: 40%;
+                width: 32%;
 
                 .check {
                     margin: 0;
@@ -180,6 +186,8 @@
                     font: normal normal 300 15px/42px Montserrat;
                     letter-spacing: 0px;
                     color: #898989;
+                    position: relative;
+                    left: -20px;
                 }
             }
 
@@ -201,7 +209,7 @@
         .or_items {
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: space-between;
             padding: 0.5em 0em;
 
             p {
@@ -211,9 +219,11 @@
             }
 
             .hr_line {
-                background-color: #bcbcbc;
-                height: 1px;
-                width: 120px;
+                width: 208px;
+                height: 0px;
+                border: 1px solid var(--unnamed-color-bcbcbc);
+                border: 1px solid #bcbcbc;
+                opacity: 1;
             }
         }
         .social_buttons {
@@ -290,7 +300,7 @@
             .links_item_signup {
                 display: flex;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: space-evenly;
                 padding: 1em 0;
                 width: 100%;
 
@@ -300,11 +310,11 @@
                     color: #161616;
                     text-transform: uppercase;
                     opacity: 1;
-                    font-family: Montserrat !important;
+                    font-family: Montserrat;
                     font-weight: 800 !important;
-                    font-size: 16px;
+                    font-size: 18px !important;
                     letter-spacing: 0px;
-                    color: #222222 !important;
+                    color: #000 !important;
                     text-decoration: none;
                 }
             }

@@ -120,7 +120,7 @@ const ExperienceParent = (props) => {
                 <div className="image">
                     <img src={props.icon} alt="icon" />
                 </div>
-                <p className="discription">{props.description}</p>
+                <p className="discription_home">{props.description}</p>
             </div>
         </>
     );
