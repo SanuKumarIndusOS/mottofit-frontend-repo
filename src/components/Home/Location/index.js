@@ -124,8 +124,8 @@ const Location = () => {
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-      speed: 2000,
-      autoplaySpeed: 2000,
+      speed: 2100,
+      autoplaySpeed: 2100,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
@@ -159,8 +159,8 @@ const Location = () => {
         <div className='slide-container'>
         <div className="inner_location container ">
             <div className="header-content">
-                <h1>Browse by location</h1>
-                <p >
+                <h1>Browse by Location</h1>
+                <p>
                     In-Person training available in New York City, Hamptons,
                     Miami & Plam Beach with more locations coming soon. Live virtual
                     training available anywhere!

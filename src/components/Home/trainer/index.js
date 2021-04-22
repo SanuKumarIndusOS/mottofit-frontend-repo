@@ -16,8 +16,8 @@ export default class Trainer extends Component {
                     <div className="answer">
                         Get access & matched with the right clients based on
                         your expertise. Maximize your time and earnings by
-                        booking 1-on-1 or group workouts. Minimize customer
-                        acquisition cost with no upfront or subscription fees.
+                        booking 1-on-1 or group workouts. Minimize <br></br>
+                        customer acquisition cost with no upfront or subscription fees.
                     </div>
 
                     <div className="link">
