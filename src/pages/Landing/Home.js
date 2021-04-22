@@ -96,8 +96,8 @@ const Home = () => {
                     <NavBar toggle={toggle} />
                 </Route>
                 <Route path="/findtrainer" component={FindTrainer} />
-                <Route path="/findtrainer" component={TrainerCards} />
-                <Route path="/findtrainer" component={TrainerCardOutside} />
+                {/* <Route path="/findtrainer" component={TrainerCards} /> */}
+                {/* <Route path="/findtrainer" component={TrainerCardOutside} /> */}
                 <Route path="/findtrainer" component={Footer} />
 
                 {/* Trainer OnBoard */}
