@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.dd7e3204.chunk.css",
-    "main.js": "/static/js/main.701563ec.chunk.js",
-    "main.js.map": "/static/js/main.701563ec.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.21d3179d.js",
-    "runtime-main.js.map": "/static/js/runtime-main.21d3179d.js.map",
-    "static/css/2.bbc5337f.chunk.css": "/static/css/2.bbc5337f.chunk.css",
-    "static/js/2.cb3f35e4.chunk.js": "/static/js/2.cb3f35e4.chunk.js",
-    "static/js/2.cb3f35e4.chunk.js.map": "/static/js/2.cb3f35e4.chunk.js.map",
-    "static/js/3.dd6d702d.chunk.js": "/static/js/3.dd6d702d.chunk.js",
-    "static/js/3.dd6d702d.chunk.js.map": "/static/js/3.dd6d702d.chunk.js.map",
+    "main.css": "/static/css/main.5608860f.chunk.css",
+    "main.js": "/static/js/main.2a70415a.chunk.js",
+    "main.js.map": "/static/js/main.2a70415a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.51edebf4.js",
+    "runtime-main.js.map": "/static/js/runtime-main.51edebf4.js.map",
+    "static/css/2.ecd96f7f.chunk.css": "/static/css/2.ecd96f7f.chunk.css",
+    "static/js/2.53c2f02b.chunk.js": "/static/js/2.53c2f02b.chunk.js",
+    "static/js/2.53c2f02b.chunk.js.map": "/static/js/2.53c2f02b.chunk.js.map",
+    "static/js/3.9638b1c4.chunk.js": "/static/js/3.9638b1c4.chunk.js",
+    "static/js/3.9638b1c4.chunk.js.map": "/static/js/3.9638b1c4.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.bbc5337f.chunk.css.map": "/static/css/2.bbc5337f.chunk.css.map",
-    "static/css/main.dd7e3204.chunk.css.map": "/static/css/main.dd7e3204.chunk.css.map",
-    "static/js/2.cb3f35e4.chunk.js.LICENSE.txt": "/static/js/2.cb3f35e4.chunk.js.LICENSE.txt",
+    "static/css/2.ecd96f7f.chunk.css.map": "/static/css/2.ecd96f7f.chunk.css.map",
+    "static/css/main.5608860f.chunk.css.map": "/static/css/main.5608860f.chunk.css.map",
+    "static/js/2.53c2f02b.chunk.js.LICENSE.txt": "/static/js/2.53c2f02b.chunk.js.LICENSE.txt",
     "static/media/styles.scss": "/static/media/Woman Image.482ef378.png",
     "static/media/Arrow 1.2a75d61e.svg": "/static/media/Arrow 1.2a75d61e.svg",
     "static/media/Arrow Active.29c0a0c4.svg": "/static/media/Arrow Active.29c0a0c4.svg",
@@ -112,10 +112,10 @@
     "static/media/weight.3f4f4e3a.svg": "/static/media/weight.3f4f4e3a.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.21d3179d.js",
-    "static/css/2.bbc5337f.chunk.css",
-    "static/js/2.cb3f35e4.chunk.js",
-    "static/css/main.dd7e3204.chunk.css",
-    "static/js/main.701563ec.chunk.js"
+    "static/js/runtime-main.51edebf4.js",
+    "static/css/2.ecd96f7f.chunk.css",
+    "static/js/2.53c2f02b.chunk.js",
+    "static/css/main.5608860f.chunk.css",
+    "static/js/main.2a70415a.chunk.js"
   ]
 }
