@@ -136,15 +136,18 @@
                             }
 
                             .payment_input {
-                                padding: 0.5em 0em 0.5em 3em;
-                                label {
-                                    text-align: left;
-                                    font-size: 20px;
-                                    font-weight: 600;
-                                    font-family: Montserrat;
-                                    color: #2c2c2c;
-                                    opacity: 1;
-                                    margin: 1em 0 0.5em 0;
+                                .payment_input_inner {
+                                    padding: 0.5em 1em 0.5em 3em;
+
+                                    label {
+                                        text-align: left;
+                                        font-size: 20px;
+                                        font-weight: 600;
+                                        font-family: Montserrat;
+                                        color: #2c2c2c;
+                                        opacity: 1;
+                                        margin: 1em 0 1em 0;
+                                    }
                                 }
                                 input {
                                     width: 100%;
@@ -176,7 +179,53 @@
                                 }
                             }
                             .payment_input_check {
-                               // padding: 0.5em 0em 0.5em 3em;
+                                // padding: 0.5em 0em 0.5em 3em;
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                .payment_check_inner {
+                                    input {
+                                        width: 15px;
+                                        height: 15px;
+                                        border: 1.25px solid
+                                            var(--unnamed-color-bcbcbc);
+                                        border: 1px solid #bcbcbc;
+                                        opacity: 1;
+                                        margin-right: 1em;
+                                    }
+                                    label {
+                                        font: var(--unnamed-font-style-normal)
+                                            normal 300 15px /
+                                            var(--unnamed-line-spacing-42)
+                                            var(
+                                                --unnamed-font-family-montserrat
+                                            );
+                                        letter-spacing: var(
+                                            --unnamed-character-spacing-0
+                                        );
+                                        color: var(--unnamed-color-898989);
+                                        text-align: left;
+                                        font: normal normal 500 15px/42px
+                                            Montserrat;
+                                        letter-spacing: 0px;
+                                        color: #898989;
+                                        opacity: 1;
+                                        margin: 1em 0 0.5em 0;
+                                    }
+                                    a {
+                                        text-align: left;
+                                        text-decoration: underline;
+                                        color: #53bfd2;
+                                        opacity: 1;
+                                        font-style: italic;
+                                        font-size: 15px;
+                                        font-family: Montserrat;
+                                        font-weight: 700;
+                                    }
+                                }
+                            }
+                            .payment_input_outter_check {
+                                padding: 0.5em 0em 0.5em 0.8em;
                                 display: flex;
                                 align-items: center;
                                 justify-content: space-between;
@@ -220,7 +269,6 @@
                         .payment_terms {
                             display: flex;
                             align-items: center;
-                            margin-top: 2em;
                             input {
                                 width: 15px;
                                 height: 15px;
@@ -585,8 +633,7 @@
     }
 }
 
-.inside_cardform
-{
+.inside_cardform {
     // font: normal normal 300 15px/42px Montserrat;
     font-size: 15px !important;
 }
