@@ -1,21 +1,24 @@
 // TODO Error handling on login page
 
-import React, { useState } from "react";
-import Modal from "react-modal";
+import React, { useState, useRef } from "react";
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
 import "./styles.scss";
 import Facebook from "../../../assets/SignUp/Fb Logo.svg";
 import Google from "../../../assets/SignUp/Google Logo.svg";
 import Mail from "../../../assets/SignUp/Email Icon.svg";
 import Password from "../../../assets/SignUp/Password Icon.svg";
-import { IoIosClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
-import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import CloseIcon from "../../../assets/FindTrainer/Cross.svg";
+import BlueHoverButton from "../../common/BlueArrowButton";
 
-Modal.setAppElement("#root");
+const closeIcon = <img src={CloseIcon} alt="close" />;
+
 const SignIn = ({ showModel, setShowModel }) => {
     const history = useHistory();
+    const myRef = useRef(null);
 
     const [data, setData] = useState({
         email: "",
@@ -76,21 +79,17 @@ const SignIn = ({ showModel, setShowModel }) => {
             <div className="modal-container">
                 {showModel ? (
                     <Modal
-                        isOpen={showModel}
-                        onRequestClose={() => setShowModel(false)}
-                        style={{
-                            overlay: {
-                                backgroundColor: "#000000ca",
-                                opacity: "1",
-                            },
+                        open={showModel}
+                        center
+                        container={myRef.current}
+                        styles={{
+                            boaderRadius: "20px",
                         }}
+                        closeIcon={closeIcon}
+                        onClose={() => setShowModel(false)}
                     >
                         <div className="outter_container">
-                            <div className="inner_container">
-                                <IoIosClose
-                                    onClick={() => setShowModel(false)}
-                                />
-                            </div>
+                            <div className="inner_container"></div>
                             <div className="wrapper_inner">
                                 <h2>Welcome to Motto!</h2>
                                 <p>
@@ -185,8 +184,11 @@ const SignIn = ({ showModel, setShowModel }) => {
                                                 <label>Remember me</label>
                                             </div>
                                             <div className="forgotpass_right">
-                                                <Link to="/" className='forgotpass'>
-                                                    Forgot password?
+                                                <Link
+                                                    to="/"
+                                                    className="forgotpass"
+                                                >
+                                                    Forgot Password?
                                                 </Link>
                                             </div>
                                         </div>
@@ -210,12 +212,12 @@ const SignIn = ({ showModel, setShowModel }) => {
                                                     src={Facebook}
                                                     alt="icon"
                                                 />
-                                                Sign Up with Facebook
+                                                Sign In with Facebook
                                             </button>
 
                                             <button className="google-auth">
                                                 <img src={Google} alt="icon" />
-                                                Sign Up with Google
+                                                Sign In with Google
                                             </button>
                                         </div>
                                         <div className="submit_button">
@@ -225,7 +227,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                                                 onClick={handleSubmit(logIn)}
                                             >
                                                 Signin
-                                                <ArrowHoverBlacked/>
+                                                <ArrowHoverBlacked />
                                             </Link>
                                         </div>
                                     </form>
@@ -235,11 +237,11 @@ const SignIn = ({ showModel, setShowModel }) => {
                                     <div className="links_item_signup">
                                         <Link to="/signup">
                                             User Sign Up
-                                            <ArrowHover />
+                                            <BlueHoverButton />
                                         </Link>
                                         <Link to="/trainersignup">
                                             Trainer Sign Up
-                                            <ArrowHover />
+                                            <BlueHoverButton />
                                         </Link>
                                     </div>
                                 </div>
@@ -253,5 +255,3 @@ const SignIn = ({ showModel, setShowModel }) => {
 };
 
 export default SignIn;
-
-

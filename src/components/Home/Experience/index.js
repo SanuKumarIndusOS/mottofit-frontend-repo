@@ -75,7 +75,7 @@ export default class Experience extends Component {
                             </p>
                             <div className="link">
                                 <div className="button-text">
-                                    <Link to="/" className="btn">
+                                    <Link to="/findtrainer" className="btn">
                                         Find Your Best Match <BlueHoverButton />
                                     </Link>
                                 </div>
@@ -120,7 +120,7 @@ const ExperienceParent = (props) => {
                 <div className="image">
                     <img src={props.icon} alt="icon" />
                 </div>
-                <p className="discription">{props.description}</p>
+                <p className="discription_home">{props.description}</p>
             </div>
         </>
     );

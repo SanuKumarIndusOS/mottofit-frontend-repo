@@ -25,7 +25,7 @@ const SignUp = () => {
     });
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-    const [apiError, setApiError] = useState('')
+    const [apiError, setApiError] = useState("");
     const { register, errors, handleSubmit, watch } = useForm();
     const onChangeValue = (e) => {
         e.persist();
@@ -62,11 +62,14 @@ const SignUp = () => {
                 if (response.ok) {
                     history.push("/findtrainer");
                 } else {
-                    setApiError('Email already registered',response.statusText);
+                    setApiError(
+                        "Email already registered",
+                        response.statusText
+                    );
                 }
             })
             .catch((error) => {
-                setApiError('Sorry, something went wrong.',error.message);
+                setApiError("Sorry, something went wrong.", error.message);
             });
     }
 
@@ -370,8 +373,11 @@ const SignUp = () => {
                                             </span>
                                         )}
                                     </div>
-                                    {apiError && <span className='errorMessage'>{apiError}</span>}
-
+                                    {apiError && (
+                                        <span className="errorMessage">
+                                            {apiError}
+                                        </span>
+                                    )}
 
                                     <div className="or_items">
                                         <div className="hr_line"></div>
@@ -397,7 +403,7 @@ const SignUp = () => {
                                             onClick={handleSubmit(signUp)}
                                         >
                                             Continue to Account{" "}
-                                            <ArrowHoverBlacked/>
+                                            <ArrowHoverBlacked />
                                         </button>
                                     </div>
                                 </form>
@@ -406,8 +412,8 @@ const SignUp = () => {
                                 <h1>Already have an account?</h1>
 
                                 <Link to="/">
-                                    Sign In now 
-                                    <ArrowHover/>
+                                    Sign In now
+                                    <ArrowHover />
                                 </Link>
                             </div>
                         </div>

@@ -133,6 +133,7 @@
     background: #fff;
     position: sticky;
     top: 0;
+    height: 100px;
     z-index: 9999;
     width: 100%;
     -webkit-box-shadow: 0 8px 6px -6px black;
@@ -142,6 +143,7 @@
         position: sticky;
         top: 0;
     }
+
     .main_navbar {
         display: flex;
         justify-content: space-between;
@@ -184,7 +186,7 @@
             height: 87px;
             opacity: 1;
             position: relative;
-            left: 2pc;
+            left: 4pc;
             .defaultLogo img {
                 padding: 1em;
                 margin-top: 1em !important;

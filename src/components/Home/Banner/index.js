@@ -117,7 +117,7 @@ const Banner = () => {
                                     className="custom_dropdown"
                                     onClick={TriggerDropDownAvailability}
                                 >
-                                    <h2>Select a Category</h2>
+                                    <h2>Select a Time</h2>
                                     <img src={AvailabilityIcon} ali="icon" />
                                 </div>
                                 <div className="home_dropdown">

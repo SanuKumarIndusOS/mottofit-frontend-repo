@@ -7,7 +7,7 @@ import Logo from "../../../assets/SVG/Motto Logo Home.svg";
 import LogoImage from "../../../assets/SVG/Motto Logo.svg";
 import Line from "../../../assets/SVG/Blue Line.svg";
 import Line2 from "../../../assets/SVG/Blue Line 2.svg";
-import './styles.scss'
+import "./styles.scss";
 import SignIn from "../../SignIn/Banner";
 
 const NavBarHome = ({ toggle }) => {
@@ -25,7 +25,7 @@ const NavBarHome = ({ toggle }) => {
     }, []);
 
     const changeBackground = () => {
-        if (window.scrollY >= 80) {
+        if (window.scrollY >= 100) {
             setNavbar(true);
             setLogo(true);
         } else {
@@ -36,11 +36,7 @@ const NavBarHome = ({ toggle }) => {
     window.addEventListener("scroll", changeBackground);
 
     return (
-        <Nav
-            className={
-                navbar ? "navbaractive active" : "navbar-sass"
-            }
-        >
+        <Nav className={navbar ? "navbaractive active" : "navbar-sass"}>
             <div className="main_navbar container ">
                 <div className="header-links">
                     <Link to="/how-it-works">How it works</Link>
@@ -56,16 +52,13 @@ const NavBarHome = ({ toggle }) => {
                             className="changeLogo"
                         />
                     ) : (
-                        <img src={Logo} alt="logo" 
-                        className="defaultLogo"
-                        
-                        />
+                        <img src={Logo} alt="logo" className="defaultLogo" />
                     )}
                 </div>
                 <div className="search-items">
                     <div className="input-item">
                         <input
-                        className='input'
+                            className="input"
                             type="text"
                             placeholder="Rotating prompts go here"
                         />
