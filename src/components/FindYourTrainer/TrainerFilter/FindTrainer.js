@@ -170,6 +170,13 @@ const FindTrainer = () => {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", token);
 
+    // if(token === null)
+    // {
+    //   console.log("please sign in ");
+    // }
+
+    // console.log(token);
+
     fetch(url + query, {
       method: "GET",
       headers: myHeaders,

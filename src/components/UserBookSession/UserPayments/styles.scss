@@ -176,7 +176,7 @@
                                 }
                             }
                             .payment_input_check {
-                                padding: 0.5em 0em 0.5em 3em;
+                               // padding: 0.5em 0em 0.5em 3em;
                                 display: flex;
                                 align-items: center;
                                 justify-content: space-between;
@@ -583,4 +583,10 @@
             }
         }
     }
+}
+
+.inside_cardform
+{
+    // font: normal normal 300 15px/42px Montserrat;
+    font-size: 15px !important;
 }
