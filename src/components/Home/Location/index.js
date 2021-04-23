@@ -124,8 +124,10 @@ const Location = () => {
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-      speed: 2100,
-      autoplaySpeed: 2100,
+
+        speed: 4000,
+        autoplaySpeed: 2000,
+
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
@@ -156,40 +158,40 @@ const Location = () => {
         ],
     };
     return (
-        <div className='slide-container'>
-        <div className="inner_location container ">
-            <div className="header-content">
-                <h1>Browse by Location</h1>
-                <p>
-                    In-Person training available in New York City, Hamptons,
-                    Miami & Plam Beach with more locations coming soon. Live virtual
-                    training available anywhere!
-                </p>
-            </div>
+        <div className="slide-container">
+            <div className="inner_location container ">
+                <div className="header-content">
+                    <h1>Browse by Location</h1>
+                    <p>
+                        In-Person training available in New York City, Hamptons,
+                        Miami & Plam Beach with more locations coming soon. Live
+                        virtual training available anywhere!
+                    </p>
+                </div>
 
-            <Slider {...settings}>
-                {SlideData.map((slide, index) => {
-                    return (
-                        <div className="main-slide" key={index}>
-                            <div className="slide-content">
-                                <img
-                                    src={slide.image}
-                                    alt={slide.name}
-                                    className="slide-image"
-                                />
-                                <img
-                                    src={slide.line}
-                                    alt={slide.name}
-                                    className="slide-line"
-                                />
+                <Slider {...settings}>
+                    {SlideData.map((slide, index) => {
+                        return (
+                            <div className="main-slide" key={index}>
+                                <div className="slide-content">
+                                    <img
+                                        src={slide.image}
+                                        alt={slide.name}
+                                        className="slide-image"
+                                    />
+                                    <img
+                                        src={slide.line}
+                                        alt={slide.name}
+                                        className="slide-line"
+                                    />
 
-                                <p>{slide.name}</p>
+                                    <p>{slide.name}</p>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
-            </Slider>
-        </div>
+                        );
+                    })}
+                </Slider>
+            </div>
         </div>
     );
 };
