@@ -127,13 +127,14 @@
                     padding: 2em;
                     margin: 1em;
                 }
-                button {
+                a {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     margin: 0 auto;
-
-                    width: 210px;
+                    padding-left: 1em;
+                    width: 230px;
+                    text-decoration: none;
                     height: 52px;
                     background: var(--unnamed-color-53bfd2) 0% 0% no-repeat
                         padding-box;

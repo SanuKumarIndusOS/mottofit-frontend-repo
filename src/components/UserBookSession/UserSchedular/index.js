@@ -40,9 +40,9 @@ const UserEventSchedular = () => {
                                 <div className="event_schedular_slot container">
                                     Event Schedular pending
                                 </div>
-                                <button>
+                                <Link to="/user-onboard/book-session">
                                     CONTINUE <ArrowHoverBlacked />{" "}
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
