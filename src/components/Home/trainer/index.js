@@ -23,7 +23,7 @@ export default class Trainer extends Component {
 
                             <div className="link">
                                 <div className="button-text">
-                                    <Link to="/">
+                                    <Link to="/trainersignup">
                                         APPLY AS A TRAINER <BlueHoverButton />
                                     </Link>
                                 </div>
