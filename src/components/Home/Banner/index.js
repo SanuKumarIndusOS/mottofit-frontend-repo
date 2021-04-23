@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./style.scss";
 import "./find.sass";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 import { BiSearch } from "react-icons/bi";
 import Between from "../../../assets/Home/Banner/SearchBar/between.svg";
 import AvailabilityIcon from "../../../assets/Home/Banner/SearchBar/Availability Icon.svg";
@@ -10,6 +9,9 @@ import SheduleIcon from "../../../assets/Home/Banner/SearchBar/Shedule Icon.svg"
 import TrainerVerticalIcon from "../../../assets/Home/Banner/SearchBar/Training Vertical Icon.svg";
 import Dropdown from "./Dropdown";
 import DropdownAvailability from "./DropdownAvailability";
+import { enGB } from "date-fns/locale";
+import { DatePicker } from "react-nice-dates";
+import "react-nice-dates/build/style.css";
 
 const Banner = () => {
     const [DropdownState, setDropdownState] = useState(false);
@@ -21,10 +23,23 @@ const Banner = () => {
     const [DropdownAvailabilityValue, setDropdownAvailabilityValue] = useState(
         []
     );
-    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const [virtualMarkup, setvirtualMarkup] = useState(
+        <h2 style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</h2>
+    );
+    const [inPersonMarkup, setinPersonMarkup] = useState(
+        <h2 style={{ fontWeight: "normal" }}>In Person</h2>
+    );
+    const [queryObject, setqueryObject] = useState({
+        location: "Online",
+        vertical: "Boxing",
+        date: "",
+        availability: "EarlyBird",
+    });
+    const [date, setDate] = useState(new Date());
     const onClickHandle = () => {
-        setSelectedDate(selectedDate);
-        console.log(selectedDate);
+        setDate(date);
+        console.log(date);
     };
     let DropdownTraining;
     if (DropdownState) {
@@ -32,6 +47,27 @@ const Banner = () => {
     } else {
         <div>hello</div>;
     }
+
+    const SetLocation = (value) => {
+        console.log(value);
+
+        if (value === "Virtual") {
+            setvirtualMarkup(
+                <h2 style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</h2>
+            );
+            setinPersonMarkup(
+                <h2 style={{ fontWeight: "normal" }}>In Person</h2>
+            );
+
+            setqueryObject({ ...queryObject, location: "Online" });
+        } else {
+            setvirtualMarkup(<h2 style={{ fontWeight: "normal" }}>Virtual</h2>);
+            setinPersonMarkup(
+                <h2 style={{ borderBottom: "3px solid #53BFD2" }}>In Person</h2>
+            );
+            setqueryObject({ ...queryObject, location: "Person" });
+        }
+    };
 
     let DropdownHomeAvailability;
     if (DropdownAvailabilityState) {
@@ -68,13 +104,15 @@ const Banner = () => {
                             <h3>Location</h3>
                             <div className="card_item_home">
                                 <div className="custom_dropdown">
-                                    <button className="location_item">
-                                        Virtual
-                                    </button>
+                                    <div onClick={() => SetLocation("Virtual")}>
+                                        {virtualMarkup}
+                                    </div>
                                     <img src={Between} ali="icon" />
-                                    <button className="location_item">
-                                        In Personal
-                                    </button>
+                                    <div
+                                        onClick={() => SetLocation("InPerson")}
+                                    >
+                                        {inPersonMarkup}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -99,13 +137,23 @@ const Banner = () => {
                             <h3>Schedule</h3>
                             <div className="card_item_home_item3 mt-2">
                                 <DatePicker
-                                    onChange={(date) => setSelectedDate(date)}
-                                    selected={selectedDate}
-                                    dateFormat="dd/MM/yyyy"
-                                    minDate={new Date()}
-                                    showYearDropdown
-                                    scrollableMonthYearDropdown
-                                ></DatePicker>
+                                    date={date}
+                                    onDateChange={setDate}
+                                    locale={enGB}
+                                    startDate={new Date()}
+                                    style={{ height: "100px" }}
+                                >
+                                    {({ inputProps, focused }) => (
+                                        <input
+                                            className={
+                                                "input" +
+                                                (focused ? " -focused" : "")
+                                            }
+                                            {...inputProps}
+                                        />
+                                    )}
+                                </DatePicker>
+
                                 <img src={TrainerVerticalIcon} ali="icon" />
                             </div>
                         </div>
@@ -125,7 +173,6 @@ const Banner = () => {
                                 </div>
                             </div>
                         </div>
-                        <LineBetween />
                         <div className="item5">
                             <button className="circle">
                                 <BiSearch />

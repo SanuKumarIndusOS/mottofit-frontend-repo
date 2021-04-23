@@ -9,6 +9,7 @@ export default class Trainer extends Component {
             <>
                 <div className="outter_bg_container ">
                     <div className="background_container ">
+                        <div className="container_empty"></div>
                         <div className="container_trainer ">
                             <div className="qustion">
                                 Are you a trainer interested in joining Motto?
