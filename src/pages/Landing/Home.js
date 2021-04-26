@@ -30,12 +30,14 @@ import CustomizeSection from "../../components/HowItWork/Customize/index";
 import TrainerMotto from "../../components/HowItWork/TrainerMotto";
 import TrainerProfile from "../../components/TrainerProfile/Profile/index";
 import TrainerDashboard from "../../components/TrainerDashBoard/TrainerAdmin";
+import UserDashboard from "../../components/UserDashBoard/UserAdmin";
 import UserTracker from "../../components/UserBookSession/UserTrackerBar";
 import UserEventSchedular from "../../components/UserBookSession/UserSchedular";
 import UserBookSession from "../../components/UserBookSession/UserSessionType";
 import UserMottoPass from "../../components/UserBookSession/UserMottoPass";
 import UserPayments from "../../components/UserBookSession/UserPayments";
 import TrainWithFriends from "../../components/TrainWithFriends";
+import NotFound from "./NotFound";
 const Home = () => {
     const [isOpen, setisOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -204,6 +206,9 @@ const Home = () => {
                     path="/train-with-friends"
                     component={TrainWithFriends}
                 />
+
+                <Route path="/user-dashboard" component={UserDashboard} />
+                {/* <Route exact component={NotFound} /> */}
             </Router>
         </>
     );
