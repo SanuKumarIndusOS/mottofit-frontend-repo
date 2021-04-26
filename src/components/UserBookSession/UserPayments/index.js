@@ -11,10 +11,15 @@ import LocationIcon from "../../../assets/UserOnboard/PaymentAsset/Location Icon
 import Footer from "../../common/Footer";
 import ArrowBack from "../../../assets/SVG/Arrow Back.svg";
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CardForm from "./subcomponents/CardForm";
+
+const stripePromise = loadStripe(
+    "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
+);
+
 const UserPayments = () => {
-
-
-
     //for material ui radio buttom (temp)
     const [selectedValue, setSelectedValue] = React.useState("a");
 
@@ -55,106 +60,77 @@ const UserPayments = () => {
                                             </p>
                                         </div>
                                         <div className="user_payment_section">
-                                            <form>
-                                                <div className="inner_payment_form">
-                                                    <div className="payment_form_radio">
-                                                        <div className="inner_payment_radio">
-                                                            <Radio
-                                                                checked={
-                                                                    selectedValue ===
-                                                                    "a"
-                                                                }
-                                                                onChange={
-                                                                    handleChange
-                                                                }
-                                                                value="a"
-                                                                name="radio-button-demo"
-                                                                inputProps={{
-                                                                    "aria-label":
-                                                                        "A",
-                                                                }}
-                                                                label="Credit or Debit Card"
-                                                            />
-                                                            <label>
-                                                                Credit or Debit
-                                                                Card
-                                                            </label>
-                                                        </div>
-                                                        <img
-                                                            src={
-                                                                paymentMethodImg
+                                            <div className="inner_payment_form">
+                                                <div className="payment_form_radio">
+                                                    <div className="inner_payment_radio">
+                                                        <Radio
+                                                            checked={
+                                                                selectedValue ===
+                                                                "a"
                                                             }
-                                                            alt="icon"
+                                                            onChange={
+                                                                handleChange
+                                                            }
+                                                            value="a"
+                                                            name="radio-button-demo"
+                                                            inputProps={{
+                                                                "aria-label":
+                                                                    "A",
+                                                            }}
+                                                            label="Credit or Debit Card"
                                                         />
-                                                    </div>
-                                                    <div className="payment_input">
                                                         <label>
-                                                            Card Number
+                                                            Credit or Debit Card
                                                         </label>
-                                                        <input
-                                                            type="number"
-                                                            placeholder="XXXX-XXXX-XXXX"
-                                                        />
-                                                        <div className="payment_expire_input">
-                                                            <div className="payment_expire_inner">
-                                                                <label>
-                                                                    Expiry Date
-                                                                </label>
-                                                                <input
-                                                                    type="number"
-                                                                    placeholder="MM/YY"
-                                                                />
-                                                            </div>
-                                                            <div className="payment_expire_inner">
-                                                                <label>
-                                                                    CVC/CVV
-                                                                </label>
-                                                                <input
-                                                                    type="number"
-                                                                    placeholder="XXX"
-                                                                />
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                                    <div className="payment_input_check">
-                                                        <div className="payment_check_inner">
-                                                            <input type="checkbox" />
-                                                            <label>
-                                                                Remember My Card
-                                                                Details
-                                                            </label>
-                                                        </div>
-                                                        <div className="payment_check_inner">
-                                                            <Link to="/">
-                                                                Session
-                                                                Cancellation
-                                                                Policy
-                                                            </Link>
-                                                        </div>
-                                                    </div>
+                                                    <img
+                                                        src={paymentMethodImg}
+                                                        alt="icon"
+                                                    />
                                                 </div>
-                                                <div className="payment_terms">
-                                                    <input type="checkbox" />
-                                                    <label>
-                                                        By proceeding, you
-                                                        accept the latest
-                                                        versions of our{" "}
-                                                        <Link to="/">
-                                                            Terms of Use
-                                                        </Link>{" "}
-                                                        and{" "}
-                                                        <Link to="/">
-                                                            Privacy Policy
-                                                        </Link>
-                                                    </label>
+
+                                                <div className="payment_input">
+                                                    <Elements
+                                                        stripe={stripePromise}
+                                                    >
+                                                        <CardForm />
+                                                    </Elements>
+
+                                                    {/* <input type="number" placeholder="XXXX-XXXX-XXXX" />
+                            <div className="payment_expire_input">
+                              <div className="payment_expire_inner">
+                                <label>Expiry Date</label>
+                                <input type="number" placeholder="MM/YY" />
+                              </div>
+                              <div className="payment_expire_inner">
+                                <label>CVC/CVV</label>
+                                <input type="number" placeholder="XXX" />
+                              </div>
+                            </div> */}
                                                 </div>
-                                                <div className="submit">
-                                                    <button>
-                                                        Continue{" "}
-                                                        <ArrowHoverBlacked />
-                                                    </button>
-                                                </div>
-                                            </form>
+                                                {/* <div className="payment_input_check">
+                            <div className="payment_check_inner">
+                              <input type="checkbox" />
+                              <label>Remember My Card Details</label>
+                            </div>
+                            <div className="payment_check_inner">
+                              <Link to="/">Session Cancellation Policy</Link>
+                            </div>
+                          </div> */}
+                                            </div>
+                                            {/* <div className="payment_terms">
+                          <input type="checkbox" />
+                          <label>
+                            By proceeding, you accept the latest versions of our{" "}
+                            <Link to="/">Terms of Use</Link> and{" "}
+                            <Link to="/">Privacy Policy</Link>
+                          </label>
+                        </div> */}
+                                            {/* <div className="submit">
+                          <button>
+                            Continue <ArrowHoverBlacked />
+                          </button>
+                        </div> */}
                                         </div>
                                     </div>
                                 </div>

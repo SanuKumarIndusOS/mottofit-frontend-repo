@@ -1,8 +1,8 @@
 import React from "react";
 import "./styles.scss";
-import Personal from "../../../assets/Home/Benfit/personal.png";
-import Session from "../../../assets/Home/Benfit/season.png";
-import Social from "../../../assets/Home/Benfit/social.png";
+import Personal from "../../../assets/Home/Benfit/Icon 1.svg";
+import Session from "../../../assets/Home/Benfit/Icon 3.svg";
+import Social from "../../../assets/Home/Benfit/Icon2.svg";
 
 const Benifet = () => {
     return (
