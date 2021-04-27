@@ -86,7 +86,9 @@ function CardForm() {
                                     fontSize: "16px",
                                     color: "#424770",
                                     "::placeholder": {
-                                        color: "black",
+                                        color: "#898989",
+                                        fontFamily: "Montserrat",
+                                        fontSize: "16px",
                                     },
                                 },
                                 invalid: {
@@ -106,7 +108,9 @@ function CardForm() {
                                                 fontSize: "16px",
                                                 color: "#424770",
                                                 "::placeholder": {
-                                                    color: "black",
+                                                    color: "#898989",
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: "16px",
                                                 },
                                             },
                                             invalid: {
@@ -127,7 +131,9 @@ function CardForm() {
                                                 fontSize: "16px",
                                                 color: "#424770",
                                                 "::placeholder": {
-                                                    color: "black",
+                                                    color: "#898989",
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: "16px",
                                                 },
                                             },
                                             invalid: {

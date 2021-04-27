@@ -35,6 +35,7 @@ const FindTrainer = () => {
     }, []);
 
     const [bestMatchData, setbestMatchData] = useState([]);
+    const [bestOthersData, setbestOthersData] = useState([]);
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [DropdownState, setDropdownState] = useState(false);
@@ -213,6 +214,7 @@ const FindTrainer = () => {
             .then((data) => {
                 console.log(data.data, data.data.bestMatch);
                 setbestMatchData(data.data.bestMatch);
+                setbestOthersData(data.data.others);
             });
 
         console.log(url + query);
@@ -327,7 +329,7 @@ const FindTrainer = () => {
                 </div>
             </div>
             <TrainerCards content={bestMatchData}></TrainerCards>
-            <TrainerCardOutside></TrainerCardOutside>
+            <TrainerCardOutside content={bestOthersData}></TrainerCardOutside>
         </>
     );
 };
