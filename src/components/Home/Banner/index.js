@@ -125,7 +125,7 @@ const Banner = () => {
                                     onClick={TriggerVerticalDropDown}
                                 >
                                     <h2>Select a Category</h2>
-                                    <img src={SheduleIcon} ali="icon" />
+                                    <img src={TrainerVerticalIcon} ali="icon" />
                                 </div>
                                 <div className="home_dropdown">
                                     {DropdownTraining}
@@ -152,9 +152,9 @@ const Banner = () => {
                                             {...inputProps}
                                         />
                                     )}
-                                </DatePicker>
+                                </DatePicker> 
 
-                                <img src={TrainerVerticalIcon} ali="icon" />
+                                <img src={SheduleIcon} ali="icon" />
                             </div>
                         </div>
                         <LineBetween />
