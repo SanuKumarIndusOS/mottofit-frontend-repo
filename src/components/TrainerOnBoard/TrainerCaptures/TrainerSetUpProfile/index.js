@@ -149,7 +149,7 @@ const TrainerSetUpProfile = () => {
                     )
                   )}
                   <h5 onClick={handleAddCertificateFields}>
-                    + Add Certificate's
+                    + Add Certification
                   </h5>
                 </div>
                 <div className="setup_card5">

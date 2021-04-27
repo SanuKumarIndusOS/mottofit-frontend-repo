@@ -394,7 +394,7 @@ const SignUp = () => {
 
                                         <button className="google-auth">
                                             <img src={Google} alt="icon" />
-                                            Sign Up with Google
+                                            Sign up with Google
                                         </button>
                                     </div>
                                     <div className="submit_button">
