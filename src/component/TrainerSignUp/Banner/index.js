@@ -60,7 +60,7 @@ const BannerTrainer = () => {
         const data = await response.json();
         localStorage.setItem("user-info", JSON.stringify(data));
         if (response.ok) {
-          history.push("/aboutTrainer");
+          history.push("/trainer/about");
         } else {
           setApiError("Email already registered", response.statusText);
         }

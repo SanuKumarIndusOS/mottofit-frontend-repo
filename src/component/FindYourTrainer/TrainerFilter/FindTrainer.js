@@ -222,7 +222,7 @@ const FindTrainer = () => {
 
   return (
     <>
-      <div className="card container" style={{ border: "none", marginTop: "220px" }}>
+      <div className="card container border-0">
         <div className="card-wrapper">
           <div className="item1">
             <h3>Location</h3>

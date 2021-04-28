@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import NavBarHome from "component/Home/NavbarHomePage/NavBarHome";
 import SideBar from "component/common/SideBar";
 import Footer from "component/common/Footer";
-import { NavBar } from "component/common/Navbar/NavBar";
 
-export class MainLayout extends Component {
+export class DashboardLayout extends Component {
   state = {
     isOpen: false,
     modalIsOpen: false,
@@ -23,7 +23,10 @@ export class MainLayout extends Component {
     const { isOpen } = this.state;
     return (
       <>
-        <NavBar toggle={() => this.toggle("isOpen")} />
+        <NavBarHome
+          toggle={() => this.toggle("isOpen")}
+          modalToggle={() => this.toggle("modalIsOpen")}
+        />
         <SideBar isOpen={isOpen} toggle={this.toggle} />
         <div className="main-layout">{children}</div>
         <Footer />

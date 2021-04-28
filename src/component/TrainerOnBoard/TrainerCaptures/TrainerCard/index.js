@@ -59,7 +59,7 @@ const TrainerCard = () => {
   }, [image]);
 
   const handleChangeToTrainerProfile = () => {
-    history.push("/trainer-setup");
+    history.push("/trainer/setup");
   };
 
   return (
@@ -277,7 +277,6 @@ const TrainerCard = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 };

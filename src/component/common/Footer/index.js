@@ -95,10 +95,10 @@ const Footer = () => {
                         <Link to="/how-it-works">How it works</Link>
                       </li>
                       <li>
-                        <Link to="/findtrainer">Find your trainer</Link>
+                        <Link to="/trainer/find">Find your trainer</Link>
                       </li>
                       <li>
-                        <Link to="/trainersignup">Be a trainer</Link>
+                        <Link to="/trainer/signup">Be a trainer</Link>
                       </li>
                     </ul>
                     <hr />

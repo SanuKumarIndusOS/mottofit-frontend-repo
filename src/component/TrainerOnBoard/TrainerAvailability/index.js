@@ -170,7 +170,7 @@ const TrainerAvailability = (props) => {
           <div className="link_wrapper">
             <img src={ArrowBack} alt="icon" />
             <div className="inner_links">
-              <Link to="/trainerbackground">Back to Trainer Background</Link>
+              <Link to="/trainer/background">Back to Trainer Background</Link>
               <div></div>
             </div>
           </div>
