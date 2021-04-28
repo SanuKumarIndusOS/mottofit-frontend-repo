@@ -1,0 +1,77 @@
+$primary-color: #180065;
+$primary-color-dark: #180065;
+$light-gray: #D6D6D6;
+$primary-bg: #180065;
+$gold: #c89a32;
+$orange: #f58d45;
+$white: #fff;
+$green: #27BF2F;
+$green-18: #189c5c;
+$black: #000;
+$black-50: #565958;
+$black-1c: #ebebeb;
+$grey: #E8E4E4;
+$ash-gray:#C4C4C4;
+$grey-65: #656565;
+$black-4D: #4d4d4d;
+$light-blue50:#DFF5FB;
+$light-green50:#DFF9E1;
+$light-blue80:#DFEDFF;
+$light-pink:#FEE7E5;
+$light-violet50:#D4DCF4;
+$danger-light:#F38C8C;
+$gray-6d: #6e6d6d;
+$required: #fa5661;
+$full-height: 100vh;
+$border-c0:#C0C0C0;
+$light-bg:#f8f9fa;
+$pagination-bg:#aebfef;
+$col-555555:#555555;
+$col-3fc1e833:#3fc1e833;
+$col-F7946A:#F7946A;
+$col-3FC1E8:#3FC1E8;
+$col-1C7F9D:#1C7F9D;
+$col-FFBD80:#FFBD80;
+$col-67B1FF:#67B1FF;
+$col-99E59D:#99E59D;
+$col-5DACFF:#5DACFF;
+$col-26BBD3:#26BBD3;
+$col-0345CD:#0345CD;
+$col-083E6D:#083E6D;
+$col-A23633:#A23633;
+$col-53201C:#53201C;
+$col-3C9FBC:#3C9FBC;
+$col-CC2B5A:#CC2B5A;
+
+$black-5 :rgba(46, 25, 25, 0.5);
+
+$c2: #fafafa;
+$c3: #424242;
+$c4: #6c6c6c;
+
+/* Color */
+$myColors: (
+    "c1": $primary-bg,
+    "c2": $c2,
+    "c3": $c3,
+    "c4": $c4,
+);
+
+@each $name, $colors in $myColors {
+    $index: index($myColors, $colors);
+    .text-#{$name} {
+        color: $colors;
+    }
+    .bg-#{$name} {
+        background-color: $colors;
+    }
+    .text-#{$name} {
+        color: $colors;
+    }
+    .bg-h-#{$name} {
+        background-color: $colors;
+    }
+    .bc-#{$name} {
+        border-color: $colors;
+    }
+}
