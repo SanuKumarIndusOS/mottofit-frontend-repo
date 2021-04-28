@@ -29,7 +29,7 @@ const TrainerTracker = () => {
   let Availability_text;
 
   //PeopleBarIcon
-  if (window.location.pathname === "/aboutTrainer") {
+  if (window.location.pathname.includes("/about")) {
     PeopleBarIcon = <img src={People_active} alt="icon" />;
     TrainerBarIcon = <img src={Trainer_inactive} alt="icon" />;
     ScheduleBarIcon = <img src={Schedule_inactive} alt="icon" />;
@@ -41,7 +41,7 @@ const TrainerTracker = () => {
   }
 
   //TrainerBarIcon
-  if (window.location.pathname === "/trainerbackground") {
+  if (window.location.pathname.includes("/background")) {
     PeopleBarIcon = <img src={People_active} alt="icon" />;
     TrainerBarIcon = <img src={Trainer_active} alt="icon" />;
     ScheduleBarIcon = <img src={Schedule_inactive} alt="icon" />;
@@ -53,7 +53,7 @@ const TrainerTracker = () => {
   }
 
   //ScheduleBarIcon
-  if (window.location.pathname === "/trainer-avaliability") {
+  if (window.location.pathname.includes("/avaliability")) {
     PeopleBarIcon = <img src={People_active} alt="icon" />;
     TrainerBarIcon = <img src={Trainer_active} alt="icon" />;
     ScheduleBarIcon = <img src={Schedule_active} alt="icon" />;

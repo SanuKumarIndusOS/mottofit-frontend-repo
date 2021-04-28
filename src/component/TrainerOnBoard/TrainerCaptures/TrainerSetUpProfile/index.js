@@ -63,7 +63,7 @@ const TrainerSetUpProfile = () => {
           <div className="setup_link">
             <img src={ArrowBack} alt="icon" />
             <div className="inner_link">
-              <Link to="/trainer-card"> Edit Trainer Card </Link>
+              <Link to="/trainer/card"> Edit Trainer Card </Link>
               <div></div>
             </div>
           </div>
@@ -239,7 +239,6 @@ const TrainerSetUpProfile = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 };

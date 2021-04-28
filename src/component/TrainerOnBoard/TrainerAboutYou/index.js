@@ -6,7 +6,6 @@ import DropDown from "../../../assets/files/SVG/Drop Down 4.svg";
 import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { useForm } from "react-hook-form";
-import Footer from "../../common/Footer";
 import validation from "../Validation/validation";
 const AboutTrainer = () => {
   //   const [location, setLocation] = useState("");
@@ -243,7 +242,7 @@ const AboutTrainer = () => {
                 <Link
                   type="submit"
                   to={{
-                    pathname: "/trainerbackground",
+                    pathname: "/trainer/background",
                     state: aboutTrainerData,
                   }}
                   onClick={handleTrainerBackground}
@@ -259,7 +258,6 @@ const AboutTrainer = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

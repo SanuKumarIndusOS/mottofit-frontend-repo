@@ -128,13 +128,13 @@ const TrainerBackground = (props) => {
             <div className="outter_links">
               <img src={ArrowBack} alt="icon" />
               <div className="inner_links">
-                <Link to="/aboutTrainer"> Back to About You</Link>
+                <Link to="/trainer/about"> Back to About You</Link>
                 <div></div>
               </div>
             </div>
             <div className="outter_links">
               <div className="inner_links">
-                <Link to="/trainer-avaliability">Go to Avaliability</Link>
+                <Link to="/trainer/avaliability">Go to Avaliability</Link>
                 <div></div>
               </div>
               <img src={ArrowNext} alt="icon" />
@@ -416,7 +416,7 @@ const TrainerBackground = (props) => {
                       type="submit"
                       //  onClick={handleTrainerAvailability}
                       to={{
-                        pathname: "/trainer-avaliability",
+                        pathname: "/trainer/avaliability",
                         state: [trainerbackgroundData, AboutTrainer],
                       }}
                     >

@@ -202,7 +202,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                       User Sign Up
                       <BlueHoverButton />
                     </Link>
-                    <Link to="/trainersignup">
+                    <Link to="/trainer/signup">
                       Trainer Sign Up
                       <BlueHoverButton />
                     </Link>
