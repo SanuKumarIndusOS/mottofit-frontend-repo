@@ -46,9 +46,9 @@ const NavBarHome = ({ toggle }) => {
         <Bars onClick={toggle} />
         <div className="logo-content_home">
           {logo ? (
-            <img src={LogoImage} alt="logo" className="changeLogo" />
+           <Link to="/welcome"> <img src={LogoImage} alt="logo" className="changeLogo" /></Link>
           ) : (
-            <img src={Logo} alt="logo" className="defaultLogo" />
+            <Link to="/welcome"> <img src={Logo} alt="logo" className="defaultLogo" /> </Link>
           )}
         </div>
         <div className="search-items">

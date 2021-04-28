@@ -18,6 +18,8 @@ export class MainLayout extends Component {
   render() {
     let { children } = this.props;
 
+    console.log(this.props);
+
     const { isOpen } = this.state;
     return (
       <>

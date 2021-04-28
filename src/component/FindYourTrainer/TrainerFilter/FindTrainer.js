@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
+import "./find.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { BiSearch } from "react-icons/bi";
 import BoxingIcon from "../../../assets/files/FindTrainer/DropDownAssets/Boxing Icon.svg";
@@ -221,7 +222,7 @@ const FindTrainer = () => {
 
   return (
     <>
-      <div className="card container" style={{ border: "none" }}>
+      <div className="card container" style={{ border: "none", marginTop: "220px" }}>
         <div className="card-wrapper">
           <div className="item1">
             <h3>Location</h3>

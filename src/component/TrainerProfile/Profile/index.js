@@ -14,7 +14,7 @@ import Quote from "../../../assets/files/FindTrainer/Quote Icon.svg";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
-const TrainerProfile = () => {
+const TrainerProfile =  () => {
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);

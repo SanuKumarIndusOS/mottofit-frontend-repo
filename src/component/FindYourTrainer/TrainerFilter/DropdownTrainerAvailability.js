@@ -3,6 +3,7 @@ import BoxingIcon from "../../../assets/files/FindTrainer/DropDownAssets/Boxing 
 import PilatesIcon from "../../../assets/files/FindTrainer/DropDownAssets/Pilates Icon.svg";
 import StrengthIcon from "../../../assets/files/FindTrainer/DropDownAssets/Strength Icon.svg";
 import YogaIcon from "../../../assets/files/FindTrainer/DropDownAssets/Yoga Icon.svg";
+import './find.scss'
 
 const DropdownTrainerAvailability = () => {
   const [ddBoxingState, setddBoxingState] = useState(false);

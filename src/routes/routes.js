@@ -37,6 +37,38 @@ const routers = [
       },
     ],
   },
+  {
+    component: "MainLayout",
+    path: "/findtrainer",
+    auth: false,
+    name: "FindTrainer",
+    exact: false,
+    childrens: [
+      {
+        path: "/",
+        componentPath: "pages/FindTrainer/index",
+        name: "FindTrainerBase",
+        auth: false,
+        exact: true,
+      },
+    ],
+  },
+  {
+    component: "MainLayout",
+    path: "/trainer-profile",
+    auth: false,
+    name: "TrainerProfile",
+    exact: false,
+    childrens: [
+      {
+        path: "/",
+        componentPath: "pages/TrainerProfile/index",
+        name: "TrainerProfileBase",
+        auth: false,
+        exact: true,
+      },
+    ],
+  },
 ];
 
 export default routers;
