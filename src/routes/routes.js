@@ -68,6 +68,53 @@ const routers = [
         exact: true,
       },
     ],
+  },{
+    component: "MainLayout",
+    path: "/how-it-works",
+    auth: false,
+    name: "HowItWorks",
+    exact: false,
+    childrens: [
+      {
+        path: "/",
+        componentPath: "pages/HowItWorks/index",
+        name: "HowItWorksBase",
+        auth: false,
+        exact: true,
+      },
+    ],
+  },
+  {
+    component: "MainLayout",
+    path: "/signup",
+    auth: false,
+    name: "UserSignUp",
+    exact: false,
+    childrens: [
+      {
+        path: "/",
+        componentPath: "pages/UserSignUp/index",
+        name: "UserSignUpBase",
+        auth: false,
+        exact: true,
+      },
+    ],
+  },
+  {
+    component: "MainLayout",
+    path: "/user-onboard",
+    auth: false,
+    name: "UserOnBoard",
+    exact: false,
+    childrens: [
+      {
+        path: "/",
+        componentPath: "pages/UserOnBoard/index",
+        name: "UserOnBoardBase",
+        auth: false,
+        exact: true,
+      },
+    ],
   },
 ];
 
