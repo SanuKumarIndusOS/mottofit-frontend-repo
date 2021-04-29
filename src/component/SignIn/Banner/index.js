@@ -198,7 +198,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                 <div className="login_items">
                   <h4>Don't have an account yet?</h4>
                   <div className="links_item_signup">
-                    <Link to="/signup">
+                    <Link to="user/signup">
                       User Sign Up
                       <BlueHoverButton />
                     </Link>

@@ -119,36 +119,50 @@ const routers = [
   },
   {
     component: "MainLayout",
-    path: "/signup",
+    path: "/user",
     auth: false,
-    name: "UserSignUp",
+    name: "User",
     exact: false,
     childrens: [
       {
-        path: "/",
-        componentPath: "pages/UserSignUp/index",
+        path: "/signup",
+        componentPath: "pages/User/UserSignUp/index",
         name: "UserSignUpBase",
         auth: false,
         exact: true,
       },
-    ],
-  },
-  {
-    component: "MainLayout",
-    path: "/user-onboard",
-    auth: false,
-    name: "UserOnBoard",
-    exact: false,
-    childrens: [
+
       {
-        path: "/",
-        componentPath: "pages/UserOnBoard/index",
-        name: "UserOnBoardBase",
+        path: "/scheduler",
+        componentPath: "pages/User/UserSchedule/index",
+        name: "UserScheduler",
+        auth: false,
+        exact: true,
+      },
+      {
+        path: "/session-type",
+        componentPath: "pages/User/BookASession/index",
+        name: "SessionType",
+        auth: false,
+        exact: true,
+      },
+      {
+        path: "/motto-pass",
+        componentPath: "pages/User/MottoPass/index",
+        name: "MottoPass",
+        auth: false,
+        exact: true,
+      },
+      {
+        path: "/payment",
+        componentPath: "pages/User/Payment/index",
+        name: "UserPayment",
         auth: false,
         exact: true,
       },
     ],
   },
+ 
 ];
 
 export default routers;

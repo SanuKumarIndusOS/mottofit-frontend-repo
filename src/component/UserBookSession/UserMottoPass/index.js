@@ -125,7 +125,7 @@ const UserMottoPass = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   );
 };

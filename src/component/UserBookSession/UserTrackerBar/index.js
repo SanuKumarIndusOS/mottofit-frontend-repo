@@ -86,7 +86,7 @@ const UserTracker = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="tracker_main">
         <div className="wrapper_item container">
           <div className="items">
