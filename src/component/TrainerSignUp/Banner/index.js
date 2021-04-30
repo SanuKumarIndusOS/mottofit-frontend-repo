@@ -8,8 +8,12 @@ import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import BlueHoverButton from "../../common/BlueArrowButton";
+import { connect } from "react-redux";
+import { loginOrSignUp } from "action/authAct";
+import { bindActionCreators } from "redux";
+import { AuthApi } from "service/apiVariables";
 
-const BannerTrainer = () => {
+const BannerTrainerFC = ({ loginOrSignupAct }) => {
   const history = useHistory();
   const [data, setData] = useState({
     name: "",
@@ -37,7 +41,7 @@ const BannerTrainer = () => {
   };
 
   async function trainerSignUp() {
-    const item = {
+    const payload = {
       name: data.name,
       email: data.email,
       password: data.password,
@@ -45,29 +49,37 @@ const BannerTrainer = () => {
       phoneNumber: data.phoneNumber,
       signUpType: data.signUpType,
     };
-    console.log(item);
+    // console.log(item);
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(item),
-    };
-    fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
-      .then(async (response) => {
-        const data = await response.json();
-        localStorage.setItem("user-info", JSON.stringify(data));
-        if (response.ok) {
-          history.push("/trainer/about");
-        } else {
-          setApiError("Email already registered", response.statusText);
-        }
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    //   body: JSON.stringify(item),
+    // };
+
+    const { trainerSignUp } = AuthApi;
+
+    loginOrSignupAct(trainerSignUp, payload)
+      .then(({ data }) => {
+        // console.log(data);
+        history.push("/trainer/about");
       })
       .catch((error) => {
-        setApiError("Sorry, something went wrong.", error.message);
+        setApiError(error.message);
       });
+
+    // fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
+    //   .then(async (response) => {
+    //     const data = await response.json();
+    //     localStorage.setItem("user-info", JSON.stringify(data));
+    //     if (response.ok) {
+    //     } else {
+    //       setApiError("Email already registered", response.statusText);
+    //     }
+    //   })
   }
   return (
     <>
@@ -274,5 +286,16 @@ const BannerTrainer = () => {
     </>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      loginOrSignupAct: loginOrSignUp,
+    },
+    dispatch
+  );
+};
+
+const BannerTrainer = connect(null, mapDispatchToProps)(BannerTrainerFC);
 
 export default BannerTrainer;

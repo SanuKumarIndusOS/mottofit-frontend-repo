@@ -13,10 +13,14 @@ import { Link, useHistory } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../common/BlueArrowButton";
+import { AuthApi } from "service/apiVariables";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { login, loginOrSignUp } from "action/authAct";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
-const SignIn = ({ showModel, setShowModel }) => {
+const SignInFC = ({ showModel, setShowModel, loginAct }) => {
   const history = useHistory();
   const myRef = useRef(null);
 
@@ -40,35 +44,48 @@ const SignIn = ({ showModel, setShowModel }) => {
   };
 
   async function logIn() {
-    const item = {
+    const payload = {
       email: data.email,
       password: data.password,
       signUpType: data.signUpType,
       deviceName: data.deviceName,
     };
-    console.log(item);
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(item),
-    };
-    fetch("http://doodlebluelive.com:2307/v1/login", requestOptions)
-      .then(async (response) => {
-        const data = await response.json();
-        localStorage.setItem("user-info", JSON.stringify(data));
-        if (response.ok) {
-          history.push("/findtrainer");
-        } else {
-          setApiError("User Not Registered", response.statusText);
-        }
+    const { loginApi } = AuthApi;
+
+    // NEED USER DATA AFTER LOGIN AND SIGNUP
+
+    loginAct(loginApi, payload)
+      .then(() => {
+        history.push("/trainer/find");
       })
       .catch((error) => {
         setApiError("Sorry, something went wrong.", error.message);
       });
+
+    // const { loginApi } = AuthApi;
+
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    //   body: JSON.stringify(item),
+    // };
+    // fetch("http://doodlebluelive.com:2307/v1/login", requestOptions)
+    //   .then(async (response) => {
+    //     const data = await response.json();
+    //     localStorage.setItem("user-info", JSON.stringify(data));
+    //     if (response.ok) {
+    //       history.push("/trainer/find");
+    //     } else {
+    //       setApiError("User Not Registered", response.statusText);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     setApiError("Sorry, something went wrong.", error.message);
+    //   });
   }
   const preventSubmit = (e) => {
     e.preventDefault();
@@ -124,7 +141,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                           required: true,
                           minLength: 6,
                           maxLength: 16,
-                          pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                          pattern: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{3,}$/,
                         })}
                       />
                       <img src={Password} alt="icon" onClick={showPassword} />
@@ -198,7 +215,7 @@ const SignIn = ({ showModel, setShowModel }) => {
                 <div className="login_items">
                   <h4>Don't have an account yet?</h4>
                   <div className="links_item_signup">
-                    <Link to="user/signup">
+                    <Link to="/user/signup">
                       User Sign Up
                       <BlueHoverButton />
                     </Link>
@@ -216,5 +233,16 @@ const SignIn = ({ showModel, setShowModel }) => {
     </>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      loginAct: loginOrSignUp,
+    },
+    dispatch
+  );
+};
+
+const SignIn = connect(null, mapDispatchToProps)(SignInFC);
 
 export default SignIn;

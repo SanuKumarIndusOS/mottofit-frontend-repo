@@ -13,7 +13,7 @@ const UserEventSchedular = () => {
             <div className="link_wrapper">
               <img src={ArrowBack} alt="icon" />
               <div className="inner_links">
-                <Link to="/findtrainer">Choose another Trainer</Link>
+                <Link to="/trainer/find">Choose another Trainer</Link>
                 <div></div>
               </div>
             </div>

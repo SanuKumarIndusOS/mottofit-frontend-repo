@@ -69,7 +69,7 @@ export default class Experience extends Component {
               </p>
               <div className="link">
                 <div className="button-text">
-                  <Link to="/findtrainer" className="btn">
+                  <Link to="/trainer/find" className="btn">
                     Find Your Best Match <BlueHoverButton />
                   </Link>
                 </div>

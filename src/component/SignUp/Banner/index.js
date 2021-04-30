@@ -11,8 +11,13 @@ import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import { api } from "service/api";
+import { AuthApi } from "service/apiVariables";
+import { loginOrSignUp } from "action/authAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const SignUp = () => {
+const SignUpFC = ({ loginOrSignupAct }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -23,6 +28,7 @@ const SignUp = () => {
     location: "",
     signUpType: "email",
   });
+
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
   const [apiError, setApiError] = useState("");
@@ -35,7 +41,7 @@ const SignUp = () => {
   const history = useHistory();
 
   async function signUp() {
-    const item = {
+    const payload = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -45,29 +51,33 @@ const SignUp = () => {
       location: data.location,
       signUpType: data.signUpType,
     };
-    console.log(item);
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(item),
-    };
-    fetch("http://doodlebluelive.com:2307/v1/user/sign-up", requestOptions)
-      .then(async (response) => {
-        const data = await response.json();
-        localStorage.setItem("user-info", JSON.stringify(data));
+    // console.log(item);
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    //   body: JSON.stringify(item),
+    // };
 
-        if (response.ok) {
-          history.push("/findtrainer");
-        } else {
-          setApiError("Email already registered", response.statusText);
-        }
-      })
-      .catch((error) => {
-        setApiError("Sorry, something went wrong.", error.message);
-      });
+    const { userSignUp } = AuthApi;
+
+    loginOrSignupAct(userSignUp, payload).catch((error) => {
+      setApiError("Sorry, something went wrong.", error.message);
+    });
+
+    // fetch("http://doodlebluelive.com:2307/v1/user/sign-up", requestOptions)
+    //   .then(async (response) => {
+    //     const data = await response.json();
+    //     localStorage.setItem("user-info", JSON.stringify(data));
+
+    //     if (response.ok) {
+    //       history.push("/trainer/find");
+    //     } else {
+    //       setApiError("Email already registered", response.statusText);
+    //     }
+    //   })
   }
 
   const showPassword = () => {
@@ -228,7 +238,7 @@ const SignUp = () => {
                         required: true,
                         minLength: 6,
                         maxLength: 16,
-                        pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                        // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
                       })}
                     />
                     <img src={Password} alt="icon" onClick={showPassword} />
@@ -262,7 +272,7 @@ const SignUp = () => {
                         required: true,
                         minLength: 6,
                         maxLength: 16,
-                        pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                        // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
                       })}
                       name="cpassword"
                     />
@@ -332,5 +342,16 @@ const SignUp = () => {
     </>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      loginOrSignupAct: loginOrSignUp,
+    },
+    dispatch
+  );
+};
+
+const SignUp = connect(null, mapDispatchToProps)(SignUpFC);
 
 export default SignUp;

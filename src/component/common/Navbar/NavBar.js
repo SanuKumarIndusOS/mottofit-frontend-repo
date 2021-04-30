@@ -23,7 +23,7 @@ export const NavBar = ({ toggle }) => {
           <div className="header-links1">
             <Link to="/how-it-works">How it works</Link>
             <img src={Line} alt="icon" />
-            <Link to="/findtrainer">Who we are</Link>
+            <Link to="/trainer/find">Who we are</Link>
           </div>
           <Bars onClick={toggle} />
           <div className="logo-content1">

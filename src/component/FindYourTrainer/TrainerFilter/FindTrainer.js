@@ -18,21 +18,50 @@ import AvailabilityIcon from "../../../assets/files/Home/Banner/SearchBar/Availa
 import DropdownTrainerAvailability from "./DropdownTrainerAvailability";
 
 import "./find.scss";
-const FindTrainer = () => {
+import { TrainerApi } from "service/apiVariables";
+import { api } from "service/api";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateTrainerDetails } from "action/trainerAct";
+import { getFormatDate } from "service/helperFunctions";
+const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   useEffect(() => {
-    var date = new Date(selectedDate.toISOString());
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var dt = date.getDate();
+    // var date = new Date(selectedDate.toISOString());
+    // var year = date.getFullYear();
+    // var month = date.getMonth() + 1;
+    // var dt = date.getDate();
 
-    if (dt < 10) {
-      dt = "0" + dt;
-    }
-    if (month < 10) {
-      month = "0" + month;
-    }
+    // if (dt < 10) {
+    //   dt = "0" + dt;
+    // }
+    // if (month < 10) {
+    //   month = "0" + month;
+    // }
 
-    setqueryObject({ ...queryObject, date: year + "-" + month + "-" + dt });
+    // setqueryObject({ ...queryObject, date: year + "-" + month + "-" + dt });
+
+    if (trainerQueryData.location && trainerQueryData.date) {
+      console.log(trainerQueryData);
+
+      setqueryObject(trainerQueryData);
+
+      SetLocation(trainerQueryData.location);
+
+      getTrainerDataByQuery();
+    } else {
+      let payload = {
+        query: {
+          location: "Online",
+          vertical: "Boxing",
+          date: getFormatDate(),
+          availability: "EarlyBird",
+        },
+      };
+
+      setqueryObject(payload.query);
+
+      updateTrainerDetails(payload);
+    }
   }, []);
 
   const [bestMatchData, setbestMatchData] = useState([]);
@@ -196,28 +225,62 @@ const FindTrainer = () => {
   };
 
   const search_action = () => {
-    var token = JSON.parse(localStorage.getItem("user-info"))["token"];
-    var url = "http://doodlebluelive.com:2307/v1/availableTrainer?";
-    var query = `location=${queryObject.location}&trainingType=["${queryObject.vertical}"]&date=["${queryObject.date}","${queryObject.date}"]&availability=["${queryObject.availability}"]`;
+    let payload = {
+      query: {
+        location: queryObject.location,
+        date: queryObject.date,
+        trainingType: queryObject.vertical,
+        availability: queryObject.availability,
+      },
+    };
 
-    const myHeaders = new Headers();
+    console.log(payload);
 
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", token);
+    updateTrainerDetails(payload);
 
-    fetch(url + query, {
-      method: "GET",
-      headers: myHeaders,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data, data.data.bestMatch);
-        setbestMatchData(data.data.bestMatch);
-        setbestOthersData(data.data.others);
-      });
+    getTrainerDataByQuery(payload.query);
 
-    console.log(url + query);
-    console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
+    // var token = localStorage.getItem("token");
+    // var url = "http://doodlebluelive.com:2307/v1/availableTrainer?";
+    // var query = `location=${queryObject.location}&trainingType=["${queryObject.vertical}"]&date=["${queryObject.date}","${queryObject.date}"]&availability=["${queryObject.availability}"]`;
+
+    // const myHeaders = new Headers();
+
+    // myHeaders.append("Content-Type", "application/json");
+    // myHeaders.append("Authorization", token);
+
+    // fetch(url + query, {
+    //   method: "GET",
+    //   headers: myHeaders,
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data.data, data.data.bestMatch);
+    //     setbestMatchData(data.data.bestMatch);
+    //     setbestOthersData(data.data.others);
+    //   });
+
+    // console.log(url + query);
+    // console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
+  };
+
+  const getTrainerDataByQuery = (currData) => {
+    const { location, date, trainingType, availability } =
+      currData || trainerQueryData;
+
+    // console.log({ location, date, trainingType, availability });
+
+    const { trainerAvailableApi } = TrainerApi;
+
+    trainerAvailableApi.query.location = location;
+    trainerAvailableApi.query.trainingType = trainingType;
+    trainerAvailableApi.query.date = date;
+    trainerAvailableApi.query.availability = availability;
+
+    api({ ...trainerAvailableApi }).then(({ data }) => {
+      setbestMatchData(data.bestMatch);
+      setbestOthersData(data.others);
+    });
   };
 
   return (
@@ -258,7 +321,7 @@ const FindTrainer = () => {
             <h3>Training Vertical</h3>
             <div className="card-item" onClick={TriggerVerticalDropDown}>
               <img src={Weight} alt="icon" />
-              <p>{queryObject.vertical}</p>
+              <p>{queryObject.vertical || queryObject.trainingType}</p>
             </div>
             {Dropdown}
           </div>
@@ -309,7 +372,7 @@ const FindTrainer = () => {
               onClick={TriggerDropDownTrainerAvailability}
             >
               <img src={AvailabilityIcon} alt="icon" />
-              <p>Early Bird</p>
+              <p>{queryObject.availability}</p>
             </div>
             {DropdownAvailability}
           </div>
@@ -373,5 +436,20 @@ function DropDownSVG() {
     </svg>
   );
 }
+
+const mapStateToProps = (state) => ({
+  trainerQueryData: state.trainerReducer.query,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateTrainerDetails,
+    },
+    dispatch
+  );
+};
+
+const FindTrainer = connect(mapStateToProps, mapDispatchToProps)(FindTrainerFC);
 
 export default FindTrainer;

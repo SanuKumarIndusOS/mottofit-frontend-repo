@@ -14,9 +14,7 @@ export var api = async function ({
     // setting token
     axiosInstance.defaults.headers.common[
       "Authorization"
-    ] = localStorage.getItem("AuthToken")
-      ? `Bearer ${localStorage.getItem("AuthToken")}`
-      : "";
+    ] = localStorage.getItem("token") ? `${localStorage.getItem("token")}` : "";
 
     axiosInstance[method](`${getServiceUrl(baseURL)}${api}`, body ? body : "")
       .then((data) => {
@@ -56,10 +54,10 @@ let getServiceUrl = (baseURL) => {
 
   switch (baseURL) {
     case "normal":
-      finalURL = "http://180.151.69.138:2167";
+      finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
     default:
-      finalURL = "http://180.151.69.138:2081/api/";
+      finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
   }
 

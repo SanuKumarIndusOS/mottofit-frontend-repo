@@ -4,7 +4,7 @@ import PilatesIcon from "../../../assets/files/FindTrainer/DropDownAssets/Pilate
 import StrengthIcon from "../../../assets/files/FindTrainer/DropDownAssets/Strength Icon.svg";
 import YogaIcon from "../../../assets/files/FindTrainer/DropDownAssets/Yoga Icon.svg";
 
-const DropdownAvailability = () => {
+const DropdownAvailability = ({ onClick = () => {} }) => {
   const [ddBoxingState, setddBoxingState] = useState(false);
   const [ddPilatesState, setddPilatesState] = useState(false);
   const [ddYogaState, setddYogaState] = useState(false);
@@ -19,6 +19,7 @@ const DropdownAvailability = () => {
             onClick={() => {
               setddBoxingState(!ddBoxingState);
               console.log(ddBoxingState, "boxing");
+              onClick({ availability: "Early Bird" });
             }}
           >
             <div className="option_wapper">
@@ -31,6 +32,7 @@ const DropdownAvailability = () => {
             onClick={() => {
               setddPilatesState(!ddPilatesState);
               console.log(ddPilatesState, "pilates");
+              onClick({ availability: "Rise & Shine" });
             }}
           >
             <div className="option_wapper">
@@ -45,6 +47,7 @@ const DropdownAvailability = () => {
             onClick={() => {
               setddHiitState(!ddHiitState);
               console.log(ddHiitState, "hiit");
+              onClick({ availability: "Mid-day Break" });
             }}
           >
             <div className="option_wapper">
@@ -57,6 +60,7 @@ const DropdownAvailability = () => {
             onClick={() => {
               setddYogaState(!ddYogaState);
               console.log(ddYogaState, "yoga");
+              onClick({ availability: "Happy Hour" });
             }}
           >
             <div className="option_wapper">
@@ -71,6 +75,7 @@ const DropdownAvailability = () => {
             onClick={() => {
               setddYogaState(!ddYogaState);
               console.log(ddYogaState, "yoga");
+              onClick({ availability: "Never Too Late" });
             }}
           >
             <div className="option_wapper">

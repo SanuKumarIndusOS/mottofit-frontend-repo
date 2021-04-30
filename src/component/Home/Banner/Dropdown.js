@@ -4,7 +4,7 @@ import PilatesIcon from "../../../assets/files/FindTrainer/DropDownAssets/Pilate
 import StrengthIcon from "../../../assets/files/FindTrainer/DropDownAssets/Strength Icon.svg";
 import YogaIcon from "../../../assets/files/FindTrainer/DropDownAssets/Yoga Icon.svg";
 
-const Dropdown = () => {
+const Dropdown = ({ onClick = () => {} }) => {
   const [ddBoxingState, setddBoxingState] = useState(false);
   const [ddPilatesState, setddPilatesState] = useState(false);
   const [ddYogaState, setddYogaState] = useState(false);
@@ -18,6 +18,7 @@ const Dropdown = () => {
             className="option"
             onClick={() => {
               setddBoxingState(!ddBoxingState);
+              onClick({ vertical: "Boxing" });
               console.log(ddBoxingState, "boxing");
             }}
           >
@@ -30,6 +31,7 @@ const Dropdown = () => {
             className="option"
             onClick={() => {
               setddPilatesState(!ddPilatesState);
+              onClick({ vertical: "Pilates" });
               console.log(ddPilatesState, "pilates");
             }}
           >
@@ -45,6 +47,7 @@ const Dropdown = () => {
             onClick={() => {
               setddHiitState(!ddHiitState);
               console.log(ddHiitState, "hiit");
+              onClick({ vertical: "Strength & Hiit" });
             }}
           >
             <div className="option_wapper">
@@ -57,6 +60,7 @@ const Dropdown = () => {
             onClick={() => {
               setddYogaState(!ddYogaState);
               console.log(ddYogaState, "yoga");
+              onClick({ vertical: "Yoga" });
             }}
           >
             <div className="option_wapper">

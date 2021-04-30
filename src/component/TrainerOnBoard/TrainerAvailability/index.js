@@ -10,6 +10,8 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import "./model.scss";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
+import { TrainerApi } from "service/apiVariables";
+import { api } from "service/api";
 // hoursPerWeek
 // preferedTrainingMode
 // serviceableCity
@@ -59,7 +61,7 @@ const TrainerAvailability = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
+    // console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
 
     let data = {
       location: props.location.state[0]["location"],
@@ -134,27 +136,36 @@ const TrainerAvailability = (props) => {
       },
     };
 
-    fetch("http://doodlebluelive.com:2307/v1/trainer", {
-      method: "PUT", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-        token: JSON.parse(localStorage.getItem("user-info"))["token"],
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        if (data === "200") {
-          setOpen(true);
-        } else {
-          console.log("errro");
-        }
+    const { updateTrainerAvailabilityApi } = TrainerApi;
+
+    updateTrainerAvailabilityApi.body = data;
+
+    api({ ...updateTrainerAvailabilityApi })
+      .then(() => {
+        setOpen(true);
       })
       .catch((error) => {
         console.error("Error:", error);
         setOpen(false);
       });
+
+    // fetch("http://doodlebluelive.com:2307/v1/trainer", {
+    //   method: "PUT", // or 'PUT'
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     token: JSON.parse(localStorage.getItem("user-info"))["token"],
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Success:", data);
+    //     if (data === "200") {
+    //       setOpen(true);
+    //     } else {
+    //       console.log("errro");
+    //     }
+    //   })
   };
 
   // useEffect(() => {

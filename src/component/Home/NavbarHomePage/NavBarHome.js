@@ -41,14 +41,20 @@ const NavBarHome = ({ toggle }) => {
         <div className="header-links">
           <Link to="/how-it-works">How it works</Link>
           <img src={Line} alt="icon" />
-          <Link to="/findtrainer">Who we are</Link>
+          <Link to="/trainer/find">Who we are</Link>
         </div>
         <Bars onClick={toggle} />
         <div className="logo-content_home">
           {logo ? (
-           <Link to="/welcome"> <img src={LogoImage} alt="logo" className="changeLogo" /></Link>
+            <Link to="/welcome">
+              {" "}
+              <img src={LogoImage} alt="logo" className="changeLogo" />
+            </Link>
           ) : (
-            <Link to="/welcome"> <img src={Logo} alt="logo" className="defaultLogo" /> </Link>
+            <Link to="/welcome">
+              {" "}
+              <img src={Logo} alt="logo" className="defaultLogo" />{" "}
+            </Link>
           )}
         </div>
         <div className="search-items">

@@ -2,6 +2,7 @@ const routers = [
   {
     path: "/",
     redirect: "/welcome",
+    auth: false,
   },
   {
     component: "AuthLayout",
@@ -40,7 +41,7 @@ const routers = [
   {
     component: "MainLayout",
     path: "/trainer",
-    auth: false,
+    auth: true,
     name: "Dashboard",
     exact: false,
     childrens: [
@@ -101,7 +102,8 @@ const routers = [
         exact: true,
       },
     ],
-  },{
+  },
+  {
     component: "MainLayout",
     path: "/how-it-works",
     auth: false,
@@ -162,7 +164,6 @@ const routers = [
       },
     ],
   },
- 
 ];
 
 export default routers;

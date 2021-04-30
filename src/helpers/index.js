@@ -2,10 +2,12 @@ import { createStore, applyMiddleware } from "redux";
 import { reducers } from "../reducer";
 import thunk from "redux-thunk";
 import routers from "routes/routes";
+import { api } from "service/api";
+import { Toast } from "service/toast";
 
 export const store = createStore(
   reducers,
-  applyMiddleware(thunk.withExtraArgument({}))
+  applyMiddleware(thunk.withExtraArgument({ api, Toast }))
 );
 export const history = require("history").createBrowserHistory({
   basename: process.env.PUBLIC_URL,

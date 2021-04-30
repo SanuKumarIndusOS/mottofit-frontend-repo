@@ -11,8 +11,13 @@ import DropdownAvailability from "./DropdownAvailability";
 import { enGB } from "date-fns/locale";
 import { DatePicker } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
+import { connect } from "react-redux";
+import { updateTrainerDetails } from "action/trainerAct";
+import { bindActionCreators } from "redux";
+import { history } from "helpers";
+import { getFormatDate } from "service/helperFunctions";
 
-const Banner = () => {
+const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const [DropdownState, setDropdownState] = useState(false);
   const [DropdownValue, setDropdownValue] = useState([]);
 
@@ -42,7 +47,14 @@ const Banner = () => {
   };
   let DropdownTraining;
   if (DropdownState) {
-    DropdownTraining = <Dropdown />;
+    DropdownTraining = (
+      <Dropdown
+        onClick={({ vertical }) => {
+          setqueryObject({ ...queryObject, vertical });
+          TriggerVerticalDropDown();
+        }}
+      />
+    );
   } else {
     <div>hello</div>;
   }
@@ -68,7 +80,14 @@ const Banner = () => {
 
   let DropdownHomeAvailability;
   if (DropdownAvailabilityState) {
-    DropdownHomeAvailability = <DropdownAvailability />;
+    DropdownHomeAvailability = (
+      <DropdownAvailability
+        onClick={({ availability }) => {
+          setqueryObject({ ...queryObject, availability });
+          TriggerDropDownAvailability();
+        }}
+      />
+    );
   } else {
     <div>hello</div>;
   }
@@ -83,6 +102,23 @@ const Banner = () => {
     setDropdownState(!DropdownState);
     setDropdownValue("Boxing");
     console.log(DropdownState);
+  };
+
+  const search_action = () => {
+    let payload = {
+      query: {
+        location: queryObject.location,
+        date: getFormatDate(date, "YYYY-MM-DD"),
+        trainingType: queryObject.vertical,
+        availability: queryObject.availability,
+      },
+    };
+
+    console.log(payload);
+
+    updateTrainerDetails(payload);
+
+    history.push("/trainer/find");
   };
   return (
     <div className="background">
@@ -119,7 +155,7 @@ const Banner = () => {
                   className="custom_dropdown"
                   onClick={TriggerVerticalDropDown}
                 >
-                  <h2>Select a Category</h2>
+                  <h2>{`${queryObject.vertical || "Select a Category"}`}</h2>
                   <img src={TrainerVerticalIcon} ali="icon" />
                 </div>
                 <div className="home_dropdown">{DropdownTraining}</div>
@@ -155,14 +191,14 @@ const Banner = () => {
                   className="custom_dropdown"
                   onClick={TriggerDropDownAvailability}
                 >
-                  <h2>Select a Time</h2>
+                  <h2>{`${queryObject.availability || "Select a Time"}`}</h2>
                   <img src={AvailabilityIcon} ali="icon" />
                 </div>
                 <div className="home_dropdown">{DropdownHomeAvailability}</div>
               </div>
             </div>
             <div className="item5">
-              <button className="circle">
+              <button className="circle" onClick={search_action}>
                 <BiSearch />
               </button>
             </div>
@@ -217,5 +253,20 @@ function DropDownSVG() {
     </svg>
   );
 }
+
+const mapStateToProps = (state) => ({
+  trainerQueryData: state.trainerReducer.query,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateTrainerDetails,
+    },
+    dispatch
+  );
+};
+
+const Banner = connect(mapStateToProps, mapDispatchToProps)(BannerFC);
 
 export default Banner;
