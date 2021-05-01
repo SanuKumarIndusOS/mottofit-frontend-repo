@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 import Radio from "@material-ui/core/Radio";
 import paymentMethodImg from "../../../assets/files/UserOnboard/PaymentAsset/Card Icons.png";
@@ -14,18 +14,25 @@ import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CardForm from "./subcomponents/CardForm";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { updateUserDetails } from "action/userAct";
 
 const stripePromise = loadStripe(
   "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
 );
 
-const UserPayments = () => {
+const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
   //for material ui radio buttom (temp)
   const [selectedValue, setSelectedValue] = React.useState("a");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+
+  useEffect(() => {
+    console.log(sessionData);
+  }, []);
   //
   return (
     <>
@@ -210,5 +217,23 @@ const UserPayments = () => {
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateUserDetails,
+    },
+    dispatch
+  );
+};
+
+const UserPayments = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserPaymentsFC);
 
 export default UserPayments;

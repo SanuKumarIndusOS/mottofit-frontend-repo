@@ -6,6 +6,7 @@ import { history } from "../helpers";
 import CodeSplitter from "helpers/CodeSplitter";
 import { compareDates } from "service/helperFunctions";
 import { logout } from "service/utilities";
+import { NotificationContainer } from "react-notifications";
 class RoutesClass extends Component {
   constructor(props) {
     super(props);
@@ -122,6 +123,7 @@ class RoutesClass extends Component {
               );
             }
           )}
+          <NotificationContainer />
         </Suspense>
       </Router>
     );

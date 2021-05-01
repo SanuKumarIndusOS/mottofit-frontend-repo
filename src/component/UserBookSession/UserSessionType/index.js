@@ -14,6 +14,11 @@ import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { updateUserDetails } from "action/userAct";
+import { updateTrainerDetails } from "action/trainerAct";
+import { history } from "helpers";
 
 const options = [
   { value: "nyw", label: "New York" },
@@ -22,13 +27,37 @@ const options = [
   { value: "plam", label: "Plam Beach" },
 ];
 
+const trainingVenueOptions = [
+  { value: "trainerlocation", label: "Trainer's Location" },
+  { value: "yourlocation", label: "Your Location" },
+];
+
 const closeIcon = <img src={CloseIcon} alt="close" />;
-const UserBookSession = () => {
+const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
   const [selectedOption, setSelectedOption] = useState([]);
+  const [trainingVenue, setTrainingVenue] = useState([]);
+
+  const [preferedTrainingMode, setPreferedTrainingMode] = useState("");
 
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);
+
+  const handleBookSession = (price) => {
+    let storeData = {
+      sessionData: {
+        location: selectedOption,
+        trainingVenue,
+        preferedTrainingMode,
+        price,
+      },
+    };
+
+    console.log("called");
+    updateUserDetails(storeData);
+
+    history.push("/user/payment");
+  };
 
   return (
     <>
@@ -61,10 +90,26 @@ const UserBookSession = () => {
                     <div className="sesstion_tabslist container">
                       <TabList>
                         <Tab tabFor="virtual">
-                          <button>Virtual</button>
+                          <button
+                            onClick={() => setPreferedTrainingMode("virtual")}
+                            className={`${
+                              preferedTrainingMode === "virtual" ? "active" : ""
+                            }`}
+                          >
+                            Virtual
+                          </button>
                         </Tab>
                         <Tab tabFor="inPerson">
-                          <button>In Person</button>
+                          <button
+                            onClick={() => setPreferedTrainingMode("inperson")}
+                            className={`${
+                              preferedTrainingMode === "inperson"
+                                ? "active"
+                                : ""
+                            }`}
+                          >
+                            In Person
+                          </button>
                         </Tab>
                       </TabList>
                       <div className="session_location_dd">
@@ -79,9 +124,10 @@ const UserBookSession = () => {
                         <div className="session_venue">
                           <div className="session_location">
                             <Select
-                              defaultValue={selectedOption}
-                              onChange={setSelectedOption}
-                              options={options}
+                              defaultValue={trainingVenue}
+                              onChange={setTrainingVenue}
+                              options={trainingVenueOptions}
+                              placeholder="Select Training Venue"
                               className="session_location_select"
                             />
                           </div>
@@ -149,7 +195,7 @@ const UserBookSession = () => {
 
                               <img src={TrainerIcon} alt="icon" />
                             </div>
-                            <button>
+                            <button onClick={() => handleBookSession(20)}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -176,7 +222,7 @@ const UserBookSession = () => {
                               </h6>
                               <img src={Social} alt="icon" />
                             </div>
-                            <button>
+                            <button onClick={() => handleBookSession(15)}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -203,7 +249,7 @@ const UserBookSession = () => {
                               </h6>
                               <img src={ClassIcon} alt="icon" />
                             </div>
-                            <button>
+                            <button onClick={() => handleBookSession(20)}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -232,7 +278,7 @@ const UserBookSession = () => {
 
                               <img src={TrainerIcon} alt="icon" />
                             </div>
-                            <button>
+                            <button onClick={() => handleBookSession(120)}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -254,7 +300,7 @@ const UserBookSession = () => {
                               </h6>
                               <img src={Social} alt="icon" />
                             </div>
-                            <button>
+                            <button onClick={() => handleBookSession(20)}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -276,7 +322,7 @@ const UserBookSession = () => {
                               </h6>
                               <img src={ClassIcon} alt="icon" />
                             </div>
-                            <button>
+                            <button onClick={() => handleBookSession(30)}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -294,5 +340,23 @@ const UserBookSession = () => {
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateUserDetails,
+    },
+    dispatch
+  );
+};
+
+const UserBookSession = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserBookSessionFC);
 
 export default UserBookSession;

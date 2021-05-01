@@ -2,6 +2,7 @@ import { UserActionType } from "service/actionType";
 
 const initialState = {
   data: "",
+  sessionData: {},
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {
@@ -9,7 +10,7 @@ export default (state = Object.assign({}, initialState), { type, payload }) => {
     case UserActionType.updateUserDetails:
       return {
         ...state,
-        data: payload,
+        ...payload,
       };
     default:
       return state;

@@ -164,6 +164,23 @@ const routers = [
       },
     ],
   },
+
+  {
+    component: "TrainerDashboardLayout",
+    path: "/trainers/dashboard",
+    auth: false,
+    name: "TrainerDashboard",
+    exact: false,
+    childrens: [
+      {
+        path: "/session",
+        componentPath: "pages/TrainerDashboard/Session/index",
+        name: "TrainerSession",
+        auth: false,
+        exact: true,
+      },
+    ],
+  },
 ];
 
 export default routers;

@@ -7,6 +7,8 @@ const initialState = {
     trainingType: "",
     availability: "",
   },
+  details: {},
+  data: {},
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {

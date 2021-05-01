@@ -91,8 +91,14 @@ export const compareDates = (date1, date2 = moment(), unit = "h") => {
   // return moment.unix(date1);
 };
 
-export const getFormatDate = (date = moment(), format = "YYYY-MM-DD") => {
-  return moment(date).format(format);
+export const getFormatDate = (
+  date = moment(),
+  format = "YYYY-MM-DD",
+  isUnix = false
+) => {
+  return isUnix
+    ? moment.unix(date).format(format)
+    : moment(date).format(format);
 };
 // export const getFormatDateOnly = (date) => {
 //   let newDate = moment(date).format("DD MM YYYY");

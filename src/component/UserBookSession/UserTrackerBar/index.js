@@ -25,7 +25,7 @@ const UserTracker = () => {
   let PaymentText;
 
   // ScheduleBarIcon
-  if (window.location.pathname === "/user-onboard/schedule") {
+  if (window.location.pathname.includes("/user/scheduler")) {
     ScheduleIconBar = <img src={ScheduleIcon} alt="icon" />;
     SessionIconBar = <img src={Session} alt="icon" />;
     MottoIconBar = <img src={Motto} alt="icon" />;
@@ -41,7 +41,7 @@ const UserTracker = () => {
 
   // SessionBar
 
-  if (window.location.pathname === "/user-onboard/book-session") {
+  if (window.location.pathname.includes("/user/session-type")) {
     ScheduleIconBar = <img src={ScheduleIcon} alt="icon" />;
     SessionIconBar = <img src={SessionActive} alt="icon" />;
     MottoIconBar = <img src={Motto} alt="icon" />;
@@ -56,7 +56,7 @@ const UserTracker = () => {
     PaymentText = <p className="inactive">Make a Payment</p>;
   }
 
-  if (window.location.pathname === "/user-onboard/motto-pass") {
+  if (window.location.pathname.includes("/user/motto-pass")) {
     ScheduleIconBar = <img src={ScheduleIcon} alt="icon" />;
     SessionIconBar = <img src={SessionActive} alt="icon" />;
     MottoIconBar = <img src={MottoActive} alt="icon" />;
@@ -70,7 +70,7 @@ const UserTracker = () => {
     PaymentText = <p className="inactive">Make a Payment</p>;
   }
 
-  if (window.location.pathname === "/user-onboard/user-payments") {
+  if (window.location.pathname.includes("/user/payment")) {
     ScheduleIconBar = <img src={ScheduleIcon} alt="icon" />;
     SessionIconBar = <img src={SessionActive} alt="icon" />;
     MottoIconBar = <img src={MottoActive} alt="icon" />;

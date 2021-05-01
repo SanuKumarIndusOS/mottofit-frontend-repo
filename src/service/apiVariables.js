@@ -40,4 +40,20 @@ export const TrainerApi = {
     api: "trainer",
     method: "put",
   },
+  getTrainerApi: {
+    api: "trainer",
+    method: "get",
+  },
+  getTrainerSessionApi: {
+    url: "session/trainer",
+    method: "get",
+    iscalenderView: false,
+    baseURL: "session",
+    get api() {
+      return this.url;
+    },
+    set addQuery({ key, payload }) {
+      this.query[key] = payload;
+    },
+  },
 };

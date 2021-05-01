@@ -10,6 +10,11 @@ import Footer from "../../../common/Footer/index";
 import "./accordion.scss";
 import "./styles.scss";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
+import { TrainerApi } from "service/apiVariables";
+import { api } from "service/api";
 
 const CyanRadio = withStyles({
   root: {
@@ -19,7 +24,11 @@ const CyanRadio = withStyles({
   },
   checked: {},
 })((props) => <Radio color="default" {...props} />);
-const TrainerCard = () => {
+const TrainerCardFC = ({
+  updateTrainerDetails,
+  trainerPersonalData,
+  getTrainerDetails,
+}) => {
   const history = useHistory();
 
   const data = {
@@ -37,6 +46,19 @@ const TrainerCard = () => {
 
   const [image, setImage] = useState();
   const [previewImage, setPreviewTmage] = useState();
+  const [trainerData, setTrainerData] = useState({
+    firstName: "",
+    lastName: "",
+    description: "",
+    individualCharge: "",
+    ssTwoPeopleCharge: "",
+    ssThreePeopleCharge: "",
+    ssFourPeopleCharge: "",
+    classFlatRate: "",
+    threeSessionRate: "",
+    tenSessionRate: "",
+    amtPerPerson: "",
+  });
   const fileInputRef = useRef();
 
   // for radio button
@@ -59,8 +81,72 @@ const TrainerCard = () => {
   }, [image]);
 
   const handleChangeToTrainerProfile = () => {
+    let storeData = {
+      details: { ...trainerData },
+    };
+    updateTrainerDetails(storeData);
     history.push("/trainer/setup");
   };
+
+  const handleInputChange = ({ target: { name, value } }) => {
+    const tempData = {
+      ...trainerData,
+    };
+
+    tempData[name] = value;
+
+    setTrainerData(tempData);
+  };
+
+  useEffect(() => {
+    getTrainerDetails().then((data) => {
+      const {
+        firstName,
+        lastName,
+        description,
+        socialSessionPricing,
+        oneOnOnePricing,
+        classSessionPricing,
+      } = data || {};
+
+      if (data) {
+        // console.log(data);
+        const {
+          inPeronAtClientLocationfor2People = "",
+          inPeronAtClientLocationfor3People = "",
+          inPeronAtClientLocationfor4People = "",
+        } = socialSessionPricing || {};
+
+        const {
+          passRatefor3Session = "",
+          passRatefor10Session = "",
+          inPersonAtClientLocation = "",
+        } = oneOnOnePricing || {};
+
+        const { inPersonAtclientLocationfor15People = "" } =
+          classSessionPricing || {};
+
+        const storeData = {
+          details: {
+            firstName,
+            lastName,
+            description,
+            individualCharge: inPersonAtClientLocation,
+            ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
+            ssThreePeopleCharge: inPeronAtClientLocationfor3People,
+            ssFourPeopleCharge: inPeronAtClientLocationfor4People,
+            classFlatRate: inPersonAtclientLocationfor15People,
+            threeSessionRate: passRatefor3Session,
+            tenSessionRate: passRatefor10Session,
+          },
+        };
+
+        setTrainerData(storeData.details);
+
+        updateTrainerDetails(storeData);
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -140,11 +226,20 @@ const TrainerCard = () => {
                 <div className="card_item2 ">
                   <div className="card_innerItem">
                     <h6>First Name</h6>
-                    <input />
+                    <input
+                      type="text"
+                      name="firstName"
+                      onChange={handleInputChange}
+                      value={trainerData.firstName}
+                    />
                   </div>
                   <div className="card_innerItem">
                     <h6>Last Name</h6>
-                    <input />
+                    <input
+                      name="lastName"
+                      onChange={handleInputChange}
+                      value={trainerData.lastName}
+                    />
                   </div>
                 </div>
                 <div className="card_item3">
@@ -192,9 +287,11 @@ const TrainerCard = () => {
                   <h6>{data.clientDesc}</h6>
                   <textarea
                     type="text"
-                    name="comment"
+                    value={trainerData.description}
+                    name="description"
                     placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into
                                             your full profile."
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="card_item5">
@@ -205,13 +302,22 @@ const TrainerCard = () => {
                   <Accordion title="In Person Training Session Pricing (at the clients location)">
                     <div className="card_accordion">
                       <div className="iconwrapper">
-                        <input type="text" placeholder="Individual charge" />
+                        <input
+                          type="text"
+                          placeholder="Individual charge"
+                          onChange={handleInputChange}
+                          value={trainerData.individualCharge}
+                          name="individualCharge"
+                        />
                         <img src={DollarIcon} alt="icon" />
                       </div>
                       <div className="iconwrapper">
                         <input
                           type="text"
                           placeholder="Social Session (Total Charge for 2 People)"
+                          onChange={handleInputChange}
+                          value={trainerData.ssTwoPeopleCharge}
+                          name="ssTwoPeopleCharge"
                         />
                         <img src={DollarIcon} alt="icon" />
                       </div>
@@ -220,6 +326,9 @@ const TrainerCard = () => {
                         <input
                           type="text"
                           placeholder="Social Session (Total Charge for 3 People)"
+                          onChange={handleInputChange}
+                          value={trainerData.ssThreePeopleCharge}
+                          name="ssThreePeopleCharge"
                         />
                         <img src={DollarIcon} alt="icon" />
                       </div>
@@ -227,6 +336,9 @@ const TrainerCard = () => {
                         <input
                           type="text"
                           placeholder="Social Session (Total Charge for 4 People)"
+                          onChange={handleInputChange}
+                          value={trainerData.ssFourPeopleCharge}
+                          name="ssFourPeopleCharge"
                         />
                         <img src={DollarIcon} alt="icon" />
                       </div>
@@ -234,15 +346,30 @@ const TrainerCard = () => {
                         <input
                           type="text"
                           placeholder="Class Flat Rate (5-15 People)"
+                          onChange={handleInputChange}
+                          value={trainerData.classFlatRate}
+                          name="classFlatRate"
                         />
                         <img src={DollarIcon} alt="icon" />
                       </div>
                       <div className="iconwrapper">
-                        <input type="text" placeholder="3 Session Rate" />
+                        <input
+                          type="text"
+                          placeholder="3 Session Rate"
+                          onChange={handleInputChange}
+                          value={trainerData.threeSessionRate}
+                          name="threeSessionRate"
+                        />
                         <img src={DollarIcon} alt="icon" />
                       </div>
                       <div className="iconwrapper">
-                        <input type="text" placeholder="10 Session Pass Rate" />
+                        <input
+                          type="text"
+                          placeholder="10 Session Pass Rate"
+                          onChange={handleInputChange}
+                          value={trainerData.tenSessionRate}
+                          name="tenSessionRate"
+                        />
                         <img src={DollarIcon} alt="icon" />
                       </div>
                     </div>
@@ -253,6 +380,9 @@ const TrainerCard = () => {
                         <input
                           type="text"
                           placeholder="Dollar Amount Per Person"
+                          onChange={handleInputChange}
+                          value={trainerData.amtPerPerson}
+                          name="amtPerPerson"
                         />
                         <img src={DollarIcon} alt="icon" />
                       </div>
@@ -298,5 +428,22 @@ function Accordion({ title, children }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  details: state.trainerReducer.details,
+  trainerPersonalData: state.trainerReducer.data,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateTrainerDetails,
+      getTrainerDetails,
+    },
+    dispatch
+  );
+};
+
+const TrainerCard = connect(mapStateToProps, mapDispatchToProps)(TrainerCardFC);
 
 export default TrainerCard;
