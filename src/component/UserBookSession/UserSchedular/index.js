@@ -11,7 +11,7 @@ import {useLocation} from 'react-router-dom'
 const UserEventSchedular = () => {
 
   const location = useLocation() 
-  console.log(location.state["trainerId"]);
+//  console.log(location.state["trainerId"]);
   return (
     <>
       <div className="event_outter_container">
@@ -42,7 +42,8 @@ const UserEventSchedular = () => {
                   </div>
                 </div>
                  <div className="container">
-                 <UserScheduler trainerID={location.state["trainerId"]}/>
+                 {/* <UserScheduler trainerID={location.state["trainerId"]}/> */}
+                 <UserScheduler/>
                 </div> 
                
                 <Link to="/user/session-type" style={{marginBottom:"500px"}}>

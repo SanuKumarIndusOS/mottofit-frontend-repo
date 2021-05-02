@@ -12,6 +12,12 @@ import Select from "react-select";
 
 import BlueArrowHover from "../common/BlueArrowButton";
 
+function useForceUpdate() {
+  console.log("updating");
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue((value) => value + 1); // update the state to force render
+}
+
 const options = [
   { value: "nyw", label: "New York" },
   { value: "maimi", label: "Maimi" },
@@ -19,14 +25,22 @@ const options = [
   { value: "plam", label: "Plam Beach" },
 ];
 
-function Scheduler(props) {
+function Scheduler() {
+  const forceUpdate = useForceUpdate();
+
   const [date, setDate] = React.useState([]);
   const [startWeek, setstartWeek] = React.useState(moment().startOf("isoWeek"));
   const [endWeek, setendWeek] = React.useState(moment().endOf("isoWeek"));
 
   React.useEffect(() => {
+    var time = moment("02:00 AM", "hh:mm A")
+      .add(30, "minutes")
+      .format("hh:mm A");
+
+    console.log(time);
+
     populate(startWeek, endWeek);
-    console.log(props.trainerID);
+    console.log();
   }, []);
 
   const PreviousWeek = () => {
@@ -74,7 +88,7 @@ function Scheduler(props) {
   ];
 
   const [data, setData] = React.useState([]);
-//   JSON.parse(localStorage.getItem("user-info"))["token"]
+  //   JSON.parse(localStorage.getItem("user-info"))["token"]
   React.useEffect(() => {
     console.log("check effect");
     populate(startWeek, endWeek);
@@ -83,7 +97,8 @@ function Scheduler(props) {
       {
         method: "GET",
         headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYxOTk3NDc0OSwiZXhwIjoxNjE5OTgxOTQ5fQ.0ze5BaUfDtbEtQfYZ6VC8eaVEHsqI8WqiqOYsZOJgf8",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYxOTk4Mzk4MCwiZXhwIjoxNjE5OTkxMTgwfQ.m1dd3oTi1HhIVvw0XvO_KNoRExIR81Ylk-xdq_lsdOo",
         },
       }
     )
@@ -114,7 +129,7 @@ function Scheduler(props) {
     lt[item] = ta;
   });
 
-  console.log(ta);
+  console.log(lt);
 
   // Dropdown time zone
   const [selectedOption, setSelectedOption] = useState([]);
@@ -140,6 +155,31 @@ function Scheduler(props) {
   const TriggerDropDownTrainerAvailability = () => {
     setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
     setDropdownTrainerAvailabilityValue("Boxing");
+  };
+
+  var cellCollection = [];
+
+  const setCellSelection = (time, date) => {
+    cellCollection = [];
+    var temp = lt[date];
+    console.log(time, date, temp);
+
+    cellCollection.push(time + date);
+
+    var newTime = moment(time, "hh:mm A").add(30, "minutes").format("hh:mm A");
+
+    if (temp.find((el) => el === newTime)) {
+      console.log("found");
+      cellCollection.push(newTime + date);
+      console.log(cellCollection);
+    } else {
+      console.log("not_found");
+      var prevTime = moment(newTime, "hh:mm A")
+        .subtract(60, "minutes")
+        .format("hh:mm A");
+      cellCollection.push(prevTime + date);
+      console.log(cellCollection);
+    }
   };
 
   return (
@@ -255,27 +295,45 @@ function Scheduler(props) {
             </tr>
           </thead>
           <tbody>
+            {/* //REMEMBER TO STOP forceUpdate for tests */}
             {time.map((time) => {
               return (
                 <tr key={time}>
                   {date.map((t) => {
                     if (Object.keys(dt).find((el) => el === t)) {
-                      // console.log(dt[t][0]["end"], t);
-                      // console.log(lt[t]);
+                      // console.log(dt[t], t);
+                      //  console.log(lt[t]);
                       if (lt[t].find((el) => el === time)) {
-                        return (
-                          <td
-                            style={{
-                              backgroundColor: "#F8F8F8",
-                              border: "2px solid #E6E6E6",
-                              height: "70px",
-                            }}
-                            key={time + t}
-                            onClick={() => {
-                              console.log(time + t);
-                            }}
-                          ></td>
-                        );
+                        if (cellCollection.find((el) => el === time + t)) {
+                          return (
+                            <td
+                              style={{
+                                backgroundColor: "red",
+                                border: "2px solid #E6E6E6",
+                                height: "70px",
+                              }}
+                              key={time + t}
+                              onClick={() => {
+                                setCellSelection(time, t);
+                               
+                              }}
+                            ></td>
+                          );
+                        }else
+                        {
+                         return ( <td
+                          style={{
+                            backgroundColor: "#F8F8F8",
+                            border: "2px solid #E6E6E6",
+                            height: "70px",
+                          }}
+                          key={time + t}
+                          onClick={() => {
+                            setCellSelection(time, t);
+                           
+                          }}
+                        ></td>)
+                        }
                       } else {
                         return <td key={time + t}></td>;
                       }
