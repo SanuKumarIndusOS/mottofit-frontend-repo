@@ -158,6 +158,7 @@ function Scheduler() {
   };
 
   var cellCollection = [];
+  const [cellColor, setCellColor] = useState([]);
 
   const setCellSelection = (time, date) => {
     cellCollection = [];
@@ -180,6 +181,8 @@ function Scheduler() {
       cellCollection.push(prevTime + date);
       console.log(cellCollection);
     }
+
+    setCellColor(cellCollection)
   };
 
   return (
@@ -304,35 +307,34 @@ function Scheduler() {
                       // console.log(dt[t], t);
                       //  console.log(lt[t]);
                       if (lt[t].find((el) => el === time)) {
-                        if (cellCollection.find((el) => el === time + t)) {
+                        if (cellColor.find((el) => el === time + t)) {
                           return (
                             <td
                               style={{
-                                backgroundColor: "red",
+                                backgroundColor: "#53bfd2 ",
+                                border: "2px solid #53bfd2 ",
+                                height: "70px",
+                              }}
+                              key={time + t}
+                              onClick={() => {
+                                setCellSelection(time, t);
+                              }}
+                            ></td>
+                          );
+                        } else {
+                          return (
+                            <td
+                              style={{
+                                backgroundColor: "#F8F8F8",
                                 border: "2px solid #E6E6E6",
                                 height: "70px",
                               }}
                               key={time + t}
                               onClick={() => {
                                 setCellSelection(time, t);
-                               
                               }}
                             ></td>
                           );
-                        }else
-                        {
-                         return ( <td
-                          style={{
-                            backgroundColor: "#F8F8F8",
-                            border: "2px solid #E6E6E6",
-                            height: "70px",
-                          }}
-                          key={time + t}
-                          onClick={() => {
-                            setCellSelection(time, t);
-                           
-                          }}
-                        ></td>)
                         }
                       } else {
                         return <td key={time + t}></td>;
