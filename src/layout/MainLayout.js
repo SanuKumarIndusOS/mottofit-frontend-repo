@@ -26,7 +26,7 @@ export class MainLayout extends Component {
         <NavBar toggle={() => this.toggle("isOpen")} />
         <SideBar isOpen={isOpen} toggle={this.toggle} />
         <div className="main-layout">{children}</div>
-        <Footer />
+        {/* <Footer /> */}
       </>
     );
   }

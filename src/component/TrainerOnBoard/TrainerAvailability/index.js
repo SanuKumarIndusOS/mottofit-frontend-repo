@@ -12,6 +12,8 @@ import "./model.scss";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
+import {useLocation} from 'react-router-dom'
+import { history } from "helpers";
 // hoursPerWeek
 // preferedTrainingMode
 // serviceableCity
@@ -29,6 +31,8 @@ const CyanRadio = withStyles({
 })((props) => <Radio color="default" {...props} />);
 
 const TrainerAvailability = (props) => {
+
+  const location = useLocation() 
   const [selectedValue, setSelectedValue] = React.useState("a");
   const [selectedOneValue, setSelectedOneValue] = React.useState("");
 
@@ -64,19 +68,19 @@ const TrainerAvailability = (props) => {
     // console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
 
     let data = {
-      location: props.location.state[0]["location"],
-      DOB: props.location.state[0]["dob"],
-      gender: props.location.state[0]["gender"],
-      instagramProfile: props.location.state[0]["instagram"],
+      location: location.state[0]["location"],
+      DOB: location.state[0]["dob"],
+      gender: location.state[0]["gender"],
+      instagramProfile: location.state[0]["instagram"],
       facebookProfile: "https://facebook.com/kljdhpersonaltrainer",
       linkedInProfile: "https://linkedin.com/kljdhpersonaltrainer",
       referalCode: "gh678lJJ",
-      areaOfExpertise: props.location.state[0]["areaOfExpertise"],
+      areaOfExpertise: location.state[0]["areaOfExpertise"],
       trainingAvailability: "Fulltime",
       preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
       willingToTravel: trainerAvailabilityData.willingToTravel,
       servicableLocation: trainerAvailabilityData.servicableLocation,
-      currentExperience: props.location.state[1]["currentExperience"],
+      currentExperience: location.state[1]["currentExperience"],
       previousExperience: [
         {
           workMode: "S FITNESS & CROSSFIT STUDIO",
@@ -84,10 +88,10 @@ const TrainerAvailability = (props) => {
           yearsOfExperience: "2 Years",
         },
       ],
-      trainingProcess: props.location.state[1]["trainingProcess"],
+      trainingProcess: location.state[1]["trainingProcess"],
       profilePicture: "img location",
-      interestInMotto: props.location.state[1]["interestInMotto"],
-      clientAssessment: props.location.state[1]["clientAssessment"],
+      interestInMotto: location.state[1]["interestInMotto"],
+      clientAssessment: location.state[1]["clientAssessment"],
       trainingFacility: true,
       trainingFacilityLocation: [
         trainerAvailabilityData.trainingFacilityLocation,
@@ -104,7 +108,7 @@ const TrainerAvailability = (props) => {
       stripeId: "",
       hoursPerWeek: trainerAvailabilityData.hoursPerWeek,
       serviceableCity: trainerAvailabilityData.servicableLocation,
-      websiteLink: props.location.state[0]["websiteURL"],
+      websiteLink: location.state[0]["websiteURL"],
       youtubeLink: "jfjdld",
       certification: [
         { certificateName: "", certfiedYear: "", certification: "" },
@@ -143,11 +147,14 @@ const TrainerAvailability = (props) => {
     api({ ...updateTrainerAvailabilityApi })
       .then(() => {
         setOpen(true);
+       
       })
       .catch((error) => {
         console.error("Error:", error);
         setOpen(false);
       });
+
+    
 
     // fetch("http://doodlebluelive.com:2307/v1/trainer", {
     //   method: "PUT", // or 'PUT'
@@ -168,11 +175,7 @@ const TrainerAvailability = (props) => {
     //   })
   };
 
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-  //   console.log("trainerBackground", props.location.state);
-  //   setTrainerAbout(props.location.state)
-  // });
+
 
   return (
     <>
@@ -308,7 +311,7 @@ const TrainerAvailability = (props) => {
                 {open ? (
                   <Modal
                     open={open}
-                    onClose={() => setOpen(false)}
+                    onClose={() =>{ setOpen(false);  history.push('card');}}
                     center
                     closeIcon={closeIcon}
                     container={myRef.current}

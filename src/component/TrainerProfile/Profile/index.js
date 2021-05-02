@@ -14,7 +14,7 @@ import Quote from "../../../assets/files/FindTrainer/Quote Icon.svg";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
-const TrainerProfile =  () => {
+const TrainerProfile = () => {
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);
@@ -250,7 +250,10 @@ const TrainerProfile =  () => {
                   </div>
                   <div className="profile_right_item4">
                     <h2>Jane’s Schedule </h2>
-                    <div className="profile_event_schedular">
+                    <div
+                      className="profile_event_schedular"
+                      onClick={() => console.log("hello")}
+                    >
                       Event schedular in pending
                     </div>
                   </div>

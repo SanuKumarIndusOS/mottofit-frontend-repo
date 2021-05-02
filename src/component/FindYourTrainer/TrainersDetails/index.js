@@ -5,6 +5,7 @@ import onHoverImage from "../../../assets/files/FindTrainer/onHover.svg";
 import onImage from "../../../assets/files/SignUp/Arrow.svg";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
 import { Link } from "react-router-dom";
+import { history } from "helpers";
 
 function useHover() {
   const [value, setValue] = useState(false);
@@ -40,7 +41,7 @@ const TrainerCards = (props) => {
     setbestMatchData(props.content);
 
     Object.keys(bestMatchData).map((item) => {
-      console.log(bestMatchData[item]);
+      console.log(bestMatchData[item], "best");
     });
   });
   const [hoverRef, isHovered] = useHover();
@@ -78,7 +79,7 @@ const TrainerCards = (props) => {
                   <h6>{data.role}</h6>
                   <p>
                     {data.describe}
-                    <Link to="trainer-profile">Read More</Link>
+                    <Link to="profile">Read More</Link>
                   </p>
                 </div>
                 <div className="card-button">
@@ -86,6 +87,13 @@ const TrainerCards = (props) => {
                     ref={hoverRef}
                     style={{
                       backgroundColor: isHovered ? "red" : "#53BFD2",
+                    }}
+                    onClick={() => {
+                      console.log(bestMatchData[data]["id"]);
+                      history.push({
+                        pathname: "/user/scheduler",
+                        state: { trainerId: bestMatchData[data]["id"] },
+                      });
                     }}
                   >
                     book a session

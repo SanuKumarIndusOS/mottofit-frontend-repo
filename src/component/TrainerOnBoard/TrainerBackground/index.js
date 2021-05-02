@@ -43,10 +43,10 @@ const TrainerBackground = (props) => {
 
   const [checkstate, setCheckState] = React.useState("");
 
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-  //   console.log("trainerBackground", props.location.state);
-  // });
+  React.useEffect(() => {
+    // Update the document title using the browser API
+    console.log("trainerBackground", props.location.state);
+  });
 
   // const history = useHistory();
   const AboutTrainer = props.location.state;
@@ -414,10 +414,10 @@ const TrainerBackground = (props) => {
                         color: "#FFFFFF",
                       }}
                       type="submit"
-                      //  onClick={handleTrainerAvailability}
+                       // onClick={handleTrainerAvailability}
                       to={{
                         pathname: "/trainer/avaliability",
-                        state: [trainerbackgroundData, AboutTrainer],
+                        state: [ AboutTrainer, trainerbackgroundData],
                       }}
                     >
                       Continue

@@ -4,7 +4,14 @@ import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import UserScheduler from "../../UserScheduler/Scheduler"
+import {useLocation} from 'react-router-dom'
+
+
 const UserEventSchedular = () => {
+
+  const location = useLocation() 
+  console.log(location.state["trainerId"]);
   return (
     <>
       <div className="event_outter_container">
@@ -34,10 +41,11 @@ const UserEventSchedular = () => {
                     <p>STRENGTH & HIIT</p>
                   </div>
                 </div>
-                <div className="event_schedular_slot container">
-                  Event Schedular pending
-                </div>
-                <Link to="/user-onboard/book-session">
+                 <div className="container">
+                 <UserScheduler trainerID={location.state["trainerId"]}/>
+                </div> 
+               
+                <Link to="/user/session-type" style={{marginBottom:"500px"}}>
                   CONTINUE <ArrowHoverBlacked />{" "}
                 </Link>
               </div>

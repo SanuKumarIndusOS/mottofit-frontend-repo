@@ -213,7 +213,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

@@ -161,7 +161,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                       <div className="input_items">
                         <input
                           placeholder="Phone"
-                          type="text"
+                          type="number"
                           value={data.phoneNumber}
                           name="phoneNumber"
                           onChange={onChangeValue}

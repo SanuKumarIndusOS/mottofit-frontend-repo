@@ -57,6 +57,14 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     updateUserDetails(storeData);
 
     history.push("/user/payment");
+    // if(price === 20)
+    // {
+    //   history.push("/user/moto-pass");
+    // }else
+    // {
+    //   history.push("/user/payment");
+    // }
+   
   };
 
   return (
@@ -336,7 +344,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

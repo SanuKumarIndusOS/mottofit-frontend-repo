@@ -6,7 +6,7 @@ import UserMottoPass from "component/UserBookSession/UserMottoPass/index";
 export default function index() {
     return (
         <div>
-            <UserTracker/>
+             <UserTracker/> 
             <UserMottoPass/>
         </div>
     )
