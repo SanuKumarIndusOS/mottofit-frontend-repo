@@ -36,7 +36,7 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetails }) => {
             loc: venue,
             previousImg: Jenny,
             prevHeading: "Yoga with Kane",
-            prevDate: "02 May 2021",
+            prevDate: getFormatDate(sessionData, "DD MMMM YYYY"),
           })
         );
       });
@@ -314,7 +314,7 @@ const TabFour = ({ datas = [] }) => {
                             <img src={data.previousImg} alt="profile" />
                           </div>
                           <div className="row_previous_header">
-                            <h2>{data.prevHeading}</h2>
+                            <h2 className="text-capitalize">{data.heading}</h2>
                             <p>{data.prevDate}</p>
                           </div>
                         </div>
