@@ -1,5 +1,5 @@
-import React from 'react'
-import './styles.scss'
+import React from "react";
+import "./styles.scss";
 const BlueHoverButton = () => {
     return (
         <div className="check_blue">
@@ -13,7 +13,7 @@ const BlueHoverButton = () => {
                 <div className="circle_blue"></div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default BlueHoverButton
+export default BlueHoverButton;

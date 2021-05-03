@@ -32,7 +32,7 @@
             position: relative;
             top: -490px;
             right: -200px;
-            width: 175px !important;
+            width: 134px !important;
             height: 229px !important;
             bottom: center;
             @media screen and (max-width: 1023px) {
@@ -44,7 +44,7 @@
             display: flex;
             height: auto;
             width: 100%;
-            justify-content: space-around;
+            justify-content: space-between;
             margin: 0;
             padding: 0;
             @media screen and (max-width: 1024px) {
@@ -65,7 +65,7 @@
                 display: flex;
                 width: 240px;
                 height: 310px;
-                margin: 0 1em;
+                margin: 0 1em 0 0;
                 flex-direction: column;
                 img {
                     width: 270px;
@@ -80,16 +80,15 @@
                 .link_button {
                     display: flex;
                     width: 270px;
-
+                    height: 70px;
                     text-transform: uppercase;
                     justify-content: flex-start !important;
                     align-items: center;
                     background: #53bfd2;
-                    height: 70px;
                     color: #fff;
                     font-size: 16px;
                     font-weight: bold;
-                    padding: 0.4em 0 0.4em 0.8em !important;
+                    padding: 0.5em 0 0.5em 0.8em !important;
                     font: var(--unnamed-font-style-normal) normal
                         var(--unnamed-font-weight-bold)
                         var(--unnamed-font-size-18) /
@@ -130,13 +129,13 @@
 
     .personal_container {
         display: grid;
-        grid-template-columns: 35% 65%;
-        grid-column-gap: 30px;
+        grid-template-columns: 38% 58%;
+        grid-column-gap: 40px;
         width: 100%;
         align-items: flex-start;
         height: 500px;
-        margin-top: 10em;
-        padding: 3em 2em !important;
+        margin-top: 15em;
+        padding: 3em 0em !important;
         @media screen and (max-width: 1023px) {
             grid-template-columns: auto;
             height: auto;
@@ -223,7 +222,7 @@
             display: grid;
             grid-template-columns: auto auto;
             grid-template-rows: auto;
-            grid-column-gap: 50px;
+            grid-column-gap: 0px;
             height: 550px;
             margin-top: 10px;
             @media screen and (max-width: 1023px) {
@@ -244,7 +243,10 @@
                 height: 100px;
             }
             .discription_home {
-                font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-normal)
+                    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-32)
+                    var(--unnamed-font-family-montserrat);
                 text-align: left;
                 letter-spacing: 0.3px;
                 color: #2c2c2c;
@@ -252,7 +254,7 @@
                 opacity: 1;
                 font-size: 20px;
                 font-family: Montserrat;
-                font: normal normal normal 20px/32px Montserrat;
+                font: normal normal normal 18px/32px Montserrat;
                 font-weight: normal;
                 @media screen and (max-width: 1023px) {
                     font: normal normal normal 16px/22px Montserrat;

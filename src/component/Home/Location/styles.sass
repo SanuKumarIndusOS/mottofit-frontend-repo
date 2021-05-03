@@ -14,14 +14,12 @@ $small-text: #696969
     align-content: center
     width: 100%
     background: #f6f6f6
-    // min-width: 1200px
-    // max-width: 1920px
     height: 858px
     @media screen and (max-width:920px)
         padding: 0 2em
 
     .inner_location
-        padding: 5em
+        padding: 5em 3em
 
     .header-content
         display: flex
@@ -29,14 +27,16 @@ $small-text: #696969
         align-items: center
         justify-content: center
         h1
-            font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-45)/var(--unnamed-line-spacing-55) var(--unnamed-font-family-cormorant-garamond);
+            font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-45)/var(--unnamed-line-spacing-55) var(--unnamed-font-family-cormorant-garamond)
             font-size: 45px
             text-align: center
-            font: normal normal bold 45px/55px Cormorant Garamond;
-            margin-top: 0.5em 
-            color: #161616;
-            opacity: 1;
-            
+            font: normal normal bold 45px/55px Cormorant Garamond
+            margin-top: 0.5em
+            color: #161616
+            opacity: 1
+            letter-spacing: var(--unnamed-character-spacing--0-45)
+            margin-bottom: 20px
+
         p
             font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-montserrat)
             letter-spacing: var(--unnamed-character-spacing-0-27)
@@ -45,15 +45,14 @@ $small-text: #696969
             letter-spacing: 0.27px
             color: #696969
             opacity: 1
-            width: 80%
+            width: 733px
 
             @media screen and (max-width:1120px)
-                width: 70%
 
                 padding: 0
                 margin: 0
     .slider_wrapper_container
-        padding: 0 2em
+        padding: 2em 2em 1em 2em
         .slick-slider
             display: flex
             width: 100%
@@ -79,6 +78,7 @@ $small-text: #696969
                             color: $small-text
                             font-size: 18px
                             font-weight: 700
+
                             text-transform: uppercase
 
                         .slide-image

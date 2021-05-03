@@ -11,7 +11,7 @@ function ArrowHoverBlacked() {
                     <div className="arrow right"></div>
                 </div>
                 <div className="arrow2 right" id="cube"></div>
-                <div className="circle"></div>
+                <div className="circle_black"></div>
             </div>
         </div>
     );

@@ -5,24 +5,24 @@ import Rectangle from "../../../assets/files/TrainerSignUp/ExperienceTrainer/Rec
 import TessaWilson from "../../../assets/files/Home/Location/tessa-wilson.jpeg";
 
 export const SlideData = [
-  {
-    name: "New york city",
-    image: NYC,
-    line: Rectangle,
-  },
-  {
-    name: "Miami",
-    image: Miami,
-    line: Rectangle,
-  },
-  {
-    name: "Hamptons",
-    image: Hamptons,
-    line: Rectangle,
-  },
-  {
-    name: "Palm Beach",
-    image: TessaWilson,
-    line: Rectangle,
-  },
+    {
+        name: "New york city",
+        image: NYC,
+        line: Rectangle,
+    },
+    {
+        name: "Miami",
+        image: Miami,
+        line: Rectangle,
+    },
+    {
+        name: "Hamptons",
+        image: Hamptons,
+        line: Rectangle,
+    },
+    {
+        name: "Palm Beach",
+        image: TessaWilson,
+        line: Rectangle,
+    },
 ];

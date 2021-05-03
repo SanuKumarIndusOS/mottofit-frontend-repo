@@ -1,6 +1,7 @@
 .tracker_main {
     background-color: #000;
     width: 100%;
+
     .wrapper_item {
         // background: yellowgreen;
         display: flex;
@@ -33,6 +34,16 @@
                 text-decoration: underline;
                 text-decoration-thickness: 2px;
                 text-decoration-color: #53bfd2;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-bold) 15px /
+                    var(--unnamed-line-spacing-22)
+                    var(--unnamed-font-family-montserrat);
+                color: var(--unnamed-color-ffffff);
+                text-align: center;
+                font: normal normal bold 15px/22px Montserrat;
+                letter-spacing: 0.75px;
+                color: #ffffff;
+                text-transform: uppercase;
             }
 
             .inactive {
@@ -42,6 +53,16 @@
                 font-weight: bold;
                 margin: 0;
                 margin-top: 10px;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-600) 15px /
+                    var(--unnamed-line-spacing-22)
+                    var(--unnamed-font-family-montserrat);
+                color: var(--unnamed-color-898989);
+                text-align: center;
+                font: normal normal 600 15px/22px Montserrat;
+                letter-spacing: 0.75px;
+                color: #898989;
+                text-transform: uppercase;
             }
 
             .completed {
@@ -51,6 +72,16 @@
                 font-weight: bold;
                 margin: 0;
                 margin-top: 10px;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-600) 15px /
+                    var(--unnamed-line-spacing-22)
+                    var(--unnamed-font-family-montserrat);
+                color: var(--unnamed-color-ffffff);
+                text-align: center;
+                font: normal normal 600 12px/22px Montserrat;
+                letter-spacing: 0.75px;
+                color: #ffffff;
+                text-transform: uppercase;
             }
         }
     }

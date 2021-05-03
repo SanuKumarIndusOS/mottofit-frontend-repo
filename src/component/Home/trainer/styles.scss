@@ -1,18 +1,22 @@
 .outter_bg_container {
     .background_container {
-        background: transparent url("../../../assets/files/Home/trainer/Apply As A Trainer 1.png") no-repeat;
+        background: transparent
+            url("../../../assets/files/Home/trainer/Apply As A Trainer 1.png")
+            no-repeat;
         background-size: cover;
         opacity: 1;
-        height: 605px;
+        max-height: 650px;
+        height: 650px;
         width: 100%;
 
         display: grid;
-        grid-template-columns: 45% 65%;
+        grid-template-columns: 40% 60%;
 
         position: relative;
 
         @media screen and (max-width: 1024px) {
-            background: url("../../../assets/files/Home/trainer/Woman Image.png") 0% 0% no-repeat;
+            background: url("../../../assets/files/Home/trainer/Woman Image.png")
+                0% 0% no-repeat;
             width: 100%;
         }
 
@@ -21,10 +25,11 @@
             flex-direction: column;
             max-width: 740px;
             max-height: 40%;
-            width: 85%;
+            width: 87%;
             padding-right: 200px;
             padding-top: 85px;
             position: relative;
+            left: 80px;
 
             @media screen and (max-width: 1024px) {
                 margin-top: 10em;
@@ -35,8 +40,10 @@
             }
 
             .qustion {
-                font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-                    var(--unnamed-font-size-35) / var(--unnamed-line-spacing-54) var(--unnamed-font-family-montserrat);
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-bold) var(--unnamed-font-size-35) /
+                    var(--unnamed-line-spacing-54)
+                    var(--unnamed-font-family-montserrat);
                 letter-spacing: var(--unnamed-character-spacing-0);
                 color: var(--unnamed-color-161616);
                 text-align: left;
@@ -59,8 +66,10 @@
             }
             .answer {
                 margin-top: 1em;
-                font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal)
-                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32) var(--unnamed-font-family-montserrat);
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-normal)
+                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32)
+                    var(--unnamed-font-family-montserrat);
                 letter-spacing: var(--unnamed-character-spacing-0-27);
                 color: var(--unnamed-color-2c2c2c);
                 text-align: left;
@@ -119,8 +128,10 @@
                     display: flex;
                     align-items: center;
                     padding-right: 1em;
-                    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-18) / var(--unnamed-line-spacing-22)
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-bold)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-22)
                         var(--unnamed-font-family-montserrat);
                     color: var(--unnamed-color-161616);
                     text-align: right;

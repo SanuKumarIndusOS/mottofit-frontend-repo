@@ -156,7 +156,7 @@ const LocationTrainer = () => {
         ],
     };
     return (
-        <div className="slide-container">
+        <div className="slide-container_trainer">
             <div className="inner_location container">
                 <div className="header-content">
                     <h1>We are in these Cities</h1>
@@ -166,28 +166,29 @@ const LocationTrainer = () => {
                         launching in other cities across the United States soon.
                     </p>
                 </div>
-
-                <Slider {...settings}>
-                    {SlideData.map((slide, index) => {
-                        return (
-                            <div className="main-slide" key={index}>
-                                <div className="slide-content">
-                                    <img
-                                        src={slide.image}
-                                        alt={slide.name}
-                                        className="slide-image"
-                                    />
-                                    <img
-                                        src={slide.line}
-                                        alt={slide.name}
-                                        className="slide-line"
-                                    />
-                                    <p>{slide.name}</p>
+                <div className="slider_wrapper_container">
+                    <Slider {...settings}>
+                        {SlideData.map((slide, index) => {
+                            return (
+                                <div className="main-slide" key={index}>
+                                    <div className="slide-content">
+                                        <img
+                                            src={slide.image}
+                                            alt={slide.name}
+                                            className="slide-image"
+                                        />
+                                        <img
+                                            src={slide.line}
+                                            alt={slide.name}
+                                            className="slide-line"
+                                        />
+                                        <p>{slide.name}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </Slider>
+                            );
+                        })}
+                    </Slider>
+                </div>
             </div>
         </div>
     );

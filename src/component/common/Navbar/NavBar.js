@@ -10,45 +10,52 @@ import Line2 from "../../../assets/files/SVG/Blue Line 2.svg";
 import SignIn from "../../SignIn/Banner";
 
 export const NavBar = ({ toggle }) => {
-  const [showModel, setShowModel] = useState(false);
+    const [showModel, setShowModel] = useState(false);
 
-  const openModal = () => {
-    setShowModel((prev) => !prev);
-  };
+    const openModal = () => {
+        setShowModel((prev) => !prev);
+    };
 
-  return (
-    <>
-      <nav className="navbar1 ">
-        <div className="nav_wrapper container">
-          <div className="header-links1">
-            <Link to="/how-it-works">How it works</Link>
-            <img src={Line} alt="icon" />
-            <Link to="/trainer/find">Who we are</Link>
-          </div>
-          <Bars onClick={toggle} />
-          <div className="logo-content1">
-            <Link to="">
-              <img src={LogoImage} alt="logo" className="changeLogo1" />
-            </Link>
-          </div>
-          <div className="search-items1">
-            <div className="input-item1">
-              <input
-                className="input"
-                type="text"
-                placeholder="Rotating prompts go here"
-              ></input>
-              <BiSearch className="search-icon1" />
-            </div>
-            <div className="login-item1">
-              <img src={Line2} alt="icon" />
+    return (
+        <>
+            <nav className="navbar1 ">
+                <div className="nav_wrapper container">
+                    <div className="header-links1">
+                        <Link to="/how-it-works">How it works</Link>
+                        <img src={Line} alt="icon" />
+                        <Link to="/who-we-are">Who we are</Link>
+                    </div>
+                    <Bars onClick={toggle} />
+                    <div className="logo-content1">
+                        <Link to="">
+                            <img
+                                src={LogoImage}
+                                alt="logo"
+                                className="changeLogo1"
+                            />
+                        </Link>
+                    </div>
+                    <div className="search-items1">
+                        <div className="input-item1">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Rotating prompts go here"
+                            ></input>
+                            <BiSearch className="search-icon1" />
+                        </div>
+                        <div className="login-item1">
+                            <img src={Line2} alt="icon" />
 
-              <img src={Person} alt="icon" onClick={openModal} />
-              <SignIn showModel={showModel} setShowModel={setShowModel} />
-            </div>
-          </div>
-        </div>
-      </nav>
-    </>
-  );
+                            <img src={Person} alt="icon" onClick={openModal} />
+                            <SignIn
+                                showModel={showModel}
+                                setShowModel={setShowModel}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </>
+    );
 };

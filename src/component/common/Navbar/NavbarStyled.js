@@ -38,13 +38,13 @@ export const NavLink = styled(Link)`
     align-items: center;
     text-decoration: none;
     padding: 0 1rem;
-    margin:0 0.5em;
+    margin: 0 0.5em;
     height: 100%;
     cursor: pointer;
 
     @media screen and (max-width: 1200px) {
         padding: 0;
-        display:none
+        display: none;
     }
 `;
 
@@ -53,7 +53,7 @@ export const Bars = styled(FaBars)`
     color: #bcbcbc;
     @media screen and (max-width: 1024px) {
         display: flex;
-        align-items:center;
+        align-items: center;
         font-size: 1.8rem;
         cursor: pointer;
     }

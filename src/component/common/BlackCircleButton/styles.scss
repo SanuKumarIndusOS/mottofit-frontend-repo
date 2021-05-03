@@ -24,7 +24,7 @@
 
 .line_btn {
     height: 3px;
-    width: 27px;
+    width: 28px;
     background-color: white;
     position: relative;
     right: 9px;
@@ -66,7 +66,7 @@
     height: 100%;
     width: 100%;
     position: relative;
-    right: 40px;
+    right: 60px;
     //   background-color: #53bfd2;
     align-items: center;
     justify-content: center;
@@ -84,17 +84,15 @@
     opacity: 0;
 }
 
-.circle {
-    height: 40px;
-    width: 40px;
-    border-radius: 60px;
-    border: 2px solid #161616;
+.circle_black {
+    height: 35px;
+    width: 34px;
+    border-radius: 100px;
     position: relative;
     left: 50px;
     bottom: 0px;
-    border: 2px solid #000;
-
-    /* background-color: brown; */
+    border: 2.5px solid var(--unnamed-color-161616);
+    border: 2.5px solid #161616;
 }
 
 .button_text {

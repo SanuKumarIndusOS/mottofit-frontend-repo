@@ -1,15 +1,21 @@
 .banner_container_trainer {
     width: 100%;
-    height: 800px;
+    max-height: 825px;
+    height: 825px;
+
     background: url("../../../assets/files/TrainerSignUp/Banner Image.png"),
-        linear-gradient(0deg, #ffffff00 0%, #38222159 51%, #2b1514a7 100%) 0% 0% no-repeat padding-box;
+        linear-gradient(0deg, #ffffff00 0%, #38222159 51%, #2b1514a7 100%) 0% 0%
+            no-repeat padding-box;
     background-size: 100%;
     opacity: 0s;
     background-repeat: no-repeat;
-    mix-blend-mode: multiply;
+    display: flex;
+    align-items: center;
+    background-blend-mode: multiply;
+
     .wrapper_main {
         display: grid;
-        grid-template-columns: 55% 45%;
+        grid-template-columns: 49% 45%;
         grid-template-rows: auto;
         align-items: center;
         @media screen and (max-width: 1023px) {
@@ -18,9 +24,8 @@
 
         .item_left {
             text-align: left;
-            width: 60%;
             position: relative;
-            top: -80px;
+            top: 1px;
             @media screen and (max-width: 1023px) {
                 margin: 0 auto;
                 text-align: center;
@@ -29,7 +34,8 @@
             h2 {
                 width: 539px;
                 height: 147px;
-                font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 60px/75px
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-600) 60px/75px
                     var(--unnamed-font-family-cormorant-garamond);
                 color: var(--unnamed-color-ffffff);
                 text-align: left;
@@ -42,8 +48,10 @@
             h6 {
                 width: 500px;
                 height: 61px;
-                font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-medium)
-                    var(--unnamed-font-size-20) / 35px var(--unnamed-font-family-montserrat);
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-medium)
+                    var(--unnamed-font-size-20) / 35px
+                    var(--unnamed-font-family-montserrat);
                 letter-spacing: var(--unnamed-character-spacing-0-3);
                 color: var(--unnamed-color-ffffff);
                 text-align: left;
@@ -52,6 +60,9 @@
                 color: #ffffff;
                 text-shadow: 0px 3px 6px #62412329;
                 opacity: 1;
+                font-size: 20px;
+                font-family: Montserrat;
+                font-weight: 400;
             }
         }
         .item_right {
@@ -62,7 +73,7 @@
         }
     }
     .wrapper {
-        margin: 3em 0 2em 0;
+        margin: 5em 0 2em 0;
 
         @media screen and (max-width: 1023px) {
             width: 80%;
@@ -72,19 +83,23 @@
         }
         .item_right {
             border-radius: 10px;
-            width: 530px;
-            height: auto;
+            width: 570px;
+
+            height: 770px;
+
             background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
             background: #ffffff 0% 0% no-repeat padding-box;
             box-shadow: 0px 3px 12px #16161626;
             opacity: 1;
             .inner_items {
                 margin: 0.5em;
-                padding: 2em 0 0 0;
+                padding: 4.5em 0 0 0;
 
                 h3 {
-                    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-45) / var(--unnamed-line-spacing-55)
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-bold)
+                        var(--unnamed-font-size-45) /
+                        var(--unnamed-line-spacing-55)
                         var(--unnamed-font-family-cormorant-garamond);
                     letter-spacing: var(--unnamed-character-spacing--0-45);
                     color: var(--unnamed-color-161616);
@@ -94,8 +109,10 @@
                     color: #161616;
                 }
                 p {
-                    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32)
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-32)
                         var(--unnamed-font-family-montserrat);
                     letter-spacing: var(--unnamed-character-spacing-0-27);
                     color: var(--unnamed-color-2c2c2c);
@@ -105,19 +122,21 @@
                     color: #2c2c2c;
                 }
             }
-            .form_items {
+            .form_items_trainer {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
                 justify-content: center;
                 width: 100%;
+                color: #242424;
 
-                .input_items {
+                .input_items_trainer {
                     display: flex;
                     flex-direction: column;
                     position: relative;
                     padding: 0.5em 0;
                     width: 80%;
+                    color: #242424;
 
                     input {
                         width: 425px;
@@ -127,13 +146,22 @@
                         border-radius: 30px;
                         opacity: 1;
                         padding: 0 1.5em;
+                        color: #242424;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500 !important;
                     }
                     input:focus {
                         outline: none;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 400 !important;
                     }
                     input::placeholder {
                         font-family: Montserrat;
                         font-size: 18px;
+                        color: #bcbcbc;
+                        font-weight: 400 !important;
                     }
 
                     img {
@@ -189,7 +217,8 @@
                         justify-content: center;
                         width: 425px;
                         height: 52px;
-                        background: var(--unnamed-color-53bfd2) 0% 0% no-repeat padding-box;
+                        background: var(--unnamed-color-53bfd2) 0% 0% no-repeat
+                            padding-box;
                         background: #53bfd2 0% 0% no-repeat padding-box;
                         opacity: 1;
 
@@ -198,8 +227,10 @@
                             padding: 0 0.5em 0 0.5em;
                             display: flex;
                             margin: 0;
-                            font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-                                var(--unnamed-font-size-18) / var(--unnamed-line-spacing-22)
+                            font: var(--unnamed-font-style-normal) normal
+                                var(--unnamed-font-weight-bold)
+                                var(--unnamed-font-size-18) /
+                                var(--unnamed-line-spacing-22)
                                 var(--unnamed-font-family-montserrat);
                             color: var(--unnamed-color-161616);
                             text-align: right;
@@ -241,16 +272,17 @@
                 justify-content: center;
 
                 h4 {
-                    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-500)
-                        var(--unnamed-font-size-22) / var(--unnamed-line-spacing-38)
-                        var(--unnamed-font-family-montserrat);
-                    font: normal normal 800 22px/38px Montserrat;
-                    margin: 2em 0 0 0;
+                    margin: 2em 0 1em 0;
+                    font-size: 22px;
+                    font-weight: 500;
+                    font-family: Montserrat;
                 }
                 a {
                     text-decoration: none;
-                    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-18) / var(--unnamed-line-spacing-22)
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-bold)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-22)
                         var(--unnamed-font-family-montserrat);
                     color: var(--unnamed-color-161616);
                     font: normal normal bold 18px/22px Montserrat;
@@ -259,6 +291,9 @@
                     text-transform: uppercase;
                     opacity: 1;
                     margin-bottom: 3em;
+                    display: flex;
+                    align-items: center;
+                    margin-left: 31px;
                 }
             }
         }

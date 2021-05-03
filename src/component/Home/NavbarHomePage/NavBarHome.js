@@ -11,70 +11,81 @@ import "./styles.scss";
 import SignIn from "../../SignIn/Banner";
 
 const NavBarHome = ({ toggle }) => {
-  const [navbar, setNavbar] = useState(false);
-  const [showModel, setShowModel] = useState(false);
-  const [logo, setLogo] = useState(false);
+    const [navbar, setNavbar] = useState(false);
+    const [showModel, setShowModel] = useState(false);
+    const [logo, setLogo] = useState(false);
 
-  const openModal = () => {
-    setShowModel((prev) => !prev);
-  };
+    const openModal = () => {
+        setShowModel((prev) => !prev);
+    };
 
-  useEffect(() => {
-    setNavbar(true);
-    return () => setNavbar(false);
-  }, []);
+    useEffect(() => {
+        setNavbar(true);
+        return () => setNavbar(false);
+    }, []);
 
-  const changeBackground = () => {
-    if (window.scrollY >= 100) {
-      setNavbar(true);
-      setLogo(true);
-    } else {
-      setNavbar(false);
-      setLogo(false);
-    }
-  };
-  window.addEventListener("scroll", changeBackground);
+    const changeBackground = () => {
+        if (window.scrollY >= 100) {
+            setNavbar(true);
+            setLogo(true);
+        } else {
+            setNavbar(false);
+            setLogo(false);
+        }
+    };
+    window.addEventListener("scroll", changeBackground);
 
-  return (
-    <Nav className={navbar ? "navbaractive active" : "navbar-sass"}>
-      <div className="main_navbar container ">
-        <div className="header-links">
-          <Link to="/how-it-works">How it works</Link>
-          <img src={Line} alt="icon" />
-          <Link to="/trainer/find">Who we are</Link>
-        </div>
-        <Bars onClick={toggle} />
-        <div className="logo-content_home">
-          {logo ? (
-            <Link to="/welcome">
-              {" "}
-              <img src={LogoImage} alt="logo" className="changeLogo" />
-            </Link>
-          ) : (
-            <Link to="/welcome">
-              {" "}
-              <img src={Logo} alt="logo" className="defaultLogo" />{" "}
-            </Link>
-          )}
-        </div>
-        <div className="search-items">
-          <div className="input-item">
-            <input
-              className="input"
-              type="text"
-              placeholder="Rotating prompts go here"
-            />
-            <BiSearch className="search-icon" />
-          </div>
-          <div className="login-item">
-            <img src={Line2} alt="icon" />
-            <img src={Person} alt="icon" onClick={openModal} />
-            <SignIn showModel={showModel} setShowModel={setShowModel} />
-          </div>
-        </div>
-      </div>
-    </Nav>
-  );
+    return (
+        <Nav className={navbar ? "navbaractive active" : "navbar-sass"}>
+            <div className="main_navbar container ">
+                <div className="header-links">
+                    <Link to="/how-it-works">How it works</Link>
+                    <img src={Line} alt="icon" />
+                    <Link to="/who-we-are">Who we are</Link>
+                </div>
+                <Bars onClick={toggle} />
+                <div className="logo-content_home">
+                    {logo ? (
+                        <Link to="/welcome">
+                            {" "}
+                            <img
+                                src={LogoImage}
+                                alt="logo"
+                                className="changeLogo"
+                            />
+                        </Link>
+                    ) : (
+                        <Link to="/welcome">
+                            {" "}
+                            <img
+                                src={Logo}
+                                alt="logo"
+                                className="defaultLogo"
+                            />{" "}
+                        </Link>
+                    )}
+                </div>
+                <div className="search-items">
+                    <div className="input-item">
+                        <input
+                            className="input"
+                            type="text"
+                            placeholder="Rotating prompts go here"
+                        />
+                        <BiSearch className="search-icon" />
+                    </div>
+                    <div className="login-item">
+                        <img src={Line2} alt="icon" />
+                        <img src={Person} alt="icon" onClick={openModal} />
+                        <SignIn
+                            showModel={showModel}
+                            setShowModel={setShowModel}
+                        />
+                    </div>
+                </div>
+            </div>
+        </Nav>
+    );
 };
 
 export default NavBarHome;
