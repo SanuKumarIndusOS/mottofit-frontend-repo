@@ -98,7 +98,7 @@ function Scheduler() {
         method: "GET",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYxOTk4Mzk4MCwiZXhwIjoxNjE5OTkxMTgwfQ.m1dd3oTi1HhIVvw0XvO_KNoRExIR81Ylk-xdq_lsdOo",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDA1NDU1OCwiZXhwIjoxNjIwMDYxNzU4fQ.uLYE30DMXfWhJNo8r6YH3Ug7PlToHPLmn4Xtn1Qxxlc",
         },
       }
     )
@@ -234,19 +234,19 @@ function Scheduler() {
               <td className="ttime">5:00 A.M</td>
             </tr>
             <tr>
-              <td className="ttime">5:30 A.M</td>
+              <td className="ttime"></td>
             </tr>
             <tr>
               <td className="ttime">6:00 A.M</td>
             </tr>
             <tr>
-              <td className="ttime">6.30 A.M</td>
+              <td className="ttime"></td>
             </tr>
             <tr>
               <td className="ttime">7.00 A.M</td>
             </tr>
             <tr>
-              <td className="ttime">7.30 A.M</td>
+              <td className="ttime"></td>
             </tr>
           </tbody>
         </table>

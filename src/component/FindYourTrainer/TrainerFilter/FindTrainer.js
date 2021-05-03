@@ -66,7 +66,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     availability: "EarlyBird",
                 },
             };
-
+           
+            console.log(payload);
             setqueryObject(payload.query);
 
             updateTrainerDetails(payload);
