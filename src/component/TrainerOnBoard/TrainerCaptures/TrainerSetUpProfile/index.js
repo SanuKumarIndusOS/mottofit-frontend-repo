@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { updateTrainerDetails } from "action/trainerAct";
 import Select from "react-select";
 import { history } from "helpers";
-import { TrainerApi } from "service/apiVariables";
+import { TrainerApi, PaymentApi } from "service/apiVariables";
 import { api } from "service/api";
 import { Toast } from "service/toast";
 
@@ -53,6 +53,9 @@ const TrainerSetUpProfileFC = ({
       image: "",
     },
   ]);
+
+  const [isLoading, setLoading] = useState(false);
+
   const [inputCertificatesFields, setInputCertificatesFields] = useState([
     {
       certificate: "",
@@ -181,13 +184,19 @@ const TrainerSetUpProfileFC = ({
 
     updateTrainerAvailabilityApi.body = payload;
 
+    setLoading(true);
+
     api({ ...updateTrainerAvailabilityApi })
       .then(({ data, message }) => {
         console.log(data, message);
+        getStripeURL();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
 
-    history.push("/trainers/dashboard/session");
+    // history.push("/trainers/dashboard/session");
   };
 
   const handleBack = () => {
@@ -196,6 +205,17 @@ const TrainerSetUpProfileFC = ({
     };
 
     updateTrainerDetails(storeData);
+  };
+
+  const getStripeURL = () => {
+    const { getStripeAccLink } = PaymentApi;
+
+    api({ ...getStripeAccLink })
+      .then(({ data, message }) => {
+        const { url } = data;
+        window.location.href = url;
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -480,12 +500,21 @@ const TrainerSetUpProfileFC = ({
                 </div>
                 {/* <PaymentSection /> */}
                 <div className="submit_button">
-                  <button onClick={handleSubmit} type="submit">
-                    <a>
-                      {" "}
-                      Continue to account
-                      <ArrowHoverBlacked />
-                    </a>
+                  <button
+                    onClick={handleSubmit}
+                    type="submit"
+                    disabled={isLoading}
+                    className={`${isLoading ? "loading" : ""}`}
+                  >
+                    {isLoading ? (
+                      "Loading..."
+                    ) : (
+                      <a>
+                        {" "}
+                        Continue to account
+                        <ArrowHoverBlacked />
+                      </a>
+                    )}
                     {/* <img src={Arrow} alt="icon" /> */}
                   </button>
                 </div>

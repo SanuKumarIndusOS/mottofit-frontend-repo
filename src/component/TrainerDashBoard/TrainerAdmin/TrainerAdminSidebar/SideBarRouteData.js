@@ -10,7 +10,7 @@ import LogoutIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/
 export const SideBarRouteData = [
   {
     title: "MY Schedule",
-    path: "/trainer-dashboard/schedule",
+    path: "/trainers/dashboard/schedule",
     icon: <img src={SessionIcon} alt="icon" />,
 
     iconClosed: <RiIcons.RiArrowDownSFill />,
@@ -24,38 +24,38 @@ export const SideBarRouteData = [
 
   {
     title: "Messages",
-    path: "/trainer-dashboard/message",
+    path: "/trainers/dashboard/message",
     icon: <img src={MessageIcon} alt="icon" />,
   },
   {
     title: "My Earnings",
-    path: "/trainer-dashboard/earnings",
+    path: "/trainers/dashboard/earnings",
     icon: <img src={MessageIcon} alt="icon" />,
   },
   {
     title: "Notifications",
-    path: "/trainer-dashboard/notifications",
+    path: "/trainers/dashboard/notification",
     icon: <img src={NotificationIcon} alt="icon" />,
   },
   {
     title: "Settings",
-    path: "/trainer-dashboard/notifications",
+    path: "/trainers/dashboard/settings/profile",
     icon: <img src={SettingIcon} alt="icon" />,
 
     subNav: [
       {
         title: "My Profile",
-        path: "/trainer-dashboard/setting/profile",
+        path: "/trainers/dashboard/settings/profile",
         // icon: <img src={SessionIcon} alt="icon" />,
       },
       {
         title: "Payment History",
-        path: "/trainer-dashboard/setting/payment-history",
+        path: "/trainers/dashboard/settings/payment-history",
         // icon: <img src={SessionIcon} alt="icon" />,
       },
       {
         title: "Notification Settings",
-        path: "/trainer-dashboard/setting/notification",
+        path: "/trainers/dashboard/settings/notification",
         // icon: <img src={SessionIcon} alt="icon" />,
       },
     ],
