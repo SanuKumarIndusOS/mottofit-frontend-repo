@@ -17,6 +17,7 @@ import CardForm from "./subcomponents/CardForm";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
+import { useLocation } from "react-router-dom";
 
 const stripePromise = loadStripe(
   "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
@@ -30,8 +31,11 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
     setSelectedValue(event.target.value);
   };
 
+  const location = useLocation();
+
   useEffect(() => {
-    console.log(sessionData);
+    console.log(location.state.slotDetails, location.state.sessionDatafcom);
+  
   }, []);
   //
   return (
@@ -106,6 +110,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
                               <Link to="/">Session Cancellation Policy</Link>
                             </div>
                           </div> */}
+                         
                       </div>
                       {/* <div className="payment_terms">
                           <input type="checkbox" />
@@ -124,6 +129,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
                   </div>
                 </div>
                 <div className="user_friends">
+                <Link>Continue</Link>
                   <h2>
                     Session cost too high? Train with friends and split the bill
                   </h2>

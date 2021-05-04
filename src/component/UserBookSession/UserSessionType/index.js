@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
+import { useLocation } from "react-router-dom";
 
 const options = [
   { value: "nyw", label: "New York" },
@@ -42,6 +43,11 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    console.log(location.state["slotDetails"]);
+  }, []);
 
   const handleBookSession = (price) => {
     let storeData = {
@@ -53,10 +59,14 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
       },
     };
 
-    console.log("called", storeData);
+    console.log("called", storeData["sessionData"]);
     updateUserDetails(storeData);
 
-    history.push("/user/payment");
+    history.push({
+      pathname: "/user/payment",
+    
+      state: { slotDetails: location.state["slotDetails"], sessionData: storeData["sessionData"] },
+    });
     // if(price === 20)
     // {
     //   history.push("/user/moto-pass");
@@ -64,7 +74,6 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     // {
     //   history.push("/user/payment");
     // }
-   
   };
 
   return (

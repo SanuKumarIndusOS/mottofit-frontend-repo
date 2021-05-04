@@ -4,26 +4,28 @@ import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
-import UserScheduler from "../../UserScheduler/Scheduler"
-import {useLocation} from 'react-router-dom'
-
+import UserScheduler from "../../UserScheduler/Scheduler";
+import { useLocation } from "react-router-dom";
 
 const UserEventSchedular = () => {
-
-  const [trainerName, setTrainerName] = React.useState("")
-  const [activity, setActivity] = React.useState("Boxing")
+  const [trainerName, setTrainerName] = React.useState("");
+  const [activity, setActivity] = React.useState("Boxing");
+  const [trainerSlot, settrainerSlot] = React.useState();
 
   React.useEffect(() => {
-   
-    setTrainerName(location.state["trainerData"]["firstName"])
-   console.log(location.state["trainerData"]);
+    setTrainerName(location.state["trainerData"]["firstName"]);
+    console.log(location.state["trainerData"]);
 
-   console.log(localStorage.getItem("trainertime"), "ee" );
-  
-  }, [])
+    console.log(localStorage.getItem("trainertime"), "ee");
+  }, []);
 
-  const location = useLocation() 
-//  console.log(location.state["trainerId"]);
+  const callbackFunction = (childData) => {
+    console.log(childData, "Callback");
+    settrainerSlot(childData);
+  };
+
+  const location = useLocation();
+  //  console.log(location.state["trainerId"]);
   return (
     <>
       <div className="event_outter_container">
@@ -49,16 +51,35 @@ const UserEventSchedular = () => {
                 <div className="user_profile_details">
                   <img src={Profile} alt="profile" />
                   <div className="user_content">
-                    <h2 style={{textTransform:"capitalize"}}>{trainerName}</h2>
+                    <h2 style={{ textTransform: "capitalize" }}>
+                      {trainerName}
+                    </h2>
                     <p>{activity}</p>
                   </div>
                 </div>
-                 <div className="container">
-                 <UserScheduler trainerID={location.state["trainerId"]}/>
+                <div className="container">
+                  <UserScheduler
+                    trainerID={location.state["trainerId"]}
+                    parentCallback={callbackFunction}
+                  />
                   {/* <UserScheduler/>  */}
-                </div> 
-               
-                <Link to="/user/session-type"  style={{marginBottom:"500px"}}>
+                </div>
+
+                <Link
+                  
+                  to={{
+                    pathname: "/user/session-type",
+                    state: {
+                      slotDetails:{
+                      Name: trainerName,
+                      slot: trainerSlot,
+                      activity: activity,
+                      id: location.state["trainerId"]
+                      }
+                    },
+                  }}
+                  style={{ marginBottom: "500px" }}
+                >
                   CONTINUE <ArrowHoverBlacked />{" "}
                 </Link>
               </div>

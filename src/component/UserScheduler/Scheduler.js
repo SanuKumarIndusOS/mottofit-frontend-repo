@@ -12,11 +12,11 @@ import Select from "react-select";
 
 import BlueArrowHover from "../common/BlueArrowButton";
 
-function useForceUpdate() {
-  console.log("updating");
-  const [value, setValue] = useState(0); // integer state
-  return () => setValue((value) => value + 1); // update the state to force render
-}
+// function useForceUpdate() {
+//     console.log("updating");
+//     const [value, setValue] = useState(0); // integer state
+//     return () => setValue((value) => value + 1); // update the state to force render
+// }
 
 const options = [
   { value: "nyw", label: "New York" },
@@ -26,7 +26,7 @@ const options = [
 ];
 
 function Scheduler(props) {
-  const forceUpdate = useForceUpdate();
+  // const forceUpdate = useForceUpdate();
 
   const [date, setDate] = React.useState([]);
   const [startWeek, setstartWeek] = React.useState(moment().startOf("isoWeek"));
@@ -90,23 +90,20 @@ function Scheduler(props) {
   const [data, setData] = React.useState([]);
   var token;
   //   JSON.parse(localStorage.getItem("user-info"))["token"]
-  token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDExNTEzNywiZXhwIjoxNjIwMTIyMzM3fQ.RnzYvPfdx6c7PsfblyQizSfzl_-pfTmu2RLMoQRn3UY";
   React.useEffect(() => {
-   
-    console.log(
-      "check effect",
-      props.trainerID,
-     
-    );
+    // token = JSON.parse(localStorage.getItem("user-info"))["token"];
+    console.log("check effect", props.trainerID);
 
-   
     populate(startWeek, endWeek);
     fetch(
-      "http://doodlebluelive.com:2307/v1/trainer/calenderView?trainerId="+`${props.trainerID}`+"&startDate=2021-05-01&endDate=2021-05-31&timeBlock=EarlyBird",
+      "http://doodlebluelive.com:2307/v1/trainer/calenderView?trainerId=" +
+        `${props.trainerID}` +
+        "&startDate=2021-05-01&endDate=2021-05-08&timeBlock=EarlyBird",
       {
         method: "GET",
         headers: {
-          Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDExNTQ1MywiZXhwIjoxNjIwMTIyNjUzfQ.AzLYGech_UPY9seJOeBfEdVrESnXNdqYSaYhR1OMXAs",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDExODExNiwiZXhwIjoxNjIwMTI1MzE2fQ.dL5xEDy_44drcxNSxALMq-01FSzQSdjEp9zfAMpgyHU",
         },
       }
     )
@@ -192,7 +189,7 @@ function Scheduler(props) {
 
     setCellColor(cellCollection);
 
-    localStorage.setItem("trainertime", JSON.stringify(cellCollection));
+    props.parentCallback(cellCollection);
   };
 
   return (
@@ -211,20 +208,21 @@ function Scheduler(props) {
                 className="availability"
                 onClick={TriggerDropDownTrainerAvailability}
               >
-                <img src={AvailabilityIcon} alt="icon" />
+                <img src={Earlybrid} alt="icon" />
                 <p>Early Bird</p>
               </div>
             </div>
             {DropdownAvailability}
           </div>
-          {/* <div className="time_zone">
+          <div className="time_zone">
             <Select
               defaultValue={selectedOption}
               onChange={setSelectedOption}
               options={options}
               className="session_location_select"
             />
-          </div> */}
+          </div>
+          <img src={AvailabilityIcon} alt="icon" />
         </div>
       </div>
       <div className="schedular_table">
@@ -239,24 +237,17 @@ function Scheduler(props) {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="schedular_time_display">
             <tr>
-              <td className="ttime">5:00 A.M</td>
+              <td className="schedular_time">5:00 A.M</td>
             </tr>
+
             <tr>
-              <td className="ttime"></td>
+              <td className="schedular_time">6:00 A.M</td>
             </tr>
+
             <tr>
-              <td className="ttime">6:00 A.M</td>
-            </tr>
-            <tr>
-              <td className="ttime"></td>
-            </tr>
-            <tr>
-              <td className="ttime">7.00 A.M</td>
-            </tr>
-            <tr>
-              <td className="ttime"></td>
+              <td className="schedular_time">7.00 A.M</td>
             </tr>
           </tbody>
         </table>
@@ -347,7 +338,15 @@ function Scheduler(props) {
                           );
                         }
                       } else {
-                        return <td key={time + t}></td>;
+                        return (
+                          <td
+                            key={time + t}
+                            style={{
+                              border: "2px solid #E6E6E6",
+                              height: "70px",
+                            }}
+                          ></td>
+                        );
                       }
                     } else {
                       return <td key={time + t}></td>;
