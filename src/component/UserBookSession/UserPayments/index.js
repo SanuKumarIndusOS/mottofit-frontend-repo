@@ -27,6 +27,8 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
   //for material ui radio buttom (temp)
   const [selectedValue, setSelectedValue] = React.useState("a");
 
+  const [price, setprice] = React.useState();
+
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -34,9 +36,48 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.state.slotDetails, location.state.sessionDatafcom);
-  
+    console.log(location.state.slotDetails, location.state.sessionData);
   }, []);
+
+  const ScheduleSession = () => {
+    if (location.state.sessionType === "1on1") {
+      console.log("1on1");
+    
+      fetch("http://doodlebluelive.com:2337/v1/session/schedule", {
+        headers: {
+        
+          "Content-Type": "application/json",
+          'Authorization': localStorage.getItem("token"), 
+        },
+        method: "POST",
+        body: JSON.stringify({
+          
+          trainerId : location.state.slotDetails["id"],
+          title : location.state.slotDetails["Name"] +" " + location.state.slotDetails["activity"],
+          trainingType : "1on1",
+          sessionType :location.state.sessionData["preferedTrainingMode"],
+          activity : location.state.slotDetails["activity"],
+          sessionStatus : "created",
+          sessionDate:location.state.slotDetails["date"],
+          sessionStartTime:location.state.slotDetails["start_slot"],
+          sessionEndTime:location.state.slotDetails["end_slot"],
+          city:location.state.sessionData["location"]["value"],
+          venue:location.state.sessionData["trainingVenue"]["value"],
+          price :20
+         }),
+      })
+        .then(function (res) {
+          console.log(res);
+        })
+        .catch(function (res) {
+          console.log(res);
+        });
+   
+   
+      } else {
+      console.log("social session");
+    }
+  };
   //
   return (
     <>
@@ -110,7 +151,6 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
                               <Link to="/">Session Cancellation Policy</Link>
                             </div>
                           </div> */}
-                         
                       </div>
                       {/* <div className="payment_terms">
                           <input type="checkbox" />
@@ -129,7 +169,9 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
                   </div>
                 </div>
                 <div className="user_friends">
-                <Link>Continue</Link>
+                  <button className="ud_but" onClick={ScheduleSession}>
+                    Continue <ArrowHoverBlacked />
+                  </button>
                   <h2>
                     Session cost too high? Train with friends and split the bill
                   </h2>

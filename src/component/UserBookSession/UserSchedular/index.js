@@ -10,7 +10,9 @@ import { useLocation } from "react-router-dom";
 const UserEventSchedular = () => {
   const [trainerName, setTrainerName] = React.useState("");
   const [activity, setActivity] = React.useState("Boxing");
-  const [trainerSlot, settrainerSlot] = React.useState();
+  const [trainerstartSlot, settrainerstartSlot] = React.useState();
+  const [trainerEndSlot, settrainerEndSlot] = React.useState();
+  const [DateSlot, setDateSlot] = React.useState();
 
   React.useEffect(() => {
     setTrainerName(location.state["trainerData"]["firstName"]);
@@ -19,9 +21,11 @@ const UserEventSchedular = () => {
     console.log(localStorage.getItem("trainertime"), "ee");
   }, []);
 
-  const callbackFunction = (childData) => {
-    console.log(childData, "Callback");
-    settrainerSlot(childData);
+  const callbackFunction = (ts, tss, date) => {
+    console.log(ts,tss, "Callback");
+    settrainerstartSlot(ts);
+    settrainerEndSlot(tss);
+    setDateSlot(date)
   };
 
   const location = useLocation();
@@ -72,7 +76,9 @@ const UserEventSchedular = () => {
                     state: {
                       slotDetails:{
                       Name: trainerName,
-                      slot: trainerSlot,
+                      start_slot: trainerstartSlot,
+                      end_slot: trainerEndSlot,
+                      date: DateSlot,
                       activity: activity,
                       id: location.state["trainerId"]
                       }

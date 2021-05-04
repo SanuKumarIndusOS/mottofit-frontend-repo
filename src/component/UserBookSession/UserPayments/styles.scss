@@ -693,3 +693,17 @@
     // font: normal normal 300 15px/42px Montserrat;
     font-size: 15px !important;
 }
+
+.ud_but
+{
+    height: 50px;
+    width: 250px;
+    margin: 2rem;
+    background-color: #53bfd2 ;
+    font: normal normal bold 18px/22px Montserrat;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

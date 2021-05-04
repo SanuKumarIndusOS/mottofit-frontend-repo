@@ -49,7 +49,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     console.log(location.state["slotDetails"]);
   }, []);
 
-  const handleBookSession = (price) => {
+  const handleBookSession = (price, sessionType) => {
     let storeData = {
       sessionData: {
         location: selectedOption,
@@ -65,7 +65,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     history.push({
       pathname: "/user/payment",
     
-      state: { slotDetails: location.state["slotDetails"], sessionData: storeData["sessionData"] },
+      state: { slotDetails: location.state["slotDetails"], sessionData: storeData["sessionData"], sessionType:sessionType },
     });
     // if(price === 20)
     // {
@@ -212,7 +212,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
 
                               <img src={TrainerIcon} alt="icon" />
                             </div>
-                            <button onClick={() => handleBookSession(20)}>
+                            <button onClick={() => handleBookSession(20,"1on1")}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -239,7 +239,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               </h6>
                               <img src={Social} alt="icon" />
                             </div>
-                            <button onClick={() => handleBookSession(15)}>
+                            <button onClick={() => handleBookSession(15, "group")}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -266,7 +266,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               </h6>
                               <img src={ClassIcon} alt="icon" />
                             </div>
-                            <button onClick={() => handleBookSession(20)}>
+                            <button onClick={() => handleBookSession(20, "class")}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>

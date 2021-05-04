@@ -37,7 +37,10 @@ function Scheduler(props) {
       .add(30, "minutes")
       .format("hh:mm A");
 
-    console.log(time);
+    //var ts = moment("10/15/2014 09:00 AM", "M/D/YYYY H:mm").valueOf();
+   
+
+   // console.log(ts);
 
     populate(startWeek, endWeek);
     console.log();
@@ -103,7 +106,7 @@ function Scheduler(props) {
         method: "GET",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDExODExNiwiZXhwIjoxNjIwMTI1MzE2fQ.dL5xEDy_44drcxNSxALMq-01FSzQSdjEp9zfAMpgyHU",
+          localStorage.getItem("token"),
         },
       }
     )
@@ -173,11 +176,14 @@ function Scheduler(props) {
     cellCollection.push(time + date);
 
     var newTime = moment(time, "hh:mm A").add(30, "minutes").format("hh:mm A");
-
+    var ts = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm").valueOf();
+    var tss; 
     if (temp.find((el) => el === newTime)) {
-      console.log("found");
+      console.log("found", date);
       cellCollection.push(newTime + date);
       console.log(cellCollection);
+      tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm").add(60,"minutes").valueOf();
+
     } else {
       console.log("not_found");
       var prevTime = moment(newTime, "hh:mm A")
@@ -185,11 +191,15 @@ function Scheduler(props) {
         .format("hh:mm A");
       cellCollection.push(prevTime + date);
       console.log(cellCollection);
+      tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm").subtract(30,"minutes").valueOf();
+
     }
 
     setCellColor(cellCollection);
-
-    props.parentCallback(cellCollection);
+    
+    
+    console.log(ts, `${date} ${time}`, tss);
+    props.parentCallback(ts, tss, date);
   };
 
   return (
