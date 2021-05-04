@@ -37,6 +37,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 1em;
+
             .availability_dropdown_outter {
                 height: 25px;
                 display: flex;
@@ -55,8 +57,16 @@
                         padding: 0 1em;
                         p {
                             width: 100%;
-
+                            text-align: left;
+                            letter-spacing: 0.2px;
+                            color: #898989;
+                            opacity: 1;
+                            font-family: Montserrat;
+                            font-size: 20px;
+                            font-weight: 600;
                             margin: 0 1em;
+                            position: relative;
+                            top: 1px;
                         }
                     }
                 }
@@ -70,17 +80,13 @@
                     background-color: transparent;
 
                     .css-1uccc91-singleValue {
-                        font: var(--unnamed-font-style-normal) normal
-                            var(--unnamed-font-weight-600)
-                            var(--unnamed-font-size-20) /
-                            var(--unnamed-line-spacing-42)
-                            var(--unnamed-font-family-montserrat);
-                        color: var(--unnamed-color-898989);
                         text-align: left;
-                        font: normal normal 600 20px/42px Montserrat;
                         letter-spacing: 0.2px;
                         color: #898989;
                         opacity: 1;
+                        font-family: Montserrat;
+                        font-size: 20px;
+                        font-weight: 600;
                     }
 
                     .css-1hb7zxy-IndicatorsContainer {
@@ -88,6 +94,11 @@
                             display: none;
                         }
                     }
+                }
+                .css-1wa3eu0-placeholder {
+                    font-family: Montserrat;
+                    font-size: 20px;
+                    font-weight: 600;
                 }
             }
         }
@@ -113,7 +124,8 @@
 
                         color: #898989;
                         img {
-                            width: 20px;
+                            width: 50px;
+                            padding-bottom: 0.5em;
                             height: 40px;
                         }
                         .schedular_selection_header {
@@ -129,15 +141,12 @@
             .schedular_time_display {
                 tr {
                     .schedular_time {
+                        background-color: white;
+                        border: 1px solid #e6e6e6;
+                        height: 140px;
                         display: flex;
                         align-items: flex-start;
                         justify-content: center;
-                        // border-left: 2px solid #e6e6e6;
-                        // border-right: 2px solid #e6e6e6;
-                        width: 130px;
-                        height: 50px;
-                        cursor: pointer;
-                        background-color: #bfbfbf;
                         font: var(--unnamed-font-style-normal) normal
                             var(--unnamed-font-weight-600)
                             var(--unnamed-font-size-20) /
@@ -149,8 +158,8 @@
                         letter-spacing: 0.6px;
                         color: #161616;
                         text-transform: uppercase;
-                        padding-top: 2em;
-                        border: 1px solid #e6e6e6;
+                        opacity: 1;
+                        padding-top: 1em;
                     }
                 }
             }
