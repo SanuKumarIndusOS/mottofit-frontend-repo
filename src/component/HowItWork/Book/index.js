@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Icon1 from "../../../assets/files/Home/Experience/icon/Icon1.png";
-import Icon2 from "../../../assets/files/Home/Experience/icon/Icon2.png";
-import Icon3 from "../../../assets/files/Home/Experience/icon/Icon3.png";
+import Icon1 from "../../../assets/files/HowItWorks/Icon 1.svg";
+import Icon2 from "../../../assets/files/HowItWorks/Icon 2.svg";
+import Icon3 from "../../../assets/files/HowItWorks/Icon 3.svg";
+
 import "./styles.scss";
 import BlueHoverButton from "component/common/BlueArrowButton";
 

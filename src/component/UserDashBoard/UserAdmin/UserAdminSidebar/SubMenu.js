@@ -9,7 +9,7 @@ const SidebarLink = styled(Link)`
     color: #e1e9fc;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0 20px 33px;
+    padding: 20px 0 20px 35px;
     list-style: none;
     height: 70px;
     text-decoration: none;
@@ -19,14 +19,17 @@ const SidebarLink = styled(Link)`
     &:hover {
         font-weight: 700;
         background: #53bfd2;
+        text-decoration: none;
     }
     &:focus {
         font-weight: 700;
         background: #53bfd2;
+        text-decoration: none;
     }
     &:active {
         font-weight: 700;
         background: #53bfd2;
+        text-decoration: none;
     }
 `;
 
@@ -49,63 +52,6 @@ const SidebarLabel = styled.span`
     &:hover {
         font-weight: 700;
         background: #53bfd2;
-    }
-    &:focus {
-        font-weight: 700;
-        background: #53bfd2;
-    }
-    &:active {
-        font-weight: 700;
-        background: #53bfd2;
-    }
-`;
-const DropdownLabel = styled.p`
-    /* margin: 0 0 40px 0; */
-    font-size: 18px;
-    padding: 0 0 20px 0 !important;
-    font: var(--unnamed-font-style-normal) normal
-        var(--unnamed-font-weight-normal) 16px/38px
-        var(--unnamed-font-family-montserrat);
-    letter-spacing: var(--unnamed-character-spacing-0);
-    color: var(--unnamed-color-898989);
-    text-align: left;
-    font: normal normal normal 16px/38px Montserrat;
-    letter-spacing: 0px;
-    color: #898989;
-    width: 100%;
-    text-transform: none;
-    opacity: 1;
-    /* height: 50px; */
-
-    &:hover {
-        font-weight: 500;
-        background: #53d2;
-    }
-    &:focus {
-        font-weight: 500;
-        background: #5fd2;
-    }
-    &:active {
-        font-weight: 500;
-        background: #5d2;
-    }
-`;
-
-const DropdownLink = styled(Link)`
-    background: #5125;
-    height: 50px;
-    padding-left: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    text-decoration: none;
-    color: #f5f5f5;
-    font-size: 18px;
-    padding: 5em;
-
-    &:hover {
-        font-weight: 700;
-        background: #5fd2;
     }
     &:focus {
         font-weight: 700;

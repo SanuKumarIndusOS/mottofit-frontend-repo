@@ -14,70 +14,31 @@ import SubMenu from "./TrainerAdminSidebar/SubMenu";
 import TrainerSession from "../DashboardCompontents/TrainerSession";
 // import TrainerNotification from "../TrainerDashboardCompontents/TrainerNotification";
 // import TrainerMessage from "../TrainerDashboardCompontents/TrainerMessages";
+import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
+
 const TrainerDashboardTemp = ({ children }) => {
-  return (
-    <>
-      {/* <Router> */}
-      {/* <NavBar /> */}
-      <div className="admin_container">
-        <div className="admin_sidenav">
-          <div className="admin_profile">
-            <div className="profile_pic"></div>
-            <h2>User Name</h2>
-          </div>
-
-          <div className="admin_sidenav_links">
-            {SideBarRouteData.map((item, index) => {
-              return <SubMenu item={item} key={index} />;
-            })}
-          </div>
-        </div>
-        <div className="admin_content">
-          <div className="top_bar"></div>
-          <div className="admin_content">
-            {children}
-            {/* <Sidebar /> */}
-            {/* <Switch>
-                <Route
-                  path="/trainer-dashboard/schedule"
-                  exact
-                  component={TrainerSchedule}
-                />
-                <Route
-                  path="/trainer-dashboard/session"
-                  exact
-                  component={TrainerSession}
-                />
-                <Route
-                  path="/trainer-dashboard/message"
-                  exact
-                  component={TrainerMessage}
-                />
-
-                <Route
-                  path="/trainer-dashboard/earnings"
-                  exact
-                  component={TrainerMyEarnings}
-                />
-
-                <Route
-                  path="/trainer-dashboard/notifications"
-                  exact
-                  component={TrainerNotification}
-                />
-                <Route
-                  path="/trainer-dashboard/setting/profile"
-                  exact
-                  component={MyProfile}
-                />
-              </Switch> */}
-          </div>
-        </div>
-      </div>
-      {/* <Footer /> */}
-      {/* </Router> */}
-    </>
-  );
+    return (
+        <>
+            <div className="admin_container_trainer">
+                <div className="admin_sidenav">
+                    <div className="admin_profile">
+                        <div className="profile_pic"></div>
+                        <h2>User Name</h2>
+                    </div>
+                    <div className="admin_sidenav_links">
+                        {SideBarRouteData.map((item, index) => {
+                            return <SubMenu item={item} key={index} />;
+                        })}
+                    </div>
+                    <img src={WaterMark} className="td_watermark" alt="icon" />
+                </div>
+                <div className="admin_content">
+                    <div className="top_bar"></div>
+                    <div className="admin_content">{children}</div>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default TrainerDashboardTemp;

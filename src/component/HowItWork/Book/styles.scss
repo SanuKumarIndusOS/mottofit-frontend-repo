@@ -4,7 +4,8 @@
     // background-color: cadetblue;
     .book_grid {
         display: grid;
-        grid-template-columns: 40% 60%;
+        grid-template-columns: 35% 60%;
+        grid-column-gap: 5%;
         grid-template-rows: auto;
         align-items: center;
         margin-top: 7em;

@@ -373,9 +373,7 @@ const TrainerProfile = () => {
                                                 onClick={() =>
                                                     console.log("hello")
                                                 }
-                                            >
-                                                Event schedular in pending
-                                            </div>
+                                            ></div>
                                         </div>
                                     </div>
                                 </div>
