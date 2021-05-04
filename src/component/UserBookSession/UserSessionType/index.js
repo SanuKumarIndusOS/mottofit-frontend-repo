@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
+import { useLocation } from "react-router-dom";
 
 const options = [
   { value: "nyw", label: "New York" },
@@ -42,8 +43,13 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);
+  const location = useLocation();
 
-  const handleBookSession = (price) => {
+  React.useEffect(() => {
+    console.log(location.state["slotDetails"]);
+  }, []);
+
+  const handleBookSession = (price, sessionType) => {
     let storeData = {
       sessionData: {
         location: selectedOption,
@@ -53,10 +59,14 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
       },
     };
 
-    console.log("called");
+    console.log("called", storeData["sessionData"]);
     updateUserDetails(storeData);
 
-    history.push("/user/payment");
+    history.push({
+      pathname: "/user/payment",
+    
+      state: { slotDetails: location.state["slotDetails"], sessionData: storeData["sessionData"], sessionType:sessionType },
+    });
     // if(price === 20)
     // {
     //   history.push("/user/moto-pass");
@@ -64,7 +74,6 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     // {
     //   history.push("/user/payment");
     // }
-   
   };
 
   return (
@@ -203,7 +212,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
 
                               <img src={TrainerIcon} alt="icon" />
                             </div>
-                            <button onClick={() => handleBookSession(20)}>
+                            <button onClick={() => handleBookSession(20,"1on1")}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -230,7 +239,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               </h6>
                               <img src={Social} alt="icon" />
                             </div>
-                            <button onClick={() => handleBookSession(15)}>
+                            <button onClick={() => handleBookSession(15, "group")}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>
@@ -257,7 +266,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               </h6>
                               <img src={ClassIcon} alt="icon" />
                             </div>
-                            <button onClick={() => handleBookSession(20)}>
+                            <button onClick={() => handleBookSession(20, "class")}>
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
                           </div>

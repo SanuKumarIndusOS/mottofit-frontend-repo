@@ -70,6 +70,8 @@ function CardForm() {
             // Handle result.error or result.token
             console.log(result);
         });
+
+        alert("Card Saved")
     };
 
     return (
@@ -171,7 +173,7 @@ function CardForm() {
                 </div>
                 <div className="submit">
                     <button type="submit" disabled={!stripe}>
-                        Continue <ArrowHoverBlacked />
+                        Save Card <ArrowHoverBlacked />
                     </button>
                 </div>
             </form>
