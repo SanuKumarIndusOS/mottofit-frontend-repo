@@ -90,21 +90,23 @@ function Scheduler(props) {
   const [data, setData] = React.useState([]);
   var token;
   //   JSON.parse(localStorage.getItem("user-info"))["token"]
+  token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDExNTEzNywiZXhwIjoxNjIwMTIyMzM3fQ.RnzYvPfdx6c7PsfblyQizSfzl_-pfTmu2RLMoQRn3UY";
   React.useEffect(() => {
-    token = JSON.parse(localStorage.getItem("user-info"))["token"];
+   
     console.log(
       "check effect",
-      props.trainerID
+      props.trainerID,
+     
     );
 
    
     populate(startWeek, endWeek);
     fetch(
-      "http://doodlebluelive.com:2307/v1/trainer/calenderView?trainerId="+`${props.trainerID}`+"&startDate=2021-05-01&endDate=2021-05-08&timeBlock=EarlyBird",
+      "http://doodlebluelive.com:2307/v1/trainer/calenderView?trainerId="+`${props.trainerID}`+"&startDate=2021-05-01&endDate=2021-05-31&timeBlock=EarlyBird",
       {
         method: "GET",
         headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJkYWIxYjlmLTZkYzUtNGNhMi1hOTkzLWNmMDE4MGIwZTMxZSIsImlhdCI6MTYyMDA2NDAzNSwiZXhwIjoxNjIwMDcxMjM1fQ.F5lDhyfaq5oTFxhqyu-PSayBhBUr3NBwVmTtSuLcc74",
+          Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDExNTQ1MywiZXhwIjoxNjIwMTIyNjUzfQ.AzLYGech_UPY9seJOeBfEdVrESnXNdqYSaYhR1OMXAs",
         },
       }
     )
@@ -189,6 +191,8 @@ function Scheduler(props) {
     }
 
     setCellColor(cellCollection);
+
+    localStorage.setItem("trainertime", JSON.stringify(cellCollection));
   };
 
   return (
@@ -213,14 +217,14 @@ function Scheduler(props) {
             </div>
             {DropdownAvailability}
           </div>
-          <div className="time_zone">
+          {/* <div className="time_zone">
             <Select
               defaultValue={selectedOption}
               onChange={setSelectedOption}
               options={options}
               className="session_location_select"
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="schedular_table">

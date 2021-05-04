@@ -89,10 +89,10 @@ const TrainerCards = (props) => {
                       backgroundColor: isHovered ? "red" : "#53BFD2",
                     }}
                     onClick={() => {
-                      console.log(bestMatchData[data]["id"]);
+                      console.log(bestMatchData[data]);
                       history.push({
                         pathname: "/user/scheduler",
-                        state: { trainerId: bestMatchData[data]["id"] },
+                        state: { trainerId: bestMatchData[data]["id"], trainerData: bestMatchData[data] },
                       });
                     }}
                   >

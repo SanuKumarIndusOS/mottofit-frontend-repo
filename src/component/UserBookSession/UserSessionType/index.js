@@ -53,7 +53,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
       },
     };
 
-    console.log("called");
+    console.log("called", storeData);
     updateUserDetails(storeData);
 
     history.push("/user/payment");

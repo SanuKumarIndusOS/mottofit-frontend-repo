@@ -10,6 +10,18 @@ import {useLocation} from 'react-router-dom'
 
 const UserEventSchedular = () => {
 
+  const [trainerName, setTrainerName] = React.useState("")
+  const [activity, setActivity] = React.useState("Boxing")
+
+  React.useEffect(() => {
+   
+    setTrainerName(location.state["trainerData"]["firstName"])
+   console.log(location.state["trainerData"]);
+
+   console.log(localStorage.getItem("trainertime"), "ee" );
+  
+  }, [])
+
   const location = useLocation() 
 //  console.log(location.state["trainerId"]);
   return (
@@ -37,8 +49,8 @@ const UserEventSchedular = () => {
                 <div className="user_profile_details">
                   <img src={Profile} alt="profile" />
                   <div className="user_content">
-                    <h2>John Doe</h2>
-                    <p>STRENGTH & HIIT</p>
+                    <h2 style={{textTransform:"capitalize"}}>{trainerName}</h2>
+                    <p>{activity}</p>
                   </div>
                 </div>
                  <div className="container">
@@ -46,7 +58,7 @@ const UserEventSchedular = () => {
                   {/* <UserScheduler/>  */}
                 </div> 
                
-                <Link to="/user/session-type" style={{marginBottom:"500px"}}>
+                <Link to="/user/session-type"  style={{marginBottom:"500px"}}>
                   CONTINUE <ArrowHoverBlacked />{" "}
                 </Link>
               </div>
