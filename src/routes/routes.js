@@ -219,6 +219,44 @@ const routers = [
       },
     ],
   },
+  {
+    component: "UserDashboardLayout",
+    path: "/user-dashboard",
+    auth: false,
+    name: "UserDashboardLayout",
+    exact: false,
+    redirect: "/user-dashboard/settings/profile",
+    childrens: [
+      {
+        path: "/session",
+        componentPath: "pages/UserDashboard/Session/index",
+        name: "UserSession",
+        auth: false,
+        exact: true,
+      },
+      {
+        path: "/message",
+        componentPath: "pages/UserDashboard/Message/index",
+        name: "UserMessage",
+        auth: false,
+        exact: true,
+      },
+      {
+        path: "/notification",
+        componentPath: "pages/UserDashboard/Notifications/index",
+        name: "UserNotification",
+        auth: false,
+        exact: true,
+      },
+      {
+        path: "/settings/profile",
+        componentPath: "pages/UserDashboard/Settings/MyProfile",
+        name: "UserProfile",
+        auth: false,
+        exact: true,
+      },
+    ],
+  },
 ];
 
 export default routers;
