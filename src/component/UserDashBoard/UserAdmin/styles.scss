@@ -1,9 +1,9 @@
 .admin_container {
-    height: 700px;
+    height: 1300px !important;
     width: 100%;
     display: flex;
     .admin_sidenav {
-        width: 300px;
+        width: 370px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -53,7 +53,7 @@
                 display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;
-                padding: 1.5em 1em 1.5em 3.5em;
+                padding: 0.5em 1em 1.5em 3.5em;
                 font: var(--unnamed-font-style-normal) normal
                     var(--unnamed-font-weight-medium)
                     var(--unnamed-font-size-18) / var(--unnamed-line-spacing-42)
@@ -102,10 +102,54 @@
                 opacity: 1;
             }
         }
+        .sub_links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            width: 100%;
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                // background: #10792a;
+                height: 45px !important;
+                padding: 0 !important;
+                text-align: center;
+                width: 80%;
+                text-transform: none;
+
+                p {
+                    // background: #cad804;
+                    margin: 0;
+                    padding: 0;
+                    font-family: Montserrat;
+                    font-size: 16px;
+                }
+                p:hover {
+                    border-bottom: 3px solid #53bfd2;
+                }
+                img {
+                    // display: none;
+                    width: 10px;
+                    height: 10px;
+                    margin-left: 0.2em;
+                }
+            }
+            a:hover {
+                background: #f6f6f6;
+                font-size: 12px;
+            }
+        }
+        .ud_watermark {
+            position: relative;
+            top: 360px;
+        }
     }
     .admin_content {
         height: 100%;
         flex: auto;
+        width: 100%;
         background-color: #f6f6f6;
         .top_bar {
             margin: 2rem;

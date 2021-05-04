@@ -25,7 +25,7 @@ const options = [
   { value: "plam", label: "Plam Beach" },
 ];
 
-function Scheduler() {
+function Scheduler(props) {
   const forceUpdate = useForceUpdate();
 
   const [date, setDate] = React.useState([]);
@@ -88,17 +88,23 @@ function Scheduler() {
   ];
 
   const [data, setData] = React.useState([]);
+  var token;
   //   JSON.parse(localStorage.getItem("user-info"))["token"]
   React.useEffect(() => {
-    console.log("check effect");
+    token = JSON.parse(localStorage.getItem("user-info"))["token"];
+    console.log(
+      "check effect",
+      props.trainerID
+    );
+
+   
     populate(startWeek, endWeek);
     fetch(
-      "http://doodlebluelive.com:2307/v1/trainer/calenderView?trainerId=8a915f49-4b89-43d6-bbf8-9f799886fc68&startDate=2021-04-22&endDate=2021-04-30&timeBlock=EarlyBird",
+      "http://doodlebluelive.com:2307/v1/trainer/calenderView?trainerId="+`${props.trainerID}`+"&startDate=2021-05-01&endDate=2021-05-08&timeBlock=EarlyBird",
       {
         method: "GET",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4YzI4MDlmLTFhYTEtNDI4OS05MDNhLWZmZjllOTM4YTdkYyIsImlhdCI6MTYyMDA1NDU1OCwiZXhwIjoxNjIwMDYxNzU4fQ.uLYE30DMXfWhJNo8r6YH3Ug7PlToHPLmn4Xtn1Qxxlc",
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJkYWIxYjlmLTZkYzUtNGNhMi1hOTkzLWNmMDE4MGIwZTMxZSIsImlhdCI6MTYyMDA2NDAzNSwiZXhwIjoxNjIwMDcxMjM1fQ.F5lDhyfaq5oTFxhqyu-PSayBhBUr3NBwVmTtSuLcc74",
         },
       }
     )
@@ -182,7 +188,7 @@ function Scheduler() {
       console.log(cellCollection);
     }
 
-    setCellColor(cellCollection)
+    setCellColor(cellCollection);
   };
 
   return (

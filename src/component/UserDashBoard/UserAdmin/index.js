@@ -9,7 +9,10 @@ import UserMessage from "../UserDashboardCompontents/UserMessages";
 import Sidebar from "./UserAdminSidebar/Sidebar";
 import { SideBarRouteData } from "./UserAdminSidebar/SideBarRouteData";
 import SubMenu from "./UserAdminSidebar/SubMenu";
+import UserNotification from "../UserDashboardCompontents/UserNotification";
+import MyProfile from "../UserDashboardCompontents/UserMyProfile/MyProfile";
 // import UserMessage from "../UserDashboardCompontents/UserMessages";
+import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 
 const UserDashboard = () => {
     return (
@@ -28,6 +31,11 @@ const UserDashboard = () => {
                                 return <SubMenu item={item} key={index} />;
                             })}
                         </div>
+                        <img
+                            src={WaterMark}
+                            className="ud_watermark"
+                            alt="icon"
+                        />
                     </div>
                     <div className="admin_content">
                         <div className="top_bar"></div>
@@ -43,6 +51,16 @@ const UserDashboard = () => {
                                     path="/user-dashboard/message"
                                     exact
                                     component={UserMessage}
+                                />
+                                <Route
+                                    path="/user-dashboard/notifications"
+                                    exact
+                                    component={UserNotification}
+                                />
+                                <Route
+                                    path="/user-dashboard/setting/profile"
+                                    exact
+                                    component={MyProfile}
                                 />
                             </Switch>
                         </div>

@@ -42,8 +42,8 @@ const UserEventSchedular = () => {
                   </div>
                 </div>
                  <div className="container">
-                 {/* <UserScheduler trainerID={location.state["trainerId"]}/> */}
-                 <UserScheduler/>
+                 <UserScheduler trainerID={location.state["trainerId"]}/>
+                  {/* <UserScheduler/>  */}
                 </div> 
                
                 <Link to="/user/session-type" style={{marginBottom:"500px"}}>
