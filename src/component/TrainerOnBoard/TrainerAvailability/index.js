@@ -15,6 +15,7 @@ import { api } from "service/api";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
+import Location from "../../../assets/files/SVG/Location Icon.svg";
 
 // hoursPerWeek
 // preferedTrainingMode
@@ -179,16 +180,15 @@ const TrainerAvailability = (props) => {
     return (
         <>
             <div className="container">
-                <div className="main_wrappercontainer">
-                    <div className="link_wrapper">
-                        <img src={ArrowBack} alt="icon" />
-                        <div className="inner_links">
-                            <Link to="/trainer/background">
-                                Back to Trainer Background
-                            </Link>
-                            <div></div>
-                        </div>
+                <div className="link_wrapper">
+                    <img src={ArrowBack} alt="icon" />
+                    <div className="inner_links">
+                        <Link to="/trainer/background">
+                            Back to Trainer Background
+                        </Link>
                     </div>
+                </div>
+                <div className="main_wrappercontainer">
                     <div className="wrapper_inneritem">
                         <h1>Highlight your availability on the platform</h1>
                         <p>
@@ -229,8 +229,8 @@ const TrainerAvailability = (props) => {
                                 </div>
                                 <div className="item_3">
                                     <h6>
-                                        Tell us what you train! Select all the
-                                        verticals that apply
+                                        Do you have a training facility for
+                                        clients?
                                     </h6>
                                     <CyanRadio
                                         checked={selectedValue === "a"}
@@ -256,9 +256,10 @@ const TrainerAvailability = (props) => {
                                         Select the location of your facility
                                     </h6>
                                     <div className="inputs_platform">
-                                        <input
-                                            type="text"
-                                            placeholder="Select your Location"
+                                        <select
+                                            className="select_location"
+                                            required
+                                            name="answer"
                                             value={
                                                 trainerAvailabilityData.trainingFacilityLocation
                                             }
@@ -269,6 +270,19 @@ const TrainerAvailability = (props) => {
                                                         e.target.value,
                                                 });
                                             }}
+                                        >
+                                            <option value="" disabled selected>
+                                                Select your Location
+                                            </option>
+                                            <option>New York</option>
+                                            <option>Miami</option>
+                                            <option>Hampton</option>
+                                            <option>Palm Beach</option>
+                                        </select>
+                                        <img
+                                            src={Location}
+                                            alt="icon"
+                                            className="loction_img_select"
                                         />
                                     </div>
                                 </div>
@@ -295,11 +309,12 @@ const TrainerAvailability = (props) => {
                                     <label>No</label>
                                 </div>
                                 <div className="item_6">
-                                    <h6>Serviceable Locations</h6>
+                                    <h6>Your preferred training location</h6>
                                     <div className="inputs_platform">
-                                        <input
-                                            type="text"
-                                            placeholder="List all areas that you will service"
+                                        <select
+                                            className="select_location"
+                                            required
+                                            name="answer"
                                             value={
                                                 trainerAvailabilityData.servicableLocation
                                             }
@@ -310,6 +325,19 @@ const TrainerAvailability = (props) => {
                                                         e.target.value,
                                                 });
                                             }}
+                                        >
+                                            <option value="" disabled selected>
+                                                Select your Location
+                                            </option>
+                                            <option>New York</option>
+                                            <option>Miami</option>
+                                            <option>Hampton</option>
+                                            <option>Palm Beach</option>
+                                        </select>
+                                        <img
+                                            src={Location}
+                                            alt="icon"
+                                            className="loction_img_select"
                                         />
                                     </div>
                                 </div>

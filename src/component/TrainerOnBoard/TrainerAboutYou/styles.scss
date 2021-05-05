@@ -15,16 +15,18 @@
             font-weight: 600;
         }
         p {
-            text-align: center;
-            font-size: 18px;
-            width: 850px;
-            margin: 0 auto;
-            color: #696969;
             letter-spacing: 0.27px;
-            font-family: Montserrat;
+            width: 100% !important;
+            color: #696969;
+            opacity: 1;
+            width: 63%;
             font-size: 18px;
-            line-height: 30px;
-            padding-bottom: 1em;
+            font-family: Montserrat;
+            text-align: center;
+            letter-spacing: 0.27px;
+            color: #696969;
+            opacity: 1;
+            font-weight: 500;
         }
         .outter_form {
             .wrapper_inputs {
@@ -83,6 +85,12 @@
                         font-family: Montserrat;
                         font-size: 18px;
                         font-weight: 500;
+                        color: #696969;
+                        option {
+                            color: black;
+                            border-radius: 100px;
+                            border: 2px solid #bcbcbc;
+                        }
                     }
                     select::placeholder {
                         color: #bcbcbc;

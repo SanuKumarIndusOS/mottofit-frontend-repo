@@ -1,46 +1,37 @@
+.link_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin: 3em 0;
+
+    .inner_links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        a {
+            margin-left: 0.5em;
+            font: var(--unnamed-font-style-normal) normal
+                var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
+                var(--unnamed-line-spacing-42)
+                var(--unnamed-font-family-montserrat);
+            color: var(--unnamed-color-161616);
+            text-align: left;
+            font: normal normal normal 16px/22px Montserrat;
+            letter-spacing: 0.18px;
+            color: #161616;
+            opacity: 1;
+            text-decoration: none;
+            border-bottom: 2px solid #53bfd2;
+        }
+    }
+}
 .main_wrappercontainer {
     width: 100%;
     height: 1024px;
     padding: 0 5em;
-    .link_wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        margin-top: 2em;
-        margin-left: -120px;
 
-        .left_arrow {
-            left: 10px;
-            position: relative;
-        }
-
-        .inner_links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            a {
-                margin-left: 0.5em;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-normal)
-                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-42)
-                    var(--unnamed-font-family-montserrat);
-                color: var(--unnamed-color-161616);
-                text-align: left;
-                font: normal normal normal 16px/22px Montserrat;
-                letter-spacing: 0.18px;
-                color: #161616;
-                opacity: 1;
-                text-decoration: none;
-            }
-            div {
-                width: 95%;
-                height: 2px;
-                margin-left: 1.5em;
-                background-color: #53bfd2;
-            }
-        }
-    }
     .wrapper_inneritem {
         margin: 0 auto;
         // padding: 0 5em;
@@ -62,13 +53,18 @@
             margin-top: 25px;
         }
         p {
-            text-align: center;
-            width: 850px;
-            margin: 0 auto;
-            color: #696969;
             letter-spacing: 0.27px;
-            font-family: "Montserrat", sans-serif;
-            line-height: 30px;
+            width: 100% !important;
+            color: #696969;
+            opacity: 1;
+            width: 63%;
+            font-size: 18px;
+            font-family: Montserrat;
+            text-align: center;
+            letter-spacing: 0.27px;
+            color: #696969;
+            opacity: 1;
+            font-weight: 400;
         }
 
         .content_wrapper {
@@ -78,12 +74,12 @@
             grid-template-rows: auto;
             align-items: center;
             width: 100%;
-            // background-color: chocolate;
+            grid-column-gap: 50px;
             height: auto;
             .item_1 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                left: -35px;
+                // left: -35px;
 
                 h6 {
                     color: #161616;
@@ -98,21 +94,21 @@
                 .inputs_platform {
                     input {
                         width: 100%;
-                        padding: 0.3em 1em;
+                        padding: 1em 1.5em;
                         height: 45px;
                         border: 1.5px solid var(--unnamed-color-bcbcbc);
                         border: 2px solid #bcbcbc;
                         border-radius: 30px;
                         opacity: 1;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
                     }
                     input::placeholder {
-                        // font-size: 16px;
                         color: #bcbcbc;
+                        font-family: "Montserrat";
                         font-size: 18px;
-                        font-family: Montserrat;
                         font-weight: 400;
-                        // margin: 0;
-                        // padding: 0;
                     }
                     input:focus {
                         outline: none;
@@ -122,7 +118,7 @@
             .item_2 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                left: 10px;
+                // left: 10px;
 
                 h6 {
                     color: #161616;
@@ -169,9 +165,9 @@
                 }
             }
             .item_3 {
-                margin: 1em 0 2em 0;
+                margin: 1em 0 3.4em 0;
                 position: relative;
-                left: -35px;
+                // left: -35px;
                 h6 {
                     color: #161616;
                     opacity: 1;
@@ -197,7 +193,7 @@
             .item_4 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                left: 10px;
+                // left: 10px;
 
                 h6 {
                     color: #161616;
@@ -213,6 +209,7 @@
                 }
 
                 .inputs_platform {
+                    display: flex;
                     label {
                         margin-right: 3em;
                         color: #2c2c2c;
@@ -220,30 +217,48 @@
                         font-family: "Montserrat";
                         font-weight: 500;
                     }
-                    input {
+
+                    .select_location {
+                        background: transparent;
                         width: 100%;
-                        padding: 0.3em 1em;
-                        height: 45px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+                        margin: 0.5em 1em 0.5em 0;
+                        padding: 0.5em 1em;
+                        border-radius: 50px;
                         border: 2px solid #bcbcbc;
-                        border-radius: 30px;
-                        opacity: 1;
-                    }
-                    input::placeholder {
-                        color: #bcbcbc;
-                        font-size: 18px;
+                        outline: none;
+                        appearance: none;
                         font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                        color: #696969;
+                        option {
+                            color: black;
+                            border-radius: 100px;
+                            border: 2px solid #bcbcbc;
+                        }
+                    }
+                    select::placeholder {
+                        color: #bcbcbc;
+                        font-family: Montserrat;
+                        font-size: 18px;
                         font-weight: 400;
                     }
-                    input:focus {
-                        outline: none;
+                    select:invalid {
+                        color: #bcbcbc;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                    }
+                    .loction_img_select {
+                        position: relative;
+                        left: -60px;
                     }
                 }
             }
             .item_5 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                left: -35px;
+                // left: -35px;
                 h6 {
                     color: #161616;
                     opacity: 1;
@@ -270,7 +285,7 @@
             .item_6 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                left: 10px;
+                // left: 10px;s
                 h6 {
                     color: #161616;
                     opacity: 1;
@@ -285,23 +300,41 @@
                 }
 
                 .inputs_platform {
-                    input {
+                    display: flex;
+                    .select_location {
+                        background: transparent;
                         width: 100%;
-                        padding: 0.3em 1em;
-                        height: 45px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+                        margin: 0.5em 1em 0.5em 0;
+                        padding: 0.5em 1em;
+                        border-radius: 50px;
                         border: 2px solid #bcbcbc;
-                        border-radius: 30px;
-                        opacity: 1;
-                    }
-                    input::placeholder {
-                        color: #bcbcbc;
-                        font-size: 18px;
+                        outline: none;
+                        appearance: none;
                         font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                        color: #696969;
+                        option {
+                            color: black;
+                            border-radius: 100px;
+                            border: 2px solid #bcbcbc;
+                        }
+                    }
+                    select::placeholder {
+                        color: #bcbcbc;
+                        font-family: Montserrat;
+                        font-size: 18px;
                         font-weight: 400;
                     }
-                    input:focus {
-                        outline: none;
+                    select:invalid {
+                        color: #bcbcbc;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                    }
+                    .loction_img_select {
+                        position: relative;
+                        left: -60px;
                     }
                 }
             }

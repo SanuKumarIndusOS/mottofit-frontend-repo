@@ -7,6 +7,7 @@ import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import Checkbox from "@material-ui/core/Checkbox";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
+import Location from "../../../assets/files/SVG/Location Icon.svg";
 
 /* areaOfExpertise
    previousExperience
@@ -129,28 +130,28 @@ const TrainerBackground = (props) => {
         <>
             <div className="outter_container_bg">
                 <div className="container">
-                    <div className="main_wrapper">
-                        <div className="links_wrapper">
-                            <div className="outter_links">
-                                <img src={ArrowBack} alt="icon" />
-                                <div className="inner_links">
-                                    <Link to="/trainer/about">
-                                        {" "}
-                                        Back to About You
-                                    </Link>
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div className="outter_links">
-                                <div className="inner_links">
-                                    <Link to="/trainer/avaliability">
-                                        Go to Avaliability
-                                    </Link>
-                                    <div></div>
-                                </div>
-                                <img src={ArrowNext} alt="icon" />
+                    <div className="links_wrapper">
+                        <div className="outter_links">
+                            <img src={ArrowBack} alt="icon" />
+                            <div className="inner_links">
+                                <Link to="/trainer/about">
+                                    {" "}
+                                    Back to About You
+                                </Link>
+                                <div></div>
                             </div>
                         </div>
+                        <div className="outter_links">
+                            <div className="inner_links">
+                                <Link to="/trainer/avaliability">
+                                    Go to Avaliability
+                                </Link>
+                                <div></div>
+                            </div>
+                            <img src={ArrowNext} alt="icon" />
+                        </div>
+                    </div>
+                    <div className="main_wrapper">
                         <div className="wrapper_inneritems">
                             <h1>Detail out your training background</h1>
 
@@ -266,7 +267,7 @@ const TrainerBackground = (props) => {
                                                 >
                                                     <input
                                                         type="text"
-                                                        placeholder="Name of the Orgnisation/GYM"
+                                                        placeholder="Name of the Orgnisation / GYM"
                                                         value={
                                                             input.orgnization
                                                         }
@@ -291,7 +292,7 @@ const TrainerBackground = (props) => {
                                                         }
                                                     />
                                                     <input
-                                                        type="Number"
+                                                        type="number"
                                                         placeholder="Years"
                                                         name="years"
                                                         value={input.years}
@@ -398,9 +399,9 @@ const TrainerBackground = (props) => {
                                             Do you currently own/work at a gym?
                                         </h6>
                                         <div className="inputs_experience">
-                                            <input
-                                                type="text"
-                                                placeholder="Role"
+                                            <select
+                                                required
+                                                name="answer"
                                                 value={
                                                     currentExperiencee.workMode
                                                 }
@@ -413,10 +414,22 @@ const TrainerBackground = (props) => {
 
                                                     // setTrainerbackgroundData({...trainerbackgroundData, currentExperience: currentExperiencee})
                                                 }}
-                                            />
-                                            <input
-                                                type="text"
-                                                placeholder="Select your Location"
+                                            >
+                                                <option
+                                                    value=""
+                                                    disabled
+                                                    selected
+                                                >
+                                                    Select your Answer
+                                                </option>
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                            </select>
+
+                                            <select
+                                                className="select_location"
+                                                required
+                                                name="answer"
                                                 value={
                                                     currentExperiencee.workLocation
                                                 }
@@ -431,6 +444,23 @@ const TrainerBackground = (props) => {
                                                         currentExperience: currentExperiencee,
                                                     });
                                                 }}
+                                            >
+                                                <option
+                                                    value=""
+                                                    disabled
+                                                    selected
+                                                >
+                                                    Select your Location
+                                                </option>
+                                                <option>New York</option>
+                                                <option>Miami</option>
+                                                <option>Hampton</option>
+                                                <option>Palm Beach</option>
+                                            </select>
+                                            <img
+                                                src={Location}
+                                                alt="icon"
+                                                className="loction_img_select"
                                             />
                                         </div>
                                     </div>

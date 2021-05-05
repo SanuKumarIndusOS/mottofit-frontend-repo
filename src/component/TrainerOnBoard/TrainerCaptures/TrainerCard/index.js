@@ -10,6 +10,7 @@ import "./accordion.scss";
 import "./styles.scss";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 import { bindActionCreators } from "redux";
+import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { TrainerApi } from "service/apiVariables";
@@ -35,12 +36,12 @@ const TrainerCardFC = ({
         describtion:
             " Heads up! Your trainer card is what clients will see when trainer results start filtering. Utilize keywords as anything you write here will also besearchable in our search box!",
         upload: " Upload your profile picture, hotshot!",
-        tellus: " Tell us what you train! Select all the verticals that apply",
+        tellus: " Tell us what you train! Select all the categories that apply",
         clientDesc:
             "Write a short and sweet description for clients to pick you in 75 characters",
         pricing: "Tell us about your Pricing",
         pricingDesc:
-            "We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
+            "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
     };
 
     const [image, setImage] = useState();
@@ -149,376 +150,395 @@ const TrainerCardFC = ({
 
     return (
         <>
-            <div className="container">
-                <div className="card_outter">
-                    <div className="card_outter_wrapper">
-                        <h2>{data.title}</h2>
-                        <p>{data.describtion}</p>
-                    </div>
-                    <div className="card_inner ">
-                        <div className="card_form_outter">
-                            <form className="container">
-                                <div className="card_item1">
-                                    {previewImage ? (
-                                        <img
-                                            src={previewImage}
-                                            style={{
-                                                objectFit: "cover",
-                                                width: "200px",
-                                                height: "200px",
-                                                borderRadius: "100px",
-                                            }}
-                                            onClick={() => {
-                                                setPreviewTmage(null);
-                                            }}
-                                        />
-                                    ) : (
-                                        <div className="combin_profile">
-                                            <button
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    fileInputRef.current.click();
+            <div className="outter_container_card">
+                <div className="container">
+                    <div className="card_outter">
+                        <div className="card_prev_link">
+                            <Link to="/">Preview Your Trainer Card</Link>
+                        </div>
+                        <div className="card_outter_wrapper">
+                            <h2>{data.title}</h2>
+                            <p>{data.describtion}</p>
+                        </div>
+                        <div className="card_inner ">
+                            <div className="card_form_outter">
+                                <form>
+                                    <div className="card_item1">
+                                        {previewImage ? (
+                                            <img
+                                                src={previewImage}
+                                                style={{
+                                                    objectFit: "cover",
+                                                    width: "200px",
+                                                    height: "200px",
+                                                    borderRadius: "100px",
                                                 }}
-                                            >
+                                                onClick={() => {
+                                                    setPreviewTmage(null);
+                                                }}
+                                            />
+                                        ) : (
+                                            <div className="combin_profile">
+                                                <button
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        fileInputRef.current.click();
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={Profile}
+                                                        alt="icon"
+                                                        style={{
+                                                            objectFit: "cover",
+                                                            width: "100px",
+                                                            height: "100px",
+                                                        }}
+                                                    />
+                                                </button>
                                                 <img
-                                                    src={Profile}
+                                                    src={ProfileAdd}
                                                     alt="icon"
                                                     style={{
                                                         objectFit: "cover",
-                                                        width: "100px",
-                                                        height: "100px",
+                                                        width: "20px",
+                                                        height: "20px",
+                                                        borderRadius: "100px",
+                                                    }}
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        fileInputRef.current.click();
                                                     }}
                                                 />
-                                            </button>
-                                            <img
-                                                src={ProfileAdd}
-                                                alt="icon"
-                                                style={{
-                                                    objectFit: "cover",
-                                                    width: "20px",
-                                                    height: "20px",
-                                                    borderRadius: "100px",
-                                                }}
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    fileInputRef.current.click();
-                                                }}
+                                            </div>
+                                        )}
+
+                                        <input
+                                            type="file"
+                                            ref={fileInputRef}
+                                            accept="image/*"
+                                            onChange={(event) => {
+                                                const file =
+                                                    event.target.files[0];
+                                                if (
+                                                    file &&
+                                                    file.type.substr(0, 5) ===
+                                                        "image"
+                                                ) {
+                                                    setImage(file);
+                                                } else {
+                                                    setImage(null);
+                                                }
+                                            }}
+                                        />
+                                        <h5>{data.upload}</h5>
+                                    </div>
+                                    <div className="card_item2 ">
+                                        <div className="card_innerItem">
+                                            <h6>First Name</h6>
+                                            <input
+                                                type="text"
+                                                name="firstName"
+                                                onChange={handleInputChange}
+                                                value={trainerData.firstName}
                                             />
                                         </div>
-                                    )}
-
-                                    <input
-                                        type="file"
-                                        ref={fileInputRef}
-                                        accept="image/*"
-                                        onChange={(event) => {
-                                            const file = event.target.files[0];
-                                            if (
-                                                file &&
-                                                file.type.substr(0, 5) ===
-                                                    "image"
-                                            ) {
-                                                setImage(file);
-                                            } else {
-                                                setImage(null);
-                                            }
-                                        }}
-                                    />
-                                    <h5>{data.upload}</h5>
-                                </div>
-                                <div className="card_item2 ">
-                                    <div className="card_innerItem">
-                                        <h6>First Name</h6>
-                                        <input
+                                        <div className="card_innerItem">
+                                            <h6>Last Name</h6>
+                                            <input
+                                                name="lastName"
+                                                onChange={handleInputChange}
+                                                value={trainerData.lastName}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="card_item3">
+                                        <h6>{data.tellus}</h6>
+                                        <div className="inputs_experience">
+                                            <Checkbox
+                                                value=""
+                                                onChange={handleChange}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
+                                            />
+                                            <label>Strength & Hitt</label>
+                                            <Checkbox
+                                                value=""
+                                                onChange={handleChange}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
+                                            />
+                                            <label>Boxing</label>
+                                            <Checkbox
+                                                value=""
+                                                onChange={handleChange}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
+                                            />
+                                            <label>Yoga</label>
+                                            <Checkbox
+                                                value=""
+                                                onChange={handleChange}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
+                                            />
+                                            <label>Pilates</label>
+                                        </div>
+                                    </div>
+                                    <div className="card_item4">
+                                        <h6>{data.clientDesc}</h6>
+                                        <textarea
                                             type="text"
-                                            name="firstName"
+                                            value={trainerData.description}
+                                            name="description"
+                                            placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into your full profile."
                                             onChange={handleInputChange}
-                                            value={trainerData.firstName}
                                         />
                                     </div>
-                                    <div className="card_innerItem">
-                                        <h6>Last Name</h6>
-                                        <input
-                                            name="lastName"
-                                            onChange={handleInputChange}
-                                            value={trainerData.lastName}
-                                        />
+                                    <div className="card_item5">
+                                        <h6>Tell us about your Pricing</h6>
+                                        <p>{data.pricingDesc}</p>
                                     </div>
-                                </div>
-                                <div className="card_item3">
-                                    <h6>{data.tellus}</h6>
-                                    <div className="inputs_experience">
-                                        <CyanRadio
-                                            checked={selectedValue === "a"}
-                                            onChange={handleChange}
-                                            value="a"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "a" }}
-                                        />
-                                        <label>Strength & Hitt</label>
-                                        <CyanRadio
-                                            checked={selectedValue === "b"}
-                                            onChange={handleChange}
-                                            value="b"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "b" }}
-                                        />
-                                        <label>Boxing</label>
-                                        <CyanRadio
-                                            checked={selectedValue === "c"}
-                                            onChange={handleChange}
-                                            value="c"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "C" }}
-                                        />
-                                        <label>Yoga</label>
-                                        <CyanRadio
-                                            checked={selectedValue === "d"}
-                                            onChange={handleChange}
-                                            value="d"
-                                            name="radio-button-demo"
-                                            label="Strength & Hitt"
-                                            inputProps={{ "aria-label": "d" }}
-                                        />
-                                        <label>Pilates</label>
-                                    </div>
-                                </div>
-                                <div className="card_item4">
-                                    <h6>{data.clientDesc}</h6>
-                                    <textarea
-                                        type="text"
-                                        value={trainerData.description}
-                                        name="description"
-                                        placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into
-                                            your full profile."
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                                <div className="card_item5">
-                                    <h6></h6>
-                                    <p>{data.pricingDesc}</p>
-                                </div>
-                                <div className="card_item6">
-                                    <Accordion title="In Person Training Session Pricing (at the clients location)">
-                                        <div className="card_accordion">
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Individual charge"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.individualCharge
-                                                    }
-                                                    name="individualCharge"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Social Session (Total Charge for 2 People)"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.ssTwoPeopleCharge
-                                                    }
-                                                    name="ssTwoPeopleCharge"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
+                                    <div className="card_item6">
+                                        <Accordion title="In Person Training Session Pricing (at the clients location)">
+                                            <div className="card_accordion">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Individual charge"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.individualCharge
+                                                        }
+                                                        name="individualCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssTwoPeopleCharge
+                                                        }
+                                                        name="ssTwoPeopleCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
 
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Social Session (Total Charge for 3 People)"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.ssThreePeopleCharge
-                                                    }
-                                                    name="ssThreePeopleCharge"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssThreePeopleCharge
+                                                        }
+                                                        name="ssThreePeopleCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssFourPeopleCharge
+                                                        }
+                                                        name="ssFourPeopleCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Class Flat Rate (5-15 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.classFlatRate
+                                                        }
+                                                        name="classFlatRate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="3 Session Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.threeSessionRate
+                                                        }
+                                                        name="threeSessionRate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="10 Session Pass Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.tenSessionRate
+                                                        }
+                                                        name="tenSessionRate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
                                             </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Social Session (Total Charge for 4 People)"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.ssFourPeopleCharge
-                                                    }
-                                                    name="ssFourPeopleCharge"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
+                                        </Accordion>
+                                        <Accordion title="In Person Training Session Pricing (at your location)">
+                                            <div className="card_accordion">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Dollar Amount Per Person"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.amtPerPerson
+                                                        }
+                                                        name="amtPerPerson"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
                                             </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Class Flat Rate (5-15 People)"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.classFlatRate
-                                                    }
-                                                    name="classFlatRate"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="3 Session Rate"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.threeSessionRate
-                                                    }
-                                                    name="threeSessionRate"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="10 Session Pass Rate"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.tenSessionRate
-                                                    }
-                                                    name="tenSessionRate"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                        </div>
-                                    </Accordion>
-                                    <Accordion title="In Person Training Session Pricing (at your location)">
-                                        <div className="card_accordion">
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Dollar Amount Per Person"
-                                                    onChange={handleInputChange}
-                                                    value={
-                                                        trainerData.amtPerPerson
-                                                    }
-                                                    name="amtPerPerson"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                        </div>
-                                    </Accordion>
-                                    <Accordion title="Virtual Training Session Pricing">
-                                        <div className="card_accordion">
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Individual charge"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Social Session (Total Charge for 2 People)"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
+                                        </Accordion>
+                                        <Accordion title="Virtual Training Session Pricing">
+                                            <div className="card_accordion">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Individual charge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
 
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Social Session (Total Charge for 3 People)"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Class Flat Rate (5-15 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="3 Session Rate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="10 Session Pass Rate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
                                             </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Social Session (Total Charge for 4 People)"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Class Flat Rate (5-15 People)"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="3 Session Rate"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                            <div className="iconwrapper">
-                                                <input
-                                                    type="text"
-                                                    placeholder="10 Session Pass Rate"
-                                                />
-                                                <img
-                                                    src={DollarIcon}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                        </div>
-                                    </Accordion>
-                                </div>
-                                <div className="submit_button">
-                                    <Link
-                                        onClick={handleChangeToTrainerProfile}
-                                        type="submit"
-                                        // onClick={handleTrainerAvailability}
-                                    >
-                                        Continue To profile{" "}
-                                        <ArrowHoverBlacked />
-                                        {/* <img src={Arrow} alt="icon" /> */}
-                                    </Link>
-                                </div>
-                            </form>
+                                        </Accordion>
+                                    </div>
+                                    <div className="submit_button">
+                                        <Link
+                                            onClick={
+                                                handleChangeToTrainerProfile
+                                            }
+                                            type="submit"
+                                            // onClick={handleTrainerAvailability}
+                                        >
+                                            Continue To profile{" "}
+                                            <ArrowHoverBlacked />
+                                            {/* <img src={Arrow} alt="icon" /> */}
+                                        </Link>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -531,7 +551,7 @@ function Accordion({ title, children }) {
     const [isOpenAccodion, setAccordion] = useState(false);
 
     // for radio button
-    const [selectedValue, setSelectedValue] = useState("l");
+    const [selectedValue, setSelectedValue] = useState("a");
 
     // for radio
     const handleChange = (event) => {
