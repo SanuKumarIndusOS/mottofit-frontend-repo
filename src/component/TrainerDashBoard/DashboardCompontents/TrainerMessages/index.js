@@ -61,6 +61,7 @@ const TrainerMessage = () => {
             // this.setState({ messages: messages.items || [] });
             setMessages(message["items"]);
             console.log(message["items"][0]);
+            // scrollToBottom();
           });
         });
       });
@@ -109,7 +110,7 @@ const TrainerMessage = () => {
         setSocialGroup_list(data["data"]["socialGroups"]);
         setAdmin_list(data["data"]["admins"]);
 
-        console.log(data["data"]);
+        console.log("admin data", admin_list);
       });
   }, []);
 
@@ -134,7 +135,13 @@ const TrainerMessage = () => {
 
   const PopulateMessages = (channelID) => {
     console.log("clicked", channelID);
-    console.log(messages);
+    // console.log(messages);
+    setMessages([])
+  };
+
+  const messagesEndRef = React.useRef();
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView( {behavior: "smooth" });
   };
 
   return (
@@ -161,8 +168,8 @@ const TrainerMessage = () => {
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
-                        {individual_list.map((item) => {
-                          console.log(item["channelId"]);
+                        {[...individual_list,...socialGroup_list,...admin_list].map((item) => {
+                          // // console.log(item["channelId"]);
                           return (
                             <div className="contact_item">
                               <div className="inner_link">
@@ -201,9 +208,10 @@ const TrainerMessage = () => {
                           </div>
                           <div className="message_right_textarea">
                             {messages.map((item) => {
-                              console.log(item["state"]["body"]);
+                              // // console.log(item["state"]["body"]);
                               return <Chat data={item["state"]["body"]} />;
                             })}
+                            <div ref={messagesEndRef} />
                           </div>
                           <div className="message_right_input">
                             <input
@@ -221,13 +229,196 @@ const TrainerMessage = () => {
                     </div>
                   </TabPanel>
                   <TabPanel tabId="two">
-                    <p>Tab 2 content</p>
+                  <div className="message_inner_one">
+                      <div className="message_left">
+                        {/* Todo Change to ALL */}
+                        {individual_list.map((item) => {
+                          // // console.log(item["channelId"]);
+                          return (
+                            <div className="contact_item">
+                              <div className="inner_link">
+                                <img src={Jenny} alt="icon" />
+                                <div
+                                  className="message_link_notify"
+                                  onClick={() =>
+                                    PopulateMessages(item["channelId"])
+                                  }
+                                >
+                                  <h3>{item["members"][0]["userName"]}</h3>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="message_right">
+                        <div className="message_right_chatarea">
+                          <div className="message_right_header">
+                            <h2>Strength & HIIT with Jeremy Clark</h2>
+                            <div className="message_header_times">
+                              <div className="message_header_items">
+                                <img src={SheduleIcon} alt="icon" />
+                                <h5> {new Date().toDateString()}</h5>
+                              </div>
+                              <div className="message_header_items">
+                                <img src={AvailabilityIcon} alt="icon" />
+                                <h5>{new Date().toLocaleTimeString()}</h5>
+                              </div>
+                              <div className="message_header_items">
+                                <img src={LocationIcon} alt="icon" />
+                                <h5>Chennai, TN</h5>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="message_right_textarea">
+                            {messages.map((item) => {
+                              // console.log(item["state"]["body"]);
+                              return <Chat data={item["state"]["body"]} />;
+                            })}
+                            <div ref={messagesEndRef} />
+                          </div>
+                          <div className="message_right_input">
+                            <input
+                              type="text"
+                              placeholder="Type your message here.."
+                              value={text_thread}
+                              onChange={(event) => {
+                                setText_thread(event.target.value);
+                              }}
+                            />
+                            <button onClick={sendText}>Send</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </TabPanel>
                   <TabPanel tabId="three">
-                    <p>Tab 3 content</p>
+                  <div className="message_inner_one">
+                      <div className="message_left">
+                        {/* Todo Change to ALL */}
+                        {socialGroup_list.map((item) => {
+                          // console.log(item["channelId"]);
+                          return (
+                            <div className="contact_item">
+                              <div className="inner_link">
+                                <img src={Jenny} alt="icon" />
+                                <div
+                                  className="message_link_notify"
+                                  onClick={() =>
+                                    PopulateMessages(item["channelId"])
+                                  }
+                                >
+                                  <h3>{item["members"][0]["userName"]}</h3>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="message_right">
+                        <div className="message_right_chatarea">
+                          <div className="message_right_header">
+                            <h2>Strength & HIIT with Jeremy Clark</h2>
+                            <div className="message_header_times">
+                              <div className="message_header_items">
+                                <img src={SheduleIcon} alt="icon" />
+                                <h5> {new Date().toDateString()}</h5>
+                              </div>
+                              <div className="message_header_items">
+                                <img src={AvailabilityIcon} alt="icon" />
+                                <h5>{new Date().toLocaleTimeString()}</h5>
+                              </div>
+                              <div className="message_header_items">
+                                <img src={LocationIcon} alt="icon" />
+                                <h5>Chennai, TN</h5>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="message_right_textarea">
+                            {messages.map((item) => {
+                              // console.log(item["state"]["body"]);
+                              return <Chat data={item["state"]["body"]} />;
+                            })}
+                            <div ref={messagesEndRef} />
+                          </div>
+                          <div className="message_right_input">
+                            <input
+                              type="text"
+                              placeholder="Type your message here.."
+                              value={text_thread}
+                              onChange={(event) => {
+                                setText_thread(event.target.value);
+                              }}
+                            />
+                            <button onClick={sendText}>Send</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </TabPanel>
                   <TabPanel tabId="four">
-                    <p>Tab 4 content</p>
+                  <div className="message_inner_one">
+                      <div className="message_left">
+                        {/* Todo Change to ALL */}
+                        {admin_list.map((item) => {
+                          // console.log(item["channelId"]);
+                          return (
+                            <div className="contact_item">
+                              <div className="inner_link">
+                                <img src={Jenny} alt="icon" />
+                                <div
+                                  className="message_link_notify"
+                                  onClick={() =>
+                                    PopulateMessages(item["channelId"])
+                                  }
+                                >
+                                  <h3>{item["members"][0]["userName"]}</h3>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="message_right">
+                        <div className="message_right_chatarea">
+                          <div className="message_right_header">
+                            <h2>Strength & HIIT with Jeremy Clark</h2>
+                            <div className="message_header_times">
+                              <div className="message_header_items">
+                                <img src={SheduleIcon} alt="icon" />
+                                <h5> {new Date().toDateString()}</h5>
+                              </div>
+                              <div className="message_header_items">
+                                <img src={AvailabilityIcon} alt="icon" />
+                                <h5>{new Date().toLocaleTimeString()}</h5>
+                              </div>
+                              <div className="message_header_items">
+                                <img src={LocationIcon} alt="icon" />
+                                <h5>Chennai, TN</h5>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="message_right_textarea">
+                            {messages.map((item) => {
+                              // console.log(item["state"]["body"]);
+                              return <Chat data={item["state"]["body"]} />;
+                            })}
+                            <div ref={messagesEndRef} />
+                          </div>
+                          <div className="message_right_input">
+                            <input
+                              type="text"
+                              placeholder="Type your message here.."
+                              value={text_thread}
+                              onChange={(event) => {
+                                setText_thread(event.target.value);
+                              }}
+                            />
+                            <button onClick={sendText}>Send</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </TabPanel>
                 </div>
               </Tabs>
@@ -242,10 +433,11 @@ const TrainerMessage = () => {
 const Chat = (props) => {
   return (
     <>
-      <div className="message_chat">
+      <div className="message_chat_right">
         <div className="message_text">
           <h5>{props.data}</h5>
         </div>
+
         <img src={Jonn} alt="icon" />
       </div>
     </>
