@@ -3,10 +3,10 @@ import "./styles.scss";
 import Instagram from "../../../assets/files/SVG/Insta Icon.svg";
 import Web from "../../../assets/files/SVG/Web Icon.svg";
 import DropDown from "../../../assets/files/SVG/Drop Down 4.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { useForm } from "react-hook-form";
-import validation from "../Validation/validation";
+// import validation from "../Validation/validation";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 
 const AboutTrainer = () => {
@@ -34,9 +34,9 @@ const AboutTrainer = () => {
     // const history = useHistory();
 
     const handleTrainerBackground = () => {
-        // history.push("/trainerbackground");
+        // history.push("/trainer/background");
         console.log(aboutTrainerData);
-        setError(validation(aboutTrainerData));
+        // setError(validation(aboutTrainerData));
     };
 
     return (
@@ -270,7 +270,9 @@ const AboutTrainer = () => {
                                     onClick={handleTrainerBackground}
 
                                     //react hook form
-                                    // onClick={handleSubmit(handleTrainerBackground)}
+                                    // onClick={handleSubmit(
+                                    //     handleTrainerBackground
+                                    // )}
                                 >
                                     Continue
                                     <ArrowHoverBlacked />

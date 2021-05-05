@@ -68,8 +68,8 @@
                 margin: 0 1em 0 0;
                 flex-direction: column;
                 img {
-                    width: 270px;
-                    height: 450px;
+                    width: 260px;
+                    // height: 450px;
                 }
 
                 @media screen and (max-width: 1023px) {
@@ -79,7 +79,7 @@
 
                 .link_button {
                     display: flex;
-                    width: 270px;
+                    width: 260px;
                     height: 70px;
                     text-transform: uppercase;
                     justify-content: flex-start !important;
