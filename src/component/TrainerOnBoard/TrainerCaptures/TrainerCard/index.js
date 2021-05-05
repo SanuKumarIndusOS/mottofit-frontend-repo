@@ -152,10 +152,10 @@ const TrainerCardFC = ({
         <>
             <div className="outter_container_card">
                 <div className="container">
+                    <div className="card_prev_link">
+                        <Link to="/">Preview Your Trainer Card</Link>
+                    </div>
                     <div className="card_outter">
-                        <div className="card_prev_link">
-                            <Link to="/">Preview Your Trainer Card</Link>
-                        </div>
                         <div className="card_outter_wrapper">
                             <h2>{data.title}</h2>
                             <p>{data.describtion}</p>

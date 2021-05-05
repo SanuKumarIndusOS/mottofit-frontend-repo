@@ -40,9 +40,9 @@ const TrainerSetUpProfileFC = ({
         tellUs: "Tell us about you and describe your training process",
         showcase: "Throw in some photos showcasing you & your skills",
         certificate: "Certifications you’d like to display",
-        where: "Where will you br training",
-        serviceable: "Serviceable Location",
-        location: "Location",
+        where: "Where will you be training",
+        serviceable: "Which city will you train in?",
+        location: "Your preferred training location",
         web: "Website",
         insta: "Instagram",
         youtube: "Youtube",
@@ -233,7 +233,7 @@ const TrainerSetUpProfileFC = ({
             instagramProfile = "",
             currentExperience = {},
             certification = "",
-            servicableLocation = [],
+            serviceableLocation = [],
         } = trainerPersonalData || {};
 
         const { workLocation = "" } = currentExperience || {};
@@ -243,7 +243,7 @@ const TrainerSetUpProfileFC = ({
                 motto: myMotto,
                 trainingProcessDescription: trainingProcess,
                 trainingLocation: preferedTrainingMode,
-                serviceableLocation: servicableLocation?.map((location) => ({
+                servicableLocation: serviceableLocation?.map((location) => ({
                     label: location,
                     value: location,
                     name: "serviceableLocation",
@@ -272,18 +272,20 @@ const TrainerSetUpProfileFC = ({
 
     return (
         <>
-            <div>
-                <div className="setup_container container">
-                    <div className="setup_link">
+            <div className="outter_setup_container container">
+                <div className="setup_link">
+                    <div className="inner_link">
                         <img src={ArrowBack} alt="icon" />
-                        <div className="inner_link">
-                            <Link to="/trainer/card" onClick={handleBack}>
-                                {" "}
-                                Edit Trainer Card{" "}
-                            </Link>
-                            <div></div>
-                        </div>
+                        <Link to="/trainer/card" onClick={handleBack}>
+                            {" "}
+                            Edit Trainer Card{" "}
+                        </Link>
                     </div>
+                    <div className="inner_link_preview">
+                        <Link to="/"> Preview Your Trainer Profile </Link>
+                    </div>
+                </div>
+                <div className="setup_container ">
                     <div className="setup_headings">
                         <h2>{data.heading}</h2>
                         <p>{data.describe}</p>
@@ -443,7 +445,7 @@ const TrainerSetUpProfileFC = ({
                                                 >
                                                     In Person
                                                 </button>
-                                                <button
+                                                {/* <button
                                                     onClick={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -460,27 +462,32 @@ const TrainerSetUpProfileFC = ({
                                                     name="trainingLocation"
                                                 >
                                                     Outdoors
-                                                </button>
+                                                </button> */}
                                             </div>
                                         </div>
                                         <div className="setup_item1">
                                             <h6>{data.serviceable}</h6>
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
-                                                    <Select
-                                                        // defaultValue={trainingVenue}
-                                                        value={
-                                                            trainerData.serviceableLocation
-                                                        }
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                        options={options}
-                                                        isMulti
-                                                        placeholder="List all areas that you will service"
-                                                        // className="session_location_select"
-                                                        className="w-100"
-                                                    />
+                                                    <div className="session_location_dd">
+                                                        <div className="session_location">
+                                                            <Select
+                                                                // defaultValue={trainingVenue}
+                                                                value={
+                                                                    trainerData.serviceableLocation
+                                                                }
+                                                                onChange={
+                                                                    handleInputChange
+                                                                }
+                                                                options={
+                                                                    options
+                                                                }
+                                                                placeholder="List all areas that you will service"
+                                                                className="session_location_select"
+                                                                // className="w-100"
+                                                            />
+                                                        </div>
+                                                    </div>
                                                     {/* <input
                             type="text"
                             placeholder="List all areas that you will service"
@@ -495,20 +502,29 @@ const TrainerSetUpProfileFC = ({
                                             <h6>{data.location}</h6>
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Select your Location"
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                        value={
-                                                            trainerData.location
-                                                        }
-                                                        name="location"
-                                                    />
+                                                    <div className="session_location_dd">
+                                                        <div className="session_location">
+                                                            <Select
+                                                                // defaultValue={trainingVenue}
+                                                                onChange={
+                                                                    handleInputChange
+                                                                }
+                                                                value={
+                                                                    trainerData.location
+                                                                }
+                                                                options={
+                                                                    options
+                                                                }
+                                                                placeholder="List all areas that you will service"
+                                                                className="session_location_select"
+                                                                // className="w-100"
+                                                            />
+                                                        </div>
+                                                    </div>
                                                     <img
                                                         src={Location}
                                                         alt="icon"
+                                                        className="location_icon"
                                                     />
                                                 </div>
                                             </div>
