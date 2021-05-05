@@ -68,6 +68,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
       })
         .then(function (res) {
           console.log(res);
+          alert("Session Succesfully created")
         })
         .catch(function (res) {
           console.log(res);

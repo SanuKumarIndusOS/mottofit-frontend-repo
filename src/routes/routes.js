@@ -233,6 +233,13 @@ const routers = [
                 auth: false,
                 exact: true,
             },
+            {
+                path: "/message",
+                componentPath: "pages/TrainerDashboard/TrainerMessage",
+                name: "TrainerMessage",
+                auth: false,
+                exact: true,
+            },
         ],
     },
     {
