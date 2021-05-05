@@ -119,10 +119,8 @@ const TrainerMessage = () => {
                                                         </div>
                                                     </div>
                                                     <div className="message_right_textarea">
-                                                        <Chat/>
-                                                        <Chat/>
-
-
+                                                        <RightChat />
+                                                        <LeftChat />
                                                     </div>
                                                     <div className="message_right_input">
                                                         <input
@@ -153,10 +151,25 @@ const TrainerMessage = () => {
         </>
     );
 };
-const Chat = () => {
+const RightChat = () => {
     return (
         <>
-            <div className="message_chat">
+            <div className="message_chat_right">
+                <div className="message_text">
+                    <h5>
+                        Lorem ipsum dolor sit amet, consectetuer ad ipiscing
+                        elit, sed diam nonummy nibh euism od tincidunt ut…
+                    </h5>
+                </div>
+                <img src={Jonn} alt="icon" />
+            </div>
+        </>
+    );
+};
+const LeftChat = () => {
+    return (
+        <>
+            <div className="message_chat_left">
                 <div className="message_text">
                     <h5>
                         Lorem ipsum dolor sit amet, consectetuer ad ipiscing
