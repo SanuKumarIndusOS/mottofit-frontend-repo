@@ -1,8 +1,8 @@
 .main {
-    height: 980px;
+    height: auto;
     // padding: 0 5.5em;
     .wrapper_about {
-        height: 100vh;
+        height: auto;
         // padding: 0 5.5em;
 
         h2 {
@@ -29,6 +29,7 @@
             font-weight: 500;
         }
         .outter_form {
+            height: auto;
             .wrapper_inputs {
                 display: flex;
                 flex-wrap: wrap;
@@ -39,7 +40,11 @@
                 .wrapper_innerInput {
                     margin: 1em;
                     width: 40%;
-
+                    span {
+                        color: tomato;
+                        font-family: montserrat;
+                        font-weight: 500;
+                    }
                     label {
                         font-size: 22px;
                         text-align: left;
@@ -126,7 +131,7 @@
                         outline: none;
                         background: #53bfd2;
                         border: 0;
-                        margin: 1em;
+                        margin: 1em 0 0 0;
                         width: 210px;
                         height: 52px;
                         text-decoration: none;
@@ -137,7 +142,6 @@
                         img {
                             width: auto;
                             margin-left: 1em;
-                            color: red;
                         }
                     }
                 }
@@ -145,7 +149,7 @@
         }
         .about_watermark {
             position: relative;
-            top: -123px;
+            top: 0px;
             left: -103px;
             height: 320px;
         }
