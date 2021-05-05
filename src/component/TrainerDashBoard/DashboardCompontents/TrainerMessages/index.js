@@ -8,6 +8,7 @@ import Jonn from "../../../../assets/files/TrainerDashboard/Message/Image 1.png"
 import SheduleIcon from "../../../../assets/files/TrainerDashboard/Message/Shedule Icon.svg";
 import AvailabilityIcon from "../../../../assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import LocationIcon from "../../../../assets/files/TrainerDashboard/Message/Location Icon.svg";
+import { set } from "date-fns";
 
 const Chatt = require("twilio-chat");
 
@@ -20,6 +21,7 @@ const TrainerMessage = () => {
   const [messages, setMessages] = React.useState([]);
   const [text_thread, setText_thread] = React.useState([]);
   const [chattoken, setToken] = React.useState("");
+  const [channel_id, setChannel_id] = React.useState("");
 
   // Make Id dynamic
   React.useEffect(() => {
@@ -29,7 +31,7 @@ const TrainerMessage = () => {
         method: "get",
         headers: new Headers({
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDIzNTk4OSwiZXhwIjoxNjIwMjQzMTg5fQ.AeinsEpsn7V4ISMxVEM2Xb1szIFtHSmv5EjCw8jMe5M",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI0NDUyMCwiZXhwIjoxNjIwMjUxNzIwfQ.V-hGYx0gekV1wKFBW-LaAA2IdOYwYiUmYtKlmi4qsY4",
           "Content-Type": "application/x-www-form-urlencoded",
         }),
       }
@@ -39,35 +41,34 @@ const TrainerMessage = () => {
         //console.log(data['chatToken']);
         setToken(data["chatToken"]);
 
-        var channel;
-        Chatt.Client.create(data["chatToken"]).then((client) => {
-          // Use client
+        // var channel;
 
-          client
-            .getChannelByUniqueName("CH968a07b6614642508c1cfda691f4c698")
-            .then((res) => {
-              console.log(res);
-              channel = res;
-              setChannel(channel);
-              channel.join();
-            });
+        // Chatt.Client.create(data["chatToken"]).then((client) => {
+        //   // Use client
 
-          setClient(client);
+        //   // client.getChannelByUniqueName(channel_id).then((res) => {
+        //   //   console.log(res);
+        //   //   channel = res;
+        //   //   setChannel(channel);
+        //   //   channel.join();
+        //   // });
 
-          client.on("channelJoined", async (channel) => {
-            // getting list of all messages since this is an existing channel
-            console.log("joined");
-            const message = await channel.getMessages();
-            // this.setState({ messages: messages.items || [] });
-            setMessages(message["items"]);
-            console.log(message["items"][0]);
-            // scrollToBottom();
-          });
-        });
+        //   setClient(client);
+
+        //   // client.on("channelJoined", async (channel) => {
+        //   //   // getting list of all messages since this is an existing channel
+        //   //   console.log("joined");
+        //   //   const message = await channel.getMessages();
+        //   //   // this.setState({ messages: messages.items || [] });
+        //   //   setMessages(message["items"]);
+        //   //   console.log(message["items"][0]);
+        //   //   // scrollToBottom();
+        //   // });
+        // });
       });
 
     // Twilio initialisation
-    var token = chattoken;
+    // var token = chattoken;
     // var channel;
     // Chatt.Client.create(chattoken).then((client) => {
     //   // Use client
@@ -100,7 +101,7 @@ const TrainerMessage = () => {
       method: "get",
       headers: new Headers({
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDIzNTk4OSwiZXhwIjoxNjIwMjQzMTg5fQ.AeinsEpsn7V4ISMxVEM2Xb1szIFtHSmv5EjCw8jMe5M",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI0NDUyMCwiZXhwIjoxNjIwMjUxNzIwfQ.V-hGYx0gekV1wKFBW-LaAA2IdOYwYiUmYtKlmi4qsY4",
         "Content-Type": "application/x-www-form-urlencoded",
       }),
     })
@@ -133,15 +134,53 @@ const TrainerMessage = () => {
     console.log(messages);
   };
 
-  const PopulateMessages = (channelID) => {
-    console.log("clicked", channelID);
+  async function loadMessages(channelID) {
+
+    setMessages([]);
+    
+    console.log("loadMessages", channelID);
+    // setChannel_id(channel_id);
+    
+    Chatt.Client.create(chattoken).then((client) => {
+      var channel;
+      client.getChannelByUniqueName(channelID).then((res) => {
+        console.log(res);
+        channel = res;
+        setChannel(channel);
+        channel.join();
+      });
+
+      client.on('channelAdded', function(channel) {
+       
+      });
+    
+      client.on("channelJoined", async (channel) => {
+          // getting list of all messages since this is an existing channel
+          console.log("joined");
+          const message = await channel.getMessages();
+          // this.setState({ messages: messages.items || [] });
+          setMessages(message["items"]);
+          console.log(message["items"]);
+          // scrollToBottom();
+        });
+
+        client.on('channelRemoved', function(channel) {
+        //  setMessages([])
+        });
+    
+    });
+  }
+
+  function PopulateContacts(channelID) {
+    console.log("PopulateContacts", channelID);
     // console.log(messages);
-    setMessages([])
-  };
+   
+    loadMessages(channelID);
+  }
 
   const messagesEndRef = React.useRef();
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView( {behavior: "smooth" });
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -168,8 +207,12 @@ const TrainerMessage = () => {
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
-                        {[...individual_list,...socialGroup_list,...admin_list].map((item) => {
-                          // // console.log(item["channelId"]);
+                        {[
+                          ...individual_list,
+                          ...socialGroup_list,
+                          ...admin_list,
+                        ].map((item) => {
+                          //  console.log(item);
                           return (
                             <div className="contact_item">
                               <div className="inner_link">
@@ -177,7 +220,7 @@ const TrainerMessage = () => {
                                 <div
                                   className="message_link_notify"
                                   onClick={() =>
-                                    PopulateMessages(item["channelId"])
+                                    PopulateContacts(item["channelUniqueName"])
                                   }
                                 >
                                   <h3>{item["members"][0]["userName"]}</h3>
@@ -229,7 +272,7 @@ const TrainerMessage = () => {
                     </div>
                   </TabPanel>
                   <TabPanel tabId="two">
-                  <div className="message_inner_one">
+                    <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {individual_list.map((item) => {
@@ -241,7 +284,7 @@ const TrainerMessage = () => {
                                 <div
                                   className="message_link_notify"
                                   onClick={() =>
-                                    PopulateMessages(item["channelId"])
+                                    PopulateContacts(item["channelUniqueName"])
                                   }
                                 >
                                   <h3>{item["members"][0]["userName"]}</h3>
@@ -293,7 +336,7 @@ const TrainerMessage = () => {
                     </div>
                   </TabPanel>
                   <TabPanel tabId="three">
-                  <div className="message_inner_one">
+                    <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {socialGroup_list.map((item) => {
@@ -305,7 +348,7 @@ const TrainerMessage = () => {
                                 <div
                                   className="message_link_notify"
                                   onClick={() =>
-                                    PopulateMessages(item["channelId"])
+                                    PopulateContacts(item["channelUniqueName"])
                                   }
                                 >
                                   <h3>{item["members"][0]["userName"]}</h3>
@@ -357,7 +400,7 @@ const TrainerMessage = () => {
                     </div>
                   </TabPanel>
                   <TabPanel tabId="four">
-                  <div className="message_inner_one">
+                    <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {admin_list.map((item) => {
@@ -369,7 +412,7 @@ const TrainerMessage = () => {
                                 <div
                                   className="message_link_notify"
                                   onClick={() =>
-                                    PopulateMessages(item["channelId"])
+                                    PopulateContacts(item["channelUniqueName"])
                                   }
                                 >
                                   <h3>{item["members"][0]["userName"]}</h3>
