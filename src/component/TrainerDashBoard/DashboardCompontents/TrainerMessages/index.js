@@ -19,44 +19,87 @@ const TrainerMessage = () => {
   const [Client, setClient] = React.useState();
   const [messages, setMessages] = React.useState([]);
   const [text_thread, setText_thread] = React.useState([]);
+  const [chattoken, setToken] = React.useState("");
 
+  // Make Id dynamic
   React.useEffect(() => {
-    // Twilio initialisation
-    var token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2JlOWJjYjdkNjhmOTZkNTA4ZDA0N2FkOWI4NTFiNTU3LTE2MjAyMjUwMDkiLCJncmFudHMiOnsiaWRlbnRpdHkiOiI3ZjAwN2ZkMS03MDQyLTRjMWMtYjhlYS0zZDczOWNmOWY3MDciLCJjaGF0Ijp7InNlcnZpY2Vfc2lkIjoiSVNhNDQ0MzlmMDBmMzc0Njg1YjY1NzNmNmEyYTM0YWZjZiJ9fSwiaWF0IjoxNjIwMjI1MDA5LCJleHAiOjE2MjAyMjg2MDksImlzcyI6IlNLYmU5YmNiN2Q2OGY5NmQ1MDhkMDQ3YWQ5Yjg1MWI1NTciLCJzdWIiOiJBQzg0NDNjZDYwMmU4N2U4OTZmY2ZmYWU4YTJmNmE5NGE1In0.JLZUvIiOzq645b8ZdN71ZdUYopJ3-hBNuSfhrRa8agg";
-    var channel;
-    Chatt.Client.create(token).then((client) => {
-      // Use client
+    fetch(
+      "http://doodlebluelive.com:2338/v1/token?identity=7f007fd1-7042-4c1c-b8ea-3d739cf9f707",
+      {
+        method: "get",
+        headers: new Headers({
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDIzNTk4OSwiZXhwIjoxNjIwMjQzMTg5fQ.AeinsEpsn7V4ISMxVEM2Xb1szIFtHSmv5EjCw8jMe5M",
+          "Content-Type": "application/x-www-form-urlencoded",
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data['chatToken']);
+        setToken(data["chatToken"]);
 
-      client
-        .getChannelByUniqueName("CH968a07b6614642508c1cfda691f4c698")
-        .then((res) => {
-          console.log(res);
-          channel = res;
-          setChannel(channel);
-          channel.join();
+        var channel;
+        Chatt.Client.create(data["chatToken"]).then((client) => {
+          // Use client
+
+          client
+            .getChannelByUniqueName("CH968a07b6614642508c1cfda691f4c698")
+            .then((res) => {
+              console.log(res);
+              channel = res;
+              setChannel(channel);
+              channel.join();
+            });
+
+          setClient(client);
+
+          client.on("channelJoined", async (channel) => {
+            // getting list of all messages since this is an existing channel
+            console.log("joined");
+            const message = await channel.getMessages();
+            // this.setState({ messages: messages.items || [] });
+            setMessages(message["items"]);
+            console.log(message["items"][0]);
+          });
         });
-
-      setClient(client);
-
-      client.on("channelJoined", async (channel) => {
-        // getting list of all messages since this is an existing channel
-        console.log("joined");
-        const message = await channel.getMessages();
-        // this.setState({ messages: messages.items || [] });
-        setMessages(message["items"]);
-        console.log(message["items"][0]);
       });
-    });
+
+    // Twilio initialisation
+    var token = chattoken;
+    // var channel;
+    // Chatt.Client.create(chattoken).then((client) => {
+    //   // Use client
+
+    //   client
+    //     .getChannelByUniqueName("CH968a07b6614642508c1cfda691f4c698")
+    //     .then((res) => {
+    //       console.log(res);
+    //       channel = res;
+    //       setChannel(channel);
+    //       channel.join();
+    //     });
+
+    //   setClient(client);
+
+    //   client.on("channelJoined", async (channel) => {
+    //     // getting list of all messages since this is an existing channel
+    //     console.log("joined");
+    //     const message = await channel.getMessages();
+    //     // this.setState({ messages: messages.items || [] });
+    //     setMessages(message["items"]);
+    //     console.log(message["items"][0]);
+    //   });
+    // });
 
     // localStorage.getItem("token")
-  
+
     // Get Contact_list
     fetch("http://doodlebluelive.com:2338/v1/trainer/channel", {
       method: "get",
       headers: new Headers({
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDIyNTAwMCwiZXhwIjoxNjIwMjMyMjAwfQ.ElEw9YqgirjxUDYhXyNmRatdk6PWwF2J0fqEEbJT6Jo",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDIzNTk4OSwiZXhwIjoxNjIwMjQzMTg5fQ.AeinsEpsn7V4ISMxVEM2Xb1szIFtHSmv5EjCw8jMe5M",
         "Content-Type": "application/x-www-form-urlencoded",
       }),
     })
@@ -72,32 +115,22 @@ const TrainerMessage = () => {
 
   const sendText = () => {
     console.log(text_thread);
-     var temp = {}
-     temp.state = text_thread 
-     Channel.sendMessage(text_thread);
-     console.log("text_thread");
-
-     
-    //  const message = () => Channel.getMessages();
-    //  setMessages([])
-     
+    var temp = {};
+    temp.state = text_thread;
+    Channel.sendMessage(text_thread);
+    console.log("text_thread");
 
     Channel.on("messageAdded", handleMessageAdded);
+    //  const message = () => Channel.getMessages();
+    //  setMessages([])
 
-    setText_thread(" ")
+    setText_thread(" ");
   };
-  
- 
- 
+
   const handleMessageAdded = (message) => {
-  
-    setMessages(messages => !!messages ? [...messages, message] : [message] ) 
+    setMessages((messages) => [...messages, message]);
     console.log(messages);
-   
-
-  }
-
-
+  };
 
   const PopulateMessages = (channelID) => {
     console.log("clicked", channelID);
@@ -178,7 +211,7 @@ const TrainerMessage = () => {
                               placeholder="Type your message here.."
                               value={text_thread}
                               onChange={(event) => {
-                                 setText_thread(event.target.value);
+                                setText_thread(event.target.value);
                               }}
                             />
                             <button onClick={sendText}>Send</button>
