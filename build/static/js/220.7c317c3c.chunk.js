@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[220],{386:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Youtube.1eb126cd.svg"}}]);
+//# sourceMappingURL=220.7c317c3c.chunk.js.map

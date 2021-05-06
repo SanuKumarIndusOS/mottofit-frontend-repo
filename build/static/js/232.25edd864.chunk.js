@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[232],{447:function(t,s,a){"use strict";a.r(s),s.default=a.p+"static/media/Mastercard.a5c1de52.svg"}}]);
+//# sourceMappingURL=232.25edd864.chunk.js.map
