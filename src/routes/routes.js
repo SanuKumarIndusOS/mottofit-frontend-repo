@@ -227,7 +227,7 @@ const routers = [
         auth: false,
         name: "TrainerDashboard",
         exact: false,
-        redirect: "/trainers/dashboard/settings/profile",
+        redirect: "/trainers/dashboard/session",
         childrens: [
             {
                 path: "/session",

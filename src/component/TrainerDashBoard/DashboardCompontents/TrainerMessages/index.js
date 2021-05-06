@@ -31,7 +31,7 @@ const TrainerMessage = () => {
                 method: "get",
                 headers: new Headers({
                     Authorization:
-                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyMzNlYmZlLTc0N2MtNDBjZi1iYjllLTI2ZTU5MmY0ZmFlYyIsImlhdCI6MTYyMDI3NjM0NCwiZXhwIjoxNjIwMjgzNTQ0fQ.b1YP5mlq7blnO8-yimHGEAXrJ3E61phPujNaKOvraOc",
+                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI4MDE3MiwiZXhwIjoxNjIwMjg3MzcyfQ.8iqR0mzhAtqZme8-AvsQxKQydDZi2QSAor63CsGcBA4",
                     "Content-Type": "application/x-www-form-urlencoded",
                 }),
             }
@@ -101,7 +101,7 @@ const TrainerMessage = () => {
             method: "get",
             headers: new Headers({
                 Authorization:
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI0NDUyMCwiZXhwIjoxNjIwMjUxNzIwfQ.V-hGYx0gekV1wKFBW-LaAA2IdOYwYiUmYtKlmi4qsY4",
+                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI4MDE3MiwiZXhwIjoxNjIwMjg3MzcyfQ.8iqR0mzhAtqZme8-AvsQxKQydDZi2QSAor63CsGcBA4",
                 "Content-Type": "application/x-www-form-urlencoded",
             }),
         })
@@ -153,7 +153,7 @@ const TrainerMessage = () => {
 
             client.on("channelJoined", async (channel) => {
                 // getting list of all messages since this is an existing channel
-                console.log("joined");
+                console.log("joined", channel);
                 const message = await channel.getMessages();
                 // this.setState({ messages: messages.items || [] });
                 setMessages(message["items"]);
@@ -290,7 +290,7 @@ const TrainerMessage = () => {
                                                             (item) => {
                                                                 // // console.log(item["state"]["body"]);
                                                                 return (
-                                                                    <Chat
+                                                                    <RightChat
                                                                         data={
                                                                             item[
                                                                                 "state"
@@ -417,7 +417,7 @@ const TrainerMessage = () => {
                                                             (item) => {
                                                                 // console.log(item["state"]["body"]);
                                                                 return (
-                                                                    <Chat
+                                                                    <RightChat
                                                                         data={
                                                                             item[
                                                                                 "state"
@@ -548,7 +548,7 @@ const TrainerMessage = () => {
                                                             (item) => {
                                                                 // console.log(item["state"]["body"]);
                                                                 return (
-                                                                    <Chat
+                                                                    <RightChat
                                                                         data={
                                                                             item[
                                                                                 "state"
@@ -675,7 +675,7 @@ const TrainerMessage = () => {
                                                             (item) => {
                                                                 // console.log(item["state"]["body"]);
                                                                 return (
-                                                                    <Chat
+                                                                    <RightChat
                                                                         data={
                                                                             item[
                                                                                 "state"
@@ -725,7 +725,7 @@ const TrainerMessage = () => {
         </>
     );
 };
-const Chat = (props) => {
+const RightChat = (props) => {
     return (
         <>
             <div className="message_chat_right">
@@ -738,5 +738,17 @@ const Chat = (props) => {
         </>
     );
 };
+// const LeftChat = (props) => {
+//     return (
+//         <>
+//             <div className="message_chat_right">
+//                 <div className="message_text">
+//                     <h5>{props.data}</h5>
+//                 </div>
 
+//                 <img src={Jonn} alt="icon" />
+//             </div>
+//         </>
+//     );
+// };
 export default TrainerMessage;

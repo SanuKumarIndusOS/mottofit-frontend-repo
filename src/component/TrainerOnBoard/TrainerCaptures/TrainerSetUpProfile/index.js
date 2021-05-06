@@ -145,6 +145,8 @@ const TrainerSetUpProfileFC = ({
       youtubeChannel,
     } = trainerData;
 
+   console.log(serviceableLocation);
+
     let payload = {
       firstName,
       lastName,
@@ -174,10 +176,12 @@ const TrainerSetUpProfileFC = ({
         certfiedYear: year,
         certification: certificate,
       })),
-      servicableLocation: serviceableLocation?.map(({ value }) => value),
+     
+      servicableLocation: serviceableLocation,
     };
     // updateTrainerDetails();
 
+   
     console.log(payload);
 
     const { updateTrainerAvailabilityApi } = TrainerApi;
@@ -242,7 +246,7 @@ const TrainerSetUpProfileFC = ({
         motto: myMotto,
         trainingProcessDescription: trainingProcess,
         trainingLocation: preferedTrainingMode,
-        servicableLocation: serviceableLocation?.map((location) => ({
+        servicableLocation: serviceableLocation.map((location) => ({
           label: location,
           value: location,
           name: "serviceableLocation",
