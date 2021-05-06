@@ -63,7 +63,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
 
     const { userSignUp } = AuthApi;
 
-    loginOrSignupAct(userSignUp, payload).catch((error) => {
+    loginOrSignupAct(userSignUp, payload).then((data) => console.log(data))
+    .catch((error) => {
       setApiError("Sorry, something went wrong.", error.message);
     });
 

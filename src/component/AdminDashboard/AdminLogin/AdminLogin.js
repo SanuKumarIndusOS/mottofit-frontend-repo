@@ -41,8 +41,9 @@ const AdminLogin = () => {
         fetch("http://doodlebluelive.com:2307/v1/admin/login", requestOptions)
             .then(async (response) => {
                 const data = await response.json();
-                localStorage.setItem("user-info", JSON.stringify(data));
+                localStorage.setItem("admin-token", data["token"]);
                 if (response.ok) {
+                    console.log(data);
                     history.push("/admin/dashboard");
                 } else {
                     setApiError("User Not Registered", response.statusText);
@@ -111,7 +112,7 @@ const AdminLogin = () => {
                                         type="submit"
                                         onClick={handleSubmit(adminLogIn)}
                                     >
-                                        Login <BlackArrowButton />
+                                        Login
                                     </button>
 
                                     {/* <div className="sigup_admin">
