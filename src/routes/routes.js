@@ -40,6 +40,30 @@ const routers = [
     },
     {
         component: "MainLayout",
+        path: "/admin",
+        auth: true,
+        name: "Dashboard",
+        exact: false,
+        childrens: [
+            {
+                path: "/login",
+                componentPath: "pages/Admin/Admin",
+                name: "AdminLogin",
+                auth: false,
+                exact: true,
+            },
+            {
+                path: "/dashboard",
+                componentPath: "pages/AdminDashboard/AdminDashboardMain",
+                name: "AdminDashboard",
+                auth: false,
+                exact: true,
+            },
+        ],
+    },
+
+    {
+        component: "MainLayout",
         path: "/trainer",
         auth: true,
         name: "Dashboard",
