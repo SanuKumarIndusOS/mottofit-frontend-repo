@@ -6,115 +6,101 @@ import Mail from "../../../assets/files/SignUp/Email Icon.svg";
 import Password from "../../../assets/files/SignUp/Password Icon.svg";
 
 const AdminLogin = () => {
-    const [data, setData] = useState({
-        email: "",
-        password: "",
-        signUpType: "email",
-        deviceName: "email",
-    });
-    const [passwordShown, setPasswordShown] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    signUpType: "email",
+    deviceName: "email",
+  });
+  const [passwordShown, setPasswordShown] = useState(false);
 
-    const showPassword = () => {
-        setPasswordShown(passwordShown ? false : true);
+  const showPassword = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+  const [apiError, setApiError] = useState("");
+
+  const history = useHistory();
+
+  async function adminLogIn() {
+    const item = {
+      email: data.email,
+      password: data.password,
+      signUpType: data.signUpType,
+      deviceName: data.deviceName,
     };
-    const [apiError, setApiError] = useState("");
+    console.log(item);
 
-    const history = useHistory();
-
-    async function adminLogIn() {
-        const item = {
-            email: data.email,
-            password: data.password,
-            signUpType: data.signUpType,
-            deviceName: data.deviceName,
-        };
-        console.log(item);
-
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify(item),
-        };
-        fetch("http://doodlebluelive.com:2307/v1/admin/login", requestOptions)
-            .then(async (response) => {
-                const data = await response.json();
-                localStorage.setItem("user-info", JSON.stringify(data));
-                if (response.ok) {
-                    history.push("/admin/dashboard");
-                } else {
-                    setApiError("User Not Registered", response.statusText);
-                }
-            })
-            .catch((error) => {
-                setApiError("Sorry, something went wrong.", error.message);
-            });
-    }
-    const onChangeValue = (e) => {
-        e.persist();
-        setData({ ...data, [e.target.name]: e.target.value });
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(item),
     };
+    fetch("http://doodlebluelive.com:2307/v1/admin/login", requestOptions)
+      .then(async (response) => {
+        const data = await response.json();
+        localStorage.setItem("admin-token", data["token"]);
+        if (response.ok) {
+          console.log(data);
+          history.push("/admin/dashboard");
+        } else {
+          setApiError("User Not Registered", response.statusText);
+        }
+      })
+      .catch((error) => {
+        setApiError("Sorry, something went wrong.", error.message);
+      });
+  }
+  const onChangeValue = (e) => {
+    e.persist();
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
-    const preventSubmit = (e) => {
-        e.preventDefault();
-    };
-    const { register, errors, handleSubmit } = useForm();
+  const preventSubmit = (e) => {
+    e.preventDefault();
+  };
+  const { register, errors, handleSubmit } = useForm();
 
-    return (
-        <>
-            <div className="outter_admin_login">
-                <div className="container">
-                    <div className="inner_admin_login">
-                        <div className="login_wraper">
-                            <h2>Mottofit Admin Dashboard </h2>
-                            <form onSubmit={preventSubmit}>
-                                <div className="inner_form_loginAdmin">
-                                    <label>Email</label>
-                                    <div className="input_item1_signin">
-                                        <input
-                                            type="text"
-                                            placeholder="Email"
-                                            value={data.email}
-                                            onChange={onChangeValue}
-                                            name="email"
-                                        />
-                                        <img src={Mail} alt="icon" />
-                                    </div>
+  return (
+    <>
+      <div className="outter_admin_login">
+        <div className="container">
+          <div className="inner_admin_login">
+            <div className="login_wraper">
+              <h2>Mottofit Admin Dashboard </h2>
+              <form onSubmit={preventSubmit}>
+                <div className="inner_form_loginAdmin">
+                  <label>Email</label>
+                  <div className="input_item1_signin">
+                    <input
+                      type="text"
+                      placeholder="Email"
+                      value={data.email}
+                      onChange={onChangeValue}
+                      name="email"
+                    />
+                    <img src={Mail} alt="icon" />
+                  </div>
 
-                                    <label>Password</label>
-                                    <div className="input_item1_signin">
-                                        <input
-                                            type={
-                                                passwordShown
-                                                    ? "text"
-                                                    : "password"
-                                            }
-                                            placeholder="Password"
-                                            value={data.password}
-                                            onChange={onChangeValue}
-                                            name="password"
-                                        />
-                                        <img
-                                            src={Password}
-                                            alt="icon"
-                                            onClick={showPassword}
-                                        />
-                                    </div>
-                                    {apiError && (
-                                        <span className="errorMessage">
-                                            {apiError}
-                                        </span>
-                                    )}
-                                    <button
-                                        type="submit"
-                                        onClick={handleSubmit(adminLogIn)}
-                                    >
-                                        Login
-                                    </button>
+                  <label>Password</label>
+                  <div className="input_item1_signin">
+                    <input
+                      type={passwordShown ? "text" : "password"}
+                      placeholder="Password"
+                      value={data.password}
+                      onChange={onChangeValue}
+                      name="password"
+                    />
+                    <img src={Password} alt="icon" onClick={showPassword} />
+                  </div>
+                  {apiError && <span className="errorMessage">{apiError}</span>}
+                  <button type="submit" onClick={handleSubmit(adminLogIn)}>
+                    Login
+                  </button>
 
-                                    {/* <div className="sigup_admin">
+                  {/* <div className="sigup_admin">
                                         <h4>Don't have an account yet?</h4>
                                         <Link
                                             type="submit"
@@ -124,14 +110,14 @@ const AdminLogin = () => {
                                             Sign Up
                                         </Link>
                                     </div> */}
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
+              </form>
             </div>
-        </>
-    );
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default AdminLogin;
