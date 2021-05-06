@@ -9,6 +9,7 @@ import SheduleIcon from "../../../../assets/files/TrainerDashboard/Message/Shedu
 import AvailabilityIcon from "../../../../assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import LocationIcon from "../../../../assets/files/TrainerDashboard/Message/Location Icon.svg";
 import { set } from "date-fns";
+import BlueHoverButton from "../../../common/BlueArrowButton/index";
 
 const Chatt = require("twilio-chat");
 
@@ -25,13 +26,13 @@ const TrainerMessage = () => {
 
     // Make Id dynamic
     React.useEffect(() => {
+        var btoken = localStorage.getItem("token")
         fetch(
             "http://doodlebluelive.com:2338/v1/token?identity=7f007fd1-7042-4c1c-b8ea-3d739cf9f707",
             {
                 method: "get",
                 headers: new Headers({
-                    Authorization:
-                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI4MDE3MiwiZXhwIjoxNjIwMjg3MzcyfQ.8iqR0mzhAtqZme8-AvsQxKQydDZi2QSAor63CsGcBA4",
+                    Authorization: btoken,
                     "Content-Type": "application/x-www-form-urlencoded",
                 }),
             }
@@ -94,14 +95,13 @@ const TrainerMessage = () => {
         //   });
         // });
 
-        // localStorage.getItem("token")
+         
 
         // Get Contact_list
         fetch("http://doodlebluelive.com:2338/v1/trainer/channel", {
             method: "get",
             headers: new Headers({
-                Authorization:
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI4MDE3MiwiZXhwIjoxNjIwMjg3MzcyfQ.8iqR0mzhAtqZme8-AvsQxKQydDZi2QSAor63CsGcBA4",
+                Authorization: btoken,
                 "Content-Type": "application/x-www-form-urlencoded",
             }),
         })
@@ -320,11 +320,11 @@ const TrainerMessage = () => {
                                                                 );
                                                             }}
                                                         />
-                                                        <button
+                                                        <div
                                                             onClick={sendText}
                                                         >
-                                                            Send
-                                                        </button>
+                                                            <BlueHoverButton />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -447,11 +447,11 @@ const TrainerMessage = () => {
                                                                 );
                                                             }}
                                                         />
-                                                        <button
-                                                            onClick={sendText}
+                                                        <div
+                                                            onClick={sendText} 
                                                         >
-                                                            Send
-                                                        </button>
+                                                             <BlueHoverButton />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -578,11 +578,11 @@ const TrainerMessage = () => {
                                                                 );
                                                             }}
                                                         />
-                                                        <button
+                                                        <div
                                                             onClick={sendText}
                                                         >
-                                                            Send
-                                                        </button>
+                                                            <BlueHoverButton />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -705,11 +705,11 @@ const TrainerMessage = () => {
                                                                 );
                                                             }}
                                                         />
-                                                        <button
+                                                        <div
                                                             onClick={sendText}
                                                         >
-                                                            Send
-                                                        </button>
+                                                            <BlueHoverButton />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
