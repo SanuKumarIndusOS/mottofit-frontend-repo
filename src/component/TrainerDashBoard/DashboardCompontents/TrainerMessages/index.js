@@ -31,7 +31,7 @@ const TrainerMessage = () => {
         method: "get",
         headers: new Headers({
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI0NDUyMCwiZXhwIjoxNjIwMjUxNzIwfQ.V-hGYx0gekV1wKFBW-LaAA2IdOYwYiUmYtKlmi4qsY4",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI4MDE3MiwiZXhwIjoxNjIwMjg3MzcyfQ.8iqR0mzhAtqZme8-AvsQxKQydDZi2QSAor63CsGcBA4",
           "Content-Type": "application/x-www-form-urlencoded",
         }),
       }
@@ -101,7 +101,7 @@ const TrainerMessage = () => {
       method: "get",
       headers: new Headers({
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI0NDUyMCwiZXhwIjoxNjIwMjUxNzIwfQ.V-hGYx0gekV1wKFBW-LaAA2IdOYwYiUmYtKlmi4qsY4",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmMDA3ZmQxLTcwNDItNGMxYy1iOGVhLTNkNzM5Y2Y5ZjcwNyIsImlhdCI6MTYyMDI4MDE3MiwiZXhwIjoxNjIwMjg3MzcyfQ.8iqR0mzhAtqZme8-AvsQxKQydDZi2QSAor63CsGcBA4",
         "Content-Type": "application/x-www-form-urlencoded",
       }),
     })
@@ -156,7 +156,7 @@ const TrainerMessage = () => {
     
       client.on("channelJoined", async (channel) => {
           // getting list of all messages since this is an existing channel
-          console.log("joined");
+          console.log("joined", channel);
           const message = await channel.getMessages();
           // this.setState({ messages: messages.items || [] });
           setMessages(message["items"]);
