@@ -23,7 +23,7 @@ const TrainerDashboardTemp = ({ children }) => {
                 <div className="admin_sidenav">
                     <div className="admin_profile">
                         <div className="profile_pic"></div>
-                        <h2>User Name</h2>
+                        <h2>Trainer Name</h2>
                     </div>
                     <div className="admin_sidenav_links">
                         {SideBarRouteData.map((item, index) => {

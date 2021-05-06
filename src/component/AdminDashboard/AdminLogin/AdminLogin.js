@@ -4,7 +4,7 @@ import "./styles.scss";
 import { useForm } from "react-hook-form";
 import Mail from "../../../assets/files/SignUp/Email Icon.svg";
 import Password from "../../../assets/files/SignUp/Password Icon.svg";
-
+import BlackArrowButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
 const AdminLogin = () => {
     const [data, setData] = useState({
         email: "",
@@ -111,7 +111,7 @@ const AdminLogin = () => {
                                         type="submit"
                                         onClick={handleSubmit(adminLogIn)}
                                     >
-                                        Login
+                                        Login <BlackArrowButton />
                                     </button>
 
                                     {/* <div className="sigup_admin">

@@ -1,86 +1,99 @@
 .profile_main {
-    height: 3500px;
+    height: 100%;
     .profile_outter_container {
         width: 100%;
-        height: 400px;
-        background: #141414;
-        opacity: 1;
+        height: 100%;
+
         .profile_wrapper_container {
-            width: 100%;
-            height: 400px;
-            background: #141414;
             .profile_header {
                 width: 100%;
                 height: 400px;
-                position: relative;
-                top: 150px;
-                display: grid;
-                grid-template-columns: auto 30% 35%;
-                align-items: flex-start;
-                img {
-                    width: 350px;
-                    height: 400px;
-                    opacity: 1;
-                }
-                .profile_header_inner {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
+                background: #141414;
+
+                .inner_profile {
+                    position: relative;
+                    top: 150px;
+                    display: grid;
+                    grid-template-columns: auto 30% 35%;
                     align-items: flex-start;
-                    margin: 4em 0 0 2em;
-
-                    h2 {
-                        font: var(--unnamed-font-style-normal) normal
-                            var(--unnamed-font-weight-bold)
-                            var(--unnamed-font-size-45) /
-                            var(--unnamed-line-spacing-55)
-                            var(--unnamed-font-family-cormorant-garamond);
-                        letter-spacing: var(--unnamed-character-spacing--0-45);
-                        color: var(--unnamed-color-ffffff);
-                        text-align: left;
-                        font: normal normal bold 45px/55px Cormorant Garamond;
-                        letter-spacing: -0.45px;
-                        color: #ffffff;
+                    img {
+                        width: 350px;
+                        height: 400px;
                         opacity: 1;
                     }
-                    p {
-                        font: var(--unnamed-font-style-normal) normal
-                            var(--unnamed-font-weight-medium)
-                            var(--unnamed-font-size-22) /
-                            var(--unnamed-line-spacing-22)
-                            var(--unnamed-font-family-montserrat);
-                        color: var(--unnamed-color-898989);
-                        text-align: left;
-                        font: normal normal medium 22px/22px Montserrat;
-                        letter-spacing: 1.1px;
-                        color: #898989;
-                        text-transform: uppercase;
-                        opacity: 1;
-                    }
-                }
-                .profile_header_link {
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-end;
-                    text-align: right;
-                    margin: 4em 0 0 4em;
+                    .profile_header_inner {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        margin: 4em 0 0 2em;
 
-                    a {
+                        h2 {
+                            font: var(--unnamed-font-style-normal) normal
+                                var(--unnamed-font-weight-bold)
+                                var(--unnamed-font-size-45) /
+                                var(--unnamed-line-spacing-55)
+                                var(--unnamed-font-family-cormorant-garamond);
+                            letter-spacing: var(
+                                --unnamed-character-spacing--0-45
+                            );
+                            color: var(--unnamed-color-ffffff);
+                            text-align: left;
+                            font: normal normal bold 45px/55px Cormorant
+                                Garamond;
+                            letter-spacing: -0.45px;
+                            color: #ffffff;
+                            opacity: 1;
+                        }
+                        p {
+                            font: var(--unnamed-font-style-normal) normal
+                                var(--unnamed-font-weight-medium)
+                                var(--unnamed-font-size-22) /
+                                var(--unnamed-line-spacing-22)
+                                var(--unnamed-font-family-montserrat);
+                            color: var(--unnamed-color-898989);
+                            text-align: left;
+                            font: normal normal medium 22px/22px Montserrat;
+                            letter-spacing: 1.1px;
+                            color: #898989;
+                            text-transform: uppercase;
+                            opacity: 1;
+                            text-decoration: none;
+                        }
+                    }
+                    .profile_header_link {
                         display: flex;
                         align-items: center;
                         justify-content: flex-end;
                         text-align: right;
-                        font: var(--unnamed-font-style-normal) normal
-                            var(--unnamed-font-weight-normal)
-                            var(--unnamed-font-size-18) /
-                            var(--unnamed-line-spacing-42)
-                            var(--unnamed-font-family-montserrat);
-                        color: var(--unnamed-color-bcbcbc);
-                        text-align: left;
-                        font: normal normal normal 18px/42px Montserrat;
-                        letter-spacing: 0.18px;
-                        color: #bcbcbc;
-                        opacity: 1;
+                        margin: 4em 0 0 4em;
+
+                        a {
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                            text-align: right;
+                            font: var(--unnamed-font-style-normal) normal
+                                var(--unnamed-font-weight-normal)
+                                var(--unnamed-font-size-18) /
+                                var(--unnamed-line-spacing-42)
+                                var(--unnamed-font-family-montserrat);
+                            color: var(--unnamed-color-bcbcbc);
+                            text-align: left;
+                            font: normal normal normal 18px/25px Montserrat;
+                            letter-spacing: 0.18px;
+                            color: #bcbcbc;
+                            opacity: 1;
+                            border-bottom: 2px solid #53bfd2;
+                        }
+                        a:hover {
+                            text-decoration: none;
+                        }
+                        img {
+                            margin-right: 0.5em;
+                            width: 10px;
+                            height: 15px;
+                        }
                     }
                 }
             }
@@ -90,7 +103,7 @@
                 grid-template-rows: auto;
                 margin-top: 10em;
                 grid-column-gap: 62px;
-                height: 900px;
+                // height: 900px;
                 .profile_aside {
                     // background: chocolate;
                     .profile_aside_link {
@@ -106,6 +119,13 @@
                             letter-spacing: 0.18px;
                             color: #161616;
                             opacity: 1;
+                            border-bottom: 2px solid #53bfd2;
+                        }
+                        a:hover {
+                            text-decoration: none;
+                        }
+                        img {
+                            margin-left: 0.5em;
                         }
                     }
                     .profile_aside_items {
@@ -327,10 +347,14 @@
                             }
                             .profile_images_grid {
                                 display: flex;
+                                flex-direction: column;
+                                box-sizing: border-box;
+                                width: 100%;
+                                margin: 0.5em 0;
                                 .profile_images_container {
                                     display: flex;
-                                    width: 100%;
-                                    flex-wrap: wrap;
+                                    box-sizing: border-box;
+                                    margin: 0.5em 0;
 
                                     .profile_images_card {
                                         font-family: sans-serif;
@@ -338,39 +362,64 @@
                                         font-weight: bold;
                                         height: 40%;
                                         display: flex;
-                                        flex-flow: column wrap;
-
+                                        color: white;
                                         justify-content: center;
-
-                                        &:nth-child(1) {
-                                            width: 300px;
-                                            height: 400px;
-                                            background: darkblue;
-                                            order: 1;
-                                        }
-                                        &:nth-child(2) {
-                                            width: 400px;
-                                            height: 208px;
-                                            background: rgb(187, 255, 0);
-                                            order: 2;
-                                        }
-
-                                        &:nth-child(3) {
-                                            display: flex;
-                                            flex-wrap: wrap;
-                                            width: 100px;
-                                            height: 200px;
-                                            background: darkgreen;
-                                            order: 2;
-                                        }
-
-                                        &:nth-child(4) {
-                                            width: 200px;
-                                            height: 200px;
-                                            background-color: darkorange;
-                                            order: 4;
-                                        }
                                     }
+                                    .box1 {
+                                        width: 320px;
+                                        height: 360px;
+                                        // background: rgb(144, 144, 221);
+                                    }
+
+                                    .box2 {
+                                        width: 400px;
+                                        height: 175px;
+                                        // background: rgb(75, 189, 189);
+                                        margin-left: 10px;
+                                    }
+
+                                    .box3 {
+                                        width: 200px;
+                                        height: 165px;
+                                        // background: rgb(78, 221, 150);
+                                        margin: 0 0 0 10px;
+                                    }
+
+                                    .box4 {
+                                        width: 200px;
+                                        height: 165px;
+                                        // background-color: rgb(245, 201, 148);
+                                        margin-left: 10px;
+                                    }
+                                    .flex-try-2 {
+                                        width: 408px;
+                                    }
+                                    .flex-try-3 {
+                                        display: flex;
+                                        margin-top: 20px;
+                                    }
+                                }
+                            }
+                            .image_more {
+                                display: flex;
+                                align-items: center;
+                                h5 {
+                                    margin: 0;
+                                    font: var(--unnamed-font-style-normal)
+                                        normal var(--unnamed-font-weight-normal)
+                                        var(--unnamed-font-size-18) /
+                                        var(--unnamed-line-spacing-42)
+                                        var(--unnamed-font-family-montserrat);
+                                    color: var(--unnamed-color-161616);
+                                    text-align: left;
+                                    font: normal normal normal 18px/25px
+                                        Montserrat;
+                                    letter-spacing: 0.18px;
+                                    color: #161616;
+                                    border-bottom: 2px solid #53bfd2;
+                                }
+                                img {
+                                    margin-left: 0.5em;
                                 }
                             }
                         }
@@ -409,13 +458,15 @@
                                             );
                                         color: var(--unnamed-color-898989);
                                         text-align: left;
-                                        font: normal normal 600 20px/22px
+                                        font: normal normal 600 18px/22px
                                             Montserrat;
                                         letter-spacing: 0.6px;
                                         color: #898989;
                                         text-transform: uppercase;
                                         opacity: 1;
-                                        margin: 0 0 0 1em;
+                                        margin: 0 0 0 0.5em;
+                                        display: flex;
+                                        align-items: center;
                                     }
                                 }
                             }
@@ -435,6 +486,7 @@
                                 width: 100%;
                                 height: 500px;
                                 background: cyan;
+                                margin: 1em 0 11em 0;
                             }
                         }
                     }
