@@ -1,0 +1,292 @@
+.outer_schedular_container {
+    margin: 1em 0;
+    .schedular_header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin: 1em 0;
+        .schedular_buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: auto;
+            p {
+                margin: 0;
+                padding: 0 0.5em;
+
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-600) var(--unnamed-font-size-20) /
+                    var(--unnamed-line-spacing-22)
+                    var(--unnamed-font-family-montserrat);
+                color: var(--unnamed-color-898989);
+                text-align: center;
+                font: normal normal 600 20px/22px Montserrat;
+                letter-spacing: 0.6px;
+                color: #898989;
+                text-transform: uppercase;
+            }
+        }
+
+        .schedular_dropdown {
+            // width: 550px;
+            height: 40px;
+            border: 1.5px solid var(--unnamed-color-bcbcbc);
+            border: 2px solid #bcbcbc;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1em;
+
+            .availability_dropdown_outter {
+                height: 25px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .availability_dropdown {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    .availability {
+                        display: flex;
+                        height: 25px;
+                        align-items: center;
+                        width: 260px;
+                        padding: 0 1em;
+                        p {
+                            width: 100%;
+                            text-align: left;
+                            letter-spacing: 0.2px;
+                            color: #898989;
+                            opacity: 1;
+                            font-family: Montserrat;
+                            font-size: 20px;
+                            font-weight: 600;
+                            margin: 0 1em;
+                            position: relative;
+                            top: 1px;
+                        }
+                    }
+                }
+            }
+            .time_zone {
+                width: 50%;
+                margin-left: 1em;
+
+                .css-yk16xz-control {
+                    border: none;
+                    background-color: transparent;
+
+                    .css-1uccc91-singleValue {
+                        text-align: left;
+                        letter-spacing: 0.2px;
+                        color: #898989;
+                        opacity: 1;
+                        font-family: Montserrat;
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+
+                    .css-1hb7zxy-IndicatorsContainer {
+                        .css-1okebmr-indicatorSeparator {
+                            display: none;
+                        }
+                    }
+                }
+                .css-1wa3eu0-placeholder {
+                    font-family: Montserrat;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    .schedular_table {
+        display: flex;
+        table {
+            border-collapse: collapse;
+            thead {
+                th {
+                    border: 2px solid #e6e6e6;
+                    width: 130px;
+                    padding-top: 1rem;
+                    padding-bottom: 1rem;
+                    font-family: "Montserrat";
+                    .schedular_selection {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        // font-size: 20px;
+                        height: 108px;
+
+                        color: #898989;
+                        img {
+                            width: 50px;
+                            padding-bottom: 0.5em;
+                            height: 40px;
+                        }
+                        .schedular_selection_header {
+                            letter-spacing: 0.2px;
+                            color: #898989;
+                            font-size: 20px !important;
+                            font-weight: 600 !important;
+                            font-family: Montserrat !important;
+                        }
+                    }
+                }
+            }
+            .schedular_time_display {
+                tr {
+                    .schedular_time {
+                        background-color: white;
+                        border: 1px solid #e6e6e6;
+                        height: 140px;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        font: var(--unnamed-font-style-normal) normal
+                            var(--unnamed-font-weight-600)
+                            var(--unnamed-font-size-20) /
+                            var(--unnamed-line-spacing-22)
+                            var(--unnamed-font-family-montserrat);
+                        color: var(--unnamed-color-161616);
+                        text-align: center;
+                        font: normal normal 600 20px/22px Montserrat;
+                        letter-spacing: 0.6px;
+                        color: #161616;
+                        text-transform: uppercase;
+                        opacity: 1;
+                        padding-top: 1em;
+                    }
+                }
+            }
+        }
+        .week_selection_table {
+            thead {
+                tr {
+                    th {
+                        height: 140px;
+                        .scheduler_date {
+                            font: var(--unnamed-font-style-normal) normal
+                                var(--unnamed-font-weight-600)
+                                var(--unnamed-font-size-40) /
+                                var(--unnamed-line-spacing-22)
+                                var(--unnamed-font-family-montserrat);
+                            color: var(--unnamed-color-161616);
+                            text-align: center;
+                            font: normal normal 600 40px/22px Montserrat;
+                            letter-spacing: 1.2px;
+                            color: #161616;
+                            text-transform: uppercase;
+                        }
+                        .schedular_day {
+                            margin-top: 0.5em;
+                            text-align: center;
+                            letter-spacing: 0.6px;
+                            color: #898989;
+                            text-transform: uppercase;
+                            font-weight: 600;
+                            font-size: 20px;
+                            font-family: Montserrat;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .schedular_slots {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-template-rows: auto;
+        grid-column-gap: 20px;
+        width: 100%;
+        margin: 1em 0 3em 0;
+        align-items: center;
+        .items_slots {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            .item_slot1 {
+                display: flex;
+                align-items: center;
+                .indicator {
+                    width: 75px;
+                    height: 15px;
+                    background: #f2f2f2 0% 0% no-repeat padding-box;
+                    opacity: 1;
+                }
+                h5 {
+                    letter-spacing: 0.54px;
+                    color: #2c2c2c;
+                    text-transform: uppercase;
+                    margin: 0 1em;
+                    font-size: 16px;
+                    font-weight: 600;
+                    font-family: Montserrat;
+                }
+            }
+            .item_slot2 {
+                display: flex;
+                align-items: center;
+                .indicator2 {
+                    width: 75px;
+                    height: 15px;
+                    background: #dedede 0% 0% no-repeat padding-box;
+                    opacity: 1;
+                }
+                h5 {
+                    letter-spacing: 0.54px;
+                    color: #2c2c2c;
+                    text-transform: uppercase;
+                    margin: 0 1em;
+                    font-size: 16px;
+                    font-weight: 600;
+                    font-family: Montserrat;
+                }
+            }
+            .item_slot3 {
+                display: flex;
+                align-items: center;
+                .indicator3 {
+                    width: 75px;
+                    height: 15px;
+                    background: #53bfd2 0% 0% no-repeat padding-box;
+                    opacity: 1;
+                }
+                h5 {
+                    letter-spacing: 0.54px;
+                    color: #2c2c2c;
+                    text-transform: uppercase;
+                    margin: 0 0 0 1em;
+                    font-size: 16px;
+                    font-weight: 600;
+                    font-family: Montserrat;
+                }
+            }
+        }
+        .items_slot_button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            button {
+                display: flex;
+                align-items: center;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-bold) var(--unnamed-font-size-18) /
+                    var(--unnamed-line-spacing-22)
+                    var(--unnamed-font-family-montserrat);
+                color: var(--unnamed-color-161616);
+                text-align: right;
+                font: normal normal bold 18px/22px Montserrat;
+                letter-spacing: 0.45px;
+                color: #161616;
+                text-transform: uppercase;
+                border: none;
+            }
+        }
+    }
+}

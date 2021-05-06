@@ -1,0 +1,159 @@
+.outter_bg_container {
+    .background_container {
+        background: transparent
+            url("../../../assets/files/Home/trainer/Apply As A Trainer 1.png")
+            no-repeat;
+        background-size: cover;
+        opacity: 1;
+        max-height: 650px;
+        height: 650px;
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 40% 60%;
+
+        position: relative;
+
+        @media screen and (max-width: 1024px) {
+            background: url("../../../assets/files/Home/trainer/Woman Image.png")
+                0% 0% no-repeat;
+            width: 100%;
+        }
+
+        .container_trainer {
+            display: flex;
+            flex-direction: column;
+            max-width: 740px;
+            max-height: 40%;
+            width: 87%;
+            padding-right: 200px;
+            padding-top: 85px;
+            position: relative;
+            left: 80px;
+
+            @media screen and (max-width: 1024px) {
+                margin-top: 10em;
+                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                padding: 8em 0;
+            }
+
+            .qustion {
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-bold) var(--unnamed-font-size-35) /
+                    var(--unnamed-line-spacing-54)
+                    var(--unnamed-font-family-montserrat);
+                letter-spacing: var(--unnamed-character-spacing-0);
+                color: var(--unnamed-color-161616);
+                text-align: left;
+                font: normal normal bold 35px/50px Montserrat;
+                letter-spacing: 0px;
+                color: #161616;
+                opacity: 1;
+                width: 100%;
+                position: relative;
+
+                @media screen and (max-width: 1024px) {
+                    width: 100%;
+                    max-width: 100%;
+                    max-height: 100%;
+                    padding-left: 1em;
+                    font: normal normal bold 22px/30px Montserrat;
+
+                    margin: 2em 0 0 0;
+                }
+            }
+            .answer {
+                margin-top: 1em;
+                font: var(--unnamed-font-style-normal) normal
+                    var(--unnamed-font-weight-normal)
+                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32)
+                    var(--unnamed-font-family-montserrat);
+                letter-spacing: var(--unnamed-character-spacing-0-27);
+                color: var(--unnamed-color-2c2c2c);
+                text-align: left;
+                line-height: 2 !important;
+                font: normal normal normal 18px/22px Montserrat;
+                letter-spacing: 0.27px;
+                color: #2c2c2c;
+                opacity: 1;
+                position: relative;
+
+                @media screen and (max-width: 1024px) {
+                    width: 100%;
+                    max-width: 100%;
+                    max-height: 100%;
+                    padding-left: 1.5em;
+                    margin-top: 1.5em;
+                    font: normal normal normal 14px/22px Montserrat;
+                }
+            }
+            .link {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                // font: var(--unnamed-font-style-normal) normal
+                //     var(--unnamed-font-weight-bold) var(--unnamed-font-size-18) /
+                //     var(--unnamed-line-spacing-22)
+                //     var(--unnamed-font-family-montserrat);
+                color: var(--unnamed-color-161616);
+                text-align: left;
+                font: 18px 900/12px Montserrat;
+                letter-spacing: 0.45px;
+                color: #161616;
+                text-transform: uppercase;
+                opacity: 1;
+                margin-top: 2em;
+                text-decoration: none;
+                position: relative;
+
+                @media screen and (max-width: 1024px) {
+                    width: 100%;
+                    max-width: 100%;
+                    max-height: 100%;
+                    padding-left: 1.5em;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+            .button-text {
+                text-align: left;
+                position: relative;
+
+                a {
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    padding-right: 1em;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-bold)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-22)
+                        var(--unnamed-font-family-montserrat);
+                    color: var(--unnamed-color-161616);
+                    text-align: right;
+                    font: normal normal bold 18px/22px Montserrat;
+                    letter-spacing: 0.45px;
+                    color: #161616;
+                    text-transform: uppercase;
+                }
+                img {
+                    margin-left: 1em;
+                }
+            }
+            .watermark {
+                position: absolute;
+                right: 0;
+                top: 350px;
+
+                img {
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+        }
+    }
+}

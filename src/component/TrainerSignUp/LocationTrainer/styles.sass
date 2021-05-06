@@ -1,0 +1,111 @@
+
+$primary-bg: #fff
+$primary-box: #f6f6f6
+$small-text: #2C2C2C
+*
+    padding: 0
+    margin: 0
+
+.slide-container_trainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-content: center
+    width: 100%
+    background: #f6f6f6
+    height: 858px
+    margin-bottom: 2em
+
+    @media screen and (max-width:920px)
+        padding: 0 2em
+    .inner_location
+        padding: 5em 3em
+    .header-content
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        h1
+            text-align: center
+            margin-top: 0.5em
+            font-size: 45px
+            font-family: Garamond
+            color: #161616
+            margin-bottom: 20px
+
+        p
+            font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-montserrat)
+            letter-spacing: var(--unnamed-character-spacing-0-27)
+            text-align: center
+            font: normal normal normal 18px/30px Montserrat
+            letter-spacing: 0.27px
+            color: #696969
+            opacity: 1
+            text-align: center
+            width: 877px
+            margin: 0 auto
+            padding: 1em 0
+            @media screen and (max-width:1120px)
+                padding: 0
+                margin: 0
+    .slider_wrapper_container
+        padding: 2em 2em 1em 2em
+        .slick-slider
+            display: flex
+            width: 100%
+            margin: 2em 0
+            align-items: center
+            justify-content: space-evenly
+            @media screen and (max-width:920px)
+                margin: 0
+                padding: 0
+                justify-content: center
+                align-items: center
+
+            .slick-list
+                margin: 0 2em
+                .slick-dots
+                    display: none
+                .main-slide
+                    .slide-content
+                        background: $primary-box
+                        margin: 1em
+
+                        p
+                            text-align: center
+                            letter-spacing: 0.9px
+                            color: #2C2C2C
+                            text-transform: uppercase
+                            opacity: 1
+                            font-weight: 600
+                            font-size: 18px
+                            font-family: Montserrat
+                            padding-top: 15px
+
+                        .slide-image
+                            width: 100%
+                            height: auto
+                            @media screen and (max-width:1024px)
+                                height: auto
+                            @media screen and (max-width:1024px) and (min-width:1300px)
+                                height: auto
+
+                        .slide-line
+                            width: 100%
+
+        .right-arrow
+            font-size: 3em
+            color: #000
+            cursor: pointer
+            user-select: none
+            z-index: 999
+            position: relative
+            margin-left: 1.5em
+
+        .left-arrow
+            font-size: 3em
+            color: #000
+            cursor: pointer
+            user-select: none
+            z-index: 10
+            margin-right: 1.5em

@@ -1,0 +1,346 @@
+.session_outter_container {
+    width: 100%;
+    height: 1100px;
+    .seesion_inner_container {
+        .link_wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 2em;
+
+            .inner_links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                a {
+                    margin-left: 1em;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-42)
+                        var(--unnamed-font-family-montserrat);
+                    color: var(--unnamed-color-161616);
+                    text-align: left;
+                    font: normal normal normal 16px/22px Montserrat;
+                    letter-spacing: 0.18px;
+                    color: #161616;
+                    opacity: 1;
+                    text-decoration: none;
+                }
+                div {
+                    width: 95%;
+                    height: 2px;
+                    margin-left: 1.5em;
+                    background-color: #53bfd2;
+                }
+            }
+        }
+        .session_inner_wrapper {
+            margin-top: 3em;
+            .session_heading {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                h2 {
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-600)
+                        var(--unnamed-font-size-35) /
+                        var(--unnamed-line-spacing-58)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0);
+                    color: var(--unnamed-color-161616);
+                    text-align: center;
+                    font: normal normal 600 35px/58px Montserrat;
+                    letter-spacing: 0px;
+                    color: #161616;
+                    opacity: 1;
+                }
+                p {
+                    width: 810px;
+                    font: var(--unnamed-font-style-normal) normal
+                        var(--unnamed-font-weight-normal)
+                        var(--unnamed-font-size-18) /
+                        var(--unnamed-line-spacing-30)
+                        var(--unnamed-font-family-montserrat);
+                    letter-spacing: var(--unnamed-character-spacing-0-27);
+                    text-align: center;
+                    font: normal normal normal 18px/30px Montserrat;
+                    letter-spacing: 0.27px;
+                    color: #696969;
+                    opacity: 1;
+                }
+            }
+            .session_tabs {
+                margin-top: 2em;
+                .session_tabs_inner {
+                    .sesstion_tabslist {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-evenly;
+                        width: 100%;
+                        .rwt__tablist .rwt__tab:after {
+                            border: none;
+                        }
+                        .rwt__tab {
+                            padding: 0;
+                            height: 40px;
+                            button {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 135px;
+                                height: 40px;
+                                border: 1.5px solid var(--unnamed-color-bcbcbc);
+                                border: 2px solid #bcbcbc;
+                                border-radius: 30px 0px 0px 30px;
+                                opacity: 1;
+                                background: transparent;
+                                font: var(--unnamed-font-style-normal) normal
+                                    var(--unnamed-font-weight-600)
+                                    var(--unnamed-font-size-20) /
+                                    var(--unnamed-line-spacing-42)
+                                    var(--unnamed-font-family-montserrat);
+                                color: var(--unnamed-color-ffffff);
+                                text-align: center;
+                                font: normal normal 600 20px/42px Montserrat;
+                                letter-spacing: 0.2px;
+                            }
+
+                            button {
+                                &:active,
+                                &:focus,
+                                &:hover,
+                                &.active {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+                            }
+                        }
+
+                        .rwt__tab:nth-child(2) {
+                            padding: 0;
+                            button {
+                                width: 147px;
+                                height: 40px;
+                                background: var(--unnamed-color-161616) 0% 0%
+                                    no-repeat padding-box;
+                                border: 1.5px solid var(--unnamed-color-161616);
+                                background: #fff 0% 0% no-repeat padding-box;
+                                border: 2px solid #bcbcbc;
+                                border-radius: 0px 30px 30px 0px;
+                                opacity: 1;
+                                color: #000;
+                                font: var(--unnamed-font-style-normal) normal
+                                    var(--unnamed-font-weight-600)
+                                    var(--unnamed-font-size-20) /
+                                    var(--unnamed-line-spacing-42)
+                                    var(--unnamed-font-family-montserrat);
+                                color: var(--unnamed-color-ffffff);
+                                text-align: center;
+                                font: normal normal 600 20px/42px Montserrat;
+                                letter-spacing: 0.2px;
+                            }
+                            button {
+                                &:active,
+                                &:focus,
+                                &:hover,
+                                &.active {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+                            }
+                        }
+
+                        .session_location_dd {
+                            display: grid;
+                            grid-template-columns: 40% 50%;
+                            grid-template-rows: auto;
+                            grid-column-gap: 20px;
+                            align-items: center;
+                            width: 550px;
+                            height: 40px;
+                            background: var(--unnamed-color-ffffff) 0% 0%
+                                no-repeat padding-box;
+                            border: 1.5px solid var(--unnamed-color-bcbcbc);
+                            background: #ffffff 0% 0% no-repeat padding-box;
+                            border: 2px solid #bcbcbc;
+                            border-radius: 30px;
+                            opacity: 1;
+                            .session_location {
+                                width: 100%;
+                                .session_location_select {
+                                    width: 100%;
+                                    margin-left: 1em;
+
+                                    .css-yk16xz-control {
+                                        border: none;
+                                        background-color: transparent;
+
+                                        .css-1uccc91-singleValue {
+                                            font: var(
+                                                    --unnamed-font-style-normal
+                                                )
+                                                normal
+                                                var(--unnamed-font-weight-600)
+                                                var(--unnamed-font-size-20) /
+                                                var(--unnamed-line-spacing-42)
+                                                var(
+                                                    --unnamed-font-family-montserrat
+                                                );
+                                            color: var(--unnamed-color-898989);
+                                            text-align: left;
+                                            font: normal normal 600 20px/42px
+                                                Montserrat;
+                                            letter-spacing: 0.2px;
+                                            color: #898989;
+                                            opacity: 1;
+                                        }
+
+                                        .css-1hb7zxy-IndicatorsContainer {
+                                            .css-1okebmr-indicatorSeparator {
+                                                display: none;
+                                            }
+                                        }
+                                    }
+                                    .css-1pahdxg-control {
+                                        border: 0px solid transparent !important;
+                                        outline: none;
+                                    }
+                                    .css-26l3qy-menu {
+                                        background-color: rgb(255, 255, 255);
+                                    }
+                                }
+                            }
+                        }
+                        .session_view_location {
+                            a {
+                                color: #53bfd2;
+                                opacity: 1;
+                                font-style: italic;
+                                font-family: 15px;
+                                font-weight: 800;
+                                font-family: Montserrat;
+                            }
+                        }
+                    }
+                }
+                .inPerson_tab_inner {
+                    margin-top: 5em;
+                    .inPerson_tab_wrapper {
+                        display: grid;
+                        grid-template-columns: 30% 30% 30%;
+                        grid-template-rows: auto;
+                        grid-column-gap: 50px;
+                        align-items: center;
+                        justify-content: center;
+                        .session_cards {
+                            width: 355px;
+                            height: 425px;
+                            background-color: #f6f6f6;
+                            box-shadow: 0px 3px 12px #1616160d;
+                            opacity: 1;
+                            .session_card_content {
+                                padding: 2em 2em 0 2em;
+                                h2 {
+                                    font: var(--unnamed-font-style-normal)
+                                        normal var(--unnamed-font-weight-600)
+                                        var(--unnamed-font-size-28) /
+                                        var(--unnamed-line-spacing-54)
+                                        var(--unnamed-font-family-montserrat);
+                                    letter-spacing: var(
+                                        --unnamed-character-spacing-0
+                                    );
+                                    color: var(--unnamed-color-161616);
+                                    text-align: left;
+                                    font: normal normal bolder 28px/54px
+                                        Montserrat;
+                                    letter-spacing: 0px;
+                                    color: #161616;
+                                    opacity: 1;
+                                }
+                                p {
+                                    font: var(--unnamed-font-style-normal)
+                                        normal var(--unnamed-font-weight-normal)
+                                        var(--unnamed-font-size-18) /
+                                        var(--unnamed-line-spacing-30)
+                                        var(--unnamed-font-family-montserrat);
+                                    letter-spacing: var(
+                                        --unnamed-character-spacing-0-27
+                                    );
+                                    text-align: left;
+                                    font: normal normal normal 18px/30px
+                                        Montserrat;
+                                    letter-spacing: 0.27px;
+                                    color: #696969;
+                                    opacity: 1;
+                                }
+                            }
+                            .session_card_inner {
+                                display: flex;
+                                justify-content: space-between;
+                                padding: 0 0.4em 0 2em;
+
+                                h6 {
+                                    margin-top: 2em;
+                                    letter-spacing: 0px;
+                                    color: #161616;
+                                    opacity: 1;
+                                    font-size: 28px;
+                                    font-weight: 600;
+                                    font-family: Montserrat;
+                                    span {
+                                        letter-spacing: 0.27px;
+                                        color: #696969;
+                                        font-size: 18px;
+                                        font-weight: 500;
+                                        font-family: Montserrat;
+                                        margin-left: 0.5em;
+                                        img {
+                                            position: relative;
+                                            top: -12px;
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+                                    }
+                                }
+
+                                img {
+                                    justify-content: flex-end;
+                                    width: 120px;
+                                    height: 123px;
+                                }
+                            }
+                        }
+                        button {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 100%;
+                            height: 70px;
+                            background: var(--unnamed-color-53bfd2) 0% 0%
+                                no-repeat padding-box;
+                            background: #53bfd2 0% 0% no-repeat padding-box;
+                            opacity: 1;
+                            outline: none;
+                            border: none;
+                            font: var(--unnamed-font-style-normal) normal
+                                var(--unnamed-font-weight-bold)
+                                var(--unnamed-font-size-18) /
+                                var(--unnamed-line-spacing-22)
+                                var(--unnamed-font-family-montserrat);
+                            color: var(--unnamed-color-ffffff);
+                            text-align: right;
+                            font: normal normal bold 18px/22px Montserrat;
+                            letter-spacing: 0.45px;
+                            color: #ffffff;
+                            text-transform: uppercase;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

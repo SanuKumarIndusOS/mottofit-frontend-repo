@@ -1,0 +1,157 @@
+.main {
+    height: auto;
+    // padding: 0 5.5em;
+    .wrapper_about {
+        height: auto;
+        // padding: 0 5.5em;
+
+        h2 {
+            margin-top: 3em;
+            text-align: center;
+            text-align: center;
+            font-family: Montserrat;
+            font-size: 35px;
+            line-height: 30px;
+            font-weight: 600;
+        }
+        p {
+            letter-spacing: 0.27px;
+            width: 100% !important;
+            color: #696969;
+            opacity: 1;
+            width: 63%;
+            font-size: 18px;
+            font-family: Montserrat;
+            text-align: center;
+            letter-spacing: 0.27px;
+            color: #696969;
+            opacity: 1;
+            font-weight: 500;
+        }
+        .outter_form {
+            height: auto;
+            .wrapper_inputs {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                // padding: 2em;
+
+                .wrapper_innerInput {
+                    margin: 1em;
+                    width: 40%;
+                    span {
+                        color: tomato;
+                        font-family: montserrat;
+                        font-weight: 500;
+                    }
+                    label {
+                        font-size: 22px;
+                        text-align: left;
+                        font-family: montserrat;
+                        font-weight: 450;
+                        margin-bottom: 0.5em;
+                    }
+                    .bg_down {
+                        position: relative;
+                        top: 8px;
+                    }
+                    input {
+                        width: 100%;
+                        padding: 1em 1.5em;
+                        height: 45px;
+                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+                        border: 2px solid #bcbcbc;
+                        border-radius: 30px;
+                        opacity: 1;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                    }
+                    input::placeholder {
+                        color: #bcbcbc;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 400;
+                    }
+                    input:focus {
+                        outline: none;
+                    }
+
+                    select {
+                        background: transparent;
+                        width: 100%;
+                        margin: 0.5em 1em 0.5em 0;
+                        padding: 0.5em 1.5em;
+                        border-radius: 50px;
+                        border: 2px solid #bcbcbc;
+                        outline: none;
+                        appearance: none;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                        color: #696969;
+                        option {
+                            color: black;
+                            border-radius: 100px;
+                            border: 2px solid #bcbcbc;
+                        }
+                    }
+                    select::placeholder {
+                        color: #bcbcbc;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 400;
+                    }
+                    select:invalid {
+                        color: #bcbcbc;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                    }
+                    .iconwrapper {
+                        display: flex;
+                        margin: 0;
+                        padding: 0;
+                        img {
+                            margin-left: -3em;
+                        }
+                    }
+                }
+                .submit_button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 55px;
+
+                    a {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        outline: none;
+                        background: #53bfd2;
+                        border: 0;
+                        margin: 1em 0 0 0;
+                        width: 210px;
+                        height: 52px;
+                        text-decoration: none;
+                        padding: 0.2em 0.5em 0.2em 2em !important;
+                        text-transform: uppercase;
+                        color: #fff;
+                        font-weight: bold;
+                        img {
+                            width: auto;
+                            margin-left: 1em;
+                        }
+                    }
+                }
+            }
+        }
+        .about_watermark {
+            position: relative;
+            top: 0px;
+            left: -103px;
+            height: 320px;
+        }
+    }
+}
