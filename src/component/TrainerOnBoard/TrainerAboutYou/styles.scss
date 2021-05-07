@@ -1,6 +1,6 @@
 .main {
     height: auto;
-    // padding: 0 5.5em;
+    padding: 0 5.5em;
     .wrapper_about {
         height: auto;
         // padding: 0 5.5em;
@@ -44,6 +44,21 @@
                         color: tomato;
                         font-family: montserrat;
                         font-weight: 500;
+                    }
+                    .react-tel-input {
+                        .flag-dropdown {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            background: transparent;
+                            border: none;
+                            .arrow {
+                                display: none;
+                            }
+                        }
+                        .special-label {
+                            display: none;
+                        }
                     }
                     label {
                         font-size: 22px;

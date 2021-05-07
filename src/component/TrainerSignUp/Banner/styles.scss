@@ -137,6 +137,21 @@
                     padding: 0.5em 0;
                     width: 80%;
                     color: #242424;
+                    .react-tel-input {
+                        .flag-dropdown {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            background: transparent;
+                            border: none;
+                            .arrow {
+                                display: none;
+                            }
+                        }
+                        .special-label {
+                            display: none;
+                        }
+                    }
 
                     input {
                         width: 425px;
