@@ -137,25 +137,23 @@ const Footer = () => {
                                             <div className="footer_privacy">
                                                 <ul className="footer_privacy_ul">
                                                     <li>
-                                                        <Link to="/">FAQs</Link>
+                                                        <a href="/faq">FAQs</a>
                                                     </li>
                                                     <img src={Line} alt="svg" />
                                                     <li>
-                                                        <Link to="/">
+                                                        <a href="/">
                                                             Privacy Policy{" "}
-                                                        </Link>
+                                                        </a>
                                                     </li>
                                                     <img src={Line} alt="svg" />
                                                     <li>
-                                                        <Link to="/terms">
+                                                        <a href="/terms">
                                                             Terms of Use{" "}
-                                                        </Link>
+                                                        </a>
                                                     </li>
                                                     <img src={Line} alt="svg" />
                                                     <li>
-                                                        <Link to="/">
-                                                            Legal{" "}
-                                                        </Link>
+                                                        <a href="/">Legal </a>
                                                     </li>
                                                 </ul>
                                                 <div className="hr_mobile"></div>

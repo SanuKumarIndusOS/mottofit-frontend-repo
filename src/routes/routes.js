@@ -127,6 +127,23 @@ const routers = [
             },
         ],
     },
+
+    {
+        component: "MainLayout",
+        path: "/faq",
+        auth: false,
+        name: "FAQ",
+        exact: false,
+        childrens: [
+            {
+                path: "/",
+                componentPath: "pages/FAQ/FAQMain",
+                name: "FAQBase",
+                auth: false,
+                exact: true,
+            },
+        ],
+    },
     {
         component: "MainLayout",
         path: "/how-it-works",
