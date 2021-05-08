@@ -19,6 +19,9 @@ import { history } from "helpers";
 import { TrainerApi, PaymentApi } from "service/apiVariables";
 import { api } from "service/api";
 import { Toast } from "service/toast";
+import axios from "axios";
+
+const FileArray = [];
 
 const options = [
     { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
@@ -124,84 +127,107 @@ const TrainerSetUpProfileFC = ({
     };
 
     const handleSubmit = () => {
-        const {
-            firstName,
-            lastName,
-            description,
-            individualCharge,
-            ssTwoPeopleCharge,
-            ssThreePeopleCharge,
-            ssFourPeopleCharge,
-            classFlatRate,
-            threeSessionRate,
-            tenSessionRate,
-            instaHandle,
-            location,
-            motto,
-            serviceableLocation,
-            trainingLocation,
-            trainingProcessDescription,
-            websiteLink,
-            youtubeChannel,
-        } = trainerData;
 
-        console.log(serviceableLocation);
+        console.log( FileArray );
 
-        let payload = {
-            firstName,
-            lastName,
-            description,
-            oneOnOnePricing: {
-                passRatefor3Session: threeSessionRate,
-                passRatefor10Session: tenSessionRate,
-                inPersonAtClientLocation: individualCharge,
-            },
-            socialSessionPricing: {
-                inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
-                inPeronAtClientLocationfor3People: ssThreePeopleCharge,
-                inPeronAtClientLocationfor4People: ssFourPeopleCharge,
-            },
-            classSessionPricing: {
-                inPersonAtclientLocationfor15People: classFlatRate,
-            },
-            trainingProcess: trainingProcessDescription,
-            myMotto: motto,
-            preferedTrainingMode: trainingLocation,
-            websiteLink,
-            youtubeLink: youtubeChannel,
-            instagramProfile: instaHandle,
-            currentExperience: { workLocation: location },
-            certification: inputCertificatesFields?.map(
-                ({ certificate, year }) => ({
-                    certificateName: "",
-                    certfiedYear: year,
-                    certification: certificate,
-                })
-            ),
+        if (FileArray.length !== 0) {
+            const headers = {
+              "Content-Type": "application/json",
+              Authorization:
+              localStorage.getItem('token'),
+            };
+      
+            const fd = new FormData();
+      
+            FileArray.forEach(file=>{
+                fd.append("images", file, file.name);
+              });
+            axios
+              .post("http://doodlebluelive.com:2307/v1/upload/image", fd, {
+                headers: headers,
+              })
+              .then((res) => {
+                console.log(res);
+              });
+          }
+        // const {
+        //     firstName,
+        //     lastName,
+        //     description,
+        //     individualCharge,
+        //     ssTwoPeopleCharge,
+        //     ssThreePeopleCharge,
+        //     ssFourPeopleCharge,
+        //     classFlatRate,
+        //     threeSessionRate,
+        //     tenSessionRate,
+        //     instaHandle,
+        //     location,
+        //     motto,
+        //     serviceableLocation,
+        //     trainingLocation,
+        //     trainingProcessDescription,
+        //     websiteLink,
+        //     youtubeChannel,
+        // } = trainerData;
 
-            servicableLocation: serviceableLocation,
-        };
-        // updateTrainerDetails();
+        // console.log(serviceableLocation);
 
-        console.log(payload);
+        // let payload = {
+        //     firstName,
+        //     lastName,
+        //     description,
+        //     oneOnOnePricing: {
+        //         passRatefor3Session: threeSessionRate,
+        //         passRatefor10Session: tenSessionRate,
+        //         inPersonAtClientLocation: individualCharge,
+        //     },
+        //     socialSessionPricing: {
+        //         inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
+        //         inPeronAtClientLocationfor3People: ssThreePeopleCharge,
+        //         inPeronAtClientLocationfor4People: ssFourPeopleCharge,
+        //     },
+        //     classSessionPricing: {
+        //         inPersonAtclientLocationfor15People: classFlatRate,
+        //     },
+        //     trainingProcess: trainingProcessDescription,
+        //     myMotto: motto,
+        //     preferedTrainingMode: trainingLocation,
+        //     websiteLink,
+        //     youtubeLink: youtubeChannel,
+        //     instagramProfile: instaHandle,
+        //     currentExperience: { workLocation: location },
+        //     certification: inputCertificatesFields?.map(
+        //         ({ certificate, year }) => ({
+        //             certificateName: "",
+        //             certfiedYear: year,
+        //             certification: certificate,
+        //         })
+        //     ),
 
-        const { updateTrainerAvailabilityApi } = TrainerApi;
+        //     servicableLocation: serviceableLocation,
+        // };
+        // // updateTrainerDetails();
 
-        updateTrainerAvailabilityApi.body = payload;
+        // console.log(payload);
 
-        setLoading(true);
+        // const { updateTrainerAvailabilityApi } = TrainerApi;
 
-        api({ ...updateTrainerAvailabilityApi })
-            .then(({ data, message }) => {
-                console.log(data, message);
-                getStripeURL();
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false);
-            });
+        // updateTrainerAvailabilityApi.body = payload;
 
-        // history.push("/trainers/dashboard/session");
+        // setLoading(true);
+
+        // api({ ...updateTrainerAvailabilityApi })
+        //     .then(({ data, message }) => {
+        //         console.log(data, message);
+        //         getStripeURL();
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //         setLoading(false);
+        //     });
+
+        // // history.push("/trainers/dashboard/session");
     };
 
     const handleBack = () => {
@@ -696,6 +722,7 @@ const ImageReander = () => {
                         const file = event.target.files[0];
                         if (file && file.type.substr(0, 5) === "image") {
                             setImage(file);
+                            FileArray.push(file)
                         } else {
                             setImage(null);
                         }
