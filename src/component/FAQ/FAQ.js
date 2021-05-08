@@ -15,32 +15,38 @@ const FAQ = () => {
     return (
         <>
             <div className="faq_outer_container">
-                <div className="hero_banner">
-                    <h1>Frequently Asked Questions</h1>
-                </div>
+                <Banner />
                 <div className="container">
                     <div className="faq_wrapper">
                         <div className="data_container">
                             <div className="side_menu_contents">
-                                <nav className="sidebar_left active">
-                                    <LinkScroll to="general" spy={true}>
-                                        general
-                                    </LinkScroll>
-                                    <LinkScroll to="bookSession" spy={true}>
-                                        booking a session
-                                    </LinkScroll>
-                                    <LinkScroll to="socialSession" spy={true}>
-                                        Social sessions & classes
-                                    </LinkScroll>
-                                    <LinkScroll to="billing" spy={true}>
-                                        billing
-                                    </LinkScroll>
-                                    <LinkScroll to="locations" spy={true}>
-                                        locations & equipment
-                                    </LinkScroll>
-                                    <LinkScroll to="manageSession" spy={true}>
-                                        managing a session
-                                    </LinkScroll>
+                                <nav className="nav active">
+                                    <div className="sidebar_left">
+                                        <LinkScroll to="general" spy={true}>
+                                            general
+                                        </LinkScroll>
+                                        <LinkScroll to="bookSession" spy={true}>
+                                            booking a session
+                                        </LinkScroll>
+                                        <LinkScroll
+                                            to="socialSession"
+                                            spy={true}
+                                        >
+                                            Social sessions & classes
+                                        </LinkScroll>
+                                        <LinkScroll to="billing" spy={true}>
+                                            billing
+                                        </LinkScroll>
+                                        <LinkScroll to="locations" spy={true}>
+                                            locations & equipment
+                                        </LinkScroll>
+                                        <LinkScroll
+                                            to="manageSession"
+                                            spy={true}
+                                        >
+                                            managing a session
+                                        </LinkScroll>
+                                    </div>
                                 </nav>
                             </div>
                             <div className="sidebar_right">
@@ -110,6 +116,13 @@ const FAQ = () => {
     );
 };
 
+const Banner = () => {
+    return (
+        <div className="hero_banner">
+            <h1>Frequently Asked Questions</h1>
+        </div>
+    );
+};
 function Accordion(props) {
     const [isOpenAccodion, setAccordion] = useState(false);
     const { question, answer } = props.data;
