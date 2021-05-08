@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
+import axios from 'axios'
 
 const CyanRadio = withStyles({
   root: {
@@ -73,6 +74,7 @@ const TrainerCardFC = ({
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewTmage(reader.result);
+        console.log(typeof image);
       };
       reader.readAsDataURL(image);
     } else {
@@ -81,6 +83,24 @@ const TrainerCardFC = ({
   }, [image]);
 
   const handleChangeToTrainerProfile = () => {
+    // TrainerCard Profile Upload
+     
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIwNDg4ODkwLCJleHAiOjE2MjA0OTYwOTB9.SjarcL0e4g35SChdA-YknWmTStI8rM0By59Krqc5Ah0'
+    }
+
+    const fd = new FormData();
+    fd.append('profilePicture', image , image.name)
+    axios.post('http://doodlebluelive.com:2307/v1/upload/image', fd,  {
+      headers: headers
+    })
+    .then(res => {console.log(res);})
+
+
+    
+
+    // Redux logic
     let storeData = {
       details: { ...trainerData },
     };
