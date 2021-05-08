@@ -314,8 +314,8 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                 </div>
                                 <div className="item_3">
                                     <h6>
-                                        Do you have a training facility for
-                                        clients?
+                                        Do you have a facility or location where
+                                        you will train clients?
                                     </h6>
                                     <CyanRadio
                                         checked={selectedValue === "a"}
@@ -337,14 +337,11 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                     <label>No</label>
                                 </div>
                                 <div className="item_4">
-                                    <h6>
-                                        Select the location of your facility
-                                    </h6>
+                                    <h6>Details of the facility/location</h6>
                                     <div className="inputs_platform">
-                                        <select
-                                            className="select_location"
-                                            required
-                                            name="answer"
+                                        <textarea
+                                            type="text"
+                                            placeholder="Enter the Details of the location"
                                             value={
                                                 trainerAvailabilityData.trainingFacilityLocation
                                             }
@@ -355,26 +352,18 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                                         e.target.value,
                                                 });
                                             }}
-                                        >
-                                            <option value="" disabled selected>
-                                                Select a Motto City
-                                            </option>
-                                            <option>New York</option>
-                                            <option>Miami</option>
-                                            <option>Hampton</option>
-                                            <option>Palm Beach</option>
-                                        </select>
-                                        <img
+                                        />
+                                        {/* <img
                                             src={Location}
                                             alt="icon"
                                             className="loction_img_select"
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
                                 <div className="item_5">
                                     <h6>
-                                        Are you willing to travel in the
-                                        selected area?
+                                        Are you willing to travel to clients in
+                                        your city/region?
                                     </h6>
                                     <CyanRadio
                                         checked={selectedOneValue === "1"}
@@ -383,7 +372,7 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                         label="Strength & Hitt"
                                         inputProps={{ "aria-label": "1" }}
                                     />
-                                    <label>Hell, Yes!</label>
+                                    <label> Yes!</label>
                                     <CyanRadio
                                         checked={selectedOneValue === "0"}
                                         onChange={handleOneChange}
@@ -394,7 +383,10 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                     <label>No</label>
                                 </div>
                                 <div className="item_6">
-                                    <h6>Your preferred training location</h6>
+                                    <h6>
+                                        Describe/detail the areas you are
+                                        willing to travel to
+                                    </h6>
                                     <div className="inputs_platform">
                                         <select
                                             className="select_location"

@@ -12,6 +12,9 @@ import { connect } from "react-redux";
 import { loginOrSignUp } from "action/authAct";
 import { bindActionCreators } from "redux";
 import { AuthApi } from "service/apiVariables";
+// import PhoneFormatter from "react-headless-phone-input/lazy";
+// import PhoneInput from "react-phone-number-input/input";
+// import "react-phone-number-input/style.css";
 
 const BannerTrainerFC = ({ loginOrSignupAct }) => {
     const history = useHistory();
@@ -49,7 +52,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
             phoneNumber: data.phoneNumber,
             signUpType: data.signUpType,
         };
-        // console.log(item);
+        console.log(payload);
 
         // const requestOptions = {
         //   method: "POST",
@@ -81,10 +84,17 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
         //     }
         //   })
     }
+
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setData({
+    //         ...data,
+    //         [name]: value,
+    //     });
+    // };
+
     return (
         <>
-            {/* {redirect ? <Redirect to={"/findtrainer"} /> : null} */}
-
             <div className="banner_container_trainer">
                 <div className="wrapper_main container">
                     <div className="item_left">
@@ -128,7 +138,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                 {errors.name?.type ===
                                                     "required" && (
                                                     <span>
-                                                        This input is required
+                                                        This field is required
                                                     </span>
                                                 )}
                                                 {errors.name?.type ===
@@ -170,7 +180,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                 {errors.email?.type ===
                                                     "required" && (
                                                     <span>
-                                                        This input is required
+                                                        This field is required
                                                     </span>
                                                 )}
                                                 {errors.email?.type ===
@@ -191,9 +201,20 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                             </div>
 
                                             <div className="input_items_trainer">
+                                                {/* <PhoneInput
+                                                    placeholder="Enter phone number"
+                                                    value={data.phoneNumber}
+                                                    onChange={(e) =>
+                                                        setData({
+                                                            ...data,
+                                                        })
+                                                    }
+                                                    name="phone"
+                                                    defaultCountry="US"
+                                                /> */}
                                                 <input
                                                     placeholder="Phone"
-                                                    type="number"
+                                                    type="tel"
                                                     value={data.phoneNumber}
                                                     name="phoneNumber"
                                                     onChange={onChangeValue}
@@ -215,7 +236,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                 {errors.phoneNumber?.type ===
                                                     "required" && (
                                                     <span>
-                                                        This input is required
+                                                        This field is required
                                                     </span>
                                                 )}
                                                 {errors.phoneNumber?.type ===
@@ -259,7 +280,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                 {errors.password?.type ===
                                                     "required" && (
                                                     <span>
-                                                        This input is required
+                                                        This field is required
                                                     </span>
                                                 )}
                                                 {errors.password?.type ===
@@ -280,8 +301,9 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                     "pattern" && (
                                                     <span>
                                                         Password should contain
-                                                        atleast one number and
-                                                        one special character
+                                                        atleast one one captial
+                                                        letter, number and
+                                                        special character
                                                     </span>
                                                 )}
                                             </div>
@@ -317,7 +339,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                 {errors.cpassword?.type ===
                                                     "required" && (
                                                     <span>
-                                                        This input is required
+                                                        This field is required
                                                     </span>
                                                 )}
                                                 {errors.cpassword?.type ===
@@ -338,8 +360,9 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                     "pattern" && (
                                                     <span>
                                                         Password should contain
-                                                        atleast one number and
-                                                        one special character
+                                                        atleast one one captial
+                                                        letter, number and
+                                                        special character
                                                     </span>
                                                 )}
                                                 {errors.cpassword?.type !==

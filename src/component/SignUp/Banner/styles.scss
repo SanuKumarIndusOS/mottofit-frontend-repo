@@ -105,11 +105,12 @@
                 padding: 0.8em 3em 0.8em 0;
             }
             span {
-                font-size: 10px;
+                font-size: 12px;
                 padding: 0em 1em 0 1em;
                 text-align: left !important;
                 color: red;
-                font-weight: bold;
+                font-weight: 500;
+                font-family: Montserrat;
             }
         }
         .or_items {
@@ -223,6 +224,7 @@
             text-align: left !important;
             color: red;
             font-weight: bold;
+            font-family: Montserrat;
         }
     }
     .login_content_signup {
