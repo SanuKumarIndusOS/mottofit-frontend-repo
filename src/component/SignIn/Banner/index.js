@@ -144,11 +144,11 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                                 value={data.email}
                                                 name="email"
                                                 onChange={onChangeValue}
-                                                // ref={register({
-                                                //     pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
-                                                //     required: true,
-                                                //     minLength: 8,
-                                                // })}
+                                                ref={register({
+                                                    pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
+                                                    required: true,
+                                                    minLength: 8,
+                                                })}
                                             />
                                             <img src={Mail} alt="icon" />
 

@@ -16,9 +16,9 @@ import { connect } from "react-redux";
 import { history } from "helpers";
 import axios from "axios";
 
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const AboutTrainerFC = ({
   updateTrainerDetails,
