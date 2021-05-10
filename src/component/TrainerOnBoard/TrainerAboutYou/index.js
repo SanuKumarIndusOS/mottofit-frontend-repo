@@ -13,9 +13,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
 
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const AboutTrainerFC = ({
     updateTrainerDetails,
@@ -154,7 +154,7 @@ const AboutTrainerFC = ({
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
-                                {/* <input
+                                <input
                                     placeholder="DOB"
                                     type="date"
                                     value={aboutTrainerData.dob}
@@ -168,8 +168,8 @@ const AboutTrainerFC = ({
                                     ref={register({
                                         required: "Please select the DOB",
                                     })}
-                                /> */}
-                                <DatePicker
+                                />
+                                {/* <DatePicker
                                     value={aboutTrainerData.dob}
                                     onChange={(e) =>
                                         setAboutTrainerData({
@@ -179,7 +179,7 @@ const AboutTrainerFC = ({
                                     }
                                     name="dob"
                                     placeholder="DOB"
-                                />
+                                /> */}
 
                                 {errors.dob && (
                                     <span>{errors.dob.message}</span>
