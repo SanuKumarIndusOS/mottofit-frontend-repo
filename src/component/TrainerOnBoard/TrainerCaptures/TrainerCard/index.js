@@ -140,6 +140,8 @@ const TrainerCardFC = ({
 
     useEffect(() => {
         getTrainerDetails().then((data) => {
+
+            console.log(data);
             const {
                 firstName,
                 lastName,
