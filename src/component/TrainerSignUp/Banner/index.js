@@ -111,14 +111,13 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                 <div className="inner_items">
                                     <h3>Train with Motto!</h3>
                                     <p>
-                                        Sign up & apply to become a Motto
-                                        Trainer
+                                    Sign up and apply to become a Motto Trainer
                                     </p>
                                     <div className="form_items_trainer">
                                         <form>
                                             <div className="input_items_trainer">
                                                 <input
-                                                    placeholder="Name"
+                                                    placeholder="First and Last Name"
                                                     type="text"
                                                     value={data.name}
                                                     name="name"
@@ -186,9 +185,8 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                 {errors.email?.type ===
                                                     "minLength" && (
                                                     <span>
-                                                        This field should
-                                                        contain greater then 8
-                                                        charater
+                                                        Please enter a valid
+                                                        email address
                                                     </span>
                                                 )}
                                                 {errors.email?.type ===
