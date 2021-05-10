@@ -13,19 +13,15 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
 
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 const AboutTrainerFC = ({
     updateTrainerDetails,
     details,
     trainerPersonalData,
 }) => {
-    //   const [location, setLocation] = useState("");
-    //   const [dob, setDob] = useState(0 - 0 - 0);
-    //   const [email, setEmail] = useState("");
-    //   const [gender, setGender] = useState("");
-    //   const [phone, setPhone] = useState("");
-    //   const [websiteURL, setWebsiteURL] = useState("");
-    //   const [instagram, setInstagram] = useState("");
-
     const { register, errors, handleSubmit } = useForm();
 
     const [aboutTrainerData, setAboutTrainerData] = useState({
@@ -158,7 +154,7 @@ const AboutTrainerFC = ({
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
-                                <input
+                                {/* <input
                                     placeholder="DOB"
                                     type="date"
                                     value={aboutTrainerData.dob}
@@ -172,7 +168,19 @@ const AboutTrainerFC = ({
                                     ref={register({
                                         required: "Please select the DOB",
                                     })}
+                                /> */}
+                                <DatePicker
+                                    value={aboutTrainerData.dob}
+                                    onChange={(e) =>
+                                        setAboutTrainerData({
+                                            ...aboutTrainerData,
+                                            dob: e.target.value,
+                                        })
+                                    }
+                                    name="dob"
+                                    placeholder="DOB"
                                 />
+
                                 {errors.dob && (
                                     <span>{errors.dob.message}</span>
                                 )}
