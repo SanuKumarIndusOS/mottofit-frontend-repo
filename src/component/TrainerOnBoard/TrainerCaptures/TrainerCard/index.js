@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
+import axios from "axios";
 
 const CyanRadio = withStyles({
     root: {
@@ -45,6 +46,7 @@ const TrainerCardFC = ({
     };
 
     const [image, setImage] = useState();
+    const [selectedValue, setSelectedValue] = useState("");
     const [previewImage, setPreviewTmage] = useState();
     const [trainerData, setTrainerData] = useState({
         firstName: "",
@@ -61,12 +63,50 @@ const TrainerCardFC = ({
     });
     const fileInputRef = useRef();
 
-    // for radio button
-    const [selectedValue, setSelectedValue] = useState("a");
-
     // for radio
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
+    };
+    useEffect(() => {
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewTmage(reader.result);
+                console.log(typeof image);
+            };
+            reader.readAsDataURL(image);
+        } else {
+            setPreviewTmage(null);
+        }
+    }, [image]);
+
+    const handleChangeToTrainerProfile = () => {
+        // TrainerCard Profile Upload
+
+        if (image !== undefined) {
+            const headers = {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            };
+
+            const fd = new FormData();
+
+            fd.append("profilePicture", image, image.name);
+            axios
+                .post("http://doodlebluelive.com:2307/v1/upload/image", fd, {
+                    headers: headers,
+                })
+                .then((res) => {
+                    console.log(res);
+                });
+        }
+
+        // Redux logic
+        let storeData = {
+            details: { ...trainerData },
+        };
+        updateTrainerDetails(storeData);
+        history.push("/trainer/setup");
     };
     useEffect(() => {
         if (image) {
@@ -80,13 +120,13 @@ const TrainerCardFC = ({
         }
     }, [image]);
 
-    const handleChangeToTrainerProfile = () => {
-        let storeData = {
-            details: { ...trainerData },
-        };
-        updateTrainerDetails(storeData);
-        history.push("/trainer/setup");
-    };
+    // const handleChangeToTrainerProfile = () => {
+    //     let storeData = {
+    //         details: { ...trainerData },
+    //     };
+    //     updateTrainerDetails(storeData);
+    //     history.push("/trainer/setup");
+    // };
 
     const handleInputChange = ({ target: { name, value } }) => {
         const tempData = {
