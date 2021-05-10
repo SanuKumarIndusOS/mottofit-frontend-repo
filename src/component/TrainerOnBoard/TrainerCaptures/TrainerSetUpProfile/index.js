@@ -158,82 +158,82 @@ const TrainerSetUpProfileFC = ({
                 console.log(res);
               });
           }
-        // const {
-        //     firstName,
-        //     lastName,
-        //     description,
-        //     individualCharge,
-        //     ssTwoPeopleCharge,
-        //     ssThreePeopleCharge,
-        //     ssFourPeopleCharge,
-        //     classFlatRate,
-        //     threeSessionRate,
-        //     tenSessionRate,
-        //     instaHandle,
-        //     location,
-        //     motto,
-        //     serviceableLocation,
-        //     trainingLocation,
-        //     trainingProcessDescription,
-        //     websiteLink,
-        //     youtubeChannel,
-        // } = trainerData;
+        const {
+            firstName,
+            lastName,
+            description,
+            individualCharge,
+            ssTwoPeopleCharge,
+            ssThreePeopleCharge,
+            ssFourPeopleCharge,
+            classFlatRate,
+            threeSessionRate,
+            tenSessionRate,
+            instaHandle,
+            location,
+            motto,
+            serviceableLocation,
+            trainingLocation,
+            trainingProcessDescription,
+            websiteLink,
+            youtubeChannel,
+        } = trainerData;
 
-        // console.log(serviceableLocation);
+        console.log(serviceableLocation);
 
-        // let payload = {
-        //     firstName,
-        //     lastName,
-        //     description,
-        //     oneOnOnePricing: {
-        //         passRatefor3Session: threeSessionRate,
-        //         passRatefor10Session: tenSessionRate,
-        //         inPersonAtClientLocation: individualCharge,
-        //     },
-        //     socialSessionPricing: {
-        //         inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
-        //         inPeronAtClientLocationfor3People: ssThreePeopleCharge,
-        //         inPeronAtClientLocationfor4People: ssFourPeopleCharge,
-        //     },
-        //     classSessionPricing: {
-        //         inPersonAtclientLocationfor15People: classFlatRate,
-        //     },
-        //     trainingProcess: trainingProcessDescription,
-        //     myMotto: motto,
-        //     preferedTrainingMode: trainingLocation,
-        //     websiteLink,
-        //     youtubeLink: youtubeChannel,
-        //     instagramProfile: instaHandle,
-        //     currentExperience: { workLocation: location },
-        //     certification: inputCertificatesFields?.map(
-        //         ({ certificate, year }) => ({
-        //             certificateName: "",
-        //             certfiedYear: year,
-        //             certification: certificate,
-        //         })
-        //     ),
+        let payload = {
+            firstName,
+            lastName,
+            description,
+            oneOnOnePricing: {
+                passRatefor3Session: threeSessionRate,
+                passRatefor10Session: tenSessionRate,
+                inPersonAtClientLocation: individualCharge,
+            },
+            socialSessionPricing: {
+                inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
+                inPeronAtClientLocationfor3People: ssThreePeopleCharge,
+                inPeronAtClientLocationfor4People: ssFourPeopleCharge,
+            },
+            classSessionPricing: {
+                inPersonAtclientLocationfor15People: classFlatRate,
+            },
+            trainingProcess: trainingProcessDescription,
+            myMotto: motto,
+            preferedTrainingMode: trainingLocation,
+            websiteLink,
+            youtubeLink: youtubeChannel,
+            instagramProfile: instaHandle,
+            currentExperience: { workLocation: location },
+            certification: inputCertificatesFields?.map(
+                ({ certificate, year }) => ({
+                    certificateName: "",
+                    certfiedYear: year,
+                    certification: certificate,
+                })
+            ),
 
-        //     servicableLocation: serviceableLocation,
-        // };
-        // // updateTrainerDetails();
+            servicableLocation: serviceableLocation,
+        };
+        // updateTrainerDetails();
 
-        // console.log(payload);
+        console.log(payload);
 
-        // const { updateTrainerAvailabilityApi } = TrainerApi;
+        const { updateTrainerAvailabilityApi } = TrainerApi;
 
-        // updateTrainerAvailabilityApi.body = payload;
+        updateTrainerAvailabilityApi.body = payload;
 
-        // setLoading(true);
+        setLoading(true);
 
-        // api({ ...updateTrainerAvailabilityApi })
-        //     .then(({ data, message }) => {
-        //         console.log(data, message);
-        //         getStripeURL();
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //         setLoading(false);
-        //     });
+        api({ ...updateTrainerAvailabilityApi })
+            .then(({ data, message }) => {
+                console.log(data, message);
+                getStripeURL();
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
 
         // // history.push("/trainers/dashboard/session");
     };
@@ -527,9 +527,8 @@ const TrainerSetUpProfileFC = ({
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
                                                     <select
-                                                        value={
-                                                            trainerData.serviceableLocation
-                                                        }
+                                                        value="Miami"
+                                                        
                                                         onChange={
                                                             handleInputChange
                                                         }
