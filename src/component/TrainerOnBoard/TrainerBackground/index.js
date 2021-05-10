@@ -191,11 +191,12 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                             <h1>Detail out your training background</h1>
 
                             <p>
-                                We want to know it all! Share with us your
+                                {/* We want to know it all! Share with us your
                                 experience & philosophy as a trainer to progress
                                 in your application process and join the Motto
-                                Family.{" "}
+                                Family.{" "} */}
                             </p>
+                           
                             <div className="contents_wrapper">
                                 <form>
                                     <div className="item1">
@@ -464,7 +465,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                     disabled
                                                     selected
                                                 >
-                                                    Details of facility
+                                                    Select Your Answer
                                                 </option>
                                                 <option>Yes</option>
                                                 <option>No</option>
