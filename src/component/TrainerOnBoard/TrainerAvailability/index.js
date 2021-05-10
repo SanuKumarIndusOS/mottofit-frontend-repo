@@ -456,8 +456,7 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                             className="model_styles"
                                         >
                                             <h2>
-                                                Background Info (background
-                                                collection) complete. Click the
+                                                Background Information collection complete. Click the
                                                 “x” to move to next section!
                                             </h2>
                                             <p>
