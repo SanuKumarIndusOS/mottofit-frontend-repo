@@ -20,7 +20,7 @@
             color: #161616;
             opacity: 1;
             text-decoration: none;
-            border-bottom: 2px solid #53bfd2;
+            border-bottom: 2px solid rgb(83, 191, 210);
         }
         img {
             margin-right: 0.5em;
@@ -34,7 +34,7 @@
             text-decoration: underline;
 
             letter-spacing: 0px;
-            color: #53bfd2;
+            color: rgb(83, 191, 210);
             font-size: 15px;
             font-family: Montserrat;
             font-weight: 500;
@@ -144,7 +144,7 @@
                     align-items: stretch;
                     justify-content: space-evenly;
                     h5 {
-                        color: #53bfd2;
+                        color: rgb(83, 191, 210);
                         font-size: 16px;
                         margin-bottom: 1em;
                         cursor: pointer;
@@ -165,7 +165,7 @@
             .setup_card4 {
                 margin: 1em 2em 2em 1em;
                 h5 {
-                    color: #53bfd2;
+                    color: rgb(83, 191, 210);
                     font-size: 16px;
                     margin-bottom: 1em;
                     cursor: pointer;
@@ -419,7 +419,7 @@
 
             button {
                 outline: none;
-                background: #53bfd2;
+                background: rgb(83, 191, 210);
                 border: 0;
                 height: 50px;
                 margin: 1em 1em 8em 1em;
