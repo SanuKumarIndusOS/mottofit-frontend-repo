@@ -1,5 +1,0 @@
-<<<<<<< HEAD:build/static/js/65.02fde4a8.chunk.js.map
-{"version":3,"sources":["pages/UserDashboard/Message/index.js"],"names":["Main"],"mappings":"iGAAA,uEAGe,SAASA,IACtB,OACE,8BAEE,cAAC,UAAD","file":"static/js/65.02fde4a8.chunk.js","sourcesContent":["import React from \"react\";\r\nimport UserMessage from \"component/UserDashBoard/UserDashboardCompontents/UserMessages\";\r\n\r\nexport default function Main() {\r\n  return (\r\n    <div>\r\n      {/* Banner  */}\r\n      <UserMessage />\r\n    </div>\r\n  );\r\n}\r\n"],"sourceRoot":""}
-=======
-{"version":3,"sources":["pages/UserDashboard/Message/index.js"],"names":["Main"],"mappings":"iGAAA,uEAGe,SAASA,IACtB,OACE,8BAEE,cAAC,UAAD","file":"static/js/65.69f2097d.chunk.js","sourcesContent":["import React from \"react\";\r\nimport UserMessage from \"component/UserDashBoard/UserDashboardCompontents/UserMessages\";\r\n\r\nexport default function Main() {\r\n  return (\r\n    <div>\r\n      {/* Banner  */}\r\n      <UserMessage />\r\n    </div>\r\n  );\r\n}\r\n"],"sourceRoot":""}
->>>>>>> c8cee4c44ed4aa251dea3ace2c1aa72f82b18d8c:build/static/js/65.69f2097d.chunk.js.map
