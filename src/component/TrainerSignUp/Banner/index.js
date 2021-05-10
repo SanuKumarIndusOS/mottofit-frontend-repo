@@ -117,7 +117,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                         <form>
                                             <div className="input_items_trainer">
                                                 <input
-                                                    placeholder="First and Last Name"
+                                                    placeholder="Fullname"
                                                     type="text"
                                                     value={data.name}
                                                     name="name"
