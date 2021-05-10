@@ -7,14 +7,18 @@ import { Link, useHistory } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { useForm } from "react-hook-form";
 // import validation from "../Validation/validation";
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+// import 'react-phone-number-input/style.css'
+// import PhoneInput from 'react-phone-number-input'
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
 import axios from "axios";
+
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const AboutTrainerFC = ({
   updateTrainerDetails,
