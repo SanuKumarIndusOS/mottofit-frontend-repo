@@ -300,10 +300,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                         </div>
                                     </div>
                                     <div className="item2">
-                                        <h6>
-                                            Prior training experience or gym
-                                            affiliations
-                                        </h6>
+                                        <h6>Training experience</h6>
                                         {inputFields.map((input, index) => {
                                             return (
                                                 <div
@@ -441,17 +438,17 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                     </div>
                                     <div className="item5">
                                         <h6>
-                                            Do you train clients at a gym
-                                            facility?
+                                            Do you have a facility to train new
+                                            & outside clients?
                                         </h6>
                                         <div className="inputs_experience">
-                                            <input
-                                                type="text"
-                                                placeholder="Details of facility"
+                                            <select
+                                                className="select_location"
+                                                required
+                                                name="answer"
                                                 value={
                                                     currentExperiencee.workMode
                                                 }
-                                                name="certificate"
                                                 onChange={(e) => {
                                                     setCurrentExperiencee({
                                                         ...currentExperiencee,
@@ -461,15 +458,24 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
 
                                                     // setTrainerbackgroundData({...trainerbackgroundData, currentExperience: currentExperiencee})
                                                 }}
-                                            />
-
-                                            <select
-                                                className="select_location"
-                                                required
-                                                name="answer"
+                                            >
+                                                <option
+                                                    value=""
+                                                    disabled
+                                                    selected
+                                                >
+                                                    Details of facility
+                                                </option>
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                            </select>
+                                            <input
+                                                type="text"
+                                                placeholder="Details of facility"
                                                 value={
                                                     currentExperiencee.workLocation
                                                 }
+                                                name="answer"
                                                 onChange={(e) => {
                                                     setCurrentExperiencee({
                                                         ...currentExperiencee,
@@ -481,19 +487,8 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                         currentExperience: currentExperiencee,
                                                     });
                                                 }}
-                                            >
-                                                <option
-                                                    value=""
-                                                    disabled
-                                                    selected
-                                                >
-                                                    Select your Location
-                                                </option>
-                                                <option>New York</option>
-                                                <option>Miami</option>
-                                                <option>Hampton</option>
-                                                <option>Palm Beach</option>
-                                            </select>
+                                            />
+
                                             <img
                                                 src={Location}
                                                 alt="icon"

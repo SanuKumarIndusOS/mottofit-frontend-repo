@@ -77,7 +77,15 @@ const TrainerSetUpProfileFC = ({
 
     const handleAddFields = () => {
         setImageFields([...imageFields, { image: "" }]);
+        setRenderButton(false);
     };
+    const handleRemoveFields = (index) => {
+        const values = [...imageFields];
+        values.splice(index, 1);
+        setImageFields(values);
+        setRenderButton(true);
+    };
+
     const handleAddCertificateFields = () => {
         setInputCertificatesFields([
             ...inputCertificatesFields,
@@ -273,6 +281,9 @@ const TrainerSetUpProfileFC = ({
         updateTrainerDetails(storeData);
     }, []);
 
+    const [renderButton, setRenderButton] = useState({
+        visiable: false,
+    });
     return (
         <>
             <div className="outter_setup_container container">
@@ -304,6 +315,7 @@ const TrainerSetUpProfileFC = ({
                                         onChange={handleInputChange}
                                         value={trainerData.motto}
                                         name="motto"
+                                        maxlength="250"
                                     />
                                 </div>
                                 <div className="setup_card2">
@@ -323,33 +335,49 @@ const TrainerSetUpProfileFC = ({
                                 <div className="setup_card3">
                                     <h6>{data.showcase}</h6>
                                     <div className="read_image">
-                                        {imageFields.map((index, input) => {
-                                            return (
-                                                <div
-                                                    key={index}
-                                                    className="render_image"
-                                                >
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                </div>
-                                            );
-                                        })}
-                                        <h5 onClick={() => handleAddFields()}>
-                                            + Add More Image's
-                                        </h5>
+                                        {imageFields
+                                            .slice(0, 2)
+                                            .map((index, input) => {
+                                                return (
+                                                    <div
+                                                        key={index}
+                                                        className="render_image"
+                                                    >
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                    </div>
+                                                );
+                                            })}
+                                        {renderButton ? (
+                                            <h5
+                                                onClick={() =>
+                                                    handleAddFields()
+                                                }
+                                            >
+                                                + Add More Image's
+                                            </h5>
+                                        ) : (
+                                            <h5
+                                                onClick={() =>
+                                                    handleRemoveFields()
+                                                }
+                                            >
+                                                Remove
+                                            </h5>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="setup_card4">

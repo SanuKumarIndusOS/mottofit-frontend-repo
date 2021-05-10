@@ -151,6 +151,7 @@
                         font-family: Montserrat;
                         font-size: 18px;
                         font-weight: 500 !important;
+                        text-rendering: optimizeLegibility !important;
                     }
                     input:focus {
                         outline: none;
@@ -178,6 +179,7 @@
                         color: rgb(255, 31, 31);
                         font-weight: bold;
                         font-family: Montserrat;
+                        text-rendering: optimizeLegibility !important;
                     }
                 }
 

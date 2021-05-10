@@ -456,14 +456,15 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                             className="model_styles"
                                         >
                                             <h2>
-                                                Your Application is Complete!
+                                                Background Info (background
+                                                collection) complete. Click the
+                                                “x” to move to next section!
                                             </h2>
                                             <p>
-                                                Thank you for sharing your
-                                                training experience & philosophy
-                                                with us! We will review, and you
-                                                will be notified with an email
-                                                on next steps.
+                                                Time to move on to building your
+                                                public Motto profile. This
+                                                profile will be published only
+                                                after you are approved!
                                             </p>
                                         </div>
                                     </Modal>
