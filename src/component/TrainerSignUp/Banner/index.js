@@ -111,7 +111,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                 <div className="inner_items">
                                     <h3>Train with Motto!</h3>
                                     <p>
-                                        Sign up & apply to become a Motto
+                                        Sign up to apply to become a Motto
                                         Trainer
                                     </p>
                                     <div className="form_items_trainer">
