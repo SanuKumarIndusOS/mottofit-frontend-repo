@@ -16,6 +16,7 @@ import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
 import axios from "axios";
+import { set } from "date-fns";
 
 const CyanRadio = withStyles({
     root: {
@@ -44,6 +45,14 @@ const TrainerCardFC = ({
         pricingDesc:
             "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
     };
+
+    const [checkedBoxing, setCheckedBoxing] = React.useState(false);
+    const [checkedHIIT, setCheckedHIIT] = React.useState(false);
+    const [checkedYoga, setCheckedYoga] = React.useState(false);
+    const [checkedPilates, setCheckedPilates] = React.useState(false);
+    const [trainerbackgroundData, setTrainerbackgroundData] = useState({
+        areaOfExpertise: [],
+    });
 
     const [image, setImage] = useState();
     const [selectedValue, setSelectedValue] = useState("");
@@ -81,6 +90,8 @@ const TrainerCardFC = ({
     }, [image]);
 
     const handleChangeToTrainerProfile = () => {
+        // Update Area of Expertise
+
         // TrainerCard Profile Upload
 
         if (image !== undefined) {
@@ -140,6 +151,28 @@ const TrainerCardFC = ({
 
     useEffect(() => {
         getTrainerDetails().then((data) => {
+            if (
+                data["areaOfExpertise"].find((el) => el === "Strength & HIIT")
+            ) {
+                console.log("Strength & HIIT");
+                setCheckedHIIT(true);
+            }
+
+            if (data["areaOfExpertise"].find((el) => el === "Boxing")) {
+                console.log("Boxing");
+                setCheckedBoxing(true);
+            }
+
+            if (data["areaOfExpertise"].find((el) => el === "Yoga")) {
+                console.log("Yoga");
+                setCheckedYoga(true);
+            }
+
+            if (data["areaOfExpertise"].find((el) => el === "Pilates")) {
+                console.log("Pilates");
+                setCheckedPilates(true);
+            }
+
             const {
                 firstName,
                 lastName,
@@ -293,43 +326,235 @@ const TrainerCardFC = ({
                                     </div>
                                     <div className="card_item3">
                                         <h6>{data.tellus}</h6>
+
                                         <div className="inputs_experience">
                                             <Checkbox
-                                                checked={trainerData?.areaOfExpertise?.includes(
-                                                    "Strength & HIIT"
-                                                )}
-                                                value=""
-                                                onChange={handleChange}
+                                                checked={checkedHIIT}
+                                                onChange={(e) => {
+                                                    setCheckedHIIT(
+                                                        e.target.checked
+                                                    );
+                                                    console.log(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Strength & HIIT",
+                                                                ],
+                                                            }
+                                                        );
+
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    } else {
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Strength & HIIT"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    }
+
+                                                    console.log(
+                                                        trainerbackgroundData
+                                                    );
+                                                }}
                                                 style={{
                                                     color: "#53BFD2",
                                                 }}
+
+                                                // onChange={() => {
+                                                //   setCheckState("Strength & HIIT");
+                                                // }}
                                             />
-                                            <label>Strength & HITT</label>
+                                            <div className="checkbox_label">
+                                                Strength & HIIT
+                                            </div>
                                             <Checkbox
-                                                value=""
-                                                onChange={handleChange}
+                                                checked={checkedBoxing}
+                                                // checked={true}
+                                                onChange={(e) => {
+                                                    setCheckedBoxing(
+                                                        e.target.checked
+                                                    );
+                                                    console.log(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        console.log(
+                                                            "setBoxing"
+                                                        );
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Boxing",
+                                                                ],
+                                                            }
+                                                        );
+
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    } else {
+                                                        console.log(
+                                                            "unsetBoxing"
+                                                        );
+
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Boxing"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    }
+
+                                                    console.log(
+                                                        trainerbackgroundData
+                                                    );
+                                                }}
                                                 style={{
                                                     color: "#53BFD2",
                                                 }}
                                             />
-                                            <label>Boxing</label>
+                                            <div className="checkbox_label">
+                                                Boxing
+                                            </div>
                                             <Checkbox
-                                                value=""
-                                                onChange={handleChange}
+                                                checked={checkedYoga}
+                                                onChange={(e) => {
+                                                    setCheckedYoga(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Yoga",
+                                                                ],
+                                                            }
+                                                        );
+                                                    } else {
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Yoga"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                    }
+                                                }}
                                                 style={{
                                                     color: "#53BFD2",
                                                 }}
                                             />
-                                            <label>Yoga</label>
+                                            <div className="checkbox_label">
+                                                Yoga
+                                            </div>
                                             <Checkbox
-                                                value=""
-                                                onChange={handleChange}
+                                                checked={checkedPilates}
+                                                onChange={(e) => {
+                                                    setCheckedPilates(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Pilates",
+                                                                ],
+                                                            }
+                                                        );
+                                                    } else {
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Pilates"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                    }
+                                                }}
                                                 style={{
                                                     color: "#53BFD2",
                                                 }}
                                             />
-                                            <label>Pilates</label>
+                                            <div className="checkbox_label">
+                                                Pilates
+                                            </div>
                                         </div>
+
+                                        {/* <div className="inputs_experience"> */}
+                                        {/* <Checkbox
+                        checked={trainerData?.areaOfExpertise?.includes(
+                          "Strength & HIIT"
+                        )}
+                        value=""
+                        onChange={handleChange}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <label>Strength & HITT</label>
+                      <Checkbox
+                        value=""
+                        onChange={handleChange}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <label>Boxing</label>
+                      <Checkbox
+                        value=""
+                        onChange={handleChange}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <label>Yoga</label>
+                      <Checkbox
+                        value=""
+                        onChange={handleChange}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <label>Pilates</label>
+                    </div> */}
                                     </div>
                                     <div className="card_item4">
                                         <h6>{data.clientDesc}</h6>
@@ -476,14 +701,68 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Dollar Amount Per Person"
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                        value={
-                                                            trainerData.amtPerPerson
-                                                        }
-                                                        name="amtPerPerson"
+                                                        placeholder="Individual charge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Class Flat Rate (5-15 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="3 Session Rate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="10 Session Pass Rate"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -492,11 +771,7 @@ const TrainerCardFC = ({
                                                 </div>
                                             </div>
                                         </Accordion>
-
-                                        <Accordion
-                                            title="Virtual Training Session Pricing"
-                                            checked="virtual"
-                                        >
+                                        <Accordion title="Virtual Training Session Pricing">
                                             <div className="card_accordion">
                                                 <div className="iconwrapper">
                                                     <input
@@ -595,7 +870,7 @@ const TrainerCardFC = ({
     );
 };
 
-function Accordion({ title, children, checked }) {
+function Accordion({ title, children }) {
     const [isOpenAccodion, setAccordion] = useState(false);
 
     // for radio button
@@ -610,7 +885,7 @@ function Accordion({ title, children, checked }) {
         <div className="accordion-wrapper">
             <div className="cyanRadio_wrapper">
                 <CyanRadio
-                    checked={selectedValue === { checked }}
+                    checked={selectedValue === ""}
                     onChange={handleChange}
                     onClick={() => setAccordion(!isOpenAccodion)}
                 />

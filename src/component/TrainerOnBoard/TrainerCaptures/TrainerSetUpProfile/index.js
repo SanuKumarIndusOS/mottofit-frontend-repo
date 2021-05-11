@@ -156,6 +156,24 @@ const TrainerSetUpProfileFC = ({
                     console.log(res);
                 });
         }
+
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+        };
+
+        axios
+            .put(
+                "http://doodlebluelive.com:2307/v1/trainer",
+                { applicationStatus: "setupComplete" },
+                {
+                    headers: headers,
+                }
+            )
+            .then((res) => {
+                console.log(res);
+            });
+
         const {
             firstName,
             lastName,

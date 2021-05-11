@@ -124,9 +124,10 @@ const AboutTrainerFC = ({
         <div className="wrapper_about">
           <h2>Tell us a little bit about you</h2>
           <p>
-            *Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem ipsum has been the. *All these fields are mandatory.{" "}
+            {/* *Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem ipsum has been the. *All these fields are mandatory.{" "} */}
           </p>
+          <br></br>
           <div className="outter_form">
             <form className="wrapper_inputs">
               <div className="wrapper_innerInput">

@@ -34,6 +34,11 @@ import { history } from "helpers";
 */
 
 const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
+    const [checkedBoxing, setCheckedBoxing] = React.useState(false);
+    const [checkedHIIT, setCheckedHIIT] = React.useState(false);
+    const [checkedYoga, setCheckedYoga] = React.useState(false);
+    const [checkedPilates, setCheckedPilates] = React.useState(false);
+
     const [currentExperiencee, setCurrentExperiencee] = useState({
         workMode: "",
         workLocation: "",
@@ -191,11 +196,12 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                             <h1>Detail out your training background</h1>
 
                             <p>
-                                We want to know it all! Share with us your
+                                {/* We want to know it all! Share with us your
                                 experience & philosophy as a trainer to progress
                                 in your application process and join the Motto
-                                Family.{" "}
+                                Family.{" "} */}
                             </p>
+
                             <div className="contents_wrapper">
                                 <form>
                                     <div className="item1">
@@ -205,17 +211,44 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                         </h6>
                                         <div className="inputs_experience">
                                             <Checkbox
-                                                checked={trainerbackgroundData.areaOfExpertise.includes(
-                                                    "Strength & HIIT"
-                                                )}
+                                                checked={checkedHIIT}
                                                 onChange={(e) => {
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        areaOfExpertise: [
-                                                            ...trainerbackgroundData.areaOfExpertise,
-                                                            "Strength & HIIT",
-                                                        ],
-                                                    });
+                                                    setCheckedHIIT(
+                                                        e.target.checked
+                                                    );
+                                                    console.log(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Strength & HIIT",
+                                                                ],
+                                                            }
+                                                        );
+
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    } else {
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Strength & HIIT"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    }
 
                                                     console.log(
                                                         trainerbackgroundData
@@ -233,18 +266,52 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                 Strength & HIIT
                                             </div>
                                             <Checkbox
-                                                checked={trainerbackgroundData.areaOfExpertise.includes(
-                                                    "Boxing"
-                                                )}
+                                                checked={checkedBoxing}
                                                 // checked={true}
                                                 onChange={(e) => {
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        areaOfExpertise: [
-                                                            ...trainerbackgroundData.areaOfExpertise,
-                                                            "Boxing",
-                                                        ],
-                                                    });
+                                                    setCheckedBoxing(
+                                                        e.target.checked
+                                                    );
+                                                    console.log(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        console.log(
+                                                            "setBoxing"
+                                                        );
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Boxing",
+                                                                ],
+                                                            }
+                                                        );
+
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    } else {
+                                                        console.log(
+                                                            "unsetBoxing"
+                                                        );
+
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Boxing"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    }
 
                                                     console.log(
                                                         trainerbackgroundData
@@ -258,17 +325,34 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                 Boxing
                                             </div>
                                             <Checkbox
-                                                checked={trainerbackgroundData.areaOfExpertise.includes(
-                                                    "Yoga"
-                                                )}
+                                                checked={checkedYoga}
                                                 onChange={(e) => {
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        areaOfExpertise: [
-                                                            ...trainerbackgroundData.areaOfExpertise,
-                                                            "Yoga",
-                                                        ],
-                                                    });
+                                                    setCheckedYoga(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Yoga",
+                                                                ],
+                                                            }
+                                                        );
+                                                    } else {
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Yoga"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                    }
                                                 }}
                                                 style={{
                                                     color: "#53BFD2",
@@ -278,17 +362,34 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                 Yoga
                                             </div>
                                             <Checkbox
-                                                checked={trainerbackgroundData.areaOfExpertise.includes(
-                                                    "Pilates"
-                                                )}
+                                                checked={checkedPilates}
                                                 onChange={(e) => {
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        areaOfExpertise: [
-                                                            ...trainerbackgroundData.areaOfExpertise,
-                                                            "Pilates",
-                                                        ],
-                                                    });
+                                                    setCheckedPilates(
+                                                        e.target.checked
+                                                    );
+
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise: [
+                                                                    ...trainerbackgroundData.areaOfExpertise,
+                                                                    "Pilates",
+                                                                ],
+                                                            }
+                                                        );
+                                                    } else {
+                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                                            "Pilates"
+                                                        );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                    }
                                                 }}
                                                 style={{
                                                     color: "#53BFD2",
@@ -464,7 +565,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                     disabled
                                                     selected
                                                 >
-                                                    Details of facility
+                                                    Select Your Answer
                                                 </option>
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
@@ -472,33 +573,33 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
 
                                             {currentExperiencee.workMode ===
                                             "yes" ? (
-                                                <input
-                                                    type="text"
-                                                    placeholder="Details of facility"
-                                                    value={
-                                                        currentExperiencee.workLocation
-                                                    }
-                                                    name="answer"
-                                                    onChange={(e) => {
-                                                        setCurrentExperiencee({
-                                                            ...currentExperiencee,
-                                                            workLocation:
-                                                                e.target.value,
-                                                        });
-                                                        setTrainerbackgroundData(
-                                                            {
-                                                                ...trainerbackgroundData,
-                                                                currentExperience: currentExperiencee,
-                                                            }
-                                                        );
-                                                    }}
-                                                />
+                                                <>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Details of facility"
+                                                        value={
+                                                            currentExperiencee.workLocation
+                                                        }
+                                                        name="answer"
+                                                        onChange={(e) => {
+                                                            setCurrentExperiencee(
+                                                                {
+                                                                    ...currentExperiencee,
+                                                                    workLocation:
+                                                                        e.target
+                                                                            .value,
+                                                                }
+                                                            );
+                                                            setTrainerbackgroundData(
+                                                                {
+                                                                    ...trainerbackgroundData,
+                                                                    currentExperience: currentExperiencee,
+                                                                }
+                                                            );
+                                                        }}
+                                                    />
+                                                </>
                                             ) : null}
-                                            {/* <img
-                                                src={Location}
-                                                alt="icon"
-                                                className="loction_img_select"
-                                            /> */}
                                         </div>
                                     </div>
                                     <div className="item6">

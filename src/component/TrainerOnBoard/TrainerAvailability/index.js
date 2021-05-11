@@ -243,10 +243,11 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                     <div className="wrapper_inneritem">
                         <h1>Highlight your availability on the platform</h1>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and
+                            {/* Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem ipsum has been the
-                            industry’s standard dummy text.
+                            industry’s standard dummy text. */}
                         </p>
+                        {/* <br></br> */}
                         <form
                             className="container"
                             onSubmit={(e) => e.preventDefault()}

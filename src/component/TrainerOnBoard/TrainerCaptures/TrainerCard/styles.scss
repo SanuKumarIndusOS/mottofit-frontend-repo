@@ -180,6 +180,17 @@
                     .inputs_experience {
                         display: flex;
                         align-items: center;
+                        .checkbox_label {
+                            margin: 0 2em 0 0.5em;
+                            font-size: 18px;
+
+                            letter-spacing: 0px;
+                            color: #2c2c2c;
+                            font-family: Montserrat;
+                            font-weight: 500;
+                            text-align: left;
+                            opacity: 1;
+                        }
                         label {
                             margin: 0 2em 0 0.5em;
                             font-size: 18px;
