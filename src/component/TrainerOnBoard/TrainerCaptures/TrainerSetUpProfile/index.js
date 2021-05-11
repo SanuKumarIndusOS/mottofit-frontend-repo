@@ -80,7 +80,15 @@ const TrainerSetUpProfileFC = ({
 
     const handleAddFields = () => {
         setImageFields([...imageFields, { image: "" }]);
+        setRenderButton(false);
     };
+    const handleRemoveFields = (index) => {
+        const values = [...imageFields];
+        values.splice(index, 1);
+        setImageFields(values);
+        setRenderButton(true);
+    };
+
     const handleAddCertificateFields = () => {
         setInputCertificatesFields([
             ...inputCertificatesFields,
@@ -150,82 +158,96 @@ const TrainerSetUpProfileFC = ({
                 console.log(res);
               });
           }
-        // const {
-        //     firstName,
-        //     lastName,
-        //     description,
-        //     individualCharge,
-        //     ssTwoPeopleCharge,
-        //     ssThreePeopleCharge,
-        //     ssFourPeopleCharge,
-        //     classFlatRate,
-        //     threeSessionRate,
-        //     tenSessionRate,
-        //     instaHandle,
-        //     location,
-        //     motto,
-        //     serviceableLocation,
-        //     trainingLocation,
-        //     trainingProcessDescription,
-        //     websiteLink,
-        //     youtubeChannel,
-        // } = trainerData;
 
-        // console.log(serviceableLocation);
+          const headers = {
+            "Content-Type": "application/json",
+            Authorization:
+            localStorage.getItem('token'),
+          };
 
-        // let payload = {
-        //     firstName,
-        //     lastName,
-        //     description,
-        //     oneOnOnePricing: {
-        //         passRatefor3Session: threeSessionRate,
-        //         passRatefor10Session: tenSessionRate,
-        //         inPersonAtClientLocation: individualCharge,
-        //     },
-        //     socialSessionPricing: {
-        //         inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
-        //         inPeronAtClientLocationfor3People: ssThreePeopleCharge,
-        //         inPeronAtClientLocationfor4People: ssFourPeopleCharge,
-        //     },
-        //     classSessionPricing: {
-        //         inPersonAtclientLocationfor15People: classFlatRate,
-        //     },
-        //     trainingProcess: trainingProcessDescription,
-        //     myMotto: motto,
-        //     preferedTrainingMode: trainingLocation,
-        //     websiteLink,
-        //     youtubeLink: youtubeChannel,
-        //     instagramProfile: instaHandle,
-        //     currentExperience: { workLocation: location },
-        //     certification: inputCertificatesFields?.map(
-        //         ({ certificate, year }) => ({
-        //             certificateName: "",
-        //             certfiedYear: year,
-        //             certification: certificate,
-        //         })
-        //     ),
+          axios.put("http://doodlebluelive.com:2307/v1/trainer",{applicationStatus: "setupComplete"},{
+            headers: headers,
+          }).then((res) => {
+            console.log(res);
+          });
 
-        //     servicableLocation: serviceableLocation,
-        // };
-        // // updateTrainerDetails();
+          
+        const {
+            firstName,
+            lastName,
+            description,
+            individualCharge,
+            ssTwoPeopleCharge,
+            ssThreePeopleCharge,
+            ssFourPeopleCharge,
+            classFlatRate,
+            threeSessionRate,
+            tenSessionRate,
+            instaHandle,
+            location,
+            motto,
+            serviceableLocation,
+            trainingLocation,
+            trainingProcessDescription,
+            websiteLink,
+            youtubeChannel,
+        } = trainerData;
 
-        // console.log(payload);
+        console.log(serviceableLocation);
 
-        // const { updateTrainerAvailabilityApi } = TrainerApi;
+        let payload = {
+            firstName,
+            lastName,
+            description,
+            oneOnOnePricing: {
+                passRatefor3Session: threeSessionRate,
+                passRatefor10Session: tenSessionRate,
+                inPersonAtClientLocation: individualCharge,
+            },
+            socialSessionPricing: {
+                inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
+                inPeronAtClientLocationfor3People: ssThreePeopleCharge,
+                inPeronAtClientLocationfor4People: ssFourPeopleCharge,
+            },
+            classSessionPricing: {
+                inPersonAtclientLocationfor15People: classFlatRate,
+            },
+            trainingProcess: trainingProcessDescription,
+            myMotto: motto,
+            preferedTrainingMode: trainingLocation,
+            websiteLink,
+            youtubeLink: youtubeChannel,
+            instagramProfile: instaHandle,
+            currentExperience: { workLocation: location },
+            certification: inputCertificatesFields?.map(
+                ({ certificate, year }) => ({
+                    certificateName: "",
+                    certfiedYear: year,
+                    certification: certificate,
+                })
+            ),
 
-        // updateTrainerAvailabilityApi.body = payload;
+            servicableLocation: serviceableLocation,
+        };
+        // updateTrainerDetails();
 
-        // setLoading(true);
+        console.log(payload);
 
-        // api({ ...updateTrainerAvailabilityApi })
-        //     .then(({ data, message }) => {
-        //         console.log(data, message);
-        //         getStripeURL();
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //         setLoading(false);
-        //     });
+        const { updateTrainerAvailabilityApi } = TrainerApi;
+
+        updateTrainerAvailabilityApi.body = payload;
+
+        setLoading(true);
+
+        api({ ...updateTrainerAvailabilityApi })
+            .then(({ data, message }) => {
+                console.log(data, message);
+                getStripeURL();
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
 
         // // history.push("/trainers/dashboard/session");
     };
@@ -240,6 +262,8 @@ const TrainerSetUpProfileFC = ({
 
     const getStripeURL = () => {
         const { getStripeAccLink } = PaymentApi;
+
+
 
         api({ ...getStripeAccLink })
             .then(({ data, message }) => {
@@ -299,6 +323,9 @@ const TrainerSetUpProfileFC = ({
         updateTrainerDetails(storeData);
     }, []);
 
+    const [renderButton, setRenderButton] = useState({
+        visiable: false,
+    });
     return (
         <>
             <div className="outter_setup_container container">
@@ -330,6 +357,7 @@ const TrainerSetUpProfileFC = ({
                                         onChange={handleInputChange}
                                         value={trainerData.motto}
                                         name="motto"
+                                        maxlength="250"
                                     />
                                 </div>
                                 <div className="setup_card2">
@@ -349,33 +377,49 @@ const TrainerSetUpProfileFC = ({
                                 <div className="setup_card3">
                                     <h6>{data.showcase}</h6>
                                     <div className="read_image">
-                                        {imageFields.map((index, input) => {
-                                            return (
-                                                <div
-                                                    key={index}
-                                                    className="render_image"
-                                                >
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                    <ImageReander
-                                                        value={input.image}
-                                                    />
-                                                </div>
-                                            );
-                                        })}
-                                        <h5 onClick={() => handleAddFields()}>
-                                            + Add More Image's
-                                        </h5>
+                                        {imageFields
+                                            .slice(0, 2)
+                                            .map((index, input) => {
+                                                return (
+                                                    <div
+                                                        key={index}
+                                                        className="render_image"
+                                                    >
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                        <ImageReander
+                                                            value={input.image}
+                                                        />
+                                                    </div>
+                                                );
+                                            })}
+                                        {renderButton ? (
+                                            <h5
+                                                onClick={() =>
+                                                    handleAddFields()
+                                                }
+                                            >
+                                                + Add More Image's
+                                            </h5>
+                                        ) : (
+                                            <h5
+                                                onClick={() =>
+                                                    handleRemoveFields()
+                                                }
+                                            >
+                                                Remove
+                                            </h5>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="setup_card4">
@@ -499,9 +543,8 @@ const TrainerSetUpProfileFC = ({
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
                                                     <select
-                                                        value={
-                                                            trainerData.serviceableLocation
-                                                        }
+                                                        value="Miami"
+                                                        
                                                         onChange={
                                                             handleInputChange
                                                         }

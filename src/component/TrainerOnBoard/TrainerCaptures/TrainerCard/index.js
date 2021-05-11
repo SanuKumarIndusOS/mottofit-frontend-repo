@@ -16,6 +16,7 @@ import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
 import axios from "axios";
+import { set } from "date-fns";
 
 const CyanRadio = withStyles({
   root: {
@@ -45,7 +46,15 @@ const TrainerCardFC = ({
       "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
   };
 
+  const [checkedBoxing, setCheckedBoxing] = React.useState(false);
+  const [checkedHIIT, setCheckedHIIT] = React.useState(false);
+  const [checkedYoga, setCheckedYoga] = React.useState(false);
+  const [checkedPilates, setCheckedPilates] = React.useState(false);
+  const [trainerbackgroundData, setTrainerbackgroundData] = useState({
+    areaOfExpertise: [],})
+
   const [image, setImage] = useState();
+  const [selectedValue, setSelectedValue] = useState("");
   const [previewImage, setPreviewTmage] = useState();
   const [trainerData, setTrainerData] = useState({
     firstName: "",
@@ -61,9 +70,6 @@ const TrainerCardFC = ({
     amtPerPerson: "",
   });
   const fileInputRef = useRef();
-
-  // for radio button
-  const [selectedValue, setSelectedValue] = useState("a");
 
   // for radio
   const handleChange = (event) => {
@@ -83,12 +89,16 @@ const TrainerCardFC = ({
   }, [image]);
 
   const handleChangeToTrainerProfile = () => {
+
+    // Update Area of Expertise
+    
+    
     // TrainerCard Profile Upload
 
     if (image !== undefined) {
       const headers = {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem('token'),
+        Authorization: localStorage.getItem("token"),
       };
 
       const fd = new FormData();
@@ -103,6 +113,8 @@ const TrainerCardFC = ({
         });
     }
 
+
+
     // Redux logic
     let storeData = {
       details: { ...trainerData },
@@ -110,6 +122,25 @@ const TrainerCardFC = ({
     updateTrainerDetails(storeData);
     history.push("/trainer/setup");
   };
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewTmage(reader.result);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setPreviewTmage(null);
+    }
+  }, [image]);
+
+  // const handleChangeToTrainerProfile = () => {
+  //     let storeData = {
+  //         details: { ...trainerData },
+  //     };
+  //     updateTrainerDetails(storeData);
+  //     history.push("/trainer/setup");
+  // };
 
   const handleInputChange = ({ target: { name, value } }) => {
     const tempData = {
@@ -123,6 +154,38 @@ const TrainerCardFC = ({
 
   useEffect(() => {
     getTrainerDetails().then((data) => {
+     
+
+      
+     
+
+      if(data['areaOfExpertise'].find((el) => (el === "Strength & HIIT")))
+      {
+          console.log("Strength & HIIT");
+          setCheckedHIIT(true)
+      }
+
+      
+      if(data['areaOfExpertise'].find((el) => (el === "Boxing")))
+      {
+          console.log("Boxing");
+          setCheckedBoxing(true)
+      }
+
+      
+      if(data['areaOfExpertise'].find((el) => (el === "Yoga")))
+      {
+          console.log("Yoga");
+          setCheckedYoga(true)
+      }
+
+      
+      if(data['areaOfExpertise'].find((el) => (el === "Pilates")))
+      {
+          console.log("Pilates");
+          setCheckedPilates(true)
+      }
+    
       const {
         firstName,
         lastName,
@@ -271,8 +334,158 @@ const TrainerCardFC = ({
                   </div>
                   <div className="card_item3">
                     <h6>{data.tellus}</h6>
+
                     <div className="inputs_experience">
                       <Checkbox
+                        checked={checkedHIIT}
+                        onChange={(e) => {
+                          setCheckedHIIT(e.target.checked);
+                          console.log(e.target.checked);
+
+                          if (e.target.checked) {
+                            setTrainerbackgroundData({
+                              ...trainerbackgroundData,
+                              areaOfExpertise: [
+                                ...trainerbackgroundData.areaOfExpertise,
+                                "Strength & HIIT",
+                              ],
+                            });
+
+                            console.log(trainerbackgroundData.areaOfExpertise);
+                          } else {
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Strength & HIIT"
+                            );
+                            // console.log(index);
+                            if (index > -1) {
+                              trainerbackgroundData.areaOfExpertise.splice(
+                                index,
+                                1
+                              );
+                            }
+                            console.log(trainerbackgroundData.areaOfExpertise);
+                          }
+
+                          console.log(trainerbackgroundData);
+                        }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+
+                        // onChange={() => {
+                        //   setCheckState("Strength & HIIT");
+                        // }}
+                      />
+                      <div className="checkbox_label">Strength & HIIT</div>
+                      <Checkbox
+                        checked={checkedBoxing}
+                        // checked={true}
+                        onChange={(e) => {
+                          setCheckedBoxing(e.target.checked);
+                          console.log(e.target.checked);
+
+                          if (e.target.checked) {
+                            console.log("setBoxing");
+                            setTrainerbackgroundData({
+                              ...trainerbackgroundData,
+                              areaOfExpertise: [
+                                ...trainerbackgroundData.areaOfExpertise,
+                                "Boxing",
+                              ],
+                            });
+
+                            console.log(trainerbackgroundData.areaOfExpertise);
+                          } else {
+                            console.log("unsetBoxing");
+
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Boxing"
+                            );
+                            // console.log(index);
+                            if (index > -1) {
+                              trainerbackgroundData.areaOfExpertise.splice(
+                                index,
+                                1
+                              );
+                            }
+                            console.log(trainerbackgroundData.areaOfExpertise);
+                          }
+
+                          console.log(trainerbackgroundData);
+                        }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <div className="checkbox_label">Boxing</div>
+                      <Checkbox
+                        checked={checkedYoga}
+                        onChange={(e) => {
+                          setCheckedYoga(e.target.checked);
+
+                          if (e.target.checked) {
+                            setTrainerbackgroundData({
+                              ...trainerbackgroundData,
+                              areaOfExpertise: [
+                                ...trainerbackgroundData.areaOfExpertise,
+                                "Yoga",
+                              ],
+                            });
+                          } else {
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Yoga"
+                            );
+                            // console.log(index);
+                            if (index > -1) {
+                              trainerbackgroundData.areaOfExpertise.splice(
+                                index,
+                                1
+                              );
+                            }
+                          }
+                        }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <div className="checkbox_label">Yoga</div>
+                      <Checkbox
+                        checked={checkedPilates}
+                        onChange={(e) => {
+                            setCheckedPilates(e.target.checked);
+  
+                            if (e.target.checked) {
+                              setTrainerbackgroundData({
+                                ...trainerbackgroundData,
+                                areaOfExpertise: [
+                                  ...trainerbackgroundData.areaOfExpertise,
+                                  "Pilates",
+                                ],
+                              });
+                            } else {
+                              const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Pilates"
+                              );
+                              // console.log(index);
+                              if (index > -1) {
+                                trainerbackgroundData.areaOfExpertise.splice(
+                                  index,
+                                  1
+                                );
+                              }
+                            }
+                          }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <div className="checkbox_label">Pilates</div>
+                    </div>
+
+
+
+                    {/* <div className="inputs_experience"> */}
+                      {/* <Checkbox
                         checked={trainerData?.areaOfExpertise?.includes(
                           "Strength & HIIT"
                         )}
@@ -282,7 +495,7 @@ const TrainerCardFC = ({
                           color: "#53BFD2",
                         }}
                       />
-                      <label>Strength & Hitt</label>
+                      <label>Strength & HITT</label>
                       <Checkbox
                         value=""
                         onChange={handleChange}
@@ -307,7 +520,7 @@ const TrainerCardFC = ({
                         }}
                       />
                       <label>Pilates</label>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="card_item4">
                     <h6>{data.clientDesc}</h6>
@@ -317,6 +530,7 @@ const TrainerCardFC = ({
                       name="description"
                       placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into your full profile."
                       onChange={handleInputChange}
+                      maxLength="75"
                     />
                   </div>
                   <div className="card_item5">

@@ -9922,10 +9922,10 @@ react-headless-phone-input@^2.0.0:
   resolved "https://registry.yarnpkg.com/react-headless-phone-input/-/react-headless-phone-input-2.0.0.tgz#2e4a5ae10c56f803831d1514de597c2ac639773e"
   integrity sha512-Pg6/nAvlCCP19x3Gxr4Ph/4p0qbXhcpaaTEkNJwFNiPhTa/4H6cGBOkXkUdyfekUAm+3ZRgtxtpFOkTvLYC5YA==
 
-react-hook-form@^6.15.5:
-  version "6.15.7"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.7.tgz#e5ad7a9f73b0311ee770c56951276a3b85b06656"
-  integrity sha512-cfJoBCF/hEjrgfto+70pLDi/F5IBWr5hQhYDFklxb+zyttQORVs+y70OaY4Z4V3IZFeY5oN3ECzEwBaiO1tT1A==
+react-hook-form@6.15.5:
+  version "6.15.5"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.5.tgz#c2578f9ce6a6df7b33015587d40cd880dc13e2db"
+  integrity sha512-so2jEPYKdVk1olMo+HQ9D9n1hVzaPPFO4wsjgSeZ964R7q7CHsYRbVF0PGBi83FcycA5482WHflasdwLIUVENg==
 
 react-hover-image@^2.0.1:
   version "2.0.1"

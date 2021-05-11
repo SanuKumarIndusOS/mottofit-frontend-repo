@@ -243,10 +243,11 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                     <div className="wrapper_inneritem">
                         <h1>Highlight your availability on the platform</h1>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and
+                            {/* Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem ipsum has been the
-                            industry’s standard dummy text.
+                            industry’s standard dummy text. */}
                         </p>
+                        {/* <br></br> */}
                         <form
                             className="container"
                             onSubmit={(e) => e.preventDefault()}
@@ -456,14 +457,14 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                             className="model_styles"
                                         >
                                             <h2>
-                                                Your Application is Complete!
+                                                Background Information collection complete. Click the
+                                                “x” to move to next section!
                                             </h2>
                                             <p>
-                                                Thank you for sharing your
-                                                training experience & philosophy
-                                                with us! We will review, and you
-                                                will be notified with an email
-                                                on next steps.
+                                                Time to move on to building your
+                                                public Motto profile. This
+                                                profile will be published only
+                                                after you are approved!
                                             </p>
                                         </div>
                                     </Modal>
