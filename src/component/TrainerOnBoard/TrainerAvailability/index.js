@@ -385,11 +385,25 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                 </div>
                                 <div className="item_6">
                                     <h6>
-                                        Describe/detail the areas you are
+                                        List the areas/neighborhoods you’re
                                         willing to travel to
                                     </h6>
                                     <div className="inputs_platform">
-                                        <select
+                                        <textarea
+                                            type="text"
+                                            placeholder="Neighborhood List"
+                                            value={
+                                                trainerAvailabilityData.servicableLocation
+                                            }
+                                            onChange={(e) => {
+                                                setTrainerAvailabilityData({
+                                                    ...trainerAvailabilityData,
+                                                    servicableLocation:
+                                                        e.target.value,
+                                                });
+                                            }}
+                                        />
+                                        {/* <select
                                             className="select_location"
                                             required
                                             name="answer"
@@ -411,7 +425,7 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                             <option>Miami</option>
                                             <option>Hampton</option>
                                             <option>Palm Beach</option>
-                                        </select>
+                                        </select> */}
                                         <img
                                             src={Location}
                                             alt="icon"
@@ -457,7 +471,8 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                             className="model_styles"
                                         >
                                             <h2>
-                                                Background Information collection complete. Click the
+                                                Background Information
+                                                collection complete. Click the
                                                 “x” to move to next section!
                                             </h2>
                                             <p>

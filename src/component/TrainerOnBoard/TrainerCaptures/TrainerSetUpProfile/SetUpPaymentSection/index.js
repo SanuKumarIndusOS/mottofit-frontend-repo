@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import ArrowHover from "../../../../common/ButtonIcon/ArrowHover";
+import BlueHoverButton from "component/common/BlueArrowButton";
 const PaymentSection = () => {
     const data = {
         heading: "Security & Payment Information",
@@ -17,31 +18,28 @@ const PaymentSection = () => {
     };
     return (
         <>
-            <div className="payment_container">
+            <div className="payment_container container">
                 <div className="payment_wrapper">
                     <div className="payment_heading">
                         <h2>{data.heading}</h2>
                         <p>{data.describe}</p>
                     </div>
-                    <div className="payment_inner container">
+                    <div className="payment_inner ">
                         {/* <form> */}
                         <div className="payment_item1">
                             <h6>{data.id}</h6>
-                            <div className="inputs_payment">
+                            <div className="inputs_payment1">
                                 <select
-                                    name="bank"
-                                    id="id"
-                                    className={dropdowm ? "active" : "option"}
-                                    defaultValue={"Default"}
-                                    onChange={dropdowmColorChange}
+                                    value=""
+                                    // onChange={handleInputChange}
                                 >
-                                    <option value="Default" disabled hidden>
+                                    <option value="" disabled selected>
                                         Select type of ID
                                     </option>
-                                    <option value="USA">USA</option>
-                                    <option value="FBI">FBI</option>
-                                    <option value="National">National</option>
-                                    <option value="United">United</option>
+                                    <option>New York</option>
+                                    <option>Miami</option>
+                                    <option>Hampton</option>
+                                    <option>Palm Beach</option>
                                 </select>
                                 <input
                                     type="text"
@@ -53,28 +51,24 @@ const PaymentSection = () => {
                                     className="custom-file-input"
                                 />
                                 <a className="checkarrow">
-                                    <ArrowHover />
+                                    <BlueHoverButton />
                                 </a>
                             </div>
                         </div>
                         <div className="payment_item1">
                             <h6>{data.insurance}</h6>
-                            <div className="inputs_payment">
+                            <div className="inputs_payment1">
                                 <select
-                                    name="bank"
-                                    id="insurance"
-                                    className={dropdowm ? "active" : "option"}
-                                    defaultValue={"Default"}
-                                    onChange={dropdowmColorChange}
+                                    value=""
+                                    // onChange={handleInputChange}
                                 >
-                                    <option value="Default" disabled hidden>
-                                        Select your Insurance
+                                    <option value="" disabled selected>
+                                        Insurance Plan Provider
                                     </option>
-
-                                    <option value="USA">USA</option>
-                                    <option value="FBI">FBI</option>
-                                    <option value="National">National</option>
-                                    <option value="United">United</option>
+                                    <option>New York</option>
+                                    <option>Miami</option>
+                                    <option>Hampton</option>
+                                    <option>Palm Beach</option>
                                 </select>
                                 <input
                                     type="text"
@@ -86,7 +80,7 @@ const PaymentSection = () => {
                                     className="custom-file-input"
                                 />
                                 <a className="checkarrow">
-                                    <ArrowHover />
+                                    <BlueHoverButton />
                                 </a>
                             </div>
                         </div>
@@ -94,6 +88,18 @@ const PaymentSection = () => {
                             <h6>{data.payment}</h6>
                             <div className="inputs_payment">
                                 <select
+                                    value=""
+                                    // onChange={handleInputChange}
+                                >
+                                    <option value="" disabled selected>
+                                        Bank Name
+                                    </option>
+                                    <option>New York</option>
+                                    <option>Miami</option>
+                                    <option>Hampton</option>
+                                    <option>Palm Beach</option>
+                                </select>
+                                {/* <select
                                     name="bank"
                                     id="payment"
                                     defaultValue={"Default"}
@@ -110,7 +116,7 @@ const PaymentSection = () => {
                                     </option>
                                     <option value="national">National</option>
                                     <option value="united">United</option>
-                                </select>
+                                </select> */}
                                 <input
                                     type="text"
                                     placeholder="Add your Account Number"

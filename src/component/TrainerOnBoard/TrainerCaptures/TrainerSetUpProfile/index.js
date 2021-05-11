@@ -135,43 +135,45 @@ const TrainerSetUpProfileFC = ({
     };
 
     const handleSubmit = () => {
-
-        console.log( FileArray );
+        console.log(FileArray);
 
         if (FileArray.length !== 0) {
             const headers = {
-              "Content-Type": "application/json",
-              Authorization:
-              localStorage.getItem('token'),
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
             };
-      
+
             const fd = new FormData();
-      
-            FileArray.forEach(file=>{
+
+            FileArray.forEach((file) => {
                 fd.append("images", file, file.name);
-              });
+            });
             axios
-              .post("http://doodlebluelive.com:2307/v1/upload/image", fd, {
-                headers: headers,
-              })
-              .then((res) => {
-                console.log(res);
-              });
-          }
+                .post("http://doodlebluelive.com:2307/v1/upload/image", fd, {
+                    headers: headers,
+                })
+                .then((res) => {
+                    console.log(res);
+                });
+        }
 
-          const headers = {
+        const headers = {
             "Content-Type": "application/json",
-            Authorization:
-            localStorage.getItem('token'),
-          };
+            Authorization: localStorage.getItem("token"),
+        };
 
-          axios.put("http://doodlebluelive.com:2307/v1/trainer",{applicationStatus: "setupComplete"},{
-            headers: headers,
-          }).then((res) => {
-            console.log(res);
-          });
+        axios
+            .put(
+                "http://doodlebluelive.com:2307/v1/trainer",
+                { applicationStatus: "setupComplete" },
+                {
+                    headers: headers,
+                }
+            )
+            .then((res) => {
+                console.log(res);
+            });
 
-          
         const {
             firstName,
             lastName,
@@ -263,8 +265,6 @@ const TrainerSetUpProfileFC = ({
     const getStripeURL = () => {
         const { getStripeAccLink } = PaymentApi;
 
-
-
         api({ ...getStripeAccLink })
             .then(({ data, message }) => {
                 const { url } = data;
@@ -305,7 +305,7 @@ const TrainerSetUpProfileFC = ({
                 location: workLocation,
                 websiteLink,
                 instaHandle: instagramProfile,
-                youtubeChannel: youtubeLink,
+                // youtubeChannel: youtubeLink,
             },
         };
 
@@ -543,8 +543,9 @@ const TrainerSetUpProfileFC = ({
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
                                                     <select
-                                                        value="Miami"
-                                                        
+                                                        value={
+                                                            trainerData.serviceableLocation
+                                                        }
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -554,8 +555,7 @@ const TrainerSetUpProfileFC = ({
                                                             disabled
                                                             selected
                                                         >
-                                                            List all areas that
-                                                            you will service
+                                                            Choose City
                                                         </option>
                                                         <option>
                                                             New York
@@ -587,8 +587,7 @@ const TrainerSetUpProfileFC = ({
                                                             disabled
                                                             selected
                                                         >
-                                                            List all areas that
-                                                            you will service
+                                                            Choose City
                                                         </option>
                                                         <option>
                                                             New York
@@ -765,7 +764,7 @@ const ImageReander = () => {
                         const file = event.target.files[0];
                         if (file && file.type.substr(0, 5) === "image") {
                             setImage(file);
-                            FileArray.push(file)
+                            FileArray.push(file);
                         } else {
                             setImage(null);
                         }
