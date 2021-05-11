@@ -492,7 +492,11 @@ const TrainerCardFC = ({
                                                 </div>
                                             </div>
                                         </Accordion>
-                                        <Accordion title="Virtual Training Session Pricing">
+
+                                        <Accordion
+                                            title="Virtual Training Session Pricing"
+                                            checked="virtual"
+                                        >
                                             <div className="card_accordion">
                                                 <div className="iconwrapper">
                                                     <input
@@ -591,7 +595,7 @@ const TrainerCardFC = ({
     );
 };
 
-function Accordion({ title, children }) {
+function Accordion({ title, children, checked }) {
     const [isOpenAccodion, setAccordion] = useState(false);
 
     // for radio button
@@ -606,7 +610,7 @@ function Accordion({ title, children }) {
         <div className="accordion-wrapper">
             <div className="cyanRadio_wrapper">
                 <CyanRadio
-                    checked={selectedValue === ""}
+                    checked={selectedValue === { checked }}
                     onChange={handleChange}
                     onClick={() => setAccordion(!isOpenAccodion)}
                 />

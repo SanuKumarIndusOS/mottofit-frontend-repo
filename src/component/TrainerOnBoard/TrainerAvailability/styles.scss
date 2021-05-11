@@ -287,36 +287,26 @@
 
                 .inputs_platform {
                     display: flex;
-                    .select_location {
-                        background: transparent;
-                        width: 100%;
-                        margin: 0.5em 1em 0.5em 0;
-                        padding: 0.5em 1em;
-                        border-radius: 50px;
+                    textarea {
+                        width: 92%;
+                        height: 70px;
+                        border: 1.5px solid var(--unnamed-color-bcbcbc);
                         border: 2px solid #bcbcbc;
-                        outline: none;
-                        appearance: none;
-                        font-family: Montserrat;
+                        border-radius: 20px;
                         font-size: 18px;
+                        color: #161616;
+                        font-family: "Montserrat";
                         font-weight: 500;
-                        color: #696969;
-                        option {
-                            color: black;
-                            border-radius: 100px;
-                            border: 2px solid #bcbcbc;
-                        }
+                        padding: 0.5em 1em;
                     }
-                    select::placeholder {
-                        color: #bcbcbc;
-                        font-family: Montserrat;
+                    textarea::placeholder {
                         font-size: 18px;
+                        color: #bcbcbc;
+                        font-family: "Montserrat";
                         font-weight: 400;
                     }
-                    select:invalid {
-                        color: #bcbcbc;
-                        font-family: Montserrat;
-                        font-size: 18px;
-                        font-weight: 500;
+                    textarea:focus {
+                        outline: none;
                     }
                     .loction_img_select {
                         position: relative;

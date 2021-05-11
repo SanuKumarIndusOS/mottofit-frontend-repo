@@ -466,34 +466,39 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                 >
                                                     Details of facility
                                                 </option>
-                                                <option>Yes</option>
-                                                <option>No</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
                                             </select>
-                                            <input
-                                                type="text"
-                                                placeholder="Details of facility"
-                                                value={
-                                                    currentExperiencee.workLocation
-                                                }
-                                                name="answer"
-                                                onChange={(e) => {
-                                                    setCurrentExperiencee({
-                                                        ...currentExperiencee,
-                                                        workLocation:
-                                                            e.target.value,
-                                                    });
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        currentExperience: currentExperiencee,
-                                                    });
-                                                }}
-                                            />
 
-                                            <img
+                                            {currentExperiencee.workMode ===
+                                            "yes" ? (
+                                                <input
+                                                    type="text"
+                                                    placeholder="Details of facility"
+                                                    value={
+                                                        currentExperiencee.workLocation
+                                                    }
+                                                    name="answer"
+                                                    onChange={(e) => {
+                                                        setCurrentExperiencee({
+                                                            ...currentExperiencee,
+                                                            workLocation:
+                                                                e.target.value,
+                                                        });
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                currentExperience: currentExperiencee,
+                                                            }
+                                                        );
+                                                    }}
+                                                />
+                                            ) : null}
+                                            {/* <img
                                                 src={Location}
                                                 alt="icon"
                                                 className="loction_img_select"
-                                            />
+                                            /> */}
                                         </div>
                                     </div>
                                     <div className="item6">

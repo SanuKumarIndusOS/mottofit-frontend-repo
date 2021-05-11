@@ -336,11 +336,11 @@
 
                         .inputs_experience {
                             display: flex;
-                            justify-content: space-around;
+                            justify-content: space-between;
                             width: 100%;
                             input {
                                 background: transparent;
-                                width: 100%;
+                                width: 50%;
                                 margin: 0.5em 1em 0.5em 0;
                                 padding: 0.5em 1em;
                                 border-radius: 50px;
@@ -395,8 +395,11 @@
                             }
 
                             .select_location {
+                                display: flex;
+                                align-items: flex-start;
+                                justify-content: flex-start;
                                 background: transparent;
-                                width: 100%;
+                                width: 50%;
                                 margin: 0.5em 1em 0.5em 0;
                                 padding: 0.5em 1em;
                                 border-radius: 50px;
