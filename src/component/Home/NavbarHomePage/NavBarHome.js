@@ -40,7 +40,7 @@ const NavBarHome = ({ toggle }) => {
     return (
         <Nav className={navbar ? "navbaractive active" : "navbar-sass"}>
             <div className="main_navbar ">
-                <div className="main_container container ">
+                <div className="main_container_home container ">
                     <div className="header-links">
                         <Link to="/how-it-works">How it works</Link>
                         <img src={Line} alt="icon" />
