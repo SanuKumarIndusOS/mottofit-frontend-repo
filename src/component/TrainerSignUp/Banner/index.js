@@ -5,27 +5,33 @@ import Mail from "../../../assets/files/SignUp/Email Icon.svg";
 import Phone from "../../../assets/files/SignUp/Phone Icon.svg";
 import Password from "../../../assets/files/SignUp/Password Icon.svg";
 import { Link, useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import BlueHoverButton from "../../common/BlueArrowButton";
 import { connect } from "react-redux";
 import { loginOrSignUp } from "action/authAct";
 import { bindActionCreators } from "redux";
 import { AuthApi } from "service/apiVariables";
+import useForm from "./useForm";
+import validateInfo from  "./validation";
+
 // import PhoneFormatter from "react-headless-phone-input/lazy";
 // import PhoneInput from "react-phone-number-input/input";
 // import "react-phone-number-input/style.css";
 
-const BannerTrainerFC = ({ loginOrSignupAct }) => {
+const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     const history = useHistory();
-    const [data, setData] = useState({
-        name: "",
-        email: "",
-        phoneNumber: "",
-        password: "",
-        cpassword: "",
-        signUpType: "email",
-    });
+
+    const {data,handleFormSubmit,error,setData} = useForm(validateInfo, submitForm);
+
+    // const [data, setData] = useState({
+    //     name: "",
+    //     email: "",
+    //     phoneNumber: "",
+    //     password: "",
+    //     cpassword: "",
+    //     signUpType: "email",
+    // });
 
     const onChangeValue = (e) => {
         e.persist();
@@ -63,16 +69,23 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
         //   body: JSON.stringify(item),
         // };
 
-        const { trainerSignUp } = AuthApi;
+        
 
-        loginOrSignupAct(trainerSignUp, payload)
+
+        if(Object.keys(error).length === 0){
+            const { trainerSignUp } = AuthApi;
+            loginOrSignupAct(trainerSignUp, payload)
             .then(({ data }) => {
                 // console.log(data);
-                history.push("/trainer/about");
+              history.push("/trainer/about");
             })
             .catch((error) => {
                 setApiError(error.message);
             });
+        }
+
+
+        
 
         // fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
         //   .then(async (response) => {
@@ -115,7 +128,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                         Trainer
                                     </p>
                                     <div className="form_items_trainer">
-                                        <form>
+                                        <form onSubmit={handleFormSubmit}>
                                             <div className="input_items_trainer">
                                                 <input
                                                     placeholder="Name"
@@ -123,19 +136,19 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                     value={data.name}
                                                     name="name"
                                                     onChange={onChangeValue}
-                                                    ref={register({
-                                                        pattern: /^[A-Za-z_ ]+$/i,
-                                                        required: true,
-                                                        minLength: 2,
-                                                    })}
+                                                    // ref={register({
+                                                    //     pattern: /^[A-Za-z_ ]+$/i,
+                                                    //     required: true,
+                                                    //     minLength: 2,
+                                                    // })}
                                                 />
                                                 <img src={Person} alt="icon" />
-                                                {errors.name && (
+                                                {error.name && (
                                                     <span>
-                                                        {errors.name.message}
+                                                        {error.name}
                                                     </span>
                                                 )}
-                                                {errors.name?.type ===
+                                                {/* {errors.name?.type ===
                                                     "required" && (
                                                     <span>
                                                         This field is required
@@ -155,7 +168,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                         This field accept only
                                                         alphabets
                                                     </span>
-                                                )}
+                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
@@ -165,19 +178,19 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                     value={data.email}
                                                     name="email"
                                                     onChange={onChangeValue}
-                                                    ref={register({
-                                                        pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
-                                                        required: true,
-                                                        minLength: 8,
-                                                    })}
+                                                    // ref={register({
+                                                    //     pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
+                                                    //     required: true,
+                                                    //     minLength: 8,
+                                                    // })}
                                                 />
                                                 <img src={Mail} alt="icon" />
-                                                {errors.email && (
+                                                {error.email && (
                                                     <span>
-                                                        {errors.email.message}
+                                                        {error.email}
                                                     </span>
                                                 )}
-                                                {errors.email?.type ===
+                                                {/* {errors.email?.type ===
                                                     "required" && (
                                                     <span>
                                                         This field is required
@@ -197,7 +210,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                         Please enter a valid
                                                         email address
                                                     </span>
-                                                )}
+                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
@@ -218,22 +231,21 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                     value={data.phoneNumber}
                                                     name="phoneNumber"
                                                     onChange={onChangeValue}
-                                                    ref={register({
-                                                        required: true,
-                                                        minLength: 6,
-                                                        maxLength: 11,
-                                                    })}
+                                                    // ref={register({
+                                                    //     required: true,
+                                                    //     minLength: 6,
+                                                    //     maxLength: 11,
+                                                    // })}
                                                 />
                                                 <img src={Phone} alt="icon" />
-                                                {errors.phoneNumber && (
+                                                {error.phoneNumber && (
                                                     <span>
                                                         {
-                                                            errors.phoneNumber
-                                                                .message
+                                                            error.phoneNumber
                                                         }
                                                     </span>
                                                 )}
-                                                {errors.phoneNumber?.type ===
+                                                {/* {errors.phoneNumber?.type ===
                                                     "required" && (
                                                     <span>
                                                         This field is required
@@ -251,7 +263,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                         This field exceed max
                                                         length
                                                     </span>
-                                                )}
+                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
@@ -265,19 +277,26 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                     value={data.password}
                                                     name="password"
                                                     onChange={onChangeValue}
-                                                    ref={register({
-                                                        required: true,
-                                                        minLength: 6,
-                                                        maxLength: 16,
-                                                        pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                                    })}
+                                                    // ref={register({
+                                                    //     required: true,
+                                                    //     minLength: 6,
+                                                    //     maxLength: 16,
+                                                    //     pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                                                    // })}
                                                 />
                                                 <img
                                                     src={Password}
                                                     alt="icon"
                                                     onClick={showPassword}
                                                 />
-                                                {errors.password?.type ===
+                                                         {error.password && (
+                                                    <span>
+                                                        {
+                                                            error.password
+                                                        }
+                                                    </span>
+                                                )}
+                                                {/* {errors.password?.type ===
                                                     "required" && (
                                                     <span>
                                                         This field is required
@@ -305,7 +324,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                         letter, number and
                                                         special character
                                                     </span>
-                                                )}
+                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
@@ -319,15 +338,15 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                     value={data.cpassword}
                                                     name="cpassword"
                                                     onChange={onChangeValue}
-                                                    ref={register({
-                                                        validate: (value) =>
-                                                            value ===
-                                                            watch("password"),
-                                                        required: true,
-                                                        minLength: 6,
-                                                        maxLength: 16,
-                                                        pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                                    })}
+                                                    // ref={register({
+                                                    //     validate: (value) =>
+                                                    //         value ===
+                                                    //         watch("password"),
+                                                    //     required: true,
+                                                    //     minLength: 6,
+                                                    //     maxLength: 16,
+                                                    //     pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                                                    // })}
                                                 />
                                                 <img
                                                     src={Password}
@@ -336,7 +355,14 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                         showConfirmPassword
                                                     }
                                                 />
-                                                {errors.cpassword?.type ===
+                                                   {error.cpassword && (
+                                                    <span>
+                                                        {
+                                                            error.cpassword
+                                                        }
+                                                    </span>
+                                                )}
+                                                {/* {errors.cpassword?.type ===
                                                     "required" && (
                                                     <span>
                                                         This field is required
@@ -371,7 +397,7 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                                         The passwords do not
                                                         match
                                                     </span>
-                                                )}
+                                                )} */}
                                             </div>
                                             {apiError && (
                                                 <span className="errorMessage">
@@ -380,10 +406,9 @@ const BannerTrainerFC = ({ loginOrSignupAct }) => {
                                             )}
 
                                             <div className="submit_button">
-                                                <button
-                                                    onClick={handleSubmit(
-                                                        trainerSignUp
-                                                    )}
+                                                <button type="submit" value="submit"
+                                                      onClick={trainerSignUp}
+                                            
                                                 >
                                                     <p>Continue to Account</p>
                                                     <ArrowHoverBlacked />
