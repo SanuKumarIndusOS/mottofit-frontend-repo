@@ -5,9 +5,18 @@ const validation = ( values) => {
         errors.name='This field is required'
     }else if(values.name.length <= 1){
         errors.name='This field should contain more than one character'
-    } else if(!/^[A-Za-z_ ]+$/i.test(values.name)){
-        errors.name=" This field accept only alphabets"
-    }
+     } else if(!/^([a-z']+(-| )?)+$/i.test(values.name)){
+         errors.name=" Enter a valid name"
+     }
+    
+   // else if(!/^[A-Za-z_ ]+$/i.test(values.name)){
+    //     errors.name=" This field accept only alphabets"
+    // }
+
+    // else if(!/^([a-z']+(-| )?)+$/i.test(values.name)){
+    //     errors.name=" Enter a valid name"
+    // }
+   //   ^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$
     
 
     if(!values.email){

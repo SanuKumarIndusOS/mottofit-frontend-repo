@@ -71,9 +71,9 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
 
         
 
-
+        const { trainerSignUp } = AuthApi;
         if(Object.keys(error).length === 0){
-            const { trainerSignUp } = AuthApi;
+            
             loginOrSignupAct(trainerSignUp, payload)
             .then(({ data }) => {
                 // console.log(data);
@@ -405,7 +405,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                             )}
 
                                             <div className="submit_button">
-                                                <button type="submit" value="submit"
+                                                <button type="submit"
                                                       onClick={trainerSignUp}
                                             
                                                 >
