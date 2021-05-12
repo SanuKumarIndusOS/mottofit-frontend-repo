@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[224],{509:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Happy hour.42dd7008.svg"}}]);
+//# sourceMappingURL=224.1e192045.chunk.js.map

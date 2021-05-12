@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[272],{335:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Book Session Icon.4fc668f8.svg"}}]);
+//# sourceMappingURL=272.0e42d3f5.chunk.js.map
