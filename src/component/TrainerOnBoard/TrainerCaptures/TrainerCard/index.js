@@ -342,10 +342,11 @@ const TrainerCardFC = ({
                                                         setTrainerbackgroundData(
                                                             {
                                                                 ...trainerbackgroundData,
-                                                                areaOfExpertise: [
-                                                                    ...trainerbackgroundData.areaOfExpertise,
-                                                                    "Strength & HIIT",
-                                                                ],
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Strength & HIIT",
+                                                                    ],
                                                             }
                                                         );
 
@@ -353,9 +354,10 @@ const TrainerCardFC = ({
                                                             trainerbackgroundData.areaOfExpertise
                                                         );
                                                     } else {
-                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                                                            "Strength & HIIT"
-                                                        );
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Strength & HIIT"
+                                                            );
                                                         // console.log(index);
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
@@ -401,10 +403,11 @@ const TrainerCardFC = ({
                                                         setTrainerbackgroundData(
                                                             {
                                                                 ...trainerbackgroundData,
-                                                                areaOfExpertise: [
-                                                                    ...trainerbackgroundData.areaOfExpertise,
-                                                                    "Boxing",
-                                                                ],
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Boxing",
+                                                                    ],
                                                             }
                                                         );
 
@@ -416,9 +419,10 @@ const TrainerCardFC = ({
                                                             "unsetBoxing"
                                                         );
 
-                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                                                            "Boxing"
-                                                        );
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Boxing"
+                                                            );
                                                         // console.log(index);
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
@@ -453,16 +457,18 @@ const TrainerCardFC = ({
                                                         setTrainerbackgroundData(
                                                             {
                                                                 ...trainerbackgroundData,
-                                                                areaOfExpertise: [
-                                                                    ...trainerbackgroundData.areaOfExpertise,
-                                                                    "Yoga",
-                                                                ],
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Yoga",
+                                                                    ],
                                                             }
                                                         );
                                                     } else {
-                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                                                            "Yoga"
-                                                        );
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Yoga"
+                                                            );
                                                         // console.log(index);
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
@@ -490,16 +496,18 @@ const TrainerCardFC = ({
                                                         setTrainerbackgroundData(
                                                             {
                                                                 ...trainerbackgroundData,
-                                                                areaOfExpertise: [
-                                                                    ...trainerbackgroundData.areaOfExpertise,
-                                                                    "Pilates",
-                                                                ],
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Pilates",
+                                                                    ],
                                                             }
                                                         );
                                                     } else {
-                                                        const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                                                            "Pilates"
-                                                        );
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Pilates"
+                                                            );
                                                         // console.log(index);
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(

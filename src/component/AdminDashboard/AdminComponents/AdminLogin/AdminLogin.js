@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./styles.scss";
 import { useForm } from "react-hook-form";
-import Mail from "../../../assets/files/SignUp/Email Icon.svg";
-import Password from "../../../assets/files/SignUp/Password Icon.svg";
-import BlackArrowButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import Mail from "../../../../assets/files/SignUp/Email Icon.svg";
+import Password from "../../../../assets/files/SignUp/Password Icon.svg";
+import BlackArrowButton from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 const AdminLogin = () => {
     const [data, setData] = useState({
         email: "",
@@ -44,7 +44,7 @@ const AdminLogin = () => {
                 localStorage.setItem("admin-token", data["token"]);
                 if (response.ok) {
                     console.log(data);
-                    history.push("/admin/dashboard");
+                    history.push("/admins/dashboard");
                 } else {
                     setApiError("User Not Registered", response.statusText);
                 }
