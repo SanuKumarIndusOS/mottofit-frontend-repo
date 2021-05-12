@@ -15,6 +15,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
 import axios from "axios";
+import ReactPhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
@@ -270,7 +273,7 @@ const AboutTrainerFC = ({
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Phone*</label>
-                                <input
+                                {/* <input
                                     placeholder="Phone Number"
                                     type="phone"
                                     value={aboutTrainerData.phone}
@@ -286,8 +289,35 @@ const AboutTrainerFC = ({
                                         required: true,
                                         minLength: 10,
                                     })}
+                                /> */}
+                                <ReactPhoneInput
+                                    type="phone"
+                                    disableDropdown
+                                    disableAreaCodes
+                                    countryCodeEditable={false}
+                                    value={aboutTrainerData.phone}
+                                    placeholder="Phone Number"
+                                    // country="us"
+                                    inputProps={{
+                                        name: "phone",
+                                    }}
+                                    name="phoneNumber"
+                                    onChange={(e) =>
+                                        setAboutTrainerData({
+                                            ...aboutTrainerData,
+                                            phone: e,
+                                        })
+                                    }
                                 />
-                                {errors.phone?.type === "required" && (
+                                {/* {!aboutTrainerData.phone && (
+                  <span>This input is required</span>
+                )} */}
+                                {aboutTrainerData.phone.length < 11 && (
+                                    <span>
+                                        Phone Number should contain 10 digits
+                                    </span>
+                                )}
+                                {/* {errors.phone?.type === "required" && (
                                     <span>This input is required</span>
                                 )}
                                 {errors.phone?.type === "minLength" && (
@@ -299,7 +329,7 @@ const AboutTrainerFC = ({
                                     <span>
                                         Please enter a valid phone number
                                     </span>
-                                )}
+                                )} */}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Website</label>

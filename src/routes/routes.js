@@ -305,6 +305,13 @@ const routers = [
                 exact: true,
             },
             {
+                path: "/settings/card",
+                componentPath: "pages/TrainerDashboard/Settings/CardTrainer",
+                name: "TrainerCard",
+                auth: false,
+                exact: true,
+            },
+            {
                 path: "/message",
                 componentPath: "pages/TrainerDashboard/TrainerMessage",
                 name: "TrainerMessage",

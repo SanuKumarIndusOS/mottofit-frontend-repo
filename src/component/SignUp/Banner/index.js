@@ -8,7 +8,7 @@ import Google from "../../../assets/files/SignUp/Google Logo.svg";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { api } from "service/api";
@@ -16,18 +16,13 @@ import { AuthApi } from "service/apiVariables";
 import { loginOrSignUp } from "action/authAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import useForm from "./useForm";
+import validateInfo from  "./validation";
 
-const SignUpFC = ({ loginOrSignupAct }) => {
-    const [data, setData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNo: "",
-        password: "",
-        cpassword: "",
-        location: "",
-        signUpType: "email",
-    });
+
+const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
+  
+    const {data,handleFormSubmit,error,setData} = useForm(validateInfo, submitForm);
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
@@ -63,12 +58,13 @@ const SignUpFC = ({ loginOrSignupAct }) => {
 
         const { userSignUp } = AuthApi;
 
+        if(Object.keys(error).length === 0){
         loginOrSignupAct(userSignUp, payload)
             .then((data) => console.log(data))
             .catch((error) => {
                 setApiError("Sorry, something went wrong.", error.message);
             });
-
+        }
         // fetch("http://doodlebluelive.com:2307/v1/user/sign-up", requestOptions)
         //   .then(async (response) => {
         //     const data = await response.json();
@@ -102,7 +98,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                 account
                             </p>
                             <div className="form_items">
-                                <form onSubmit={(e) => e.preventDefault()}>
+                                <form onSubmit={handleFormSubmit}>
                                     <div className="input_items">
                                         <input
                                             placeholder="Name"
@@ -110,14 +106,14 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             value={data.firstName}
                                             name="firstName"
                                             onChange={onChangeValue}
-                                            ref={register({
-                                                pattern: /^[A-Za-z]+$/i,
-                                                required: true,
-                                                minLength: 2,
-                                            })}
+                                            // ref={register({
+                                            //     pattern: /^[A-Za-z]+$/i,
+                                            //     required: true,
+                                            //     minLength: 2,
+                                            // })}
                                         />
                                         <img src={Person} alt="icon" />
-                                        {errors.firstName && (
+                                        {/* {errors.firstName && (
                                             <span>
                                                 {errors.firstName.message}
                                             </span>
@@ -132,13 +128,18 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                                 This field should contain more
                                                 then one charater
                                             </span>
-                                        )}
-                                        {errors.firstName?.type ===
+                                        )} */}
+                                        {/* {errors.firstName?.type ===
                                             "pattern" && (
                                             <span>
                                                 This field accept only alphabets
                                             </span>
-                                        )}
+                                        )} */}
+                                           {error.firstName && (
+                                                    <span>
+                                                        {error.firstName}
+                                                    </span>
+                                                )}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -147,14 +148,19 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             value={data.lastName}
                                             name="lastName"
                                             onChange={onChangeValue}
-                                            ref={register({
-                                                pattern: /^[A-Za-z]+$/i,
-                                                required: true,
-                                                minLength: 2,
-                                            })}
+                                            // ref={register({
+                                            //     pattern: /^[A-Za-z]+$/i,
+                                            //     required: true,
+                                            //     minLength: 2,
+                                            // })}
                                         />
                                         <img src={Person} alt="icon" />
-                                        {errors.lastName && (
+                                        {error.lastName && (
+                                                    <span>
+                                                        {error.lastName}
+                                                    </span>
+                                                )}
+                                        {/* {errors.lastName && (
                                             <span>
                                                 {errors.lastName.message}
                                             </span>
@@ -169,13 +175,13 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                                 This field should contain more
                                                 then one charater
                                             </span>
-                                        )}
-                                        {errors.lastName?.type ===
+                                        )} */}
+                                        {/* {errors.lastName?.type ===
                                             "pattern" && (
                                             <span>
                                                 This field accept only alphabets
                                             </span>
-                                        )}
+                                        )} */}
                                     </div>
 
                                     <div className="input_items">
@@ -185,14 +191,20 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             value={data.location}
                                             name="location"
                                             onChange={onChangeValue}
-                                            ref={register({
-                                                pattern: /^[A-Za-z]+$/i,
-                                                required: true,
-                                                minLength: 2,
-                                            })}
+                                            // ref={register({
+                                            //     pattern: /^[A-Za-z]+$/i,
+                                            //     required: true,
+                                            //     minLength: 2,
+                                            // })}
                                         />
                                         <img src={Person} alt="icon" />
-                                        {errors.location && (
+                                        {error.location && (
+                                                    <span>
+                                                        {error.location}
+                                                    </span>
+                                                )}
+                                        
+                                        {/* {errors.location && (
                                             <span>
                                                 {errors.location.message}
                                             </span>
@@ -200,8 +212,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                         {errors.location?.type ===
                                             "required" && (
                                             <span>This field is required</span>
-                                        )}
-                                        {errors.location?.type ===
+                                        )} */}
+                                        {/* {errors.location?.type ===
                                             "minLength" && (
                                             <span>
                                                 This field should contain more
@@ -213,7 +225,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             <span>
                                                 This field accept only alphabets
                                             </span>
-                                        )}
+                                        )} */}
                                     </div>
 
                                     <div className="input_items">
@@ -223,21 +235,26 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             value={data.email}
                                             name="email"
                                             onChange={onChangeValue}
-                                            ref={register({
-                                                required:
-                                                    "This filed is required",
-                                                minLength: {
-                                                    value: 2,
-                                                    message:
-                                                        "Enter a valid name",
-                                                },
-                                            })}
+                                            // ref={register({
+                                            //     required:
+                                            //         "This filed is required",
+                                            //     minLength: {
+                                            //         value: 2,
+                                            //         message:
+                                            //             "Enter a valid name",
+                                            //     },
+                                            // })}
                                         />
                                         <img src={Mail} alt="icon" />
 
-                                        {errors.email && (
+                                        {error.email && (
+                                                    <span>
+                                                        {error.email}
+                                                    </span>
+                                                )}
+                                        {/* {errors.email && (
                                             <span>{errors.email.message}</span>
-                                        )}
+                                        )} */}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -246,19 +263,25 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             value={data.phoneNo}
                                             name="phoneNo"
                                             onChange={onChangeValue}
-                                            ref={register({
-                                                required: true,
-                                                minLength: 6,
-                                                maxLength: 11,
-                                            })}
+                                            // ref={register({
+                                            //     required: true,
+                                            //     minLength: 6,
+                                            //     maxLength: 11,
+                                            // })}
                                         />
                                         <img src={Phone} alt="icon" />
-                                        {errors.phoneNo && (
+                                        {error.phoneNo && (
+                                                    <span>
+                                                        {error.phoneNo}
+                                                    </span>
+                                                )}
+
+                                        {/* {errors.phoneNo && (
                                             <span>
                                                 {errors.phoneNo.message}
                                             </span>
-                                        )}
-                                        {errors.phoneNo?.type ===
+                                        )} */}
+                                        {/* {errors.phoneNo?.type ===
                                             "required" && (
                                             <span>This field is required</span>
                                         )}
@@ -271,7 +294,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             <span>
                                                 This field exceed max length
                                             </span>
-                                        )}
+                                        )} */}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -284,19 +307,25 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             value={data.password}
                                             name="password"
                                             onChange={onChangeValue}
-                                            ref={register({
-                                                required: true,
-                                                minLength: 6,
-                                                maxLength: 16,
-                                                // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                            })}
+                                            // ref={register({
+                                            //     required: true,
+                                            //     minLength: 6,
+                                            //     maxLength: 16,
+                                            //     // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                                            // })}
                                         />
                                         <img
                                             src={Password}
                                             alt="icon"
                                             onClick={showPassword}
                                         />
-                                        {errors.password?.type ===
+                                             {error.password && (
+                                                    <span>
+                                                        {error.password}
+                                                    </span>
+                                                )}
+
+                                        {/* {errors.password?.type ===
                                             "required" && (
                                             <span>This field is required</span>
                                         )}
@@ -306,8 +335,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                                 Password should be more then 6
                                                 Charcters
                                             </span>
-                                        )}
-                                        {errors.password?.type ===
+                                        )} */}
+                                        {/* {errors.password?.type ===
                                             "maxLength" && (
                                             <span>
                                                 This field exceed max length
@@ -320,7 +349,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                                 one one captial letter, number
                                                 and special character
                                             </span>
-                                        )}
+                                        )} */}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -330,31 +359,38 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                                     ? "text"
                                                     : "password"
                                             }
+                                            name="cpassword"
                                             value={data.cpassword}
                                             onChange={onChangeValue}
-                                            ref={register({
-                                                validate: (value) =>
-                                                    value === watch("password"),
+                                            // ref={register({
+                                            //     validate: (value) =>
+                                            //         value === watch("password"),
 
-                                                // validate: value =>
-                                                // value === password.current || "The passwords do not match",
-                                                required: true,
-                                                minLength: 6,
-                                                maxLength: 16,
-                                                // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                            })}
-                                            name="cpassword"
+                                            //     // validate: value =>
+                                            //     // value === password.current || "The passwords do not match",
+                                            //     required: true,
+                                            //     minLength: 6,
+                                            //     maxLength: 16,
+                                            //     // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+                                            // })}
+                                            
                                         />
                                         <img
                                             src={Password}
                                             alt="icon"
                                             onClick={showConfirmPassword}
                                         />
-                                        {errors.cpassword?.type ===
+
+                                            {error.cpassword && (
+                                                    <span>
+                                                        {error.cpassword}
+                                                    </span>
+                                                )}
+                                        {/* {errors.cpassword?.type ===
                                             "required" && (
                                             <span>This field is required</span>
-                                        )}
-                                        {errors.cpassword?.type ===
+                                        )} */}
+                                        {/* {errors.cpassword?.type ===
                                             "minLength" && (
                                             <span>
                                                 Password should be more then 6
@@ -366,8 +402,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             <span>
                                                 This field exceed max length
                                             </span>
-                                        )}
-                                        {errors.cpassword?.type ===
+                                        )} */}
+                                        {/* {errors.cpassword?.type ===
                                             "pattern" && (
                                             <span>
                                                 Password should contain atleast
@@ -380,7 +416,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                             <span>
                                                 The passwords do not match
                                             </span>
-                                        )}
+                                        )} */}
                                     </div>
                                     {apiError && (
                                         <span className="errorMessage">
@@ -409,7 +445,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                                     <div className="submit_button">
                                         <button
                                             type="submit"
-                                            onClick={handleSubmit(signUp)}
+                                            onClick={signUp}
                                         >
                                             Continue to Account{" "}
                                             <ArrowHoverBlacked />

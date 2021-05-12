@@ -3,12 +3,22 @@ const validation = ( values) => {
 
     if(!values.name){
         errors.name='This field is required'
-    }else if(values.name.length <= 1){
+    }
+    else if(values.name.length <= 1){
         errors.name='This field should contain more than one character'
-     } else if(!/^([a-z']+(-| )?)+$/i.test(values.name)){
-         errors.name=" Enter a valid name"
-     }
-    
+    }
+        //  } else if(!/^([a-z']+(-| )?)+$/i.test(values.name)){
+    //      errors.name=" Enter a valid name"
+    //  }
+    else if(!/^[a-zA-Z]+(\s[a-zA-Z]+)+$/gm.test(values.name)){
+        errors.name = "Enter full name"
+    }
+     else if(!/^[a-zA-Z]+\s[a-zA-Z]+\s?$/g.test(values.name)){
+        errors.name=" Enter a valid name"
+    } 
+
+
+   // ^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)
    // else if(!/^[A-Za-z_ ]+$/i.test(values.name)){
     //     errors.name=" This field accept only alphabets"
     // }
@@ -32,9 +42,9 @@ const validation = ( values) => {
     }    else if(!/^[0-9]*$/i.test(values.phoneNumber)){
             errors.phoneNumber = 'Invalid Number'
     }
-    else if(values.phoneNumber.length < 10){
+    else if(values.phoneNumber.length < 11){
         errors.phoneNumber = 'Enter a valid number'
-    } else if (values.phoneNumber.length  >= 11) {
+    } else if (values.phoneNumber.length  >= 12) {
         errors.phoneNumber = " This field exceed max length"
     }
     //  else if(!/^[0-9]*$/i.test(values.phone)){
