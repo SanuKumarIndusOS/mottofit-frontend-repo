@@ -8,7 +8,7 @@ import Facebook from "../../../assets/files/SignUp/Fb Logo.svg";
 import Google from "../../../assets/files/SignUp/Google Logo.svg";
 import Mail from "../../../assets/files/SignUp/Email Icon.svg";
 import Password from "../../../assets/files/SignUp/Password Icon.svg";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
@@ -17,19 +17,16 @@ import { AuthApi } from "service/apiVariables";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { login, loginOrSignUp } from "action/authAct";
+import useForm from "./useForm";
+import validateInfo from  "./validation";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
-const SignInFC = ({ showModel, setShowModel, loginAct }) => {
+const SignInFC = ({ showModel, setShowModel, loginAct ,submitForm }) => {
     const history = useHistory();
     const myRef = useRef(null);
+    const {data,handleFormSubmit,error,setData} = useForm(validateInfo, submitForm);
 
-    const [data, setData] = useState({
-        email: "",
-        password: "",
-        signUpType: "email",
-        deviceName: "email",
-    });
     const [passwordShown, setPasswordShown] = useState(false);
     const [apiError, setApiError] = useState("");
 
@@ -55,8 +52,9 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
 
         // NEED USER DATA AFTER LOGIN AND SIGNUP
 
+         if(Object.keys(error).length === 0){
         loginAct(loginApi, payload)
-            .then((res) => {
+        .then((res) => {
                 if (res["type"] === "trainer") {
                     fetch("http://doodlebluelive.com:2307/v1/trainer", {
                         method: "get",
@@ -84,7 +82,8 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
             .catch((error) => {
                 setApiError("Sorry, something went wrong.", error.message);
             });
-
+        }
+        
         // const { loginApi } = AuthApi;
 
         // const requestOptions = {
@@ -109,6 +108,7 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
         //     setApiError("Sorry, something went wrong.", error.message);
         //   });
     }
+
     const preventSubmit = (e) => {
         e.preventDefault();
     };
@@ -136,7 +136,7 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                     details below
                                 </p>
                                 <div className="form_item_login">
-                                    <form onSubmit={preventSubmit}>
+                                    <form onSubmit={handleFormSubmit}>
                                         <div className="input_item1_signin">
                                             <input
                                                 placeholder="Email"
@@ -144,15 +144,15 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                                 value={data.email}
                                                 name="email"
                                                 onChange={onChangeValue}
-                                                ref={register({
-                                                    pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
-                                                    required: true,
-                                                    minLength: 8,
-                                                })}
+                                                // ref={register({
+                                                //     pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
+                                                //     required: true,
+                                                //     minLength: 8,
+                                                // })}
                                             />
                                             <img src={Mail} alt="icon" />
 
-                                            {errors.email?.type ===
+                                            {/* {errors.email?.type ===
                                                 "required" && (
                                                 <span>
                                                     This field is required
@@ -164,14 +164,19 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                                     This field should contain
                                                     greater then 8 charater
                                                 </span>
-                                            )}
-                                            {errors.email?.type ===
+                                            )} */}
+                                            {/* {error.email?.type ===
                                                 "pattern" && (
                                                 <span>
                                                     Please enter a valid email
                                                     address
                                                 </span>
-                                            )}
+                                            )} */}
+                                              {error.email && (
+                                                    <span>
+                                                        {error.email}
+                                                    </span>
+                                                )}
                                         </div>
                                         <div className="input_item1_signin">
                                             <input
@@ -184,19 +189,19 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                                 value={data.password}
                                                 onChange={onChangeValue}
                                                 name="password"
-                                                ref={register({
-                                                    required: true,
-                                                    minLength: 6,
-                                                    maxLength: 16,
-                                                    pattern: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{3,}$/,
-                                                })}
+                                                // ref={register({
+                                                //     required: true,
+                                                //     minLength: 6,
+                                                //     maxLength: 16,
+                                                //     pattern: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{3,}$/,
+                                                // })}
                                             />
                                             <img
                                                 src={Password}
                                                 alt="icon"
                                                 onClick={showPassword}
                                             />
-                                            {errors.password?.type ===
+                                            {/* {errors.password?.type ===
                                                 "required" && (
                                                 <span>
                                                     This input is required
@@ -208,8 +213,8 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                                     Password should be more then
                                                     6 Charcters
                                                 </span>
-                                            )}
-                                            {errors.password?.type ===
+                                            )} */}
+                                            {/* {errors.password?.type ===
                                                 "maxLength" && (
                                                 <span>
                                                     This field exceed max length
@@ -223,7 +228,12 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                                     letter, number and special
                                                     character
                                                 </span>
-                                            )}
+                                            )} */}
+                                            {error.password && (
+                                                    <span>
+                                                        {error.password}
+                                                    </span>
+                                                )}
                                         </div>
                                         <div className="remember_container">
                                             <div className="remember_left">
@@ -273,14 +283,14 @@ const SignInFC = ({ showModel, setShowModel, loginAct }) => {
                                             </button>
                                         </div>
                                         <div className="submit_button">
-                                            <Link
+                                            <button
                                                 className="login_button"
                                                 type="submit"
-                                                onClick={handleSubmit(logIn)}
+                                                onClick={logIn}
                                             >
                                                 Signin
                                                 <ArrowHoverBlacked />
-                                            </Link>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>

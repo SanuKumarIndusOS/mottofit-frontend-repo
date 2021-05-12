@@ -3,12 +3,19 @@ const validation = ( values) => {
 
     if(!values.name){
         errors.name='This field is required'
-    }else if(values.name.length <= 1){
+    }
+    else if(values.name.length <= 1){
         errors.name='This field should contain more than one character'
-     } else if(!/^([a-z']+(-| )?)+$/i.test(values.name)){
-         errors.name=" Enter a valid name"
-     }
-    
+    }
+        //  } else if(!/^([a-z']+(-| )?)+$/i.test(values.name)){
+    //      errors.name=" Enter a valid name"
+    //  }
+     else if(!/^[a-zA-Z]+\s[a-zA-Z]+\s?$/g.test(values.name)){
+        errors.name=" Enter a valid name"
+    }
+
+
+   // ^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)
    // else if(!/^[A-Za-z_ ]+$/i.test(values.name)){
     //     errors.name=" This field accept only alphabets"
     // }
