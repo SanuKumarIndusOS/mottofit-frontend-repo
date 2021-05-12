@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[245],{370:function(t,s,i){"use strict";i.r(s),s.default=i.p+"static/media/Training Icon.d725d1c5.svg"}}]);
+//# sourceMappingURL=245.677ce8d5.chunk.js.map

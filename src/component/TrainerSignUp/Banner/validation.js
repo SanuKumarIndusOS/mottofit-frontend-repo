@@ -10,9 +10,12 @@ const validation = ( values) => {
         //  } else if(!/^([a-z']+(-| )?)+$/i.test(values.name)){
     //      errors.name=" Enter a valid name"
     //  }
+    else if(!/^[a-zA-Z]+(\s[a-zA-Z]+)+$/gm.test(values.name)){
+        errors.name = "Enter full name"
+    }
      else if(!/^[a-zA-Z]+\s[a-zA-Z]+\s?$/g.test(values.name)){
         errors.name=" Enter a valid name"
-    }
+    } 
 
 
    // ^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)

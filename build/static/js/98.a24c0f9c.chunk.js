@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[98],{249:function(t,e,n){"use strict";n.r(e),n.d(e,"getHomePageDetails",(function(){return a})),n.d(e,"getPageDetails",(function(){return i}));var o=n(22),a=function(t){return function(t,e,n){n.api;return console.log("called"),new Promise((function(e,n){t({type:o.HomeActionType.updateHomePageData,payload:"test"}),e(!0)}))}},i=function(){return new Promise((function(t,e){t({name:"viswaram"})}))}}}]);
+//# sourceMappingURL=98.a24c0f9c.chunk.js.map
