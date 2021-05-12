@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[189],{484:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Pilates Icon.7c3999d9.svg"}}]);
+//# sourceMappingURL=189.4589e53f.chunk.js.map
