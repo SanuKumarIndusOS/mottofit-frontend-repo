@@ -15,6 +15,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
 import axios from "axios";
+import ReactPhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css'
 
 // import DatePicker from "react-datepicker";
 
@@ -265,7 +267,7 @@ const AboutTrainerFC = ({
               </div>
               <div className="wrapper_innerInput">
                 <label>Phone*</label>
-                <input
+                {/* <input
                   placeholder="Phone Number"
                   type="phone"
                   value={aboutTrainerData.phone}
@@ -281,7 +283,23 @@ const AboutTrainerFC = ({
                     required: true,
                     minLength: 10,
                   })}
-                />
+                /> */}
+                <ReactPhoneInput 
+                  type="phone"
+                  disableDropdown
+                  value={aboutTrainerData.phone}
+                  country="us" 
+                  inputProps={{
+                      name: "phone",
+                    }}
+                  name="phoneNumber"
+                  onChange={(e) =>
+                    setAboutTrainerData({
+                      ...aboutTrainerData,
+                      phone: e,
+                    })
+                  }
+                  />
                 {errors.phone?.type === "required" && (
                   <span>This input is required</span>
                 )}
