@@ -138,6 +138,13 @@
                     width: 100%;
                     color: #242424;
                     margin: 0 auto;
+                    .react-tel-input .flag-dropdown {
+                        background: transparent;
+                        border: none;
+                        .arrow {
+                            display: none;
+                        }
+                    }
 
                     input {
                         width: 100%;

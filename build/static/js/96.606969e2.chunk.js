@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[96],{236:function(e,t,a){"use strict";a.r(t);var s=a(7),r=a(2);t.default=function(e){var t=Object(r.useState)({name:"",email:"",phoneNumber:"",password:"",cpassword:"",signUpType:"email"}),a=Object(s.a)(t,2),o=a[0],n=a[1],p=Object(r.useState)({name:"",email:"",phoneNumber:"",password:"",cpassword:""}),u=Object(s.a)(p,2),c=u[0],i=u[1];return{data:o,handleFormSubmit:function(t){t.preventDefault();var a=e(o);i(a)},error:c,setData:n}}}}]);
+//# sourceMappingURL=96.606969e2.chunk.js.map
