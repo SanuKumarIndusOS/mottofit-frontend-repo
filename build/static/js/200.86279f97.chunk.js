@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[200],{496:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Cross 2.adb8d37a.svg"}}]);
-//# sourceMappingURL=200.86279f97.chunk.js.map

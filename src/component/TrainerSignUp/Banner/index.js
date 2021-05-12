@@ -13,25 +13,18 @@ import { loginOrSignUp } from "action/authAct";
 import { bindActionCreators } from "redux";
 import { AuthApi } from "service/apiVariables";
 import useForm from "./useForm";
-import validateInfo from  "./validation";
+import validateInfo from "./validation";
 
-// import PhoneFormatter from "react-headless-phone-input/lazy";
-// import PhoneInput from "react-phone-number-input/input";
-// import "react-phone-number-input/style.css";
+// import PhoneInput from "react-phone-input-2";
+// import "react-phone-input-2/lib/style.css";
 
 const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     const history = useHistory();
 
-    const {data,handleFormSubmit,error,setData} = useForm(validateInfo, submitForm);
-
-    // const [data, setData] = useState({
-    //     name: "",
-    //     email: "",
-    //     phoneNumber: "",
-    //     password: "",
-    //     cpassword: "",
-    //     signUpType: "email",
-    // });
+    const { data, handleFormSubmit, error, setData } = useForm(
+        validateInfo,
+        submitForm
+    );
 
     const onChangeValue = (e) => {
         e.persist();
@@ -69,23 +62,17 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         //   body: JSON.stringify(item),
         // };
 
-        
-
         const { trainerSignUp } = AuthApi;
-        if(Object.keys(error).length === 0){
-            
+        if (Object.keys(error).length === 0) {
             loginOrSignupAct(trainerSignUp, payload)
-            .then(({ data }) => {
-                // console.log(data);
-              history.push("/trainer/about");
-            })
-            .catch((error) => {
-                setApiError(error.message);
-            });
+                .then(({ data }) => {
+                    // console.log(data);
+                    history.push("/trainer/about");
+                })
+                .catch((error) => {
+                    setApiError(error.message);
+                });
         }
-
-
-        
 
         // fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
         //   .then(async (response) => {
@@ -98,14 +85,14 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         //   })
     }
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setData({
-    //         ...data,
-    //         [name]: value,
+    // const [phone, setPhone] = useState({
+    //     phoneNumber: "",
+    // });
+    // const handeOnChange = (value) => {
+    //     setPhone({
+    //         phoneNumber: value,
     //     });
     // };
-
     return (
         <>
             <div className="banner_container_trainer">
@@ -136,39 +123,11 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     value={data.name}
                                                     name="name"
                                                     onChange={onChangeValue}
-                                                    // ref={register({
-                                                    //     pattern: /^[A-Za-z_ ]+$/i,
-                                                    //     required: true,
-                                                    //     minLength: 2,
-                                                    // })}
                                                 />
                                                 <img src={Person} alt="icon" />
                                                 {error.name && (
-                                                    <span>
-                                                        {error.name}
-                                                    </span>
+                                                    <span>{error.name}</span>
                                                 )}
-                                                {/* {errors.name?.type ===
-                                                    "required" && (
-                                                    <span>
-                                                        This field is required
-                                                    </span>
-                                                )}
-                                                {errors.name?.type ===
-                                                    "minLength" && (
-                                                    <span>
-                                                        This field should
-                                                        contain more then one
-                                                        charater
-                                                    </span>
-                                                )}
-                                                {errors.name?.type ===
-                                                    "pattern" && (
-                                                    <span>
-                                                        This field accept only
-                                                        alphabets
-                                                    </span>
-                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
@@ -178,91 +137,36 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     value={data.email}
                                                     name="email"
                                                     onChange={onChangeValue}
-                                                    // ref={register({
-                                                    //     pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
-                                                    //     required: true,
-                                                    //     minLength: 8,
-                                                    // })}
                                                 />
                                                 <img src={Mail} alt="icon" />
                                                 {error.email && (
-                                                    <span>
-                                                        {error.email}
-                                                    </span>
+                                                    <span>{error.email}</span>
                                                 )}
-                                                {/* {errors.email?.type ===
-                                                    "required" && (
-                                                    <span>
-                                                        This field is required
-                                                    </span>
-                                                )}
-                                                {errors.email?.type ===
-                                                    "minLength" && (
-                                                    <span>
-                                                        Please enter a valid
-                                                        email address
-                                                    </span>
-                                                )}
-                                                {errors.email?.type ===
-                                                    "pattern" && (
-                                                    <span>
-                                                        Please enter a valid
-                                                        email address
-                                                    </span>
-                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
-                                                {/* <PhoneInput
-                                                    placeholder="Enter phone number"
-                                                    value={data.phoneNumber}
-                                                    onChange={(e) =>
-                                                        setData({
-                                                            ...data,
-                                                        })
-                                                    }
-                                                    name="phone"
-                                                    defaultCountry="US"
-                                                /> */}
                                                 <input
                                                     placeholder="Phone"
                                                     type="tel"
                                                     value={data.phoneNumber}
                                                     name="phoneNumber"
                                                     onChange={onChangeValue}
-                                                    // ref={register({
-                                                    //     required: true,
-                                                    //     minLength: 6,
-                                                    //     maxLength: 11,
-                                                    // })}
                                                 />
+                                                {/* <PhoneInput
+                                                    country={"us"}
+                                                    defaultCountry={"us"}
+                                                    value={phone.phoneNumber}
+                                                    onChange={handeOnChange}
+                                                    showDropdown={false}
+                                                    disableCountryCode={false}
+                                                /> */}
+
                                                 <img src={Phone} alt="icon" />
                                                 {error.phoneNumber && (
                                                     <span>
-                                                        {
-                                                            error.phoneNumber
-                                                        }
+                                                        {error.phoneNumber}
                                                     </span>
                                                 )}
-                                                {/* {errors.phoneNumber?.type ===
-                                                    "required" && (
-                                                    <span>
-                                                        This field is required
-                                                    </span>
-                                                )}
-                                                {errors.phoneNumber?.type ===
-                                                    "minLength" && (
-                                                    <span>
-                                                        Enter a valid number
-                                                    </span>
-                                                )}
-                                                {errors.phoneNumber?.type ===
-                                                    "maxLength" && (
-                                                    <span>
-                                                        This field exceed max
-                                                        length
-                                                    </span>
-                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
@@ -276,54 +180,17 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     value={data.password}
                                                     name="password"
                                                     onChange={onChangeValue}
-                                                    // ref={register({
-                                                    //     required: true,
-                                                    //     minLength: 6,
-                                                    //     maxLength: 16,
-                                                    //     pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                                    // })}
                                                 />
                                                 <img
                                                     src={Password}
                                                     alt="icon"
                                                     onClick={showPassword}
                                                 />
-                                                         {error.password && (
+                                                {error.password && (
                                                     <span>
-                                                        {
-                                                            error.password
-                                                        }
+                                                        {error.password}
                                                     </span>
                                                 )}
-                                                {/* {errors.password?.type ===
-                                                    "required" && (
-                                                    <span>
-                                                        This field is required
-                                                    </span>
-                                                )}
-                                                {errors.password?.type ===
-                                                    "minLength" && (
-                                                    <span>
-                                                        Password should be more
-                                                        then 6 Charcters
-                                                    </span>
-                                                )}
-                                                {errors.password?.type ===
-                                                    "maxLength" && (
-                                                    <span>
-                                                        This field exceed max
-                                                        length
-                                                    </span>
-                                                )}
-                                                {errors.password?.type ===
-                                                    "pattern" && (
-                                                    <span>
-                                                        Password should contain
-                                                        atleast one one captial
-                                                        letter, number and
-                                                        special character
-                                                    </span>
-                                                )} */}
                                             </div>
 
                                             <div className="input_items_trainer">
@@ -337,15 +204,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     value={data.cpassword}
                                                     name="cpassword"
                                                     onChange={onChangeValue}
-                                                    // ref={register({
-                                                    //     validate: (value) =>
-                                                    //         value ===
-                                                    //         watch("password"),
-                                                    //     required: true,
-                                                    //     minLength: 6,
-                                                    //     maxLength: 16,
-                                                    //     pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                                    // })}
                                                 />
                                                 <img
                                                     src={Password}
@@ -354,49 +212,11 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                         showConfirmPassword
                                                     }
                                                 />
-                                                   {error.cpassword && (
+                                                {error.cpassword && (
                                                     <span>
-                                                        {
-                                                            error.cpassword
-                                                        }
+                                                        {error.cpassword}
                                                     </span>
                                                 )}
-                                                {/* {errors.cpassword?.type ===
-                                                    "required" && (
-                                                    <span>
-                                                        This field is required
-                                                    </span>
-                                                )}
-                                                {errors.cpassword?.type ===
-                                                    "minLength" && (
-                                                    <span>
-                                                        Password should be more
-                                                        then 6 Charcters
-                                                    </span>
-                                                )}
-                                                {errors.cpassword?.type ===
-                                                    "maxLength" && (
-                                                    <span>
-                                                        This field exceed max
-                                                        length
-                                                    </span>
-                                                )}
-                                                {errors.cpassword?.type ===
-                                                    "pattern" && (
-                                                    <span>
-                                                        Password should contain
-                                                        atleast one one captial
-                                                        letter, number and
-                                                        special character
-                                                    </span>
-                                                )}
-                                                {errors.cpassword?.type !==
-                                                    errors.password && (
-                                                    <span>
-                                                        The passwords do not
-                                                        match
-                                                    </span>
-                                                )} */}
                                             </div>
                                             {apiError && (
                                                 <span className="errorMessage">
@@ -405,9 +225,9 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                             )}
 
                                             <div className="submit_button">
-                                                <button type="submit"
-                                                      onClick={trainerSignUp}
-                                            
+                                                <button
+                                                    type="submit"
+                                                    onClick={trainerSignUp}
                                                 >
                                                     <p>Continue to Account</p>
                                                     <ArrowHoverBlacked />

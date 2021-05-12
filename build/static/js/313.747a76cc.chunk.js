@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[313],{380:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/SocialSession.3c15eeb7.jpg"}}]);
+//# sourceMappingURL=313.747a76cc.chunk.js.map

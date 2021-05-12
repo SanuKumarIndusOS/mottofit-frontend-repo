@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[236],{322:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Phone Icon.f207d1b4.svg"}}]);
+//# sourceMappingURL=236.a10773af.chunk.js.map

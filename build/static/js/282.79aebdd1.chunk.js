@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[282],{475:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Motto Logo.6a9011c1.png"}}]);
+//# sourceMappingURL=282.79aebdd1.chunk.js.map
