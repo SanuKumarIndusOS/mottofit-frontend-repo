@@ -154,8 +154,11 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     name="phoneNumber"
                                                     onChange={onChangeValue}
                                                 /> */}
+
                                                 <ReactPhoneInput 
                                                     disableDropdown
+                                                    // prefix="+1"
+                                                    countryCodeEditable={false}
                                                     country="us" 
                                                     placeholder = "Phone Number"
                                                     inputProps={{
