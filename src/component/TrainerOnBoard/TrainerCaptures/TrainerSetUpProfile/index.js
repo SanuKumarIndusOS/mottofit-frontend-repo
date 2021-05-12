@@ -700,11 +700,9 @@ const TrainerSetUpProfileFC = ({
                                 {/* <PaymentSection /> */}
                                 <div className="submit_button">
                                     <button
-                                        // disabled={!agreed}
                                         onClick={handleSubmit}
                                         type="submit"
-                                        disabled={!agreed}
-                                        // style={{agreed  }}
+                                        disabled={(isLoading, !agreed)}
                                         className={`${
                                             isLoading ? "loading" : "btn"
                                         }`}

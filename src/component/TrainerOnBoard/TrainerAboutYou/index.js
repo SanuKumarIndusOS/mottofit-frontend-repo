@@ -337,7 +337,7 @@ const AboutTrainerFC = ({
                             </div>
 
                             <div className="submit_button">
-                                <Link
+                                <button
                                     type="submit"
                                     // to={{
                                     //     pathname: "/trainer/background",
@@ -352,7 +352,7 @@ const AboutTrainerFC = ({
                                 >
                                     Continue
                                     <ArrowHoverBlacked />
-                                </Link>
+                                </button>
                             </div>
                         </form>
                     </div>
