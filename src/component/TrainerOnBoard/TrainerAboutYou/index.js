@@ -15,6 +15,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
 import axios from "axios";
+import ReactPhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css'
 
 // import DatePicker from "react-datepicker";
 
@@ -265,7 +267,7 @@ const AboutTrainerFC = ({
               </div>
               <div className="wrapper_innerInput">
                 <label>Phone*</label>
-                <input
+                {/* <input
                   placeholder="Phone Number"
                   type="phone"
                   value={aboutTrainerData.phone}
@@ -281,16 +283,35 @@ const AboutTrainerFC = ({
                     required: true,
                     minLength: 10,
                   })}
-                />
-                {errors.phone?.type === "required" && (
+                /> */}
+                <ReactPhoneInput 
+                  type="phone"
+                  disableDropdown
+                  disableAreaCodes
+                  countryCodeEditable={false}
+                  value={aboutTrainerData.phone}
+                  placeholder="Phone Number"
+                  // country="us" 
+                  inputProps={{
+                      name: "phone",
+                    }}
+                  name="phoneNumber"
+                  onChange={(e) =>
+                    setAboutTrainerData({
+                      ...aboutTrainerData,
+                      phone: e,
+                    })
+                  }
+                  />
+                {/* {!aboutTrainerData.phone && (
                   <span>This input is required</span>
-                )}
-                {errors.phone?.type === "minLength" && (
+                )} */}
+                {aboutTrainerData.phone.length < 11 && (
                   <span>Phone Number should contain 10 digits</span>
                 )}
-                {errors.phone?.type === "pattern" && (
+                {/* {errors.phone?.type === "pattern" && (
                   <span>Please enter a valid phone number</span>
-                )}
+                )} */}
               </div>
               <div className="wrapper_innerInput">
                 <label>Website</label>

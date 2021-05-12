@@ -42,9 +42,9 @@ const validation = ( values) => {
     }    else if(!/^[0-9]*$/i.test(values.phoneNumber)){
             errors.phoneNumber = 'Invalid Number'
     }
-    else if(values.phoneNumber.length < 10){
+    else if(values.phoneNumber.length < 11){
         errors.phoneNumber = 'Enter a valid number'
-    } else if (values.phoneNumber.length  >= 11) {
+    } else if (values.phoneNumber.length  >= 12) {
         errors.phoneNumber = " This field exceed max length"
     }
     //  else if(!/^[0-9]*$/i.test(values.phone)){

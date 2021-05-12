@@ -14,6 +14,8 @@ import { bindActionCreators } from "redux";
 import { AuthApi } from "service/apiVariables";
 import useForm from "./useForm";
 import validateInfo from "./validation";
+import ReactPhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css'
 
 // import PhoneInput from "react-phone-input-2";
 // import "react-phone-input-2/lib/style.css";
@@ -145,13 +147,31 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                             </div>
 
                                             <div className="input_items_trainer">
-                                                <input
+                                                {/* <input
                                                     placeholder="Phone"
                                                     type="tel"
                                                     value={data.phoneNumber}
                                                     name="phoneNumber"
                                                     onChange={onChangeValue}
-                                                />
+                                                /> */}
+
+                                                <ReactPhoneInput 
+                                                    disableDropdown
+                                                    // prefix="+1"
+                                                    countryCodeEditable={false}
+                                                    country="us" 
+                                                    placeholder = "Phone Number"
+                                                    inputProps={{
+                                                        name: "phoneNumber",
+                                                    }}
+                                                    value={data.phoneNumber}
+                                                    name="phoneNumber"
+                                                    onChange={(e) => {
+                                                        console.log(e);
+                                                        setData({...data,phoneNumber:e});
+                                                      }}
+                                                    />
+                                                
                                                 {/* <PhoneInput
                                                     country={"us"}
                                                     defaultCountry={"us"}
