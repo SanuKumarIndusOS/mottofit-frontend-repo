@@ -37,7 +37,7 @@ const TrainerTracker = () => {
     Arrow_two = <img src={Arrow_inactive} alt="icon" />;
     ABout_you_text = <p className="active">About you</p>;
     Training_background_text = <p className="inactive">Training background</p>;
-    Availability_text = <p className="inactive">Avaliability</p>;
+    Availability_text = <p className="inactive">Availability</p>;
   }
 
   //TrainerBarIcon
@@ -49,7 +49,7 @@ const TrainerTracker = () => {
     Arrow_two = <img src={Arrow_inactive} alt="icon" />;
     ABout_you_text = <p className="completed">About you</p>;
     Training_background_text = <p className="active">Training background</p>;
-    Availability_text = <p className="inactive">Avaliability</p>;
+    Availability_text = <p className="inactive">Availability</p>;
   }
 
   //ScheduleBarIcon
@@ -61,7 +61,7 @@ const TrainerTracker = () => {
     Arrow_two = <img src={Arrow_active} alt="icon" />;
     ABout_you_text = <p className="completed">About you</p>;
     Training_background_text = <p className="completed">Training background</p>;
-    Availability_text = <p className="active">Avaliability</p>;
+    Availability_text = <p className="active">Availability</p>;
   }
 
   return (
