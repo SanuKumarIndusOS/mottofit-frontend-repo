@@ -1035,8 +1035,11 @@ const TrainerSetUpProfileFC = ({
                                                 <div className="iconwrapper">
                                                     <select
                                                         required
-                                                        onChange={
-                                                            handleInputChange
+                                                        onChange={(e) =>
+                                                            setTrainerData({
+                                                                ...trainerData,
+                                                                location: e.target.value,
+                                                            })
                                                         }
                                                         value={
                                                             trainerData.location
