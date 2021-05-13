@@ -277,6 +277,13 @@ const routers = [
         redirect: "/trainers/dashboard/session",
         childrens: [
             {
+                path: "/schedule",
+                componentPath: "pages/TrainerDashboard/Schedule/Schedule",
+                name: "TrainerSession",
+                auth: false,
+                exact: true,
+            },
+            {
                 path: "/session",
                 componentPath: "pages/TrainerDashboard/Session/index",
                 name: "TrainerSession",

@@ -39,6 +39,7 @@
     "react-select": "^4.3.0",
     "react-slick": "^0.28.1",
     "react-tabbordion": "^1.0.6",
+    "react-table-drag-select": "^0.3.1",
     "react-web-tabs": "^1.0.1",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
