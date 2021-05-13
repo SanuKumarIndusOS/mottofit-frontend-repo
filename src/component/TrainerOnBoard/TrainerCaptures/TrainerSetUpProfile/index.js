@@ -100,6 +100,10 @@ const TrainerSetUpProfileFC = ({
         websiteLink: "",
         instaHandle: "",
         youtubeChannel: "",
+        governmentId: "",
+        insurance: "",
+        governmentIdNumber: "",
+        coverAmount: "",
     });
 
     const [trainerAvailabilityData, setTrainerAvailabilityData] =
@@ -149,8 +153,11 @@ const TrainerSetUpProfileFC = ({
         setInputCertificatesFields(values);
     };
 
+    function handleChangePayment(e) {
+        setTrainerData(e);
+    }
+
     const handleInputChange = (e, trainingType) => {
-        // debugger;
         e.preventDefault && e.preventDefault();
 
         const { name, value, label } = e.target || e || {};
@@ -256,6 +263,10 @@ const TrainerSetUpProfileFC = ({
             classFlatRateVt,
             threeSessionRateVt,
             tenSessionRateVt,
+            governmentId,
+            insurance,
+            governmentIdNumber,
+            coverAmount,
         } = trainerData;
 
         console.log(serviceableLocation);
@@ -307,6 +318,14 @@ const TrainerSetUpProfileFC = ({
             ),
 
             servicableLocation: serviceableLocation,
+            insuranceInformation: {
+                insurance: insurance,
+                insuranceAmount: coverAmount,
+            },
+            identityInfromation: {
+                identity: governmentId,
+                identityNumber: governmentIdNumber,
+            },
         };
         // updateTrainerDetails();
 
@@ -410,6 +429,7 @@ const TrainerSetUpProfileFC = ({
     const handleAgreedCheck = () => {
         setAgreed(!agreed);
     };
+    debugger;
     return (
         <>
             <div className="outter_setup_container container">
@@ -456,8 +476,10 @@ const TrainerSetUpProfileFC = ({
                                                 <img
                                                     src={
                                                         trainerPersonalData.profilePicture
+                                                        // : "https://1m19tt3pztls474q6z46fnk9-wpengine.netdna-ssl.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"
                                                     }
                                                 />
+
                                                 <div className="profile_header_inner">
                                                     <h2>
                                                         {trainerData.firstName}{" "}
@@ -487,51 +509,92 @@ const TrainerSetUpProfileFC = ({
                                                     />
                                                 </div>
                                                 <div className="profile_aside_items">
-                                                    <div className="profile_aside_item">
-                                                        <h2>
-                                                            1 ON 1 INDIVIDUAL
-                                                            TRAINING
-                                                        </h2>
-                                                        <hr />
-                                                        <div className="profile_aside_inner_item">
-                                                            <h6>
-                                                                $45{" "}
-                                                                <span>
-                                                                    (Virtual
-                                                                    Session)
-                                                                </span>
-                                                            </h6>
-                                                            <h6>
-                                                                $150{" "}
-                                                                <span>
-                                                                    (In Person
-                                                                    Session)
-                                                                </span>
-                                                            </h6>
-                                                            <h5>
-                                                                See package
-                                                                rates during
-                                                                checkout
-                                                            </h5>
+                                                    {trainerPersonalData.oneOnOnePricing &&
+                                                    (trainerPersonalData
+                                                        .oneOnOnePricing
+                                                        .virtualSession ||
+                                                        trainerPersonalData
+                                                            .oneOnOnePricing
+                                                            .inPersonAtTrainerLocation) ? (
+                                                        <div className="profile_aside_item">
+                                                            <h2>
+                                                                1 ON 1
+                                                                INDIVIDUAL
+                                                                TRAINING
+                                                            </h2>
+                                                            <hr />
+                                                            <div className="profile_aside_inner_item">
+                                                                {trainerPersonalData.oneOnOnePricing &&
+                                                                trainerPersonalData
+                                                                    .oneOnOnePricing
+                                                                    .virtualSession ? (
+                                                                    <h6>
+                                                                        $
+                                                                        {
+                                                                            trainerPersonalData
+                                                                                .oneOnOnePricing
+                                                                                .virtualSession
+                                                                        }
+                                                                        <span>
+                                                                            (Virtual
+                                                                            Session)
+                                                                        </span>
+                                                                    </h6>
+                                                                ) : null}
+                                                                {trainerPersonalData.oneOnOnePricing &&
+                                                                trainerPersonalData
+                                                                    .oneOnOnePricing
+                                                                    .inPersonAtTrainerLocation ? (
+                                                                    <h6>
+                                                                        $
+                                                                        {
+                                                                            trainerPersonalData
+                                                                                .oneOnOnePricing
+                                                                                .inPersonAtTrainerLocation
+                                                                        }
+                                                                        <span>
+                                                                            (In
+                                                                            Person
+                                                                            Session)
+                                                                        </span>
+                                                                    </h6>
+                                                                ) : null}
+                                                                <h5>
+                                                                    See package
+                                                                    rates during
+                                                                    checkout
+                                                                </h5>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="profile_aside_item">
-                                                        <h2>
-                                                            SOCIAL SESSIONS{" "}
-                                                            <img
-                                                                src={QMark}
-                                                                alt="icon"
-                                                                onClick={() =>
-                                                                    setOpen(
-                                                                        true
-                                                                    )
-                                                                }
-                                                                className="model_Qmark"
-                                                            />
-                                                        </h2>
-                                                        <hr />
-                                                        {/* model */}
-                                                        {/* {open ? (
+                                                    ) : null}
+
+                                                    {trainerPersonalData.socialSessionPricing &&
+                                                    (trainerPersonalData
+                                                        .socialSessionPricing
+                                                        .inPeronAtTrainerLocationfor2People ||
+                                                        trainerPersonalData
+                                                            .socialSessionPricing
+                                                            .inPeronAtTrainerLocationfor3People ||
+                                                        trainerPersonalData
+                                                            .socialSessionPricing
+                                                            .inPeronAtTrainerLocationfor4People) ? (
+                                                        <div className="profile_aside_item">
+                                                            <h2>
+                                                                SOCIAL SESSIONS{" "}
+                                                                <img
+                                                                    src={QMark}
+                                                                    alt="icon"
+                                                                    onClick={() =>
+                                                                        setOpen(
+                                                                            true
+                                                                        )
+                                                                    }
+                                                                    className="model_Qmark"
+                                                                />
+                                                            </h2>
+                                                            <hr />
+                                                            {/* model */}
+                                                            {/* {open ? (
                                             <Modal
                                                 open={open}
                                                 onClose={() => setOpen(false)}
@@ -571,48 +634,89 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </Modal>
                                         ) : null} */}
-                                                        <div className="profile_aside_inner_item">
-                                                            <h6>
-                                                                $65{" "}
-                                                                <span>
-                                                                    / Session
-                                                                    (For 2
-                                                                    People)
-                                                                </span>
-                                                            </h6>
-                                                            <h6>
-                                                                $50{" "}
-                                                                <span>
-                                                                    / Session
-                                                                    (For 3
-                                                                    People)
-                                                                </span>
-                                                            </h6>
-                                                            <h6>
-                                                                $25{" "}
-                                                                <span>
-                                                                    / Session
-                                                                    (For 4
-                                                                    People)
-                                                                </span>
-                                                            </h6>
+                                                            <div className="profile_aside_inner_item">
+                                                                {trainerPersonalData.socialSessionPricing &&
+                                                                trainerPersonalData
+                                                                    .socialSessionPricing
+                                                                    .inPeronAtTrainerLocationfor2People ? (
+                                                                    <h6>
+                                                                        $
+                                                                        {
+                                                                            trainerPersonalData
+                                                                                .socialSessionPricing
+                                                                                .inPeronAtTrainerLocationfor2People
+                                                                        }
+                                                                        <span>
+                                                                            /
+                                                                            Session
+                                                                            (For
+                                                                            2
+                                                                            People)
+                                                                        </span>
+                                                                    </h6>
+                                                                ) : null}
+                                                                {trainerPersonalData.socialSessionPricing &&
+                                                                trainerPersonalData
+                                                                    .socialSessionPricing
+                                                                    .inPeronAtTrainerLocationfor3People ? (
+                                                                    <h6>
+                                                                        $
+                                                                        {
+                                                                            trainerPersonalData
+                                                                                .socialSessionPricing
+                                                                                .inPeronAtTrainerLocationfor3People
+                                                                        }
+                                                                        <span>
+                                                                            /
+                                                                            Session
+                                                                            (For
+                                                                            3
+                                                                            People)
+                                                                        </span>
+                                                                    </h6>
+                                                                ) : null}
+                                                                {trainerPersonalData.socialSessionPricing &&
+                                                                trainerPersonalData
+                                                                    .socialSessionPricing
+                                                                    .inPeronAtTrainerLocationfor4People ? (
+                                                                    <h6>
+                                                                        $
+                                                                        {
+                                                                            trainerPersonalData
+                                                                                .socialSessionPricing
+                                                                                .inPeronAtTrainerLocationfor4People
+                                                                        }
+                                                                        <span>
+                                                                            /
+                                                                            Session
+                                                                            (For
+                                                                            4
+                                                                            People)
+                                                                        </span>
+                                                                    </h6>
+                                                                ) : null}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="profile_aside_item">
-                                                        <h2>
-                                                            CREATE A CLASS
-                                                            <img
-                                                                src={QMark}
-                                                                alt="icon"
-                                                                // onClick={() =>
-                                                                //     setOpenClassModel(true)
-                                                                // }
-                                                                className="model_Qmark"
-                                                            />
-                                                        </h2>
-                                                        <hr />
-                                                        {/* model */}
-                                                        {/* {openClassModel ? (
+                                                    ) : null}
+                                                    {trainerPersonalData.classSessionPricing &&
+                                                    trainerPersonalData
+                                                        .classSessionPricing
+                                                        .inPersonAtclientLocationfor15People ? (
+                                                        <div className="profile_aside_item">
+                                                            <h2>
+                                                                CREATE A CLASS
+                                                                <img
+                                                                    src={QMark}
+                                                                    alt="icon"
+                                                                    // onClick={() =>
+                                                                    //     setOpenClassModel(true)
+                                                                    // }
+                                                                    className="model_Qmark"
+                                                                />
+                                                            </h2>
+                                                            <hr />
+                                                            {/* model */}
+                                                            {/* {openClassModel ? (
                                             <Modal
                                                 open={openClassModel}
                                                 // onClose={() =>
@@ -651,29 +755,43 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </Modal>
                                         ) : null} */}
-                                                        <div className="profile_aside_inner_item">
-                                                            <h6>
-                                                                $200{" "}
-                                                                <span>
-                                                                    Flat Rate
-                                                                    Class (For
-                                                                    5-15 People)
-                                                                </span>
-                                                            </h6>
-                                                            <h5>
-                                                                If trainer
-                                                                offers Virtual
-                                                                Social Sessions
-                                                                and Classes they
-                                                                will be at a
-                                                                discount to in
-                                                                person rates
-                                                                above. You will
-                                                                see these prior
-                                                                to checkout.
-                                                            </h5>
+
+                                                            <div className="profile_aside_inner_item">
+                                                                <h6>
+                                                                    $
+                                                                    {trainerPersonalData &&
+                                                                    trainerPersonalData.classSessionPricing
+                                                                        ? trainerPersonalData
+                                                                              .classSessionPricing
+                                                                              .inPersonAtclientLocationfor15People
+                                                                        : ""}
+                                                                    <span>
+                                                                        Flat
+                                                                        Rate
+                                                                        Class
+                                                                        (For
+                                                                        5-15
+                                                                        People)
+                                                                    </span>
+                                                                </h6>
+                                                                <h5>
+                                                                    If trainer
+                                                                    offers
+                                                                    Virtual
+                                                                    Social
+                                                                    Sessions and
+                                                                    Classes they
+                                                                    will be at a
+                                                                    discount to
+                                                                    in person
+                                                                    rates above.
+                                                                    You will see
+                                                                    these prior
+                                                                    to checkout.
+                                                                </h5>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    ) : null}
                                                     <div className="profile_aside_item">
                                                         <h2>
                                                             TRAINING LOCATIONS
@@ -681,17 +799,30 @@ const TrainerSetUpProfileFC = ({
 
                                                         <hr />
                                                         <div className="profile_aside_inner_item">
+                                                            {trainerPersonalData.currentExperience ? (
+                                                                <div className="profile_location">
+                                                                    <img
+                                                                        src={
+                                                                            Tick
+                                                                        }
+                                                                        alt="icon"
+                                                                    />
+                                                                    <h4>
+                                                                        {
+                                                                            trainerPersonalData
+                                                                                .currentExperience
+                                                                                .workLocation
+                                                                        }
+                                                                    </h4>
+                                                                </div>
+                                                            ) : (
+                                                                "null"
+                                                            )}
                                                             <div className="profile_location">
-                                                                {/* <img src={Tick} alt="icon" /> */}
-                                                                <h4>
-                                                                    {
-                                                                        trainerData
-                                                                            .trainingLocation[0]
-                                                                    }
-                                                                </h4>
-                                                            </div>
-                                                            <div className="profile_location">
-                                                                {/* <img src={Tick} alt="icon" /> */}
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="icon"
+                                                                />
                                                                 <h4>
                                                                     Trainer’s
                                                                     Location{" "}
@@ -711,7 +842,7 @@ const TrainerSetUpProfileFC = ({
                                                                     Location
                                                                 </h4>
                                                             </div>
-                                                            <div className="profile_share">
+                                                            {/* <div className="profile_share">
                                                                 <img
                                                                     src={Share}
                                                                     alt="icon"
@@ -720,13 +851,13 @@ const TrainerSetUpProfileFC = ({
                                                                     Share
                                                                     Profile
                                                                 </Link>
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                     </div>
-                                                    <button>
+                                                    {/* <button>
                                                         Book a session{" "}
                                                         <ArrowHoverBlacked />
-                                                    </button>
+                                                    </button> */}
                                                 </div>
                                             </div>
                                             <div className="profile_trainer_data">
@@ -751,13 +882,16 @@ const TrainerSetUpProfileFC = ({
                                                         </p>
 
                                                         <div className="profile_images">
-                                                            {trainerData ? (
-                                                                <ImageGrid
-                                                                    trainerPersonalData={
-                                                                        trainerPersonalData
-                                                                    }
-                                                                />
-                                                            ) : null}
+                                                            {
+                                                                // trainerData ? (
+                                                                //     <ImageGrid
+                                                                //         trainerPersonalData={
+                                                                //             trainerPersonalData
+                                                                //         }
+                                                                //     />
+                                                                // ) :
+                                                                "NO IMAGES ADDED"
+                                                            }
                                                         </div>
                                                     </div>
                                                     <div className="profile_right_item3 mb-5 pb-5">
@@ -1102,9 +1236,9 @@ const TrainerSetUpProfileFC = ({
                                                 <textarea
                                                     type="text"
                                                     placeholder="Enter the Details of the location"
-                                                    value={
-                                                        trainerAvailabilityData.trainingFacilityLocation
-                                                    }
+                                                    // value={
+                                                    //     trainerAvailabilityData.trainingFacilityLocation
+                                                    // }
                                                     // onChange={(e) => {
                                                     //     setTrainerAvailabilityData(
                                                     //         {
@@ -1158,9 +1292,9 @@ const TrainerSetUpProfileFC = ({
                                                 <textarea
                                                     type="text"
                                                     placeholder="Neighborhood List"
-                                                    value={
-                                                        trainerAvailabilityData.servicableLocation
-                                                    }
+                                                    // value={
+                                                    //     trainerAvailabilityData.servicableLocation
+                                                    // }
                                                     // value={
                                                     //     trainerData.websiteLink
                                                     // }
@@ -1328,7 +1462,10 @@ const TrainerSetUpProfileFC = ({
                                         </label>
                                     </div> */}
                                 </div>
-                                <PaymentSection />
+                                <PaymentSection
+                                    onChange={handleChangePayment}
+                                    trainerData={trainerData}
+                                />
                                 <div className="card_agree">
                                     <input
                                         type="checkbox"
@@ -1345,7 +1482,6 @@ const TrainerSetUpProfileFC = ({
                                     </label>
                                 </div>
                                 <div className="submit_button">
-                                
                                     <button
                                         onClick={handleSubmit}
                                         type="submit"
@@ -1365,12 +1501,16 @@ const TrainerSetUpProfileFC = ({
                                         )}
                                         {/* <img src={Arrow} alt="icon" /> */}
                                     </button>
-                                    <div className="terms_msg">{agreed ? null : <span>Please Agree to the above terms and conditions to continue</span>}</div> 
-                              
+                                    <div className="terms_msg">
+                                        {agreed ? null : (
+                                            <span>
+                                                Please Agree to the above terms
+                                                and conditions to continue
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
-                              
                             </form>
-                           
                         </div>
                     </div>
                 </div>
