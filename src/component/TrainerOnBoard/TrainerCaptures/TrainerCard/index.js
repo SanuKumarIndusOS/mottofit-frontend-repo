@@ -423,37 +423,37 @@ const TrainerCardFC = ({
                                             </p>
                                         </div>
                                         <div className="card-button">
-                                            <button
-                                                // ref={hoverRef}
+                                            {/* <button
+                                                ref={hoverRef}
                                                 style={{
                                                     backgroundColor: "#53BFD2",
                                                 }}
-                                                // onClick={() => {
-                                                //   console.log(bestMatchData[data]);
-                                                //   history.push({
-                                                //     pathname: "/user/scheduler",
-                                                //     state: { trainerId: bestMatchData[data]["id"], trainerData: bestMatchData[data] },
-                                                //   });
-                                                // }}
+                                                onClick={() => {
+                                                  console.log(bestMatchData[data]);
+                                                  history.push({
+                                                    pathname: "/user/scheduler",
+                                                    state: { trainerId: bestMatchData[data]["id"], trainerData: bestMatchData[data] },
+                                                  });
+                                                }}
                                             >
-                                                book a session
+                                                book a session */}
                                                 {/* <img src={onImage} alt="icon" /> */}
                                                 {/* {isHovered ? (
                               <img src={onHoverImage} alt="icon" />
                             ) : (
                               <img src={onImage} alt="icon" />
                             )} */}
-                                                <p>
+                                                {/* <p>
                                                     from{" "}
-                                                    {/* <span>
+                                                    <span>
                                 {
                                   bestMatchData[data]["oneOnOnePricing"][
                                     "inPersonAtClientLocation"
                                   ]
                                 }
-                              </span> */}
+                              </span>
                                                 </p>
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
                                 </div>
