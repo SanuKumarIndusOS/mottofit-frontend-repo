@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[295],{421:function(t,s,a){"use strict";a.r(s),s.default=a.p+"static/media/M Watermark.841bfd2e.svg"}}]);
-//# sourceMappingURL=295.e0e1469e.chunk.js.map

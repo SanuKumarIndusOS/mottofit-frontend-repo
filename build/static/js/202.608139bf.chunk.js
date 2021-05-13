@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[202],{362:function(t,s,e){"use strict";e.r(s),s.default=e.p+"static/media/Tick 1.bf0e36e8.svg"}}]);
-//# sourceMappingURL=202.608139bf.chunk.js.map

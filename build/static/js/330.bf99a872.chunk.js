@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[330],{396:function(t,s,e){"use strict";e.r(s),s.default=e.p+"static/media/KeepPersonal.d7a843bb.jpg"}}]);
+//# sourceMappingURL=330.bf99a872.chunk.js.map
