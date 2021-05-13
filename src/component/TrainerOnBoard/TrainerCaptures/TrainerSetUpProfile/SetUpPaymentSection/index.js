@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.scss";
-import ArrowHover from "../../../../common/ButtonIcon/ArrowHover";
+// import ArrowHover from "../../../../common/ButtonIcon/ArrowHover";
 import BlueHoverButton from "component/common/BlueArrowButton";
 const PaymentSection = () => {
     const data = {

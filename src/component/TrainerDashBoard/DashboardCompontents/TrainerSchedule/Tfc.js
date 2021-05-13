@@ -337,15 +337,15 @@ function Tfc() {
                                     )
                                 ) {
                                     console.log(item.time);
-                                    return <td disabled>{item.time}</td>;
+                                    return <td disabled></td>;
                                 } else {
-                                    return <td>{item.date}</td>;
+                                    return <td></td>;
                                 }
                             } else {
-                                return <td>{item.date}</td>;
+                                return <td></td>;
                             }
                         } else {
-                            return <td>{item.date}</td>;
+                            return <td></td>;
                         }
                     })}
                 </tr>
@@ -361,15 +361,15 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled>{item.time}</td>;
+                                    return <td disabled></td>;
                                 } else {
-                                    return <td>{item.date}</td>;
+                                    return <td></td>;
                                 }
                             } else {
-                                return <td>{item.date}</td>;
+                                return <td></td>;
                             }
                         } else {
-                            return <td>{item.date}</td>;
+                            return <td></td>;
                         }
                     })}
                 </tr>
@@ -385,15 +385,15 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled>{item.time}</td>;
+                                    return <td disabled></td>;
                                 } else {
-                                    return <td>{item.date}</td>;
+                                    return <td></td>;
                                 }
                             } else {
-                                return <td>{item.date}</td>;
+                                return <td></td>;
                             }
                         } else {
-                            return <td>{item.date}</td>;
+                            return <td></td>;
                         }
                     })}
                 </tr>
@@ -409,15 +409,15 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled>{item.time}</td>;
+                                    return <td disabled></td>;
                                 } else {
-                                    return <td>{item.date}</td>;
+                                    return <td></td>;
                                 }
                             } else {
-                                return <td>{item.date}</td>;
+                                return <td></td>;
                             }
                         } else {
-                            return <td>{item.date}</td>;
+                            return <td></td>;
                         }
                     })}
                 </tr>
@@ -433,15 +433,15 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled>{item.time}</td>;
+                                    return <td disabled></td>;
                                 } else {
-                                    return <td>{item.date}</td>;
+                                    return <td></td>;
                                 }
                             } else {
-                                return <td>{item.date}</td>;
+                                return <td></td>;
                             }
                         } else {
-                            return <td>{item.date}</td>;
+                            return <td></td>;
                         }
                     })}
                 </tr>
@@ -457,15 +457,15 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled>{item.time}</td>;
+                                    return <td disabled></td>;
                                 } else {
-                                    return <td>{item.date}</td>;
+                                    return <td></td>;
                                 }
                             } else {
-                                return <td>{item.date}</td>;
+                                return <td></td>;
                             }
                         } else {
-                            return <td>{item.date}</td>;
+                            return <td></td>;
                         }
                     })}
                 </tr>

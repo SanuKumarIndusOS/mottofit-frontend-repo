@@ -10,7 +10,9 @@ import ArrowBack from "../../../../assets/files/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 // import 'react-responsive-modal/styles.css';
-
+import { withStyles } from "@material-ui/core/styles";
+import { cyan } from "@material-ui/core/colors";
+import Radio from "@material-ui/core/Radio";
 import Footer from "../../../common/Footer/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -40,6 +42,15 @@ const options = [
     { label: "Miami", value: "Miami", name: "serviceableLocation" },
 ];
 
+const CyanRadio = withStyles({
+    root: {
+        "&$checked": {
+            color: cyan[600],
+        },
+    },
+    checked: {},
+})((props) => <Radio color="default" {...props} />);
+
 const TrainerSetUpProfileFC = ({
     updateTrainerDetails,
     trainerPersonalData,
@@ -60,6 +71,9 @@ const TrainerSetUpProfileFC = ({
         insta: "Instagram",
         youtube: "Youtube",
     };
+
+    const [selectedValue, setSelectedValue] = React.useState("a");
+    const [selectedOneValue, setSelectedOneValue] = React.useState("");
 
     const [imageFields, setImageFields] = useState([
         {
@@ -87,6 +101,26 @@ const TrainerSetUpProfileFC = ({
         instaHandle: "",
         youtubeChannel: "",
     });
+
+    const [trainerAvailabilityData, setTrainerAvailabilityData] =
+        React.useState({
+            hoursPerWeek: "",
+            preferedTrainingMode: [],
+            trainingFacilityLocation: "",
+            willingToTravel: "0",
+            servicableLocation: "",
+        });
+    const handleOneChange = (event) => {
+        setSelectedOneValue(event.target.value);
+
+        setTrainerAvailabilityData({
+            ...trainerAvailabilityData,
+            willingToTravel: event.target.value,
+        });
+    };
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
 
     const [open, setOpen] = useState(false);
     const myRef = useRef(null);
@@ -235,27 +269,27 @@ const TrainerSetUpProfileFC = ({
                 passRatefor10Session: tenSessionRate,
                 inPersonAtClientLocation: individualCharge,
                 inPersonAtTrainerLocation: individualChargeTl,
-                passRatefor3SessionAtTrainerLocation:threeSessionRateTl,
-                passRatefor10SessionAtTrainerLocation:tenSessionRateTl,
-                virtualSession:individualChargeVt,
-                passRatefor3SessionAtVirtual:threeSessionRateVt,
-                passRatefor10SessionAtVirtual:tenSessionRateVt,  
+                passRatefor3SessionAtTrainerLocation: threeSessionRateTl,
+                passRatefor10SessionAtTrainerLocation: tenSessionRateTl,
+                virtualSession: individualChargeVt,
+                passRatefor3SessionAtVirtual: threeSessionRateVt,
+                passRatefor10SessionAtVirtual: tenSessionRateVt,
             },
             socialSessionPricing: {
                 inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
                 inPeronAtClientLocationfor3People: ssThreePeopleCharge,
                 inPeronAtClientLocationfor4People: ssFourPeopleCharge,
-                inPeronAtTrainerLocationfor2People:ssTwoPeopleChargeTl,
-                inPeronAtTrainerLocationfor3People:ssThreePeopleChargeTl,
-                inPeronAtTrainerLocationfor4People:ssFourPeopleChargeTl,
-                virtualSessionfor2People:ssTwoPeopleChargeVt,
-                virtualSessionfor3People:ssThreePeopleChargeVt,
-                virtualSessionfor4People:ssFourPeopleChargeVt,
+                inPeronAtTrainerLocationfor2People: ssTwoPeopleChargeTl,
+                inPeronAtTrainerLocationfor3People: ssThreePeopleChargeTl,
+                inPeronAtTrainerLocationfor4People: ssFourPeopleChargeTl,
+                virtualSessionfor2People: ssTwoPeopleChargeVt,
+                virtualSessionfor3People: ssThreePeopleChargeVt,
+                virtualSessionfor4People: ssFourPeopleChargeVt,
             },
             classSessionPricing: {
                 inPersonAtclientLocationfor15People: classFlatRate,
-                inPersonAttrainerLocationfor15People:classFlatRateTl,
-                virtualSessionfor15People:classFlatRateVt 
+                inPersonAttrainerLocationfor15People: classFlatRateTl,
+                virtualSessionfor15People: classFlatRateVt,
             },
             trainingProcess: trainingProcessDescription,
             myMotto: motto,
@@ -1029,7 +1063,123 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="setup_item1">
+                                        <div className="item_3">
+                                            <h6>
+                                                Do you have a facility or
+                                                location where you will train
+                                                clients?
+                                            </h6>
+                                            <CyanRadio
+                                                checked={selectedValue === "a"}
+                                                onChange={handleChange}
+                                                value="a"
+                                                name="radio-button-demo"
+                                                label="Strength & Hitt"
+                                                inputProps={{
+                                                    "aria-label": "a",
+                                                }}
+                                            />
+                                            <label>Yes</label>
+                                            <CyanRadio
+                                                checked={selectedValue === "b"}
+                                                onChange={handleChange}
+                                                value="b"
+                                                name="radio-button-demo"
+                                                label="Strength & Hitt"
+                                                inputProps={{
+                                                    "aria-label": "b",
+                                                }}
+                                            />
+                                            <label>No</label>
+                                        </div>
+                                        <div className="item_4">
+                                            <h6>
+                                                Details of the facility/location
+                                            </h6>
+                                            <div className="inputs_platform">
+                                                <textarea
+                                                    type="text"
+                                                    placeholder="Enter the Details of the location"
+                                                    value={
+                                                        trainerAvailabilityData.trainingFacilityLocation
+                                                    }
+                                                    // onChange={(e) => {
+                                                    //     setTrainerAvailabilityData(
+                                                    //         {
+                                                    //             ...trainerAvailabilityData,
+                                                    //             trainingFacilityLocation:
+                                                    //                 e.target
+                                                    //                     .value,
+                                                    //         }
+                                                    //     );
+                                                    // }}
+                                                    onChange={handleInputChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="item_5">
+                                            <h6>
+                                                Are you willing to travel to
+                                                clients in your city/region?
+                                            </h6>
+                                            <CyanRadio
+                                                checked={
+                                                    selectedOneValue === "1"
+                                                }
+                                                onChange={handleOneChange}
+                                                value="1"
+                                                label="Strength & Hitt"
+                                                inputProps={{
+                                                    "aria-label": "1",
+                                                }}
+                                            />
+                                            <label> Yes!</label>
+                                            <CyanRadio
+                                                checked={
+                                                    selectedOneValue === "0"
+                                                }
+                                                onChange={handleOneChange}
+                                                value="0"
+                                                label="Strength & Hitt"
+                                                inputProps={{
+                                                    "aria-label": "0",
+                                                }}
+                                            />
+                                            <label>No</label>
+                                        </div>
+                                        <div className="item_6">
+                                            <h6>
+                                                List the areas/neighborhoods
+                                                you’re willing to travel to
+                                            </h6>
+                                            <div className="inputs_platform">
+                                                <textarea
+                                                    type="text"
+                                                    placeholder="Neighborhood List"
+                                                    value={
+                                                        trainerAvailabilityData.servicableLocation
+                                                    }
+                                                    // onChange={(e) => {
+                                                    //     setTrainerAvailabilityData(
+                                                    //         {
+                                                    //             ...trainerAvailabilityData,
+                                                    //             servicableLocation:
+                                                    //                 e.target
+                                                    //                     .value,
+                                                    //         }
+                                                    //     );
+                                                    // }}
+                                                    onChange={handleInputChange}
+                                                />
+
+                                                <img
+                                                    src={Location}
+                                                    alt="icon"
+                                                    className="loction_img_select"
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* <div className="setup_item1">
                                             <h6>{data.location}</h6>
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
@@ -1069,8 +1219,8 @@ const TrainerSetUpProfileFC = ({
                                                     />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="setup_item1">
+                                        </div> */}
+                                        {/* <div className="setup_item1">
                                             <h6>{data.web}</h6>
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
@@ -1088,7 +1238,7 @@ const TrainerSetUpProfileFC = ({
                                                     <img src={Web} alt="icon" />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="setup_item1">
                                             <h6>{data.insta}</h6>
                                             <div className="inputs_platform">

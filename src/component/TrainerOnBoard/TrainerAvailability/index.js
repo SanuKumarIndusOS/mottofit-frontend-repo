@@ -311,7 +311,7 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                     </div>
                                 </div>
 
-                                {trainerAvailabilityData?.preferedTrainingMode?.includes(
+                                {/* {trainerAvailabilityData?.preferedTrainingMode?.includes(
                                     "Online"
                                 ) === true ? (
                                     <>
@@ -326,7 +326,7 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                             />
                                         </div>
                                     </>
-                                ) : null}
+                                ) : null} */}
 
                                 <div className="item_3">
                                     <h6>
