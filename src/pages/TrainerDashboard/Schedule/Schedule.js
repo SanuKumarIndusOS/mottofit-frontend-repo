@@ -5,8 +5,8 @@ import React from "react";
 const Schedule = () => {
     return (
         <div>
-            {/* <TrainerSchedule /> */}
-            <Tfc />
+            <TrainerSchedule />
+            {/* <Tfc /> */}
         </div>
     );
 };

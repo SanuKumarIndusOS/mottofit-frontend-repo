@@ -1,5 +1,6 @@
-import React from 'react'
-import './styles.scss'
+import React from "react";
+import "./styles.scss";
+import Tfc from "./Tfc";
 const TrainerSchedule = () => {
     return (
         <>
@@ -15,13 +16,13 @@ const TrainerSchedule = () => {
                     </div>
                     <div className="schedule_wrapper">
                         <div className="eventCalender">
-                            <h1>Event Calender, IN PENDING </h1>
+                            <Tfc />
                         </div>
                     </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default TrainerSchedule
+export default TrainerSchedule;

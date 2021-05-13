@@ -139,7 +139,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
 
         updateTrainerDetails(storeData);
 
-        history.push(`/trainer/avaliability`);
+        history.push(`/trainer/availability`);
     };
 
     useEffect(() => {
@@ -183,7 +183,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                         </div>
                         <div className="outter_links">
                             <div className="inner_links">
-                                <Link to="/trainer/avaliability">
+                                <Link to="/trainer/availability">
                                     Go to Availability
                                 </Link>
                                 <div></div>

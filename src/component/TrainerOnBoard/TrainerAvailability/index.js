@@ -308,26 +308,9 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                         >
                                             In Person
                                         </button>
+                                        {/* <button>Outdoors</button> */}
                                     </div>
                                 </div>
-
-                                {/* {trainerAvailabilityData?.preferedTrainingMode?.includes(
-                                    "Online"
-                                ) === true ? (
-                                    <>
-                                        <div className="item_2_inner">
-                                            <h6>
-                                                Add Google meet or Zoom meeting
-                                                link
-                                            </h6>
-                                            <input
-                                                type="text"
-                                                placeholder="please add virtual meeting link"
-                                            />
-                                        </div>
-                                    </>
-                                ) : null} */}
-
                                 <div className="item_3">
                                     <h6>
                                         Do you have a facility or location where

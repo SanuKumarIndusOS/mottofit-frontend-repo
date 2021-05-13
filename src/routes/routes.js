@@ -118,7 +118,7 @@ const routers = [
                 exact: true,
             },
             {
-                path: "/avaliability",
+                path: "/availability",
                 componentPath: "pages/Trainer/Avaliability/index",
                 name: "TrainerAvaliabilitySection",
                 auth: false,

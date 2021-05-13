@@ -474,18 +474,24 @@ function Tfc() {
     }
 
     return (
-        <div className="table_trainer">
-            <div className="table_inner_trainer">
-                <img src={BackIcon} onClick={PreviousWeek} /> &ensp;
-                <div className="date_week">
-                    {startWeek.format("DD")} - {endWeek.format("DD")} &ensp;
-                    {startWeek.format("MMMM")}, {startWeek.format("yyyy")}
+        <>
+            <div className="outter_table_trainer">
+                <div className="table_trainer">
+                    <div className="table_inner_trainer">
+                        <img src={BackIcon} onClick={PreviousWeek} /> &ensp;
+                        <div className="date_week">
+                            {startWeek.format("DD")} - {endWeek.format("DD")}{" "}
+                            &ensp;
+                            {startWeek.format("MMMM")},{" "}
+                            {startWeek.format("yyyy")}
+                        </div>
+                        <img src={NextIcon} onClick={NextWeek} /> &ensp; &ensp;
+                    </div>
+                    {tableData}
                 </div>
-                <img src={NextIcon} onClick={NextWeek} /> &ensp; &ensp;
+                <ButtonSection />
             </div>
-            {tableData}
-            <ButtonSection />
-        </div>
+        </>
     );
 }
 
@@ -505,11 +511,6 @@ const ButtonSection = () => {
                     <div className="indicator3"></div>
                     <h5>YOUR SLOT</h5>{" "}
                 </div>
-            </div>
-            <div className="items_slot_button">
-                <button>
-                    BOOK A SESSION <BlueHoverButton />
-                </button>
             </div>
         </div>
     );
