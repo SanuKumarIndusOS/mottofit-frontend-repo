@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[181],{331:function(t,s,a){"use strict";a.r(s),s.default=a.p+"static/media/Mid_DayBreak_Active.9ab42574.svg"}}]);
-//# sourceMappingURL=181.9121f25b.chunk.js.map
