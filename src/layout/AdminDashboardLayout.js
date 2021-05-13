@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { NavBar } from "component/common/Navbar/NavBar";
 // import SideBar from "component/common/SideBar";
 // import Footer from "component/common/Footer";
-import AdminSetup from "component/AdminDashboard/AdminRoutes";
+import AdminSetup from "component/AdminDashboard/AdminRoutes/index";
 import SideBar from "component/UserDashBoard/UserAdmin/UserAdminSidebar/Sidebar";
 
 export class AdminDashboardLayout extends Component {

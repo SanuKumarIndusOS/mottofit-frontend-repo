@@ -56,7 +56,7 @@ const routers = [
     },
 
     {
-        component: "TrainerDashboardLayout",
+        component: "DashboardLayout",
         path: "/admins",
         auth: true,
         name: "Dashboard",

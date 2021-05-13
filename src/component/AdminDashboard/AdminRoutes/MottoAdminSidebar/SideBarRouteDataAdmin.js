@@ -10,66 +10,42 @@ import LogoutIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/
 export const SideBarRouteDataAdmin = [
     {
         title: "Dashboard",
-        path: "/admin/dashboard",
+        path: "/admins/dashboard",
         icon: <img src={SessionIcon} alt="icon" />,
 
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />,
     },
     {
-        title: "My Session",
-        path: "/trainers/dashboard/session",
+        title: "Trainers",
+        path: "/admins/dashboard/session",
         icon: <img src={MessageIcon} alt="icon" />,
     },
 
     {
-        title: "Messages",
-        path: "/trainers/dashboard/message",
+        title: "Users",
+        path: "/admins/dashboard/message",
         icon: <img src={MessageIcon} alt="icon" />,
     },
     {
-        title: "My Earnings",
+        title: "Bookings",
         path: "/trainers/dashboard/earnings",
         icon: <img src={MessageIcon} alt="icon" />,
     },
     {
-        title: "Notifications",
+        title: "Payments",
         path: "/trainers/dashboard/notification",
         icon: <img src={NotificationIcon} alt="icon" />,
     },
     {
-        title: "Settings",
+        title: "Marketing",
+        path: "/trainers/dashboard/notification",
+        icon: <img src={NotificationIcon} alt="icon" />,
+    },
+    {
+        title: "Reports",
         path: "/trainers/dashboard/settings/profile",
         icon: <img src={SettingIcon} alt="icon" />,
-
-        subNav: [
-            {
-                title: "My Trainer Card",
-                path: "/trainers/dashboard/settings/card",
-                // icon: <img src={SessionIcon} alt="icon" />,
-            },
-            {
-                title: "My Profile",
-                path: "/trainers/dashboard/settings/profile",
-                // icon: <img src={SessionIcon} alt="icon" />,
-            },
-            {
-                title: "Security & Payment Info",
-                path: "/trainers/dashboard/settings/payment-history",
-                // icon: <img src={SessionIcon} alt="icon" />,
-            },
-            {
-                title: "Earning History ",
-                path: "/trainers/dashboard/settings/earn-history",
-                // icon: <img src={SessionIcon} alt="icon" />,
-            },
-
-            {
-                title: "Notification Settings",
-                path: "/trainers/dashboard/settings/notification",
-                // icon: <img src={SessionIcon} alt="icon" />,
-            },
-        ],
     },
     {
         title: "Log out",

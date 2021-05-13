@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import NavBarHome from "component/Home/NavbarHomePage/NavBarHome";
+// import NavBarHome from "component/Home/NavbarHomePage/NavBarHome";
 import SideBar from "component/common/SideBar";
 import Footer from "component/common/Footer";
+import AdminSetup from "component/AdminDashboard/AdminRoutes/index";
+import { NavBar } from "component/common/Navbar/NavBar";
 
 export class DashboardLayout extends Component {
     state = {
@@ -23,12 +25,13 @@ export class DashboardLayout extends Component {
         const { isOpen } = this.state;
         return (
             <>
-                <NavBarHome
+                <NavBar
                     toggle={() => this.toggle("isOpen")}
                     modalToggle={() => this.toggle("modalIsOpen")}
                 />
                 <SideBar isOpen={isOpen} toggle={this.toggle} />
-                <div className="main-layout">{children}</div>
+                {/* <div className="main-layout">{children}</div> */}
+                <AdminSetup>{children}</AdminSetup>
                 <Footer />
             </>
         );
