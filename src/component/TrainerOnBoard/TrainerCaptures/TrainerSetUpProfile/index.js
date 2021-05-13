@@ -1175,6 +1175,7 @@ const TrainerSetUpProfileFC = ({
                                         </label>
                                     </div>
                                 <div className="submit_button">
+                                
                                     <button
                                         onClick={handleSubmit}
                                         type="submit"
@@ -1194,8 +1195,12 @@ const TrainerSetUpProfileFC = ({
                                         )}
                                         {/* <img src={Arrow} alt="icon" /> */}
                                     </button>
+                                    <div className="terms_msg">{agreed ? null : <span>Please Agree to the above terms and conditions to continue</span>}</div> 
+                              
                                 </div>
+                              
                             </form>
+                           
                         </div>
                     </div>
                 </div>
