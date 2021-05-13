@@ -74,6 +74,20 @@ const TrainerCardFC = ({
         threeSessionRate: "",
         tenSessionRate: "",
         amtPerPerson: "",
+        individualChargeTl: "",
+        ssTwoPeopleChargeTl: "",
+        ssThreePeopleChargeTl: "",
+        ssFourPeopleChargeTl: "",
+        classFlatRateTl: "",
+        threeSessionRateTl: "",
+        tenSessionRateTl: "",
+        individualChargeVt: "",
+        ssTwoPeopleChargeVt: "",
+        ssThreePeopleChargeVt: "",
+        ssFourPeopleChargeVt: "",
+        classFlatRateVt: "",
+        threeSessionRateVt: "",
+        tenSessionRateVt: "",
     });
     const fileInputRef = useRef();
 
@@ -193,29 +207,59 @@ const TrainerCardFC = ({
                     inPeronAtClientLocationfor2People = "",
                     inPeronAtClientLocationfor3People = "",
                     inPeronAtClientLocationfor4People = "",
+                    inPeronAtTrainerLocationfor2People="",
+                    inPeronAtTrainerLocationfor3People="",
+                    inPeronAtTrainerLocationfor4People="",
+                    virtualSessionfor2People="",
+                    virtualSessionfor3People="",
+                    virtualSessionfor4People="",
                 } = socialSessionPricing || {};
 
                 const {
                     passRatefor3Session = "",
                     passRatefor10Session = "",
                     inPersonAtClientLocation = "",
+                    inPersonAtTrainerLocation="",
+                    virtualSession="",
+                    passRatefor3SessionAtTrainerLocation="",
+                    passRatefor10SessionAtTrainerLocation="",
+                    passRatefor3SessionAtVirtual="",
+                    passRatefor10SessionAtVirtual=""
+
                 } = oneOnOnePricing || {};
 
-                const { inPersonAtclientLocationfor15People = "" } =
-                    classSessionPricing || {};
+                const { 
+                    inPersonAtclientLocationfor15People = "",
+                    inPersonAttrainerLocationfor15People= "",
+                    virtualSessionfor15People = ""
+                     } = classSessionPricing || {};
 
                 const storeData = {
                     details: {
                         firstName,
                         lastName,
                         description,
-                        // individualCharge: inPersonAtClientLocation,
-                        // ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
-                        // ssThreePeopleCharge: inPeronAtClientLocationfor3People,
-                        // ssFourPeopleCharge: inPeronAtClientLocationfor4People,
-                        // classFlatRate: inPersonAtclientLocationfor15People,
-                        // threeSessionRate: passRatefor3Session,
-                        // tenSessionRate: passRatefor10Session,
+                        individualCharge: inPersonAtClientLocation,
+                        ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
+                        ssThreePeopleCharge: inPeronAtClientLocationfor3People,
+                        ssFourPeopleCharge: inPeronAtClientLocationfor4People,
+                        classFlatRate: inPersonAtclientLocationfor15People,
+                        threeSessionRate: passRatefor3Session,
+                        tenSessionRate: passRatefor10Session,
+                        individualChargeTl: inPersonAtTrainerLocation,
+                        ssTwoPeopleChargeTl: inPeronAtTrainerLocationfor2People,
+                        ssThreePeopleChargeTl: inPeronAtTrainerLocationfor3People,
+                        ssFourPeopleChargeTl: inPeronAtTrainerLocationfor4People,
+                        classFlatRateTl: inPersonAttrainerLocationfor15People,
+                        threeSessionRateTl: passRatefor3SessionAtTrainerLocation,
+                        tenSessionRateTl: passRatefor10SessionAtTrainerLocation,
+                        individualChargeVt: virtualSession,
+                        ssTwoPeopleChargeVt: virtualSessionfor2People,
+                        ssThreePeopleChargeVt: virtualSessionfor3People,
+                        ssFourPeopleChargeVt: virtualSessionfor4People,
+                        classFlatRateVt: virtualSessionfor15People,
+                        threeSessionRateVt: passRatefor3SessionAtVirtual,
+                        tenSessionRateVt: passRatefor10SessionAtVirtual,
                     },
                 };
 
@@ -904,6 +948,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Individual charge"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.individualChargeTl
+                                                        }
+                                                        name="individualChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -914,6 +965,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Social Session (Total Charge for 2 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssTwoPeopleChargeTl
+                                                        }
+                                                        name="ssTwoPeopleChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -925,6 +983,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Social Session (Total Charge for 3 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssThreePeopleChargeTl
+                                                        }
+                                                        name="ssThreePeopleChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -935,6 +1000,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Social Session (Total Charge for 4 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssFourPeopleChargeTl
+                                                        }
+                                                        name="ssFourPeopleChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -945,6 +1017,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Class Flat Rate (5-15 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.classFlatRateTl
+                                                        }
+                                                        name="classFlatRateTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -955,6 +1034,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="3 Session Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.threeSessionRateTl
+                                                        }
+                                                        name="threeSessionRateTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -965,6 +1051,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="10 Session Pass Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.tenSessionRateTl
+                                                        }
+                                                        name="tenSessionRateTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -979,6 +1072,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Individual charge"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.individualChargeVt
+                                                        }
+                                                        name="individualChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -989,6 +1089,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Social Session (Total Charge for 2 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssTwoPeopleChargeVt
+                                                        }
+                                                        name="ssTwoPeopleChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -1000,6 +1107,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Social Session (Total Charge for 3 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssThreePeopleChargeVt
+                                                        }
+                                                        name="ssThreePeopleChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -1010,6 +1124,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Social Session (Total Charge for 4 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssFourPeopleChargeVt
+                                                        }
+                                                        name="ssFourPeopleChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -1020,6 +1141,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Class Flat Rate (5-15 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.classFlatRateVt
+                                                        }
+                                                        name="classFlatRateVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -1030,6 +1158,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="3 Session Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.threeSessionRateVt
+                                                        }
+                                                        name="threeSessionRateVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -1040,6 +1175,13 @@ const TrainerCardFC = ({
                                                     <input
                                                         type="text"
                                                         placeholder="10 Session Pass Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.tenSessionRateVt
+                                                        }
+                                                        name="tenSessionRateVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
