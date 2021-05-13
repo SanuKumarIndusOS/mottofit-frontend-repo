@@ -1284,7 +1284,28 @@ const TrainerSetUpProfileFC = ({
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="card_agree">
+                                    {/* <div className="card_agree">
+                                        <input
+                                            type="checkbox"
+                                            id="agree"
+                                            name="agree"
+                                            onChange={handleAgreedCheck}
+                                        />
+                                        <label>
+                                            Check here to acknowledge that you
+                                            have read and agree to the Motto
+                                            trainer
+                                            <a
+                                                href="/agreement"
+                                                target="_blank"
+                                            >
+                                                terms and conditions
+                                            </a>
+                                        </label>
+                                    </div> */}
+                                </div>
+                                <PaymentSection /> 
+                                <div className="card_agree">
                                         <input
                                             type="checkbox"
                                             id="agree"
@@ -1303,8 +1324,6 @@ const TrainerSetUpProfileFC = ({
                                             </a>
                                         </label>
                                     </div>
-                                </div>
-                                {/* <PaymentSection /> */}
                                 <div className="submit_button">
                                     <button
                                         onClick={handleSubmit}

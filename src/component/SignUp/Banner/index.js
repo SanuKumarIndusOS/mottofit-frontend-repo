@@ -445,7 +445,7 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                     <div className="submit_button">
                                         <button
                                             type="submit"
-                                            onClick={signUp}
+                                            onClick={signUp()}
                                         >
                                             Continue to Account{" "}
                                             <ArrowHoverBlacked />

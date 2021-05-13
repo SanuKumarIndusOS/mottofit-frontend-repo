@@ -286,7 +286,7 @@ const SignInFC = ({ showModel, setShowModel, loginAct ,submitForm }) => {
                                             <button
                                                 className="login_button"
                                                 type="submit"
-                                                onClick={logIn}
+                                                onClick={logIn()}
                                             >
                                                 Signin
                                                 <ArrowHoverBlacked />
