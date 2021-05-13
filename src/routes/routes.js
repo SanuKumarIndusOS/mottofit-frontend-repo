@@ -23,7 +23,7 @@ const routers = [
         ],
     },
     {
-        component: "DashboardLayout",
+        component: "HomeLayout",
         path: "/welcome",
         auth: false,
         name: "Dashboard",
@@ -41,21 +41,34 @@ const routers = [
     {
         component: "MainLayout",
         path: "/admin",
-        auth: true,
+        auth: false,
         name: "Dashboard",
         exact: false,
         childrens: [
             {
                 path: "/login",
-                componentPath: "pages/Admin/Admin",
+                componentPath: "pages/AdminDashboard/Admin/Admin",
                 name: "AdminLogin",
                 auth: false,
                 exact: true,
             },
+        ],
+    },
+
+    {
+        component: "DashboardLayout",
+        path: "/admins",
+        auth: true,
+        name: "Dashboard",
+        exact: false,
+        redirect: "/admins/dashboard",
+
+        childrens: [
             {
                 path: "/dashboard",
-                componentPath: "pages/AdminDashboard/AdminDashboardMain",
-                name: "AdminDashboard",
+                componentPath:
+                    "pages/AdminDashboard/MainAdminComp/AdminDashboardList",
+                name: "AdminDashboardList",
                 auth: false,
                 exact: true,
             },
@@ -122,6 +135,23 @@ const routers = [
                 path: "/setup",
                 componentPath: "pages/Trainer/Setup/index",
                 name: "TrainerSetupSection",
+                auth: false,
+                exact: true,
+            },
+        ],
+    },
+
+    {
+        component: "MainLayout",
+        path: "/agreement",
+        auth: false,
+        name: "agree",
+        exact: false,
+        childrens: [
+            {
+                path: "/",
+                componentPath: "pages/TrainerAggrement/TrainerAgreement",
+                name: "AgreeBase",
                 auth: false,
                 exact: true,
             },
@@ -247,6 +277,13 @@ const routers = [
         redirect: "/trainers/dashboard/session",
         childrens: [
             {
+                path: "/schedule",
+                componentPath: "pages/TrainerDashboard/Schedule/Schedule",
+                name: "TrainerSession",
+                auth: false,
+                exact: true,
+            },
+            {
                 path: "/session",
                 componentPath: "pages/TrainerDashboard/Session/index",
                 name: "TrainerSession",
@@ -271,6 +308,13 @@ const routers = [
                 path: "/settings/profile",
                 componentPath: "pages/TrainerDashboard/Settings/MyProfile",
                 name: "TrainerMyProfile",
+                auth: false,
+                exact: true,
+            },
+            {
+                path: "/settings/card",
+                componentPath: "pages/TrainerDashboard/Settings/CardTrainer",
+                name: "TrainerCard",
                 auth: false,
                 exact: true,
             },

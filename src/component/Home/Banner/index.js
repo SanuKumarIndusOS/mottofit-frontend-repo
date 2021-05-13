@@ -20,9 +20,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     const [DropdownState, setDropdownState] = useState(false);
     const [DropdownValue, setDropdownValue] = useState([]);
 
-    const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
-        false
-    );
+    const [DropdownAvailabilityState, setDropdownAvailabilityState] =
+        useState(false);
     const [DropdownAvailabilityValue, setDropdownAvailabilityValue] = useState(
         []
     );
@@ -152,7 +151,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                         </div>
                         <LineBetween />
                         <div className="item2">
-                            <h3>Training Vertical</h3>
+                            <h3>Training Type</h3>
                             <div className="card_item_home">
                                 <div
                                     className="custom_dropdown"

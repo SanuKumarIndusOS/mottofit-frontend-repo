@@ -15,7 +15,7 @@ import { AuthApi } from "service/apiVariables";
 import useForm from "./useForm";
 import validateInfo from "./validation";
 import ReactPhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css'
+import "react-phone-input-2/lib/style.css";
 
 // import PhoneInput from "react-phone-input-2";
 // import "react-phone-input-2/lib/style.css";
@@ -127,6 +127,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     value={data.name}
                                                     name="name"
                                                     onChange={onChangeValue}
+                                                    className="fullname"
                                                 />
                                                 <img src={Person} alt="icon" />
                                                 {error.name && (
@@ -157,12 +158,12 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     onChange={onChangeValue}
                                                 /> */}
 
-                                                <ReactPhoneInput 
+                                                <ReactPhoneInput
                                                     disableDropdown
                                                     // prefix="+1"
                                                     countryCodeEditable={false}
-                                                    country="us" 
-                                                    placeholder = "Phone Number"
+                                                    country="us"
+                                                    placeholder="Phone Number"
                                                     inputProps={{
                                                         name: "phoneNumber",
                                                     }}
@@ -170,10 +171,13 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     name="phoneNumber"
                                                     onChange={(e) => {
                                                         console.log(e);
-                                                        setData({...data,phoneNumber:e});
-                                                      }}
-                                                    />
-                                                
+                                                        setData({
+                                                            ...data,
+                                                            phoneNumber: e,
+                                                        });
+                                                    }}
+                                                />
+
                                                 {/* <PhoneInput
                                                     country={"us"}
                                                     defaultCountry={"us"}

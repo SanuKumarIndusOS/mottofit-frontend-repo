@@ -9,6 +9,7 @@ import Location from "../../../../assets/files/SVG/Location Icon.svg";
 import ArrowBack from "../../../../assets/files/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
+// import 'react-responsive-modal/styles.css';
 
 import Footer from "../../../common/Footer/index";
 import { bindActionCreators } from "redux";
@@ -20,6 +21,15 @@ import { TrainerApi, PaymentApi } from "service/apiVariables";
 import { api } from "service/api";
 import { Toast } from "service/toast";
 import axios from "axios";
+import { Modal } from "react-responsive-modal";
+import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
+import "../../../TrainerProfile/Profile/model.scss";
+import "../../../TrainerProfile/Profile/styles.scss";
+import QMark from "../../../../assets/files/FindTrainer/Q Mark.svg";
+import Quote from "../../../../assets/files/FindTrainer/Quote Icon.svg";
+import ArrowNext from "../../../../assets/files/SVG/Arrow Next.svg";
+import Tick from "../../../../assets/files/FindTrainer/Tick 1.svg";
+import Share from "../../../../assets/files/FindTrainer/share.svg";
 
 const FileArray = [];
 
@@ -78,6 +88,10 @@ const TrainerSetUpProfileFC = ({
         youtubeChannel: "",
     });
 
+    const [open, setOpen] = useState(false);
+    const myRef = useRef(null);
+    const closeIcon = <img src={CloseIcon} alt="close" />;
+
     const handleAddFields = () => {
         setImageFields([...imageFields, { image: "" }]);
         setRenderButton(false);
@@ -102,6 +116,7 @@ const TrainerSetUpProfileFC = ({
     };
 
     const handleInputChange = (e, trainingType) => {
+        // debugger;
         e.preventDefault && e.preventDefault();
 
         const { name, value, label } = e.target || e || {};
@@ -193,6 +208,20 @@ const TrainerSetUpProfileFC = ({
             trainingProcessDescription,
             websiteLink,
             youtubeChannel,
+            individualChargeTl,
+            ssTwoPeopleChargeTl,
+            ssThreePeopleChargeTl,
+            ssFourPeopleChargeTl,
+            classFlatRateTl,
+            threeSessionRateTl,
+            tenSessionRateTl,
+            individualChargeVt,
+            ssTwoPeopleChargeVt,
+            ssThreePeopleChargeVt,
+            ssFourPeopleChargeVt,
+            classFlatRateVt,
+            threeSessionRateVt,
+            tenSessionRateVt,
         } = trainerData;
 
         console.log(serviceableLocation);
@@ -205,14 +234,28 @@ const TrainerSetUpProfileFC = ({
                 passRatefor3Session: threeSessionRate,
                 passRatefor10Session: tenSessionRate,
                 inPersonAtClientLocation: individualCharge,
+                inPersonAtTrainerLocation: individualChargeTl,
+                passRatefor3SessionAtTrainerLocation:threeSessionRateTl,
+                passRatefor10SessionAtTrainerLocation:tenSessionRateTl,
+                virtualSession:individualChargeVt,
+                passRatefor3SessionAtVirtual:threeSessionRateVt,
+                passRatefor10SessionAtVirtual:tenSessionRateVt,  
             },
             socialSessionPricing: {
                 inPeronAtClientLocationfor2People: ssTwoPeopleCharge,
                 inPeronAtClientLocationfor3People: ssThreePeopleCharge,
                 inPeronAtClientLocationfor4People: ssFourPeopleCharge,
+                inPeronAtTrainerLocationfor2People:ssTwoPeopleChargeTl,
+                inPeronAtTrainerLocationfor3People:ssThreePeopleChargeTl,
+                inPeronAtTrainerLocationfor4People:ssFourPeopleChargeTl,
+                virtualSessionfor2People:ssTwoPeopleChargeVt,
+                virtualSessionfor3People:ssThreePeopleChargeVt,
+                virtualSessionfor4People:ssFourPeopleChargeVt,
             },
             classSessionPricing: {
                 inPersonAtclientLocationfor15People: classFlatRate,
+                inPersonAttrainerLocationfor15People:classFlatRateTl,
+                virtualSessionfor15People:classFlatRateVt 
             },
             trainingProcess: trainingProcessDescription,
             myMotto: motto,
@@ -285,7 +328,7 @@ const TrainerSetUpProfileFC = ({
             youtubeLink = "",
             instagramProfile = "",
             currentExperience = {},
-            certification = "",
+            certification = [],
             serviceableLocation = [],
         } = trainerPersonalData || {};
 
@@ -326,6 +369,11 @@ const TrainerSetUpProfileFC = ({
     const [renderButton, setRenderButton] = useState({
         visiable: false,
     });
+    const [agreed, setAgreed] = useState(false);
+
+    const handleAgreedCheck = () => {
+        setAgreed(!agreed);
+    };
     return (
         <>
             <div className="outter_setup_container container">
@@ -338,8 +386,420 @@ const TrainerSetUpProfileFC = ({
                         </Link>
                     </div>
                     <div className="inner_link_preview">
-                        <Link to="/"> Preview Your Trainer Profile </Link>
+                        <div
+                            onClick={() => {
+                                setOpen(true);
+                            }}
+                            className="prev_profile"
+                        >
+                            Preview Your Trainer Profile
+                        </div>
                     </div>
+                    {open ? (
+                        <Modal
+                            open={open}
+                            onClose={() => {
+                                setOpen(false);
+                            }}
+                            center
+                            closeIcon={closeIcon}
+                            container={myRef.current}
+                            styles={{
+                                boaderRadius: "10px",
+                            }}
+                            classNames={{
+                                modal: "customModal",
+                            }}
+                        >
+                            <div className="profile_main">
+                                <div className="profile_outter_container">
+                                    {/* <div className="profile"> */}
+                                    <div className="profile_wrapper_container ">
+                                        <div className="profile_header">
+                                            <div className="inner_profile container">
+                                                <img
+                                                    src={
+                                                        trainerPersonalData.profilePicture
+                                                    }
+                                                />
+                                                <div className="profile_header_inner">
+                                                    <h2>
+                                                        {trainerData.firstName}{" "}
+                                                        {trainerData.lastName}
+                                                    </h2>
+                                                    <p>
+                                                        {trainerPersonalData.areaOfExpertise.toString()}
+                                                    </p>
+                                                </div>
+                                                {/* <div className="profile_header_link"> */}
+                                                {/* <img src={ArrowBack} alt="icon" /> */}
+                                                {/* <Link to="/trainer/find">
+                                        Back to Search
+                                    </Link> */}
+                                                {/* <label style = {{color:"#bcbcbc"}}>Back to Search</label> */}
+                                                {/* </div> */}
+                                            </div>
+                                        </div>
+                                        <div className="profile_main_contents container">
+                                            <div className="profile_aside">
+                                                <div className="profile_aside_link">
+                                                    {/* <Link to="/">View Calender</Link> */}
+                                                    <label>View Calender</label>
+                                                    <img
+                                                        src={ArrowNext}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="profile_aside_items">
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            1 ON 1 INDIVIDUAL
+                                                            TRAINING
+                                                        </h2>
+                                                        <hr />
+                                                        <div className="profile_aside_inner_item">
+                                                            <h6>
+                                                                $45{" "}
+                                                                <span>
+                                                                    (Virtual
+                                                                    Session)
+                                                                </span>
+                                                            </h6>
+                                                            <h6>
+                                                                $150{" "}
+                                                                <span>
+                                                                    (In Person
+                                                                    Session)
+                                                                </span>
+                                                            </h6>
+                                                            <h5>
+                                                                See package
+                                                                rates during
+                                                                checkout
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            SOCIAL SESSIONS{" "}
+                                                            <img
+                                                                src={QMark}
+                                                                alt="icon"
+                                                                onClick={() =>
+                                                                    setOpen(
+                                                                        true
+                                                                    )
+                                                                }
+                                                                className="model_Qmark"
+                                                            />
+                                                        </h2>
+                                                        <hr />
+                                                        {/* model */}
+                                                        {/* {open ? (
+                                            <Modal
+                                                open={open}
+                                                onClose={() => setOpen(false)}
+                                                center
+                                                closeIcon={closeIcon}
+                                                container={myRef.current}
+                                                styles={{
+                                                    boaderRadius: "10px",
+                                                }}
+                                            >
+                                                <div
+                                                    style={{
+                                                        textAlign: "center",
+                                                        height: "300px",
+                                                        width: "600px",
+                                                        padding: "2em",
+                                                    }}
+                                                    className="model_styles"
+                                                >
+                                                    <h2>
+                                                        Want to Train with
+                                                        Friends?
+                                                    </h2>
+                                                    <p>
+                                                        Make your workout social
+                                                        & fun, while saving
+                                                        money! Complete your
+                                                        payment and add friends
+                                                        to your session simply
+                                                        by sending them an
+                                                        invite. Once they accept
+                                                        your invite, your
+                                                        session rate will
+                                                        automatically be
+                                                        adjusted.
+                                                    </p>
+                                                </div>
+                                            </Modal>
+                                        ) : null} */}
+                                                        <div className="profile_aside_inner_item">
+                                                            <h6>
+                                                                $65{" "}
+                                                                <span>
+                                                                    / Session
+                                                                    (For 2
+                                                                    People)
+                                                                </span>
+                                                            </h6>
+                                                            <h6>
+                                                                $50{" "}
+                                                                <span>
+                                                                    / Session
+                                                                    (For 3
+                                                                    People)
+                                                                </span>
+                                                            </h6>
+                                                            <h6>
+                                                                $25{" "}
+                                                                <span>
+                                                                    / Session
+                                                                    (For 4
+                                                                    People)
+                                                                </span>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            CREATE A CLASS
+                                                            <img
+                                                                src={QMark}
+                                                                alt="icon"
+                                                                // onClick={() =>
+                                                                //     setOpenClassModel(true)
+                                                                // }
+                                                                className="model_Qmark"
+                                                            />
+                                                        </h2>
+                                                        <hr />
+                                                        {/* model */}
+                                                        {/* {openClassModel ? (
+                                            <Modal
+                                                open={openClassModel}
+                                                // onClose={() =>
+                                                //     setOpenClassModel(false)
+                                                // }
+                                                center
+                                                closeIcon={closeIcon}
+                                                container={myRef.current}
+                                                styles={{
+                                                    boaderRadius: "10px",
+                                                }}
+                                            >
+                                                <div
+                                                    style={{
+                                                        textAlign: "center",
+                                                        height: "300px",
+                                                        width: "600px",
+                                                        padding: "2em",
+                                                    }}
+                                                    className="model_styles"
+                                                >
+                                                    <h2>
+                                                        Want to Create a Class?
+                                                    </h2>
+                                                    <p>
+                                                        Design your very own
+                                                        workout party with the
+                                                        vertical & location of
+                                                        your choice. Create a
+                                                        class by paying a flat
+                                                        rate and adding up to 19
+                                                        friends. You will be
+                                                        notified once they
+                                                        accept your invite.
+                                                    </p>
+                                                </div>
+                                            </Modal>
+                                        ) : null} */}
+                                                        <div className="profile_aside_inner_item">
+                                                            <h6>
+                                                                $200{" "}
+                                                                <span>
+                                                                    Flat Rate
+                                                                    Class (For
+                                                                    5-15 People)
+                                                                </span>
+                                                            </h6>
+                                                            <h5>
+                                                                If trainer
+                                                                offers Virtual
+                                                                Social Sessions
+                                                                and Classes they
+                                                                will be at a
+                                                                discount to in
+                                                                person rates
+                                                                above. You will
+                                                                see these prior
+                                                                to checkout.
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            TRAINING LOCATIONS
+                                                        </h2>
+
+                                                        <hr />
+                                                        <div className="profile_aside_inner_item">
+                                                            <div className="profile_location">
+                                                                {/* <img src={Tick} alt="icon" /> */}
+                                                                <h4>
+                                                                    {
+                                                                        trainerData
+                                                                            .trainingLocation[0]
+                                                                    }
+                                                                </h4>
+                                                            </div>
+                                                            <div className="profile_location">
+                                                                {/* <img src={Tick} alt="icon" /> */}
+                                                                <h4>
+                                                                    Trainer’s
+                                                                    Location{" "}
+                                                                    <Link>
+                                                                        View
+                                                                        Location
+                                                                    </Link>
+                                                                </h4>
+                                                            </div>
+                                                            <div className="profile_location">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="icon"
+                                                                />
+                                                                <h4>
+                                                                    Your
+                                                                    Location
+                                                                </h4>
+                                                            </div>
+                                                            <div className="profile_share">
+                                                                <img
+                                                                    src={Share}
+                                                                    alt="icon"
+                                                                />
+                                                                <Link to="/">
+                                                                    Share
+                                                                    Profile
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button>
+                                                        Book a session{" "}
+                                                        <ArrowHoverBlacked />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className="profile_trainer_data">
+                                                <div className="profile_right_data">
+                                                    <div className="profile_right_item1">
+                                                        {/* <img src={Quote} alt="qoute" /> */}
+                                                        <h6>
+                                                            {trainerData.motto}
+                                                        </h6>
+                                                    </div>
+                                                    <div className="profile_right_item2">
+                                                        <h4>
+                                                            About{" "}
+                                                            {
+                                                                trainerData.firstName
+                                                            }
+                                                        </h4>
+                                                        <p>
+                                                            {
+                                                                trainerData.trainingProcessDescription
+                                                            }
+                                                        </p>
+
+                                                        <div className="profile_images">
+                                                            {trainerData ? (
+                                                                <ImageGrid
+                                                                    trainerPersonalData={
+                                                                        trainerPersonalData
+                                                                    }
+                                                                />
+                                                            ) : null}
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_right_item3 mb-5 pb-5">
+                                                        <h2>Certifications</h2>
+                                                        <div className="profile_item3_inner">
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[0]
+                                                                        ? trainerPersonalData
+                                                                              .certification[0]
+                                                                              .certification
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[1]
+                                                                        ? trainerPersonalData
+                                                                              .certification[1]
+                                                                              .certification
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[2]
+                                                                        ? trainerPersonalData
+                                                                              .certification[2]
+                                                                              .certification
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[3]
+                                                                        ? trainerPersonalData
+                                                                              .certification[3]
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* <div className="profile_right_item4">
+                                        <h2>Jane’s Schedule </h2>
+                                        <div
+                                            className="profile_event_schedular"
+                                            onClick={() => console.log("hello")}
+                                        ></div>
+                                    </div> */}
+                                                    {/* </div> */}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Modal>
+                    ) : null}
                 </div>
                 <div className="setup_container ">
                     <div className="setup_headings">
@@ -575,8 +1035,11 @@ const TrainerSetUpProfileFC = ({
                                                 <div className="iconwrapper">
                                                     <select
                                                         required
-                                                        onChange={
-                                                            handleInputChange
+                                                        onChange={(e) =>
+                                                            setTrainerData({
+                                                                ...trainerData,
+                                                                location: e.target.value,
+                                                            })
                                                         }
                                                         value={
                                                             trainerData.location
@@ -671,15 +1134,34 @@ const TrainerSetUpProfileFC = ({
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="card_agree">
+                                        <input
+                                            type="checkbox"
+                                            id="agree"
+                                            name="agree"
+                                            onChange={handleAgreedCheck}
+                                        />
+                                        <label>
+                                            Check here to acknowledge that you
+                                            have read and agree to the Motto
+                                            trainer
+                                            <a
+                                                href="/agreement"
+                                                target="_blank"
+                                            >
+                                                terms and conditions
+                                            </a>
+                                        </label>
+                                    </div>
                                 </div>
                                 {/* <PaymentSection /> */}
                                 <div className="submit_button">
                                     <button
                                         onClick={handleSubmit}
                                         type="submit"
-                                        disabled={isLoading}
+                                        disabled={(isLoading, !agreed)}
                                         className={`${
-                                            isLoading ? "loading" : ""
+                                            isLoading ? "loading" : "btn"
                                         }`}
                                     >
                                         {isLoading ? (
@@ -763,13 +1245,82 @@ const ImageReander = () => {
                     onChange={(event) => {
                         const file = event.target.files[0];
                         if (file && file.type.substr(0, 5) === "image") {
+                            // debugger;
+                            // debugger;
                             setImage(file);
                             FileArray.push(file);
+                            console.log(FileArray);
                         } else {
                             setImage(null);
                         }
                     }}
                 />
+            </div>
+        </>
+    );
+};
+
+const ImageGrid = () => {
+    const [imageView, setImageView] = useState([
+        {
+            image: "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg",
+        },
+    ]);
+    const handleViewImages = () => {
+        setImageView([
+            ...imageView,
+            {
+                image: "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg",
+            },
+        ]);
+    };
+    return (
+        <>
+            <div className="profile_images_grid">
+                {imageView.map((images, index) => {
+                    return (
+                        <div className="profile_images_container">
+                            <div className="profile_images_card box1">
+                                <img
+                                    src={images.image}
+                                    alt="picture"
+                                    className="box1"
+                                />
+                            </div>
+                            <div className="flex-try-2">
+                                <div className="profile_images_card box2">
+                                    <img
+                                        src={images.image}
+                                        alt="picture"
+                                        className="box2"
+                                    />
+                                </div>
+
+                                <div className="flex-try-3">
+                                    <div className="profile_images_card box3">
+                                        <img
+                                            src={images.image}
+                                            alt="picture"
+                                            className="box3"
+                                        />
+                                    </div>
+
+                                    <div className="profile_images_card box4">
+                                        <img
+                                            src={images.image}
+                                            alt="picture"
+                                            className="box4"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+            <div className="image_more" onClick={() => handleViewImages()}>
+                <h5>View More Images</h5>
+                {/* <img src={ArrowNext} ali="icon" /> */}
             </div>
         </>
     );
