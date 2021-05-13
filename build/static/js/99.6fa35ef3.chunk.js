@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[99],{230:function(t,e,n){"use strict";n.r(e),n.d(e,"updateUserDetails",(function(){return r}));var o=n(22),r=function(t){return function(e){return new Promise((function(n){e({type:o.UserActionType.updateUserDetails,payload:t}),n(!0)}))}}}}]);
-//# sourceMappingURL=99.6fa35ef3.chunk.js.map

@@ -17,6 +17,10 @@ import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
 import axios from "axios";
 import { set } from "date-fns";
+import { Modal } from "react-responsive-modal";
+import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
+import "./trainer.sass";
+
 
 const CyanRadio = withStyles({
     root: {
@@ -47,6 +51,7 @@ const TrainerCardFC = ({
     };
 
     const [checkedBoxing, setCheckedBoxing] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const [checkedHIIT, setCheckedHIIT] = React.useState(false);
     const [checkedYoga, setCheckedYoga] = React.useState(false);
     const [checkedPilates, setCheckedPilates] = React.useState(false);
@@ -55,6 +60,7 @@ const TrainerCardFC = ({
     });
 
     const [image, setImage] = useState();
+    const myRef = useRef(null);
     const [selectedValue, setSelectedValue] = useState("");
     const [previewImage, setPreviewTmage] = useState();
     const [trainerData, setTrainerData] = useState({
@@ -71,6 +77,8 @@ const TrainerCardFC = ({
         amtPerPerson: "",
     });
     const fileInputRef = useRef();
+
+    
 
     // for radio
     const handleChange = (event) => {
@@ -221,13 +229,97 @@ const TrainerCardFC = ({
         });
     }, []);
 
+    const closeIcon = <img src={CloseIcon} alt="close" />;
+    
+
     return (
         <>
             <div className="outter_container_card">
                 <div className="container">
-                    <div className="card_prev_link">
-                        <Link to="/">Preview Your Trainer Card</Link>
+                    <div className="card_prev_link" style = {{marginLeft:"75%"}}>
+                        <div onClick={()=>{setOpen(true);}}>Preview Your Trainer Card</div>
                     </div>
+                    {open ? (
+                        <Modal
+                            open={open}
+                            onClose={() => {
+                                setOpen(false);
+                            }}
+                            center
+                            closeIcon={closeIcon}
+                            container={myRef.current}
+                            styles={{
+                                boaderRadius: "10px",
+                            }}
+                        >
+                            <div className="container" style = {{paddingLeft: "50px"}}>
+                            <div className="row" style={{ alignleft: "auto" }}>
+                            <div className="card" >
+                        <img
+                          className="card-img-top"
+                          src={previewImage ? previewImage : "https://www.solidbackgrounds.com/images/2048x1536/2048x1536-powder-blue-web-solid-color-background.jpg"}
+                          style={previewImage ? { objectFit: "cover"} : ({ objectFit: "cover", backgroundColor:"blue"})}
+                        />
+                        <div className="card-body">
+                          <h3>
+                            {trainerData.firstName}&ensp;
+                            {trainerData.lastName}
+                          </h3>
+                          <h6 style = {{color: "#898989", fontWeight:"bold"}}>{ checkedHIIT && !checkedPilates && !checkedBoxing && !checkedYoga  ? "HIIT"  
+                          :checkedPilates && !checkedHIIT && !checkedBoxing && !checkedYoga ? "Pilates" 
+                          :checkedYoga && !checkedHIIT && !checkedBoxing && !checkedPilates ? "Yoga" 
+                          :checkedBoxing && !checkedHIIT && !checkedPilates && !checkedYoga ? "Boxing" 
+                          :(checkedHIIT && checkedPilates && !checkedBoxing && !checkedYoga ) ? ("HIIT,Pilates")
+                          :checkedHIIT && checkedYoga && !checkedPilates && !checkedBoxing ? "HIIT,Yoga"
+                          :checkedHIIT && checkedBoxing && !checkedPilates && !checkedYoga ? "HIIT,Boxing"
+                          :checkedYoga && checkedBoxing && !checkedPilates && !checkedHIIT ? "Yoga,Boxing"
+                          :checkedYoga && checkedPilates && !checkedBoxing && !checkedHIIT ? "Yoga,Pilates"
+                          :checkedBoxing && checkedPilates && !checkedHIIT && !checkedYoga ? "Boxing,Pilates"
+                          :checkedHIIT && checkedPilates && checkedBoxing && !checkedYoga ? "HIIT,Pilates,Boxing"
+                          :checkedHIIT && checkedPilates && checkedYoga && !checkedBoxing ? "HIIT,Pilates,Yoga"
+                          :checkedYoga && checkedPilates && checkedBoxing && !checkedHIIT ? "Yoga,Pilates,Boxing"
+                          :checkedYoga && checkedHIIT && checkedBoxing && !checkedPilates ? "Yoga,HIIT,Boxing"
+                          :checkedYoga && checkedHIIT && checkedBoxing && checkedPilates ? "Yoga,HIIT,Boxing,Pilates"
+                          :"Not Added" }</h6>
+                          <p style = {{color:"#898989"}}>
+                          {trainerData.description}
+                            {/* <Link to="profile">Read More</Link> */}
+                          </p>
+                        </div>
+                        <div className="card-button">
+                          <button
+                            // ref={hoverRef}
+                            style={{
+                              backgroundColor:  "#53BFD2"
+                            }}
+                            // onClick={() => {
+                            //   console.log(bestMatchData[data]);
+                            //   history.push({
+                            //     pathname: "/user/scheduler",
+                            //     state: { trainerId: bestMatchData[data]["id"], trainerData: bestMatchData[data] },
+                            //   });
+                            // }}
+                          >
+                            book a session
+                            {/* <img src={onImage} alt="icon" /> */}
+                            {/* {isHovered ? (
+                              <img src={onHoverImage} alt="icon" />
+                            ) : (
+                              <img src={onImage} alt="icon" />
+                            )} */}
+                            <p>
+                              from{" "}
+                              {/* <span>
+                                {
+                                  bestMatchData[data]["oneOnOnePricing"][
+                                    "inPersonAtClientLocation"
+                                  ]
+                                }
+                              </span> */}
+                            </p>
+                          </button>
+                        </div>
+                      </div></div></div></Modal>) : null }
                     <div className="card_outter">
                         <div className="card_outter_wrapper">
                             <h2>{data.title}</h2>
