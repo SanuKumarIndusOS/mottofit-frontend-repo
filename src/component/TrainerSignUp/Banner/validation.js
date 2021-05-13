@@ -64,7 +64,7 @@ const validation = (values) => {
         )
     ) {
         errors.password =
-            " Password should contain atleast one one captial letter, number and special character";
+            " Password should be 8 characters long and contain a Capital letter, Number & Special character";
     }
 
     if (!values.cpassword) {
@@ -79,7 +79,7 @@ const validation = (values) => {
         )
     ) {
         errors.cpassword =
-            " Password should contain atleast one one captial letter, number and special character";
+            " Password should be 8 characters long and contain a Capital letter, Number & Special character";
     } else if (values.password !== values.cpassword) {
         errors.cpassword = "  The passwords do not match";
     }
