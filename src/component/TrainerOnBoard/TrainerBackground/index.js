@@ -184,7 +184,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                         <div className="outter_links">
                             <div className="inner_links">
                                 <Link to="/trainer/avaliability">
-                                    Go to Avaliability
+                                    Go to Availability
                                 </Link>
                                 <div></div>
                             </div>
@@ -418,7 +418,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                 >
                                                     <input
                                                         type="text"
-                                                        placeholder="Name of the Orgnisation / GYM"
+                                                        placeholder="Name of the organization / GYM"
                                                         value={
                                                             input.orgnization
                                                         }

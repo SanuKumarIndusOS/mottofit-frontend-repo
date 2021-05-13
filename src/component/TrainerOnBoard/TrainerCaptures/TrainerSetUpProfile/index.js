@@ -358,7 +358,14 @@ const TrainerSetUpProfileFC = ({
                         </Link>
                     </div>
                     <div className="inner_link_preview">
-                    <div onClick={()=>{setOpen(true);}}>Preview Your Trainer Profile</div>
+                        <div
+                            onClick={() => {
+                                setOpen(true);
+                            }}
+                            className="prev_profile"
+                        >
+                            Preview Your Trainer Profile
+                        </div>
                     </div>
                     {open ? (
                         <Modal
@@ -373,68 +380,94 @@ const TrainerSetUpProfileFC = ({
                                 boaderRadius: "10px",
                             }}
                             classNames={{
-                                modal: 'customModal',
-                              }}
+                                modal: "customModal",
+                            }}
                         >
                             <div className="profile_main">
-                <div className="profile_outter_container">
-                    {/* <div className="profile"> */}
-                    <div className="profile_wrapper_container ">
-                        <div className="profile_header">
-                            <div className="inner_profile container">
-                                <img src={trainerPersonalData.profilePicture} />
-                                <div className="profile_header_inner">
-                                    <h2>{trainerData.firstName}{" "}{trainerData.lastName}</h2>
-                                    <p>{trainerPersonalData.areaOfExpertise.toString()}</p>
-                                </div>
-                                {/* <div className="profile_header_link"> */}
-                                    {/* <img src={ArrowBack} alt="icon" /> */}
-                                    {/* <Link to="/trainer/find">
+                                <div className="profile_outter_container">
+                                    {/* <div className="profile"> */}
+                                    <div className="profile_wrapper_container ">
+                                        <div className="profile_header">
+                                            <div className="inner_profile container">
+                                                <img
+                                                    src={
+                                                        trainerPersonalData.profilePicture
+                                                    }
+                                                />
+                                                <div className="profile_header_inner">
+                                                    <h2>
+                                                        {trainerData.firstName}{" "}
+                                                        {trainerData.lastName}
+                                                    </h2>
+                                                    <p>
+                                                        {trainerPersonalData.areaOfExpertise.toString()}
+                                                    </p>
+                                                </div>
+                                                {/* <div className="profile_header_link"> */}
+                                                {/* <img src={ArrowBack} alt="icon" /> */}
+                                                {/* <Link to="/trainer/find">
                                         Back to Search
                                     </Link> */}
-                                    {/* <label style = {{color:"#bcbcbc"}}>Back to Search</label> */}
-                                {/* </div> */}
-                            </div>
-                        </div>
-                        <div className="profile_main_contents container">
-                            <div className="profile_aside">
-                                <div className="profile_aside_link">
-                                    {/* <Link to="/">View Calender</Link> */}
-                                    <label>View Calender</label>
-                                    <img src={ArrowNext} alt="icon" />
-                                </div>
-                                <div className="profile_aside_items">
-                                    <div className="profile_aside_item">
-                                        <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
-                                        <hr />
-                                        <div className="profile_aside_inner_item">
-                                            <h6>
-                                                $45{" "}
-                                                <span>(Virtual Session)</span>
-                                            </h6>
-                                            <h6>
-                                                $150{" "}
-                                                <span>(In Person Session)</span>
-                                            </h6>
-                                            <h5>
-                                                See package rates during
-                                                checkout
-                                            </h5>
+                                                {/* <label style = {{color:"#bcbcbc"}}>Back to Search</label> */}
+                                                {/* </div> */}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="profile_aside_item">
-                                        <h2>
-                                            SOCIAL SESSIONS{" "}
-                                            <img
-                                                src={QMark}
-                                                alt="icon"
-                                                onClick={() => setOpen(true)}
-                                                className="model_Qmark"
-                                            />
-                                        </h2>
-                                        <hr />
-                                        {/* model */}
-                                        {/* {open ? (
+                                        <div className="profile_main_contents container">
+                                            <div className="profile_aside">
+                                                <div className="profile_aside_link">
+                                                    {/* <Link to="/">View Calender</Link> */}
+                                                    <label>View Calender</label>
+                                                    <img
+                                                        src={ArrowNext}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="profile_aside_items">
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            1 ON 1 INDIVIDUAL
+                                                            TRAINING
+                                                        </h2>
+                                                        <hr />
+                                                        <div className="profile_aside_inner_item">
+                                                            <h6>
+                                                                $45{" "}
+                                                                <span>
+                                                                    (Virtual
+                                                                    Session)
+                                                                </span>
+                                                            </h6>
+                                                            <h6>
+                                                                $150{" "}
+                                                                <span>
+                                                                    (In Person
+                                                                    Session)
+                                                                </span>
+                                                            </h6>
+                                                            <h5>
+                                                                See package
+                                                                rates during
+                                                                checkout
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            SOCIAL SESSIONS{" "}
+                                                            <img
+                                                                src={QMark}
+                                                                alt="icon"
+                                                                onClick={() =>
+                                                                    setOpen(
+                                                                        true
+                                                                    )
+                                                                }
+                                                                className="model_Qmark"
+                                                            />
+                                                        </h2>
+                                                        <hr />
+                                                        {/* model */}
+                                                        {/* {open ? (
                                             <Modal
                                                 open={open}
                                                 onClose={() => setOpen(false)}
@@ -474,42 +507,48 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </Modal>
                                         ) : null} */}
-                                        <div className="profile_aside_inner_item">
-                                            <h6>
-                                                $65{" "}
-                                                <span>
-                                                    / Session (For 2 People)
-                                                </span>
-                                            </h6>
-                                            <h6>
-                                                $50{" "}
-                                                <span>
-                                                    / Session (For 3 People)
-                                                </span>
-                                            </h6>
-                                            <h6>
-                                                $25{" "}
-                                                <span>
-                                                    / Session (For 4 People)
-                                                </span>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                    <div className="profile_aside_item">
-                                        <h2>
-                                            CREATE A CLASS
-                                            <img
-                                                src={QMark}
-                                                alt="icon"
-                                                // onClick={() =>
-                                                //     setOpenClassModel(true)
-                                                // }
-                                                className="model_Qmark"
-                                            />
-                                        </h2>
-                                        <hr />
-                                        {/* model */}
-                                        {/* {openClassModel ? (
+                                                        <div className="profile_aside_inner_item">
+                                                            <h6>
+                                                                $65{" "}
+                                                                <span>
+                                                                    / Session
+                                                                    (For 2
+                                                                    People)
+                                                                </span>
+                                                            </h6>
+                                                            <h6>
+                                                                $50{" "}
+                                                                <span>
+                                                                    / Session
+                                                                    (For 3
+                                                                    People)
+                                                                </span>
+                                                            </h6>
+                                                            <h6>
+                                                                $25{" "}
+                                                                <span>
+                                                                    / Session
+                                                                    (For 4
+                                                                    People)
+                                                                </span>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            CREATE A CLASS
+                                                            <img
+                                                                src={QMark}
+                                                                alt="icon"
+                                                                // onClick={() =>
+                                                                //     setOpenClassModel(true)
+                                                                // }
+                                                                className="model_Qmark"
+                                                            />
+                                                        </h2>
+                                                        <hr />
+                                                        {/* model */}
+                                                        {/* {openClassModel ? (
                                             <Modal
                                                 open={openClassModel}
                                                 // onClose={() =>
@@ -548,121 +587,191 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </Modal>
                                         ) : null} */}
-                                        <div className="profile_aside_inner_item">
-                                            <h6>
-                                                $200{" "}
-                                                <span>
-                                                    Flat Rate Class (For 5-15
-                                                    People)
-                                                </span>
-                                            </h6>
-                                            <h5>
-                                                If trainer offers Virtual Social
-                                                Sessions and Classes they will
-                                                be at a discount to in person
-                                                rates above. You will see these
-                                                prior to checkout.
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div className="profile_aside_item">
-                                        <h2>TRAINING LOCATIONS</h2>
+                                                        <div className="profile_aside_inner_item">
+                                                            <h6>
+                                                                $200{" "}
+                                                                <span>
+                                                                    Flat Rate
+                                                                    Class (For
+                                                                    5-15 People)
+                                                                </span>
+                                                            </h6>
+                                                            <h5>
+                                                                If trainer
+                                                                offers Virtual
+                                                                Social Sessions
+                                                                and Classes they
+                                                                will be at a
+                                                                discount to in
+                                                                person rates
+                                                                above. You will
+                                                                see these prior
+                                                                to checkout.
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_aside_item">
+                                                        <h2>
+                                                            TRAINING LOCATIONS
+                                                        </h2>
 
-                                        <hr />
-                                        <div className="profile_aside_inner_item">
-                                            <div className="profile_location">
-                                                {/* <img src={Tick} alt="icon" /> */}
-                                                <h4>{trainerData.trainingLocation[0]}</h4>
+                                                        <hr />
+                                                        <div className="profile_aside_inner_item">
+                                                            <div className="profile_location">
+                                                                {/* <img src={Tick} alt="icon" /> */}
+                                                                <h4>
+                                                                    {
+                                                                        trainerData
+                                                                            .trainingLocation[0]
+                                                                    }
+                                                                </h4>
+                                                            </div>
+                                                            <div className="profile_location">
+                                                                {/* <img src={Tick} alt="icon" /> */}
+                                                                <h4>
+                                                                    Trainer’s
+                                                                    Location{" "}
+                                                                    <Link>
+                                                                        View
+                                                                        Location
+                                                                    </Link>
+                                                                </h4>
+                                                            </div>
+                                                            <div className="profile_location">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="icon"
+                                                                />
+                                                                <h4>
+                                                                    Your
+                                                                    Location
+                                                                </h4>
+                                                            </div>
+                                                            <div className="profile_share">
+                                                                <img
+                                                                    src={Share}
+                                                                    alt="icon"
+                                                                />
+                                                                <Link to="/">
+                                                                    Share
+                                                                    Profile
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button>
+                                                        Book a session{" "}
+                                                        <ArrowHoverBlacked />
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div className="profile_location">
-                                                {/* <img src={Tick} alt="icon" /> */}
-                                                <h4>
-                                                    Trainer’s Location{" "}
-                                                    <Link>
-                                                        View Location
-                                                    </Link>
-                                                </h4>
-                                            </div>
-                                            <div className="profile_location">
-                                                <img src={Tick} alt="icon" />
-                                                <h4>Your Location</h4>
-                                            </div>
-                                            <div className="profile_share">
-                                                <img src={Share} alt="icon" />
-                                                <Link to="/">
-                                                    Share Profile
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button>
-                                        Book a session <ArrowHoverBlacked />
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="profile_trainer_data">
-                                <div className="profile_right_data">
-                                    <div className="profile_right_item1">
-                                        {/* <img src={Quote} alt="qoute" /> */}
-                                        <h6>
-                                        {trainerData.motto}
-                                        </h6>
-                                    </div>
-                                    <div className="profile_right_item2">
-                                        <h4>About{" "}{trainerData.firstName}</h4>
-                                        <p>
-                                            {trainerData.trainingProcessDescription}
-                                        </p>
+                                            <div className="profile_trainer_data">
+                                                <div className="profile_right_data">
+                                                    <div className="profile_right_item1">
+                                                        {/* <img src={Quote} alt="qoute" /> */}
+                                                        <h6>
+                                                            {trainerData.motto}
+                                                        </h6>
+                                                    </div>
+                                                    <div className="profile_right_item2">
+                                                        <h4>
+                                                            About{" "}
+                                                            {
+                                                                trainerData.firstName
+                                                            }
+                                                        </h4>
+                                                        <p>
+                                                            {
+                                                                trainerData.trainingProcessDescription
+                                                            }
+                                                        </p>
 
-                                        <div className="profile_images">
-                                            {trainerData ? <ImageGrid trainerPersonalData = {trainerPersonalData} /> : null}
-                                            
-                                        </div>
-                                    </div>
-                                    <div className="profile_right_item3 mb-5 pb-5">
-                                        <h2>Certifications</h2>
-                                        <div className="profile_item3_inner">
-                                            <div className="inner_items">
-                                                <img src={Tick} alt="check" />
-                                                <h6>
-                                                    {trainerPersonalData.certification[0] ? trainerPersonalData.certification[0].certification : "Not Added"}
-                                                </h6>
-                                            </div>
-                                            <div className="inner_items">
-                                                <img src={Tick} alt="check" />
-                                                <h6>
-                                                {trainerPersonalData.certification[1] ? trainerPersonalData.certification[1].certification : "Not Added"}
-                                                </h6>
-                                            </div>
-                                            <div className="inner_items">
-                                                <img src={Tick} alt="check" />
-                                                <h6>
-                                                {trainerPersonalData.certification[2] ? trainerPersonalData.certification[2].certification : "Not Added"}
-                                                </h6>
-                                            </div>
-                                            <div className="inner_items">
-                                                <img src={Tick} alt="check" />
-                                                <h6>
-                                                {trainerPersonalData.certification[3] ? trainerPersonalData.certification[3] : "Not Added"}
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* <div className="profile_right_item4">
+                                                        <div className="profile_images">
+                                                            {trainerData ? (
+                                                                <ImageGrid
+                                                                    trainerPersonalData={
+                                                                        trainerPersonalData
+                                                                    }
+                                                                />
+                                                            ) : null}
+                                                        </div>
+                                                    </div>
+                                                    <div className="profile_right_item3 mb-5 pb-5">
+                                                        <h2>Certifications</h2>
+                                                        <div className="profile_item3_inner">
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[0]
+                                                                        ? trainerPersonalData
+                                                                              .certification[0]
+                                                                              .certification
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[1]
+                                                                        ? trainerPersonalData
+                                                                              .certification[1]
+                                                                              .certification
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[2]
+                                                                        ? trainerPersonalData
+                                                                              .certification[2]
+                                                                              .certification
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                            <div className="inner_items">
+                                                                <img
+                                                                    src={Tick}
+                                                                    alt="check"
+                                                                />
+                                                                <h6>
+                                                                    {trainerPersonalData
+                                                                        .certification[3]
+                                                                        ? trainerPersonalData
+                                                                              .certification[3]
+                                                                        : "Not Added"}
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* <div className="profile_right_item4">
                                         <h2>Jane’s Schedule </h2>
                                         <div
                                             className="profile_event_schedular"
                                             onClick={() => console.log("hello")}
                                         ></div>
                                     </div> */}
-                                    {/* </div> */}
+                                                    {/* </div> */}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Modal>) : null }
+                        </Modal>
+                    ) : null}
                 </div>
                 <div className="setup_container ">
                     <div className="setup_headings">
@@ -1109,7 +1218,7 @@ const ImageReander = () => {
                             // debugger;
                             setImage(file);
                             FileArray.push(file);
-                            console.log(FileArray)
+                            console.log(FileArray);
                         } else {
                             setImage(null);
                         }
@@ -1127,13 +1236,18 @@ const ImageGrid = () => {
         },
     ]);
     const handleViewImages = () => {
-        setImageView([...imageView, { image: "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg"}]);
+        setImageView([
+            ...imageView,
+            {
+                image: "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg",
+            },
+        ]);
     };
     return (
         <>
             <div className="profile_images_grid">
                 {imageView.map((images, index) => {
-                    return(
+                    return (
                         <div className="profile_images_container">
                             <div className="profile_images_card box1">
                                 <img
@@ -1149,7 +1263,7 @@ const ImageGrid = () => {
                                         alt="picture"
                                         className="box2"
                                     />
-                                </div> 
+                                </div>
 
                                 <div className="flex-try-3">
                                     <div className="profile_images_card box3">
@@ -1170,7 +1284,7 @@ const ImageGrid = () => {
                                 </div>
                             </div>
                         </div>
-                )
+                    );
                 })}
             </div>
             <div className="image_more" onClick={() => handleViewImages()}>
@@ -1180,7 +1294,6 @@ const ImageGrid = () => {
         </>
     );
 };
-
 
 const mapStateToProps = (state) => ({
     details: state.trainerReducer.details,

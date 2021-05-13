@@ -114,11 +114,11 @@ const AboutTrainerFC = ({
             <div className="container main">
                 <div className="wrapper_about">
                     <h2>Tell us a little bit about you</h2>
-                    <p>
+                    {/* <p>
                         *Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem ipsum has been the. *All
                         these fields are mandatory.{" "}
-                    </p>
+                    </p> */}
                     <br></br>
                     <div className="outter_form">
                         <form className="wrapper_inputs">
@@ -128,6 +128,7 @@ const AboutTrainerFC = ({
                                     placeholder="Name"
                                     type="name"
                                     name="name"
+                                    style={{ textTransform: "capitalize" }}
                                     onChange={(e) =>
                                         setAboutTrainerData({
                                             ...aboutTrainerData,
@@ -169,9 +170,9 @@ const AboutTrainerFC = ({
                                         <option value="" disabled selected>
                                             Select a Motto City
                                         </option>
-                                        <option>New York</option>
+                                        <option>New York City</option>
                                         <option>Miami</option>
-                                        <option>Hampton</option>
+                                        <option>Hamptons</option>
                                         <option>Palm Beach</option>
                                     </select>
                                     <img src={DropDown} alt="icon" />
@@ -226,7 +227,7 @@ const AboutTrainerFC = ({
                                         </option>
                                         <option>Male</option>
                                         <option>Female</option>
-                                        <option>Others</option>
+                                        {/* <option>Others</option> */}
                                     </select>
                                     <img src={DropDown} alt="icon" />
                                 </div>

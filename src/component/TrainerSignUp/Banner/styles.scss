@@ -145,6 +145,33 @@
                             display: none;
                         }
                     }
+                    .fullname {
+                        width: 100%;
+                        height: 45px;
+                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+                        border: 2px solid #bcbcbc;
+                        border-radius: 30px;
+                        opacity: 1;
+                        padding: 0 1.5em;
+                        color: #242424;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500 !important;
+                        text-rendering: optimizeLegibility !important;
+                        text-transform: capitalize;
+                    }
+                    input:focus {
+                        outline: none;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 400 !important;
+                    }
+                    input::placeholder {
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        color: #bcbcbc;
+                        font-weight: 400 !important;
+                    }
 
                     input {
                         width: 100%;
@@ -314,7 +341,7 @@
 }
 
 .react-tel-input {
-    >div{
-        display:none;
+    > div {
+        display: none;
     }
 }

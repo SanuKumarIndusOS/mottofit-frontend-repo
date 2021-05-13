@@ -23,7 +23,7 @@ const routers = [
         ],
     },
     {
-        component: "DashboardLayout",
+        component: "HomeLayout",
         path: "/welcome",
         auth: false,
         name: "Dashboard",

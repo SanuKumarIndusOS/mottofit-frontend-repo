@@ -21,7 +21,6 @@ import { Modal } from "react-responsive-modal";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import "./trainer.sass";
 
-
 const CyanRadio = withStyles({
     root: {
         "&$checked": {
@@ -44,7 +43,7 @@ const TrainerCardFC = ({
         upload: " Upload your profile picture, hotshot!",
         tellus: " Tell us what you train! Select all the categories that apply",
         clientDesc:
-            "Write a short and sweet description for clients to pick you in 75 characters",
+            "Write a short and sweet description for clients to pick you in 100 characters",
         pricing: "Tell us about your Pricing",
         pricingDesc:
             "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
@@ -77,8 +76,6 @@ const TrainerCardFC = ({
         amtPerPerson: "",
     });
     const fileInputRef = useRef();
-
-    
 
     // for radio
     const handleChange = (event) => {
@@ -230,14 +227,20 @@ const TrainerCardFC = ({
     }, []);
 
     const closeIcon = <img src={CloseIcon} alt="close" />;
-    
 
     return (
         <>
             <div className="outter_container_card">
                 <div className="container">
-                    <div className="card_prev_link" style = {{marginLeft:"75%"}}>
-                        <div onClick={()=>{setOpen(true);}}>Preview Your Trainer Card</div>
+                    <div className="card_prev_link">
+                        <div
+                            onClick={() => {
+                                setOpen(true);
+                            }}
+                            className="prev_link"
+                        >
+                            Preview Your Trainer Card
+                        </div>
                     </div>
                     {open ? (
                         <Modal
@@ -252,74 +255,167 @@ const TrainerCardFC = ({
                                 boaderRadius: "10px",
                             }}
                         >
-                            <div className="container" style = {{paddingLeft: "50px"}}>
-                            <div className="row" style={{ alignleft: "auto" }}>
-                            <div className="card" >
-                        <img
-                          className="card-img-top"
-                          src={previewImage ? previewImage : "https://www.solidbackgrounds.com/images/2048x1536/2048x1536-powder-blue-web-solid-color-background.jpg"}
-                          style={previewImage ? { objectFit: "cover"} : ({ objectFit: "cover", backgroundColor:"blue"})}
-                        />
-                        <div className="card-body">
-                          <h3>
-                            {trainerData.firstName}&ensp;
-                            {trainerData.lastName}
-                          </h3>
-                          <h6 style = {{color: "#898989", fontWeight:"bold"}}>{ checkedHIIT && !checkedPilates && !checkedBoxing && !checkedYoga  ? "HIIT"  
-                          :checkedPilates && !checkedHIIT && !checkedBoxing && !checkedYoga ? "Pilates" 
-                          :checkedYoga && !checkedHIIT && !checkedBoxing && !checkedPilates ? "Yoga" 
-                          :checkedBoxing && !checkedHIIT && !checkedPilates && !checkedYoga ? "Boxing" 
-                          :(checkedHIIT && checkedPilates && !checkedBoxing && !checkedYoga ) ? ("HIIT,Pilates")
-                          :checkedHIIT && checkedYoga && !checkedPilates && !checkedBoxing ? "HIIT,Yoga"
-                          :checkedHIIT && checkedBoxing && !checkedPilates && !checkedYoga ? "HIIT,Boxing"
-                          :checkedYoga && checkedBoxing && !checkedPilates && !checkedHIIT ? "Yoga,Boxing"
-                          :checkedYoga && checkedPilates && !checkedBoxing && !checkedHIIT ? "Yoga,Pilates"
-                          :checkedBoxing && checkedPilates && !checkedHIIT && !checkedYoga ? "Boxing,Pilates"
-                          :checkedHIIT && checkedPilates && checkedBoxing && !checkedYoga ? "HIIT,Pilates,Boxing"
-                          :checkedHIIT && checkedPilates && checkedYoga && !checkedBoxing ? "HIIT,Pilates,Yoga"
-                          :checkedYoga && checkedPilates && checkedBoxing && !checkedHIIT ? "Yoga,Pilates,Boxing"
-                          :checkedYoga && checkedHIIT && checkedBoxing && !checkedPilates ? "Yoga,HIIT,Boxing"
-                          :checkedYoga && checkedHIIT && checkedBoxing && checkedPilates ? "Yoga,HIIT,Boxing,Pilates"
-                          :"Not Added" }</h6>
-                          <p style = {{color:"#898989"}}>
-                          {trainerData.description}
-                            {/* <Link to="profile">Read More</Link> */}
-                          </p>
-                        </div>
-                        <div className="card-button">
-                          <button
-                            // ref={hoverRef}
-                            style={{
-                              backgroundColor:  "#53BFD2"
-                            }}
-                            // onClick={() => {
-                            //   console.log(bestMatchData[data]);
-                            //   history.push({
-                            //     pathname: "/user/scheduler",
-                            //     state: { trainerId: bestMatchData[data]["id"], trainerData: bestMatchData[data] },
-                            //   });
-                            // }}
-                          >
-                            book a session
-                            {/* <img src={onImage} alt="icon" /> */}
-                            {/* {isHovered ? (
+                            <div
+                                className="container"
+                                style={{ paddingLeft: "50px" }}
+                            >
+                                <div
+                                    className="row"
+                                    style={{ alignleft: "auto" }}
+                                >
+                                    <div className="card">
+                                        <img
+                                            className="card-img-top"
+                                            src={
+                                                previewImage
+                                                    ? previewImage
+                                                    : "https://www.solidbackgrounds.com/images/2048x1536/2048x1536-powder-blue-web-solid-color-background.jpg"
+                                            }
+                                            style={
+                                                previewImage
+                                                    ? { objectFit: "cover" }
+                                                    : {
+                                                          objectFit: "cover",
+                                                          backgroundColor:
+                                                              "blue",
+                                                      }
+                                            }
+                                        />
+                                        <div className="card-body">
+                                            <h3
+                                                style={{
+                                                    textTransform: "capitalize",
+                                                }}
+                                            >
+                                                {trainerData.firstName}&ensp;
+                                                {trainerData.lastName}
+                                            </h3>
+                                            <h6
+                                                style={{
+                                                    color: "#898989",
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                {checkedHIIT &&
+                                                !checkedPilates &&
+                                                !checkedBoxing &&
+                                                !checkedYoga
+                                                    ? "HIIT"
+                                                    : checkedPilates &&
+                                                      !checkedHIIT &&
+                                                      !checkedBoxing &&
+                                                      !checkedYoga
+                                                    ? "Pilates"
+                                                    : checkedYoga &&
+                                                      !checkedHIIT &&
+                                                      !checkedBoxing &&
+                                                      !checkedPilates
+                                                    ? "Yoga"
+                                                    : checkedBoxing &&
+                                                      !checkedHIIT &&
+                                                      !checkedPilates &&
+                                                      !checkedYoga
+                                                    ? "Boxing"
+                                                    : checkedHIIT &&
+                                                      checkedPilates &&
+                                                      !checkedBoxing &&
+                                                      !checkedYoga
+                                                    ? "HIIT,Pilates"
+                                                    : checkedHIIT &&
+                                                      checkedYoga &&
+                                                      !checkedPilates &&
+                                                      !checkedBoxing
+                                                    ? "HIIT,Yoga"
+                                                    : checkedHIIT &&
+                                                      checkedBoxing &&
+                                                      !checkedPilates &&
+                                                      !checkedYoga
+                                                    ? "HIIT,Boxing"
+                                                    : checkedYoga &&
+                                                      checkedBoxing &&
+                                                      !checkedPilates &&
+                                                      !checkedHIIT
+                                                    ? "Yoga,Boxing"
+                                                    : checkedYoga &&
+                                                      checkedPilates &&
+                                                      !checkedBoxing &&
+                                                      !checkedHIIT
+                                                    ? "Yoga,Pilates"
+                                                    : checkedBoxing &&
+                                                      checkedPilates &&
+                                                      !checkedHIIT &&
+                                                      !checkedYoga
+                                                    ? "Boxing,Pilates"
+                                                    : checkedHIIT &&
+                                                      checkedPilates &&
+                                                      checkedBoxing &&
+                                                      !checkedYoga
+                                                    ? "HIIT,Pilates,Boxing"
+                                                    : checkedHIIT &&
+                                                      checkedPilates &&
+                                                      checkedYoga &&
+                                                      !checkedBoxing
+                                                    ? "HIIT,Pilates,Yoga"
+                                                    : checkedYoga &&
+                                                      checkedPilates &&
+                                                      checkedBoxing &&
+                                                      !checkedHIIT
+                                                    ? "Yoga,Pilates,Boxing"
+                                                    : checkedYoga &&
+                                                      checkedHIIT &&
+                                                      checkedBoxing &&
+                                                      !checkedPilates
+                                                    ? "Yoga,HIIT,Boxing"
+                                                    : checkedYoga &&
+                                                      checkedHIIT &&
+                                                      checkedBoxing &&
+                                                      checkedPilates
+                                                    ? "Yoga,HIIT,Boxing,Pilates"
+                                                    : "Not Added"}
+                                            </h6>
+                                            <p style={{ color: "#898989" }}>
+                                                {trainerData.description}
+                                                {/* <Link to="profile">Read More</Link> */}
+                                            </p>
+                                        </div>
+                                        <div className="card-button">
+                                            <button
+                                                // ref={hoverRef}
+                                                style={{
+                                                    backgroundColor: "#53BFD2",
+                                                }}
+                                                // onClick={() => {
+                                                //   console.log(bestMatchData[data]);
+                                                //   history.push({
+                                                //     pathname: "/user/scheduler",
+                                                //     state: { trainerId: bestMatchData[data]["id"], trainerData: bestMatchData[data] },
+                                                //   });
+                                                // }}
+                                            >
+                                                book a session
+                                                {/* <img src={onImage} alt="icon" /> */}
+                                                {/* {isHovered ? (
                               <img src={onHoverImage} alt="icon" />
                             ) : (
                               <img src={onImage} alt="icon" />
                             )} */}
-                            <p>
-                              from{" "}
-                              {/* <span>
+                                                <p>
+                                                    from{" "}
+                                                    {/* <span>
                                 {
                                   bestMatchData[data]["oneOnOnePricing"][
                                     "inPersonAtClientLocation"
                                   ]
                                 }
                               </span> */}
-                            </p>
-                          </button>
-                        </div>
-                      </div></div></div></Modal>) : null }
+                                                </p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Modal>
+                    ) : null}
                     <div className="card_outter">
                         <div className="card_outter_wrapper">
                             <h2>{data.title}</h2>
@@ -405,6 +501,9 @@ const TrainerCardFC = ({
                                                 name="firstName"
                                                 onChange={handleInputChange}
                                                 value={trainerData.firstName}
+                                                style={{
+                                                    textTransform: "capitalize",
+                                                }}
                                             />
                                         </div>
                                         <div className="card_innerItem">
@@ -413,6 +512,9 @@ const TrainerCardFC = ({
                                                 name="lastName"
                                                 onChange={handleInputChange}
                                                 value={trainerData.lastName}
+                                                style={{
+                                                    textTransform: "capitalize",
+                                                }}
                                             />
                                         </div>
                                     </div>
@@ -664,7 +766,7 @@ const TrainerCardFC = ({
                                             name="description"
                                             placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into your full profile."
                                             onChange={handleInputChange}
-                                            maxLength="75"
+                                            maxLength="100"
                                         />
                                     </div>
                                     <div className="card_item5">
