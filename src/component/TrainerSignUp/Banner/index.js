@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import Person from "../../../assets/files/SignUp/Person Icon.svg";
 import Mail from "../../../assets/files/SignUp/Email Icon.svg";
@@ -23,10 +23,7 @@ import 'react-phone-input-2/lib/style.css'
 const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     const history = useHistory();
 
-    const { data, handleFormSubmit, error, setData } = useForm(
-        validateInfo,
-        submitForm
-    );
+    const { data, handleFormSubmit, error, setData,dataSubmit } = useForm( validateInfo,submitForm);
 
     const onChangeValue = (e) => {
         e.persist();
@@ -45,6 +42,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     };
 
     async function trainerSignUp() {
+        
         const payload = {
             name: data.name,
             email: data.email,
@@ -65,7 +63,9 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         // };
 
         const { trainerSignUp } = AuthApi;
-        if (Object.keys(error).length === 0) {
+        
+     if (dataSubmit){
+       
             loginOrSignupAct(trainerSignUp, payload)
                 .then(({ data }) => {
                     // console.log(data);
@@ -74,7 +74,8 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                 .catch((error) => {
                     setApiError(error.message);
                 });
-        }
+     }
+        
 
         // fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
         //   .then(async (response) => {
@@ -85,6 +86,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         //       setApiError("Email already registered", response.statusText);
         //     }
         //   })
+            
     }
 
     // const [phone, setPhone] = useState({
@@ -247,7 +249,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                             <div className="submit_button">
                                                 <button
                                                     type="submit"
-                                                    onClick={trainerSignUp}
+                                                    onClick={trainerSignUp()}
                                                 >
                                                     <p>Continue to Account</p>
                                                     <ArrowHoverBlacked />
