@@ -458,7 +458,7 @@
                         .inputs_platform {
                             display: flex;
                             textarea {
-                                width: 92%;
+                                width: 90%;
                                 height: 70px;
                                 border: 1.5px solid var(--unnamed-color-bcbcbc);
                                 border: 2px solid #bcbcbc;
@@ -539,7 +539,7 @@
                         .inputs_platform {
                             display: flex;
                             textarea {
-                                width: 92%;
+                                width: 90%;
                                 height: 70px;
                                 border: 1.5px solid var(--unnamed-color-bcbcbc);
                                 border: 2px solid #bcbcbc;
@@ -566,7 +566,6 @@
                         }
                     }
                 }
-                
             }
             .card_agree {
                 display: flex;
@@ -621,6 +620,10 @@
 
                 &.loading {
                     padding-right: 2rem;
+                }
+                a {
+                    display: flex;
+                    align-items: center;
                 }
             }
         }

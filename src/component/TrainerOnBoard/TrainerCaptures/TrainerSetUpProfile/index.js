@@ -382,6 +382,8 @@ const TrainerSetUpProfileFC = ({
                 location: workLocation,
                 websiteLink,
                 instaHandle: instagramProfile,
+                willingToTravel: trainerAvailabilityData.willingToTravel,
+                servicableLocation: trainerAvailabilityData.servicableLocation,
                 // youtubeChannel: youtubeLink,
             },
         };
@@ -1159,6 +1161,9 @@ const TrainerSetUpProfileFC = ({
                                                     value={
                                                         trainerAvailabilityData.servicableLocation
                                                     }
+                                                    // value={
+                                                    //     trainerData.websiteLink
+                                                    // }
                                                     // onChange={(e) => {
                                                     //     setTrainerAvailabilityData(
                                                     //         {
@@ -1261,7 +1266,7 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="setup_item1">
+                                        {/* <div className="setup_item1">
                                             <h6>{data.youtube}</h6>
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
@@ -1280,6 +1285,25 @@ const TrainerSetUpProfileFC = ({
                                                         src={Youtube}
                                                         alt="icon"
                                                     />
+                                                </div>
+                                            </div>
+                                        </div> */}
+                                        <div className="setup_item1">
+                                            <h6>{data.web}</h6>
+                                            <div className="inputs_platform">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Add your Web Link"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.websiteLink
+                                                        }
+                                                        name="websiteLink"
+                                                    />
+                                                    <img src={Web} alt="icon" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1304,26 +1328,22 @@ const TrainerSetUpProfileFC = ({
                                         </label>
                                     </div> */}
                                 </div>
-                                <PaymentSection /> 
+                                <PaymentSection />
                                 <div className="card_agree">
-                                        <input
-                                            type="checkbox"
-                                            id="agree"
-                                            name="agree"
-                                            onChange={handleAgreedCheck}
-                                        />
-                                        <label>
-                                            Check here to acknowledge that you
-                                            have read and agree to the Motto
-                                            trainer
-                                            <a
-                                                href="/agreement"
-                                                target="_blank"
-                                            >
-                                                terms and conditions
-                                            </a>
-                                        </label>
-                                    </div>
+                                    <input
+                                        type="checkbox"
+                                        id="agree"
+                                        name="agree"
+                                        onChange={handleAgreedCheck}
+                                    />
+                                    <label>
+                                        Check here to acknowledge that you have
+                                        read and agree to the Motto trainer
+                                        <a href="/agreement" target="_blank">
+                                            terms and conditions
+                                        </a>
+                                    </label>
+                                </div>
                                 <div className="submit_button">
                                     <button
                                         onClick={handleSubmit}

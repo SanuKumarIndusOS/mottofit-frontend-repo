@@ -207,32 +207,31 @@ const TrainerCardFC = ({
                     inPeronAtClientLocationfor2People = "",
                     inPeronAtClientLocationfor3People = "",
                     inPeronAtClientLocationfor4People = "",
-                    inPeronAtTrainerLocationfor2People="",
-                    inPeronAtTrainerLocationfor3People="",
-                    inPeronAtTrainerLocationfor4People="",
-                    virtualSessionfor2People="",
-                    virtualSessionfor3People="",
-                    virtualSessionfor4People="",
+                    inPeronAtTrainerLocationfor2People = "",
+                    inPeronAtTrainerLocationfor3People = "",
+                    inPeronAtTrainerLocationfor4People = "",
+                    virtualSessionfor2People = "",
+                    virtualSessionfor3People = "",
+                    virtualSessionfor4People = "",
                 } = socialSessionPricing || {};
 
                 const {
                     passRatefor3Session = "",
                     passRatefor10Session = "",
                     inPersonAtClientLocation = "",
-                    inPersonAtTrainerLocation="",
-                    virtualSession="",
-                    passRatefor3SessionAtTrainerLocation="",
-                    passRatefor10SessionAtTrainerLocation="",
-                    passRatefor3SessionAtVirtual="",
-                    passRatefor10SessionAtVirtual=""
-
+                    inPersonAtTrainerLocation = "",
+                    virtualSession = "",
+                    passRatefor3SessionAtTrainerLocation = "",
+                    passRatefor10SessionAtTrainerLocation = "",
+                    passRatefor3SessionAtVirtual = "",
+                    passRatefor10SessionAtVirtual = "",
                 } = oneOnOnePricing || {};
 
-                const { 
+                const {
                     inPersonAtclientLocationfor15People = "",
-                    inPersonAttrainerLocationfor15People= "",
-                    virtualSessionfor15People = ""
-                     } = classSessionPricing || {};
+                    inPersonAttrainerLocationfor15People = "",
+                    virtualSessionfor15People = "",
+                } = classSessionPricing || {};
 
                 const storeData = {
                     details: {
@@ -1192,7 +1191,7 @@ const TrainerCardFC = ({
                                         </Accordion>
                                     </div>
                                     <div className="submit_button">
-                                        <Link
+                                        <button
                                             onClick={
                                                 handleChangeToTrainerProfile
                                             }
@@ -1202,7 +1201,7 @@ const TrainerCardFC = ({
                                             Continue To profile{" "}
                                             <ArrowHoverBlacked />
                                             {/* <img src={Arrow} alt="icon" /> */}
-                                        </Link>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
