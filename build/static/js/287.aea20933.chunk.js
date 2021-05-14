@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[287],{351:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Motto Pass Icon Active.1e37dec5.svg"}}]);
-//# sourceMappingURL=287.aea20933.chunk.js.map
