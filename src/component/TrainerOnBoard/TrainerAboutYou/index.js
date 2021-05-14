@@ -313,11 +313,11 @@ const AboutTrainerFC = ({
                                 {/* {!aboutTrainerData.phone && (
                   <span>This input is required</span>
                 )} */}
-                                {aboutTrainerData.phone.length < 11 && (
+                                {/* {aboutTrainerData.phone.length < 11 && (
                                     <span>
                                         Phone Number should contain 10 digits
                                     </span>
-                                )}
+                                )} */}
                                 {/* {errors.phone?.type === "required" && (
                                     <span>This input is required</span>
                                 )}

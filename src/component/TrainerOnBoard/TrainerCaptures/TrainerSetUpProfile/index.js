@@ -105,6 +105,7 @@ const TrainerSetUpProfileFC = ({
         governmentIdNumber: "",
         coverAmount: "",
         virtualMeetingHandle: "",
+        virtualMeetingLink:""
     });
 
     const [trainerAvailabilityData, setTrainerAvailabilityData] =
@@ -268,6 +269,7 @@ const TrainerSetUpProfileFC = ({
             insurance,
             governmentIdNumber,
             coverAmount,
+            virtualMeetingLink
         } = trainerData;
 
         console.log(serviceableLocation);
@@ -327,6 +329,7 @@ const TrainerSetUpProfileFC = ({
                 identity: governmentId,
                 identityNumber: governmentIdNumber,
             },
+            virtualMeetingLink:virtualMeetingLink
         };
         // updateTrainerDetails();
 
@@ -407,6 +410,7 @@ const TrainerSetUpProfileFC = ({
                 willingToTravel: trainerAvailabilityData.willingToTravel,
                 servicableLocation: trainerAvailabilityData.servicableLocation,
                 // youtubeChannel: youtubeLink,
+                
             },
         };
 
@@ -805,7 +809,7 @@ const TrainerSetUpProfileFC = ({
 
                                                         <hr />
                                                         <div className="profile_aside_inner_item">
-                                                            {trainerPersonalData.currentExperience ? (
+                                                            {trainerPersonalData.currentExperience.workLocation ? (
                                                                 <div className="profile_location">
                                                                     <img
                                                                         src={
@@ -822,7 +826,7 @@ const TrainerSetUpProfileFC = ({
                                                                     </h4>
                                                                 </div>
                                                             ) : (
-                                                                "null"
+                                                                ""
                                                             )}
                                                             <div className="profile_location">
                                                                 <img
@@ -871,10 +875,10 @@ const TrainerSetUpProfileFC = ({
                                                     <div className="profile_right_item1">
                                                         {/* <img src={Quote} alt="qoute" /> */}
                                                         <h6>
-                                                            {trainerData.motto}
+                                                            {trainerData.motto ? trainerData.motto :"Motto not Added"}
                                                         </h6>
                                                     </div>
-                                                    <div className="profile_right_item2">
+                                                    <div className="profile_right_item2" style = {{width:"40rem"}}>
                                                         <h4>
                                                             About{" "}
                                                             {
@@ -883,7 +887,7 @@ const TrainerSetUpProfileFC = ({
                                                         </h4>
                                                         <p>
                                                             {
-                                                                trainerData.trainingProcessDescription
+                                                                trainerData.trainingProcessDescription ? trainerData.trainingProcessDescription : "Description not Added"
                                                             }
                                                         </p>
 
@@ -1195,6 +1199,7 @@ const TrainerSetUpProfileFC = ({
                                                                     onChange={
                                                                         handleInputChange
                                                                     }
+                                                                    name="virtualMeetingLink"
                                                                 />
                                                             </div>
                                                         </div>
