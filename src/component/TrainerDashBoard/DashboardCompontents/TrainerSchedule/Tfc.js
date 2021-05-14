@@ -17,7 +17,7 @@ function Tfc() {
         [false, false, false, false, false, false, false, false],
     ];
     //   let date = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    let time = [
+    let early_bird = [
         "05:00 AM",
         "05:30 AM",
         "06:00 AM",
@@ -25,6 +25,45 @@ function Tfc() {
         "07:00 AM",
         "07:30 AM",
     ];
+
+    let rise_shine = [
+        "08:00 AM",
+        "08:30 AM",
+        "09:00 AM",
+        "09:30 AM",
+        "10:00 AM",
+        "10:30 AM",
+    ]; //1
+
+    let mid_day = [
+        "11:30 AM",
+        "12:00 PM",
+        "12:30 PM",
+        "01:00 PM",
+        "01:30 PM",
+        "02:00 PM",
+    ]; //230 - 4
+
+    let happy_hour = [
+        "04:30 PM",
+        "05:00 PM",
+        "05:30 PM",
+        "06:00 PM",
+        "06:30 PM",
+        "07:00 PM",
+    ];
+
+    let never_too_late = [
+        "07:00 PM",
+        "07:30 PM",
+        "08:00 PM",
+        "08:30 PM",
+        "09:00 PM",
+        "09:30 PM",
+    ];
+
+    const [time, setTime] = React.useState(early_bird);
+    const [TimeSlot, setTimeSlot] = React.useState("EarlyBird");
 
     const [cellData, setCellData] = React.useState([]);
     const [selectedCell, setSelectedCell] = React.useState([]);
@@ -57,11 +96,27 @@ function Tfc() {
     React.useEffect(() => {
         getAvailableSlots(startWeek, endWeek);
         populate(startWeek, endWeek);
+
+        console.log(TimeSlot);
     }, []);
 
     React.useEffect(() => {
         populate(startWeek, endWeek);
     }, [aslotKeys]);
+
+    React.useEffect(() => {
+        setSelectedCell([]);
+        console.log("time changed");
+        getAvailableSlots(startWeek, endWeek);
+        populate(startWeek, endWeek);
+    }, [time]);
+
+    //   React.useEffect(() => {
+    //     console.log("time changed");
+    //     // getAvailableSlots(startWeek, endWeek);
+    //     populate(startWeek, endWeek);
+
+    //  }, [TimeSlot])
 
     React.useEffect(() => {
         Object.keys(data).map((item) => {
@@ -122,6 +177,7 @@ function Tfc() {
     }, [cells]);
 
     React.useEffect(() => {
+        // setSelectedCell([]);
         console.log(selectedCell);
         var temp = [];
         var sortDate = [];
@@ -156,7 +212,7 @@ function Tfc() {
                     endDate: sortDate[0].date,
                     availabilitySlot: [
                         {
-                            availableMode: "EarlyBird",
+                            availableMode: TimeSlot,
                             availableSlots: [
                                 sortDate[0].time +
                                     "-" +
@@ -186,6 +242,8 @@ function Tfc() {
                     });
             }
         }
+
+        // setCells(tempcells)
     }, [selectedCell]);
 
     const PreviousWeek = () => {
@@ -250,12 +308,21 @@ function Tfc() {
         var startDate = start.format("YYYY-MM-DD");
         var endDate = end.format("YYYY-MM-DD");
         console.log(startDate, endDate);
+        console.log(
+            "http://doodlebluelive.com:2307/v1/trainer/calenderView?startDate=" +
+                startDate +
+                "&endDate=" +
+                endDate +
+                "&timeBlock=" +
+                TimeSlot
+        );
         fetch(
             "http://doodlebluelive.com:2307/v1/trainer/calenderView?startDate=" +
                 startDate +
                 "&endDate=" +
                 endDate +
-                "&timeBlock=EarlyBird",
+                "&timeBlock=" +
+                TimeSlot,
             {
                 method: "GET", // or 'PUT'
                 headers: {
@@ -326,9 +393,7 @@ function Tfc() {
                     </td>
                 </th>
                 <tr>
-                    <td disabled className="time_show">
-                        5:00 AM
-                    </td>
+                    <td disabled>{time[0]}</td>
                     {cellData[0].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -351,9 +416,7 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled className="time_show">
-                        5:30 AM
-                    </td>
+                    <td disabled>{time[1]}</td>
                     {cellData[1].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -375,9 +438,7 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled className="time_show">
-                        6:00 AM
-                    </td>
+                    <td disabled>{time[2]}</td>
                     {cellData[2].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -399,9 +460,7 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled className="time_show">
-                        6:30 AM
-                    </td>
+                    <td disabled>{time[3]}</td>
                     {cellData[3].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -423,9 +482,7 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled className="time_show">
-                        7:00 AM
-                    </td>
+                    <td disabled>{time[4]}</td>
                     {cellData[4].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -447,9 +504,7 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled className="time_show">
-                        7:30 AM
-                    </td>
+                    <td disabled>{time[5]}</td>
                     {cellData[5].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -488,6 +543,43 @@ function Tfc() {
                         </div>
                         <img src={NextIcon} onClick={NextWeek} /> &ensp; &ensp;
                     </div>
+                    <select
+                        value={TimeSlot}
+                        onChange={(e) => {
+                            setTimeSlot(e.target.value);
+                            console.log(e.target.value);
+                            if (e.target.value === "EarlyBird") {
+                                setTime(early_bird);
+                                console.log("early_bird");
+                            }
+
+                            if (e.target.value === "RiseAndShine") {
+                                setTime(rise_shine);
+                                console.log("RiseAndShine");
+                            }
+
+                            if (e.target.value === "MidDayBreak") {
+                                setTime(mid_day);
+                                console.log("MidDayBreak");
+                            }
+
+                            if (e.target.value === "HappyHours") {
+                                setTime(happy_hour);
+                                console.log("HappyHours");
+                            }
+
+                            if (e.target.value === "NeverTooLate") {
+                                setTime(never_too_late);
+                                console.log("NeverTooLate");
+                            }
+                        }}
+                    >
+                        <option value="EarlyBird">Early Bird</option>
+                        <option value="RiseAndShine">Rise & Shine</option>
+                        <option value="MidDayBreak">Mid-Day Break</option>
+                        <option value="HappyHours">Happy Hour</option>
+                        <option value="NeverTooLate">Never Too Late</option>
+                    </select>
                     {tableData}
                 </div>
                 <ButtonSection />

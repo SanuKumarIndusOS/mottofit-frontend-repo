@@ -1,4 +1,5 @@
 import React from "react";
+import AdminTrainerSection from "../AdminTrainerSection";
 import "./styles.scss";
 
 const AdminDashboard = () => {
@@ -34,6 +35,7 @@ const AdminDashboard = () => {
                             </div>
                         </div>
                     </div>
+                    <AdminTrainerSection />
                 </div>
             </div>
         </div>
