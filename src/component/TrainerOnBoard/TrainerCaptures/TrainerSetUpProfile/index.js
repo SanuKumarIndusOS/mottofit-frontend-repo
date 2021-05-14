@@ -1148,6 +1148,7 @@ const TrainerSetUpProfileFC = ({
                                                 >
                                                     In Person
                                                 </button>
+
                                                 {/* <button
                                                     onClick={(e) =>
                                                         handleInputChange(
@@ -1167,7 +1168,29 @@ const TrainerSetUpProfileFC = ({
                                                     Outdoors
                                                 </button> */}
                                             </div>
+                                            <div className="social_meeting_links">
+                                                {trainerData?.trainingLocation?.includes(
+                                                    "Online"
+                                                ) ? (
+                                                    // <div className="setup_ite1">
+                                                    <>
+                                                        <h5>
+                                                            Add your Google or
+                                                            Zoom meeting link
+                                                        </h5>
+                                                        <div className="inputs_platform">
+                                                            <div className="iconwrapper">
+                                                                <input
+                                                                    type="text"
+                                                                    placeholder="Add a Google or Zoom meeting link"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                ) : null}
+                                            </div>
                                         </div>
+
                                         <div className="setup_item1">
                                             <h6>{data.serviceable}</h6>
                                             <div className="inputs_platform">
@@ -1199,6 +1222,7 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div className="item_3">
                                             <h6>
                                                 Do you have a facility or

@@ -178,6 +178,7 @@ function Tfc() {
                     .then((data) => {
                         console.log("Success:", data);
                         alert("Slot Added");
+                        setCells(tempcells);
                         getAvailableSlots(startWeek, endWeek);
                     })
                     .catch((error) => {

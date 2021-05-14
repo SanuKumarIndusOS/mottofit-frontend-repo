@@ -18,13 +18,13 @@ export const SideBarRouteDataAdmin = [
     },
     {
         title: "Trainers",
-        path: "/admins/dashboard/session",
+        path: "/admins/trainer",
         icon: <img src={MessageIcon} alt="icon" />,
     },
 
     {
         title: "Users",
-        path: "/admins/dashboard/message",
+        path: "/admins/user",
         icon: <img src={MessageIcon} alt="icon" />,
     },
     {

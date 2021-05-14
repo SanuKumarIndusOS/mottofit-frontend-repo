@@ -72,7 +72,23 @@ const routers = [
                 auth: false,
                 exact: true,
             },
+            {
+                path: "/trainer",
+                componentPath: "pages/AdminDashboard/AdminTrainer/AdminTrainer",
+                name: "AdminTrainer",
+                auth: false,
+                exact: true,
+            },
         ],
+        // childrens: [
+        //     {
+        //         path: "/trainer",
+        //         componentPath: "pages/AdminDashboard/AdminTrainer/AdminTrainer",
+        //         name: "AdminTrainer",
+        //         auth: false,
+        //         exact: true,
+        //     },
+        // ],
     },
 
     {
