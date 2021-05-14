@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[291],{349:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Schedule Slot Icon.40eb0810.svg"}}]);
-//# sourceMappingURL=291.7ca39100.chunk.js.map

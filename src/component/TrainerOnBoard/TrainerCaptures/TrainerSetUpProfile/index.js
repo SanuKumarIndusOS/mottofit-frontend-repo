@@ -410,7 +410,6 @@ const TrainerSetUpProfileFC = ({
                 willingToTravel: trainerAvailabilityData.willingToTravel,
                 servicableLocation: trainerAvailabilityData.servicableLocation,
                 // youtubeChannel: youtubeLink,
-                
             },
         };
 
