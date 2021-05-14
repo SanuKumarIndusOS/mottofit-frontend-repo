@@ -429,7 +429,7 @@ const TrainerSetUpProfileFC = ({
     const handleAgreedCheck = () => {
         setAgreed(!agreed);
     };
-    debugger;
+    // debugger;
     return (
         <>
             <div className="outter_setup_container container">
@@ -472,13 +472,17 @@ const TrainerSetUpProfileFC = ({
                                     {/* <div className="profile"> */}
                                     <div className="profile_wrapper_container ">
                                         <div className="profile_header">
-                                            <div className="inner_profile container">
+                                            <div className="inner_profile container" >
+                                                {/* {trainerPersonalData.profilePicture ? ( */}
                                                 <img
+                                                    onerror='this.style.display = "none"'
                                                     src={
                                                         trainerPersonalData.profilePicture
                                                         // : "https://1m19tt3pztls474q6z46fnk9-wpengine.netdna-ssl.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"
                                                     }
+                                                    alt="Image not Added"
                                                 />
+
 
                                                 <div className="profile_header_inner">
                                                     <h2>
@@ -1274,6 +1278,7 @@ const TrainerSetUpProfileFC = ({
                                                     //     );
                                                     // }}
                                                     onChange={handleInputChange}
+                                                    value={trainerPersonalData.trainingFacilityLocation ? trainerPersonalData.trainingFacilityLocation : ""}
                                                 />
                                             </div>
                                         </div>
@@ -1333,6 +1338,7 @@ const TrainerSetUpProfileFC = ({
                                                     //     );
                                                     // }}
                                                     onChange={handleInputChange}
+                                                    value={trainerPersonalData.servicableLocation ? trainerPersonalData.servicableLocation : ""}
                                                 />
 
                                                 <img
