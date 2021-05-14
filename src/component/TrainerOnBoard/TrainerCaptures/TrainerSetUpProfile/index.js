@@ -104,6 +104,7 @@ const TrainerSetUpProfileFC = ({
         insurance: "",
         governmentIdNumber: "",
         coverAmount: "",
+        virtualMeetingHandle: "",
     });
 
     const [trainerAvailabilityData, setTrainerAvailabilityData] =
@@ -383,6 +384,7 @@ const TrainerSetUpProfileFC = ({
             currentExperience = {},
             certification = [],
             serviceableLocation = [],
+            // virtualMeetingLink = "",
         } = trainerPersonalData || {};
 
         const { workLocation = "" } = currentExperience || {};
@@ -401,6 +403,7 @@ const TrainerSetUpProfileFC = ({
                 location: workLocation,
                 websiteLink,
                 instaHandle: instagramProfile,
+                // virtualMeetingHandle: virtualMeetingLink,
                 willingToTravel: trainerAvailabilityData.willingToTravel,
                 servicableLocation: trainerAvailabilityData.servicableLocation,
                 // youtubeChannel: youtubeLink,
@@ -472,7 +475,7 @@ const TrainerSetUpProfileFC = ({
                                     {/* <div className="profile"> */}
                                     <div className="profile_wrapper_container ">
                                         <div className="profile_header">
-                                            <div className="inner_profile container" >
+                                            <div className="inner_profile container">
                                                 {/* {trainerPersonalData.profilePicture ? ( */}
                                                 <img
                                                     onerror='this.style.display = "none"'
@@ -482,7 +485,6 @@ const TrainerSetUpProfileFC = ({
                                                     }
                                                     alt="Image not Added"
                                                 />
-
 
                                                 <div className="profile_header_inner">
                                                     <h2>
@@ -1184,9 +1186,15 @@ const TrainerSetUpProfileFC = ({
                                                         </h5>
                                                         <div className="inputs_platform">
                                                             <div className="iconwrapper">
-                                                                <input
+                                                                <textarea
                                                                     type="text"
                                                                     placeholder="Add a Google or Zoom meeting link"
+                                                                    value={
+                                                                        trainerData.virtualMeetingLink
+                                                                    }
+                                                                    onChange={
+                                                                        handleInputChange
+                                                                    }
                                                                 />
                                                             </div>
                                                         </div>
@@ -1278,7 +1286,11 @@ const TrainerSetUpProfileFC = ({
                                                     //     );
                                                     // }}
                                                     onChange={handleInputChange}
-                                                    value={trainerPersonalData.trainingFacilityLocation ? trainerPersonalData.trainingFacilityLocation : ""}
+                                                    value={
+                                                        trainerPersonalData.trainingFacilityLocation
+                                                            ? trainerPersonalData.trainingFacilityLocation
+                                                            : ""
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -1338,7 +1350,11 @@ const TrainerSetUpProfileFC = ({
                                                     //     );
                                                     // }}
                                                     onChange={handleInputChange}
-                                                    value={trainerPersonalData.servicableLocation ? trainerPersonalData.servicableLocation : ""}
+                                                    value={
+                                                        trainerPersonalData.servicableLocation
+                                                            ? trainerPersonalData.servicableLocation
+                                                            : ""
+                                                    }
                                                 />
 
                                                 <img
