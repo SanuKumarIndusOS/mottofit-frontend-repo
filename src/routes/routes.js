@@ -173,6 +173,23 @@ const routers = [
             },
         ],
     },
+    {
+        component: "MainLayout",
+        path: "/privacy",
+
+        auth: false,
+        name: "privacy",
+        exact: false,
+        childrens: [
+            {
+                path: "/",
+                componentPath: "pages/Privacy/Privacy",
+                name: "privacyBase",
+                auth: false,
+                exact: true,
+            },
+        ],
+    },
 
     {
         component: "MainLayout",

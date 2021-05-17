@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[306],{374:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/logo.927f1d60.svg"}}]);
+//# sourceMappingURL=306.fad20234.chunk.js.map

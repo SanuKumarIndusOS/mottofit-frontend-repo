@@ -271,7 +271,17 @@ const TrainerCardFC = ({
             }
         });
     }, []);
-
+    // const least = (e) => {
+    //     e.preventDefault();
+    //     const array = [
+    //         trainerData.individualChargeVt,
+    //         trainerData.individualChargeTl,
+    //         trainerData.individualCharge,
+    //     ];
+    //     const low = Math.min(...array);
+    //     console.log(low);
+    //     return <p>{low}</p>;
+    // };
     const closeIcon = <img src={CloseIcon} alt="close" />;
 
     return (
@@ -1192,6 +1202,8 @@ const TrainerCardFC = ({
                                             </span>
                                         )}
                                     </div>
+                                    {/* <button onClick={least}>try</button>
+                                    <p>{least.low} dh</p> */}
                                     <div className="submit_button">
                                         <button
                                             onClick={handleSubmit(

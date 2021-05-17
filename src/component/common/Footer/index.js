@@ -141,7 +141,7 @@ const Footer = () => {
                                                     </li>
                                                     <img src={Line} alt="svg" />
                                                     <li>
-                                                        <a href="/">
+                                                        <a href="/privacy">
                                                             Privacy Policy{" "}
                                                         </a>
                                                     </li>

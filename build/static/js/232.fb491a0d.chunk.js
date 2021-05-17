@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[232],{501:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Drop Down.8f8bcb1b.svg"}}]);
+//# sourceMappingURL=232.fb491a0d.chunk.js.map
