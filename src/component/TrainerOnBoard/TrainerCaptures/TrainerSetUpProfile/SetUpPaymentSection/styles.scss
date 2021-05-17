@@ -47,10 +47,12 @@
                     font-weight: 500;
                 }
                 .inputs_payment1 {
-                    display: flex;
+                    display: grid;
+                    grid-template-columns: 33% 33% 23% 9%;
+                    grid-template-rows: auto;
                     align-items: center;
-                    justify-content: space-between;
                     width: 1100px;
+                    grid-column-gap: 20px;
                     select {
                         background: transparent;
                         width: 130%;
@@ -92,11 +94,10 @@
                     }
 
                     input {
-                        width: 90% !important;
+                        width: 100% !important;
                         margin: 1em 1em 1em 0;
                         border-radius: 50px;
                         background: transparent;
-                        width: 500px;
                         height: 45px;
                         font-size: 22px;
                         color: #161616;

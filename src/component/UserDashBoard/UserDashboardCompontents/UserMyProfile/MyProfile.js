@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
-import Select from "react-select";
+// import Select from "react-select";
 import Profile from "../../../../assets/files/SVG/Profile Picture.svg";
 import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
@@ -125,7 +125,7 @@ const MyProfile = () => {
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>Location </label>
-                                                    <Select
+                                                    {/* <Select
                                                         defaultValue={
                                                             selectedOption
                                                         }
@@ -134,7 +134,7 @@ const MyProfile = () => {
                                                         }
                                                         options={location}
                                                         className="profile_location_select"
-                                                    />
+                                                    /> */}
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>
@@ -144,7 +144,7 @@ const MyProfile = () => {
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>Gender </label>
-                                                    <Select
+                                                    {/* <Select
                                                         defaultValue={
                                                             selectedOption
                                                         }
@@ -153,7 +153,7 @@ const MyProfile = () => {
                                                         }
                                                         options={gender}
                                                         className="profile_location_select"
-                                                    />
+                                                    /> */}
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>Email </label>

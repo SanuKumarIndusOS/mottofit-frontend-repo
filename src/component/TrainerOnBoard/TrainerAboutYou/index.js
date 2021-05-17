@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import Instagram from "../../../assets/files/SVG/Insta Icon.svg";
 import Web from "../../../assets/files/SVG/Web Icon.svg";
-import DropDown from "../../../assets/files/SVG/Drop Down 4.svg";
 import { Link, useHistory } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { useForm } from "react-hook-form";
@@ -17,14 +16,49 @@ import { history } from "helpers";
 import axios from "axios";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { Dropdown } from "reactjs-dropdown-component";
+import "./dropdown.scss";
+// import useForm from "./useForm";
+// import validateInfo from "./validation";
 
+// import { Multiselect } from "multiselect-react-dropdown";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
+// import Select from "react-select";
+const locations = [
+    {
+        label: "New York City",
+        value: "New York City",
+    },
+    {
+        label: "Miami",
+        value: "Miami",
+    },
+    {
+        label: "Hamptons",
+        value: "Hamptons",
+    },
+    {
+        label: "Palm Beach",
+        value: "Palm Beach",
+    },
+];
 
+const gender = [
+    {
+        label: "Male",
+        value: "male",
+    },
+    {
+        label: "Female",
+        value: "female",
+    },
+];
 const AboutTrainerFC = ({
     updateTrainerDetails,
     details,
     trainerPersonalData,
+    // submitForm,
 }) => {
     //   const [location, setLocation] = useState("");
     //   const [dob, setDob] = useState(0 - 0 - 0);
@@ -35,7 +69,13 @@ const AboutTrainerFC = ({
     //   const [instagram, setInstagram] = useState("");
 
     const { register, errors, handleSubmit } = useForm();
-
+    // const {
+    //     aboutTrainerData,
+    //     handleFormSubmit,
+    //     error,
+    //     setAboutTrainerData,
+    //     // dataSubmit,
+    // } = useForm(validateInfo, submitForm);
     const [aboutTrainerData, setAboutTrainerData] = useState({
         location: "",
         dob: "",
@@ -67,9 +107,8 @@ const AboutTrainerFC = ({
                 instaHandle: aboutTrainerData.instagram,
             },
         };
+        console.log(storeData);
 
-        console.log(storeData, aboutTrainerData);
-        // setError(validation(aboutTrainerData));
         history.push(`/trainer/background`);
         updateTrainerDetails(storeData);
     };
@@ -121,7 +160,10 @@ const AboutTrainerFC = ({
                     </p> */}
                     <br></br>
                     <div className="outter_form">
-                        <form className="wrapper_inputs">
+                        <form
+                            className="wrapper_inputs"
+                            // onSubmit={handleFormSubmit}
+                        >
                             <div className="wrapper_innerInput">
                                 <label>Name*</label>
                                 <input
@@ -136,50 +178,43 @@ const AboutTrainerFC = ({
                                         })
                                     }
                                     value={aboutTrainerData.firstName}
-                                    ref={register({
-                                        required: "This filed is required",
-                                        minLength: {
-                                            value: 2,
-                                            message: "Enter a valid name",
-                                        },
-                                    })}
+                                    // ref={register({
+                                    //     required: "This filed is required",
+                                    //     minLength: {
+                                    //         value: 2,
+                                    //         message: "Enter a valid name",
+                                    //     },
+                                    // })}
+                                    name="firstName"
                                 />
-                                {errors.name && (
-                                    <span>{errors.name.message}</span>
+                                {error.firstName && (
+                                    <span>{error.firstName}</span>
                                 )}
                             </div>
 
                             <div className="wrapper_innerInput">
                                 <label className="bg_down">Location*</label>
                                 <div className="iconwrapper">
-                                    <select
-                                        required
+                                    <Dropdown
+                                        className="custom_dropdown"
+                                        title="Select Location"
+                                        list={locations}
                                         value={aboutTrainerData.location}
-                                        onChange={(e) =>
+                                        onChange={(e) => {
                                             setAboutTrainerData({
                                                 ...aboutTrainerData,
-                                                location: e.target.value,
-                                            })
-                                        }
+                                                location: e.value,
+                                            });
+                                        }}
                                         name="location"
-                                        ref={register({
-                                            required:
-                                                "Please select the location",
-                                        })}
-                                    >
-                                        <option value="" disabled selected>
-                                            Select a Motto City
-                                        </option>
-                                        <option>New York City</option>
-                                        <option>Miami</option>
-                                        <option>Hamptons</option>
-                                        <option>Palm Beach</option>
-                                    </select>
-                                    <img src={DropDown} alt="icon" />
+                                    />
                                 </div>
-                                {errors.location && (
+                                {/* {errors.location && (
                                     <span>{errors.location.message}</span>
-                                )}
+                                )} */}
+                                {/* {error.location && (
+                                    <span>{error.location}</span>
+                                )} */}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
@@ -205,35 +240,26 @@ const AboutTrainerFC = ({
                             <div className="wrapper_innerInput">
                                 <label>Gender*</label>
                                 <div className="iconwrapper">
-                                    <select
-                                        required
-                                        // name="gender"
-                                        // id="gender"
+                                    <Dropdown
+                                        className="custom_dropdown"
+                                        title="Select Gender"
+                                        list={gender}
                                         value={aboutTrainerData.gender}
-                                        onChange={(e) =>
+                                        onChange={(e) => {
                                             setAboutTrainerData({
                                                 ...aboutTrainerData,
-                                                gender: e.target.value,
-                                            })
-                                        }
+                                                gender: e.value,
+                                            });
+                                        }}
                                         name="gender"
-                                        ref={register({
-                                            required:
-                                                "Please select the gender",
-                                        })}
-                                    >
-                                        <option value="" disabled selected>
-                                            Select your Gender
-                                        </option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        {/* <option>Others</option> */}
-                                    </select>
-                                    <img src={DropDown} alt="icon" />
+                                        // name="gender"
+                                        // ref={register({
+                                        //     required:
+                                        //         "Please select the gender",
+                                        // })}
+                                    />
                                 </div>
-                                {errors.gender && (
-                                    <span>{errors.gender.message}</span>
-                                )}
+                                {/* {error.gender && <span>{error.gender}</span>} */}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Email*</label>
@@ -248,16 +274,16 @@ const AboutTrainerFC = ({
                                         })
                                     }
                                     name="email"
-                                    ref={register({
-                                        pattern:
-                                            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
-                                        required: true,
-                                        minLength: 8,
-                                    })}
+                                    // ref={register({
+                                    //     pattern:
+                                    //         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
+                                    //     required: true,
+                                    //     minLength: 8,
+                                    // })}
                                 />
                                 {/* {error.email && (<span>{error.email}</span>)} */}
 
-                                {errors.email?.type === "required" && (
+                                {/* {errors.email?.type === "required" && (
                                     <span>This input is required</span>
                                 )}
                                 {errors.email?.type === "minLength" && (
@@ -270,7 +296,7 @@ const AboutTrainerFC = ({
                                     <span>
                                         Please enter a valid email address
                                     </span>
-                                )}
+                                )} */}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Phone*</label>
@@ -313,11 +339,13 @@ const AboutTrainerFC = ({
                                 {/* {!aboutTrainerData.phone && (
                   <span>This input is required</span>
                 )} */}
-                                {aboutTrainerData.phone && aboutTrainerData.phone.length < 11 && (
-                                    <span>
-                                        Phone Number should contain 10 digits
-                                    </span>
-                                )}
+                                {aboutTrainerData.phone &&
+                                    aboutTrainerData.phone.length < 11 && (
+                                        <span>
+                                            Phone Number should contain 10
+                                            digits
+                                        </span>
+                                    )}
                                 {/* {errors.phone?.type === "required" && (
                                     <span>This input is required</span>
                                 )}

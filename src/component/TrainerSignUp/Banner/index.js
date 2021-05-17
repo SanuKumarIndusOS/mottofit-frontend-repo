@@ -23,7 +23,10 @@ import "react-phone-input-2/lib/style.css";
 const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     const history = useHistory();
 
-    const { data, handleFormSubmit, error, setData,dataSubmit } = useForm( validateInfo,submitForm);
+    const { data, handleFormSubmit, error, setData, dataSubmit } = useForm(
+        validateInfo,
+        submitForm
+    );
 
     const onChangeValue = (e) => {
         e.persist();
@@ -33,7 +36,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
     const [apiError, setApiError] = useState("");
-    const { register, errors, handleSubmit, watch } = useForm();
+    // const { register, errors, handleSubmit, watch } = useForm();
     const showPassword = () => {
         setPasswordShown(passwordShown ? false : true);
     };
@@ -42,7 +45,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     };
 
     async function trainerSignUp() {
-        
         const payload = {
             name: data.name,
             email: data.email,
@@ -53,19 +55,9 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         };
         console.log(payload);
 
-        // const requestOptions = {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Accept: "application/json",
-        //   },
-        //   body: JSON.stringify(item),
-        // };
-
         const { trainerSignUp } = AuthApi;
-        
-     if (dataSubmit){
-       
+
+        if (dataSubmit) {
             loginOrSignupAct(trainerSignUp, payload)
                 .then(({ data }) => {
                     // console.log(data);
@@ -74,29 +66,9 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                 .catch((error) => {
                     setApiError(error.message);
                 });
-     }
-        
-
-        // fetch("http://doodlebluelive.com:2307/v1/trainer/sign-up", requestOptions)
-        //   .then(async (response) => {
-        //     const data = await response.json();
-        //     localStorage.setItem("user-info", JSON.stringify(data));
-        //     if (response.ok) {
-        //     } else {
-        //       setApiError("Email already registered", response.statusText);
-        //     }
-        //   })
-            
+        }
     }
 
-    // const [phone, setPhone] = useState({
-    //     phoneNumber: "",
-    // });
-    // const handeOnChange = (value) => {
-    //     setPhone({
-    //         phoneNumber: value,
-    //     });
-    // };
     return (
         <>
             <div className="banner_container_trainer">

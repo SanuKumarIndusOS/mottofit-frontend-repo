@@ -20,6 +20,7 @@ import { set } from "date-fns";
 import { Modal } from "react-responsive-modal";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import "./trainer.sass";
+import { useForm } from "react-hook-form";
 
 const CyanRadio = withStyles({
     root: {
@@ -48,6 +49,8 @@ const TrainerCardFC = ({
         pricingDesc:
             "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
     };
+
+    const { register, errors, handleSubmit } = useForm();
 
     const [checkedBoxing, setCheckedBoxing] = React.useState(false);
     const [open, setOpen] = useState(false);
@@ -422,37 +425,22 @@ const TrainerCardFC = ({
                                             </p>
                                         </div>
                                         <div className="card-button">
-                                            {/* <button
-                                                ref={hoverRef}
+                                            <button
+                                                // ref={hoverRef}
                                                 style={{
                                                     backgroundColor: "#53BFD2",
                                                 }}
-                                                onClick={() => {
-                                                  console.log(bestMatchData[data]);
-                                                  history.push({
-                                                    pathname: "/user/scheduler",
-                                                    state: { trainerId: bestMatchData[data]["id"], trainerData: bestMatchData[data] },
-                                                  });
-                                                }}
                                             >
-                                                book a session */}
-                                                {/* <img src={onImage} alt="icon" /> */}
-                                                {/* {isHovered ? (
-                              <img src={onHoverImage} alt="icon" />
-                            ) : (
-                              <img src={onImage} alt="icon" />
-                            )} */}
-                                                {/* <p>
+                                                book a session
+                                                <p>
                                                     from{" "}
                                                     <span>
-                                {
-                                  bestMatchData[data]["oneOnOnePricing"][
-                                    "inPersonAtClientLocation"
-                                  ]
-                                }
-                              </span>
+                                                        {
+                                                            trainerData.individualCharge
+                                                        }
+                                                    </span>
                                                 </p>
-                                            </button> */}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -822,7 +810,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Individual charge"
+                                                        placeholder="Individual Charge"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -830,6 +818,10 @@ const TrainerCardFC = ({
                                                             trainerData.individualCharge
                                                         }
                                                         name="individualCharge"
+                                                        ref={register({
+                                                            required:
+                                                                "Please enter Individual Charge (atleast one)",
+                                                        })}
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -839,7 +831,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                        placeholder="Social Session (Total for 2 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -857,7 +849,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                        placeholder="Social Session (Total for 3 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -874,7 +866,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                        placeholder="Social Session (Total for 4 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -946,7 +938,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Individual charge"
+                                                        placeholder="Individual Charge"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -963,7 +955,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                        placeholder="Social Session (Total for 2 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -981,7 +973,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                        placeholder="Social Session (Total for 3 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -998,7 +990,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                        placeholder="Social Session (Total for 4 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -1070,7 +1062,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Individual charge"
+                                                        placeholder="Individual Charge"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -1087,7 +1079,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                        placeholder="Social Session (Total for 2 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -1105,7 +1097,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                        placeholder="Social Session (Total for 3 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -1122,7 +1114,7 @@ const TrainerCardFC = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                        placeholder="Social Session (Total for 4 People)"
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -1190,11 +1182,21 @@ const TrainerCardFC = ({
                                             </div>
                                         </Accordion>
                                     </div>
+                                    <div className="error_span">
+                                        {errors.individualCharge && (
+                                            <span>
+                                                {
+                                                    errors.individualCharge
+                                                        .message
+                                                }
+                                            </span>
+                                        )}
+                                    </div>
                                     <div className="submit_button">
                                         <button
-                                            onClick={
+                                            onClick={handleSubmit(
                                                 handleChangeToTrainerProfile
-                                            }
+                                            )}
                                             type="submit"
                                             // onClick={handleTrainerAvailability}
                                         >

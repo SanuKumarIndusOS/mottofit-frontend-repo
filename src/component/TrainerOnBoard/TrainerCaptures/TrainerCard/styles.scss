@@ -335,6 +335,16 @@
                         }
                     }
                 }
+                .error_span {
+                    text-align: center;
+                    width: 100%;
+                    span {
+                        font-family: Montserrat;
+                        text-align: center;
+                        color: red;
+                        font-weight: 500;
+                    }
+                }
                 .submit_button {
                     display: flex;
                     align-items: center;

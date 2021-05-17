@@ -1,30 +1,24 @@
 import { useState, useEffect } from "react";
 
 const useForm = (validate, callback) => {
-    const [data, setData] = useState({
-        name: "",
+    const [aboutTrainerData, setAboutTrainerData] = useState({
+        location: "",
+        dob: "",
         email: "",
-        phoneNumber: "",
-        password: "",
-        cpassword: "",
-        signUpType: "email",
+        gender: "",
+        phone: "",
+        websiteURL: "",
+        instagram: "",
+        firstName: "",
     });
 
     const [error, setError] = useState({});
-    // const [error, setError] = useState({
-    //     name: "",
-    //     email: "",
-    //     phoneNumber: "",
-    //     password: "",
-    //     cpassword: "",
-    // });
     const [isSubmit, setSubmit] = useState(false);
-
     const [dataSubmit, setdataSubmit] = useState(false);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const errorData = validate(data);
+        const errorData = validate(aboutTrainerData);
         setError(errorData);
         setSubmit(true);
     };
@@ -35,6 +29,12 @@ const useForm = (validate, callback) => {
         }
     }, [error]);
 
-    return { data, handleFormSubmit, error, setData, dataSubmit };
+    return {
+        setAboutTrainerData,
+        handleFormSubmit,
+        error,
+        aboutTrainerData,
+        dataSubmit,
+    };
 };
 export default useForm;

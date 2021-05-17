@@ -334,13 +334,16 @@
                             margin-bottom: 16px;
                         }
 
-                        .inputs_experience {
-                            display: flex;
-                            justify-content: space-between;
+                        .inputs_experience_drop {
+                            display: grid;
+                            grid-template-columns: 50% 50%;
+                            grid-template-rows: auto;
+                            align-items: center;
+                            grid-column-gap: 20px;
                             width: 100%;
                             input {
                                 background: transparent;
-                                width: 50%;
+                                width: 100%;
                                 margin: 0.5em 1em 0.5em 0;
                                 padding: 0.5em 1em;
                                 border-radius: 50px;

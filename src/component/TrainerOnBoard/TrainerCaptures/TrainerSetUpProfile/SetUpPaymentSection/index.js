@@ -1,8 +1,26 @@
 import React from "react";
 import "./styles.scss";
+import { Dropdown } from "reactjs-dropdown-component";
+import "./dropdown.scss";
 // import ArrowHover from "../../../../common/ButtonIcon/ArrowHover";
 import BlueHoverButton from "component/common/BlueArrowButton";
-const PaymentSection = ({onChange, trainerData}) => {
+
+const info = [
+    {
+        label: "Passport",
+        value: "Passport",
+    },
+    {
+        value: "Driver's Licence",
+        label: "Driver's Licence",
+    },
+    {
+        label: "State Issued ID",
+        value: "State Issued ID",
+    },
+];
+
+const PaymentSection = ({ onChange, trainerData, setTrainerData }) => {
     const data = {
         heading: "Security & Payment Information",
         describe:
@@ -42,28 +60,32 @@ const PaymentSection = ({onChange, trainerData}) => {
                         <div className="payment_item1">
                             <h6>{data.id}</h6>
                             <div className="inputs_payment1">
-                                <select
-                                    // onChange={handleInputChange}
-                                >
-                                    <option value="" disabled selected>
-                                        Select type of ID
-                                    </option>
-                                    <option>New York</option>
-                                    <option>Miami</option>
-                                    <option>Hampton</option>
-                                    <option>Palm Beach</option>
-                                </select>
+                                <Dropdown
+                                    title="Select government ID’s
+                                    "
+                                    list={info}
+                                    value={trainerData.identityNameUS}
+                                    onChange={(e) => {
+                                        setTrainerData({
+                                            ...trainerData,
+                                            identityNameUS: e.value,
+                                        });
+                                    }}
+                                    name="identityNameUS"
+                                />
                                 <input
                                     type="text"
                                     placeholder="Add your ID Number"
-                                    value={trainerData.governmentIdNumber} onChange={handleChange}
+                                    value={trainerData.governmentIdNumber}
+                                    onChange={handleChange}
                                     name="governmentIdNumber"
                                 />
                                 <input
                                     type="file"
                                     name="governmentId"
                                     className="custom-file-input"
-                                    value={trainerData.governmentId} onChange={handleChange}
+                                    value={trainerData.governmentId}
+                                    onChange={handleChange}
                                 />
                                 <a className="checkarrow">
                                     <BlueHoverButton />
@@ -73,72 +95,32 @@ const PaymentSection = ({onChange, trainerData}) => {
                         <div className="payment_item1">
                             <h6>{data.insurance}</h6>
                             <div className="inputs_payment1">
-                                <select>
-                                    <option value="" disabled selected>
-                                        Insurance Plan Provider
-                                    </option>
-                                    <option>New York</option>
-                                    <option>Miami</option>
-                                    <option>Hampton</option>
-                                    <option>Palm Beach</option>
-                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Enter your Insurance Name"
+                                    value={trainerData.insuranceNameUS}
+                                    onChange={handleChange}
+                                    name="insuranceNameUS"
+                                />
                                 <input
                                     type="text"
                                     placeholder="Add your Cover Amount"
-                                    value={trainerData.coverAmount} onChange={handleChange}
+                                    value={trainerData.coverAmount}
+                                    onChange={handleChange}
                                     name="coverAmount"
                                 />
                                 <input
                                     type="file"
                                     name="insurance"
                                     className="custom-file-input"
-                                    value={trainerData.insurance} onChange={handleChange}
+                                    value={trainerData.insurance}
+                                    onChange={handleChange}
                                 />
                                 <a className="checkarrow">
                                     <BlueHoverButton />
                                 </a>
                             </div>
                         </div>
-                        {/* <div className="payment_item2">
-                            <h6>{data.payment}</h6>
-                            <div className="inputs_payment">
-                                <select
-                                    value=""
-                                    // onChange={handleInputChange}
-                                >
-                                    <option value="" disabled selected>
-                                        Bank Name
-                                    </option>
-                                    <option>New York</option>
-                                    <option>Miami</option>
-                                    <option>Hampton</option>
-                                    <option>Palm Beach</option>
-                                </select> */}
-                                {/* <select
-                                    name="bank"
-                                    id="payment"
-                                    defaultValue={"Default"}
-                                    className={dropdowm ? "active" : "option"}
-                                    onChange={dropdowmColorChange}
-                                >
-                                    <option value="Default" disabled hidden>
-                                        Bank Name
-                                    </option>
-
-                                    <option value="hdfc">HDFC</option>
-                                    <option value="america">
-                                        American Bank
-                                    </option>
-                                    <option value="national">National</option>
-                                    <option value="united">United</option>
-                                </select> */}
-                                {/* <input
-                                    type="text"
-                                    placeholder="Add your Account Number"
-                                />
-                            </div>
-                        </div> */}
-                        {/* </form> */}
                     </div>
                 </div>
             </div>

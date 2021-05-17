@@ -92,6 +92,12 @@
                     input:focus {
                         outline: none;
                     }
+                    .custom_dropdown {
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        font-weight: 500;
+                        color: #696969;
+                    }
 
                     select {
                         background: transparent;
@@ -173,7 +179,7 @@
 }
 
 .react-tel-input {
-    >div{
-        display:none;
+    > div {
+        display: none;
     }
 }

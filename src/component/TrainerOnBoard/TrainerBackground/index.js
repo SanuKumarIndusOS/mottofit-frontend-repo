@@ -12,7 +12,19 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
+import { Dropdown } from "reactjs-dropdown-component";
+import "./dropdown.scss";
 
+const worksMode = [
+    {
+        label: "Yes",
+        value: "yes",
+    },
+    {
+        label: "No",
+        value: "no",
+    },
+];
 /* areaOfExpertise
    previousExperience
    currentExperience
@@ -550,35 +562,24 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                             Do you have a facility to train new
                                             & outside clients?
                                         </h6>
-                                        <div className="inputs_experience">
-                                            <select
-                                                className="select_location"
+                                        <div className="inputs_experience_drop">
+                                            <Dropdown
                                                 required
-                                                name="answer"
+                                                className="select_location"
+                                                title="Select Your Answer"
+                                                list={worksMode}
                                                 value={
                                                     currentExperiencee.workMode
                                                 }
                                                 onChange={(e) => {
                                                     setCurrentExperiencee({
                                                         ...currentExperiencee,
-                                                        workMode:
-                                                            e.target.value,
+                                                        workMode: e.value,
                                                     });
 
                                                     // setTrainerbackgroundData({...trainerbackgroundData, currentExperience: currentExperiencee})
                                                 }}
-                                            >
-                                                <option
-                                                    value=""
-                                                    disabled
-                                                    selected
-                                                >
-                                                    Select Your Answer
-                                                </option>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-
+                                            />
                                             {currentExperiencee.workMode ===
                                             "yes" ? (
                                                 <>

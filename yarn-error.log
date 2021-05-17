@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-hook-form
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/reactjs-dropdown-component
 
 PATH: 
-  C:\Python38\Scripts\;C:\Python38\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\venkatesh\AppData\Local\Microsoft\WindowsApps;C:\Users\venkatesh\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\venkatesh\AppData\Local\GitHubDesktop\bin;C:\Users\venkatesh\AppData\Local\Microsoft\WindowsApps;C:\Users\venkatesh\AppData\Local\Yarn\bin;C:\Users\venkatesh\AppData\Roaming\npm
+  C:\Users\venkatesh\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\venkatesh\bin;C:\Python38\Scripts;C:\Python38;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\QuickTime\QTSystem;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\venkatesh\AppData\Local\Microsoft\WindowsApps;C:\Users\venkatesh\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\venkatesh\AppData\Local\GitHubDesktop\bin;C:\Users\venkatesh\AppData\Local\Microsoft\WindowsApps;C:\Users\venkatesh\AppData\Local\Yarn\bin;C:\Users\venkatesh\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.21.1
@@ -14,7 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, open 'C:\Users\venkatesh\Desktop\frontend_motto_fit\node_modules\postcss-browser-comments\node_modules\.bin\browserslist'
+  Error: https://registry.yarnpkg.com/@types%2freactjs-dropdown-component: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66056:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140665:22)
+      at Request.emit (events.js:315:20)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141637:10)
+      at Request.emit (events.js:315:20)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141559:12)
+      at Object.onceWrapper (events.js:421:28)
+      at IncomingMessage.emit (events.js:327:22)
+      at endReadableNT (_stream_readable.js:1220:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
 
 npm manifest: 
   {
@@ -41,13 +51,14 @@ npm manifest:
       "react-datepicker": "^3.6.0",
       "react-dom": "^17.0.1",
       "react-headless-phone-input": "^2.0.0",
-      "react-hook-form": "^7.5.1",
+      "react-hook-form": "6.15.5",
       "react-hover-image": "^2.0.1",
       "react-icons": "^4.2.0",
       "react-modal": "^3.12.1",
       "react-model": "^4.0.0",
       "react-nice-dates": "^3.1.0",
       "react-notifications": "^1.7.0",
+      "react-phone-input-2": "^2.14.0",
       "react-phone-number-input": "^3.1.21",
       "react-redux": "^7.1.1",
       "react-responsive-modal": "^6.0.1",
@@ -57,7 +68,9 @@ npm manifest:
       "react-select": "^4.3.0",
       "react-slick": "^0.28.1",
       "react-tabbordion": "^1.0.6",
+      "react-table-drag-select": "^0.3.1",
       "react-web-tabs": "^1.0.1",
+      "reactjs-dropdown-component": "^1.2.0",
       "reactstrap": "^8.0.1",
       "redux": "^4.0.4",
       "redux-thunk": "^2.3.0",
@@ -2794,7 +2807,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/arrify/-/arrify-2.0.1.tgz#c9655e9331e0abcd588d2a7cad7e9956f66701fa"
     integrity sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==
   
-  asap@~2.0.6:
+  asap@~2.0.3, asap@~2.0.6:
     version "2.0.6"
     resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
     integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
@@ -3747,6 +3760,11 @@ Lockfile:
       strip-ansi "^6.0.0"
       wrap-ansi "^6.2.0"
   
+  clone@^2.1.1:
+    version "2.1.2"
+    resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
+    integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
+  
   clsx@^1.0.4:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
@@ -3997,6 +4015,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.11.1.tgz#fd52fa8c8b7b797b3606524b3d97278a8d8e7f09"
     integrity sha512-2JukQi8HgAOCD5CSimxWWXVrUBoA9Br796uIA5Z06bIjt7PBBI19ircFaAxplgE1mJf3x2BY6MkT/HWA/UryPg==
   
+  core-js@^1.0.0:
+    version "1.2.7"
+    resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
+    integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
+  
   core-js@^2.4.0:
     version "2.6.12"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
@@ -4079,6 +4102,14 @@ Lockfile:
       ripemd160 "^2.0.0"
       safe-buffer "^5.0.1"
       sha.js "^2.4.8"
+  
+  create-react-class@^15.6.0:
+    version "15.7.0"
+    resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
+    integrity sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==
+    dependencies:
+      loose-envify "^1.3.1"
+      object-assign "^4.1.1"
   
   cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     version "7.0.3"
@@ -4830,6 +4861,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
     integrity sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=
   
+  encoding@^0.1.11:
+    version "0.1.13"
+    resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.13.tgz#56574afdd791f54a8e9b2785c0582a2d26210fa9"
+    integrity sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==
+    dependencies:
+      iconv-lite "^0.6.2"
+  
   end-of-stream@^1.0.0, end-of-stream@^1.1.0:
     version "1.4.4"
     resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.4.4.tgz#5ae64a5f45057baf3626ec14da0ca5e4b2431eb0"
@@ -5460,6 +5498,19 @@ Lockfile:
     integrity sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
     dependencies:
       bser "2.1.1"
+  
+  fbjs@^0.8.9:
+    version "0.8.17"
+    resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
+    integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
+    dependencies:
+      core-js "^1.0.0"
+      isomorphic-fetch "^2.1.1"
+      loose-envify "^1.0.0"
+      object-assign "^4.1.0"
+      promise "^7.1.1"
+      setimmediate "^1.0.5"
+      ua-parser-js "^0.7.18"
   
   figgy-pudding@^3.5.1:
     version "3.5.2"
@@ -6267,6 +6318,13 @@ Lockfile:
     dependencies:
       safer-buffer ">= 2.1.2 < 3"
   
+  iconv-lite@^0.6.2:
+    version "0.6.2"
+    resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.6.2.tgz#ce13d1875b0c3a674bd6a04b7f76b01b1b6ded01"
+    integrity sha512-2y91h5OpQlolefMPmUlivelittSWy0rP+oYVpn6A7GwVHNE8AWzoYOBNmlwks3LobaJxgHCYZAnyNo2GgpNRNQ==
+    dependencies:
+      safer-buffer ">= 2.1.2 < 3.0.0"
+  
   icss-utils@^4.0.0, icss-utils@^4.1.1:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-4.1.1.tgz#21170b53789ee27447c2f47dd683081403f9a467"
@@ -6767,7 +6825,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/is-root/-/is-root-2.1.0.tgz#809e18129cf1129644302a4f8544035d51984a9c"
     integrity sha512-AGOriNp96vNBd3HtU+RzFEc75FfR5ymiYv8E553I71SCeXBiMsVDUtdio1OEFvrPyLIQ9tVR5RxXIFe5PUFjMg==
   
-  is-stream@^1.1.0:
+  is-stream@^1.0.1, is-stream@^1.1.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
     integrity sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
@@ -6847,6 +6905,14 @@ Lockfile:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
     integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+  
+  isomorphic-fetch@^2.1.1:
+    version "2.2.1"
+    resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
+    integrity sha1-YRrhrPFPXoH3KVB0coGf6XM1WKk=
+    dependencies:
+      node-fetch "^1.0.1"
+      whatwg-fetch ">=0.10.0"
   
   isstream@~0.1.2:
     version "0.1.2"
@@ -7756,6 +7822,16 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
     integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
   
+  lodash.reduce@^4.6.0:
+    version "4.6.0"
+    resolved "https://registry.yarnpkg.com/lodash.reduce/-/lodash.reduce-4.6.0.tgz#f1ab6b839299ad48f784abbf476596f03b914d3b"
+    integrity sha1-8atrg5KZrUj3hKu/R2WW8DuRTTs=
+  
+  lodash.startswith@^4.2.1:
+    version "4.2.1"
+    resolved "https://registry.yarnpkg.com/lodash.startswith/-/lodash.startswith-4.2.1.tgz#c598c4adce188a27e53145731cdc6c0e7177600c"
+    integrity sha1-xZjErc4YiiflMUVzHNxsDnF3YAw=
+  
   lodash.template@^4.5.0:
     version "4.5.0"
     resolved "https://registry.yarnpkg.com/lodash.template/-/lodash.template-4.5.0.tgz#f976195cf3f347d0d5f52483569fe8031ccce8ab"
@@ -8275,6 +8351,14 @@ Lockfile:
     dependencies:
       lower-case "^2.0.2"
       tslib "^2.0.3"
+  
+  node-fetch@^1.0.1:
+    version "1.7.3"
+    resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
+    integrity sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ==
+    dependencies:
+      encoding "^0.1.11"
+      is-stream "^1.0.1"
   
   node-forge@^0.10.0:
     version "0.10.0"
@@ -9001,6 +9085,11 @@ Lockfile:
     version "1.3.6"
     resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.6.tgz#48b4ce983164b209c2d45a107adb31f473a6e7a7"
     integrity sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==
+  
+  pluralize@^8.0.0:
+    version "8.0.0"
+    resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
+    integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
   
   pnp-webpack-plugin@1.6.4:
     version "1.6.4"
@@ -9758,6 +9847,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
     integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
   
+  promise@^7.1.1:
+    version "7.3.1"
+    resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
+    integrity sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==
+    dependencies:
+      asap "~2.0.3"
+  
   promise@^8.1.0:
     version "8.1.0"
     resolved "https://registry.yarnpkg.com/promise/-/promise-8.1.0.tgz#697c25c3dfe7435dd79fcd58c38a135888eaf05e"
@@ -10017,10 +10113,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-headless-phone-input/-/react-headless-phone-input-2.0.0.tgz#2e4a5ae10c56f803831d1514de597c2ac639773e"
     integrity sha512-Pg6/nAvlCCP19x3Gxr4Ph/4p0qbXhcpaaTEkNJwFNiPhTa/4H6cGBOkXkUdyfekUAm+3ZRgtxtpFOkTvLYC5YA==
   
-  react-hook-form@^7.5.1:
-    version "7.5.1"
-    resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.5.1.tgz#344adc4718ee7804b044c2fc265937d207b8adbb"
-    integrity sha512-L0cfOEeO+Vr14FaW0+l3oKGkoSz2FuYjvxRkarcImbJT99qp4238VkbopnB62nGssVULurjRkhYuAnjNoA5NvQ==
+  react-hook-form@6.15.5:
+    version "6.15.5"
+    resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.5.tgz#c2578f9ce6a6df7b33015587d40cd880dc13e2db"
+    integrity sha512-so2jEPYKdVk1olMo+HQ9D9n1hVzaPPFO4wsjgSeZ964R7q7CHsYRbVF0PGBi83FcycA5482WHflasdwLIUVENg==
   
   react-hover-image@^2.0.1:
     version "2.0.1"
@@ -10092,6 +10188,18 @@ Lockfile:
     version "6.10.0"
     resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.10.0.tgz#05abb592575b08b4d129003494056b9dff46eeeb"
     integrity sha512-7i2L3ef+0ILXpL6P+Hg304eCQswh4jl3ynwR71BSlMU49PE2uk31k8B2GkP6yE9s2D4jTGKnzuSpzWxu4YxfQQ==
+  
+  react-phone-input-2@^2.14.0:
+    version "2.14.0"
+    resolved "https://registry.yarnpkg.com/react-phone-input-2/-/react-phone-input-2-2.14.0.tgz#75dff7ba503becc7a19e0e8ff5aa3d878265af77"
+    integrity sha512-gOY3jUpwO7ulryXPEdqzH7L6DPqI9RQxKfBxZbgqAwXyALGsmwLWFyi2RQwXlBLWN/EPPT4Nv6I9TESVY2YBcg==
+    dependencies:
+      classnames "^2.2.6"
+      lodash.debounce "^4.0.8"
+      lodash.memoize "^4.1.2"
+      lodash.reduce "^4.6.0"
+      lodash.startswith "^4.2.1"
+      prop-types "^15.7.2"
   
   react-phone-number-input@^3.1.21:
     version "3.1.21"
@@ -10274,6 +10382,15 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-tabbordion/-/react-tabbordion-1.0.6.tgz#6f83f032608370d45baf0310933a8d511d99264f"
     integrity sha512-OJrpzAQuBV7Znw3CxlB8g0wCeLvwG9t8oujC1ltl1xShXsMgoL41IphUcu3Ebn+xrOYbBNqLSo0aZUivAFrVDA==
   
+  react-table-drag-select@^0.3.1:
+    version "0.3.1"
+    resolved "https://registry.yarnpkg.com/react-table-drag-select/-/react-table-drag-select-0.3.1.tgz#e88efacd1f1a4a85b21c951c196fc74465e7d2b7"
+    integrity sha512-+aOYkpbQ1YlEpDoMhdD+S+GVY5lG1+YN60YIt6pVRuEkU24G8BgGAy9+R+JXX+Izw3Nv7Jq8+kKoCPhBrKgaiw==
+    dependencies:
+      clone "^2.1.1"
+      deep-is "^0.1.3"
+      react "^15.5.4"
+  
   react-transition-group@^2.3.1:
     version "2.9.0"
     resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
@@ -10299,6 +10416,17 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-web-tabs/-/react-web-tabs-1.0.1.tgz#86972a9ca4a1de0d6fca31bc725e30c8a59c8e22"
     integrity sha512-Cg5B2515iLTvown5Tby+f69hT3+3HXetvsGr/Akou1ltREX57E3b3xra4lBjuUay42epMZ/2rfq/e+tTwOgBTQ==
   
+  react@^15.5.4:
+    version "15.7.0"
+    resolved "https://registry.yarnpkg.com/react/-/react-15.7.0.tgz#10308fd42ac6912a250bf00380751abc41ac7106"
+    integrity sha512-5/MMRYmpmM0sMTHGLossnJCrmXQIiJilD6y3YN3TzAwGFj6zdnMtFv6xmi65PHKRV+pehIHpT7oy67Sr6s9AHA==
+    dependencies:
+      create-react-class "^15.6.0"
+      fbjs "^0.8.9"
+      loose-envify "^1.1.0"
+      object-assign "^4.1.0"
+      prop-types "^15.5.10"
+  
   react@^17.0.1:
     version "17.0.2"
     resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
@@ -10306,6 +10434,14 @@ Lockfile:
     dependencies:
       loose-envify "^1.1.0"
       object-assign "^4.1.1"
+  
+  reactjs-dropdown-component@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/reactjs-dropdown-component/-/reactjs-dropdown-component-1.2.0.tgz#33a2ccf3cd2d4fb7e1b5b7e5b854d6fef4f7940d"
+    integrity sha512-2EgEpAdQqbTAybPX05p7a/SWS5nZbd67c9T1DLFlHE9Y8SJLfWwC461kMEjLYXaqjcWv34hpZi7urBGMAoaOkA==
+    dependencies:
+      pluralize "^8.0.0"
+      prop-types "^15.7.2"
   
   reactstrap@^8.0.1:
     version "8.9.0"
@@ -10843,7 +10979,7 @@ Lockfile:
     dependencies:
       ret "~0.1.10"
   
-  "safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
+  "safer-buffer@>= 2.1.2 < 3", "safer-buffer@>= 2.1.2 < 3.0.0", safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
     integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
@@ -11054,7 +11190,7 @@ Lockfile:
       is-plain-object "^2.0.3"
       split-string "^3.0.1"
   
-  setimmediate@^1.0.4:
+  setimmediate@^1.0.4, setimmediate@^1.0.5:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
     integrity sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=
@@ -12180,6 +12316,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
     integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   
+  ua-parser-js@^0.7.18:
+    version "0.7.28"
+    resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
+    integrity sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==
+  
   unbox-primitive@^1.0.0:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/unbox-primitive/-/unbox-primitive-1.0.1.tgz#085e215625ec3162574dc8859abee78a59b14471"
@@ -12631,7 +12772,7 @@ Lockfile:
     dependencies:
       iconv-lite "0.4.24"
   
-  whatwg-fetch@^3.4.1:
+  whatwg-fetch@>=0.10.0, whatwg-fetch@^3.4.1:
     version "3.6.2"
     resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz#dced24f37f2624ed0281725d51d0e2e3fe677f8c"
     integrity sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==

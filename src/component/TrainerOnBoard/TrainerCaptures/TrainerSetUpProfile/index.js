@@ -17,7 +17,7 @@ import Footer from "../../../common/Footer/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateTrainerDetails } from "action/trainerAct";
-import Select from "react-select";
+// import Select from "react-select";
 import { history } from "helpers";
 import { TrainerApi, PaymentApi } from "service/apiVariables";
 import { api } from "service/api";
@@ -32,12 +32,18 @@ import Quote from "../../../../assets/files/FindTrainer/Quote Icon.svg";
 import ArrowNext from "../../../../assets/files/SVG/Arrow Next.svg";
 import Tick from "../../../../assets/files/FindTrainer/Tick 1.svg";
 import Share from "../../../../assets/files/FindTrainer/share.svg";
+import { Dropdown } from "reactjs-dropdown-component";
+import "./dropdown.scss";
 
 const FileArray = [];
 
 const options = [
     { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
-    { label: "New York", value: "New York", name: "serviceableLocation" },
+    {
+        label: "New York City",
+        value: "New York City",
+        name: "serviceableLocation",
+    },
     { label: "Hamptons", value: "Hamptons", name: "serviceableLocation" },
     { label: "Miami", value: "Miami", name: "serviceableLocation" },
 ];
@@ -105,7 +111,9 @@ const TrainerSetUpProfileFC = ({
         governmentIdNumber: "",
         coverAmount: "",
         virtualMeetingHandle: "",
-        virtualMeetingLink:""
+        virtualMeetingLink: "",
+        identityNameUS: "",
+        insuranceNameUS: "",
     });
 
     const [trainerAvailabilityData, setTrainerAvailabilityData] =
@@ -269,7 +277,9 @@ const TrainerSetUpProfileFC = ({
             insurance,
             governmentIdNumber,
             coverAmount,
-            virtualMeetingLink
+            virtualMeetingLink,
+            identityNameUS,
+            insuranceNameUS,
         } = trainerData;
 
         console.log(serviceableLocation);
@@ -322,14 +332,16 @@ const TrainerSetUpProfileFC = ({
 
             servicableLocation: serviceableLocation,
             insuranceInformation: {
+                insuranceName: insuranceNameUS,
                 insurance: insurance,
                 insuranceAmount: coverAmount,
             },
             identityInfromation: {
+                identityName: identityNameUS,
                 identity: governmentId,
                 identityNumber: governmentIdNumber,
             },
-            virtualMeetingLink:virtualMeetingLink
+            virtualMeetingLink: virtualMeetingLink,
         };
         // updateTrainerDetails();
 
@@ -808,7 +820,9 @@ const TrainerSetUpProfileFC = ({
 
                                                         <hr />
                                                         <div className="profile_aside_inner_item">
-                                                            {trainerPersonalData.currentExperience.workLocation ? (
+                                                            {trainerPersonalData
+                                                                .currentExperience
+                                                                .workLocation ? (
                                                                 <div className="profile_location">
                                                                     <img
                                                                         src={
@@ -874,10 +888,17 @@ const TrainerSetUpProfileFC = ({
                                                     <div className="profile_right_item1">
                                                         {/* <img src={Quote} alt="qoute" /> */}
                                                         <h6>
-                                                            {trainerData.motto ? trainerData.motto :"Motto not Added"}
+                                                            {trainerData.motto
+                                                                ? trainerData.motto
+                                                                : "Motto not Added"}
                                                         </h6>
                                                     </div>
-                                                    <div className="profile_right_item2" style = {{width:"40rem"}}>
+                                                    <div
+                                                        className="profile_right_item2"
+                                                        style={{
+                                                            width: "40rem",
+                                                        }}
+                                                    >
                                                         <h4>
                                                             About{" "}
                                                             {
@@ -885,9 +906,9 @@ const TrainerSetUpProfileFC = ({
                                                             }
                                                         </h4>
                                                         <p>
-                                                            {
-                                                                trainerData.trainingProcessDescription ? trainerData.trainingProcessDescription : "Description not Added"
-                                                            }
+                                                            {trainerData.trainingProcessDescription
+                                                                ? trainerData.trainingProcessDescription
+                                                                : "Description not Added"}
                                                         </p>
 
                                                         <div className="profile_images">
@@ -994,7 +1015,7 @@ const TrainerSetUpProfileFC = ({
                                         type="text"
                                         placeholder="Share the words you live or train by in 250 characters or less"
                                         onChange={handleInputChange}
-                                        value={trainerData.motto}
+                                        value={trainerData.myMotto}
                                         name="motto"
                                         maxlength="250"
                                     />
@@ -1211,30 +1232,25 @@ const TrainerSetUpProfileFC = ({
                                             <h6>{data.serviceable}</h6>
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
-                                                    <select
+                                                    <Dropdown
+                                                        className="custom_dropdown"
+                                                        title="Select Location"
+                                                        list={options}
                                                         value={
                                                             trainerData.serviceableLocation
                                                         }
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                    >
-                                                        <option
-                                                            value=""
-                                                            disabled
-                                                            selected
-                                                        >
-                                                            Choose City
-                                                        </option>
-                                                        <option>
-                                                            New York
-                                                        </option>
-                                                        <option>Miami</option>
-                                                        <option>Hampton</option>
-                                                        <option>
-                                                            Palm Beach
-                                                        </option>
-                                                    </select>
+                                                        onChange={(e) => {
+                                                            setTrainerData({
+                                                                ...trainerData,
+                                                                serviceableLocation:
+                                                                    e.value,
+                                                            });
+                                                            console.log(
+                                                                e.value
+                                                            );
+                                                        }}
+                                                        name="location"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -1276,19 +1292,6 @@ const TrainerSetUpProfileFC = ({
                                                 <textarea
                                                     type="text"
                                                     placeholder="Enter the Details of the location"
-                                                    // value={
-                                                    //     trainerAvailabilityData.trainingFacilityLocation
-                                                    // }
-                                                    // onChange={(e) => {
-                                                    //     setTrainerAvailabilityData(
-                                                    //         {
-                                                    //             ...trainerAvailabilityData,
-                                                    //             trainingFacilityLocation:
-                                                    //                 e.target
-                                                    //                     .value,
-                                                    //         }
-                                                    //     );
-                                                    // }}
                                                     onChange={handleInputChange}
                                                     value={
                                                         trainerPersonalData.trainingFacilityLocation
@@ -1337,22 +1340,6 @@ const TrainerSetUpProfileFC = ({
                                                 <textarea
                                                     type="text"
                                                     placeholder="Neighborhood List"
-                                                    // value={
-                                                    //     trainerAvailabilityData.servicableLocation
-                                                    // }
-                                                    // value={
-                                                    //     trainerData.websiteLink
-                                                    // }
-                                                    // onChange={(e) => {
-                                                    //     setTrainerAvailabilityData(
-                                                    //         {
-                                                    //             ...trainerAvailabilityData,
-                                                    //             servicableLocation:
-                                                    //                 e.target
-                                                    //                     .value,
-                                                    //         }
-                                                    //     );
-                                                    // }}
                                                     onChange={handleInputChange}
                                                     value={
                                                         trainerPersonalData.servicableLocation
@@ -1450,28 +1437,7 @@ const TrainerSetUpProfileFC = ({
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <div className="setup_item1">
-                                            <h6>{data.youtube}</h6>
-                                            <div className="inputs_platform">
-                                                <div className="iconwrapper">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Add your Youtube Channel"
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                        value={
-                                                            trainerData.youtubeChannel
-                                                        }
-                                                        name="youtubeChannel"
-                                                    />
-                                                    <img
-                                                        src={Youtube}
-                                                        alt="icon"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div> */}
+
                                         <div className="setup_item1">
                                             <h6>{data.web}</h6>
                                             <div className="inputs_platform">
@@ -1492,29 +1458,11 @@ const TrainerSetUpProfileFC = ({
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div className="card_agree">
-                                        <input
-                                            type="checkbox"
-                                            id="agree"
-                                            name="agree"
-                                            onChange={handleAgreedCheck}
-                                        />
-                                        <label>
-                                            Check here to acknowledge that you
-                                            have read and agree to the Motto
-                                            trainer
-                                            <a
-                                                href="/agreement"
-                                                target="_blank"
-                                            >
-                                                terms and conditions
-                                            </a>
-                                        </label>
-                                    </div> */}
                                 </div>
                                 <PaymentSection
                                     onChange={handleChangePayment}
                                     trainerData={trainerData}
+                                    setTrainerData={setTrainerData}
                                 />
                                 <div className="card_agree">
                                     <input
