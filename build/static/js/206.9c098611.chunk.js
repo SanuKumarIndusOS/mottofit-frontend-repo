@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[206],{377:function(t,i,s){"use strict";s.r(i),i.default=s.p+"static/media/Availability Icon.0afc93d8.svg"}}]);
-//# sourceMappingURL=206.9c098611.chunk.js.map

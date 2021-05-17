@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[281],{363:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Location Icon.c8540d80.svg"}}]);
+//# sourceMappingURL=281.26d1deda.chunk.js.map

@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[295],{328:function(t,s,c){"use strict";c.r(s),s.default=c.p+"static/media/Payment Icon Active.d34a42c9.svg"}}]);
+//# sourceMappingURL=295.7126724e.chunk.js.map
