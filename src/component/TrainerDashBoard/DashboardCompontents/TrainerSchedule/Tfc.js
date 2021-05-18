@@ -7,6 +7,8 @@ import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.s
 import BlueHoverButton from "component/common/BlueArrowButton";
 
 function Tfc() {
+    //refer style in node module's react-table-drag
+    const [editMode, setEditMode] = React.useState(false);
     const tempcells = [
         [false, false, false, false, false, false, false, false],
         [false, false, false, false, false, false, false, false],
@@ -129,7 +131,7 @@ function Tfc() {
         Object.keys(dt).map((item) => {
             ta = [];
             dt[item].map((a) => {
-                ta.push(a["end"]);
+                // ta.push(a["end"]);
                 ta.push(a["start"]);
                 // console.log(ta, item);
             });
@@ -199,49 +201,54 @@ function Tfc() {
             console.log(sortDate);
         }
 
-        if (temp.length === 1) {
-            alert("Select more than Half an hour");
-            setCells(tempcells);
-        } else {
-            if (sortDate.length !== 0) {
-                console.log(
-                    sortDate[0].time + "-" + sortDate[sortDate.length - 1].time
-                );
-                var data = {
-                    startDate: sortDate[sortDate.length - 1].date,
-                    endDate: sortDate[0].date,
-                    availabilitySlot: [
-                        {
-                            availableMode: TimeSlot,
-                            availableSlots: [
-                                sortDate[0].time +
-                                    "-" +
+        // if (temp.length === 1) {
+        //     alert("Select more than Half an hour");
+        //     setCells(tempcells);
+        // } else {
+        if (sortDate.length !== 0) {
+            console.log(
+                sortDate[0].time + "-" + sortDate[sortDate.length - 1].time
+            );
+            var data = {
+                startDate: sortDate[sortDate.length - 1].date,
+                endDate: sortDate[0].date,
+                availabilitySlot: [
+                    {
+                        availableMode: TimeSlot,
+                        availableSlots: [
+                            sortDate[0].time +
+                                "-" +
+                                moment(
                                     sortDate[sortDate.length - 1].time,
-                            ],
-                        },
-                    ],
-                };
-
-                fetch("http://doodlebluelive.com:2307/v1/addTrainerSlot", {
-                    method: "POST", // or 'PUT'
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: token,
+                                    "HH:mm a"
+                                )
+                                    .add(30, "minutes")
+                                    .format("hh:mm A"),
+                        ],
                     },
-                    body: JSON.stringify(data),
+                ],
+            };
+
+            fetch("http://doodlebluelive.com:2307/v1/addTrainerSlot", {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: token,
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                    alert("Slot Added");
+                    setCells(tempcells);
+                    getAvailableSlots(startWeek, endWeek);
                 })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log("Success:", data);
-                        alert("Slot Added");
-                        setCells(tempcells);
-                        getAvailableSlots(startWeek, endWeek);
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
-                    });
-            }
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
         }
+        // }
 
         // setCells(tempcells)
     }, [selectedCell]);
@@ -336,9 +343,42 @@ function Tfc() {
                 setData(json.data);
             });
     };
+    function editSlot(datee, time) {
+        var editData = {
+            date: datee,
+            mode: "EarlyBird",
+            blockedSlot: time,
+            state: "BLOCK",
+        };
+        // console.log(date + " " + time);
+        fetch("http://doodlebluelive.com:2307/v1/block/trainerSlot", {
+            method: "PUT", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+            body: JSON.stringify(editData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                // alert("Slot blocked");
+                setCells(tempcells);
+                getAvailableSlots(startWeek, endWeek);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
+    const toggleEditMode = () => {
+        console.log("edit mode");
+
+        setEditMode(!editMode);
+    };
 
     let tableData;
 
+    let tableData2;
     if (cellData.length === 0) {
         console.log("hitu");
     } else {
@@ -403,7 +443,14 @@ function Tfc() {
                                     )
                                 ) {
                                     console.log(item.time);
-                                    return <td disabled></td>;
+                                    return (
+                                        <td
+                                            disabled
+                                            onClick={() =>
+                                                editSlot(item.date, item.time)
+                                            }
+                                        ></td>
+                                    );
                                 } else {
                                     return <td></td>;
                                 }
@@ -425,7 +472,14 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled></td>;
+                                    return (
+                                        <td
+                                            disabled
+                                            onClick={() =>
+                                                editSlot(item.date, item.time)
+                                            }
+                                        ></td>
+                                    );
                                 } else {
                                     return <td></td>;
                                 }
@@ -447,7 +501,14 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled></td>;
+                                    return (
+                                        <td
+                                            disabled
+                                            onClick={() =>
+                                                editSlot(item.date, item.time)
+                                            }
+                                        ></td>
+                                    );
                                 } else {
                                     return <td></td>;
                                 }
@@ -469,7 +530,14 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled></td>;
+                                    return (
+                                        <td
+                                            disabled
+                                            onClick={() =>
+                                                editSlot(item.date, item.time)
+                                            }
+                                        ></td>
+                                    );
                                 } else {
                                     return <td></td>;
                                 }
@@ -491,7 +559,14 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled></td>;
+                                    return (
+                                        <td
+                                            disabled
+                                            onClick={() =>
+                                                editSlot(item.date, item.time)
+                                            }
+                                        ></td>
+                                    );
                                 } else {
                                     return <td></td>;
                                 }
@@ -513,7 +588,14 @@ function Tfc() {
                                         (l) => l === item.time
                                     )
                                 ) {
-                                    return <td disabled></td>;
+                                    return (
+                                        <td
+                                            disabled
+                                            onClick={() =>
+                                                editSlot(item.date, item.time)
+                                            }
+                                        ></td>
+                                    );
                                 } else {
                                     return <td></td>;
                                 }
@@ -526,6 +608,242 @@ function Tfc() {
                     })}
                 </tr>
             </TableDragSelect>
+        );
+        tableData2 = (
+            <table
+                value={cells}
+                onChange={(cells) => setCells(cells)}
+                className="table2"
+            >
+                <thead>
+                    <tr>
+                        <th disabled></th>
+                        <th disabled>
+                            <div className="table_header_number">
+                                {cal[0].slice(8, 10)}
+                            </div>
+                            <div className="table_header_txt">MON</div>
+                        </th>
+                        <th disabled>
+                            <div className="table_header_number">
+                                {cal[1].slice(8, 10)}
+                            </div>
+                            <div className="table_header_txt">TUES</div>
+                        </th>
+                        <th disabled>
+                            <div className="table_header_number">
+                                {cal[2].slice(8, 10)}
+                            </div>
+                            <div className="table_header_txt">WED</div>
+                        </th>
+                        <th disabled>
+                            <div className="table_header_number">
+                                {cal[3].slice(8, 10)}
+                            </div>
+                            <div className="table_header_txt">THURS</div>
+                        </th>
+                        <th disabled>
+                            <div className="table_header_number">
+                                {cal[4].slice(8, 10)}
+                            </div>
+                            <div className="table_header_txt">FRI</div>
+                        </th>
+                        <th disabled>
+                            <div className="table_header_number">
+                                {cal[5].slice(8, 10)}
+                            </div>
+                            <div className="table_header_txt">SAT</div>
+                        </th>
+                        <th disabled>
+                            <div className="table_header_number">
+                                {cal[6].slice(8, 10)}
+                            </div>
+                            <div className="table_header_txt">SUN</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td
+                            disabled
+                            className="slot_time"
+                            style={{ backgroundColor: "fff" }}
+                        >
+                            {time[0]}
+                        </td>
+                        {cellData[0].map((item) => {
+                            if (aslotKeys.length !== 0) {
+                                if (aslotKeys.find((el) => el === item.date)) {
+                                    if (
+                                        aslot[item.date].find(
+                                            (l) => l === item.time
+                                        )
+                                    ) {
+                                        console.log(item.time);
+                                        return (
+                                            <td
+                                                disabled
+                                                className="avaiable_slot"
+                                            ></td>
+                                        );
+                                    } else {
+                                        return <td></td>;
+                                    }
+                                } else {
+                                    return <td></td>;
+                                }
+                            } else {
+                                return <td></td>;
+                            }
+                        })}
+                    </tr>
+                    <tr>
+                        <td disabled className="slot_time">
+                            {time[1]}
+                        </td>
+                        {cellData[1].map((item) => {
+                            if (aslotKeys.length !== 0) {
+                                if (aslotKeys.find((el) => el === item.date)) {
+                                    if (
+                                        aslot[item.date].find(
+                                            (l) => l === item.time
+                                        )
+                                    ) {
+                                        return (
+                                            <td
+                                                disabled
+                                                className="avaiable_slot"
+                                            ></td>
+                                        );
+                                    } else {
+                                        return <td></td>;
+                                    }
+                                } else {
+                                    return <td></td>;
+                                }
+                            } else {
+                                return <td></td>;
+                            }
+                        })}
+                    </tr>
+                    <tr>
+                        <td disabled className="slot_time">
+                            {time[2]}
+                        </td>
+                        {cellData[2].map((item) => {
+                            if (aslotKeys.length !== 0) {
+                                if (aslotKeys.find((el) => el === item.date)) {
+                                    if (
+                                        aslot[item.date].find(
+                                            (l) => l === item.time
+                                        )
+                                    ) {
+                                        return (
+                                            <td
+                                                disabled
+                                                className="avaiable_slot"
+                                            ></td>
+                                        );
+                                    } else {
+                                        return <td></td>;
+                                    }
+                                } else {
+                                    return <td></td>;
+                                }
+                            } else {
+                                return <td></td>;
+                            }
+                        })}
+                    </tr>
+                    <tr>
+                        <td disabled className="slot_time">
+                            {time[3]}
+                        </td>
+                        {cellData[3].map((item) => {
+                            if (aslotKeys.length !== 0) {
+                                if (aslotKeys.find((el) => el === item.date)) {
+                                    if (
+                                        aslot[item.date].find(
+                                            (l) => l === item.time
+                                        )
+                                    ) {
+                                        return (
+                                            <td
+                                                disabled
+                                                className="avaiable_slot"
+                                            ></td>
+                                        );
+                                    } else {
+                                        return <td></td>;
+                                    }
+                                } else {
+                                    return <td></td>;
+                                }
+                            } else {
+                                return <td></td>;
+                            }
+                        })}
+                    </tr>
+                    <tr>
+                        <td disabled className="slot_time">
+                            {time[4]}
+                        </td>
+                        {cellData[4].map((item) => {
+                            if (aslotKeys.length !== 0) {
+                                if (aslotKeys.find((el) => el === item.date)) {
+                                    if (
+                                        aslot[item.date].find(
+                                            (l) => l === item.time
+                                        )
+                                    ) {
+                                        return (
+                                            <td
+                                                disabled
+                                                className="avaiable_slot"
+                                            ></td>
+                                        );
+                                    } else {
+                                        return <td></td>;
+                                    }
+                                } else {
+                                    return <td></td>;
+                                }
+                            } else {
+                                return <td></td>;
+                            }
+                        })}
+                    </tr>
+                    <tr>
+                        <td disabled className="slot_time">
+                            {time[5]}
+                        </td>
+                        {cellData[5].map((item) => {
+                            if (aslotKeys.length !== 0) {
+                                if (aslotKeys.find((el) => el === item.date)) {
+                                    if (
+                                        aslot[item.date].find(
+                                            (l) => l === item.time
+                                        )
+                                    ) {
+                                        return (
+                                            <td
+                                                disabled
+                                                className="avaiable_slot"
+                                            ></td>
+                                        );
+                                    } else {
+                                        return <td></td>;
+                                    }
+                                } else {
+                                    return <td></td>;
+                                }
+                            } else {
+                                return <td></td>;
+                            }
+                        })}
+                    </tr>
+                </tbody>
+            </table>
         );
     }
 
@@ -542,45 +860,58 @@ function Tfc() {
                             {startWeek.format("yyyy")}
                         </div>
                         <img src={NextIcon} onClick={NextWeek} /> &ensp; &ensp;
+                        <select
+                            value={TimeSlot}
+                            onChange={(e) => {
+                                setTimeSlot(e.target.value);
+                                console.log(e.target.value);
+                                if (e.target.value === "EarlyBird") {
+                                    setTime(early_bird);
+                                    console.log("early_bird");
+                                }
+
+                                if (e.target.value === "RiseAndShine") {
+                                    setTime(rise_shine);
+                                    console.log("RiseAndShine");
+                                }
+
+                                if (e.target.value === "MidDayBreak") {
+                                    setTime(mid_day);
+                                    console.log("MidDayBreak");
+                                }
+
+                                if (e.target.value === "HappyHours") {
+                                    setTime(happy_hour);
+                                    console.log("HappyHours");
+                                }
+
+                                if (e.target.value === "NeverTooLate") {
+                                    setTime(never_too_late);
+                                    console.log("NeverTooLate");
+                                }
+                            }}
+                        >
+                            <option value="EarlyBird">Early Bird</option>
+                            <option value="RiseAndShine">Rise & Shine</option>
+                            <option value="MidDayBreak">Mid-Day Break</option>
+                            <option value="HappyHours">Happy Hour</option>
+                            <option value="NeverTooLate">Never Too Late</option>
+                        </select>
                     </div>
-                    <select
-                        value={TimeSlot}
-                        onChange={(e) => {
-                            setTimeSlot(e.target.value);
-                            console.log(e.target.value);
-                            if (e.target.value === "EarlyBird") {
-                                setTime(early_bird);
-                                console.log("early_bird");
-                            }
+                    {/* {tableData}
+                    {tableData2} */}
+                    {
+                        //Check if message failed
+                        editMode ? (
+                            <div> {tableData} </div>
+                        ) : (
+                            <div> {tableData2} </div>
+                        )
+                    }
 
-                            if (e.target.value === "RiseAndShine") {
-                                setTime(rise_shine);
-                                console.log("RiseAndShine");
-                            }
-
-                            if (e.target.value === "MidDayBreak") {
-                                setTime(mid_day);
-                                console.log("MidDayBreak");
-                            }
-
-                            if (e.target.value === "HappyHours") {
-                                setTime(happy_hour);
-                                console.log("HappyHours");
-                            }
-
-                            if (e.target.value === "NeverTooLate") {
-                                setTime(never_too_late);
-                                console.log("NeverTooLate");
-                            }
-                        }}
-                    >
-                        <option value="EarlyBird">Early Bird</option>
-                        <option value="RiseAndShine">Rise & Shine</option>
-                        <option value="MidDayBreak">Mid-Day Break</option>
-                        <option value="HappyHours">Happy Hour</option>
-                        <option value="NeverTooLate">Never Too Late</option>
-                    </select>
-                    {tableData}
+                    <button onClick={toggleEditMode}>
+                        {editMode ? "SAVE" : "EDIT"}
+                    </button>
                 </div>
                 <ButtonSection />
             </div>

@@ -72,10 +72,6 @@ const TrainerCardDashboard = ({
     });
     const fileInputRef = useRef();
 
-    // for radio
-    const handleChange = (event) => {
-        setSelectedValue(event.target.value);
-    };
     useEffect(() => {
         if (image) {
             const reader = new FileReader();
@@ -131,14 +127,6 @@ const TrainerCardDashboard = ({
         }
     }, [image]);
 
-    // const handleChangeToTrainerProfile = () => {
-    //     let storeData = {
-    //         details: { ...trainerData },
-    //     };
-    //     updateTrainerDetails(storeData);
-    //     history.push("/trainer/setup");
-    // };
-
     const handleInputChange = ({ target: { name, value } }) => {
         const tempData = {
             ...trainerData,
@@ -148,91 +136,119 @@ const TrainerCardDashboard = ({
 
         setTrainerData(tempData);
     };
+    useEffect(() => {
+        getTrainerDetails().then((data) => {
+            if (
+                data["areaOfExpertise"].find((el) => el === "Strength & HIIT")
+            ) {
+                console.log("Strength & HIIT");
+                setCheckedHIIT(true);
+            }
 
-    // useEffect(() => {
-    //     getTrainerDetails().then((data) => {
-    //         if (
-    //             data["areaOfExpertise"].find((el) => el === "Strength & HIIT")
-    //         ) {
-    //             console.log("Strength & HIIT");
-    //             setCheckedHIIT(true);
-    //         }
+            if (data["areaOfExpertise"].find((el) => el === "Boxing")) {
+                console.log("Boxing");
+                setCheckedBoxing(true);
+            }
 
-    //         if (data["areaOfExpertise"].find((el) => el === "Boxing")) {
-    //             console.log("Boxing");
-    //             setCheckedBoxing(true);
-    //         }
+            if (data["areaOfExpertise"].find((el) => el === "Yoga")) {
+                console.log("Yoga");
+                setCheckedYoga(true);
+            }
 
-    //         if (data["areaOfExpertise"].find((el) => el === "Yoga")) {
-    //             console.log("Yoga");
-    //             setCheckedYoga(true);
-    //         }
+            if (data["areaOfExpertise"].find((el) => el === "Pilates")) {
+                console.log("Pilates");
+                setCheckedPilates(true);
+            }
 
-    //         if (data["areaOfExpertise"].find((el) => el === "Pilates")) {
-    //             console.log("Pilates");
-    //             setCheckedPilates(true);
-    //         }
+            const {
+                firstName,
+                lastName,
+                description,
+                socialSessionPricing,
+                oneOnOnePricing,
+                classSessionPricing,
+            } = data || {};
 
-    //         const {
-    //             firstName,
-    //             lastName,
-    //             description,
-    //             socialSessionPricing,
-    //             oneOnOnePricing,
-    //             classSessionPricing,
-    //         } = data || {};
+            if (data) {
+                // console.log(data);
+                const {
+                    inPeronAtClientLocationfor2People = "",
+                    inPeronAtClientLocationfor3People = "",
+                    inPeronAtClientLocationfor4People = "",
+                    inPeronAtTrainerLocationfor2People = "",
+                    inPeronAtTrainerLocationfor3People = "",
+                    inPeronAtTrainerLocationfor4People = "",
+                    virtualSessionfor2People = "",
+                    virtualSessionfor3People = "",
+                    virtualSessionfor4People = "",
+                } = socialSessionPricing || {};
 
-    //         if (data) {
-    //             // console.log(data);
-    //             const {
-    //                 inPeronAtClientLocationfor2People = "",
-    //                 inPeronAtClientLocationfor3People = "",
-    //                 inPeronAtClientLocationfor4People = "",
-    //             } = socialSessionPricing || {};
+                const {
+                    passRatefor3Session = "",
+                    passRatefor10Session = "",
+                    inPersonAtClientLocation = "",
+                    inPersonAtTrainerLocation = "",
+                    virtualSession = "",
+                    passRatefor3SessionAtTrainerLocation = "",
+                    passRatefor10SessionAtTrainerLocation = "",
+                    passRatefor3SessionAtVirtual = "",
+                    passRatefor10SessionAtVirtual = "",
+                } = oneOnOnePricing || {};
 
-    //             const {
-    //                 passRatefor3Session = "",
-    //                 passRatefor10Session = "",
-    //                 inPersonAtClientLocation = "",
-    //             } = oneOnOnePricing || {};
+                const {
+                    inPersonAtclientLocationfor15People = "",
+                    inPersonAttrainerLocationfor15People = "",
+                    virtualSessionfor15People = "",
+                } = classSessionPricing || {};
 
-    //             const { inPersonAtclientLocationfor15People = "" } =
-    //                 classSessionPricing || {};
+                const storeData = {
+                    details: {
+                        firstName,
+                        lastName,
+                        description,
+                        individualCharge: inPersonAtClientLocation,
+                        ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
+                        ssThreePeopleCharge: inPeronAtClientLocationfor3People,
+                        ssFourPeopleCharge: inPeronAtClientLocationfor4People,
+                        classFlatRate: inPersonAtclientLocationfor15People,
+                        threeSessionRate: passRatefor3Session,
+                        tenSessionRate: passRatefor10Session,
+                        individualChargeTl: inPersonAtTrainerLocation,
+                        ssTwoPeopleChargeTl: inPeronAtTrainerLocationfor2People,
+                        ssThreePeopleChargeTl:
+                            inPeronAtTrainerLocationfor3People,
+                        ssFourPeopleChargeTl:
+                            inPeronAtTrainerLocationfor4People,
+                        classFlatRateTl: inPersonAttrainerLocationfor15People,
+                        threeSessionRateTl:
+                            passRatefor3SessionAtTrainerLocation,
+                        tenSessionRateTl: passRatefor10SessionAtTrainerLocation,
+                        individualChargeVt: virtualSession,
+                        ssTwoPeopleChargeVt: virtualSessionfor2People,
+                        ssThreePeopleChargeVt: virtualSessionfor3People,
+                        ssFourPeopleChargeVt: virtualSessionfor4People,
+                        classFlatRateVt: virtualSessionfor15People,
+                        threeSessionRateVt: passRatefor3SessionAtVirtual,
+                        tenSessionRateVt: passRatefor10SessionAtVirtual,
+                    },
+                };
 
-    //             const storeData = {
-    //                 details: {
-    //                     firstName,
-    //                     lastName,
-    //                     description,
-    //                     // individualCharge: inPersonAtClientLocation,
-    //                     // ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
-    //                     // ssThreePeopleCharge: inPeronAtClientLocationfor3People,
-    //                     // ssFourPeopleCharge: inPeronAtClientLocationfor4People,
-    //                     // classFlatRate: inPersonAtclientLocationfor15People,
-    //                     // threeSessionRate: passRatefor3Session,
-    //                     // tenSessionRate: passRatefor10Session,
-    //                 },
-    //             };
+                setTrainerData(storeData.details);
 
-    //             setTrainerData(storeData.details);
-
-    //             updateTrainerDetails(storeData);
-    //         }
-    //     });
-    // }, []);
+                updateTrainerDetails(storeData);
+            }
+        });
+    }, []);
 
     return (
         <>
             <div className="outter_container_card">
                 <div className="container">
-                    <div className="card_prev_link">
-                        <Link to="/">Preview Your Trainer Card</Link>
-                    </div>
                     <div className="card_outter">
-                        <div className="card_outter_wrapper">
+                        {/* <div className="card_outter_wrapper">
                             <h2>{data.title}</h2>
                             <p>{data.describtion}</p>
-                        </div>
+                        </div> */}
                         <div className="card_inner ">
                             <div className="card_form_outter">
                                 <form>
@@ -863,8 +879,7 @@ const TrainerCardDashboard = ({
                                             type="submit"
                                             // onClick={handleTrainerAvailability}
                                         >
-                                            Continue To profile{" "}
-                                            <ArrowHoverBlacked />
+                                            Save Changes <ArrowHoverBlacked />
                                             {/* <img src={Arrow} alt="icon" /> */}
                                         </Link>
                                     </div>

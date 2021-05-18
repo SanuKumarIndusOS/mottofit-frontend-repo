@@ -1,71 +1,416 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
-
+import {
+    dataList,
+    dataSet1,
+    dataSet2,
+    dataSet3,
+    dataSet4,
+    dataSet5,
+    dataSet6,
+    dataSet7,
+    dataSet8,
+    dataSet9,
+    dataSet10,
+    dataSet11,
+    dataSet12,
+    dataSet13,
+    dataListTwo,
+    dataSet13_1,
+    dataSet13_2,
+    dataListTwoMore,
+    dataSet14,
+    dataSet15,
+    dataSet16,
+    dataSet17,
+    dataSet18,
+    dataSet19,
+    dataSet20,
+    dataSet21,
+    dataSet22,
+    dataSet23,
+    dataSet24,
+    dataSet25,
+    dataSet26,
+    dataSet27,
+} from "./termsData";
 import BlueHoverButton from "../common/BlueArrowButton";
-import { Link } from "react-router-dom";
-
-const data = {
-    point1:
-        "PLEASE READ THESE TERMS OF SERVICE CAREFULLY. BY ACCESSING OR USING MOTTO APPLICATIONS OR ANY SERVICES PROVIDED BY US, YOU AGREE TO BE BOUND BY THESE TERMS OF SERVICE. IF YOU DO NOT AGREE TO ALL OF THESE TERMS AND CONDITIONS, DO NOT ACCESS OR USE THE FIND YOUR TRAINER WEBSITE, APPLICATION OR ANY SERVICES PROVIDED BY US.",
-    point3:
-        " MOTTO may modify this Agreement's terms and conditions at any time without notice. Continued use of the Services and the Motto Site after a change in this Agreement, or after implementation of any other new policy constitutes acceptance of such change or policy. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT OR ANY REVISED VERSION OF THIS AGREEMENT, PLEASE DO NOT USE THIS SITE OR OUR SERVICES.",
-    point4:
-        " You understand that our Services are intended for use only by individuals healthy enough to perform strenuous exercise and follow a general nutrition plan and, may not be suitable or recommended to all individuals, including but not limited to, pregnant women or people who suffer from an underlying medical condition or who have special dietary needs. Our Services may utilize the Physical Activity Readiness Questionnaire (PAR-Q) in assessing the safety of, or possible risks of, exercising for you based on your answers. This assessment requires that all information provided by you is true, complete and correct and further, requires that you not omit any relevant information regardless of whether we have asked about such information. Furthermore, in becoming a user of the Services, you affirm that a physician has specifically approved your use of the Services, or that all of the following statements are true:",
-    point5:
-        "No physician has ever informed you that you have a heart condition or that you should only do physical activities recommended by a physician",
-    point6: "You have never felt chest pain when engaging in physical activity",
-    point7:
-        "You have not experienced chest pain when not engaged in physical activity at any time within the past month",
-    point8:
-        "You have never lost your balance because of dizziness and you have never lost consciousness",
-    point9:
-        "You do not have a bone or joint problem that could be made worse by a change in your physical activity",
-    point10:
-        "Your physician is not currently prescribing drugs for your blood pressure or heart condition",
-    point11:
-        "You do not have a history of high blood pressure, and no one in your immediate family has a history of high blood pressure or heart problems",
-    point12: "You are not pregnant, breastfeeding or lactating",
-    point13:
-        "You do not have a condition of high-cholesterol, diabetes, obesity or arthritis",
-    point14:
-        "You do not know of any other reason you should not exercise or follow a general nutrition plan",
-    point15:
-        "BEFORE USING OUR SERVICES, YOU SHOULD CONSULT YOUR DOCTOR OR OTHER PROFESSIONAL HEALTHCARE PROVIDER. THE USE OF ANY INFORMATION OR PROGRAMS PROVIDED ON THE SERVICES IS SOLELY AT YOUR OWN RISK. IF YOU THINK YOU MAY HAVE A MEDICAL EMERGENCY, CALL YOUR DOCTOR OR 911 IMMEDIATELY.",
-    point16:
-        "IF AT ANYTIME DURING YOUR EXERCISE WORKOUT YOU DO NOT FEEL WELL, MAKE SURE YOU STOP IMMEDIATELY AND SEEK MEDICAL ADVICE OF A MEDICAL PROFESSIONAL IF REQUIRED.",
-    point17:
-        " THE CONTENT AVAILABLE VIA THE SERVICES IS PROVIDED WITH THE UNDERSTANDING THAT NEITHER THE COMPANY NOR ITS AFFILIATES OR USERS ARE ENGAGED IN RENDERING MEDICAL, COUNSELING, LEGAL, OR OTHER PROFESSIONAL SERVICES OR ADVICE. SUCH CONTENT IS INTENDED SOLELY AS A GENERAL EDUCATIONAL AID. IT IS NOT INTENDED AS MEDICAL OR HEALTHCARE ADVICE, OR TO BE USED FOR MEDICAL DIAGNOSIS OR TREATMENT, FOR ANY INDIVIDUAL PROBLEM. IT IS ALSO NOT INTENDED AS A SUBSTITUTE FOR PROFESSIONAL ADVICE AND SERVICES FROM A QUALIFIED HEALTHCARE PROVIDER FAMILIAR WITH YOUR UNIQUE FACTS. NOTHING STATED OR POSTED ON THIS SITE OR AVAILABLE THROUGH ANY SERVICES ARE INTENDED TO BE, AND MUST NOT BE TAKEN TO BE, THE PRACTICE OF MEDICINE. OUR RECOMMENDED WORKOUT PLANS AND EXERCISES OR NUTRITION PLANS, EVEN IF THEY ARE TAILORED TO INDIVIDUAL USERS, SHOULD NOT BE MISCONSTRUED AS MEDICAL ADVICE, DIAGNOSES OR TREATMENT. ALWAYS SEEK THE ADVICE OF YOUR PHYSICIAN OR OTHER QUALIFIED HEALTHCARE PROVIDER REGARDING ANY MEDICAL CONDITION AND BEFORE STARTING ANY NEW TREATMENT. ",
-    point18:
-        "Neither the Company nor any of its trainers or Affiliates will be liable for any physical or mental injury or illness that may result, whether directly or indirectly, from any of our recommended workout plans or exercises or nutrition plans. While we may provide guidelines such as written descriptions, pictures, or videos describing how to perform specific exercises or activities, you assume sole responsibility for performing those exercises or activities with proper form, as risk of injury or illness increases with improper form.",
-};
 
 const Terms = () => {
+    const [showMore, setShowMore] = useState(false);
+
+    const showMoreTerms = () => {
+        setShowMore(true);
+    };
+    const showLessTerms = () => {
+        setShowMore(false);
+    };
     return (
         <>
             <div className="outter_terms_container">
                 <div className="container">
                     <div className="div_outer">
-                        <TermsComponent data={data} />
+                        <TermsComponentHeader />
+                        <div className="div_outer_wrapper box2">
+                            {/* {item.slice(0, 2).map((terms, index) => { */}
+                            {/* return ( */}
+                            <>
+                                <div>
+                                    <TermsComponent
+                                        heading={dataList.heading1}
+                                        paragraph={dataList.paragraph1}
+                                    />
+                                    <DataListOne />
+                                    <Termsdesc desc={dataList.point15} />
+                                    <Termsdesc desc={dataList.point16} />
+                                    <Termsdesc desc={dataList.point17} />
+                                    <Termsdesc desc={dataList.point18} />
+                                    {showMore ? (
+                                        <div>
+                                            <TermsComponent
+                                                heading={dataSet1.heading}
+                                                paragraph={dataSet1.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet2.heading}
+                                                paragraph={dataSet2.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet3.heading}
+                                                paragraph={dataSet3.desc}
+                                                hyper={dataSet3.hyper}
+                                                linkTo="/privacy"
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet4.heading}
+                                                paragraph={dataSet4.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet5.heading}
+                                                paragraph={dataSet5.desc}
+                                            />
+                                            <TermsComponentBold
+                                                heading={dataSet6.heading}
+                                                paragraph={dataSet6.desc}
+                                                bold={dataSet6.bold}
+                                                desc1={dataSet6.desc1}
+                                                desc2={dataSet6.desc2}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet7.heading}
+                                                paragraph={dataSet7.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet8.heading}
+                                                paragraph={dataSet8.desc}
+                                            />
+                                            <TermsComponentBold
+                                                heading={dataSet9.heading}
+                                                paragraph={dataSet9.desc}
+                                                desc1={dataSet9.desc1}
+                                                desc2={dataSet9.desc2}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet10.heading}
+                                                paragraph={dataSet10.desc}
+                                            />
+                                            <TermsComponentBold
+                                                heading={dataSet11.heading}
+                                                paragraph={dataSet11.desc}
+                                                desc2={dataSet11.desc1}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet12.heading}
+                                                paragraph={dataSet12.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet13.heading}
+                                                paragraph={dataSet13.desc}
+                                            />
+                                            <DataListTwo />
+                                            <TermsComponent
+                                                paragraph={dataSet13_1.desc}
+                                            />
+                                            <DataListTwo_More />
+                                            <TermsComponentBold
+                                                paragraph={dataSet13_2.desc}
+                                                desc2={dataSet13_2.desc1}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet14.heading}
+                                                paragraph={dataSet14.desc}
+                                            />
+                                            <TermsComponentBold
+                                                desc2={dataSet14.desc1}
+                                            />
+                                            <TermsComponent
+                                                paragraph={dataSet14.desc2}
+                                                hyper={dataSet14.hyper}
+                                                linkTo="mail"
+                                            />
+                                            <TermsComponentBold
+                                                heading={dataSet15.heading}
+                                                paragraph={dataSet15.desc}
+                                                desc2={dataSet15.desc2}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet16.heading}
+                                                paragraph={dataSet16.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet17.heading}
+                                                paragraph={dataSet17.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet18.heading}
+                                                paragraph={dataSet18.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet19.heading}
+                                                paragraph={dataSet19.desc}
+                                            />{" "}
+                                            <TermsComponent
+                                                heading={dataSet20.heading}
+                                                paragraph={dataSet20.desc}
+                                            />{" "}
+                                            <TermsComponent
+                                                heading={dataSet21.heading}
+                                                paragraph={dataSet21.desc}
+                                            />{" "}
+                                            <TermsComponent
+                                                heading={dataSet22.heading}
+                                                paragraph={dataSet22.desc}
+                                            />{" "}
+                                            <TermsComponent
+                                                heading={dataSet23.heading}
+                                                paragraph={dataSet23.desc}
+                                            />{" "}
+                                            <TermsComponent
+                                                heading={dataSet24.heading}
+                                                paragraph={dataSet24.desc}
+                                            />
+                                            <TermsComponent
+                                                heading={dataSet25.heading}
+                                                paragraph={dataSet25.desc}
+                                            />
+                                            <TermsComponentBold
+                                                heading={dataSet26.heading}
+                                                paragraph={dataSet26.desc}
+                                                desc1={dataSet26.desc1}
+                                                desc2={dataSet26.desc2}
+                                            />
+                                            <TermsComponentBold
+                                                paragraph={dataSet26.desc3}
+                                                desc1={dataSet26.desc4}
+                                                desc2={dataSet26.desc5}
+                                            />
+                                            <TermsComponentBold
+                                                heading={dataSet27.heading}
+                                                desc1={dataSet27.desc}
+                                                desc2={dataSet27.desc1}
+                                            />
+                                        </div>
+                                    ) : null}
+                                </div>
+                            </>
+                            {/* );
+                            })} */}
+                        </div>
+                        {/* <TermsComponent data={data} /> */}
                     </div>
 
                     <div className="readmore_button">
-                        <Link to="">
-                            Read More
-                            <BlueHoverButton />
-                        </Link>
+                        {showMore ? (
+                            <button onClick={showLessTerms}>
+                                Read Less
+                                <BlueHoverButton />
+                            </button>
+                        ) : (
+                            <button onClick={showMoreTerms}>
+                                Read More
+                                <BlueHoverButton />
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
         </>
     );
 };
+const DataListOne = () => {
+    return (
+        <ul>
+            <li className="common_margin_li">
+                <span>{dataList.point4}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataList.point5}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataList.point6}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataList.point7}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataList.point8}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataList.point10}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataList.point11}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataList.point12}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataList.point13}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataList.point14}</span>
+            </li>
+        </ul>
+    );
+};
+const DataListTwo = () => {
+    return (
+        <ul>
+            <li className="common_margin_li">
+                <span>{dataListTwo.point1}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataListTwo.point2}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwo.point3}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwo.point4}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwo.point5}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwo.point6}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataListTwo.point7}</span>
+            </li>
+        </ul>
+    );
+};
+const DataListTwo_More = () => {
+    return (
+        <ul>
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point1}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point2}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point3}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point4}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point5}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point6}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point7}</span>
+            </li>
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point8}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point9}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point10}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point11}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point12}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point13}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point14}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point15}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point16}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point17}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point18}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point19}</span>
+            </li>{" "}
+            <li className="common_margin_li">
+                <span>{dataListTwoMore.point20}</span>
+            </li>{" "}
+        </ul>
+    );
+};
 
-const TermsComponent = ({ data }) => {
+const Termsdesc = (props) => {
+    return (
+        <>
+            <div className="div_outer_wrapper box2">
+                <p className="common_margin">{props.desc}</p>
+            </div>
+        </>
+    );
+};
+
+const TermsComponent = (props) => {
+    return (
+        <>
+            <div className="div_outer_wrapper box2">
+                <h5>{props.heading}</h5>
+                <p className="common_margin">
+                    {props.paragraph}
+                    <a href={props.linkTo}>{props.hyper}</a>
+                </p>
+            </div>
+        </>
+    );
+};
+const TermsComponentBold = (props) => {
+    return (
+        <>
+            <div className="div_outer_wrapper box2">
+                <h5>{props.heading}</h5>
+                <p className="common_margin">
+                    {props.paragraph}
+                    <strong>{props.bold}</strong>
+                    {props.desc1}
+                </p>
+                <p className="common_margin">{props.desc2}</p>
+            </div>
+        </>
+    );
+};
+const TermsComponentHeader = ({ data }) => {
     return (
         <>
             <div className="div_outer_wrapper box1">
                 <h2>Terms of Use</h2>
-                <p className="common_margin">{data.point1}</p>
+                <p className="common_margin">{dataList.point1}</p>
                 <p className="common_margin">
                     This USER Agreement (the "Agreement") and the policies
                     referred to herein contain the complete terms and conditions
@@ -79,47 +424,7 @@ const TermsComponent = ({ data }) => {
                     THIS USER AGREEMENT, AND MOTTO’S PRIVACY POLICY
                     (COLLECTIVELY, THE “MOTTO POLICIES”).
                 </p>
-                <p className="common_margin">{data.point3}</p>
-            </div>
-            <div className="div_outer_wrapper box2">
-                <h5>USE OF SERVICE; NO MEDICAL ADVICE</h5>
-                <p className="common_margin">{data.point4}</p>
-                <ul>
-                    <li className="common_margin_li">
-                        <span>{data.point5}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point6}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point7}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point8}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point9}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point10}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point11}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point12}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point13}</span>
-                    </li>
-                    <li className="common_margin_li">
-                        <span>{data.point14}</span>
-                    </li>
-                </ul>
-                <p className="common_margin">{data.point15}</p>
-                <p className="common_margin">{data.point16}</p>
-                <p className="common_margin">{data.point17}</p>
-                <p className="common_margin">{data.point18}</p>
+                <p className="common_margin">{dataList.point3}</p>
             </div>
         </>
     );

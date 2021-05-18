@@ -157,7 +157,7 @@
         width: 100%;
         background-color: #f6f6f6;
         .top_bar {
-            margin: 2rem;
+            margin: 7rem 0;
             display: flex;
             flex-direction: row-reverse;
             @media screen and (max-width: 1023px) {
@@ -167,12 +167,9 @@
     }
 }
 
-.pro_pic
-{
-    
-       height: 80px;
-       width: 80px;
-       border-radius: 80px;
-        object-fit:cover;
-     
+.pro_pic {
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
+    object-fit: cover;
 }

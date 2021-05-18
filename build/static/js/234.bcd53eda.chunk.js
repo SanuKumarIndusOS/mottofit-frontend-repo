@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[234],{504:function(t,s,i){"use strict";i.r(s),s.default=i.p+"static/media/Ellipse 2818.2714372a.svg"}}]);
+//# sourceMappingURL=234.bcd53eda.chunk.js.map

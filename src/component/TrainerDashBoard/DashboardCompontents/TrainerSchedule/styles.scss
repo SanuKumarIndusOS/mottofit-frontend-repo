@@ -71,6 +71,7 @@
         .table_inner_trainer {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             width: 100%;
             margin: 0.5em 0 2em 0;
             padding: 1.5em 1em 0 1em;
@@ -86,6 +87,11 @@
                 letter-spacing: 0.6px;
                 color: #898989;
                 text-transform: uppercase;
+            }
+            select {
+                width: 200px;
+                padding: 0.5em 0;
+                border: 2px solid #e6e6e6;
             }
         }
     }
@@ -208,4 +214,72 @@
             border: none;
         }
     }
+}
+.table2 {
+    thead {
+        text-align: center !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        border: 2px solid #e6e6e6 !important;
+        background-clip: padding-box;
+        line-height: 3rem !important;
+        padding-left: 0rem !important;
+        padding-right: 0rem !important;
+        width: 120px;
+        height: 70px;
+        th {
+            .table_header_number {
+                color: #161616;
+                letter-spacing: 1.2px;
+                font: normal normal 600 32px/22px Montserrat;
+                padding-top: 15px;
+                position: relative;
+                top: 10px;
+            }
+            .table_header_txt {
+                color: #898989;
+                font: normal normal medium 20px/22px Montserrat;
+            }
+        }
+    }
+    .time_show {
+        font: var(--unnamed-font-style-normal) normal
+            var(--unnamed-font-weight-600) var(--unnamed-font-size-20) /
+            var(--unnamed-line-spacing-22) var(--unnamed-font-family-montserrat);
+        color: var(--unnamed-color-161616);
+        text-align: center;
+        font: normal normal 600 20px/22px Montserrat;
+        letter-spacing: 0.6px;
+        color: #161616;
+        text-transform: uppercase;
+    }
+
+    .avaiable_slot {
+        background: #fff;
+        text-align: center !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        border: 2px solid #e6e6e6 !important;
+        background-clip: padding-box;
+        line-height: 3rem !important;
+        padding-left: 0rem !important;
+        padding-right: 0rem !important;
+        width: 120px;
+        height: 70px;
+        th {
+            width: 100px;
+            border: 2px solid #e6e6e6 !important;
+        }
+    }
+    td {
+        width: 120px;
+        height: 60px;
+        border: 2px solid #e6e6e6 !important;
+        text-align: center;
+        background: #dedede;
+    }
+}
+
+.slot_time {
+    background: #fff !important;
 }

@@ -85,7 +85,8 @@
     }
     .readmore_button {
         margin-bottom: 8em;
-        a {
+        button {
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -101,6 +102,8 @@
             opacity: 1;
             text-decoration: none;
             margin-bottom: 1em;
+            border: none;
+            width: 100%;
         }
     }
 

@@ -13,15 +13,15 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
+import axios from "axios";
 
-const options = [
-    { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
-    { label: "New York", value: "New York", name: "serviceableLocation" },
-    { label: "Hamptons", value: "Hamptons", name: "serviceableLocation" },
-    { label: "Miami", value: "Miami", name: "serviceableLocation" },
-];
-const MyProfileFC = ({ getTrainerDetails, details }) => {
-    const [selectedOption, setSelectedOption] = useState([]);
+const MyProfileFC = ({
+    getTrainerDetails,
+    details,
+    updateTrainerDetails,
+    // trainerPersonalData,
+}) => {
+    // const [selectedOption, setSelectedOption] = useState([]);
 
     const [trainerData, setTrainerData] = useState({
         motto: "",
@@ -98,6 +98,22 @@ const MyProfileFC = ({ getTrainerDetails, details }) => {
     };
 
     const handleSubmit = () => {
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+        };
+
+        axios
+            .get(
+                "http://doodlebluelive.com:2307/v1/trainer",
+                { applicationStatus: "setupComplete" },
+                {
+                    headers: headers,
+                }
+            )
+            .then((res) => {
+                console.log(res);
+            });
         const {
             instaHandle,
             location,
@@ -128,7 +144,7 @@ const MyProfileFC = ({ getTrainerDetails, details }) => {
         };
         // updateTrainerDetails();
 
-        console.log(payload);
+        console.log(payload, "payload");
 
         const { updateTrainerAvailabilityApi } = TrainerApi;
 
@@ -146,7 +162,7 @@ const MyProfileFC = ({ getTrainerDetails, details }) => {
     useEffect(() => {
         getTrainerDetails()
             .then((data) => {
-                console.log(data);
+                console.log(data, "api data");
 
                 const {
                     trainingProcess = "",
@@ -190,9 +206,7 @@ const MyProfileFC = ({ getTrainerDetails, details }) => {
                 );
 
                 setInputCertificatesFields(tempCertification);
-
                 setTrainerData(storeData.details);
-
                 updateTrainerDetails(storeData);
             })
             .catch((err) => console.log(err));
