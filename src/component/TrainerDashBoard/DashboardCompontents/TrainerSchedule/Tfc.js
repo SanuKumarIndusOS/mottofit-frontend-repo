@@ -433,7 +433,9 @@ function Tfc() {
                     </td>
                 </th>
                 <tr>
-                    <td disabled>{time[0]}</td>
+                    <td disabled className="slot_time">
+                        {time[0]}
+                    </td>
                     {cellData[0].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -463,7 +465,9 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled>{time[1]}</td>
+                    <td disabled className="slot_time">
+                        {time[1]}
+                    </td>
                     {cellData[1].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -492,7 +496,9 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled>{time[2]}</td>
+                    <td disabled className="slot_time">
+                        {time[2]}
+                    </td>
                     {cellData[2].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -521,7 +527,9 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled>{time[3]}</td>
+                    <td disabled className="slot_time">
+                        {time[3]}
+                    </td>
                     {cellData[3].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -550,7 +558,9 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled>{time[4]}</td>
+                    <td disabled className="slot_time">
+                        {time[4]}
+                    </td>
                     {cellData[4].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -579,7 +589,9 @@ function Tfc() {
                     })}
                 </tr>
                 <tr>
-                    <td disabled>{time[5]}</td>
+                    <td disabled className="slot_time">
+                        {time[5]}
+                    </td>
                     {cellData[5].map((item) => {
                         if (aslotKeys.length !== 0) {
                             if (aslotKeys.find((el) => el === item.date)) {
@@ -852,51 +864,62 @@ function Tfc() {
             <div className="outter_table_trainer">
                 <div className="table_trainer">
                     <div className="table_inner_trainer">
-                        <img src={BackIcon} onClick={PreviousWeek} /> &ensp;
-                        <div className="date_week">
-                            {startWeek.format("DD")} - {endWeek.format("DD")}{" "}
+                        <div className="table_date">
+                            <img src={BackIcon} onClick={PreviousWeek} /> &ensp;
+                            <div className="date_week">
+                                {startWeek.format("DD")} -{" "}
+                                {endWeek.format("DD")} &ensp;
+                                {startWeek.format("MMMM")},{" "}
+                                {startWeek.format("yyyy")}
+                            </div>
+                            <img src={NextIcon} onClick={NextWeek} /> &ensp;
                             &ensp;
-                            {startWeek.format("MMMM")},{" "}
-                            {startWeek.format("yyyy")}
                         </div>
-                        <img src={NextIcon} onClick={NextWeek} /> &ensp; &ensp;
-                        <select
-                            value={TimeSlot}
-                            onChange={(e) => {
-                                setTimeSlot(e.target.value);
-                                console.log(e.target.value);
-                                if (e.target.value === "EarlyBird") {
-                                    setTime(early_bird);
-                                    console.log("early_bird");
-                                }
+                        <div className="table_date">
+                            <select
+                                value={TimeSlot}
+                                onChange={(e) => {
+                                    setTimeSlot(e.target.value);
+                                    console.log(e.target.value);
+                                    if (e.target.value === "EarlyBird") {
+                                        setTime(early_bird);
+                                        console.log("early_bird");
+                                    }
 
-                                if (e.target.value === "RiseAndShine") {
-                                    setTime(rise_shine);
-                                    console.log("RiseAndShine");
-                                }
+                                    if (e.target.value === "RiseAndShine") {
+                                        setTime(rise_shine);
+                                        console.log("RiseAndShine");
+                                    }
 
-                                if (e.target.value === "MidDayBreak") {
-                                    setTime(mid_day);
-                                    console.log("MidDayBreak");
-                                }
+                                    if (e.target.value === "MidDayBreak") {
+                                        setTime(mid_day);
+                                        console.log("MidDayBreak");
+                                    }
 
-                                if (e.target.value === "HappyHours") {
-                                    setTime(happy_hour);
-                                    console.log("HappyHours");
-                                }
+                                    if (e.target.value === "HappyHours") {
+                                        setTime(happy_hour);
+                                        console.log("HappyHours");
+                                    }
 
-                                if (e.target.value === "NeverTooLate") {
-                                    setTime(never_too_late);
-                                    console.log("NeverTooLate");
-                                }
-                            }}
-                        >
-                            <option value="EarlyBird">Early Bird</option>
-                            <option value="RiseAndShine">Rise & Shine</option>
-                            <option value="MidDayBreak">Mid-Day Break</option>
-                            <option value="HappyHours">Happy Hour</option>
-                            <option value="NeverTooLate">Never Too Late</option>
-                        </select>
+                                    if (e.target.value === "NeverTooLate") {
+                                        setTime(never_too_late);
+                                        console.log("NeverTooLate");
+                                    }
+                                }}
+                            >
+                                <option value="EarlyBird">Early Bird</option>
+                                <option value="RiseAndShine">
+                                    Rise & Shine
+                                </option>
+                                <option value="MidDayBreak">
+                                    Mid-Day Break
+                                </option>
+                                <option value="HappyHours">Happy Hour</option>
+                                <option value="NeverTooLate">
+                                    Never Too Late
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     {/* {tableData}
                     {tableData2} */}
@@ -909,7 +932,10 @@ function Tfc() {
                         )
                     }
 
-                    <button onClick={toggleEditMode}>
+                    <button
+                        onClick={toggleEditMode}
+                        className="scheduler_button"
+                    >
                         {editMode ? "SAVE" : "EDIT"}
                     </button>
                 </div>

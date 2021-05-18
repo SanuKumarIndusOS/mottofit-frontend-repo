@@ -75,6 +75,10 @@
             width: 100%;
             margin: 0.5em 0 2em 0;
             padding: 1.5em 1em 0 1em;
+            .table_date {
+                display: flex;
+                align-items: center;
+            }
             .date_week {
                 width: 230px;
                 font: var(--unnamed-font-style-normal) normal
@@ -282,4 +286,29 @@
 
 .slot_time {
     background: #fff !important;
+    text-align: center;
+    font: normal normal 600 16px/22px Montserrat;
+}
+.table_trainer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
+    margin: 0 auto;
+    .scheduler_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        outline: none;
+        background: #53bfd2;
+        border: 0;
+        margin: 1em 0 0 0;
+        width: 20%;
+        height: 52px;
+        text-decoration: none;
+        padding: 0.2em 0.5em 0.2em 0.5em !important;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: bold;
+    }
 }
