@@ -38,30 +38,39 @@ function Tfc() {
     ]; //1
 
     let mid_day = [
+        "11:00 AM",
         "11:30 AM",
         "12:00 PM",
         "12:30 PM",
         "01:00 PM",
         "01:30 PM",
-        "02:00 PM",
     ]; //230 - 4
 
-    let happy_hour = [
+    let mid_day_2 = [
+        "02:00 PM",
+        "02:30 PM",
+        "03:00 PM",
+        "03:30 PM",
+        "04:00 PM",
         "04:30 PM",
+    ];
+
+    let happy_hour = [
         "05:00 PM",
         "05:30 PM",
         "06:00 PM",
         "06:30 PM",
         "07:00 PM",
+        "07:30 PM",
     ];
 
     let never_too_late = [
-        "07:00 PM",
-        "07:30 PM",
         "08:00 PM",
         "08:30 PM",
         "09:00 PM",
         "09:30 PM",
+        "10:00 PM",
+        "10:30 PM",
     ];
 
     const [time, setTime] = React.useState(early_bird);
@@ -891,9 +900,14 @@ function Tfc() {
                                         console.log("RiseAndShine");
                                     }
 
-                                    if (e.target.value === "MidDayBreak") {
+                                    if (e.target.value === "MidDayBreak1") {
                                         setTime(mid_day);
                                         console.log("MidDayBreak");
+                                    }
+
+                                    if (e.target.value === "MidDayBreak2") {
+                                        setTime(mid_day_2);
+                                        console.log("MidDayBreak2");
                                     }
 
                                     if (e.target.value === "HappyHours") {
@@ -911,8 +925,11 @@ function Tfc() {
                                 <option value="RiseAndShine">
                                     Rise & Shine
                                 </option>
-                                <option value="MidDayBreak">
+                                <option value="MidDayBreak1">
                                     Mid-Day Break
+                                </option>
+                                <option value="MidDayBreak2">
+                                    Mid-Day AfterNoon
                                 </option>
                                 <option value="HappyHours">Happy Hour</option>
                                 <option value="NeverTooLate">
