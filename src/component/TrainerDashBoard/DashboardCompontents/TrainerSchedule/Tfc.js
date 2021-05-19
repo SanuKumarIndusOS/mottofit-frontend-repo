@@ -931,13 +931,31 @@ function Tfc() {
                             <div> {tableData2} </div>
                         )
                     }
-
-                    <button
-                        onClick={toggleEditMode}
-                        className="scheduler_button"
-                    >
-                        {editMode ? "SAVE" : "EDIT"}
-                    </button>
+                    <div className="scheduler_button">
+                        {editMode ? (
+                            <button
+                                onClick={toggleEditMode}
+                                className="scheduler_button"
+                                style={{
+                                    backgroundColor: "#53bfd2",
+                                    width: "100%",
+                                }}
+                            >
+                                SAVE
+                            </button>
+                        ) : (
+                            <button
+                                onClick={toggleEditMode}
+                                className="scheduler_button"
+                                style={{
+                                    backgroundColor: "#53d27d",
+                                    width: "100%",
+                                }}
+                            >
+                                EDIT
+                            </button>
+                        )}
+                    </div>
                 </div>
                 <ButtonSection />
             </div>
