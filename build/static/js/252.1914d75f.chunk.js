@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[252],{450:function(t,s,i){"use strict";i.r(s),s.default=i.p+"static/media/Early bird.114f1643.svg"}}]);
-//# sourceMappingURL=252.1914d75f.chunk.js.map

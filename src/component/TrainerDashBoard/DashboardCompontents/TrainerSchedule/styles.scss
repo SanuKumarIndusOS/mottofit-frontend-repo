@@ -221,17 +221,17 @@
 }
 .table2 {
     thead {
-        text-align: center !important;
-        text-overflow: ellipsis !important;
-        overflow: hidden !important;
-        border: 2px solid #e6e6e6 !important;
-        background-clip: padding-box;
-        line-height: 3rem !important;
-        padding-left: 0rem !important;
-        padding-right: 0rem !important;
-        width: 120px;
-        height: 70px;
         th {
+            text-align: center !important;
+            text-overflow: ellipsis !important;
+            overflow: hidden !important;
+            border: 2px solid #e6e6e6 !important;
+            background-clip: padding-box;
+            line-height: 3rem !important;
+            padding-left: 0rem !important;
+            padding-right: 0rem !important;
+            width: 120px;
+            height: 120px !important;
             .table_header_number {
                 color: #161616;
                 letter-spacing: 1.2px;
@@ -311,4 +311,14 @@
         color: #fff;
         font-weight: bold;
     }
+}
+.table-drag-select td {
+    text-align: center !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    border: 2px solid #e6e6e6 !important;
+    background-clip: padding-box;
+    line-height: 3rem !important;
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
 }

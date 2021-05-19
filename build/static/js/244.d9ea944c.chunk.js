@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[244],{351:function(t,e,s){"use strict";s.r(e),e.default=s.p+"static/media/Schedule_slot_active.29ee488e.svg"}}]);
+//# sourceMappingURL=244.d9ea944c.chunk.js.map
