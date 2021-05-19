@@ -874,7 +874,35 @@ function Tfc() {
                 <div className="table_trainer">
                     <div className="table_inner_trainer">
                         <div className="table_date">
-                            <img src={BackIcon} onClick={PreviousWeek} /> &ensp;
+                            {/* <img
+                                src={BackIcon}
+                                onClick={PreviousWeek}
+                                disabled="true"
+                            />{" "} */}
+                            &ensp;
+                            {moment(startWeek.format("YYYY-MM-DD")).isAfter(
+                                moment()
+                                    .startOf("isoWeek")
+                                    .format("YYYY-MM-DD"),
+                                "day"
+                            ) ? (
+                                <div>
+                                    <img
+                                        src={BackIcon}
+                                        onClick={PreviousWeek}
+                                    />{" "}
+                                    &ensp;
+                                </div>
+                            ) : (
+                                <div>
+                                    <img
+                                        src={BackIcon}
+                                        disabled="true"
+                                        style={{ opacity: "0.5" }}
+                                    />{" "}
+                                    &ensp;
+                                </div>
+                            )}
                             <div className="date_week">
                                 {startWeek.format("DD")} -{" "}
                                 {endWeek.format("DD")} &ensp;
@@ -954,7 +982,7 @@ function Tfc() {
                                 onClick={toggleEditMode}
                                 className="scheduler_button"
                                 style={{
-                                    backgroundColor: "#53bfd2",
+                                    backgroundColor: "#53d27d",
                                     width: "100%",
                                 }}
                             >
@@ -965,7 +993,8 @@ function Tfc() {
                                 onClick={toggleEditMode}
                                 className="scheduler_button"
                                 style={{
-                                    backgroundColor: "#53d27d",
+                                    backgroundColor: "#53bfd2",
+
                                     width: "100%",
                                 }}
                             >
