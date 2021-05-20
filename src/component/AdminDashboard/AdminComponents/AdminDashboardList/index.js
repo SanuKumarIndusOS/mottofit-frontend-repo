@@ -13,13 +13,13 @@ const AdminDashboard = () => {
                             <div className="views_AD">
                                 <p>No of</p>
                                 <h3>
-                                    User's : <span>80</span>
+                                    User's : <span>43</span>
                                 </h3>
                             </div>
                             <div className="views_AD">
                                 <p>No of</p>
                                 <h3>
-                                    Trainer's : <span>150</span>
+                                    Trainer's : <span>253</span>
                                 </h3>
                             </div>
                             <div className="views_AD">

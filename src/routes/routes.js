@@ -79,6 +79,13 @@ const routers = [
                 auth: false,
                 exact: true,
             },
+            {
+                path: "/user",
+                componentPath: "pages/AdminDashboard/AdminUsers/AdminUser",
+                name: "AdminUser",
+                auth: false,
+                exact: true,
+            },
         ],
         // childrens: [
         //     {

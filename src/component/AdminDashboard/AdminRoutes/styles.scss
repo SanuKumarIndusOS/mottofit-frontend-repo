@@ -1,7 +1,7 @@
-.admin_container {
-    height: 1400px !important;
+.outter_container_AD {
+    height: auto !important;
     width: 100%;
-    display: flex;
+    // display: flex;
     .admin_sidenav {
         width: 370px;
         display: flex;
@@ -148,7 +148,7 @@
         }
         .ud_watermark {
             position: relative;
-            top: 320px;
+            top: 100px;
         }
     }
     .admin_content {

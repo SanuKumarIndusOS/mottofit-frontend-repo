@@ -11,7 +11,7 @@ const AdminTrainerSection = () => {
 
     function fetchAllTrainers() {
         fetch(
-            "http://doodlebluelive.com:2307/v1/admin/trainers?limit=10&page=1",
+            "http://doodlebluelive.com:2307/v1/admin/trainers?limit=20&page=1",
             {
                 method: "get",
                 headers: new Headers({
@@ -55,7 +55,7 @@ const AdminTrainerSection = () => {
     return (
         <div className="outter_container_AD">
             <div className="container">
-                <h2>Admin Trainer's</h2>
+                <h2>Admin Overall Data</h2>
                 <br></br>
                 <h3>Trainer List</h3>
                 <div className="admin">
