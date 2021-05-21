@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[211],{490:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Boxing Icon.d97da098.svg"}}]);
+//# sourceMappingURL=211.a45b8559.chunk.js.map

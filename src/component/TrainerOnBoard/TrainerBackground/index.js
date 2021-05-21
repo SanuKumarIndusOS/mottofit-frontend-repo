@@ -63,10 +63,12 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
         trainingProcess: "",
         interestInMotto: "",
         currentExperience: "",
+        awaitingCertification: "",
     });
 
-    const [checkstate, setCheckState] = React.useState("");
+    // const [checkstate, setCheckState] = React.useState("");
 
+    console.log(trainerbackgroundData, "trainerbackgroundData");
     // const history = useHistory();
 
     const [selectedValue, setSelectedValue] = useState("a");
@@ -146,6 +148,8 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                 trainingProcess: trainerbackgroundData.trainingProcess,
                 interestInMotto: trainerbackgroundData.interestInMotto,
                 currentExperience: currentExperiencee,
+                awaitingCertification:
+                    trainerbackgroundData.awaitingCertification,
             },
         };
 
@@ -155,7 +159,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
     };
 
     useEffect(() => {
-        if (Object.keys(details).length > 3) {
+        if (Object.keys(details).length > 5) {
             let tempData = {
                 areaOfExpertise: details?.areaOfExpertise || [],
                 previousExperience: details?.previousExperience || [],
@@ -163,6 +167,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                 clientAssessment: details.clientAssessment,
                 trainingProcess: details.trainingProcess,
                 interestInMotto: details.interestInMotto,
+                awaitingCertification: details.awaitingCertification,
             };
 
             details.currentExperience &&
@@ -554,6 +559,16 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                 type="text"
                                                 name="comment"
                                                 placeholder="Tell us about any awaiting certifications "
+                                                value={
+                                                    trainerbackgroundData.awaitingCertification
+                                                }
+                                                onChange={(e) =>
+                                                    setTrainerbackgroundData({
+                                                        ...trainerbackgroundData,
+                                                        awaitingCertification:
+                                                            e.target.value,
+                                                    })
+                                                }
                                             />
                                         </div>
                                     </div>

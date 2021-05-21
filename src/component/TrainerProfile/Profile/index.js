@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
 import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
 import { Link } from "react-router-dom";
@@ -20,6 +20,29 @@ const TrainerProfile = () => {
     const [open, setOpen] = useState(false);
     const myRef = useRef(null);
     const [openClassModel, setOpenClassModel] = useState(false);
+    const [trainerProfileData, setTrainerProfileData] = useState([]);
+    console.log(trainerProfileData, "trainerProfileData");
+
+    // function fetchTrainerProfile() {
+    //     fetch("http://doodlebluelive.com:2307/v1/availableTrainer?", {
+    //         method: "get",
+    //         headers: new Headers({
+    //             Authorization:
+    //                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIxNjAwMTc2LCJleHAiOjE2MjE2MDczNzZ9.EId_XcYG0YLtqcQEyT08T9-IUr2Oh-dyABrJKgePLYw",
+    //             "Content-Type": "application/x-www-form-urlencoded",
+    //         }),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setTrainerProfileData(data.bestMatch);
+    //             console.log(data.bestMatch, "data");
+    //             // setLoading(false);
+    //         });
+    // }
+    // useEffect(() => {
+    //     // setLoading(true);
+    //     fetchTrainerProfile();
+    // }, []);
 
     return (
         <>
@@ -31,7 +54,14 @@ const TrainerProfile = () => {
                             <div className="inner_profile container">
                                 <img src={Profile} alt="picture" />
                                 <div className="profile_header_inner">
-                                    <h2>John Doe</h2>
+                                    <h2>
+                                        {/* {
+                                            trainerProfileData["data"][
+                                                "firstName"
+                                            ]
+                                        } */}
+                                        John Deo
+                                    </h2>
                                     <p>PILATES, STRENGTH & HIIT</p>
                                 </div>
                                 <div className="profile_header_link">

@@ -8,10 +8,20 @@
     h2
         text-align: center
         font-size: 40px
+        font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-montserrat)
+        letter-spacing: var(--unnamed-character-spacing-0-27)
+        text-align: center
+        font: normal normal 600 40px/30px Montserrat
+        margin: 0 0 0.5em 0
 
     p
+        font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-montserrat)
+        letter-spacing: var(--unnamed-character-spacing-0-27)
         text-align: center
-        width: 50%
+        font: normal normal normal 18px/30px Montserrat
+        letter-spacing: 0.27px
+        color: #696969
+        width: 80%
 
 .row
     display: grid
@@ -29,15 +39,19 @@
         flex-direction: column
         justify-content: center
         margin: 1em 0
-        height: auto
         width: 314px
+        height: 450px !important
         border-radius: 50px
-        background: #ffffff
+        background: #fff !important
 
         .card-img-top
             width: 314px
             height: 200px
             border-radius: 20px 20px 0 0
+
+        .card-img-top:hover
+            background: #515 !important
+
         .card-body
             width: 314px
             display: flex
@@ -45,19 +59,49 @@
             justify-content: center
             align-items: center
 
-            h4
-                font-size: 35px
+            h3
+                font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-35)/45px var(--unnamed-font-family-cormorant-garamond)
+                color: var(--unnamed-color-161616)
+                text-align: center
+                font: normal normal bold 32px/45px Cormorant Garamond !important
+                letter-spacing: -0.35px
+                color: #161616
             h6
-                font-size: 18px
+
+                text-align: center
+                letter-spacing: 0.9px
+                color: #898989
+                text-transform: uppercase
+                margin-bottom: 1em
+                font-family: 'Montserrat'
+                font-size: 14px !important
+                font-weight: 600
 
             p
-                font-size: 12px
+
+                text-align: center
+                letter-spacing: 0.24px
+                color: #898989
+                font-family: 'Montserrat'
+                font-size: 12px !important
+                font-weight: 500
+                button
+                    outline: none
+                    border: none
+                    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 16px/29px var(--unnamed-font-family-montserrat)
+                    color: var(--unnamed-color-2c2c2c)
+                    text-align: center
+                    text-decoration: underline
+                    font: normal normal 600 15px/22px Montserrat
+                    letter-spacing: 0.24px
+                    color: #2C2C2C
+
         .card-button
             button
                 display: flex
                 align-items: center
                 justify-content: space-between
-                padding: 0 0.8em
+                padding: 0 0.6em !important
                 margin: 0 auto
                 width: 314px
                 height: 62px
@@ -111,4 +155,12 @@
         color: #53BFD2
 
 .no_match
+    color: #53BFD2
+
     text-align: center
+    font-size: 40px
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-montserrat)
+    letter-spacing: var(--unnamed-character-spacing-0-27)
+    text-align: center
+    font: normal normal 600 40px/30px Montserrat
+    margin: 2em 0 0em 0

@@ -17,12 +17,13 @@ import { loginOrSignUp } from "action/authAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import useForm from "./useForm";
-import validateInfo from  "./validation";
+import validateInfo from "./validation";
 
-
-const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
-  
-    const {data,handleFormSubmit,error,setData} = useForm(validateInfo, submitForm);
+const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
+    const { data, handleFormSubmit, error, setData } = useForm(
+        validateInfo,
+        submitForm
+    );
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
@@ -58,12 +59,14 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
 
         const { userSignUp } = AuthApi;
 
-        if(Object.keys(error).length === 0){
-        loginOrSignupAct(userSignUp, payload)
-            .then((data) => console.log(data))
-            .catch((error) => {
-                setApiError("Sorry, something went wrong.", error.message);
-            });
+        if (Object.keys(error).length === 0) {
+            loginOrSignupAct(userSignUp, payload)
+                .then((data) => {
+                    history.push("/trainer/find");
+                })
+                .catch((error) => {
+                    setApiError("Sorry, something went wrong.", error.message);
+                });
         }
         // fetch("http://doodlebluelive.com:2307/v1/user/sign-up", requestOptions)
         //   .then(async (response) => {
@@ -135,11 +138,9 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                                 This field accept only alphabets
                                             </span>
                                         )} */}
-                                           {error.firstName && (
-                                                    <span>
-                                                        {error.firstName}
-                                                    </span>
-                                                )}
+                                        {error.firstName && (
+                                            <span>{error.firstName}</span>
+                                        )}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -156,10 +157,8 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                         />
                                         <img src={Person} alt="icon" />
                                         {error.lastName && (
-                                                    <span>
-                                                        {error.lastName}
-                                                    </span>
-                                                )}
+                                            <span>{error.lastName}</span>
+                                        )}
                                         {/* {errors.lastName && (
                                             <span>
                                                 {errors.lastName.message}
@@ -199,11 +198,9 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                         />
                                         <img src={Person} alt="icon" />
                                         {error.location && (
-                                                    <span>
-                                                        {error.location}
-                                                    </span>
-                                                )}
-                                        
+                                            <span>{error.location}</span>
+                                        )}
+
                                         {/* {errors.location && (
                                             <span>
                                                 {errors.location.message}
@@ -248,10 +245,8 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                         <img src={Mail} alt="icon" />
 
                                         {error.email && (
-                                                    <span>
-                                                        {error.email}
-                                                    </span>
-                                                )}
+                                            <span>{error.email}</span>
+                                        )}
                                         {/* {errors.email && (
                                             <span>{errors.email.message}</span>
                                         )} */}
@@ -271,10 +266,8 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                         />
                                         <img src={Phone} alt="icon" />
                                         {error.phoneNo && (
-                                                    <span>
-                                                        {error.phoneNo}
-                                                    </span>
-                                                )}
+                                            <span>{error.phoneNo}</span>
+                                        )}
 
                                         {/* {errors.phoneNo && (
                                             <span>
@@ -319,11 +312,9 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                             alt="icon"
                                             onClick={showPassword}
                                         />
-                                             {error.password && (
-                                                    <span>
-                                                        {error.password}
-                                                    </span>
-                                                )}
+                                        {error.password && (
+                                            <span>{error.password}</span>
+                                        )}
 
                                         {/* {errors.password?.type ===
                                             "required" && (
@@ -373,7 +364,6 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                             //     maxLength: 16,
                                             //     // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
                                             // })}
-                                            
                                         />
                                         <img
                                             src={Password}
@@ -381,11 +371,9 @@ const SignUpFC = ({ loginOrSignupAct,submitForm }) => {
                                             onClick={showConfirmPassword}
                                         />
 
-                                            {error.cpassword && (
-                                                    <span>
-                                                        {error.cpassword}
-                                                    </span>
-                                                )}
+                                        {error.cpassword && (
+                                            <span>{error.cpassword}</span>
+                                        )}
                                         {/* {errors.cpassword?.type ===
                                             "required" && (
                                             <span>This field is required</span>

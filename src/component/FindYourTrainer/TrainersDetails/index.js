@@ -1,38 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
 // import { TrainerData } from "./TrainerData";
 import "./trainer.sass";
-import onHoverImage from "../../../assets/files/FindTrainer/onHover.svg";
-import onImage from "../../../assets/files/SignUp/Arrow.svg";
+// import onHoverImage from "../../../assets/files/FindTrainer/onHover.svg";
+// import onImage from "../../../assets/files/SignUp/Arrow.svg";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { history } from "helpers";
+import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
-function useHover() {
-    const [value, setValue] = useState(false);
+// function useHover() {
+//     const [value, setValue] = useState(false);
 
-    const ref = useRef(null);
+//     const ref = useRef(null);
 
-    const handleMouseOver = () => setValue(true);
-    const handleMouseOut = () => setValue(false);
+//     const handleMouseOver = () => setValue(true);
+//     const handleMouseOut = () => setValue(false);
 
-    useEffect(
-        () => {
-            const node = ref.current;
-            if (node) {
-                node.addEventListener("mouseover", handleMouseOver);
-                node.addEventListener("mouseout", handleMouseOut);
+//     useEffect(
+//         () => {
+//             const node = ref.current;
+//             if (node) {
+//                 node.addEventListener("mouseover", handleMouseOver);
+//                 node.addEventListener("mouseout", handleMouseOut);
 
-                return () => {
-                    node.removeEventListener("mouseover", handleMouseOver);
-                    node.removeEventListener("mouseout", handleMouseOut);
-                };
-            }
-        },
-        [ref] // Recall only if ref changes
-    );
+//                 return () => {
+//                     node.removeEventListener("mouseover", handleMouseOver);
+//                     node.removeEventListener("mouseout", handleMouseOut);
+//                 };
+//             }
+//         },
+//         [ref] // Recall only if ref changes
+//     );
 
-    return [ref, value];
-}
+//     return [ref, value];
+// }
 
 const TrainerCards = (props) => {
     const [bestMatchData, setbestMatchData] = useState([]);
@@ -45,7 +46,7 @@ const TrainerCards = (props) => {
             console.log(bestMatchData[item], "best");
         });
     });
-    const [hoverRef, isHovered] = useHover();
+    // const [hoverRef, isHovered] = useHover();
     const [visible, setVisible] = useState(3);
     const showMoreItems = () => {
         setVisible((showCard) => showCard + 3);
@@ -72,24 +73,83 @@ const TrainerCards = (props) => {
                                     src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                                     style={{ objectFit: "cover" }}
                                 />
+
                                 <div className="card-body">
                                     <h3>
-                                        {bestMatchData[data]["firstName"]}&ensp;
+                                        {bestMatchData[data]["firstName"]}&nbsp;
                                         {bestMatchData[data]["lastName"]}
                                     </h3>
-                                    <h6>{data.role}</h6>
+                                    <h6>
+                                        {
+                                            bestMatchData[data][
+                                                "areaOfExpertise"
+                                            ][0]
+                                        }
+                                        {bestMatchData[data][
+                                            "areaOfExpertise"
+                                        ][1]
+                                            ? ","
+                                            : ""}
+                                        &nbsp;
+                                        {
+                                            bestMatchData[data][
+                                                "areaOfExpertise"
+                                            ][1]
+                                        }
+                                        {bestMatchData[data][
+                                            "areaOfExpertise"
+                                        ][2]
+                                            ? ","
+                                            : ""}
+                                        &nbsp;
+                                        {
+                                            bestMatchData[data][
+                                                "areaOfExpertise"
+                                            ][2]
+                                        }
+                                        &nbsp;
+                                        {
+                                            bestMatchData[data][
+                                                "areaOfExpertise"
+                                            ][3]
+                                        }
+                                    </h6>
                                     <p>
-                                        {data.describe}
-                                        <Link to="profile">Read More</Link>
+                                        {bestMatchData[data]["description"]}
+
+                                        <button
+                                            onClick={() => {
+                                                console.log(
+                                                    bestMatchData[data]
+                                                );
+                                                history.push({
+                                                    pathname:
+                                                        "/trainer/profile",
+                                                    state: {
+                                                        trainerId:
+                                                            bestMatchData[data][
+                                                                "id"
+                                                            ],
+                                                        trainerData:
+                                                            bestMatchData[data],
+                                                    },
+                                                });
+                                            }}
+                                        >
+                                            Read More
+                                        </button>
                                     </p>
                                 </div>
                                 <div className="card-button">
                                     <button
-                                        ref={hoverRef}
+                                        // ref={hoverRef}
+                                        // style={{
+                                        //     backgroundColor: isHovered
+                                        //         ? "red"
+                                        //         : "#53BFD2",
+                                        // }}
                                         style={{
-                                            backgroundColor: isHovered
-                                                ? "red"
-                                                : "#53BFD2",
+                                            backgroundColor: "#53BFD2",
                                         }}
                                         onClick={() => {
                                             console.log(bestMatchData[data]);
@@ -107,7 +167,7 @@ const TrainerCards = (props) => {
                                         }}
                                     >
                                         book a session
-                                        <img src={onImage} alt="icon" />
+                                        <BlackCircleButton />
                                         {/* {isHovered ? (
                       <img src={onHoverImage} alt="icon" />
                     ) : (

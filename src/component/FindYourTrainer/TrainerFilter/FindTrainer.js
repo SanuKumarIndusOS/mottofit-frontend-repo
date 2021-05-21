@@ -33,6 +33,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
+import TrainerProfile from "component/TrainerProfile/Profile";
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     useEffect(() => {
         // var date = new Date(selectedDate.toISOString());
@@ -66,7 +67,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     availability: "EarlyBird",
                 },
             };
-           
+
             console.log(payload);
             setqueryObject(payload.query);
 
@@ -84,10 +85,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         DropdownTrainerAvailabilityState,
         setDropdownTrainerAvailabilityState,
     ] = useState(false);
-    const [
-        DropdownAvailabilityValue,
-        setDropdownTrainerAvailabilityValue,
-    ] = useState([]);
+    const [DropdownAvailabilityValue, setDropdownTrainerAvailabilityValue] =
+        useState([]);
 
     const [ddBoxingState, setddBoxingState] = useState(false);
     const [ddPilatesState, setddPilatesState] = useState(false);
