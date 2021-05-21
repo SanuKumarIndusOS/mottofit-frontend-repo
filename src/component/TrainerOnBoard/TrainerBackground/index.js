@@ -619,6 +619,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                         </h6>
                                         <div className="inputs_experience">
                                             <textarea
+                                                maxlength="150"
                                                 type="text"
                                                 name="comment"
                                                 placeholder="Tell us all about it in not more than 150 words"
@@ -644,6 +645,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                             <textarea
                                                 type="text"
                                                 name="comment"
+                                                maxlength="150"
                                                 placeholder="Tell us all about it in not more than 150 words"
                                                 value={
                                                     trainerbackgroundData.clientAssessment
@@ -667,6 +669,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                             <textarea
                                                 type="text"
                                                 name="comment"
+                                                maxlength="150"
                                                 placeholder="Tell us all about it in not more than 150 words"
                                                 value={
                                                     trainerbackgroundData.trainingProcess

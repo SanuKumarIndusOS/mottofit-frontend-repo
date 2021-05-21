@@ -40,7 +40,7 @@ const TrainerCardDashboard = ({
         upload: " Upload your profile picture, hotshot!",
         tellus: " Tell us what you train! Select all the categories that apply",
         clientDesc:
-            "Write a short and sweet description for clients to pick you in 75 characters",
+            "Write a short and sweet description for clients to pick you in 100 characters",
         pricing: "Tell us about your Pricing",
         pricingDesc:
             "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",

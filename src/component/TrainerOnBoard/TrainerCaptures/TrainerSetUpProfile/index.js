@@ -493,7 +493,7 @@ const TrainerSetUpProfileFC = ({
                                             <div className="inner_profile container">
                                                 {/* {trainerPersonalData.profilePicture ? ( */}
                                                 <img
-                                                    onerror='this.style.display = "none"'
+                                                    // onerror='this.style.display = "none"'
                                                     src={
                                                         trainerPersonalData.profilePicture
                                                         // : "https://1m19tt3pztls474q6z46fnk9-wpengine.netdna-ssl.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"
@@ -550,7 +550,6 @@ const TrainerSetUpProfileFC = ({
                                                                     .oneOnOnePricing
                                                                     .virtualSession ? (
                                                                     <h6>
-                                                                        $
                                                                         {
                                                                             trainerPersonalData
                                                                                 .oneOnOnePricing
@@ -567,7 +566,6 @@ const TrainerSetUpProfileFC = ({
                                                                     .oneOnOnePricing
                                                                     .inPersonAtTrainerLocation ? (
                                                                     <h6>
-                                                                        $
                                                                         {
                                                                             trainerPersonalData
                                                                                 .oneOnOnePricing
@@ -661,7 +659,6 @@ const TrainerSetUpProfileFC = ({
                                                                     .socialSessionPricing
                                                                     .inPeronAtTrainerLocationfor2People ? (
                                                                     <h6>
-                                                                        $
                                                                         {
                                                                             trainerPersonalData
                                                                                 .socialSessionPricing
@@ -681,7 +678,6 @@ const TrainerSetUpProfileFC = ({
                                                                     .socialSessionPricing
                                                                     .inPeronAtTrainerLocationfor3People ? (
                                                                     <h6>
-                                                                        $
                                                                         {
                                                                             trainerPersonalData
                                                                                 .socialSessionPricing
@@ -701,7 +697,6 @@ const TrainerSetUpProfileFC = ({
                                                                     .socialSessionPricing
                                                                     .inPeronAtTrainerLocationfor4People ? (
                                                                     <h6>
-                                                                        $
                                                                         {
                                                                             trainerPersonalData
                                                                                 .socialSessionPricing
@@ -779,7 +774,6 @@ const TrainerSetUpProfileFC = ({
 
                                                             <div className="profile_aside_inner_item">
                                                                 <h6>
-                                                                    $
                                                                     {trainerPersonalData &&
                                                                     trainerPersonalData.classSessionPricing
                                                                         ? trainerPersonalData
@@ -1206,7 +1200,7 @@ const TrainerSetUpProfileFC = ({
                                                     <>
                                                         <h5>
                                                             Add your Google or
-                                                            Zoom meeting link
+                                                            zoom meeting link
                                                         </h5>
                                                         <div className="inputs_platform">
                                                             <div className="iconwrapper">

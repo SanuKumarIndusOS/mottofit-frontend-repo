@@ -319,7 +319,7 @@ const routers = [
             {
                 path: "/schedule",
                 componentPath: "pages/TrainerDashboard/Schedule/Schedule",
-                name: "TrainerSession",
+                name: "TrainerSchedule",
                 auth: false,
                 exact: true,
             },

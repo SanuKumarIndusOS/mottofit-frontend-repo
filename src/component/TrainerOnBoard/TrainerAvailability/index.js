@@ -352,11 +352,6 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                                 });
                                             }}
                                         />
-                                        {/* <img
-                                            src={Location}
-                                            alt="icon"
-                                            className="loction_img_select"
-                                        /> */}
                                     </div>
                                 </div>
                                 <div className="item_5">
@@ -401,34 +396,12 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                                 });
                                             }}
                                         />
-                                        {/* <select
-                                            className="select_location"
-                                            required
-                                            name="answer"
-                                            value={
-                                                trainerAvailabilityData.servicableLocation
-                                            }
-                                            onChange={(e) => {
-                                                setTrainerAvailabilityData({
-                                                    ...trainerAvailabilityData,
-                                                    servicableLocation:
-                                                        e.target.value,
-                                                });
-                                            }}
-                                        >
-                                            <option value="" disabled selected>
-                                                Select a Motto City
-                                            </option>
-                                            <option>New York</option>
-                                            <option>Miami</option>
-                                            <option>Hampton</option>
-                                            <option>Palm Beach</option>
-                                        </select> */}
-                                        <img
+
+                                        {/* <img
                                             src={Location}
                                             alt="icon"
                                             className="loction_img_select"
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
                             </div>

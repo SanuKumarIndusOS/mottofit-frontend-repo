@@ -3,6 +3,7 @@ import Datatable from "./datatable/index";
 import Pagination from "./Pagination";
 import { Input } from "reactstrap";
 import "./styles.scss";
+import AdminDashboard from "../AdminDashboardList/index";
 
 // require("es6-promise").polyfill();
 // require("isomorphic-fetch");
@@ -14,7 +15,7 @@ const Main = () => {
     const [postsPerPage] = useState(2000);
     const [loading, setLoading] = useState(false);
     const [q, setQ] = useState("");
-
+    console.log(noTrainer, "main");
     // console.log(trainerList, "useState");
     useEffect(() => {
         setLoading(true);
@@ -65,6 +66,7 @@ const Main = () => {
     //Change page
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div className="outter_container_AD container">
             <h2>Admin Trainer's Data </h2>

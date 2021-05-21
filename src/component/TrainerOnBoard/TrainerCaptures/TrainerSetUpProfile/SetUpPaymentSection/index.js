@@ -4,6 +4,7 @@ import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
 // import ArrowHover from "../../../../common/ButtonIcon/ArrowHover";
 import BlueHoverButton from "component/common/BlueArrowButton";
+import Tick from "../../../../../assets/files/FindTrainer/Tick 1.svg";
 
 const info = [
     {
@@ -87,9 +88,13 @@ const PaymentSection = ({ onChange, trainerData, setTrainerData }) => {
                                     value={trainerData.governmentId}
                                     onChange={handleChange}
                                 />
-                                <a className="checkarrow">
-                                    <BlueHoverButton />
-                                </a>
+                                {trainerData.governmentId ? (
+                                    <img src={Tick} alt="Uploaded" />
+                                ) : (
+                                    <a className="checkarrow">
+                                        <BlueHoverButton />
+                                    </a>
+                                )}
                             </div>
                         </div>
                         <div className="payment_item1">
@@ -116,9 +121,13 @@ const PaymentSection = ({ onChange, trainerData, setTrainerData }) => {
                                     value={trainerData.insurance}
                                     onChange={handleChange}
                                 />
-                                <a className="checkarrow">
-                                    <BlueHoverButton />
-                                </a>
+                                {trainerData.insurance ? (
+                                    <img src={Tick} alt="Uploaded" />
+                                ) : (
+                                    <a className="checkarrow">
+                                        <BlueHoverButton />
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </div>

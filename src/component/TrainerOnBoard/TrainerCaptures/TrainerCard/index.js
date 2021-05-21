@@ -343,7 +343,8 @@ const TrainerCardFC = ({
                                                     textTransform: "capitalize",
                                                 }}
                                             >
-                                                {trainerData.firstName}&ensp;
+                                                {trainerData.firstName}
+                                                &nbsp;
                                                 {trainerData.lastName}
                                             </h3>
                                             <h6
@@ -356,7 +357,7 @@ const TrainerCardFC = ({
                                                 !checkedPilates &&
                                                 !checkedBoxing &&
                                                 !checkedYoga
-                                                    ? "HIIT"
+                                                    ? "Strength & HIIT"
                                                     : checkedPilates &&
                                                       !checkedHIIT &&
                                                       !checkedBoxing &&
@@ -376,17 +377,17 @@ const TrainerCardFC = ({
                                                       checkedPilates &&
                                                       !checkedBoxing &&
                                                       !checkedYoga
-                                                    ? "HIIT,Pilates"
+                                                    ? "Strength & HIIT,Pilates"
                                                     : checkedHIIT &&
                                                       checkedYoga &&
                                                       !checkedPilates &&
                                                       !checkedBoxing
-                                                    ? "HIIT,Yoga"
+                                                    ? "Strength & HIIT,Yoga"
                                                     : checkedHIIT &&
                                                       checkedBoxing &&
                                                       !checkedPilates &&
                                                       !checkedYoga
-                                                    ? "HIIT,Boxing"
+                                                    ? "Strength & HIIT,Boxing"
                                                     : checkedYoga &&
                                                       checkedBoxing &&
                                                       !checkedPilates &&
@@ -406,12 +407,12 @@ const TrainerCardFC = ({
                                                       checkedPilates &&
                                                       checkedBoxing &&
                                                       !checkedYoga
-                                                    ? "HIIT,Pilates,Boxing"
+                                                    ? "Strength & HIIT,Pilates,Boxing"
                                                     : checkedHIIT &&
                                                       checkedPilates &&
                                                       checkedYoga &&
                                                       !checkedBoxing
-                                                    ? "HIIT,Pilates,Yoga"
+                                                    ? "Strength & HIIT,Pilates,Yoga"
                                                     : checkedYoga &&
                                                       checkedPilates &&
                                                       checkedBoxing &&
@@ -421,12 +422,12 @@ const TrainerCardFC = ({
                                                       checkedHIIT &&
                                                       checkedBoxing &&
                                                       !checkedPilates
-                                                    ? "Yoga,HIIT,Boxing"
+                                                    ? "Yoga,Strength & HIIT,Boxing"
                                                     : checkedYoga &&
                                                       checkedHIIT &&
                                                       checkedBoxing &&
                                                       checkedPilates
-                                                    ? "Yoga,HIIT,Boxing,Pilates"
+                                                    ? "Yoga,Strength & HIIT,Boxing,Pilates"
                                                     : "Not Added"}
                                             </h6>
                                             <p style={{ color: "#898989" }}>
@@ -445,6 +446,7 @@ const TrainerCardFC = ({
                                                 <p>
                                                     from{" "}
                                                     <span>
+                                                        $
                                                         {
                                                             trainerData.individualCharge
                                                         }

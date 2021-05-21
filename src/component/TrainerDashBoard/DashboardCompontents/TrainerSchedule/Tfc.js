@@ -26,6 +26,7 @@ function Tfc() {
         "06:30 AM",
         "07:00 AM",
         "07:30 AM",
+        "Early Bird",
     ];
 
     let rise_shine = [
@@ -35,8 +36,9 @@ function Tfc() {
         "09:30 AM",
         "10:00 AM",
         "10:30 AM",
+        "Rise & Shine",
     ]; //1
-
+    // let rise_shine = ["Rise & Shine"]; //1
     let mid_day = [
         "11:00 AM",
         "11:30 AM",
@@ -44,6 +46,7 @@ function Tfc() {
         "12:30 PM",
         "01:00 PM",
         "01:30 PM",
+        "Mid-Day Break",
     ]; //230 - 4
 
     let mid_day_2 = [
@@ -53,6 +56,7 @@ function Tfc() {
         "03:30 PM",
         "04:00 PM",
         "04:30 PM",
+        "Mid-Day Lunchtime",
     ];
 
     let happy_hour = [
@@ -62,6 +66,7 @@ function Tfc() {
         "06:30 PM",
         "07:00 PM",
         "07:30 PM",
+        "Happy Hour",
     ];
 
     let never_too_late = [
@@ -71,6 +76,7 @@ function Tfc() {
         "09:30 PM",
         "10:00 PM",
         "10:30 PM",
+        "Never Too Late",
     ];
 
     const [time, setTime] = React.useState(early_bird);
@@ -397,7 +403,24 @@ function Tfc() {
                 onChange={(cells) => setCells(cells)}
             >
                 <th>
-                    <td disabled></td>
+                    <td disabled>
+                        <h6
+                            style={{
+                                wordWrap: "break-word",
+                                lineHeight: "18px",
+                                paddingLeft: "0.5em",
+                                paddingRight: "0.5em",
+                                paddingBottom: "0em",
+                                fontFamily: "Montserrat",
+                                fontWeight: "800",
+                                color: "#898989",
+                                margin: 0,
+                            }}
+                        >
+                            {" "}
+                            {time[6]}
+                        </h6>
+                    </td>
                     <td disabled>
                         <div className="table_header_number">
                             {cal[0].slice(8, 10)}
@@ -638,7 +661,25 @@ function Tfc() {
             >
                 <thead>
                     <tr>
-                        <th disabled></th>
+                        <th disabled>
+                            <h6
+                                style={{
+                                    wordWrap: "break-word",
+                                    lineHeight: "18px",
+                                    paddingLeft: "0.5em",
+                                    paddingRight: "0.5em",
+                                    paddingBottom: "0em",
+                                    fontFamily: "Montserrat",
+                                    fontWeight: "800",
+                                    color: "#898989",
+                                    margin: 0,
+                                }}
+                            >
+                                {" "}
+                                {time[6]}
+                            </h6>
+                            {/* {early_bird} */}
+                        </th>
                         <th disabled>
                             <div className="table_header_number">
                                 {cal[0].slice(8, 10)}
@@ -957,7 +998,7 @@ function Tfc() {
                                     Mid-Day Break
                                 </option>
                                 <option value="MidDayBreak2">
-                                    Mid-Day AfterNoon
+                                    Mid-Day Lunchtime
                                 </option>
                                 <option value="HappyHours">Happy Hour</option>
                                 <option value="NeverTooLate">
@@ -998,7 +1039,7 @@ function Tfc() {
                                     width: "100%",
                                 }}
                             >
-                                EDIT
+                                ADD YOUR SLOT
                             </button>
                         )}
                     </div>
@@ -1023,7 +1064,7 @@ const ButtonSection = () => {
                 </div>
                 <div className="item_slot3">
                     <div className="indicator3"></div>
-                    <h5>YOUR SLOT</h5>{" "}
+                    <h5>BOOKED SLOT</h5>{" "}
                 </div>
             </div>
         </div>
