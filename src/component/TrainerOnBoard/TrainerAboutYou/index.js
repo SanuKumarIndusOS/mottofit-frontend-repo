@@ -18,6 +18,9 @@ import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 // import useForm from "./useForm";
 // import validateInfo from "./validation";
 
@@ -178,13 +181,6 @@ const AboutTrainerFC = ({
                                         })
                                     }
                                     value={aboutTrainerData.firstName}
-                                    // ref={register({
-                                    //     required: "This filed is required",
-                                    //     minLength: {
-                                    //         value: 2,
-                                    //         message: "Enter a valid name",
-                                    //     },
-                                    // })}
                                     name="firstName"
                                 />
                                 {error.firstName && (
@@ -209,15 +205,26 @@ const AboutTrainerFC = ({
                                         name="location"
                                     />
                                 </div>
-                                {/* {errors.location && (
-                                    <span>{errors.location.message}</span>
-                                )} */}
-                                {/* {error.location && (
-                                    <span>{error.location}</span>
-                                )} */}
+                                {errors.dob && (
+                                    <span>{errors.dob.message}</span>
+                                )}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
+                                {/* <DatePicker
+                                    value={aboutTrainerData.dob}
+                                    onChange={(e) =>
+                                        setAboutTrainerData({
+                                            ...aboutTrainerData,
+                                            dob: e.value,
+                                        })
+                                    }
+                                    name="dob"
+                                    ref={register({
+                                        required:
+                                            "Mandatory fields cannot be empty",
+                                    })}
+                                /> */}
                                 <input
                                     placeholder="MM/DD/YYYY"
                                     type="date"
@@ -230,7 +237,8 @@ const AboutTrainerFC = ({
                                     }
                                     name="dob"
                                     ref={register({
-                                        required: "Please select the DOB",
+                                        required:
+                                            "Mandatory fields cannot be empty",
                                     })}
                                 />
                                 {errors.dob && (
@@ -252,14 +260,18 @@ const AboutTrainerFC = ({
                                             });
                                         }}
                                         name="gender"
-                                        // name="gender"
-                                        // ref={register({
-                                        //     required:
-                                        //         "Please select the gender",
-                                        // })}
+                                        ref={register({
+                                            required:
+                                                "Mandatory fields cannot be empty",
+                                        })}
                                     />
                                 </div>
-                                {/* {error.gender && <span>{error.gender}</span>} */}
+                                {/* {error.gender && (
+                                    <span>{error.gender.message}</span>
+                                )} */}
+                                {errors.dob && (
+                                    <span>{errors.dob.message}</span>
+                                )}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Email*</label>
@@ -274,12 +286,6 @@ const AboutTrainerFC = ({
                                         })
                                     }
                                     name="email"
-                                    // ref={register({
-                                    //     pattern:
-                                    //         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
-                                    //     required: true,
-                                    //     minLength: 8,
-                                    // })}
                                 />
                                 {/* {error.email && (<span>{error.email}</span>)} */}
 

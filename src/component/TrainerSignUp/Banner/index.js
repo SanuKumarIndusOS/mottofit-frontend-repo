@@ -122,14 +122,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                             </div>
 
                                             <div className="input_items_trainer">
-                                                {/* <input
-                                                    placeholder="Phone"
-                                                    type="tel"
-                                                    value={data.phoneNumber}
-                                                    name="phoneNumber"
-                                                    onChange={onChangeValue}
-                                                /> */}
-
                                                 <ReactPhoneInput
                                                     disableDropdown
                                                     // prefix="+1"
@@ -149,15 +141,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                         });
                                                     }}
                                                 />
-
-                                                {/* <PhoneInput
-                                                    country={"us"}
-                                                    defaultCountry={"us"}
-                                                    value={phone.phoneNumber}
-                                                    onChange={handeOnChange}
-                                                    showDropdown={false}
-                                                    disableCountryCode={false}
-                                                /> */}
 
                                                 <img src={Phone} alt="icon" />
                                                 {error.phoneNumber && (

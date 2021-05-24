@@ -104,8 +104,9 @@
                         display: flex;
 
                         img:nth-child(2) {
-                            margin-top: 9em;
-                            margin-left: -3em;
+                            position: relative;
+                            top: 154px;
+                            right: 69px;
                             width: 50px !important;
                             height: 50px !important;
                             cursor: pointer;

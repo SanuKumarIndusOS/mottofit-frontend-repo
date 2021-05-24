@@ -90,6 +90,9 @@ const validation = (values) => {
     if (!values.gender) {
         errors.gender = "Please select the Gender";
     }
+    if (!values.dob) {
+        errors.dob = "Please enter the DOB";
+    }
 
     return errors;
 };

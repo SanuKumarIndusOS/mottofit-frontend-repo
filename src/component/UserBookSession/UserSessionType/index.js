@@ -63,7 +63,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
         updateUserDetails(storeData);
 
         history.push({
-            pathname: "/user/payment",
+            pathname: "/user/motto-pass",
 
             state: {
                 slotDetails: location.state["slotDetails"],
@@ -88,7 +88,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                         <div className="link_wrapper">
                             <img src={ArrowBack} alt="icon" />
                             <div className="inner_links">
-                                <Link to="/user-onboard/schedule">
+                                <Link to="/user/scheduler">
                                     Change your Slot
                                 </Link>
                                 <div></div>

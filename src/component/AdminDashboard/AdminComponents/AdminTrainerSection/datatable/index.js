@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
+import { Link } from "react-router-dom";
 // import BootstrapTable from "react-bootstrap-table-next";
 // import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
 // import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
@@ -89,6 +90,15 @@ const Datatable = ({ trainerList, fetchAllTrainers, loading }) => {
 
                                 <td> {item["servicableLocation"]}</td>
                                 <td> {item["trainerStatus"]}</td>
+                                <td>
+                                    {" "}
+                                    <Link
+                                        style={{ border: "none" }}
+                                        className="btn btn-primary"
+                                    >
+                                        view
+                                    </Link>{" "}
+                                </td>
                                 <div>
                                     {" "}
                                     <button style={{ border: "none" }}>

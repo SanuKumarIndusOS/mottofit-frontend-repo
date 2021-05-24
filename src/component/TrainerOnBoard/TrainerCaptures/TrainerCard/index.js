@@ -51,7 +51,7 @@ const TrainerCardFC = ({
     };
 
     const { register, errors, handleSubmit } = useForm();
-
+    const [error, setError] = useState();
     const [checkedBoxing, setCheckedBoxing] = React.useState(false);
     const [open, setOpen] = useState(false);
     const [checkedHIIT, setCheckedHIIT] = React.useState(false);
@@ -138,8 +138,13 @@ const TrainerCardFC = ({
         let storeData = {
             details: { ...trainerData },
         };
-        updateTrainerDetails(storeData);
-        history.push("/trainer/setup");
+        if (!trainerData.individualCharge) {
+            setError(true);
+            // alert("Please enter Individual Charge (atleast one)");
+        } else {
+            updateTrainerDetails(storeData);
+            history.push("/trainer/setup");
+        }
     };
     useEffect(() => {
         if (image) {
@@ -830,10 +835,10 @@ const TrainerCardFC = ({
                                                             trainerData.individualCharge
                                                         }
                                                         name="individualCharge"
-                                                        ref={register({
-                                                            required:
-                                                                "Please enter Individual Charge (atleast one)",
-                                                        })}
+                                                        // ref={register({
+                                                        //     required:
+                                                        //         "Please enter Individual Charge (atleast one)",
+                                                        // })}
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -1195,17 +1200,14 @@ const TrainerCardFC = ({
                                         </Accordion>
                                     </div>
                                     <div className="error_span">
-                                        {errors.individualCharge && (
+                                        {error ? (
                                             <span>
-                                                {
-                                                    errors.individualCharge
-                                                        .message
-                                                }
+                                                Please enter Individual Charge
+                                                (atleast one)
                                             </span>
-                                        )}
+                                        ) : null}
                                     </div>
-                                    {/* <button onClick={least}>try</button>
-                                    <p>{least.low} dh</p> */}
+
                                     <div className="submit_button">
                                         <button
                                             onClick={handleSubmit(
