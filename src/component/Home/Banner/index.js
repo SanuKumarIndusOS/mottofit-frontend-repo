@@ -43,6 +43,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         setDate(date);
         console.log(date);
     };
+
+    //Training_type_dropdown
     let DropdownTraining;
     if (DropdownState) {
         DropdownTraining = (
@@ -77,7 +79,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             setqueryObject({ ...queryObject, location: "Person" });
         }
     };
-
+     
+    //availabilty_dropdown
     let DropdownHomeAvailability;
     if (DropdownAvailabilityState) {
         DropdownHomeAvailability = (
@@ -87,6 +90,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     TriggerDropDownAvailability();
                 }}
             />
+
+           
         );
     } else {
         <div>hello</div>;

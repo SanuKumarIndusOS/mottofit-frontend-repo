@@ -303,6 +303,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         api({ ...trainerAvailableApi }).then(({ data }) => {
             setbestMatchData(data.bestMatch);
             setbestOthersData(data.others);
+            console.log(data.others);
         });
     };
 
@@ -417,6 +418,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                 </div>
             </div>
             <TrainerCards content={bestMatchData}></TrainerCards>
+            {console.log(bestOthersData)}
             <TrainerCardOutside content={bestOthersData}></TrainerCardOutside>
         </>
     );

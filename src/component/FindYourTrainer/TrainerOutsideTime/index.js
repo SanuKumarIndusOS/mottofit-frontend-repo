@@ -5,6 +5,8 @@ import onHoverImage from "../../../assets/files/FindTrainer/onHover.svg";
 import onImage from "../../../assets/files/SignUp/Arrow.svg";
 import { Link } from "react-router-dom";
 // import Arrow from "../../../assests/SignUp/ArrowSecondary.svg";
+import { history } from "helpers";
+import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
 
 function useHover() {
   const [value, setValue] = useState(false);
@@ -33,47 +35,164 @@ function useHover() {
   return [ref, value];
 }
 
-const TrainerCardOutside = () => {
+const TrainerCardOutside = (props) => {
   const [hoverRef, isHovered] = useHover();
+
+  const [outSideData, setOutSideData] = React.useState([]);
+
+  React.useEffect(() => {
+    setOutSideData(props.content)
+
+  //   Object.keys(outSideData).map((item) => {
+  //     console.log(outSideData[item], "ouyt");
+  // });
+
+  console.log("outside");
+  
+  }, [])
+
+  
+  React.useEffect(() => {
+   
+  //   Object.keys(outSideData).map((item) => {
+  //     console.log(outSideData[item], "ouyt");
+  // });
+
+  setOutSideData(props.content)
+
+  console.log("outside");
+  
+  }, [props.content])
 
   return (
     <>
       <div className="container">
         <HeadingTrainer />
-
+         
         <div className="row">
-          {TrainerData.slice(0, 3).map((data, index) => {
+          {Object.keys(outSideData).map((data, index) => {
             return (
               <div className="card" key={index}>
-                <img
+              <img
                   className="card-img-top"
-                  src={data.image}
-                  alt={data.name}
-                />
-                <div className="card-body">
-                  <h3>{data.name}</h3>
-                  <h6>{data.role}</h6>
-                  <Link to="/trainer-profile">Read More</Link>
-                </div>
-                <div className="card-button">
-                  <button
-                    ref={hoverRef}
-                    style={{
-                      backgroundColor: isHovered ? "red" : "#53BFD2",
-                    }}
-                  >
-                    book a session
-                    {isHovered ? (
-                      <img src={onHoverImage} alt="icon" />
-                    ) : (
-                      <img src={onImage} alt="icon" />
-                    )}
-                    <p>
-                      from <span>{data.price}</span>
-                    </p>
-                  </button>
-                </div>
+                  src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  style={{ objectFit: "cover" }}
+              />
+
+              <div className="card-body">
+                  <h3>
+                      {outSideData[data]["firstName"]}&nbsp;
+                      {outSideData[data]["lastName"]}
+                  </h3>
+                  <h6>
+                      {
+                          outSideData[data][
+                              "areaOfExpertise"
+                          ][0]
+                      }
+                      {outSideData[data][
+                          "areaOfExpertise"
+                      ][1]
+                          ? ","
+                          : ""}
+                      &nbsp;
+                      {
+                          outSideData[data][
+                              "areaOfExpertise"
+                          ][1]
+                      }
+                      {outSideData[data][
+                          "areaOfExpertise"
+                      ][2]
+                          ? ","
+                          : ""}
+                      &nbsp;
+                      {
+                          outSideData[data][
+                              "areaOfExpertise"
+                          ][2]
+                      }
+                      &nbsp;
+                      {
+                          outSideData[data][
+                              "areaOfExpertise"
+                          ][3]
+                      }
+                  </h6>
+                  <p>
+                      {outSideData[data]["description"]}
+
+                      <button
+                          onClick={() => {
+                              console.log(
+                                outSideData[data]
+                              );
+                              history.push({
+                                  pathname:
+                                      "/trainer/profile",
+                                  state: {
+                                      trainerId:
+                                      outSideData[data][
+                                              "id"
+                                          ],
+                                      trainerData:
+                                      outSideData[data],
+                                  },
+                              });
+                          }}
+                      >
+                          Read More
+                      </button>
+                  </p>
               </div>
+              <div className="card-button">
+                  <button
+                      // ref={hoverRef}
+                      // style={{
+                      //     backgroundColor: isHovered
+                      //         ? "red"
+                      //         : "#53BFD2",
+                      // }}
+                      style={{
+                          backgroundColor: "#53BFD2",
+                      }}
+                      onClick={() => {
+                          console.log(outSideData[data]);
+                          history.push({
+                              pathname: "/user/scheduler",
+                              state: {
+                                  trainerId:
+                                  outSideData[data][
+                                          "id"
+                                      ],
+                                  trainerData:
+                                  outSideData[data],
+                              },
+                          });
+                      }}
+                  >
+                      book a session
+                      <BlackCircleButton />
+                      {/* {isHovered ? (
+    <img src={onHoverImage} alt="icon" />
+  ) : (
+    <img src={onImage} alt="icon" />
+  )} */}
+                      <p>
+                          from{" "}
+                          <span>
+                              {
+                                  outSideData[data][
+                                      "oneOnOnePricing"
+                                  ][
+                                      "inPersonAtClientLocation"
+                                  ]
+                              }
+                          </span>
+                      </p>
+                  </button>
+              </div>
+          </div>
             );
           })}
         </div>
