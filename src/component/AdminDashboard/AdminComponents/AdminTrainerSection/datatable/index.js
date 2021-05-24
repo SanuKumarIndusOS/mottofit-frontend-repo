@@ -95,6 +95,7 @@ const Datatable = ({ trainerList, fetchAllTrainers, loading }) => {
                                     <Link
                                         style={{ border: "none" }}
                                         className="btn btn-primary"
+                                        to={`admins/trainer/view/${item["id"]}`}
                                     >
                                         view
                                     </Link>{" "}

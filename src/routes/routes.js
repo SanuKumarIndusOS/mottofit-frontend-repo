@@ -78,7 +78,19 @@ const routers = [
                 name: "AdminTrainer",
                 auth: false,
                 exact: true,
+
+                childrens: [
+                    {
+                        path: "/view/:id",
+                        componentPath:
+                            "pages/AdminDashboard/AdminTrainer/ViewTrainer",
+                        name: "AdminTrainerView",
+                        auth: false,
+                        exact: true,
+                    },
+                ],
             },
+
             {
                 path: "/user",
                 componentPath: "pages/AdminDashboard/AdminUsers/AdminUser",
