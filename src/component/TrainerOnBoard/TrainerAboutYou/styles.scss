@@ -141,6 +141,14 @@
                         }
                     }
                 }
+                .error {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    color: red;
+                    margin: 0 auto;
+                }
                 .submit_button {
                     display: flex;
                     align-items: center;

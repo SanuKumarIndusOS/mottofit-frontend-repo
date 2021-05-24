@@ -205,26 +205,10 @@ const AboutTrainerFC = ({
                                         name="location"
                                     />
                                 </div>
-                                {errors.dob && (
-                                    <span>{errors.dob.message}</span>
-                                )}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
-                                {/* <DatePicker
-                                    value={aboutTrainerData.dob}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            dob: e.value,
-                                        })
-                                    }
-                                    name="dob"
-                                    ref={register({
-                                        required:
-                                            "Mandatory fields cannot be empty",
-                                    })}
-                                /> */}
+
                                 <input
                                     placeholder="MM/DD/YYYY"
                                     type="date"
@@ -260,18 +244,8 @@ const AboutTrainerFC = ({
                                             });
                                         }}
                                         name="gender"
-                                        ref={register({
-                                            required:
-                                                "Mandatory fields cannot be empty",
-                                        })}
                                     />
                                 </div>
-                                {/* {error.gender && (
-                                    <span>{error.gender.message}</span>
-                                )} */}
-                                {errors.dob && (
-                                    <span>{errors.dob.message}</span>
-                                )}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Email*</label>
@@ -287,42 +261,10 @@ const AboutTrainerFC = ({
                                     }
                                     name="email"
                                 />
-                                {/* {error.email && (<span>{error.email}</span>)} */}
-
-                                {/* {errors.email?.type === "required" && (
-                                    <span>This input is required</span>
-                                )}
-                                {errors.email?.type === "minLength" && (
-                                    <span>
-                                        This field should contain greater then 8
-                                        charater
-                                    </span>
-                                )}
-                                {errors.email?.type === "pattern" && (
-                                    <span>
-                                        Please enter a valid email address
-                                    </span>
-                                )} */}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Phone*</label>
-                                {/* <input
-                                    placeholder="Phone Number"
-                                    type="phone"
-                                    value={aboutTrainerData.phone}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            phone: e.target.value,
-                                        })
-                                    }
-                                    name="phone"
-                                    ref={register({
-                                        pattern: /^[0-9]*$/i,
-                                        required: true,
-                                        minLength: 10,
-                                    })}
-                                /> */}
+
                                 <ReactPhoneInput
                                     type="phone"
                                     disableDropdown
@@ -352,19 +294,6 @@ const AboutTrainerFC = ({
                                             digits
                                         </span>
                                     )}
-                                {/* {errors.phone?.type === "required" && (
-                                    <span>This input is required</span>
-                                )}
-                                {errors.phone?.type === "minLength" && (
-                                    <span>
-                                        Phone Number should contain 10 digits
-                                    </span>
-                                )}
-                                {errors.phone?.type === "pattern" && (
-                                    <span>
-                                        Please enter a valid phone number
-                                    </span>
-                                )} */}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Website</label>

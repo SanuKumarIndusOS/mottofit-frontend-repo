@@ -3,7 +3,7 @@ import Datatable from "./datatable/index";
 import Pagination from "./Pagination";
 import { Input } from "reactstrap";
 import "./styles.scss";
-import AdminDashboard from "../AdminDashboardList/index";
+// import AdminDashboard from "../AdminDashboardList/index";
 
 // require("es6-promise").polyfill();
 // require("isomorphic-fetch");
