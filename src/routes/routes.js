@@ -78,17 +78,14 @@ const routers = [
                 name: "AdminTrainer",
                 auth: false,
                 exact: true,
+            },
 
-                childrens: [
-                    {
-                        path: "/view/:id",
-                        componentPath:
-                            "pages/AdminDashboard/AdminTrainer/ViewTrainer",
-                        name: "AdminTrainerView",
-                        auth: false,
-                        exact: true,
-                    },
-                ],
+            {
+                path: "/view/:id",
+                componentPath: "pages/AdminDashboard/AdminTrainer/ViewTrainer",
+                name: "AdminTrainerView",
+                auth: false,
+                exact: true,
             },
 
             {
@@ -315,6 +312,13 @@ const routers = [
                 path: "/payment",
                 componentPath: "pages/User/Payment/index",
                 name: "UserPayment",
+                auth: false,
+                exact: true,
+            },
+            {
+                path: "/with-friends",
+                componentPath: "pages/User/TrainWithFriend/TrainWithFriend",
+                name: "UserFriend",
                 auth: false,
                 exact: true,
             },

@@ -93,9 +93,9 @@ const Datatable = ({ trainerList, fetchAllTrainers, loading }) => {
                                 <td>
                                     {" "}
                                     <Link
-                                        style={{ border: "none" }}
+                                        // style={{ border: "none" }}
                                         className="btn btn-primary"
-                                        to={`admins/trainer/view/${item["id"]}`}
+                                        to={`/admins/view/${item["id"]}`}
                                     >
                                         view
                                     </Link>{" "}
