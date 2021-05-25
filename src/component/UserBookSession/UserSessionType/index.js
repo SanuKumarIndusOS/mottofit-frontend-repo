@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-// import Select from "react-select";
+import Select from "react-select";
 import "./styles.scss";
 import { Tabs, Tab, TabPanel, TabList } from "react-web-tabs";
 import "react-web-tabs/dist/react-web-tabs.css";
@@ -63,7 +63,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
         updateUserDetails(storeData);
 
         history.push({
-            pathname: "/user/motto-pass",
+            pathname: "/user/payment",
 
             state: {
                 slotDetails: location.state["slotDetails"],
@@ -120,12 +120,12 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                                                 "virtual"
                                                             )
                                                         }
-                                                        className={`${
-                                                            preferedTrainingMode ===
+                                                        className={`${preferedTrainingMode ===
+
                                                             "virtual"
-                                                                ? "active"
-                                                                : ""
-                                                        }`}
+                                                            ? "active"
+                                                            : ""
+                                                            }`}
                                                     >
                                                         Virtual
                                                     </button>
@@ -137,12 +137,11 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                                                 "inperson"
                                                             )
                                                         }
-                                                        className={`${
-                                                            preferedTrainingMode ===
+                                                        className={`${preferedTrainingMode ===
                                                             "inperson"
-                                                                ? "active"
-                                                                : ""
-                                                        }`}
+                                                            ? "active"
+                                                            : ""
+                                                            }`}
                                                     >
                                                         In Person
                                                     </button>
@@ -150,16 +149,16 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                             </TabList>
                                             <div className="session_location_dd">
                                                 <div className="session_location">
-                                                    {/* <Select
-                            defaultValue={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options}
-                            className="session_location_select"
-                          /> */}
+                                                    <Select
+                                                        defaultValue={selectedOption}
+                                                        onChange={setSelectedOption}
+                                                        options={options}
+                                                        className="session_location_select"
+                                                    />
                                                 </div>
                                                 <div className="session_venue">
                                                     <div className="session_location">
-                                                        {/* <Select
+                                                        <Select
                                                             defaultValue={
                                                                 trainingVenue
                                                             }
@@ -171,7 +170,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                                             }
                                                             placeholder="Select Training Venue"
                                                             className="session_location_select"
-                                                        /> */}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

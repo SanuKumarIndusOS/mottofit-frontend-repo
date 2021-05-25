@@ -18,6 +18,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
 import { useLocation } from "react-router-dom";
+import { history } from "helpers";
 
 const stripePromise = loadStripe(
   "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
@@ -40,44 +41,75 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
   }, []);
 
   const ScheduleSession = () => {
-    if (location.state.sessionType === "1on1") {
-      console.log("1on1");
-    
-      fetch("http://doodlebluelive.com:2337/v1/session/schedule", {
-        headers: {
-        
-          "Content-Type": "application/json",
-          'Authorization': localStorage.getItem("token"), 
-        },
-        method: "POST",
-        body: JSON.stringify({
-          
-          trainerId : location.state.slotDetails["id"],
-          title : location.state.slotDetails["Name"] +" " + location.state.slotDetails["activity"],
-          trainingType : "1on1",
-          sessionType :location.state.sessionData["preferedTrainingMode"],
-          activity : location.state.slotDetails["activity"],
-          sessionStatus : "created",
-          sessionDate:location.state.slotDetails["date"],
-          sessionStartTime:location.state.slotDetails["start_slot"],
-          sessionEndTime:location.state.slotDetails["end_slot"],
-          city:location.state.sessionData["location"]["value"],
-          venue:location.state.sessionData["trainingVenue"]["value"],
-          price :20
-         }),
-      })
-        .then(function (res) {
-          console.log(res);
-          alert("Session Succesfully created")
-        })
-        .catch(function (res) {
-          console.log(res);
-        });
-   
-   
-      } else {
-      console.log("social session");
+
+    const scheduleBody = {
+      trainerId: location.state.slotDetails["id"],
+      title: location.state.slotDetails["Name"] + " " + location.state.slotDetails["activity"],
+      trainingType: location.state.sessionType,
+      sessionType: location.state.sessionData["preferedTrainingMode"],
+      activity: location.state.slotDetails["activity"],
+      sessionStatus: "created",
+      sessionDate: location.state.slotDetails["date"],
+      sessionStartTime: location.state.slotDetails["start_slot"],
+      sessionEndTime: location.state.slotDetails["end_slot"],
+      city: location.state.sessionData["location"]["value"],
+      venue: location.state.sessionData["trainingVenue"]["value"],
+      price: location.state.sessionData.price,
     }
+
+    fetch("http://doodlebluelive.com:2337/v1/session/schedule", {
+      headers: {
+
+        "Content-Type": "application/json",
+        'Authorization': localStorage.getItem("token"),
+      },
+      method: "POST",
+      body: JSON.stringify(scheduleBody),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        alert('Session created successfully')
+        if (res.session.trainingType === '1on1') {
+          history.push({
+            pathname: "/users/dashboard/session",
+
+            state: {
+              slotDetails: location.state["slotDetails"],
+              sessionData: location.state["sessionData"],
+            },
+          });
+        }
+        else if (res.session.trainingType === 'social' || res.session.trainingType === 'group') {
+          history.push({
+            pathname: "/with-friends",
+
+            state: {
+              slotDetails: location.state["slotDetails"],
+              sessionData: location.state["sessionData"],
+            },
+          });
+
+        }
+        else if (res.session.trainingType === 'class') {
+
+          history.push({
+            pathname: "/with-friends",
+
+            state: {
+              slotDetails: location.state["slotDetails"],
+             sessionData: location.state["sessionData"],
+            },
+          });
+
+        }
+
+
+      })
+      .catch((error)=> {
+        console.log(error);
+      });
+
   };
   //
   return (
