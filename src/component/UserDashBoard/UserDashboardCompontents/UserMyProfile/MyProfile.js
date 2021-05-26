@@ -3,23 +3,49 @@ import "./styles.scss";
 import Profile from "../../../../assets/files/SVG/Profile Picture.svg";
 import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
-
-const location = [
-    { value: "nyw", label: "New York" },
-    { value: "maimi", label: "Maimi" },
-    { value: "hampton", label: "Hampton" },
-    { value: "plam", label: "Plam Beach" },
+import { Dropdown } from "reactjs-dropdown-component";
+import "./dropdown.scss";
+import ReactPhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+const options = [
+    { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
+    {
+        label: "New York City",
+        value: "New York City",
+        name: "serviceableLocation",
+    },
+    { label: "Hamptons", value: "Hamptons", name: "serviceableLocation" },
+    { label: "Miami", value: "Miami", name: "serviceableLocation" },
 ];
 const gender = [
     { value: "male", label: "Male" },
     { value: "female", label: "Female" },
 ];
-const MyProfile = () => {
-    const [selectedOption, setSelectedOption] = useState([]);
 
+// firstName
+// lastName
+// password
+// email
+// phoneNo
+// signUpType
+// mottoPasses
+// status
+// paymentProfileId
+const MyProfile = () => {
+    const [userData, setUserData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNo: "",
+        paymentProfileId: "",
+        mottoPasses: "",
+        signUpType: "email",
+    });
+    const [getUserData, setGetUserData] = useState();
     const [image, setImage] = useState();
     const [previewImage, setPreviewTmage] = useState();
     const fileInputRef = useRef();
+    console.log(userData, "userData");
 
     useEffect(() => {
         if (image) {
@@ -32,6 +58,45 @@ const MyProfile = () => {
             setPreviewTmage(null);
         }
     }, [image]);
+
+    useEffect(() => {
+        getUserProfileData();
+    }, []);
+
+    function getUserProfileData() {
+        // fetch("http://doodlebluelive.com:2307/v1/user/edit", {
+        fetch("http://doodlebluelive.com:2307/v1/user", {
+            method: "get",
+            headers: new Headers({
+                Authorization: localStorage.getItem("token"),
+                "Content-Type": "application/x-www-form-urlencoded",
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setUserData(data["data"]);
+            });
+    }
+
+    // const handleSaveChange = () => {
+    //     const { firstName } = userData;
+
+    //     let payload = {
+    //         firstName: firstName,
+    //     };
+
+    //     fetch("http://doodlebluelive.com:2307/v1/user/edit", {
+    //         method: "POST",
+    //         headers: new Headers({
+    //             Authorization: localStorage.getItem("token"),
+    //             "Content-Type": "application/x-www-form-urlencoded",
+    //         }),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setUserData(data["data"]);
+    //         });
+    // };
 
     return (
         <>
@@ -120,47 +185,109 @@ const MyProfile = () => {
                                             <div className="inner_profile_form">
                                                 <div className="input_profile">
                                                     <label>Name </label>
-                                                    <input type="text" />
+                                                    <input
+                                                        type="text"
+                                                        value={
+                                                            userData.firstName
+                                                        }
+                                                        onChange={(e) => {
+                                                            setUserData({
+                                                                ...userData,
+                                                                firstName:
+                                                                    e.target
+                                                                        .value,
+                                                            });
+                                                        }}
+                                                        name="firstName"
+                                                    />
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>Location </label>
-                                                    {/* <Select
-                                                        defaultValue={
-                                                            selectedOption
+                                                    <Dropdown
+                                                        className="custom_dropdown"
+                                                        title="Select Location"
+                                                        list={options}
+                                                        value={
+                                                            userData.location
                                                         }
-                                                        onChange={
-                                                            setSelectedOption
-                                                        }
-                                                        options={location}
-                                                        className="profile_location_select"
-                                                    /> */}
+                                                        onChange={(e) => {
+                                                            setUserData({
+                                                                ...userData,
+                                                                location:
+                                                                    e.value,
+                                                            });
+                                                            console.log(
+                                                                e.value
+                                                            );
+                                                        }}
+                                                        name="location"
+                                                    />
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>
                                                         Date of Birth{" "}
                                                     </label>
-                                                    <input type="date" />
+                                                    <input
+                                                        type="date"
+                                                        value={
+                                                            userData.location
+                                                        }
+                                                    />
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>Gender </label>
-                                                    {/* <Select
-                                                        defaultValue={
-                                                            selectedOption
-                                                        }
-                                                        onChange={
-                                                            setSelectedOption
-                                                        }
-                                                        options={gender}
-                                                        className="profile_location_select"
-                                                    /> */}
+                                                    {/* <Dropdown
+                                        className="custom_dropdown"
+                                        title="Select Gender"
+                                        list={gender}
+                                        value={aboutTrainerData.gender}
+                                        onChange={(e) => {
+                                            setAboutTrainerData({
+                                                ...aboutTrainerData,
+                                                gender: e.value,
+                                            });
+                                        }}
+                                        name="gender"
+                                    /> */}
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>Email </label>
-                                                    <input type="text" />
+                                                    <input
+                                                        type="text"
+                                                        value={userData.email}
+                                                        onChange={(e) => {
+                                                            setUserData({
+                                                                ...userData,
+                                                                email: e.target
+                                                                    .value,
+                                                            });
+                                                        }}
+                                                    />
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>Phone </label>
-                                                    <input type="text" />
+
+                                                    <ReactPhoneInput
+                                                        type="phone"
+                                                        disableDropdown
+                                                        // disableAreaCodes
+                                                        countryCodeEditable={
+                                                            false
+                                                        }
+                                                        value={userData.phoneNo}
+                                                        placeholder="Phone Number"
+                                                        country="us"
+                                                        inputProps={{
+                                                            name: "phoneNo",
+                                                        }}
+                                                        name="phoneNo"
+                                                        onChange={(e) =>
+                                                            setUserData({
+                                                                ...userData,
+                                                                phoneNo: e,
+                                                            })
+                                                        }
+                                                    />
                                                 </div>
                                                 <div className="input_profile">
                                                     <label>

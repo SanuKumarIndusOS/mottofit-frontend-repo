@@ -97,45 +97,23 @@
                                     font-weight: 600;
                                 }
                                 input {
-                                    padding: 0 1em;
                                     width: 100%;
+                                    padding: 0em 1.5em;
                                     height: 45px;
 
                                     border: 2px solid #bcbcbc;
                                     border-radius: 30px;
                                     opacity: 1;
-                                    background: transparent;
+                                    font-family: "Montserrat", sans-serif;
+                                    font-size: 18px;
+                                    font-weight: 500;
+                                    color: #000;
                                 }
                                 input::placeholder {
-                                    font-size: 20px;
-                                    font-family: Montserrat;
-                                }
-                                .css-yk16xz-control {
-                                    width: 100%;
-                                    height: 45px;
-
-                                    border: 2px solid #bcbcbc;
-                                    border-radius: 30px;
-                                    opacity: 1;
-                                    font-size: 20px;
-                                    background: transparent;
-                                }
-                                .css-g1d714-ValueContainer {
-                                    border: none;
-                                    display: flex;
-                                    padding: 0 0 0 1em;
-                                    position: relative;
-                                    top: -2px;
-                                    align-items: center;
-                                    width: 100%;
-                                    font-size: 20px;
-                                    height: 48px;
-                                    border-radius: 30px;
-                                    opacity: 1;
-                                    background: transparent;
-                                }
-                                .css-1okebmr-indicatorSeparator {
-                                    display: none;
+                                    color: #bcbcbc;
+                                    font-family: "Montserrat", sans-serif;
+                                    font-size: 18px;
+                                    font-weight: 500;
                                 }
                             }
                         }
@@ -160,4 +138,10 @@
             }
         }
     }
+}
+.react-tel-input .selected-flag {
+    display: none;
+}
+.react-tel-input .flag-dropdown {
+    border: none !important;
 }
