@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[224],{319:function(t,s,i){"use strict";i.r(s),s.default=i.p+"static/media/Rise_Shine_Inactive.2d2d4d98.svg"}}]);
+//# sourceMappingURL=224.9dc1af60.chunk.js.map

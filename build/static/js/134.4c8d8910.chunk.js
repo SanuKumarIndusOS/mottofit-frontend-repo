@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[134],{258:function(t,e,s){"use strict";s.r(e);var c=s(244),n=(s(2),s(1));e.default=function(){return Object(n.jsx)("div",{children:Object(n.jsx)(c.default,{})})}}}]);
+//# sourceMappingURL=134.4c8d8910.chunk.js.map

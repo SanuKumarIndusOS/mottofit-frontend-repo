@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[266],{528:function(t,e,o){"use strict";o.r(e),e.default=o.p+"static/media/Never too Late.e2f53cd9.svg"}}]);
-//# sourceMappingURL=266.d403a0e6.chunk.js.map
