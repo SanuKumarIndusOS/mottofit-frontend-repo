@@ -127,7 +127,7 @@ const UserMottoPass = () => {
                             <div className="session_skip">
                                 <h4>
                                     Not right now?
-                                    <Link to="/user-onboard/user-payments">
+                                    <Link to="/user/payment">
                                         CONTINUE TO PAYMENT <BlueHoverButton />
                                     </Link>
                                 </h4>

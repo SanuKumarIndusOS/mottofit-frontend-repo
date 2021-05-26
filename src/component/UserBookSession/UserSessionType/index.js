@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-// import Select from "react-select";
+import Select from "react-select";
 import "./styles.scss";
 import { Tabs, Tab, TabPanel, TabList } from "react-web-tabs";
 import "react-web-tabs/dist/react-web-tabs.css";
@@ -20,6 +20,18 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
 
+const options = [
+    { value: "nyw", label: "New York" },
+    { value: "maimi", label: "Maimi" },
+    { value: "hampton", label: "Hampton" },
+    { value: "plam", label: "Plam Beach" },
+];
+
+const trainingVenueOptions = [
+    { value: "trainerlocation", label: "Trainer's Location" },
+    { value: "yourlocation", label: "Your Location" },
+];
+
 const closeIcon = <img src={CloseIcon} alt="close" />;
 const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     const [selectedOption, setSelectedOption] = useState([]);
@@ -33,7 +45,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     const location = useLocation();
 
     React.useEffect(() => {
-        console.log(location.state["slotDetails"]);
+        // console.log(location.state["slotDetails"]);
     }, []);
 
     const handleBookSession = (price, sessionType) => {
@@ -50,7 +62,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
         updateUserDetails(storeData);
 
         history.push({
-            pathname: "/user/motto-pass",
+            pathname: "/user/payment",
 
             state: {
                 slotDetails: location.state["slotDetails"],
@@ -58,6 +70,13 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                 sessionType: sessionType,
             },
         });
+        // if(price === 20)
+        // {
+        //   history.push("/user/moto-pass");
+        // }else
+        // {
+        //   history.push("/user/payment");
+        // }
     };
 
     return (
@@ -130,16 +149,20 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                             </TabList>
                                             <div className="session_location_dd">
                                                 <div className="session_location">
-                                                    {/* <Select
-                            defaultValue={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options}
-                            className="session_location_select"
-                          /> */}
+                                                    <Select
+                                                        defaultValue={
+                                                            selectedOption
+                                                        }
+                                                        onChange={
+                                                            setSelectedOption
+                                                        }
+                                                        options={options}
+                                                        className="session_location_select"
+                                                    />
                                                 </div>
                                                 <div className="session_venue">
                                                     <div className="session_location">
-                                                        {/* <Select
+                                                        <Select
                                                             defaultValue={
                                                                 trainingVenue
                                                             }
@@ -151,7 +174,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                                             }
                                                             placeholder="Select Training Venue"
                                                             className="session_location_select"
-                                                        /> */}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -550,7 +573,6 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </>
     );
 };
