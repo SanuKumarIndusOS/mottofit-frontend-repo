@@ -14,6 +14,8 @@ import Quote from "../../../../../assets/files/FindTrainer/Quote Icon.svg";
 import ArrowNext from "../../../../../assets/files/SVG/Arrow Next.svg";
 import ArrowBack from "../../../../../assets/files/SVG/Arrow Back.svg";
 
+// `http://doodlebluelive.com:2307/v1/trainer/id?trainerId=8052bef4-5b88-4a56-a9b1-5262bc7b9cf8`,
+
 import "./styles.scss";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
@@ -41,9 +43,9 @@ const ViewTrainers = () => {
             {
                 method: "get",
                 headers: new Headers({
-                    // Authorization: localStorage.getItem("admin-token"),
-                    Authorization:
-                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIxOTU0OTgyLCJleHAiOjE2MjE5NjIxODJ9._5HHnrdtJcz17uCk74bn6QNHWsLW3C6G7AwLFIeP3yY",
+                    Authorization: localStorage.getItem("admin-token"),
+                    // Authorization:
+                    //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIxOTU0OTgyLCJleHAiOjE2MjE5NjIxODJ9._5HHnrdtJcz17uCk74bn6QNHWsLW3C6G7AwLFIeP3yY",
                     "Content-Type": "application/x-www-form-urlencoded",
                 }),
             }
@@ -161,28 +163,26 @@ const ViewTrainers = () => {
                                                 <div className="profile_aside_inner_item">
                                                     <h6>
                                                         $
-                                                        {TrainerViewData.oneOnOnePricing
-                                                            ? TrainerViewData[
-                                                                  "oneOnOnePricing"
-                                                              ][
-                                                                  "inPersonAtClientLocation"
-                                                              ]
-                                                            : "0"}
-                                                        &nbsp;
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.oneOnOnePricing
+                                                            ? TrainerViewData
+                                                                  .oneOnOnePricing
+                                                                  .virtualSession
+                                                            : "N/A"}
+                                                        &ensp;
                                                         <span>
                                                             (Virtual Session)
                                                         </span>
                                                     </h6>
                                                     <h6>
                                                         $
-                                                        {TrainerViewData.oneOnOnePricing
-                                                            ? TrainerViewData[
-                                                                  "oneOnOnePricing"
-                                                              ][
-                                                                  "inPersonAtClientLocation"
-                                                              ]
-                                                            : "0"}
-                                                        &nbsp;
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.oneOnOnePricing
+                                                            ? TrainerViewData
+                                                                  .oneOnOnePricing
+                                                                  .inPersonAtClientLocation
+                                                            : "N/A"}
+                                                        &ensp;
                                                         <span>
                                                             (In Person Session)
                                                         </span>
@@ -260,24 +260,45 @@ const ViewTrainers = () => {
                                                 ) : null}
                                                 <div className="profile_aside_inner_item">
                                                     <h6>
-                                                        $65{" "}
+                                                        $
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.socialSessionPricing
+                                                            ? TrainerViewData
+                                                                  .socialSessionPricing
+                                                                  .virtualSessionfor2People
+                                                            : "N/A"}
+                                                        &ensp;
                                                         <span>
-                                                            / Session (For 2
-                                                            People)
+                                                            / Session (Virtual
+                                                            For 2 People)
                                                         </span>
                                                     </h6>
                                                     <h6>
-                                                        $50{" "}
+                                                        $
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.socialSessionPricing
+                                                            ? TrainerViewData
+                                                                  .socialSessionPricing
+                                                                  .virtualSessionfor3People
+                                                            : "N/A"}
+                                                        &ensp;
                                                         <span>
-                                                            / Session (For 3
-                                                            People)
+                                                            / Session (Virtual
+                                                            For 3 People)
                                                         </span>
                                                     </h6>
                                                     <h6>
-                                                        $25{" "}
+                                                        $
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.socialSessionPricing
+                                                            ? TrainerViewData
+                                                                  .socialSessionPricing
+                                                                  .virtualSessionfor4People
+                                                            : "N/A"}
+                                                        &ensp;
                                                         <span>
-                                                            / Session (For 4
-                                                            People)
+                                                            / Session (Virtual
+                                                            For 4 People)
                                                         </span>
                                                     </h6>
                                                 </div>
@@ -350,7 +371,14 @@ const ViewTrainers = () => {
                                                 ) : null}
                                                 <div className="profile_aside_inner_item">
                                                     <h6>
-                                                        $200{" "}
+                                                        $
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.classSessionPricing
+                                                            ? TrainerViewData
+                                                                  .classSessionPricing
+                                                                  .virtualSessionfor15People
+                                                            : "N/A"}
+                                                        &ensp;
                                                         <span>
                                                             Flat Rate Class (For
                                                             5-15 People)
@@ -562,19 +590,10 @@ const ViewTrainers = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="profile_right_item3 mb-5 pb-5">
+                                            <div className="profile_personal_data mb-5 pb-5">
                                                 <h2>Previous Experience</h2>
-                                                <div className="profile_item3_inner">
-                                                    {/* <h6>
-                                                        {" "}
-                                                        Job Title: &nbsp;
-                                                        {TrainerViewData.previousExperience
-                                                            ? TrainerViewData
-                                                                  .previousExperience[0]
-                                                                  .jobTitle
-                                                            : "Not Added"}
-                                                    </h6> */}
-                                                    {/* {TrainerViewData &&
+                                                <div className="profile_personal_data_inner">
+                                                    {TrainerViewData &&
                                                     TrainerViewData.previousExperience ? (
                                                         <h6>
                                                             Job Title: &nbsp;
@@ -584,81 +603,242 @@ const ViewTrainers = () => {
                                                                     .jobTitle
                                                             }
                                                         </h6>
-                                                    ) : (
-                                                        <h6>Not Added</h6>
-                                                    )}
+                                                    ) : null}
                                                     {TrainerViewData &&
                                                     TrainerViewData.previousExperience ? (
                                                         <h6>
-                                                            Job Title: &nbsp;
+                                                            Work Mode: &nbsp;
                                                             {
                                                                 TrainerViewData
                                                                     .previousExperience[0]
                                                                     .workMode
                                                             }
                                                         </h6>
-                                                    ) : (
-                                                        <h6>Not Added</h6>
-                                                    )}
+                                                    ) : null}
                                                     {TrainerViewData &&
                                                     TrainerViewData.previousExperience ? (
                                                         <h6>
-                                                            Job Title: &nbsp;
+                                                            Year of Experience:
+                                                            &nbsp;
                                                             {
                                                                 TrainerViewData
                                                                     .previousExperience[0]
                                                                     .yearsOfExperience
                                                             }
                                                         </h6>
-                                                    ) : (
-                                                        <h6>Not Added</h6>
-                                                    )} */}
+                                                    ) : null}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[1] ? (
+                                                        <h6>
+                                                            Job Title: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[1]
+                                                                    .jobTitle
+                                                            }
+                                                        </h6>
+                                                    ) : null}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[1] ? (
+                                                        <h6>
+                                                            Work Mode: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[1]
+                                                                    .workMode
+                                                            }
+                                                        </h6>
+                                                    ) : null}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[1] ? (
+                                                        <h6>
+                                                            Year of Experience:
+                                                            &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[1]
+                                                                    .yearsOfExperience
+                                                            }
+                                                        </h6>
+                                                    ) : null}
 
-                                                    {/* <h6>
-                                                        {" "}
-                                                        Work Mode: &nbsp;
-                                                        {TrainerViewData.previousExperience
-                                                            ? TrainerViewData
-                                                                  .previousExperience[0]
-                                                                  .workMode
-                                                            : "Not Added"}
-                                                    </h6>
-                                                    <h6>
-                                                        {" "}
-                                                        Years Of Experience:
-                                                        &nbsp;
-                                                        {TrainerViewData.previousExperience
-                                                            ? TrainerViewData
-                                                                  .previousExperience[0]
-                                                                  .yearsOfExperience
-                                                            : "Not Added"}
-                                                    </h6> */}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[2] ? (
+                                                        <h6>
+                                                            Job Title: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[2]
+                                                                    .jobTitle
+                                                            }
+                                                        </h6>
+                                                    ) : null}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[2] ? (
+                                                        <h6>
+                                                            Work Mode: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[2]
+                                                                    .workMode
+                                                            }
+                                                        </h6>
+                                                    ) : null}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[2] ? (
+                                                        <h6>
+                                                            Year of Experience:
+                                                            &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[2]
+                                                                    .yearsOfExperience
+                                                            }
+                                                        </h6>
+                                                    ) : null}
 
-                                                    <div className="inner_items">
-                                                        {/* <h6>
-                                                            {TrainerViewData[
-                                                                "previousExperience"
-                                                            ]
-                                                                ? TrainerViewData[
-                                                                      "previousExperience"
-                                                                  ][1][
-                                                                      "jobTitle"
-                                                                  ]
-                                                                : "Not Added"}
-                                                        </h6> */}
-                                                    </div>
-                                                    <div className="inner_items">
-                                                        {/* <h6>
-                                                            {TrainerViewData[
-                                                                "previousExperience"
-                                                            ]
-                                                                ? TrainerViewData[
-                                                                      "previousExperience"
-                                                                  ][2][
-                                                                      "jobTitle"
-                                                                  ]
-                                                                : "Not Added"}
-                                                        </h6> */}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[3] ? (
+                                                        <h6>
+                                                            Job Title: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[3]
+                                                                    .jobTitle
+                                                            }
+                                                        </h6>
+                                                    ) : null}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[3] ? (
+                                                        <h6>
+                                                            Work Mode: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[3]
+                                                                    .workMode
+                                                            }
+                                                        </h6>
+                                                    ) : null}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience &&
+                                                    TrainerViewData
+                                                        .previousExperience[3] ? (
+                                                        <h6>
+                                                            Year of Experience:
+                                                            &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[3]
+                                                                    .yearsOfExperience
+                                                            }
+                                                        </h6>
+                                                    ) : null}
+
+                                                    <div className="profile_personal_data1">
+                                                        <h2
+                                                            style={{
+                                                                textTransform:
+                                                                    "capitalize",
+                                                            }}
+                                                        >
+                                                            {
+                                                                TrainerViewData.firstName
+                                                            }
+                                                            <span
+                                                                style={{
+                                                                    textTransform:
+                                                                        "none",
+                                                                }}
+                                                            >
+                                                                's
+                                                            </span>{" "}
+                                                            Personal Data
+                                                        </h2>
+                                                        <div className="personal_data_container">
+                                                            <div className="personal_data_inner1">
+                                                                <h4>
+                                                                    DOB:{" "}
+                                                                    {
+                                                                        TrainerViewData.DOB
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Email:{" "}
+                                                                    {
+                                                                        TrainerViewData.email
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Gender:{" "}
+                                                                    {
+                                                                        TrainerViewData.gender
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Phone
+                                                                    Number:{" "}
+                                                                    {
+                                                                        TrainerViewData.phoneNumber
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Servicable
+                                                                    Location:{" "}
+                                                                    {
+                                                                        TrainerViewData.servicableLocation
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Servicable
+                                                                    City:{" "}
+                                                                    {
+                                                                        TrainerViewData.serviceableCity
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Virtual
+                                                                    Meeting:{" "}
+                                                                    {
+                                                                        TrainerViewData.virtualMeetingLink
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Instagram
+                                                                    handle:{" "}
+                                                                    {
+                                                                        TrainerViewData.instagramProfile
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Website:{" "}
+                                                                    {
+                                                                        TrainerViewData.websiteLink
+                                                                    }
+                                                                </h4>
+                                                                <h4>
+                                                                    Signup Type:{" "}
+                                                                    {
+                                                                        TrainerViewData.signUpType
+                                                                    }
+                                                                </h4>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div className="inner_items">
                                                         {/* <h6> */}

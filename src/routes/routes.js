@@ -122,7 +122,7 @@ const routers = [
                 exact: true,
             },
             {
-                path: "/profile",
+                path: "/profile/:id",
                 componentPath: "pages/Trainer/Profile/index",
                 name: "TrainerProfile",
                 auth: false,

@@ -36,6 +36,7 @@ const TrainerCards = (props) => {
                             <div className="card" key={index}>
                                 <img
                                     className="card-img-top"
+                                    // src={bestMatchData[data]["profilePicture"]}
                                     src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                                     style={{ objectFit: "cover" }}
                                 />
@@ -89,8 +90,7 @@ const TrainerCards = (props) => {
                                                     bestMatchData[data]
                                                 );
                                                 history.push({
-                                                    pathname:
-                                                        "/trainer/profile",
+                                                    pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
                                                     state: {
                                                         trainerId:
                                                             bestMatchData[data][

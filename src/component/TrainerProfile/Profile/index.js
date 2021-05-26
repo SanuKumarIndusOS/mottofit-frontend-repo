@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
 import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Tick from "../../../assets/files/FindTrainer/Tick 1.svg";
 import Share from "../../../assets/files/FindTrainer/share.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
@@ -13,6 +13,7 @@ import QMark from "../../../assets/files/FindTrainer/Q Mark.svg";
 import Quote from "../../../assets/files/FindTrainer/Quote Icon.svg";
 import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
+import NotFoundImage from "../../../assets/files/FindTrainer/NoImageFound.png";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -20,49 +21,107 @@ const TrainerProfile = () => {
     const [open, setOpen] = useState(false);
     const myRef = useRef(null);
     const [openClassModel, setOpenClassModel] = useState(false);
-    const [trainerProfileData, setTrainerProfileData] = useState([]);
-    console.log(trainerProfileData, "trainerProfileData");
 
-    // function fetchTrainerProfile() {
-    //     fetch("http://doodlebluelive.com:2307/v1/availableTrainer?", {
-    //         method: "get",
-    //         headers: new Headers({
-    //             Authorization:
-    //                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIxNjAwMTc2LCJleHAiOjE2MjE2MDczNzZ9.EId_XcYG0YLtqcQEyT08T9-IUr2Oh-dyABrJKgePLYw",
-    //             "Content-Type": "application/x-www-form-urlencoded",
-    //         }),
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setTrainerProfileData(data.bestMatch);
-    //             console.log(data.bestMatch, "data");
-    //             // setLoading(false);
-    //         });
-    // }
-    // useEffect(() => {
-    //     // setLoading(true);
-    //     fetchTrainerProfile();
-    // }, []);
+    const [trainerProfileData, setTraierProfileData] = useState([]);
+    console.log(trainerProfileData, "trainerProfileData");
+    useEffect(() => {
+        fetchViewTrainer();
+    }, []);
+
+    const { id } = useParams();
+
+    function fetchViewTrainer() {
+        fetch(
+            // `http://doodlebluelive.com:2307/v1/trainer/id?trainerId=8052bef4-5b88-4a56-a9b1-5262bc7b9cf8`,
+            `http://doodlebluelive.com:2307/v1/trainer/id?trainerId=${id}`,
+            {
+                method: "get",
+                headers: new Headers({
+                    Authorization: localStorage.getItem("token"),
+                    "Content-Type": "application/x-www-form-urlencoded",
+                }),
+            }
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                setTraierProfileData(data["data"]);
+            });
+    }
 
     return (
         <>
             <div className="profile_main">
                 <div className="profile_outter_container">
-                    {/* <div className="profile"> */}
                     <div className="profile_wrapper_container ">
                         <div className="profile_header">
                             <div className="inner_profile container">
-                                <img src={Profile} alt="picture" />
+                                {trainerProfileData &&
+                                trainerProfileData.profilePicture ? (
+                                    <img
+                                        src={trainerProfileData.profilePicture}
+                                        alt="Not Found Image"
+                                    />
+                                ) : (
+                                    <img
+                                        src={NotFoundImage}
+                                        alt="Not Found Image"
+                                    />
+                                )}
                                 <div className="profile_header_inner">
                                     <h2>
-                                        {/* {
-                                            trainerProfileData["data"][
-                                                "firstName"
-                                            ]
-                                        } */}
-                                        John Deo
+                                        {trainerProfileData.firstName}&nbsp;
+                                        {trainerProfileData.lastName}
                                     </h2>
-                                    <p>PILATES, STRENGTH & HIIT</p>
+                                    <p>
+                                        {trainerProfileData &&
+                                        trainerProfileData.areaOfExpertise &&
+                                        trainerProfileData
+                                            .areaOfExpertise[0] ? (
+                                            <p>
+                                                {" "}
+                                                {
+                                                    trainerProfileData
+                                                        .areaOfExpertise[0]
+                                                }
+                                            </p>
+                                        ) : null}
+                                        {trainerProfileData &&
+                                        trainerProfileData.areaOfExpertise &&
+                                        trainerProfileData
+                                            .areaOfExpertise[1] ? (
+                                            <p>
+                                                {","}&nbsp;
+                                                {
+                                                    trainerProfileData
+                                                        .areaOfExpertise[1]
+                                                }
+                                            </p>
+                                        ) : null}
+                                        {trainerProfileData &&
+                                        trainerProfileData.areaOfExpertise &&
+                                        trainerProfileData
+                                            .areaOfExpertise[2] ? (
+                                            <p>
+                                                {","}&nbsp;
+                                                {
+                                                    trainerProfileData
+                                                        .areaOfExpertise[2]
+                                                }
+                                            </p>
+                                        ) : null}
+                                        {trainerProfileData &&
+                                        trainerProfileData.areaOfExpertise &&
+                                        trainerProfileData
+                                            .areaOfExpertise[3] ? (
+                                            <p>
+                                                {","}&nbsp;
+                                                {
+                                                    trainerProfileData
+                                                        .areaOfExpertise[3]
+                                                }
+                                            </p>
+                                        ) : null}
+                                    </p>
                                 </div>
                                 <div className="profile_header_link">
                                     <img src={ArrowBack} alt="icon" />
@@ -84,11 +143,25 @@ const TrainerProfile = () => {
                                         <hr />
                                         <div className="profile_aside_inner_item">
                                             <h6>
-                                                $45{" "}
+                                                $
+                                                {trainerProfileData &&
+                                                trainerProfileData.oneOnOnePricing
+                                                    ? trainerProfileData
+                                                          .oneOnOnePricing
+                                                          .virtualSession
+                                                    : "N/A"}
+                                                &nbsp;
                                                 <span>(Virtual Session)</span>
                                             </h6>
                                             <h6>
-                                                $150{" "}
+                                                $
+                                                {trainerProfileData &&
+                                                trainerProfileData.oneOnOnePricing
+                                                    ? trainerProfileData
+                                                          .oneOnOnePricing
+                                                          .inPersonAtClientLocation
+                                                    : "N/A"}
+                                                &nbsp;
                                                 <span>(In Person Session)</span>
                                             </h6>
                                             <h5>
@@ -151,21 +224,45 @@ const TrainerProfile = () => {
                                         ) : null}
                                         <div className="profile_aside_inner_item">
                                             <h6>
-                                                $65{" "}
+                                                $
+                                                {trainerProfileData &&
+                                                trainerProfileData.socialSessionPricing
+                                                    ? trainerProfileData
+                                                          .socialSessionPricing
+                                                          .virtualSessionfor2People
+                                                    : "N/A"}
+                                                &ensp;
                                                 <span>
-                                                    / Session (For 2 People)
+                                                    / Session (Virtual For 2
+                                                    People)
                                                 </span>
                                             </h6>
                                             <h6>
-                                                $50{" "}
+                                                $
+                                                {trainerProfileData &&
+                                                trainerProfileData.socialSessionPricing
+                                                    ? trainerProfileData
+                                                          .socialSessionPricing
+                                                          .virtualSessionfor3People
+                                                    : "N/A"}
+                                                &ensp;
                                                 <span>
-                                                    / Session (For 3 People)
+                                                    / Session (Virtual For 3
+                                                    People)
                                                 </span>
                                             </h6>
                                             <h6>
-                                                $25{" "}
+                                                $
+                                                {trainerProfileData &&
+                                                trainerProfileData.socialSessionPricing
+                                                    ? trainerProfileData
+                                                          .socialSessionPricing
+                                                          .virtualSessionfor4People
+                                                    : "N/A"}
+                                                &ensp;
                                                 <span>
-                                                    / Session (For 4 People)
+                                                    / Session (Virtual For 4
+                                                    People)
                                                 </span>
                                             </h6>
                                         </div>
@@ -225,7 +322,14 @@ const TrainerProfile = () => {
                                         ) : null}
                                         <div className="profile_aside_inner_item">
                                             <h6>
-                                                $200{" "}
+                                                $
+                                                {trainerProfileData &&
+                                                trainerProfileData.classSessionPricing
+                                                    ? trainerProfileData
+                                                          .classSessionPricing
+                                                          .virtualSessionfor15People
+                                                    : "N/A"}
+                                                &ensp;
                                                 <span>
                                                     Flat Rate Class (For 5-15
                                                     People)
@@ -247,12 +351,41 @@ const TrainerProfile = () => {
                                         <div className="profile_aside_inner_item">
                                             <div className="profile_location">
                                                 <img src={Tick} alt="icon" />
-                                                <h4>Virtual</h4>
+                                                {trainerProfileData &&
+                                                trainerProfileData.preferedTrainingMode &&
+                                                trainerProfileData
+                                                    .preferedTrainingMode[0] ? (
+                                                    <h4>
+                                                        {
+                                                            trainerProfileData
+                                                                .preferedTrainingMode[0]
+                                                        }
+                                                    </h4>
+                                                ) : (
+                                                    "N/A"
+                                                )}
+                                                {trainerProfileData &&
+                                                trainerProfileData.preferedTrainingMode &&
+                                                trainerProfileData
+                                                    .preferedTrainingMode[1] ? (
+                                                    <h4 className="p-0">
+                                                        {","}&nbsp;
+                                                        {
+                                                            trainerProfileData
+                                                                .preferedTrainingMode[1]
+                                                        }
+                                                    </h4>
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                             <div className="profile_location">
                                                 <img src={Tick} alt="icon" />
                                                 <h4>
-                                                    Trainer’s Location{" "}
+                                                    {trainerProfileData &&
+                                                    trainerProfileData.location
+                                                        ? trainerProfileData.location
+                                                        : "Not Added"}
                                                     <Link to="/">
                                                         View Location
                                                     </Link>
@@ -260,7 +393,12 @@ const TrainerProfile = () => {
                                             </div>
                                             <div className="profile_location">
                                                 <img src={Tick} alt="icon" />
-                                                <h4>Your Location</h4>
+                                                <h4>
+                                                    {trainerProfileData &&
+                                                    trainerProfileData.servicableLocation
+                                                        ? trainerProfileData.servicableLocation
+                                                        : "Not Added"}
+                                                </h4>
                                             </div>
                                             <div className="profile_share">
                                                 <img src={Share} alt="icon" />
@@ -280,40 +418,27 @@ const TrainerProfile = () => {
                                     <div className="profile_right_item1">
                                         <img src={Quote} alt="qoute" />
                                         <h6>
-                                            This trainers motto can go over
-                                            here. Lorem ipsum dolor sit amet,
-                                            consetetur sadipscing elitr, sed di
-                                            nonumy eirmod tempor invidunt ut
-                                            labore et dolore magna aliquyam
-                                            erat, sed diam voluptua. At vero eos
-                                            et accusam.
+                                            {trainerProfileData.myMotto
+                                                ? trainerProfileData.myMotto
+                                                : "Not Added"}
                                         </h6>
                                     </div>
                                     <div className="profile_right_item2">
-                                        <h4>About Jane</h4>
+                                        <h4>
+                                            About {trainerProfileData.firstName}
+                                        </h4>
                                         <p>
-                                            Lorem ipsum dolor sit amet,
-                                            consetetur sadipscing elitr, sed
-                                            diam nonumy eirmod tempor invidunt
-                                            ut labore et dolore magna aliquyam
-                                            erat, sed diam voluptua. At vero eos
-                                            et accusam et justo duo dolores et
-                                            ea rebum. Stet clita kasd gubergren,
-                                            no sea takimata sanctus est Lorem
-                                            ipsum dolor sit amet. Lorem ipsum
-                                            dolor sit amet, consetetur
-                                            sadipscing elitr, sed diam nonumy
-                                            eirmod tempor invidunt ut labore et
-                                            dolore magna aliquyam erat, sed diam
-                                            voluptua. At vero eos et accusam et
-                                            justo duo dolores et ea rebum. Stet
-                                            clita kasd gubergren, no sea
-                                            takimata sanctus est Lorem ipsum
-                                            dolor sit.
+                                            {trainerProfileData.description
+                                                ? trainerProfileData.description
+                                                : "Not Added"}
                                         </p>
 
                                         <div className="profile_images">
-                                            <ImageGrid />
+                                            <ImageGrid
+                                                trainerProfileData={
+                                                    trainerProfileData
+                                                }
+                                            />
                                         </div>
                                     </div>
                                     <div className="profile_right_item3 mb-5 pb-5">
@@ -321,37 +446,95 @@ const TrainerProfile = () => {
                                         <div className="profile_item3_inner">
                                             <div className="inner_items">
                                                 <img src={Tick} alt="check" />
-                                                <h6>
-                                                    Certification 1 goes here
-                                                </h6>
+                                                {trainerProfileData &&
+                                                trainerProfileData.certification &&
+                                                trainerProfileData
+                                                    .certification[0] ? (
+                                                    <h6>
+                                                        {
+                                                            trainerProfileData
+                                                                .certification[0]
+                                                                .certification
+                                                        }{" "}
+                                                    </h6>
+                                                ) : (
+                                                    <h6>Not Added</h6>
+                                                )}
                                             </div>
                                             <div className="inner_items">
                                                 <img src={Tick} alt="check" />
-                                                <h6>
-                                                    Certification 1 goes here
-                                                </h6>
+                                                {trainerProfileData &&
+                                                trainerProfileData.certification &&
+                                                trainerProfileData
+                                                    .certification[1] ? (
+                                                    <h6>
+                                                        {
+                                                            trainerProfileData
+                                                                .certification[1]
+                                                                .certification
+                                                        }{" "}
+                                                    </h6>
+                                                ) : (
+                                                    <h6>Not Added</h6>
+                                                )}
                                             </div>
                                             <div className="inner_items">
                                                 <img src={Tick} alt="check" />
-                                                <h6>
-                                                    Certification 1 goes here
-                                                </h6>
+                                                {trainerProfileData &&
+                                                trainerProfileData.certification &&
+                                                trainerProfileData
+                                                    .certification[2] ? (
+                                                    <h6>
+                                                        {
+                                                            trainerProfileData
+                                                                .certification[2]
+                                                                .certification
+                                                        }{" "}
+                                                    </h6>
+                                                ) : (
+                                                    <h6>Not Added</h6>
+                                                )}
                                             </div>
                                             <div className="inner_items">
                                                 <img src={Tick} alt="check" />
-                                                <h6>
-                                                    Certification 1 goes here
-                                                </h6>
+                                                {trainerProfileData &&
+                                                trainerProfileData.certification &&
+                                                trainerProfileData
+                                                    .certification[3] ? (
+                                                    <h6>
+                                                        {
+                                                            trainerProfileData
+                                                                .certification[3]
+                                                                .certification
+                                                        }{" "}
+                                                    </h6>
+                                                ) : (
+                                                    <h6>Not Added</h6>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div className="profile_right_item4">
-                                        <h2>Jane’s Schedule </h2>
+                                    <div className="profile_right_item4">
+                                        <h2
+                                            style={{
+                                                textTransform: "capitalize",
+                                            }}
+                                        >
+                                            {trainerProfileData.firstName}
+                                            <span
+                                                style={{
+                                                    textTransform: "none",
+                                                }}
+                                            >
+                                                's
+                                            </span>{" "}
+                                            Schedule{" "}
+                                        </h2>
                                         <div
                                             className="profile_event_schedular"
                                             onClick={() => console.log("hello")}
                                         ></div>
-                                    </div> */}
+                                    </div>
                                     {/* </div> */}
                                 </div>
                             </div>
@@ -359,14 +542,15 @@ const TrainerProfile = () => {
                     </div>
                 </div>
             </div>
+            {/* )} */}
         </>
     );
 };
 
-const ImageGrid = () => {
+const ImageGrid = ({ trainerProfileData }) => {
     const [imageView, setImageView] = useState([
         {
-            image: Profile,
+            image: NotFoundImage,
         },
     ]);
     const handleViewImages = () => {
@@ -377,49 +561,89 @@ const ImageGrid = () => {
             <div className="profile_images_grid">
                 {imageView.map((images, index) => {
                     return (
-                        <div className="profile_images_container">
-                            <div className="profile_images_card box1">
-                                <img
-                                    src={images.image}
-                                    alt="picture"
-                                    className="box1"
-                                />
-                            </div>
-                            <div className="flex-try-2">
-                                <div className="profile_images_card box2">
-                                    <img
-                                        src={images.image}
-                                        alt="picture"
-                                        className="box2"
-                                    />
-                                </div>
-
-                                <div className="flex-try-3">
-                                    <div className="profile_images_card box3">
+                        <div key={index}>
+                            {trainerProfileData && trainerProfileData.images ? (
+                                <div className="profile_images_container">
+                                    <div className="profile_images_card box1">
                                         <img
-                                            src={images.image}
+                                            src={
+                                                trainerProfileData &&
+                                                trainerProfileData.images &&
+                                                trainerProfileData.images[1]
+                                                    ? trainerProfileData
+                                                          .images[1]
+                                                    : images.image
+                                            }
                                             alt="picture"
-                                            className="box3"
+                                            className="box1"
                                         />
                                     </div>
+                                    <div className="flex-try-2">
+                                        <div className="profile_images_card box2">
+                                            <img
+                                                src={
+                                                    trainerProfileData &&
+                                                    trainerProfileData.images &&
+                                                    trainerProfileData.images[1]
+                                                        ? trainerProfileData
+                                                              .images[1]
+                                                        : images.image
+                                                }
+                                                alt="picture"
+                                                className="box2"
+                                            />
+                                        </div>
 
-                                    <div className="profile_images_card box4">
-                                        <img
-                                            src={images.image}
-                                            alt="picture"
-                                            className="box4"
-                                        />
+                                        <div className="flex-try-3">
+                                            <div className="profile_images_card box3">
+                                                <img
+                                                    src={
+                                                        trainerProfileData &&
+                                                        trainerProfileData.images &&
+                                                        trainerProfileData
+                                                            .images[2]
+                                                            ? trainerProfileData
+                                                                  .images[2]
+                                                            : images.image
+                                                    }
+                                                    alt="Not Added"
+                                                    className="box3"
+                                                />
+                                            </div>
+
+                                            <div className="profile_images_card box4">
+                                                <img
+                                                    src={
+                                                        trainerProfileData &&
+                                                        trainerProfileData.images &&
+                                                        trainerProfileData
+                                                            .images[3]
+                                                            ? trainerProfileData
+                                                                  .images[3]
+                                                            : images.image
+                                                    }
+                                                    alt="picture"
+                                                    className="box4"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            ) : (
+                                "Image;'s Not Added"
+                            )}
                         </div>
                     );
                 })}
             </div>
-            <div className="image_more" onClick={() => handleViewImages()}>
-                <h5>View More Images</h5>
-                <img src={ArrowNext} ali="icon" />
-            </div>
+            {trainerProfileData &&
+            trainerProfileData.images &&
+            trainerProfileData.images[4] ? (
+                <div className="image_more" onClick={() => handleViewImages()}>
+                    <h5>View More Images</h5>
+                    <img src={ArrowNext} ali="icon" />
+                </div>
+            ) : null}
         </>
     );
 };

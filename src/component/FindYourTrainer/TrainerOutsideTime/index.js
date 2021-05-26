@@ -76,8 +76,7 @@ const TrainerCardOutside = (props) => {
                                             onClick={() => {
                                                 console.log(outSideData[data]);
                                                 history.push({
-                                                    pathname:
-                                                        "/trainer/profile",
+                                                    pathname: `/trainer/profile/${outSideData[data]["id"]}`,
                                                     state: {
                                                         trainerId:
                                                             outSideData[data][
