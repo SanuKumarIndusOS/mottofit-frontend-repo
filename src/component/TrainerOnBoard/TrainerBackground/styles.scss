@@ -20,17 +20,13 @@
                     a {
                         margin-left: 0.5em;
                         margin-right: 0.5em;
-                        font: var(--unnamed-font-style-normal) normal
-                            var(--unnamed-font-weight-normal)
-                            var(--unnamed-font-size-18) /
-                            var(--unnamed-line-spacing-42)
-                            var(--unnamed-font-family-montserrat);
-                        color: var(--unnamed-color-161616);
                         text-align: left;
-                        font: normal normal normal 16px/22px Montserrat;
                         letter-spacing: 0.18px;
                         color: #161616;
-                        opacity: 1;
+                        line-height: 22px;
+                        font-size: 16px;
+                        font-weight: normal;
+                        font-family: "Montserrat", sans-serif;
                         text-decoration: none;
                         border-bottom: 2px solid #53bfd2;
                     }
@@ -57,7 +53,10 @@
                 h1 {
                     text-align: center;
                     font-size: 30px;
-                    font: normal normal 600 30px/58px Montserrat;
+                    line-height: 58px;
+                    font-size: 30px;
+                    font-weight: 600;
+                    font-family: "Montserrat", sans-serif;
                     letter-spacing: 0px;
                     color: #161616;
                     opacity: 1;
@@ -69,7 +68,7 @@
                     opacity: 1;
                     width: 63%;
                     font-size: 18px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     text-align: center;
                     letter-spacing: 0.27px;
                     color: #696969;
@@ -82,7 +81,6 @@
                     width: 100%;
                     height: auto;
                     .item1 {
-                        // margin: 1em 0 2em 0;
                         position: relative;
                         top: 15px;
 
@@ -92,7 +90,7 @@
                             text-align: left;
                             letter-spacing: 0px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             margin-bottom: 20px;
                         }
 
@@ -103,7 +101,7 @@
                             .checkbox_label {
                                 color: #2c2c2c;
                                 font-size: 18px;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-weight: 500;
                                 margin: 0 2em 0 0;
                             }
@@ -126,7 +124,7 @@
                             text-align: left;
                             letter-spacing: 0px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             margin-bottom: 20px;
                         }
                         span {
@@ -153,11 +151,11 @@
                                 margin-right: 1em;
                                 padding: 0.3em 1em;
                                 height: 45px;
-                                border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                                 border: 2px solid #bcbcbc;
                                 border-radius: 30px;
                                 opacity: 1;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                                 top: -10px;
@@ -171,7 +169,7 @@
                             }
                             input::placeholder {
                                 color: #bcbcbc;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                             }
@@ -199,7 +197,7 @@
                             text-align: left;
                             letter-spacing: 0px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
 
                             margin-bottom: 0.7em;
                         }
@@ -222,11 +220,11 @@
                                 margin-right: 1em;
                                 padding: 0.3em 1em;
                                 height: 45px;
-                                border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                                 border: 2px solid #bcbcbc;
                                 border-radius: 30px;
                                 opacity: 1;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                                 top: -10px;
@@ -241,7 +239,7 @@
                             }
                             input::placeholder {
                                 color: #bcbcbc;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                             }
@@ -292,18 +290,18 @@
                             text-align: left;
                             letter-spacing: 0px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             margin-bottom: 16px;
                         }
                         textarea {
                             width: 98%;
                             height: 135px;
-                            border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                             border: 2px solid #bcbcbc;
                             border-radius: 20px;
                             font-size: 18px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             font-weight: 500;
                             padding: 0.5em 1em;
                         }
@@ -311,7 +309,7 @@
                             font-size: 18px;
                             color: #bcbcbc;
                             font-style: italic;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             font-weight: 500;
                         }
                         textarea:focus {
@@ -330,7 +328,7 @@
                             text-align: left;
                             letter-spacing: 0px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             margin-bottom: 16px;
                         }
 
@@ -351,14 +349,14 @@
                                 outline: none;
                                 -webkit-appearance: none;
                                 appearance: none;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                                 color: #696969;
                             }
                             input::placeholder {
                                 color: #bcbcbc;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                             }
@@ -373,8 +371,8 @@
                                 border-radius: 50px;
                                 border: 2px solid #bcbcbc;
                                 outline: none;
-                                // appearance: none;
-                                font-family: Montserrat;
+
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                                 color: #696969;
@@ -386,13 +384,13 @@
                             }
                             select::placeholder {
                                 color: #bcbcbc;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                             }
                             select:invalid {
                                 color: #bcbcbc;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                             }
@@ -409,7 +407,7 @@
                                 border: 2px solid #bcbcbc;
                                 outline: none;
                                 appearance: none;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                                 font-size: 18px;
                                 font-weight: 500;
                                 color: #696969;
@@ -434,18 +432,18 @@
                             text-align: left;
                             letter-spacing: 0px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             margin-bottom: 14px;
                         }
                         textarea {
                             width: 98%;
                             height: 135px;
-                            border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                             border: 2px solid #bcbcbc;
                             border-radius: 20px;
                             font-size: 18px;
                             color: #161616;
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             font-weight: 500;
                             padding: 0.5em 1em;
                         }
@@ -454,7 +452,7 @@
                             color: #bcbcbc;
                             font-style: italic;
 
-                            font-family: "Montserrat";
+                            font-family: "Montserrat", sans-serif;
                             font-weight: 500;
                         }
                         textarea:focus {

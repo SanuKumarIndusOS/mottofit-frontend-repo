@@ -34,35 +34,27 @@
             h2 {
                 width: 539px;
                 height: 147px;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-600) 60px/75px
-                    var(--unnamed-font-family-cormorant-garamond);
-                color: var(--unnamed-color-ffffff);
                 text-align: left;
-                font: normal normal 600 60px/75px Cormorant Garamond;
                 letter-spacing: -1.2px;
                 color: #ffffff;
                 text-shadow: 0px 3px 6px #624123;
-                opacity: 1;
+                font-size: 60px;
+                line-height: 75px;
+                font-weight: 600;
+                font-family: "Cormorant Garamond", sans-serif;
             }
             h6 {
                 width: 500px;
                 height: 61px;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-medium)
-                    var(--unnamed-font-size-20) / 35px
-                    var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0-3);
-                color: var(--unnamed-color-ffffff);
                 text-align: left;
-                font: normal normal medium 20px/35px Montserrat;
                 letter-spacing: 0.3px;
                 color: #ffffff;
                 text-shadow: 0px 3px 6px #62412329;
-                opacity: 1;
+
                 font-size: 20px;
-                font-family: Montserrat;
-                font-weight: 400;
+                line-height: 35px;
+                font-weight: 500;
+                font-family: "Montserrat", sans-serif;
             }
         }
         .item_right {
@@ -87,8 +79,7 @@
 
             height: 770px;
 
-            background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-            background: #ffffff 0% 0% no-repeat padding-box;
+            background: #ffffff;
             box-shadow: 0px 3px 12px #16161626;
             opacity: 1;
             .inner_items {
@@ -96,30 +87,22 @@
                 padding: 4.5em 0 0 0;
 
                 h3 {
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-45) /
-                        var(--unnamed-line-spacing-55)
-                        var(--unnamed-font-family-cormorant-garamond);
-                    letter-spacing: var(--unnamed-character-spacing--0-45);
-                    color: var(--unnamed-color-161616);
                     text-align: center;
-                    font: normal normal bold 45px/55px Cormorant Garamond;
                     letter-spacing: -0.45px;
                     color: #161616;
+                    font-size: 45px;
+                    line-height: 55px;
+                    font-weight: bold;
+                    font-family: "Cormorant Garamond", sans-serif;
                 }
                 p {
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-18) /
-                        var(--unnamed-line-spacing-32)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-27);
-                    color: var(--unnamed-color-2c2c2c);
                     text-align: center;
-                    font: normal normal normal 18px/32px Montserrat;
                     letter-spacing: 0.27px;
                     color: #2c2c2c;
+                    font-size: 18px;
+                    line-height: 32px;
+                    font-weight: normal;
+                    font-family: "Montserrat", sans-serif;
                 }
             }
             .form_items_trainer {
@@ -148,13 +131,13 @@
                     .fullname {
                         width: 100%;
                         height: 45px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                         border: 2px solid #bcbcbc;
                         border-radius: 30px;
                         opacity: 1;
                         padding: 0 1.5em;
                         color: #242424;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500 !important;
                         text-rendering: optimizeLegibility !important;
@@ -162,12 +145,12 @@
                     }
                     input:focus {
                         outline: none;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 400 !important;
                     }
                     input::placeholder {
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         color: #bcbcbc;
                         font-weight: 400 !important;
@@ -176,25 +159,25 @@
                     input {
                         width: 100%;
                         height: 45px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                         border: 2px solid #bcbcbc;
                         border-radius: 30px;
                         opacity: 1;
                         padding: 0 1.5em;
                         color: #242424;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500 !important;
                         text-rendering: optimizeLegibility !important;
                     }
                     input:focus {
                         outline: none;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 400 !important;
                     }
                     input::placeholder {
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         color: #bcbcbc;
                         font-weight: 400 !important;
@@ -255,10 +238,8 @@
                         justify-content: center;
                         width: 425px;
                         height: 52px;
-                        background: var(--unnamed-color-53bfd2) 0% 0% no-repeat
-                            padding-box;
-                        background: rgb(83, 191, 210) 0% 0% no-repeat
-                            padding-box;
+
+                        background: rgb(83, 191, 210);
                         opacity: 1;
 
                         p {
@@ -266,18 +247,14 @@
                             padding: 0 0.5em 0 0.5em;
                             display: flex;
                             margin: 0;
-                            font: var(--unnamed-font-style-normal) normal
-                                var(--unnamed-font-weight-bold)
-                                var(--unnamed-font-size-18) /
-                                var(--unnamed-line-spacing-22)
-                                var(--unnamed-font-family-montserrat);
-                            color: var(--unnamed-color-161616);
                             text-align: right;
-                            font: normal normal bold 18px/22px Montserrat;
                             letter-spacing: 0.45px;
                             color: white;
                             text-transform: uppercase;
-                            opacity: 1;
+                            font-size: 18px;
+                            line-height: 22px;
+                            font-weight: bold;
+                            font-family: "Montserrat", sans-serif;
 
                             align-items: center;
                             @media screen and (max-width: 1125px) {
@@ -319,21 +296,17 @@
                 }
                 a {
                     text-decoration: none;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-18) /
-                        var(--unnamed-line-spacing-22)
-                        var(--unnamed-font-family-montserrat);
-                    color: var(--unnamed-color-161616);
-                    font: normal normal bold 18px/22px Montserrat;
                     letter-spacing: 0.45px;
                     color: #161616 !important;
                     text-transform: uppercase;
-                    opacity: 1;
                     margin-bottom: 3em;
                     display: flex;
                     align-items: center;
                     margin-left: 31px;
+                    font-size: 18px;
+                    line-height: 22px;
+                    font-weight: bold;
+                    font-family: "Montserrat", sans-serif;
                 }
             }
         }

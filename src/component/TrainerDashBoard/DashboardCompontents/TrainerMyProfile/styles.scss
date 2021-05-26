@@ -260,16 +260,12 @@
                             .social_meeting_links {
                                 h5 {
                                     margin-top: 1em;
-                                    font-size: 22px;
                                     color: #161616;
-                                    font-family: Montserrat;
-                                    font-weight: 500;
-                                    letter-spacing: var(
-                                        --unnamed-character-spacing-0
-                                    );
                                     text-align: left;
-                                    font: normal normal medium 22px/42px
-                                        Montserrat;
+                                    font-family: "Montserrat", sans-serif;
+                                    font-size: 22px;
+                                    line-height: 42px;
+                                    font-weight: 500;
                                     letter-spacing: 0px;
                                     text-transform: capitalize;
                                     opacity: 1;
@@ -278,8 +274,7 @@
                                     textarea {
                                         width: 100%;
                                         height: 135px;
-                                        border: 1.5px solid
-                                            var(--unnamed-color-bcbcbc);
+
                                         border: 2px solid #bcbcbc;
                                         border-radius: 20px;
                                         font-size: 18px;
@@ -305,20 +300,14 @@
                             margin: 0em 0 2em 0;
 
                             h6 {
-                                // margin: 0;
                                 margin-top: 1em;
-                                font-size: 22px;
                                 color: #161616;
-                                font-family: Montserrat;
-                                font-weight: 500;
-                                letter-spacing: var(
-                                    --unnamed-character-spacing-0
-                                );
                                 text-align: left;
-                                font: normal normal medium 22px/42px Montserrat;
                                 letter-spacing: 0px;
-                                // text-transform: capitalize;
-                                opacity: 1;
+                                font-family: "Montserrat", sans-serif;
+                                font-size: 22px;
+                                line-height: 42px;
+                                font-weight: 500;
                             }
 
                             .inputs_platform {
@@ -333,8 +322,7 @@
                                     color: #161616;
                                     font-family: Montserrat;
                                     font-weight: 500;
-                                    border: 1.5px solid
-                                        var(--unnamed-color-bcbcbc);
+
                                     border: 2px solid #bcbcbc;
                                     border-radius: 30px;
                                     opacity: 1;
@@ -348,18 +336,11 @@
                                     }
                                 }
                                 input::placeholder {
-                                    font-size: 18px;
-                                    font: var(--unnamed-font-style-normal)
-                                        normal var(--unnamed-font-weight-normal)
-                                        var(--unnamed-font-size-20) /
-                                        var(--unnamed-line-spacing-30)
-                                        var(--unnamed-font-family-montserrat);
-                                    letter-spacing: var(
-                                        --unnamed-character-spacing-0-3
-                                    );
                                     text-align: left;
-                                    font: normal normal normal 18px/30px
-                                        Montserrat;
+                                    font-family: "Montserrat", sans-serif;
+                                    font-size: 18px;
+                                    line-height: 30px;
+                                    font-weight: normal;
                                     color: #898989;
                                 }
                                 .iconwrapper {
@@ -464,8 +445,7 @@
                                 textarea {
                                     width: 95%;
                                     height: 70px;
-                                    border: 1.5px solid
-                                        var(--unnamed-color-bcbcbc);
+
                                     border: 2px solid #bcbcbc;
                                     border-radius: 20px;
                                     font-size: 18px;
@@ -546,8 +526,7 @@
                                 textarea {
                                     width: 100%;
                                     height: 70px;
-                                    border: 1.5px solid
-                                        var(--unnamed-color-bcbcbc);
+
                                     border: 2px solid #bcbcbc;
                                     border-radius: 20px;
                                     font-size: 18px;
@@ -605,10 +584,12 @@
 
                     .terms_msg {
                         margin-bottom: 6em;
-                        letter-spacing: var(--unnamed-character-spacing-0);
-                        color: var(--unnamed-color-898989);
+                        color: #898989;
                         text-align: left;
-                        font: normal normal 500 18px/42px Montserrat;
+                        font-family: "Montserrat", sans-serif;
+                        font-size: 18px;
+                        line-height: 42px;
+                        font-weight: 500;
                     }
 
                     // }
@@ -619,20 +600,17 @@
                         display: flex;
                         align-items: center;
                         border: none;
-                        font: var(--unnamed-font-style-normal) normal
-                            var(--unnamed-font-weight-bold)
-                            var(--unnamed-font-size-18) /
-                            var(--unnamed-line-spacing-22)
-                            var(--unnamed-font-family-montserrat);
-                        color: var(--unnamed-color-161616);
                         text-align: right;
-                        font: normal normal bold 18px/22px Montserrat;
                         letter-spacing: 0.45px;
                         color: #161616;
                         text-transform: uppercase;
                         margin: 0 auto;
                         padding: 2em 0;
                         height: 45px;
+                        font-family: "Montserrat", sans-serif;
+                        font-size: 18px;
+                        line-height: 22px;
+                        font-weight: bold;
                     }
                 }
             }

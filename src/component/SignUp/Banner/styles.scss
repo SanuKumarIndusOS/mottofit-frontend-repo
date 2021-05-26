@@ -26,33 +26,27 @@
         padding: 2em 0;
 
         h2 {
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-bold) var(--unnamed-font-size-45) /
-                var(--unnamed-line-spacing-55)
-                var(--unnamed-font-family-cormorant-garamond);
-            letter-spacing: var(--unnamed-character-spacing--0-45);
-            color: var(--unnamed-color-161616);
             text-align: center;
-            font: normal normal bold 45px/55px Cormorant Garamond;
             letter-spacing: -0.45px;
             color: #161616;
             opacity: 1;
             margin-top: 0.5em;
+            font-family: "Cormorant Garamond", sans-serif;
+            font-size: 45px;
+            line-height: 55px;
+            font-weight: bold;
         }
         p {
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
-                var(--unnamed-line-spacing-32)
-                var(--unnamed-font-family-montserrat);
-            letter-spacing: var(--unnamed-character-spacing-0-27);
-            color: var(--unnamed-color-2c2c2c);
             text-align: center;
-            font: normal normal normal 18px/32px Montserrat;
             letter-spacing: 0.27px;
             color: #2c2c2c;
             opacity: 1;
             font-size: 17px;
             margin-bottom: 29px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 18px;
+            line-height: 32px;
+            font-weight: normal;
         }
     }
     .form_items form {
@@ -68,7 +62,6 @@
             position: relative;
             padding: 0.6em 0;
             width: 80%;
-            //color: var(--unnamed-color-898989);
             color: #898989;
             font-size: 15px;
 
@@ -78,7 +71,6 @@
                 width: 425px;
                 height: 45px;
                 border-radius: 50px;
-                border: 1.5px solid var(--unnamed-color-bcbcbc);
                 border: 2px solid #bcbcbc;
                 border-radius: 30px;
                 opacity: 1;
@@ -145,7 +137,6 @@
                 justify-content: flex-start;
                 align-items: center;
                 outline: none;
-                border: 1px solid #bcbcbc;
                 width: 80%;
                 background-color: #fff;
                 color: #bcbcbc;
@@ -153,11 +144,9 @@
                 margin: 0.2em 1em;
                 width: 425px;
                 height: 45px;
-                border: 1.5px solid var(--unnamed-color-bcbcbc);
                 border: 2px solid #bcbcbc;
                 border-radius: 30px;
                 opacity: 1;
-                color: #898989;
                 font-family: Montserrat;
                 font-size: 18px;
 
@@ -173,16 +162,13 @@
                 background-color: #fff;
                 color: #bcbcbc;
                 outline: none;
-                border: 1px solid #bcbcbc;
                 border-radius: 50px;
                 margin: 0.7em 1em;
                 width: 425px;
                 height: 45px;
-                border: 1.5px solid var(--unnamed-color-bcbcbc);
                 border: 2px solid #bcbcbc;
                 border-radius: 30px;
                 opacity: 1;
-                color: #898989;
                 font-family: Montserrat;
                 font-size: 18px;
 
@@ -234,16 +220,12 @@
         justify-content: center;
 
         h1 {
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-500) var(--unnamed-font-size-22) /
-                var(--unnamed-line-spacing-38)
-                var(--unnamed-font-family-montserrat);
-            font: normal normal 600 28px/38px Montserrat;
             margin: 1.5em 0 0.5em 0;
             color: #222222 !important;
-            font-size: 22px;
-            font-family: Montserrat;
-            margin-top: 20px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 28px;
+            line-height: 38px;
+            font-weight: 600;
         }
         a {
             text-transform: uppercase;

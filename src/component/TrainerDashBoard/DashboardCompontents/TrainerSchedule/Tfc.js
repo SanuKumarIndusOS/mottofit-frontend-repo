@@ -4,7 +4,6 @@ import "react-table-drag-select/style.css";
 import moment from "moment";
 import BackIcon from "../../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
-import BlueHoverButton from "component/common/BlueArrowButton";
 
 function Tfc() {
     //refer style in node module's react-table-drag

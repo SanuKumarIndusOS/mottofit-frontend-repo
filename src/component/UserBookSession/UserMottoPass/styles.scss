@@ -25,24 +25,20 @@
                         a {
                             margin-left: 1em;
                             margin-right: 1em;
-                            font: var(--unnamed-font-style-normal) normal
-                                var(--unnamed-font-weight-normal)
-                                var(--unnamed-font-size-18) /
-                                var(--unnamed-line-spacing-42)
-                                var(--unnamed-font-family-montserrat);
-                            color: var(--unnamed-color-161616);
                             text-align: left;
-                            font: normal normal normal 16px/22px Montserrat;
                             letter-spacing: 0.18px;
                             color: #161616;
-                            opacity: 1;
+                            font-size: 16px;
+                            line-height: 22px;
+                            font-weight: normal;
+                            font-family: "Montserrat", sans-serif;
                             text-decoration: none;
                         }
 
                         div {
                             width: 85%;
                             height: 2px;
-                            // margin-left: 1.5em;
+
                             background-color: #53bfd2;
                         }
                     }
@@ -60,18 +56,13 @@
                 width: 60%;
                 height: 500px;
                 h2 {
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-45) /
-                        var(--unnamed-line-spacing-55)
-                        var(--unnamed-font-family-cormorant-garamond);
-                    letter-spacing: var(--unnamed-character-spacing--0-45);
-                    color: var(--unnamed-color-161616);
                     text-align: center;
-                    font: normal normal bold 45px/55px Cormorant Garamond;
                     letter-spacing: -0.45px;
                     color: #161616;
-                    opacity: 1;
+                    font-size: 45px;
+                    line-height: 55px;
+                    font-weight: bold;
+                    font-family: "Cormorant Garamond", sans-serif;
                 }
                 .motto_pass_items {
                     display: grid;
@@ -83,38 +74,29 @@
                     margin-top: 2em;
                     .motto_pass_left {
                         height: 440px;
-                        background: var(--unnamed-color-f8f8f8) 0% 0% no-repeat
-                            padding-box;
-                        background: #f8f8f8 0% 0% no-repeat padding-box;
+
+                        background: #f8f8f8;
                         box-shadow: 0px 3px 12px #16161626;
                         opacity: 1;
                         border-radius: 20px;
                         .session_pass {
                             border-radius: 20px;
                             height: 100px;
-                            background: var(--unnamed-color-53bfd2) 0% 0%
-                                no-repeat padding-box;
-                            background: #53bfd2 0% 0% no-repeat padding-box;
+
+                            background: #53bfd2;
                             border-radius: 20px 20px 0px 0px;
                             opacity: 1;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             h3 {
-                                font: var(--unnamed-font-style-normal) normal
-                                    var(--unnamed-font-weight-bold)
-                                    var(--unnamed-font-size-28) /
-                                    var(--unnamed-line-spacing-54)
-                                    var(--unnamed-font-family-montserrat);
-                                letter-spacing: var(
-                                    --unnamed-character-spacing-0
-                                );
-                                color: var(--unnamed-color-ffffff);
                                 text-align: center;
-                                font: normal normal bold 28px/54px Montserrat;
                                 letter-spacing: 0px;
                                 color: #ffffff;
-                                opacity: 1;
+                                font-size: 28px;
+                                line-height: 54px;
+                                font-weight: bold;
+                                font-family: "Montserrat", sans-serif;
                             }
                         }
                         .session_pass_inner {
@@ -166,9 +148,6 @@
                                     align-items: center;
                                     justify-content: center;
                                     span {
-                                        letter-spacing: var(
-                                            --unnamed-character-spacing-0-27
-                                        );
                                         text-align: left;
 
                                         letter-spacing: 0.27px;
@@ -199,22 +178,17 @@
                                 background-color: transparent;
                                 display: flex;
                                 align-items: center;
-                                font: var(--unnamed-font-style-normal) normal
-                                    var(--unnamed-font-weight-bold)
-                                    var(--unnamed-font-size-18) /
-                                    var(--unnamed-line-spacing-22)
-                                    var(--unnamed-font-family-montserrat);
-                                color: var(--unnamed-color-161616);
-                                font: normal normal 800 15px/22px Montserrat;
                                 letter-spacing: 0.45px;
                                 color: #161616;
                                 text-transform: uppercase;
-                                opacity: 1;
-                                font-weight: 800 !important;
                                 border: none;
                                 padding: 0;
                                 margin: 0;
                                 justify-content: space-between;
+                                font-size: 15px;
+                                line-height: 22px;
+                                font-weight: 800;
+                                font-family: "Montserrat", sans-serif;
                             }
                         }
                         .button_line {
@@ -231,9 +205,8 @@
                     }
                     .motto_pass_right {
                         height: 440px;
-                        background: var(--unnamed-color-f8f8f8) 0% 0% no-repeat
-                            padding-box;
-                        background: #f8f8f8 0% 0% no-repeat padding-box;
+
+                        background: #f8f8f8;
                         box-shadow: 0px 3px 12px #16161626;
                         opacity: 1;
 
@@ -241,29 +214,21 @@
                         .session_pass {
                             border-radius: 20px;
                             height: 100px;
-                            background: var(--unnamed-color-53bfd2) 0% 0%
-                                no-repeat padding-box;
-                            background: #53bfd2 0% 0% no-repeat padding-box;
+
+                            background: #53bfd2;
                             border-radius: 20px 20px 0px 0px;
                             opacity: 1;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             h3 {
-                                font: var(--unnamed-font-style-normal) normal
-                                    var(--unnamed-font-weight-bold)
-                                    var(--unnamed-font-size-28) /
-                                    var(--unnamed-line-spacing-54)
-                                    var(--unnamed-font-family-montserrat);
-                                letter-spacing: var(
-                                    --unnamed-character-spacing-0
-                                );
-                                color: var(--unnamed-color-ffffff);
                                 text-align: center;
-                                font: normal normal bold 28px/54px Montserrat;
                                 letter-spacing: 0px;
                                 color: #ffffff;
-                                opacity: 1;
+                                font-size: 28px;
+                                line-height: 54px;
+                                font-weight: bold;
+                                font-family: "Montserrat", sans-serif;
                             }
                         }
                         .session_pass_inner {
@@ -288,7 +253,7 @@
                                     letter-spacing: 0.27px;
                                     color: #696969;
                                     opacity: 1;
-                                    font-family: Montserrat;
+                                    font-family: "Montserrat", sans-serif;
                                     font-weight: normal !important;
                                     font-size: 18px;
                                     span {
@@ -316,16 +281,13 @@
                                     align-items: center;
                                     justify-content: center;
                                     span {
-                                        letter-spacing: var(
-                                            --unnamed-character-spacing-0-27
-                                        );
                                         text-align: left;
 
                                         letter-spacing: 0.27px;
                                         color: #696969;
                                         opacity: 1;
                                         font-size: 18px;
-                                        font-family: Montserrat;
+                                        font-family: "Montserrat", sans-serif;
                                         font-weight: 500;
                                         margin-right: 0.7em;
                                         text-decoration: line-through #53bfd2;
@@ -349,13 +311,6 @@
                                 background-color: transparent;
                                 display: flex;
                                 align-items: center;
-                                font: var(--unnamed-font-style-normal) normal
-                                    var(--unnamed-font-weight-bold)
-                                    var(--unnamed-font-size-18) /
-                                    var(--unnamed-line-spacing-22)
-                                    var(--unnamed-font-family-montserrat);
-                                color: var(--unnamed-color-161616);
-                                font: normal normal 800 15px/22px Montserrat;
                                 letter-spacing: 0.45px;
                                 color: #161616;
                                 text-transform: uppercase;
@@ -365,6 +320,10 @@
                                 padding: 0;
                                 margin: 0;
                                 justify-content: space-between;
+                                font-size: 15px;
+                                line-height: 22px;
+                                font-weight: 800;
+                                font-family: "Montserrat", sans-serif;
                             }
                         }
                         .button_line {
@@ -404,23 +363,19 @@
                     font-weight: 500;
 
                     a {
-                        font: var(--unnamed-font-style-normal) normal
-                            var(--unnamed-font-weight-bold)
-                            var(--unnamed-font-size-18) /
-                            var(--unnamed-line-spacing-22)
-                            var(--unnamed-font-family-montserrat);
-                        color: var(--unnamed-color-161616);
                         text-align: right;
-                        font: normal normal bold 18px/22px Montserrat;
                         letter-spacing: 0.45px;
                         color: #161616;
                         text-transform: uppercase;
                         opacity: 1;
-                        font-weight: 800 !important;
                         margin-left: 2em;
                         text-decoration: none;
                         display: flex;
                         align-items: center;
+                        font-size: 18px;
+                        line-height: 22px;
+                        font-weight: bold;
+                        font-family: "Montserrat", sans-serif;
                     }
                 }
             }

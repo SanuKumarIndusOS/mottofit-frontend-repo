@@ -5,10 +5,9 @@
     background: #f6f6f6 0% 0% no-repeat padding-box;
     .smallContainer {
         display: grid;
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 33% 34% 33%;
         grid-template-rows: auto;
         grid-column-gap: 30px;
-        // margin: 7em auto;
         padding: 1em;
 
         @media screen and (max-width: 920px) {
@@ -36,17 +35,15 @@
 
             .personal_heading {
                 padding: 10px 0;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-600) var(--unnamed-font-size-22) /
-                    var(--unnamed-line-spacing-34)
-                    var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0);
-                color: var(--unnamed-color-222222);
                 text-align: left;
-                font: normal normal 600 20px/34px Montserrat;
                 letter-spacing: 0px;
                 color: #222222;
                 opacity: 1;
+                font-size: 20px;
+                font-weight: 600;
+                font-family: "Montserrat", sans-serif;
+                letter-spacing: 0.2px;
+
                 @media screen and (max-width: 1150px) and (min-width: 920px) {
                     height: 100px;
                 }
@@ -58,18 +55,16 @@
             }
             .personal_description {
                 word-wrap: break-word;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-normal)
-                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-30)
-                    var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0-27);
                 text-align: left;
-                font: normal normal normal 18px/30px Montserrat;
                 letter-spacing: 0.27px;
                 color: #696969;
                 opacity: 1;
+                font-size: 18px;
+                font-weight: 400;
+                font-family: "Montserrat", sans-serif;
                 @media screen and (max-width: 920px) {
-                    font: normal normal normal 14px Montserrat;
+                    font-size: 14px;
+                    font-weight: 400;
                     padding: 0 1em;
                     text-align: center;
                 }

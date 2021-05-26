@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.scss";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
-// import ArrowHover from "../../../../common/ButtonIcon/ArrowHover";
 import BlueHoverButton from "component/common/BlueArrowButton";
 import Tick from "../../../../../assets/files/FindTrainer/Tick 1.svg";
 
@@ -35,10 +34,7 @@ const PaymentSection = ({ onChange, trainerData, setTrainerData }) => {
     const dropdowmColorChange = () => {
         setdropdown(!dropdowm);
     };
-    // function handleChange(e) {
-    //     // Here, we invoke the callback with the new value
-    //     onChange(e.target.value);
-    // }
+
     const handleChange = ({ target: { name, value } }) => {
         const tempData = {
             ...trainerData,

@@ -35,17 +35,14 @@ export const SideBarRouteData = [
             {
                 title: "My Profile",
                 path: "/users/dashboard/settings/profile",
-                // icon: <img src={SessionIcon} alt="icon" />,
             },
             {
                 title: "Payment History",
                 path: "/users/dashboard/settings/profile",
-                // icon: <img src={SessionIcon} alt="icon" />,
             },
             {
                 title: "Notification Settings",
                 path: "/users/dashboard/settings/profile",
-                // icon: <img src={SessionIcon} alt="icon" />,
             },
         ],
     },

@@ -8,7 +8,6 @@ import Facebook from "../../../assets/files/SignUp/Fb Logo.svg";
 import Google from "../../../assets/files/SignUp/Google Logo.svg";
 import Mail from "../../../assets/files/SignUp/Email Icon.svg";
 import Password from "../../../assets/files/SignUp/Password Icon.svg";
-// import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
@@ -18,14 +17,17 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { login, loginOrSignUp } from "action/authAct";
 import useForm from "./useForm";
-import validateInfo from  "./validation";
+import validateInfo from "./validation";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
-const SignInFC = ({ showModel, setShowModel, loginAct ,submitForm }) => {
+const SignInFC = ({ showModel, setShowModel, loginAct, submitForm }) => {
     const history = useHistory();
     const myRef = useRef(null);
-    const {data,handleFormSubmit,error,setData} = useForm(validateInfo, submitForm);
+    const { data, handleFormSubmit, error, setData } = useForm(
+        validateInfo,
+        submitForm
+    );
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [apiError, setApiError] = useState("");
@@ -35,7 +37,6 @@ const SignInFC = ({ showModel, setShowModel, loginAct ,submitForm }) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
 
-    const { register, errors, handleSubmit } = useForm();
     const showPassword = () => {
         setPasswordShown(passwordShown ? false : true);
     };
@@ -52,66 +53,41 @@ const SignInFC = ({ showModel, setShowModel, loginAct ,submitForm }) => {
 
         // NEED USER DATA AFTER LOGIN AND SIGNUP
 
-         if(Object.keys(error).length === 0){
-        loginAct(loginApi, payload)
-        .then((res) => {
-                if (res["type"] === "trainer") {
-                    fetch("http://doodlebluelive.com:2307/v1/trainer", {
-                        method: "get",
-                        headers: new Headers({
-                            Authorization: localStorage.getItem("token"),
-                            "Content-Type": "application/x-www-form-urlencoded",
-                        }),
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            console.log(
-                                "rr",
-                                data["data"]["applicationStatus"]
-                            );
-                            if (data["data"]["applicationStatus"] === null) {
-                                history.push("/trainer/about");
-                            } else {
-                                history.push("/trainers/dashboard/session");
-                            }
-                        });
-                } else {
-                    history.push("/trainer/find");
-                }
-            })
-            .catch((error) => {
-                setApiError("Sorry, something went wrong.", error.message);
-            });
+        if (Object.keys(error).length === 0) {
+            loginAct(loginApi, payload)
+                .then((res) => {
+                    if (res["type"] === "trainer") {
+                        fetch("http://doodlebluelive.com:2307/v1/trainer", {
+                            method: "get",
+                            headers: new Headers({
+                                Authorization: localStorage.getItem("token"),
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded",
+                            }),
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(
+                                    "rr",
+                                    data["data"]["applicationStatus"]
+                                );
+                                if (
+                                    data["data"]["applicationStatus"] === null
+                                ) {
+                                    history.push("/trainer/about");
+                                } else {
+                                    history.push("/trainers/dashboard/session");
+                                }
+                            });
+                    } else {
+                        history.push("/trainer/find");
+                    }
+                })
+                .catch((error) => {
+                    setApiError("Sorry, something went wrong.", error.message);
+                });
         }
-        
-        // const { loginApi } = AuthApi;
-
-        // const requestOptions = {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Accept: "application/json",
-        //   },
-        //   body: JSON.stringify(item),
-        // };
-        // fetch("http://doodlebluelive.com:2307/v1/login", requestOptions)
-        //   .then(async (response) => {
-        //     const data = await response.json();
-        //     localStorage.setItem("user-info", JSON.stringify(data));
-        //     if (response.ok) {
-        //       history.push("/trainer/find");
-        //     } else {
-        //       setApiError("User Not Registered", response.statusText);
-        //     }
-        //   })
-        //   .catch((error) => {
-        //     setApiError("Sorry, something went wrong.", error.message);
-        //   });
     }
-
-    const preventSubmit = (e) => {
-        e.preventDefault();
-    };
 
     return (
         <>
@@ -144,39 +120,12 @@ const SignInFC = ({ showModel, setShowModel, loginAct ,submitForm }) => {
                                                 value={data.email}
                                                 name="email"
                                                 onChange={onChangeValue}
-                                                // ref={register({
-                                                //     pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
-                                                //     required: true,
-                                                //     minLength: 8,
-                                                // })}
                                             />
                                             <img src={Mail} alt="icon" />
 
-                                            {/* {errors.email?.type ===
-                                                "required" && (
-                                                <span>
-                                                    This field is required
-                                                </span>
+                                            {error.email && (
+                                                <span>{error.email}</span>
                                             )}
-                                            {errors.email?.type ===
-                                                "minLength" && (
-                                                <span>
-                                                    This field should contain
-                                                    greater then 8 charater
-                                                </span>
-                                            )} */}
-                                            {/* {error.email?.type ===
-                                                "pattern" && (
-                                                <span>
-                                                    Please enter a valid email
-                                                    address
-                                                </span>
-                                            )} */}
-                                              {error.email && (
-                                                    <span>
-                                                        {error.email}
-                                                    </span>
-                                                )}
                                         </div>
                                         <div className="input_item1_signin">
                                             <input
@@ -189,51 +138,16 @@ const SignInFC = ({ showModel, setShowModel, loginAct ,submitForm }) => {
                                                 value={data.password}
                                                 onChange={onChangeValue}
                                                 name="password"
-                                                // ref={register({
-                                                //     required: true,
-                                                //     minLength: 6,
-                                                //     maxLength: 16,
-                                                //     pattern: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{3,}$/,
-                                                // })}
                                             />
                                             <img
                                                 src={Password}
                                                 alt="icon"
                                                 onClick={showPassword}
                                             />
-                                            {/* {errors.password?.type ===
-                                                "required" && (
-                                                <span>
-                                                    This input is required
-                                                </span>
-                                            )}
-                                            {errors.password?.type ===
-                                                "minLength" && (
-                                                <span>
-                                                    Password should be more then
-                                                    6 Charcters
-                                                </span>
-                                            )} */}
-                                            {/* {errors.password?.type ===
-                                                "maxLength" && (
-                                                <span>
-                                                    This field exceed max length
-                                                </span>
-                                            )}
-                                            {errors.password?.type ===
-                                                "pattern" && (
-                                                <span>
-                                                    Password should contain
-                                                    atleast one one captial
-                                                    letter, number and special
-                                                    character
-                                                </span>
-                                            )} */}
+
                                             {error.password && (
-                                                    <span>
-                                                        {error.password}
-                                                    </span>
-                                                )}
+                                                <span>{error.password}</span>
+                                            )}
                                         </div>
                                         <div className="remember_container">
                                             <div className="remember_left">

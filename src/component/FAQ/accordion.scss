@@ -21,15 +21,13 @@
     max-height: 9999px;
     .accordion-content {
         p {
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
-                var(--unnamed-line-spacing-30)
-                var(--unnamed-font-family-montserrat);
-            letter-spacing: var(--unnamed-character-spacing-0-27);
             text-align: left;
-            font: normal normal normal 18px/30px Montserrat;
             letter-spacing: 0.27px;
             color: #696969;
+            line-height: 30px;
+            font-size: 18px;
+            font-weight: normal;
+            font-family: "Montserrat", sans-serif;
         }
     }
 }
@@ -54,10 +52,6 @@
 
     &::after {
         content: url("../../assets/files/SVG/Cross 2.svg");
-        // width: 20px;
-        // height: 2px;
-        // background-color: rgb(0, 0, 0);
-        // background-image: url("../../../assets/SVG/Negative.svg");
     }
 
     &:hover,

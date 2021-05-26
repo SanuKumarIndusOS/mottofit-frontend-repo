@@ -2,28 +2,13 @@ import React, { useState } from "react";
 import moment from "moment";
 import "./styles.css";
 import "./styles.scss";
-
 import AvailabilityIcon from "../../assets/files/SVG/SearchBar/Availability Icon.svg";
 import Earlybrid from "../../assets/files/SVG/SearchBar/Early bird.svg";
 import BackIcon from "../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import DropdownTrainerAvailability from "../Home/Banner/DropdownAvailability";
-// import Select from "react-select";
 
 import BlueArrowHover from "../common/BlueArrowButton";
-
-// function useForceUpdate() {
-//     console.log("updating");
-//     const [value, setValue] = useState(0); // integer state
-//     return () => setValue((value) => value + 1); // update the state to force render
-// }
-
-const options = [
-    { value: "nyw", label: "New York" },
-    { value: "maimi", label: "Maimi" },
-    { value: "hampton", label: "Hampton" },
-    { value: "plam", label: "Plam Beach" },
-];
 
 function Scheduler(props) {
     // const forceUpdate = useForceUpdate();

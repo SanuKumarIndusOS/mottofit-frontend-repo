@@ -7,17 +7,13 @@
         width: 100%;
         h1 {
             margin: 0 2em;
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-600) var(--unnamed-font-size-40) /
-                var(--unnamed-line-spacing-58)
-                var(--unnamed-font-family-montserrat);
-            letter-spacing: var(--unnamed-character-spacing-0);
-            color: var(--unnamed-color-161616);
             text-align: left;
-            font: normal normal 600 40px/58px Montserrat;
             letter-spacing: 0px;
             color: #161616;
-            opacity: 1;
+            font-family: "Montserrat", sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 58px;
         }
         .dates {
             display: flex;
@@ -42,16 +38,13 @@
             justify-content: center;
             height: 500px;
             h1 {
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-medium)
-                    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-42)
-                    var(--unnamed-font-family-montserrat);
-                color: var(--unnamed-color-161616);
                 text-align: center;
-                font: normal normal medium 20px/42px Montserrat;
                 letter-spacing: 0.2px;
                 color: #161616;
-                opacity: 1;
+                font-family: "Montserrat", sans-serif;
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 42px;
             }
         }
     }
@@ -82,16 +75,14 @@
             }
             .date_week {
                 width: 230px;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-600) var(--unnamed-font-size-20) /
-                    var(--unnamed-line-spacing-22)
-                    var(--unnamed-font-family-montserrat);
-                color: var(--unnamed-color-898989);
                 text-align: center;
-                font: normal normal 600 20px/22px Montserrat;
                 letter-spacing: 0.6px;
                 color: #898989;
                 text-transform: uppercase;
+                font-family: "Montserrat", sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 22px;
             }
             select {
                 width: 250px;
@@ -114,27 +105,32 @@
 }
 .table_header_txt {
     color: #898989;
-    font: normal normal medium 20px/22px Montserrat;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
 }
 
 .table_header_number {
     color: #161616;
     letter-spacing: 1.2px;
-    font: normal normal 600 32px/22px Montserrat;
     padding-top: 15px;
     position: relative;
     top: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 22px;
 }
 .time_show {
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600)
-        var(--unnamed-font-size-20) / var(--unnamed-line-spacing-22)
-        var(--unnamed-font-family-montserrat);
-    color: var(--unnamed-color-161616);
     text-align: center;
-    font: normal normal 600 20px/22px Montserrat;
     letter-spacing: 0.6px;
     color: #161616;
     text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
 }
 .table-drag-select {
     height: 500px;
@@ -177,7 +173,7 @@
             .indicator2 {
                 width: 75px;
                 height: 15px;
-                background: #dedede 0% 0% no-repeat padding-box;
+                background: #dedede;
                 opacity: 1;
             }
             h5 {
@@ -196,7 +192,7 @@
             .indicator3 {
                 width: 75px;
                 height: 15px;
-                background: #53bfd2 0% 0% no-repeat padding-box;
+                background: #53bfd2;
                 opacity: 1;
             }
             h5 {
@@ -217,17 +213,16 @@
         button {
             display: flex;
             align-items: center;
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-bold) var(--unnamed-font-size-18) /
-                var(--unnamed-line-spacing-22)
-                var(--unnamed-font-family-montserrat);
-            color: var(--unnamed-color-161616);
             text-align: right;
             font: normal normal bold 18px/22px Montserrat;
             letter-spacing: 0.45px;
             color: #161616;
             text-transform: uppercase;
             border: none;
+            font-family: "Montserrat", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 22px;
         }
     }
 }
@@ -247,27 +242,32 @@
             .table_header_number {
                 color: #161616;
                 letter-spacing: 1.2px;
-                font: normal normal 600 32px/22px Montserrat;
+                font-family: "Montserrat", sans-serif;
+                font-size: 32px;
+                font-weight: 600;
+                line-height: 22px;
                 padding-top: 15px;
                 position: relative;
                 top: 10px;
             }
             .table_header_txt {
                 color: #898989;
-                font: normal normal medium 20px/22px Montserrat;
+                font-family: "Montserrat", sans-serif;
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 22px;
             }
         }
     }
     .time_show {
-        font: var(--unnamed-font-style-normal) normal
-            var(--unnamed-font-weight-600) var(--unnamed-font-size-20) /
-            var(--unnamed-line-spacing-22) var(--unnamed-font-family-montserrat);
-        color: var(--unnamed-color-161616);
         text-align: center;
-        font: normal normal 600 20px/22px Montserrat;
         letter-spacing: 0.6px;
         color: #161616;
         text-transform: uppercase;
+        font-family: "Montserrat", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 22px;
     }
 
     .avaiable_slot {
@@ -299,10 +299,17 @@
 .slot_time {
     background: #fff !important;
     text-align: center;
-    font: normal normal 600 16px/22px Montserrat;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
 }
 .table_trainer {
     display: flex;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
     align-items: flex-end;
     justify-content: flex-end;
     flex-direction: column;

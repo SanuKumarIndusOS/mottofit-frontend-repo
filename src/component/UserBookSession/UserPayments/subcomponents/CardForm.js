@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import {
-    // CardElement,
     useStripe,
     useElements,
     CardNumberElement,
@@ -12,11 +11,9 @@ import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlack
 import { Link } from "react-router-dom";
 
 const useOptions = () => {
-    // const fontSize = useResponsiveFontSize();
     const options = useMemo(() => ({
         style: {
             base: {
-                // fontSize,
                 color: "#424770",
                 letterSpacing: "0.025em",
                 fontFamily: "Source Code Pro, monospace",
@@ -33,8 +30,6 @@ const useOptions = () => {
     return options;
 };
 function CardForm() {
-    // const stripe = useStripe();
-    // const elements = useElements();
     const stripe = useStripe();
     const elements = useElements();
     const options = useOptions();
@@ -71,7 +66,7 @@ function CardForm() {
             console.log(result);
         });
 
-        alert("Card Saved")
+        alert("Card Saved");
     };
 
     return (

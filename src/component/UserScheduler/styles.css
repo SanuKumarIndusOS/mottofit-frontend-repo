@@ -8,7 +8,7 @@ th {
     width: 130px;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    font-family: "Montserrat";
+    font-family: "Montserrat", sans-serif;
 }
 
 td {
@@ -28,7 +28,7 @@ td {
     background-color: white;
     border: 1px solid #e6e6e6;
     height: 60px;
-    display:  flex;
+    display: flex;
     align-items: center;
     justify-content: center;
 }

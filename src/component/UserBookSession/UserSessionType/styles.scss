@@ -15,17 +15,13 @@
                 align-items: center;
                 a {
                     margin-left: 1em;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-18) /
-                        var(--unnamed-line-spacing-42)
-                        var(--unnamed-font-family-montserrat);
-                    color: var(--unnamed-color-161616);
                     text-align: left;
-                    font: normal normal normal 16px/22px Montserrat;
                     letter-spacing: 0.18px;
                     color: #161616;
-                    opacity: 1;
+                    font-size: 16px;
+                    line-height: 22px;
+                    font-weight: normal;
+                    font-family: "Montserrat", sans-serif;
                     text-decoration: none;
                 }
                 div {
@@ -44,32 +40,23 @@
                 align-items: center;
                 justify-content: center;
                 h2 {
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-600)
-                        var(--unnamed-font-size-35) /
-                        var(--unnamed-line-spacing-58)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0);
-                    color: var(--unnamed-color-161616);
                     text-align: center;
-                    font: normal normal 600 35px/58px Montserrat;
                     letter-spacing: 0px;
                     color: #161616;
-                    opacity: 1;
+                    font-size: 35px;
+                    line-height: 58px;
+                    font-weight: 600;
+                    font-family: "Montserrat", sans-serif;
                 }
                 p {
                     width: 810px;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-normal)
-                        var(--unnamed-font-size-18) /
-                        var(--unnamed-line-spacing-30)
-                        var(--unnamed-font-family-montserrat);
-                    letter-spacing: var(--unnamed-character-spacing-0-27);
                     text-align: center;
-                    font: normal normal normal 18px/30px Montserrat;
                     letter-spacing: 0.27px;
                     color: #696969;
-                    opacity: 1;
+                    font-size: 18px;
+                    line-height: 30px;
+                    font-weight: normal;
+                    font-family: "Montserrat", sans-serif;
                 }
             }
             .session_tabs {
@@ -92,20 +79,16 @@
                                 justify-content: center;
                                 width: 135px;
                                 height: 40px;
-                                border: 1.5px solid var(--unnamed-color-bcbcbc);
                                 border: 2px solid #bcbcbc;
                                 border-radius: 30px 0px 0px 30px;
                                 opacity: 1;
                                 background: transparent;
-                                font: var(--unnamed-font-style-normal) normal
-                                    var(--unnamed-font-weight-600)
-                                    var(--unnamed-font-size-20) /
-                                    var(--unnamed-line-spacing-42)
-                                    var(--unnamed-font-family-montserrat);
-                                color: var(--unnamed-color-ffffff);
                                 text-align: center;
-                                font: normal normal 600 20px/42px Montserrat;
                                 letter-spacing: 0.2px;
+                                font-size: 20px;
+                                line-height: 42px;
+                                font-weight: 600;
+                                font-family: "Montserrat", sans-serif;
                             }
 
                             button {
@@ -124,23 +107,16 @@
                             button {
                                 width: 147px;
                                 height: 40px;
-                                background: var(--unnamed-color-161616) 0% 0%
-                                    no-repeat padding-box;
-                                border: 1.5px solid var(--unnamed-color-161616);
-                                background: #fff 0% 0% no-repeat padding-box;
+                                background: #fff;
                                 border: 2px solid #bcbcbc;
                                 border-radius: 0px 30px 30px 0px;
-                                opacity: 1;
                                 color: #000;
-                                font: var(--unnamed-font-style-normal) normal
-                                    var(--unnamed-font-weight-600)
-                                    var(--unnamed-font-size-20) /
-                                    var(--unnamed-line-spacing-42)
-                                    var(--unnamed-font-family-montserrat);
-                                color: var(--unnamed-color-ffffff);
                                 text-align: center;
-                                font: normal normal 600 20px/42px Montserrat;
                                 letter-spacing: 0.2px;
+                                font-size: 20px;
+                                line-height: 42px;
+                                font-weight: 600;
+                                font-family: "Montserrat", sans-serif;
                             }
                             button {
                                 &:active,
@@ -161,13 +137,11 @@
                             align-items: center;
                             width: 550px;
                             height: 40px;
-                            background: var(--unnamed-color-ffffff) 0% 0%
-                                no-repeat padding-box;
-                            border: 1.5px solid var(--unnamed-color-bcbcbc);
-                            background: #ffffff 0% 0% no-repeat padding-box;
+
+                            background: #ffffff;
                             border: 2px solid #bcbcbc;
                             border-radius: 30px;
-                            opacity: 1;
+
                             .session_location {
                                 width: 100%;
                                 .session_location_select {
@@ -179,23 +153,14 @@
                                         background-color: transparent;
 
                                         .css-1uccc91-singleValue {
-                                            font: var(
-                                                    --unnamed-font-style-normal
-                                                )
-                                                normal
-                                                var(--unnamed-font-weight-600)
-                                                var(--unnamed-font-size-20) /
-                                                var(--unnamed-line-spacing-42)
-                                                var(
-                                                    --unnamed-font-family-montserrat
-                                                );
-                                            color: var(--unnamed-color-898989);
                                             text-align: left;
-                                            font: normal normal 600 20px/42px
-                                                Montserrat;
                                             letter-spacing: 0.2px;
                                             color: #898989;
-                                            opacity: 1;
+                                            font-size: 20px;
+                                            line-height: 42px;
+                                            font-weight: 600;
+                                            font-family: "Montserrat",
+                                                sans-serif;
                                         }
 
                                         .css-1hb7zxy-IndicatorsContainer {
@@ -221,7 +186,7 @@
                                 font-style: italic;
                                 font-family: 15px;
                                 font-weight: 800;
-                                font-family: Montserrat;
+                                font-family: "Montserrat", sans-serif;
                             }
                         }
                     }
@@ -244,37 +209,22 @@
                             .session_card_content {
                                 padding: 2em 2em 0 2em;
                                 h2 {
-                                    font: var(--unnamed-font-style-normal)
-                                        normal var(--unnamed-font-weight-600)
-                                        var(--unnamed-font-size-28) /
-                                        var(--unnamed-line-spacing-54)
-                                        var(--unnamed-font-family-montserrat);
-                                    letter-spacing: var(
-                                        --unnamed-character-spacing-0
-                                    );
-                                    color: var(--unnamed-color-161616);
                                     text-align: left;
-                                    font: normal normal bolder 28px/54px
-                                        Montserrat;
                                     letter-spacing: 0px;
                                     color: #161616;
-                                    opacity: 1;
+                                    font-size: 28px;
+                                    line-height: 54px;
+                                    font-weight: bolder;
+                                    font-family: "Montserrat", sans-serif;
                                 }
                                 p {
-                                    font: var(--unnamed-font-style-normal)
-                                        normal var(--unnamed-font-weight-normal)
-                                        var(--unnamed-font-size-18) /
-                                        var(--unnamed-line-spacing-30)
-                                        var(--unnamed-font-family-montserrat);
-                                    letter-spacing: var(
-                                        --unnamed-character-spacing-0-27
-                                    );
                                     text-align: left;
-                                    font: normal normal normal 18px/30px
-                                        Montserrat;
                                     letter-spacing: 0.27px;
                                     color: #696969;
-                                    opacity: 1;
+                                    font-size: 18px;
+                                    line-height: 30px;
+                                    font-weight: normal;
+                                    font-family: "Montserrat", sans-serif;
                                 }
                             }
                             .session_card_inner {
@@ -295,7 +245,7 @@
                                         color: #696969;
                                         font-size: 18px;
                                         font-weight: 500;
-                                        font-family: Montserrat;
+                                        font-family: "Montserrat", sans-serif;
                                         margin-left: 0.5em;
                                         img {
                                             position: relative;
@@ -319,24 +269,18 @@
                             justify-content: center;
                             width: 100%;
                             height: 70px;
-                            background: var(--unnamed-color-53bfd2) 0% 0%
-                                no-repeat padding-box;
-                            background: #53bfd2 0% 0% no-repeat padding-box;
+                            background: #53bfd2;
                             opacity: 1;
                             outline: none;
                             border: none;
-                            font: var(--unnamed-font-style-normal) normal
-                                var(--unnamed-font-weight-bold)
-                                var(--unnamed-font-size-18) /
-                                var(--unnamed-line-spacing-22)
-                                var(--unnamed-font-family-montserrat);
-                            color: var(--unnamed-color-ffffff);
                             text-align: right;
-                            font: normal normal bold 18px/22px Montserrat;
                             letter-spacing: 0.45px;
                             color: #ffffff;
                             text-transform: uppercase;
-                            opacity: 1;
+                            font-size: 18px;
+                            line-height: 22px;
+                            font-weight: bold;
+                            font-family: "Montserrat", sans-serif;
                         }
                     }
                 }

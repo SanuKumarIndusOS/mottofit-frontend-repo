@@ -6,12 +6,10 @@ import Password from "../../../assets/files/SignUp/Password Icon.svg";
 import Facebook from "../../../assets/files/SignUp/Fb Logo.svg";
 import Google from "../../../assets/files/SignUp/Google Logo.svg";
 import "./styles.scss";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-// import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
-import { api } from "service/api";
+// import { api } from "service/api";
 import { AuthApi } from "service/apiVariables";
 import { loginOrSignUp } from "action/authAct";
 import { connect } from "react-redux";
@@ -28,7 +26,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
     const [apiError, setApiError] = useState("");
-    const { register, errors, handleSubmit, watch } = useForm();
     const onChangeValue = (e) => {
         e.persist();
         setData({ ...data, [e.target.name]: e.target.value });
@@ -47,38 +44,18 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
             location: data.location,
             signUpType: data.signUpType,
         };
-        // console.log(item);
-        // const requestOptions = {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Accept: "application/json",
-        //   },
-        //   body: JSON.stringify(item),
-        // };
 
         const { userSignUp } = AuthApi;
 
         if (Object.keys(error).length === 0) {
             loginOrSignupAct(userSignUp, payload)
-                .then((data) => {
+                .then(() => {
                     history.push("/trainer/find");
                 })
                 .catch((error) => {
                     setApiError("Sorry, something went wrong.", error.message);
                 });
         }
-        // fetch("http://doodlebluelive.com:2307/v1/user/sign-up", requestOptions)
-        //   .then(async (response) => {
-        //     const data = await response.json();
-        //     localStorage.setItem("user-info", JSON.stringify(data));
-
-        //     if (response.ok) {
-        //       history.push("/trainer/find");
-        //     } else {
-        //       setApiError("Email already registered", response.statusText);
-        //     }
-        //   })
     }
 
     const showPassword = () => {
@@ -90,7 +67,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
 
     return (
         <>
-            {/* {redirect ? <Redirect to={"/findtrainer"} /> : null} */}
             <div className="main_container">
                 <div className="wrapper">
                     <div className="inner_wrapper">
@@ -109,35 +85,9 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             value={data.firstName}
                                             name="firstName"
                                             onChange={onChangeValue}
-                                            // ref={register({
-                                            //     pattern: /^[A-Za-z]+$/i,
-                                            //     required: true,
-                                            //     minLength: 2,
-                                            // })}
                                         />
                                         <img src={Person} alt="icon" />
-                                        {/* {errors.firstName && (
-                                            <span>
-                                                {errors.firstName.message}
-                                            </span>
-                                        )}
-                                        {errors.firstName?.type ===
-                                            "required" && (
-                                            <span>This field is required</span>
-                                        )}
-                                        {errors.firstName?.type ===
-                                            "minLength" && (
-                                            <span>
-                                                This field should contain more
-                                                then one charater
-                                            </span>
-                                        )} */}
-                                        {/* {errors.firstName?.type ===
-                                            "pattern" && (
-                                            <span>
-                                                This field accept only alphabets
-                                            </span>
-                                        )} */}
+
                                         {error.firstName && (
                                             <span>{error.firstName}</span>
                                         )}
@@ -149,38 +99,11 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             value={data.lastName}
                                             name="lastName"
                                             onChange={onChangeValue}
-                                            // ref={register({
-                                            //     pattern: /^[A-Za-z]+$/i,
-                                            //     required: true,
-                                            //     minLength: 2,
-                                            // })}
                                         />
                                         <img src={Person} alt="icon" />
                                         {error.lastName && (
                                             <span>{error.lastName}</span>
                                         )}
-                                        {/* {errors.lastName && (
-                                            <span>
-                                                {errors.lastName.message}
-                                            </span>
-                                        )}
-                                        {errors.lastName?.type ===
-                                            "required" && (
-                                            <span>This field is required</span>
-                                        )}
-                                        {errors.lastName?.type ===
-                                            "minLength" && (
-                                            <span>
-                                                This field should contain more
-                                                then one charater
-                                            </span>
-                                        )} */}
-                                        {/* {errors.lastName?.type ===
-                                            "pattern" && (
-                                            <span>
-                                                This field accept only alphabets
-                                            </span>
-                                        )} */}
                                     </div>
 
                                     <div className="input_items">
@@ -190,39 +113,11 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             value={data.location}
                                             name="location"
                                             onChange={onChangeValue}
-                                            // ref={register({
-                                            //     pattern: /^[A-Za-z]+$/i,
-                                            //     required: true,
-                                            //     minLength: 2,
-                                            // })}
                                         />
                                         <img src={Person} alt="icon" />
                                         {error.location && (
                                             <span>{error.location}</span>
                                         )}
-
-                                        {/* {errors.location && (
-                                            <span>
-                                                {errors.location.message}
-                                            </span>
-                                        )}
-                                        {errors.location?.type ===
-                                            "required" && (
-                                            <span>This field is required</span>
-                                        )} */}
-                                        {/* {errors.location?.type ===
-                                            "minLength" && (
-                                            <span>
-                                                This field should contain more
-                                                then one charater
-                                            </span>
-                                        )}
-                                        {errors.location?.type ===
-                                            "pattern" && (
-                                            <span>
-                                                This field accept only alphabets
-                                            </span>
-                                        )} */}
                                     </div>
 
                                     <div className="input_items">
@@ -232,24 +127,12 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             value={data.email}
                                             name="email"
                                             onChange={onChangeValue}
-                                            // ref={register({
-                                            //     required:
-                                            //         "This filed is required",
-                                            //     minLength: {
-                                            //         value: 2,
-                                            //         message:
-                                            //             "Enter a valid name",
-                                            //     },
-                                            // })}
                                         />
                                         <img src={Mail} alt="icon" />
 
                                         {error.email && (
                                             <span>{error.email}</span>
                                         )}
-                                        {/* {errors.email && (
-                                            <span>{errors.email.message}</span>
-                                        )} */}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -258,36 +141,11 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             value={data.phoneNo}
                                             name="phoneNo"
                                             onChange={onChangeValue}
-                                            // ref={register({
-                                            //     required: true,
-                                            //     minLength: 6,
-                                            //     maxLength: 11,
-                                            // })}
                                         />
                                         <img src={Phone} alt="icon" />
                                         {error.phoneNo && (
                                             <span>{error.phoneNo}</span>
                                         )}
-
-                                        {/* {errors.phoneNo && (
-                                            <span>
-                                                {errors.phoneNo.message}
-                                            </span>
-                                        )} */}
-                                        {/* {errors.phoneNo?.type ===
-                                            "required" && (
-                                            <span>This field is required</span>
-                                        )}
-                                        {errors.phoneNo?.type ===
-                                            "minLength" && (
-                                            <span>Enter a valid number</span>
-                                        )}
-                                        {errors.phoneNo?.type ===
-                                            "maxLength" && (
-                                            <span>
-                                                This field exceed max length
-                                            </span>
-                                        )} */}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -300,12 +158,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             value={data.password}
                                             name="password"
                                             onChange={onChangeValue}
-                                            // ref={register({
-                                            //     required: true,
-                                            //     minLength: 6,
-                                            //     maxLength: 16,
-                                            //     // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                            // })}
                                         />
                                         <img
                                             src={Password}
@@ -315,32 +167,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                         {error.password && (
                                             <span>{error.password}</span>
                                         )}
-
-                                        {/* {errors.password?.type ===
-                                            "required" && (
-                                            <span>This field is required</span>
-                                        )}
-                                        {errors.password?.type ===
-                                            "minLength" && (
-                                            <span>
-                                                Password should be more then 6
-                                                Charcters
-                                            </span>
-                                        )} */}
-                                        {/* {errors.password?.type ===
-                                            "maxLength" && (
-                                            <span>
-                                                This field exceed max length
-                                            </span>
-                                        )}
-                                        {errors.password?.type ===
-                                            "pattern" && (
-                                            <span>
-                                                Password should contain atleast
-                                                one one captial letter, number
-                                                and special character
-                                            </span>
-                                        )} */}
                                     </div>
                                     <div className="input_items">
                                         <input
@@ -353,17 +179,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             name="cpassword"
                                             value={data.cpassword}
                                             onChange={onChangeValue}
-                                            // ref={register({
-                                            //     validate: (value) =>
-                                            //         value === watch("password"),
-
-                                            //     // validate: value =>
-                                            //     // value === password.current || "The passwords do not match",
-                                            //     required: true,
-                                            //     minLength: 6,
-                                            //     maxLength: 16,
-                                            //     // pattern: /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
-                                            // })}
                                         />
                                         <img
                                             src={Password}
@@ -374,37 +189,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                         {error.cpassword && (
                                             <span>{error.cpassword}</span>
                                         )}
-                                        {/* {errors.cpassword?.type ===
-                                            "required" && (
-                                            <span>This field is required</span>
-                                        )} */}
-                                        {/* {errors.cpassword?.type ===
-                                            "minLength" && (
-                                            <span>
-                                                Password should be more then 6
-                                                Charcters
-                                            </span>
-                                        )}
-                                        {errors.cpassword?.type ===
-                                            "maxLength" && (
-                                            <span>
-                                                This field exceed max length
-                                            </span>
-                                        )} */}
-                                        {/* {errors.cpassword?.type ===
-                                            "pattern" && (
-                                            <span>
-                                                Password should contain atleast
-                                                one one captial letter, number
-                                                and special character
-                                            </span>
-                                        )}
-                                        {errors.cpassword?.type !==
-                                            errors.password && (
-                                            <span>
-                                                The passwords do not match
-                                            </span>
-                                        )} */}
                                     </div>
                                     {apiError && (
                                         <span className="errorMessage">

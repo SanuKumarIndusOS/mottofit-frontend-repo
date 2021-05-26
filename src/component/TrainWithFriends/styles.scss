@@ -1,8 +1,7 @@
 .TF_outter_container {
     width: 100%;
     height: 1500px;
-    background: var(--unnamed-color-f6f6f6) 0% 0% no-repeat padding-box;
-    background: #f6f6f6 0% 0% no-repeat padding-box;
+    background: #f6f6f6;
     opacity: 1;
     .TF_inner_container {
         .TF_headers {
@@ -13,30 +12,23 @@
 
             h2 {
                 margin-top: 2em;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-600) var(--unnamed-font-size-35) /
-                    var(--unnamed-line-spacing-58)
-                    var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0);
-                color: var(--unnamed-color-161616);
                 text-align: center;
-                font: normal normal 600 35px/58px Montserrat;
                 letter-spacing: 0px;
                 color: #161616;
-                opacity: 1;
+                font-family: "Montserrat", sans-serif;
+                font-size: 35px;
+                font-weight: 600;
+                line-height: 58px;
             }
             p {
                 width: 997px;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-normal)
-                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-30)
-                    var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0-27);
                 text-align: center;
-                font: normal normal normal 18px/30px Montserrat;
                 letter-spacing: 0.27px;
                 color: #696969;
-                opacity: 1;
+                font-family: "Montserrat", sans-serif;
+                font-size: 18px;
+                font-weight: normal;
+                line-height: 30px;
             }
         }
         .TF_wrapper {
@@ -49,9 +41,7 @@
                 margin-top: 3em;
                 .TF_wrapper_left {
                     height: 981px;
-                    background: var(--unnamed-color-ffffff) 0% 0% no-repeat
-                        padding-box;
-                    background: #ffffff 0% 0% no-repeat padding-box;
+                    background: #ffffff;
                     box-shadow: 0px 3px 12px #16161608;
                     opacity: 1;
                     overflow: auto;
@@ -60,33 +50,24 @@
 
                         h2 {
                             margin: 1em 0;
-                            font: var(--unnamed-font-style-normal) normal
-                                var(--unnamed-font-weight-bold)
-                                var(--unnamed-font-size-45) /
-                                var(--unnamed-line-spacing-55)
-                                var(--unnamed-font-family-cormorant-garamond);
-                            letter-spacing: var(
-                                --unnamed-character-spacing--0-45
-                            );
-                            color: var(--unnamed-color-161616);
                             text-align: left;
-                            font: normal normal bold 45px/55px Cormorant
-                                Garamond;
                             letter-spacing: -0.45px;
                             color: #161616;
-                            opacity: 1;
+                            font-family: "Cormorant Garamond", sans-serif;
+                            font-size: 45px;
+                            font-weight: bold;
+                            line-height: 55px;
                         }
                         .TF_form {
                             form {
                                 h3 {
                                     margin: 0 0 0.5em 0;
-
                                     text-align: left;
                                     letter-spacing: 0px;
                                     color: #626262;
                                     opacity: 1;
                                     font-size: 28px;
-                                    font-family: Montserrat;
+                                    font-family: "Montserrat", sans-serif;
                                     font-weight: 500;
                                 }
                                 .TF_inner_form {
@@ -96,28 +77,14 @@
                                         flex-wrap: wrap;
 
                                         h4 {
-                                            font: var(
-                                                    --unnamed-font-style-normal
-                                                )
-                                                normal
-                                                var(
-                                                    --unnamed-font-weight-normal
-                                                )
-                                                var(--unnamed-font-size-20) /
-                                                var(--unnamed-line-spacing-58)
-                                                var(
-                                                    --unnamed-font-family-montserrat
-                                                );
-                                            letter-spacing: var(
-                                                --unnamed-character-spacing-0
-                                            );
-                                            color: var(--unnamed-color-2c2c2c);
                                             text-align: left;
-                                            font: normal normal normal 20px/58px
-                                                Montserrat;
                                             letter-spacing: 0px;
                                             color: #2c2c2c;
-                                            opacity: 1;
+                                            font-family: "Montserrat",
+                                                sans-serif;
+                                            font-size: 20px;
+                                            font-weight: normal;
+                                            line-height: 58px;
                                         }
                                         .inner_input {
                                             display: flex;
@@ -125,11 +92,8 @@
                                             input {
                                                 height: 45px;
                                                 width: 100%;
-                                                border: 1.5px solid
-                                                    var(--unnamed-color-bcbcbc);
                                                 border: 2px solid #bcbcbc;
                                                 border-radius: 30px;
-                                                opacity: 1;
                                                 padding: 1em 1.5em;
                                             }
                                             input::placeholder {
@@ -153,8 +117,6 @@
                                             input {
                                                 height: 45px;
                                                 width: 48%;
-                                                border: 1.5px solid
-                                                    var(--unnamed-color-bcbcbc);
                                                 border: 2px solid #bcbcbc;
                                                 border-radius: 30px;
                                                 opacity: 1;
@@ -166,10 +128,6 @@
                                                 input {
                                                     height: 45px;
                                                     width: 100%;
-                                                    border: 1.5px solid
-                                                        var(
-                                                            --unnamed-color-bcbcbc
-                                                        );
                                                     border: 2px solid #bcbcbc;
                                                     border-radius: 30px;
                                                     opacity: 1;
@@ -202,9 +160,8 @@
                                     input {
                                         width: 15px;
                                         height: 15px;
-                                        border: 1.25px solid
-                                            var(--unnamed-color-bcbcbc);
-                                        border: 1px solid #bcbcbc;
+
+                                        border: 2px solid #bcbcbc;
                                         opacity: 1;
                                     }
                                     label {
@@ -212,23 +169,14 @@
                                         font-size: 15px;
                                         padding: 0 0 0 0em;
                                         color: #898989;
-                                        font: var(--unnamed-font-style-normal)
-                                            normal 300 15px /
-                                            var(--unnamed-line-spacing-42)
-                                            var(
-                                                --unnamed-font-family-montserrat
-                                            );
-                                        letter-spacing: var(
-                                            --unnamed-character-spacing-0
-                                        );
-                                        color: var(--unnamed-color-898989);
                                         text-align: left;
-                                        font: normal normal 300 15px/42px
-                                            Montserrat;
                                         letter-spacing: 0px;
-                                        color: #898989;
                                         position: relative;
                                         left: 0px;
+                                        font-family: "Montserrat", sans-serif;
+                                        font-size: 15px;
+                                        font-weight: normal;
+                                        line-height: 42px;
                                     }
                                 }
                                 .TF_button {
@@ -242,28 +190,18 @@
                                         justify-content: center;
                                         width: 280px;
                                         height: 52px;
-                                        background: var(--unnamed-color-53bfd2)
-                                            0% 0% no-repeat padding-box;
-                                        background: #53bfd2 0% 0% no-repeat
-                                            padding-box;
+                                        background: #53bfd2;
                                         opacity: 1;
                                         outline: none;
                                         border: none;
-                                        font: var(--unnamed-font-style-normal)
-                                            normal
-                                            var(--unnamed-font-weight-bold)
-                                            var(--unnamed-font-size-18) /
-                                            var(--unnamed-line-spacing-22)
-                                            var(
-                                                --unnamed-font-family-montserrat
-                                            );
-                                        color: var(--unnamed-color-ffffff);
                                         text-align: right;
-                                        font: normal normal bold 18px/22px
-                                            Montserrat;
                                         letter-spacing: 0.45px;
                                         color: #ffffff;
                                         text-transform: uppercase;
+                                        font-family: "Montserrat", sans-serif;
+                                        font-size: 18px;
+                                        font-weight: bold;
+                                        line-height: 22px;
                                     }
                                     h5 {
                                         text-decoration: underline;
@@ -282,20 +220,15 @@
                 }
                 .TF_wrapper_right {
                     height: 981px;
-                    background: var(--unnamed-color-ffffff) 0% 0% no-repeat
-                        padding-box;
-                    background: #ffffff 0% 0% no-repeat padding-box;
+
+                    background: #ffffff;
                     box-shadow: 0px 3px 12px #16161608;
                     opacity: 1;
                     .TF_right {
                         height: auto;
                         padding: 4em 2em;
-
                         border-radius: 30px;
-
-                        background: var(--unnamed-color-ffffff) 0% 0% no-repeat
-                            padding-box;
-                        background: #ffffff 0% 0% no-repeat padding-box;
+                        background: #ffffff;
                         box-shadow: 0px 3px 12px #16161608;
                         opacity: 1;
                         .TF_profile {
@@ -309,37 +242,24 @@
                             .TF_name {
                                 margin-left: 1em;
                                 h2 {
-                                    font: var(--unnamed-font-style-normal)
-                                        normal var(--unnamed-font-weight-bold)
-                                        var(--unnamed-font-size-35) / 45px
-                                        var(
-                                            --unnamed-font-family-cormorant-garamond
-                                        );
-                                    color: var(--unnamed-color-161616);
                                     text-align: left;
-                                    font: normal normal bold 35px/45px Cormorant
-                                        Garamond;
                                     letter-spacing: -0.35px;
                                     color: #161616;
-                                    opacity: 1;
+                                    font-family: "Cormorant Garamond",
+                                        sans-serif;
+                                    font-size: 35px;
+                                    font-weight: bold;
+                                    line-height: 45px;
                                 }
                                 p {
-                                    font: var(--unnamed-font-style-normal)
-                                        normal var(--unnamed-font-weight-medium)
-                                        var(--unnamed-font-size-18) /
-                                        var(--unnamed-line-spacing-22)
-                                        var(--unnamed-font-family-montserrat);
-                                    letter-spacing: var(
-                                        --unnamed-character-spacing-0-9
-                                    );
-                                    color: var(--unnamed-color-898989);
                                     text-align: left;
-                                    font: normal normal medium 18px/22px
-                                        Montserrat;
                                     letter-spacing: 0.9px;
                                     color: #898989;
                                     text-transform: uppercase;
-                                    opacity: 1;
+                                    font-family: "Montserrat", sans-serif;
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    line-height: 22px;
                                 }
                             }
                         }
@@ -347,18 +267,14 @@
                             .TF_details {
                                 margin-top: 2em;
                                 h3 {
-                                    font: var(--unnamed-font-style-normal)
-                                        normal var(--unnamed-font-weight-medium)
-                                        15px / var(--unnamed-line-spacing-22)
-                                        var(--unnamed-font-family-montserrat);
-                                    color: var(--unnamed-color-898989);
                                     text-align: left;
-                                    font: normal normal medium 15px/22px
-                                        Montserrat;
                                     letter-spacing: 0.75px;
                                     color: #898989;
                                     text-transform: uppercase;
-                                    opacity: 1;
+                                    font-family: "Montserrat", sans-serif;
+                                    font-size: 15px;
+                                    font-weight: 600;
+                                    line-height: 22px;
                                 }
                                 .TF_data_inner {
                                     display: flex;
@@ -370,7 +286,7 @@
                                         opacity: 1;
                                         font-size: 22px;
                                         font-weight: 600;
-                                        font-family: Montserrat;
+                                        font-family: "Montserrat", sans-serif;
                                     }
                                 }
                             }
@@ -402,36 +318,17 @@
                                             .TF_data_item {
                                                 .TF_data_title {
                                                     h3 {
-                                                        font: var(
-                                                                --unnamed-font-style-normal
-                                                            )
-                                                            normal
-                                                            var(
-                                                                --unnamed-font-weight-600
-                                                            )
-                                                            var(
-                                                                --unnamed-font-size-20
-                                                            ) /
-                                                            var(
-                                                                --unnamed-line-spacing-32
-                                                            )
-                                                            var(
-                                                                --unnamed-font-family-montserrat
-                                                            );
-                                                        letter-spacing: var(
-                                                            --unnamed-character-spacing-0-3
-                                                        );
-                                                        color: var(
-                                                            --unnamed-color-2c2c2c
-                                                        );
                                                         text-align: left;
-                                                        font: normal normal 600
-                                                            20px/32px Montserrat;
                                                         letter-spacing: 0.3px;
                                                         color: #898989;
                                                         opacity: 1;
                                                         cursor: pointer;
                                                         margin-top: 0.5em;
+                                                        font-family: "Montserrat",
+                                                            sans-serif;
+                                                        font-size: 20px;
+                                                        font-weight: 600;
+                                                        line-height: 35px;
                                                     }
                                                     .line {
                                                         margin-top: 0.5em;
@@ -461,38 +358,16 @@
                                                                 );
                                                             max-height: 0;
                                                             p {
-                                                                font: var(
-                                                                        --unnamed-font-style-normal
-                                                                    )
-                                                                    normal
-                                                                    var(
-                                                                        --unnamed-font-weight-normal
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-size-20
-                                                                    ) /
-                                                                    var(
-                                                                        --unnamed-line-spacing-58
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-family-montserrat
-                                                                    );
-                                                                letter-spacing: var(
-                                                                    --unnamed-character-spacing-0
-                                                                );
-                                                                color: var(
-                                                                    --unnamed-color-898989
-                                                                );
                                                                 text-align: left;
-                                                                font: normal
-                                                                    normal
-                                                                    normal 20px/58px
-                                                                    Montserrat;
                                                                 letter-spacing: 0px;
                                                                 color: #898989;
                                                                 transition: 0.2s
                                                                     ease-in-out;
-                                                                opacity: 1;
+                                                                font-family: "Montserrat",
+                                                                    sans-serif;
+                                                                font-size: 20px;
+                                                                font-weight: normal;
+                                                                line-height: 58px;
                                                             }
                                                             p:hover {
                                                                 color: black;
@@ -513,37 +388,16 @@
                                                             p {
                                                                 margin: 0;
                                                                 padding: 0;
-                                                                font: var(
-                                                                        --unnamed-font-style-normal
-                                                                    )
-                                                                    normal
-                                                                    var(
-                                                                        --unnamed-font-weight-normal
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-size-20
-                                                                    ) /
-                                                                    var(
-                                                                        --unnamed-line-spacing-58
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-family-montserrat
-                                                                    );
-                                                                letter-spacing: var(
-                                                                    --unnamed-character-spacing-0
-                                                                );
-                                                                color: var(
-                                                                    --unnamed-color-898989
-                                                                );
                                                                 text-align: left;
-                                                                font: normal
-                                                                    normal
-                                                                    normal 20px/58px
-                                                                    Montserrat;
                                                                 letter-spacing: 0px;
                                                                 color: #898989;
                                                                 opacity: 1;
                                                                 width: 100%;
+                                                                font-family: "Montserrat",
+                                                                    sans-serif;
+                                                                font-size: 20px;
+                                                                font-weight: normal;
+                                                                line-height: 58px;
                                                             }
 
                                                             div {
@@ -565,36 +419,14 @@
                                                                 );
                                                             max-height: 0;
                                                             p {
-                                                                font: var(
-                                                                        --unnamed-font-style-normal
-                                                                    )
-                                                                    normal
-                                                                    var(
-                                                                        --unnamed-font-weight-normal
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-size-20
-                                                                    ) /
-                                                                    var(
-                                                                        --unnamed-line-spacing-58
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-family-montserrat
-                                                                    );
-                                                                letter-spacing: var(
-                                                                    --unnamed-character-spacing-0
-                                                                );
-                                                                color: var(
-                                                                    --unnamed-color-898989
-                                                                );
                                                                 text-align: left;
-                                                                font: normal
-                                                                    normal
-                                                                    normal 20px/58px
-                                                                    Montserrat;
                                                                 letter-spacing: 0px;
                                                                 color: #898989;
-                                                                opacity: 1;
+                                                                font-family: "Montserrat",
+                                                                    sans-serif;
+                                                                font-size: 20px;
+                                                                font-weight: normal;
+                                                                line-height: 58px;
                                                             }
                                                         }
                                                         .TF_DT_contentshow {
@@ -615,36 +447,13 @@
                                                                 text-align: right;
                                                                 margin: 0;
                                                                 padding: 0;
-
-                                                                font: var(
-                                                                        --unnamed-font-style-normal
-                                                                    )
-                                                                    normal
-                                                                    var(
-                                                                        --unnamed-font-weight-normal
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-size-20
-                                                                    ) /
-                                                                    var(
-                                                                        --unnamed-line-spacing-58
-                                                                    )
-                                                                    var(
-                                                                        --unnamed-font-family-montserrat
-                                                                    );
-                                                                letter-spacing: var(
-                                                                    --unnamed-character-spacing-0
-                                                                );
-                                                                color: var(
-                                                                    --unnamed-color-898989
-                                                                );
-                                                                font: normal
-                                                                    normal
-                                                                    normal 20px/58px
-                                                                    Montserrat;
                                                                 letter-spacing: 0px;
                                                                 color: #898989;
-                                                                opacity: 1;
+                                                                font-family: "Montserrat",
+                                                                    sans-serif;
+                                                                font-size: 20px;
+                                                                font-weight: normal;
+                                                                line-height: 58px;
                                                                 width: 100%;
                                                             }
 
@@ -685,17 +494,15 @@
                     text-decoration: none;
                     text-align: center;
                     margin-left: 1em;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-18) /
-                        var(--unnamed-line-spacing-22)
-                        var(--unnamed-font-family-montserrat);
-                    color: var(--unnamed-color-161616);
                     text-align: right;
-                    font: normal normal bold 18px/22px Montserrat;
                     letter-spacing: 0.45px;
                     color: #161616;
                     text-transform: uppercase;
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 18px;
+                    font-weight: bold;
+                    line-height: 22px;
+                    width: 100%;
                 }
             }
         }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import Person from "../../../assets/files/SignUp/Person Icon.svg";
-import { Nav, Bars } from "./NavbarStyled";
+import { Bars } from "./NavbarStyled";
 import "./styles.css";
 import LogoImage from "../../../assets/files/SVG/Motto Logo.svg";
 import Line from "../../../assets/files/SVG/Blue Line.svg";

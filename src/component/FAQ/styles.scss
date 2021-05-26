@@ -14,14 +14,14 @@ html {
         align-items: center;
 
         h1 {
-            // font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 60px/var(--unnamed-line-spacing-55) var(--unnamed-font-family-cormorant-garamond);
-            // color: var(--unnamed-color-ffffff);
             text-align: center;
-            font: normal normal bold 60px/55px Cormorant Garamond;
             letter-spacing: -0.6px;
             color: #ffffff;
             text-shadow: 0px 3px 6px #0000004b;
-            opacity: 1;
+            line-height: 55px;
+            font-size: 60px;
+            font-weight: bold;
+            font-family: "Cormorant Garamond", sans-serif;
         }
     }
 
@@ -60,19 +60,15 @@ html {
 
                         a {
                             padding: 1em 1em 0 1em;
-                            font: var(--unnamed-font-style-normal) normal
-                                var(--unnamed-font-weight-bold)
-                                var(--unnamed-font-size-17) /
-                                var(--unnamed-line-spacing-42)
-                                var(--unnamed-font-family-montserrat);
-                            color: var(--unnamed-color-161616);
                             text-align: left;
-                            font: normal normal bold 17px/42px Montserrat;
                             letter-spacing: 0.59px;
                             color: #161616;
                             text-transform: uppercase;
                             cursor: pointer;
-                            opacity: 1;
+                            line-height: 42px;
+                            font-size: 17px;
+                            font-weight: bold;
+                            font-family: "Montserrat", sans-serif;
                             &.active {
                                 text-decoration: underline 4px #53bfd2;
                             }
@@ -90,11 +86,8 @@ html {
                 .card_item {
                     margin-bottom: 8em;
                     h6 {
-                        // font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-medium) var(--unnamed-font-size-35)/var(--unnamed-line-spacing-58) var(--unnamed-font-family-montserrat);
-                        // letter-spacing: var(--unnamed-character-spacing-0);
-                        color: var(--unnamed-color-53bfd2);
                         text-align: left;
-                        // font: normal normal medium 35px/58px Montserrat;
+
                         font-size: 35px;
                         font-family: Montserrat;
                         letter-spacing: 0px;
@@ -106,7 +99,6 @@ html {
                 .card_item2 {
                     margin-bottom: 15em;
                     h6 {
-                        color: var(--unnamed-color-53bfd2);
                         text-align: left;
                         font-size: 35px;
                         font-family: Montserrat;

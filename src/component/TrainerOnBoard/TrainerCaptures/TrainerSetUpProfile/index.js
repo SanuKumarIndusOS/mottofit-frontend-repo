@@ -1199,8 +1199,8 @@ const TrainerSetUpProfileFC = ({
                                                     // <div className="setup_ite1">
                                                     <>
                                                         <h5>
-                                                            Add your Google or
-                                                            zoom meeting link
+                                                            Add zoom meeting
+                                                            link
                                                         </h5>
                                                         <div className="inputs_platform">
                                                             <div className="iconwrapper">

@@ -34,17 +34,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "Montserrat";
+    font-family: "Montserrat", sans-serif;
 
     font-size: 22px;
     width: 100%;
 
     &::after {
         content: url("../../../../assets/files/SVG/Cross 2.svg");
-        // width: 20px;
-        // height: 2px;
-        // background-color: rgb(0, 0, 0);
-        // background-image: url("../../../assets/SVG/Negative.svg");
     }
 
     &:hover,

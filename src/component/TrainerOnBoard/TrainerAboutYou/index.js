@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import Instagram from "../../../assets/files/SVG/Insta Icon.svg";
 import Web from "../../../assets/files/SVG/Web Icon.svg";
-import { Link, useHistory } from "react-router-dom";
+
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { useForm } from "react-hook-form";
-// import validation from "../Validation/validation";
-// import 'react-phone-number-input/style.css'
-// import PhoneInput from 'react-phone-number-input'
+
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
@@ -18,16 +16,10 @@ import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
-import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 // import useForm from "./useForm";
 // import validateInfo from "./validation";
 
-// import { Multiselect } from "multiselect-react-dropdown";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-// import Select from "react-select";
 const locations = [
     {
         label: "New York City",
@@ -63,14 +55,6 @@ const AboutTrainerFC = ({
     trainerPersonalData,
     // submitForm,
 }) => {
-    //   const [location, setLocation] = useState("");
-    //   const [dob, setDob] = useState(0 - 0 - 0);
-    //   const [email, setEmail] = useState("");
-    //   const [gender, setGender] = useState("");
-    //   const [phone, setPhone] = useState("");
-    //   const [websiteURL, setWebsiteURL] = useState("");
-    //   const [instagram, setInstagram] = useState("");
-
     const { register, errors, handleSubmit } = useForm();
     // const {
     //     aboutTrainerData,
@@ -91,12 +75,7 @@ const AboutTrainerFC = ({
     });
     const [error, setError] = useState({});
 
-    // const history = useHistory();
-
     const handleTrainerBackground = () => {
-        // history.push("/trainer/background");
-        // console.log(aboutTrainerData);
-
         const storeData = {
             details: {
                 ...details,
@@ -284,9 +263,7 @@ const AboutTrainerFC = ({
                                         })
                                     }
                                 />
-                                {/* {!aboutTrainerData.phone && (
-                  <span>This input is required</span>
-                )} */}
+
                                 {aboutTrainerData.phone &&
                                     aboutTrainerData.phone.length < 11 && (
                                         <span>
@@ -333,12 +310,6 @@ const AboutTrainerFC = ({
                             <div className="submit_button">
                                 <button
                                     type="submit"
-                                    // to={{
-                                    //     pathname: "/trainer/background",
-                                    //     state: aboutTrainerData,
-                                    // }}
-                                    // onClick={handleTrainerBackground}
-
                                     //react hook form
                                     onClick={handleSubmit(
                                         handleTrainerBackground

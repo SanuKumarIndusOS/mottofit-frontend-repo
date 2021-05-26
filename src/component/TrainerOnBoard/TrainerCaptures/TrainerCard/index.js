@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import DollarIcon from "../../../../assets/files/SVG/dollar Icon.svg";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./accordion.scss";
 import "./styles.scss";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
@@ -13,10 +13,10 @@ import { bindActionCreators } from "redux";
 import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
-import { TrainerApi } from "service/apiVariables";
-import { api } from "service/api";
+// import { TrainerApi } from "service/apiVariables";
+// import { api } from "service/api";
 import axios from "axios";
-import { set } from "date-fns";
+// import { set } from "date-fns";
 import { Modal } from "react-responsive-modal";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import "./trainer.sass";
@@ -157,14 +157,6 @@ const TrainerCardFC = ({
             setPreviewTmage(null);
         }
     }, [image]);
-
-    // const handleChangeToTrainerProfile = () => {
-    //     let storeData = {
-    //         details: { ...trainerData },
-    //     };
-    //     updateTrainerDetails(storeData);
-    //     history.push("/trainer/setup");
-    // };
 
     const handleInputChange = ({ target: { name, value } }) => {
         const tempData = {
@@ -437,12 +429,10 @@ const TrainerCardFC = ({
                                             </h6>
                                             <p style={{ color: "#898989" }}>
                                                 {trainerData.description}
-                                                {/* <Link to="profile">Read More</Link> */}
                                             </p>
                                         </div>
                                         <div className="card-button">
                                             <button
-                                                // ref={hoverRef}
                                                 style={{
                                                     backgroundColor: "#53BFD2",
                                                 }}
@@ -619,17 +609,12 @@ const TrainerCardFC = ({
                                                 style={{
                                                     color: "#53BFD2",
                                                 }}
-
-                                                // onChange={() => {
-                                                //   setCheckState("Strength & HIIT");
-                                                // }}
                                             />
                                             <div className="checkbox_label">
                                                 Strength & HIIT
                                             </div>
                                             <Checkbox
                                                 checked={checkedBoxing}
-                                                // checked={true}
                                                 onChange={(e) => {
                                                     setCheckedBoxing(
                                                         e.target.checked
@@ -711,7 +696,7 @@ const TrainerCardFC = ({
                                                             trainerbackgroundData.areaOfExpertise.indexOf(
                                                                 "Yoga"
                                                             );
-                                                        // console.log(index);
+
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
                                                                 index,
@@ -767,44 +752,6 @@ const TrainerCardFC = ({
                                                 Pilates
                                             </div>
                                         </div>
-
-                                        {/* <div className="inputs_experience"> */}
-                                        {/* <Checkbox
-                        checked={trainerData?.areaOfExpertise?.includes(
-                          "Strength & HIIT"
-                        )}
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Strength & HITT</label>
-                      <Checkbox
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Boxing</label>
-                      <Checkbox
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Yoga</label>
-                      <Checkbox
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Pilates</label>
-                    </div> */}
                                     </div>
                                     <div className="card_item4">
                                         <h6>{data.clientDesc}</h6>
@@ -835,10 +782,6 @@ const TrainerCardFC = ({
                                                             trainerData.individualCharge
                                                         }
                                                         name="individualCharge"
-                                                        // ref={register({
-                                                        //     required:
-                                                        //         "Please enter Individual Charge (atleast one)",
-                                                        // })}
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -1214,11 +1157,9 @@ const TrainerCardFC = ({
                                                 handleChangeToTrainerProfile
                                             )}
                                             type="submit"
-                                            // onClick={handleTrainerAvailability}
                                         >
                                             Continue To profile{" "}
                                             <ArrowHoverBlacked />
-                                            {/* <img src={Arrow} alt="icon" /> */}
                                         </button>
                                     </div>
                                 </form>

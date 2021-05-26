@@ -3,7 +3,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-
     margin: 3em 0;
 
     .inner_links {
@@ -12,18 +11,16 @@
         align-items: center;
         a {
             margin-left: 0.5em;
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
-                var(--unnamed-line-spacing-42)
-                var(--unnamed-font-family-montserrat);
-            color: var(--unnamed-color-161616);
             text-align: left;
-            font: normal normal normal 16px/22px Montserrat;
             letter-spacing: 0.18px;
             color: #161616;
-            opacity: 1;
+
             text-decoration: none;
             border-bottom: 2px solid #53bfd2;
+            line-height: 22px;
+            font-size: 16px;
+            font-weight: normal;
+            font-family: "Montserrat", sans-serif;
         }
     }
 }
@@ -34,23 +31,17 @@
 
     .wrapper_inneritem {
         margin: 0 auto;
-        // padding: 0 5em;
 
         h1 {
             text-align: center;
             font-size: 35px;
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-600) var(--unnamed-font-size-35) /
-                var(--unnamed-line-spacing-58)
-                var(--unnamed-font-family-montserrat);
-            letter-spacing: var(--unnamed-character-spacing-0);
-            color: var(--unnamed-color-161616);
-            text-align: center;
-            font: normal normal 600 33px/58px Montserrat;
             letter-spacing: 0px;
             color: #161616;
-            opacity: 1;
             margin-top: 25px;
+            line-height: 58px;
+            font-size: 33px;
+            font-weight: 600;
+            font-family: "Montserrat", sans-serif;
         }
         p {
             letter-spacing: 0.27px;
@@ -59,11 +50,10 @@
             opacity: 1;
             width: 63%;
             font-size: 18px;
-            font-family: Montserrat;
+            font-family: "Montserrat", sans-serif;
             text-align: center;
             letter-spacing: 0.27px;
             color: #696969;
-            opacity: 1;
             font-weight: 400;
         }
 
@@ -79,13 +69,11 @@
             .item_1 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                // left: -35px;
 
                 h6 {
                     color: #161616;
-                    opacity: 1;
                     font-size: 22px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
                     letter-spacing: 0px;
                     text-align: left;
@@ -96,17 +84,16 @@
                         width: 100%;
                         padding: 1em 1.5em;
                         height: 45px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
                         border: 2px solid #bcbcbc;
                         border-radius: 30px;
                         opacity: 1;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500;
                     }
                     input::placeholder {
                         color: #bcbcbc;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 400;
                     }
@@ -118,13 +105,12 @@
             .item_2 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                // left: 10px;
 
                 h6 {
                     color: #161616;
                     opacity: 1;
                     font-size: 22px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
 
                     letter-spacing: 0px;
@@ -145,9 +131,9 @@
                         background-color: transparent;
                         color: rgb(0, 0, 0);
                         width: 165px;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 500;
-                        letter-spacing: var(--unnamed-character-spacing-0);
+
                         text-align: center;
 
                         &:active,
@@ -168,7 +154,7 @@
                     color: #161616;
                     opacity: 1;
                     font-size: 22px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
                     letter-spacing: 0px;
                     text-align: left;
@@ -179,17 +165,16 @@
                     width: 100%;
                     padding: 1em 1.5em;
                     height: 45px;
-                    border: 1.5px solid var(--unnamed-color-bcbcbc);
                     border: 2px solid #bcbcbc;
                     border-radius: 30px;
                     opacity: 1;
-                    font-family: Montserrat;
+                    font-family: "Montserrat", sans-serif;
                     font-size: 18px;
                     font-weight: 500;
                 }
                 input::placeholder {
                     color: #bcbcbc;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-size: 18px;
                     font-weight: 400;
                 }
@@ -204,7 +189,7 @@
                     color: #161616;
                     opacity: 1;
                     font-size: 22px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
 
                     letter-spacing: 0px;
@@ -214,7 +199,7 @@
                     margin-right: 3em;
                     color: #2c2c2c;
                     font-size: 20px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
                 }
                 .inputs_platform {
@@ -225,13 +210,12 @@
             .item_4 {
                 margin: 1em 0 0em 0;
                 position: relative;
-                // left: 10px;
 
                 h6 {
                     color: #161616;
                     opacity: 1;
                     font-size: 22px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
 
                     letter-spacing: 0px;
@@ -245,19 +229,19 @@
                     textarea {
                         width: 92%;
                         height: 70px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                         border: 2px solid #bcbcbc;
                         border-radius: 20px;
                         font-size: 18px;
                         color: #161616;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 500;
                         padding: 0.5em 1em;
                     }
                     textarea::placeholder {
                         font-size: 18px;
                         color: #bcbcbc;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 400;
                     }
                     textarea:focus {
@@ -267,7 +251,7 @@
                         margin-right: 3em;
                         color: #2c2c2c;
                         font-size: 20px;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 500;
                     }
 
@@ -280,12 +264,12 @@
             .item_5 {
                 margin: 1em 0 2em 0;
                 position: relative;
-                // left: -35px;
+
                 h6 {
                     color: #161616;
                     opacity: 1;
                     font-size: 22px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
 
                     letter-spacing: 0px;
@@ -295,7 +279,7 @@
                     margin-right: 3em;
                     color: #2c2c2c;
                     font-size: 20px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
                 }
 
@@ -312,7 +296,7 @@
                     color: #161616;
                     opacity: 1;
                     font-size: 22px;
-                    font-family: "Montserrat";
+                    font-family: "Montserrat", sans-serif;
                     font-weight: 500;
 
                     letter-spacing: 0px;
@@ -326,19 +310,18 @@
                     textarea {
                         width: 92%;
                         height: 70px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
                         border: 2px solid #bcbcbc;
                         border-radius: 20px;
                         font-size: 18px;
                         color: #161616;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 500;
                         padding: 0.5em 1em;
                     }
                     textarea::placeholder {
                         font-size: 18px;
                         color: #bcbcbc;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 400;
                     }
                     textarea:focus {

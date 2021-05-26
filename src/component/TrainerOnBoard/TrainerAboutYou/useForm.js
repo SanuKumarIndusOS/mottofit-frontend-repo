@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useForm = (validate, callback) => {
+const useForm = (validate) => {
     const [aboutTrainerData, setAboutTrainerData] = useState({
         location: "",
         dob: "",

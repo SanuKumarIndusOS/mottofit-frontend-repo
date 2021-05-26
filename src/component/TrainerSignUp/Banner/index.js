@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import Person from "../../../assets/files/SignUp/Person Icon.svg";
 import Mail from "../../../assets/files/SignUp/Email Icon.svg";
 import Phone from "../../../assets/files/SignUp/Phone Icon.svg";
 import Password from "../../../assets/files/SignUp/Password Icon.svg";
 import { Link, useHistory } from "react-router-dom";
-// import { useForm } from "react-hook-form";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import BlueHoverButton from "../../common/BlueArrowButton";
 import { connect } from "react-redux";
@@ -16,9 +15,6 @@ import useForm from "./useForm";
 import validateInfo from "./validation";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
-// import PhoneInput from "react-phone-input-2";
-// import "react-phone-input-2/lib/style.css";
 
 const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     const history = useHistory();
@@ -36,7 +32,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
     const [apiError, setApiError] = useState("");
-    // const { register, errors, handleSubmit, watch } = useForm();
     const showPassword = () => {
         setPasswordShown(passwordShown ? false : true);
     };
@@ -60,7 +55,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         if (dataSubmit) {
             loginOrSignupAct(trainerSignUp, payload)
                 .then(({ data }) => {
-                    // console.log(data);
                     history.push("/trainer/about");
                 })
                 .catch((error) => {
@@ -124,7 +118,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                             <div className="input_items_trainer">
                                                 <ReactPhoneInput
                                                     disableDropdown
-                                                    // prefix="+1"
                                                     countryCodeEditable={false}
                                                     country="us"
                                                     placeholder="Phone Number"

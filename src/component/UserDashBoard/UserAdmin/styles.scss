@@ -20,16 +20,13 @@
             justify-content: center;
             padding: 2rem;
             h2 {
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-bold) var(--unnamed-font-size-35) /
-                    var(--unnamed-line-spacing-42)
-                    var(--unnamed-font-family-cormorant-garamond);
-                color: var(--unnamed-color-161616);
                 text-align: center;
-                font: normal normal bold 35px/42px Cormorant Garamond;
                 letter-spacing: -0.35px;
                 color: #161616;
-                opacity: 1;
+                font-size: 35px;
+                line-height: 42px;
+                font-weight: bold;
+                font-family: "Cormorant Garamond", sans-serif;
             }
             .profile_pic {
                 height: 80px;
@@ -54,18 +51,15 @@
                 align-items: flex-start;
                 justify-content: flex-start;
                 padding: 0.5em 1em 1.5em 3.5em;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-medium)
-                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-42)
-                    var(--unnamed-font-family-montserrat);
-                color: var(--unnamed-color-161616);
                 text-align: left !important;
-                font: normal normal medium 18px/42px Montserrat;
                 letter-spacing: 1.17px;
                 color: #161616;
                 text-transform: uppercase;
                 text-decoration: none;
-                opacity: 1;
+                font-size: 18px;
+                line-height: 42px;
+                font-weight: 500;
+                font-family: "Montserrat", sans-serif;
                 img {
                     text-align: left;
                     width: 25px;
@@ -83,8 +77,6 @@
                 opacity: 1;
             }
             .nav_item:hover {
-                // padding: 1.5em 1em 1.5em 3.5em;
-
                 background: #53bfd2;
                 font-weight: 800;
 
@@ -121,7 +113,7 @@
                 p {
                     margin: 0;
                     padding: 0;
-                    font-family: Montserrat;
+                    font-family: "Montserrat", sans-serif;
                     font-size: 16px;
                     text-decoration: none;
                     letter-spacing: 0px;
@@ -134,7 +126,6 @@
                     font-weight: 600;
                 }
                 img {
-                    // display: none;
                     width: 10px;
                     height: 10px;
                     margin-left: 0.2em;

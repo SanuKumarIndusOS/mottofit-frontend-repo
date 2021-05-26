@@ -7,7 +7,6 @@ import LocationIcon from "../../../../assets/files/TrainerDashboard/Message/Loca
 import { Link } from "react-router-dom";
 import BlueArrowButton from "../../../common/BlueArrowButton";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
-import ArrowNext from "../../../../assets/files/SVG/Arrow Next.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { getTrainerSessionDetails } from "action/trainerAct";
 import { connect } from "react-redux";
@@ -22,7 +21,6 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetails }) => {
     });
     useEffect(() => {
         getTrainerSessionDetails().then((data) => {
-            //   console.log(data);
             const tempSessionData = {};
             Object.keys(data).forEach((sessionKey) => {
                 tempSessionData[sessionKey] = data[sessionKey].map(
@@ -44,7 +42,6 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetails }) => {
                     })
                 );
             });
-            //   console.log(tempSessionData);
 
             setTrainerSessionData(tempSessionData);
         });
@@ -170,10 +167,6 @@ const TabOne = ({ datas = [] }) => {
                                                             Reschedule
                                                         </button>
                                                         <button>Cancel</button>
-                                                        {/* <div className="button_boarder">
-                            <button>Add Friends </button>
-                            <img src={ArrowNext} alt="icon" />
-                          </div> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,10 +308,6 @@ const TabTwo = ({ datas = [] }) => {
                                                             Reschedule
                                                         </button>
                                                         <button>Cancel</button>
-                                                        {/* <div className="button_boarder">
-                              <button>Add Friends </button>
-                              <img src={ArrowNext} alt="icon" />
-                            </div> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -346,11 +335,6 @@ const TabTwo = ({ datas = [] }) => {
 };
 
 const TabThree = () => {
-    const [visible, setVisible] = useState([3]);
-
-    const setViewMore = () => {
-        setVisible((prevValue) => prevValue + 1);
-    };
     return (
         <div className="tabPanel_overview">
             <div className="tabPanel_overview_right">
@@ -374,11 +358,6 @@ const TabThree = () => {
     );
 };
 const TabFour = ({ datas = [] }) => {
-    const [visible, setVisible] = useState([3]);
-
-    const setViewMore = () => {
-        setVisible((prevValue) => prevValue + 1);
-    };
     return (
         <div className="tabPanel_overview d-flex">
             <div className="tabPanel_overview_right w-100">
@@ -427,69 +406,6 @@ const TabFour = ({ datas = [] }) => {
         </div>
     );
 };
-
-const Data = [
-    {
-        date: "14",
-        month: "Feb",
-        heading: "Strength & HIIT with John Doe",
-        imgAva: AvailabilityIcon,
-        avaTime: "  5:00 PM PST",
-        imgLoc: LocationIcon,
-        loc: "Trainer GYM",
-        previousImg: Jenny,
-        prevHeading: "Yoga with Kane",
-        prevDate: "02 May 2021",
-    },
-    {
-        date: "25",
-        month: "May",
-        heading: "Yoga with Kane",
-        imgAva: AvailabilityIcon,
-        avaTime: "  5:00 PM PST",
-        imgLoc: LocationIcon,
-        loc: "Trainer GYM",
-        previousImg: Jenny,
-        prevHeading: "Yoga with John Doe",
-        prevDate: "02 May 2021",
-    },
-    {
-        date: "20",
-        month: "Apr",
-        heading: "Boxing with John Doe",
-        imgAva: AvailabilityIcon,
-        avaTime: "  5:00 PM PST",
-        imgLoc: LocationIcon,
-        loc: "Trainer GYM",
-        previousImg: Jenny,
-        prevHeading: "Yoga with Kane ",
-        prevDate: "02 May 2021",
-    },
-    {
-        date: "20",
-        month: "Apr",
-        heading: "Boxing with John Doe",
-        imgAva: AvailabilityIcon,
-        avaTime: "  5:00 PM PST",
-        imgLoc: LocationIcon,
-        loc: "Trainer GYM",
-        previousImg: Jenny,
-        prevHeading: "Yoga with Ananaya ",
-        prevDate: "02 May 2021",
-    },
-    {
-        date: "20",
-        month: "Apr",
-        heading: "Boxing with John Doe",
-        imgAva: AvailabilityIcon,
-        avaTime: "  5:00 PM PST",
-        imgLoc: LocationIcon,
-        loc: "Trainer GYM",
-        previousImg: Jenny,
-        prevHeading: "Yoga with Kane ",
-        prevDate: "02 May 2021",
-    },
-];
 
 const mapStateToProps = (state) => ({
     sessionData: state.trainerReducer.sessionData,

@@ -1,39 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-// import { TrainerData } from "./TrainerData";
+import React, { useState, useEffect } from "react";
 import "./trainer.sass";
-// import onHoverImage from "../../../assets/files/FindTrainer/onHover.svg";
-// import onImage from "../../../assets/files/SignUp/Arrow.svg";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
-// import { Link } from "react-router-dom";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
-
-// function useHover() {
-//     const [value, setValue] = useState(false);
-
-//     const ref = useRef(null);
-
-//     const handleMouseOver = () => setValue(true);
-//     const handleMouseOut = () => setValue(false);
-
-//     useEffect(
-//         () => {
-//             const node = ref.current;
-//             if (node) {
-//                 node.addEventListener("mouseover", handleMouseOver);
-//                 node.addEventListener("mouseout", handleMouseOut);
-
-//                 return () => {
-//                     node.removeEventListener("mouseover", handleMouseOver);
-//                     node.removeEventListener("mouseout", handleMouseOut);
-//                 };
-//             }
-//         },
-//         [ref] // Recall only if ref changes
-//     );
-
-//     return [ref, value];
-// }
 
 const TrainerCards = (props) => {
     const [bestMatchData, setbestMatchData] = useState([]);
@@ -46,7 +15,6 @@ const TrainerCards = (props) => {
             console.log(bestMatchData[item], "best");
         });
     });
-    // const [hoverRef, isHovered] = useHover();
     const [visible, setVisible] = useState(3);
     const showMoreItems = () => {
         setVisible((showCard) => showCard + 3);
@@ -63,8 +31,6 @@ const TrainerCards = (props) => {
                 <HeadingTrainer />
                 {no_match}
                 <div className="row" style={{ alignleft: "auto" }}>
-                    {/* {console.log("dd", bestMatchData[0]["firstName"])} */}
-
                     {Object.keys(bestMatchData).map((data, index) => {
                         return (
                             <div className="card" key={index}>
@@ -142,12 +108,6 @@ const TrainerCards = (props) => {
                                 </div>
                                 <div className="card-button">
                                     <button
-                                        // ref={hoverRef}
-                                        // style={{
-                                        //     backgroundColor: isHovered
-                                        //         ? "red"
-                                        //         : "#53BFD2",
-                                        // }}
                                         style={{
                                             backgroundColor: "#53BFD2",
                                         }}
@@ -168,11 +128,6 @@ const TrainerCards = (props) => {
                                     >
                                         book a session
                                         <BlackCircleButton />
-                                        {/* {isHovered ? (
-                      <img src={onHoverImage} alt="icon" />
-                    ) : (
-                      <img src={onImage} alt="icon" />
-                    )} */}
                                         <p>
                                             from{" "}
                                             <span>

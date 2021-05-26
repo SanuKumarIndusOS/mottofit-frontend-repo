@@ -24,7 +24,7 @@ const ViewTrainers = () => {
     const [openClassModel, setOpenClassModel] = useState(false);
     const [TrainerViewData, setTraierViewData] = useState([]);
     const [loading, setLoading] = useState(false);
-    console.log(TrainerViewData, "setTraierViewData");
+    console.log(TrainerViewData);
 
     useEffect(() => {
         setLoading(true);
@@ -43,7 +43,7 @@ const ViewTrainers = () => {
                 headers: new Headers({
                     // Authorization: localStorage.getItem("admin-token"),
                     Authorization:
-                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIxOTIxMDMwLCJleHAiOjE2MjE5MjgyMzB9.y3x_g9m-rNPArkWat5VJDq6GNPdsBP2taA9mb4UFLng",
+                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIxOTU0OTgyLCJleHAiOjE2MjE5NjIxODJ9._5HHnrdtJcz17uCk74bn6QNHWsLW3C6G7AwLFIeP3yY",
                     "Content-Type": "application/x-www-form-urlencoded",
                 }),
             }
@@ -66,17 +66,82 @@ const ViewTrainers = () => {
                             <div className="profile_wrapper_container ">
                                 <div className="profile_header">
                                     <div className="inner_profile container">
-                                        <img src={Profile} alt="picture" />
+                                        <img
+                                            src={TrainerViewData.profilePicture}
+                                            alt="No Image Found"
+                                        />
                                         <div className="profile_header_inner">
                                             <h2>
                                                 {TrainerViewData["firstName"]}
+                                                &nbsp;
+                                                {TrainerViewData["lastName"]}
                                             </h2>
-                                            <p>PILATES, STRENGTH & HIIT</p>
+                                            <p>
+                                                {TrainerViewData &&
+                                                TrainerViewData.areaOfExpertise &&
+                                                TrainerViewData
+                                                    .areaOfExpertise[0] ? (
+                                                    <label>
+                                                        {
+                                                            TrainerViewData
+                                                                .areaOfExpertise[0]
+                                                        }
+                                                    </label>
+                                                ) : (
+                                                    ""
+                                                )}
+                                                {/* &nbsp; */}
+                                                {TrainerViewData &&
+                                                TrainerViewData.areaOfExpertise &&
+                                                TrainerViewData
+                                                    .areaOfExpertise[1] ? (
+                                                    <label>
+                                                        {","}&nbsp;
+                                                        {
+                                                            TrainerViewData
+                                                                .areaOfExpertise[1]
+                                                        }
+                                                    </label>
+                                                ) : (
+                                                    ""
+                                                )}
+                                                {/* &nbsp; */}
+                                                {TrainerViewData &&
+                                                TrainerViewData.areaOfExpertise &&
+                                                TrainerViewData
+                                                    .areaOfExpertise[2] ? (
+                                                    <label>
+                                                        {","}&nbsp;
+                                                        {
+                                                            TrainerViewData
+                                                                .areaOfExpertise[2]
+                                                        }
+                                                    </label>
+                                                ) : (
+                                                    ""
+                                                )}
+                                                {/* &nbsp; */}
+                                                {TrainerViewData &&
+                                                TrainerViewData.areaOfExpertise &&
+                                                TrainerViewData
+                                                    .areaOfExpertise[3] ? (
+                                                    <label>
+                                                        {","}&nbsp;
+                                                        {
+                                                            TrainerViewData
+                                                                .areaOfExpertise[3]
+                                                        }
+                                                    </label>
+                                                ) : (
+                                                    ""
+                                                )}
+                                                {/* &nbsp; */}
+                                            </p>
                                         </div>
                                         <div className="profile_header_link">
                                             <img src={ArrowBack} alt="icon" />
-                                            <Link to="/trainer/find">
-                                                Back to Search
+                                            <Link to="/admins/trainer">
+                                                Back to Trainer List
                                             </Link>
                                         </div>
                                     </div>
@@ -95,13 +160,29 @@ const ViewTrainers = () => {
                                                 <hr />
                                                 <div className="profile_aside_inner_item">
                                                     <h6>
-                                                        $45{" "}
+                                                        $
+                                                        {TrainerViewData.oneOnOnePricing
+                                                            ? TrainerViewData[
+                                                                  "oneOnOnePricing"
+                                                              ][
+                                                                  "inPersonAtClientLocation"
+                                                              ]
+                                                            : "0"}
+                                                        &nbsp;
                                                         <span>
                                                             (Virtual Session)
                                                         </span>
                                                     </h6>
                                                     <h6>
-                                                        $150{" "}
+                                                        $
+                                                        {TrainerViewData.oneOnOnePricing
+                                                            ? TrainerViewData[
+                                                                  "oneOnOnePricing"
+                                                              ][
+                                                                  "inPersonAtClientLocation"
+                                                              ]
+                                                            : "0"}
+                                                        &nbsp;
                                                         <span>
                                                             (In Person Session)
                                                         </span>
@@ -296,18 +377,12 @@ const ViewTrainers = () => {
                                                             src={Tick}
                                                             alt="icon"
                                                         />
-                                                        <h4>Virtual</h4>
-                                                    </div>
-                                                    <div className="profile_location">
-                                                        <img
-                                                            src={Tick}
-                                                            alt="icon"
-                                                        />
                                                         <h4>
-                                                            Trainer’s Location{" "}
-                                                            <Link to="/">
-                                                                View Location
-                                                            </Link>
+                                                            {TrainerViewData.preferedTrainingMode
+                                                                ? TrainerViewData[
+                                                                      "preferedTrainingMode"
+                                                                  ]
+                                                                : "Not Added"}
                                                         </h4>
                                                     </div>
                                                     <div className="profile_location">
@@ -315,7 +390,30 @@ const ViewTrainers = () => {
                                                             src={Tick}
                                                             alt="icon"
                                                         />
-                                                        <h4>Your Location</h4>
+                                                        <h4>
+                                                            {" "}
+                                                            Servicable Location:{" "}
+                                                            {TrainerViewData.servicableLocation
+                                                                ? TrainerViewData[
+                                                                      "servicableLocation"
+                                                                  ]
+                                                                : "Not Added"}
+                                                        </h4>
+                                                    </div>
+
+                                                    <div className="profile_location">
+                                                        <img
+                                                            src={Tick}
+                                                            alt="icon"
+                                                        />
+                                                        <h4>
+                                                            Trainer Location:{" "}
+                                                            {TrainerViewData.location
+                                                                ? TrainerViewData[
+                                                                      "location"
+                                                                  ]
+                                                                : "Not Added"}
+                                                        </h4>
                                                     </div>
                                                     <div className="profile_share">
                                                         <img
@@ -339,42 +437,28 @@ const ViewTrainers = () => {
                                             <div className="profile_right_item1">
                                                 <img src={Quote} alt="qoute" />
                                                 <h6>
-                                                    This trainers motto can go
-                                                    over here. Lorem ipsum dolor
-                                                    sit amet, consetetur
-                                                    sadipscing elitr, sed di
-                                                    nonumy eirmod tempor
-                                                    invidunt ut labore et dolore
-                                                    magna aliquyam erat, sed
-                                                    diam voluptua. At vero eos
-                                                    et accusam.
+                                                    {TrainerViewData
+                                                        ? TrainerViewData[
+                                                              "myMotto"
+                                                          ]
+                                                        : "Not Added"}
                                                 </h6>
                                             </div>
                                             <div className="profile_right_item2">
-                                                <h4>About Jane</h4>
+                                                <h4>
+                                                    About{" "}
+                                                    {TrainerViewData.firstName
+                                                        ? TrainerViewData[
+                                                              "firstName"
+                                                          ]
+                                                        : "Not Added"}
+                                                </h4>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet,
-                                                    consetetur sadipscing elitr,
-                                                    sed diam nonumy eirmod
-                                                    tempor invidunt ut labore et
-                                                    dolore magna aliquyam erat,
-                                                    sed diam voluptua. At vero
-                                                    eos et accusam et justo duo
-                                                    dolores et ea rebum. Stet
-                                                    clita kasd gubergren, no sea
-                                                    takimata sanctus est Lorem
-                                                    ipsum dolor sit amet. Lorem
-                                                    ipsum dolor sit amet,
-                                                    consetetur sadipscing elitr,
-                                                    sed diam nonumy eirmod
-                                                    tempor invidunt ut labore et
-                                                    dolore magna aliquyam erat,
-                                                    sed diam voluptua. At vero
-                                                    eos et accusam et justo duo
-                                                    dolores et ea rebum. Stet
-                                                    clita kasd gubergren, no sea
-                                                    takimata sanctus est Lorem
-                                                    ipsum dolor sit.
+                                                    {TrainerViewData.description
+                                                        ? TrainerViewData[
+                                                              "description"
+                                                          ]
+                                                        : "Not Added"}
                                                 </p>
 
                                                 <div className="profile_images">
@@ -389,51 +473,210 @@ const ViewTrainers = () => {
                                                             src={Tick}
                                                             alt="check"
                                                         />
-                                                        <h6>
-                                                            Certification 1 goes
-                                                            here
-                                                        </h6>
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.certification &&
+                                                        TrainerViewData
+                                                            .certification[0] &&
+                                                        TrainerViewData
+                                                            .certification[0]
+                                                            .certification ? (
+                                                            <h6>
+                                                                {
+                                                                    TrainerViewData
+                                                                        .certification[0]
+                                                                        .certification
+                                                                }
+                                                            </h6>
+                                                        ) : (
+                                                            <h6>Not Added</h6>
+                                                        )}
                                                     </div>
                                                     <div className="inner_items">
                                                         <img
                                                             src={Tick}
                                                             alt="check"
                                                         />
-                                                        <h6>
-                                                            Certification 1 goes
-                                                            here
-                                                        </h6>
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.certification &&
+                                                        TrainerViewData
+                                                            .certification[1] &&
+                                                        TrainerViewData
+                                                            .certification[1]
+                                                            .certification ? (
+                                                            <h6>
+                                                                {
+                                                                    TrainerViewData
+                                                                        .certification[1]
+                                                                        .certification
+                                                                }
+                                                            </h6>
+                                                        ) : (
+                                                            <h6>Not Added</h6>
+                                                        )}
                                                     </div>
                                                     <div className="inner_items">
                                                         <img
                                                             src={Tick}
                                                             alt="check"
                                                         />
-                                                        <h6>
-                                                            Certification 1 goes
-                                                            here
-                                                        </h6>
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.certification &&
+                                                        TrainerViewData
+                                                            .certification[2] &&
+                                                        TrainerViewData
+                                                            .certification[2]
+                                                            .certification ? (
+                                                            <h6>
+                                                                {
+                                                                    TrainerViewData
+                                                                        .certification[2]
+                                                                        .certification
+                                                                }
+                                                            </h6>
+                                                        ) : (
+                                                            <h6>Not Added</h6>
+                                                        )}
                                                     </div>
                                                     <div className="inner_items">
                                                         <img
                                                             src={Tick}
                                                             alt="check"
                                                         />
-                                                        <h6>
-                                                            Certification 1 goes
-                                                            here
-                                                        </h6>
+                                                        {TrainerViewData &&
+                                                        TrainerViewData.certification &&
+                                                        TrainerViewData
+                                                            .certification[3] &&
+                                                        TrainerViewData
+                                                            .certification[3]
+                                                            .certification ? (
+                                                            <h6>
+                                                                {
+                                                                    TrainerViewData
+                                                                        .certification[3]
+                                                                        .certification
+                                                                }
+                                                            </h6>
+                                                        ) : (
+                                                            <h6>Not Added</h6>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* <div className="profile_right_item4">
-                                        <h2>Jane’s Schedule </h2>
-                                        <div
-                                            className="profile_event_schedular"
-                                            onClick={() => console.log("hello")}
-                                        ></div>
-                                    </div> */}
-                                            {/* </div> */}
+                                            <div className="profile_right_item3 mb-5 pb-5">
+                                                <h2>Previous Experience</h2>
+                                                <div className="profile_item3_inner">
+                                                    {/* <h6>
+                                                        {" "}
+                                                        Job Title: &nbsp;
+                                                        {TrainerViewData.previousExperience
+                                                            ? TrainerViewData
+                                                                  .previousExperience[0]
+                                                                  .jobTitle
+                                                            : "Not Added"}
+                                                    </h6> */}
+                                                    {/* {TrainerViewData &&
+                                                    TrainerViewData.previousExperience ? (
+                                                        <h6>
+                                                            Job Title: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[0]
+                                                                    .jobTitle
+                                                            }
+                                                        </h6>
+                                                    ) : (
+                                                        <h6>Not Added</h6>
+                                                    )}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience ? (
+                                                        <h6>
+                                                            Job Title: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[0]
+                                                                    .workMode
+                                                            }
+                                                        </h6>
+                                                    ) : (
+                                                        <h6>Not Added</h6>
+                                                    )}
+                                                    {TrainerViewData &&
+                                                    TrainerViewData.previousExperience ? (
+                                                        <h6>
+                                                            Job Title: &nbsp;
+                                                            {
+                                                                TrainerViewData
+                                                                    .previousExperience[0]
+                                                                    .yearsOfExperience
+                                                            }
+                                                        </h6>
+                                                    ) : (
+                                                        <h6>Not Added</h6>
+                                                    )} */}
+
+                                                    {/* <h6>
+                                                        {" "}
+                                                        Work Mode: &nbsp;
+                                                        {TrainerViewData.previousExperience
+                                                            ? TrainerViewData
+                                                                  .previousExperience[0]
+                                                                  .workMode
+                                                            : "Not Added"}
+                                                    </h6>
+                                                    <h6>
+                                                        {" "}
+                                                        Years Of Experience:
+                                                        &nbsp;
+                                                        {TrainerViewData.previousExperience
+                                                            ? TrainerViewData
+                                                                  .previousExperience[0]
+                                                                  .yearsOfExperience
+                                                            : "Not Added"}
+                                                    </h6> */}
+
+                                                    <div className="inner_items">
+                                                        {/* <h6>
+                                                            {TrainerViewData[
+                                                                "previousExperience"
+                                                            ]
+                                                                ? TrainerViewData[
+                                                                      "previousExperience"
+                                                                  ][1][
+                                                                      "jobTitle"
+                                                                  ]
+                                                                : "Not Added"}
+                                                        </h6> */}
+                                                    </div>
+                                                    <div className="inner_items">
+                                                        {/* <h6>
+                                                            {TrainerViewData[
+                                                                "previousExperience"
+                                                            ]
+                                                                ? TrainerViewData[
+                                                                      "previousExperience"
+                                                                  ][2][
+                                                                      "jobTitle"
+                                                                  ]
+                                                                : "Not Added"}
+                                                        </h6> */}
+                                                    </div>
+                                                    <div className="inner_items">
+                                                        {/* <h6> */}
+                                                        {/* <h6>
+                                                            {TrainerViewData[
+                                                                "previousExperience"
+                                                            ]
+                                                                ? TrainerViewData[
+                                                                      "previousExperience"
+                                                                  ][3][
+                                                                      "jobTitle"
+                                                                  ]
+                                                                : "Not Added"}
+                                                        </h6> */}
+                                                        {/* </h6> */}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

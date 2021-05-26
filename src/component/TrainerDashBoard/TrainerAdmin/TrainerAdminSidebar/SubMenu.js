@@ -37,17 +37,15 @@ const SidebarLabel = styled.span`
     margin-left: 1px;
     font-size: 18px;
     padding: 0 0 0 20px;
-    font: var(--unnamed-font-style-normal) normal
-        var(--unnamed-font-weight-medium) var(--unnamed-font-size-18) /
-        var(--unnamed-line-spacing-42) var(--unnamed-font-family-montserrat);
-    color: var(--unnamed-color-161616);
     text-align: left;
-    font: normal normal medium 18px/42px Montserrat;
     letter-spacing: 1.17px;
     color: #161616;
     width: 120px;
     text-transform: uppercase;
-    opacity: 1;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    line-height: 42px;
+    font-weight: 500;
 
     &:hover {
         font-weight: 700;

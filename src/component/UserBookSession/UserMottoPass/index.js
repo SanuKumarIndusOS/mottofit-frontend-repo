@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 import Tick from "../../../assets/files/FindTrainer/Tick 1.svg";
 import BlueHoverButton from "../../common/BlueArrowButton";
-import Footer from "../../common/Footer";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 

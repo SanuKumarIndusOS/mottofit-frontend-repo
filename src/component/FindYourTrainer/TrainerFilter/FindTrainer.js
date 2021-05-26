@@ -19,13 +19,10 @@ import YogaIconIconActive from "../../../assets/files/FindTrainer/DropDownAssets
 
 import TrainerCards from "../TrainersDetails/index";
 import TrainerCardOutside from "../TrainerOutsideTime/index";
-
 import Weight from "../../../assets/files/SVG/findTrainer/weight.svg";
 import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
 import AvailabilityIcon from "../../../assets/files/Home/Banner/SearchBar/Availability Icon.svg";
-// import { Schedule } from "@material-ui/icons";
 import DropdownTrainerAvailability from "./DropdownTrainerAvailability";
-
 import "./find.scss";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
@@ -36,20 +33,6 @@ import { getFormatDate } from "service/helperFunctions";
 import TrainerProfile from "component/TrainerProfile/Profile";
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     useEffect(() => {
-        // var date = new Date(selectedDate.toISOString());
-        // var year = date.getFullYear();
-        // var month = date.getMonth() + 1;
-        // var dt = date.getDate();
-
-        // if (dt < 10) {
-        //   dt = "0" + dt;
-        // }
-        // if (month < 10) {
-        //   month = "0" + month;
-        // }
-
-        // setqueryObject({ ...queryObject, date: year + "-" + month + "-" + dt });
-
         if (trainerQueryData.location && trainerQueryData.date) {
             console.log(trainerQueryData);
 
@@ -262,36 +245,11 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         updateTrainerDetails(payload);
 
         getTrainerDataByQuery(payload.query);
-
-        // var token = localStorage.getItem("token");
-        // var url = "http://doodlebluelive.com:2307/v1/availableTrainer?";
-        // var query = `location=${queryObject.location}&trainingType=["${queryObject.vertical}"]&date=["${queryObject.date}","${queryObject.date}"]&availability=["${queryObject.availability}"]`;
-
-        // const myHeaders = new Headers();
-
-        // myHeaders.append("Content-Type", "application/json");
-        // myHeaders.append("Authorization", token);
-
-        // fetch(url + query, {
-        //   method: "GET",
-        //   headers: myHeaders,
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     console.log(data.data, data.data.bestMatch);
-        //     setbestMatchData(data.data.bestMatch);
-        //     setbestOthersData(data.data.others);
-        //   });
-
-        // console.log(url + query);
-        // console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
     };
 
     const getTrainerDataByQuery = (currData) => {
         const { location, date, trainingType, availability } =
             currData || trainerQueryData;
-
-        // console.log({ location, date, trainingType, availability });
 
         const { trainerAvailableApi } = TrainerApi;
 

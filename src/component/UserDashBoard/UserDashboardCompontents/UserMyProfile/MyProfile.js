@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
-// import Select from "react-select";
 import Profile from "../../../../assets/files/SVG/Profile Picture.svg";
 import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";

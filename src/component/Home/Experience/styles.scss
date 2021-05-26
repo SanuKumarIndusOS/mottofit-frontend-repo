@@ -4,25 +4,21 @@
 
     .experience_upper_container {
         margin: 2em 0;
-        opacity: 1;
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
         .heading {
             padding-bottom: 40px;
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-bold) var(--unnamed-font-size-45) /
-                var(--unnamed-line-spacing-55)
-                var(--unnamed-font-family-cormorant-garamond);
-            letter-spacing: var(--unnamed-character-spacing--0-45);
-            color: var(--unnamed-color-161616);
             text-align: center;
-            font: normal normal bold 45px/55px Cormorant Garamond;
             letter-spacing: -0.45px;
             color: #161616;
             opacity: 1;
             width: 50%;
+            font-size: 45px;
+            font-weight: 800;
+            font-family: Cormorant Garamond;
+
             @media screen and (max-width: 920px) {
                 font: normal normal bold 25px/35px Cormorant Garamond;
                 width: 100%;
@@ -69,7 +65,6 @@
                 flex-direction: column;
                 img {
                     width: 260px;
-                    // height: 450px;
                 }
 
                 @media screen and (max-width: 1023px) {
@@ -86,22 +81,14 @@
                     align-items: center;
                     background: #53bfd2;
                     color: #fff;
-                    font-size: 16px;
-                    font-weight: bold;
                     padding: 0.5em 0 0.5em 0.8em !important;
-                    font: var(--unnamed-font-style-normal) normal
-                        var(--unnamed-font-weight-bold)
-                        var(--unnamed-font-size-18) /
-                        var(--unnamed-line-spacing-22)
-                        var(--unnamed-font-family-montserrat);
-                    color: var(--unnamed-color-ffffff);
+                    font-size: 16px;
+                    font-weight: 800;
+                    font-family: "Montserrat", sans-serif;
                     text-align: right;
-                    font: normal normal bold 16px/22px Montserrat;
                     letter-spacing: 0.45px;
-                    color: #ffffff;
-                    text-transform: uppercase;
-                    opacity: 1;
                     text-decoration: none;
+                    line-height: 22px;
                     @media screen and (max-width: 919px) {
                         font-size: 10px;
                     }
@@ -146,42 +133,35 @@
             align-items: flex-start;
             .heading {
                 padding-bottom: 15px;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-600) var(--unnamed-font-size-40) /
-                    var(--unnamed-line-spacing-58)
-                    var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0);
-                color: var(--unnamed-color-161616);
                 text-align: left;
-                font: normal normal 600 40px/58px Montserrat;
                 letter-spacing: 0px;
                 color: #161616;
                 opacity: 1;
+                font-size: 40px;
+                font-weight: 600;
+                font-family: "Montserrat", sans-serif;
+                line-height: 58px;
+
                 @media screen and (max-width: 1023px) {
                     text-align: center;
-                    font: normal normal 600 24px/38px Montserrat;
+                    font-size: 24px;
                 }
             }
             .discription {
                 padding-bottom: 30px;
                 align-items: center;
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-normal)
-                    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-32)
-                    var(--unnamed-font-family-montserrat);
-                letter-spacing: var(--unnamed-character-spacing-0-27);
-                color: var(--unnamed-color-2c2c2c);
                 text-align: left;
-                font: normal normal normal 18px/32px Montserrat;
                 letter-spacing: 0.27px;
                 color: #2c2c2c;
                 font-size: 18px;
                 font-weight: 500;
-                font-family: Montserrat;
+                font-family: "Montserrat", sans-serif;
+
+                line-height: 32px;
 
                 @media screen and (max-width: 1023px) {
                     text-align: center;
-                    font: normal normal normal 14px/32px Montserrat;
+                    font-size: 14px;
                 }
             }
             .link {
@@ -189,10 +169,10 @@
                 width: 100%;
                 display: flex;
                 align-items: center;
-                color: var(--unnamed-color-161616);
                 text-align: left;
-                font: 18px 900/12px Montserrat;
-
+                font-size: 12px;
+                font-weight: 800;
+                font-family: "Montserrat", sans-serif;
                 letter-spacing: 0.45px;
                 color: #161616;
                 text-transform: uppercase;
@@ -206,7 +186,7 @@
                     color: #161616;
                     font-weight: 900;
                     font-size: 18px;
-                    font-family: Montserrat;
+                    font-family: "Montserrat", sans-serif;
                     font-weight: bold;
                     padding: 0;
 
@@ -243,21 +223,18 @@
                 height: 100px;
             }
             .discription_home {
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-normal)
-                    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-32)
-                    var(--unnamed-font-family-montserrat);
                 text-align: left;
                 letter-spacing: 0.3px;
                 color: #2c2c2c;
                 margin-left: 1em;
                 opacity: 1;
-                font-size: 20px;
-                font-family: Montserrat;
-                font: normal normal normal 18px/32px Montserrat;
                 font-weight: normal;
+                font-size: 18px;
+                font-family: "Montserrat", sans-serif;
+                line-height: 32px;
                 @media screen and (max-width: 1023px) {
-                    font: normal normal normal 16px/22px Montserrat;
+                    line-height: 22px;
+                    font-size: 16px;
                     padding: 0 0 0 1em;
                 }
             }

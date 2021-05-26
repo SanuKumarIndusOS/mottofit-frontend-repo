@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles.scss";
 import People_active from "../../../assets/files/SVG/Person Icon.svg";
-import People_inactive from "../../../assets/files/SVG/Person_2.svg";
 import Trainer_active from "../../../assets/files/SVG/Training_active.svg";
 import Trainer_inactive from "../../../assets/files/SVG/Training Icon.svg";
 
@@ -11,8 +10,6 @@ import Arrow_inactive from "../../../assets/files/SVG/Arrow_active.svg";
 import Arrow_active from "../../../assets/files/SVG/Arrow 1.svg";
 
 const TrainerTracker = () => {
-    // console.log(this.props.location)
-
     const log = () => {
         console.log("hihi", window.location.pathname);
     };

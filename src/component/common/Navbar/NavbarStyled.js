@@ -2,28 +2,6 @@ import { FaBars } from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
-// export const Nav = styled.nav`
-//     /* height: 70px; */
-//     width:100%;
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     top:0;
-//     position:sticky;
-//     top:0;
-//     z-index:9999;
-
-//     @media screen and (max-width: 1024px) {
-//     margin-bottom: 0;
-//     justify-content:space-between;
-//     align-items: center;
-//     position:sticky;
-//     top:0;
-//     z-index:999;
-
-//     }
-// `;
-
 export const LogoImage = styled.img`
     width: 50%;
     padding: 1em;

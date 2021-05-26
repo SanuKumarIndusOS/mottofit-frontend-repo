@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.scss";
 import PersonIcon from "assets/files/TrainerDashboard/MyEarning/Person Icon.svg";
 import SheduleIcon from "assets/files/TrainerDashboard/MyEarning/Shedule Icon.svg";
@@ -7,17 +7,8 @@ import Mastercard from "assets/files/TrainerDashboard/MyEarning/Mastercard.svg";
 import Earn from "assets/files/TrainerDashboard/MyEarning/Earn.svg";
 import Profile from "assets/files/TrainerDashboard/MyEarning/Profile Picture.svg";
 import Client from "assets/files/TrainerDashboard/MyEarning/Image 1.svg";
-// import Select from "react-select";
 
-const options = [
-    { value: "q1", label: "Q1 2021" },
-    { value: "maimi", label: "Maimi" },
-    { value: "hampton", label: "Hampton" },
-    { value: "plam", label: "Plam Beach" },
-];
 export const TrainerMyEarnings = () => {
-    const [selectedOption, setSelectedOption] = useState([]);
-
     return (
         <>
             <div className="outter_earn_container">
@@ -29,14 +20,7 @@ export const TrainerMyEarnings = () => {
                             </div>
                             <div className="earnDropdown_tabs">
                                 <div className="tab_outter_earn">1</div>
-                                <div className="dd_outter_earn">
-                                    {/* <Select
-                    defaultValue={selectedOption}
-                    onChange={setSelectedOption}
-                    options={options}
-                    className="session_location_select"
-                  /> */}
-                                </div>
+                                <div className="dd_outter_earn"></div>
                             </div>
                         </div>
                         <div className="earn_wrapper">

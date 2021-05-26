@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./styles.scss";
 import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
 import { Link } from "react-router-dom";

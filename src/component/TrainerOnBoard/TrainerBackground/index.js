@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./styles.scss";
-
 import { Link } from "react-router-dom";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import Checkbox from "@material-ui/core/Checkbox";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
-import Location from "../../../assets/files/SVG/Location Icon.svg";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
@@ -25,25 +23,6 @@ const worksMode = [
         value: "no",
     },
 ];
-/* areaOfExpertise
-   previousExperience
-   currentExperience
-   interestInMotto
-   trainingProcess
-   clientAssessment
-   "myMotto":"",
-   certification
-
-   hoursPerWeek
-   preferedTrainingMode
-//    serviceableCity
-   servicableLocation
-   trainingFacilityLocation
-   willingToTravel
-
-
-   
-*/
 
 const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
     const [checkedBoxing, setCheckedBoxing] = React.useState(false);
@@ -66,10 +45,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
         awaitingCertification: "",
     });
 
-    // const [checkstate, setCheckState] = React.useState("");
-
     console.log(trainerbackgroundData, "trainerbackgroundData");
-    // const history = useHistory();
 
     const [selectedValue, setSelectedValue] = useState("a");
     const [inputFields, setInputField] = useState([
@@ -104,7 +80,6 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
         values[index][event.target.name] = event.target.value;
         setinputCertificatesField(values);
 
-        // console.log(inputCertificatesFields);
         setTrainerbackgroundData({
             ...trainerbackgroundData,
             certification: inputCertificatesFields,
@@ -522,23 +497,6 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                             )
                                                         }
                                                     />
-                                                    {/* <input
-                                                    type="file"
-                                                    name="file"
-                                                    value={
-                                                        inputCertificatesField.upload
-                                                    }
-                                                    // className="custom-file-input"
-                                                    onChange={(event) =>
-                                                        handleChangeCertificateInput(
-                                                            index,
-                                                            event
-                                                        )
-                                                    }
-                                                /> */}
-                                                    {/* <a className="checkarrow">
-                                                    <ArrowHover />
-                                                </a> */}
                                                 </div>
                                             )
                                         )}
@@ -708,12 +666,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                 color: "#FFFFFF",
                                             }}
                                             type="submit"
-                                            // onClick={handleTrainerAvailability}
                                             onClick={handleSubmit}
-                                            // to={{
-                                            //   pathname: "/trainer/avaliability",
-                                            //   state: [AboutTrainer, trainerbackgroundData],
-                                            // }}
                                         >
                                             Continue
                                             <ArrowHoverBlacked />

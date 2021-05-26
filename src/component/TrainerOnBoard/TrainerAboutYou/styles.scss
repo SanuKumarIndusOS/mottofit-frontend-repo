@@ -3,13 +3,12 @@
     padding: 0 5.5em;
     .wrapper_about {
         height: auto;
-        // padding: 0 5.5em;
 
         h2 {
             margin-top: 3em;
             text-align: center;
             text-align: center;
-            font-family: Montserrat;
+            font-family: "Montserrat", sans-serif;
             font-size: 35px;
             line-height: 30px;
             font-weight: 600;
@@ -21,7 +20,7 @@
             opacity: 1;
             width: 63%;
             font-size: 18px;
-            font-family: Montserrat;
+            font-family: "Montserrat", sans-serif;
             text-align: center;
             letter-spacing: 0.27px;
             color: #696969;
@@ -35,14 +34,13 @@
                 flex-wrap: wrap;
                 align-items: center;
                 justify-content: center;
-                // padding: 2em;
 
                 .wrapper_innerInput {
                     margin: 1em;
                     width: 40%;
                     span {
                         color: tomato;
-                        font-family: montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 500;
                     }
                     .react-tel-input {
@@ -63,7 +61,7 @@
                     label {
                         font-size: 22px;
                         text-align: left;
-                        font-family: montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-weight: 450;
                         margin-bottom: 0.5em;
                     }
@@ -75,18 +73,18 @@
                         width: 100%;
                         padding: 0em 1.5em;
                         height: 45px;
-                        border: 1.5px solid var(--unnamed-color-bcbcbc);
+
                         border: 2px solid #bcbcbc;
                         border-radius: 30px;
                         opacity: 1;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500;
                         color: #000;
                     }
                     input::placeholder {
                         color: #bcbcbc;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500;
                     }
@@ -94,7 +92,7 @@
                         outline: none;
                     }
                     .custom_dropdown {
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500;
                         color: #696969;
@@ -110,7 +108,7 @@
                         border: 2px solid #bcbcbc;
                         outline: none;
                         appearance: none;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500;
                         color: #696969;
@@ -122,13 +120,13 @@
                     }
                     select::placeholder {
                         color: #bcbcbc;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 400;
                     }
                     select:invalid {
                         color: #bcbcbc;
-                        font-family: Montserrat;
+                        font-family: "Montserrat", sans-serif;
                         font-size: 18px;
                         font-weight: 500;
                     }

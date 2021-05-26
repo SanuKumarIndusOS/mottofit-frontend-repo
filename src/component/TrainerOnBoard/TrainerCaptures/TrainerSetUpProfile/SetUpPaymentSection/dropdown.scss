@@ -13,16 +13,13 @@
         .dd-header-title {
             margin: 2px 20px !important;
             margin-right: 30px !important;
-            font: var(--unnamed-font-style-normal) normal
-                var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
-                var(--unnamed-line-spacing-42)
-                var(--unnamed-font-family-montserrat);
-            letter-spacing: var(--unnamed-character-spacing-0);
-            color: var(--unnamed-color-898989);
             text-align: left !important;
-            font: normal normal 500 20px/42px Montserrat !important;
             letter-spacing: 0px;
             color: #000 !important;
+            line-height: 42px !important;
+            font-size: 20px !important;
+            font-weight: 500 !important;
+            font-family: "Montserrat", sans-serif !important;
         }
     }
     .dd-list {
@@ -32,16 +29,13 @@
             max-height: none !important;
             overflow-y: hidden !important;
             .dd-list-item {
-                font: var(--unnamed-font-style-normal) normal
-                    var(--unnamed-font-weight-medium)
-                    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-42)
-                    var(--unnamed-font-family-montserrat);
-                color: var(--unnamed-color-898989);
                 text-align: left !important;
-                font: normal normal 20px/42px Montserrat !important;
                 letter-spacing: 0.2px !important;
                 color: #898989 !important;
-                font-family: 500 !important;
+                line-height: 42px !important;
+                font-size: 20px !important;
+                font-weight: 500 !important;
+                font-family: "Montserrat", sans-serif !important;
                 &:hover {
                     background-color: #53bfd2 !important;
                     color: #fff !important;

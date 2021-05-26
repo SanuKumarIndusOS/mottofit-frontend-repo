@@ -2,13 +2,11 @@ import React from "react";
 import { Tabs, Tab, TabPanel, TabList } from "react-web-tabs";
 import "react-web-tabs/dist/react-web-tabs.css";
 import "./style.scss";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import Jonn from "../../../../assets/files/TrainerDashboard/Message/Image 1.png";
 import SheduleIcon from "../../../../assets/files/TrainerDashboard/Message/Shedule Icon.svg";
 import AvailabilityIcon from "../../../../assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import LocationIcon from "../../../../assets/files/TrainerDashboard/Message/Location Icon.svg";
-import { set } from "date-fns";
 import BlueHoverButton from "../../../common/BlueArrowButton/index";
 
 const Chatt = require("twilio-chat");

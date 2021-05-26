@@ -15,17 +15,9 @@ import { api } from "service/api";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
-import Location from "../../../assets/files/SVG/Location Icon.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateTrainerDetails } from "action/trainerAct";
-
-// hoursPerWeek
-// preferedTrainingMode
-// serviceableCity
-// servicableLocation
-// trainingFacilityLocation
-// willingToTravel
 
 const CyanRadio = withStyles({
     root: {
@@ -45,7 +37,6 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
 
     const [open, setOpen] = useState(false);
     const myRef = useRef(null);
-    // const [openClassModel, setOpenClassModel] = useState(false);
 
     const [trainerAvailabilityData, setTrainerAvailabilityData] =
         React.useState({
@@ -71,7 +62,6 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(JSON.parse(localStorage.getItem("user-info"))["token"]);
 
         const storeData = {
             details: {
@@ -177,24 +167,6 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                 console.error("Error:", error);
                 setOpen(false);
             });
-
-        // fetch("http://doodlebluelive.com:2307/v1/trainer", {
-        //   method: "PUT", // or 'PUT'
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     token: JSON.parse(localStorage.getItem("user-info"))["token"],
-        //   },
-        //   body: JSON.stringify(data),
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     console.log("Success:", data);
-        //     if (data === "200") {
-        //       setOpen(true);
-        //     } else {
-        //       console.log("errro");
-        //     }
-        //   })
     };
 
     const handleTrianingData = (e, type) => {
@@ -245,7 +217,6 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                             typesetting industry. Lorem ipsum has been the
                             industry’s standard dummy text. */}
                         </p>
-                        {/* <br></br> */}
                         <form
                             className="container"
                             onSubmit={(e) => e.preventDefault()}
@@ -308,7 +279,6 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                         >
                                             In Person
                                         </button>
-                                        {/* <button>Outdoors</button> */}
                                     </div>
                                 </div>
                                 <div className="item_3">
@@ -396,25 +366,11 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                                 });
                                             }}
                                         />
-
-                                        {/* <img
-                                            src={Location}
-                                            alt="icon"
-                                            className="loction_img_select"
-                                        /> */}
                                     </div>
                                 </div>
                             </div>
                             <div className="submit_button">
-                                <button
-                                    type="submit"
-                                    //   onClick={(e) => {
-                                    //     console.log(selectedOneValue, trainerAvailabilityData);
-                                    //     e.preventDefault();
-                                    //   }}
-
-                                    onClick={handleSubmit}
-                                >
+                                <button type="submit" onClick={handleSubmit}>
                                     Submit
                                     <ArrowHoverBlacked />
                                 </button>

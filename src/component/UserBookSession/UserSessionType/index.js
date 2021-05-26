@@ -9,7 +9,6 @@ import Social from "../../../assets/files/UserOnboard/UserSessionAsset/social.sv
 import ClassIcon from "../../../assets/files/UserOnboard/UserSessionAsset/class.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import QMark from "../../../assets/files/FindTrainer/Q Mark.svg";
-import Footer from "../../common/Footer";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
@@ -20,18 +19,6 @@ import { updateUserDetails } from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
-
-const options = [
-    { value: "nyw", label: "New York" },
-    { value: "maimi", label: "Maimi" },
-    { value: "hampton", label: "Hampton" },
-    { value: "plam", label: "Plam Beach" },
-];
-
-const trainingVenueOptions = [
-    { value: "trainerlocation", label: "Trainer's Location" },
-    { value: "yourlocation", label: "Your Location" },
-];
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
@@ -71,13 +58,6 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                 sessionType: sessionType,
             },
         });
-        // if(price === 20)
-        // {
-        //   history.push("/user/moto-pass");
-        // }else
-        // {
-        //   history.push("/user/payment");
-        // }
     };
 
     return (
