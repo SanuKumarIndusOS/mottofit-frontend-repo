@@ -14,6 +14,7 @@ import Quote from "../../../assets/files/FindTrainer/Quote Icon.svg";
 import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import NotFoundImage from "../../../assets/files/FindTrainer/NoImageFound.png";
+import UserScheduler from "../UserScheduler/UserScheduler";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -530,10 +531,8 @@ const TrainerProfile = () => {
                                             </span>{" "}
                                             Schedule{" "}
                                         </h2>
-                                        <div
-                                            className="profile_event_schedular"
-                                            onClick={() => console.log("hello")}
-                                        ></div>
+
+                                        <UserScheduler />
                                     </div>
                                     {/* </div> */}
                                 </div>

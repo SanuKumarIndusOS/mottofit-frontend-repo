@@ -120,7 +120,6 @@
     font-family: "Montserrat", sans-serif;
     font-size: 32px;
     font-weight: 600;
-    line-height: 22px;
 }
 .time_show {
     text-align: center;
@@ -227,6 +226,7 @@
     }
 }
 .table2 {
+    
     thead {
         th {
             text-align: center !important;
@@ -245,7 +245,6 @@
                 font-family: "Montserrat", sans-serif;
                 font-size: 32px;
                 font-weight: 600;
-                line-height: 22px;
                 padding-top: 15px;
                 position: relative;
                 top: 10px;
@@ -321,7 +320,7 @@
         outline: none;
         border: 0;
         margin: 1em 0 0 0;
-        width: 20%;
+        width: auto;
         height: 52px;
         text-decoration: none;
         padding: 0.2em 0.5em 0.2em 0.5em !important;
@@ -330,6 +329,15 @@
         font-weight: bold;
         position: relative;
         top: -6px;
+        .default_label {
+            color: rgb(137, 137, 137);
+            display: flex;
+            align-items: center;
+            width: 400px;
+            font-size: 16px;
+            margin: 0;
+            padding: 0 0 0 0.5em;
+        }
     }
 }
 .table-drag-select td {
@@ -357,4 +365,5 @@
     color: #fff;
     font-weight: bold;
     cursor: pointer;
+    font-size: 18px;
 }

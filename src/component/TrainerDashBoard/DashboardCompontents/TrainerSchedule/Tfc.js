@@ -6,6 +6,7 @@ import BackIcon from "../../../../assets/files/SVG/SchedulerAsset/Left Button.sv
 import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 
 function Tfc() {
+    const [makeDefault, setMakeDefault] = React.useState(false);
     //refer style in node module's react-table-drag
     const [editMode, setEditMode] = React.useState(false);
     const tempcells = [
@@ -385,11 +386,51 @@ function Tfc() {
             });
     }
     const toggleEditMode = () => {
-        console.log("edit mode");
-
+        console.log("edit mode", makeDefault);
+        if(makeDefault)
+        {
+            saveDefaultWeeks()
+            setMakeDefault(!makeDefault)
+        }
         setEditMode(!editMode);
     };
 
+    const saveDefaultWeeks = () => {
+        console.log(
+            "clicked",
+            startWeek.format("YYYY-MM-DD"),
+            endWeek.format("YYYY-MM-DD"),
+            TimeSlot
+        );
+
+        var def_body = {
+            startDate: startWeek.format("YYYY-MM-DD"),
+            endDate: endWeek.format("YYYY-MM-DD"),
+            defaultWeeks: 2,
+            mode: TimeSlot,
+        };
+
+        console.log(def_body);
+
+        fetch("http://doodlebluelive.com:2307/v1/slot/make-default", {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+            body: JSON.stringify(def_body),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Slot def blocked");
+                setCells(tempcells);
+                getAvailableSlots(startWeek, endWeek);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
     let tableData;
 
     let tableData2;
@@ -654,8 +695,7 @@ function Tfc() {
         );
         tableData2 = (
             <table
-                value={cells}
-                onChange={(cells) => setCells(cells)}
+              
                 className="table2"
             >
                 <thead>
@@ -1011,23 +1051,43 @@ function Tfc() {
                     {
                         //Check if message failed
                         editMode ? (
-                            <div> {tableData} </div>
+                            <div style={{height:"530px", width:"960px"}}> {tableData} </div>
                         ) : (
-                            <div> {tableData2} </div>
+                            <div style={{height:"530px", width:"960px"}}> {tableData2} </div>
                         )
                     }
                     <div className="scheduler_button">
                         {editMode ? (
-                            <button
-                                onClick={toggleEditMode}
-                                className="scheduler_button"
-                                style={{
-                                    backgroundColor: "#53d27d",
-                                    width: "100%",
-                                }}
-                            >
-                                SAVE
-                            </button>
+                            <>
+                                <input
+                                    type="checkbox"
+                                    id="defualt"
+                                   
+                                    onChange={(e) => {
+                                        setMakeDefault(e.target.checked);
+                                    }}
+                                    checked={makeDefault}
+                                />
+                                <label
+                                    for="defualt"
+                                    style={{ color: "#898989" }}
+                                    className="default_label"
+                                >
+                                    {" "}
+                                    Make defualt
+                                </label>
+                                <br></br>
+                                <button
+                                    onClick={toggleEditMode}
+                                    className="scheduler_button"
+                                    style={{
+                                        backgroundColor: "#53d27d",
+                                        width: "100%",
+                                    }}
+                                >
+                                    SAVE
+                                </button>
+                            </>
                         ) : (
                             <button
                                 onClick={toggleEditMode}
