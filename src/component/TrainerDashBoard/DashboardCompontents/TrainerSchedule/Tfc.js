@@ -6,6 +6,7 @@ import BackIcon from "../../../../assets/files/SVG/SchedulerAsset/Left Button.sv
 import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 
 function Tfc() {
+    const [makeDefault, setMakeDefault] = React.useState(false);
     //refer style in node module's react-table-drag
     const [editMode, setEditMode] = React.useState(false);
     const tempcells = [
@@ -1055,12 +1056,19 @@ function Tfc() {
                     <div className="scheduler_button">
                         {editMode ? (
                             <>
-                                <input type="checkbox" id="defualt" />
+                                <input
+                                    type="checkbox"
+                                    id="defualt"
+                                    onClick={saveDefaultWeeks}
+                                    onChange={(e) => {
+                                        setMakeDefault(e.target.checked);
+                                    }}
+                                    checked={makeDefault}
+                                />
                                 <label
                                     for="defualt"
                                     style={{ color: "#898989" }}
                                     className="default_label"
-                                    onChange={saveDefaultWeeks}
                                 >
                                     {" "}
                                     Make a defualt
