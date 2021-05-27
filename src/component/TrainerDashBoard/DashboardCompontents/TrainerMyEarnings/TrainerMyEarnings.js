@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import PersonIcon from "assets/files/TrainerDashboard/MyEarning/Person Icon.svg";
 import SheduleIcon from "assets/files/TrainerDashboard/MyEarning/Shedule Icon.svg";
@@ -9,6 +9,35 @@ import Profile from "assets/files/TrainerDashboard/MyEarning/Profile Picture.svg
 import Client from "assets/files/TrainerDashboard/MyEarning/Image 1.svg";
 
 export const TrainerMyEarnings = () => {
+    const [paymentHistory, setPaymentHistory] = useState();
+    console.log(paymentHistory, "paymentHistory");
+
+    useEffect(() => {
+        getTrainerPaymentHistory();
+    }, []);
+
+    function getTrainerPaymentHistory() {
+        fetch(
+            "http://doodlebluelive.com:2336/v1/payment-history/trainer?trainerId=7f007fd1-7042-4c1c-b8ea-3d739cf9f707",
+            {
+                method: "get",
+                headers: new Headers({
+                    Authorization: localStorage.getItem("token"),
+
+                    "Content-Type": "application/x-www-form-urlencoded",
+                }),
+            }
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data["data"]["history"]);
+                setPaymentHistory(data["data"]["history"]);
+            })
+            .catch((error) => {
+                console.log(error, "error");
+            });
+    }
+
     return (
         <>
             <div className="outter_earn_container">
@@ -16,18 +45,21 @@ export const TrainerMyEarnings = () => {
                     <div className="inner_earn_container">
                         <div className="earn_heading">
                             <div className="earnHeader">
-                                <h2>My Earnings</h2>
+                                <h2>
+                                    My Earnings
+                                    {/* {paymentHistory.createdAt} */}
+                                </h2>
                             </div>
-                            <div className="earnDropdown_tabs">
+                            {/* <div className="earnDropdown_tabs">
                                 <div className="tab_outter_earn">1</div>
                                 <div className="dd_outter_earn"></div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="earn_wrapper">
                             <div className="earn_graph">
                                 <div className="earn_total">
                                     <div className="earn_total_inner">
-                                        <div className="total_item1">
+                                        {/* <div className="total_item1">
                                             <div className="total_data">
                                                 <img
                                                     src={Earn}
@@ -39,8 +71,8 @@ export const TrainerMyEarnings = () => {
                                                     <p>Total Earnings in q1</p>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="total_item2">
+                                        </div> */}
+                                        {/* <div className="total_item2">
                                             <div className="annual_status">
                                                 <div className="day_earn">
                                                     <h2>$500</h2>
@@ -55,10 +87,10 @@ export const TrainerMyEarnings = () => {
                                                     <p>This Month</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
-                                <div className="earn_charts">
+                                {/* <div className="earn_charts">
                                     <div className="outter_chart_grid">
                                         <div className="chart_flex">
                                             <div className="chart_contents">
@@ -76,17 +108,17 @@ export const TrainerMyEarnings = () => {
                                             chart
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
-                        <TransactionSection />
+                        <TransactionSection paymentHistory={paymentHistory} />
                     </div>
                 </div>
             </div>
         </>
     );
 };
-const TransactionSection = () => {
+const TransactionSection = ({ paymentHistory }) => {
     return (
         <>
             <div className="outter_ts">
@@ -96,63 +128,108 @@ const TransactionSection = () => {
                             <h2>Transaction</h2>
                         </div>
                         <div className="ts_overflow_container">
-                            {TransactionTempData.map((data, index) => {
-                                return (
-                                    <div className="ts_wrapper" key={index}>
-                                        <div className="ts_card">
-                                            <div className="card_profile">
-                                                <img
-                                                    src={data.clientImg}
-                                                    className="profile_card_img"
-                                                />
-                                                <div className="profile_card_content">
-                                                    <h4>Client</h4>
-                                                    <div className="wrap_content_ts">
-                                                        <img
-                                                            src={PersonIcon}
-                                                            alt="icon"
-                                                        />
-                                                        <p>{data.clientName}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="card_transaction">
-                                                <div className="transaction_card_content">
-                                                    <h4>Transaction Date</h4>
-                                                    <div className="wrap_content_ts">
-                                                        <img
-                                                            src={SheduleIcon}
-                                                            alt="icon"
-                                                        />
-                                                        <p>{data.transTime}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="card_amount">
-                                                <div className="amount_card_content">
-                                                    <h4>Amount</h4>
-                                                    <div className="wrap_content_ts">
-                                                        <img
-                                                            src={AmountIcon}
-                                                            alt="icon"
-                                                        />
-                                                        <p>{data.amount}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="card_payment">
-                                                <div className="payment_card_content">
-                                                    <h4>Payment type</h4>
-                                                    <img
+                            {paymentHistory
+                                ? paymentHistory.map((data, index) => {
+                                      return (
+                                          <div
+                                              className="ts_wrapper"
+                                              key={index}
+                                          >
+                                              <div className="ts_card">
+                                                  <div className="card_profile">
+                                                      <img
+                                                          src={Profile}
+                                                          className="profile_card_img"
+                                                      />
+                                                      <div className="profile_card_content">
+                                                          <h4>Client</h4>
+                                                          <div className="wrap_content_ts">
+                                                              <img
+                                                                  src={
+                                                                      PersonIcon
+                                                                  }
+                                                                  alt="icon"
+                                                              />
+                                                              <p
+                                                                  style={{
+                                                                      textTransform:
+                                                                          "capitalize",
+                                                                  }}
+                                                              >
+                                                                  {
+                                                                      data
+                                                                          .userDetail
+                                                                          .firstName
+                                                                  }
+                                                              </p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div className="card_transaction">
+                                                      <div className="transaction_card_content">
+                                                          <h4>
+                                                              Transaction Date
+                                                          </h4>
+                                                          <div className="wrap_content_ts">
+                                                              <img
+                                                                  src={
+                                                                      SheduleIcon
+                                                                  }
+                                                                  alt="icon"
+                                                              />
+                                                              <p>
+                                                                  {
+                                                                      data
+                                                                          .userDetail
+                                                                          .createdAt
+                                                                  }
+                                                              </p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div className="card_amount">
+                                                      <div className="amount_card_content">
+                                                          <h4>Amount</h4>
+                                                          <div className="wrap_content_ts">
+                                                              <img
+                                                                  src={
+                                                                      AmountIcon
+                                                                  }
+                                                                  alt="icon"
+                                                              />
+                                                              <p>
+                                                                  {data.amount}
+                                                              </p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div className="card_payment">
+                                                      <div className="payment_card_content">
+                                                          <h4>Payment type</h4>
+                                                          {/* <img
                                                         src={Mastercard}
                                                         alt="icon"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                                                    /> */}
+                                                          <p
+                                                              style={{
+                                                                  textTransform:
+                                                                      "capitalize",
+                                                              }}
+                                                          >
+                                                              {
+                                                                  data
+                                                                      .paymentDetail
+                                                                      .card
+                                                                      .brand
+                                                              }
+                                                          </p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      );
+                                  })
+                                : "Loading...."}
                         </div>
                     </div>
                 </div>
@@ -160,30 +237,3 @@ const TransactionSection = () => {
         </>
     );
 };
-
-const TransactionTempData = [
-    {
-        clientImg: Profile,
-        clientName: "John Doe",
-        transTime: "Feb 16,2021 at 2:20 P.M",
-        amount: "$500",
-    },
-    {
-        clientImg: Client,
-        clientName: "Jeremy Clark",
-        transTime: "Feb 16,2021 at 2:20 P.M",
-        amount: "$500",
-    },
-    {
-        clientImg: Profile,
-        clientName: "John Doe",
-        transTime: "Feb 16,2021 at 2:20 P.M",
-        amount: "$500",
-    },
-    {
-        clientImg: Client,
-        clientName: "Jeremy Clark",
-        transTime: "Feb 16,2021 at 2:20 P.M",
-        amount: "$500",
-    },
-];
