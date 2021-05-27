@@ -11,6 +11,7 @@ import ArrowHoverBlacked from "../common/BlackCircleButton/ArrowHoverBlacked";
 import "../HowItWork/TrainerMotto/styles.scss";
 import BlueHoverButton from "../common/BlueArrowButton";
 import { Link } from "react-router-dom";
+import { history } from 'helpers'
 
 const accordionData = [
     {
@@ -49,11 +50,49 @@ const TrainWithFriends = () => {
     };
 
     const handleAddFriendFields = () => {
+        console.log(history);
         setFriendsInput([
             ...friendsInput,
             { friendName: "", friendEmail: "", friendPhone: "" },
         ]);
     };
+
+    const updateSessionApi = () => {
+        fetch("http://doodlebluelive.com:2337/v1/session/update", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            },
+            method: "PUT",
+            body: JSON.stringify(
+                {
+                    "friends":
+                        [{ "email": "stageuser001@doodleblue.com", "firstName": "John", "lastName": "Doe 001", "phoneNo": "8220681305" }]
+                }),
+        })
+            .then((resp) => resp.json())
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err))
+    }
+
+    const getUserSessions = () => {
+        fetch("http://doodlebluelive.com:2337/v1/session/user", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            },
+            method: "GET",
+        })
+            .then((resp) => resp.json())
+            .then((res) => {
+                console.log(res);
+                history.push({
+                    pathname: "/users/dashboard/session",
+                })
+            })
+            .catch((err) => console.log(err))
+    }
+
     return (
         <>
             <div className="TF_outter_container">
@@ -190,7 +229,7 @@ const TrainWithFriends = () => {
                                                 </div>
 
                                                 <div className="TF_button">
-                                                    <button>
+                                                    <button onClick={updateSessionApi}>
                                                         Invite Friends{" "}
                                                         <ArrowHoverBlacked />{" "}
                                                     </button>
@@ -275,7 +314,7 @@ const TrainWithFriends = () => {
                             </div>
                             <div className="TF_skip">
                                 <h2>Not right now? </h2>
-                                <Link>
+                                <Link onClick={getUserSessions}>
                                     CONTINUE TO ACCOUNT <BlueHoverButton />
                                 </Link>
                             </div>
