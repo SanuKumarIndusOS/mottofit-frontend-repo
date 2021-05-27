@@ -9,8 +9,32 @@ import BlueArrowButton from "../../../common/BlueArrowButton";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import ArrowNext from "../../../../assets/files/SVG/Arrow Next.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
+import { history } from "helpers";
+import { useEffect } from 'react';
+
+
 
 const UserSession = () => {
+    const [userSessionsData, setUserData] = React.useState([]);
+
+    useEffect(() => {
+        fetch('http://doodlebluelive.com:2337/v1/session/user', {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            },
+            method: 'GET',
+
+        })
+            .then((resp) => resp.json())
+            .then((res) => {
+                setUserData(res.data["pastSessions"]);
+                console.log(res.data["pastSessions"]);
+            })
+            .catch((error) => { console.log(error) })
+    }, []);
+
+
     return (
         <>
             <div className="outter_user_container">
@@ -34,22 +58,22 @@ const UserSession = () => {
                                 </TabList>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="overview">
-                                        <TabOne />
+                                        <TabOne tabname={'overview'} tabData={userSessionsData} />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="upcoming">
-                                        <TabOne />
+                                        <TabOne tabname={"Upcoming"} tabData={userSessionsData} />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="pass">
-                                        <TabOne />
+                                        <TabOne tabname={"Moto Pass"} tabData={userSessionsData} />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="previous">
-                                        <TabOne />
+                                        <TabOne tabname={"Previous"} tabData={userSessionsData} />
                                     </TabPanel>
                                 </div>
                             </Tabs>
@@ -61,7 +85,8 @@ const UserSession = () => {
     );
 };
 
-const TabOne = () => {
+const TabOne = ({ tabname, tabData }) => {
+
     const [visible, setVisible] = useState([3]);
 
     const setViewMore = () => {
@@ -71,10 +96,11 @@ const TabOne = () => {
         <div className="tabPanel_overview">
             <div className="tabPanel_overview_left">
                 <div className="TP_overview_wrapper">
-                    <h3>Upcoming Sessions</h3>
+                    <h3>{tabname} Sessions</h3>
                     <div className="TP_US_overview">
                         <div className="TP_US_overview_inner">
-                            {Data.slice(0, visible).map((data, index) => {
+                            {tabData.slice(0, visible).map((data, index) => {
+                                console.log(tabData);
                                 return (
                                     <>
                                         <div
@@ -83,33 +109,33 @@ const TabOne = () => {
                                         >
                                             <div className="TP_USession_dates">
                                                 <h4>
-                                                    {data.date}
-                                                    <span>{data.month}</span>
+                                                    {data.createdAt.substr(8, 2)}
+                                                    <span>{datamonth[data.createdAt.substr(5,2)]}</span>
                                                 </h4>
                                             </div>
                                             <div className="TP_USession_data">
-                                                <h2>{data.heading}</h2>
+                                                <h2>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2>
                                                 <div className="TP_USession_data_icons">
                                                     <h5>
                                                         <img
-                                                            src={data.imgAva}
+                                                            src={AvailabilityIcon}
                                                             alt="icon"
                                                         />
-                                                        {data.avaTime}
+                                                        {Data[0].avaTime}
                                                     </h5>
                                                     <h5>
                                                         <img
-                                                            src={data.imgLoc}
+                                                            src={LocationIcon}
                                                             alt="icon"
                                                         />
-                                                        {data.loc}
+                                                        {Data[0].loc}
                                                     </h5>
                                                 </div>
                                                 <div className="TP_USession_data_buttons">
                                                     <button>Reschedule</button>
                                                     <button>Cancel</button>
                                                     <div className="button_boarder">
-                                                        <button>
+                                                        <button onClick={() => history.push({ pathname: '/user/with-friends' })}>
                                                             Add Friends{" "}
                                                         </button>
                                                         <img
@@ -154,6 +180,7 @@ const TabOne = () => {
                             <h2>PREVIOUS SESSIONS</h2>
                             <div className="row_two_scroll">
                                 {Data.map((data, index) => {
+
                                     return (
                                         <>
                                             <div
@@ -246,5 +273,20 @@ const Data = [
         prevDate: "02 May 2021",
     },
 ];
+
+const datamonth = {
+    '01':'Jan',
+    '02':'Feb',
+    '03':'Mar',
+    '04':'Apr',
+    '05':'May',
+    '06':'Jun',
+    '07':'Jul',
+    '08':'Aug',
+    '09':'Sep',
+    '10':'Oct',
+    '11':'Nov',
+    '12':'Dec',
+}
 
 export default UserSession;
