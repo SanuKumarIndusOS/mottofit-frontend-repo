@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[310],{548:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/My Earnings Icon.8521d7b6.svg"}}]);
-//# sourceMappingURL=310.0af656a0.chunk.js.map

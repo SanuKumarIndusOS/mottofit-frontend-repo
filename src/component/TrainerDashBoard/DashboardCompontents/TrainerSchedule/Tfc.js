@@ -387,10 +387,9 @@ function Tfc() {
     }
     const toggleEditMode = () => {
         console.log("edit mode", makeDefault);
-        if(makeDefault)
-        {
-            saveDefaultWeeks()
-            setMakeDefault(!makeDefault)
+        if (makeDefault) {
+            saveDefaultWeeks();
+            setMakeDefault(!makeDefault);
         }
         setEditMode(!editMode);
     };
@@ -442,7 +441,7 @@ function Tfc() {
                 value={cells}
                 onChange={(cells) => setCells(cells)}
             >
-                <th>
+                <thead>
                     <td disabled>
                         <h6
                             style={{
@@ -497,14 +496,14 @@ function Tfc() {
                         </div>
                         <div className="table_header_txt">SAT</div>
                     </td>
-                    <td disabled>
+                    <td disabled style={{ height: "120px" }}>
                         <div className="table_header_number">
                             {cal[6].slice(8, 10)}
                         </div>
                         <div className="table_header_txt">SUN</div>
                     </td>
-                </th>
-                <tr>
+                </thead>
+                <tr style={{ height: "70px" }}>
                     <td disabled className="slot_time">
                         {time[0]}
                     </td>
@@ -536,7 +535,7 @@ function Tfc() {
                         }
                     })}
                 </tr>
-                <tr>
+                <tr style={{ height: "70px" }}>
                     <td disabled className="slot_time">
                         {time[1]}
                     </td>
@@ -567,7 +566,7 @@ function Tfc() {
                         }
                     })}
                 </tr>
-                <tr>
+                <tr style={{ height: "70px" }}>
                     <td disabled className="slot_time">
                         {time[2]}
                     </td>
@@ -598,7 +597,7 @@ function Tfc() {
                         }
                     })}
                 </tr>
-                <tr>
+                <tr style={{ height: "70px" }}>
                     <td disabled className="slot_time">
                         {time[3]}
                     </td>
@@ -629,7 +628,7 @@ function Tfc() {
                         }
                     })}
                 </tr>
-                <tr>
+                <tr style={{ height: "70px" }}>
                     <td disabled className="slot_time">
                         {time[4]}
                     </td>
@@ -660,7 +659,7 @@ function Tfc() {
                         }
                     })}
                 </tr>
-                <tr>
+                <tr style={{ height: "70px" }}>
                     <td disabled className="slot_time">
                         {time[5]}
                     </td>
@@ -694,12 +693,9 @@ function Tfc() {
             </TableDragSelect>
         );
         tableData2 = (
-            <table
-              
-                className="table2"
-            >
+            <table className="table2">
                 <thead>
-                    <tr>
+                    <tr style={{ height: "70px" }}>
                         <th disabled>
                             <h6
                                 style={{
@@ -764,7 +760,7 @@ function Tfc() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr style={{ height: "70px" }}>
                         <td
                             disabled
                             className="slot_time"
@@ -798,7 +794,7 @@ function Tfc() {
                             }
                         })}
                     </tr>
-                    <tr>
+                    <tr style={{ height: "70px" }}>
                         <td disabled className="slot_time">
                             {time[1]}
                         </td>
@@ -827,7 +823,7 @@ function Tfc() {
                             }
                         })}
                     </tr>
-                    <tr>
+                    <tr style={{ height: "70px" }}>
                         <td disabled className="slot_time">
                             {time[2]}
                         </td>
@@ -856,7 +852,7 @@ function Tfc() {
                             }
                         })}
                     </tr>
-                    <tr>
+                    <tr style={{ height: "70px" }}>
                         <td disabled className="slot_time">
                             {time[3]}
                         </td>
@@ -885,7 +881,7 @@ function Tfc() {
                             }
                         })}
                     </tr>
-                    <tr>
+                    <tr style={{ height: "70px" }}>
                         <td disabled className="slot_time">
                             {time[4]}
                         </td>
@@ -914,7 +910,7 @@ function Tfc() {
                             }
                         })}
                     </tr>
-                    <tr>
+                    <tr style={{ height: "70px" }}>
                         <td disabled className="slot_time">
                             {time[5]}
                         </td>
@@ -1051,9 +1047,15 @@ function Tfc() {
                     {
                         //Check if message failed
                         editMode ? (
-                            <div style={{height:"530px", width:"960px"}}> {tableData} </div>
+                            <div style={{ height: "530px", width: "960px" }}>
+                                {" "}
+                                {tableData}{" "}
+                            </div>
                         ) : (
-                            <div style={{height:"530px", width:"960px"}}> {tableData2} </div>
+                            <div style={{ height: "530px", width: "960px" }}>
+                                {" "}
+                                {tableData2}{" "}
+                            </div>
                         )
                     }
                     <div className="scheduler_button">
@@ -1062,7 +1064,6 @@ function Tfc() {
                                 <input
                                     type="checkbox"
                                     id="defualt"
-                                   
                                     onChange={(e) => {
                                         setMakeDefault(e.target.checked);
                                     }}

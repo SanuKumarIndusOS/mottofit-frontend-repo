@@ -491,12 +491,9 @@ const TrainerSetUpProfileFC = ({
                                     <div className="profile_wrapper_container ">
                                         <div className="profile_header">
                                             <div className="inner_profile container">
-                                                {/* {trainerPersonalData.profilePicture ? ( */}
                                                 <img
-                                                    // onerror='this.style.display = "none"'
                                                     src={
                                                         trainerPersonalData.profilePicture
-                                                        // : "https://1m19tt3pztls474q6z46fnk9-wpengine.netdna-ssl.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"
                                                     }
                                                     alt="Image not Added"
                                                 />
@@ -510,19 +507,11 @@ const TrainerSetUpProfileFC = ({
                                                         {trainerPersonalData.areaOfExpertise.toString()}
                                                     </p>
                                                 </div>
-                                                {/* <div className="profile_header_link"> */}
-                                                {/* <img src={ArrowBack} alt="icon" /> */}
-                                                {/* <Link to="/trainer/find">
-                                        Back to Search
-                                    </Link> */}
-                                                {/* <label style = {{color:"#bcbcbc"}}>Back to Search</label> */}
-                                                {/* </div> */}
                                             </div>
                                         </div>
                                         <div className="profile_main_contents container">
                                             <div className="profile_aside">
                                                 <div className="profile_aside_link">
-                                                    {/* <Link to="/">View Calender</Link> */}
                                                     <label>View Calender</label>
                                                     <img
                                                         src={ArrowNext}
@@ -612,47 +601,7 @@ const TrainerSetUpProfileFC = ({
                                                                 />
                                                             </h2>
                                                             <hr />
-                                                            {/* model */}
-                                                            {/* {open ? (
-                                            <Modal
-                                                open={open}
-                                                onClose={() => setOpen(false)}
-                                                center
-                                                closeIcon={closeIcon}
-                                                container={myRef.current}
-                                                styles={{
-                                                    boaderRadius: "10px",
-                                                }}
-                                            >
-                                                <div
-                                                    style={{
-                                                        textAlign: "center",
-                                                        height: "300px",
-                                                        width: "600px",
-                                                        padding: "2em",
-                                                    }}
-                                                    className="model_styles"
-                                                >
-                                                    <h2>
-                                                        Want to Train with
-                                                        Friends?
-                                                    </h2>
-                                                    <p>
-                                                        Make your workout social
-                                                        & fun, while saving
-                                                        money! Complete your
-                                                        payment and add friends
-                                                        to your session simply
-                                                        by sending them an
-                                                        invite. Once they accept
-                                                        your invite, your
-                                                        session rate will
-                                                        automatically be
-                                                        adjusted.
-                                                    </p>
-                                                </div>
-                                            </Modal>
-                                        ) : null} */}
+
                                                             <div className="profile_aside_inner_item">
                                                                 {trainerPersonalData.socialSessionPricing &&
                                                                 trainerPersonalData
@@ -724,53 +673,10 @@ const TrainerSetUpProfileFC = ({
                                                                 <img
                                                                     src={QMark}
                                                                     alt="icon"
-                                                                    // onClick={() =>
-                                                                    //     setOpenClassModel(true)
-                                                                    // }
                                                                     className="model_Qmark"
                                                                 />
                                                             </h2>
                                                             <hr />
-                                                            {/* model */}
-                                                            {/* {openClassModel ? (
-                                            <Modal
-                                                open={openClassModel}
-                                                // onClose={() =>
-                                                //     setOpenClassModel(false)
-                                                // }
-                                                center
-                                                closeIcon={closeIcon}
-                                                container={myRef.current}
-                                                styles={{
-                                                    boaderRadius: "10px",
-                                                }}
-                                            >
-                                                <div
-                                                    style={{
-                                                        textAlign: "center",
-                                                        height: "300px",
-                                                        width: "600px",
-                                                        padding: "2em",
-                                                    }}
-                                                    className="model_styles"
-                                                >
-                                                    <h2>
-                                                        Want to Create a Class?
-                                                    </h2>
-                                                    <p>
-                                                        Design your very own
-                                                        workout party with the
-                                                        vertical & location of
-                                                        your choice. Create a
-                                                        class by paying a flat
-                                                        rate and adding up to 19
-                                                        friends. You will be
-                                                        notified once they
-                                                        accept your invite.
-                                                    </p>
-                                                </div>
-                                            </Modal>
-                                        ) : null} */}
 
                                                             <div className="profile_aside_inner_item">
                                                                 <h6>
@@ -859,28 +765,13 @@ const TrainerSetUpProfileFC = ({
                                                                     Location
                                                                 </h4>
                                                             </div>
-                                                            {/* <div className="profile_share">
-                                                                <img
-                                                                    src={Share}
-                                                                    alt="icon"
-                                                                />
-                                                                <Link to="/">
-                                                                    Share
-                                                                    Profile
-                                                                </Link>
-                                                            </div> */}
                                                         </div>
                                                     </div>
-                                                    {/* <button>
-                                                        Book a session{" "}
-                                                        <ArrowHoverBlacked />
-                                                    </button> */}
                                                 </div>
                                             </div>
                                             <div className="profile_trainer_data">
                                                 <div className="profile_right_data">
                                                     <div className="profile_right_item1">
-                                                        {/* <img src={Quote} alt="qoute" /> */}
                                                         <h6>
                                                             {trainerData.motto
                                                                 ? trainerData.motto
@@ -978,14 +869,6 @@ const TrainerSetUpProfileFC = ({
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {/* <div className="profile_right_item4">
-                                        <h2>Jane’s Schedule </h2>
-                                        <div
-                                            className="profile_event_schedular"
-                                            onClick={() => console.log("hello")}
-                                        ></div>
-                                    </div> */}
-                                                    {/* </div> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -1019,8 +902,7 @@ const TrainerSetUpProfileFC = ({
                                     <textarea
                                         type="text"
                                         name="comment"
-                                        placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here
-                                        will be searchable through our search bar"
+                                        placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here will be searchable through our search bar"
                                         onChange={handleInputChange}
                                         value={
                                             trainerData.trainingProcessDescription

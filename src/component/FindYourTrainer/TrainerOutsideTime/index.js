@@ -34,7 +34,7 @@ const TrainerCardOutside = (props) => {
                                 />
 
                                 <div className="card-body">
-                                    <h3>
+                                    <h3 style={{ textTransform: "capitalize" }}>
                                         {outSideData[data]["firstName"]}&nbsp;
                                         {outSideData[data]["lastName"]}
                                     </h3>

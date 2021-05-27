@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 .outter_container_bg {
-    height: 2053px;
+    height: auto;
     .container {
         .links_wrapper {
             display: flex;
@@ -77,7 +77,7 @@
                 }
 
                 .contents_wrapper {
-                    margin: 3em 0.5em;
+                    margin: 3em 0.5em 0 0.5em;
                     width: 100%;
                     height: auto;
                     .item1 {
@@ -496,7 +496,7 @@
         }
         .bg_watermark {
             position: relative;
-            top: -167px;
+            top: 0px;
             left: -50px;
         }
     }

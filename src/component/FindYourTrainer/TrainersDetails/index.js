@@ -36,13 +36,13 @@ const TrainerCards = (props) => {
                             <div className="card" key={index}>
                                 <img
                                     className="card-img-top"
-                                    // src={bestMatchData[data]["profilePicture"]}
-                                    src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                    src={bestMatchData[data]["profilePicture"]}
+                                    // src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                                     style={{ objectFit: "cover" }}
                                 />
 
                                 <div className="card-body">
-                                    <h3>
+                                    <h3 style={{ textTransform: "capitalize" }}>
                                         {bestMatchData[data]["firstName"]}&nbsp;
                                         {bestMatchData[data]["lastName"]}
                                     </h3>
@@ -112,7 +112,8 @@ const TrainerCards = (props) => {
                                             backgroundColor: "#53BFD2",
                                         }}
                                         onClick={() => {
-                                            console.log(bestMatchData[data]);
+                                            // console.log(bestMatchData[data]);
+                                            // if (localStorage.getItem("token")) {
                                             history.push({
                                                 pathname: "/user/scheduler",
                                                 state: {
@@ -124,6 +125,9 @@ const TrainerCards = (props) => {
                                                         bestMatchData[data],
                                                 },
                                             });
+                                            // } else {
+                                            //     alert("Please Login");
+                                            // }
                                         }}
                                     >
                                         book a session

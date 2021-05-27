@@ -3,9 +3,7 @@ import moment from "moment";
 import BackIcon from "../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import "./styles.scss";
-function UserScheduler() {
-    const [editMode, setEditMode] = React.useState(false);
-
+function UserScheduler(props) {
     //   let date = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     let early_bird = [
         "05:00 AM",
@@ -85,8 +83,7 @@ function UserScheduler() {
     );
     const [endWeek, setendWeek] = React.useState(moment().endOf("isoWeek"));
 
-    const token =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyYWYxZDY0LWZhZmUtNGE4YS05YzUyLWRmMDViOWNkMDBkMyIsInR5cGUiOiJ0cmFpbmVyIiwiaWF0IjoxNjIyMDg5MjU5LCJleHAiOjE2MjIwOTY0NTl9.B1Ac8MV-2SYfVzO35hI9u3wuNCR1FdwlLx2Ihtm-V_8";
+    const token = localStorage.getItem("token");
 
     var dt = new Object();
     var lt = new Object();
@@ -279,7 +276,9 @@ function UserScheduler() {
         //     TimeSlot
         // );
         fetch(
-            "http://doodlebluelive.com:2307/v1/trainer/calenderView?startDate=" +
+            "http://doodlebluelive.com:2307/v1/trainer/calenderView?trainerId=" +
+                props.id +
+                "&startDate=" +
                 startDate +
                 "&endDate=" +
                 endDate +

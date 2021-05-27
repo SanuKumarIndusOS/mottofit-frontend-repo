@@ -532,7 +532,7 @@ const TrainerProfile = () => {
                                             Schedule{" "}
                                         </h2>
 
-                                        <UserScheduler />
+                                        <UserScheduler id={id} />
                                     </div>
                                     {/* </div> */}
                                 </div>

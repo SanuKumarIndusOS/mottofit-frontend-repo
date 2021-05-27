@@ -30,6 +30,7 @@ const Datatable = ({ trainerList, fetchAllTrainers, loading }) => {
         })
             .then((response) => response.json())
             .then((data) => {
+                alert("Approved");
                 console.log("Success:", data);
                 fetchAllTrainers();
             })

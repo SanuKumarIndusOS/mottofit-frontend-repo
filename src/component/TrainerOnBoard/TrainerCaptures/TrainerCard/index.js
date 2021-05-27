@@ -313,7 +313,7 @@ const TrainerCardFC = ({
                                 style={{ paddingLeft: "50px" }}
                             >
                                 <div
-                                    className="row"
+                                    className="row m-0"
                                     style={{ alignleft: "auto" }}
                                 >
                                     <div className="card">
