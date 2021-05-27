@@ -390,6 +390,42 @@ function Tfc() {
         setEditMode(!editMode);
     };
 
+    const saveDefaultWeeks = () => {
+        console.log(
+            "clicked",
+            startWeek.format("YYYY-MM-DD"),
+            endWeek.format("YYYY-MM-DD"),
+            TimeSlot
+        );
+
+        var def_body = {
+            startDate: startWeek.format("YYYY-MM-DD"),
+            endDate: endWeek.format("YYYY-MM-DD"),
+            defaultWeeks: 2,
+            mode: TimeSlot,
+        };
+
+        console.log(def_body);
+
+        fetch("http://doodlebluelive.com:2307/v1/slot/make-default", {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+            body: JSON.stringify(def_body),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Slot def blocked");
+                setCells(tempcells);
+                getAvailableSlots(startWeek, endWeek);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
     let tableData;
 
     let tableData2;
@@ -1018,16 +1054,29 @@ function Tfc() {
                     }
                     <div className="scheduler_button">
                         {editMode ? (
-                            <button
-                                onClick={toggleEditMode}
-                                className="scheduler_button"
-                                style={{
-                                    backgroundColor: "#53d27d",
-                                    width: "100%",
-                                }}
-                            >
-                                SAVE
-                            </button>
+                            <>
+                                <input type="checkbox" id="defualt" />
+                                <label
+                                    for="defualt"
+                                    style={{ color: "#898989" }}
+                                    className="default_label"
+                                    onChange={saveDefaultWeeks}
+                                >
+                                    {" "}
+                                    Make a defualt
+                                </label>
+                                <br></br>
+                                <button
+                                    onClick={toggleEditMode}
+                                    className="scheduler_button"
+                                    style={{
+                                        backgroundColor: "#53d27d",
+                                        width: "100%",
+                                    }}
+                                >
+                                    SAVE
+                                </button>
+                            </>
                         ) : (
                             <button
                                 onClick={toggleEditMode}
