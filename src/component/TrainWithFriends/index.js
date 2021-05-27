@@ -43,6 +43,8 @@ const TrainWithFriends = () => {
             friendPhone: "",
         },
     ]);
+
+    let trainingType = localStorage.getItem('sessionTrainingType');
     const handleChangeFriendInput = (index, event) => {
         const values = [...friendsInput];
         values[index][event.target.name] = event.target.value;
@@ -51,13 +53,18 @@ const TrainWithFriends = () => {
 
     const handleAddFriendFields = () => {
         console.log(history);
+
         setFriendsInput([
             ...friendsInput,
             { friendName: "", friendEmail: "", friendPhone: "" },
         ]);
-    };
+
+    }
+
 
     const updateSessionApi = () => {
+        let sessionId = localStorage.getItem('sessionId');
+
         fetch("http://doodlebluelive.com:2337/v1/session/update", {
             headers: {
                 "Content-Type": "application/json",
@@ -67,11 +74,17 @@ const TrainWithFriends = () => {
             body: JSON.stringify(
                 {
                     "friends":
-                        [{ "email": "stageuser001@doodleblue.com", "firstName": "John", "lastName": "Doe 001", "phoneNo": "8220681305" }]
+                        [
+                            { "email": "stageuser001@doodleblue.com", "firstName": "John", "lastName": "Doe 001", "phoneNo": "8220681305" }
+                        ],
+                    "sessionId": sessionId,
+
                 }),
         })
             .then((resp) => resp.json())
-            .then((res) => console.log(res))
+            .then((res) => {
+                console.log(res)
+            })
             .catch((err) => console.log(err))
     }
 
@@ -233,13 +246,17 @@ const TrainWithFriends = () => {
                                                         Invite Friends{" "}
                                                         <ArrowHoverBlacked />{" "}
                                                     </button>
-                                                    <h5
-                                                        onClick={
-                                                            handleAddFriendFields
-                                                        }
-                                                    >
-                                                        + Add More Friends
-                                                    </h5>
+                                                    {
+                                                        ((trainingType === 'social' && friendsInput.length < 3) ||
+                                                            (trainingType === 'class' && friendsInput.length < 12)) ?
+                                                            <h5
+                                                                onClick={
+                                                                    handleAddFriendFields
+                                                                }
+                                                            >
+                                                                + Add More Friends
+                                                    </h5> : ''
+                                                    }
                                                 </div>
                                             </form>
                                         </div>
