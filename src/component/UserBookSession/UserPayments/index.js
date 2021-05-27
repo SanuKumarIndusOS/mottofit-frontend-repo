@@ -39,13 +39,19 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
   }, []);
 
   const ScheduleSession = () => {
+
+    let trainingtype = location.state.sessionType;
+    if (trainingtype === 'group') {
+      trainingtype = 'social';
+    }
+
     const scheduleBody = {
       trainerId: location.state.slotDetails["id"],
       title:
         location.state.slotDetails["Name"] +
         " " +
         location.state.slotDetails["activity"],
-      trainingType: location.state.sessionType,
+      trainingType: trainingtype,
       sessionType: location.state.sessionData["preferedTrainingMode"],
       activity: location.state.slotDetails["activity"],
       sessionStatus: "created",
@@ -65,10 +71,14 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
       method: "POST",
       body: JSON.stringify(scheduleBody),
     })
-      .then((res) => res.json())
+      .then((resp) => resp.json())
       .then((res) => {
         console.log(res);
-        if (res.session.trainingType === "1on1") {
+
+        localStorage.setItem('sessionId',res.session.id);
+        localStorage.setItem('sessionTrainingType',res.session.trainingType);
+        
+        if (res.session.trainingType === '1on1') {
           history.push({
             pathname: "/users/dashboard/session",
 
@@ -78,18 +88,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
             },
           });
         } else if (
-          res.session.trainingType === "social" ||
-          res.session.trainingType === "group"
-        ) {
-          history.push({
-            pathname: "user/with-friends",
-
-            state: {
-              slotDetails: location.state["slotDetails"],
-              sessionData: location.state["sessionData"],
-            },
-          });
-        } else if (res.session.trainingType === "class") {
+          res.session.trainingType === "social" || res.session.trainingType==='class') {
           history.push({
             pathname: "user/with-friends",
 
