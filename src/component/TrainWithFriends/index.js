@@ -248,7 +248,7 @@ const TrainWithFriends = () => {
                                                     </button>
                                                     {
                                                         ((trainingType === 'social' && friendsInput.length < 3) ||
-                                                            (trainingType === 'class' && friendsInput.length < 12)) ?
+                                                            (trainingType === 'class' && friendsInput.length < 14)) ?
                                                             <h5
                                                                 onClick={
                                                                     handleAddFriendFields

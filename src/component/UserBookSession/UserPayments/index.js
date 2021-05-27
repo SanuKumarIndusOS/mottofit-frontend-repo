@@ -71,12 +71,14 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
       method: "POST",
       body: JSON.stringify(scheduleBody),
     })
-      .then((res) => res.json())
+      .then((resp) => resp.json())
       .then((res) => {
         console.log(res);
+
         localStorage.setItem('sessionId',res.session.id);
         localStorage.setItem('sessionTrainingType',res.session.trainingType);
-        if (res.session.trainingType === "1on1") {
+        
+        if (res.session.trainingType === '1on1') {
           history.push({
             pathname: "/users/dashboard/session",
 
