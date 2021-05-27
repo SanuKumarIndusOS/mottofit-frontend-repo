@@ -386,8 +386,12 @@ function Tfc() {
             });
     }
     const toggleEditMode = () => {
-        console.log("edit mode");
-
+        console.log("edit mode", makeDefault);
+        if(makeDefault)
+        {
+            saveDefaultWeeks()
+            setMakeDefault(!makeDefault)
+        }
         setEditMode(!editMode);
     };
 
@@ -691,8 +695,7 @@ function Tfc() {
         );
         tableData2 = (
             <table
-                value={cells}
-                onChange={(cells) => setCells(cells)}
+              
                 className="table2"
             >
                 <thead>
@@ -1048,9 +1051,9 @@ function Tfc() {
                     {
                         //Check if message failed
                         editMode ? (
-                            <div> {tableData} </div>
+                            <div style={{height:"530px", width:"960px"}}> {tableData} </div>
                         ) : (
-                            <div> {tableData2} </div>
+                            <div style={{height:"530px", width:"960px"}}> {tableData2} </div>
                         )
                     }
                     <div className="scheduler_button">
@@ -1059,7 +1062,7 @@ function Tfc() {
                                 <input
                                     type="checkbox"
                                     id="defualt"
-                                    onClick={saveDefaultWeeks}
+                                   
                                     onChange={(e) => {
                                         setMakeDefault(e.target.checked);
                                     }}
@@ -1071,7 +1074,7 @@ function Tfc() {
                                     className="default_label"
                                 >
                                     {" "}
-                                    Make a defualt
+                                    Make defualt
                                 </label>
                                 <br></br>
                                 <button
