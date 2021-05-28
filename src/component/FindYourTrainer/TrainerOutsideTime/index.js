@@ -5,6 +5,7 @@ import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked"
 
 const TrainerCardOutside = (props) => {
     const [outSideData, setOutSideData] = React.useState([]);
+    const urlmy = "http://doodlebluelive.com:2307";
 
     React.useEffect(() => {
         setOutSideData(props.content);
@@ -25,12 +26,19 @@ const TrainerCardOutside = (props) => {
 
                 <div className="row">
                     {Object.keys(outSideData).map((data, index) => {
+                        let imgdb = `${urlmy}${outSideData[data]["profilePicture"]}`;
+                        console.log(imgdb, "imgdb");
                         return (
                             <div className="card" key={index}>
                                 <img
                                     className="card-img-top"
-                                    src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                    src={imgdb}
                                     style={{ objectFit: "cover" }}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src =
+                                            "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                                    }}
                                 />
 
                                 <div className="card-body">

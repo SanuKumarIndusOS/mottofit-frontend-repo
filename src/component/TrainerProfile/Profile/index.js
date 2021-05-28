@@ -73,6 +73,11 @@ const TrainerProfile = () => {
                                     <img
                                         src={trainerProfileData.profilePicture}
                                         alt="Not Found Image"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src =
+                                                "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                                        }}
                                     />
                                 ) : (
                                     <img

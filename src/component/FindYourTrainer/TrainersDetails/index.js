@@ -7,7 +7,7 @@ import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked"
 const TrainerCards = (props) => {
     const [bestMatchData, setbestMatchData] = useState([]);
     console.log(bestMatchData, "bestmtch");
-    const urlmy="http://doodlebluelive.com:2307";
+    const urlmy = "http://doodlebluelive.com:2307";
 
     useEffect(() => {
         setbestMatchData(props.content);
@@ -33,14 +33,21 @@ const TrainerCards = (props) => {
                 {no_match}
                 <div className="row" style={{ alignleft: "auto" }}>
                     {Object.keys(bestMatchData).map((data, index) => {
-                       let imgdb=`${urlmy}${bestMatchData[data]["profilePicture"]}`;
+                        let imgdb = `${urlmy}${bestMatchData[data]["profilePicture"]}`;
+                        console.log(imgdb, "imgdb");
+
                         return (
                             <div className="card" key={index}>
                                 <img
                                     className="card-img-top"
                                     src={imgdb}
-                                    //src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                                     style={{ objectFit: "cover" }}
+                                    alt="Profile Picture Not Found "
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src =
+                                            "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                                    }}
                                 />
 
                                 <div className="card-body">
