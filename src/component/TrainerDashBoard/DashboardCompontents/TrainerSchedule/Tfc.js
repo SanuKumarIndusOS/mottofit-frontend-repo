@@ -4,6 +4,35 @@ import "react-table-drag-select/style.css";
 import moment from "moment";
 import BackIcon from "../../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
+import { Dropdown } from "reactjs-dropdown-component";
+import "./dropdown.scss";
+
+const timeZone = [
+    {
+        label: "Early Bird",
+        value: "EarlyBird",
+    },
+    {
+        label: "Rise & Shine",
+        value: "RiseAndShine",
+    },
+    {
+        label: "Mid-Day Break",
+        value: "MidDayBreak1",
+    },
+    {
+        label: "Mid-Day Lunchtime",
+        value: "MidDayBreak2",
+    },
+    {
+        label: "Happy Hour",
+        value: "HappyHours",
+    },
+    {
+        label: "Never Too Late",
+        value: "NeverTooLate",
+    },
+];
 
 function Tfc() {
     const [makeDefault, setMakeDefault] = React.useState(false);
@@ -989,57 +1018,46 @@ function Tfc() {
                             &ensp;
                         </div>
                         <div className="table_date">
-                            <select
+                            <Dropdown
+                                className="custom_dropdown"
+                                title="Select Time Zone"
+                                list={timeZone}
                                 value={TimeSlot}
                                 onChange={(e) => {
-                                    setTimeSlot(e.target.value);
-                                    console.log(e.target.value);
-                                    if (e.target.value === "EarlyBird") {
+                                    setTimeSlot(e.value);
+                                    console.log(e.value);
+                                    if (e.value === "EarlyBird") {
                                         setTime(early_bird);
                                         console.log("early_bird");
                                     }
 
-                                    if (e.target.value === "RiseAndShine") {
+                                    if (e.value === "RiseAndShine") {
                                         setTime(rise_shine);
                                         console.log("RiseAndShine");
                                     }
 
-                                    if (e.target.value === "MidDayBreak1") {
+                                    if (e.value === "MidDayBreak1") {
                                         setTime(mid_day);
                                         console.log("MidDayBreak");
                                     }
 
-                                    if (e.target.value === "MidDayBreak2") {
+                                    if (e.value === "MidDayBreak2") {
                                         setTime(mid_day_2);
                                         console.log("MidDayBreak2");
                                     }
 
-                                    if (e.target.value === "HappyHours") {
+                                    if (e.value === "HappyHours") {
                                         setTime(happy_hour);
                                         console.log("HappyHours");
                                     }
 
-                                    if (e.target.value === "NeverTooLate") {
+                                    if (e.value === "NeverTooLate") {
                                         setTime(never_too_late);
                                         console.log("NeverTooLate");
                                     }
                                 }}
-                            >
-                                <option value="EarlyBird">Early Bird</option>
-                                <option value="RiseAndShine">
-                                    Rise & Shine
-                                </option>
-                                <option value="MidDayBreak1">
-                                    Mid-Day Break
-                                </option>
-                                <option value="MidDayBreak2">
-                                    Mid-Day Lunchtime
-                                </option>
-                                <option value="HappyHours">Happy Hour</option>
-                                <option value="NeverTooLate">
-                                    Never Too Late
-                                </option>
-                            </select>
+                                name="TimeSlot"
+                            />
                         </div>
                     </div>
                     {/* {tableData}
