@@ -11,11 +11,16 @@ import ArrowNext from "../../../../assets/files/SVG/Arrow Next.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { history } from "helpers";
 import { useEffect } from 'react';
+import moment from "moment";
 
 
 
 const UserSession = () => {
-    const [userSessionsData, setUserData] = React.useState([]);
+    const [userData, setUserData] = React.useState({
+        upcomingSessions: [],
+        pastSessions: [],
+        onGoingSessions: []
+    });
 
     useEffect(() => {
         fetch('http://doodlebluelive.com:2337/v1/session/user', {
@@ -28,8 +33,9 @@ const UserSession = () => {
         })
             .then((resp) => resp.json())
             .then((res) => {
-                setUserData(res.data["pastSessions"]);
-                console.log(res.data["pastSessions"]);
+                setUserData(res.data);
+                console.log(res.data);
+                console.log(userData);
             })
             .catch((error) => { console.log(error) })
     }, []);
@@ -58,22 +64,22 @@ const UserSession = () => {
                                 </TabList>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="overview">
-                                        <TabOne tabname={'overview'} tabData={userSessionsData} />
+                                        <TabOne tabname={'overview'} tabData={userData.upcomingSessions} />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="upcoming">
-                                        <TabOne tabname={"Upcoming"} tabData={userSessionsData} />
+                                        <TabOne tabname={"Upcoming"} tabData={userData.upcomingSessions} />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="pass">
-                                        <TabOne tabname={"Moto Pass"} tabData={userSessionsData} />
+                                        <TabOne tabname={"Moto Pass"} tabData={userData.pastSessions} />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="previous">
-                                        <TabOne tabname={"Previous"} tabData={userSessionsData} />
+                                        <TabOne tabname={"Previous"} tabData={userData.pastSessions} />
                                     </TabPanel>
                                 </div>
                             </Tabs>
@@ -109,8 +115,8 @@ const TabOne = ({ tabname, tabData }) => {
                                         >
                                             <div className="TP_USession_dates">
                                                 <h4>
-                                                    {data.createdAt.substr(8, 2)}
-                                                    <span>{datamonth[data.createdAt.substr(5,2)]}</span>
+                                                    {data.sessionDate.substr(8, 2)}
+                                                    <span>{datamonth[data.sessionDate.substr(5, 2)]}</span>
                                                 </h4>
                                             </div>
                                             <div className="TP_USession_data">
@@ -121,7 +127,7 @@ const TabOne = ({ tabname, tabData }) => {
                                                             src={AvailabilityIcon}
                                                             alt="icon"
                                                         />
-                                                        {Data[0].avaTime}
+                                                        {moment(data.sessionStartTime).format('MMM')}
                                                     </h5>
                                                     <h5>
                                                         <img
@@ -275,18 +281,18 @@ const Data = [
 ];
 
 const datamonth = {
-    '01':'Jan',
-    '02':'Feb',
-    '03':'Mar',
-    '04':'Apr',
-    '05':'May',
-    '06':'Jun',
-    '07':'Jul',
-    '08':'Aug',
-    '09':'Sep',
-    '10':'Oct',
-    '11':'Nov',
-    '12':'Dec',
+    '01': 'Jan',
+    '02': 'Feb',
+    '03': 'Mar',
+    '04': 'Apr',
+    '05': 'May',
+    '06': 'Jun',
+    '07': 'Jul',
+    '08': 'Aug',
+    '09': 'Sep',
+    '10': 'Oct',
+    '11': 'Nov',
+    '12': 'Dec',
 }
 
 export default UserSession;
