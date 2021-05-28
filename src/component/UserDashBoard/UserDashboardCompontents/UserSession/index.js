@@ -65,8 +65,9 @@ const UserSession = () => {
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="overview">
                                         <TabOne
-                                            tabname={"overview"}
+                                            tabname={"Overview"}
                                             tabData={userData.upcomingSessions}
+                                            prevData={userData.pastSessions}
                                         />
                                     </TabPanel>
                                 </div>
@@ -75,6 +76,7 @@ const UserSession = () => {
                                         <TabOne
                                             tabname={"Upcoming"}
                                             tabData={userData.upcomingSessions}
+                                            prevData={userData.pastSessions}
                                         />
                                     </TabPanel>
                                 </div>
@@ -83,6 +85,7 @@ const UserSession = () => {
                                         <TabOne
                                             tabname={"Moto Pass"}
                                             tabData={userData.pastSessions}
+                                            prevData={userData.pastSessions}
                                         />
                                     </TabPanel>
                                 </div>
@@ -91,6 +94,7 @@ const UserSession = () => {
                                         <TabOne
                                             tabname={"Previous"}
                                             tabData={userData.pastSessions}
+                                            prevData={userData.pastSessions}
                                         />
                                     </TabPanel>
                                 </div>
@@ -103,7 +107,7 @@ const UserSession = () => {
     );
 };
 
-const TabOne = ({ tabname, tabData }) => {
+const TabOne = ({ tabname, tabData, prevData }) => {
     const [visible, setVisible] = useState([3]);
 
     const setViewMore = () => {
@@ -249,7 +253,7 @@ const TabOne = ({ tabname, tabData }) => {
                         <div className="row_two_data">
                             <h2>PREVIOUS SESSIONS</h2>
                             <div className="row_two_scroll">
-                                {Data.map((data, index) => {
+                                {prevData.map((data, index) => {
                                     return (
                                         <>
                                             <div
@@ -258,13 +262,57 @@ const TabOne = ({ tabname, tabData }) => {
                                             >
                                                 <div className="row_previous_avater">
                                                     <img
-                                                        src={data.previousImg}
+                                                        src={Jenny}
                                                         alt="profile"
                                                     />
                                                 </div>
                                                 <div className="row_previous_header">
-                                                    <h2>{data.prevHeading}</h2>
-                                                    <p>{data.prevDate}</p>
+                                                    <h2
+                                                        className="d-flex flex-wrap"
+                                                        style={{
+                                                            textTransform:
+                                                                "capitalize",
+                                                        }}
+                                                    >
+                                                        {data.activity}&nbsp;
+                                                        <span
+                                                            style={{
+                                                                textTransform:
+                                                                    "lowerCase",
+                                                            }}
+                                                        >
+                                                            with
+                                                        </span>{" "}
+                                                        &nbsp;
+                                                        <h2
+                                                            className="d-flex flex-wrap"
+                                                            style={{
+                                                                textTransform:
+                                                                    "capitalize",
+                                                            }}
+                                                        >
+                                                            {
+                                                                data
+                                                                    .trainerDetail
+                                                                    .firstName
+                                                            }
+                                                        </h2>
+                                                    </h2>
+                                                    {/* <h2>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2> */}
+                                                    <p>{`${data.sessionDate.substr(
+                                                        8,
+                                                        2
+                                                    )} ${
+                                                        datamonth[
+                                                            data.sessionDate.substr(
+                                                                5,
+                                                                2
+                                                            )
+                                                        ]
+                                                    } ${data.sessionDate.substr(
+                                                        0,
+                                                        4
+                                                    )}`}</p>
                                                 </div>
                                             </div>
                                             <hr />

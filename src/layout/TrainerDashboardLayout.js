@@ -32,7 +32,7 @@ export class TrainerDashboardLayout extends Component {
                 <SideBar isOpen={isOpen} toggle={this.toggle} />
                 <TrainerDashboardTemp>{children}</TrainerDashboardTemp>
                 {/* <div className="main-layout"></div> */}
-                {/* <Footer /> */}
+                <Footer />
             </>
         );
     }

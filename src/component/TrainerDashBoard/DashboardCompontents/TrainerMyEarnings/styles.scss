@@ -250,7 +250,9 @@
                         border-radius: 20px;
                         .ts_card {
                             display: grid;
-                            grid-template-columns: 33% 32% 16% 19%;
+
+                            grid-template-columns: auto auto auto 19%;
+
                             grid-template-rows: auto;
                             align-items: center;
                             height: 170px;

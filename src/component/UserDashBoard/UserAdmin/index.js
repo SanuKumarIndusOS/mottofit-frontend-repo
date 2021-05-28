@@ -18,8 +18,6 @@ const UserDashboard = ({ children }) => {
         axios
             .get("http://doodlebluelive.com:2307/v1/user", { headers })
             .then((data) => {
-                // console.log(data["data"]["data"]["profilePicture"]);
-                // setImgUrl(data["data"]["data"]["profilePicture"]);
                 setUserData(data["data"]["data"]);
             });
     }, []);
@@ -45,7 +43,8 @@ const UserDashboard = ({ children }) => {
                             />
                         </div>
                         <h2 style={{ textTransform: "capitalize" }}>
-                            {userData ? userData.firstName : "Not Added"}
+                            {userData ? userData.firstName : "Not Added"}&nbsp;
+                            {userData ? userData.lastName : "Not Added"}
                         </h2>
                     </div>
 
