@@ -88,23 +88,24 @@ const UserEventSchedular = () => {
                                             style={{
                                                 color: "#898989",
                                                 fontFamily: "Montserrat",
+                                                textTransform: "uppercase",
                                             }}
                                         >
                                             {activity}
                                         </p>
                                     </div>
                                 </div>
-                                <div className="container">
-                                    {/* <UserScheduler
+                                {/* <div className="container"> */}
+                                {/* <UserScheduler
                                         trainerID={location.state["trainerId"]}
                                         parentCallback={callbackFunction}
                                     /> */}
-                                    <UserScheduler2
-                                        id={location.state["trainerId"]}
-                                        parentCallback={callbackFunction}
-                                    />
-                                    <ButtonSection trainerName={trainerName} />
-                                </div>
+                                <UserScheduler2
+                                    id={location.state["trainerId"]}
+                                    parentCallback={callbackFunction}
+                                />
+                                <ButtonSection trainerName={trainerName} />
+                                {/* </div> */}
 
                                 <Link
                                     to={{
