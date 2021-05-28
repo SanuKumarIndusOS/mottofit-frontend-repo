@@ -36,7 +36,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         location: "Online",
         vertical: "Boxing",
         date: "",
-        availability: "EarlyBird",
+        availability: "Early Bird",
     });
     const [date, setDate] = useState(new Date());
     const onClickHandle = () => {
@@ -82,12 +82,15 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
      
     //availabilty_dropdown
     let DropdownHomeAvailability;
+    console.log(DropdownAvailabilityState);
     if (DropdownAvailabilityState) {
         DropdownHomeAvailability = (
             <DropdownAvailability
                 onClick={({ availability }) => {
+                    console.log(availability);
                     setqueryObject({ ...queryObject, availability });
                     TriggerDropDownAvailability();
+                    console.log(availability);
                 }}
             />
 
@@ -145,7 +148,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                                     <div onClick={() => SetLocation("Virtual")}>
                                         {virtualMarkup}
                                     </div>
-                                    <img src={Between} ali="icon" />
+                                    <img src={Between} alt="icon" />
                                     <div
                                         onClick={() => SetLocation("InPerson")}
                                     >

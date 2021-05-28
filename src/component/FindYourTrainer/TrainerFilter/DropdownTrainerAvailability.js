@@ -17,21 +17,22 @@ import NeverTooActive from "../../../assets/files/FindTrainer/AvaliablityDropDow
 
 import "./find.scss";
 
-const DropdownTrainerAvailability = () => {
-    const [ddBoxingState, setddBoxingState] = useState(false);
-    const [ddPilatesState, setddPilatesState] = useState(false);
-    const [ddYogaState, setddYogaState] = useState(false);
-    const [ddHiitState, setddHiitState] = useState(false);
+const DropdownTrainerAvailability = ({ onClick = () => {} }) => {
+    // const [ddBoxingState, setddBoxingState] = useState(false);
+    // const [ddPilatesState, setddPilatesState] = useState(false);
+    // const [ddYogaState, setddYogaState] = useState(false);
+    // const [ddHiitState, setddHiitState] = useState(false);
 
     return (
         <>
-            <div className="box_3_active_trainer">
+            <div className="box_3_active_home">
                 <div className="dd_row_one">
                     <div
                         className="option"
                         onClick={() => {
-                            setddBoxingState(!ddBoxingState);
-                            console.log(ddBoxingState, "boxing");
+                           // setddBoxingState(!ddBoxingState);
+                            onClick({availability:"Early Bird"})
+                            //console.log(ddBoxingState, "boxing");
                         }}
                     >
                         <div className="option_wapper">
@@ -47,8 +48,9 @@ const DropdownTrainerAvailability = () => {
                     <div
                         className="option"
                         onClick={() => {
-                            setddPilatesState(!ddPilatesState);
-                            console.log(ddPilatesState, "pilates");
+                           // setddPilatesState(!ddPilatesState);
+                            onClick({availability:"Rise & Shine"})
+                           // console.log(ddPilatesState, "pilates");
                         }}
                     >
                         <div className="option_wapper">
@@ -65,8 +67,9 @@ const DropdownTrainerAvailability = () => {
                     <div
                         className="option"
                         onClick={() => {
-                            setddHiitState(!ddHiitState);
-                            console.log(ddHiitState, "hiit");
+                           // setddHiitState(!ddHiitState);
+                            onClick({availability:"Mid-day Break"})
+                           // console.log(ddHiitState, "hiit");
                         }}
                     >
                         <div className="option_wapper">
@@ -81,8 +84,9 @@ const DropdownTrainerAvailability = () => {
                     <div
                         className="option"
                         onClick={() => {
-                            setddYogaState(!ddYogaState);
-                            console.log(ddYogaState, "yoga");
+                            //setddYogaState(!ddYogaState);
+                            onClick({availability:"Happy Hour"})
+                            //console.log(ddYogaState, "yoga");
                         }}
                     >
                         <div className="option_wapper">
@@ -99,8 +103,9 @@ const DropdownTrainerAvailability = () => {
                     <div
                         className="option"
                         onClick={() => {
-                            setddYogaState(!ddYogaState);
-                            console.log(ddYogaState, "yoga");
+                           // setddYogaState(!ddYogaState);
+                            onClick({availability:"Never Too Late"})
+                           // console.log(ddYogaState, "yoga");
                         }}
                     >
                         <div className="option_wapper">

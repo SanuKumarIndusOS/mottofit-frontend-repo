@@ -35,12 +35,10 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     useEffect(() => {
         if (trainerQueryData.location && trainerQueryData.date) {
             console.log(trainerQueryData);
-
+            getTrainerDataByQuery();
             setqueryObject(trainerQueryData);
 
             SetLocation(trainerQueryData.location);
-
-            getTrainerDataByQuery();
         } else {
             let payload = {
                 query: {
@@ -90,14 +88,21 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     // Dropdown for availability
     let DropdownAvailability;
     if (DropdownTrainerAvailabilityState) {
-        DropdownAvailability = <DropdownTrainerAvailability />;
+        DropdownAvailability = <DropdownTrainerAvailability 
+        onClick={({ availability }) => {
+            console.log(availability);
+            setqueryObject({ ...queryObject, availability });
+            TriggerDropDownTrainerAvailability();
+            console.log(availability);
+        }}
+        />;
     } else {
         <div>hello</div>;
     }
 
     const TriggerDropDownTrainerAvailability = () => {
         setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
-        setDropdownTrainerAvailabilityValue("Boxing");
+        //setDropdownTrainerAvailabilityValue("Boxing");
     };
 
     let Dropdown;
@@ -212,7 +217,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     const SetLocation = (value) => {
         console.log(value);
 
-        if (value === "Virtual") {
+        if (value === "Online" || value==="Virtual") {
             setvirtualMarkup(
                 <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
             );
