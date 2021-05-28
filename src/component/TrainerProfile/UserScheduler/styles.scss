@@ -91,7 +91,7 @@ table {
     tbody {
         tr {
             .user_time_slot {
-                background: #fff !important;
+                background: #fff;
                 text-align: center;
                 font-family: "Montserrat", sans-serif;
                 font-size: 15px;
@@ -99,13 +99,13 @@ table {
                 line-height: 22px;
                 width: 130px !important;
                 height: 70px !important;
-                border: 2px solid #e6e6e6 !important;
+                border: 2px solid #e6e6e6;
             }
             td {
                 width: 120px !important;
                 height: 70px !important;
                 font-family: "Montserrat", sans-serif !important;
-                background: #dedede !important;
+                background: #dedede;
             }
         }
     }

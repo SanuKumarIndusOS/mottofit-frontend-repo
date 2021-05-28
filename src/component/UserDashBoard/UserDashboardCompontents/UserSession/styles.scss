@@ -1,8 +1,8 @@
 .outter_user_container {
     width: 100%;
-    height: 1000px;
+    height: auto;
     background: #f6f6f6;
-    padding: 1em 3em 1em 2em;
+    padding: 1em 3em 8em 2em;
     .inner_user_container {
         .userSession_heading {
             h2 {
@@ -17,8 +17,8 @@
         }
         .US_tabs_wrapper {
             .rwt__tab {
-                padding: 1em 1em 0 0;
-                margin: 0 2em 1em 0;
+                padding: 1em 1em 0.4em 0;
+                margin: 0 1em 1em 0;
                 text-align: center;
                 letter-spacing: 0.9px;
                 color: #161616;
@@ -26,10 +26,13 @@
                 line-height: 18px;
                 font-size: 22px;
                 font-weight: 600;
+                background-color: transparent;
+
                 font-family: "Montserrat", sans-serif;
             }
             .rwt__tab[aria-selected="true"]:after {
-                width: 86%;
+                width: 85%;
+                background-color: transparent;
                 border-bottom: 3px solid #53bfd2;
             }
             .rwt__tablist:not([aria-orientation="vertical"]) {
@@ -112,6 +115,7 @@
                                         .TP_USession_data {
                                             margin-left: 2em;
                                             h2 {
+                                                display: flex;
                                                 text-align: left;
                                                 letter-spacing: 0px;
                                                 line-height: 35px;
@@ -119,7 +123,7 @@
 
                                                 margin: 0;
                                                 padding: 0;
-                                                line-height: 58px;
+                                                line-height: 22px;
                                                 font-size: 22px;
                                                 font-weight: 600;
                                                 font-family: "Montserrat",
@@ -136,7 +140,7 @@
 
                                                     letter-spacing: 0px;
                                                     color: #898989;
-                                                    line-height: 42px;
+                                                    line-height: 30px;
                                                     font-size: 15px;
                                                     font-weight: 500;
                                                     font-family: "Montserrat",
@@ -144,7 +148,7 @@
                                                     margin: 0 1em 0 0;
 
                                                     img {
-                                                        margin-right: 1em;
+                                                        margin-right: 0.5em;
                                                     }
                                                 }
                                             }
@@ -152,7 +156,7 @@
                                                 display: flex;
                                                 align-items: center;
                                                 width: 100%;
-                                                margin-top: 0.7em;
+                                                // margin-top: 0.7em;
 
                                                 button {
                                                     background: transparent;
@@ -176,7 +180,7 @@
                                                         margin-right: 1em;
                                                         text-align: right;
                                                         position: relative;
-                                                        left: 100px;
+                                                        left: 40px;
                                                         display: flex;
                                                         align-items: center;
                                                         height: 30px;
@@ -196,7 +200,7 @@
                                                     }
                                                     img {
                                                         position: relative;
-                                                        left: 90px;
+                                                        left: 27px;
                                                     }
                                                 }
                                             }
@@ -254,20 +258,21 @@
                                         line-height: 40px;
                                         font-size: 28px;
                                         font-weight: bold;
-                                        font-family: " Cormorant Garamond",
-                                            sans-serif;
+                                        font-family: Cormorant Garamond;
                                     }
                                     p {
                                         text-align: center;
 
                                         letter-spacing: 0.23px;
                                         color: #bcbcbc;
-                                        line-height: 25px;
-                                        font-size: 15px;
+                                        // line-height: 25px;
+                                        font-size: 14px;
                                         font-weight: normal;
                                         font-family: "Montserrat", sans-serif;
                                     }
                                     a {
+                                        display: flex;
+                                        align-items: center;
                                         text-align: right;
                                         letter-spacing: 0.45px;
                                         color: #ffffff;
@@ -296,7 +301,7 @@
                                         text-transform: uppercase;
                                         line-height: 22px;
                                         font-size: 18px;
-                                        font-weight: normal;
+                                        font-weight: 600;
                                         font-family: "Montserrat", sans-serif;
                                     }
                                     .row_two_scroll {
@@ -319,11 +324,10 @@
                                                 margin-left: 1em;
                                                 h2 {
                                                     text-align: left;
-
                                                     letter-spacing: 0px;
                                                     color: #161616;
                                                     margin: 0;
-                                                    line-height: 58px;
+                                                    line-height: 16px;
                                                     font-size: 16px;
                                                     font-weight: 600;
                                                     font-family: "Montserrat",
@@ -334,7 +338,7 @@
                                                     text-align: left;
                                                     letter-spacing: 0px;
                                                     color: #898989;
-                                                    line-height: 42px;
+                                                    line-height: 20px;
                                                     font-size: 14px;
                                                     font-weight: 500;
                                                     font-family: "Montserrat",

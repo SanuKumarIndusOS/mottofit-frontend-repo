@@ -176,18 +176,27 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
                                                     >
                                                         <CardForm />
                                                     </Elements>
+                                                    <button
+                                                        className="ud_but"
+                                                        onClick={
+                                                            ScheduleSession
+                                                        }
+                                                    >
+                                                        Continue{" "}
+                                                        <ArrowHoverBlacked />
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="user_friends">
-                                    <button
+                                    {/* <button
                                         className="ud_but"
                                         onClick={ScheduleSession}
                                     >
                                         Continue <ArrowHoverBlacked />
-                                    </button>
+                                    </button> */}
                                     <h2>
                                         Session cost too high? Train with
                                         friends and split the bill

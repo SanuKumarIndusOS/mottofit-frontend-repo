@@ -1,6 +1,7 @@
 .user_payment_outer_container {
     background: #f6f6f6;
 
+    padding-bottom: 5em;
     height: auto;
     .user_payment_inner_container {
         width: 100%;
@@ -42,11 +43,11 @@
         }
         .user_payment_grid {
             display: grid;
-            grid-template-columns: 60% 40%;
+            grid-template-columns: 55% 44%;
             height: auto;
             grid-template-rows: auto;
             grid-column-gap: 40px;
-            margin: 3em 0 8em 0;
+            margin: 3em 0 5em 0;
             .user_payment_left_outter {
                 .user_payment_left {
                     height: auto;
@@ -126,7 +127,7 @@
                                         color: #2c2c2c;
                                         font-size: 20px;
                                         line-height: 58px;
-                                        font-weight: normal;
+                                        font-weight: 500;
                                         font-family: "Montserrat", sans-serif;
                                         input {
                                             width: 100%;
@@ -154,7 +155,7 @@
                                         color: #2c2c2c;
                                         font-size: 20px;
                                         line-height: 58px;
-                                        font-weight: normal;
+                                        font-weight: 500;
                                         font-family: "Montserrat", sans-serif;
 
                                         margin: 1em 0 1em 0;
@@ -240,7 +241,7 @@
                                     letter-spacing: 0px;
                                     color: #898989;
                                     font-size: 15px;
-                                    line-height: 42px;
+                                    line-height: 20px;
                                     font-weight: 500;
                                     font-family: "Montserrat", sans-serif;
                                     margin: 1em 0 0.5em 0;
@@ -287,17 +288,19 @@
                             }
                         }
                         .submit {
-                            margin-top: 4em;
+                            // margin-top: 4em;
+                            display: flex;
+
                             button {
                                 display: flex;
                                 align-items: center;
                                 margin-top: 4em;
-                                width: 240px;
+                                width: 260px;
                                 height: 52px;
                                 outline: none;
                                 border: none;
                                 background: #53bfd2;
-                                text-transform: uppercase;
+                                // text-transform: uppercase;
                                 text-align: right;
                                 letter-spacing: 0.45px;
                                 color: #ffffff;
@@ -376,7 +379,7 @@
                 }
                 .user_details_wrapper {
                     .user_payment_details {
-                        margin-top: 2em;
+                        margin: 2em 0;
                         h3 {
                             text-align: left;
                             letter-spacing: 0.75px;
@@ -402,7 +405,7 @@
                         }
                     }
                     .user_coupon {
-                        margin-top: 2em;
+                        margin-top: 3em;
                         h2 {
                             text-align: left;
                             letter-spacing: 0px;
@@ -416,17 +419,24 @@
                             height: 45px;
                             border: 2px solid #bcbcbc;
                             border-radius: 30px;
+                            font-family: "Montserrat", sans-serif;
+                            font-size: 20px;
+
                             padding: 0 1.5em;
+                            margin-top: 1em;
                         }
                         input::placeholder {
                             font-size: 20px;
-                            color: #898989;
+                            color: #bcbcbc;
+                            font-weight: 500;
                         }
                         button {
                             position: relative;
                             right: 0;
-                            left: 380px;
-                            top: -36px;
+
+                            left: 362px;
+                            top: -45px;
+
                             text-align: left;
                             text-decoration: underline;
                             letter-spacing: 0px;
@@ -438,6 +448,7 @@
                             font-size: 15px;
                             line-height: 42px;
                             font-weight: 500;
+                            background-color: transparent;
                             font-family: "Montserrat", sans-serif;
                         }
                     }
@@ -456,7 +467,7 @@
                                         height: 35px;
                                         font-family: "Montserrat", sans-serif;
                                         font-size: 20px;
-                                        font-weight: 700;
+                                        font-weight: 500;
                                         letter-spacing: 0px;
                                         color: #626262;
                                     }
@@ -470,7 +481,7 @@
                                             margin: 0;
                                             padding: 0;
                                             font-size: 20px;
-                                            line-height: 58px;
+                                            line-height: 45px;
                                             font-weight: normal;
                                             font-family: "Montserrat",
                                                 sans-serif;
@@ -501,7 +512,7 @@
                                         opacity: 1;
                                         font-family: "Montserrat", sans-serif;
                                         font-size: 20px;
-                                        font-weight: 700;
+                                        font-weight: 500;
                                     }
                                     .user_data_table_right {
                                         text-align: right;
@@ -510,7 +521,7 @@
                                             letter-spacing: 0px;
                                             color: #898989;
                                             font-size: 20px;
-                                            line-height: 58px;
+                                            line-height: 45px;
                                             font-weight: 600;
                                             font-family: "Montserrat",
                                                 sans-serif;
@@ -545,7 +556,7 @@
 .ud_but {
     height: 50px;
     width: 250px;
-    margin: 2rem;
+    margin: 2rem 0;
     background-color: #53bfd2;
     font-size: 18px;
     line-height: 22px;

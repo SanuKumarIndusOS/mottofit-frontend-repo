@@ -10,26 +10,25 @@ import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import ArrowNext from "../../../../assets/files/SVG/Arrow Next.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { history } from "helpers";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import moment from "moment";
-
-
 
 const UserSession = () => {
     const [userData, setUserData] = React.useState({
         upcomingSessions: [],
         pastSessions: [],
-        onGoingSessions: []
+        onGoingSessions: [],
     });
 
+    console.log(userData, "userData");
+
     useEffect(() => {
-        fetch('http://doodlebluelive.com:2337/v1/session/user', {
+        fetch("http://doodlebluelive.com:2337/v1/session/user", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: localStorage.getItem("token"),
             },
-            method: 'GET',
-
+            method: "GET",
         })
             .then((resp) => resp.json())
             .then((res) => {
@@ -37,9 +36,10 @@ const UserSession = () => {
                 console.log(res.data);
                 console.log(userData);
             })
-            .catch((error) => { console.log(error) })
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
-
 
     return (
         <>
@@ -64,22 +64,34 @@ const UserSession = () => {
                                 </TabList>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="overview">
-                                        <TabOne tabname={'overview'} tabData={userData.upcomingSessions} />
+                                        <TabOne
+                                            tabname={"overview"}
+                                            tabData={userData.upcomingSessions}
+                                        />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="upcoming">
-                                        <TabOne tabname={"Upcoming"} tabData={userData.upcomingSessions} />
+                                        <TabOne
+                                            tabname={"Upcoming"}
+                                            tabData={userData.upcomingSessions}
+                                        />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="pass">
-                                        <TabOne tabname={"Moto Pass"} tabData={userData.pastSessions} />
+                                        <TabOne
+                                            tabname={"Moto Pass"}
+                                            tabData={userData.pastSessions}
+                                        />
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="previous">
-                                        <TabOne tabname={"Previous"} tabData={userData.pastSessions} />
+                                        <TabOne
+                                            tabname={"Previous"}
+                                            tabData={userData.pastSessions}
+                                        />
                                     </TabPanel>
                                 </div>
                             </Tabs>
@@ -92,7 +104,6 @@ const UserSession = () => {
 };
 
 const TabOne = ({ tabname, tabData }) => {
-
     const [visible, setVisible] = useState([3]);
 
     const setViewMore = () => {
@@ -102,7 +113,9 @@ const TabOne = ({ tabname, tabData }) => {
         <div className="tabPanel_overview">
             <div className="tabPanel_overview_left">
                 <div className="TP_overview_wrapper">
-                    <h3>{tabname} Sessions</h3>
+                    <h3 style={{ textTransform: "capitalize" }}>
+                        {tabname} Sessions
+                    </h3>
                     <div className="TP_US_overview">
                         <div className="TP_US_overview_inner">
                             {tabData.slice(0, visible).map((data, index) => {
@@ -115,19 +128,63 @@ const TabOne = ({ tabname, tabData }) => {
                                         >
                                             <div className="TP_USession_dates">
                                                 <h4>
-                                                    {data.sessionDate.substr(8, 2)}
-                                                    <span>{datamonth[data.sessionDate.substr(5, 2)]}</span>
+                                                    {data.sessionDate.substr(
+                                                        8,
+                                                        2
+                                                    )}
+                                                    <span>
+                                                        {
+                                                            datamonth[
+                                                                data.sessionDate.substr(
+                                                                    5,
+                                                                    2
+                                                                )
+                                                            ]
+                                                        }
+                                                    </span>
                                                 </h4>
                                             </div>
                                             <div className="TP_USession_data">
-                                                <h2>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2>
+                                                <h2
+                                                    style={{
+                                                        textTransform:
+                                                            "capitalize",
+                                                    }}
+                                                >
+                                                    {data.activity}&nbsp;
+                                                    <span
+                                                        style={{
+                                                            textTransform:
+                                                                "lowerCase",
+                                                        }}
+                                                    >
+                                                        with
+                                                    </span>{" "}
+                                                    &nbsp;
+                                                    <h2
+                                                        style={{
+                                                            textTransform:
+                                                                "capitalize",
+                                                        }}
+                                                    >
+                                                        {
+                                                            data.trainerDetail
+                                                                .firstName
+                                                        }
+                                                    </h2>
+                                                </h2>
+                                                {/* // ></div>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2> */}
                                                 <div className="TP_USession_data_icons">
                                                     <h5>
                                                         <img
-                                                            src={AvailabilityIcon}
+                                                            src={
+                                                                AvailabilityIcon
+                                                            }
                                                             alt="icon"
                                                         />
-                                                        {moment(data.sessionStartTime).format('MMM')}
+                                                        {moment(
+                                                            data.sessionStartTime
+                                                        ).format("MMM")}
                                                     </h5>
                                                     <h5>
                                                         <img
@@ -141,7 +198,14 @@ const TabOne = ({ tabname, tabData }) => {
                                                     <button>Reschedule</button>
                                                     <button>Cancel</button>
                                                     <div className="button_boarder">
-                                                        <button onClick={() => history.push({ pathname: '/user/with-friends' })}>
+                                                        <button
+                                                            onClick={() =>
+                                                                history.push({
+                                                                    pathname:
+                                                                        "/user/with-friends",
+                                                                })
+                                                            }
+                                                        >
                                                             Add Friends{" "}
                                                         </button>
                                                         <img
@@ -186,7 +250,6 @@ const TabOne = ({ tabname, tabData }) => {
                             <h2>PREVIOUS SESSIONS</h2>
                             <div className="row_two_scroll">
                                 {Data.map((data, index) => {
-
                                     return (
                                         <>
                                             <div
@@ -281,18 +344,18 @@ const Data = [
 ];
 
 const datamonth = {
-    '01': 'Jan',
-    '02': 'Feb',
-    '03': 'Mar',
-    '04': 'Apr',
-    '05': 'May',
-    '06': 'Jun',
-    '07': 'Jul',
-    '08': 'Aug',
-    '09': 'Sep',
-    '10': 'Oct',
-    '11': 'Nov',
-    '12': 'Dec',
-}
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
+};
 
 export default UserSession;
