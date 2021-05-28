@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[393],{306:function(t,s,n){"use strict";n.r(s),s.default=n.p+"static/media/Jenny.c50273b9.png"}}]);
+//# sourceMappingURL=393.0f8c15a9.chunk.js.map

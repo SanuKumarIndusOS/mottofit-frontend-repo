@@ -6,6 +6,11 @@ import BackIcon from "../../../../assets/files/SVG/SchedulerAsset/Left Button.sv
 import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
+import EarlyInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/EarlyBird_Inactive.svg";
+import RiseInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Rise_Shine_Inactive.svg";
+import MidInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Mid-DayBreak_Inactive.svg";
+import HappyInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/HappyHour_Inactive.svg";
+import NeverTooInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/NeverTooLate_Inactive.svg";
 
 const timeZone = [
     {
@@ -56,6 +61,7 @@ function Tfc() {
         "07:00 AM",
         "07:30 AM",
         "Early Bird",
+        EarlyInActive,
     ];
 
     let rise_shine = [
@@ -66,6 +72,7 @@ function Tfc() {
         "10:00 AM",
         "10:30 AM",
         "Rise & Shine",
+        RiseInActive,
     ]; //1
     // let rise_shine = ["Rise & Shine"]; //1
     let mid_day = [
@@ -76,6 +83,7 @@ function Tfc() {
         "01:00 PM",
         "01:30 PM",
         "Mid-Day Break",
+        MidInActive,
     ]; //230 - 4
 
     let mid_day_2 = [
@@ -86,6 +94,7 @@ function Tfc() {
         "04:00 PM",
         "04:30 PM",
         "Mid-Day Lunchtime",
+        MidInActive,
     ];
 
     let happy_hour = [
@@ -96,6 +105,7 @@ function Tfc() {
         "07:00 PM",
         "07:30 PM",
         "Happy Hour",
+        HappyInActive,
     ];
 
     let never_too_late = [
@@ -106,6 +116,7 @@ function Tfc() {
         "10:00 PM",
         "10:30 PM",
         "Never Too Late",
+        NeverTooInActive,
     ];
 
     const [time, setTime] = React.useState(early_bird);
@@ -472,6 +483,10 @@ function Tfc() {
             >
                 <thead>
                     <td disabled>
+                        <img
+                            src={time[7]}
+                            style={{ width: "30px", height: "30px" }}
+                        />
                         <h6
                             style={{
                                 wordWrap: "break-word",
@@ -726,6 +741,10 @@ function Tfc() {
                 <thead>
                     <tr style={{ height: "70px" }}>
                         <th disabled>
+                            <img
+                                src={time[7]}
+                                style={{ width: "30px", height: "30px" }}
+                            />
                             <h6
                                 style={{
                                     wordWrap: "break-word",
