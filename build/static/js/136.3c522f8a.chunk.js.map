@@ -1,9 +1,1 @@
-<<<<<<< Updated upstream:build/static/js/136.3c522f8a.chunk.js.map
 {"version":3,"sources":["pages/AdminDashboard/AdminTrainer/ViewTrainer.js"],"names":["ViewTrainer"],"mappings":"kGAAA,kCAWeA,UARK,WAChB,OACI,8BACI,cAAC,UAAD","file":"static/js/136.3c522f8a.chunk.js","sourcesContent":["import ViewTrainers from \"component/AdminDashboard/AdminComponents/AdminTrainerSection/View/ViewTrainers\";\r\nimport React from \"react\";\r\n\r\nconst ViewTrainer = () => {\r\n    return (\r\n        <div>\r\n            <ViewTrainers />\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default ViewTrainer;\r\n"],"sourceRoot":""}
-=======
-<<<<<<< Updated upstream:build/static/js/136.13cfdeea.chunk.js.map
-{"version":3,"sources":["pages/AdminDashboard/AdminTrainer/ViewTrainer.js"],"names":["ViewTrainer"],"mappings":"kGAAA,kCAWeA,UARK,WAChB,OACI,8BACI,cAAC,UAAD","file":"static/js/136.13cfdeea.chunk.js","sourcesContent":["import ViewTrainers from \"component/AdminDashboard/AdminComponents/AdminTrainerSection/View/ViewTrainers\";\r\nimport React from \"react\";\r\n\r\nconst ViewTrainer = () => {\r\n    return (\r\n        <div>\r\n            <ViewTrainers />\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default ViewTrainer;\r\n"],"sourceRoot":""}
-=======
-{"version":3,"sources":["pages/AdminDashboard/AdminTrainer/ViewTrainer.js"],"names":["ViewTrainer"],"mappings":"kGAAA,kCAWeA,UARK,WAChB,OACI,8BACI,cAAC,UAAD","file":"static/js/136.ee795ad1.chunk.js","sourcesContent":["import ViewTrainers from \"component/AdminDashboard/AdminComponents/AdminTrainerSection/View/ViewTrainers\";\nimport React from \"react\";\n\nconst ViewTrainer = () => {\n    return (\n        <div>\n            <ViewTrainers />\n        </div>\n    );\n};\n\nexport default ViewTrainer;\n"],"sourceRoot":""}
->>>>>>> Stashed changes:build/static/js/136.ee795ad1.chunk.js.map
->>>>>>> Stashed changes:build/static/js/136.13cfdeea.chunk.js.map
