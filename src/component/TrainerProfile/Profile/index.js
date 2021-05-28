@@ -15,6 +15,8 @@ import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import NotFoundImage from "../../../assets/files/FindTrainer/NoImageFound.png";
 import UserScheduler from "../UserScheduler/UserScheduler";
+import BlueArrowButton from "../../common/BlueArrowButton";
+import { history } from "helpers";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -546,6 +548,7 @@ const TrainerProfile = () => {
                                             id={id}
                                             parentCallback={callbackFunction}
                                         />
+                                        <ButtonSection />
                                     </div>
                                     {/* </div> */}
                                 </div>
@@ -556,6 +559,36 @@ const TrainerProfile = () => {
             </div>
             {/* )} */}
         </>
+    );
+};
+
+const ButtonSection = () => {
+    return (
+        <div className="schedular_slots">
+            <div className="items_slots">
+                <div className="item_slot1">
+                    <div className="indicator"></div>
+                    <h5>AVAILABLE</h5>
+                </div>
+                <div className="item_slot2">
+                    <div className="indicator2"></div>
+                    <h5>UNAVAILABLE</h5>{" "}
+                </div>
+                <div className="item_slot3">
+                    <div className="indicator3"></div>
+                    <h5>BOOKED SLOT</h5>{" "}
+                </div>
+                <div className="item_slot4">
+                    <button
+                        onClick={() => {
+                            history.push("/user/session-type");
+                        }}
+                    >
+                        BOOK a session <BlueArrowButton />{" "}
+                    </button>{" "}
+                </div>
+            </div>
+        </div>
     );
 };
 

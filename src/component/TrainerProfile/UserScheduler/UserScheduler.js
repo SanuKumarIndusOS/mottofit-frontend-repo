@@ -4,7 +4,41 @@ import BackIcon from "../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import BlueArrowButton from "../../common/BlueArrowButton";
 import "./styles.scss";
+import { Dropdown } from "reactjs-dropdown-component";
+import "./dropdown.scss";
 import { history } from "helpers";
+import EarlyInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/EarlyBird_Inactive.svg";
+import RiseInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Rise_Shine_Inactive.svg";
+import MidInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Mid-DayBreak_Inactive.svg";
+import HappyInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/HappyHour_Inactive.svg";
+import NeverTooInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/NeverTooLate_Inactive.svg";
+
+const timeZone = [
+    {
+        label: "Early Bird",
+        value: "EarlyBird",
+    },
+    {
+        label: "Rise & Shine",
+        value: "RiseAndShine",
+    },
+    {
+        label: "Mid-Day Break",
+        value: "MidDayBreak1",
+    },
+    {
+        label: "Mid-Day Lunchtime",
+        value: "MidDayBreak2",
+    },
+    {
+        label: "Happy Hour",
+        value: "HappyHours",
+    },
+    {
+        label: "Never Too Late",
+        value: "NeverTooLate",
+    },
+];
 function UserScheduler(props) {
     //   let date = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     let early_bird = [
@@ -14,6 +48,8 @@ function UserScheduler(props) {
         "06:30 AM",
         "07:00 AM",
         "07:30 AM",
+        "Early Bird",
+        EarlyInActive,
     ];
 
     let rise_shine = [
@@ -23,6 +59,8 @@ function UserScheduler(props) {
         "09:30 AM",
         "10:00 AM",
         "10:30 AM",
+        "Rise & Shine",
+        RiseInActive,
     ]; //1
 
     let mid_day = [
@@ -32,6 +70,8 @@ function UserScheduler(props) {
         "12:30 PM",
         "01:00 PM",
         "01:30 PM",
+        "Mid-Day Break",
+        MidInActive,
     ]; //230 - 4
 
     let mid_day_2 = [
@@ -41,6 +81,8 @@ function UserScheduler(props) {
         "03:30 PM",
         "04:00 PM",
         "04:30 PM",
+        "Mid-Day Lunchtime",
+        MidInActive,
     ];
 
     let happy_hour = [
@@ -50,6 +92,8 @@ function UserScheduler(props) {
         "06:30 PM",
         "07:00 PM",
         "07:30 PM",
+        "Happy Hour",
+        HappyInActive,
     ];
 
     let never_too_late = [
@@ -59,6 +103,8 @@ function UserScheduler(props) {
         "09:30 PM",
         "10:00 PM",
         "10:30 PM",
+        "Never Too Late",
+        NeverTooInActive,
     ];
 
     const [time, setTime] = React.useState(early_bird);
@@ -318,7 +364,28 @@ function UserScheduler(props) {
             <table>
                 <thead>
                     <tr>
-                        <th></th>
+                        <th style={{ height: "70px" }}>
+                            <img
+                                src={time[7]}
+                                style={{ width: "30px", height: "30px" }}
+                            />
+                            <h6
+                                style={{
+                                    wordWrap: "break-word",
+                                    lineHeight: "18px",
+                                    paddingLeft: "0.5em",
+                                    paddingRight: "0.5em",
+                                    paddingBottom: "0em",
+                                    fontFamily: "Montserrat",
+                                    fontWeight: "600",
+                                    color: "#898989",
+                                    margin: 0,
+                                }}
+                            >
+                                {" "}
+                                {time[6]}
+                            </h6>
+                        </th>
                         <th>
                             <div className="table_header_number">
                                 {cal[0].slice(8, 10)}
@@ -705,91 +772,55 @@ function UserScheduler(props) {
                         />{" "}
                         &ensp; &ensp;
                     </div>
-                    <select
+
+                    <Dropdown
+                        className="custom_dropdown"
+                        title="Select Time Zone"
+                        list={timeZone}
                         value={TimeSlot}
                         onChange={(e) => {
-                            setTimeSlot(e.target.value);
-                            // console.log(e.target.value);
-                            if (e.target.value === "EarlyBird") {
+                            setTimeSlot(e.value);
+                            console.log(e.value);
+                            if (e.value === "EarlyBird") {
                                 setTime(early_bird);
-                                // console.log("early_bird");
+                                console.log("early_bird");
                             }
 
-                            if (e.target.value === "RiseAndShine") {
+                            if (e.value === "RiseAndShine") {
                                 setTime(rise_shine);
-                                //console.log("RiseAndShine");
+                                console.log("RiseAndShine");
                             }
 
-                            if (e.target.value === "MidDayBreak1") {
+                            if (e.value === "MidDayBreak1") {
                                 setTime(mid_day);
-                                // console.log("MidDayBreak");
+                                console.log("MidDayBreak");
                             }
 
-                            if (e.target.value === "MidDayBreak2") {
+                            if (e.value === "MidDayBreak2") {
                                 setTime(mid_day_2);
-                                //console.log("MidDayBreak2");
+                                console.log("MidDayBreak2");
                             }
 
-                            if (e.target.value === "HappyHours") {
+                            if (e.value === "HappyHours") {
                                 setTime(happy_hour);
-                                //console.log("HappyHours");
+                                console.log("HappyHours");
                             }
 
-                            if (e.target.value === "NeverTooLate") {
+                            if (e.value === "NeverTooLate") {
                                 setTime(never_too_late);
-                                //console.log("NeverTooLate");
+                                console.log("NeverTooLate");
                             }
                         }}
-                    >
-                        <option value="EarlyBird">Early Bird</option>
-                        <option value="RiseAndShine">Rise & Shine</option>
-                        <option value="MidDayBreak1">Mid-Day Break</option>
-                        <option value="MidDayBreak2">Mid-Day AfterNoon</option>
-                        <option value="HappyHours">Happy Hour</option>
-                        <option value="NeverTooLate">Never Too Late</option>
-                    </select>
+                        name="TimeSlot"
+                    />
                 </div>
             </div>
-            {/* {tableData} */}
 
             <br></br>
-            {/* {tableData2} */}
 
             {tableData2}
-
-            <ButtonSection />
         </div>
     );
 }
-
-const ButtonSection = () => {
-    return (
-        <div className="schedular_slots">
-            <div className="items_slots">
-                <div className="item_slot1">
-                    <div className="indicator"></div>
-                    <h5>AVAILABLE</h5>
-                </div>
-                <div className="item_slot2">
-                    <div className="indicator2"></div>
-                    <h5>UNAVAILABLE</h5>{" "}
-                </div>
-                <div className="item_slot3">
-                    <div className="indicator3"></div>
-                    <h5>BOOKED SLOT</h5>{" "}
-                </div>
-                <div className="item_slot4">
-                    <button
-                        onClick={() => {
-                            history.push("/user/session-type");
-                        }}
-                    >
-                        BOOK a session <BlueArrowButton />{" "}
-                    </button>{" "}
-                </div>
-            </div>
-        </div>
-    );
-};
 
 export default UserScheduler;

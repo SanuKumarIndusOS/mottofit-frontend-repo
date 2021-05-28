@@ -14,9 +14,11 @@ const UserEventSchedular = () => {
     const [trainerstartSlot, settrainerstartSlot] = React.useState();
     const [trainerEndSlot, settrainerEndSlot] = React.useState();
     const [DateSlot, setDateSlot] = React.useState();
+    console.log(trainerName, "trainerName");
 
     React.useEffect(() => {
-        setTrainerName(location.state["trainerData"]["firstName"]);
+        setTrainerName(location.state["trainerData"]);
+
         console.log(location.state["trainerData"]);
 
         console.log(localStorage.getItem("trainertime"), "ee");
@@ -57,14 +59,30 @@ const UserEventSchedular = () => {
                                     </p>
                                 </div>
                                 <div className="user_profile_details">
-                                    <img src={Profile} alt="profile" />
+                                    {/* {trainerName &&
+                                    trainerName.profilePicture ? (
+                                        <img
+                                            src={trainerName.profilePicture}
+                                            alt="profile"
+                                            style={{ objectFit: "cover" }}
+                                        />
+                                    ) : (
+                                        "dj"
+                                    )} */}
+                                    <img
+                                        src={Profile}
+                                        alt="profile"
+                                        style={{ objectFit: "cover" }}
+                                    />
                                     <div className="user_content">
                                         <h2
                                             style={{
                                                 textTransform: "capitalize",
+                                                fontFamily:
+                                                    "Cormorant Garamond",
                                             }}
                                         >
-                                            {trainerName}
+                                            {trainerName.firstName}
                                         </h2>
                                         <p>{activity}</p>
                                     </div>
@@ -78,6 +96,7 @@ const UserEventSchedular = () => {
                                         id={location.state["trainerId"]}
                                         parentCallback={callbackFunction}
                                     />
+                                    <ButtonSection trainerName={trainerName} />
                                 </div>
 
                                 <Link
@@ -107,4 +126,29 @@ const UserEventSchedular = () => {
     );
 };
 
+const ButtonSection = ({ trainerName }) => {
+    return (
+        <div className="schedular_slots_user">
+            <div className="items_slots">
+                <div className="item_slot1">
+                    <div className="indicator"></div>
+                    <h5>AVAILABLE</h5>
+                </div>
+                <div className="item_slot2">
+                    <div className="indicator2"></div>
+                    <h5>UNAVAILABLE</h5>{" "}
+                </div>
+                <div className="item_slot3">
+                    <div className="indicator3"></div>
+                    <h5>BOOKED SLOT</h5>{" "}
+                </div>
+                <div className="item_slot5">
+                    <Link to={`/trainer/profile/${trainerName.id}`}>
+                        Learn more about {trainerName.firstName}
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+};
 export default UserEventSchedular;

@@ -753,7 +753,7 @@ function Tfc() {
                                     paddingRight: "0.5em",
                                     paddingBottom: "0em",
                                     fontFamily: "Montserrat",
-                                    fontWeight: "800",
+                                    fontWeight: "600",
                                     color: "#898989",
                                     margin: 0,
                                 }}
