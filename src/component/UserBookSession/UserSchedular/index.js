@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.scss";
+import "./style.scss";
 import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
@@ -104,7 +104,7 @@ const UserEventSchedular = () => {
                                     id={location.state["trainerId"]}
                                     parentCallback={callbackFunction}
                                 />
-                                <ButtonSection trainerName={trainerName} />
+                                <BottomSection trainerName={trainerName} />
                                 {/* </div> */}
 
                                 <Link
@@ -135,7 +135,7 @@ const UserEventSchedular = () => {
     );
 };
 
-const ButtonSection = ({ trainerName }) => {
+const BottomSection = ({ trainerName }) => {
     return (
         <div className="schedular_slots_user">
             <div className="items_slots_user">
