@@ -1,9 +1,1 @@
-<<<<<<< Updated upstream:build/static/js/85.a3761276.chunk.js.map
 {"version":3,"sources":["pages/Trainer/Setup/index.js"],"names":["TrainerSetupSection"],"mappings":"iGAAA,gCAWeA,UARa,WAC1B,OACE,8BACE,cAAC,UAAD","file":"static/js/85.a3761276.chunk.js","sourcesContent":["import React from \"react\";\r\nimport TrainerSetUpProfile from \"component/TrainerOnBoard/TrainerCaptures/TrainerSetUpProfile\";\r\n\r\nconst TrainerSetupSection = () => {\r\n  return (\r\n    <div>\r\n      <TrainerSetUpProfile />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TrainerSetupSection;\r\n"],"sourceRoot":""}
-=======
-<<<<<<< Updated upstream:build/static/js/87.804f58a4.chunk.js.map
-{"version":3,"sources":["pages/Trainer/Setup/index.js"],"names":["TrainerSetupSection"],"mappings":"iGAAA,gCAWeA,UARa,WAC1B,OACE,8BACE,cAAC,UAAD","file":"static/js/87.804f58a4.chunk.js","sourcesContent":["import React from \"react\";\r\nimport TrainerSetUpProfile from \"component/TrainerOnBoard/TrainerCaptures/TrainerSetUpProfile\";\r\n\r\nconst TrainerSetupSection = () => {\r\n  return (\r\n    <div>\r\n      <TrainerSetUpProfile />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TrainerSetupSection;\r\n"],"sourceRoot":""}
-=======
-{"version":3,"sources":["pages/Trainer/Setup/index.js"],"names":["TrainerSetupSection"],"mappings":"iGAAA,gCAWeA,UARa,WAC1B,OACE,8BACE,cAAC,UAAD","file":"static/js/86.38cb8d5b.chunk.js","sourcesContent":["import React from \"react\";\nimport TrainerSetUpProfile from \"component/TrainerOnBoard/TrainerCaptures/TrainerSetUpProfile\";\n\nconst TrainerSetupSection = () => {\n  return (\n    <div>\n      <TrainerSetUpProfile />\n    </div>\n  );\n};\n\nexport default TrainerSetupSection;\n"],"sourceRoot":""}
->>>>>>> Stashed changes:build/static/js/86.38cb8d5b.chunk.js.map
->>>>>>> Stashed changes:build/static/js/87.804f58a4.chunk.js.map
