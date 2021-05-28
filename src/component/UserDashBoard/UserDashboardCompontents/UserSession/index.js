@@ -64,22 +64,22 @@ const UserSession = () => {
                                 </TabList>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="overview">
-                                        <TabOne tabname={'overview'} tabData={userData.upcomingSessions} />
+                                        <TabOne tabname={'Overview'} tabData={userData.upcomingSessions} prevData={userData.pastSessions}/>
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="upcoming">
-                                        <TabOne tabname={"Upcoming"} tabData={userData.upcomingSessions} />
+                                        <TabOne tabname={"Upcoming"} tabData={userData.upcomingSessions} prevData={userData.pastSessions}/>
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="pass">
-                                        <TabOne tabname={"Moto Pass"} tabData={userData.pastSessions} />
+                                        <TabOne tabname={"Moto Pass"} tabData={userData.pastSessions} prevData={userData.pastSessions}/>
                                     </TabPanel>
                                 </div>
                                 <div className="tabPanel_outter">
                                     <TabPanel tabId="previous">
-                                        <TabOne tabname={"Previous"} tabData={userData.pastSessions} />
+                                        <TabOne tabname={"Previous"} tabData={userData.pastSessions} prevData={userData.pastSessions}/>
                                     </TabPanel>
                                 </div>
                             </Tabs>
@@ -91,7 +91,7 @@ const UserSession = () => {
     );
 };
 
-const TabOne = ({ tabname, tabData }) => {
+const TabOne = ({ tabname, tabData,prevData}) => {
 
     const [visible, setVisible] = useState([3]);
 
@@ -185,7 +185,7 @@ const TabOne = ({ tabname, tabData }) => {
                         <div className="row_two_data">
                             <h2>PREVIOUS SESSIONS</h2>
                             <div className="row_two_scroll">
-                                {Data.map((data, index) => {
+                                {prevData.map((data, index) => {
 
                                     return (
                                         <>
@@ -195,13 +195,13 @@ const TabOne = ({ tabname, tabData }) => {
                                             >
                                                 <div className="row_previous_avater">
                                                     <img
-                                                        src={data.previousImg}
+                                                        src={Jenny}
                                                         alt="profile"
                                                     />
                                                 </div>
                                                 <div className="row_previous_header">
-                                                    <h2>{data.prevHeading}</h2>
-                                                    <p>{data.prevDate}</p>
+                                                    <h2>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2>
+                                                    <p>{`${data.sessionDate.substr(8, 2)} ${datamonth[data.sessionDate.substr(5,2)]} ${data.sessionDate.substr(0,4)}`}</p>
                                                 </div>
                                             </div>
                                             <hr />
