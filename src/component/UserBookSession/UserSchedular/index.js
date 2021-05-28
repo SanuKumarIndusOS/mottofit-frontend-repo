@@ -4,7 +4,7 @@ import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
-import UserScheduler from "../../UserScheduler/Scheduler";
+// import UserScheduler from "../../UserScheduler/Scheduler";
 import UserScheduler2 from "component/TrainerProfile/UserScheduler/UserScheduler";
 import { useLocation } from "react-router-dom";
 
@@ -84,7 +84,14 @@ const UserEventSchedular = () => {
                                         >
                                             {trainerName.firstName}
                                         </h2>
-                                        <p>{activity}</p>
+                                        <p
+                                            style={{
+                                                color: "#898989",
+                                                fontFamily: "Montserrat",
+                                            }}
+                                        >
+                                            {activity}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="container">
