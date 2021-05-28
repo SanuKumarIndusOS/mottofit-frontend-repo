@@ -22,6 +22,9 @@ const TrainerProfile = () => {
     const [open, setOpen] = useState(false);
     const myRef = useRef(null);
     const [openClassModel, setOpenClassModel] = useState(false);
+    const [trainerstartSlot, settrainerstartSlot] = React.useState();
+    const [trainerEndSlot, settrainerEndSlot] = React.useState();
+    const [DateSlot, setDateSlot] = React.useState();
 
     const [trainerProfileData, setTraierProfileData] = useState([]);
     console.log(trainerProfileData, "trainerProfileData");
@@ -48,6 +51,13 @@ const TrainerProfile = () => {
                 setTraierProfileData(data["data"]);
             });
     }
+
+    const callbackFunction = (ts, tss, date) => {
+        console.log(ts, tss, "Callback");
+        settrainerstartSlot(ts);
+        settrainerEndSlot(tss);
+        setDateSlot(date);
+    };
 
     return (
         <>
@@ -532,7 +542,10 @@ const TrainerProfile = () => {
                                             Schedule{" "}
                                         </h2>
 
-                                        <UserScheduler id={id} />
+                                        <UserScheduler
+                                            id={id}
+                                            parentCallback={callbackFunction}
+                                        />
                                     </div>
                                     {/* </div> */}
                                 </div>

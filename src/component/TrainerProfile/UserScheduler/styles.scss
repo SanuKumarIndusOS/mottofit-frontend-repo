@@ -1,4 +1,5 @@
 .outter_table_user {
+    height: 750px;
     .table_user {
         height: auto;
         width: 100%;
@@ -135,7 +136,7 @@ table {
                 color: #2c2c2c;
                 text-transform: uppercase;
                 margin: 0 1em;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: 600;
                 font-family: Montserrat;
             }
@@ -154,7 +155,7 @@ table {
                 color: #2c2c2c;
                 text-transform: uppercase;
                 margin: 0 1em;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: 600;
                 font-family: Montserrat;
             }
@@ -173,7 +174,25 @@ table {
                 color: #2c2c2c;
                 text-transform: uppercase;
                 margin: 0 0 0 1em;
-                font-size: 16px;
+                font-size: 14px;
+                font-weight: 600;
+                font-family: Montserrat;
+            }
+        }
+        .item_slot4 {
+            display: flex;
+            align-items: center;
+
+            button {
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.54px;
+                border: none;
+                outline: none;
+                color: #2c2c2c;
+                text-transform: uppercase;
+                margin: 0 0 0 1em;
+                font-size: 14px;
                 font-weight: 600;
                 font-family: Montserrat;
             }

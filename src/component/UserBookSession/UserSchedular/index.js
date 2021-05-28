@@ -5,6 +5,7 @@ import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import UserScheduler from "../../UserScheduler/Scheduler";
+import UserScheduler2 from "component/TrainerProfile/UserScheduler/UserScheduler";
 import { useLocation } from "react-router-dom";
 
 const UserEventSchedular = () => {
@@ -69,8 +70,12 @@ const UserEventSchedular = () => {
                                     </div>
                                 </div>
                                 <div className="container">
-                                    <UserScheduler
+                                    {/* <UserScheduler
                                         trainerID={location.state["trainerId"]}
+                                        parentCallback={callbackFunction}
+                                    /> */}
+                                    <UserScheduler2
+                                        id={location.state["trainerId"]}
                                         parentCallback={callbackFunction}
                                     />
                                 </div>

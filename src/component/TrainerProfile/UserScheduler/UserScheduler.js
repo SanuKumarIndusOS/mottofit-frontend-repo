@@ -2,7 +2,9 @@ import React from "react";
 import moment from "moment";
 import BackIcon from "../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
+import BlueArrowButton from "../../common/BlueArrowButton";
 import "./styles.scss";
+import { history } from "helpers";
 function UserScheduler(props) {
     //   let date = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     let early_bird = [
@@ -241,9 +243,11 @@ function UserScheduler(props) {
             // console.log("found", date);
             cellCollection.push(newTime + date);
             //  console.log(cellCollection);
-            // tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
-            //     .add(60, "minutes")
-            //     .valueOf();
+            tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
+                .add(60, "minutes")
+                .valueOf();
+
+            props.parentCallback(ts, tss, date);
         } else {
             //  console.log("not_found");
             var prevTime = moment(newTime, "hh:mm A")
@@ -251,9 +255,15 @@ function UserScheduler(props) {
                 .format("hh:mm A");
             cellCollection.push(prevTime + date);
             //  console.log(cellCollection);
-            // tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
-            //     .subtract(30, "minutes")
-            //     .valueOf();
+            tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
+                .subtract(30, "minutes")
+                .valueOf();
+
+            ts = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
+                .add(30, "minutes")
+                .valueOf();
+
+            props.parentCallback(tss, ts, date);
         }
 
         setuserSlots(cellCollection);
@@ -767,6 +777,15 @@ const ButtonSection = () => {
                 <div className="item_slot3">
                     <div className="indicator3"></div>
                     <h5>BOOKED SLOT</h5>{" "}
+                </div>
+                <div className="item_slot4">
+                    <button
+                        onClick={() => {
+                            history.push("/user/session-type");
+                        }}
+                    >
+                        BOOK a session <BlueArrowButton />{" "}
+                    </button>{" "}
                 </div>
             </div>
         </div>

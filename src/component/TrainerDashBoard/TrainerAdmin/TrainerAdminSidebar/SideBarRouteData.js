@@ -6,12 +6,14 @@ import MessageIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets
 import NotificationIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Notifications Icon.svg";
 import SettingIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Settings Icon.svg";
 import LogoutIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Logout Icon.svg";
+import MyEarningIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/My Earnings Icon.svg";
+import SheduleIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Shedule Icon.svg";
 
 export const SideBarRouteData = [
     {
         title: "MY Schedule",
         path: "/trainers/dashboard/schedule",
-        icon: <img src={SessionIcon} alt="icon" />,
+        icon: <img src={SheduleIcon} alt="icon" />,
 
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -19,7 +21,7 @@ export const SideBarRouteData = [
     {
         title: "My Session",
         path: "/trainers/dashboard/session",
-        icon: <img src={MessageIcon} alt="icon" />,
+        icon: <img src={SessionIcon} alt="icon" />,
     },
 
     {
@@ -30,7 +32,7 @@ export const SideBarRouteData = [
     {
         title: "My Earnings",
         path: "/trainers/dashboard/earnings",
-        icon: <img src={MessageIcon} alt="icon" />,
+        icon: <img src={MyEarningIcon} alt="icon" />,
     },
     {
         title: "Notifications",

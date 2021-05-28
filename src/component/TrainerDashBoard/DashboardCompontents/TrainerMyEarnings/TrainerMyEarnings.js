@@ -10,7 +10,9 @@ import Client from "assets/files/TrainerDashboard/MyEarning/Image 1.svg";
 
 export const TrainerMyEarnings = () => {
     const [paymentHistory, setPaymentHistory] = useState();
+    const [myEarning, setMyEarning] = useState();
     console.log(paymentHistory, "paymentHistory");
+    console.log(myEarning, "myEarning");
 
     useEffect(() => {
         getTrainerPaymentHistory();
@@ -32,6 +34,7 @@ export const TrainerMyEarnings = () => {
             .then((data) => {
                 console.log(data["data"]["history"]);
                 setPaymentHistory(data["data"]["history"]);
+                setMyEarning(data["data"]);
             })
             .catch((error) => {
                 console.log(error, "error");
@@ -59,7 +62,7 @@ export const TrainerMyEarnings = () => {
                             <div className="earn_graph">
                                 <div className="earn_total">
                                     <div className="earn_total_inner">
-                                        {/* <div className="total_item1">
+                                        <div className="total_item1">
                                             <div className="total_data">
                                                 <img
                                                     src={Earn}
@@ -71,23 +74,50 @@ export const TrainerMyEarnings = () => {
                                                     <p>Total Earnings in q1</p>
                                                 </div>
                                             </div>
-                                        </div> */}
-                                        {/* <div className="total_item2">
+                                        </div>
+                                        <div className="total_item2">
                                             <div className="annual_status">
                                                 <div className="day_earn">
-                                                    <h2>$500</h2>
+                                                    <h2>
+                                                        $
+                                                        {myEarning &&
+                                                        myEarning.dayRevenue &&
+                                                        myEarning.dayRevenue
+                                                            .total_amount ===
+                                                            !null
+                                                            ? myEarning
+                                                                  .dayRevenue
+                                                                  .total_amount
+                                                            : "N/A"}
+                                                    </h2>
                                                     <p>Today</p>
                                                 </div>
                                                 <div className="day_earn">
-                                                    <h2>$2,000</h2>
+                                                    <h2>
+                                                        $
+                                                        {myEarning &&
+                                                        myEarning.weekRevenue
+                                                            ? myEarning
+                                                                  .weekRevenue
+                                                                  .total_amount
+                                                            : "N/A"}
+                                                    </h2>
                                                     <p>This Week</p>
                                                 </div>
                                                 <div className="month_earn">
-                                                    <h2>$7,000</h2>
+                                                    <h2>
+                                                        $
+                                                        {myEarning &&
+                                                        myEarning.monthRevenue
+                                                            ? myEarning
+                                                                  .monthRevenue
+                                                                  .total_amount
+                                                            : "N/A"}
+                                                    </h2>
                                                     <p>This Month</p>
                                                 </div>
                                             </div>
-                                        </div> */}
+                                        </div>
                                     </div>
                                 </div>
                                 {/* <div className="earn_charts">
