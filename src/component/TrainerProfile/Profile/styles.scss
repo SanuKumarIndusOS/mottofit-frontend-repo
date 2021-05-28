@@ -417,11 +417,114 @@
                                 margin-bottom: 1em;
                                 // text-transform: capitalize;
                             }
-                            .profile_event_schedular {
-                                width: 100%;
-                                height: 500px;
-                                background: cyan;
-                                margin: 1em 0 11em 0;
+                            .schedular_slots {
+                                display: grid !important;
+                                grid-template-columns: 100%;
+                                grid-template-rows: auto;
+                                grid-column-gap: 20px;
+                                width: 807px;
+                                margin: 2em 0 3em 0;
+                                align-items: center;
+                                .items_slots {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: space-between;
+                                    width: 100%;
+                                    .item_slot1 {
+                                        display: flex;
+                                        align-items: center;
+                                        .indicator {
+                                            width: 60px;
+                                            height: 15px;
+                                            background: #f2f2f2;
+                                            opacity: 1;
+                                        }
+                                        h5 {
+                                            letter-spacing: 0.54px;
+                                            color: #2c2c2c;
+                                            text-transform: uppercase;
+                                            margin: 0 1em;
+                                            font-size: 12px;
+                                            font-weight: 700;
+                                            font-family: Montserrat;
+                                        }
+                                    }
+                                    .item_slot2 {
+                                        display: flex;
+                                        align-items: center;
+                                        .indicator2 {
+                                            width: 60px;
+                                            height: 15px;
+                                            background: #dedede;
+                                            opacity: 1;
+                                        }
+                                        h5 {
+                                            letter-spacing: 0.54px;
+                                            color: #2c2c2c;
+                                            text-transform: uppercase;
+                                            margin: 0 1em;
+                                            font-size: 12px;
+                                            font-weight: 700;
+                                            font-family: Montserrat;
+                                        }
+                                    }
+                                    .item_slot3 {
+                                        display: flex;
+                                        align-items: center;
+                                        .indicator3 {
+                                            width: 60px;
+                                            height: 15px;
+                                            background: #53bfd2;
+                                            opacity: 1;
+                                        }
+                                        h5 {
+                                            letter-spacing: 0.54px;
+                                            color: #2c2c2c;
+                                            text-transform: uppercase;
+                                            margin: 0 0 0 1em;
+                                            font-size: 12px;
+                                            font-weight: 700;
+                                            font-family: Montserrat;
+                                        }
+                                    }
+                                    .item_slot4 {
+                                        display: flex;
+                                        align-items: center;
+
+                                        button {
+                                            display: flex;
+                                            align-items: center;
+                                            letter-spacing: 0.54px;
+                                            border: none;
+                                            outline: none;
+                                            color: #2c2c2c;
+                                            text-transform: uppercase;
+                                            margin: 0 0 0 1em;
+                                            font-size: 14px;
+                                            font-weight: 700;
+                                            font-family: Montserrat;
+                                            background-color: transparent;
+                                        }
+                                    }
+                                }
+                                .items_slot_button {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-end;
+                                    button {
+                                        display: flex;
+                                        align-items: center;
+                                        text-align: right;
+                                        letter-spacing: 0.45px;
+                                        color: #161616;
+                                        text-transform: uppercase;
+                                        border: none;
+                                        font-family: "Montserrat", sans-serif;
+                                        font-size: 18px;
+                                        font-weight: bold;
+                                        line-height: 22px;
+                                    }
+                                }
                             }
                         }
                     }

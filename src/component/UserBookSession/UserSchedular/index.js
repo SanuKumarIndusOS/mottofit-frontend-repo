@@ -108,6 +108,7 @@ const UserEventSchedular = () => {
                                 {/* </div> */}
 
                                 <Link
+                                    className="submit_user"
                                     to={{
                                         pathname: "/user/session-type",
                                         state: {
@@ -137,20 +138,20 @@ const UserEventSchedular = () => {
 const ButtonSection = ({ trainerName }) => {
     return (
         <div className="schedular_slots_user">
-            <div className="items_slots">
-                <div className="item_slot1">
+            <div className="items_slots_user">
+                <div className="item_slot1_user">
                     <div className="indicator"></div>
                     <h5>AVAILABLE</h5>
                 </div>
-                <div className="item_slot2">
+                <div className="item_slot2_user">
                     <div className="indicator2"></div>
                     <h5>UNAVAILABLE</h5>{" "}
                 </div>
-                <div className="item_slot3">
+                <div className="item_slot3_user">
                     <div className="indicator3"></div>
                     <h5>BOOKED SLOT</h5>{" "}
                 </div>
-                <div className="item_slot5">
+                <div className="item_slot5_user">
                     <Link to={`/trainer/profile/${trainerName.id}`}>
                         Learn more about {trainerName.firstName}
                     </Link>
