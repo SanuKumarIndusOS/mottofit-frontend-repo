@@ -83,7 +83,7 @@ const TrainerCards = (props) => {
                                     </h6>
                                     <p>
                                         {bestMatchData[data]["description"]}
-
+                                        &nbsp;
                                         <button
                                             onClick={() => {
                                                 console.log(

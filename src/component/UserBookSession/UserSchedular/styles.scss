@@ -108,12 +108,12 @@
                     width: 100%;
                     margin: 2em 0 3em 0;
                     align-items: center;
-                    .items_slots {
+                    .items_slots_user {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         width: 100%;
-                        .item_slot1 {
+                        .item_slot1_user {
                             display: flex;
                             align-items: center;
                             .indicator {
@@ -132,7 +132,7 @@
                                 font-family: Montserrat;
                             }
                         }
-                        .item_slot2 {
+                        .item_slot2_user {
                             display: flex;
                             align-items: center;
                             .indicator2 {
@@ -151,7 +151,7 @@
                                 font-family: Montserrat;
                             }
                         }
-                        .item_slot3 {
+                        .item_slot3_user {
                             display: flex;
                             align-items: center;
                             .indicator3 {
@@ -170,26 +170,8 @@
                                 font-family: Montserrat;
                             }
                         }
-                        .item_slot4 {
-                            display: flex;
-                            align-items: center;
 
-                            button {
-                                display: flex;
-                                align-items: center;
-                                letter-spacing: 0.54px;
-                                border: none;
-                                outline: none;
-                                color: #2c2c2c;
-                                text-transform: uppercase;
-                                margin: 0 0 0 1em;
-                                font-size: 14px;
-                                font-weight: 700;
-                                font-family: Montserrat;
-                                background-color: transparent;
-                            }
-                        }
-                        .item_slot5 {
+                        .item_slot5_user {
                             display: flex;
                             align-items: center;
 
@@ -212,28 +194,9 @@
                             }
                         }
                     }
-                    .items_slot_button {
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-                        button {
-                            display: flex;
-                            align-items: center;
-                            text-align: right;
-                            font: normal normal bold 18px/22px Montserrat;
-                            letter-spacing: 0.45px;
-                            color: #161616;
-                            text-transform: uppercase;
-                            border: none;
-                            font-family: "Montserrat", sans-serif;
-                            font-size: 18px;
-                            font-weight: bold;
-                            line-height: 22px;
-                        }
-                    }
                 }
 
-                a {
+                .submit_user {
                     display: flex;
                     justify-content: center;
                     align-items: center;
