@@ -200,8 +200,7 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
             ...trainerAvailabilityData,
             preferedTrainingMode: tempData,
         });
-        // console.log(tempData, "tempData");
-        // setCheckButton((checkButton) => !checkButton);
+
         setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
     };
 
