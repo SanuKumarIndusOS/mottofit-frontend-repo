@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./styles.sass";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import {COMMON_URL} from "helpers/baseURL"
+
 
 const TrainerCardOutside = (props) => {
     const [outSideData, setOutSideData] = React.useState([]);
-    const urlmy = "http://doodlebluelive.com:2307";
+    const urlmy = COMMON_URL;
 
     React.useEffect(() => {
         setOutSideData(props.content);
