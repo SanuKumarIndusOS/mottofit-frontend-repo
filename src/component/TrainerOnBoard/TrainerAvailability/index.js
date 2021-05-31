@@ -32,8 +32,10 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
     const location = useLocation();
     const [selectedValue, setSelectedValue] = React.useState("a");
     const [selectedOneValue, setSelectedOneValue] = React.useState("");
+    const [checkButton, setCheckButton] = useState(true);
+    const [checkButtonInPerson, setCheckButtonInPerson] = useState(true);
 
-    const [trainerAbout, setTrainerAbout] = React.useState({});
+    // const [trainerAbout, setTrainerAbout] = React.useState({});
 
     const [open, setOpen] = useState(false);
     const myRef = useRef(null);
@@ -181,6 +183,26 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
             ...trainerAvailabilityData,
             preferedTrainingMode: tempData,
         });
+        // console.log(tempData, "tempDatas");
+
+        setCheckButton((checkButton) => !checkButton);
+        // setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
+    };
+    const handleTrainingData = (e, type) => {
+        let tempData = [...trainerAvailabilityData.preferedTrainingMode];
+
+        if (tempData.includes(type)) {
+            tempData = tempData.filter((prefered) => prefered !== type);
+        } else {
+            tempData = [...tempData, type];
+        }
+        setTrainerAvailabilityData({
+            ...trainerAvailabilityData,
+            preferedTrainingMode: tempData,
+        });
+        // console.log(tempData, "tempData");
+        // setCheckButton((checkButton) => !checkButton);
+        setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
     };
 
     useEffect(() => {
@@ -250,31 +272,34 @@ const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
                                             onClick={(e) =>
                                                 handleTrianingData(e, "Online")
                                             }
-                                            className={`${
-                                                trainerAvailabilityData?.preferedTrainingMode?.includes(
-                                                    "Online"
-                                                )
-                                                    ? "active"
-                                                    : ""
-                                            }`}
+                                            className={
+                                                checkButton
+                                                    ? "buttonTrue"
+                                                    : "buttonFalse"
+                                            }
                                             name="trainingLocation"
                                         >
                                             Virtual
                                         </button>
                                         <button
                                             onClick={(e) =>
-                                                handleTrianingData(
+                                                handleTrainingData(
                                                     e,
                                                     "inperson"
                                                 )
                                             }
-                                            className={`${
-                                                trainerAvailabilityData?.preferedTrainingMode?.includes(
-                                                    "inperson"
-                                                )
-                                                    ? "active"
-                                                    : ""
-                                            }`}
+                                            // className={`${
+                                            //     trainerAvailabilityData?.preferedTrainingMode?.includes(
+                                            //         "inperson"
+                                            //     )
+                                            //         ? "active"
+                                            //         : ""
+                                            // }`}
+                                            className={
+                                                checkButtonInPerson
+                                                    ? "buttonTrue"
+                                                    : "buttonFalse"
+                                            }
                                             name="trainingLocation"
                                         >
                                             In Person

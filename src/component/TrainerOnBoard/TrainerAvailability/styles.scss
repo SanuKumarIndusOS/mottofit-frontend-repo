@@ -138,10 +138,17 @@
 
                         &:active,
                         &:focus,
-                        &:hover,
-                        &.active {
+                        &:hover {
                             background-color: #000;
                             color: #fff;
+                        }
+                        &.buttonTrue {
+                            background-color: rgb(255, 255, 255);
+                            color: #000;
+                        }
+                        &.buttonFalse {
+                            color: #fff;
+                            background-color: rgb(0, 0, 0);
                         }
                     }
                 }
