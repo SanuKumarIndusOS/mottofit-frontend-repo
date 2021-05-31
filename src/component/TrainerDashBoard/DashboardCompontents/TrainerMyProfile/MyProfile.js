@@ -20,6 +20,7 @@ import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
+import { COMMON_URL } from "helpers/baseURL";
 
 const options = [
     { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
@@ -187,7 +188,7 @@ const MyProfileFC = ({
 
         axios
             .get(
-                "http://doodlebluelive.com:2307/v1/trainer",
+                 COMMON_URL+"/v1/trainer",
                 { applicationStatus: "setupComplete" },
                 {
                     headers: headers,
