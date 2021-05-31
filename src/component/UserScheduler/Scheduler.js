@@ -9,6 +9,7 @@ import NextIcon from "../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import DropdownTrainerAvailability from "../Home/Banner/DropdownAvailability";
 
 import BlueArrowHover from "../common/BlueArrowButton";
+import {COMMON_URL} from "helpers/baseURL"
 
 function Scheduler(props) {
     // const forceUpdate = useForceUpdate();
