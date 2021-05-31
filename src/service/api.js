@@ -9,12 +9,19 @@ export var api = async function ({
   status = false,
   token = "",
   baseURL = "normal",
+  isAdmin = false,
 }) {
   return await new Promise((resolve, reject) => {
     // setting token
-    axiosInstance.defaults.headers.common[
-      "Authorization"
-    ] = localStorage.getItem("token") ? `${localStorage.getItem("token")}` : "";
+    if (isAdmin) {
+      axiosInstance.defaults.headers.common["Authorization"] =
+        localStorage.getItem("admin-token")
+          ? `${localStorage.getItem("admin-token")}`
+          : "";
+    } else {
+      axiosInstance.defaults.headers.common["Authorization"] =
+        localStorage.getItem("token") ? `${localStorage.getItem("token")}` : "";
+    }
 
     axiosInstance[method](`${getServiceUrl(baseURL)}${api}`, body ? body : "")
       .then((data) => {
