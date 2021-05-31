@@ -17,7 +17,7 @@ import { Dropdown } from "reactjs-dropdown-component";
 import { trainerDetail } from "action/trainerAct";
 import "./dropdown.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment';
+import moment from "moment";
 // import useForm from "./useForm";
 // import validateInfo from "./validation";
 
@@ -132,115 +132,51 @@ const AboutTrainerFC = ({
                         typesetting industry. Lorem ipsum has been the. *All
                         these fields are mandatory.{" "}
                     </p> */}
-                    <br></br>
-                    <div className="outter_form">
-                        <form
-                            className="wrapper_inputs"
-                        // onSubmit={handleFormSubmit}
-                        >
-                            <div className="wrapper_innerInput">
-                                <label>Name*</label>
-                                <input
-                                    placeholder="Name"
-                                    type="name"
-                                    name="name"
-                                    style={{ textTransform: "capitalize" }}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            firstName: e.target.value,
-                                        })
-                                    }
-                                    value={aboutTrainerData.firstName}
-                                    name="firstName"
-                                />
-                                {error.firstName && (
-                                    <span>{error.firstName}</span>
-                                )}
-                            </div>
+          <br></br>
+          <div className="outter_form">
+            <form
+              className="wrapper_inputs"
+              // onSubmit={handleFormSubmit}
+            >
+              <div className="wrapper_innerInput">
+                <label>Name*</label>
+                <input
+                  placeholder="Name"
+                  type="name"
+                  name="name"
+                  style={{ textTransform: "capitalize" }}
+                  onChange={(e) =>
+                    setAboutTrainerData({
+                      ...aboutTrainerData,
+                      firstName: e.target.value,
+                    })
+                  }
+                  value={aboutTrainerData.firstName}
+                  name="firstName"
+                />
+                {error.firstName && <span>{error.firstName}</span>}
+              </div>
 
-                            <div className="wrapper_innerInput">
-                                <label className="bg_down">Location*</label>
-                                <div className="iconwrapper">
-                                    <Dropdown
-                                        className="custom_dropdown"
-                                        title="Select Location"
-                                        list={locations}
-                                        value={aboutTrainerData.location}
-                                        onChange={(e) => {
-                                            setAboutTrainerData({
-                                                ...aboutTrainerData,
-                                                location: e.value,
-                                            });
-                                        }}
-                                        name="location"
-                                    />
-                                </div>
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Date of Birth*</label>
-
-                                <input
-                                    placeholder="MM/DD/YYYY"
-                                    type="date"
-                                    value={aboutTrainerData.dob}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            dob: e.target.value,
-                                        })
-                                    }
-                                    name="dob"
-                                    ref={register({
-                                        required:
-                                            "Mandatory fields cannot be empty",
-                                    })}
-                                />
-                                {errors.dob && (
-                                    <span>{errors.dob.message}</span>
-                                )}
-                                {aboutTrainerData.dob &&
-                                    moment().diff(aboutTrainerData.dob, 'years', false) <= 21 && (
-                                        <span>
-                                            Trainer should be more than 21 years
-                                        </span>
-                                    )}
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Gender*</label>
-                                <div className="iconwrapper">
-                                    <Dropdown
-                                        className="custom_dropdown"
-                                        title="Select Gender"
-                                        list={gender}
-                                        value={aboutTrainerData.gender}
-                                        onChange={(e) => {
-                                            setAboutTrainerData({
-                                                ...aboutTrainerData,
-                                                gender: e.value,
-                                            });
-                                        }}
-                                        name="gender"
-                                    />
-                                </div>
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Email*</label>
-                                <input
-                                    placeholder="Email"
-                                    type="email"
-                                    value={aboutTrainerData.email}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            email: e.target.value,
-                                        })
-                                    }
-                                    name="email"
-                                />
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Phone*</label>
+              <div className="wrapper_innerInput">
+                <label className="bg_down">Location*</label>
+                <div className="iconwrapper">
+                  <Dropdown
+                    className="custom_dropdown"
+                    title="Select Location"
+                    list={locations}
+                    value={aboutTrainerData.location}
+                    onChange={(e) => {
+                      setAboutTrainerData({
+                        ...aboutTrainerData,
+                        location: e.value,
+                      });
+                    }}
+                    name="location"
+                  />
+                </div>
+              </div>
+              <div className="wrapper_innerInput">
+                <label>Date of Birth*</label>
 
                 <input
                   placeholder="MM/DD/YYYY"
@@ -258,8 +194,73 @@ const AboutTrainerFC = ({
                   })}
                 />
                 {errors.dob && <span>{errors.dob.message}</span>}
+                {aboutTrainerData.dob &&
+                  moment().diff(aboutTrainerData.dob, "years", false) <= 21 && (
+                    <span>Trainer should be more than 21 years</span>
+                  )}
               </div>
-            
+              <div className="wrapper_innerInput">
+                <label>Gender*</label>
+                <div className="iconwrapper">
+                  <Dropdown
+                    className="custom_dropdown"
+                    title="Select Gender"
+                    list={gender}
+                    value={aboutTrainerData.gender}
+                    onChange={(e) => {
+                      setAboutTrainerData({
+                        ...aboutTrainerData,
+                        gender: e.value,
+                      });
+                    }}
+                    name="gender"
+                  />
+                </div>
+              </div>
+              <div className="wrapper_innerInput">
+                <label>Email*</label>
+                <input
+                  placeholder="Email"
+                  type="email"
+                  value={aboutTrainerData.email}
+                  onChange={(e) =>
+                    setAboutTrainerData({
+                      ...aboutTrainerData,
+                      email: e.target.value,
+                    })
+                  }
+                  name="email"
+                />
+              </div>
+              <div className="wrapper_innerInput">
+                <label>Phone*</label>
+
+                <ReactPhoneInput
+                  type="phone"
+                  disableDropdown
+                  disableAreaCodes
+                  countryCodeEditable={false}
+                  value={aboutTrainerData.phone}
+                  placeholder="Phone Number"
+                  // country="us"
+                  inputProps={{
+                    name: "phone",
+                  }}
+                  name="phoneNumber"
+                  onChange={(e) =>
+                    setAboutTrainerData({
+                      ...aboutTrainerData,
+                      phone: e,
+                    })
+                  }
+                />
+
+                {aboutTrainerData.phone &&
+                  aboutTrainerData.phone.length < 11 && (
+                    <span>Phone Number should contain 10 digits</span>
+                  )}
+              </div>
+
               <div className="wrapper_innerInput">
                 <label>Website</label>
                 <div className="iconwrapper">

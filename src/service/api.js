@@ -64,7 +64,7 @@ let getServiceUrl = (baseURL) => {
       finalURL = "https://apis.bookmotto.com/user/v1/";
       break;
     case "session":
-      finalURL = "http://doodlebluelive.com:2337/v1/";
+      finalURL = "https://apis.bookmotto.com/session/v1/";
       break;
     case "payment":
       finalURL = "https://apis.bookmotto.com/payments/v1/";

@@ -43,8 +43,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
     const scheduleBody = {
       trainerId: location.state.slotDetails["id"],
       title:
-        location.state.slotDetails["Name"] +
-        " " +
+        
         location.state.slotDetails["activity"],
       trainingType: trainingtype,
       sessionType: location.state.sessionData["preferedTrainingMode"],
@@ -58,6 +57,8 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
       price: location.state.sessionData.price,
     };
 
+    console.log(scheduleBody);
+
     fetch(`${SESSION_URL}/v1/session/schedule`, {
       headers: {
         "Content-Type": "application/json",
@@ -68,8 +69,8 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
     })
       .then((resp) => resp.json())
       .then((res) => {
-        localStorage.setItem("sessionId", res.session.id);
-        localStorage.setItem("sessionTrainingType", res.session.trainingType);
+        // localStorage.setItem("sessionId", res.session.id);
+        // localStorage.setItem("sessionTrainingType", res.session.trainingType);
 
         if (res.session.trainingType === "1on1") {
           history.push({

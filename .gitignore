@@ -4,8 +4,9 @@
 .pnp.js
 
 node_modules
+
 #production
-/build
+
 
 # testing
 /coverage

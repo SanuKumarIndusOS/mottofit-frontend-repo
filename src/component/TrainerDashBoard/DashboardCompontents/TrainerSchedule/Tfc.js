@@ -392,7 +392,7 @@ function Tfc() {
     var editData = {
       date:  datee,
       mode: "EarlyBird",
-      blockedSlot:    moment(time, ["h:mm A"]).format("HH:mm"),
+      blockedSlot: moment(time, ["h:mm A"]).format("HH:mm"),
       state: "BLOCK",
     };
     // console.log(date + " " + time);
