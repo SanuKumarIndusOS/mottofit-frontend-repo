@@ -274,11 +274,11 @@ function Tfc() {
           {
             availableMode: TimeSlot,
             availableSlots: [
-              sortDate[0].time +
+              moment(sortDate[0].time, ["hh:mm A"]).format("HH:mm")  +
                 "-" +
                 moment(sortDate[sortDate.length - 1].time, "HH:mm a")
                   .add(30, "minutes")
-                  .format("hh:mm A"),
+                  .format("HH:mm"),
             ],
           },
         ],
@@ -390,9 +390,9 @@ function Tfc() {
   };
   function editSlot(datee, time) {
     var editData = {
-      date: datee,
+      date:  datee,
       mode: "EarlyBird",
-      blockedSlot: time,
+      blockedSlot:    moment(time, ["h:mm A"]).format("HH:mm"),
       state: "BLOCK",
     };
     // console.log(date + " " + time);
