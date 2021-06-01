@@ -11,10 +11,10 @@ import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
-import axios from "axios";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Dropdown } from "reactjs-dropdown-component";
+import { trainerDetail } from "action/trainerAct";
 import "./dropdown.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
@@ -54,6 +54,7 @@ const AboutTrainerFC = ({
     updateTrainerDetails,
     details,
     trainerPersonalData,
+    trainerDetail,
     // submitForm,
 }) => {
     const { register, errors, handleSubmit } = useForm();
@@ -90,7 +91,6 @@ const AboutTrainerFC = ({
                 instaHandle: aboutTrainerData.instagram,
             },
         };
-        console.log(storeData);
 
         history.push(`/trainer/background`);
         updateTrainerDetails(storeData);
@@ -111,24 +111,15 @@ const AboutTrainerFC = ({
             setAboutTrainerData(tempData);
         }
 
-        const headers = {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
-        };
-
-        axios
-            .get("http://doodlebluelive.com:2307/v1/trainer", { headers })
-            .then((data) => {
-                console.log(data["data"]["data"]["phoneNumber"]);
-
-                // prepopulate
-                setAboutTrainerData({
-                    ...aboutTrainerData,
-                    phone: data["data"]["data"]["phoneNumber"],
-                    email: data["data"]["data"]["email"],
-                    firstName: data["data"]["data"]["firstName"],
-                });
+        trainerDetail().then((data) => {
+            console.log(data, "datadata");
+            setAboutTrainerData({
+                ...aboutTrainerData,
+                phone: data["phoneNumber"],
+                email: data["email"],
+                firstName: data["firstName"],
             });
+        });
     }, []);
 
     return (
@@ -283,6 +274,7 @@ const AboutTrainerFC = ({
                                         </span>
                                     )}
                             </div>
+
                             <div className="wrapper_innerInput">
                                 <label>Website</label>
                                 <div className="iconwrapper">
@@ -353,6 +345,7 @@ const mapDispatchToProps = (dispatch) => {
         {
             updateTrainerDetails,
             getTrainerDetails,
+            trainerDetail,
         },
         dispatch
     );
