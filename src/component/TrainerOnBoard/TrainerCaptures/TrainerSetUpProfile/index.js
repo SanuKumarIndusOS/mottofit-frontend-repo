@@ -360,7 +360,11 @@ const TrainerSetUpProfileFC = ({
     };
 
     updateTrainerDetails(storeData);
+    console.log(trainerData);
+    localStorage.setItem("setUpformObj", JSON.stringify(trainerData));
   };
+
+
 
   const getStripeURL = () => {
     const { getStripeAccLink } = PaymentApi;
@@ -422,9 +426,34 @@ const TrainerSetUpProfileFC = ({
 
     setInputCertificatesFields(tempCertification);
 
-    setTrainerData(storeData.details);
-
     updateTrainerDetails(storeData);
+
+    let setUpData = JSON.parse(localStorage.getItem("setUpformObj"));
+    console.log(setUpData);
+
+    setUpData === null
+      ? setTrainerData(storeData) :
+      setTrainerData({
+        ...trainerData,
+        motto: setUpData.motto,
+        trainingProcessDescription: setUpData.trainingProcessDescription,
+        trainingLocation: setUpData.trainingLocation,
+        serviceableLocation: setUpData.servicableLocation,
+        location: setUpData.location,
+        websiteLink: setUpData.websiteLink,
+        instaHandle: setUpData.instaHandle,
+        youtubeChannel: setUpData.youtubeChannel,
+        governmentId: setUpData.governmentId,
+        insurance: setUpData.insurance,
+        governmentIdNumber: setUpData.governmentIdNumber,
+        coverAmount: setUpData.coverAmount,
+        virtualMeetingHandle: setUpData.virtualMeetingHandle,
+        virtualMeetingLink: setUpData.virtualMeetingLink,
+        identityNameUS: setUpData.identityNameUS,
+        insuranceNameUS: setUpData.insuranceNameUS,
+      })
+
+
   }, []);
 
   const [renderButton, setRenderButton] = useState({

@@ -98,6 +98,9 @@ const TrainerCardDashboard = ({
       fileUpload(fd);
     }
 
+    console.log(trainerData);
+    localStorage.setItem("trainerDetails", JSON.stringify(trainerData));
+
     // Redux logic
     let storeData = {
       details: { ...trainerData },
@@ -106,6 +109,7 @@ const TrainerCardDashboard = ({
     history.push("/trainer/setup");
   };
   useEffect(() => {
+    console.log('trainerdata=,', trainerData);
     if (image) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -218,9 +222,29 @@ const TrainerCardDashboard = ({
           },
         };
 
-        setTrainerData(storeData.details);
+        //setTrainerData(storeData.details);
 
         updateTrainerDetails(storeData);
+        var backData = JSON.parse(localStorage.getItem("trainerDetails"));
+        console.log(backData);
+
+        backData === null ?
+          setTrainerData(storeData.details) :
+          setTrainerData({
+            ...trainerData,
+            firstName:backData.firstName,
+            lastName: backData.lastName,
+            description: backData.description,
+            individualCharge: backData.individualCharge,
+            ssTwoPeopleCharge: backData.ssTwoPeopleCharge,
+            ssThreePeopleCharge: backData.ssThreePeopleCharge,
+            ssFourPeopleCharge: backData.ssFourPeopleCharge,
+            classFlatRate: backData.classFlatRate,
+            threeSessionRate: backData.threeSessionRate,
+            tenSessionRate: backData.tenSessionRate,
+            amtPerPerson: backData.amtPerPerson,
+          })
+
       }
     });
   }, []);
@@ -361,9 +385,9 @@ const TrainerCardDashboard = ({
                           color: "#53BFD2",
                         }}
 
-                        // onChange={() => {
-                        //   setCheckState("Strength & HIIT");
-                        // }}
+                      // onChange={() => {
+                      //   setCheckState("Strength & HIIT");
+                      // }}
                       />
                       <div className="checkbox_label">Strength & HIIT</div>
                       <Checkbox
@@ -704,7 +728,7 @@ const TrainerCardDashboard = ({
                     <Link
                       onClick={handleChangeToTrainerProfile}
                       type="submit"
-                      // onClick={handleTrainerAvailability}
+                    // onClick={handleTrainerAvailability}
                     >
                       Save Changes <ArrowHoverBlacked />
                       {/* <img src={Arrow} alt="icon" /> */}
