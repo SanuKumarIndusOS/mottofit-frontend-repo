@@ -17,7 +17,7 @@ import "react-phone-input-2/lib/style.css";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment';
+import moment from "moment";
 // import useForm from "./useForm";
 // import validateInfo from "./validation";
 
@@ -145,7 +145,7 @@ const AboutTrainerFC = ({
                     <div className="outter_form">
                         <form
                             className="wrapper_inputs"
-                        // onSubmit={handleFormSubmit}
+                            // onSubmit={handleFormSubmit}
                         >
                             <div className="wrapper_innerInput">
                                 <label>Name*</label>
@@ -209,7 +209,11 @@ const AboutTrainerFC = ({
                                     <span>{errors.dob.message}</span>
                                 )}
                                 {aboutTrainerData.dob &&
-                                    moment().diff(aboutTrainerData.dob, 'years', false) <= 21 && (
+                                    moment().diff(
+                                        aboutTrainerData.dob,
+                                        "years",
+                                        false
+                                    ) <= 21 && (
                                         <span>
                                             Trainer should be more than 21 years
                                         </span>
