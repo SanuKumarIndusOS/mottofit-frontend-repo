@@ -117,7 +117,8 @@ const AboutTrainerFC = ({
         ...aboutTrainerData,
         phone: data["phoneNumber"],
         email: data["email"],
-        firstName: data["firstName"],
+        firstName: data["firstName"] + ' ' + data["lastName"],
+
       });
     });
   }, []);
@@ -136,7 +137,7 @@ const AboutTrainerFC = ({
           <div className="outter_form">
             <form
               className="wrapper_inputs"
-              // onSubmit={handleFormSubmit}
+            // onSubmit={handleFormSubmit}
             >
               <div className="wrapper_innerInput">
                 <label>Name*</label>
@@ -196,7 +197,7 @@ const AboutTrainerFC = ({
                 {errors.dob && <span>{errors.dob.message}</span>}
                 {aboutTrainerData.dob &&
                   moment().diff(aboutTrainerData.dob, "years", false) <= 21 && (
-                    <span>Trainer should be more than 21 years</span>
+                    <span>Trainer should be more than 21 years of age</span>
                   )}
               </div>
               <div className="wrapper_innerInput">
