@@ -84,3 +84,103 @@ export const fileUpload =
         });
     });
   };
+
+//get Trainer Calender Details
+export const getTrainerCalenderDetails =
+  (startDate, endDate, timeSlot) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { getTrainerCalenderDetails } = TrainerApi;
+      getTrainerCalenderDetails.startDate = startDate;
+      getTrainerCalenderDetails.endDate = endDate;
+      getTrainerCalenderDetails.timeSlot = timeSlot;
+      api({ ...getTrainerCalenderDetails })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//trainer Slot
+export const trainerSlot =
+  (body) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { trainerSlot } = TrainerApi;
+      api({ ...trainerSlot, body })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//make Default
+export const makeDefaultApi =
+  (body) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { makeDefaultApi } = TrainerApi;
+      api({ ...makeDefaultApi, body })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//add Trainer Slot Api
+export const addTrainerSlotApi =
+  (body) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { addTrainerSlotApi } = TrainerApi;
+      api({ ...addTrainerSlotApi, body })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//trainer Channel
+export const trainerChannel =
+  () =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { trainerChannel } = TrainerApi;
+      api({ ...trainerChannel })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//trainer My Earning
+export const trainerMyEarning =
+  (id) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { trainerMyEarning } = TrainerApi;
+      trainerMyEarning.trainerId = id;
+      api({ ...trainerMyEarning })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };

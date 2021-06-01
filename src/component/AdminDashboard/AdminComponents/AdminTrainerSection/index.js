@@ -1,28 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
-import { COMMON_URL } from "helpers/baseURL";
-import { changeApproval } from "action/adminAct";
+import { changeApproval, getAllTrainerLists } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-const AdminTrainerSectionClass = (props) => {
-  const [trainerList, setTrainerList] = React.useState([]);
+import CommonPagination from "component/common/CommonPagination";
 
-  React.useEffect(() => {
-    fetchAllTrainers();
+const AdminTrainerSectionClass = (props) => {
+  const [trainerList, setTrainerList] = useState([]);
+  const [pageMetaData, setpageMetaData] = useState({});
+
+  useEffect(() => {
+    fetchAllTrainers(1);
   }, []);
 
-  function fetchAllTrainers() {
-    fetch(`${COMMON_URL}/v1/admin/trainers?limit=20&page=1`, {
-      method: "get",
-      headers: new Headers({
-        Authorization: localStorage.getItem("admin-token"),
-        "Content-Type": "application/x-www-form-urlencoded",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setTrainerList(data["data"]["list"]);
-      });
+  function fetchAllTrainers(page) {
+    props.getAllTrainerLists(page).then((data) => {
+      setTrainerList(data.list);
+      setpageMetaData(data.pageMetaData);
+    });
   }
 
   function ChangeApproval(id, state) {
@@ -82,6 +77,11 @@ const AdminTrainerSectionClass = (props) => {
               </div>
             );
           })}
+          <CommonPagination
+            pageMetaData={pageMetaData}
+            totalPosts={trainerList.length}
+            pageChange={(e) => fetchAllTrainers(e)}
+          />
         </div>
       </div>
     </div>
@@ -92,6 +92,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       changeApproval,
+      getAllTrainerLists,
     },
     dispatch
   );

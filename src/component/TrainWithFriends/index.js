@@ -12,6 +12,9 @@ import "../HowItWork/TrainerMotto/styles.scss";
 import BlueHoverButton from "../common/BlueArrowButton";
 import { Link } from "react-router-dom";
 import { history } from "helpers";
+import { userSession } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { SESSION_URL } from "helpers/baseURL";
 const accordionData = [
   {
@@ -35,7 +38,7 @@ const accordionData = [
   },
 ];
 
-const TrainWithFriends = () => {
+const TrainWithFriendsClass = ({ userSession }) => {
   const [friendsInput, setFriendsInput] = useState([
     {
       friendName: "",
@@ -61,7 +64,7 @@ const TrainWithFriends = () => {
   const updateSessionApi = () => {
     let sessionId = localStorage.getItem("sessionId");
 
-    fetch("${SESSION_URL}/v1/session/update", {
+    fetch(`${SESSION_URL}/v1/session/update`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
@@ -87,15 +90,8 @@ const TrainWithFriends = () => {
   };
 
   const getUserSessions = () => {
-    fetch(`${SESSION_URL}/v1/session/user`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      method: "GET",
-    })
-      .then((resp) => resp.json())
-      .then((res) => {
+    userSession()
+      .then(() => {
         history.push({
           pathname: "/users/dashboard/session",
         });
@@ -315,5 +311,18 @@ const AccordationService = () => {
     </>
   );
 };
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      userSession,
+    },
+    dispatch
+  );
+};
+
+const TrainWithFriends = connect(
+  null,
+  mapDispatchToProps
+)(TrainWithFriendsClass);
 
 export default TrainWithFriends;

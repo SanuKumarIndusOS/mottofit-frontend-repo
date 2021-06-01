@@ -1,41 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Datatable from "../datatable/index";
-import Pagination from "../UserMain/Pagination";
+import CommonPagination from "component/common/CommonPagination";
 import { Input } from "reactstrap";
 import "./styles.scss";
-import { COMMON_URL } from "helpers/baseURL";
-// require("es6-promise").polyfill();
-// require("isomorphic-fetch");
+import { getAllUsersLists } from "action/adminAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const Main = () => {
+const MainClass = ({ getAllUsersLists }) => {
   const [userList, setUserList] = React.useState([]);
-  const [noUser, setNoUser] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(2000);
+  const [pageMetaData, setpageMetaData] = useState({});
   const [loading, setLoading] = useState(false);
 
   const [q, setQ] = useState("");
   useEffect(() => {
     setLoading(true);
-    fetchAllTrainers();
+    fetchAllTrainers(1);
   }, []);
 
-  function fetchAllTrainers() {
-    setLoading(true);
-
-    fetch(`${COMMON_URL}/v1/admin/users?limit=50&page=1`, {
-      method: "get",
-      headers: new Headers({
-        Authorization: localStorage.getItem("admin-token"),
-        "Content-Type": "application/x-www-form-urlencoded",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUserList(data["data"]["list"]);
-        setNoUser(data["data"]["pageMetaData"]);
-        setLoading(false);
-      });
+  function fetchAllTrainers(page) {
+    getAllUsersLists(page).then((data) => {
+      setUserList(data.list);
+      setpageMetaData(data.pageMetaData);
+      setLoading(false);
+    });
   }
 
   function search(rows) {
@@ -46,15 +34,7 @@ const Main = () => {
       // row.location.toString().indexOf(q.toLowerCase()) > -1
     );
   }
-
-  // get current page
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = userList.slice(indexOfFirstPost, indexOfLastPost);
-
-  //Change page
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  if (loading) return "Loading...";
   return (
     <div className="outter_container_AD container">
       <h2>Admin User's Data </h2>
@@ -62,8 +42,7 @@ const Main = () => {
         <div className="views_trainer">
           <p>No of</p>
           <h3>
-            User:{" "}
-            {loading ? <span>Loading...</span> : <span>{noUser.total}</span>}
+            User: <span>{pageMetaData.total}</span>
           </h3>
         </div>
       </div>
@@ -75,18 +54,25 @@ const Main = () => {
         onChange={(e) => setQ(e.target.value)}
       />
 
-      <Datatable
-        userList={search(currentPosts)}
-        loading={loading}
-        // trainerList={searchByLocation(trainerList)}
-      />
-      <Pagination
-        postsPerPage={postsPerPage}
+      <Datatable userList={search(userList)} loading={loading} />
+      <CommonPagination
+        pageMetaData={pageMetaData}
         totalPosts={userList.length}
-        paginate={paginate}
+        pageChange={(e) => fetchAllTrainers(e)}
       />
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getAllUsersLists,
+    },
+    dispatch
+  );
+};
+
+const Main = connect(null, mapDispatchToProps)(MainClass);
 
 export default Main;

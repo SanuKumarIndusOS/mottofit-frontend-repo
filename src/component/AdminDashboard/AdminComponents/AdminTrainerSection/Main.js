@@ -1,46 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Datatable from "./datatable/index";
-import Pagination from "./Pagination";
+import CommonPagination from "component/common/CommonPagination";
 import { Input } from "reactstrap";
-import { COMMON_URL } from "helpers/baseURL";
+import { fetchTrainersLists } from "action/adminAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import "./styles.scss";
-// import AdminDashboard from "../AdminDashboardList/index";
 
-// require("es6-promise").polyfill();
-// require("isomorphic-fetch");
-
-const Main = () => {
-  const [trainerList, setTrainerList] = React.useState([]);
-  const [noTrainer, setNoTrainer] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(2000);
+const MainClass = ({ fetchTrainersLists }) => {
+  const [trainerList, setTrainerList] = useState([]);
+  const [pageMetaData, setpageMetaData] = useState({});
   const [loading, setLoading] = useState(false);
   const [q, setQ] = useState("");
   useEffect(() => {
     setLoading(true);
-    fetchAllTrainers();
+    fetchAllTrainers(1);
   }, []);
 
-  function fetchAllTrainers() {
-    setLoading(true);
-
-    fetch(
-      `${COMMON_URL}/v1/admin/trainers?limit=${postsPerPage}&page=${currentPage}`,
-
-      {
-        method: "get",
-        headers: new Headers({
-          Authorization: localStorage.getItem("admin-token"),
-          "Content-Type": "application/x-www-form-urlencoded",
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setTrainerList(data["data"]["list"]);
-        setNoTrainer(data["data"]["pageMetaData"]);
-        setLoading(false);
-      });
+  function fetchAllTrainers(page) {
+    fetchTrainersLists(page).then((data) => {
+      setTrainerList(data.list);
+      setpageMetaData(data.pageMetaData);
+      setLoading(false);
+    });
   }
 
   function search(rows) {
@@ -55,16 +37,7 @@ const Main = () => {
       // row.location.toString().indexOf(q.toLowerCase()) > -1
     );
   }
-
-  // get current page
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = trainerList.slice(indexOfFirstPost, indexOfLastPost);
-
-  //Change page
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  if (loading) return "Loading...";
   return (
     <div className="outter_container_AD container">
       <h2>Admin Trainer's Data </h2>
@@ -72,12 +45,7 @@ const Main = () => {
         <div className="views_trainer">
           <p>No of</p>
           <h3>
-            Trainer's :
-            {loading ? (
-              <span>Loading...</span>
-            ) : (
-              <span> {noTrainer.total}</span>
-            )}
+            Trainer's :<span> {pageMetaData.total}</span>
           </h3>
         </div>
         <Input
@@ -90,17 +58,28 @@ const Main = () => {
       </div>
 
       <Datatable
-        trainerList={search(currentPosts)}
+        trainerList={search(trainerList)}
         loading={loading}
         // trainerList={searchByLocation(trainerList)}
       />
-      <Pagination
-        postsPerPage={postsPerPage}
+      <CommonPagination
+        pageMetaData={pageMetaData}
         totalPosts={trainerList.length}
-        paginate={paginate}
+        pageChange={(e) => fetchAllTrainers(e)}
       />
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchTrainersLists,
+    },
+    dispatch
+  );
+};
+
+const Main = connect(null, mapDispatchToProps)(MainClass);
 
 export default Main;

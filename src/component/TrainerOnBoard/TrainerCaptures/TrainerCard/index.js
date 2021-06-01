@@ -15,7 +15,6 @@ import { connect } from "react-redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 // import { TrainerApi } from "service/apiVariables";
 // import { api } from "service/api";
-import axios from "axios";
 // import { set } from "date-fns";
 import { Modal } from "react-responsive-modal";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
