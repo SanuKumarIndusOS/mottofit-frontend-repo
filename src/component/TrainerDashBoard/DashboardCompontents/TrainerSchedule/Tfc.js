@@ -270,15 +270,16 @@ function Tfc() {
       var data = {
         startDate: sortDate[sortDate.length - 1].date,
         endDate: sortDate[0].date,
+        timeZone:"America/New_York",
         availabilitySlot: [
           {
             availableMode: TimeSlot,
-            availableSlots: [
-              moment(sortDate[0].time, ["hh:mm A"]).format("HH:mm")  +
+            availableSlots:  [
+              sortDate[0].time +
                 "-" +
                 moment(sortDate[sortDate.length - 1].time, "HH:mm a")
                   .add(30, "minutes")
-                  .format("HH:mm"),
+                  .format("hh:mm A"),
             ],
           },
         ],
@@ -374,7 +375,8 @@ function Tfc() {
         "&endDate=" +
         endDate +
         "&timeBlock=" +
-        TimeSlot,
+        TimeSlot +
+        `&timeZone=America/New_York`,
       {
         method: "GET", // or 'PUT'
         headers: {
@@ -391,11 +393,12 @@ function Tfc() {
   function editSlot(datee, time) {
     var editData = {
       date:  datee,
-      mode: "EarlyBird",
-      blockedSlot: moment(time, ["h:mm A"]).format("HH:mm"),
+      mode: TimeSlot,
+      blockedSlot: time,
       state: "BLOCK",
+      timeZone:"America/New_York"
     };
-    // console.log(date + " " + time);
+     console.log("wwwwwwwwwwww", editData);
     fetch(`${COMMON_URL}/v1/block/trainerSlot`, {
       method: "PUT", // or 'PUT'
       headers: {
@@ -408,6 +411,7 @@ function Tfc() {
       .then((data) => {
         setCells(tempcells);
         getAvailableSlots(startWeek, endWeek);
+        console.log("yui", data);
       })
       .catch((error) => {
         console.error("Error:", error);

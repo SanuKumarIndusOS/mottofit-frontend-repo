@@ -61,7 +61,7 @@ let getServiceUrl = (baseURL) => {
 
   switch (baseURL) {
     case "normal":
-      finalURL = "https://apis.bookmotto.com/user/v1/";
+      finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
     case "session":
       finalURL = "https://apis.bookmotto.com/session/v1/";
