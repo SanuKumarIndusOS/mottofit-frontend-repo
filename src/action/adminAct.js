@@ -33,3 +33,54 @@ export const getTrainerDetail =
         });
     });
   };
+
+//get All Trainer Lists
+export const getAllTrainerLists =
+  (page, isAdmin = true) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { getAllTrainerLists } = TrainerApi;
+      getAllTrainerLists.page = page;
+      api({ ...getAllTrainerLists, isAdmin })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//get All Users Lists
+export const getAllUsersLists =
+  (page, isAdmin = true) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { getAllUsersLists } = TrainerApi;
+      getAllUsersLists.page = page;
+      api({ ...getAllUsersLists, isAdmin })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//fetct Trainers Lists
+export const fetchTrainersLists =
+  (page, isAdmin = true) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { fetchTrainersLists } = TrainerApi;
+      fetchTrainersLists.page = page;
+      api({ ...fetchTrainersLists, isAdmin })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };

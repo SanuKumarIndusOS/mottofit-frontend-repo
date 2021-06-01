@@ -70,6 +70,36 @@ export const TrainerApi = {
       return this.url + this.id;
     },
   },
+  getAllTrainerLists: {
+    url: "admin/trainers?limit=5&page=",
+    method: "get",
+    baseURL: "normal",
+    isAdmin: true,
+    page: 1,
+    get api() {
+      return this.url + this.page;
+    },
+  },
+  getAllUsersLists: {
+    url: "admin/users?limit=20&page=",
+    method: "get",
+    baseURL: "normal",
+    isAdmin: true,
+    page: 1,
+    get api() {
+      return this.url + this.page;
+    },
+  },
+  fetchTrainersLists: {
+    url: "admin/trainers?limit=20&page=",
+    method: "get",
+    baseURL: "normal",
+    isAdmin: true,
+    page: 1,
+    get api() {
+      return this.url + this.page;
+    },
+  },
   getTrainerDetail: {
     url: "trainer/id?trainerId=",
     method: "get",
@@ -90,6 +120,53 @@ export const TrainerApi = {
     method: "post",
     baseURL: "normal",
   },
+  getTrainerCalenderDetails: {
+    url: "trainer/calenderView?startDate=",
+    method: "get",
+    baseURL: "normal",
+    startDate: null,
+    endDate: null,
+    timeSlot: null,
+    get api() {
+      return (
+        this.url +
+        this.startDate +
+        "&endDate=" +
+        this.endDate +
+        "&timeBlock=" +
+        this.timeSlot
+      );
+    },
+  },
+  trainerSlot: {
+    api: "block/trainerSlot",
+    method: "put",
+    baseURL: "normal",
+  },
+  makeDefaultApi: {
+    api: "slot/make-default",
+    method: "post",
+    baseURL: "normal",
+  },
+  addTrainerSlotApi: {
+    api: "addTrainerSlot",
+    method: "post",
+    baseURL: "normal",
+  },
+  trainerChannel: {
+    api: "trainer/channel",
+    method: "get",
+    baseURL: "message",
+  },
+  trainerMyEarning: {
+    url: "payment-history/trainer?trainerId=",
+    method: "get",
+    baseURL: "payment",
+    trainerId: null,
+    get api() {
+      return this.url + this.trainerId;
+    },
+  },
 };
 
 export const PaymentApi = {
@@ -105,5 +182,36 @@ export const userApi = {
     api: "user",
     method: "get",
     baseURL: "normal",
+  },
+  userSession: {
+    api: "session/user",
+    method: "get",
+    baseURL: "session",
+  },
+  scheduleSession: {
+    api: "session/schedule",
+    method: "post",
+    baseURL: "session",
+  },
+  getCalenderDetails: {
+    url: "trainer/calenderView?trainerId=",
+    method: "get",
+    baseURL: "normal",
+    trainerId: null,
+    startDate: null,
+    endDate: null,
+    timeSlot: null,
+    get api() {
+      return (
+        this.url +
+        this.trainerId +
+        "&startDate=" +
+        this.startDate +
+        "&endDate=" +
+        this.endDate +
+        "&timeBlock=" +
+        this.timeSlot
+      );
+    },
   },
 };

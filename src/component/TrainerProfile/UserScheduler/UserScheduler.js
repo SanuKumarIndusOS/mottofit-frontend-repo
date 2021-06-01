@@ -11,7 +11,9 @@ import RiseInActive from "../../../assets/files/TrainerDashboard/AvaliablityDrop
 import MidInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Mid-DayBreak_Inactive.svg";
 import HappyInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/HappyHour_Inactive.svg";
 import NeverTooInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/NeverTooLate_Inactive.svg";
-import { COMMON_URL } from "helpers/baseURL";
+import { getCalenderDetails } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 const timeZone = [
   {
     label: "Early Bird",
@@ -38,7 +40,7 @@ const timeZone = [
     value: "NeverTooLate",
   },
 ];
-function UserScheduler(props) {
+function UserSchedulerClass(props) {
   //   let date = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let early_bird = [
     "05:00 AM",
@@ -127,8 +129,6 @@ function UserScheduler(props) {
   const [cal, setCal] = React.useState([]);
   const [startWeek, setstartWeek] = React.useState(moment().startOf("isoWeek"));
   const [endWeek, setendWeek] = React.useState(moment().endOf("isoWeek"));
-
-  const token = localStorage.getItem("token");
 
   var dt = new Object();
   var lt = new Object();
@@ -295,25 +295,8 @@ function UserScheduler(props) {
   const getAvailableSlots = (start, end) => {
     var startDate = start.format("YYYY-MM-DD");
     var endDate = end.format("YYYY-MM-DD");
-    fetch(
-      `${COMMON_URL}/v1/trainer/calenderView?trainerId=` +
-        props.id +
-        "&startDate=" +
-        startDate +
-        "&endDate=" +
-        endDate +
-        "&timeBlock=" +
-        TimeSlot,
-      {
-        method: "GET", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: localStorage.getItem("token"),
-          Authorization: token,
-        },
-      }
-    )
-      .then((response) => response.json())
+    props
+      .getCalenderDetails(props.id, startDate, endDate, TimeSlot)
       .then((json) => {
         setData(json.data);
       });
@@ -676,5 +659,15 @@ function UserScheduler(props) {
     </div>
   );
 }
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getCalenderDetails,
+    },
+    dispatch
+  );
+};
+
+const UserScheduler = connect(null, mapDispatchToProps)(UserSchedulerClass);
 
 export default UserScheduler;

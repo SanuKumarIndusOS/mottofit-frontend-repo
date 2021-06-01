@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
 import moment from "moment";
@@ -11,7 +11,14 @@ import RiseInActive from "../../../../assets/files/TrainerDashboard/AvaliablityD
 import MidInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Mid-DayBreak_Inactive.svg";
 import HappyInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/HappyHour_Inactive.svg";
 import NeverTooInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/NeverTooLate_Inactive.svg";
-import { COMMON_URL } from "helpers/baseURL";
+import {
+  getTrainerCalenderDetails,
+  trainerSlot,
+  makeDefaultApi,
+  addTrainerSlotApi,
+} from "action/trainerAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 const timeZone = [
   {
     label: "Early Bird",
@@ -39,10 +46,15 @@ const timeZone = [
   },
 ];
 
-function Tfc() {
-  const [makeDefault, setMakeDefault] = React.useState(false);
+function TfcClass({
+  getTrainerCalenderDetails,
+  trainerSlot,
+  makeDefaultApi,
+  addTrainerSlotApi,
+}) {
+  const [makeDefault, setMakeDefault] = useState(false);
   //refer style in node module's react-table-drag
-  const [editMode, setEditMode] = React.useState(false);
+  const [editMode, setEditMode] = useState(false);
   const tempcells = [
     [false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false],
@@ -119,13 +131,13 @@ function Tfc() {
     NeverTooInActive,
   ];
 
-  const [time, setTime] = React.useState(early_bird);
-  const [TimeSlot, setTimeSlot] = React.useState("EarlyBird");
+  const [time, setTime] = useState(early_bird);
+  const [TimeSlot, setTimeSlot] = useState("EarlyBird");
 
-  const [cellData, setCellData] = React.useState([]);
-  const [selectedCell, setSelectedCell] = React.useState([]);
+  const [cellData, setCellData] = useState([]);
+  const [selectedCell, setSelectedCell] = useState([]);
 
-  const [cells, setCells] = React.useState([
+  const [cells, setCells] = useState([
     [false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false],
@@ -135,58 +147,50 @@ function Tfc() {
     [false, false, false, false, false, false, false, false],
   ]);
 
-  const [cal, setCal] = React.useState([]);
-  const [startWeek, setstartWeek] = React.useState(moment().startOf("isoWeek"));
-  const [endWeek, setendWeek] = React.useState(moment().endOf("isoWeek"));
+  const [cal, setCal] = useState([]);
+  const [startWeek, setstartWeek] = useState(moment().startOf("isoWeek"));
+  const [endWeek, setendWeek] = useState(moment().endOf("isoWeek"));
 
   const token = localStorage.getItem("token");
 
   var dt = new Object();
   var lt = new Object();
-  const [data, setData] = React.useState([]);
+  const [data, setData] = useState([]);
 
-  const [aslot, setAslot] = React.useState();
-  const [aslotKeys, setAslotKeys] = React.useState();
+  const [aslot, setAslot] = useState();
+  const [aslotKeys, setAslotKeys] = useState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
-
-    console.log(TimeSlot);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     populate(startWeek, endWeek);
   }, [aslotKeys]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSelectedCell([]);
-    console.log("time changed");
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
   }, [time]);
 
-  //   React.useEffect(() => {
-  //     console.log("time changed");
+  //   useEffect(() => {
   //     // getAvailableSlots(startWeek, endWeek);
   //     populate(startWeek, endWeek);
 
   //  }, [TimeSlot])
 
-  React.useEffect(() => {
+  useEffect(() => {
     Object.keys(data).map((item) => {
-      // console.log(data[item]["slotDate"], data[item]["availabileTimes"]);
       dt[data[item]["slotDate"]] = data[item]["availabileTimes"];
     });
-    console.log(dt);
 
     var ta;
     Object.keys(dt).map((item) => {
       ta = [];
       dt[item].map((a) => {
-        // ta.push(a["end"]);
         ta.push(a["start"]);
-        // console.log(ta, item);
       });
 
       lt[item] = ta;
@@ -194,11 +198,9 @@ function Tfc() {
 
     setAslot(lt);
     setAslotKeys(Object.keys(lt));
-    console.log(Object.keys(lt));
   }, [data]);
 
-  React.useEffect(() => {
-    console.log(cal);
+  useEffect(() => {
     setCellData([]);
     time.map((time) => {
       var temp = [];
@@ -211,37 +213,30 @@ function Tfc() {
     });
   }, [cal]);
 
-  React.useEffect(() => {
-    console.log("change", cells, cellData);
+  useEffect(() => {
     setSelectedCell([]);
     cells.map((column, key) => {
       var temp = [];
       if (key !== 0) {
-        // console.log(key);
-
         column.map((row, key) => {
           if (row === true) {
             temp.push(key - 1);
           }
         });
 
-        //   console.log(temp);
         setSelectedCell((selectedCell) => [...selectedCell, temp]);
       }
     });
   }, [cells]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // setSelectedCell([]);
-    console.log(selectedCell);
     var temp = [];
     var sortDate = [];
 
     selectedCell.map((column, columnkey) => {
       if (column.length !== 0) {
         column.map((row, rowkey) => {
-          console.log(cellData[columnkey][row]);
-
           temp.push(cellData[columnkey][row]);
         });
       }
@@ -251,14 +246,6 @@ function Tfc() {
 
     if (temp.length !== 0) {
       sortDate = temp.sort((a, b) => new Date(b.date) - new Date(a.date));
-      console.log(sortDate);
-      console.log(
-        moment(sortDate[0].time, ["hh:mm A"]).format("HH:mm")  +
-          "-" +
-          moment(sortDate[sortDate.length - 1].time, "HH:mm a")
-            .add(30, "minutes")
-            .format("HH:mm")
-      );
     }
 
     // if (temp.length === 1) {
@@ -266,7 +253,6 @@ function Tfc() {
     //     setCells(tempcells);
     // } else {
     if (sortDate.length !== 0) {
-      console.log(sortDate[0].time + "-" + sortDate[sortDate.length - 1].time);
       var data = {
         startDate: sortDate[sortDate.length - 1].date,
         endDate: sortDate[0].date,
@@ -274,7 +260,7 @@ function Tfc() {
           {
             availableMode: TimeSlot,
             availableSlots: [
-              moment(sortDate[0].time, ["hh:mm A"]).format("HH:mm")  +
+              moment(sortDate[0].time, ["hh:mm A"]).format("HH:mm") +
                 "-" +
                 moment(sortDate[sortDate.length - 1].time, "HH:mm a")
                   .add(30, "minutes")
@@ -284,17 +270,8 @@ function Tfc() {
         ],
       };
 
-      fetch(`${COMMON_URL}/v1/addTrainerSlot`, {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert("Slot Added");
+      addTrainerSlotApi(data)
+        .then(() => {
           setCells(tempcells);
           getAvailableSlots(startWeek, endWeek);
         })
@@ -311,25 +288,21 @@ function Tfc() {
     //Reset current cells
 
     setCells(tempcells);
-    // console.log(startWeek.format("DD/MM"));
     setstartWeek(startWeek.subtract(7, "days"));
     setendWeek(endWeek.subtract(7, "days"));
-    console.log(startWeek.format("DD/MM"), endWeek.format("DD/MM"));
 
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
   };
 
-  React.useEffect(() => {}, [startWeek]);
+  useEffect(() => {}, [startWeek]);
 
   const NextWeek = () => {
     //Reset current cells
 
     setCells(tempcells);
-    // console.log(startWeek.format("DD/MM"));
     setstartWeek(startWeek.add(7, "days"));
     setendWeek(endWeek.add(7, "days"));
-    console.log(startWeek.format("DD/MM"), endWeek.format("DD/MM"));
 
     getAvailableSlots(startWeek, endWeek);
 
@@ -350,7 +323,6 @@ function Tfc() {
     setCal(dates);
 
     if (cellData.length === 0) {
-      console.log("0");
       time.map((time) => {
         var temp = [];
         dates.map((date) => {
@@ -368,44 +340,19 @@ function Tfc() {
   const getAvailableSlots = (start, end) => {
     var startDate = start.format("YYYY-MM-DD");
     var endDate = end.format("YYYY-MM-DD");
-    fetch(
-      `${COMMON_URL}/v1/trainer/calenderView?startDate=` +
-        startDate +
-        "&endDate=" +
-        endDate +
-        "&timeBlock=" +
-        TimeSlot,
-      {
-        method: "GET", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json.data);
-      });
+    getTrainerCalenderDetails(startDate, endDate, TimeSlot).then((json) => {
+      setData(json.data);
+    });
   };
   function editSlot(datee, time) {
     var editData = {
-      date:  datee,
+      date: datee,
       mode: "EarlyBird",
       blockedSlot: moment(time, ["h:mm A"]).format("HH:mm"),
       state: "BLOCK",
     };
-    // console.log(date + " " + time);
-    fetch(`${COMMON_URL}/v1/block/trainerSlot`, {
-      method: "PUT", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(editData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    trainerSlot(editData)
+      .then(() => {
         setCells(tempcells);
         getAvailableSlots(startWeek, endWeek);
       })
@@ -414,7 +361,6 @@ function Tfc() {
       });
   }
   const toggleEditMode = () => {
-    console.log("edit mode", makeDefault);
     if (makeDefault) {
       saveDefaultWeeks();
       setMakeDefault(!makeDefault);
@@ -423,29 +369,14 @@ function Tfc() {
   };
 
   const saveDefaultWeeks = () => {
-    console.log(
-      "clicked",
-      startWeek.format("YYYY-MM-DD"),
-      endWeek.format("YYYY-MM-DD"),
-      TimeSlot
-    );
-
     var def_body = {
       startDate: startWeek.format("YYYY-MM-DD"),
       endDate: endWeek.format("YYYY-MM-DD"),
       defaultWeeks: 2,
       mode: TimeSlot,
     };
-    fetch(`${COMMON_URL}/v1/slot/make-default`, {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(def_body),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    makeDefaultApi(def_body)
+      .then(() => {
         alert("Slot def blocked");
         setCells(tempcells);
         getAvailableSlots(startWeek, endWeek);
@@ -519,7 +450,6 @@ function Tfc() {
             if (aslotKeys.length !== 0) {
               if (aslotKeys.find((el) => el === item.date)) {
                 if (aslot[item.date].find((l) => l === item.time)) {
-                  console.log(item.time);
                   return (
                     <td
                       disabled
@@ -731,7 +661,6 @@ function Tfc() {
               if (aslotKeys.length !== 0) {
                 if (aslotKeys.find((el) => el === item.date)) {
                   if (aslot[item.date].find((l) => l === item.time)) {
-                    console.log(item.time);
                     return <td disabled className="avaiable_slot"></td>;
                   } else {
                     return <td></td>;
@@ -892,35 +821,28 @@ function Tfc() {
                 value={TimeSlot}
                 onChange={(e) => {
                   setTimeSlot(e.value);
-                  console.log(e.value);
                   if (e.value === "EarlyBird") {
                     setTime(early_bird);
-                    console.log("early_bird");
                   }
 
                   if (e.value === "RiseAndShine") {
                     setTime(rise_shine);
-                    console.log("RiseAndShine");
                   }
 
                   if (e.value === "MidDayBreak1") {
                     setTime(mid_day);
-                    console.log("MidDayBreak");
                   }
 
                   if (e.value === "MidDayBreak2") {
                     setTime(mid_day_2);
-                    console.log("MidDayBreak2");
                   }
 
                   if (e.value === "HappyHours") {
                     setTime(happy_hour);
-                    console.log("HappyHours");
                   }
 
                   if (e.value === "NeverTooLate") {
                     setTime(never_too_late);
-                    console.log("NeverTooLate");
                   }
                 }}
                 name="TimeSlot"
@@ -1015,5 +937,19 @@ const ButtonSection = () => {
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getTrainerCalenderDetails,
+      trainerSlot,
+      makeDefaultApi,
+      addTrainerSlotApi,
+    },
+    dispatch
+  );
+};
+
+const Tfc = connect(null, mapDispatchToProps)(TfcClass);
 
 export default Tfc;

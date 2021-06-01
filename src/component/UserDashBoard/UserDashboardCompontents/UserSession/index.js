@@ -12,8 +12,10 @@ import BlueHoverButton from "../../../common/BlueArrowButton";
 import { history } from "helpers";
 import { useEffect } from "react";
 import moment from "moment";
-import { SESSION_URL } from "helpers/baseURL";
-const UserSession = () => {
+import { userSession } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+const UserSessionClass = ({ userSession }) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
     pastSessions: [],
@@ -21,16 +23,9 @@ const UserSession = () => {
   });
 
   useEffect(() => {
-    fetch(`${SESSION_URL}/v1/session/user`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      method: "GET",
-    })
-      .then((resp) => resp.json())
-      .then((res) => {
-        setUserData(res.data);
+    userSession()
+      .then((data) => {
+        setUserData(data);
       })
       .catch((error) => {
         console.log(error);
@@ -337,5 +332,15 @@ const datamonth = {
   11: "Nov",
   12: "Dec",
 };
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      userSession,
+    },
+    dispatch
+  );
+};
+
+const UserSession = connect(null, mapDispatchToProps)(UserSessionClass);
 
 export default UserSession;

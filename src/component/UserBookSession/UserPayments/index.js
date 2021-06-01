@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import Radio from "@material-ui/core/Radio";
 import paymentMethodImg from "../../../assets/files/UserOnboard/PaymentAsset/Card Icons.png";
@@ -14,19 +14,18 @@ import { loadStripe } from "@stripe/stripe-js";
 import CardForm from "./subcomponents/CardForm";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateUserDetails } from "action/userAct";
+import { scheduleSession } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
-import { SESSION_URL } from "helpers/baseURL";
 const stripePromise = loadStripe(
   "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
 );
 
-const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
+const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
   //for material ui radio buttom (temp)
-  const [selectedValue, setSelectedValue] = React.useState("a");
+  const [selectedValue, setSelectedValue] = useState("a");
 
-  const [price, setprice] = React.useState();
+  const [price, setprice] = useState();
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -35,6 +34,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
   const location = useLocation();
 
   const ScheduleSession = () => {
+    console.log(location, "locationlocation");
     let trainingtype = location.state.sessionType;
     if (trainingtype === "group") {
       trainingtype = "social";
@@ -42,9 +42,7 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
 
     const scheduleBody = {
       trainerId: location.state.slotDetails["id"],
-      title:
-        
-        location.state.slotDetails["activity"],
+      title: location.state.slotDetails["activity"],
       trainingType: trainingtype,
       sessionType: location.state.sessionData["preferedTrainingMode"],
       activity: location.state.slotDetails["activity"],
@@ -57,21 +55,8 @@ const UserPaymentsFC = ({ updateUserDetails, sessionData }) => {
       price: location.state.sessionData.price,
     };
 
-    console.log(scheduleBody);
-
-    fetch(`${SESSION_URL}/v1/session/schedule`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      method: "POST",
-      body: JSON.stringify(scheduleBody),
-    })
-      .then((resp) => resp.json())
+    scheduleSession(scheduleBody)
       .then((res) => {
-        // localStorage.setItem("sessionId", res.session.id);
-        // localStorage.setItem("sessionTrainingType", res.session.trainingType);
-
         if (res.session.trainingType === "1on1") {
           history.push({
             pathname: "/users/dashboard/session",
@@ -265,7 +250,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      updateUserDetails,
+      scheduleSession,
     },
     dispatch
   );
