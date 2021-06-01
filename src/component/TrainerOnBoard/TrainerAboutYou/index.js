@@ -117,7 +117,7 @@ const AboutTrainerFC = ({
                 ...aboutTrainerData,
                 phone: data["phoneNumber"],
                 email: data["email"],
-                firstName: data["firstName"],
+                firstName: data["firstName"] + " " + data["lastName"],
             });
         });
     }, []);
@@ -207,6 +207,7 @@ const AboutTrainerFC = ({
                                     ) <= 21 && (
                                         <span>
                                             Trainer should be more than 21 years
+                                            of age
                                         </span>
                                     )}
                             </div>
