@@ -220,7 +220,7 @@ const TrainerSetUpProfileFC = ({
 
     axios
       .put(
-        COMMON_URL+"/v1/trainer",
+        COMMON_URL + "/v1/trainer",
         { applicationStatus: "setupComplete" },
         {
           headers: headers,
@@ -502,16 +502,16 @@ const TrainerSetUpProfileFC = ({
                         </div>
                         <div className="profile_aside_items">
                           {trainerPersonalData.oneOnOnePricing &&
-                          (trainerPersonalData.oneOnOnePricing.virtualSession ||
-                            trainerPersonalData.oneOnOnePricing
-                              .inPersonAtTrainerLocation) ? (
+                            (trainerPersonalData.oneOnOnePricing.virtualSession ||
+                              trainerPersonalData.oneOnOnePricing
+                                .inPersonAtTrainerLocation) ? (
                             <div className="profile_aside_item">
                               <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
                               <hr />
                               <div className="profile_aside_inner_item">
                                 {trainerPersonalData.oneOnOnePricing &&
-                                trainerPersonalData.oneOnOnePricing
-                                  .virtualSession ? (
+                                  trainerPersonalData.oneOnOnePricing
+                                    .virtualSession ? (
                                   <h6>
                                     {
                                       trainerPersonalData.oneOnOnePricing
@@ -521,8 +521,8 @@ const TrainerSetUpProfileFC = ({
                                   </h6>
                                 ) : null}
                                 {trainerPersonalData.oneOnOnePricing &&
-                                trainerPersonalData.oneOnOnePricing
-                                  .inPersonAtTrainerLocation ? (
+                                  trainerPersonalData.oneOnOnePricing
+                                    .inPersonAtTrainerLocation ? (
                                   <h6>
                                     {
                                       trainerPersonalData.oneOnOnePricing
@@ -537,12 +537,12 @@ const TrainerSetUpProfileFC = ({
                           ) : null}
 
                           {trainerPersonalData.socialSessionPricing &&
-                          (trainerPersonalData.socialSessionPricing
-                            .inPeronAtTrainerLocationfor2People ||
-                            trainerPersonalData.socialSessionPricing
-                              .inPeronAtTrainerLocationfor3People ||
-                            trainerPersonalData.socialSessionPricing
-                              .inPeronAtTrainerLocationfor4People) ? (
+                            (trainerPersonalData.socialSessionPricing
+                              .inPeronAtTrainerLocationfor2People ||
+                              trainerPersonalData.socialSessionPricing
+                                .inPeronAtTrainerLocationfor3People ||
+                              trainerPersonalData.socialSessionPricing
+                                .inPeronAtTrainerLocationfor4People) ? (
                             <div className="profile_aside_item">
                               <h2>
                                 SOCIAL SESSIONS{" "}
@@ -557,8 +557,8 @@ const TrainerSetUpProfileFC = ({
 
                               <div className="profile_aside_inner_item">
                                 {trainerPersonalData.socialSessionPricing &&
-                                trainerPersonalData.socialSessionPricing
-                                  .inPeronAtTrainerLocationfor2People ? (
+                                  trainerPersonalData.socialSessionPricing
+                                    .inPeronAtTrainerLocationfor2People ? (
                                   <h6>
                                     {
                                       trainerPersonalData.socialSessionPricing
@@ -568,8 +568,8 @@ const TrainerSetUpProfileFC = ({
                                   </h6>
                                 ) : null}
                                 {trainerPersonalData.socialSessionPricing &&
-                                trainerPersonalData.socialSessionPricing
-                                  .inPeronAtTrainerLocationfor3People ? (
+                                  trainerPersonalData.socialSessionPricing
+                                    .inPeronAtTrainerLocationfor3People ? (
                                   <h6>
                                     {
                                       trainerPersonalData.socialSessionPricing
@@ -579,8 +579,8 @@ const TrainerSetUpProfileFC = ({
                                   </h6>
                                 ) : null}
                                 {trainerPersonalData.socialSessionPricing &&
-                                trainerPersonalData.socialSessionPricing
-                                  .inPeronAtTrainerLocationfor4People ? (
+                                  trainerPersonalData.socialSessionPricing
+                                    .inPeronAtTrainerLocationfor4People ? (
                                   <h6>
                                     {
                                       trainerPersonalData.socialSessionPricing
@@ -593,8 +593,8 @@ const TrainerSetUpProfileFC = ({
                             </div>
                           ) : null}
                           {trainerPersonalData.classSessionPricing &&
-                          trainerPersonalData.classSessionPricing
-                            .inPersonAtclientLocationfor15People ? (
+                            trainerPersonalData.classSessionPricing
+                              .inPersonAtclientLocationfor15People ? (
                             <div className="profile_aside_item">
                               <h2>
                                 CREATE A CLASS
@@ -609,9 +609,9 @@ const TrainerSetUpProfileFC = ({
                               <div className="profile_aside_inner_item">
                                 <h6>
                                   {trainerPersonalData &&
-                                  trainerPersonalData.classSessionPricing
+                                    trainerPersonalData.classSessionPricing
                                     ? trainerPersonalData.classSessionPricing
-                                        .inPersonAtclientLocationfor15People
+                                      .inPersonAtclientLocationfor15People
                                     : ""}
                                   <span>Flat Rate Class (For 5-15 People)</span>
                                 </h6>
@@ -700,7 +700,7 @@ const TrainerSetUpProfileFC = ({
                                 <h6>
                                   {trainerPersonalData.certification[0]
                                     ? trainerPersonalData.certification[0]
-                                        .certification
+                                      .certification
                                     : "Not Added"}
                                 </h6>
                               </div>
@@ -709,7 +709,7 @@ const TrainerSetUpProfileFC = ({
                                 <h6>
                                   {trainerPersonalData.certification[1]
                                     ? trainerPersonalData.certification[1]
-                                        .certification
+                                      .certification
                                     : "Not Added"}
                                 </h6>
                               </div>
@@ -718,7 +718,7 @@ const TrainerSetUpProfileFC = ({
                                 <h6>
                                   {trainerPersonalData.certification[2]
                                     ? trainerPersonalData.certification[2]
-                                        .certification
+                                      .certification
                                     : "Not Added"}
                                 </h6>
                               </div>
@@ -843,22 +843,20 @@ const TrainerSetUpProfileFC = ({
                       <div className="inputs_platform">
                         <button
                           onClick={(e) => handleInputChange(e, "Online")}
-                          className={`${
-                            trainerData?.trainingLocation?.includes("Online")
-                              ? "active"
-                              : ""
-                          }`}
+                          className={`${trainerData?.trainingLocation?.includes("Online")
+                            ? "active"
+                            : ""
+                            }`}
                           name="trainingLocation"
                         >
                           Virtual
                         </button>
                         <button
                           onClick={(e) => handleInputChange(e, "inperson")}
-                          className={`${
-                            trainerData?.trainingLocation?.includes("inperson")
-                              ? "active"
-                              : ""
-                          }`}
+                          className={`${trainerData?.trainingLocation?.includes("inperson")
+                            ? "active"
+                            : ""
+                            }`}
                           name="trainingLocation"
                         >
                           In Person
@@ -960,12 +958,8 @@ const TrainerSetUpProfileFC = ({
                         <textarea
                           type="text"
                           placeholder="Enter the Details of the location"
-                          onChange={handleInputChange}
-                          value={
-                            trainerPersonalData.trainingFacilityLocation
-                              ? trainerPersonalData.trainingFacilityLocation
-                              : ""
-                          }
+                          onChange={(e) => setTrainerAvailabilityData({ ...trainerAvailabilityData, trainingFacilityLocation: e.target.value })}
+                          value={trainerAvailabilityData.trainingFacilityLocation}
                         />
                       </div>
                     </div>
@@ -1003,12 +997,8 @@ const TrainerSetUpProfileFC = ({
                         <textarea
                           type="text"
                           placeholder="Neighborhood List"
-                          onChange={handleInputChange}
-                          value={
-                            trainerPersonalData.servicableLocation
-                              ? trainerPersonalData.servicableLocation
-                              : ""
-                          }
+                          onChange={(e) => setTrainerAvailabilityData({ ...trainerAvailabilityData, servicableLocation: e.target.value })}
+                          value={trainerAvailabilityData.servicableLocation}
                         />
 
                         <img
