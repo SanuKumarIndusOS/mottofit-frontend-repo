@@ -19,10 +19,6 @@ function Scheduler(props) {
   const [endWeek, setendWeek] = React.useState(moment().endOf("isoWeek"));
 
   useEffect(() => {
-    var time = moment("02:00 AM", "hh:mm A")
-      .add(30, "minutes")
-      .format("hh:mm A");
-
     //var ts = moment("10/15/2014 09:00 AM", "M/D/YYYY H:mm").valueOf();
 
     populate(startWeek, endWeek);
@@ -53,7 +49,6 @@ function Scheduler(props) {
     setDate(dates);
   };
 
-  var glob = [];
   var dt = new Object();
   var lt = new Object();
 
@@ -67,11 +62,7 @@ function Scheduler(props) {
   ];
 
   const [data, setData] = React.useState([]);
-  var token;
-  //   JSON.parse(localStorage.getItem("user-info"))["token"]
   useEffect(() => {
-    // token = JSON.parse(localStorage.getItem("user-info"))["token"];
-
     populate(startWeek, endWeek);
     fetch(
       `${COMMON_URL}/v1/trainer/calenderView?trainerId=` +
@@ -94,8 +85,6 @@ function Scheduler(props) {
     // var a = json.data[item]["slotDate"];
     // var b = data[item]["availabileTimes"];
     dt[data[item]["slotDate"]] = data[item]["availabileTimes"];
-
-    //glob.push(a);
   });
 
   var ta;
@@ -118,8 +107,6 @@ function Scheduler(props) {
     DropdownTrainerAvailabilityState,
     setDropdownTrainerAvailabilityState,
   ] = useState(false);
-  const [DropdownAvailabilityValue, setDropdownTrainerAvailabilityValue] =
-    useState([]);
 
   let DropdownAvailability;
   if (DropdownTrainerAvailabilityState) {
@@ -130,7 +117,6 @@ function Scheduler(props) {
 
   const TriggerDropDownTrainerAvailability = () => {
     setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
-    setDropdownTrainerAvailabilityValue("Boxing");
   };
 
   var cellCollection = [];

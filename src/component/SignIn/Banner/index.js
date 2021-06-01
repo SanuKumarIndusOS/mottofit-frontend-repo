@@ -65,8 +65,8 @@ const SignInFC = ({
         .then((res) => {
           localStorage.setItem("user-id", res.id);
           if (res["type"] === "trainer") {
-            trainerDetail.then((data) => {
-              if (data["data"]["applicationStatus"] === null) {
+            trainerDetail.then((response) => {
+              if (response["data"]["applicationStatus"] === null) {
                 history.push("/trainer/about");
               } else {
                 history.push("/trainers/dashboard/session");
