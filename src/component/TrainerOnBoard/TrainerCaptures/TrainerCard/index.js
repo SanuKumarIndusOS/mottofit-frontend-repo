@@ -123,6 +123,8 @@ const TrainerCardFC = ({
       fileUpload(fd);
     }
 
+    console.log(trainerData);
+    localStorage.setItem("testObject", JSON.stringify(trainerData));
     // Redux logic
     let storeData = {
       details: { ...trainerData },
@@ -225,6 +227,7 @@ const TrainerCardFC = ({
             firstName,
             lastName,
             description,
+
             // individualCharge: inPersonAtClientLocation,
             // ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
             // ssThreePeopleCharge: inPeronAtClientLocationfor3People,
@@ -249,9 +252,44 @@ const TrainerCardFC = ({
           },
         };
 
-        setTrainerData(storeData.details);
+        //setTrainerData(storeData.details);
 
         updateTrainerDetails(storeData);
+
+        var retrievedObject = JSON.parse(localStorage.getItem("testObject"));
+        console.log(retrievedObject);
+
+        retrievedObject === null
+          ? setTrainerData(storeData.details)
+          : setTrainerData({
+              ...trainerData,
+              firstName: storeData.details.firstName,
+              lastName: storeData.details.lastName,
+              description: retrievedObject.description,
+              classFlatRate: retrievedObject.classFlatRate,
+              classFlatRateTl: retrievedObject.classFlatRateTl,
+              classFlatRateVt: retrievedObject.classFlatRateVt,
+
+              individualCharge: retrievedObject.individualCharge,
+              individualChargeTl: retrievedObject.individualChargeTl,
+              individualChargeVt: retrievedObject.individualChargeVt,
+
+              ssFourPeopleCharge: retrievedObject.ssFourPeopleCharge,
+              ssFourPeopleChargeTl: retrievedObject.ssFourPeopleChargeTl,
+              ssFourPeopleChargeVt: retrievedObject.ssFourPeopleChargeVt,
+              ssThreePeopleCharge: retrievedObject.ssThreePeopleCharge,
+              ssThreePeopleChargeTl: retrievedObject.ssThreePeopleChargeTl,
+              ssThreePeopleChargeVt: retrievedObject.ssThreePeopleChargeVt,
+              ssTwoPeopleCharge: retrievedObject.ssTwoPeopleCharge,
+              ssTwoPeopleChargeTl: retrievedObject.ssTwoPeopleChargeTl,
+              ssTwoPeopleChargeVt:retrievedObject.ssTwoPeopleChargeVt,
+              tenSessionRate: retrievedObject.tenSessionRate,
+              tenSessionRateTl: retrievedObject.tenSessionRateTl,
+              tenSessionRateVt: retrievedObject.tenSessionRateVt,
+              threeSessionRate: retrievedObject.threeSessionRate,
+              threeSessionRateTl: retrievedObject.threeSessionRateTl,
+              threeSessionRateVt:retrievedObject.threeSessionRateVt,
+            });
       }
     });
   }, []);

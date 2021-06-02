@@ -363,6 +363,8 @@ const TrainerSetUpProfileFC = ({
         };
 
         updateTrainerDetails(storeData);
+        console.log(trainerData);
+        localStorage.setItem("setUpformObj", JSON.stringify(trainerData));
     };
 
     const getStripeURL = () => {
@@ -425,9 +427,33 @@ const TrainerSetUpProfileFC = ({
 
         setInputCertificatesFields(tempCertification);
 
-        setTrainerData(storeData.details);
-
         updateTrainerDetails(storeData);
+
+        let setUpData = JSON.parse(localStorage.getItem("setUpformObj"));
+        console.log(setUpData);
+
+        setUpData === null
+            ? setTrainerData(storeData)
+            : setTrainerData({
+                  ...trainerData,
+                  motto: setUpData.motto,
+                  trainingProcessDescription:
+                      setUpData.trainingProcessDescription,
+                  trainingLocation: setUpData.trainingLocation,
+                  serviceableLocation: setUpData.servicableLocation,
+                  location: setUpData.location,
+                  websiteLink: setUpData.websiteLink,
+                  instaHandle: setUpData.instaHandle,
+                  youtubeChannel: setUpData.youtubeChannel,
+                  governmentId: setUpData.governmentId,
+                  insurance: setUpData.insurance,
+                  governmentIdNumber: setUpData.governmentIdNumber,
+                  coverAmount: setUpData.coverAmount,
+                  virtualMeetingHandle: setUpData.virtualMeetingHandle,
+                  virtualMeetingLink: setUpData.virtualMeetingLink,
+                  identityNameUS: setUpData.identityNameUS,
+                  insuranceNameUS: setUpData.insuranceNameUS,
+              });
     }, []);
 
     const [renderButton, setRenderButton] = useState({
@@ -985,6 +1011,18 @@ const TrainerSetUpProfileFC = ({
                                                         )
                                                     }
                                                 />
+                                                {/* <input
+                          type="file"
+                          name="file"
+                          value={inputCertificatesField.upload}
+                          onChange={(event) =>
+                            handleChangeCertificateInput(index, event)
+                          }
+                          className="custom-file-input"
+                        />
+                        <a className="checkarrow">
+                          <ArrowHover />
+                        </a> */}
                                             </div>
                                         )
                                     )}
@@ -1147,11 +1185,18 @@ const TrainerSetUpProfileFC = ({
                                                 <textarea
                                                     type="text"
                                                     placeholder="Enter the Details of the location"
-                                                    onChange={handleInputChange}
+                                                    onChange={(e) =>
+                                                        setTrainerAvailabilityData(
+                                                            {
+                                                                ...trainerAvailabilityData,
+                                                                trainingFacilityLocation:
+                                                                    e.target
+                                                                        .value,
+                                                            }
+                                                        )
+                                                    }
                                                     value={
-                                                        trainerPersonalData.trainingFacilityLocation
-                                                            ? trainerPersonalData.trainingFacilityLocation
-                                                            : ""
+                                                        trainerAvailabilityData.trainingFacilityLocation
                                                     }
                                                 />
                                             </div>
@@ -1195,11 +1240,18 @@ const TrainerSetUpProfileFC = ({
                                                 <textarea
                                                     type="text"
                                                     placeholder="Neighborhood List"
-                                                    onChange={handleInputChange}
+                                                    onChange={(e) =>
+                                                        setTrainerAvailabilityData(
+                                                            {
+                                                                ...trainerAvailabilityData,
+                                                                servicableLocation:
+                                                                    e.target
+                                                                        .value,
+                                                            }
+                                                        )
+                                                    }
                                                     value={
-                                                        trainerPersonalData.servicableLocation
-                                                            ? trainerPersonalData.servicableLocation
-                                                            : ""
+                                                        trainerAvailabilityData.servicableLocation
                                                     }
                                                 />
 
@@ -1210,7 +1262,66 @@ const TrainerSetUpProfileFC = ({
                                                 />
                                             </div>
                                         </div>
+                                        {/* <div className="setup_item1">
+                                            <h6>{data.location}</h6>
+                                            <div className="inputs_platform">
+                                                <div className="iconwrapper">
+                                                    <select
+                                                        required
+                                                        onChange={(e) =>
+                                                            setTrainerData({
+                                                                ...trainerData,
+                                                                location: e.target.value,
+                                                            })
+                                                        }
+                                                        value={
+                                                            trainerData.location
+                                                        }
+                                                    >
+                                                        <option
+                                                            value=""
+                                                            disabled
+                                                            selected
+                                                        >
+                                                            Choose City
+                                                        </option>
+                                                        <option>
+                                                            New York
+                                                        </option>
+                                                        <option>Miami</option>
+                                                        <option>Hampton</option>
+                                                        <option>
+                                                            Palm Beach
+                                                        </option>
+                                                    </select>
 
+                                                    <img
+                                                        src={Location}
+                                                        alt="icon"
+                                                        className="location_icon"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div> */}
+                                        {/* <div className="setup_item1">
+                                            <h6>{data.web}</h6>
+                                            <div className="inputs_platform">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Add your Web Link"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.websiteLink
+                                                        }
+                                                        name="websiteLink"
+                                                    />
+                                                    <img src={Web} alt="icon" />
+                                                </div>
+                                            </div>
+                                        </div> */}
                                         <div className="setup_item1">
                                             <h6>{data.insta}</h6>
                                             <div className="inputs_platform">

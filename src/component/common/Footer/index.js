@@ -88,10 +88,10 @@ const Footer = () => {
                                                 </g>
                                             </svg>
                                             <a
-                                                href="mailto:hello@motto.com"
+                                                href="mailto:train@bookmotto.com"
                                                 target="_blank"
                                             >
-                                                hello@motto.com
+                                                train@bookmotto.com
                                             </a>
                                         </div>
                                         <ul className="footer_links">
