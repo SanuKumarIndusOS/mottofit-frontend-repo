@@ -461,12 +461,9 @@ const TrainerSetUpProfileFC = ({
       let imageList = []
       storeTrainerData.images.map((list, index) => {
         imageList.push({ image: list })
-
-
       })
       if (imageList.length === storeTrainerData.images.length) {
-
-        setImageFields(imageList);
+        setImageFields([...imageList, { image: '' }]);
       }
       setTrainerAvailabilityData(
         {
@@ -969,7 +966,7 @@ const TrainerSetUpProfileFC = ({
                             <ImageReander
                               value={input.image}
                             />
-                            <ImageReander
+                            {/* <ImageReander
                               value={input.image}
                             />
                             <ImageReander
@@ -980,7 +977,7 @@ const TrainerSetUpProfileFC = ({
                             />
                             <ImageReander
                               value={input.image}
-                            />
+                            /> */}
                           </div>
                         );
                       })}

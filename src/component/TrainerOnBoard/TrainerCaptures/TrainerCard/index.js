@@ -126,7 +126,7 @@ const TrainerCardFC = ({
     console.log(trainerData);
     localStorage.setItem("testObject", JSON.stringify(trainerData));
     localStorage.setItem('trainerCheckedVal', JSON.stringify(trainerbackgroundData));
-    console.log(localStorage.getItem('trainerCheckedVal'));
+
     // Redux logic
     let storeData = {
       details: { ...trainerData },
@@ -229,28 +229,6 @@ const TrainerCardFC = ({
             firstName,
             lastName,
             description,
-
-            // individualCharge: inPersonAtClientLocation,
-            // ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
-            // ssThreePeopleCharge: inPeronAtClientLocationfor3People,
-            // ssFourPeopleCharge: inPeronAtClientLocationfor4People,
-            // classFlatRate: inPersonAtclientLocationfor15People,
-            // threeSessionRate: passRatefor3Session,
-            // tenSessionRate: passRatefor10Session,
-            // individualChargeTl: inPersonAtTrainerLocation,
-            // ssTwoPeopleChargeTl: inPeronAtTrainerLocationfor2People,
-            // ssThreePeopleChargeTl: inPeronAtTrainerLocationfor3People,
-            // ssFourPeopleChargeTl: inPeronAtTrainerLocationfor4People,
-            // classFlatRateTl: inPersonAttrainerLocationfor15People,
-            // threeSessionRateTl: passRatefor3SessionAtTrainerLocation,
-            // tenSessionRateTl: passRatefor10SessionAtTrainerLocation,
-            // individualChargeVt: virtualSession,
-            // ssTwoPeopleChargeVt: virtualSessionfor2People,
-            // ssThreePeopleChargeVt: virtualSessionfor3People,
-            // ssFourPeopleChargeVt: virtualSessionfor4People,
-            // classFlatRateVt: virtualSessionfor15People,
-            // threeSessionRateVt: passRatefor3SessionAtVirtual,
-            // tenSessionRateVt: passRatefor10SessionAtVirtual,
           },
         };
 
@@ -294,8 +272,55 @@ const TrainerCardFC = ({
           });
 
         var trainerCheckedValues = JSON.parse(localStorage.getItem("trainerCheckedVal"));
-        console.log(trainerCheckedValues);
+        let trainercheckedValues = trainerCheckedValues.areaOfExpertise;
+        console.log(trainercheckedValues);
 
+        if (trainercheckedValues.indexOf('Strength & HIIT') >= 0) {
+          setCheckedHIIT(true);
+          setTrainerbackgroundData({
+            ...trainerbackgroundData,
+            areaOfExpertise: [
+              ...trainerbackgroundData.areaOfExpertise,
+              "Strength & HIIT",
+            ],
+          });
+        }
+      
+        if (trainercheckedValues.indexOf('Pilates') >= 0) {
+          setCheckedPilates(true);
+          setTrainerbackgroundData({
+            ...trainerbackgroundData,
+            areaOfExpertise: [
+              ...trainerbackgroundData.areaOfExpertise,
+              "Pilates",
+            ],
+          });
+        }
+       
+        if (trainercheckedValues.indexOf('Boxing') >= 0) {
+          setCheckedBoxing(true);
+          setTrainerbackgroundData({
+            ...trainerbackgroundData,
+            areaOfExpertise: [
+              ...trainerbackgroundData.areaOfExpertise,
+              "Boxing",
+            ],
+          });
+        }
+        
+
+        if (trainercheckedValues.indexOf('Yoga') >= 0) {
+          setCheckedYoga(true);
+          setTrainerbackgroundData({
+            ...trainerbackgroundData,
+            areaOfExpertise: [
+              ...trainerbackgroundData.areaOfExpertise,
+              "Yoga",
+            ],
+          });
+        }
+       
+        console.log(trainerbackgroundData);
       }
     });
   }, []);
