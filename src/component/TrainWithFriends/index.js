@@ -83,9 +83,7 @@ const TrainWithFriendsClass = ({ userSession }) => {
       }),
     })
       .then((resp) => resp.json())
-      .then((res) => {
-        console.log(res);
-      })
+      .then(() => {})
       .catch((err) => console.log(err));
   };
 
@@ -192,9 +190,7 @@ const TrainWithFriendsClass = ({ userSession }) => {
                             <h5 onClick={handleAddFriendFields}>
                               + Add More Friends
                             </h5>
-                          ) : (
-                            ""
-                          )}
+                          ) : null}
                         </div>
                       </form>
                     </div>
@@ -275,39 +271,40 @@ const AccordationService = () => {
   };
   return (
     <>
-      {accordionData.map((item, index) => (
-        <div className="TF_data_item" key={index}>
-          <div className="TF_data_title" onClick={() => toggle(index)}>
-            <h3>{item.title}</h3>
-            <div className={selected === index ? "line show" : "line"}></div>
-          </div>
-          <div className="TF_DT_grid">
-            <div className="TF_DT_left">
-              <div
-                className={
-                  selected === index ? "TF_DT_contentshow" : "TF_DT_content"
-                }
-              >
-                <p>{item.session}</p>
-                <p>{item.session1}</p>
-                <p>{item.session2}</p>
+      {accordionData.map((item, index) => {
+        return (
+          <div className="TF_data_item" key={index}>
+            <div className="TF_data_title" onClick={() => toggle(index)}>
+              <h3>{item.title}</h3>
+              <div className={selected === index ? "line show" : "line"}></div>
+            </div>
+            <div className="TF_DT_grid">
+              <div className="TF_DT_left">
+                <div
+                  className={
+                    selected === index ? "TF_DT_contentshow" : "TF_DT_content"
+                  }
+                >
+                  <p>{item.session}</p>
+                  <p>{item.session1}</p>
+                  <p>{item.session2}</p>
+                </div>
+              </div>
+              <div className="TF_DT_right">
+                <div
+                  className={
+                    selected === index ? "TF_DT_contentshow" : "TF_DT_content"
+                  }
+                >
+                  <p>{item.price}</p>
+                  <p>{item.price1}</p>
+                  <p>{item.price2}</p>
+                </div>
               </div>
             </div>
-            <div className="TF_DT_right">
-              <div
-                className={
-                  selected === index ? "TF_DT_contentshow" : "TF_DT_content"
-                }
-              >
-                <p>{item.price}</p>
-                <p>{item.price1}</p>
-                <p>{item.price2}</p>
-              </div>
-            </div>
           </div>
-          <div></div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 };

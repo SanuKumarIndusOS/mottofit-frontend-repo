@@ -30,420 +30,373 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
-import TrainerProfile from "component/TrainerProfile/Profile";
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
-    useEffect(() => {
-        if (trainerQueryData.location && trainerQueryData.date) {
-            console.log(trainerQueryData);
-            getTrainerDataByQuery();
-            setqueryObject(trainerQueryData);
+  useEffect(() => {
+    if (trainerQueryData.location && trainerQueryData.date) {
+      getTrainerDataByQuery();
+      setqueryObject(trainerQueryData);
 
-            SetLocation(trainerQueryData.location);
-        } else {
-            let payload = {
-                query: {
-                    location: "Online",
-                    vertical: "Boxing",
-                    date: getFormatDate(),
-                    availability: "EarlyBird",
-                },
-            };
+      SetLocation(trainerQueryData.location);
+    } else {
+      let payload = {
+        query: {
+          location: "Online",
+          vertical: "Boxing",
+          date: getFormatDate(),
+          availability: "EarlyBird",
+        },
+      };
+      setqueryObject(payload.query);
 
-            console.log(payload);
-            setqueryObject(payload.query);
+      updateTrainerDetails(payload);
+    }
+  }, []);
 
-            updateTrainerDetails(payload);
-        }
-    }, []);
+  const [bestMatchData, setbestMatchData] = useState([]);
+  const [bestOthersData, setbestOthersData] = useState([]);
 
-    const [bestMatchData, setbestMatchData] = useState([]);
-    const [bestOthersData, setbestOthersData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [DropdownState, setDropdownState] = useState(false);
+  const [
+    DropdownTrainerAvailabilityState,
+    setDropdownTrainerAvailabilityState,
+  ] = useState(false);
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [DropdownState, setDropdownState] = useState(false);
-    // const [DropdownValue, setDropdownValue] = useState([]);
-    const [
-        DropdownTrainerAvailabilityState,
-        setDropdownTrainerAvailabilityState,
-    ] = useState(false);
-    const [DropdownAvailabilityValue, setDropdownTrainerAvailabilityValue] =
-        useState([]);
+  const [ddBoxingState, setddBoxingState] = useState(false);
+  const [ddPilatesState, setddPilatesState] = useState(false);
+  const [ddYogaState, setddYogaState] = useState(false);
+  const [ddHiitState, setddHiitState] = useState(false);
+  const [queryObject, setqueryObject] = useState({
+    location: "Online",
+    vertical: "Boxing",
+    date: "",
+    availability: "EarlyBird",
+  });
 
-    const [ddBoxingState, setddBoxingState] = useState(false);
-    const [ddPilatesState, setddPilatesState] = useState(false);
-    const [ddYogaState, setddYogaState] = useState(false);
-    const [ddHiitState, setddHiitState] = useState(false);
-    const [queryObject, setqueryObject] = useState({
-        location: "Online",
-        vertical: "Boxing",
-        date: "",
-        availability: "EarlyBird",
-    });
+  const onClickHandle = () => {
+    setSelectedDate(selectedDate);
+  };
 
-    const onClickHandle = () => {
-        setSelectedDate(selectedDate);
-        console.log(selectedDate.getMonth);
-    };
-
-    // Dropdown for availability
-    let DropdownAvailability;
-    if (DropdownTrainerAvailabilityState) {
-        DropdownAvailability = <DropdownTrainerAvailability 
+  // Dropdown for availability
+  let DropdownAvailability;
+  if (DropdownTrainerAvailabilityState) {
+    DropdownAvailability = (
+      <DropdownTrainerAvailability
         onClick={({ availability }) => {
-            console.log(availability);
-            setqueryObject({ ...queryObject, availability });
-            TriggerDropDownTrainerAvailability();
-            console.log(availability);
+          setqueryObject({ ...queryObject, availability });
+          TriggerDropDownTrainerAvailability();
         }}
-        />;
-    } else {
-        <div>hello</div>;
-    }
+      />
+    );
+  } else {
+    <div>hello</div>;
+  }
 
-    const TriggerDropDownTrainerAvailability = () => {
-        setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
-        //setDropdownTrainerAvailabilityValue("Boxing");
-    };
+  const TriggerDropDownTrainerAvailability = () => {
+    setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
+  };
 
-    let Dropdown;
+  let Dropdown;
 
-    if (DropdownState) {
-        Dropdown = (
-            <div className="box_3_active_trainer">
-                <div className="dd_row_one">
-                    <div
-                        className="option"
-                        onClick={() => {
-                            setddBoxingState(!ddBoxingState);
-                            console.log(ddBoxingState, "boxing");
-                            setDropdownState(!DropdownState);
-                            setqueryObject({
-                                ...queryObject,
-                                vertical: "Boxing",
-                            });
-                        }}
-                    >
-                        <div className="option_wapper">
-                            <HoverImage
-                                src={BoxingIcon}
-                                hoverSrc={BoxingIconActive}
-                            />
-                            <h2>Boxing</h2>
-                        </div>
-                    </div>
-                    <div
-                        className="option"
-                        onClick={() => {
-                            setddPilatesState(!ddPilatesState);
-                            console.log(ddPilatesState, "pilates");
-                            setDropdownState(!DropdownState);
-                            setqueryObject({
-                                ...queryObject,
-                                vertical: "Pilates",
-                            });
-                        }}
-                    >
-                        <div className="option_wapper">
-                            <HoverImage
-                                src={PilatesIcon}
-                                hoverSrc={PilatesIconActive}
-                            />
-                            <h2>Pilates</h2>
-                        </div>
-                    </div>
-                </div>
-                <div className="dd_row_two">
-                    <div
-                        className="option"
-                        onClick={() => {
-                            setddHiitState(!ddHiitState);
-                            console.log(ddHiitState, "hiit");
-                            setqueryObject({
-                                ...queryObject,
-                                vertical: "Strength & Hiit",
-                            });
-                            setDropdownState(!DropdownState);
-                        }}
-                    >
-                        <div className="option_wapper">
-                            <HoverImage
-                                src={StrengthIcon}
-                                hoverSrc={StrengthIconActive}
-                            />
-                            <h2>Strength & Hiit</h2>
-                        </div>
-                    </div>
-                    <div
-                        className="option"
-                        onClick={() => {
-                            setddYogaState(!ddYogaState);
-                            console.log(ddYogaState, "yoga");
-                            setqueryObject({
-                                ...queryObject,
-                                vertical: "Yoga",
-                            });
-                            setDropdownState(!DropdownState);
-                        }}
-                    >
-                        <div className="option_wapper">
-                            <HoverImage
-                                src={YogaIcon}
-                                hoverSrc={YogaIconIconActive}
-                            />
-                            <h2>Yoga</h2>
-                        </div>
-                    </div>
-                </div>
+  if (DropdownState) {
+    Dropdown = (
+      <div className="box_3_active_trainer">
+        <div className="dd_row_one">
+          <div
+            className="option"
+            onClick={() => {
+              setddBoxingState(!ddBoxingState);
+              setDropdownState(!DropdownState);
+              setqueryObject({
+                ...queryObject,
+                vertical: "Boxing",
+              });
+            }}
+          >
+            <div className="option_wapper">
+              <HoverImage src={BoxingIcon} hoverSrc={BoxingIconActive} />
+              <h2>Boxing</h2>
             </div>
-        );
-    } else {
-        Dropdown = <div className="box_3_inactive"></div>;
-    }
+          </div>
+          <div
+            className="option"
+            onClick={() => {
+              setddPilatesState(!ddPilatesState);
+              setDropdownState(!DropdownState);
+              setqueryObject({
+                ...queryObject,
+                vertical: "Pilates",
+              });
+            }}
+          >
+            <div className="option_wapper">
+              <HoverImage src={PilatesIcon} hoverSrc={PilatesIconActive} />
+              <h2>Pilates</h2>
+            </div>
+          </div>
+        </div>
+        <div className="dd_row_two">
+          <div
+            className="option"
+            onClick={() => {
+              setddHiitState(!ddHiitState);
+              setqueryObject({
+                ...queryObject,
+                vertical: "Strength & Hiit",
+              });
+              setDropdownState(!DropdownState);
+            }}
+          >
+            <div className="option_wapper">
+              <HoverImage src={StrengthIcon} hoverSrc={StrengthIconActive} />
+              <h2>Strength & Hiit</h2>
+            </div>
+          </div>
+          <div
+            className="option"
+            onClick={() => {
+              setddYogaState(!ddYogaState);
+              setqueryObject({
+                ...queryObject,
+                vertical: "Yoga",
+              });
+              setDropdownState(!DropdownState);
+            }}
+          >
+            <div className="option_wapper">
+              <HoverImage src={YogaIcon} hoverSrc={YogaIconIconActive} />
+              <h2>Yoga</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    Dropdown = <div className="box_3_inactive"></div>;
+  }
 
-    const TriggerVerticalDropDown = () => {
-        setDropdownState(!DropdownState);
-        // setDropdownValue("Boxing");
-        console.log(DropdownState);
-    };
-    console.log(selectedDate);
+  const TriggerVerticalDropDown = () => {
+    setDropdownState(!DropdownState);
+  };
 
-    const [virtualMarkup, setvirtualMarkup] = useState(
+  const [virtualMarkup, setvirtualMarkup] = useState(
+    <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
+  );
+  const [inPersonMarkup, setinPersonMarkup] = useState(
+    <p style={{ fontWeight: "normal" }}>In Person</p>
+  );
+
+  const SetLocation = (value) => {
+    if (value === "Online" || value === "Virtual") {
+      setvirtualMarkup(
         <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
-    );
-    const [inPersonMarkup, setinPersonMarkup] = useState(
-        <p style={{ fontWeight: "normal" }}>In Person</p>
-    );
+      );
+      setinPersonMarkup(<p style={{ fontWeight: "normal" }}>In Person</p>);
 
-    const SetLocation = (value) => {
-        console.log(value);
+      setqueryObject({ ...queryObject, location: "Online" });
+    } else {
+      setvirtualMarkup(<p style={{ fontWeight: "normal" }}>Virtual</p>);
+      setinPersonMarkup(
+        <p style={{ borderBottom: "3px solid #53BFD2" }}>In Person</p>
+      );
+      setqueryObject({ ...queryObject, location: "Person" });
+    }
+  };
 
-        if (value === "Online" || value==="Virtual") {
-            setvirtualMarkup(
-                <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
-            );
-            setinPersonMarkup(
-                <p style={{ fontWeight: "normal" }}>In Person</p>
-            );
-
-            setqueryObject({ ...queryObject, location: "Online" });
-        } else {
-            setvirtualMarkup(<p style={{ fontWeight: "normal" }}>Virtual</p>);
-            setinPersonMarkup(
-                <p style={{ borderBottom: "3px solid #53BFD2" }}>In Person</p>
-            );
-            setqueryObject({ ...queryObject, location: "Person" });
-        }
+  const search_action = () => {
+    let payload = {
+      query: {
+        location: queryObject.location,
+        date: queryObject.date,
+        trainingType: queryObject.vertical,
+        availability: queryObject.availability,
+      },
     };
 
-    const search_action = () => {
-        let payload = {
-            query: {
-                location: queryObject.location,
-                date: queryObject.date,
-                trainingType: queryObject.vertical,
-                availability: queryObject.availability,
-            },
-        };
+    updateTrainerDetails(payload);
 
-        console.log(payload);
+    getTrainerDataByQuery(payload.query);
+  };
 
-        updateTrainerDetails(payload);
+  const getTrainerDataByQuery = (currData) => {
+    const { location, date, trainingType, availability } =
+      currData || trainerQueryData;
 
-        getTrainerDataByQuery(payload.query);
-    };
+    const { trainerAvailableApi } = TrainerApi;
 
-    const getTrainerDataByQuery = (currData) => {
-        const { location, date, trainingType, availability } =
-            currData || trainerQueryData;
+    trainerAvailableApi.query.location = location;
+    trainerAvailableApi.query.trainingType = trainingType;
+    trainerAvailableApi.query.date = date;
+    trainerAvailableApi.query.availability = availability;
 
-        const { trainerAvailableApi } = TrainerApi;
+    api({ ...trainerAvailableApi }).then(({ data }) => {
+      setbestMatchData(data.bestMatch);
+      setbestOthersData(data.others);
+    });
+  };
 
-        trainerAvailableApi.query.location = location;
-        trainerAvailableApi.query.trainingType = trainingType;
-        trainerAvailableApi.query.date = date;
-        trainerAvailableApi.query.availability = availability;
-
-        api({ ...trainerAvailableApi }).then(({ data }) => {
-            setbestMatchData(data.bestMatch);
-            setbestOthersData(data.others);
-            console.log(data.others);
-        });
-    };
-
-    return (
-        <>
-            <div className="card container border-0">
-                <div className="card-wrapper">
-                    <div className="item1">
-                        <h3>Location</h3>
-                        <div className="card-item">
-                            <div onClick={() => SetLocation("Virtual")}>
-                                {virtualMarkup}
-                            </div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="9"
-                                height="27"
-                                viewBox="0 0 9 27"
-                            >
-                                <text
-                                    id="_"
-                                    data-name="/"
-                                    transform="translate(1 22)"
-                                    fill="#53bfd2"
-                                    fontSize="20"
-                                    fontFamily="SegoeUI, Segoe UI"
-                                >
-                                    <tspan x="0" y="0">
-                                        /
-                                    </tspan>
-                                </text>
-                            </svg>
-                            <div onClick={() => SetLocation("InPerson")}>
-                                {/* <p style={{ fontWeight: "normal" }}>In Person</p> */}{" "}
-                                {inPersonMarkup}
-                            </div>
-                        </div>
-                    </div>
-                    <LineBetween />
-                    <div className="item2">
-                        <h3>Training Vertical</h3>
-                        <div
-                            className="card-item"
-                            onClick={TriggerVerticalDropDown}
-                        >
-                            <img src={Weight} alt="icon" />
-                            <p>
-                                {queryObject.vertical ||
-                                    queryObject.trainingType}
-                            </p>
-                        </div>
-                        {Dropdown}
-                    </div>
-                    <LineBetween />
-
-                    <div className="item3">
-                        <h3>Schedule</h3>
-                        <div className="card-item">
-                            <img src={SheduleIcon} alt="icon" />
-                            <DatePicker
-                                onChange={(datee) => {
-                                    setSelectedDate(datee);
-                                    var date = new Date(datee);
-                                    var year = date.getFullYear();
-                                    var month = date.getMonth() + 1;
-                                    var dt = date.getDate();
-
-                                    if (dt < 10) {
-                                        dt = "0" + dt;
-                                    }
-                                    if (month < 10) {
-                                        month = "0" + month;
-                                    }
-
-                                    console.log(year + "-" + month + "-" + dt);
-
-                                    setqueryObject({
-                                        ...queryObject,
-                                        date: year + "-" + month + "-" + dt,
-                                    });
-                                }}
-                                selected={selectedDate}
-                                dateFormat="dd/MM/yyyy"
-                                minDate={new Date()}
-                                showYearDropdown
-                                scrollableMonthYearDropdown
-                            ></DatePicker>
-
-                            <DropDownSVG onClick={onClickHandle} />
-                        </div>
-                    </div>
-                    <LineBetween />
-
-                    <div className="item4">
-                        <h3>Availability</h3>
-                        <div
-                            className="card-item"
-                            onClick={TriggerDropDownTrainerAvailability}
-                        >
-                            <img src={AvailabilityIcon} alt="icon" />
-                            <p>{queryObject.availability}</p>
-                        </div>
-                        {DropdownAvailability}
-                    </div>
-                    {/* <LineBetween /> */}
-
-                    <div className="item5">
-                        <div className="circle_search" onClick={search_action}>
-                            <BiSearch />
-                        </div>
-                    </div>
-                </div>
+  return (
+    <>
+      <div className="card container border-0">
+        <div className="card-wrapper">
+          <div className="item1">
+            <h3>Location</h3>
+            <div className="card-item">
+              <div onClick={() => SetLocation("Virtual")}>{virtualMarkup}</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="9"
+                height="27"
+                viewBox="0 0 9 27"
+              >
+                <text
+                  id="_"
+                  data-name="/"
+                  transform="translate(1 22)"
+                  fill="#53bfd2"
+                  fontSize="20"
+                  fontFamily="SegoeUI, Segoe UI"
+                >
+                  <tspan x="0" y="0">
+                    /
+                  </tspan>
+                </text>
+              </svg>
+              <div onClick={() => SetLocation("InPerson")}>
+                {/* <p style={{ fontWeight: "normal" }}>In Person</p> */}{" "}
+                {inPersonMarkup}
+              </div>
             </div>
-            <TrainerCards content={bestMatchData}></TrainerCards>
-            {console.log(bestOthersData)}
-            <TrainerCardOutside content={bestOthersData}></TrainerCardOutside>
-        </>
-    );
+          </div>
+          <LineBetween />
+          <div className="item2">
+            <h3>Training Vertical</h3>
+            <div className="card-item" onClick={TriggerVerticalDropDown}>
+              <img src={Weight} alt="icon" />
+              <p>{queryObject.vertical || queryObject.trainingType}</p>
+            </div>
+            {Dropdown}
+          </div>
+          <LineBetween />
+
+          <div className="item3">
+            <h3>Schedule</h3>
+            <div className="card-item">
+              <img src={SheduleIcon} alt="icon" />
+              <DatePicker
+                onChange={(datee) => {
+                  setSelectedDate(datee);
+                  var date = new Date(datee);
+                  var year = date.getFullYear();
+                  var month = date.getMonth() + 1;
+                  var dt = date.getDate();
+
+                  if (dt < 10) {
+                    dt = "0" + dt;
+                  }
+                  if (month < 10) {
+                    month = "0" + month;
+                  }
+
+                  setqueryObject({
+                    ...queryObject,
+                    date: year + "-" + month + "-" + dt,
+                  });
+                }}
+                selected={selectedDate}
+                dateFormat="dd/MM/yyyy"
+                minDate={new Date()}
+                showYearDropdown
+                scrollableMonthYearDropdown
+              ></DatePicker>
+
+              <DropDownSVG onClick={onClickHandle} />
+            </div>
+          </div>
+          <LineBetween />
+
+          <div className="item4">
+            <h3>Availability</h3>
+            <div
+              className="card-item"
+              onClick={TriggerDropDownTrainerAvailability}
+            >
+              <img src={AvailabilityIcon} alt="icon" />
+              <p>{queryObject.availability}</p>
+            </div>
+            {DropdownAvailability}
+          </div>
+
+          <div className="item5">
+            <div className="circle_search" onClick={search_action}>
+              <BiSearch />
+            </div>
+          </div>
+        </div>
+      </div>
+      <TrainerCards content={bestMatchData}></TrainerCards>
+      <TrainerCardOutside content={bestOthersData}></TrainerCardOutside>
+    </>
+  );
 };
 
 function LineBetween() {
-    return (
-        <div className="line">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="2"
-                height="55"
-                viewBox="0 0 2 55"
-            >
-                <line
-                    id="Line_1"
-                    data-name="Line 1"
-                    y2="55"
-                    transform="translate(1)"
-                    fill="none"
-                    stroke="#eaeaea"
-                    strokeWidth="2"
-                />
-            </svg>
-        </div>
-    );
+  return (
+    <div className="line">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="2"
+        height="55"
+        viewBox="0 0 2 55"
+      >
+        <line
+          id="Line_1"
+          data-name="Line 1"
+          y2="55"
+          transform="translate(1)"
+          fill="none"
+          stroke="#eaeaea"
+          strokeWidth="2"
+        />
+      </svg>
+    </div>
+  );
 }
 
 function DropDownSVG() {
-    return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14.118"
-            height="7.809"
-            viewBox="0 0 14.118 7.809"
-        >
-            <path
-                id="Drop_Down_3"
-                data-name="Drop Down 3"
-                d="M12,0,6,6,0,0"
-                transform="translate(1.061 1.061)"
-                fill="none"
-                stroke="#898989"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-            />
-        </svg>
-    );
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14.118"
+      height="7.809"
+      viewBox="0 0 14.118 7.809"
+    >
+      <path
+        id="Drop_Down_3"
+        data-name="Drop Down 3"
+        d="M12,0,6,6,0,0"
+        transform="translate(1.061 1.061)"
+        fill="none"
+        stroke="#898989"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
 }
 
 const mapStateToProps = (state) => ({
-    trainerQueryData: state.trainerReducer.query,
+  trainerQueryData: state.trainerReducer.query,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {
-            updateTrainerDetails,
-        },
-        dispatch
-    );
+  return bindActionCreators(
+    {
+      updateTrainerDetails,
+    },
+    dispatch
+  );
 };
 
 const FindTrainer = connect(mapStateToProps, mapDispatchToProps)(FindTrainerFC);

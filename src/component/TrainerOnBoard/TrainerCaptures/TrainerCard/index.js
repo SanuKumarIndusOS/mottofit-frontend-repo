@@ -12,7 +12,11 @@ import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlack
 import { bindActionCreators } from "redux";
 import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
-import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
+import {
+    updateTrainerDetails,
+    getTrainerDetails,
+    fileUpload,
+} from "action/trainerAct";
 // import { TrainerApi } from "service/apiVariables";
 // import { api } from "service/api";
 // import { set } from "date-fns";
@@ -20,7 +24,6 @@ import { Modal } from "react-responsive-modal";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import "./trainer.sass";
 import { useForm } from "react-hook-form";
-import { fileUpload } from "action/trainerAct";
 const CyanRadio = withStyles({
     root: {
         "&$checked": {
@@ -103,7 +106,6 @@ const TrainerCardFC = ({
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewTmage(reader.result);
-                console.log(typeof image);
             };
             reader.readAsDataURL(image);
         } else {
@@ -112,6 +114,10 @@ const TrainerCardFC = ({
     }, [image]);
 
     const handleChangeToTrainerProfile = () => {
+        // Update Area of Expertise
+
+        // TrainerCard Profile Upload
+
         if (image !== undefined) {
             const fd = new FormData();
 
@@ -119,13 +125,6 @@ const TrainerCardFC = ({
             fileUpload(fd);
         }
 
-        console.log(trainerData);
-        localStorage.setItem("testObject", JSON.stringify(trainerData));
-        localStorage.setItem(
-            "trainerCheckedVal",
-            JSON.stringify(trainerbackgroundData)
-        );
-        console.log(localStorage.getItem("trainerCheckedVal"));
         // Redux logic
         let storeData = {
             details: { ...trainerData },
@@ -165,22 +164,18 @@ const TrainerCardFC = ({
             if (
                 data["areaOfExpertise"].find((el) => el === "Strength & HIIT")
             ) {
-                console.log("Strength & HIIT");
                 setCheckedHIIT(true);
             }
 
             if (data["areaOfExpertise"].find((el) => el === "Boxing")) {
-                console.log("Boxing");
                 setCheckedBoxing(true);
             }
 
             if (data["areaOfExpertise"].find((el) => el === "Yoga")) {
-                console.log("Yoga");
                 setCheckedYoga(true);
             }
 
             if (data["areaOfExpertise"].find((el) => el === "Pilates")) {
-                console.log("Pilates");
                 setCheckedPilates(true);
             }
 
@@ -194,7 +189,6 @@ const TrainerCardFC = ({
             } = data || {};
 
             if (data) {
-                // console.log(data);
                 const {
                     inPeronAtClientLocationfor2People = "",
                     inPeronAtClientLocationfor3People = "",
@@ -230,7 +224,6 @@ const TrainerCardFC = ({
                         firstName,
                         lastName,
                         description,
-
                         // individualCharge: inPersonAtClientLocation,
                         // ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
                         // ssThreePeopleCharge: inPeronAtClientLocationfor3People,
@@ -255,63 +248,9 @@ const TrainerCardFC = ({
                     },
                 };
 
-                //setTrainerData(storeData.details);
+                setTrainerData(storeData.details);
 
                 updateTrainerDetails(storeData);
-
-                var retrievedObject = JSON.parse(
-                    localStorage.getItem("testObject")
-                );
-                console.log(retrievedObject);
-
-                retrievedObject === null
-                    ? setTrainerData(storeData.details)
-                    : setTrainerData({
-                          ...trainerData,
-                          firstName: storeData.details.firstName,
-                          lastName: storeData.details.lastName,
-                          description: retrievedObject.description,
-                          classFlatRate: retrievedObject.classFlatRate,
-                          classFlatRateTl: retrievedObject.classFlatRateTl,
-                          classFlatRateVt: retrievedObject.classFlatRateVt,
-
-                          individualCharge: retrievedObject.individualCharge,
-                          individualChargeTl:
-                              retrievedObject.individualChargeTl,
-                          individualChargeVt:
-                              retrievedObject.individualChargeVt,
-
-                          ssFourPeopleCharge:
-                              retrievedObject.ssFourPeopleCharge,
-                          ssFourPeopleChargeTl:
-                              retrievedObject.ssFourPeopleChargeTl,
-                          ssFourPeopleChargeVt:
-                              retrievedObject.ssFourPeopleChargeVt,
-                          ssThreePeopleCharge:
-                              retrievedObject.ssThreePeopleCharge,
-                          ssThreePeopleChargeTl:
-                              retrievedObject.ssThreePeopleChargeTl,
-                          ssThreePeopleChargeVt:
-                              retrievedObject.ssThreePeopleChargeVt,
-                          ssTwoPeopleCharge: retrievedObject.ssTwoPeopleCharge,
-                          ssTwoPeopleChargeTl:
-                              retrievedObject.ssTwoPeopleChargeTl,
-                          ssTwoPeopleChargeVt:
-                              retrievedObject.ssTwoPeopleChargeVt,
-                          tenSessionRate: retrievedObject.tenSessionRate,
-                          tenSessionRateTl: retrievedObject.tenSessionRateTl,
-                          tenSessionRateVt: retrievedObject.tenSessionRateVt,
-                          threeSessionRate: retrievedObject.threeSessionRate,
-                          threeSessionRateTl:
-                              retrievedObject.threeSessionRateTl,
-                          threeSessionRateVt:
-                              retrievedObject.threeSessionRateVt,
-                      });
-
-                var trainerCheckedValues = JSON.parse(
-                    localStorage.getItem("trainerCheckedVal")
-                );
-                console.log(trainerCheckedValues);
             }
         });
     }, []);
@@ -323,7 +262,6 @@ const TrainerCardFC = ({
     //         trainerData.individualCharge,
     //     ];
     //     const low = Math.min(...array);
-    //     console.log(low);
     //     return <p>{low}</p>;
     // };
     const closeIcon = <img src={CloseIcon} alt="close" />;
@@ -613,9 +551,6 @@ const TrainerCardFC = ({
                                                     setCheckedHIIT(
                                                         e.target.checked
                                                     );
-                                                    console.log(
-                                                        e.target.checked
-                                                    );
 
                                                     if (e.target.checked) {
                                                         setTrainerbackgroundData(
@@ -628,30 +563,18 @@ const TrainerCardFC = ({
                                                                     ],
                                                             }
                                                         );
-
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
                                                     } else {
                                                         const index =
                                                             trainerbackgroundData.areaOfExpertise.indexOf(
                                                                 "Strength & HIIT"
                                                             );
-                                                        // console.log(index);
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
                                                                 index,
                                                                 1
                                                             );
                                                         }
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
                                                     }
-
-                                                    console.log(
-                                                        trainerbackgroundData
-                                                    );
                                                 }}
                                                 style={{
                                                     color: "#53BFD2",
@@ -666,14 +589,8 @@ const TrainerCardFC = ({
                                                     setCheckedBoxing(
                                                         e.target.checked
                                                     );
-                                                    console.log(
-                                                        e.target.checked
-                                                    );
 
                                                     if (e.target.checked) {
-                                                        console.log(
-                                                            "setBoxing"
-                                                        );
                                                         setTrainerbackgroundData(
                                                             {
                                                                 ...trainerbackgroundData,
@@ -684,34 +601,18 @@ const TrainerCardFC = ({
                                                                     ],
                                                             }
                                                         );
-
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
                                                     } else {
-                                                        console.log(
-                                                            "unsetBoxing"
-                                                        );
-
                                                         const index =
                                                             trainerbackgroundData.areaOfExpertise.indexOf(
                                                                 "Boxing"
                                                             );
-                                                        // console.log(index);
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
                                                                 index,
                                                                 1
                                                             );
                                                         }
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
                                                     }
-
-                                                    console.log(
-                                                        trainerbackgroundData
-                                                    );
                                                 }}
                                                 style={{
                                                     color: "#53BFD2",
@@ -782,7 +683,6 @@ const TrainerCardFC = ({
                                                             trainerbackgroundData.areaOfExpertise.indexOf(
                                                                 "Pilates"
                                                             );
-                                                        // console.log(index);
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
                                                                 index,
