@@ -118,13 +118,14 @@ const TrainerSetUpProfileFC = ({
     insuranceNameUS: "",
   });
 
-  const [trainerAvailabilityData, setTrainerAvailabilityData] = React.useState({
-    hoursPerWeek: "",
-    preferedTrainingMode: [],
-    trainingFacilityLocation: "",
-    willingToTravel: "0",
-    servicableLocation: "",
-  });
+  const [trainerAvailabilityData, setTrainerAvailabilityData] =
+    React.useState({
+      hoursPerWeek: "",
+      preferedTrainingMode: [],
+      trainingFacilityLocation: "",
+      willingToTravel: "0",
+      servicableLocation: "",
+    });
   const handleOneChange = (event) => {
     setSelectedOneValue(event.target.value);
 
@@ -183,9 +184,9 @@ const TrainerSetUpProfileFC = ({
 
     if (name === "trainingLocation") {
       if (tempData["trainingLocation"].includes(trainingType)) {
-        tempData["trainingLocation"] = tempData["trainingLocation"].filter(
-          (location) => location !== trainingType
-        );
+        tempData["trainingLocation"] = tempData[
+          "trainingLocation"
+        ].filter((location) => location !== trainingType);
       } else {
         tempData["trainingLocation"] = [
           ...tempData["trainingLocation"],
@@ -312,11 +313,13 @@ const TrainerSetUpProfileFC = ({
       youtubeLink: youtubeChannel,
       instagramProfile: instaHandle,
       currentExperience: { workLocation: location },
-      certification: inputCertificatesFields?.map(({ certificate, year }) => ({
-        certificateName: "",
-        certfiedYear: year,
-        certification: certificate,
-      })),
+      certification: inputCertificatesFields?.map(
+        ({ certificate, year }) => ({
+          certificateName: "",
+          certfiedYear: year,
+          certification: certificate,
+        })
+      ),
 
       servicableLocation: serviceableLocation,
       insuranceInformation: {
@@ -360,10 +363,7 @@ const TrainerSetUpProfileFC = ({
     };
 
     updateTrainerDetails(storeData);
-
   };
-
-
 
   const getStripeURL = () => {
     const { getStripeAccLink } = PaymentApi;
@@ -436,13 +436,13 @@ const TrainerSetUpProfileFC = ({
       }
     ).then((res) => {
       let storeTrainerData = res.data.data;
-      console.log(storeTrainerData.myMotto);
+      console.log(storeTrainerData);
       setTrainerData({
         ...trainerData,
         motto: storeTrainerData.myMotto,
         trainingProcessDescription: storeTrainerData.trainingProcess,
         trainingLocation: storeTrainerData.preferedTrainingMode,
-        servicableLocation: storeTrainerData.location,
+        serviceableLocation: storeTrainerData.location,
         websiteLink: storeTrainerData.websiteLink,
         instaHandle: storeTrainerData.instagramProfile,
         virtualMeetingLink: storeTrainerData.virtualMeetingLink,
@@ -458,18 +458,30 @@ const TrainerSetUpProfileFC = ({
 
       console.log(certData);
       setInputCertificatesFields([...certData]);
-      setImageFields([...storeTrainerData.images,{image:""}]);
+      let imageList = []
+      storeTrainerData.images.map((list, index) => {
+        imageList.push({ image: list })
+
+
+      })
+      if (imageList.length === storeTrainerData.images.length) {
+
+        setImageFields(imageList);
+      }
       setTrainerAvailabilityData(
-        {...trainerAvailabilityData,
+        {
+          ...trainerAvailabilityData,
           hoursPerWeek: storeTrainerData.hoursPerWeek,
           preferedTrainingMode: storeTrainerData.preferedTrainingMode,
           trainingFacilityLocation: storeTrainerData.trainingFacilityLocation,
           willingToTravel: "0",
-          servicableLocation: storeTrainerData.ser, })
+          servicableLocation: storeTrainerData.servicableLocation,
+        })
     }
     )
       .catch(err => console.log(err));
   }, []);
+
 
   const [renderButton, setRenderButton] = useState({
     visiable: false,
@@ -488,7 +500,7 @@ const TrainerSetUpProfileFC = ({
             <img src={ArrowBack} alt="icon" />
             <Link to="/trainer/card" onClick={handleBack}>
               {" "}
-              Edit Trainer Card{" "}
+                            Edit Trainer Card{" "}
             </Link>
           </div>
           <div className="inner_link_preview">
@@ -499,7 +511,7 @@ const TrainerSetUpProfileFC = ({
               className="prev_profile"
             >
               Preview Your Trainer Profile
-            </div>
+                        </div>
           </div>
           {open ? (
             <Modal
@@ -524,13 +536,16 @@ const TrainerSetUpProfileFC = ({
                     <div className="profile_header">
                       <div className="inner_profile container">
                         <img
-                          src={trainerPersonalData.profilePicture}
+                          src={
+                            trainerPersonalData.profilePicture
+                          }
                           alt="Image not Added"
                         />
 
                         <div className="profile_header_inner">
                           <h2>
-                            {trainerData.firstName} {trainerData.lastName}
+                            {trainerData.firstName}{" "}
+                            {trainerData.lastName}
                           </h2>
                           <p>
                             {trainerPersonalData.areaOfExpertise.toString()}
@@ -542,50 +557,78 @@ const TrainerSetUpProfileFC = ({
                       <div className="profile_aside">
                         <div className="profile_aside_link">
                           <label>View Calender</label>
-                          <img src={ArrowNext} alt="icon" />
+                          <img
+                            src={ArrowNext}
+                            alt="icon"
+                          />
                         </div>
                         <div className="profile_aside_items">
                           {trainerPersonalData.oneOnOnePricing &&
-                            (trainerPersonalData.oneOnOnePricing.virtualSession ||
-                              trainerPersonalData.oneOnOnePricing
+                            (trainerPersonalData
+                              .oneOnOnePricing
+                              .virtualSession ||
+                              trainerPersonalData
+                                .oneOnOnePricing
                                 .inPersonAtTrainerLocation) ? (
                             <div className="profile_aside_item">
-                              <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
+                              <h2>
+                                1 ON 1
+                                INDIVIDUAL
+                                TRAINING
+                                                            </h2>
                               <hr />
                               <div className="profile_aside_inner_item">
                                 {trainerPersonalData.oneOnOnePricing &&
-                                  trainerPersonalData.oneOnOnePricing
+                                  trainerPersonalData
+                                    .oneOnOnePricing
                                     .virtualSession ? (
                                   <h6>
                                     {
-                                      trainerPersonalData.oneOnOnePricing
+                                      trainerPersonalData
+                                        .oneOnOnePricing
                                         .virtualSession
                                     }
-                                    <span>(Virtual Session)</span>
+                                    <span>
+                                      (Virtual
+                                      Session)
+                                                                        </span>
                                   </h6>
                                 ) : null}
                                 {trainerPersonalData.oneOnOnePricing &&
-                                  trainerPersonalData.oneOnOnePricing
+                                  trainerPersonalData
+                                    .oneOnOnePricing
                                     .inPersonAtTrainerLocation ? (
                                   <h6>
                                     {
-                                      trainerPersonalData.oneOnOnePricing
+                                      trainerPersonalData
+                                        .oneOnOnePricing
                                         .inPersonAtTrainerLocation
                                     }
-                                    <span>(In Person Session)</span>
+                                    <span>
+                                      (In
+                                      Person
+                                      Session)
+                                                                        </span>
                                   </h6>
                                 ) : null}
-                                <h5>See package rates during checkout</h5>
+                                <h5>
+                                  See package
+                                  rates during
+                                  checkout
+                                                                </h5>
                               </div>
                             </div>
                           ) : null}
 
                           {trainerPersonalData.socialSessionPricing &&
-                            (trainerPersonalData.socialSessionPricing
+                            (trainerPersonalData
+                              .socialSessionPricing
                               .inPeronAtTrainerLocationfor2People ||
-                              trainerPersonalData.socialSessionPricing
+                              trainerPersonalData
+                                .socialSessionPricing
                                 .inPeronAtTrainerLocationfor3People ||
-                              trainerPersonalData.socialSessionPricing
+                              trainerPersonalData
+                                .socialSessionPricing
                                 .inPeronAtTrainerLocationfor4People) ? (
                             <div className="profile_aside_item">
                               <h2>
@@ -593,7 +636,11 @@ const TrainerSetUpProfileFC = ({
                                 <img
                                   src={QMark}
                                   alt="icon"
-                                  onClick={() => setOpen(true)}
+                                  onClick={() =>
+                                    setOpen(
+                                      true
+                                    )
+                                  }
                                   className="model_Qmark"
                                 />
                               </h2>
@@ -601,48 +648,73 @@ const TrainerSetUpProfileFC = ({
 
                               <div className="profile_aside_inner_item">
                                 {trainerPersonalData.socialSessionPricing &&
-                                  trainerPersonalData.socialSessionPricing
+                                  trainerPersonalData
+                                    .socialSessionPricing
                                     .inPeronAtTrainerLocationfor2People ? (
                                   <h6>
                                     {
-                                      trainerPersonalData.socialSessionPricing
+                                      trainerPersonalData
+                                        .socialSessionPricing
                                         .inPeronAtTrainerLocationfor2People
                                     }
-                                    <span>/ Session (For 2 People)</span>
+                                    <span>
+                                      /
+                                      Session
+                                      (For
+                                      2
+                                      People)
+                                                                        </span>
                                   </h6>
                                 ) : null}
                                 {trainerPersonalData.socialSessionPricing &&
-                                  trainerPersonalData.socialSessionPricing
+                                  trainerPersonalData
+                                    .socialSessionPricing
                                     .inPeronAtTrainerLocationfor3People ? (
                                   <h6>
                                     {
-                                      trainerPersonalData.socialSessionPricing
+                                      trainerPersonalData
+                                        .socialSessionPricing
                                         .inPeronAtTrainerLocationfor3People
                                     }
-                                    <span>/ Session (For 3 People)</span>
+                                    <span>
+                                      /
+                                      Session
+                                      (For
+                                      3
+                                      People)
+                                                                        </span>
                                   </h6>
                                 ) : null}
                                 {trainerPersonalData.socialSessionPricing &&
-                                  trainerPersonalData.socialSessionPricing
+                                  trainerPersonalData
+                                    .socialSessionPricing
                                     .inPeronAtTrainerLocationfor4People ? (
                                   <h6>
                                     {
-                                      trainerPersonalData.socialSessionPricing
+                                      trainerPersonalData
+                                        .socialSessionPricing
                                         .inPeronAtTrainerLocationfor4People
                                     }
-                                    <span>/ Session (For 4 People)</span>
+                                    <span>
+                                      /
+                                      Session
+                                      (For
+                                      4
+                                      People)
+                                                                        </span>
                                   </h6>
                                 ) : null}
                               </div>
                             </div>
                           ) : null}
                           {trainerPersonalData.classSessionPricing &&
-                            trainerPersonalData.classSessionPricing
+                            trainerPersonalData
+                              .classSessionPricing
                               .inPersonAtclientLocationfor15People ? (
                             <div className="profile_aside_item">
                               <h2>
                                 CREATE A CLASS
-                                <img
+                                                                <img
                                   src={QMark}
                                   alt="icon"
                                   className="model_Qmark"
@@ -654,32 +726,58 @@ const TrainerSetUpProfileFC = ({
                                 <h6>
                                   {trainerPersonalData &&
                                     trainerPersonalData.classSessionPricing
-                                    ? trainerPersonalData.classSessionPricing
+                                    ? trainerPersonalData
+                                      .classSessionPricing
                                       .inPersonAtclientLocationfor15People
                                     : ""}
-                                  <span>Flat Rate Class (For 5-15 People)</span>
+                                  <span>
+                                    Flat
+                                    Rate
+                                    Class
+                                    (For
+                                    5-15
+                                    People)
+                                                                    </span>
                                 </h6>
                                 <h5>
-                                  If trainer offers Virtual Social Sessions and
-                                  Classes they will be at a discount to in
-                                  person rates above. You will see these prior
+                                  If trainer
+                                  offers
+                                  Virtual
+                                  Social
+                                  Sessions and
+                                  Classes they
+                                  will be at a
+                                  discount to
+                                  in person
+                                  rates above.
+                                  You will see
+                                  these prior
                                   to checkout.
-                                </h5>
+                                                                </h5>
                               </div>
                             </div>
                           ) : null}
                           <div className="profile_aside_item">
-                            <h2>TRAINING LOCATIONS</h2>
+                            <h2>
+                              TRAINING LOCATIONS
+                                                        </h2>
 
                             <hr />
                             <div className="profile_aside_inner_item">
-                              {trainerPersonalData.currentExperience
+                              {trainerPersonalData
+                                .currentExperience
                                 .workLocation ? (
                                 <div className="profile_location">
-                                  <img src={Tick} alt="icon" />
+                                  <img
+                                    src={
+                                      Tick
+                                    }
+                                    alt="icon"
+                                  />
                                   <h4>
                                     {
-                                      trainerPersonalData.currentExperience
+                                      trainerPersonalData
+                                        .currentExperience
                                         .workLocation
                                     }
                                   </h4>
@@ -688,14 +786,28 @@ const TrainerSetUpProfileFC = ({
                                 ""
                               )}
                               <div className="profile_location">
-                                <img src={Tick} alt="icon" />
+                                <img
+                                  src={Tick}
+                                  alt="icon"
+                                />
                                 <h4>
-                                  Trainer’s Location <Link>View Location</Link>
+                                  Trainer’s
+                                                                    Location{" "}
+                                  <Link>
+                                    View
+                                    Location
+                                                                    </Link>
                                 </h4>
                               </div>
                               <div className="profile_location">
-                                <img src={Tick} alt="icon" />
-                                <h4>Your Location</h4>
+                                <img
+                                  src={Tick}
+                                  alt="icon"
+                                />
+                                <h4>
+                                  Your
+                                  Location
+                                                                </h4>
                               </div>
                             </div>
                           </div>
@@ -716,7 +828,12 @@ const TrainerSetUpProfileFC = ({
                               width: "40rem",
                             }}
                           >
-                            <h4>About {trainerData.firstName}</h4>
+                            <h4>
+                              About{" "}
+                              {
+                                trainerData.firstName
+                              }
+                            </h4>
                             <p>
                               {trainerData.trainingProcessDescription
                                 ? trainerData.trainingProcessDescription
@@ -740,37 +857,57 @@ const TrainerSetUpProfileFC = ({
                             <h2>Certifications</h2>
                             <div className="profile_item3_inner">
                               <div className="inner_items">
-                                <img src={Tick} alt="check" />
+                                <img
+                                  src={Tick}
+                                  alt="check"
+                                />
                                 <h6>
-                                  {trainerPersonalData.certification[0]
-                                    ? trainerPersonalData.certification[0]
+                                  {trainerPersonalData
+                                    .certification[0]
+                                    ? trainerPersonalData
+                                      .certification[0]
                                       .certification
                                     : "Not Added"}
                                 </h6>
                               </div>
                               <div className="inner_items">
-                                <img src={Tick} alt="check" />
+                                <img
+                                  src={Tick}
+                                  alt="check"
+                                />
                                 <h6>
-                                  {trainerPersonalData.certification[1]
-                                    ? trainerPersonalData.certification[1]
+                                  {trainerPersonalData
+                                    .certification[1]
+                                    ? trainerPersonalData
+                                      .certification[1]
                                       .certification
                                     : "Not Added"}
                                 </h6>
                               </div>
                               <div className="inner_items">
-                                <img src={Tick} alt="check" />
+                                <img
+                                  src={Tick}
+                                  alt="check"
+                                />
                                 <h6>
-                                  {trainerPersonalData.certification[2]
-                                    ? trainerPersonalData.certification[2]
+                                  {trainerPersonalData
+                                    .certification[2]
+                                    ? trainerPersonalData
+                                      .certification[2]
                                       .certification
                                     : "Not Added"}
                                 </h6>
                               </div>
                               <div className="inner_items">
-                                <img src={Tick} alt="check" />
+                                <img
+                                  src={Tick}
+                                  alt="check"
+                                />
                                 <h6>
-                                  {trainerPersonalData.certification[3]
-                                    ? trainerPersonalData.certification[3]
+                                  {trainerPersonalData
+                                    .certification[3]
+                                    ? trainerPersonalData
+                                      .certification[3]
                                     : "Not Added"}
                                 </h6>
                               </div>
@@ -811,30 +948,58 @@ const TrainerSetUpProfileFC = ({
                     name="comment"
                     placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here will be searchable through our search bar"
                     onChange={handleInputChange}
-                    value={trainerData.trainingProcessDescription}
+                    value={
+                      trainerData.trainingProcessDescription
+                    }
                     name="trainingProcessDescription"
                   />
                 </div>
                 <div className="setup_card3">
                   <h6>{data.showcase}</h6>
                   <div className="read_image">
-                    {imageFields.slice(0, 2).map((index, input) => {
-                      return (
-                        <div key={index} className="render_image">
-                          <ImageReander value={input.image} />
-                          <ImageReander value={input.image} />
-                          <ImageReander value={input.image} />
-                          <ImageReander value={input.image} />
-                          <ImageReander value={input.image} />
-                        </div>
-                      );
-                    })}
+                    {imageFields
+                      .slice(0, 2)
+                      .map((input, index) => {
+                        console.log(input, "inputinputinput")
+                        return (
+                          <div
+                            key={index}
+                            className="render_image"
+                          >
+                            <ImageReander
+                              value={input.image}
+                            />
+                            <ImageReander
+                              value={input.image}
+                            />
+                            <ImageReander
+                              value={input.image}
+                            />
+                            <ImageReander
+                              value={input.image}
+                            />
+                            <ImageReander
+                              value={input.image}
+                            />
+                          </div>
+                        );
+                      })}
                     {renderButton ? (
-                      <h5 onClick={() => handleAddFields()}>
+                      <h5
+                        onClick={() =>
+                          handleAddFields()
+                        }
+                      >
                         + Add More Image's
                       </h5>
                     ) : (
-                      <h5 onClick={() => handleRemoveFields()}>Remove</h5>
+                      <h5
+                        onClick={() =>
+                          handleRemoveFields()
+                        }
+                      >
+                        Remove
+                      </h5>
                     )}
                   </div>
                 </div>
@@ -842,23 +1007,36 @@ const TrainerSetUpProfileFC = ({
                   <h6>{data.certificate}</h6>
                   {inputCertificatesFields?.map(
                     (inputCertificatesField, index) => (
-                      <div className="inputs_certificate" key={index}>
+                      <div
+                        className="inputs_certificate"
+                        key={index}
+                      >
                         <input
                           type="text"
                           placeholder="Certification Title"
-                          value={inputCertificatesField.certificate}
+                          value={
+                            inputCertificatesField.certificate
+                          }
                           name="certificate"
                           onChange={(event) =>
-                            handleChangeCertificateInput(index, event)
+                            handleChangeCertificateInput(
+                              index,
+                              event
+                            )
                           }
                         />
                         <input
                           type="text"
                           placeholder="Year you were Certified"
-                          value={inputCertificatesField.year}
+                          value={
+                            inputCertificatesField.year
+                          }
                           name="year"
                           onChange={(event) =>
-                            handleChangeCertificateInput(index, event)
+                            handleChangeCertificateInput(
+                              index,
+                              event
+                            )
                           }
                         />
                         {/* <input
@@ -878,7 +1056,7 @@ const TrainerSetUpProfileFC = ({
                   )}
                   <h5 onClick={handleAddCertificateFields}>
                     + Add Certification
-                  </h5>
+                                    </h5>
                 </div>
                 <div className="setup_card5">
                   <div className="setupcontent_wrapper">
@@ -886,25 +1064,39 @@ const TrainerSetUpProfileFC = ({
                       <h6>{data.where}</h6>
                       <div className="inputs_platform">
                         <button
-                          onClick={(e) => handleInputChange(e, "Online")}
-                          className={`${trainerData?.trainingLocation?.includes("Online")
+                          onClick={(e) =>
+                            handleInputChange(
+                              e,
+                              "Online"
+                            )
+                          }
+                          className={`${trainerData?.trainingLocation?.includes(
+                            "Online"
+                          )
                             ? "active"
                             : ""
                             }`}
                           name="trainingLocation"
                         >
                           Virtual
-                        </button>
+                                                </button>
                         <button
-                          onClick={(e) => handleInputChange(e, "inperson")}
-                          className={`${trainerData?.trainingLocation?.includes("inperson")
+                          onClick={(e) =>
+                            handleInputChange(
+                              e,
+                              "inperson"
+                            )
+                          }
+                          className={`${trainerData?.trainingLocation?.includes(
+                            "inperson"
+                          )
                             ? "active"
                             : ""
                             }`}
                           name="trainingLocation"
                         >
                           In Person
-                        </button>
+                                                </button>
 
                         {/* <button
                                                     onClick={(e) =>
@@ -926,17 +1118,26 @@ const TrainerSetUpProfileFC = ({
                                                 </button> */}
                       </div>
                       <div className="social_meeting_links">
-                        {trainerData?.trainingLocation?.includes("Online") ? (
+                        {trainerData?.trainingLocation?.includes(
+                          "Online"
+                        ) ? (
                           // <div className="setup_ite1">
                           <>
-                            <h5>Add zoom meeting link</h5>
+                            <h5>
+                              Add zoom meeting
+                              link
+                                                        </h5>
                             <div className="inputs_platform">
                               <div className="iconwrapper">
                                 <textarea
                                   type="text"
                                   placeholder="Add a Google or Zoom meeting link"
-                                  value={trainerData.virtualMeetingLink}
-                                  onChange={handleInputChange}
+                                  value={
+                                    trainerData.virtualMeetingLink
+                                  }
+                                  onChange={
+                                    handleInputChange
+                                  }
                                   name="virtualMeetingLink"
                                 />
                               </div>
@@ -948,20 +1149,25 @@ const TrainerSetUpProfileFC = ({
 
                     <div className="setup_item1">
                       <h6>{data.serviceable}</h6>
+                      {console.log(trainerData, trainerData.serviceableLocation, options, "trainerData.serviceableLocation")}
                       <div className="inputs_platform">
                         <div className="iconwrapper">
                           <Dropdown
                             className="custom_dropdown"
                             title="Select Location"
                             list={options}
-                            value={trainerData.serviceableLocation}
+                            value={
+                              trainerData.serviceableLocation
+                            }
                             onChange={(e) => {
                               setTrainerData({
                                 ...trainerData,
-                                serviceableLocation: e.value,
-
+                                serviceableLocation:
+                                  e.value,
                               });
-                              console.log(e.value);
+                              console.log(
+                                e.value, 'eventdropvalue'
+                              );
                             }}
                             name="location"
                           />
@@ -971,9 +1177,10 @@ const TrainerSetUpProfileFC = ({
 
                     <div className="item_3">
                       <h6>
-                        Do you have a facility or location where you will train
+                        Do you have a facility or
+                        location where you will train
                         clients?
-                      </h6>
+                                            </h6>
                       <CyanRadio
                         checked={selectedValue === "a"}
                         onChange={handleChange}
@@ -998,23 +1205,38 @@ const TrainerSetUpProfileFC = ({
                       <label>No</label>
                     </div>
                     <div className="item_4">
-                      <h6>Details of the facility/location</h6>
+                      <h6>
+                        Details of the facility/location
+                                            </h6>
                       <div className="inputs_platform">
                         <textarea
                           type="text"
                           placeholder="Enter the Details of the location"
-                          onChange={(e) => setTrainerAvailabilityData({ ...trainerAvailabilityData, trainingFacilityLocation: e.target.value })}
-                          value={trainerAvailabilityData.trainingFacilityLocation}
+                          onChange={(e) =>
+                            setTrainerAvailabilityData(
+                              {
+                                ...trainerAvailabilityData,
+                                trainingFacilityLocation:
+                                  e.target
+                                    .value,
+                              }
+                            )
+                          }
+                          value={
+                            trainerAvailabilityData.trainingFacilityLocation
+                          }
                         />
                       </div>
                     </div>
                     <div className="item_5">
                       <h6>
-                        Are you willing to travel to clients in your
-                        city/region?
-                      </h6>
+                        Are you willing to travel to
+                        clients in your city/region?
+                                            </h6>
                       <CyanRadio
-                        checked={selectedOneValue === "1"}
+                        checked={
+                          selectedOneValue === "1"
+                        }
                         onChange={handleOneChange}
                         value="1"
                         label="Strength & Hitt"
@@ -1024,7 +1246,9 @@ const TrainerSetUpProfileFC = ({
                       />
                       <label> Yes!</label>
                       <CyanRadio
-                        checked={selectedOneValue === "0"}
+                        checked={
+                          selectedOneValue === "0"
+                        }
                         onChange={handleOneChange}
                         value="0"
                         label="Strength & Hitt"
@@ -1036,14 +1260,26 @@ const TrainerSetUpProfileFC = ({
                     </div>
                     <div className="item_6">
                       <h6>
-                        List the areas/neighborhoods you’re willing to travel to
-                      </h6>
+                        List the areas/neighborhoods
+                        you’re willing to travel to
+                                            </h6>
                       <div className="inputs_platform">
                         <textarea
                           type="text"
                           placeholder="Neighborhood List"
-                          onChange={(e) => setTrainerAvailabilityData({ ...trainerAvailabilityData, servicableLocation: e.target.value })}
-                          value={trainerAvailabilityData.servicableLocation}
+                          onChange={(e) =>
+                            setTrainerAvailabilityData(
+                              {
+                                ...trainerAvailabilityData,
+                                servicableLocation:
+                                  e.target
+                                    .value,
+                              }
+                            )
+                          }
+                          value={
+                            trainerAvailabilityData.servicableLocation
+                          }
                         />
 
                         <img
@@ -1053,66 +1289,7 @@ const TrainerSetUpProfileFC = ({
                         />
                       </div>
                     </div>
-                    {/* <div className="setup_item1">
-                                            <h6>{data.location}</h6>
-                                            <div className="inputs_platform">
-                                                <div className="iconwrapper">
-                                                    <select
-                                                        required
-                                                        onChange={(e) =>
-                                                            setTrainerData({
-                                                                ...trainerData,
-                                                                location: e.target.value,
-                                                            })
-                                                        }
-                                                        value={
-                                                            trainerData.location
-                                                        }
-                                                    >
-                                                        <option
-                                                            value=""
-                                                            disabled
-                                                            selected
-                                                        >
-                                                            Choose City
-                                                        </option>
-                                                        <option>
-                                                            New York
-                                                        </option>
-                                                        <option>Miami</option>
-                                                        <option>Hampton</option>
-                                                        <option>
-                                                            Palm Beach
-                                                        </option>
-                                                    </select>
 
-                                                    <img
-                                                        src={Location}
-                                                        alt="icon"
-                                                        className="location_icon"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div> */}
-                    {/* <div className="setup_item1">
-                                            <h6>{data.web}</h6>
-                                            <div className="inputs_platform">
-                                                <div className="iconwrapper">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Add your Web Link"
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                        value={
-                                                            trainerData.websiteLink
-                                                        }
-                                                        name="websiteLink"
-                                                    />
-                                                    <img src={Web} alt="icon" />
-                                                </div>
-                                            </div>
-                                        </div> */}
                     <div className="setup_item1">
                       <h6>{data.insta}</h6>
                       <div className="inputs_platform">
@@ -1120,11 +1297,18 @@ const TrainerSetUpProfileFC = ({
                           <input
                             type="text"
                             placeholder="Add your Instagram Handle"
-                            onChange={handleInputChange}
-                            value={trainerData.instaHandle}
+                            onChange={
+                              handleInputChange
+                            }
+                            value={
+                              trainerData.instaHandle
+                            }
                             name="instaHandle"
                           />
-                          <img src={Instagram} alt="icon" />
+                          <img
+                            src={Instagram}
+                            alt="icon"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1136,8 +1320,12 @@ const TrainerSetUpProfileFC = ({
                           <input
                             type="text"
                             placeholder="Add your Web Link"
-                            onChange={handleInputChange}
-                            value={trainerData.websiteLink}
+                            onChange={
+                              handleInputChange
+                            }
+                            value={
+                              trainerData.websiteLink
+                            }
                             name="websiteLink"
                           />
                           <img src={Web} alt="icon" />
@@ -1159,11 +1347,11 @@ const TrainerSetUpProfileFC = ({
                     onChange={handleAgreedCheck}
                   />
                   <label>
-                    Check here to acknowledge that you have read and agree to
-                    the Motto trainer
-                    <a href="/agreement" target="_blank">
+                    Check here to acknowledge that you have
+                    read and agree to the Motto trainer
+                                        <a href="/agreement" target="_blank">
                       terms and conditions
-                    </a>
+                                        </a>
                   </label>
                 </div>
                 <div className="submit_button">
@@ -1171,14 +1359,15 @@ const TrainerSetUpProfileFC = ({
                     onClick={handleSubmit}
                     type="submit"
                     disabled={(isLoading, !agreed)}
-                    className={`${isLoading ? "loading" : "btn"}`}
+                    className={`${isLoading ? "loading" : "btn"
+                      }`}
                   >
                     {isLoading ? (
                       "Loading..."
                     ) : (
                       <a>
                         {" "}
-                        Continue to account
+                                                Continue to account
                         <ArrowHoverBlacked />
                       </a>
                     )}
@@ -1187,8 +1376,8 @@ const TrainerSetUpProfileFC = ({
                   <div className="terms_msg">
                     {agreed ? null : (
                       <span>
-                        Please Agree to the above terms and conditions to
-                        continue
+                        Please Agree to the above terms
+                        and conditions to continue
                       </span>
                     )}
                   </div>
@@ -1202,7 +1391,8 @@ const TrainerSetUpProfileFC = ({
   );
 };
 
-const ImageReander = () => {
+const ImageReander = (props) => {
+  console.log(props, "props")
   const [image, setImage] = useState();
   const [previewImage, setPreviewTmage] = useState();
   const fileInputRef = useRef();
@@ -1241,9 +1431,10 @@ const ImageReander = () => {
                 fileInputRef.current.click();
               }}
             >
+              {console.log(props.value, "props.image")}
               <img
                 // src={Profile}
-                src={ImageBG}
+                src={props.value ? props.value : image}
                 alt="icon"
                 style={{
                   objectFit: "cover",
@@ -1280,16 +1471,14 @@ const ImageReander = () => {
 const ImageGrid = () => {
   const [imageView, setImageView] = useState([
     {
-      image:
-        "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg",
+      image: "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg",
     },
   ]);
   const handleViewImages = () => {
     setImageView([
       ...imageView,
       {
-        image:
-          "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg",
+        image: "http://doodlebluelive.com:2307/public/profilePictures/54c156e9-3bd0-43d3-84cb-2794ea7206ad.jpg",
       },
     ]);
   };
@@ -1300,20 +1489,36 @@ const ImageGrid = () => {
           return (
             <div className="profile_images_container">
               <div className="profile_images_card box1">
-                <img src={images.image} alt="picture" className="box1" />
+                <img
+                  src={images.image}
+                  alt="picture"
+                  className="box1"
+                />
               </div>
               <div className="flex-try-2">
                 <div className="profile_images_card box2">
-                  <img src={images.image} alt="picture" className="box2" />
+                  <img
+                    src={images.image}
+                    alt="picture"
+                    className="box2"
+                  />
                 </div>
 
                 <div className="flex-try-3">
                   <div className="profile_images_card box3">
-                    <img src={images.image} alt="picture" className="box3" />
+                    <img
+                      src={images.image}
+                      alt="picture"
+                      className="box3"
+                    />
                   </div>
 
                   <div className="profile_images_card box4">
-                    <img src={images.image} alt="picture" className="box4" />
+                    <img
+                      src={images.image}
+                      alt="picture"
+                      className="box4"
+                    />
                   </div>
                 </div>
               </div>
