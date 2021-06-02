@@ -73,7 +73,7 @@ let getServiceUrl = (baseURL) => {
       finalURL = "http://doodlebluelive.com:2338/v1/";
       break;
     default:
-      finalURL = "https://apis.bookmotto.com/user/v1/";
+      finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
   }
 

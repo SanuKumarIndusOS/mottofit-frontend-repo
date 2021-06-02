@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[134],{215:function(t,o,n){"use strict";n.r(o),n.d(o,"COMMON_URL",(function(){return s})),n.d(o,"MESSAGING_URL",(function(){return i})),n.d(o,"SESSION_URL",(function(){return p})),n.d(o,"NOTIFICATION_URL",(function(){return r})),n.d(o,"PAYMENT_URL",(function(){return u}));var s="https://apis.bookmotto.com/user",i="https://apis.bookmotto.com/messaging",p="https://apis.bookmotto.com/session",r="",u="https://apis.bookmotto.com/payments"}}]);
-//# sourceMappingURL=134.70d0412c.chunk.js.map

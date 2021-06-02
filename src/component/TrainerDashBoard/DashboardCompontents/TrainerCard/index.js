@@ -19,487 +19,557 @@ import { fileUpload } from "action/trainerAct";
 // import { set } from "date-fns";
 
 const CyanRadio = withStyles({
-  root: {
-    "&$checked": {
-      color: cyan[600],
+    root: {
+        "&$checked": {
+            color: cyan[600],
+        },
     },
-  },
-  checked: {},
+    checked: {},
 })((props) => <Radio color="default" {...props} />);
 const TrainerCardDashboard = ({
-  updateTrainerDetails,
-  trainerPersonalData,
-  getTrainerDetails,
-  fileUpload,
+    updateTrainerDetails,
+    trainerPersonalData,
+    getTrainerDetails,
+    fileUpload,
 }) => {
-  const history = useHistory();
+    const history = useHistory();
 
-  const data = {
-    title: "Time to build your Trainer Card!",
-    describtion:
-      " Heads up! Your trainer card is what clients will see when trainer results start filtering. Utilize keywords as anything you write here will also besearchable in our search box!",
-    upload: " Upload your profile picture, hotshot!",
-    tellus: " Tell us what you train! Select all the categories that apply",
-    clientDesc:
-      "Write a short and sweet description for clients to pick you in 100 characters",
-    pricing: "Tell us about your Pricing",
-    pricingDesc:
-      "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
-  };
-
-  const [checkedBoxing, setCheckedBoxing] = React.useState(false);
-  const [checkedHIIT, setCheckedHIIT] = React.useState(false);
-  const [checkedYoga, setCheckedYoga] = React.useState(false);
-  const [checkedPilates, setCheckedPilates] = React.useState(false);
-  const [trainerbackgroundData, setTrainerbackgroundData] = useState({
-    areaOfExpertise: [],
-  });
-
-  const [image, setImage] = useState();
-  const [selectedValue, setSelectedValue] = useState("");
-  const [previewImage, setPreviewTmage] = useState();
-  const [trainerData, setTrainerData] = useState({
-    firstName: "",
-    lastName: "",
-    description: "",
-    individualCharge: "",
-    ssTwoPeopleCharge: "",
-    ssThreePeopleCharge: "",
-    ssFourPeopleCharge: "",
-    classFlatRate: "",
-    threeSessionRate: "",
-    tenSessionRate: "",
-    amtPerPerson: "",
-  });
-  const fileInputRef = useRef();
-
-  useEffect(() => {
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewTmage(reader.result);
-        console.log(typeof image);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreviewTmage(null);
-    }
-  }, [image]);
-
-  const handleChangeToTrainerProfile = () => {
-    // Update Area of Expertise
-
-    // TrainerCard Profile Upload
-
-    if (image !== undefined) {
-      const fd = new FormData();
-
-      fd.append("profilePicture", image, image.name);
-      fileUpload(fd);
-    }
-
-    console.log(trainerData);
-    localStorage.setItem("trainerDetails", JSON.stringify(trainerData));
-
-    // Redux logic
-    let storeData = {
-      details: { ...trainerData },
-    };
-    updateTrainerDetails(storeData);
-    history.push("/trainer/setup");
-  };
-  useEffect(() => {
-    console.log('trainerdata=,', trainerData);
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewTmage(reader.result);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreviewTmage(null);
-    }
-  }, [image]);
-
-  const handleInputChange = ({ target: { name, value } }) => {
-    const tempData = {
-      ...trainerData,
+    const data = {
+        title: "Time to build your Trainer Card!",
+        describtion:
+            " Heads up! Your trainer card is what clients will see when trainer results start filtering. Utilize keywords as anything you write here will also besearchable in our search box!",
+        upload: " Upload your profile picture, hotshot!",
+        tellus: " Tell us what you train! Select all the categories that apply",
+        clientDesc:
+            "Write a short and sweet description for clients to pick you in 100 characters",
+        pricing: "Tell us about your Pricing",
+        pricingDesc:
+            "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
     };
 
-    tempData[name] = value;
+    const [checkedBoxing, setCheckedBoxing] = React.useState(false);
+    const [checkedHIIT, setCheckedHIIT] = React.useState(false);
+    const [checkedYoga, setCheckedYoga] = React.useState(false);
+    const [checkedPilates, setCheckedPilates] = React.useState(false);
+    const [trainerbackgroundData, setTrainerbackgroundData] = useState({
+        areaOfExpertise: [],
+    });
 
-    setTrainerData(tempData);
-  };
-  useEffect(() => {
-    getTrainerDetails().then((data) => {
-      if (data["areaOfExpertise"].find((el) => el === "Strength & HIIT")) {
-        console.log("Strength & HIIT");
-        setCheckedHIIT(true);
-      }
+    const [image, setImage] = useState();
+    const [selectedValue, setSelectedValue] = useState("");
+    const [previewImage, setPreviewTmage] = useState();
+    const [trainerData, setTrainerData] = useState({
+        profilePicture: "",
+        firstName: "",
+        lastName: "",
+        description: "",
+        individualCharge: "",
+        ssTwoPeopleCharge: "",
+        ssThreePeopleCharge: "",
+        ssFourPeopleCharge: "",
+        classFlatRate: "",
+        threeSessionRate: "",
+        tenSessionRate: "",
+        amtPerPerson: "",
+    });
+    const fileInputRef = useRef();
 
-      if (data["areaOfExpertise"].find((el) => el === "Boxing")) {
-        console.log("Boxing");
-        setCheckedBoxing(true);
-      }
+    useEffect(() => {
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewTmage(reader.result);
+                console.log(typeof image);
+            };
+            reader.readAsDataURL(image);
+        } else {
+            setPreviewTmage(null);
+        }
+    }, [image]);
 
-      if (data["areaOfExpertise"].find((el) => el === "Yoga")) {
-        console.log("Yoga");
-        setCheckedYoga(true);
-      }
+    const handleChangeToTrainerProfile = (e) => {
+        e.preventDefault();
+        // Update Area of Expertise
 
-      if (data["areaOfExpertise"].find((el) => el === "Pilates")) {
-        console.log("Pilates");
-        setCheckedPilates(true);
-      }
+        // TrainerCard Profile Upload
 
-      const {
-        firstName,
-        lastName,
-        description,
-        socialSessionPricing,
-        oneOnOnePricing,
-        classSessionPricing,
-      } = data || {};
+        if (image !== undefined) {
+            const fd = new FormData();
 
-      if (data) {
-        // console.log(data);
-        const {
-          inPeronAtClientLocationfor2People = "",
-          inPeronAtClientLocationfor3People = "",
-          inPeronAtClientLocationfor4People = "",
-          inPeronAtTrainerLocationfor2People = "",
-          inPeronAtTrainerLocationfor3People = "",
-          inPeronAtTrainerLocationfor4People = "",
-          virtualSessionfor2People = "",
-          virtualSessionfor3People = "",
-          virtualSessionfor4People = "",
-        } = socialSessionPricing || {};
+            fd.append("profilePicture", image, image.name);
+            fileUpload(fd);
+        }
 
-        const {
-          passRatefor3Session = "",
-          passRatefor10Session = "",
-          inPersonAtClientLocation = "",
-          inPersonAtTrainerLocation = "",
-          virtualSession = "",
-          passRatefor3SessionAtTrainerLocation = "",
-          passRatefor10SessionAtTrainerLocation = "",
-          passRatefor3SessionAtVirtual = "",
-          passRatefor10SessionAtVirtual = "",
-        } = oneOnOnePricing || {};
+        // console.log(trainerData);
+        localStorage.setItem("trainerDetails", JSON.stringify(trainerData));
 
-        const {
-          inPersonAtclientLocationfor15People = "",
-          inPersonAttrainerLocationfor15People = "",
-          virtualSessionfor15People = "",
-        } = classSessionPricing || {};
+        // Redux logic
+        let storeData = {
+            details: { ...trainerData },
+        };
+        updateTrainerDetails(storeData);
+        alert("Successfully updated the changes");
+        // history.push("/trainer/setup");
+    };
+    useEffect(() => {
+        console.log("trainerdata=,", trainerData);
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewTmage(reader.result);
+            };
+            reader.readAsDataURL(image);
+        } else {
+            setPreviewTmage(null);
+        }
+    }, [image]);
 
-        const storeData = {
-          details: {
-            firstName,
-            lastName,
-            description,
-            individualCharge: inPersonAtClientLocation,
-            ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
-            ssThreePeopleCharge: inPeronAtClientLocationfor3People,
-            ssFourPeopleCharge: inPeronAtClientLocationfor4People,
-            classFlatRate: inPersonAtclientLocationfor15People,
-            threeSessionRate: passRatefor3Session,
-            tenSessionRate: passRatefor10Session,
-            individualChargeTl: inPersonAtTrainerLocation,
-            ssTwoPeopleChargeTl: inPeronAtTrainerLocationfor2People,
-            ssThreePeopleChargeTl: inPeronAtTrainerLocationfor3People,
-            ssFourPeopleChargeTl: inPeronAtTrainerLocationfor4People,
-            classFlatRateTl: inPersonAttrainerLocationfor15People,
-            threeSessionRateTl: passRatefor3SessionAtTrainerLocation,
-            tenSessionRateTl: passRatefor10SessionAtTrainerLocation,
-            individualChargeVt: virtualSession,
-            ssTwoPeopleChargeVt: virtualSessionfor2People,
-            ssThreePeopleChargeVt: virtualSessionfor3People,
-            ssFourPeopleChargeVt: virtualSessionfor4People,
-            classFlatRateVt: virtualSessionfor15People,
-            threeSessionRateVt: passRatefor3SessionAtVirtual,
-            tenSessionRateVt: passRatefor10SessionAtVirtual,
-          },
+    const handleInputChange = ({ target: { name, value } }) => {
+        const tempData = {
+            ...trainerData,
         };
 
-        //setTrainerData(storeData.details);
+        tempData[name] = value;
 
-        updateTrainerDetails(storeData);
-        var backData = JSON.parse(localStorage.getItem("trainerDetails"));
-        console.log(backData);
+        setTrainerData(tempData);
+    };
+    useEffect(() => {
+        getTrainerDetails().then((data) => {
+            if (
+                data["areaOfExpertise"].find((el) => el === "Strength & HIIT")
+            ) {
+                console.log("Strength & HIIT");
+                setCheckedHIIT(true);
+            }
 
-        backData === null ?
-          setTrainerData(storeData.details) :
-          setTrainerData({
-            ...trainerData,
-            firstName:backData.firstName,
-            lastName: backData.lastName,
-            description: backData.description,
-            individualCharge: backData.individualCharge,
-            ssTwoPeopleCharge: backData.ssTwoPeopleCharge,
-            ssThreePeopleCharge: backData.ssThreePeopleCharge,
-            ssFourPeopleCharge: backData.ssFourPeopleCharge,
-            classFlatRate: backData.classFlatRate,
-            threeSessionRate: backData.threeSessionRate,
-            tenSessionRate: backData.tenSessionRate,
-            amtPerPerson: backData.amtPerPerson,
-          })
+            if (data["areaOfExpertise"].find((el) => el === "Boxing")) {
+                console.log("Boxing");
+                setCheckedBoxing(true);
+            }
 
-      }
-    });
-  }, []);
+            if (data["areaOfExpertise"].find((el) => el === "Yoga")) {
+                console.log("Yoga");
+                setCheckedYoga(true);
+            }
 
-  return (
-    <>
-      <div className="outter_container_card">
-        <div className="container">
-          <div className="card_outter">
-            {/* <div className="card_outter_wrapper">
+            if (data["areaOfExpertise"].find((el) => el === "Pilates")) {
+                console.log("Pilates");
+                setCheckedPilates(true);
+            }
+
+            const {
+                profilePicture,
+                firstName,
+                lastName,
+                description,
+                socialSessionPricing,
+                oneOnOnePricing,
+                classSessionPricing,
+            } = data || {};
+
+            if (data) {
+                // console.log(data);
+                const {
+                    inPeronAtClientLocationfor2People = "",
+                    inPeronAtClientLocationfor3People = "",
+                    inPeronAtClientLocationfor4People = "",
+                    inPeronAtTrainerLocationfor2People = "",
+                    inPeronAtTrainerLocationfor3People = "",
+                    inPeronAtTrainerLocationfor4People = "",
+                    virtualSessionfor2People = "",
+                    virtualSessionfor3People = "",
+                    virtualSessionfor4People = "",
+                } = socialSessionPricing || {};
+
+                const {
+                    passRatefor3Session = "",
+                    passRatefor10Session = "",
+                    inPersonAtClientLocation = "",
+                    inPersonAtTrainerLocation = "",
+                    virtualSession = "",
+                    passRatefor3SessionAtTrainerLocation = "",
+                    passRatefor10SessionAtTrainerLocation = "",
+                    passRatefor3SessionAtVirtual = "",
+                    passRatefor10SessionAtVirtual = "",
+                } = oneOnOnePricing || {};
+
+                const {
+                    inPersonAtclientLocationfor15People = "",
+                    inPersonAttrainerLocationfor15People = "",
+                    virtualSessionfor15People = "",
+                } = classSessionPricing || {};
+
+                const storeData = {
+                    details: {
+                        profilePicture,
+                        firstName,
+                        lastName,
+                        description,
+                        individualCharge: inPersonAtClientLocation,
+                        ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
+                        ssThreePeopleCharge: inPeronAtClientLocationfor3People,
+                        ssFourPeopleCharge: inPeronAtClientLocationfor4People,
+                        classFlatRate: inPersonAtclientLocationfor15People,
+                        threeSessionRate: passRatefor3Session,
+                        tenSessionRate: passRatefor10Session,
+                        individualChargeTl: inPersonAtTrainerLocation,
+                        ssTwoPeopleChargeTl: inPeronAtTrainerLocationfor2People,
+                        ssThreePeopleChargeTl:
+                            inPeronAtTrainerLocationfor3People,
+                        ssFourPeopleChargeTl:
+                            inPeronAtTrainerLocationfor4People,
+                        classFlatRateTl: inPersonAttrainerLocationfor15People,
+                        threeSessionRateTl:
+                            passRatefor3SessionAtTrainerLocation,
+                        tenSessionRateTl: passRatefor10SessionAtTrainerLocation,
+                        individualChargeVt: virtualSession,
+                        ssTwoPeopleChargeVt: virtualSessionfor2People,
+                        ssThreePeopleChargeVt: virtualSessionfor3People,
+                        ssFourPeopleChargeVt: virtualSessionfor4People,
+                        classFlatRateVt: virtualSessionfor15People,
+                        threeSessionRateVt: passRatefor3SessionAtVirtual,
+                        tenSessionRateVt: passRatefor10SessionAtVirtual,
+                    },
+                };
+
+                //setTrainerData(storeData.details);
+
+                updateTrainerDetails(storeData);
+                var backData = JSON.parse(
+                    localStorage.getItem("trainerDetails")
+                );
+                console.log(backData);
+
+                backData === null
+                    ? setTrainerData(storeData.details)
+                    : setTrainerData({
+                          ...trainerData,
+                          profilePicture: backData.profilePicture,
+                          firstName: backData.firstName,
+                          lastName: backData.lastName,
+                          description: backData.description,
+                          individualCharge: backData.individualCharge,
+                          ssTwoPeopleCharge: backData.ssTwoPeopleCharge,
+                          ssThreePeopleCharge: backData.ssThreePeopleCharge,
+                          ssFourPeopleCharge: backData.ssFourPeopleCharge,
+                          classFlatRate: backData.classFlatRate,
+                          threeSessionRate: backData.threeSessionRate,
+                          tenSessionRate: backData.tenSessionRate,
+                          amtPerPerson: backData.amtPerPerson,
+                      });
+            }
+        });
+    }, []);
+
+    return (
+        <>
+            <div className="outter_container_card">
+                <div className="container">
+                    <div className="card_outter">
+                        {/* <div className="card_outter_wrapper">
                             <h2>{data.title}</h2>
                             <p>{data.describtion}</p>
                         </div> */}
-            <div className="card_inner ">
-              <div className="card_form_outter">
-                <form>
-                  <div className="card_item1">
-                    {previewImage ? (
-                      <img
-                        src={previewImage}
-                        style={{
-                          objectFit: "cover",
-                          width: "200px",
-                          height: "200px",
-                          borderRadius: "100px",
-                        }}
-                        onClick={() => {
-                          setPreviewTmage(null);
-                        }}
-                      />
-                    ) : (
-                      <div className="combin_profile">
-                        <button
-                          onClick={(event) => {
-                            event.preventDefault();
-                            fileInputRef.current.click();
-                          }}
-                        >
-                          <img
-                            src={Profile}
-                            alt="icon"
-                            style={{
-                              objectFit: "cover",
-                              width: "100px",
-                              height: "100px",
-                            }}
-                          />
-                        </button>
-                        <img
-                          src={ProfileAdd}
-                          alt="icon"
-                          style={{
-                            objectFit: "cover",
-                            width: "20px",
-                            height: "20px",
-                            borderRadius: "100px",
-                          }}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            fileInputRef.current.click();
-                          }}
-                        />
-                      </div>
-                    )}
+                        <div className="card_inner ">
+                            <div className="card_form_outter">
+                                <form>
+                                    <div className="card_item1">
+                                        {trainerData ? (
+                                            <img
+                                                src={
+                                                    trainerData &&
+                                                    trainerData.profilePicture
+                                                        ? trainerData.profilePicture
+                                                        : "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                                                }
+                                                style={{
+                                                    objectFit: "cover",
+                                                    width: "200px",
+                                                    height: "200px",
+                                                    borderRadius: "100px",
+                                                }}
+                                                onClick={() => {
+                                                    setPreviewTmage(null);
+                                                }}
+                                            />
+                                        ) : (
+                                            <div className="combin_profile">
+                                                <button
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        fileInputRef.current.click();
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={Profile}
+                                                        alt="icon"
+                                                        style={{
+                                                            objectFit: "cover",
+                                                            width: "100px",
+                                                            height: "100px",
+                                                        }}
+                                                    />
+                                                </button>
+                                                <img
+                                                    src={ProfileAdd}
+                                                    alt="icon"
+                                                    style={{
+                                                        objectFit: "cover",
+                                                        width: "20px",
+                                                        height: "20px",
+                                                        borderRadius: "100px",
+                                                    }}
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        fileInputRef.current.click();
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
 
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      accept="image/*"
-                      onChange={(event) => {
-                        const file = event.target.files[0];
-                        if (file && file.type.substr(0, 5) === "image") {
-                          setImage(file);
-                        } else {
-                          setImage(null);
-                        }
-                      }}
-                    />
-                    <h5>{data.upload}</h5>
-                  </div>
-                  <div className="card_item2 ">
-                    <div className="card_innerItem">
-                      <h6>First Name</h6>
-                      <input
-                        type="text"
-                        name="firstName"
-                        onChange={handleInputChange}
-                        value={trainerData.firstName}
-                      />
-                    </div>
-                    <div className="card_innerItem">
-                      <h6>Last Name</h6>
-                      <input
-                        name="lastName"
-                        onChange={handleInputChange}
-                        value={trainerData.lastName}
-                      />
-                    </div>
-                  </div>
-                  <div className="card_item3">
-                    <h6>{data.tellus}</h6>
+                                        <input
+                                            type="file"
+                                            ref={fileInputRef}
+                                            accept="image/*"
+                                            onChange={(event) => {
+                                                const file =
+                                                    event.target.files[0];
+                                                if (
+                                                    file &&
+                                                    file.type.substr(0, 5) ===
+                                                        "image"
+                                                ) {
+                                                    setImage(file);
+                                                } else {
+                                                    setImage(null);
+                                                }
+                                            }}
+                                        />
+                                        <h5>{data.upload}</h5>
+                                    </div>
+                                    <div className="card_item2 ">
+                                        <div className="card_innerItem">
+                                            <h6>First Name</h6>
+                                            <input
+                                                type="text"
+                                                name="firstName"
+                                                onChange={handleInputChange}
+                                                value={trainerData.firstName}
+                                            />
+                                        </div>
+                                        <div className="card_innerItem">
+                                            <h6>Last Name</h6>
+                                            <input
+                                                name="lastName"
+                                                onChange={handleInputChange}
+                                                value={trainerData.lastName}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="card_item3">
+                                        <h6>{data.tellus}</h6>
 
-                    <div className="inputs_experience">
-                      <Checkbox
-                        checked={checkedHIIT}
-                        onChange={(e) => {
-                          setCheckedHIIT(e.target.checked);
-                          console.log(e.target.checked);
+                                        <div className="inputs_experience">
+                                            <Checkbox
+                                                checked={checkedHIIT}
+                                                onChange={(e) => {
+                                                    setCheckedHIIT(
+                                                        e.target.checked
+                                                    );
+                                                    console.log(
+                                                        e.target.checked
+                                                    );
 
-                          if (e.target.checked) {
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Strength & HIIT",
-                              ],
-                            });
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Strength & HIIT",
+                                                                    ],
+                                                            }
+                                                        );
 
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Strength & HIIT"
-                              );
-                            // console.log(index);
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          }
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    } else {
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Strength & HIIT"
+                                                            );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    }
 
-                          console.log(trainerbackgroundData);
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
+                                                    console.log(
+                                                        trainerbackgroundData
+                                                    );
+                                                }}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
 
-                      // onChange={() => {
-                      //   setCheckState("Strength & HIIT");
-                      // }}
-                      />
-                      <div className="checkbox_label">Strength & HIIT</div>
-                      <Checkbox
-                        checked={checkedBoxing}
-                        // checked={true}
-                        onChange={(e) => {
-                          setCheckedBoxing(e.target.checked);
-                          console.log(e.target.checked);
+                                                // onChange={() => {
+                                                //   setCheckState("Strength & HIIT");
+                                                // }}
+                                            />
+                                            <div className="checkbox_label">
+                                                Strength & HIIT
+                                            </div>
+                                            <Checkbox
+                                                checked={checkedBoxing}
+                                                // checked={true}
+                                                onChange={(e) => {
+                                                    setCheckedBoxing(
+                                                        e.target.checked
+                                                    );
+                                                    console.log(
+                                                        e.target.checked
+                                                    );
 
-                          if (e.target.checked) {
-                            console.log("setBoxing");
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Boxing",
-                              ],
-                            });
+                                                    if (e.target.checked) {
+                                                        console.log(
+                                                            "setBoxing"
+                                                        );
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Boxing",
+                                                                    ],
+                                                            }
+                                                        );
 
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          } else {
-                            console.log("unsetBoxing");
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    } else {
+                                                        console.log(
+                                                            "unsetBoxing"
+                                                        );
 
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Boxing"
-                              );
-                            // console.log(index);
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          }
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Boxing"
+                                                            );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                        console.log(
+                                                            trainerbackgroundData.areaOfExpertise
+                                                        );
+                                                    }
 
-                          console.log(trainerbackgroundData);
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <div className="checkbox_label">Boxing</div>
-                      <Checkbox
-                        checked={checkedYoga}
-                        onChange={(e) => {
-                          setCheckedYoga(e.target.checked);
+                                                    console.log(
+                                                        trainerbackgroundData
+                                                    );
+                                                }}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
+                                            />
+                                            <div className="checkbox_label">
+                                                Boxing
+                                            </div>
+                                            <Checkbox
+                                                checked={checkedYoga}
+                                                onChange={(e) => {
+                                                    setCheckedYoga(
+                                                        e.target.checked
+                                                    );
 
-                          if (e.target.checked) {
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Yoga",
-                              ],
-                            });
-                          } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Yoga"
-                              );
-                            // console.log(index);
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                          }
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <div className="checkbox_label">Yoga</div>
-                      <Checkbox
-                        checked={checkedPilates}
-                        onChange={(e) => {
-                          setCheckedPilates(e.target.checked);
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Yoga",
+                                                                    ],
+                                                            }
+                                                        );
+                                                    } else {
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Yoga"
+                                                            );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                    }
+                                                }}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
+                                            />
+                                            <div className="checkbox_label">
+                                                Yoga
+                                            </div>
+                                            <Checkbox
+                                                checked={checkedPilates}
+                                                onChange={(e) => {
+                                                    setCheckedPilates(
+                                                        e.target.checked
+                                                    );
 
-                          if (e.target.checked) {
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Pilates",
-                              ],
-                            });
-                          } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Pilates"
-                              );
-                            // console.log(index);
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                          }
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <div className="checkbox_label">Pilates</div>
-                    </div>
+                                                    if (e.target.checked) {
+                                                        setTrainerbackgroundData(
+                                                            {
+                                                                ...trainerbackgroundData,
+                                                                areaOfExpertise:
+                                                                    [
+                                                                        ...trainerbackgroundData.areaOfExpertise,
+                                                                        "Pilates",
+                                                                    ],
+                                                            }
+                                                        );
+                                                    } else {
+                                                        const index =
+                                                            trainerbackgroundData.areaOfExpertise.indexOf(
+                                                                "Pilates"
+                                                            );
+                                                        // console.log(index);
+                                                        if (index > -1) {
+                                                            trainerbackgroundData.areaOfExpertise.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
+                                                    }
+                                                }}
+                                                style={{
+                                                    color: "#53BFD2",
+                                                }}
+                                            />
+                                            <div className="checkbox_label">
+                                                Pilates
+                                            </div>
+                                        </div>
 
-                    {/* <div className="inputs_experience"> */}
-                    {/* <Checkbox
+                                        {/* <div className="inputs_experience"> */}
+                                        {/* <Checkbox
                         checked={trainerData?.areaOfExpertise?.includes(
                           "Strength & HIIT"
                         )}
@@ -535,267 +605,378 @@ const TrainerCardDashboard = ({
                       />
                       <label>Pilates</label>
                     </div> */}
-                  </div>
-                  <div className="card_item4">
-                    <h6>{data.clientDesc}</h6>
-                    <textarea
-                      type="text"
-                      value={trainerData.description}
-                      name="description"
-                      placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into your full profile."
-                      onChange={handleInputChange}
-                      maxLength="75"
-                    />
-                  </div>
-                  <div className="card_item5">
-                    <h6>Tell us about your Pricing</h6>
-                    <p>{data.pricingDesc}</p>
-                  </div>
-                  <div className="card_item6">
-                    <Accordion title="In Person Training Session Pricing (at the clients location)">
-                      <div className="card_accordion">
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Individual charge"
-                            onChange={handleInputChange}
-                            value={trainerData.individualCharge}
-                            name="individualCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 2 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssTwoPeopleCharge}
-                            name="ssTwoPeopleCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
+                                    </div>
+                                    <div className="card_item4">
+                                        <h6>{data.clientDesc}</h6>
+                                        <textarea
+                                            type="text"
+                                            value={trainerData.description}
+                                            name="description"
+                                            placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into your full profile."
+                                            onChange={handleInputChange}
+                                            maxLength="75"
+                                        />
+                                    </div>
+                                    <div className="card_item5">
+                                        <h6>Tell us about your Pricing</h6>
+                                        <p>{data.pricingDesc}</p>
+                                    </div>
+                                    <div className="card_item6">
+                                        <Accordion title="In Person Training Session Pricing (at the clients location)">
+                                            <div className="card_accordion">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Individual charge"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.individualCharge
+                                                        }
+                                                        name="individualCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssTwoPeopleCharge
+                                                        }
+                                                        name="ssTwoPeopleCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
 
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 3 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssThreePeopleCharge}
-                            name="ssThreePeopleCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 4 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssFourPeopleCharge}
-                            name="ssFourPeopleCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Class Flat Rate (5-15 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.classFlatRate}
-                            name="classFlatRate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="3 Session Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.threeSessionRate}
-                            name="threeSessionRate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="10 Session Pass Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.tenSessionRate}
-                            name="tenSessionRate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                      </div>
-                    </Accordion>
-                    <Accordion title="In Person Training Session Pricing (at your location)">
-                      <div className="card_accordion">
-                        <div className="iconwrapper">
-                          <input type="text" placeholder="Individual charge" />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 2 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssThreePeopleCharge
+                                                        }
+                                                        name="ssThreePeopleCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssFourPeopleCharge
+                                                        }
+                                                        name="ssFourPeopleCharge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Class Flat Rate (5-15 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.classFlatRate
+                                                        }
+                                                        name="classFlatRate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="3 Session Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.threeSessionRate
+                                                        }
+                                                        name="threeSessionRate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="10 Session Pass Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.tenSessionRate
+                                                        }
+                                                        name="tenSessionRate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </Accordion>
+                                        <Accordion title="In Person Training Session Pricing (at your location)">
+                                            <div className="card_accordion">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Individual charge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
 
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 3 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 4 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Class Flat Rate (5-15 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input type="text" placeholder="3 Session Rate" />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="10 Session Pass Rate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                      </div>
-                    </Accordion>
-                    <Accordion title="Virtual Training Session Pricing">
-                      <div className="card_accordion">
-                        <div className="iconwrapper">
-                          <input type="text" placeholder="Individual charge" />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 2 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Class Flat Rate (5-15 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="3 Session Rate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="10 Session Pass Rate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </Accordion>
+                                        <Accordion title="Virtual Training Session Pricing">
+                                            <div className="card_accordion">
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Individual charge"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
 
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 3 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Class Flat Rate (5-15 People)"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="3 Session Rate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                                <div className="iconwrapper">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="10 Session Pass Rate"
+                                                    />
+                                                    <img
+                                                        src={DollarIcon}
+                                                        alt="icon"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </Accordion>
+                                    </div>
+                                    <div className="submit_button">
+                                        <button
+                                            onClick={
+                                                handleChangeToTrainerProfile
+                                            }
+                                            type="submit"
+                                            // onClick={handleTrainerAvailability}
+                                        >
+                                            Save Changes <ArrowHoverBlacked />
+                                            {/* <img src={Arrow} alt="icon" /> */}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 4 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Class Flat Rate (5-15 People)"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input type="text" placeholder="3 Session Rate" />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="10 Session Pass Rate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                      </div>
-                    </Accordion>
-                  </div>
-                  <div className="submit_button">
-                    <Link
-                      onClick={handleChangeToTrainerProfile}
-                      type="submit"
-                    // onClick={handleTrainerAvailability}
-                    >
-                      Save Changes <ArrowHoverBlacked />
-                      {/* <img src={Arrow} alt="icon" /> */}
-                    </Link>
-                  </div>
-                </form>
-              </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 function Accordion({ title, children }) {
-  const [isOpenAccodion, setAccordion] = useState(false);
+    const [isOpenAccodion, setAccordion] = useState(false);
 
-  // for radio button
-  const [selectedValue, setSelectedValue] = useState("a");
+    // for radio button
+    const [selectedValue, setSelectedValue] = useState("a");
 
-  // for radio
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+    // for radio
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
 
-  return (
-    <div className="accordion-wrapper">
-      <div className="cyanRadio_wrapper">
-        <CyanRadio
-          checked={selectedValue === ""}
-          onChange={handleChange}
-          onClick={() => setAccordion(!isOpenAccodion)}
-        />
-        <h6
-          className={`accordion-title ${isOpenAccodion ? "open" : ""}`}
-          onClick={() => setAccordion(!isOpenAccodion)}
-        >
-          {title}
-        </h6>
-      </div>
-      <div className={`accordion-item ${!isOpenAccodion ? "collapsed" : ""}`}>
-        <div className="accordion-content">{children}</div>
-      </div>
-    </div>
-  );
+    return (
+        <div className="accordion-wrapper">
+            <div className="cyanRadio_wrapper">
+                <CyanRadio
+                    checked={selectedValue === ""}
+                    onChange={handleChange}
+                    onClick={() => setAccordion(!isOpenAccodion)}
+                />
+                <h6
+                    className={`accordion-title ${
+                        isOpenAccodion ? "open" : ""
+                    }`}
+                    onClick={() => setAccordion(!isOpenAccodion)}
+                >
+                    {title}
+                </h6>
+            </div>
+            <div
+                className={`accordion-item ${
+                    !isOpenAccodion ? "collapsed" : ""
+                }`}
+            >
+                <div className="accordion-content">{children}</div>
+            </div>
+        </div>
+    );
 }
 
 const mapStateToProps = (state) => ({
-  details: state.trainerReducer.details,
-  trainerPersonalData: state.trainerReducer.data,
+    details: state.trainerReducer.details,
+    trainerPersonalData: state.trainerReducer.data,
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      updateTrainerDetails,
-      getTrainerDetails,
-      fileUpload,
-    },
-    dispatch
-  );
+    return bindActionCreators(
+        {
+            updateTrainerDetails,
+            getTrainerDetails,
+            fileUpload,
+        },
+        dispatch
+    );
 };
 
 const TrainerCard = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(TrainerCardDashboard);
 
 export default TrainerCard;

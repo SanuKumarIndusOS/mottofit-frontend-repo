@@ -63,6 +63,7 @@ const SignInFC = ({
     if (Object.keys(error).length === 0) {
       loginAct(loginApi, payload)
         .then((res) => {
+          localStorage.setItem("user-id", res.id);
           if (res["type"] === "trainer") {
             trainerDetail.then((data) => {
               if (data["data"]["applicationStatus"] === null) {
