@@ -458,15 +458,19 @@ const TrainerSetUpProfileFC = ({
 
       console.log(certData);
       setInputCertificatesFields([...certData]);
-
-     // setImageFields()
+      setImageFields([...storeTrainerData.images, { image: "" }]);
+      setTrainerAvailabilityData(
+        {
+          ...trainerAvailabilityData,
+          hoursPerWeek: storeTrainerData.hoursPerWeek,
+          preferedTrainingMode: storeTrainerData.preferedTrainingMode,
+          trainingFacilityLocation: storeTrainerData.trainingFacilityLocation,
+          willingToTravel: "0",
+          servicableLocation: storeTrainerData.servicableLocation,
+        })
     }
     )
       .catch(err => console.log(err));
-
-
-
-
   }, []);
 
   const [renderButton, setRenderButton] = useState({
