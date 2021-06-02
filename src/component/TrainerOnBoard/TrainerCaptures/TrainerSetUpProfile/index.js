@@ -436,14 +436,14 @@ const TrainerSetUpProfileFC = ({
             })
             .then((res) => {
                 let storeTrainerData = res.data.data;
-                console.log(storeTrainerData.myMotto);
+                console.log(storeTrainerData);
                 setTrainerData({
                     ...trainerData,
                     motto: storeTrainerData.myMotto,
                     trainingProcessDescription:
                         storeTrainerData.trainingProcess,
                     trainingLocation: storeTrainerData.preferedTrainingMode,
-                    servicableLocation: storeTrainerData.location,
+                    serviceableLocation: storeTrainerData.location,
                     websiteLink: storeTrainerData.websiteLink,
                     instaHandle: storeTrainerData.instagramProfile,
                     virtualMeetingLink: storeTrainerData.virtualMeetingLink,
@@ -462,7 +462,13 @@ const TrainerSetUpProfileFC = ({
 
                 console.log(certData);
                 setInputCertificatesFields([...certData]);
-                setImageFields([...storeTrainerData.images, { image: "" }]);
+                let imageList = [];
+                storeTrainerData.images.map((list, index) => {
+                    imageList.push({ image: list });
+                });
+                if (imageList.length === storeTrainerData.images.length) {
+                    setImageFields(imageList);
+                }
                 setTrainerAvailabilityData({
                     ...trainerAvailabilityData,
                     hoursPerWeek: storeTrainerData.hoursPerWeek,
@@ -470,7 +476,7 @@ const TrainerSetUpProfileFC = ({
                     trainingFacilityLocation:
                         storeTrainerData.trainingFacilityLocation,
                     willingToTravel: "0",
-                    servicableLocation: storeTrainerData.ser,
+                    servicableLocation: storeTrainerData.servicableLocation,
                 });
             })
             .catch((err) => console.log(err));
@@ -952,7 +958,11 @@ const TrainerSetUpProfileFC = ({
                                     <div className="read_image">
                                         {imageFields
                                             .slice(0, 2)
-                                            .map((index, input) => {
+                                            .map((input, index) => {
+                                                console.log(
+                                                    input,
+                                                    "inputinputinput"
+                                                );
                                                 return (
                                                     <div
                                                         key={index}
@@ -1143,6 +1153,12 @@ const TrainerSetUpProfileFC = ({
 
                                         <div className="setup_item1">
                                             <h6>{data.serviceable}</h6>
+                                            {console.log(
+                                                trainerData,
+                                                trainerData.serviceableLocation,
+                                                options,
+                                                "trainerData.serviceableLocation"
+                                            )}
                                             <div className="inputs_platform">
                                                 <div className="iconwrapper">
                                                     <Dropdown
@@ -1159,7 +1175,8 @@ const TrainerSetUpProfileFC = ({
                                                                     e.value,
                                                             });
                                                             console.log(
-                                                                e.value
+                                                                e.value,
+                                                                "eventdropvalue"
                                                             );
                                                         }}
                                                         name="location"
@@ -1385,7 +1402,8 @@ const TrainerSetUpProfileFC = ({
     );
 };
 
-const ImageReander = () => {
+const ImageReander = (props) => {
+    console.log(props, "props");
     const [image, setImage] = useState();
     const [previewImage, setPreviewTmage] = useState();
     const fileInputRef = useRef();
@@ -1424,9 +1442,10 @@ const ImageReander = () => {
                                 fileInputRef.current.click();
                             }}
                         >
+                            {console.log(props.value, "props.image")}
                             <img
                                 // src={Profile}
-                                src={ImageBG}
+                                src={props.value ? props.value : image}
                                 alt="icon"
                                 style={{
                                     objectFit: "cover",
