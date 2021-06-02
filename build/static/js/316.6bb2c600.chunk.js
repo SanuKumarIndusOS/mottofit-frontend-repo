@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[316],{421:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Shedule Icon.ff6f5846.svg"}}]);
-//# sourceMappingURL=316.6bb2c600.chunk.js.map

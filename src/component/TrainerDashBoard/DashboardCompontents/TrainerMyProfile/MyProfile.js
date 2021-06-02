@@ -46,7 +46,7 @@ const MyProfileFC = ({
     getTrainerDetails,
     details,
     updateTrainerDetails,
-    // trainerPersonalData,
+    trainerPersonalData,
 }) => {
     const data = {
         heading: "Build out the rest of your Profile!",
@@ -73,6 +73,14 @@ const MyProfileFC = ({
         websiteLink: "",
         instaHandle: "",
         youtubeChannel: "",
+        governmentId: "",
+        insurance: "",
+        governmentIdNumber: "",
+        coverAmount: "",
+        virtualMeetingHandle: "",
+        virtualMeetingLink: "",
+        identityNameUS: "",
+        insuranceNameUS: "",
     });
     const [trainerAvailabilityData, setTrainerAvailabilityData] =
         React.useState({
@@ -86,6 +94,9 @@ const MyProfileFC = ({
     const [renderButton, setRenderButton] = useState({
         visiable: false,
     });
+
+    const [checkButton, setCheckButton] = useState(true);
+    const [checkButtonInPerson, setCheckButtonInPerson] = useState(true);
 
     //state for radio buttons
     const [selectedValue, setSelectedValue] = React.useState("a");
@@ -155,6 +166,8 @@ const MyProfileFC = ({
         const tempData = {
             ...trainerData,
         };
+        // setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
+        setCheckButton((checkButton) => !checkButton);
 
         // if(label) value = {label , name , value};
 
@@ -188,7 +201,7 @@ const MyProfileFC = ({
 
         axios
             .get(
-                 COMMON_URL+"/v1/trainer",
+                COMMON_URL + "/v1/trainer",
                 { applicationStatus: "setupComplete" },
                 {
                     headers: headers,
@@ -198,24 +211,54 @@ const MyProfileFC = ({
                 console.log(res);
             });
         const {
+            // firstName,
+            // lastName,
+            // description,
+            // individualCharge,
+            // ssTwoPeopleCharge,
+            // ssThreePeopleCharge,
+            // ssFourPeopleCharge,
+            // classFlatRate,
+            // threeSessionRate,
+            // tenSessionRate,
             instaHandle,
             // location,
             motto,
-            // serviceableLocation,
+            serviceableLocation,
             // trainingLocation,
             trainingProcessDescription,
             websiteLink,
             // youtubeChannel,
+            // individualChargeTl,
+            // ssTwoPeopleChargeTl,
+            // ssThreePeopleChargeTl,
+            // ssFourPeopleChargeTl,
+            // classFlatRateTl,
+            // threeSessionRateTl,
+            // tenSessionRateTl,
+            // individualChargeVt,
+            // ssTwoPeopleChargeVt,
+            // ssThreePeopleChargeVt,
+            // ssFourPeopleChargeVt,
+            // classFlatRateVt,
+            // threeSessionRateVt,
+            // tenSessionRateVt,
+            // governmentId,
+            // insurance,
+            // governmentIdNumber,
+            // coverAmount,
+            virtualMeetingLink,
+            // identityNameUS,
+            // insuranceNameUS,
         } = trainerData;
-        console.log(trainerData, "trainer data");
+
+        // console.log(trainerData, "trainer data");
 
         let payload = {
             trainingProcess: trainingProcessDescription,
             myMotto: motto,
-            preferedTrainingMode: websiteLink,
-            // youtubeLink: youtubeChannel,
+            websiteLink: websiteLink,
             instagramProfile: instaHandle,
-            // currentExperience: { workLocation: location },
             certification: inputCertificatesFields?.map(
                 ({ certificate, year }) => ({
                     certificateName: "",
@@ -223,11 +266,12 @@ const MyProfileFC = ({
                     certification: certificate,
                 })
             ),
-            // servicableLocation: serviceableLocation?.map(({ value }) => value),
+            virtualMeetingLink: virtualMeetingLink,
+            servicableLocation: serviceableLocation,
         };
         // updateTrainerDetails();
 
-        console.log(payload, "payload");
+        // console.log(payload, "payload");
 
         const { updateTrainerAvailabilityApi } = TrainerApi;
 
@@ -246,54 +290,57 @@ const MyProfileFC = ({
     useEffect(() => {
         getTrainerDetails()
             .then((data) => {
-                console.log(data, "api data");
+                // console.log(data, "api data");
 
                 const {
                     trainingProcess = "",
                     myMotto = "",
-                    // preferedTrainingMode = "",
+                    preferedTrainingMode = "",
                     websiteLink = "",
-                    // youtubeLink = "",
                     instagramProfile = "",
-                    // currentExperience = {},
-                    // certification = "",
-                    // servicableLocation = [],
+                    currentExperience = {},
+                    certification = [],
+                    serviceableLocation = [],
+                    virtualMeetingLink = "",
                 } = data || {};
-
-                // const { workLocation = "" } = currentExperience || {};
+                // console.log(data, "data");
+                const { workLocation = "" } = currentExperience || {};
 
                 const storeData = {
                     details: {
+                        ...details,
                         motto: myMotto,
                         trainingProcessDescription: trainingProcess,
-                        // trainingLocation: preferedTrainingMode,
-                        // serviceableLocation: servicableLocation?.map(
-                        //     (location) => ({
-                        //         label: location,
-                        //         value: location,
-                        //         name: "serviceableLocation",
-                        //     })
-                        // ),
-                        // location: workLocation,
-                        // websiteLink,
-
-                        location: websiteLink,
+                        trainingLocation: preferedTrainingMode,
+                        servicableLocation: serviceableLocation.map(
+                            (location) => ({
+                                label: location,
+                                value: location,
+                                name: "serviceableLocation",
+                            })
+                        ),
+                        location: workLocation,
+                        websiteLink: websiteLink,
                         instaHandle: instagramProfile,
+                        virtualMeetingLink: virtualMeetingLink,
+                        willingToTravel:
+                            trainerAvailabilityData.willingToTravel,
+                        servicableLocation:
+                            trainerAvailabilityData.servicableLocation,
                         // youtubeChannel: youtubeLink,
-                        ...details,
                     },
                 };
 
-                // const tempCertification = certification?.map(
-                //     ({ certfiedYear, certificateName }) => ({
-                //         certificate: certificateName,
-                //         year: certfiedYear,
-                //     })
-                // );
+                const tempCertification = certification?.map(
+                    ({ certfiedYear, certificateName }) => ({
+                        certificate: certificateName,
+                        year: certfiedYear,
+                    })
+                );
 
-                // setInputCertificatesFields(tempCertification);
+                setInputCertificatesFields(tempCertification);
                 setTrainerData(storeData.details);
-                // updateTrainerDetails(storeData);
+                updateTrainerDetails(storeData);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -449,13 +496,18 @@ const MyProfileFC = ({
                                                                 "Online"
                                                             )
                                                         }
-                                                        className={`${
-                                                            trainerData?.trainingLocation?.includes(
-                                                                "Online"
-                                                            )
-                                                                ? "active"
-                                                                : ""
-                                                        }`}
+                                                        // className={`${
+                                                        //     trainerData?.trainingLocation?.includes(
+                                                        //         "Online"
+                                                        //     )
+                                                        //         ? "active"
+                                                        //         : ""
+                                                        // }`}
+                                                        className={
+                                                            checkButton
+                                                                ? "buttonTrue"
+                                                                : "buttonFalse"
+                                                        }
                                                         name="trainingLocation"
                                                     >
                                                         Virtual
@@ -474,6 +526,11 @@ const MyProfileFC = ({
                                                                 ? "active"
                                                                 : ""
                                                         }`}
+                                                        // className={
+                                                        //     checkButtonInPerson
+                                                        //         ? "buttonTrue"
+                                                        //         : "buttonFalse"
+                                                        // }
                                                         name="trainingLocation"
                                                     >
                                                         In Person
@@ -495,12 +552,12 @@ const MyProfileFC = ({
                                                                     <textarea
                                                                         type="text"
                                                                         placeholder="Add a Google or Zoom meeting link"
-                                                                        // value={
-                                                                        //     trainerData.virtualMeetingLink
-                                                                        // }
-                                                                        // onChange={
-                                                                        //     handleInputChange
-                                                                        // }
+                                                                        value={
+                                                                            trainerData.virtualMeetingLink
+                                                                        }
+                                                                        onChange={
+                                                                            handleInputChange
+                                                                        }
                                                                         name="virtualMeetingLink"
                                                                     />
                                                                 </div>
@@ -527,9 +584,9 @@ const MyProfileFC = ({
                                                                     serviceableLocation:
                                                                         e.value,
                                                                 });
-                                                                console.log(
-                                                                    e.value
-                                                                );
+                                                                // console.log(
+                                                                //     e.value
+                                                                // );
                                                             }}
                                                             name="location"
                                                         />
@@ -579,6 +636,14 @@ const MyProfileFC = ({
                                                     <textarea
                                                         type="text"
                                                         placeholder="Enter the Details of the location"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerPersonalData.trainingFacilityLocation
+                                                                ? trainerPersonalData.trainingFacilityLocation
+                                                                : ""
+                                                        }
                                                     />
                                                 </div>
                                             </div>
@@ -621,14 +686,14 @@ const MyProfileFC = ({
                                                     <textarea
                                                         type="text"
                                                         placeholder="Neighborhood List"
-                                                        // onChange={
-                                                        //     handleInputChange
-                                                        // }
-                                                        // value={
-                                                        //     trainerPersonalData.servicableLocation
-                                                        //         ? trainerPersonalData.servicableLocation
-                                                        //         : ""
-                                                        // }
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerPersonalData.servicableLocation
+                                                                ? trainerPersonalData.servicableLocation
+                                                                : ""
+                                                        }
                                                     />
 
                                                     <img
