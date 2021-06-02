@@ -375,7 +375,7 @@ const TrainerSetUpProfileFC = ({
       })
       .catch((err) => console.log(err));
   };
-  
+
   useEffect(() => {
     if (Object.keys(trainerPersonalData).length < 5) {
       return history.push("/trainer/card");
@@ -969,18 +969,18 @@ const TrainerSetUpProfileFC = ({
                             <ImageReander
                               value={input.image}
                             />
-                            {/* <ImageReander
-                                                            value={input.image}
-                                                        />
-                                                        <ImageReander
-                                                            value={input.image}
-                                                        />
-                                                        <ImageReander
-                                                            value={input.image}
-                                                        />
-                                                        <ImageReander
-                                                            value={input.image}
-                                                        /> */}
+                            <ImageReander
+                              value={input.image}
+                            />
+                            <ImageReander
+                              value={input.image}
+                            />
+                            <ImageReander
+                              value={input.image}
+                            />
+                            <ImageReander
+                              value={input.image}
+                            />
                           </div>
                         );
                       })}
@@ -1073,8 +1073,8 @@ const TrainerSetUpProfileFC = ({
                           className={`${trainerData?.trainingLocation?.includes(
                             "Online"
                           )
-                              ? "active"
-                              : ""
+                            ? "active"
+                            : ""
                             }`}
                           name="trainingLocation"
                         >
@@ -1090,8 +1090,8 @@ const TrainerSetUpProfileFC = ({
                           className={`${trainerData?.trainingLocation?.includes(
                             "inperson"
                           )
-                              ? "active"
-                              : ""
+                            ? "active"
+                            : ""
                             }`}
                           name="trainingLocation"
                         >
