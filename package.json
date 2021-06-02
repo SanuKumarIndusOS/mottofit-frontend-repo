@@ -1,5 +1,6 @@
 {
   "name": "motto",
+  "homepage":"http://doodlebluelive.com:2347/welcome",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

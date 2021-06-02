@@ -89,10 +89,10 @@
                         color: #161616;
                         text-align: center;
                         letter-spacing: 0px;
-                        font-size: 22px;
+                        font-size: 22px !important;
                         line-height: 45px;
-                        font-weight: bold;
-                        font-family: "Montserrat", sans-serif;
+                        font-weight: 500;
+                        font-family: "Montserrat", sans-serif !important;
                     }
                     .combin_profile {
                         display: flex;

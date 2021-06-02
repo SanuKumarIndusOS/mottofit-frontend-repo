@@ -957,7 +957,8 @@ const TrainerSetUpProfileFC = ({
                     {imageFields
                       .slice(0, 2)
                       .map((input, index) => {
-                        console.log(input, "inputinputinput")
+                        console.log(input, "inputinputinput");
+                        console.log(imageFields.length)
                         return (
                           <div
                             key={index}

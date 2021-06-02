@@ -13,10 +13,12 @@ import { bindActionCreators } from "redux";
 import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
-// import { TrainerApi } from "service/apiVariables";
-// import { api } from "service/api";
+import { TrainerApi } from "service/apiVariables";
+import { api } from "service/api";
 import { fileUpload } from "action/trainerAct";
 // import { set } from "date-fns";
+import { COMMON_URL } from "helpers/baseURL";
+import axios from "axios";
 
 const CyanRadio = withStyles({
     root: {
@@ -59,7 +61,6 @@ const TrainerCardDashboard = ({
     const [selectedValue, setSelectedValue] = useState("");
     const [previewImage, setPreviewTmage] = useState();
     const [trainerData, setTrainerData] = useState({
-        profilePicture: "",
         firstName: "",
         lastName: "",
         description: "",
@@ -71,6 +72,20 @@ const TrainerCardDashboard = ({
         threeSessionRate: "",
         tenSessionRate: "",
         amtPerPerson: "",
+        individualChargeTl: "",
+        ssTwoPeopleChargeTl: "",
+        ssThreePeopleChargeTl: "",
+        ssFourPeopleChargeTl: "",
+        classFlatRateTl: "",
+        threeSessionRateTl: "",
+        tenSessionRateTl: "",
+        individualChargeVt: "",
+        ssTwoPeopleChargeVt: "",
+        ssThreePeopleChargeVt: "",
+        ssFourPeopleChargeVt: "",
+        classFlatRateVt: "",
+        threeSessionRateVt: "",
+        tenSessionRateVt: "",
     });
     const fileInputRef = useRef();
 
@@ -89,7 +104,54 @@ const TrainerCardDashboard = ({
 
     const handleChangeToTrainerProfile = (e) => {
         e.preventDefault();
-        // Update Area of Expertise
+
+        const {
+            firstName,
+            lastName,
+            description,
+            profilePicture,
+            individualCharge,
+            ssTwoPeopleCharge,
+            ssThreePeopleCharge,
+            ssFourPeopleCharge,
+            classFlatRate,
+            threeSessionRate,
+            tenSessionRate,
+            individualChargeTl,
+            ssTwoPeopleChargeTl,
+            ssThreePeopleChargeTl,
+            ssFourPeopleChargeTl,
+            classFlatRateTl,
+            threeSessionRateTl,
+            tenSessionRateTl,
+            individualChargeVt,
+            ssTwoPeopleChargeVt,
+            ssThreePeopleChargeVt,
+            ssFourPeopleChargeVt,
+            classFlatRateVt,
+            threeSessionRateVt,
+            tenSessionRateVt,
+        } = trainerData;
+
+        let payload = {
+            firstName: firstName,
+            lastName: lastName,
+            description: description,
+            profilePicture: profilePicture,
+            individualCharge: individualCharge,
+            ssTwoPeopleCharge: ssTwoPeopleCharge,
+        };
+        console.log(payload, "payload");
+
+        const { updateTrainerAvailabilityApi } = TrainerApi;
+        updateTrainerAvailabilityApi.body = payload;
+        api({ ...updateTrainerAvailabilityApi })
+            .then(({ data, message }) => {
+                console.log(data, message, "message");
+
+                alert("Successfully updated the changes");
+            })
+            .catch((err) => console.log(err));
 
         // TrainerCard Profile Upload
 
@@ -99,20 +161,8 @@ const TrainerCardDashboard = ({
             fd.append("profilePicture", image, image.name);
             fileUpload(fd);
         }
-
-        // console.log(trainerData);
-        localStorage.setItem("trainerDetails", JSON.stringify(trainerData));
-
-        // Redux logic
-        let storeData = {
-            details: { ...trainerData },
-        };
-        updateTrainerDetails(storeData);
-        alert("Successfully updated the changes");
-        // history.push("/trainer/setup");
     };
     useEffect(() => {
-        console.log("trainerdata=,", trainerData);
         if (image) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -201,7 +251,7 @@ const TrainerCardDashboard = ({
 
                 const storeData = {
                     details: {
-                        profilePicture,
+                        profilePicture: profilePicture,
                         firstName,
                         lastName,
                         description,
@@ -232,31 +282,8 @@ const TrainerCardDashboard = ({
                     },
                 };
 
-                //setTrainerData(storeData.details);
-
+                setTrainerData(storeData.details);
                 updateTrainerDetails(storeData);
-                var backData = JSON.parse(
-                    localStorage.getItem("trainerDetails")
-                );
-                console.log(backData);
-
-                backData === null
-                    ? setTrainerData(storeData.details)
-                    : setTrainerData({
-                          ...trainerData,
-                          profilePicture: backData.profilePicture,
-                          firstName: backData.firstName,
-                          lastName: backData.lastName,
-                          description: backData.description,
-                          individualCharge: backData.individualCharge,
-                          ssTwoPeopleCharge: backData.ssTwoPeopleCharge,
-                          ssThreePeopleCharge: backData.ssThreePeopleCharge,
-                          ssFourPeopleCharge: backData.ssFourPeopleCharge,
-                          classFlatRate: backData.classFlatRate,
-                          threeSessionRate: backData.threeSessionRate,
-                          tenSessionRate: backData.tenSessionRate,
-                          amtPerPerson: backData.amtPerPerson,
-                      });
             }
         });
     }, []);
@@ -355,12 +382,18 @@ const TrainerCardDashboard = ({
                                                 name="firstName"
                                                 onChange={handleInputChange}
                                                 value={trainerData.firstName}
+                                                style={{
+                                                    textTransform: "capitalize",
+                                                }}
                                             />
                                         </div>
                                         <div className="card_innerItem">
                                             <h6>Last Name</h6>
                                             <input
                                                 name="lastName"
+                                                style={{
+                                                    textTransform: "capitalize",
+                                                }}
                                                 onChange={handleInputChange}
                                                 value={trainerData.lastName}
                                             />
@@ -419,17 +452,12 @@ const TrainerCardDashboard = ({
                                                 style={{
                                                     color: "#53BFD2",
                                                 }}
-
-                                                // onChange={() => {
-                                                //   setCheckState("Strength & HIIT");
-                                                // }}
                                             />
                                             <div className="checkbox_label">
                                                 Strength & HIIT
                                             </div>
                                             <Checkbox
                                                 checked={checkedBoxing}
-                                                // checked={true}
                                                 onChange={(e) => {
                                                     setCheckedBoxing(
                                                         e.target.checked
@@ -511,7 +539,7 @@ const TrainerCardDashboard = ({
                                                             trainerbackgroundData.areaOfExpertise.indexOf(
                                                                 "Yoga"
                                                             );
-                                                        // console.log(index);
+
                                                         if (index > -1) {
                                                             trainerbackgroundData.areaOfExpertise.splice(
                                                                 index,
@@ -567,44 +595,6 @@ const TrainerCardDashboard = ({
                                                 Pilates
                                             </div>
                                         </div>
-
-                                        {/* <div className="inputs_experience"> */}
-                                        {/* <Checkbox
-                        checked={trainerData?.areaOfExpertise?.includes(
-                          "Strength & HIIT"
-                        )}
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Strength & HITT</label>
-                      <Checkbox
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Boxing</label>
-                      <Checkbox
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Yoga</label>
-                      <Checkbox
-                        value=""
-                        onChange={handleChange}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <label>Pilates</label>
-                    </div> */}
                                     </div>
                                     <div className="card_item4">
                                         <h6>{data.clientDesc}</h6>
@@ -751,7 +741,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Individual charge"
+                                                        placeholder="Individual Charge"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.individualChargeTl
+                                                        }
+                                                        name="individualChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -761,7 +758,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                        placeholder="Social Session (Total for 2 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssTwoPeopleChargeTl
+                                                        }
+                                                        name="ssTwoPeopleChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -772,7 +776,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                        placeholder="Social Session (Total for 3 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssThreePeopleChargeTl
+                                                        }
+                                                        name="ssThreePeopleChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -782,7 +793,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                        placeholder="Social Session (Total for 4 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssFourPeopleChargeTl
+                                                        }
+                                                        name="ssFourPeopleChargeTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -793,6 +811,13 @@ const TrainerCardDashboard = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Class Flat Rate (5-15 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.classFlatRateTl
+                                                        }
+                                                        name="classFlatRateTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -803,6 +828,13 @@ const TrainerCardDashboard = ({
                                                     <input
                                                         type="text"
                                                         placeholder="3 Session Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.threeSessionRateTl
+                                                        }
+                                                        name="threeSessionRateTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -813,6 +845,13 @@ const TrainerCardDashboard = ({
                                                     <input
                                                         type="text"
                                                         placeholder="10 Session Pass Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.tenSessionRateTl
+                                                        }
+                                                        name="tenSessionRateTl"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -826,7 +865,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Individual charge"
+                                                        placeholder="Individual Charge"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.individualChargeVt
+                                                        }
+                                                        name="individualChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -836,7 +882,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 2 People)"
+                                                        placeholder="Social Session (Total for 2 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssTwoPeopleChargeVt
+                                                        }
+                                                        name="ssTwoPeopleChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -847,7 +900,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 3 People)"
+                                                        placeholder="Social Session (Total for 3 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssThreePeopleChargeVt
+                                                        }
+                                                        name="ssThreePeopleChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -857,7 +917,14 @@ const TrainerCardDashboard = ({
                                                 <div className="iconwrapper">
                                                     <input
                                                         type="text"
-                                                        placeholder="Social Session (Total Charge for 4 People)"
+                                                        placeholder="Social Session (Total for 4 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.ssFourPeopleChargeVt
+                                                        }
+                                                        name="ssFourPeopleChargeVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -868,6 +935,13 @@ const TrainerCardDashboard = ({
                                                     <input
                                                         type="text"
                                                         placeholder="Class Flat Rate (5-15 People)"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.classFlatRateVt
+                                                        }
+                                                        name="classFlatRateVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -878,6 +952,13 @@ const TrainerCardDashboard = ({
                                                     <input
                                                         type="text"
                                                         placeholder="3 Session Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.threeSessionRateVt
+                                                        }
+                                                        name="threeSessionRateVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -888,6 +969,13 @@ const TrainerCardDashboard = ({
                                                     <input
                                                         type="text"
                                                         placeholder="10 Session Pass Rate"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.tenSessionRateVt
+                                                        }
+                                                        name="tenSessionRateVt"
                                                     />
                                                     <img
                                                         src={DollarIcon}
@@ -895,7 +983,7 @@ const TrainerCardDashboard = ({
                                                     />
                                                 </div>
                                             </div>
-                                        </Accordion>
+                                        </Accordion>{" "}
                                     </div>
                                     <div className="submit_button">
                                         <button

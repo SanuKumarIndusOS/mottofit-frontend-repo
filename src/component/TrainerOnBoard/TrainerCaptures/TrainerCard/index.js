@@ -319,7 +319,6 @@ const TrainerCardFC = ({
             ],
           });
         }
-       
         console.log(trainerbackgroundData);
       }
     });
