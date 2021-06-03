@@ -336,8 +336,8 @@ const MyProfileFC = ({
                 };
 
                 const tempCertification = certification?.map(
-                    ({ certfiedYear, certificateName }) => ({
-                        certificate: certificateName,
+                    ({ certfiedYear, certification }) => ({
+                        certificate: certification,
                         year: certfiedYear,
                     })
                 );
