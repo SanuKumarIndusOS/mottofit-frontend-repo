@@ -23,6 +23,23 @@ const routers = [
         ],
     },
     {
+        component: "MainLayout",
+        path: "/forgot",
+        auth: false,
+        name: "forgot",
+        exact: false,
+        childrens: [
+            {
+                path: "/",
+                componentPath: "pages/ForgotPasswordPage/index",
+                name: "ForgotBase",
+                auth: false,
+                exact: true,
+            },
+        ],
+    },
+
+    {
         component: "HomeLayout",
         path: "/welcome",
         auth: false,
@@ -38,6 +55,7 @@ const routers = [
             },
         ],
     },
+
     {
         component: "MainLayout",
         path: "/admin",
@@ -192,7 +210,6 @@ const routers = [
     {
         component: "MainLayout",
         path: "/privacy",
-
         auth: false,
         name: "privacy",
         exact: false,

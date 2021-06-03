@@ -68,7 +68,7 @@ const MyProfileFC = ({
         motto: "",
         trainingProcessDescription: "",
         trainingLocation: [],
-        serviceableLocation: "",
+        servicableLocation: "",
         location: "",
         websiteLink: "",
         instaHandle: "",
@@ -80,6 +80,7 @@ const MyProfileFC = ({
         virtualMeetingHandle: "",
         virtualMeetingLink: "",
         identityNameUS: "",
+        trainingFacilityLocation: [],
         insuranceNameUS: "",
     });
     const [trainerAvailabilityData, setTrainerAvailabilityData] =
@@ -96,7 +97,7 @@ const MyProfileFC = ({
     });
 
     const [checkButton, setCheckButton] = useState(true);
-    const [checkButtonInPerson, setCheckButtonInPerson] = useState(true);
+    // const [checkButtonInPerson, setCheckButtonInPerson] = useState(true);
 
     //state for radio buttons
     const [selectedValue, setSelectedValue] = React.useState("a");
@@ -167,7 +168,7 @@ const MyProfileFC = ({
             ...trainerData,
         };
         // setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
-        setCheckButton((checkButton) => !checkButton);
+        // setCheckButton((checkButton) => !checkButton);
 
         // if(label) value = {label , name , value};
 
@@ -224,10 +225,11 @@ const MyProfileFC = ({
             instaHandle,
             // location,
             motto,
-            serviceableLocation,
+            servicableLocation,
             // trainingLocation,
             trainingProcessDescription,
             websiteLink,
+            trainingFacilityLocation,
             // youtubeChannel,
             // individualChargeTl,
             // ssTwoPeopleChargeTl,
@@ -267,7 +269,8 @@ const MyProfileFC = ({
                 })
             ),
             virtualMeetingLink: virtualMeetingLink,
-            servicableLocation: serviceableLocation,
+            servicableLocation: servicableLocation,
+            trainingFacilityLocation: trainingFacilityLocation,
         };
         // updateTrainerDetails();
 
@@ -300,10 +303,11 @@ const MyProfileFC = ({
                     instagramProfile = "",
                     currentExperience = {},
                     certification = [],
-                    serviceableLocation = [],
+                    servicableLocation = [],
                     virtualMeetingLink = "",
+                    trainingFacilityLocation = [],
                 } = data || {};
-                // console.log(data, "data");
+                console.log(data, "data");
                 const { workLocation = "" } = currentExperience || {};
 
                 const storeData = {
@@ -312,21 +316,21 @@ const MyProfileFC = ({
                         motto: myMotto,
                         trainingProcessDescription: trainingProcess,
                         trainingLocation: preferedTrainingMode,
-                        servicableLocation: serviceableLocation.map(
-                            (location) => ({
-                                label: location,
-                                value: location,
-                                name: "serviceableLocation",
-                            })
-                        ),
+                        // servicableLocation: serviceableLocation.map(
+                        //     (location) => ({
+                        //         label: location,
+                        //         value: location,
+                        //         name: "serviceableLocation",
+                        //     })
+                        // ),
                         location: workLocation,
                         websiteLink: websiteLink,
                         instaHandle: instagramProfile,
                         virtualMeetingLink: virtualMeetingLink,
                         willingToTravel:
                             trainerAvailabilityData.willingToTravel,
-                        servicableLocation:
-                            trainerAvailabilityData.servicableLocation,
+                        servicableLocation: servicableLocation,
+                        trainingFacilityLocation: trainingFacilityLocation,
                         // youtubeChannel: youtubeLink,
                     },
                 };
@@ -496,18 +500,18 @@ const MyProfileFC = ({
                                                                 "Online"
                                                             )
                                                         }
-                                                        // className={`${
-                                                        //     trainerData?.trainingLocation?.includes(
-                                                        //         "Online"
-                                                        //     )
-                                                        //         ? "active"
-                                                        //         : ""
-                                                        // }`}
-                                                        className={
-                                                            checkButton
-                                                                ? "buttonTrue"
-                                                                : "buttonFalse"
-                                                        }
+                                                        className={`${
+                                                            trainerData?.trainingLocation?.includes(
+                                                                "Online"
+                                                            )
+                                                                ? "active"
+                                                                : ""
+                                                        }`}
+                                                        // className={
+                                                        //     checkButton
+                                                        //         ? "buttonTrue"
+                                                        //         : "buttonFalse"
+                                                        // }
                                                         name="trainingLocation"
                                                     >
                                                         Virtual
@@ -588,7 +592,7 @@ const MyProfileFC = ({
                                                                 //     e.value
                                                                 // );
                                                             }}
-                                                            name="location"
+                                                            name="serviceableLocation"
                                                         />
                                                     </div>
                                                 </div>
@@ -640,10 +644,9 @@ const MyProfileFC = ({
                                                             handleInputChange
                                                         }
                                                         value={
-                                                            trainerPersonalData.trainingFacilityLocation
-                                                                ? trainerPersonalData.trainingFacilityLocation
-                                                                : ""
+                                                            trainerData.trainingFacilityLocation
                                                         }
+                                                        name="trainingFacilityLocation"
                                                     />
                                                 </div>
                                             </div>
@@ -690,10 +693,9 @@ const MyProfileFC = ({
                                                             handleInputChange
                                                         }
                                                         value={
-                                                            trainerPersonalData.servicableLocation
-                                                                ? trainerPersonalData.servicableLocation
-                                                                : ""
+                                                            trainerData.servicableLocation
                                                         }
+                                                        name="servicableLocation"
                                                     />
 
                                                     <img
