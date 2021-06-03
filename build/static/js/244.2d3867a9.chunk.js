@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[244],{345:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Yoga_Active.a9e2966f.svg"}}]);
-//# sourceMappingURL=244.2d3867a9.chunk.js.map

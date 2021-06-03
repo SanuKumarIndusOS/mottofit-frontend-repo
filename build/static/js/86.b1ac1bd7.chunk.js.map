@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 {"version":3,"sources":["pages/Trainer/Setup/index.js"],"names":["TrainerSetupSection"],"mappings":"iGAAA,gCAWeA,UARa,WAC1B,OACE,8BACE,cAAC,UAAD","file":"static/js/86.b1ac1bd7.chunk.js","sourcesContent":["import React from \"react\";\r\nimport TrainerSetUpProfile from \"component/TrainerOnBoard/TrainerCaptures/TrainerSetUpProfile\";\r\n\r\nconst TrainerSetupSection = () => {\r\n  return (\r\n    <div>\r\n      <TrainerSetUpProfile />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TrainerSetupSection;\r\n"],"sourceRoot":""}
-=======
-{"version":3,"sources":["pages/Trainer/Setup/index.js"],"names":["TrainerSetupSection"],"mappings":"iGAAA,gCAWeA,UARa,WAC1B,OACE,8BACE,cAAC,UAAD","file":"static/js/86.b1ac1bd7.chunk.js","sourcesContent":["import React from \"react\";\nimport TrainerSetUpProfile from \"component/TrainerOnBoard/TrainerCaptures/TrainerSetUpProfile\";\n\nconst TrainerSetupSection = () => {\n  return (\n    <div>\n      <TrainerSetUpProfile />\n    </div>\n  );\n};\n\nexport default TrainerSetupSection;\n"],"sourceRoot":""}
->>>>>>> c5aef0b47d9e5fc119d50b313574fbc645a25dc4

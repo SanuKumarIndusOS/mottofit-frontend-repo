@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 {"version":3,"sources":["pages/User/TrainWithFriend/TrainWithFriend.js"],"names":["TrainWithFriend"],"mappings":"kGAAA,gCAUeA,UARS,WACpB,OACI,8BACI,cAAC,UAAD","file":"static/js/141.dd9ca8a2.chunk.js","sourcesContent":["import React from \"react\";\r\nimport TrainWithFriends from \"component/TrainWithFriends/index\";\r\nconst TrainWithFriend = () => {\r\n    return (\r\n        <div>\r\n            <TrainWithFriends />\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default TrainWithFriend;\r\n"],"sourceRoot":""}
-=======
-{"version":3,"sources":["pages/User/TrainWithFriend/TrainWithFriend.js"],"names":["TrainWithFriend"],"mappings":"kGAAA,gCAUeA,UARS,WACpB,OACI,8BACI,cAAC,UAAD","file":"static/js/141.dd9ca8a2.chunk.js","sourcesContent":["import React from \"react\";\nimport TrainWithFriends from \"component/TrainWithFriends/index\";\nconst TrainWithFriend = () => {\n    return (\n        <div>\n            <TrainWithFriends />\n        </div>\n    );\n};\n\nexport default TrainWithFriend;\n"],"sourceRoot":""}
->>>>>>> c5aef0b47d9e5fc119d50b313574fbc645a25dc4

@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[242],{344:function(t,s,a){"use strict";a.r(s),s.default=a.p+"static/media/Strength_HIIT_Inactive.fcfa8f40.svg"}}]);
-//# sourceMappingURL=242.c0bdc67c.chunk.js.map

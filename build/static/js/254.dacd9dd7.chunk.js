@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[254],{401:function(t,s,e){"use strict";e.r(s),s.default=e.p+"static/media/between.11359334.svg"}}]);
-//# sourceMappingURL=254.dacd9dd7.chunk.js.map
