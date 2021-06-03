@@ -592,10 +592,10 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                         </h6>
                                         <div className="inputs_experience">
                                             <textarea
-                                                maxlength="150"
+                                                
                                                 type="text"
                                                 name="comment"
-                                                placeholder="Tell us all about it in not more than 150 words"
+                                                placeholder="Tell us all about it."
                                                 value={
                                                     trainerbackgroundData.interestInMotto
                                                 }
@@ -618,8 +618,8 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                             <textarea
                                                 type="text"
                                                 name="comment"
-                                                maxlength="150"
-                                                placeholder="Tell us all about it in not more than 150 words"
+                                               
+                                                placeholder="Tell us all about it."
                                                 value={
                                                     trainerbackgroundData.clientAssessment
                                                 }
@@ -642,8 +642,8 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                             <textarea
                                                 type="text"
                                                 name="comment"
-                                                maxlength="150"
-                                                placeholder="Tell us all about it in not more than 150 words"
+                                                
+                                                placeholder="Tell us all about it."
                                                 value={
                                                     trainerbackgroundData.trainingProcess
                                                 }

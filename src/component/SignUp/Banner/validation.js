@@ -57,10 +57,10 @@ const validation = (values) => {
 
     if (!values.password) {
         errors.password = "This field is required";
-    } else if (values.password.length < 6) {
-        errors.password = " Password should be more then 6 Charcters";
-    } else if (values.password.length > 8) {
-        errors.password = " This field exceed max length";
+    } else if (values.password.length <= 8) {
+        errors.password = " Password should be more then 8 Charcters";
+    } else if (values.password.length > 12) {
+        errors.password = " Password should not be more then 12 Charcters";
     } else if (
         !/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/.test(
             values.password
@@ -72,10 +72,10 @@ const validation = (values) => {
 
     if (!values.cpassword) {
         errors.cpassword = "This field is required";
-    } else if (values.cpassword.length < 6) {
-        errors.cpassword = " Password should be more then 6 Charcters";
-    } else if (values.cpassword.length > 8) {
-        errors.cpassword = " This field exceed max length";
+    } else if (values.cpassword.length <= 8) {
+        errors.cpassword = " Password should be more then 8 Charcters";
+    } else if (values.cpassword.length > 12) {
+        errors.cpassword = "Password should not be more then 12 Charcters ";
     } else if (
         !/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/.test(
             values.cpassword

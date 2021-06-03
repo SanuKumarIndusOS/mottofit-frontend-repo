@@ -134,7 +134,7 @@ const TrainerCardFC = ({
         let storeData = {
             details: { ...trainerData },
         };
-        if (!trainerData.individualCharge) {
+        if (!trainerData.individualCharge && !trainerData.individualChargeTl) {
             setError(true);
             // alert("Please enter Individual Charge (atleast one)");
         } else {
@@ -290,56 +290,56 @@ const TrainerCardFC = ({
                               retrievedObject.threeSessionRateVt,
                       });
 
-                var trainerCheckedValues = JSON.parse(
-                    localStorage.getItem("trainerCheckedVal")
-                );
-                let trainercheckedValues = trainerCheckedValues.areaOfExpertise;
-                console.log(trainercheckedValues);
+                // var trainerCheckedValues = JSON.parse(
+                //     localStorage.getItem("trainerCheckedVal")
+                // );
+                // let trainercheckedValues = trainerCheckedValues.areaOfExpertise;
+                // console.log(trainercheckedValues);
 
-                if (trainercheckedValues.indexOf("Strength & HIIT") >= 0) {
-                    setCheckedHIIT(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Strength & HIIT",
-                        ],
-                    });
-                }
+                // if (trainercheckedValues.indexOf("Strength & HIIT") >= 0) {
+                //     setCheckedHIIT(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Strength & HIIT",
+                //         ],
+                //     });
+                // }
 
-                if (trainercheckedValues.indexOf("Pilates") >= 0) {
-                    setCheckedPilates(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Pilates",
-                        ],
-                    });
-                }
+                // if (trainercheckedValues.indexOf("Pilates") >= 0) {
+                //     setCheckedPilates(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Pilates",
+                //         ],
+                //     });
+                // }
 
-                if (trainercheckedValues.indexOf("Boxing") >= 0) {
-                    setCheckedBoxing(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Boxing",
-                        ],
-                    });
-                }
+                // if (trainercheckedValues.indexOf("Boxing") >= 0) {
+                //     setCheckedBoxing(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Boxing",
+                //         ],
+                //     });
+                // }
 
-                if (trainercheckedValues.indexOf("Yoga") >= 0) {
-                    setCheckedYoga(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Yoga",
-                        ],
-                    });
-                }
-                console.log(trainerbackgroundData);
+                // if (trainercheckedValues.indexOf("Yoga") >= 0) {
+                //     setCheckedYoga(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Yoga",
+                //         ],
+                //     });
+                // }
+                // console.log(trainerbackgroundData);
             }
         });
     }, []);

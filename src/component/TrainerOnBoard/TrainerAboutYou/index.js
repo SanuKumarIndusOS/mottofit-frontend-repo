@@ -43,11 +43,11 @@ const locations = [
 const gender = [
     {
         label: "Male",
-        value: "male",
+        value: "Male",
     },
     {
         label: "Female",
-        value: "female",
+        value: "Female",
     },
 ];
 const AboutTrainerFC = ({
@@ -78,6 +78,8 @@ const AboutTrainerFC = ({
     const [error, setError] = useState({});
 
     const handleTrainerBackground = () => {
+        // const dataLocal = localStorage.getItem("dob");
+        // console.log("dataLocal", dataLocal);
         const storeData = {
             details: {
                 ...details,

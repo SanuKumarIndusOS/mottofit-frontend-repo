@@ -3,15 +3,15 @@ const validation = (values) => {
 
     if (!values.password) {
         errors.password = " This input is required";
-    } else if (values.password.length < 6) {
-        errors.password = " Password should be more then 6 Charcters";
+    } else if (values.password.length < 8) {
+        errors.password = " Password should be more then 8 Charcters";
     } else if (
-        !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{3,}$/.test(values.password)
+        !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/.test(values.password)
     ) {
         errors.password =
             " Password should contain atleast one one captial letter, number and special character";
-    } else if (values.password.length > 8) {
-        errors.password = "This field exceed max length";
+    } else if (values.password.length > 13) {
+        errors.password = "Password should not be more then 13 Charcters";
     }
 
     if (!values.email) {
