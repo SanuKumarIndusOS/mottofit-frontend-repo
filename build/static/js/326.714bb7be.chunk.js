@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[326],{337:function(t,s,e){"use strict";e.r(s),s.default=e.p+"static/media/Rectangle.33226144.svg"}}]);
+//# sourceMappingURL=326.714bb7be.chunk.js.map

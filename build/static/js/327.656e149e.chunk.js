@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[327],{562:function(t,s,c){"use strict";c.r(s),s.default=c.p+"static/media/Card Icon.cb28abdc.svg"}}]);
+//# sourceMappingURL=327.656e149e.chunk.js.map
