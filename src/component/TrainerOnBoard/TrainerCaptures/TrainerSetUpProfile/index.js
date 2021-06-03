@@ -447,6 +447,12 @@ const TrainerSetUpProfileFC = ({
         instaHandle: storeTrainerData.instagramProfile,
         virtualMeetingLink: storeTrainerData.virtualMeetingLink,
         location: storeTrainerData.location,
+        identityNameUS:storeTrainerData.identityInfromation["identityName"],
+        governmentIdNumber:storeTrainerData.identityInfromation["identityNumber"],
+        insuranceNameUS:storeTrainerData.insuranceInformation["insuranceName"],
+        coverAmount:storeTrainerData.insuranceInformation["insuranceAmount"],
+        governmentId:storeTrainerData.identityInfromation["identity"],
+        insurance:storeTrainerData.insuranceInformation["insurance"],
 
       })
       //images , certificates are left
