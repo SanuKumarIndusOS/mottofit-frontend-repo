@@ -134,7 +134,7 @@ const TrainerCardFC = ({
         let storeData = {
             details: { ...trainerData },
         };
-        if (!trainerData.individualCharge && !trainerData.individualChargeTl) {
+        if (!trainerData.individualCharge) {
             setError(true);
             // alert("Please enter Individual Charge (atleast one)");
         } else {
@@ -253,93 +253,123 @@ const TrainerCardFC = ({
                           firstName: storeData.details.firstName,
                           lastName: storeData.details.lastName,
                           description: retrievedObject.description,
-                          classFlatRate: retrievedObject.classFlatRate,
-                          classFlatRateTl: retrievedObject.classFlatRateTl,
-                          classFlatRateVt: retrievedObject.classFlatRateVt,
+                          classFlatRate: `${
+                              retrievedObject.classFlatRate || "NA"
+                          }`,
+                          classFlatRateTl: `${
+                              retrievedObject.classFlatRateTl || "NA"
+                          }`,
+                          classFlatRateVt: `${
+                              retrievedObject.classFlatRateVt || "NA"
+                          }`,
 
-                          individualCharge: retrievedObject.individualCharge,
-                          individualChargeTl:
-                              retrievedObject.individualChargeTl,
-                          individualChargeVt:
-                              retrievedObject.individualChargeVt,
+                          individualCharge: `${
+                              retrievedObject.individualCharge || "NA"
+                          }`,
+                          individualChargeTl: `${
+                              retrievedObject.individualChargeTl || "NA"
+                          }`,
+                          individualChargeVt: `${
+                              retrievedObject.individualChargeVt || "NA"
+                          }`,
 
-                          ssFourPeopleCharge:
-                              retrievedObject.ssFourPeopleCharge,
-                          ssFourPeopleChargeTl:
-                              retrievedObject.ssFourPeopleChargeTl,
-                          ssFourPeopleChargeVt:
-                              retrievedObject.ssFourPeopleChargeVt,
-                          ssThreePeopleCharge:
-                              retrievedObject.ssThreePeopleCharge,
-                          ssThreePeopleChargeTl:
-                              retrievedObject.ssThreePeopleChargeTl,
-                          ssThreePeopleChargeVt:
-                              retrievedObject.ssThreePeopleChargeVt,
-                          ssTwoPeopleCharge: retrievedObject.ssTwoPeopleCharge,
-                          ssTwoPeopleChargeTl:
-                              retrievedObject.ssTwoPeopleChargeTl,
-                          ssTwoPeopleChargeVt:
-                              retrievedObject.ssTwoPeopleChargeVt,
-                          tenSessionRate: retrievedObject.tenSessionRate,
-                          tenSessionRateTl: retrievedObject.tenSessionRateTl,
-                          tenSessionRateVt: retrievedObject.tenSessionRateVt,
-                          threeSessionRate: retrievedObject.threeSessionRate,
-                          threeSessionRateTl:
-                              retrievedObject.threeSessionRateTl,
-                          threeSessionRateVt:
-                              retrievedObject.threeSessionRateVt,
+                          ssFourPeopleCharge: `${
+                              retrievedObject.ssFourPeopleCharge || "NA"
+                          }`,
+                          ssFourPeopleChargeTl: `${
+                              retrievedObject.ssFourPeopleChargeTl || "NA"
+                          }`,
+                          ssFourPeopleChargeVt: `${
+                              retrievedObject.ssFourPeopleChargeVt || "NA"
+                          }`,
+                          ssThreePeopleCharge: `${
+                              retrievedObject.ssThreePeopleCharge || "NA"
+                          }`,
+                          ssThreePeopleChargeTl: `${
+                              retrievedObject.ssThreePeopleChargeTl || "NA"
+                          }`,
+                          ssThreePeopleChargeVt: `${
+                              retrievedObject.ssThreePeopleChargeVt || "NA"
+                          }`,
+                          ssTwoPeopleCharge: `${
+                              retrievedObject.ssTwoPeopleCharge || "NA"
+                          }`,
+                          ssTwoPeopleChargeTl: `${
+                              retrievedObject.ssTwoPeopleChargeTl || "NA"
+                          }`,
+                          ssTwoPeopleChargeVt: `${
+                              retrievedObject.ssTwoPeopleChargeVt || "NA"
+                          }`,
+                          tenSessionRate: `${
+                              retrievedObject.tenSessionRate || "NA"
+                          }`,
+                          tenSessionRateTl: `${
+                              retrievedObject.tenSessionRateTl || "NA"
+                          }`,
+                          tenSessionRateVt: `${
+                              retrievedObject.tenSessionRateVt || "NA"
+                          }`,
+                          threeSessionRate: `${
+                              retrievedObject.threeSessionRate || "NA"
+                          }`,
+                          threeSessionRateTl: `${
+                              retrievedObject.threeSessionRateTl || "NA"
+                          }`,
+                          threeSessionRateVt: `${
+                              retrievedObject.threeSessionRateVt || "NA"
+                          }`,
                       });
 
-                // var trainerCheckedValues = JSON.parse(
-                //     localStorage.getItem("trainerCheckedVal")
-                // );
-                // let trainercheckedValues = trainerCheckedValues.areaOfExpertise;
-                // console.log(trainercheckedValues);
+                var trainerCheckedValues = JSON.parse(
+                    localStorage.getItem("trainerCheckedVal")
+                );
+                let trainercheckedValues = trainerCheckedValues.areaOfExpertise;
+                console.log(trainercheckedValues);
 
-                // if (trainercheckedValues.indexOf("Strength & HIIT") >= 0) {
-                //     setCheckedHIIT(true);
-                //     setTrainerbackgroundData({
-                //         ...trainerbackgroundData,
-                //         areaOfExpertise: [
-                //             ...trainerbackgroundData.areaOfExpertise,
-                //             "Strength & HIIT",
-                //         ],
-                //     });
-                // }
+                if (trainercheckedValues.indexOf("Strength & HIIT") >= 0) {
+                    setCheckedHIIT(true);
+                    setTrainerbackgroundData({
+                        ...trainerbackgroundData,
+                        areaOfExpertise: [
+                            ...trainerbackgroundData.areaOfExpertise,
+                            "Strength & HIIT",
+                        ],
+                    });
+                }
 
-                // if (trainercheckedValues.indexOf("Pilates") >= 0) {
-                //     setCheckedPilates(true);
-                //     setTrainerbackgroundData({
-                //         ...trainerbackgroundData,
-                //         areaOfExpertise: [
-                //             ...trainerbackgroundData.areaOfExpertise,
-                //             "Pilates",
-                //         ],
-                //     });
-                // }
+                if (trainercheckedValues.indexOf("Pilates") >= 0) {
+                    setCheckedPilates(true);
+                    setTrainerbackgroundData({
+                        ...trainerbackgroundData,
+                        areaOfExpertise: [
+                            ...trainerbackgroundData.areaOfExpertise,
+                            "Pilates",
+                        ],
+                    });
+                }
 
-                // if (trainercheckedValues.indexOf("Boxing") >= 0) {
-                //     setCheckedBoxing(true);
-                //     setTrainerbackgroundData({
-                //         ...trainerbackgroundData,
-                //         areaOfExpertise: [
-                //             ...trainerbackgroundData.areaOfExpertise,
-                //             "Boxing",
-                //         ],
-                //     });
-                // }
+                if (trainercheckedValues.indexOf("Boxing") >= 0) {
+                    setCheckedBoxing(true);
+                    setTrainerbackgroundData({
+                        ...trainerbackgroundData,
+                        areaOfExpertise: [
+                            ...trainerbackgroundData.areaOfExpertise,
+                            "Boxing",
+                        ],
+                    });
+                }
 
-                // if (trainercheckedValues.indexOf("Yoga") >= 0) {
-                //     setCheckedYoga(true);
-                //     setTrainerbackgroundData({
-                //         ...trainerbackgroundData,
-                //         areaOfExpertise: [
-                //             ...trainerbackgroundData.areaOfExpertise,
-                //             "Yoga",
-                //         ],
-                //     });
-                // }
-                // console.log(trainerbackgroundData);
+                if (trainercheckedValues.indexOf("Yoga") >= 0) {
+                    setCheckedYoga(true);
+                    setTrainerbackgroundData({
+                        ...trainerbackgroundData,
+                        areaOfExpertise: [
+                            ...trainerbackgroundData.areaOfExpertise,
+                            "Yoga",
+                        ],
+                    });
+                }
+                console.log(trainerbackgroundData);
             }
         });
     }, []);
