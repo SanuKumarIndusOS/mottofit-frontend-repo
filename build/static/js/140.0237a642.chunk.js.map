@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"version":3,"sources":["pages/TrainerDashboard/Settings/CardTrainer.js"],"names":["CardTrainer"],"mappings":"kGAAA,gCAUeA,UARK,WAChB,OACI,8BACI,cAAC,UAAD","file":"static/js/140.0237a642.chunk.js","sourcesContent":["import React from \"react\";\r\nimport TrainerCardDashboard from \"component/TrainerDashBoard/DashboardCompontents/TrainerCard\";\r\nconst CardTrainer = () => {\r\n    return (\r\n        <div>\r\n            <TrainerCardDashboard />\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default CardTrainer;\r\n"],"sourceRoot":""}
+=======
+{"version":3,"sources":["pages/TrainerDashboard/Settings/CardTrainer.js"],"names":["CardTrainer"],"mappings":"kGAAA,gCAUeA,UARK,WAChB,OACI,8BACI,cAAC,UAAD","file":"static/js/140.0237a642.chunk.js","sourcesContent":["import React from \"react\";\nimport TrainerCardDashboard from \"component/TrainerDashBoard/DashboardCompontents/TrainerCard\";\nconst CardTrainer = () => {\n    return (\n        <div>\n            <TrainerCardDashboard />\n        </div>\n    );\n};\n\nexport default CardTrainer;\n"],"sourceRoot":""}
+>>>>>>> c5aef0b47d9e5fc119d50b313574fbc645a25dc4
