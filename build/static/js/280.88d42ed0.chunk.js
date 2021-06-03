@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[280],{335:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Left Button.0b9d3a76.svg"}}]);
+//# sourceMappingURL=280.88d42ed0.chunk.js.map
