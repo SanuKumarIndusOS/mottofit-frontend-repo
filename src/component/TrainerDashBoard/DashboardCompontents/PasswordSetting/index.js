@@ -3,6 +3,7 @@ import "./styles.scss";
 import { COMMON_URL } from "helpers/baseURL";
 import { history } from "helpers";
 import Password from "../../../../assets/files/SignUp/Password Icon.svg";
+import ArrowHoverBlacked from "component/common/BlackCircleButton/ArrowHoverBlacked";
 
 const PasswordSetting = () => {
     // Password show or hide
@@ -123,7 +124,9 @@ const PasswordSetting = () => {
                                     style={{ cursor: "pointer" }}
                                 />
                             </div>
-                            <button type="submit">Submit</button>
+                            <button type="submit">
+                                Submit <ArrowHoverBlacked />
+                            </button>
                         </form>
                     </div>
                 </div>
