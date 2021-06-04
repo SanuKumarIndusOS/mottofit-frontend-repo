@@ -12,21 +12,28 @@
     .password_form {
         width: 40%;
         form {
-            input {
-                margin: 0.5em 0.2em;
-                border: 1px solid #bcbcbc;
-                font-family: "Montserrat", sans-serif;
-                font-size: 20px;
-                font-weight: 500;
-                height: 45px;
-                border-radius: 50px;
-                width: 100%;
-                padding: 0.5em 1em;
-                &::placeholder {
-                    font-size: 18px;
-                    color: #bcbcbc;
+            .newPassword {
+                display: flex;
+                input {
+                    margin: 0.5em 0.2em;
+                    border: 1px solid #bcbcbc;
                     font-family: "Montserrat", sans-serif;
+                    font-size: 20px;
                     font-weight: 500;
+                    height: 45px;
+                    border-radius: 50px;
+                    width: 100%;
+                    padding: 0.5em 1em;
+                    &::placeholder {
+                        font-size: 18px;
+                        color: #bcbcbc;
+                        font-family: "Montserrat", sans-serif;
+                        font-weight: 500;
+                    }
+                }
+                img {
+                    position: relative;
+                    right: 50px;
                 }
             }
             button {
