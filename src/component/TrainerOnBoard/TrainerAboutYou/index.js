@@ -75,9 +75,12 @@ const AboutTrainerFC = ({
         instagram: "",
         firstName: "",
     });
-    const [error, setError] = useState({});
 
     const handleTrainerBackground = () => {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         const storeData = {
             details: {
                 ...details,
@@ -92,8 +95,15 @@ const AboutTrainerFC = ({
             },
         };
 
-        history.push(`/trainer/background`);
-        updateTrainerDetails(storeData);
+        localStorage.setItem('aboutTrainerDetails', JSON.stringify(aboutTrainerData));
+        if (moment().diff(aboutTrainerData.dob, "years", false) <= 21 || aboutTrainerData.phone.length < 11) {
+            alert('Please fill in required data')
+        }
+        else {
+            history.push(`/trainer/background`);
+            updateTrainerDetails(storeData);
+        }
+
     };
 
     //localStorage
@@ -111,51 +121,57 @@ const AboutTrainerFC = ({
     // }, []);
 
     useEffect(() => {
-        if (Object.keys(details).length > 3) {
-            let tempData = {
-                location: details.location,
-                dob: details.dob,
-                email: details.email,
-                gender: details.gender,
-                phone: details.phone,
-                websiteURL: details.websiteLink,
-                instagram: details.instaHandle,
-                firstName: details.firstName,
-            };
-            setAboutTrainerData(tempData);
-        }
 
+        let newtrainerObj = JSON.parse(localStorage.getItem('aboutTrainerDetails'));
+        console.log(newtrainerObj);
+
+        console.log(aboutTrainerData);
         trainerDetail().then((data) => {
             console.log(data, "datadata");
             setAboutTrainerData({
                 ...aboutTrainerData,
-                phone: data["phoneNumber"],
+                phone: `${newtrainerObj.phone || ''}`,
                 email: data["email"],
                 firstName: data["firstName"] + " " + data["lastName"],
+                location: `${newtrainerObj.location || ''}`,
+                dob: `${newtrainerObj.dob || ''}`,
+                gender: `${newtrainerObj.gender || ''}`,
+                websiteURL: `${newtrainerObj.websiteURL || ''}`,
+                instagram: `${newtrainerObj.instagram || ''}`,
             });
         });
+<<<<<<< Updated upstream
         const json = localStorage.getItem("aboutTrainerData");
         const getLocalData = JSON.parse(json);
         if (getLocalData) {
             setAboutTrainerData(getLocalData);
+=======
+
+        if (newtrainerObj.gender !== "") {
+            genderDropdownRef.current.selectSingleItem({ value: newtrainerObj.gender });
+        }
+
+        if (newtrainerObj.location !== "") {
+            locationDropdownRef.current.selectSingleItem({ value: newtrainerObj.location });
+>>>>>>> Stashed changes
         }
     }, []);
+
+    const genderDropdownRef = React.useRef();
+    const locationDropdownRef = React.useRef();
+
+    console.log(locationDropdownRef);
 
     return (
         <>
             <div className="container main">
                 <div className="wrapper_about">
                     <h2>Tell us a little bit about you</h2>
-                    {/* <p>
-                        *Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem ipsum has been the. *All
-                        these fields are mandatory.{" "}
-                    </p> */}
                     <br></br>
                     <div className="outter_form">
                         <form
                             className="wrapper_inputs"
-                            // onSubmit={handleFormSubmit}
+                        // onSubmit={handleFormSubmit}
                         >
                             <div className="wrapper_innerInput">
                                 <label>Name*</label>
@@ -163,6 +179,9 @@ const AboutTrainerFC = ({
                                     placeholder="Name"
                                     type="name"
                                     name="name"
+                                    ref={register({
+                                        required: true,
+                                    })}
                                     style={{ textTransform: "capitalize" }}
                                     onChange={(e) =>
                                         setAboutTrainerData({
@@ -173,8 +192,8 @@ const AboutTrainerFC = ({
                                     value={aboutTrainerData.firstName}
                                     name="firstName"
                                 />
-                                {error.firstName && (
-                                    <span>{error.firstName}</span>
+                                {errors.firstName && (
+                                    <span>{'required'}</span>
                                 )}
                             </div>
 
@@ -183,9 +202,10 @@ const AboutTrainerFC = ({
                                 <div className="iconwrapper">
                                     <Dropdown
                                         className="custom_dropdown"
-                                        title="Select Location"
+                                        ref={locationDropdownRef}
+                                        title="Select Your City"
                                         list={locations}
-                                        value={aboutTrainerData.location}
+                                        value={locationDropdownRef.current ? locationDropdownRef.current.state.selectedItem : ''}
                                         onChange={(e) => {
                                             setAboutTrainerData({
                                                 ...aboutTrainerData,
@@ -195,13 +215,23 @@ const AboutTrainerFC = ({
                                         name="location"
                                     />
                                 </div>
+                                {
+                                    (locationDropdownRef.current !== undefined &&
+                                        locationDropdownRef.current.state.selectedItem === null) ?
+                                        <span>required field</span> : null
+                                }
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
 
                                 <input
+<<<<<<< Updated upstream
                                     placeholder="DD/MM/YYYY"
+=======
+>>>>>>> Stashed changes
                                     type="date"
+                                    onFocus={(e) => (e.currentTarget.type = "date")}
+                                    placeholder="MM/DD/YYYY"
                                     value={aboutTrainerData.dob}
                                     onChange={(e) =>
                                         setAboutTrainerData({
@@ -231,13 +261,15 @@ const AboutTrainerFC = ({
                                     )}
                             </div>
                             <div className="wrapper_innerInput">
-                                <label>Gender*</label>
+                                <label>Select Your Gender*</label>
                                 <div className="iconwrapper">
                                     <Dropdown
                                         className="custom_dropdown"
                                         title="Select Gender"
+                                        ref={genderDropdownRef}
+
                                         list={gender}
-                                        value={aboutTrainerData.gender}
+                                        value={genderDropdownRef.current ? genderDropdownRef.current.state.selectedItem : ''}
                                         onChange={(e) => {
                                             setAboutTrainerData({
                                                 ...aboutTrainerData,
@@ -245,14 +277,25 @@ const AboutTrainerFC = ({
                                             });
                                         }}
                                         name="gender"
+
                                     />
+
                                 </div>
+
+                                {
+                                    (genderDropdownRef.current !== undefined &&
+                                        genderDropdownRef.current.state.selectedItem === null) ?
+                                        <span>required field</span> : null
+                                }
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Email*</label>
                                 <input
                                     placeholder="Email"
                                     type="email"
+                                    ref={register({
+                                        required: true,
+                                    })}
                                     value={aboutTrainerData.email}
                                     onChange={(e) =>
                                         setAboutTrainerData({
@@ -261,6 +304,7 @@ const AboutTrainerFC = ({
                                         })
                                     }
                                     name="email"
+
                                 />
                             </div>
                             <div className="wrapper_innerInput">
@@ -299,7 +343,7 @@ const AboutTrainerFC = ({
                                 <label>Website</label>
                                 <div className="iconwrapper">
                                     <input
-                                        placeholder="Add your website"
+                                        placeholder="Add your weblink"
                                         type="text"
                                         value={aboutTrainerData.websiteURL}
                                         onChange={(e) =>
