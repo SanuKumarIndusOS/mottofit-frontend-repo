@@ -112,32 +112,47 @@ const AboutTrainerFC = ({
         );
         console.log(newtrainerObj);
 
-        console.log(aboutTrainerData);
-        trainerDetail().then((data) => {
-            console.log(data, "datadata");
-            setAboutTrainerData({
-                ...aboutTrainerData,
-                phone: `${newtrainerObj.phone || ""}`,
-                email: data["email"],
-                firstName: data["firstName"] + " " + data["lastName"],
-                location: `${newtrainerObj.location || ""}`,
-                dob: `${newtrainerObj.dob || ""}`,
-                gender: `${newtrainerObj.gender || ""}`,
-                websiteURL: `${newtrainerObj.websiteURL || ""}`,
-                instagram: `${newtrainerObj.instagram || ""}`,
+        if (newtrainerObj) {
+            trainerDetail().then((data) => {
+                console.log(data, "datadata");
+                setAboutTrainerData({
+                    ...aboutTrainerData,
+                    phone: `${newtrainerObj.phone || ""}`,
+                    email: data["email"],
+                    firstName: data["firstName"] + " " + data["lastName"],
+                    location: `${newtrainerObj.location || ""}`,
+                    dob: `${newtrainerObj.dob || ""}`,
+                    gender: `${newtrainerObj.gender || ""}`,
+                    websiteURL: `${newtrainerObj.websiteURL || ""}`,
+                    instagram: `${newtrainerObj.instagram || ""}`,
+                });
             });
-        });
-        if (newtrainerObj.gender !== "") {
-            genderDropdownRef.current.selectSingleItem({
-                value: newtrainerObj.gender,
-            });
+            if (newtrainerObj.gender !== "") {
+                genderDropdownRef.current.selectSingleItem({
+                    value: newtrainerObj.gender,
+                });
+            }
+
+            if (newtrainerObj.location !== "") {
+                locationDropdownRef.current.selectSingleItem({
+                    value: newtrainerObj.location,
+                });
+            }
         }
 
-        if (newtrainerObj.location !== "") {
-            locationDropdownRef.current.selectSingleItem({
-                value: newtrainerObj.location,
-            });
+        else {
+            trainerDetail().then((data) => {
+                setAboutTrainerData({
+                    ...aboutTrainerData,
+                    email: data["email"],
+                    firstName: data["firstName"] + " " + data["lastName"],
+                    phone: data["phoneNumber"],
+                })
+            })
         }
+
+        if(newtrainerObj)
+        localStorage.removeItem("aboutTrainerDetails");
     }, []);
 
     const genderDropdownRef = React.useRef();
@@ -154,7 +169,7 @@ const AboutTrainerFC = ({
                     <div className="outter_form">
                         <form
                             className="wrapper_inputs"
-                            // onSubmit={handleFormSubmit}
+                        // onSubmit={handleFormSubmit}
                         >
                             <div className="wrapper_innerInput">
                                 <label>Name*</label>
@@ -189,7 +204,7 @@ const AboutTrainerFC = ({
                                         value={
                                             locationDropdownRef.current
                                                 ? locationDropdownRef.current
-                                                      .state.selectedItem
+                                                    .state.selectedItem
                                                 : ""
                                         }
                                         onChange={(e) => {
@@ -202,8 +217,8 @@ const AboutTrainerFC = ({
                                     />
                                 </div>
                                 {locationDropdownRef.current !== undefined &&
-                                locationDropdownRef.current.state
-                                    .selectedItem === null ? (
+                                    locationDropdownRef.current.state
+                                        .selectedItem === null ? (
                                     <span>required field</span>
                                 ) : null}
                             </div>
@@ -256,7 +271,7 @@ const AboutTrainerFC = ({
                                         value={
                                             genderDropdownRef.current
                                                 ? genderDropdownRef.current
-                                                      .state.selectedItem
+                                                    .state.selectedItem
                                                 : ""
                                         }
                                         onChange={(e) => {
@@ -270,7 +285,7 @@ const AboutTrainerFC = ({
                                 </div>
 
                                 {genderDropdownRef.current !== undefined &&
-                                genderDropdownRef.current.state.selectedItem ===
+                                    genderDropdownRef.current.state.selectedItem ===
                                     null ? (
                                     <span>required field</span>
                                 ) : null}
