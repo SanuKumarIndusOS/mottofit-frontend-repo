@@ -78,8 +78,6 @@ const AboutTrainerFC = ({
     const [error, setError] = useState({});
 
     const handleTrainerBackground = () => {
-        // const dataLocal = localStorage.getItem("dob");
-        // console.log("dataLocal", dataLocal);
         const storeData = {
             details: {
                 ...details,
@@ -97,6 +95,20 @@ const AboutTrainerFC = ({
         history.push(`/trainer/background`);
         updateTrainerDetails(storeData);
     };
+
+    //localStorage
+    useEffect(() => {
+        const json = JSON.stringify(aboutTrainerData);
+        localStorage.setItem("aboutTrainerData", json);
+    }, [aboutTrainerData]);
+
+    // useEffect(() => {
+    //     const json = localStorage.getItem("aboutTrainerData");
+    //     const getLocalData = JSON.parse(json);
+    //     if (getLocalData) {
+    //         setAboutTrainerData(getLocalData);
+    //     }
+    // }, []);
 
     useEffect(() => {
         if (Object.keys(details).length > 3) {
@@ -122,6 +134,11 @@ const AboutTrainerFC = ({
                 firstName: data["firstName"] + " " + data["lastName"],
             });
         });
+        const json = localStorage.getItem("aboutTrainerData");
+        const getLocalData = JSON.parse(json);
+        if (getLocalData) {
+            setAboutTrainerData(getLocalData);
+        }
     }, []);
 
     return (
@@ -183,7 +200,7 @@ const AboutTrainerFC = ({
                                 <label>Date of Birth*</label>
 
                                 <input
-                                    placeholder="MM/DD/YYYY"
+                                    placeholder="DD/MM/YYYY"
                                     type="date"
                                     value={aboutTrainerData.dob}
                                     onChange={(e) =>

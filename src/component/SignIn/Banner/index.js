@@ -157,7 +157,7 @@ const SignInFC = ({
                                             </div>
                                             <div className="forgotpass_right">
                                                 <Link
-                                                    to="/"
+                                                    to="/forgot"
                                                     className="forgotpass"
                                                 >
                                                     Forgot Password?

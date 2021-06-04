@@ -21,6 +21,7 @@ import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import "./trainer.sass";
 import { useForm } from "react-hook-form";
 import { fileUpload } from "action/trainerAct";
+import TrainerCardNew from "./TrainerCardNew";
 const CyanRadio = withStyles({
     root: {
         "&$checked": {
@@ -320,56 +321,56 @@ const TrainerCardFC = ({
                           }`,
                       });
 
-                var trainerCheckedValues = JSON.parse(
-                    localStorage.getItem("trainerCheckedVal")
-                );
-                let trainercheckedValues = trainerCheckedValues.areaOfExpertise;
-                console.log(trainercheckedValues);
+                // var trainerCheckedValues = JSON.parse(
+                //     localStorage.getItem("trainerCheckedVal")
+                // );
+                // let trainercheckedValues = trainerCheckedValues.areaOfExpertise;
+                // console.log(trainercheckedValues);
 
-                if (trainercheckedValues.indexOf("Strength & HIIT") >= 0) {
-                    setCheckedHIIT(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Strength & HIIT",
-                        ],
-                    });
-                }
+                // if (trainercheckedValues.indexOf("Strength & HIIT") >= 0) {
+                //     setCheckedHIIT(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Strength & HIIT",
+                //         ],
+                //     });
+                // }
 
-                if (trainercheckedValues.indexOf("Pilates") >= 0) {
-                    setCheckedPilates(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Pilates",
-                        ],
-                    });
-                }
+                // if (trainercheckedValues.indexOf("Pilates") >= 0) {
+                //     setCheckedPilates(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Pilates",
+                //         ],
+                //     });
+                // }
 
-                if (trainercheckedValues.indexOf("Boxing") >= 0) {
-                    setCheckedBoxing(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Boxing",
-                        ],
-                    });
-                }
+                // if (trainercheckedValues.indexOf("Boxing") >= 0) {
+                //     setCheckedBoxing(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Boxing",
+                //         ],
+                //     });
+                // }
 
-                if (trainercheckedValues.indexOf("Yoga") >= 0) {
-                    setCheckedYoga(true);
-                    setTrainerbackgroundData({
-                        ...trainerbackgroundData,
-                        areaOfExpertise: [
-                            ...trainerbackgroundData.areaOfExpertise,
-                            "Yoga",
-                        ],
-                    });
-                }
-                console.log(trainerbackgroundData);
+                // if (trainercheckedValues.indexOf("Yoga") >= 0) {
+                //     setCheckedYoga(true);
+                //     setTrainerbackgroundData({
+                //         ...trainerbackgroundData,
+                //         areaOfExpertise: [
+                //             ...trainerbackgroundData.areaOfExpertise,
+                //             "Yoga",
+                //         ],
+                //     });
+                // }
+                // console.log(trainerbackgroundData);
             }
         });
     }, []);
@@ -1273,6 +1274,7 @@ const TrainerCardFC = ({
                     </div>
                 </div>
             </div>
+            <TrainerCardNew />
         </>
     );
 };
