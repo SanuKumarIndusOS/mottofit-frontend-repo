@@ -36,6 +36,13 @@ const routers = [
                 auth: false,
                 exact: true,
             },
+            {
+                path: "/success",
+                componentPath: "pages/ForgotPasswordPage/SuccessPage",
+                name: "SuccessBase",
+                auth: false,
+                exact: true,
+            },
         ],
     },
 

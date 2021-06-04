@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./styles.scss";
 import { COMMON_URL } from "helpers/baseURL";
+import { history } from "helpers";
 import ArrowHoverBlacked from "component/common/BlackCircleButton/ArrowHoverBlacked";
 const ForgotPassword = () => {
     const [forgotData, setForgotData] = useState({
         email: "",
     });
+    const [message, setMessage] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,8 +21,12 @@ const ForgotPassword = () => {
                 email: forgotData.email,
             }),
         })
-            .then((resp) => resp.json())
-            .then((res) => console.log(res))
+            .then((response) => {
+                if (response.ok) {
+                    history.push("/forgot/success");
+                }
+            })
+
             .catch((err) => console.log(err));
     };
 
@@ -39,6 +45,7 @@ const ForgotPassword = () => {
                         name="email"
                         onChange={onChangeValue}
                     />
+                    <span>{message}</span>
                     <button type="submit" className="forgot_submit">
                         Submit <ArrowHoverBlacked />
                     </button>
