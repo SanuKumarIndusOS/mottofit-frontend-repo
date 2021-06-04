@@ -8,7 +8,7 @@ import {
 export const updateTrainerDetails = (payload) => (dispatch) => {
     return new Promise((resolve) => {
         dispatch({ type: TrainerActionType.updateTrainerDetails, payload });
-
+        
         resolve(true);
     });
 };
@@ -64,6 +64,7 @@ export const trainerDetail =
 
             api({ ...trainerDetail })
                 .then(({ data }) => {
+                    console.log(data, "pdata");
                     resolve(data);
                 })
                 .catch((err) => {
