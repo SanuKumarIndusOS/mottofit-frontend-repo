@@ -2,10 +2,17 @@ import React, { useRef, useState, useEffect } from "react";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import { Modal } from "react-responsive-modal";
 
+import { useSelector, useDispatch } from "react-redux";
+
+
 export const TrainerPrevModal = ({ open, setOpen }) => {
     const [previewImage, setPreviewTmage] = useState();
     const myRef = useRef(null);
     const closeIconModal = <img src={CloseIcon} alt="close" />;
+
+    const TrainerCardPayload = useSelector(
+        (state) => state.trainerCaptureReducer.cardData
+      );
 
     return (
         <div>
@@ -48,7 +55,7 @@ export const TrainerPrevModal = ({ open, setOpen }) => {
                                             textTransform: "capitalize",
                                         }}
                                     >
-                                        hello
+                                        {TrainerCardPayload.firstName}
                                         {/* {trainerData.firstName}
                                     &nbsp;
                                     {trainerData.lastName} */}

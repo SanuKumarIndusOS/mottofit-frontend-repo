@@ -51,13 +51,15 @@ const TrainerCardFC = ({
             "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
     };
 
+    const [open, setOpen] = useState(false);
     const { register, errors, handleSubmit } = useForm();
     const [error, setError] = useState();
+    
     const [checkedBoxing, setCheckedBoxing] = React.useState(false);
-    const [open, setOpen] = useState(false);
     const [checkedHIIT, setCheckedHIIT] = React.useState(false);
     const [checkedYoga, setCheckedYoga] = React.useState(false);
     const [checkedPilates, setCheckedPilates] = React.useState(false);
+   
     const [trainerbackgroundData, setTrainerbackgroundData] = useState({
         areaOfExpertise: [],
     });
@@ -691,7 +693,7 @@ const TrainerCardFC = ({
                                                         console.log(
                                                             trainerbackgroundData.areaOfExpertise
                                                         );
-                                                    } else {
+                                                    } else {    
                                                         const index =
                                                             trainerbackgroundData.areaOfExpertise.indexOf(
                                                                 "Strength & HIIT"
