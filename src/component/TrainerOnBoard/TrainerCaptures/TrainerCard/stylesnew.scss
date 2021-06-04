@@ -61,7 +61,7 @@
             justify-content: space-between;
 
             input {
-                border: 1px solid #bcbcbc;
+                border: 1.5px solid #bcbcbc;
                 font-family: "Montserrat", sans-serif;
                 font-size: 20px;
                 font-weight: 500;
@@ -69,6 +69,12 @@
                 border-radius: 50px;
                 width: 90%;
                 padding: 0.5em 1em;
+                &::placeholder {
+                    font-size: 18px;
+                    color: #bcbcbc;
+                    font-family: "Montserrat", sans-serif;
+                    font-weight: 500;
+                }
             }
         }
     }
