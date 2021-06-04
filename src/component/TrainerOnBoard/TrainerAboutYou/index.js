@@ -77,10 +77,6 @@ const AboutTrainerFC = ({
     });
 
     const handleTrainerBackground = () => {
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         const storeData = {
             details: {
                 ...details,
@@ -105,21 +101,7 @@ const AboutTrainerFC = ({
         }
 
     };
-
-    //localStorage
-    useEffect(() => {
-        const json = JSON.stringify(aboutTrainerData);
-        localStorage.setItem("aboutTrainerData", json);
-    }, [aboutTrainerData]);
-
-    // useEffect(() => {
-    //     const json = localStorage.getItem("aboutTrainerData");
-    //     const getLocalData = JSON.parse(json);
-    //     if (getLocalData) {
-    //         setAboutTrainerData(getLocalData);
-    //     }
-    // }, []);
-
+    
     useEffect(() => {
 
         let newtrainerObj = JSON.parse(localStorage.getItem('aboutTrainerDetails'));
@@ -140,20 +122,13 @@ const AboutTrainerFC = ({
                 instagram: `${newtrainerObj.instagram || ''}`,
             });
         });
-<<<<<<< Updated upstream
-        const json = localStorage.getItem("aboutTrainerData");
-        const getLocalData = JSON.parse(json);
-        if (getLocalData) {
-            setAboutTrainerData(getLocalData);
-=======
-
         if (newtrainerObj.gender !== "") {
             genderDropdownRef.current.selectSingleItem({ value: newtrainerObj.gender });
         }
 
         if (newtrainerObj.location !== "") {
             locationDropdownRef.current.selectSingleItem({ value: newtrainerObj.location });
->>>>>>> Stashed changes
+
         }
     }, []);
 
@@ -225,10 +200,7 @@ const AboutTrainerFC = ({
                                 <label>Date of Birth*</label>
 
                                 <input
-<<<<<<< Updated upstream
                                     placeholder="DD/MM/YYYY"
-=======
->>>>>>> Stashed changes
                                     type="date"
                                     onFocus={(e) => (e.currentTarget.type = "date")}
                                     placeholder="MM/DD/YYYY"
