@@ -65,10 +65,10 @@ function TrainerCardNew() {
             <div className="card_inner">
                 <div className="card_prev_link">
                     <div onClick={openModal} className="prev_link">
-                        <TrainerPrevModal open={open} setOpen={setOpen} />
                         Preview Your Trainer Card
                     </div>
                 </div>
+                <TrainerPrevModal open={open} setOpen={setOpen} />
                 <div className="card_heading">
                     <h2>Time to build your Trainer Card!</h2>
                     <p>
