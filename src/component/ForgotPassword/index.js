@@ -7,7 +7,7 @@ const ForgotPassword = () => {
     const [forgotData, setForgotData] = useState({
         email: "",
     });
-    const [message, setMessage] = useState("");
+    // const [message, setMessage] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,7 +45,7 @@ const ForgotPassword = () => {
                         name="email"
                         onChange={onChangeValue}
                     />
-                    <span>{message}</span>
+                    {/* <span>{message}</span> */}
                     <button type="submit" className="forgot_submit">
                         Submit <ArrowHoverBlacked />
                     </button>

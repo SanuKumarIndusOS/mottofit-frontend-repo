@@ -91,45 +91,68 @@ const AboutTrainerFC = ({
             },
         };
 
-        localStorage.setItem('aboutTrainerDetails', JSON.stringify(aboutTrainerData));
-        if (moment().diff(aboutTrainerData.dob, "years", false) <= 21 || aboutTrainerData.phone.length < 11) {
-            alert('Please fill in required data')
-        }
-        else {
+        localStorage.setItem(
+            "aboutTrainerDetails",
+            JSON.stringify(aboutTrainerData)
+        );
+        if (
+            moment().diff(aboutTrainerData.dob, "years", false) <= 21 ||
+            aboutTrainerData.phone.length < 11
+        ) {
+            alert("Please fill in required data");
+        } else {
             history.push(`/trainer/background`);
             updateTrainerDetails(storeData);
         }
-
     };
-    
-    useEffect(() => {
 
-        let newtrainerObj = JSON.parse(localStorage.getItem('aboutTrainerDetails'));
+    useEffect(() => {
+        let newtrainerObj = JSON.parse(
+            localStorage.getItem("aboutTrainerDetails")
+        );
         console.log(newtrainerObj);
 
-        console.log(aboutTrainerData);
-        trainerDetail().then((data) => {
-            console.log(data, "datadata");
-            setAboutTrainerData({
-                ...aboutTrainerData,
-                phone: `${newtrainerObj.phone || ''}`,
-                email: data["email"],
-                firstName: data["firstName"] + " " + data["lastName"],
-                location: `${newtrainerObj.location || ''}`,
-                dob: `${newtrainerObj.dob || ''}`,
-                gender: `${newtrainerObj.gender || ''}`,
-                websiteURL: `${newtrainerObj.websiteURL || ''}`,
-                instagram: `${newtrainerObj.instagram || ''}`,
+        if (newtrainerObj) {
+            trainerDetail().then((data) => {
+                console.log(data, "datadata");
+                setAboutTrainerData({
+                    ...aboutTrainerData,
+                    phone: `${newtrainerObj.phone || ""}`,
+                    email: data["email"],
+                    firstName: data["firstName"] + " " + data["lastName"],
+                    location: `${newtrainerObj.location || ""}`,
+                    dob: `${newtrainerObj.dob || ""}`,
+                    gender: `${newtrainerObj.gender || ""}`,
+                    websiteURL: `${newtrainerObj.websiteURL || ""}`,
+                    instagram: `${newtrainerObj.instagram || ""}`,
+                });
             });
-        });
-        if (newtrainerObj.gender !== "") {
-            genderDropdownRef.current.selectSingleItem({ value: newtrainerObj.gender });
+            if (newtrainerObj.gender !== "") {
+                genderDropdownRef.current.selectSingleItem({
+                    value: newtrainerObj.gender,
+                });
+            }
+
+            if (newtrainerObj.location !== "") {
+                locationDropdownRef.current.selectSingleItem({
+                    value: newtrainerObj.location,
+                });
+            }
         }
 
-        if (newtrainerObj.location !== "") {
-            locationDropdownRef.current.selectSingleItem({ value: newtrainerObj.location });
-
+        else {
+            trainerDetail().then((data) => {
+                setAboutTrainerData({
+                    ...aboutTrainerData,
+                    email: data["email"],
+                    firstName: data["firstName"] + " " + data["lastName"],
+                    phone: data["phoneNumber"],
+                })
+            })
         }
+
+        if(newtrainerObj)
+        localStorage.removeItem("aboutTrainerDetails");
     }, []);
 
     const genderDropdownRef = React.useRef();
@@ -167,9 +190,7 @@ const AboutTrainerFC = ({
                                     value={aboutTrainerData.firstName}
                                     name="firstName"
                                 />
-                                {errors.firstName && (
-                                    <span>{'required'}</span>
-                                )}
+                                {errors.firstName && <span>{"required"}</span>}
                             </div>
 
                             <div className="wrapper_innerInput">
@@ -180,7 +201,12 @@ const AboutTrainerFC = ({
                                         ref={locationDropdownRef}
                                         title="Select Your City"
                                         list={locations}
-                                        value={locationDropdownRef.current ? locationDropdownRef.current.state.selectedItem : ''}
+                                        value={
+                                            locationDropdownRef.current
+                                                ? locationDropdownRef.current
+                                                    .state.selectedItem
+                                                : ""
+                                        }
                                         onChange={(e) => {
                                             setAboutTrainerData({
                                                 ...aboutTrainerData,
@@ -190,11 +216,11 @@ const AboutTrainerFC = ({
                                         name="location"
                                     />
                                 </div>
-                                {
-                                    (locationDropdownRef.current !== undefined &&
-                                        locationDropdownRef.current.state.selectedItem === null) ?
-                                        <span>required field</span> : null
-                                }
+                                {locationDropdownRef.current !== undefined &&
+                                    locationDropdownRef.current.state
+                                        .selectedItem === null ? (
+                                    <span>required field</span>
+                                ) : null}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Date of Birth*</label>
@@ -202,7 +228,9 @@ const AboutTrainerFC = ({
                                 <input
                                     placeholder="DD/MM/YYYY"
                                     type="date"
-                                    onFocus={(e) => (e.currentTarget.type = "date")}
+                                    onFocus={(e) =>
+                                        (e.currentTarget.type = "date")
+                                    }
                                     placeholder="MM/DD/YYYY"
                                     value={aboutTrainerData.dob}
                                     onChange={(e) =>
@@ -239,9 +267,13 @@ const AboutTrainerFC = ({
                                         className="custom_dropdown"
                                         title="Select Gender"
                                         ref={genderDropdownRef}
-
                                         list={gender}
-                                        value={genderDropdownRef.current ? genderDropdownRef.current.state.selectedItem : ''}
+                                        value={
+                                            genderDropdownRef.current
+                                                ? genderDropdownRef.current
+                                                    .state.selectedItem
+                                                : ""
+                                        }
                                         onChange={(e) => {
                                             setAboutTrainerData({
                                                 ...aboutTrainerData,
@@ -249,16 +281,14 @@ const AboutTrainerFC = ({
                                             });
                                         }}
                                         name="gender"
-
                                     />
-
                                 </div>
 
-                                {
-                                    (genderDropdownRef.current !== undefined &&
-                                        genderDropdownRef.current.state.selectedItem === null) ?
-                                        <span>required field</span> : null
-                                }
+                                {genderDropdownRef.current !== undefined &&
+                                    genderDropdownRef.current.state.selectedItem ===
+                                    null ? (
+                                    <span>required field</span>
+                                ) : null}
                             </div>
                             <div className="wrapper_innerInput">
                                 <label>Email*</label>
@@ -276,7 +306,6 @@ const AboutTrainerFC = ({
                                         })
                                     }
                                     name="email"
-
                                 />
                             </div>
                             <div className="wrapper_innerInput">

@@ -44,7 +44,7 @@ function TrainerSetup() {
     // loading the submit button
     const [isLoading, setLoading] = useState(false);
 
-    // Agree chech
+    // Agree check
     const [agreed, setAgreed] = useState(false);
 
     const TrainerSetupPayload = useSelector(
@@ -116,13 +116,7 @@ function TrainerSetup() {
                             </Link>
                         </div>
                         <div className="inner_link_preview">
-                            <div
-                                // onClick={() => {
-                                //     setOpen(true);
-                                // }}
-                                onClick={openModal}
-                                className="prev_profile"
-                            >
+                            <div onClick={openModal} className="prev_profile">
                                 Preview Your Trainer Profile
                             </div>
                         </div>
