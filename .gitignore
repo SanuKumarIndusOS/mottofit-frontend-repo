@@ -3,8 +3,13 @@
 /.pnp
 .pnp.js
 
-node_modules
+build
 
+node_modules
+src
+public
+app.js
+jsconfig.json
 #production
 
 # testing
