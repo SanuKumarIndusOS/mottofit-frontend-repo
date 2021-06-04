@@ -33,7 +33,7 @@ const PasswordSetting = () => {
             .then((response) => {
                 console.log(response);
                 if (response.ok) {
-                    alert("New Password has beed updated!");
+                    alert("New Password has been updated!");
                     history.push("/");
                 } else {
                     alert("You're Old Password was not correct ");

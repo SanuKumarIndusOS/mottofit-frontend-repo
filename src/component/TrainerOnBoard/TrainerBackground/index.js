@@ -122,41 +122,76 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                 clientAssessment: trainerbackgroundData.clientAssessment,
                 trainingProcess: trainerbackgroundData.trainingProcess,
                 interestInMotto: trainerbackgroundData.interestInMotto,
-                currentExperience: currentExperiencee,
+                currentExperience: trainerbackgroundData.currentExperiencee,
                 awaitingCertification:
                     trainerbackgroundData.awaitingCertification,
             },
         };
 
-        updateTrainerDetails(storeData);
+        localStorage.setItem('trainerBackGroundData', JSON.stringify(trainerbackgroundData));
+        console.log(JSON.parse(localStorage.getItem('trainerBackGroundData')));
 
+        updateTrainerDetails(storeData);
         history.push(`/trainer/availability`);
     };
 
     useEffect(() => {
-        if (Object.keys(details).length > 5) {
-            let tempData = {
-                areaOfExpertise: details?.areaOfExpertise || [],
-                previousExperience: details?.previousExperience || [],
-                certification: details?.certificate || [],
-                clientAssessment: details.clientAssessment,
-                trainingProcess: details.trainingProcess,
-                interestInMotto: details.interestInMotto,
-                awaitingCertification: details.awaitingCertification,
-            };
+        // if (Object.keys(details).length > 5) {
+        //     let tempData = {
+        //         areaOfExpertise: details?.areaOfExpertise || [],
+        //         previousExperience: details?.previousExperience || [],
+        //         certification: details?.certificate || [],
+        //         clientAssessment: details.clientAssessment,
+        //         trainingProcess: details.trainingProcess,
+        //         interestInMotto: details.interestInMotto,
+        //         awaitingCertification: details.awaitingCertification,
+        //     };
 
-            details.currentExperience &&
-                setCurrentExperiencee(details.currentExperience);
+        //     details.currentExperience &&
+        //         setCurrentExperiencee(details.currentExperience);
 
-            details.previousExperience &&
-                setInputField(details.previousExperience);
+        //     details.previousExperience &&
+        //         setInputField(details.previousExperience);
 
-            details.certification &&
-                setinputCertificatesField(details.certification);
+        //     details.certification &&
+        //         setinputCertificatesField(details.certification);
 
-            setTrainerbackgroundData(tempData);
+        //     setTrainerbackgroundData(tempData);
+
+        // }
+        let backgroundDetails = JSON.parse(localStorage.getItem('trainerBackGroundData'));
+        console.log('bduwgu', backgroundDetails);
+
+        if (backgroundDetails) {
+        
+            setTrainerbackgroundData({
+                ...trainerbackgroundData,
+                areaOfExpertise: [...new Set(backgroundDetails.areaOfExpertise)],
+                previousExperience: backgroundDetails.previousExperience,
+                certification: backgroundDetails.certification,
+                clientAssessment: backgroundDetails.clientAssessment,
+                trainingProcess: backgroundDetails.trainingProcess,
+                interestInMotto: backgroundDetails.interestInMotto,
+                currentExperience: backgroundDetails.currentExperience,
+                awaitingCertification: backgroundDetails.awaitingCertification,
+            })
+
+
+            if (trainerbackgroundData.areaOfExpertise.indexOf("Boxing") >= 0) setCheckedBoxing(true)
+            if (trainerbackgroundData.areaOfExpertise.indexOf("Pilates") >= 0) setCheckedPilates(true)
+            if (trainerbackgroundData.areaOfExpertise.indexOf("Yoga") >= 0) setCheckedYoga(true)
+            if (trainerbackgroundData.areaOfExpertise.indexOf("Strength & HIIT") >= 0) setCheckedHIIT(true);
+
+        }
+
+        if (backgroundDetails.currentExperience !== "" && dropdownExpRef.current !== undefined) {
+            dropdownExpRef.current.selectSingleItem({ value: backgroundDetails.experience });
         }
     }, []);
+
+    const dropdownExpRef = React.useRef();
+    
+
 
     return (
         <>
@@ -252,9 +287,9 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                     color: "#53BFD2",
                                                 }}
 
-                                                // onChange={() => {
-                                                //   setCheckState("Strength & HIIT");
-                                                // }}
+                                            // onChange={() => {
+                                            //   setCheckState("Strength & HIIT");
+                                            // }}
                                             />
                                             <div className="checkbox_label">
                                                 Strength & HIIT
@@ -537,7 +572,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                         </h6>
                                         <div className="inputs_experience_drop">
                                             <Dropdown
-                                                required
+                                             
                                                 className="select_location"
                                                 title="Select Your Answer"
                                                 list={worksMode}
@@ -550,11 +585,12 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                                         workMode: e.value,
                                                     });
 
-                                                    // setTrainerbackgroundData({...trainerbackgroundData, currentExperience: currentExperiencee})
+                                                  //  setTrainerbackgroundData({ ...trainerbackgroundData, currentExperience: e.value })
                                                 }}
+                                              //  ref={dropdownExpRef}
                                             />
                                             {currentExperiencee.workMode ===
-                                            "yes" ? (
+                                                "yes" ? (
                                                 <>
                                                     <input
                                                         type="text"
@@ -592,7 +628,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                         </h6>
                                         <div className="inputs_experience">
                                             <textarea
-                                                
+
                                                 type="text"
                                                 name="comment"
                                                 placeholder="Tell us all about it."
@@ -618,7 +654,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                             <textarea
                                                 type="text"
                                                 name="comment"
-                                               
+
                                                 placeholder="Tell us all about it."
                                                 value={
                                                     trainerbackgroundData.clientAssessment
@@ -642,7 +678,7 @@ const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
                                             <textarea
                                                 type="text"
                                                 name="comment"
-                                                
+
                                                 placeholder="Tell us all about it."
                                                 value={
                                                     trainerbackgroundData.trainingProcess
