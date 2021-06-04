@@ -10,6 +10,7 @@ import "./dropdown.scss";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 import PaymentSection from "./SetUpPaymentSection";
 import PaymentSectionSetup from "./SetUpPaymentSection/PaymentSectionSetup";
+import SetupPrevModal from "./SetupPrevModal";
 
 // Dropdown Data
 const options = [
@@ -93,6 +94,12 @@ function TrainerSetup() {
     const handleAgreedCheck = () => {
         setAgreed(!agreed);
     };
+
+    // for Modal Operation
+    const [open, setOpen] = useState(false);
+    const openModal = () => {
+        setOpen((prev) => !prev);
+    };
     return (
         <>
             <div className="container">
@@ -113,13 +120,14 @@ function TrainerSetup() {
                                 // onClick={() => {
                                 //     setOpen(true);
                                 // }}
+                                onClick={openModal}
                                 className="prev_profile"
                             >
                                 Preview Your Trainer Profile
                             </div>
                         </div>
                     </div>
-
+                    <SetupPrevModal open={open} setOpen={setOpen} />
                     <div className="setup_headings">
                         <h2>Build out the rest of your Profile!</h2>
                         <p>
