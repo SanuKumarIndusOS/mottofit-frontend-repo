@@ -1,0 +1,46 @@
+.password_main {
+    .password_heading {
+        h2 {
+            text-align: left;
+            letter-spacing: 0px;
+            color: #161616;
+            font-size: 40px;
+            line-height: 58px;
+            font-family: Montserrat;
+        }
+    }
+    .password_form {
+        width: 40%;
+        form {
+            input {
+                margin: 0.5em 0.2em;
+                border: 1px solid #bcbcbc;
+                font-family: "Montserrat", sans-serif;
+                font-size: 20px;
+                font-weight: 500;
+                height: 45px;
+                border-radius: 50px;
+                width: 100%;
+                padding: 0.5em 1em;
+                &::placeholder {
+                    font-size: 18px;
+                    color: #bcbcbc;
+                    font-family: "Montserrat", sans-serif;
+                    font-weight: 500;
+                }
+            }
+            button {
+                outline: none;
+                background: rgb(83, 191, 210);
+                border: 0;
+                margin: 1em 1em 2em 1em;
+                text-decoration: none;
+                text-transform: uppercase;
+                color: #fff;
+                font-weight: bold;
+                padding: 1em 0 1em 2em;
+                width: 50%;
+            }
+        }
+    }
+}

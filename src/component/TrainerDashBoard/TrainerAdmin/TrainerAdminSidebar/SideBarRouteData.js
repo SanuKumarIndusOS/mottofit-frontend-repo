@@ -71,6 +71,11 @@ export const SideBarRouteData = [
                 path: "/trainers/dashboard/settings/notification",
                 // icon: <img src={SessionIcon} alt="icon" />,
             },
+            {
+                title: "Password Settings",
+                path: "/trainers/dashboard/settings/password",
+                // icon: <img src={SessionIcon} alt="icon" />,
+            },
         ],
     },
     {

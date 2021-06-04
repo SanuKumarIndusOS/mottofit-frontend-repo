@@ -36,6 +36,7 @@ import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
 import { fileUpload } from "action/trainerAct";
 import { COMMON_URL } from "helpers/baseURL";
+import TrainerSetup from "./TrainerSetup";
 const FileArray = [];
 
 const options = [
@@ -1413,6 +1414,7 @@ const TrainerSetUpProfileFC = ({
                     </div>
                 </div>
             </div>
+            <TrainerSetup />
         </>
     );
 };

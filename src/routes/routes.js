@@ -399,6 +399,14 @@ const routers = [
                 exact: true,
             },
             {
+                path: "/settings/password",
+                componentPath:
+                    "pages/TrainerDashboard/Settings/PasswordSettings",
+                name: "PasswordBase",
+                auth: false,
+                exact: true,
+            },
+            {
                 path: "/message",
                 componentPath: "pages/TrainerDashboard/TrainerMessage",
                 name: "TrainerMessage",
