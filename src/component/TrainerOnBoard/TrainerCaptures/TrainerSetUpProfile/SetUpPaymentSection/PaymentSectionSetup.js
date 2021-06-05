@@ -20,7 +20,7 @@ const info = [
     },
 ];
 
-const PaymentSectionSetup = () => {
+const PaymentSectionSetup = ({ onChange, trainerData, setTrainerData }) => {
     const data = {
         heading: "Security & Payment Information",
         describe:
@@ -35,13 +35,13 @@ const PaymentSectionSetup = () => {
     //     setdropdown(!dropdowm);
     // };
 
-    // const handleChange = ({ target: { name, value } }) => {
-    //     const tempData = {
-    //         ...trainerData,
-    //     };
-    //     tempData[name] = value;
-    //     onChange(tempData);
-    // };
+    const handleChange = ({ target: { name, value } }) => {
+        const tempData = {
+            ...trainerData,
+        };
+        tempData[name] = value;
+        onChange(tempData);
+    };
     return (
         <>
             <div className="payment_container container">

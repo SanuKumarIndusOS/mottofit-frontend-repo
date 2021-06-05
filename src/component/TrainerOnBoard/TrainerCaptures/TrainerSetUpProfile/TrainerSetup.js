@@ -415,7 +415,9 @@ function TrainerSetup() {
                         </div>
                     </div>
 
-                    <PaymentSectionSetup />
+                    <PaymentSectionSetup 
+                    
+                    />
 
                     <div className="card_agree">
                         <input
