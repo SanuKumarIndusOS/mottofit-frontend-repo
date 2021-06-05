@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
@@ -35,13 +35,18 @@ const PaymentSectionSetup = ({ onChange, trainerData, setTrainerData }) => {
     //     setdropdown(!dropdowm);
     // };
 
-    const handleChange = ({ target: { name, value } }) => {
-        const tempData = {
-            ...trainerData,
-        };
-        tempData[name] = value;
-        onChange(tempData);
-    };
+    // const handleChange = ({ target: { name, value } }) => {
+    //     const tempData = {
+    //         ...trainerData,
+    //     };
+    //     tempData[name] = value;
+    //     onChange(tempData);
+    // };
+
+    //
+    const [securityData, setSecurityData] = useState({
+        identityNameUS: "",
+    });
     return (
         <>
             <div className="payment_container container">
@@ -60,12 +65,12 @@ const PaymentSectionSetup = ({ onChange, trainerData, setTrainerData }) => {
                                     "
                                     list={info}
                                     // // value={trainerData.identityNameUS}
-                                    // onChange={(e) => {
-                                    //     setTrainerData({
-                                    //         ...trainerData,
-                                    //         identityNameUS: e.value,
-                                    //     });
-                                    // }}
+                                    onChange={(e) => {
+                                        setSecurityData({
+                                            ...securityData,
+                                            identityNameUS: e.value,
+                                        });
+                                    }}
                                     name="identityNameUS"
                                 />
                                 <input

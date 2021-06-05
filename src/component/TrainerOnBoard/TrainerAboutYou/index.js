@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import Instagram from "../../../assets/files/SVG/Insta Icon.svg";
 import Web from "../../../assets/files/SVG/Web Icon.svg";
-
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { useForm } from "react-hook-form";
-
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
