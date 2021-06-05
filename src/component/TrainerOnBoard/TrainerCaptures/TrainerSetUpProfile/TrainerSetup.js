@@ -40,6 +40,10 @@ function TrainerSetup() {
         zoom_link: "",
     });
 
+    React.useEffect(() => {
+        dispatch(captureTrainerSetup(trainerSetupData));
+    }, [trainerSetupData])
+
     //buttons virtual and in person active
     const [checkButtonVirtual, setCheckButtonVirtual] = useState(true);
     const [checkButtonInPerson, setCheckButtonInPerson] = useState(true);
