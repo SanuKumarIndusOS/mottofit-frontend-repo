@@ -11,6 +11,7 @@ import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlack
 import PaymentSection from "./SetUpPaymentSection";
 import PaymentSectionSetup from "./SetUpPaymentSection/PaymentSectionSetup";
 import SetupPrevModal from "./SetupPrevModal";
+import { trainerDetail } from "action/trainerAct";
 
 // Dropdown Data
 const options = [
@@ -35,6 +36,7 @@ function TrainerSetup() {
         website: "",
         certificateFields: [{ certificate: "", year: "" }],
         trainingLocation: [],
+        zoom_link:""
     });
 
     //buttons virtual and in person active
@@ -55,9 +57,24 @@ function TrainerSetup() {
 
     React.useEffect(() => {
         console.log(TrainerSetupPayload);
+        
+        
+
 
         TrainerSetupPayload.motto === undefined
-            ? console.log("empty")
+            ? dispatch(trainerDetail()).then((res)=>{ 
+
+                console.log(res,"testt");
+                trainerSetupData.motto = res.myMotto;
+                trainerSetupData.training_process = res.trainingProcess;
+                trainerSetupData.certificateFields = res.certification;
+                trainerSetupData.instagram = res.instagramProfile;
+                trainerSetupData.website = res.websiteLink;
+                trainerSetupData.willingToTravel = res.willingToTravel;
+                trainerSetupData.haveAFacility =  res.trainingFacility;
+                trainerSetupData.zoom_link = res.virtualMeetingLinK;
+                trainerSetupData.neighborhood_list = res.servicableLocation;
+            })
             : setTrainerSetupData(TrainerSetupPayload);
     }, []);
 
@@ -240,12 +257,12 @@ function TrainerSetup() {
                                     <textarea
                                         placeholder="add you're meeting link"
                                         value={
-                                            trainerSetupData.training_process
+                                            trainerSetupData.zoom_link
                                         }
                                         onChange={(e) => {
                                             setTrainerSetupData({
                                                 ...trainerSetupData,
-                                                training_process:
+                                                zoom_link:
                                                     e.target.value,
                                             });
                                         }}
