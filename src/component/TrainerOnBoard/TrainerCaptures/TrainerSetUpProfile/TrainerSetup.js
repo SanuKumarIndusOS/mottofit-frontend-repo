@@ -8,10 +8,11 @@ import { Link } from "react-router-dom";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
-import PaymentSection from "./SetUpPaymentSection";
 import PaymentSectionSetup from "./SetUpPaymentSection/PaymentSectionSetup";
 import SetupPrevModal from "./SetupPrevModal";
 import { trainerDetail } from "action/trainerAct";
+import Instagram from "../../../../assets/files/SVG/Insta Icon.svg";
+import Web from "../../../../assets/files/SVG/Web Icon.svg";
 
 // Dropdown Data
 const options = [
@@ -36,7 +37,7 @@ function TrainerSetup() {
         website: "",
         certificateFields: [{ certificate: "", year: "" }],
         trainingLocation: [],
-        zoom_link:""
+        zoom_link: "",
     });
 
     //buttons virtual and in person active
@@ -57,24 +58,20 @@ function TrainerSetup() {
 
     React.useEffect(() => {
         console.log(TrainerSetupPayload);
-        
-        
-
 
         TrainerSetupPayload.motto === undefined
-            ? dispatch(trainerDetail()).then((res)=>{ 
-
-                console.log(res,"testt");
-                trainerSetupData.motto = res.myMotto;
-                trainerSetupData.training_process = res.trainingProcess;
-                trainerSetupData.certificateFields = res.certification;
-                trainerSetupData.instagram = res.instagramProfile;
-                trainerSetupData.website = res.websiteLink;
-                trainerSetupData.willingToTravel = res.willingToTravel;
-                trainerSetupData.haveAFacility =  res.trainingFacility;
-                trainerSetupData.zoom_link = res.virtualMeetingLinK;
-                trainerSetupData.neighborhood_list = res.servicableLocation;
-            })
+            ? dispatch(trainerDetail()).then((res) => {
+                  console.log(res, "testt");
+                  trainerSetupData.motto = res.myMotto;
+                  trainerSetupData.training_process = res.trainingProcess;
+                  trainerSetupData.certificateFields = res.certification;
+                  trainerSetupData.instagram = res.instagramProfile;
+                  trainerSetupData.website = res.websiteLink;
+                  trainerSetupData.willingToTravel = res.willingToTravel;
+                  trainerSetupData.haveAFacility = res.trainingFacility;
+                  trainerSetupData.zoom_link = res.virtualMeetingLinK;
+                  trainerSetupData.neighborhood_list = res.servicableLocation;
+              })
             : setTrainerSetupData(TrainerSetupPayload);
     }, []);
 
@@ -256,14 +253,11 @@ function TrainerSetup() {
                                     <br />
                                     <textarea
                                         placeholder="add you're meeting link"
-                                        value={
-                                            trainerSetupData.zoom_link
-                                        }
+                                        value={trainerSetupData.zoom_link}
                                         onChange={(e) => {
                                             setTrainerSetupData({
                                                 ...trainerSetupData,
-                                                zoom_link:
-                                                    e.target.value,
+                                                zoom_link: e.target.value,
                                             });
                                         }}
                                     />
@@ -279,7 +273,7 @@ function TrainerSetup() {
                                 name="location"
                             />
                         </div>
-                        <div>
+                        <div className="radio_content">
                             <label>
                                 Do you have a facility or location where you
                                 will train clients?
@@ -329,7 +323,7 @@ function TrainerSetup() {
                                 }}
                             />
                         </div>
-                        <div>
+                        <div className="radio_content">
                             <label>
                                 Are you willing to travel to clients in your
                                 city/region?
@@ -394,6 +388,7 @@ function TrainerSetup() {
                                     });
                                 }}
                             />
+                            <img src={Instagram} alt="icon" />
                         </div>
                         <div className="input_content">
                             <label>Website</label>
@@ -408,6 +403,7 @@ function TrainerSetup() {
                                     });
                                 }}
                             />
+                            <img src={Web} alt="icon" />
                         </div>
                     </div>
 
