@@ -67,7 +67,7 @@ const SignInFC = ({
       loginAct( loginApi ,payload)
         .then((res) => {
          
-          //localStorage.setItem("user-id", res.id);
+          localStorage.setItem("user-id", res.id);
           if (res["type"] === "trainer") {
             trainerDetail().then((response) => {
            
