@@ -42,14 +42,60 @@
         }
     }
     .item1_card {
-        width: 200px;
-        height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #53bfd2;
-        border-radius: 100px;
-        margin-bottom: 3em;
+        flex-direction: column;
+        width: 100%;
+        input {
+            display: none;
+        }
+        button {
+            width: 200px;
+            border-radius: 100px;
+            outline: none;
+            height: 200px;
+            background-color: rgb(83, 191, 210);
+            cursor: pointer;
+            border: none;
+        }
+        button:active {
+            border: none;
+        }
+        h5 {
+            margin-top: 1em;
+            color: #161616;
+            text-align: center;
+            letter-spacing: 0px;
+            line-height: 42px;
+            font-size: 22px;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+        }
+        .combin_profile {
+            margin-top: 3em;
+            display: flex;
+            img {
+                position: relative;
+                top: -9px;
+            }
+
+            img:nth-child(2) {
+                position: relative;
+                top: 154px;
+                right: 69px;
+                width: 50px !important;
+                height: 50px !important;
+                cursor: pointer;
+                transition: 0.2s ease-in-out;
+            }
+            img:nth-child(2):hover {
+                padding: 0.2em;
+            }
+        }
+        h5 {
+            margin-bottom: 3em;
+        }
     }
     .item2_card {
         display: flex;
@@ -126,10 +172,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 5em;
+        margin-bottom: 8em;
 
         button {
-            margin-bottom: 2em;
+            margin-bottom: 3em;
             outline: none;
             background: rgb(83, 191, 210);
             border: 0;
@@ -216,15 +262,11 @@ h6 {
     }
 }
 
-
-
-.vertical_checkbox
-{
-    color: #53BFD2;
+.vertical_checkbox {
+    color: #53bfd2;
 }
 
-.pro_pic_center
-{
+.pro_pic_center {
     width: 100%;
     display: flex;
     justify-content: center;

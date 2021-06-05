@@ -20,7 +20,11 @@ const info = [
     },
 ];
 
-const PaymentSectionSetup = () => {
+const PaymentSectionSetup = ({
+    onChange,
+    trainerSetupData,
+    setTrainerSetupData,
+}) => {
     const data = {
         heading: "Security & Payment Information",
         describe:
@@ -30,23 +34,14 @@ const PaymentSectionSetup = () => {
         payment: "Add your account details for payment",
     };
 
-    // const [dropdowm, setdropdown] = React.useState();
-    // const dropdowmColorChange = () => {
-    //     setdropdown(!dropdowm);
-    // };
+    const handleChange = ({ target: { name, value } }) => {
+        const tempData = {
+            ...trainerSetupData,
+        };
+        tempData[name] = value;
+        onChange(tempData);
+    };
 
-    // const handleChange = ({ target: { name, value } }) => {
-    //     const tempData = {
-    //         ...trainerData,
-    //     };
-    //     tempData[name] = value;
-    //     onChange(tempData);
-    // };
-
-    //
-    const [securityData, setSecurityData] = useState({
-        identityNameUS: "",
-    });
     return (
         <>
             <div className="payment_container container">
@@ -64,10 +59,10 @@ const PaymentSectionSetup = () => {
                                     title="Select government ID’s
                                     "
                                     list={info}
-                                    // // value={trainerData.identityNameUS}
+                                    value={trainerSetupData.identityNameUS}
                                     onChange={(e) => {
-                                        setSecurityData({
-                                            ...securityData,
+                                        setTrainerSetupData({
+                                            ...trainerSetupData,
                                             identityNameUS: e.value,
                                         });
                                     }}
@@ -76,27 +71,25 @@ const PaymentSectionSetup = () => {
                                 <input
                                     type="text"
                                     placeholder="Add your ID Number"
-                                    // value={trainerData.governmentIdNumber}
-                                    // onChange={handleChange}
+                                    value={trainerSetupData.governmentIdNumber}
+                                    onChange={handleChange}
                                     name="governmentIdNumber"
                                 />
                                 <input
                                     type="file"
                                     name="governmentId"
                                     className="custom-file-input"
-                                    // value={trainerData.governmentId}
-                                    // onChange={handleChange}
+                                    value={trainerSetupData.governmentId}
+                                    onChange={handleChange}
                                 />
-                                <a className="checkarrow">
-                                    <BlueHoverButton />
-                                </a>
-                                {/* {trainerData.governmentId ? (
+
+                                {trainerSetupData.governmentId ? (
                                     <img src={Tick} alt="Uploaded" />
                                 ) : (
                                     <a className="checkarrow">
                                         <BlueHoverButton />
                                     </a>
-                                )} */}
+                                )}
                             </div>
                         </div>
                         <div className="payment_item1">
@@ -105,34 +98,32 @@ const PaymentSectionSetup = () => {
                                 <input
                                     type="text"
                                     placeholder="Enter your Insurance Name"
-                                    // value={trainerData.insuranceNameUS}
-                                    // onChange={handleChange}
+                                    value={trainerSetupData.insuranceNameUS}
+                                    onChange={handleChange}
                                     name="insuranceNameUS"
                                 />
                                 <input
                                     type="text"
                                     placeholder="Add your Cover Amount"
-                                    // value={trainerData.coverAmount}
-                                    // onChange={handleChange}
+                                    value={trainerSetupData.coverAmount}
+                                    onChange={handleChange}
                                     name="coverAmount"
                                 />
                                 <input
                                     type="file"
                                     name="insurance"
                                     className="custom-file-input"
-                                    // value={trainerData.insurance}
-                                    // onChange={handleChange}
+                                    value={trainerSetupData.insurance}
+                                    onChange={handleChange}
                                 />
-                                <a className="checkarrow">
-                                    <BlueHoverButton />
-                                </a>
-                                {/* {trainerData.insurance ? (
+
+                                {trainerSetupData.insurance ? (
                                     <img src={Tick} alt="Uploaded" />
                                 ) : (
                                     <a className="checkarrow">
                                         <BlueHoverButton />
                                     </a>
-                                )} */}
+                                )}
                             </div>
                         </div>
                     </div>

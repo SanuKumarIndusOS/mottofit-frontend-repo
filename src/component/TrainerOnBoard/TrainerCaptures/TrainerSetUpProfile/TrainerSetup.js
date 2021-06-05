@@ -13,6 +13,18 @@ import SetupPrevModal from "./SetupPrevModal";
 import { trainerDetail } from "action/trainerAct";
 import Instagram from "../../../../assets/files/SVG/Insta Icon.svg";
 import Web from "../../../../assets/files/SVG/Web Icon.svg";
+import { history } from "helpers";
+import { withStyles } from "@material-ui/core/styles";
+import { cyan } from "@material-ui/core/colors";
+
+const CyanRadio = withStyles({
+    root: {
+        "&$checked": {
+            color: cyan[600],
+        },
+    },
+    checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 // Dropdown Data
 const options = [
@@ -35,14 +47,20 @@ function TrainerSetup() {
         willingToTravel: "",
         instagram: "",
         website: "",
+        serviceableLocation: "",
         certificateFields: [{ certificate: "", year: "" }],
         trainingLocation: [],
         zoom_link: "",
+        identityNameUS: "",
+        insuranceNameUS: "",
+        coverAmount: "",
+        governmentId: "",
+        governmentIdNumber: "",
     });
 
     React.useEffect(() => {
         dispatch(captureTrainerSetup(trainerSetupData));
-    }, [trainerSetupData])
+    }, [trainerSetupData]);
 
     //buttons virtual and in person active
     const [checkButtonVirtual, setCheckButtonVirtual] = useState(true);
@@ -98,6 +116,11 @@ function TrainerSetup() {
 
         console.log(trainerSetupData.certificateFields);
     };
+
+    //onChange for payment section
+    function handleChangePayment(e) {
+        setTrainerSetupData(e);
+    }
 
     // handle virtual button active
     const handleVirtual = () => {
@@ -275,6 +298,13 @@ function TrainerSetup() {
                                 title="Select Location"
                                 list={options}
                                 name="location"
+                                onChange={(e) => {
+                                    setTrainerSetupData({
+                                        ...trainerSetupData,
+                                        serviceableLocation: e.value,
+                                    });
+                                }}
+                                value={trainerSetupData.serviceableLocation}
                             />
                         </div>
                         <div className="radio_content">
@@ -283,7 +313,7 @@ function TrainerSetup() {
                                 will train clients?
                             </label>
                             <br />
-                            <Radio
+                            <CyanRadio
                                 checked={
                                     trainerSetupData.haveAFacility === true
                                 }
@@ -297,7 +327,7 @@ function TrainerSetup() {
                                 value={trainerSetupData.haveAFacility}
                             />
                             &ensp;<span className="radio">Yes</span> &ensp;
-                            <Radio
+                            <CyanRadio
                                 checked={
                                     trainerSetupData.haveAFacility === false
                                 }
@@ -333,7 +363,7 @@ function TrainerSetup() {
                                 city/region?
                             </label>
                             <br />
-                            <Radio
+                            <CyanRadio
                                 checked={
                                     trainerSetupData.willingToTravel === true
                                 }
@@ -347,7 +377,7 @@ function TrainerSetup() {
                                 value={trainerSetupData.willingToTravel}
                             />
                             &ensp;<span className="radio">Yes</span> &ensp;
-                            <Radio
+                            <CyanRadio
                                 checked={
                                     trainerSetupData.willingToTravel === false
                                 }
@@ -411,7 +441,11 @@ function TrainerSetup() {
                         </div>
                     </div>
 
-                    <PaymentSectionSetup />
+                    <PaymentSectionSetup
+                        onChange={handleChangePayment}
+                        trainerSetupData={trainerSetupData}
+                        setTrainerSetupData={setTrainerSetupData}
+                    />
 
                     <div className="card_agree">
                         <input
@@ -443,6 +477,9 @@ function TrainerSetup() {
                             onClick={() => {
                                 console.log(trainerSetupData);
                                 dispatch(captureTrainerSetup(trainerSetupData));
+                                if (trainerSetupData) {
+                                    history.push("/trainers/dashboard/session");
+                                }
                             }}
                             type="submit"
                             disabled={(isLoading, !agreed)}
