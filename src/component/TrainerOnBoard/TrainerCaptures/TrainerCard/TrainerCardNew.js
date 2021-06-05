@@ -52,6 +52,9 @@ function TrainerCardNew() {
         virtual_tenSessionRate: "",
     });
 
+    React.useEffect(() => {
+        dispatch(captureTrainerCard(trainerCardData));
+    }, [trainerCardData]);
     // Training verticals selection states
     const [checkedBoxing, setCheckedBoxing] = React.useState(false);
     const [checkedHIIT, setCheckedHIIT] = React.useState(false);

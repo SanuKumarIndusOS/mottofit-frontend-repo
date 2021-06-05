@@ -5,8 +5,9 @@ import { Modal } from "react-responsive-modal";
 import QMark from "../../../../assets/files/FindTrainer/Q Mark.svg";
 import { Link } from "react-router-dom";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
-
-const SetupPrevModal = ({ open, setOpen }) => {
+import "./modal.scss";
+import "./stylesSetup.scss";
+const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
     const myRef = useRef(null);
 
     const closeIconModal = <img src={CloseIcon} alt="close" />;
@@ -286,9 +287,9 @@ const SetupPrevModal = ({ open, setOpen }) => {
                                             <div className="profile_right_item1">
                                                 <h6>
                                                     motto
-                                                    {/* {trainerData.motto
-                                                        ? trainerData.motto
-                                                        : "Motto not Added"} */}
+                                                    {trainerSetupData.motto
+                                                        ? trainerSetupData.motto
+                                                        : "Motto not Added"}
                                                 </h6>
                                             </div>
                                             <div
@@ -303,7 +304,7 @@ const SetupPrevModal = ({ open, setOpen }) => {
                                                 </h4>
                                                 <p>
                                                     desc
-                                                    {/* {trainerData.trainingProcessDescription
+                                                    {/* {trainerSetupData.trainingProcessDescription
                                                         ? trainerData.trainingProcessDescription
                                                         : "Description not Added"} */}
                                                 </p>

@@ -72,7 +72,12 @@ const PaymentSectionSetup = ({
                                     type="text"
                                     placeholder="Add your ID Number"
                                     value={trainerSetupData.governmentIdNumber}
-                                    onChange={handleChange}
+                                    onChange={(e) => {
+                                        setTrainerSetupData({
+                                            ...trainerSetupData,
+                                            governmentIdNumber: e.target.value,
+                                        });
+                                    }}
                                     name="governmentIdNumber"
                                 />
                                 <input
@@ -80,7 +85,12 @@ const PaymentSectionSetup = ({
                                     name="governmentId"
                                     className="custom-file-input"
                                     value={trainerSetupData.governmentId}
-                                    onChange={handleChange}
+                                    onChange={(e) => {
+                                        setTrainerSetupData({
+                                            ...trainerSetupData,
+                                            governmentId: e.target.value,
+                                        });
+                                    }}
                                 />
 
                                 {trainerSetupData.governmentId ? (
@@ -99,14 +109,24 @@ const PaymentSectionSetup = ({
                                     type="text"
                                     placeholder="Enter your Insurance Name"
                                     value={trainerSetupData.insuranceNameUS}
-                                    onChange={handleChange}
+                                    onChange={(e) => {
+                                        setTrainerSetupData({
+                                            ...trainerSetupData,
+                                            insuranceNameUS: e.target.value,
+                                        });
+                                    }}
                                     name="insuranceNameUS"
                                 />
                                 <input
                                     type="text"
                                     placeholder="Add your Cover Amount"
                                     value={trainerSetupData.coverAmount}
-                                    onChange={handleChange}
+                                    onChange={(e) => {
+                                        setTrainerSetupData({
+                                            ...trainerSetupData,
+                                            coverAmount: e.target.value,
+                                        });
+                                    }}
                                     name="coverAmount"
                                 />
                                 <input
@@ -114,7 +134,12 @@ const PaymentSectionSetup = ({
                                     name="insurance"
                                     className="custom-file-input"
                                     value={trainerSetupData.insurance}
-                                    onChange={handleChange}
+                                    onChange={(e) => {
+                                        setTrainerSetupData({
+                                            ...trainerSetupData,
+                                            insurance: e.target.value,
+                                        });
+                                    }}
                                 />
 
                                 {trainerSetupData.insurance ? (

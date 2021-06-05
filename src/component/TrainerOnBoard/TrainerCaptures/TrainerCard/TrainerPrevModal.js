@@ -93,29 +93,32 @@ export const TrainerPrevModal = ({ open, setOpen, trainerCardData }) => {
                                             textTransform: "capitalize",
                                         }}
                                     >
-                                        {TrainerCardPayload.firstName || ""}
+                                        {trainerCardData.firstName}
                                         &nbsp;
-                                        {TrainerCardPayload.lastName || ""}
+                                        {trainerCardData.lastName}
                                     </h3>
                                     <h6
                                         style={{
                                             color: "#898989",
                                             fontWeight: "bold",
+                                            display: "flex",
                                         }}
-                                    ></h6>
-                                    <p style={{ color: "#898989" }}>
-                                        {/* {trainerData.description} */}
-
-                                        {TrainerCardPayload.verticals !==
-                                        undefined
-                                            ? TrainerCardPayload.verticals.map(
+                                    >
+                                        {trainerCardData.verticals !== undefined
+                                            ? trainerCardData.verticals.map(
                                                   (item) => {
-                                                      return <div>{item}</div>;
+                                                      return (
+                                                          <div>
+                                                              {item}
+                                                              {","}
+                                                          </div>
+                                                      );
                                                   }
                                               )
                                             : null}
-                                    </p>
-                                    <p>{TrainerCardPayload.shortDescription}</p>
+                                    </h6>
+
+                                    <p>{trainerCardData.shortDescription}</p>
                                 </div>
                                 <div className="card-button">
                                     <button

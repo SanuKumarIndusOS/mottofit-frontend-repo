@@ -16,7 +16,9 @@ import Web from "../../../../assets/files/SVG/Web Icon.svg";
 import { history } from "helpers";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
-
+// import { useHistory } from "react-router-dom";
+import { TrainerApi, PaymentApi } from "service/apiVariables";
+import { api } from "service/api";
 const CyanRadio = withStyles({
     root: {
         "&$checked": {
@@ -56,8 +58,11 @@ function TrainerSetup() {
         coverAmount: "",
         governmentId: "",
         governmentIdNumber: "",
+        insurance: "",
     });
 
+    console.log(trainerSetupData, "trainerSetupData");
+    // const history = useHistory();
     React.useEffect(() => {
         dispatch(captureTrainerSetup(trainerSetupData));
     }, [trainerSetupData]);
@@ -76,11 +81,14 @@ function TrainerSetup() {
         (state) => state.trainerCaptureReducer.setupData
     );
 
+    const TrainerCardPayload = useSelector(
+        (state) => state.trainerCaptureReducer.cardData
+    );
+
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         console.log(TrainerSetupPayload);
-
         TrainerSetupPayload.motto === undefined
             ? dispatch(trainerDetail()).then((res) => {
                   console.log(res, "testt");
@@ -90,9 +98,17 @@ function TrainerSetup() {
                   trainerSetupData.instagram = res.instagramProfile;
                   trainerSetupData.website = res.websiteLink;
                   trainerSetupData.willingToTravel = res.willingToTravel;
-                  trainerSetupData.haveAFacility = res.trainingFacility;
-                  trainerSetupData.zoom_link = res.virtualMeetingLinK;
+                  trainerSetupData.haveAFacility = res.haveAFacility;
+                  trainerSetupData.facility_details =
+                      res.trainingFacilityLocation;
+                  trainerSetupData.zoom_link = res.virtualMeetingLink;
                   trainerSetupData.neighborhood_list = res.servicableLocation;
+                  trainerSetupData.identityNameUS = res.identityNameUS;
+                  trainerSetupData.governmentIdNumber = res.governmentIdNumber;
+                  trainerSetupData.governmentId = res.governmentId;
+                  trainerSetupData.insuranceNameUS = res.insuranceNameUS;
+                  trainerSetupData.coverAmount = res.coverAmount;
+                  trainerSetupData.insurance = res.insurance;
               })
             : setTrainerSetupData(TrainerSetupPayload);
     }, []);
@@ -113,7 +129,6 @@ function TrainerSetup() {
         values[index][event.target.name] = event.target.value;
         //setCertificateFields(values);
         setTrainerSetupData({ ...trainerSetupData, certificateFields: values });
-
         console.log(trainerSetupData.certificateFields);
     };
 
@@ -121,7 +136,6 @@ function TrainerSetup() {
     function handleChangePayment(e) {
         setTrainerSetupData(e);
     }
-
     // handle virtual button active
     const handleVirtual = () => {
         setCheckButtonVirtual((checkButtonVirtual) => !checkButtonVirtual);
@@ -162,7 +176,11 @@ function TrainerSetup() {
                             </div>
                         </div>
                     </div>
-                    <SetupPrevModal open={open} setOpen={setOpen} />
+                    <SetupPrevModal
+                        open={open}
+                        setOpen={setOpen}
+                        trainerSetupData={trainerSetupData}
+                    />
                     <div className="setup_headings">
                         <h2>Build out the rest of your Profile!</h2>
                         <p>
@@ -301,10 +319,10 @@ function TrainerSetup() {
                                 onChange={(e) => {
                                     setTrainerSetupData({
                                         ...trainerSetupData,
-                                        serviceableLocation: e.value,
+                                        neighborhood_list: e.value,
                                     });
                                 }}
-                                value={trainerSetupData.serviceableLocation}
+                                value={trainerSetupData.neighborhood_list}
                             />
                         </div>
                         <div className="radio_content">
@@ -327,7 +345,7 @@ function TrainerSetup() {
                                 value={trainerSetupData.haveAFacility}
                             />
                             &ensp;<span className="radio">Yes</span> &ensp;
-                            <CyanRadio
+                            <Radio
                                 checked={
                                     trainerSetupData.haveAFacility === false
                                 }
@@ -442,9 +460,9 @@ function TrainerSetup() {
                     </div>
 
                     <PaymentSectionSetup
-                        onChange={handleChangePayment}
                         trainerSetupData={trainerSetupData}
                         setTrainerSetupData={setTrainerSetupData}
+                        onChange={dispatch}
                     />
 
                     <div className="card_agree">
@@ -476,10 +494,106 @@ function TrainerSetup() {
                         <button
                             onClick={() => {
                                 console.log(trainerSetupData);
-                                dispatch(captureTrainerSetup(trainerSetupData));
-                                if (trainerSetupData) {
-                                    history.push("/trainers/dashboard/session");
-                                }
+                                //dispatch(captureTrainerSetup(trainerSetupData));
+                                let payload = {
+                                    myMotto: TrainerSetupPayload.motto,
+                                    applicationStatus: "setupComplete",
+                                    trainingProcess:
+                                        TrainerSetupPayload.training_process,
+                                    certification:
+                                        TrainerSetupPayload.certificateFields,
+                                    virtualMeetingLink:
+                                        TrainerSetupPayload.zoom_link,
+                                    trainingFacility:
+                                        TrainerSetupPayload.haveAFacility,
+                                    willingToTravel:
+                                        TrainerSetupPayload.willingToTravel,
+                                    servicableLocation:
+                                        TrainerSetupPayload.neighborhood_list,
+                                    instagramProfile:
+                                        TrainerSetupPayload.instagram,
+                                    websiteLink: TrainerSetupPayload.website,
+                                    identityNameUS:
+                                        TrainerCardPayload.identityNameUS,
+                                    governmentIdNumber:
+                                        TrainerCardPayload.governmentIdNumber,
+                                    governmentId:
+                                        TrainerCardPayload.governmentId,
+                                    insuranceNameUS:
+                                        TrainerCardPayload.insuranceNameUS,
+                                    coverAmount: TrainerCardPayload.coverAmount,
+                                    insurance: TrainerCardPayload.insurance,
+
+                                    firstName: TrainerCardPayload.firstName,
+                                    lastName: TrainerCardPayload.lastName,
+                                    areaOfExpertise:
+                                        TrainerCardPayload.verticals,
+                                    description:
+                                        TrainerCardPayload.shortDescription,
+                                    oneOnOnePricing: {
+                                        inPersonAtClientLocation:
+                                            TrainerCardPayload.inPersonAtClient_individualCharge,
+                                        inPersonAtTrainerLocation:
+                                            TrainerCardPayload.inPersonAtTrainer_individualCharge,
+                                        virtualSession:
+                                            TrainerCardPayload.virtual_individualCharge,
+                                        passRatefor3SessionAtClientLocation:
+                                            TrainerCardPayload.inPersonAtClient_threeSessionRate,
+                                        passRatefor10SessionAtClientLocation:
+                                            TrainerCardPayload.inPersonAtClient_tenSessionRate,
+                                        passRatefor3SessionAtTrainerLocation:
+                                            TrainerCardPayload.inPersonAtTrainer_threeSessionRate,
+                                        passRatefor10SessionAtTrainerLocation:
+                                            TrainerCardPayload.inPersonAtTrainer_tenSessionRate,
+                                        passRatefor3SessionAtVirtual:
+                                            TrainerCardPayload.virtual_threeSessionRate,
+                                        passRatefor10SessionAtVirtual:
+                                            TrainerCardPayload.virtual_tenSessionRate,
+                                    },
+                                    socialSessionPricing: {
+                                        inPeronAtClientLocationfor2People:
+                                            TrainerCardPayload.inPersonAtClient_twoPPL,
+                                        inPeronAtClientLocationfor3People:
+                                            TrainerCardPayload.inPersonAtClient_threePPL,
+                                        inPeronAtClientLocationfor4People:
+                                            TrainerCardPayload.inPersonAtClient_fourPPL,
+                                        inPeronAtTrainerLocationfor2People:
+                                            TrainerCardPayload.inPersonAtTrainer_twoPPL,
+                                        inPeronAtTrainerLocationfor3People:
+                                            TrainerCardPayload.inPersonAtTrainer_threePPL,
+                                        inPeronAtTrainerLocationfor4People:
+                                            TrainerCardPayload.inPersonAtTrainer_fourPPL,
+                                        virtualSessionfor2People:
+                                            TrainerCardPayload.virtual_twoPPL,
+                                        virtualSessionfor3People:
+                                            TrainerCardPayload.virtual_threePPL,
+                                        virtualSessionfor4People:
+                                            TrainerCardPayload.virtual_fourPPL,
+                                    },
+                                    classSessionPricing: {
+                                        inPersonAtclientLocationfor15People:
+                                            TrainerCardPayload.inPersonAtClient_classFlatRate,
+                                        inPersonAttrainerLocationfor15People:
+                                            TrainerCardPayload.inPersonAtTrainer_classFlatRate,
+                                        // virtualAtclientLocationfor15People:TrainerCardPayload,
+                                        // virtualAttrainerLocationfor15People:TrainerCardPayload,
+                                        virtualSessionfor15People:
+                                            TrainerCardPayload.virtual_classFlatRate,
+                                    },
+                                };
+                                const { updateTrainerAvailabilityApi } =
+                                    TrainerApi;
+                                updateTrainerAvailabilityApi.body = payload;
+                                api({ ...updateTrainerAvailabilityApi })
+                                    .then(({ data, message }) => {
+                                        console.log(data, message);
+                                        // getStripeURL();
+                                        history.push("/trainers/dashboard/");
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                        //  setLoading(false);
+                                    });
                             }}
                             type="submit"
                             disabled={(isLoading, !agreed)}
@@ -494,7 +608,6 @@ function TrainerSetup() {
                                     <ArrowHoverBlacked />
                                 </a>
                             )}
-                            {/* <img src={Arrow} alt="icon" /> */}
                         </button>
                         <div className="terms_msg">
                             {agreed ? null : (
