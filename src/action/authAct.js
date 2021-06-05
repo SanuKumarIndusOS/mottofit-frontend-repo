@@ -4,17 +4,18 @@ import { addDate, compareDates } from "service/helperFunctions";
 import { history } from "helpers";
 
 
-export const loginOrSignUp = (payload) => (
+export const loginOrSignUp = ( currentApi ,payload) => (
   dispatch,
   getState,
   { api }
 ) => {
   return new Promise((resolve, reject) => {
-    let { loginApi } = AuthApi;
+    // let { loginApi } = AuthApi;.
+    
 
-    loginApi.body = payload;
+    currentApi.body = payload;
 
-    api({ ...loginApi })
+    api({ ...currentApi })
       .then((data) => {
         resolve(data);
         const { token, expiresIn, type } = data;

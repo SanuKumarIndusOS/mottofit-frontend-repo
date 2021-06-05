@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[263],{370:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Arrow 1.2a75d61e.svg"}}]);
-//# sourceMappingURL=263.34eeef02.chunk.js.map

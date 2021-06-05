@@ -219,7 +219,7 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
                                             type="submit"
                                             onClick={signUp()}
                                         >
-                                            Continue to Account{" "}
+                                            {" "}
                                             <ArrowHoverBlacked />
                                         </button>
                                     </div>

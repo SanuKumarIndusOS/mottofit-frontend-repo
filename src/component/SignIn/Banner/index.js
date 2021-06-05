@@ -64,10 +64,10 @@ const SignInFC = ({
     // NEED USER DATA AFTER LOGIN AND SIGNUP
 
     if (Object.keys(error).length === 0) {
-      loginAct(payload)
+      loginAct( loginApi ,payload)
         .then((res) => {
          
-          //localStorage.setItem("user-id", res.id);
+          localStorage.setItem("user-id", res.id);
           if (res["type"] === "trainer") {
             trainerDetail().then((response) => {
            
