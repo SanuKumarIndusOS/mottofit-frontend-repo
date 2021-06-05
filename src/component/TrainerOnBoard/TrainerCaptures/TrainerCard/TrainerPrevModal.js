@@ -3,6 +3,7 @@ import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import { Modal } from "react-responsive-modal";
 
 import { useSelector, useDispatch } from "react-redux";
+import './styles.scss';
 
 export const TrainerPrevModal = ({ open, setOpen }) => {
   const [previewImage, setPreviewTmage] = useState();
@@ -96,7 +97,7 @@ console.log(min);
                       textTransform: "capitalize",
                     }}
                   >
-                    {TrainerCardPayload.firstName}
+                    {TrainerCardPayload.firstName || ""}
                     {/* {trainerData.firstName}
                                     &nbsp;
                                     {trainerData.lastName} */}
@@ -110,9 +111,9 @@ console.log(min);
                   <p style={{ color: "#898989" }}>
                     {/* {trainerData.description} */}
 
-                    {TrainerCardPayload.verticals.map((item) => {
+                    { (TrainerCardPayload.verticals !== undefined)? TrainerCardPayload.verticals.map((item) => {
                       return <div>{item}</div>;
-                    })}
+                    }):null}
                   </p>
                   <p>
                      {TrainerCardPayload.shortDescription}
@@ -126,7 +127,7 @@ console.log(min);
                   >
                     book a session
                     <p>
-                      from <span>${price}</span>
+                      from <span>${price || ""}</span>
                     </p>
                   </button>
                 </div>

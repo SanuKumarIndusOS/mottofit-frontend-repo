@@ -379,7 +379,7 @@ const TrainerSetUpProfileFC = ({
 
     useEffect(() => {
         if (Object.keys(trainerPersonalData).length < 5) {
-            return history.push("/trainer/card");
+            // return history.push("/trainer/card");
         }
         const {
             trainingProcess = "",

@@ -164,6 +164,7 @@ function TrainerCardNew() {
             will also besearchable in our search box!
           </p>
         </div>
+        <div className="pro_pic_center">
         <div className="item1_card">
           {previewImage ? (
             <img
@@ -229,6 +230,7 @@ function TrainerCardNew() {
             }}
           />
           <h5></h5>
+        </div>
         </div>
         <div className="item2_card">
           <div className="item2_card_inner">
