@@ -343,16 +343,18 @@ const TrainerSetUpProfileFC = ({
 
         updateTrainerAvailabilityApi.body = payload;
 
-        setLoading(true);
+        console.log(updateTrainerAvailabilityApi,"updateApi");
+
+       // setLoading(true);
 
         api({ ...updateTrainerAvailabilityApi })
             .then(({ data, message }) => {
                 console.log(data, message);
-                getStripeURL();
+               // getStripeURL();
             })
             .catch((err) => {
                 console.log(err);
-                setLoading(false);
+              //  setLoading(false);
             });
 
         // // history.push("/trainers/dashboard/session");
