@@ -203,3 +203,15 @@ h6 {
     margin: 0 1em 0 0.5em;
     font-family: "Montserrat", sans-serif;
 }
+
+.error_span {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    span {
+        font-family: "Montserrat", sans-serif;
+        text-align: center;
+        color: red;
+        font-weight: 500;
+    }
+}
