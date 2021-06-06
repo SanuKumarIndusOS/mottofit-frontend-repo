@@ -6,9 +6,6 @@
 build
 
 node_modules
-src
-public
-app.js
 jsconfig.json
 #production
 

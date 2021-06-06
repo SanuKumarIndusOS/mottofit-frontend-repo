@@ -44,6 +44,10 @@ export const TrainerApi = {
     api: "trainer",
     method: "put",
   },
+  updateTrainerDetails: {
+    api: "trainer",
+    method: "put",
+  },
   getTrainerApi: {
     api: "trainer",
     method: "get",

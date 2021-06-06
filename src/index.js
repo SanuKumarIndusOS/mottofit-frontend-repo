@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./helpers";
 import "./assets/css/index.scss";
 import "./assets/scss/index.scss";
-
+import "react-notifications/lib/notifications.css";
 ReactDOM.render(
   <Provider store={store}>
     <Routes />

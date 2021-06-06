@@ -49,6 +49,7 @@
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "simple-react-validator": "^1.6.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
     "twilio-chat": "^4.1.0",

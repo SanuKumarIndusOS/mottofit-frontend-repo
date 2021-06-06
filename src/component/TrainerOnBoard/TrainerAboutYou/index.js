@@ -1,422 +1,314 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import "./styles.scss";
 import Instagram from "../../../assets/files/SVG/Insta Icon.svg";
 import Web from "../../../assets/files/SVG/Web Icon.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
-import { useForm } from "react-hook-form";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
-import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
+import {
+  updateTrainerDetailsApicall,
+  getTrainerDetails,
+} from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { history } from "helpers";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { Dropdown } from "reactjs-dropdown-component";
 import { trainerDetail } from "action/trainerAct";
 import "./dropdown.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import { NormalMultiSelect } from "component/common/NormalMultiSelect";
+import SimpleReactValidator from "simple-react-validator";
 import moment from "moment";
-// import useForm from "./useForm";
-// import validateInfo from "./validation";
 
 const locations = [
-    {
-        label: "New York City",
-        value: "New York City",
-    },
-    {
-        label: "Miami",
-        value: "Miami",
-    },
-    {
-        label: "Hamptons",
-        value: "Hamptons",
-    },
-    {
-        label: "Palm Beach",
-        value: "Palm Beach",
-    },
+  {
+    label: "New York City",
+    value: "New York City",
+  },
+  {
+    label: "Miami",
+    value: "Miami",
+  },
+  {
+    label: "Hamptons",
+    value: "Hamptons",
+  },
+  {
+    label: "Palm Beach",
+    value: "Palm Beach",
+  },
 ];
 
-const gender = [
-    {
-        label: "Male",
-        value: "Male",
-    },
-    {
-        label: "Female",
-        value: "Female",
-    },
+const genderList = [
+  {
+    label: "Male",
+    value: "Male",
+  },
+  {
+    label: "Female",
+    value: "Female",
+  },
 ];
-const AboutTrainerFC = ({
-    updateTrainerDetails,
-    details,
-    trainerPersonalData,
-    trainerDetail,
-    // submitForm,
-}) => {
-    const { register, errors, handleSubmit } = useForm();
-    // const {
-    //     aboutTrainerData,
-    //     handleFormSubmit,
-    //     error,
-    //     setAboutTrainerData,
-    //     // dataSubmit,
-    // } = useForm(validateInfo, submitForm);
-    const [aboutTrainerData, setAboutTrainerData] = useState({
-        location: "",
-        dob: "",
-        email: "",
-        gender: "",
-        phone: "",
-        websiteURL: "",
-        instagram: "",
-        firstName: "",
-    });
+class AboutTrainerFC extends Component {
+  state = {
+    dob: "",
+    location: "",
+    email: "",
+    gender: "",
+    websiteURL: "",
+    phone: "",
+    instagram: "",
+    firstName: "",
+  };
 
-    const handleTrainerBackground = () => {
-        const storeData = {
-            details: {
-                ...details,
-                firstName: aboutTrainerData.firstName,
-                dob: aboutTrainerData.dob,
-                email: aboutTrainerData.email,
-                gender: aboutTrainerData.gender,
-                phone: aboutTrainerData.phone,
-                location: aboutTrainerData.location,
-                websiteLink: aboutTrainerData.websiteURL,
-                instaHandle: aboutTrainerData.instagram,
-            },
-        };
+  //validation
+  validator = new SimpleReactValidator({
+    messages: {
+      email: "Invalid Email address",
+    },
+    element: (message) => (
+      <span className="error-message text-danger fs-14">{message}</span>
+    ),
+    autoForceUpdate: this,
+    validators: {
+      email: {
+        message: "must be a valid Email.",
+        rule: (val, params, validator) => {
+          return validator.helpers.testRegex(
+            val,
+            /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/
+          );
+        },
+        messageReplace: (message, params) =>
+          message.replace("", this.helpers.toSentence(params)),
+        required: true,
+      },
+    },
+  });
 
-        localStorage.setItem(
-            "aboutTrainerDetails",
-            JSON.stringify(aboutTrainerData)
-        );
-        if (
-            moment().diff(aboutTrainerData.dob, "years", false) <= 21 ||
-            aboutTrainerData.phone.length < 11
-        ) {
-            alert("Please fill in required data");
-        } else {
-            history.push(`/trainer/background`);
-            updateTrainerDetails(storeData);
-        }
+  handleTrainerBackground = async (e) => {
+    e.preventDefault();
+    let {
+      dob,
+      location,
+      email,
+      gender,
+      websiteURL,
+      phone,
+      instagram,
+      firstName,
+    } = this.state;
+    const storeData = {
+      firstName,
+      DOB: dob,
+      email,
+      gender,
+      phone,
+      location,
+      websiteLink: websiteURL,
+      instaHandle: instagram,
     };
 
-    useEffect(() => {
-        let newtrainerObj = JSON.parse(
-            localStorage.getItem("aboutTrainerDetails")
-        );
-        console.log(newtrainerObj);
+    if (this.validator.allValid()) {
+      this.props.updateTrainerDetailsApicall(storeData).then(() => {
+        history.push(`/trainer/background`);
+      });
+    } else {
+      this.validator.showMessages();
+      this.forceUpdate();
+    }
+  };
 
-        if (newtrainerObj) {
-            trainerDetail().then((data) => {
-                console.log(data, "datadata");
-                setAboutTrainerData({
-                    ...aboutTrainerData,
-                    phone: `${newtrainerObj.phone || ""}`,
-                    email: data["email"],
-                    firstName: data["firstName"] + " " + data["lastName"],
-                    location: `${newtrainerObj.location || ""}`,
-                    dob: `${newtrainerObj.dob || ""}`,
-                    gender: `${newtrainerObj.gender || ""}`,
-                    websiteURL: `${newtrainerObj.websiteURL || ""}`,
-                    instagram: `${newtrainerObj.instagram || ""}`,
-                });
-            });
-            if (newtrainerObj.gender !== "") {
-                genderDropdownRef.current.selectSingleItem({
-                    value: newtrainerObj.gender,
-                });
-            }
+  handleInput = ({ target: { value, name } }) => {
+    this.setState({
+      [name]: value,
+    });
+  };
 
-            if (newtrainerObj.location !== "") {
-                locationDropdownRef.current.selectSingleItem({
-                    value: newtrainerObj.location,
-                });
-            }
-        }
-
-        else {
-            trainerDetail().then((data) => {
-                setAboutTrainerData({
-                    ...aboutTrainerData,
-                    email: data["email"],
-                    firstName: data["firstName"] + " " + data["lastName"],
-                    phone: data["phoneNumber"],
-                })
-            })
-        }
-
-        if(newtrainerObj)
-        localStorage.removeItem("aboutTrainerDetails");
-    }, []);
-
-    const genderDropdownRef = React.useRef();
-    const locationDropdownRef = React.useRef();
-
-    console.log(locationDropdownRef);
-
+  componentDidMount() {
+    this.props.trainerDetail().then((data) => {
+      this.setState({
+        dob: data.DOB || "",
+        location: data.location || "",
+        email: data.email || "",
+        gender: data.gender || "",
+        websiteURL: data.websiteLink || "",
+        phone: data.phoneNumber || "",
+        instagram: data.instagramProfile || "",
+        firstName: data.firstName + " " + data.lastName || "",
+      });
+    });
+  }
+  render() {
+    let {
+      dob,
+      location,
+      email,
+      gender,
+      websiteURL,
+      phone,
+      instagram,
+      firstName,
+    } = this.state;
     return (
-        <>
-            <div className="container main">
-                <div className="wrapper_about">
-                    <h2>Tell us a little bit about you</h2>
-                    <br></br>
-                    <div className="outter_form">
-                        <form
-                            className="wrapper_inputs"
-                        // onSubmit={handleFormSubmit}
-                        >
-                            <div className="wrapper_innerInput">
-                                <label>Name*</label>
-                                <input
-                                    placeholder="Name"
-                                    type="name"
-                                    name="name"
-                                    ref={register({
-                                        required: true,
-                                    })}
-                                    style={{ textTransform: "capitalize" }}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            firstName: e.target.value,
-                                        })
-                                    }
-                                    value={aboutTrainerData.firstName}
-                                    name="firstName"
-                                />
-                                {errors.firstName && <span>{"required"}</span>}
-                            </div>
-
-                            <div className="wrapper_innerInput">
-                                <label className="bg_down">Location*</label>
-                                <div className="iconwrapper">
-                                    <Dropdown
-                                        className="custom_dropdown"
-                                        ref={locationDropdownRef}
-                                        title="Select Your City"
-                                        list={locations}
-                                        value={
-                                            locationDropdownRef.current
-                                                ? locationDropdownRef.current
-                                                    .state.selectedItem
-                                                : ""
-                                        }
-                                        onChange={(e) => {
-                                            setAboutTrainerData({
-                                                ...aboutTrainerData,
-                                                location: e.value,
-                                            });
-                                        }}
-                                        name="location"
-                                    />
-                                </div>
-                                {locationDropdownRef.current !== undefined &&
-                                    locationDropdownRef.current.state
-                                        .selectedItem === null ? (
-                                    <span>required field</span>
-                                ) : null}
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Date of Birth*</label>
-
-                                <input
-                                    placeholder="DD/MM/YYYY"
-                                    type="date"
-                                    onFocus={(e) =>
-                                        (e.currentTarget.type = "date")
-                                    }
-                                    placeholder="MM/DD/YYYY"
-                                    value={aboutTrainerData.dob}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            dob: e.target.value,
-                                        })
-                                    }
-                                    name="dob"
-                                    ref={register({
-                                        required:
-                                            "Mandatory fields cannot be empty",
-                                    })}
-                                />
-                                {errors.dob && (
-                                    <span>{errors.dob.message}</span>
-                                )}
-                                {aboutTrainerData.dob &&
-                                    moment().diff(
-                                        aboutTrainerData.dob,
-                                        "years",
-                                        false
-                                    ) <= 21 && (
-                                        <span>
-                                            Trainer should be more than 21 years
-                                            of age
-                                        </span>
-                                    )}
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Select Your Gender*</label>
-                                <div className="iconwrapper">
-                                    <Dropdown
-                                        className="custom_dropdown"
-                                        title="Select Gender"
-                                        ref={genderDropdownRef}
-                                        list={gender}
-                                        value={
-                                            genderDropdownRef.current
-                                                ? genderDropdownRef.current
-                                                    .state.selectedItem
-                                                : ""
-                                        }
-                                        onChange={(e) => {
-                                            setAboutTrainerData({
-                                                ...aboutTrainerData,
-                                                gender: e.value,
-                                            });
-                                        }}
-                                        name="gender"
-                                    />
-                                </div>
-
-                                {genderDropdownRef.current !== undefined &&
-                                    genderDropdownRef.current.state.selectedItem ===
-                                    null ? (
-                                    <span>required field</span>
-                                ) : null}
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Email*</label>
-                                <input
-                                    placeholder="Email"
-                                    type="email"
-                                    ref={register({
-                                        required: true,
-                                    })}
-                                    value={aboutTrainerData.email}
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            email: e.target.value,
-                                        })
-                                    }
-                                    name="email"
-                                />
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Phone*</label>
-
-                                <ReactPhoneInput
-                                    type="phone"
-                                    disableDropdown
-                                    disableAreaCodes
-                                    countryCodeEditable={false}
-                                    value={aboutTrainerData.phone}
-                                    placeholder="Phone Number"
-                                    // country="us"
-                                    inputProps={{
-                                        name: "phone",
-                                    }}
-                                    name="phoneNumber"
-                                    onChange={(e) =>
-                                        setAboutTrainerData({
-                                            ...aboutTrainerData,
-                                            phone: e,
-                                        })
-                                    }
-                                />
-
-                                {aboutTrainerData.phone &&
-                                    aboutTrainerData.phone.length < 11 && (
-                                        <span>
-                                            Phone Number should contain 10
-                                            digits
-                                        </span>
-                                    )}
-                            </div>
-
-                            <div className="wrapper_innerInput">
-                                <label>Website</label>
-                                <div className="iconwrapper">
-                                    <input
-                                        placeholder="Add your weblink"
-                                        type="text"
-                                        value={aboutTrainerData.websiteURL}
-                                        onChange={(e) =>
-                                            setAboutTrainerData({
-                                                ...aboutTrainerData,
-                                                websiteURL: e.target.value,
-                                            })
-                                        }
-                                    />
-                                    <img src={Web} alt="icon" />
-                                </div>
-                            </div>
-                            <div className="wrapper_innerInput">
-                                <label>Instagram</label>
-                                <div className="iconwrapper">
-                                    <input
-                                        placeholder="Add your Instagram Handle"
-                                        type="text"
-                                        value={aboutTrainerData.instagram}
-                                        onChange={(e) =>
-                                            setAboutTrainerData({
-                                                ...aboutTrainerData,
-                                                instagram: e.target.value,
-                                            })
-                                        }
-                                    />
-                                    <img src={Instagram} alt="icon" />
-                                </div>
-                            </div>
-
-                            <div className="submit_button">
-                                <button
-                                    type="submit"
-                                    //react hook form
-                                    onClick={handleSubmit(
-                                        handleTrainerBackground
-                                    )}
-                                >
-                                    Continue
-                                    <ArrowHoverBlacked />
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <img
-                        src={WaterMark}
-                        alt="icon"
-                        className="about_watermark"
-                    />
+      <>
+        <div className="container main">
+          <div className="wrapper_about">
+            <h2>Tell us a little bit about you</h2>
+            <br></br>
+            <div className="outter_form">
+              <div className="wrapper_inputs">
+                <div className="wrapper_innerInput">
+                  <label>Name*</label>
+                  <input
+                    placeholder="Name"
+                    style={{ textTransform: "capitalize" }}
+                    onChange={(e) => this.handleInput(e)}
+                    value={firstName}
+                    name="firstName"
+                  />
+                  {this.validator.message(
+                    "firstName",
+                    firstName,
+                    "required|alpha_space"
+                  )}
                 </div>
+
+                <div className="wrapper_innerInput">
+                  <label className="bg_down">Location*</label>
+                  <div className="iconwrapper">
+                    <NormalMultiSelect
+                      placeholder="Select Your City"
+                      value={location}
+                      arrow={true}
+                      name="location"
+                      options={locations}
+                      handleChange={(e) => this.handleInput(e)}
+                    />
+                    {this.validator.message("location", location, "required")}
+                  </div>
+                </div>
+                <div className="wrapper_innerInput">
+                  <label>Date of Birth*</label>
+                  <input
+                    placeholder="DD/MM/YYYY"
+                    type="date"
+                    onFocus={(e) => (e.currentTarget.type = "date")}
+                    placeholder="MM/DD/YYYY"
+                    value={dob}
+                    onChange={(e) => this.handleInput(e)}
+                    name="dob"
+                  />
+                  {this.validator.message("dob", dob, "required")}
+                  {dob && moment().diff(dob, "years", false) <= 21 && (
+                    <span>Trainer should be more than 21 years of age</span>
+                  )}
+                </div>
+                <div className="wrapper_innerInput">
+                  <label>Select Your Gender*</label>
+                  <div className="iconwrapper">
+                    <NormalMultiSelect
+                      placeholder="Select Gender"
+                      value={gender}
+                      arrow={true}
+                      name="gender"
+                      options={genderList}
+                      handleChange={(e) => this.handleInput(e)}
+                    />
+                    {this.validator.message("gender", gender, "required")}
+                  </div>
+                </div>
+                <div className="wrapper_innerInput">
+                  <label>Email*</label>
+                  <input
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => this.handleInput(e)}
+                    name="email"
+                  />
+                  {this.validator.message("email", email, "required|email")}
+                </div>
+                <div className="wrapper_innerInput">
+                  <label>Phone*</label>
+
+                  <ReactPhoneInput
+                    type="phone"
+                    disableDropdown
+                    disableAreaCodes
+                    countryCodeEditable={false}
+                    value={phone}
+                    placeholder="Phone Number"
+                    // country="us"
+                    inputProps={{
+                      name: "phone",
+                    }}
+                    name="phoneNumber"
+                    onChange={(e) => {
+                      this.setState({
+                        phone: e,
+                      });
+                    }}
+                  />
+                  {this.validator.message("phone", phone, "required|phone")}
+                </div>
+
+                <div className="wrapper_innerInput">
+                  <label>Website</label>
+                  <div className="iconwrapper">
+                    <input
+                      placeholder="Add your weblink"
+                      type="text"
+                      value={websiteURL}
+                      name="websiteURL"
+                      onChange={(e) => this.handleInput(e)}
+                    />
+                    <img src={Web} alt="icon" />
+                  </div>
+                </div>
+                <div className="wrapper_innerInput">
+                  <label>Instagram</label>
+                  <div className="iconwrapper">
+                    <input
+                      placeholder="Add your Instagram Handle"
+                      type="text"
+                      value={instagram}
+                      name="instagram"
+                      onChange={(e) => this.handleInput(e)}
+                    />
+                    <img src={Instagram} alt="icon" />
+                  </div>
+                </div>
+
+                <div className="submit_button">
+                  <button
+                    type="submit"
+                    onClick={(e) => this.handleTrainerBackground(e)}
+                  >
+                    Continue
+                    <ArrowHoverBlacked />
+                  </button>
+                </div>
+              </div>
             </div>
-        </>
+            <img src={WaterMark} alt="icon" className="about_watermark" />
+          </div>
+        </div>
+      </>
     );
-};
-
-const mapStateToProps = (state) => ({
-    details: state.trainerReducer.details,
-    trainerPersonalData: state.trainerReducer.data,
-});
-
+  }
+}
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {
-            updateTrainerDetails,
-            getTrainerDetails,
-            trainerDetail,
-        },
-        dispatch
-    );
+  return bindActionCreators(
+    {
+      updateTrainerDetailsApicall,
+      getTrainerDetails,
+      trainerDetail,
+    },
+    dispatch
+  );
 };
 
-const AboutTrainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AboutTrainerFC);
+const AboutTrainer = connect(null, mapDispatchToProps)(AboutTrainerFC);
 
 export default AboutTrainer;

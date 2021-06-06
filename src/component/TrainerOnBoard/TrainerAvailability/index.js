@@ -10,459 +10,338 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import "./model.scss";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
-import { TrainerApi } from "service/apiVariables";
-import { api } from "service/api";
-import { useLocation } from "react-router-dom";
 import { history } from "helpers";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateTrainerDetails } from "action/trainerAct";
+import { updateTrainerDetailsApicall, trainerDetail } from "action/trainerAct";
 
 const CyanRadio = withStyles({
-    root: {
-        "&$checked": {
-            color: cyan[600],
-        },
+  root: {
+    "&$checked": {
+      color: cyan[600],
     },
-    checked: {},
+  },
+  checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-const TrainerAvailabilityFC = ({ updateTrainerDetails, details }) => {
-    const location = useLocation();
-    const [selectedValue, setSelectedValue] = React.useState("a");
-    const [selectedOneValue, setSelectedOneValue] = React.useState("");
-    const [checkButton, setCheckButton] = useState(true);
-    const [checkButtonInPerson, setCheckButtonInPerson] = useState(true);
+const TrainerAvailabilityFC = ({
+  updateTrainerDetailsApicall,
+  trainerDetail,
+}) => {
+  const [selectedValue, setSelectedValue] = useState("a");
+  const [selectedOneValue, setSelectedOneValue] = useState("");
+  const [checkButton, setCheckButton] = useState(false);
+  const [checkButtonInPerson, setCheckButtonInPerson] = useState(false);
 
-    // const [trainerAbout, setTrainerAbout] = React.useState({});
+  const [open, setOpen] = useState(false);
+  const myRef = useRef(null);
 
-    const [open, setOpen] = useState(false);
-    const myRef = useRef(null);
+  const [trainerAvailabilityData, setTrainerAvailabilityData] = useState({
+    hoursPerWeek: "",
+    preferedTrainingMode: [],
+    trainingFacilityLocation: "",
+    servicableLocation: "",
+  });
 
-    const [trainerAvailabilityData, setTrainerAvailabilityData] =
-        React.useState({
-            hoursPerWeek: "",
-            preferedTrainingMode: [],
-            trainingFacilityLocation: "",
-            willingToTravel: "0",
-            servicableLocation: "",
-        });
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
 
-    const handleChange = (event) => {
-        setSelectedValue(event.target.value);
+  const handleOneChange = (event) => {
+    setSelectedOneValue(event.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let data = {
+      preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
+      willingToTravel: trainerAvailabilityData.willingToTravel,
+      servicableLocation: trainerAvailabilityData.servicableLocation,
+      trainingFacilityLocation: [
+        trainerAvailabilityData.trainingFacilityLocation,
+      ],
+      stripeId: "",
+      hoursPerWeek: trainerAvailabilityData.hoursPerWeek,
+      serviceableCity: trainerAvailabilityData.servicableLocation,
     };
 
-    const handleOneChange = (event) => {
-        setSelectedOneValue(event.target.value);
+    updateTrainerDetailsApicall(data)
+      .then(() => {
+        setOpen(true);
+      })
+      .catch(() => {
+        setOpen(false);
+      });
+  };
 
-        setTrainerAvailabilityData({
-            ...trainerAvailabilityData,
-            willingToTravel: event.target.value,
-        });
-    };
+  const handleTrianingData = (e, type) => {
+    let tempData = [...trainerAvailabilityData.preferedTrainingMode];
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    if (tempData.includes(type)) {
+      tempData = tempData.filter((prefered) => prefered !== type);
+    } else {
+      tempData = [...tempData, type];
+    }
+    setTrainerAvailabilityData({
+      ...trainerAvailabilityData,
+      preferedTrainingMode: tempData,
+    });
 
-        const storeData = {
-            details: {
-                ...details,
-                hoursPerWeek: trainerAvailabilityData.hoursPerWeek,
-                preferedTrainingMode:
-                    trainerAvailabilityData.preferedTrainingMode,
-                trainingFacilityLocation:
-                    trainerAvailabilityData.trainingFacilityLocation,
-                willingToTravel: trainerAvailabilityData.willingToTravel,
-                servicableLocation: trainerAvailabilityData.servicableLocation,
-            },
+    setCheckButton((checkButton) => !checkButton);
+  };
+  const handleTrainingData = (e, type) => {
+    let tempData = [...trainerAvailabilityData.preferedTrainingMode];
+
+    if (tempData.includes(type)) {
+      tempData = tempData.filter((prefered) => prefered !== type);
+    } else {
+      tempData = [...tempData, type];
+    }
+    setTrainerAvailabilityData({
+      ...trainerAvailabilityData,
+      preferedTrainingMode: tempData,
+    });
+
+    setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
+  };
+
+  useEffect(() => {
+    trainerDetail().then((data) => {
+      if (data) {
+        const tempData = {
+          hoursPerWeek: data.hoursPerWeek,
+          preferedTrainingMode: data.preferedTrainingMode,
+          trainingFacilityLocation: data.trainingFacilityLocation,
+          servicableLocation: data.servicableLocation,
         };
-
-        updateTrainerDetails(storeData);
-
-        let data = {
-            location: details.location,
-            DOB: details.dob,
-            gender: details.gender,
-            instagramProfile: details.instaHandle,
-            facebookProfile: "https://facebook.com/kljdhpersonaltrainer",
-            linkedInProfile: "https://linkedin.com/kljdhpersonaltrainer",
-            referalCode: "gh678lJJ",
-            areaOfExpertise: details.areaOfExpertise,
-            trainingAvailability: "Fulltime",
-            preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
-            willingToTravel: trainerAvailabilityData.willingToTravel,
-            servicableLocation: trainerAvailabilityData.servicableLocation,
-            currentExperience: details.currentExperience,
-            previousExperience: details.previousExperience.map(
-                ({ job, orgnization, years }) => ({
-                    workMode: orgnization,
-                    jobTitle: job,
-                    yearsOfExperience: `${years}`,
-                })
-            ),
-            trainingProcess: details.trainingProcess,
-            profilePicture: "img location",
-            interestInMotto: details.interestInMotto,
-            clientAssessment: details.clientAssessment,
-            trainingFacility: selectedValue === "a",
-            trainingFacilityLocation: [
-                trainerAvailabilityData.trainingFacilityLocation,
-            ],
-            description: "",
-            myMotto: "",
-            images: ["img Location"],
-            identityInfromation: {
-                identityType: "",
-                identityNumber: "",
-                identityImg: "S3 location",
-            },
-            insuranceInformation: {},
-            stripeId: "",
-            hoursPerWeek: trainerAvailabilityData.hoursPerWeek,
-            serviceableCity: trainerAvailabilityData.servicableLocation,
-            websiteLink: details.websiteLink,
-            youtubeLink: "jfjdld",
-            certification: details.certification.map(
-                ({ certificate, year }) => ({
-                    certificateName: certificate,
-                    certfiedYear: year,
-                    certification: certificate,
-                })
-            ),
-            oneOnOnePricing: {
-                inPersonAtClientLocation: "125$",
-                inPersonAtTrainerLocation: "130$",
-                virtualSession: "120$",
-                passRatefor3Session: "100$",
-                passRatefor10Session: "150$",
-            },
-            socialSessionPricing: {
-                inPeronAtClientLocationfor2People: "$123",
-                inPeronAtClientLocationfor3People: "$123",
-                inPeronAtClientLocationfor4People: "$123",
-                inPeronAtTrainerLocationfor2People: "$123",
-                inPeronAtTrainerLocationfor3People: "$123",
-                inPeronAtTrainerLocationfor4People: "$123",
-                virtualSessionfor2People: "$130",
-                virtualSessionfor3People: "$130",
-                virtualSessionfor4People: "$130",
-            },
-            classSessionPricing: {
-                inPersonAtclientLocationfor15People: "$300",
-                inPersonAttrainerLocationfor15People: "$290",
-                virtualAtclientLocationfor15People: "$300",
-                virtualAttrainerLocationfor15People: "$290",
-                virtualSessionfor15People: "$130",
-            },
-        };
-
-        const { updateTrainerAvailabilityApi } = TrainerApi;
-
-        updateTrainerAvailabilityApi.body = data;
-
-        api({ ...updateTrainerAvailabilityApi })
-            .then(() => {
-                setOpen(true);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                setOpen(false);
-            });
-    };
-
-    const handleTrianingData = (e, type) => {
-        let tempData = [...trainerAvailabilityData.preferedTrainingMode];
-
-        if (tempData.includes(type)) {
-            tempData = tempData.filter((prefered) => prefered !== type);
-        } else {
-            tempData = [...tempData, type];
+        setTrainerAvailabilityData(tempData);
+        if (
+          data.trainingFacility !== null &&
+          data.trainingFacility !== undefined
+        ) {
+          setSelectedValue(data.trainingFacility ? "a" : "b");
         }
-        setTrainerAvailabilityData({
-            ...trainerAvailabilityData,
-            preferedTrainingMode: tempData,
-        });
-        // console.log(tempData, "tempDatas");
-
-        setCheckButton((checkButton) => !checkButton);
-        // setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
-    };
-    const handleTrainingData = (e, type) => {
-        let tempData = [...trainerAvailabilityData.preferedTrainingMode];
-
-        if (tempData.includes(type)) {
-            tempData = tempData.filter((prefered) => prefered !== type);
-        } else {
-            tempData = [...tempData, type];
+        if (
+          data.willingToTravel !== null &&
+          data.willingToTravel !== undefined
+        ) {
+          setSelectedOneValue(data.willingToTravel ? "1" : "0");
         }
-        setTrainerAvailabilityData({
-            ...trainerAvailabilityData,
-            preferedTrainingMode: tempData,
-        });
-
-        setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
-    };
-
-    useEffect(() => {
-        if (Object.keys(details).length > 3) {
-            const tempData = {
-                hoursPerWeek: details.hoursPerWeek,
-                preferedTrainingMode: details.preferedTrainingMode,
-                trainingFacilityLocation: details.trainingFacilityLocation,
-                willingToTravel: details.willingToTravel,
-                servicableLocation: details.servicableLocation,
-            };
-
-            details.trainingFacility &&
-                setSelectedValue(details.trainingFacility ? "a" : "b");
+        if (
+          data.preferedTrainingMode &&
+          data.preferedTrainingMode.length !== 0
+        ) {
+          let tempArray = [];
+          tempArray = data.preferedTrainingMode.filter((x) => x == "Online");
+          if (tempArray.length !== 0) {
+            setCheckButton(true);
+          }
+          let tempArrayPerson = [];
+          tempArrayPerson = data.preferedTrainingMode.filter(
+            (x) => x == "inperson"
+          );
+          if (tempArrayPerson.length !== 0) {
+            setCheckButtonInPerson(true);
+          }
         }
-    }, []);
+      }
+    });
+  }, []);
 
-    return (
-        <>
-            <div className="container">
-                <div className="link_wrapper">
-                    <img src={ArrowBack} alt="icon" />
-                    <div className="inner_links">
-                        <Link to="/trainer/background">
-                            Back to Trainer Background
-                        </Link>
-                    </div>
+  return (
+    <>
+      <div className="container">
+        <div className="link_wrapper">
+          <img src={ArrowBack} alt="icon" />
+          <div className="inner_links">
+            <Link to="/trainer/background">Back to Trainer Background</Link>
+          </div>
+        </div>
+        <div className="main_wrappercontainer">
+          <div className="wrapper_inneritem">
+            <h1>Highlight your availability on the platform</h1>
+            <form className="container" onSubmit={(e) => e.preventDefault()}>
+              <div className="content_wrapper">
+                <div className="item_1">
+                  <h6>How many hours will you list on Motto?</h6>
+                  <div className="inputs_platform">
+                    <input
+                      type="number"
+                      placeholder="10 Hours/Week"
+                      value={trainerAvailabilityData.hoursPerWeek}
+                      onChange={(e) => {
+                        setTrainerAvailabilityData({
+                          ...trainerAvailabilityData,
+                          hoursPerWeek: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="main_wrappercontainer">
-                    <div className="wrapper_inneritem">
-                        <h1>Highlight your availability on the platform</h1>
-                        <p>
-                            {/* Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem ipsum has been the
-                            industry’s standard dummy text. */}
-                        </p>
-                        <form
-                            className="container"
-                            onSubmit={(e) => e.preventDefault()}
-                        >
-                            <div className="content_wrapper">
-                                <div className="item_1">
-                                    <h6>
-                                        How many hours will you list on Motto?
-                                    </h6>
-                                    <div className="inputs_platform">
-                                        <input
-                                            type="number"
-                                            placeholder="10 Hours/Week"
-                                            value={
-                                                trainerAvailabilityData.hoursPerWeek
-                                            }
-                                            onChange={(e) => {
-                                                setTrainerAvailabilityData({
-                                                    ...trainerAvailabilityData,
-                                                    hoursPerWeek:
-                                                        e.target.value,
-                                                });
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="item_2">
-                                    <h6>Where are you willing to train?</h6>
-                                    <div className="inputs_platform">
-                                        <button
-                                            onClick={(e) =>
-                                                handleTrianingData(e, "Online")
-                                            }
-                                            className={
-                                                checkButton
-                                                    ? "buttonTrue"
-                                                    : "buttonFalse"
-                                            }
-                                            name="trainingLocation"
-                                        >
-                                            Virtual
-                                        </button>
-                                        <button
-                                            onClick={(e) =>
-                                                handleTrainingData(
-                                                    e,
-                                                    "inperson"
-                                                )
-                                            }
-                                            // className={`${
-                                            //     trainerAvailabilityData?.preferedTrainingMode?.includes(
-                                            //         "inperson"
-                                            //     )
-                                            //         ? "active"
-                                            //         : ""
-                                            // }`}
-                                            className={
-                                                checkButtonInPerson
-                                                    ? "buttonTrue"
-                                                    : "buttonFalse"
-                                            }
-                                            name="trainingLocation"
-                                        >
-                                            In Person
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="item_3">
-                                    <h6>
-                                        Do you have a facility or location where
-                                        you will train clients?
-                                    </h6>
-                                    <CyanRadio
-                                        checked={selectedValue === "a"}
-                                        onChange={handleChange}
-                                        value="a"
-                                        name="radio-button-demo"
-                                        label="Strength & Hitt"
-                                        inputProps={{ "aria-label": "a" }}
-                                    />
-                                    <label>Yes</label>
-                                    <CyanRadio
-                                        checked={selectedValue === "b"}
-                                        onChange={handleChange}
-                                        value="b"
-                                        name="radio-button-demo"
-                                        label="Strength & Hitt"
-                                        inputProps={{ "aria-label": "b" }}
-                                    />
-                                    <label>No</label>
-                                </div>
-                                <div className="item_4">
-                                    <h6>Details of the facility/location</h6>
-                                    <div className="inputs_platform">
-                                        <textarea
-                                            type="text"
-                                            placeholder="Enter the Details of the location"
-                                            value={
-                                                trainerAvailabilityData.trainingFacilityLocation
-                                            }
-                                            onChange={(e) => {
-                                                setTrainerAvailabilityData({
-                                                    ...trainerAvailabilityData,
-                                                    trainingFacilityLocation:
-                                                        e.target.value,
-                                                });
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="item_5">
-                                    <h6>
-                                        Are you willing to travel to clients in
-                                        your city/region?
-                                    </h6>
-                                    <CyanRadio
-                                        checked={selectedOneValue === "1"}
-                                        onChange={handleOneChange}
-                                        value="1"
-                                        label="Strength & Hitt"
-                                        inputProps={{ "aria-label": "1" }}
-                                    />
-                                    <label> Yes!</label>
-                                    <CyanRadio
-                                        checked={selectedOneValue === "0"}
-                                        onChange={handleOneChange}
-                                        value="0"
-                                        label="Strength & Hitt"
-                                        inputProps={{ "aria-label": "0" }}
-                                    />
-                                    <label>No</label>
-                                </div>
-                                <div className="item_6">
-                                    <h6>
-                                        List the areas/neighborhoods you’re
-                                        willing to travel to
-                                    </h6>
-                                    <div className="inputs_platform">
-                                        <textarea
-                                            type="text"
-                                            placeholder="Neighborhood List"
-                                            value={
-                                                trainerAvailabilityData.servicableLocation
-                                            }
-                                            onChange={(e) => {
-                                                setTrainerAvailabilityData({
-                                                    ...trainerAvailabilityData,
-                                                    servicableLocation:
-                                                        e.target.value,
-                                                });
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="submit_button">
-                                <button type="submit" onClick={handleSubmit}>
-                                    Submit
-                                    <ArrowHoverBlacked />
-                                </button>
-                                {open ? (
-                                    <Modal
-                                        open={open}
-                                        onClose={() => {
-                                            setOpen(false);
-                                            history.push("card");
-                                        }}
-                                        center
-                                        closeIcon={closeIcon}
-                                        container={myRef.current}
-                                        styles={{
-                                            boaderRadius: "10px",
-                                        }}
-                                    >
-                                        <div
-                                            style={{
-                                                textAlign: "center",
-                                                height: "300px",
-                                                width: "600px",
-                                                padding: "2em",
-                                            }}
-                                            className="model_styles"
-                                        >
-                                            <h2>
-                                                Background Information
-                                                collection complete. Click the
-                                                “x” to move to next section!
-                                            </h2>
-                                            <p>
-                                                Time to move on to building your
-                                                public Motto profile. This
-                                                profile will be published only
-                                                after you are approved!
-                                            </p>
-                                        </div>
-                                    </Modal>
-                                ) : null}
-                            </div>
-                        </form>
-                    </div>
-                    <img src={WaterMark} alt="icon" className="ava_watermark" />
+                <div className="item_2">
+                  <h6>Where are you willing to train?</h6>
+                  <div className="inputs_platform">
+                    <button
+                      onClick={(e) => handleTrianingData(e, "Online")}
+                      className={checkButton ? "buttonFalse" : "buttonTrue"}
+                    >
+                      Virtual
+                    </button>
+                    <button
+                      onClick={(e) => handleTrainingData(e, "inperson")}
+                      className={
+                        checkButtonInPerson ? "buttonFalse" : "buttonTrue"
+                      }
+                    >
+                      In Person
+                    </button>
+                  </div>
                 </div>
-            </div>
-        </>
-    );
+                <div className="item_3">
+                  <h6>
+                    Do you have a facility or location where you will train
+                    clients?
+                  </h6>
+                  <CyanRadio
+                    checked={selectedValue == "a"}
+                    onChange={handleChange}
+                    value="a"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "a" }}
+                  />
+                  <label>Yes</label>
+                  <CyanRadio
+                    checked={selectedValue == "b"}
+                    onChange={handleChange}
+                    value="b"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "b" }}
+                  />
+                  <label>No</label>
+                </div>
+                <div className="item_4">
+                  <h6>Details of the facility/location</h6>
+                  <div className="inputs_platform">
+                    <textarea
+                      type="text"
+                      placeholder="Enter the Details of the location"
+                      value={trainerAvailabilityData.trainingFacilityLocation}
+                      onChange={(e) => {
+                        setTrainerAvailabilityData({
+                          ...trainerAvailabilityData,
+                          trainingFacilityLocation: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="item_5">
+                  <h6>
+                    Are you willing to travel to clients in your city/region?
+                  </h6>
+                  {console.log(
+                    selectedOneValue,
+                    "selectedOneValueselectedOneValue"
+                  )}
+                  <CyanRadio
+                    checked={selectedOneValue == "1"}
+                    onChange={handleOneChange}
+                    value="1"
+                    inputProps={{ "aria-label": "1" }}
+                  />
+                  <label> Yes!</label>
+                  <CyanRadio
+                    checked={selectedOneValue == "0"}
+                    onChange={handleOneChange}
+                    value="0"
+                    inputProps={{ "aria-label": "0" }}
+                  />
+                  <label>No</label>
+                </div>
+                <div className="item_6">
+                  <h6>
+                    List the areas/neighborhoods you’re willing to travel to
+                  </h6>
+                  <div className="inputs_platform">
+                    <textarea
+                      type="text"
+                      placeholder="Neighborhood List"
+                      value={trainerAvailabilityData.servicableLocation}
+                      onChange={(e) => {
+                        setTrainerAvailabilityData({
+                          ...trainerAvailabilityData,
+                          servicableLocation: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="submit_button">
+                <button type="submit" onClick={handleSubmit}>
+                  Submit
+                  <ArrowHoverBlacked />
+                </button>
+                {open ? (
+                  <Modal
+                    open={open}
+                    onClose={() => {
+                      setOpen(false);
+                      history.push("card");
+                    }}
+                    center
+                    closeIcon={<img src={CloseIcon} alt="close" />}
+                    container={myRef.current}
+                    styles={{
+                      boaderRadius: "10px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        textAlign: "center",
+                        height: "300px",
+                        width: "600px",
+                        padding: "2em",
+                      }}
+                      className="model_styles"
+                    >
+                      <h2>
+                        Background Information collection complete. Click the
+                        “x” to move to next section!
+                      </h2>
+                      <p>
+                        Time to move on to building your public Motto profile.
+                        This profile will be published only after you are
+                        approved!
+                      </p>
+                    </div>
+                  </Modal>
+                ) : null}
+              </div>
+            </form>
+          </div>
+          <img src={WaterMark} alt="icon" className="ava_watermark" />
+        </div>
+      </div>
+    </>
+  );
 };
-const closeIcon = <img src={CloseIcon} alt="close" />;
-
-const mapStateToProps = (state) => ({
-    details: state.trainerReducer.details,
-    trainerPersonalData: state.trainerReducer.data,
-});
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {
-            updateTrainerDetails,
-        },
-        dispatch
-    );
+  return bindActionCreators(
+    {
+      updateTrainerDetailsApicall,
+      trainerDetail,
+    },
+    dispatch
+  );
 };
 
 const TrainerAvailability = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  null,
+  mapDispatchToProps
 )(TrainerAvailabilityFC);
 
 export default TrainerAvailability;

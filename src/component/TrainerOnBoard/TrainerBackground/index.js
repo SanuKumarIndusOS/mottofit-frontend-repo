@@ -8,741 +8,575 @@ import Checkbox from "@material-ui/core/Checkbox";
 import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
+import {
+  updateTrainerDetailsApicall,
+  getTrainerDetails,
+  trainerDetail,
+} from "action/trainerAct";
 import { history } from "helpers";
-import { Dropdown } from "reactjs-dropdown-component";
+import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import "./dropdown.scss";
+import { ListRounded } from "@material-ui/icons";
 
 const worksMode = [
-    {
-        label: "Yes",
-        value: "yes",
-    },
-    {
-        label: "No",
-        value: "no",
-    },
+  {
+    label: "Yes",
+    value: "yes",
+  },
+  {
+    label: "No",
+    value: "no",
+  },
 ];
 
-const TrainerBackgroundFC = ({ updateTrainerDetails, details }) => {
-    const [checkedBoxing, setCheckedBoxing] = React.useState(false);
-    const [checkedHIIT, setCheckedHIIT] = React.useState(false);
-    const [checkedYoga, setCheckedYoga] = React.useState(false);
-    const [checkedPilates, setCheckedPilates] = React.useState(false);
+const TrainerBackgroundFC = ({
+  updateTrainerDetailsApicall,
+  details,
+  trainerDetail,
+}) => {
+  const [checkedBoxing, setCheckedBoxing] = React.useState(false);
+  const [checkedHIIT, setCheckedHIIT] = React.useState(false);
+  const [checkedYoga, setCheckedYoga] = React.useState(false);
+  const [checkedPilates, setCheckedPilates] = React.useState(false);
 
-    const [currentExperiencee, setCurrentExperiencee] = useState({
-        workMode: "",
-        workLocation: "",
-    });
-    const [trainerbackgroundData, setTrainerbackgroundData] = useState({
-        areaOfExpertise: [],
-        previousExperience: [],
-        certification: [],
-        clientAssessment: "",
-        trainingProcess: "",
-        interestInMotto: "",
-        currentExperience: "",
-        awaitingCertification: "",
-    });
+  const [currentExperience, setCurrentExperience] = useState({
+    workMode: "",
+    workLocation: "",
+  });
+  const [trainerbackgroundData, setTrainerbackgroundData] = useState({
+    areaOfExpertise: [],
+    clientAssessment: "",
+    trainingProcess: "",
+    interestInMotto: "",
+    awaitingCertification: "",
+  });
 
-    console.log(trainerbackgroundData, "trainerbackgroundData");
+  const [inputFields, setInputField] = useState([
+    {
+      orgnization: "",
+      job: "",
+      years: "",
+    },
+  ]);
 
-    const [selectedValue, setSelectedValue] = useState("a");
-    const [inputFields, setInputField] = useState([
-        {
-            orgnization: "",
-            job: "",
-            years: "",
-        },
+  const [inputCertificatesFields, setinputCertificatesField] = useState([
+    {
+      certificate: "",
+      year: "",
+      upload: "",
+    },
+  ]);
+  const handleChangeInput = (index, event) => {
+    const values = [...inputFields];
+    values[index][event.target.name] = event.target.value;
+    setInputField(values);
+  };
+  const handleChangeCertificateInput = (index, event) => {
+    const values = [...inputCertificatesFields];
+    values[index][event.target.name] = event.target.value;
+    setinputCertificatesField(values);
+  };
+
+  const handleAddFields = () => {
+    setInputField([...inputFields, { orgnization: "", job: "", years: "" }]);
+  };
+
+  const handleAddCertificateFields = () => {
+    setinputCertificatesField([
+      ...inputCertificatesFields,
+      { certificate: "", year: "", upload: "" },
     ]);
+  };
 
-    const [inputCertificatesFields, setinputCertificatesField] = useState([
-        {
-            certificate: "",
-            year: "",
-            upload: "",
-        },
-    ]);
-    const handleChangeInput = (index, event) => {
-        const values = [...inputFields];
-        values[index][event.target.name] = event.target.value;
-        setInputField(values);
+  const handleRemoveFields = (index) => {
+    const values = [...inputFields];
+    values.splice(index, 1);
+    setInputField(values);
+  };
+  const handleRemoveCertificateFields = (index) => {
+    const values = [...inputCertificatesFields];
+    values.splice(index, 1);
+    setinputCertificatesField(values);
+  };
 
-        console.log(inputFields);
+  const handleSubmit = () => {
+    const storeData = {
+      areaOfExpertise: trainerbackgroundData.areaOfExpertise,
+      previousExperience: inputFields,
+      certification: inputCertificatesFields,
+      clientAssessment: trainerbackgroundData.clientAssessment,
+      trainingProcess: trainerbackgroundData.trainingProcess,
+      interestInMotto: trainerbackgroundData.interestInMotto,
+      awaitingCertification: trainerbackgroundData.awaitingCertification,
+    };
+    updateTrainerDetailsApicall(storeData).then(() => {
+      history.push(`/trainer/availability`);
+    });
+  };
 
+  useEffect(() => {
+    trainerDetail().then((data) => {
+      if (data) {
         setTrainerbackgroundData({
-            ...trainerbackgroundData,
-            previousExperience: inputFields,
+          ...trainerbackgroundData,
+          areaOfExpertise: [...new Set(data.areaOfExpertise)],
+          clientAssessment: data.clientAssessment,
+          trainingProcess: data.trainingProcess,
+          interestInMotto: data.interestInMotto,
+          awaitingCertification: data.awaitingCertification
+            ? data.awaitingCertification
+            : "",
         });
-    };
-    const handleChangeCertificateInput = (index, event) => {
-        const values = [...inputCertificatesFields];
-        values[index][event.target.name] = event.target.value;
-        setinputCertificatesField(values);
 
-        setTrainerbackgroundData({
-            ...trainerbackgroundData,
-            certification: inputCertificatesFields,
-        });
-    };
+        setInputField(data.previousExperience);
+        setinputCertificatesField(data.certification);
+        setCurrentExperience(data.currentExperience);
 
-    const handleChange = (event) => {
-        setSelectedValue(event.target.value);
-    };
+        if (data.areaOfExpertise.indexOf("Boxing") >= 0) setCheckedBoxing(true);
+        if (data.areaOfExpertise.indexOf("Pilates") >= 0)
+          setCheckedPilates(true);
+        if (data.areaOfExpertise.indexOf("Yoga") >= 0) setCheckedYoga(true);
+        if (data.areaOfExpertise.indexOf("Strength & HIIT") >= 0)
+          setCheckedHIIT(true);
+      }
+    });
+  }, []);
 
-    const handleAddFields = () => {
-        setInputField([
-            ...inputFields,
-            { orgnization: "", job: "", years: "" },
-        ]);
-    };
-
-    const handleAddCertificateFields = () => {
-        setinputCertificatesField([
-            ...inputCertificatesFields,
-            { certificate: "", year: "", upload: "" },
-        ]);
-
-        console.log(inputCertificatesFields);
-    };
-
-    // const handleRemoveFields = (index) => {
-    //     const values = [...inputFields];
-    //     values.splice(index, 1);
-    //     setInputField(values);
-    // };
-
-    const handleSubmit = () => {
-        const storeData = {
-            details: {
-                ...details,
-                areaOfExpertise: trainerbackgroundData.areaOfExpertise,
-                previousExperience: trainerbackgroundData.previousExperience,
-                certification: trainerbackgroundData.certification,
-                clientAssessment: trainerbackgroundData.clientAssessment,
-                trainingProcess: trainerbackgroundData.trainingProcess,
-                interestInMotto: trainerbackgroundData.interestInMotto,
-                currentExperience: trainerbackgroundData.currentExperiencee,
-                awaitingCertification:
-                    trainerbackgroundData.awaitingCertification,
-            },
-        };
-
-        localStorage.setItem(
-            "trainerBackGroundData",
-            JSON.stringify(trainerbackgroundData)
-        );
-        console.log(JSON.parse(localStorage.getItem("trainerBackGroundData")));
-
-        updateTrainerDetails(storeData);
-        history.push(`/trainer/availability`);
-    };
-
-    useEffect(() => {
-        // if (Object.keys(details).length > 5) {
-        //     let tempData = {
-        //         areaOfExpertise: details?.areaOfExpertise || [],
-        //         previousExperience: details?.previousExperience || [],
-        //         certification: details?.certificate || [],
-        //         clientAssessment: details.clientAssessment,
-        //         trainingProcess: details.trainingProcess,
-        //         interestInMotto: details.interestInMotto,
-        //         awaitingCertification: details.awaitingCertification,
-        //     };
-
-        //     details.currentExperience &&
-        //         setCurrentExperiencee(details.currentExperience);
-
-        //     details.previousExperience &&
-        //         setInputField(details.previousExperience);
-
-        //     details.certification &&
-        //         setinputCertificatesField(details.certification);
-
-        //     setTrainerbackgroundData(tempData);
-
-        // }
-        let backgroundDetails = JSON.parse(
-            localStorage.getItem("trainerBackGroundData")
-        );
-        console.log("bduwgu", backgroundDetails);
-
-        if (backgroundDetails) {
-            setTrainerbackgroundData({
-                ...trainerbackgroundData,
-                areaOfExpertise: [
-                    ...new Set(backgroundDetails.areaOfExpertise),
-                ],
-                previousExperience: backgroundDetails.previousExperience,
-                certification: backgroundDetails.certification,
-                clientAssessment: backgroundDetails.clientAssessment,
-                trainingProcess: backgroundDetails.trainingProcess,
-                interestInMotto: backgroundDetails.interestInMotto,
-                currentExperience: backgroundDetails.currentExperience,
-                awaitingCertification: backgroundDetails.awaitingCertification,
-            });
-
-            if (trainerbackgroundData.areaOfExpertise.indexOf("Boxing") >= 0)
-                setCheckedBoxing(true);
-            if (trainerbackgroundData.areaOfExpertise.indexOf("Pilates") >= 0)
-                setCheckedPilates(true);
-            if (trainerbackgroundData.areaOfExpertise.indexOf("Yoga") >= 0)
-                setCheckedYoga(true);
-            if (
-                trainerbackgroundData.areaOfExpertise.indexOf(
-                    "Strength & HIIT"
-                ) >= 0
-            )
-                setCheckedHIIT(true);
-        }
-
-        // if (backgroundDetails.currentExperience !== "" && dropdownExpRef.current !== undefined) {
-        //     dropdownExpRef.current.selectSingleItem({ value: backgroundDetails.experience });
-        // }
-    }, []);
-
-    const dropdownExpRef = React.useRef();
-
-    return (
-        <>
-            <div className="outter_container_bg">
-                <div className="container">
-                    <div className="links_wrapper">
-                        <div className="outter_links">
-                            <img src={ArrowBack} alt="icon" />
-                            <div className="inner_links">
-                                <Link to="/trainer/about">
-                                    {" "}
-                                    Back to About You
-                                </Link>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div className="outter_links">
-                            <div className="inner_links">
-                                <Link to="/trainer/availability">
-                                    Go to Availability
-                                </Link>
-                                <div></div>
-                            </div>
-                            <img src={ArrowNext} alt="icon" />
-                        </div>
-                    </div>
-                    <div className="main_wrapper">
-                        <div className="wrapper_inneritems">
-                            <h1>Detail out your training background</h1>
-
-                            <p>
-                                {/* We want to know it all! Share with us your
-                                experience & philosophy as a trainer to progress
-                                in your application process and join the Motto
-                                Family.{" "} */}
-                            </p>
-
-                            <div className="contents_wrapper">
-                                <form>
-                                    <div className="item1">
-                                        <h6>
-                                            Tell us what you train! Select all
-                                            the verticals that apply
-                                        </h6>
-                                        <div className="inputs_experience">
-                                            <Checkbox
-                                                checked={checkedHIIT}
-                                                onChange={(e) => {
-                                                    setCheckedHIIT(
-                                                        e.target.checked
-                                                    );
-                                                    console.log(
-                                                        e.target.checked
-                                                    );
-
-                                                    if (e.target.checked) {
-                                                        setTrainerbackgroundData(
-                                                            {
-                                                                ...trainerbackgroundData,
-                                                                areaOfExpertise:
-                                                                    [
-                                                                        ...trainerbackgroundData.areaOfExpertise,
-                                                                        "Strength & HIIT",
-                                                                    ],
-                                                            }
-                                                        );
-
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
-                                                    } else {
-                                                        const index =
-                                                            trainerbackgroundData.areaOfExpertise.indexOf(
-                                                                "Strength & HIIT"
-                                                            );
-                                                        // console.log(index);
-                                                        if (index > -1) {
-                                                            trainerbackgroundData.areaOfExpertise.splice(
-                                                                index,
-                                                                1
-                                                            );
-                                                        }
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
-                                                    }
-
-                                                    console.log(
-                                                        trainerbackgroundData
-                                                    );
-                                                }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
-
-                                                // onChange={() => {
-                                                //   setCheckState("Strength & HIIT");
-                                                // }}
-                                            />
-                                            <div className="checkbox_label">
-                                                Strength & HIIT
-                                            </div>
-                                            <Checkbox
-                                                checked={checkedBoxing}
-                                                // checked={true}
-                                                onChange={(e) => {
-                                                    setCheckedBoxing(
-                                                        e.target.checked
-                                                    );
-                                                    console.log(
-                                                        e.target.checked
-                                                    );
-
-                                                    if (e.target.checked) {
-                                                        console.log(
-                                                            "setBoxing"
-                                                        );
-                                                        setTrainerbackgroundData(
-                                                            {
-                                                                ...trainerbackgroundData,
-                                                                areaOfExpertise:
-                                                                    [
-                                                                        ...trainerbackgroundData.areaOfExpertise,
-                                                                        "Boxing",
-                                                                    ],
-                                                            }
-                                                        );
-
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
-                                                    } else {
-                                                        console.log(
-                                                            "unsetBoxing"
-                                                        );
-
-                                                        const index =
-                                                            trainerbackgroundData.areaOfExpertise.indexOf(
-                                                                "Boxing"
-                                                            );
-                                                        // console.log(index);
-                                                        if (index > -1) {
-                                                            trainerbackgroundData.areaOfExpertise.splice(
-                                                                index,
-                                                                1
-                                                            );
-                                                        }
-                                                        console.log(
-                                                            trainerbackgroundData.areaOfExpertise
-                                                        );
-                                                    }
-
-                                                    console.log(
-                                                        trainerbackgroundData
-                                                    );
-                                                }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
-                                            />
-                                            <div className="checkbox_label">
-                                                Boxing
-                                            </div>
-                                            <Checkbox
-                                                checked={checkedYoga}
-                                                onChange={(e) => {
-                                                    setCheckedYoga(
-                                                        e.target.checked
-                                                    );
-
-                                                    if (e.target.checked) {
-                                                        setTrainerbackgroundData(
-                                                            {
-                                                                ...trainerbackgroundData,
-                                                                areaOfExpertise:
-                                                                    [
-                                                                        ...trainerbackgroundData.areaOfExpertise,
-                                                                        "Yoga",
-                                                                    ],
-                                                            }
-                                                        );
-                                                    } else {
-                                                        const index =
-                                                            trainerbackgroundData.areaOfExpertise.indexOf(
-                                                                "Yoga"
-                                                            );
-                                                        // console.log(index);
-                                                        if (index > -1) {
-                                                            trainerbackgroundData.areaOfExpertise.splice(
-                                                                index,
-                                                                1
-                                                            );
-                                                        }
-                                                    }
-                                                }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
-                                            />
-                                            <div className="checkbox_label">
-                                                Yoga
-                                            </div>
-                                            <Checkbox
-                                                checked={checkedPilates}
-                                                onChange={(e) => {
-                                                    setCheckedPilates(
-                                                        e.target.checked
-                                                    );
-
-                                                    if (e.target.checked) {
-                                                        setTrainerbackgroundData(
-                                                            {
-                                                                ...trainerbackgroundData,
-                                                                areaOfExpertise:
-                                                                    [
-                                                                        ...trainerbackgroundData.areaOfExpertise,
-                                                                        "Pilates",
-                                                                    ],
-                                                            }
-                                                        );
-                                                    } else {
-                                                        const index =
-                                                            trainerbackgroundData.areaOfExpertise.indexOf(
-                                                                "Pilates"
-                                                            );
-                                                        // console.log(index);
-                                                        if (index > -1) {
-                                                            trainerbackgroundData.areaOfExpertise.splice(
-                                                                index,
-                                                                1
-                                                            );
-                                                        }
-                                                    }
-                                                }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
-                                            />
-                                            <div className="checkbox_label">
-                                                Pilates
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="item2">
-                                        <h6>Training experience</h6>
-                                        {inputFields.map((input, index) => {
-                                            return (
-                                                <div
-                                                    className="inputs_experience"
-                                                    key={index}
-                                                >
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Name of the organization / GYM"
-                                                        value={
-                                                            input.orgnization
-                                                        }
-                                                        name="orgnization"
-                                                        onChange={(event) =>
-                                                            handleChangeInput(
-                                                                index,
-                                                                event
-                                                            )
-                                                        }
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Job Title"
-                                                        value={input.job}
-                                                        name="job"
-                                                        onChange={(event) =>
-                                                            handleChangeInput(
-                                                                index,
-                                                                event
-                                                            )
-                                                        }
-                                                    />
-                                                    <input
-                                                        type="number"
-                                                        placeholder="Years"
-                                                        name="years"
-                                                        value={input.years}
-                                                        onChange={(event) =>
-                                                            handleChangeInput(
-                                                                index,
-                                                                event
-                                                            )
-                                                        }
-                                                    />
-                                                </div>
-                                            );
-                                        })}
-
-                                        <h5 onClick={() => handleAddFields()}>
-                                            + Add Work Experience
-                                        </h5>
-                                        {/* {inputFields ? (
-                                        <span
-                                            onClick={() => handleRemoveFields()}
-                                        >
-                                            Remove
-                                        </span>
-                                    ) : null} */}
-                                    </div>
-                                    <div className="item3">
-                                        <h6>Certifications</h6>
-                                        {inputCertificatesFields.map(
-                                            (inputCertificatesField, index) => (
-                                                <div
-                                                    className="inputs_background"
-                                                    key={index}
-                                                >
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Certification Title"
-                                                        value={
-                                                            inputCertificatesField.certificate
-                                                        }
-                                                        name="certificate"
-                                                        onChange={(event) =>
-                                                            handleChangeCertificateInput(
-                                                                index,
-                                                                event
-                                                            )
-                                                        }
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Year you were Certified"
-                                                        value={
-                                                            inputCertificatesField.year
-                                                        }
-                                                        name="year"
-                                                        onChange={(event) =>
-                                                            handleChangeCertificateInput(
-                                                                index,
-                                                                event
-                                                            )
-                                                        }
-                                                    />
-                                                </div>
-                                            )
-                                        )}
-
-                                        <h5
-                                            onClick={handleAddCertificateFields}
-                                        >
-                                            + Add Certificate's
-                                        </h5>
-                                    </div>
-                                    <div className="item4">
-                                        <h6>
-                                            Are you currently enrolled in any
-                                            continued education programs?
-                                        </h6>
-                                        <div className="inputs_experience">
-                                            <textarea
-                                                type="text"
-                                                name="comment"
-                                                placeholder="Tell us about any awaiting certifications "
-                                                value={
-                                                    trainerbackgroundData.awaitingCertification
-                                                }
-                                                onChange={(e) =>
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        awaitingCertification:
-                                                            e.target.value,
-                                                    })
-                                                }
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="item5">
-                                        <h6>
-                                            Do you have a facility to train new
-                                            & outside clients?
-                                        </h6>
-                                        <div className="inputs_experience_drop">
-                                            <Dropdown
-                                                className="select_location"
-                                                title="Select Your Answer"
-                                                list={worksMode}
-                                                value={
-                                                    currentExperiencee.workMode
-                                                }
-                                                onChange={(e) => {
-                                                    setCurrentExperiencee({
-                                                        ...currentExperiencee,
-                                                        workMode: e.value,
-                                                    });
-
-                                                    //  setTrainerbackgroundData({ ...trainerbackgroundData, currentExperience: e.value })
-                                                }}
-                                                //  ref={dropdownExpRef}
-                                            />
-                                            {currentExperiencee.workMode ===
-                                            "yes" ? (
-                                                <>
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Details of facility"
-                                                        value={
-                                                            currentExperiencee.workLocation
-                                                        }
-                                                        name="answer"
-                                                        onChange={(e) => {
-                                                            setCurrentExperiencee(
-                                                                {
-                                                                    ...currentExperiencee,
-                                                                    workLocation:
-                                                                        e.target
-                                                                            .value,
-                                                                }
-                                                            );
-                                                            setTrainerbackgroundData(
-                                                                {
-                                                                    ...trainerbackgroundData,
-                                                                    currentExperience:
-                                                                        currentExperiencee,
-                                                                }
-                                                            );
-                                                        }}
-                                                    />
-                                                </>
-                                            ) : null}
-                                        </div>
-                                    </div>
-                                    <div className="item6">
-                                        <h6>
-                                            Why are you interested in joining
-                                            Motto?
-                                        </h6>
-                                        <div className="inputs_experience">
-                                            <textarea
-                                                type="text"
-                                                name="comment"
-                                                placeholder="Tell us all about it."
-                                                value={
-                                                    trainerbackgroundData.interestInMotto
-                                                }
-                                                onChange={(e) =>
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        interestInMotto:
-                                                            e.target.value,
-                                                    })
-                                                }
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="item6">
-                                        <h6>
-                                            Describe how you assess a client
-                                            before their first session?
-                                        </h6>
-                                        <div className="inputs_experience">
-                                            <textarea
-                                                type="text"
-                                                name="comment"
-                                                placeholder="Tell us all about it."
-                                                value={
-                                                    trainerbackgroundData.clientAssessment
-                                                }
-                                                onChange={(e) =>
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        clientAssessment:
-                                                            e.target.value,
-                                                    })
-                                                }
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="item6">
-                                        <h6>
-                                            Describe your training process &
-                                            philosophy
-                                        </h6>
-                                        <div className="inputs_experience">
-                                            <textarea
-                                                type="text"
-                                                name="comment"
-                                                placeholder="Tell us all about it."
-                                                value={
-                                                    trainerbackgroundData.trainingProcess
-                                                }
-                                                onChange={(e) =>
-                                                    setTrainerbackgroundData({
-                                                        ...trainerbackgroundData,
-                                                        trainingProcess:
-                                                            e.target.value,
-                                                    })
-                                                }
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="submit_button">
-                                        <button
-                                            type="submit"
-                                            style={{
-                                                textDecoration: "none",
-                                                color: "#FFFFFF",
-                                            }}
-                                            type="submit"
-                                            onClick={handleSubmit}
-                                        >
-                                            Continue
-                                            <ArrowHoverBlacked />
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <img src={WaterMark} alt="icon" className="bg_watermark" />
-                </div>
+  return (
+    <>
+      <div className="outter_container_bg">
+        <div className="container">
+          <div className="links_wrapper">
+            <div className="outter_links">
+              <img src={ArrowBack} alt="icon" />
+              <div className="inner_links">
+                <Link to="/trainer/about"> Back to About You</Link>
+                <div></div>
+              </div>
             </div>
-        </>
-    );
+            <div className="outter_links">
+              <div className="inner_links">
+                <Link to="/trainer/availability">Go to Availability</Link>
+                <div></div>
+              </div>
+              <img src={ArrowNext} alt="icon" />
+            </div>
+          </div>
+          <div className="main_wrapper">
+            <div className="wrapper_inneritems">
+              <h1>Detail out your training background</h1>
+              <div className="contents_wrapper">
+                <div>
+                  <div className="item1">
+                    <h6>
+                      Tell us what you train! Select all the verticals that
+                      apply
+                    </h6>
+                    <div className="inputs_experience">
+                      <Checkbox
+                        checked={checkedHIIT}
+                        onChange={(e) => {
+                          setCheckedHIIT(e.target.checked);
+
+                          if (e.target.checked) {
+                            setTrainerbackgroundData({
+                              ...trainerbackgroundData,
+                              areaOfExpertise: [
+                                ...trainerbackgroundData.areaOfExpertise,
+                                "Strength & HIIT",
+                              ],
+                            });
+                          } else {
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Strength & HIIT"
+                              );
+                            if (index > -1) {
+                              trainerbackgroundData.areaOfExpertise.splice(
+                                index,
+                                1
+                              );
+                            }
+                          }
+                        }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <div className="checkbox_label">Strength & HIIT</div>
+                      <Checkbox
+                        checked={checkedBoxing}
+                        // checked={true}
+                        onChange={(e) => {
+                          setCheckedBoxing(e.target.checked);
+                          if (e.target.checked) {
+                            setTrainerbackgroundData({
+                              ...trainerbackgroundData,
+                              areaOfExpertise: [
+                                ...trainerbackgroundData.areaOfExpertise,
+                                "Boxing",
+                              ],
+                            });
+                          } else {
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Boxing"
+                              );
+                            if (index > -1) {
+                              trainerbackgroundData.areaOfExpertise.splice(
+                                index,
+                                1
+                              );
+                            }
+                          }
+                        }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <div className="checkbox_label">Boxing</div>
+                      <Checkbox
+                        checked={checkedYoga}
+                        onChange={(e) => {
+                          setCheckedYoga(e.target.checked);
+
+                          if (e.target.checked) {
+                            setTrainerbackgroundData({
+                              ...trainerbackgroundData,
+                              areaOfExpertise: [
+                                ...trainerbackgroundData.areaOfExpertise,
+                                "Yoga",
+                              ],
+                            });
+                          } else {
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Yoga"
+                              );
+                            if (index > -1) {
+                              trainerbackgroundData.areaOfExpertise.splice(
+                                index,
+                                1
+                              );
+                            }
+                          }
+                        }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <div className="checkbox_label">Yoga</div>
+                      <Checkbox
+                        checked={checkedPilates}
+                        onChange={(e) => {
+                          setCheckedPilates(e.target.checked);
+
+                          if (e.target.checked) {
+                            setTrainerbackgroundData({
+                              ...trainerbackgroundData,
+                              areaOfExpertise: [
+                                ...trainerbackgroundData.areaOfExpertise,
+                                "Pilates",
+                              ],
+                            });
+                          } else {
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Pilates"
+                              );
+                            if (index > -1) {
+                              trainerbackgroundData.areaOfExpertise.splice(
+                                index,
+                                1
+                              );
+                            }
+                          }
+                        }}
+                        style={{
+                          color: "#53BFD2",
+                        }}
+                      />
+                      <div className="checkbox_label">Pilates</div>
+                    </div>
+                  </div>
+                  <div className="item2">
+                    <h6>Training experience</h6>
+                    {inputFields.map((input, index) => {
+                      return (
+                        <React.Fragment key={index}>
+                          <div className="inputs_experience">
+                            <input
+                              type="text"
+                              placeholder="Name of the organization / GYM"
+                              value={input.orgnization}
+                              name="orgnization"
+                              onChange={(event) =>
+                                handleChangeInput(index, event)
+                              }
+                            />
+                            <input
+                              type="text"
+                              placeholder="Job Title"
+                              value={input.job}
+                              name="job"
+                              onChange={(event) =>
+                                handleChangeInput(index, event)
+                              }
+                            />
+                            <input
+                              type="number"
+                              placeholder="Years"
+                              name="years"
+                              value={input.years}
+                              onChange={(event) =>
+                                handleChangeInput(index, event)
+                              }
+                            />
+                          </div>
+                          {index + 1 === inputFields.length ? (
+                            <div className="d-flex">
+                              <h5 onClick={() => handleAddFields()}>
+                                + Add Work Experience
+                              </h5>
+                              {index + 1 === inputFields.length &&
+                              inputFields.length !== 1 ? (
+                                <h5
+                                  className="text-danger pl-3"
+                                  onClick={() => handleRemoveFields(index)}
+                                >
+                                  Remove
+                                </h5>
+                              ) : null}
+                            </div>
+                          ) : null}
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                  <div className="item3">
+                    <h6>Certifications</h6>
+                    {inputCertificatesFields.map(
+                      (inputCertificatesField, index) => (
+                        <React.Fragment key={index}>
+                          <div className="inputs_background" key={index}>
+                            <input
+                              type="text"
+                              placeholder="Certification Title"
+                              value={inputCertificatesField.certificate}
+                              name="certificate"
+                              onChange={(event) =>
+                                handleChangeCertificateInput(index, event)
+                              }
+                            />
+                            <input
+                              type="text"
+                              placeholder="Year you were Certified"
+                              value={inputCertificatesField.year}
+                              name="year"
+                              onChange={(event) =>
+                                handleChangeCertificateInput(index, event)
+                              }
+                              type="number"
+                            />
+                          </div>
+                          {index + 1 === inputCertificatesFields.length ? (
+                            <div className="d-flex">
+                              <h5 onClick={handleAddCertificateFields}>
+                                + Add Certificate's
+                              </h5>
+                              {index + 1 === inputCertificatesFields.length &&
+                              inputCertificatesFields.length !== 1 ? (
+                                <h5
+                                  className="text-danger pl-3"
+                                  onClick={() =>
+                                    handleRemoveCertificateFields(index)
+                                  }
+                                >
+                                  Remove
+                                </h5>
+                              ) : null}
+                            </div>
+                          ) : null}
+                        </React.Fragment>
+                      )
+                    )}
+                  </div>
+                  <div className="item4">
+                    <h6>
+                      Are you currently enrolled in any continued education
+                      programs?
+                    </h6>
+                    <div className="inputs_experience">
+                      <textarea
+                        type="text"
+                        name="comment"
+                        placeholder="Tell us about any awaiting certifications "
+                        value={trainerbackgroundData.awaitingCertification}
+                        onChange={(e) =>
+                          setTrainerbackgroundData({
+                            ...trainerbackgroundData,
+                            awaitingCertification: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="item5">
+                    <h6>
+                      Do you have a facility to train new & outside clients?
+                    </h6>
+                    <div className="">
+                      <div className="row">
+                        <div className="col-6">
+                          <select
+                            value={currentExperience.workMode}
+                            name="workMode"
+                            onChange={(e) => {
+                              setCurrentExperience({
+                                ...currentExperience,
+                                workMode: e.target.value,
+                              });
+                            }}
+                          >
+                            {worksMode.map((list, index) => (
+                              <option value={list.value} key={index}>
+                                {list.label}
+                              </option>
+                            ))}
+                          </select>
+                          {/* <NormalMultiSelect
+                            placeholder="Select Your Answer"
+                            value={currentExperience.workMode}
+                            arrow={true}
+                            name="workMode"
+                            options={worksMode}
+                            handleChange={(e) => {
+                              setCurrentExperience({
+                                ...currentExperience,
+                                workMode: e.target.value,
+                              });
+                            }}
+                          /> */}
+                        </div>
+                        <div className="col-6">
+                          {currentExperience.workMode === "yes" ? (
+                            <div className="inputs_experience_drop">
+                              <input
+                                type="text"
+                                placeholder="Details of facility"
+                                value={currentExperience.workLocation}
+                                name="answer"
+                                onChange={(e) => {
+                                  setCurrentExperience({
+                                    ...currentExperience,
+                                    workLocation: e.target.value,
+                                  });
+                                }}
+                              />
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="item6">
+                    <h6>Why are you interested in joining Motto?</h6>
+                    <div className="inputs_experience">
+                      <textarea
+                        type="text"
+                        name="comment"
+                        placeholder="Tell us all about it."
+                        value={trainerbackgroundData.interestInMotto}
+                        onChange={(e) =>
+                          setTrainerbackgroundData({
+                            ...trainerbackgroundData,
+                            interestInMotto: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="item6">
+                    <h6>
+                      Describe how you assess a client before their first
+                      session?
+                    </h6>
+                    <div className="inputs_experience">
+                      <textarea
+                        type="text"
+                        name="comment"
+                        placeholder="Tell us all about it."
+                        value={trainerbackgroundData.clientAssessment}
+                        onChange={(e) =>
+                          setTrainerbackgroundData({
+                            ...trainerbackgroundData,
+                            clientAssessment: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="item6">
+                    <h6>Describe your training process & philosophy</h6>
+                    <div className="inputs_experience">
+                      <textarea
+                        type="text"
+                        name="comment"
+                        placeholder="Tell us all about it."
+                        value={trainerbackgroundData.trainingProcess}
+                        onChange={(e) =>
+                          setTrainerbackgroundData({
+                            ...trainerbackgroundData,
+                            trainingProcess: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="submit_button">
+                    <button
+                      type="submit"
+                      style={{
+                        textDecoration: "none",
+                        color: "#FFFFFF",
+                      }}
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
+                      Continue
+                      <ArrowHoverBlacked />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <img src={WaterMark} alt="icon" className="bg_watermark" />
+        </div>
+      </div>
+    </>
+  );
 };
 
 const mapStateToProps = (state) => ({
-    details: state.trainerReducer.details,
-    trainerPersonalData: state.trainerReducer.data,
+  details: state.trainerReducer.details,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {
-            updateTrainerDetails,
-            getTrainerDetails,
-        },
-        dispatch
-    );
+  return bindActionCreators(
+    {
+      updateTrainerDetailsApicall,
+      getTrainerDetails,
+      trainerDetail,
+    },
+    dispatch
+  );
 };
 
 const TrainerBackground = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(TrainerBackgroundFC);
 
 export default TrainerBackground;
