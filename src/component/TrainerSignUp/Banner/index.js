@@ -282,7 +282,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
 
                       <div className="submit_button">
                         <button type="submit" onClick={handleSubmit}>
-                          <p>Continue to Account</p>
+                          <p className="mb-0 text-black">Continue to Account</p>
                           <ArrowHoverBlacked />
                         </button>
                       </div>

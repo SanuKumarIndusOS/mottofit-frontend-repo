@@ -20,6 +20,14 @@ export const AuthApi = {
     api: "admin/login",
     method: "post",
   },
+  resetPassword: {
+    api: "user/reset-password",
+    method: "post",
+  },
+  changePasswordTrainer: {
+    api: "trainer/change-password",
+    method: "post",
+  },
 };
 
 export const TrainerApi = {

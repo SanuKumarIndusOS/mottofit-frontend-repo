@@ -33,7 +33,6 @@ const PaymentSectionSetupClass = ({
 
       fd.append("insurance", image);
       fileUploadApi(fd).then((data) => {
-        console.log(data, "datadata");
         setTrainerSetupData({
           ...trainerSetupData,
           insurance: data.urlPath,
@@ -49,7 +48,6 @@ const PaymentSectionSetupClass = ({
 
       fd.append("identity", image);
       fileUploadApi(fd).then((data) => {
-        console.log(data, "datadata");
         setTrainerSetupData({
           ...trainerSetupData,
           governmentId: data.urlPath,

@@ -1,4 +1,4 @@
-import { TrainerApi } from "service/apiVariables";
+import { TrainerApi, PaymentApi } from "service/apiVariables";
 import {
   TrainerActionType,
   TrainerCaptureActionType,
@@ -210,6 +210,22 @@ export const updateTrainerDetailsApicall =
     return new Promise((resolve, reject) => {
       const { updateTrainerDetails } = TrainerApi;
       api({ ...updateTrainerDetails, body })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+//get Stripe Acc Link
+
+export const getStripeAccLink =
+  () =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      api({ ...PaymentApi.getStripeAccLink })
         .then(({ data }) => {
           resolve(data);
         })

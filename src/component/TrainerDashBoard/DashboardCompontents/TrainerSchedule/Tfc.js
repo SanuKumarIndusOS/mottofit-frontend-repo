@@ -326,7 +326,6 @@ function TfcClass({
       time.map((time) => {
         var temp = [];
         dates.map((date) => {
-          // temp.push(date + " " + time);
           temp.push({ date: date, time: time });
         });
 
@@ -342,7 +341,6 @@ function TfcClass({
     var endDate = end.format("YYYY-MM-DD");
     getTrainerCalenderDetailsApi(startDate, endDate, TimeSlot).then(
       ({ data }) => {
-        console.log(data, "datadata");
         setData(data);
       }
     );

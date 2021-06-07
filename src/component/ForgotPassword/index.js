@@ -1,57 +1,92 @@
 import React, { useState } from "react";
 import "./styles.scss";
-import { COMMON_URL } from "helpers/baseURL";
+import { resetPassword } from "action/authAct";
 import { history } from "helpers";
 import ArrowHoverBlacked from "component/common/BlackCircleButton/ArrowHoverBlacked";
-const ForgotPassword = () => {
-    const [forgotData, setForgotData] = useState({
-        email: "",
-    });
-    // const [message, setMessage] = useState("");
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import validate from "service/validation";
+import { ErrorComponent } from "component/common/ErrorComponent";
+const ForgotPasswordClass = (props) => {
+  const [email, setemail] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        fetch(`${COMMON_URL}/v1/user/reset-password`, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify({
-                email: forgotData.email,
-            }),
-        })
-            .then((response) => {
-                if (response.ok) {
-                    history.push("/forgot/success");
-                }
-            })
-
-            .catch((err) => console.log(err));
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let body = {
+      email,
     };
+    if (!validateFields(body)) return;
+    props
+      .resetPassword(body)
+      .then(() => {
+        history.push("/forgot/success");
+      })
 
-    const onChangeValue = (e) => {
-        setForgotData({ ...forgotData, email: e.target.value });
+      .catch((err) => console.log(err));
+  }
+  const [error, setErrors] = useState({});
+  const validationRules = () => {
+    return {
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: "^Email is required",
+        },
+        email: true,
+      },
     };
-    return (
-        <>
-            <div className="container forgot_main">
-                <h2>Forgot Password?</h2>{" "}
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="email"
-                        placeholder="Enter your email address"
-                        value={forgotData.email}
-                        name="email"
-                        onChange={onChangeValue}
-                    />
-                    {/* <span>{message}</span> */}
-                    <button type="submit" className="forgot_submit">
-                        Submit <ArrowHoverBlacked />
-                    </button>
-                </form>
-            </div>
-        </>
-    );
+  };
+
+  const validateFields = (data) => {
+    let fieldInvalidList = validate(data, validationRules());
+
+    if (fieldInvalidList !== undefined) {
+      let errors = {
+        ...fieldInvalidList,
+      };
+
+      setErrors({ ...errors, ...fieldInvalidList });
+    }
+
+    return !fieldInvalidList;
+  };
+  const onChangeValue = (e) => {
+    e.persist();
+    const { name, value } = e.target || {};
+    let tempErrors = { ...error };
+    tempErrors[name] = undefined;
+    setErrors({ ...error, ...tempErrors });
+    setemail(value);
+  };
+
+  return (
+    <div className="container forgot_main">
+      <h2>Forgot Password?</h2>{" "}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Enter your email address"
+          value={email}
+          name="email"
+          onChange={onChangeValue}
+        />
+        {error.email && <ErrorComponent message={error.email[0]} />}
+        <button type="submit" className="forgot_submit">
+          Submit <ArrowHoverBlacked />
+        </button>
+      </form>
+    </div>
+  );
 };
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      resetPassword,
+    },
+    dispatch
+  );
+};
+
+const ForgotPassword = connect(null, mapDispatchToProps)(ForgotPasswordClass);
+
 export default ForgotPassword;

@@ -269,11 +269,11 @@ const MyProfileFC = ({
                     <h6>What’s your Motto?</h6>
                     <textarea
                       type="text"
-                      placeholder="Share the words you live or train by in 250 characters or less"
+                      placeholder="Tell us all about it"
                       onChange={handleInputChange}
                       value={trainerData.motto}
                       name="motto"
-                      maxlength="250"
+                      maxlength="500"
                     />
                   </div>
                   <div className="setup_card2">

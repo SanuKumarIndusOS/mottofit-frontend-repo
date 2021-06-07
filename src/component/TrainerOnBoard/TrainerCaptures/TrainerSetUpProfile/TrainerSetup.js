@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { trainerDetail, fileUpload } from "action/trainerAct";
+import { trainerDetail, fileUpload, getStripeAccLink } from "action/trainerAct";
 import Radio from "@material-ui/core/Radio";
 import ArrowBack from "../../../../assets/files/SVG/Arrow Back.svg";
 import "./stylesSetup.scss";
@@ -185,12 +185,19 @@ function TrainerSetupClass(props) {
     setLoading(true);
     api({ ...updateTrainerAvailabilityApi })
       .then(() => {
-        setLoading(false);
-        history.push("/trainers/dashboard/session");
+        getStripeURL();
       })
-      .catch(() => {
+      .catch(() => setLoading(false));
+  };
+  const getStripeURL = () => {
+    props
+      .getStripeAccLink()
+      .then((data) => {
+        const { url } = data;
+        window.location.href = url;
         setLoading(false);
-      });
+      })
+      .catch(() => setLoading(false));
   };
   const handleUploadArea = (e, index) => {
     let image = e.target.files[0];
@@ -244,7 +251,7 @@ function TrainerSetupClass(props) {
             <label>What’s your Motto?</label>
             <br />
             <textarea
-              placeholder="Share the words you live or train by in 250 characters or less"
+              placeholder="Tell us all about it"
               value={trainerSetupData.motto}
               onChange={(e) => {
                 setTrainerSetupData({
@@ -252,13 +259,14 @@ function TrainerSetupClass(props) {
                   motto: e.target.value,
                 });
               }}
+              maxlength="500"
             />
           </div>
           <div className="textarea_content">
             <label>Tell us about you and describe your training process</label>
             <br />
             <textarea
-              placeholder="Share the words you live or train by in 250 characters or less"
+              placeholder="Tell us all about it"
               value={trainerSetupData.training_process}
               onChange={(e) => {
                 setTrainerSetupData({
@@ -418,19 +426,6 @@ function TrainerSetupClass(props) {
                   </option>
                 ))}
               </select>
-              {/* <NormalMultiSelect
-                placeholder="Select Location"
-                value={trainerSetupData.neighborhood_list}
-                arrow={true}
-                name="location"
-                options={options}
-                handleChange={(e) => {
-                  setTrainerSetupData({
-                    ...trainerSetupData,
-                    neighborhood_list: e.value,
-                  });
-                }}
-              /> */}
             </div>
             <div className="radio_content">
               <label>
@@ -607,6 +602,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       fileUploadApi: fileUpload,
       trainerDetail,
+      getStripeAccLink,
     },
     dispatch
   );

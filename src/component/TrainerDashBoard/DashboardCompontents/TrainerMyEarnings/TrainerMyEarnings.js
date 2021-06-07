@@ -21,7 +21,6 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
     let id = localStorage.getItem("user-id");
     trainerMyEarning(id)
       .then((data) => {
-        console.log(data, "datadata");
         setPaymentHistory(data.history);
         setMyEarning(data);
       })

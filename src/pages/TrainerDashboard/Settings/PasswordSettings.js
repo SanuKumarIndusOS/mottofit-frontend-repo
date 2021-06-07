@@ -2,11 +2,7 @@ import PasswordSetting from "component/TrainerDashBoard/DashboardCompontents/Pas
 import React from "react";
 
 const PasswordSettings = () => {
-    return (
-        <div>
-            <PasswordSetting />
-        </div>
-    );
+  return <PasswordSetting />;
 };
 
 export default PasswordSettings;
