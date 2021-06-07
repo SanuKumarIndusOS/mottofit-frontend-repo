@@ -17,6 +17,7 @@ import { TrainerApi } from "service/apiVariables";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { api } from "service/api";
+import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import ImageBG from "../../../../assets/files/SVG/Image 1.svg";
 const CyanRadio = withStyles({
@@ -77,7 +78,7 @@ function TrainerSetupClass(props) {
   useEffect(() => {
     props.trainerDetail().then((res) => {
       setTrainerDetails(res);
-      if (res.images) {
+      if (res.images && res.images.length !== 0) {
         setImageList(res.images);
       }
       let { identityInfromation = {}, insuranceInformation = {} } = res;
@@ -154,6 +155,7 @@ function TrainerSetupClass(props) {
 
   const handleSubmit = () => {
     let payload = {
+      images: imagesList.filter((x) => x != ""),
       myMotto: trainerSetupData.motto,
       applicationStatus: "setupComplete",
       trainingProcess: trainerSetupData.training_process,
@@ -175,6 +177,8 @@ function TrainerSetupClass(props) {
       identityNo: trainerSetupData.governmentIdNumber,
       insuranceName: trainerSetupData.insuranceNameUS,
       insuranceAmount: trainerSetupData.coverAmount,
+      insurance: trainerSetupData.insurance,
+      identity: trainerSetupData.governmentId,
     };
     const { updateTrainerAvailabilityApi } = TrainerApi;
     updateTrainerAvailabilityApi.body = payload;
@@ -195,13 +199,17 @@ function TrainerSetupClass(props) {
 
       fd.append("images", image);
       props.fileUploadApi(fd).then((data) => {
-        imagesList[index] = URL.createObjectURL(image);
+        imagesList[index] = data.urlPath;
         setImageList([...imagesList]);
       });
     }
   };
   const handleMoreImageUploadArea = () => {
     imagesList.push("");
+    setImageList([...imagesList]);
+  };
+  const handleRemoveImage = (index) => {
+    imagesList[index] = "";
     setImageList([...imagesList]);
   };
   return (
@@ -265,35 +273,47 @@ function TrainerSetupClass(props) {
             <div className="row">
               {imagesList.map((list, index) => {
                 return (
-                  <div className="col-3 w-100 mb-3 px-2" key={index}>
+                  <div className="col-3 w-100 mt-3 px-2" key={index}>
                     <div className="image-upload-card btn-file-input">
-                      <button>
-                        <img
-                          src={list !== "" ? list : ImageBG}
-                          alt={"card-image"}
-                          accept="image/*"
-                        />
-                        <input
-                          type="file"
-                          name="insurance"
-                          className="custom-file-input"
-                          onChange={(e) => handleUploadArea(e, index)}
-                        />
-                      </button>
+                      {list !== "" ? (
+                        <button className="uploaded-image">
+                          <img src={list} alt={"card-image"} accept="image/*" />
+                          <div id="overlay"></div>
+                          <img
+                            src={CloseIcon}
+                            className="remove-image"
+                            alt="close"
+                            onClick={() => handleRemoveImage(index)}
+                          />
+                        </button>
+                      ) : (
+                        <button>
+                          <img
+                            src={ImageBG}
+                            alt={"card-image"}
+                            accept="image/*"
+                          />
+                          <input
+                            type="file"
+                            className="custom-file-input"
+                            onChange={(e) => handleUploadArea(e, index)}
+                          />
+                        </button>
+                      )}
                     </div>
                   </div>
                 );
               })}
-              {imagesList.length < 10 ? (
-                <button
-                  className="certificate_button"
-                  type="button"
-                  onClick={() => handleMoreImageUploadArea()}
-                >
-                  + Add More Images
-                </button>
-              ) : null}
             </div>
+            {imagesList.length < 10 ? (
+              <button
+                className="certificate_button"
+                type="button"
+                onClick={() => handleMoreImageUploadArea()}
+              >
+                + Add More Images
+              </button>
+            ) : null}
           </div>
           <div className="certificate_content">
             <label>Certifications</label>

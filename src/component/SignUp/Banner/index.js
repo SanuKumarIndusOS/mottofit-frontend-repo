@@ -9,21 +9,13 @@ import "./styles.scss";
 import { Link, useHistory } from "react-router-dom";
 import ArrowHover from "../../common/ButtonIcon/ArrowHover";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
-// import { api } from "service/api";
 import { AuthApi } from "service/apiVariables";
 import { loginOrSignUp } from "action/authAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import useForm from "./useForm";
-import validateInfo from "./validation";
 import validate from "service/validation";
 
-const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
-  // const { data, handleFormSubmit, error, setData } = useForm(
-  //     validateInfo,
-  //     submitForm
-  // );
-
+const SignUpFC = ({ loginOrSignupAct }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -71,9 +63,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
 
     if (!validateFields(payload)) return;
 
-    // console.log(payload);
-
-    //   if (Object.keys(error).length === 0) {
     loginOrSignupAct(userSignUp, payload)
       .then(() => {
         history.push("/trainer/find");
@@ -81,7 +70,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
       .catch((error) => {
         setApiError("Sorry, something went wrong.", error.message);
       });
-    //   }
   }
 
   const showPassword = () => {
@@ -94,7 +82,8 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
   const validationRules = () => {
     let passwordValidation = {
       format: {
-        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
+        pattern:
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
         flags: "i",
         message:
           "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
@@ -109,9 +98,9 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
 
     let nameValidation = {
       format: {
-        pattern: /^[a-zA-Z]*$/,
+        pattern: /^[a-zA-Z ]*$/,
         flags: "i",
-        message: "must be alphabets",
+        message: "must be alphabets and spaces",
       },
       length: {
         minimum: 3,
@@ -124,21 +113,21 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
       firstName: {
         presence: {
           allowEmpty: false,
-          message: "^Firstname is required",
+          message: "^First name is required",
         },
         ...nameValidation,
       },
       lastName: {
         presence: {
           allowEmpty: false,
-          message: "^Lastname is required",
+          message: "^Last name is required",
         },
         ...nameValidation,
       },
       location: {
         presence: {
           allowEmpty: false,
-          message: "^Lastname is required",
+          message: "^Location is required",
         },
         ...nameValidation,
       },
@@ -197,8 +186,6 @@ const SignUpFC = ({ loginOrSignupAct, submitForm }) => {
       let errors = {
         ...fieldInvalidList,
       };
-
-      console.log(errors);
       setErrors({ ...errors, ...fieldInvalidList });
     }
 

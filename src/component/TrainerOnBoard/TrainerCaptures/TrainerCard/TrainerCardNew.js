@@ -52,7 +52,6 @@ function TrainerCardNewClass(props) {
     virtual_classFlatRate: "",
     virtual_threeSessionRate: "",
     virtual_tenSessionRate: "",
-    profilepic: null,
   });
 
   useEffect(() => {
@@ -66,21 +65,10 @@ function TrainerCardNewClass(props) {
 
   //Profile Picture Upload
   const [previewImage, setPreviewTmage] = useState();
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
   const fileInputRef = useRef();
   const [isLoading, setisLoading] = useState(false);
   const [error, setErrors] = useState({});
-  useEffect(() => {
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewTmage(reader.result);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreviewTmage(null);
-    }
-  }, [image]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -89,10 +77,13 @@ function TrainerCardNewClass(props) {
         classSessionPricing = {},
         oneOnOnePricing = {},
         socialSessionPricing = {},
+        profilePicture,
       } = res;
+      if (profilePicture) {
+        setImage(profilePicture);
+      }
       setTrainerCardData({
         ...trainerCardData,
-        profilepic: res.profilePicture,
         firstName: res.firstName,
         lastName: res.lastName,
         description: res.description,
@@ -189,7 +180,7 @@ function TrainerCardNewClass(props) {
           message: "^First name is required",
         },
         format: {
-          pattern: /^[A-Za-z? ,_-]+$/,
+          pattern: /^[A-Za-z ]+$/,
           flags: "i",
           message: "^First name must contain only letters and spaces",
         },
@@ -244,18 +235,12 @@ function TrainerCardNewClass(props) {
       trainerCardData.inPersonAtClient_individualCharge ||
       trainerCardData.inPersonAtTrainer_individualCharge
     ) {
-      if (image !== undefined) {
-        const fd = new FormData();
-
-        fd.append("profilePicture", image, image.name);
-        dispatch(fileUpload(fd));
-      }
-
       let payload = {
         firstName: trainerCardData.firstName,
         lastName: trainerCardData.lastName,
         areaOfExpertise: trainerCardData.verticals,
         description: trainerCardData.description,
+        profilePicture: image,
         oneOnOnePricing: {
           inPersonAtClientLocation:
             trainerCardData.inPersonAtClient_individualCharge,
@@ -314,6 +299,18 @@ function TrainerCardNewClass(props) {
     }
   };
 
+  const handleProfileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fd = new FormData();
+
+      fd.append("profilePicture", file);
+      props.fileUpload(fd).then((data) => {
+        setImage(data.urlPath);
+      });
+    }
+  };
+
   return (
     <div className="container">
       <div className="card_inner">
@@ -338,20 +335,40 @@ function TrainerCardNewClass(props) {
         </div>
         <div className="pro_pic_center">
           <div className="item1_card">
-            {previewImage ? (
-              <img
-                src={previewImage}
-                style={{
-                  objectFit: "cover",
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "100px",
-                  marginTop: "3em",
-                }}
-                onClick={() => {
-                  setPreviewTmage(null);
-                }}
-              />
+            {console.log(image, "imageimage")}
+            {image ? (
+              <div className="combin_profile">
+                <button
+                  onClick={(event) => {
+                    event.preventDefault();
+                    fileInputRef.current.click();
+                  }}
+                >
+                  <img
+                    src={image ? image : Profile}
+                    alt="icon"
+                    style={{
+                      objectFit: "cover",
+                      width: "100px",
+                      height: "100px",
+                    }}
+                  />
+                </button>
+                <img
+                  src={ProfileAdd}
+                  alt="icon"
+                  style={{
+                    objectFit: "cover",
+                    width: "20px",
+                    height: "20px",
+                    borderRadius: "100px",
+                  }}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    fileInputRef.current.click();
+                  }}
+                />
+              </div>
             ) : (
               <div className="combin_profile">
                 <button
@@ -361,16 +378,12 @@ function TrainerCardNewClass(props) {
                   }}
                 >
                   <img
-                    src={
-                      trainerCardData.profilepic
-                        ? trainerCardData.profilepic
-                        : Profile
-                    }
-                    alt="icon"
+                    src={Profile}
                     style={{
                       objectFit: "cover",
                       width: "100px",
                       height: "100px",
+                      borderRadius: "100px",
                     }}
                   />
                 </button>
@@ -396,14 +409,7 @@ function TrainerCardNewClass(props) {
               ref={fileInputRef}
               accept="image/*"
               style={{ display: "none" }}
-              onChange={(event) => {
-                const file = event.target.files[0];
-                if (file && file.type.substr(0, 5) === "image") {
-                  setImage(file);
-                } else {
-                  setImage(null);
-                }
-              }}
+              onChange={(e) => handleProfileUpload(e)}
             />
             <h5>Upload your profile picture, hotshot!</h5>
           </div>
@@ -951,6 +957,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       trainerDetail,
       updateTrainerDetailsApicall,
+      fileUpload,
     },
     dispatch
   );

@@ -14,7 +14,6 @@ import { history } from "helpers";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { trainerDetail } from "action/trainerAct";
-import "./dropdown.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import SimpleReactValidator from "simple-react-validator";

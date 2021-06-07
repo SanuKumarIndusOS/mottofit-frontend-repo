@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
-// import Select from "react-select";
 
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 import ImageBG from "assets/files/SVG/Image 1.svg";
@@ -12,17 +11,16 @@ import {
   updateTrainerDetails,
   fileUpload,
 } from "action/trainerAct";
+import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
-import axios from "axios";
 
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import "./dropdown.scss";
-import { COMMON_URL } from "helpers/baseURL";
 
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
@@ -50,22 +48,6 @@ const MyProfileFC = ({
   updateTrainerDetails,
   fileUploadApi,
 }) => {
-  const data = {
-    heading: "Build out the rest of your Profile!",
-    describe:
-      "Your trainer profile is what clients will see when they click on your trainer card while filtering results. The below information and training settings can be changed at any time.",
-    motto: "What’s your Motto?",
-    tellUs: "Tell us about you and describe your training process",
-    showcase: "Throw in some photos showcasing you & your skills",
-    certificate: "Certifications you’d like to display",
-    where: "Where will you be training",
-    serviceable: "Which city will you train in?",
-    location: "Your preferred training location",
-    web: "Website",
-    insta: "Instagram",
-    youtube: "Youtube",
-  };
-
   const [trainerData, setTrainerData] = useState({
     motto: "",
     trainingProcessDescription: "",
@@ -90,10 +72,6 @@ const MyProfileFC = ({
     preferedTrainingMode: [],
     trainingFacilityLocation: "",
     servicableLocation: "",
-  });
-
-  const [renderButton, setRenderButton] = useState({
-    visiable: false,
   });
 
   //state for radio buttons
@@ -136,18 +114,6 @@ const MyProfileFC = ({
     values[index][event.target.name] = event.target.value;
     setInputCertificatesFields(values);
   };
-
-  //adding and removing the input certificate field
-  const handleAddFields = () => {
-    setImageList([...imagesList, { image: "" }]);
-    setRenderButton(false);
-  };
-  const handleRemoveFields = (index) => {
-    const values = [...imagesList];
-    values.splice(index, 1);
-    setImageList(values);
-    setRenderButton(true);
-  };
   const handleMoreImageUploadArea = () => {
     imagesList.push("");
     setImageList([...imagesList]);
@@ -160,10 +126,6 @@ const MyProfileFC = ({
     const tempData = {
       ...trainerData,
     };
-    // setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
-    // setCheckButton((checkButton) => !checkButton);
-
-    // if(label) value = {label , name , value};
 
     const isMultiSelect = Array.isArray(e);
 
@@ -188,63 +150,14 @@ const MyProfileFC = ({
   };
 
   const handleSubmit = () => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: localStorage.getItem("token"),
-    };
-
-    axios
-      .get(
-        COMMON_URL + "/v1/trainer",
-        { applicationStatus: "setupComplete" },
-        {
-          headers: headers,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      });
     const {
-      // firstName,
-      // lastName,
-      // description,
-      // individualCharge,
-      // ssTwoPeopleCharge,
-      // ssThreePeopleCharge,
-      // ssFourPeopleCharge,
-      // classFlatRate,
-      // threeSessionRate,
-      // tenSessionRate,
       instaHandle,
-      // location,
       motto,
       servicableLocation,
-      // trainingLocation,
       trainingProcessDescription,
       websiteLink,
       trainingFacilityLocation,
-      // youtubeChannel,
-      // individualChargeTl,
-      // ssTwoPeopleChargeTl,
-      // ssThreePeopleChargeTl,
-      // ssFourPeopleChargeTl,
-      // classFlatRateTl,
-      // threeSessionRateTl,
-      // tenSessionRateTl,
-      // individualChargeVt,
-      // ssTwoPeopleChargeVt,
-      // ssThreePeopleChargeVt,
-      // ssFourPeopleChargeVt,
-      // classFlatRateVt,
-      // threeSessionRateVt,
-      // tenSessionRateVt,
-      // governmentId,
-      // insurance,
-      // governmentIdNumber,
-      // coverAmount,
       virtualMeetingLink,
-      // identityNameUS,
-      // insuranceNameUS,
     } = trainerData;
 
     let payload = {
@@ -256,6 +169,7 @@ const MyProfileFC = ({
       virtualMeetingLink: virtualMeetingLink,
       servicableLocation: servicableLocation,
       trainingFacilityLocation: trainingFacilityLocation,
+      images: imagesList.filter((x) => x !== ""),
     };
 
     const { updateTrainerAvailabilityApi } = TrainerApi;
@@ -264,12 +178,12 @@ const MyProfileFC = ({
 
     api({ ...updateTrainerAvailabilityApi })
       .then(() => {
+        _getTrainerDetails();
         alert("Successfully added changes");
       })
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
+  const _getTrainerDetails = () => {
     getTrainerDetails()
       .then((data) => {
         const {
@@ -300,7 +214,7 @@ const MyProfileFC = ({
             trainingFacilityLocation: trainingFacilityLocation,
           },
         };
-        if (data.images) {
+        if (data.images && data.images.length !== "") {
           setImageList(data.images);
         }
         if (
@@ -316,6 +230,10 @@ const MyProfileFC = ({
         updateTrainerDetails(storeData);
       })
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    _getTrainerDetails();
   }, []);
 
   const handleUploadArea = (e, index) => {
@@ -331,6 +249,11 @@ const MyProfileFC = ({
     }
   };
 
+  const handleRemoveImage = (index) => {
+    imagesList[index] = "";
+    setImageList([...imagesList]);
+  };
+
   return (
     <>
       <div className="outter_tp_container">
@@ -343,7 +266,7 @@ const MyProfileFC = ({
               <div className="tp_outter_form container">
                 <form onSubmit={(e) => e.preventDefault()}>
                   <div className="setup_card1">
-                    <h6>{data.motto}</h6>
+                    <h6>What’s your Motto?</h6>
                     <textarea
                       type="text"
                       placeholder="Share the words you live or train by in 250 characters or less"
@@ -354,38 +277,55 @@ const MyProfileFC = ({
                     />
                   </div>
                   <div className="setup_card2">
-                    <h6>{data.tellUs}</h6>
+                    <h6>
+                      Tell us about you and describe your training process
+                    </h6>
                     <textarea
                       type="text"
                       name="comment"
-                      placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here
-                                        will be searchable through our search bar"
+                      placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here will be searchable through our search bar"
                       onChange={handleInputChange}
                       value={trainerData.trainingProcessDescription}
                       name="trainingProcessDescription"
                     />
                   </div>
                   <div className="setup_card3">
-                    <h6>{data.showcase}</h6>
-
+                    <h6>Throw in some photos showcasing you & your skills</h6>
                     <div className="row">
                       {imagesList.map((list, index) => {
                         return (
                           <div className="col-3 w-100 mb-3 px-2" key={index}>
                             <div className="image-upload-card btn-file-input">
-                              <button>
-                                <img
-                                  src={list !== "" ? list : ImageBG}
-                                  alt={"card-image"}
-                                  accept="image/*"
-                                />
-                                <input
-                                  type="file"
-                                  name="insurance"
-                                  className="custom-file-input"
-                                  onChange={(e) => handleUploadArea(e, index)}
-                                />
-                              </button>
+                              {list !== "" ? (
+                                <button className="uploaded-image">
+                                  <img
+                                    src={list}
+                                    alt={"card-image"}
+                                    accept="image/*"
+                                  />
+                                  <div id="overlay"></div>
+                                  <img
+                                    src={CloseIcon}
+                                    className="remove-image"
+                                    alt="close"
+                                    onClick={() => handleRemoveImage(index)}
+                                  />
+                                </button>
+                              ) : (
+                                <button>
+                                  <img
+                                    src={ImageBG}
+                                    alt={"card-image"}
+                                    accept="image/*"
+                                  />
+                                  <input
+                                    type="file"
+                                    name="insurance"
+                                    className="custom-file-input"
+                                    onChange={(e) => handleUploadArea(e, index)}
+                                  />
+                                </button>
+                              )}
                             </div>
                           </div>
                         );
@@ -405,7 +345,7 @@ const MyProfileFC = ({
                     </div>
                   </div>
                   <div className="setup_card4">
-                    <h6>{data.certificate}</h6>
+                    <h6>Certifications you’d like to display</h6>
                     {inputCertificatesFields?.map(
                       (inputCertificatesField, index) => (
                         <div className="inputs_certificate" key={index}>
@@ -437,7 +377,7 @@ const MyProfileFC = ({
                   <div className="setup_card5">
                     <div className="setupcontent_wrapper">
                       <div className="setup_item">
-                        <h6>{data.where}</h6>
+                        <h6>Where will you be training</h6>
                         <div className="inputs_platform">
                           <button
                             onClick={(e) => handleInputChange(e, "Online")}
@@ -486,7 +426,7 @@ const MyProfileFC = ({
                       </div>
 
                       <div className="setup_item1">
-                        <h6>{data.serviceable}</h6>
+                        <h6>Which city will you train in?</h6>
                         <div className="inputs_platform">
                           <div className="iconwrapper">
                             <select
@@ -598,7 +538,7 @@ const MyProfileFC = ({
                       </div>
 
                       <div className="setup_item1">
-                        <h6>{data.insta}</h6>
+                        <h6>Instagram</h6>
                         <div className="inputs_platform">
                           <div className="iconwrapper">
                             <input
@@ -614,7 +554,7 @@ const MyProfileFC = ({
                       </div>
 
                       <div className="setup_item1">
-                        <h6>{data.web}</h6>
+                        <h6>Website</h6>
                         <div className="inputs_platform">
                           <div className="iconwrapper">
                             <input
@@ -641,76 +581,6 @@ const MyProfileFC = ({
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-};
-const ImageReander = () => {
-  const [image, setImage] = useState();
-  const [previewImage, setPreviewTmage] = useState();
-  const fileInputRef = useRef();
-
-  useEffect(() => {
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewTmage(reader.result);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreviewTmage(null);
-    }
-  }, [image]);
-  return (
-    <>
-      <div className="renderImage">
-        {previewImage ? (
-          <img
-            src={previewImage}
-            style={{
-              objectFit: "cover",
-              width: "180px",
-              height: "180px",
-            }}
-            onClick={() => {
-              setPreviewTmage(null);
-            }}
-          />
-        ) : (
-          <div className="combin_profile">
-            <button
-              onClick={(event) => {
-                event.preventDefault();
-                fileInputRef.current.click();
-              }}
-            >
-              <img
-                // src={Profile}
-                src={ImageBG}
-                alt="icon"
-                style={{
-                  objectFit: "cover",
-                  width: "180px",
-                  height: "180px",
-                }}
-              />
-            </button>
-          </div>
-        )}
-
-        <input
-          type="file"
-          ref={fileInputRef}
-          accept="image/*"
-          onChange={(event) => {
-            const file = event.target.files[0];
-            if (file && file.type.substr(0, 5) === "image") {
-              setImage(file);
-            } else {
-              setImage(null);
-            }
-          }}
-        />
       </div>
     </>
   );
