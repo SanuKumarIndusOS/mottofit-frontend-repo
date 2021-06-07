@@ -36,7 +36,7 @@ const PaymentSectionSetupClass = ({
         console.log(data, "datadata");
         setTrainerSetupData({
           ...trainerSetupData,
-          insurance: e.target.files[0],
+          insurance: data.urlPath,
         });
       });
     }
@@ -52,7 +52,7 @@ const PaymentSectionSetupClass = ({
         console.log(data, "datadata");
         setTrainerSetupData({
           ...trainerSetupData,
-          governmentId: e.target.value,
+          governmentId: data.urlPath,
         });
       });
     }

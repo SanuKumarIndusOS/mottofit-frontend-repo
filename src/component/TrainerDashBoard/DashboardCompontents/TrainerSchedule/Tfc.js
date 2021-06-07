@@ -859,15 +859,9 @@ function TfcClass({
           {
             //Check if message failed
             editMode ? (
-              <div style={{ height: "530px", width: "960px" }}>
-                {" "}
-                {tableData}{" "}
-              </div>
+              <div style={{ height: "100%", width: "960px" }}>{tableData}</div>
             ) : (
-              <div style={{ height: "530px", width: "960px" }}>
-                {" "}
-                {tableData2}{" "}
-              </div>
+              <div style={{ height: "100%", width: "960px" }}>{tableData2}</div>
             )
           }
           <div className="scheduler_button">
@@ -889,7 +883,6 @@ function TfcClass({
                   {" "}
                   Make defualt
                 </label>
-                <br></br>
                 <button
                   onClick={toggleEditMode}
                   className="scheduler_button"

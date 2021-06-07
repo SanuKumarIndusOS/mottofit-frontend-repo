@@ -87,7 +87,8 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
   const validationRules = () => {
     let passwordValidation = {
       format: {
-        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
+        pattern:
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
         flags: "i",
         message:
           "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
@@ -106,7 +107,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
           message: "^Name is required",
         },
         format: {
-          pattern: /^[a-zA-Z]*$/,
+          pattern: /^[a-zA-Z ]*$/,
           flags: "i",
           message: "^Enter a valid name",
         },
