@@ -83,7 +83,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
     let passwordValidation = {
       format: {
         pattern:
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@_#$!%*?&]*$/,
         flags: "i",
         message:
           "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
