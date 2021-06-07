@@ -335,13 +335,6 @@ const MyProfileFC = ({
                           + Add More Images
                         </h5>
                       ) : null}
-                      {/* {renderButton ? (
-                        <h5 onClick={() => handleAddFields()}>
-                          + Add More Image's
-                        </h5>
-                      ) : (
-                        <h5 onClick={() => handleRemoveFields()}>Remove</h5>
-                      )} */}
                     </div>
                   </div>
                   <div className="setup_card4">
