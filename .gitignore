@@ -6,7 +6,7 @@
 node_modules
 jsconfig.json
 #production
-
+/build
 # testing
 /coverage
 

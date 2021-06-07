@@ -135,7 +135,7 @@ class AboutTrainerFC extends Component {
         websiteURL: data.websiteLink || "",
         phone: data.phoneNumber || "",
         instagram: data.instagramProfile || "",
-        firstName: data.firstName + " " + data.lastName || "",
+        firstName: data.firstName,
       });
     });
   }
