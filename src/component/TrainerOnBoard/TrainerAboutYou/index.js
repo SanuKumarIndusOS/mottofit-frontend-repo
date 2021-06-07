@@ -59,6 +59,7 @@ class AboutTrainerFC extends Component {
     phone: "",
     instagram: "",
     firstName: "",
+    isLoading: false,
   };
 
   //validation
@@ -110,9 +111,17 @@ class AboutTrainerFC extends Component {
     };
 
     if (this.validator.allValid()) {
-      this.props.updateTrainerDetailsApicall(storeData).then(() => {
-        history.push(`/trainer/background`);
-      });
+      this.setState({ isLoading: true });
+      this.props
+        .updateTrainerDetailsApicall(storeData)
+        .then(() => {
+          this.validator.hideMessages();
+          this.setState({ isLoading: false });
+          history.push(`/trainer/background`);
+        })
+        .catch(() => {
+          this.setState({ isLoading: false });
+        });
     } else {
       this.validator.showMessages();
       this.forceUpdate();
@@ -128,14 +137,14 @@ class AboutTrainerFC extends Component {
   componentDidMount() {
     this.props.trainerDetail().then((data) => {
       this.setState({
-        dob: data.DOB || "",
-        location: data.location || "",
-        email: data.email || "",
-        gender: data.gender || "",
-        websiteURL: data.websiteLink || "",
-        phone: data.phoneNumber || "",
-        instagram: data.instagramProfile || "",
-        firstName: data.firstName,
+        dob: data.DOB ? data.DOB : "",
+        location: data.location ? data.location : "",
+        email: data.email ? data.email : "",
+        gender: data.gender ? data.gender : "",
+        websiteURL: data.websiteLink ? data.websiteLink : "",
+        phone: data.phoneNumber ? data.phoneNumber : "",
+        instagram: data.instagramProfile ? data.instagramProfile : "",
+        firstName: data.firstName ? data.firstName : "",
       });
     });
   }
@@ -149,6 +158,7 @@ class AboutTrainerFC extends Component {
       phone,
       instagram,
       firstName,
+      isLoading,
     } = this.state;
     return (
       <>
@@ -287,9 +297,17 @@ class AboutTrainerFC extends Component {
                   <button
                     type="submit"
                     onClick={(e) => this.handleTrainerBackground(e)}
+                    disabled={isLoading}
+                    className="d-flex justify-content-center"
                   >
-                    Continue
-                    <ArrowHoverBlacked />
+                    {isLoading ? (
+                      "Loading..."
+                    ) : (
+                      <>
+                        Continue
+                        <ArrowHoverBlacked />
+                      </>
+                    )}
                   </button>
                 </div>
               </div>

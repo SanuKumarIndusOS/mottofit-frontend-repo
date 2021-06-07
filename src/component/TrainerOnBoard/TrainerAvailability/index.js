@@ -33,7 +33,7 @@ const TrainerAvailabilityFC = ({
   const [selectedOneValue, setSelectedOneValue] = useState("");
   const [checkButton, setCheckButton] = useState(false);
   const [checkButtonInPerson, setCheckButtonInPerson] = useState(false);
-
+  const [isLoading, setisLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
 
@@ -57,22 +57,26 @@ const TrainerAvailabilityFC = ({
 
     let data = {
       preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
-      willingToTravel: trainerAvailabilityData.willingToTravel,
+      willingToTravel: setSelectedOneValue == "1" ? true : false,
       servicableLocation: trainerAvailabilityData.servicableLocation,
       trainingFacilityLocation: [
         trainerAvailabilityData.trainingFacilityLocation,
       ],
       stripeId: "",
-      hoursPerWeek: trainerAvailabilityData.hoursPerWeek,
       serviceableCity: trainerAvailabilityData.servicableLocation,
     };
-
+    if (trainerAvailabilityData.hoursPerWeek !== "") {
+      data.hoursPerWeek = parseFloat(trainerAvailabilityData.hoursPerWeek);
+    }
+    setisLoading(true);
     updateTrainerDetailsApicall(data)
       .then(() => {
         setOpen(true);
+        setisLoading(false);
       })
       .catch(() => {
         setOpen(false);
+        setisLoading(false);
       });
   };
 
@@ -84,9 +88,9 @@ const TrainerAvailabilityFC = ({
     } else {
       tempData = [...tempData, type];
     }
+    trainerAvailabilityData.preferedTrainingMode = [...tempData];
     setTrainerAvailabilityData({
       ...trainerAvailabilityData,
-      preferedTrainingMode: tempData,
     });
 
     setCheckButton((checkButton) => !checkButton);
@@ -99,11 +103,10 @@ const TrainerAvailabilityFC = ({
     } else {
       tempData = [...tempData, type];
     }
+    trainerAvailabilityData.preferedTrainingMode = [...tempData];
     setTrainerAvailabilityData({
       ...trainerAvailabilityData,
-      preferedTrainingMode: tempData,
     });
-
     setCheckButtonInPerson((checkButtonInPerson) => !checkButtonInPerson);
   };
 
@@ -111,10 +114,16 @@ const TrainerAvailabilityFC = ({
     trainerDetail().then((data) => {
       if (data) {
         const tempData = {
-          hoursPerWeek: data.hoursPerWeek,
-          preferedTrainingMode: data.preferedTrainingMode,
-          trainingFacilityLocation: data.trainingFacilityLocation,
-          servicableLocation: data.servicableLocation,
+          hoursPerWeek: data.hoursPerWeek ? data.hoursPerWeek : 0,
+          preferedTrainingMode: data.preferedTrainingMode
+            ? data.preferedTrainingMode
+            : [],
+          trainingFacilityLocation: data.trainingFacilityLocation
+            ? data.trainingFacilityLocation
+            : "",
+          servicableLocation: data.servicableLocation
+            ? data.servicableLocation
+            : "",
         };
         setTrainerAvailabilityData(tempData);
         if (
@@ -241,10 +250,6 @@ const TrainerAvailabilityFC = ({
                   <h6>
                     Are you willing to travel to clients in your city/region?
                   </h6>
-                  {console.log(
-                    selectedOneValue,
-                    "selectedOneValueselectedOneValue"
-                  )}
                   <CyanRadio
                     checked={selectedOneValue == "1"}
                     onChange={handleOneChange}
@@ -280,9 +285,20 @@ const TrainerAvailabilityFC = ({
                 </div>
               </div>
               <div className="submit_button">
-                <button type="submit" onClick={handleSubmit}>
-                  Submit
-                  <ArrowHoverBlacked />
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  disabled={isLoading}
+                  className="d-flex justify-content-center"
+                >
+                  {isLoading ? (
+                    "Loading..."
+                  ) : (
+                    <>
+                      Submit
+                      <ArrowHoverBlacked />
+                    </>
+                  )}
                 </button>
                 {open ? (
                   <Modal

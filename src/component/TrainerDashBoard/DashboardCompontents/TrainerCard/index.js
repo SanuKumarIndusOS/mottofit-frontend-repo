@@ -13,7 +13,7 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import Profile from "../../../../assets/files/SVG/Profile Picture.svg";
 import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import { fileUpload } from "action/trainerAct";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 

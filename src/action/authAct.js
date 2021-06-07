@@ -1,35 +1,22 @@
-import { UserActionType } from "service/actionType";
-import { AuthApi } from "service/apiVariables";
-import { addDate, compareDates } from "service/helperFunctions";
-import { history } from "helpers";
+import { addDate } from "service/helperFunctions";
 
+export const loginOrSignUp =
+  (currentApi, payload) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      currentApi.body = payload;
 
-export const loginOrSignUp = ( currentApi ,payload) => (
-  dispatch,
-  getState,
-  { api }
-) => {
-  return new Promise((resolve, reject) => {
-    // let { loginApi } = AuthApi;.
-    
+      api({ ...currentApi })
+        .then((data) => {
+          resolve(data);
+          const { token, expiresIn, type } = data;
+          localStorage.setItem("token", token);
 
-    currentApi.body = payload;
-
-    api({ ...currentApi })
-      .then((data) => {
-        resolve(data);
-        const { token, expiresIn, type } = data;
-        localStorage.setItem("token", token);
-
-        const expireTime = addDate(null, 2).unix();
-        localStorage.setItem("exp", expireTime);
-
-       //if (token && type === "trainer") history.push("/trainer/about");
-
-       
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
+          const expireTime = addDate(null, 2).unix();
+          localStorage.setItem("exp", expireTime);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };

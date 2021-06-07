@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  captureTrainerSetup,
-  trainerDetail,
-  fileUpload,
-} from "action/trainerAct";
+import { trainerDetail, fileUpload } from "action/trainerAct";
 import Radio from "@material-ui/core/Radio";
 import ArrowBack from "../../../../assets/files/SVG/Arrow Back.svg";
 import "./stylesSetup.scss";
@@ -24,7 +19,6 @@ import { connect } from "react-redux";
 import { api } from "service/api";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import ImageBG from "../../../../assets/files/SVG/Image 1.svg";
-import { set } from "date-fns";
 const CyanRadio = withStyles({
   root: {
     "&$checked": {
@@ -68,9 +62,6 @@ function TrainerSetupClass(props) {
   });
 
   const [imagesList, setImageList] = useState(["", "", "", "", ""]);
-  React.useEffect(() => {
-    dispatch(captureTrainerSetup(trainerSetupData));
-  }, [trainerSetupData]);
 
   //buttons virtual and in person active
   const [checkButtonVirtual, setCheckButtonVirtual] = useState(true);
@@ -82,8 +73,6 @@ function TrainerSetupClass(props) {
   // Agree check
   const [agreed, setAgreed] = useState(false);
   const [trainerdetailData, setTrainerDetails] = useState({});
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     props.trainerDetail().then((res) => {
@@ -563,15 +552,6 @@ function TrainerSetupClass(props) {
             </label>
           </div>
 
-          {/* <button
-                            className="setup_submit"
-                            onClick={() => {
-                                console.log(trainerSetupData);
-                                dispatch(captureTrainerSetup(trainerSetupData));
-                            }}
-                        >
-                            Continue
-                        </button> */}
           <div className="submit_button">
             <button
               onClick={() => handleSubmit()}

@@ -1,5 +1,3 @@
-import { generateQuery } from "./helperFunctions";
-
 export const AuthApi = {
   loginApi: {
     api: "login",
@@ -16,6 +14,10 @@ export const AuthApi = {
   },
   loginAdminApi: {
     api: "login",
+    method: "post",
+  },
+  adminApi: {
+    api: "admin/login",
     method: "post",
   },
 };
@@ -138,7 +140,8 @@ export const TrainerApi = {
         "&endDate=" +
         this.endDate +
         "&timeBlock=" +
-        this.timeSlot
+        this.timeSlot +
+        `&timeZone=America/New_York`
       );
     },
   },
@@ -214,7 +217,8 @@ export const userApi = {
         "&endDate=" +
         this.endDate +
         "&timeBlock=" +
-        this.timeSlot
+        this.timeSlot +
+        `&timeZone=America/New_York`
       );
     },
   },
