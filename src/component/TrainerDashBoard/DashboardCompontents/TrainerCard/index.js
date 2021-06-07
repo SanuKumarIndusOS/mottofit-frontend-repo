@@ -42,7 +42,6 @@ function TrainerCardDashboard(props) {
     virtual_classFlatRate: "",
     virtual_threeSessionRate: "",
     virtual_tenSessionRate: "",
-    profilepic: null,
   });
 
   // Training verticals selection states

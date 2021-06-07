@@ -312,3 +312,157 @@
     position: relative !important;
     left: 10px;
 }
+
+//Availablity styles
+
+.box_3_active_home {
+    display: block;
+    position: relative;
+    top: 12px;
+    width: 260px;
+    height: 240px;
+    background: #fff;
+    box-shadow: 1px 3px 12px #1616160d;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    left: 45px !important;
+}
+
+.box_3_active_home {
+    display: block;
+    position: relative;
+    top: 12px;
+    width: 260px;
+    height: 240px;
+    background: #fff;
+    box-shadow: 1px 3px 12px #1616160d;
+    opacity: 1;
+    flex-direction: column;
+    border: none;
+}
+
+.box_3_active_home .dd_row_one {
+    display: flex;
+}
+
+.box_3_active_home .dd_row_one .option .option_wapper {
+    width: 130px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #eaeaea;
+}
+
+.box_3_active_home .dd_row_one .option .option_wapper img {
+    width: 54px;
+    position: relative;
+    left: 0px;
+    height: 60px;
+}
+
+.box_3_active_home .dd_row_one .option .option_wapper h2 {
+    padding-top: 0.5em;
+    width: 140px;
+    height: 16px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600)
+        var(--unnamed-font-size-14) / 18px var(--unnamed-font-family-montserrat);
+    color: var(--unnamed-color-161616);
+    text-align: center;
+    font: normal normal 600 12px/18px Montserrat;
+    letter-spacing: 0.7px;
+    color: #161616;
+    text-transform: uppercase;
+    opacity: 1;
+}
+.box_3_active_home .dd_row_one .option .option_wapper label {
+    padding-top: 0.5em;
+    width: 140px;
+    height: 16px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600)
+        var(--unnamed-font-size-14) / 18px var(--unnamed-font-family-montserrat);
+    color: var(--unnamed-color-161616);
+    text-align: center;
+    font: normal normal 500 12px/18px Montserrat !important;
+    letter-spacing: 0.7px;
+    color: #161616;
+    text-transform: uppercase !important;
+    font-style: italic !important;
+    opacity: 1;
+}
+
+.box_3_active_home .dd_row_one .option:hover {
+    background: #53bfd2;
+    border: none;
+}
+
+.box_3_active_home .dd_row_two {
+    flex: 1;
+    display: flex;
+    height: auto;
+    background: #fff;
+}
+
+.box_3_active_home .dd_row_two .option .option_wapper {
+    width: 130px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.2s ease-in;
+    border: 1px solid #eaeaea;
+}
+
+.box_3_active_home .dd_row_two .option .option_wapper img {
+    width: 54px;
+    position: relative;
+    left: 0px;
+    height: 60px;
+}
+
+.box_3_active_home .dd_row_two .option .option_wapper h2 {
+    padding-top: 0.5em;
+    width: 140px;
+    height: 16px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600)
+        var(--unnamed-font-size-14) / 18px var(--unnamed-font-family-montserrat);
+    color: var(--unnamed-color-161616);
+    text-align: center;
+    font: normal normal 600 12px/18px Montserrat;
+    letter-spacing: 0.7px;
+    color: #161616;
+    text-transform: uppercase;
+    opacity: 1;
+}
+.box_3_active_home .dd_row_two .option .option_wapper label {
+    padding-top: 0.5em;
+    width: 140px;
+    height: 16px;
+    text-align: center;
+    letter-spacing: 0.7px;
+    color: #161616;
+    text-transform: uppercase !important;
+    font-style: italic !important;
+    font: 12px;
+    line-height: 18px;
+    font-weight: 500;
+    font-family: Montserrat;
+}
+
+.box_3_active_home .dd_row_two .option:hover {
+    background: #53bfd2;
+    border: none;
+}
+
+.box_3_inactive {
+    display: none;
+    opacity: 0;
+}
+
+.circle {
+    position: relative !important;
+    left: 10px;
+}
