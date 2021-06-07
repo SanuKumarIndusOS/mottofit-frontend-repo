@@ -20,6 +20,7 @@ import useForm from "./useForm";
 import validateInfo from "./validation";
 import { trainerDetail } from "action/trainerAct";
 import { history } from "helpers";
+import validate from "service/validation";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
@@ -32,24 +33,41 @@ const SignInFC = ({
 }) => {
   // const history = useHistory();
   const myRef = useRef(null);
-  const { data, handleFormSubmit, error, setData } = useForm(
-    validateInfo,
-    submitForm
-  );
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    signUpType: "email",
+    deviceName: "email",
+  });
+
+  const [error, setErrors] = useState({});
+  // const { data, handleFormSubmit, error, setData } = useForm(
+  //   validateInfo,
+  //   submitForm
+  // );
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [apiError, setApiError] = useState("");
 
   const onChangeValue = (e) => {
     e.persist();
-    setData({ ...data, [e.target.name]: e.target.value });
+
+    const { name, value } = e.target || {};
+
+    let tempErrors = { ...error };
+
+    tempErrors[name] = undefined;
+    setData({ ...data, [name]: value });
+
+    setErrors({ ...error, ...tempErrors });
   };
 
   const showPassword = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
-  async function logIn() {
+  async function logIn(e) {
+    e.preventDefault();
     const payload = {
       email: data.email,
       password: data.password,
@@ -57,37 +75,78 @@ const SignInFC = ({
       deviceName: data.deviceName,
     };
 
-   
+    if (!validateFields(payload)) return;
 
     const { loginApi } = AuthApi;
 
     // NEED USER DATA AFTER LOGIN AND SIGNUP
 
-    if (Object.keys(error).length === 0) {
-      loginAct( loginApi ,payload)
-        .then((res) => {
-         
-          localStorage.setItem("user-id", res.id);
-          if (res["type"] === "trainer") {
-            trainerDetail().then((response) => {
-           
-              if (response.applicationStatus === null) {
-                history.push("/trainer/about");
-               
-              } else {
-                history.push("/trainers/dashboard/session");
-              
-              }
-            });
-          } else {
-            history.push("/trainer/find");
-          }
-        })
-        .catch((error) => {
-          setApiError("Sorry, something went wrong.", error.message);
-        });
-    }
+    // if (Object.keys(error).length === 0) {
+    loginAct(loginApi, payload)
+      .then((res) => {
+        localStorage.setItem("user-id", res.id);
+        if (res["type"] === "trainer") {
+          trainerDetail().then((response) => {
+            if (response.applicationStatus === null) {
+              history.push("/trainer/about");
+            } else {
+              history.push("/trainers/dashboard/session");
+            }
+          });
+        } else {
+          history.push("/trainer/find");
+        }
+      })
+      .catch((error) => {
+        setApiError("Sorry, something went wrong.", error.message);
+      });
+    // }
   }
+
+  const validationRules = () => {
+    return {
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: "^Email is required",
+        },
+        email: true,
+      },
+      password: {
+        presence: {
+          allowEmpty: false,
+          message: "^Password is required",
+        },
+        format: {
+          pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
+          flags: "i",
+          message:
+            "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+        },
+        length: {
+          minimum: 7,
+          tooShort: "must contain alteast 7 character",
+          maximum: 15,
+          tooLong: "must contain less than 15 character",
+        },
+      },
+    };
+  };
+
+  const validateFields = (data) => {
+    let fieldInvalidList = validate(data, validationRules());
+
+    if (fieldInvalidList !== undefined) {
+      let errors = {
+        ...fieldInvalidList,
+      };
+
+      // console.log(errors);
+      setErrors({ ...errors, ...fieldInvalidList });
+    }
+
+    return !fieldInvalidList;
+  };
 
   return (
     <>
@@ -109,7 +168,7 @@ const SignInFC = ({
                 <h2>Welcome to Motto!</h2>
                 <p>Sign into your account by filling in the details below</p>
                 <div className="form_item_login">
-                  <form onSubmit={handleFormSubmit}>
+                  <form onSubmit={logIn}>
                     <div className="input_item1_signin">
                       <input
                         placeholder="Email"
@@ -120,7 +179,7 @@ const SignInFC = ({
                       />
                       <img src={Mail} alt="icon" />
 
-                      {error.email && <span>{error.email}</span>}
+                      {error.email && <span>{error.email[0]}</span>}
                     </div>
                     <div className="input_item1_signin">
                       <input
@@ -132,7 +191,7 @@ const SignInFC = ({
                       />
                       <img src={Password} alt="icon" onClick={showPassword} />
 
-                      {error.password && <span>{error.password}</span>}
+                      {error.password && <span>{error.password[0]}</span>}
                     </div>
                     <div className="remember_container">
                       <div className="remember_left">
@@ -177,7 +236,7 @@ const SignInFC = ({
                       <button
                         className="login_button"
                         type="submit"
-                        onClick={logIn()}
+                        onClick={logIn}
                       >
                         Signin
                         <ArrowHoverBlacked />
