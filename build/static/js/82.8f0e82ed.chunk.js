@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[82,185],{121:function(e,s,t){"use strict";t.r(s);t(2),t(469);var c=t(1);s.default=function(){return Object(c.jsx)(c.Fragment,{children:Object(c.jsx)("div",{className:"work_banner",children:Object(c.jsxs)("div",{className:"work_main",children:[Object(c.jsx)("div",{className:"watermark"}),Object(c.jsxs)("div",{className:"work_heading",children:[Object(c.jsx)("h2",{children:"How Motto Works"}),Object(c.jsx)("br",{})]})]})})})}},469:function(e,s,t){}}]);
+//# sourceMappingURL=82.8f0e82ed.chunk.js.map
