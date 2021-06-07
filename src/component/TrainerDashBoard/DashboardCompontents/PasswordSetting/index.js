@@ -4,6 +4,7 @@ import { COMMON_URL } from "helpers/baseURL";
 import { history } from "helpers";
 import Password from "../../../../assets/files/SignUp/Password Icon.svg";
 import ArrowHoverBlacked from "component/common/BlackCircleButton/ArrowHoverBlacked";
+import validate from "service/validation";
 
 const PasswordSetting = () => {
     // Password show or hide
@@ -19,16 +20,20 @@ const PasswordSetting = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const payload = {
+            password: passwordData.password,
+            newPassword: passwordData.newPassword,
+            confirmPassword: passwordData.confirmPassword,
+        };
+        if (!validateFields(payload)) return;
+
         fetch(`${COMMON_URL}/v1/trainer/change-password`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: localStorage.getItem("token"),
             },
             method: "POST",
-            body: JSON.stringify({
-                password: passwordData.password,
-                newPassword: passwordData.newPassword,
-            }),
+            body: JSON.stringify(payload),
         })
             .then((response) => {
                 console.log(response);
@@ -51,6 +56,80 @@ const PasswordSetting = () => {
         setNewPasswordShown(newPasswordShown ? false : true);
     };
 
+    const [error, setErrors] = useState({});
+
+    // validation
+    const validationRules = () => {
+        let passwordValidation = {
+            format: {
+                pattern:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
+                flags: "i",
+                message:
+                    "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+            },
+            length: {
+                minimum: 8,
+                tooShort: "must contain alteast 8 character",
+                maximum: 12,
+                tooLong: "must contain less than 12 character",
+            },
+        };
+        return {
+            password: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Old Password is required",
+                },
+                ...passwordValidation,
+            },
+            newPassword: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^New Password is required",
+                },
+                ...passwordValidation,
+            },
+            confirmPassword: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Confirm Password is required",
+                },
+                equality: {
+                    attribute: "newPassword",
+                    message: "^Passwords doesn't match",
+                    comparator: function (v1, v2) {
+                        return JSON.stringify(v1) === JSON.stringify(v2);
+                    },
+                },
+                ...passwordValidation,
+            },
+        };
+    };
+
+    const validateFields = (data) => {
+        let fieldInvalidList = validate(data, validationRules());
+
+        if (fieldInvalidList !== undefined) {
+            let errors = {
+                ...fieldInvalidList,
+            };
+
+            console.log(errors);
+            setErrors({ ...errors, ...fieldInvalidList });
+        }
+
+        return !fieldInvalidList;
+    };
+
+    const onChangeValue = (e) => {
+        e.persist && e.persist();
+        const { name, value } = e.target || e || {};
+        let tempErrors = { ...error };
+        tempErrors[name] = undefined;
+        setPasswordData({ ...passwordData, [name]: value });
+        setErrors({ ...error, ...tempErrors });
+    };
     return (
         <>
             <div className="container">
@@ -65,12 +144,7 @@ const PasswordSetting = () => {
                                     type={passwordShown ? "text" : "password"}
                                     placeholder="Old Password"
                                     value={passwordData.password}
-                                    onChange={(e) => {
-                                        setPasswordData({
-                                            ...passwordData,
-                                            password: e.target.value,
-                                        });
-                                    }}
+                                    onChange={onChangeValue}
                                     name="password"
                                 />
                                 <img
@@ -80,6 +154,12 @@ const PasswordSetting = () => {
                                     style={{ cursor: "pointer" }}
                                 />
                             </div>
+                            <span>
+                                {error.password && (
+                                    <span>{error.password[0]}</span>
+                                )}
+                            </span>
+
                             <div className="newPassword">
                                 <input
                                     type={
@@ -87,13 +167,8 @@ const PasswordSetting = () => {
                                     }
                                     placeholder="New Password"
                                     value={passwordData.newPassword}
-                                    onChange={(e) => {
-                                        setPasswordData({
-                                            ...passwordData,
-                                            newPassword: e.target.value,
-                                        });
-                                    }}
-                                    name="password"
+                                    onChange={onChangeValue}
+                                    name="newPassword"
                                 />
                                 <img
                                     src={Password}
@@ -102,6 +177,12 @@ const PasswordSetting = () => {
                                     style={{ cursor: "pointer" }}
                                 />
                             </div>
+                            <span>
+                                {error.newPassword && (
+                                    <span>{error.newPassword[0]}</span>
+                                )}
+                            </span>
+
                             <div className="newPassword">
                                 <input
                                     type={
@@ -109,13 +190,8 @@ const PasswordSetting = () => {
                                     }
                                     placeholder="Confirm New Password"
                                     value={passwordData.confirmPassword}
-                                    onChange={(e) => {
-                                        setPasswordData({
-                                            ...passwordData,
-                                            confirmPassword: e.target.value,
-                                        });
-                                    }}
-                                    name="password"
+                                    onChange={onChangeValue}
+                                    name="confirmPassword"
                                 />
                                 <img
                                     src={Password}
@@ -124,6 +200,12 @@ const PasswordSetting = () => {
                                     style={{ cursor: "pointer" }}
                                 />
                             </div>
+                            <span>
+                                {error.confirmPassword && (
+                                    <span>{error.confirmPassword[0]}</span>
+                                )}
+                            </span>
+
                             <button type="submit">
                                 Submit <ArrowHoverBlacked />
                             </button>
