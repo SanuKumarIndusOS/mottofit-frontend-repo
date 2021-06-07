@@ -64,7 +64,6 @@ export const trainerDetail =
 
       api({ ...trainerDetail })
         .then(({ data }) => {
-          console.log(data, "pdata");
           resolve(data);
         })
         .catch((err) => {

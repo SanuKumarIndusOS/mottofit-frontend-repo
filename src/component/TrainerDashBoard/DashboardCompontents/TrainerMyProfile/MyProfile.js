@@ -300,15 +300,18 @@ const MyProfileFC = ({
             trainingFacilityLocation: trainingFacilityLocation,
           },
         };
-        setImageList(data.images);
+        if (data.images) {
+          setImageList(data.images);
+        }
         if (
           data.willingToTravel !== null &&
           data.willingToTravel !== undefined
         ) {
           setSelectedOneValue(data.willingToTravel ? "1" : "0");
         }
-
-        setInputCertificatesFields(certification);
+        if (certification) {
+          setInputCertificatesFields(certification);
+        }
         setTrainerData(storeData.details);
         updateTrainerDetails(storeData);
       })

@@ -88,7 +88,9 @@ function TrainerSetupClass(props) {
   useEffect(() => {
     props.trainerDetail().then((res) => {
       setTrainerDetails(res);
-      setImageList(res.images);
+      if (res.images) {
+        setImageList(res.images);
+      }
       let { identityInfromation = {}, insuranceInformation = {} } = res;
       setTrainerSetupData({
         ...trainerSetupData,
@@ -187,13 +189,14 @@ function TrainerSetupClass(props) {
     };
     const { updateTrainerAvailabilityApi } = TrainerApi;
     updateTrainerAvailabilityApi.body = payload;
-    console.log(payload, trainerSetupData, "payloadpayload");
+    setLoading(true);
     api({ ...updateTrainerAvailabilityApi })
       .then(() => {
+        setLoading(false);
         history.push("/trainers/dashboard/session");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        setLoading(false);
       });
   };
   const handleUploadArea = (e, index) => {

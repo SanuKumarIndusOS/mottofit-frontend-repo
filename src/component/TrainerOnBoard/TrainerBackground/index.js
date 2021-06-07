@@ -127,17 +127,24 @@ const TrainerBackgroundFC = ({
             ? data.awaitingCertification
             : "",
         });
-
-        setInputField(data.previousExperience);
-        setinputCertificatesField(data.certification);
-        setCurrentExperience(data.currentExperience);
-
-        if (data.areaOfExpertise.indexOf("Boxing") >= 0) setCheckedBoxing(true);
-        if (data.areaOfExpertise.indexOf("Pilates") >= 0)
-          setCheckedPilates(true);
-        if (data.areaOfExpertise.indexOf("Yoga") >= 0) setCheckedYoga(true);
-        if (data.areaOfExpertise.indexOf("Strength & HIIT") >= 0)
-          setCheckedHIIT(true);
+        if (data.previousExperience) {
+          setInputField(data.previousExperience);
+        }
+        if (data.certification) {
+          setinputCertificatesField(data.certification);
+        }
+        if (data.currentExperience) {
+          setCurrentExperience(data.currentExperience);
+        }
+        if (data.areaOfExpertise) {
+          if (data.areaOfExpertise.indexOf("Boxing") >= 0)
+            setCheckedBoxing(true);
+          if (data.areaOfExpertise.indexOf("Pilates") >= 0)
+            setCheckedPilates(true);
+          if (data.areaOfExpertise.indexOf("Yoga") >= 0) setCheckedYoga(true);
+          if (data.areaOfExpertise.indexOf("Strength & HIIT") >= 0)
+            setCheckedHIIT(true);
+        }
       }
     });
   }, []);

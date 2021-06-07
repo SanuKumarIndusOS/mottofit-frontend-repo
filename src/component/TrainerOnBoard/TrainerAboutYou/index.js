@@ -185,8 +185,8 @@ class AboutTrainerFC extends Component {
                       options={locations}
                       handleChange={(e) => this.handleInput(e)}
                     />
-                    {this.validator.message("location", location, "required")}
                   </div>
+                  {this.validator.message("location", location, "required")}
                 </div>
                 <div className="wrapper_innerInput">
                   <label>Date of Birth*</label>
@@ -198,6 +198,9 @@ class AboutTrainerFC extends Component {
                     value={dob}
                     onChange={(e) => this.handleInput(e)}
                     name="dob"
+                    onKeyDown={(e) =>
+                      e.keyCode !== 8 ? e.preventDefault() : ""
+                    }
                   />
                   {this.validator.message("dob", dob, "required")}
                   {dob && moment().diff(dob, "years", false) <= 21 && (
@@ -215,8 +218,8 @@ class AboutTrainerFC extends Component {
                       options={genderList}
                       handleChange={(e) => this.handleInput(e)}
                     />
-                    {this.validator.message("gender", gender, "required")}
                   </div>
+                  {this.validator.message("gender", gender, "required")}
                 </div>
                 <div className="wrapper_innerInput">
                   <label>Email*</label>

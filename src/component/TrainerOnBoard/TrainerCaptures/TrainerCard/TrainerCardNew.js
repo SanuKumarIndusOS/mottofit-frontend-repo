@@ -79,13 +79,7 @@ function TrainerCardNewClass(props) {
       setPreviewTmage(null);
     }
   }, [image]);
-
-  const TrainerCardPayload = useSelector(
-    (state) => state.trainerCaptureReducer.cardData
-  );
   const dispatch = useDispatch();
-
-  useEffect(() => {}, [trainerCardData]);
 
   useEffect(() => {
     props.trainerDetail().then((res) => {
@@ -165,21 +159,22 @@ function TrainerCardNewClass(props) {
           ? oneOnOnePricing.passRatefor10SessionAtVirtual
           : "",
       });
+      if (res.areaOfExpertise) {
+        if (res.areaOfExpertise.find((el) => el === "Strength & HIIT")) {
+          setCheckedHIIT(true);
+        }
 
-      if (res.areaOfExpertise.find((el) => el === "Strength & HIIT")) {
-        setCheckedHIIT(true);
-      }
+        if (res.areaOfExpertise.find((el) => el === "Yoga")) {
+          setCheckedYoga(true);
+        }
 
-      if (res.areaOfExpertise.find((el) => el === "Yoga")) {
-        setCheckedYoga(true);
-      }
+        if (res.areaOfExpertise.find((el) => el === "Boxing")) {
+          setCheckedBoxing(true);
+        }
 
-      if (res.areaOfExpertise.find((el) => el === "Boxing")) {
-        setCheckedBoxing(true);
-      }
-
-      if (res.areaOfExpertise.find((el) => el === "Pilates")) {
-        setCheckedPilates(true);
+        if (res.areaOfExpertise.find((el) => el === "Pilates")) {
+          setCheckedPilates(true);
+        }
       }
     });
   }, []);

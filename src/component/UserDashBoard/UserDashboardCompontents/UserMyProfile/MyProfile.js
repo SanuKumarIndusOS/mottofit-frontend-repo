@@ -204,7 +204,13 @@ const MyProfileClass = ({ getUserDetail }) => {
                         </div>
                         <div className="input_profile">
                           <label>Date of Birth </label>
-                          <input type="date" value={userData.location} />
+                          <input
+                            type="date"
+                            value={userData.location}
+                            onKeyDown={(e) =>
+                              e.keyCode !== 8 ? e.preventDefault() : ""
+                            }
+                          />
                         </div>
                         <div className="input_profile">
                           <label>Gender </label>

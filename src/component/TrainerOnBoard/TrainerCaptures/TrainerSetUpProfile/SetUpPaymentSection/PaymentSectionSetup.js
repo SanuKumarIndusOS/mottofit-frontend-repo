@@ -27,15 +27,6 @@ const PaymentSectionSetupClass = ({
   setTrainerSetupData,
   fileUploadApi,
 }) => {
-  const data = {
-    heading: "Security & Payment Information",
-    describe:
-      "The following information is mandatory to complete the onboarding of all new trainers. Please ensure you check all the documents before uploading them.",
-    id: "Please upload any one of your US government issued ID’s",
-    insurance: "Please upload your insurance information",
-    payment: "Add your account details for payment",
-  };
-
   const uploadArea = (e) => {
     let image = e.target.files[0];
     if (image !== undefined) {
@@ -73,13 +64,17 @@ const PaymentSectionSetupClass = ({
       <div className="payment_container container">
         <div className="payment_wrapper">
           <div className="payment_heading">
-            <h2>{data.heading}</h2>
-            <p>{data.describe}</p>
+            <h2>{"Security & Payment Information"}</h2>
+            <p>
+              The following information is mandatory to complete the onboarding
+              of all new trainers. Please ensure you check all the documents
+              before uploading them.
+            </p>
           </div>
           <div className="payment_inner ">
             {/* <form> */}
             <div className="payment_item1">
-              <h6>{data.id}</h6>
+              <h6>Please upload any one of your US government issued ID’s</h6>
               <div className="inputs_payment1">
                 <select
                   value={trainerSetupData.identityNameUS}
@@ -142,7 +137,7 @@ const PaymentSectionSetupClass = ({
               </div>
             </div>
             <div className="payment_item1">
-              <h6>{data.insurance}</h6>
+              <h6>Please upload your insurance information</h6>
               <div className="inputs_payment1">
                 <input
                   type="text"
