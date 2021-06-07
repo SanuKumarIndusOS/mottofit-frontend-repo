@@ -217,7 +217,8 @@ export const userApi = {
         "&endDate=" +
         this.endDate +
         "&timeBlock=" +
-        this.timeSlot
+        this.timeSlot +
+        `&timeZone=America/New_York`
       );
     },
   },

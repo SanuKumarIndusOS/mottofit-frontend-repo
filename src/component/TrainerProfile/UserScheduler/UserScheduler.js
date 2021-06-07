@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 import BackIcon from "../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
-// import BlueArrowButton from "../../common/BlueArrowButton";
 import "./styles.scss";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
@@ -137,18 +136,18 @@ function UserSchedulerClass(props) {
   const [aslot, setAslot] = React.useState();
   const [aslotKeys, setAslotKeys] = React.useState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSelectedCell([]);
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
   }, [time]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Object.keys(data).map((item) => {
       dt[data[item]["slotDate"]] = data[item]["availabileTimes"];
     });
@@ -168,7 +167,7 @@ function UserSchedulerClass(props) {
     setAslotKeys(Object.keys(lt));
   }, [data]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCellData([]);
     time.map((time) => {
       var temp = [];
@@ -181,7 +180,7 @@ function UserSchedulerClass(props) {
     });
   }, [cal]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     //    ("change", cells, cellData);
     setSelectedCell([]);
     cells.map((column, key) => {
@@ -209,8 +208,6 @@ function UserSchedulerClass(props) {
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
   };
-
-  React.useEffect(() => {}, [startWeek]);
 
   const NextWeek = () => {
     //Reset current cells
@@ -246,8 +243,6 @@ function UserSchedulerClass(props) {
 
         setCellData((cellData) => [...cellData, temp]);
       });
-    } else {
-      //   console.log("pop");
     }
   };
 
@@ -288,7 +283,7 @@ function UserSchedulerClass(props) {
     setuserSlots(cellCollection);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     populate(startWeek, endWeek);
   }, [userSlots]);
 
@@ -297,8 +292,8 @@ function UserSchedulerClass(props) {
     var endDate = end.format("YYYY-MM-DD");
     props
       .getCalenderDetails(props.id, startDate, endDate, TimeSlot)
-      .then((json) => {
-        setData(json.data);
+      .then(({ data }) => {
+        setData(data);
       });
   };
 
@@ -367,7 +362,6 @@ function UserSchedulerClass(props) {
               if (aslotKeys.length !== 0) {
                 if (aslotKeys.find((el) => el === item.date)) {
                   if (aslot[item.date].find((l) => l === item.time)) {
-                    // console.log(item.date + item.time, userSlots, "blah");
                     return userSlots.find(
                       (el) => el === item.time + item.date
                     ) ? (
