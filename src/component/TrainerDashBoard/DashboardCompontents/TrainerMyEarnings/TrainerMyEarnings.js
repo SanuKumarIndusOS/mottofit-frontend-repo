@@ -48,7 +48,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                       <div className="total_data">
                         <img src={Earn} className="earn_image" alt="icon" />
                         <div className="earning_money">
-                          <h2>$8,500</h2>
+                          <h2>${myEarning ? myEarning.totalRevenue : "N/A"}</h2>
                           <p>Total Earnings in q1</p>
                         </div>
                       </div>
