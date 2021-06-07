@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./styles.scss";
-import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
 import BlueHoverButton from "component/common/BlueArrowButton";
 import Tick from "../../../../../assets/files/FindTrainer/Tick 1.svg";
@@ -92,18 +91,6 @@ const PaymentSectionSetupClass = ({
                     </option>
                   ))}
                 </select>
-                {/* <Dropdown
-                  title="Select government ID’s "
-                  list={info}
-                  value={trainerSetupData.identityNameUS}
-                  onChange={(e) => {
-                    setTrainerSetupData({
-                      ...trainerSetupData,
-                      identityNameUS: e.value,
-                    });
-                  }}
-                  name="identityNameUS"
-                /> */}
                 <input
                   type="text"
                   placeholder="Add your ID Number"

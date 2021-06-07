@@ -33,7 +33,7 @@ const TrainerAvailabilityFC = ({
   const [selectedOneValue, setSelectedOneValue] = useState("");
   const [checkButton, setCheckButton] = useState(false);
   const [checkButtonInPerson, setCheckButtonInPerson] = useState(false);
-
+  const [isLoading, setisLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
 
@@ -68,12 +68,15 @@ const TrainerAvailabilityFC = ({
     if (trainerAvailabilityData.hoursPerWeek !== "") {
       data.hoursPerWeek = parseFloat(trainerAvailabilityData.hoursPerWeek);
     }
+    setisLoading(true);
     updateTrainerDetailsApicall(data)
       .then(() => {
         setOpen(true);
+        setisLoading(false);
       })
       .catch(() => {
         setOpen(false);
+        setisLoading(false);
       });
   };
 
@@ -282,9 +285,20 @@ const TrainerAvailabilityFC = ({
                 </div>
               </div>
               <div className="submit_button">
-                <button type="submit" onClick={handleSubmit}>
-                  Submit
-                  <ArrowHoverBlacked />
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  disabled={isLoading}
+                  className="d-flex justify-content-center"
+                >
+                  {isLoading ? (
+                    "Loading..."
+                  ) : (
+                    <>
+                      Submit
+                      <ArrowHoverBlacked />
+                    </>
+                  )}
                 </button>
                 {open ? (
                   <Modal

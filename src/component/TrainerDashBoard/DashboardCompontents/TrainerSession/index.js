@@ -138,9 +138,11 @@ const TabOne = ({ datas = [] }) => {
                 <h3 className="my-5 py-5 text-center">No Data Found</h3>
               )}
             </div>
-            <button onClick={setViewMore} className="viewMoreButton">
-              View all Session <BlueHoverButton />
-            </button>
+            {datas.length > 0 ? (
+              <button onClick={setViewMore} className="viewMoreButton">
+                View all Session <BlueHoverButton />
+              </button>
+            ) : null}
           </div>
         </div>
       </div>
@@ -242,9 +244,11 @@ const TabTwo = ({ datas = [] }) => {
                 <h3 className="my-5 py-5 text-center">No Data Found</h3>
               )}
             </div>
-            <button onClick={setViewMore} className="viewMoreButton">
-              View all Session <BlueHoverButton />
-            </button>
+            {datas.length > 0 ? (
+              <button onClick={setViewMore} className="viewMoreButton">
+                View all Session <BlueHoverButton />
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

@@ -83,8 +83,8 @@ const SignInFC = ({ showModel, setShowModel, loginAct, trainerDetail }) => {
           history.push("/trainer/find");
         }
       })
-      .catch((error) => {
-        setApiError("Sorry, something went wrong.", error.message);
+      .catch((err) => {
+        setApiError("Sorry, something went wrong.", err.message);
       });
   }
 

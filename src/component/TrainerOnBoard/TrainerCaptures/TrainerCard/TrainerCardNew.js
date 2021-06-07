@@ -4,7 +4,7 @@ import "./accordion.scss";
 import DollarIcon from "../../../../assets/files/SVG/dollar Icon.svg";
 import { TrainerPrevModal } from "./TrainerPrevModal";
 import ArrowHoverBlacked from "component/common/BlackCircleButton/ArrowHoverBlacked";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { captureTrainerCard } from "action/trainerAct";
 import { trainerDetail, updateTrainerDetailsApicall } from "action/trainerAct";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -16,7 +16,8 @@ import { fileUpload } from "action/trainerAct";
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
+import { ErrorComponent } from "component/common/ErrorComponent";
+import validate from "service/validation";
 function TrainerCardNewClass(props) {
   //for Modal Operation
   const [open, setOpen] = useState(false);
@@ -67,7 +68,8 @@ function TrainerCardNewClass(props) {
   const [previewImage, setPreviewTmage] = useState();
   const [image, setImage] = useState();
   const fileInputRef = useRef();
-
+  const [isLoading, setisLoading] = useState(false);
+  const [error, setErrors] = useState({});
   useEffect(() => {
     if (image) {
       const reader = new FileReader();
@@ -179,7 +181,65 @@ function TrainerCardNewClass(props) {
     });
   }, []);
 
+  const validationRules = () => {
+    return {
+      firstName: {
+        presence: {
+          allowEmpty: false,
+          message: "^First name is required",
+        },
+        format: {
+          pattern: /^[A-Za-z? ,_-]+$/,
+          flags: "i",
+          message: "^First name must contain only letters and spaces",
+        },
+      },
+      lastName: {
+        presence: {
+          allowEmpty: false,
+          message: "^Last name is required",
+        },
+        format: {
+          pattern: /^[A-Za-z? ,_-]+$/,
+          flags: "i",
+          message: "^First name must contain only letters and spaces",
+        },
+      },
+    };
+  };
+
+  const validateFields = (data) => {
+    let fieldInvalidList = validate(data, validationRules());
+
+    if (fieldInvalidList !== undefined) {
+      let errors = {
+        ...fieldInvalidList,
+      };
+
+      setErrors({ ...errors, ...fieldInvalidList });
+    }
+
+    return !fieldInvalidList;
+  };
+
+  const setInputData = (e) => {
+    e.persist();
+
+    const { name, value } = e.target || {};
+
+    let tempErrors = { ...error };
+
+    tempErrors[name] = undefined;
+    setErrors({ ...error, ...tempErrors });
+    setTrainerCardData({ ...trainerCardData, [name]: value });
+  };
+
   const handleSubmit = () => {
+    let payloadData = {
+      firstName: trainerCardData.firstName,
+      lastName: trainerCardData.lastName,
+    };
+    if (!validateFields(payloadData)) return;
     if (
       trainerCardData.inPersonAtClient_individualCharge ||
       trainerCardData.inPersonAtTrainer_individualCharge
@@ -190,6 +250,7 @@ function TrainerCardNewClass(props) {
         fd.append("profilePicture", image, image.name);
         dispatch(fileUpload(fd));
       }
+
       let payload = {
         firstName: trainerCardData.firstName,
         lastName: trainerCardData.lastName,
@@ -238,9 +299,16 @@ function TrainerCardNewClass(props) {
           virtualSessionfor15People: trainerCardData.virtual_classFlatRate,
         },
       };
-      props.updateTrainerDetailsApicall(payload).then(() => {
-        history.push("/trainer/setup");
-      });
+      setisLoading(true);
+      props
+        .updateTrainerDetailsApicall(payload)
+        .then(() => {
+          history.push("/trainer/setup");
+          setisLoading(false);
+        })
+        .catch(() => {
+          setisLoading(false);
+        });
     } else {
       setValidationtxt(true);
     }
@@ -345,26 +413,22 @@ function TrainerCardNewClass(props) {
             <label>First Name</label> <br />
             <input
               value={trainerCardData.firstName}
-              onChange={(e) => {
-                setTrainerCardData({
-                  ...trainerCardData,
-                  firstName: e.target.value,
-                });
-              }}
+              onChange={(e) => setInputData(e)}
+              name="firstName"
             />
+            <br />
+            {error.firstName && <ErrorComponent message={error.firstName[0]} />}
           </div>
 
           <div className="item2_card_inner">
             <label>Last Name</label> <br />
             <input
               value={trainerCardData.lastName}
-              onChange={(e) => {
-                setTrainerCardData({
-                  ...trainerCardData,
-                  lastName: e.target.value,
-                });
-              }}
+              onChange={(e) => setInputData(e)}
+              name="lastName"
             />
+            <br />
+            {error.lastName && <ErrorComponent message={error.lastName[0]} />}
           </div>
         </div>
 
@@ -834,8 +898,14 @@ function TrainerCardNewClass(props) {
           ) : null}
         </div>
         <div className="card_submit">
-          <button onClick={() => handleSubmit()}>
-            Continue To profile <ArrowHoverBlacked />
+          <button onClick={() => handleSubmit()} disabled={isLoading}>
+            {isLoading ? (
+              "Loading..."
+            ) : (
+              <>
+                Continue To profile <ArrowHoverBlacked />
+              </>
+            )}
           </button>
         </div>
       </div>
