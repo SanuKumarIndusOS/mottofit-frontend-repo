@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[315],{433:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/dollar Icon.4c16bd4d.svg"}}]);
-//# sourceMappingURL=315.e6b29ef1.chunk.js.map

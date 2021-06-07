@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[91],{154:function(e,t,r){"use strict";r.r(t),r.d(t,"FormErrorMessage",(function(){return n}));r(2);var s=r(1),n=function(e){var t=e.error,r=(e.type,e.messages);return t?Object(s.jsx)("span",{className:"text-danger",style:{fontSize:"16px"},children:r[t.type]?r[t.type]:"Error in field"}):null}}}]);
-//# sourceMappingURL=91.7495ed15.chunk.js.map

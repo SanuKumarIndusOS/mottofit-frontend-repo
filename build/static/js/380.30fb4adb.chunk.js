@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[380],{497:function(t,e,s){"use strict";s.r(e),e.default=s.p+"static/media/Pilates Image.eeab7095.png"}}]);
+//# sourceMappingURL=380.30fb4adb.chunk.js.map
