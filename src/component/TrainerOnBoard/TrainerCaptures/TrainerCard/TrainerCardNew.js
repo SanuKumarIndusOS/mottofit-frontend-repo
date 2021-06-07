@@ -335,7 +335,6 @@ function TrainerCardNewClass(props) {
         </div>
         <div className="pro_pic_center">
           <div className="item1_card">
-            {console.log(image, "imageimage")}
             {image ? (
               <div className="combin_profile">
                 <button
