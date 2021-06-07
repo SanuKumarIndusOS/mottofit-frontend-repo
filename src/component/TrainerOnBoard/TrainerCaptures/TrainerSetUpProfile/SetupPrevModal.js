@@ -5,12 +5,14 @@ import { Modal } from "react-responsive-modal";
 import QMark from "../../../../assets/files/FindTrainer/Q Mark.svg";
 import { Link } from "react-router-dom";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
-// import "./modal.scss";
+import "./styles.scss";
 import "./stylesSetup.scss";
-const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
+
+const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
   const myRef = useRef(null);
 
   const closeIconModal = <img src={CloseIcon} alt="close" />;
+  console.log(trainerdetailData);
   return (
     <div>
       {open ? (
@@ -35,22 +37,17 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
                 <div className="profile_header">
                   <div className="inner_profile container">
                     <img
-                      // src={
-                      //     trainerPersonalData.profilePicture
-                      // }
-                      src="https://www.solidbackgrounds.com/images/2048x1536/2048x1536-powder-blue-web-solid-color-background.jpg"
+                      src={trainerdetailData.profilePicture}
                       alt="Image not Added"
                     />
 
                     <div className="profile_header_inner">
                       <h2>
-                        firstname and lastname
-                        {/* {trainerData.firstName}{" "}
-                                                {trainerData.lastName} */}
+                        {trainerdetailData.firstName}{" "}
+                        {trainerdetailData.lastName}
                       </h2>
                       <p>
-                        areaOfExpertise
-                        {/* {trainerPersonalData.areaOfExpertise.toString()} */}
+                        {trainerdetailData.areaOfExpertise.toString()}
                       </p>
                     </div>
                   </div>
@@ -62,58 +59,34 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
                       <img src={ArrowNext} alt="icon" />
                     </div>
                     <div className="profile_aside_items">
-                      {/* {trainerPersonalData.oneOnOnePricing &&
-                                            (trainerPersonalData.oneOnOnePricing
-                                                .virtualSession ||
-                                                trainerPersonalData
-                                                    .oneOnOnePricing
-                                                    .inPersonAtTrainerLocation) ? ( */}
                       <div className="profile_aside_item">
                         <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
                         <hr />
                         <div className="profile_aside_inner_item">
-                          {/* {trainerPersonalData.oneOnOnePricing &&
-                                                        trainerPersonalData
-                                                            .oneOnOnePricing
-                                                            .virtualSession ? ( */}
                           <h6>
-                            50
-                            {/* {
-                                                                    
-                                                                    // trainerPersonalData
-                                                                    //     .oneOnOnePricing
-                                                                    //     .virtualSession
-                                                                } */}
+                            {`$${trainerdetailData.oneOnOnePricing.virtualSession}`}
                             <span>(Virtual Session)</span>
                           </h6>
-                          {/* ) : null} */}
-                          {/* {trainerPersonalData.oneOnOnePricing &&
-                                                        trainerPersonalData
-                                                            .oneOnOnePricing
-                                                            .inPersonAtTrainerLocation ? ( */}
                           <h6>
-                            51
-                            {/* {
-                                                                    trainerPersonalData
-                                                                        .oneOnOnePricing
-                                                                        .inPersonAtTrainerLocation
-                                                                } */}
+                            {`$
+                              ${trainerdetailData
+                                .oneOnOnePricing
+                                .inPersonAtTrainerLocation}`
+                            }
                             <span>(In Person Session)</span>
                           </h6>
-                          {/* ) : null} */}
                           <h5>See package rates during checkout</h5>
                         </div>
                       </div>
-                      {/* ) : null} */}
 
-                      {/* {trainerPersonalData.socialSessionPricing &&
-                                            (trainerPersonalData
+                      {/* {trainerdetailData.socialSessionPricing &&
+                                            (trainerdetailData
                                                 .socialSessionPricing
                                                 .inPeronAtTrainerLocationfor2People ||
-                                                trainerPersonalData
+                                                trainerdetailData
                                                     .socialSessionPricing
                                                     .inPeronAtTrainerLocationfor3People ||
-                                                trainerPersonalData
+                                                trainerdetailData
                                                     .socialSessionPricing
                                                     .inPeronAtTrainerLocationfor4People) ? ( */}
                       <div className="profile_aside_item">
@@ -129,52 +102,49 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
                         <hr />
 
                         <div className="profile_aside_inner_item">
-                          {/* {trainerPersonalData.socialSessionPricing &&
-                                                        trainerPersonalData
+                          {/* {trainerdetailData.socialSessionPricing &&
+                                                        trainerdetailData
                                                             .socialSessionPricing
                                                             .inPeronAtTrainerLocationfor2People ? ( */}
                           <h6>
-                            40
-                            {/* {
-                                                                    trainerPersonalData
-                                                                        .socialSessionPricing
-                                                                        .inPeronAtTrainerLocationfor2People
-                                                                } */}
+
+                            {`$${trainerdetailData
+                              .socialSessionPricing
+                              .inPeronAtTrainerLocationfor2People
+                              }`
+                            }
                             <span>/ Session (For 2 People)</span>
                           </h6>
                           {/* ) : null} */}
-                          {/* {trainerPersonalData.socialSessionPricing &&
-                                                        trainerPersonalData
+                          {/* {trainerdetailData.socialSessionPricing &&
+                                                        trainerdetailData
                                                             .socialSessionPricing
                                                             .inPeronAtTrainerLocationfor3People ? ( */}
                           <h6>
-                            {/* {
-                                                                    trainerPersonalData
-                                                                        .socialSessionPricing
-                                                                        .inPeronAtTrainerLocationfor3People
-                                                                } */}
+                            {`$${trainerdetailData
+                              .socialSessionPricing
+                              .inPeronAtTrainerLocationfor3People
+                              }`}
                             <span>/ Session (For 3 People)</span>
                           </h6>
                           {/* ) : null} */}
-                          {/* {trainerPersonalData.socialSessionPricing &&
-                                                        trainerPersonalData
+                          {/* {trainerdetailData.socialSessionPricing &&
+                                                        trainerdetailData
                                                             .socialSessionPricing
                                                             .inPeronAtTrainerLocationfor4People ? ( */}
                           <h6>
-                            58
-                            {/* {
-                                                                    trainerPersonalData
-                                                                        .socialSessionPricing
-                                                                        .inPeronAtTrainerLocationfor4People
-                                                                } */}
+                            {`$${trainerdetailData
+                              .socialSessionPricing
+                              .inPeronAtTrainerLocationfor4People}`
+                            }
                             <span>/ Session (For 4 People)</span>
                           </h6>
                           {/* ) : null} */}
                         </div>
                       </div>
                       {/* ) : null} */}
-                      {/* {trainerPersonalData.classSessionPricing &&
-                                            trainerPersonalData
+                      {/* {trainerdetailData.classSessionPricing &&
+                                            trainerdetailData
                                                 .classSessionPricing
                                                 .inPersonAtclientLocationfor15People ? ( */}
                       <div className="profile_aside_item">
@@ -186,13 +156,13 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
 
                         <div className="profile_aside_inner_item">
                           <h6>
-                            70
-                            {/* {trainerPersonalData &&
-                                                            trainerPersonalData.classSessionPricing
-                                                                ? trainerPersonalData
-                                                                      .classSessionPricing
-                                                                      .inPersonAtclientLocationfor15People
-                                                                : ""} */}
+
+                            {`$${trainerdetailData &&
+                              trainerdetailData.classSessionPricing
+                              ? trainerdetailData
+                                .classSessionPricing
+                                .inPersonAtclientLocationfor15People
+                              : ""}`}
                             <span>Flat Rate Class (For 5-15 People)</span>
                           </h6>
                           <h5>
@@ -208,18 +178,18 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
 
                         <hr />
                         <div className="profile_aside_inner_item">
-                          {/* {trainerPersonalData
+                          {/* {trainerdetailData
                                                         .currentExperience
                                                         .workLocation ? ( */}
                           <div className="profile_location">
                             <img src={Tick} alt="icon" />
                             <h4>
-                              demo
-                              {/* {
-                                                                    trainerPersonalData
-                                                                        .currentExperience
-                                                                        .workLocation
-                                                                } */}
+
+                              {
+                                trainerdetailData
+                                  .currentExperience
+                                  .workLocation
+                              }
                             </h4>
                           </div>
                           {/* ) : (
@@ -243,9 +213,9 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
                     <div className="profile_right_data">
                       <div className="profile_right_item1">
                         <h6>
-                          motto
-                          {trainerSetupData.motto
-                            ? trainerSetupData.motto
+                          {/* motto */}
+                          {trainerdetailData.myMotto
+                            ? trainerdetailData.myMotto
                             : "Motto not Added"}
                         </h6>
                       </div>
@@ -255,23 +225,21 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
                           width: "40rem",
                         }}
                       >
-                        <h4>About {/* {trainerData.firstName} */}</h4>
+                        <h4>About {trainerdetailData.firstName}</h4>
                         <p>
-                          desc
-                          {/* {trainerSetupData.trainingProcessDescription
-                                                        ? trainerData.trainingProcessDescription
-                                                        : "Description not Added"} */}
+                          {/* desc */}
+                          {trainerdetailData.trainingProcess
+                            ? trainerdetailData.trainingProcess
+                            : "Description not Added"}
                         </p>
 
                         <div className="profile_images">
                           {
-                            // trainerData ? (
-                            //     <ImageGrid
-                            //         trainerPersonalData={
-                            //             trainerPersonalData
-                            //         }
-                            //     />
-                            // ) :
+                            trainerdetailData.images ? (
+                              trainerdetailData.images.map((imgVal)=>(
+                                <img src={imgVal} alt="image1"/>
+                              ))
+                            ) :
                             "NO IMAGES ADDED"
                           }
                         </div>
@@ -282,12 +250,12 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
                           <div className="inner_items">
                             <img src={Tick} alt="check" />
                             <h6>
-                              {/* {trainerPersonalData
-                                                                .certification[0]
-                                                                ? trainerPersonalData
-                                                                      .certification[0]
-                                                                      .certification
-                                                                : "Not Added"} */}
+                              {trainerdetailData
+                                .certification[0]
+                                ? trainerdetailData
+                                  .certification[0]
+                                  .certification
+                                : "Not Added"}
                               certification 1
                             </h6>
                           </div>
@@ -295,35 +263,35 @@ const SetupPrevModal = ({ open, setOpen, trainerSetupData }) => {
                             <img src={Tick} alt="check" />
                             <h6>
                               certification2
-                              {/* {trainerPersonalData
-                                                                .certification[1]
-                                                                ? trainerPersonalData
-                                                                      .certification[1]
-                                                                      .certification
-                                                                : "Not Added"} */}
+                              {trainerdetailData
+                                .certification[1]
+                                ? trainerdetailData
+                                  .certification[1]
+                                  .certification
+                                : "Not Added"}
                             </h6>
                           </div>
                           <div className="inner_items">
                             <img src={Tick} alt="check" />
                             <h6>
                               certification 3
-                              {/* {trainerPersonalData
-                                                                .certification[2]
-                                                                ? trainerPersonalData
-                                                                      .certification[2]
-                                                                      .certification
-                                                                : "Not Added"} */}
+                              {trainerdetailData
+                                .certification[2]
+                                ? trainerdetailData
+                                  .certification[2]
+                                  .certification
+                                : "Not Added"}
                             </h6>
                           </div>
                           <div className="inner_items">
                             <img src={Tick} alt="check" />
                             <h6>
                               certification 4
-                              {/* {trainerPersonalData
-                                                                .certification[3]
-                                                                ? trainerPersonalData
-                                                                      .certification[3]
-                                                                : "Not Added"} */}
+                              {trainerdetailData
+                                .certification[3]
+                                ? trainerdetailData
+                                  .certification[3]
+                                : "Not Added"}
                             </h6>
                           </div>
                         </div>
