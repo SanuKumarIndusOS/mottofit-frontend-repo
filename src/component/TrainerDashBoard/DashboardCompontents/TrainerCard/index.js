@@ -1,856 +1,964 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import "./styles.scss";
+import "./accordion.scss";
+import DollarIcon from "../../../../assets/files/SVG/dollar Icon.svg";
+// import { TrainerPrevModal } from "./TrainerPrevModal";
+import ArrowHoverBlacked from "component/common/BlackCircleButton/ArrowHoverBlacked";
+import { useSelector, useDispatch } from "react-redux";
+import { captureTrainerCard } from "action/trainerAct";
+import { trainerDetail, updateTrainerDetailsApicall } from "action/trainerAct";
+import Checkbox from "@material-ui/core/Checkbox";
+import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import Profile from "../../../../assets/files/SVG/Profile Picture.svg";
 import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
-import { withStyles } from "@material-ui/core/styles";
-import { cyan } from "@material-ui/core/colors";
-import Radio from "@material-ui/core/Radio";
-import DollarIcon from "../../../../assets/files/SVG/dollar Icon.svg";
-import { Link, useHistory } from "react-router-dom";
-import "./accordion.scss";
-import "./styles.scss";
-import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
-import { bindActionCreators } from "redux";
-import Checkbox from "@material-ui/core/Checkbox";
-import { connect } from "react-redux";
-import { updateTrainerDetails, getTrainerDetails } from "action/trainerAct";
-import { TrainerApi } from "service/apiVariables";
-import { api } from "service/api";
 import { fileUpload } from "action/trainerAct";
-// import { set } from "date-fns";
-import { COMMON_URL } from "helpers/baseURL";
-import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-const CyanRadio = withStyles({
-  root: {
-    "&$checked": {
-      color: cyan[600],
-    },
-  },
-  checked: {},
-})((props) => <Radio color="default" {...props} />);
-const TrainerCardDashboard = ({
-  updateTrainerDetails,
-  trainerPersonalData,
-  getTrainerDetails,
-  fileUpload,
-}) => {
-  const history = useHistory();
-
-  const data = {
-    title: "Time to build your Trainer Card!",
-    describtion:
-      " Heads up! Your trainer card is what clients will see when trainer results start filtering. Utilize keywords as anything you write here will also besearchable in our search box!",
-    upload: " Upload your profile picture, hotshot!",
-    tellus: " Tell us what you train! Select all the categories that apply",
-    clientDesc:
-      "Write a short and sweet description for clients to pick you in 100 characters",
-    pricing: "Tell us about your Pricing",
-    pricingDesc:
-      "Please fill only those fields relevant to the various kinds of training you offer. We recommend that the pricing of the social sessions (2-4 people) should provide savings to each client in comparison to a 1 on 1 individual session. The pricing for a 5-15 person group class is a flat rate that will be split evenly amongst each client.",
-  };
-
-  const [checkedBoxing, setCheckedBoxing] = React.useState(false);
-  const [checkedHIIT, setCheckedHIIT] = React.useState(false);
-  const [checkedYoga, setCheckedYoga] = React.useState(false);
-  const [checkedPilates, setCheckedPilates] = React.useState(false);
-  const [trainerbackgroundData, setTrainerbackgroundData] = useState({
-    areaOfExpertise: [],
-  });
-
-  const [image, setImage] = useState();
-  const [selectedValue, setSelectedValue] = useState("");
-  const [previewImage, setPreviewTmage] = useState();
-  const [trainerData, setTrainerData] = useState({
-    firstName: "",
-    lastName: "",
-    description: "",
-    individualCharge: "",
-    ssTwoPeopleCharge: "",
-    ssThreePeopleCharge: "",
-    ssFourPeopleCharge: "",
-    classFlatRate: "",
-    threeSessionRate: "",
-    tenSessionRate: "",
-    amtPerPerson: "",
-    individualChargeTl: "",
-    ssTwoPeopleChargeTl: "",
-    ssThreePeopleChargeTl: "",
-    ssFourPeopleChargeTl: "",
-    classFlatRateTl: "",
-    threeSessionRateTl: "",
-    tenSessionRateTl: "",
-    individualChargeVt: "",
-    ssTwoPeopleChargeVt: "",
-    ssThreePeopleChargeVt: "",
-    ssFourPeopleChargeVt: "",
-    classFlatRateVt: "",
-    threeSessionRateVt: "",
-    tenSessionRateVt: "",
-  });
-  const fileInputRef = useRef();
-
-  useEffect(() => {
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewTmage(reader.result);
-        console.log(typeof image);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreviewTmage(null);
-    }
-  }, [image]);
-
-  const handleChangeToTrainerProfile = (e) => {
-    e.preventDefault();
-
-    const {
-      firstName,
-      lastName,
-      description,
-      profilePicture,
-      individualCharge,
-      ssTwoPeopleCharge,
-      ssThreePeopleCharge,
-      ssFourPeopleCharge,
-      classFlatRate,
-      threeSessionRate,
-      tenSessionRate,
-      individualChargeTl,
-      ssTwoPeopleChargeTl,
-      ssThreePeopleChargeTl,
-      ssFourPeopleChargeTl,
-      classFlatRateTl,
-      threeSessionRateTl,
-      tenSessionRateTl,
-      individualChargeVt,
-      ssTwoPeopleChargeVt,
-      ssThreePeopleChargeVt,
-      ssFourPeopleChargeVt,
-      classFlatRateVt,
-      threeSessionRateVt,
-      tenSessionRateVt,
-    } = trainerData;
-
-    let payload = {
-      firstName: firstName,
-      lastName: lastName,
-      description: description,
-      profilePicture: profilePicture,
-      individualCharge: individualCharge,
-      ssTwoPeopleCharge: ssTwoPeopleCharge,
-    };
-    console.log(payload, "payload");
-
-    const { updateTrainerAvailabilityApi } = TrainerApi;
-    updateTrainerAvailabilityApi.body = payload;
-    api({ ...updateTrainerAvailabilityApi })
-      .then(({ data, message }) => {
-        console.log(data, message, "message");
-
-        alert("Successfully updated the changes");
-      })
-      .catch((err) => console.log(err));
-
-    // TrainerCard Profile Upload
-
-    if (image !== undefined) {
-      const fd = new FormData();
-
-      fd.append("profilePicture", image, image.name);
-      fileUpload(fd);
-    }
-  };
-  useEffect(() => {
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewTmage(reader.result);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreviewTmage(null);
-    }
-  }, [image]);
-
-  const handleInputChange = ({ target: { name, value } }) => {
-    const tempData = {
-      ...trainerData,
-    };
-
-    tempData[name] = value;
-
-    setTrainerData(tempData);
-  };
-  useEffect(() => {
-    getTrainerDetails().then((data) => {
-      if (data["areaOfExpertise"].find((el) => el === "Strength & HIIT")) {
-        console.log("Strength & HIIT");
-        setCheckedHIIT(true);
-      }
-
-      if (data["areaOfExpertise"].find((el) => el === "Boxing")) {
-        console.log("Boxing");
-        setCheckedBoxing(true);
-      }
-
-      if (data["areaOfExpertise"].find((el) => el === "Yoga")) {
-        console.log("Yoga");
-        setCheckedYoga(true);
-      }
-
-      if (data["areaOfExpertise"].find((el) => el === "Pilates")) {
-        console.log("Pilates");
-        setCheckedPilates(true);
-      }
-
-      const {
-        profilePicture,
-        firstName,
-        lastName,
-        description,
-        socialSessionPricing,
-        oneOnOnePricing,
-        classSessionPricing,
-      } = data || {};
-
-      if (data) {
-        // console.log(data);
-        const {
-          inPeronAtClientLocationfor2People = "",
-          inPeronAtClientLocationfor3People = "",
-          inPeronAtClientLocationfor4People = "",
-          inPeronAtTrainerLocationfor2People = "",
-          inPeronAtTrainerLocationfor3People = "",
-          inPeronAtTrainerLocationfor4People = "",
-          virtualSessionfor2People = "",
-          virtualSessionfor3People = "",
-          virtualSessionfor4People = "",
-        } = socialSessionPricing || {};
-
-        const {
-          passRatefor3SessionAtClientLocation = "",
-          passRatefor10SessionAtClientLocation = "",
-          inPersonAtClientLocation = "",
-          inPersonAtTrainerLocation = "",
-          virtualSession = "",
-          passRatefor3SessionAtTrainerLocation = "",
-          passRatefor10SessionAtTrainerLocation = "",
-          passRatefor3SessionAtVirtual = "",
-          passRatefor10SessionAtVirtual = "",
-        } = oneOnOnePricing || {};
-
-        const {
-          inPersonAtclientLocationfor15People = "",
-          inPersonAttrainerLocationfor15People = "",
-          virtualSessionfor15People = "",
-        } = classSessionPricing || {};
-
-        const storeData = {
-          details: {
-            profilePicture: profilePicture,
-            firstName,
-            lastName,
-            description,
-            individualCharge: inPersonAtClientLocation,
-            ssTwoPeopleCharge: inPeronAtClientLocationfor2People,
-            ssThreePeopleCharge: inPeronAtClientLocationfor3People,
-            ssFourPeopleCharge: inPeronAtClientLocationfor4People,
-            classFlatRate: inPersonAtclientLocationfor15People,
-            threeSessionRate: passRatefor3SessionAtClientLocation,
-            tenSessionRate: passRatefor10SessionAtClientLocation,
-            individualChargeTl: inPersonAtTrainerLocation,
-            ssTwoPeopleChargeTl: inPeronAtTrainerLocationfor2People,
-            ssThreePeopleChargeTl: inPeronAtTrainerLocationfor3People,
-            ssFourPeopleChargeTl: inPeronAtTrainerLocationfor4People,
-            classFlatRateTl: inPersonAttrainerLocationfor15People,
-            threeSessionRateTl: passRatefor3SessionAtTrainerLocation,
-            tenSessionRateTl: passRatefor10SessionAtTrainerLocation,
-            individualChargeVt: virtualSession,
-            ssTwoPeopleChargeVt: virtualSessionfor2People,
-            ssThreePeopleChargeVt: virtualSessionfor3People,
-            ssFourPeopleChargeVt: virtualSessionfor4People,
-            classFlatRateVt: virtualSessionfor15People,
-            threeSessionRateVt: passRatefor3SessionAtVirtual,
-            tenSessionRateVt: passRatefor10SessionAtVirtual,
-          },
-        };
-
-        setTrainerData(storeData.details);
-        updateTrainerDetails(storeData);
-      }
+function TrainerCardDashboard(props) {
+    const [validationtxt, setValidationtxt] = useState(false);
+    // const history = useHistory();
+    const [trainerCardData, setTrainerCardData] = useState({
+        firstName: "",
+        lastName: "",
+        verticals: [],
+        description: "",
+        inPersonAtClient_individualCharge: "",
+        inPersonAtClient_twoPPL: "",
+        inPersonAtClient_threePPL: "",
+        inPersonAtClient_fourPPL: "",
+        inPersonAtClient_classFlatRate: "",
+        inPersonAtClient_threeSessionRate: "",
+        inPersonAtClient_tenSessionRate: "",
+        inPersonAtTrainer_individualCharge: "",
+        inPersonAtTrainer_twoPPL: "",
+        inPersonAtTrainer_threePPL: "",
+        inPersonAtTrainer_fourPPL: "",
+        inPersonAtTrainer_classFlatRate: "",
+        inPersonAtTrainer_threeSessionRate: "",
+        inPersonAtTrainer_tenSessionRate: "",
+        virtual_individualCharge: "",
+        virtual_twoPPL: "",
+        virtual_threePPL: "",
+        virtual_fourPPL: "",
+        virtual_classFlatRate: "",
+        virtual_threeSessionRate: "",
+        virtual_tenSessionRate: "",
+        profilepic: null,
     });
-  }, []);
 
-  return (
-    <>
-      <div className="outter_container_card">
+    useEffect(() => {
+        dispatch(captureTrainerCard(trainerCardData));
+    }, [trainerCardData]);
+    // Training verticals selection states
+    const [checkedBoxing, setCheckedBoxing] = useState(false);
+    const [checkedHIIT, setCheckedHIIT] = useState(false);
+    const [checkedYoga, setCheckedYoga] = useState(false);
+    const [checkedPilates, setCheckedPilates] = useState(false);
+
+    //Profile Picture Upload
+    const [previewImage, setPreviewTmage] = useState();
+    const [image, setImage] = useState();
+    const fileInputRef = useRef();
+
+    useEffect(() => {
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewTmage(reader.result);
+            };
+            reader.readAsDataURL(image);
+        } else {
+            setPreviewTmage(null);
+        }
+    }, [image]);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        props.trainerDetail().then((res) => {
+            let {
+                classSessionPricing = {},
+                oneOnOnePricing = {},
+                socialSessionPricing = {},
+            } = res;
+            setTrainerCardData({
+                ...trainerCardData,
+                profilepic: res.profilePicture,
+                firstName: res.firstName,
+                lastName: res.lastName,
+                description: res.description,
+                verticals: res.areaOfExpertise,
+                inPersonAtClient_individualCharge: oneOnOnePricing
+                    ? oneOnOnePricing.inPersonAtClientLocation
+                    : "",
+                inPersonAtClient_twoPPL: socialSessionPricing
+                    ? socialSessionPricing.inPeronAtClientLocationfor2People
+                    : "",
+                inPersonAtClient_threePPL: socialSessionPricing
+                    ? socialSessionPricing.inPeronAtClientLocationfor3People
+                    : "",
+                inPersonAtClient_fourPPL: socialSessionPricing
+                    ? socialSessionPricing.inPeronAtClientLocationfor4People
+                    : "",
+                inPersonAtClient_classFlatRate: classSessionPricing
+                    ? classSessionPricing.inPersonAtclientLocationfor15People
+                    : "",
+                inPersonAtClient_threeSessionRate: oneOnOnePricing
+                    ? oneOnOnePricing.passRatefor3SessionAtClientLocation
+                    : "",
+                inPersonAtClient_tenSessionRate: oneOnOnePricing
+                    ? oneOnOnePricing.passRatefor10SessionAtClientLocation
+                    : "",
+                inPersonAtTrainer_individualCharge: oneOnOnePricing
+                    ? oneOnOnePricing.inPersonAtTrainerLocation
+                    : "",
+                inPersonAtTrainer_twoPPL: socialSessionPricing
+                    ? socialSessionPricing.inPeronAtTrainerLocationfor2People
+                    : "",
+                inPersonAtTrainer_threePPL: socialSessionPricing
+                    ? socialSessionPricing.inPeronAtTrainerLocationfor3People
+                    : "",
+                inPersonAtTrainer_fourPPL: socialSessionPricing
+                    ? socialSessionPricing.inPeronAtTrainerLocationfor4People
+                    : "",
+                inPersonAtTrainer_classFlatRate: classSessionPricing
+                    ? classSessionPricing.inPersonAttrainerLocationfor15People
+                    : "",
+                inPersonAtTrainer_threeSessionRate: oneOnOnePricing
+                    ? oneOnOnePricing.passRatefor3SessionAtTrainerLocation
+                    : "",
+                inPersonAtTrainer_tenSessionRate: oneOnOnePricing
+                    ? oneOnOnePricing.passRatefor10SessionAtTrainerLocation
+                    : "",
+                virtual_individualCharge: oneOnOnePricing
+                    ? oneOnOnePricing.virtualSession
+                    : "",
+                virtual_twoPPL: socialSessionPricing
+                    ? socialSessionPricing.virtualSessionfor2People
+                    : "",
+                virtual_threePPL: socialSessionPricing
+                    ? socialSessionPricing.virtualSessionfor3People
+                    : "",
+                virtual_fourPPL: socialSessionPricing
+                    ? socialSessionPricing.virtualSessionfor4People
+                    : "",
+                virtual_classFlatRate: classSessionPricing
+                    ? classSessionPricing.virtualSessionfor15People
+                    : "",
+                virtual_threeSessionRate: oneOnOnePricing
+                    ? oneOnOnePricing.passRatefor3SessionAtVirtual
+                    : "",
+                virtual_tenSessionRate: oneOnOnePricing
+                    ? oneOnOnePricing.passRatefor10SessionAtVirtual
+                    : "",
+            });
+            if (res.areaOfExpertise) {
+                if (
+                    res.areaOfExpertise.find((el) => el === "Strength & HIIT")
+                ) {
+                    setCheckedHIIT(true);
+                }
+
+                if (res.areaOfExpertise.find((el) => el === "Yoga")) {
+                    setCheckedYoga(true);
+                }
+
+                if (res.areaOfExpertise.find((el) => el === "Boxing")) {
+                    setCheckedBoxing(true);
+                }
+
+                if (res.areaOfExpertise.find((el) => el === "Pilates")) {
+                    setCheckedPilates(true);
+                }
+            }
+        });
+    }, []);
+
+    const handleSubmit = () => {
+        if (
+            trainerCardData.inPersonAtClient_individualCharge ||
+            trainerCardData.inPersonAtTrainer_individualCharge
+        ) {
+            if (image !== undefined) {
+                const fd = new FormData();
+                fd.append("profilePicture", image, image.name);
+                dispatch(fileUpload(fd));
+            }
+            let payload = {
+                firstName: trainerCardData.firstName,
+                lastName: trainerCardData.lastName,
+                areaOfExpertise: trainerCardData.verticals,
+                description: trainerCardData.description,
+                oneOnOnePricing: {
+                    inPersonAtClientLocation:
+                        trainerCardData.inPersonAtClient_individualCharge,
+                    inPersonAtTrainerLocation:
+                        trainerCardData.inPersonAtTrainer_individualCharge,
+                    virtualSession: trainerCardData.virtual_individualCharge,
+                    passRatefor3SessionAtClientLocation:
+                        trainerCardData.inPersonAtClient_threeSessionRate,
+                    passRatefor10SessionAtClientLocation:
+                        trainerCardData.inPersonAtClient_tenSessionRate,
+                    passRatefor3SessionAtTrainerLocation:
+                        trainerCardData.inPersonAtTrainer_threeSessionRate,
+                    passRatefor10SessionAtTrainerLocation:
+                        trainerCardData.inPersonAtTrainer_tenSessionRate,
+                    passRatefor3SessionAtVirtual:
+                        trainerCardData.virtual_threeSessionRate,
+                    passRatefor10SessionAtVirtual:
+                        trainerCardData.virtual_tenSessionRate,
+                },
+                socialSessionPricing: {
+                    inPeronAtClientLocationfor2People:
+                        trainerCardData.inPersonAtClient_twoPPL,
+                    inPeronAtClientLocationfor3People:
+                        trainerCardData.inPersonAtClient_threePPL,
+                    inPeronAtClientLocationfor4People:
+                        trainerCardData.inPersonAtClient_fourPPL,
+                    inPeronAtTrainerLocationfor2People:
+                        trainerCardData.inPersonAtTrainer_twoPPL,
+                    inPeronAtTrainerLocationfor3People:
+                        trainerCardData.inPersonAtTrainer_threePPL,
+                    inPeronAtTrainerLocationfor4People:
+                        trainerCardData.inPersonAtTrainer_fourPPL,
+                    virtualSessionfor2People: trainerCardData.virtual_twoPPL,
+                    virtualSessionfor3People: trainerCardData.virtual_threePPL,
+                    virtualSessionfor4People: trainerCardData.virtual_fourPPL,
+                },
+                classSessionPricing: {
+                    inPersonAtclientLocationfor15People:
+                        trainerCardData.inPersonAtClient_classFlatRate,
+                    inPersonAttrainerLocationfor15People:
+                        trainerCardData.inPersonAtTrainer_classFlatRate,
+                    virtualSessionfor15People:
+                        trainerCardData.virtual_classFlatRate,
+                },
+            };
+            props.updateTrainerDetailsApicall(payload).then(() => {
+                alert("Successfully, Updated the changes");
+            });
+        } else {
+            setValidationtxt(true);
+        }
+    };
+
+    return (
         <div className="container">
-          <div className="card_outter">
-            {/* <div className="card_outter_wrapper">
-                            <h2>{data.title}</h2>
-                            <p>{data.describtion}</p>
-                        </div> */}
-            <div className="card_inner px-4">
-              <div className="card_form_outter">
-                <form>
-                  <div className="card_item1">
-                    {trainerData ? (
-                      <img
-                        src={
-                          trainerData && trainerData.profilePicture
-                            ? trainerData.profilePicture
-                            : "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
-                        }
-                        style={{
-                          objectFit: "cover",
-                          width: "200px",
-                          height: "200px",
-                          borderRadius: "100px",
-                        }}
-                        onClick={() => {
-                          setPreviewTmage(null);
-                        }}
-                      />
-                    ) : (
-                      <div className="combin_profile">
-                        <button
-                          onClick={(event) => {
-                            event.preventDefault();
-                            fileInputRef.current.click();
-                          }}
-                        >
-                          <img
-                            src={Profile}
-                            alt="icon"
-                            style={{
-                              objectFit: "cover",
-                              width: "100px",
-                              height: "100px",
+            <div className="card_inner">
+                <div className="pro_pic_center">
+                    <div className="item1_card">
+                        {previewImage ? (
+                            <img
+                                src={previewImage}
+                                style={{
+                                    objectFit: "cover",
+                                    width: "200px",
+                                    height: "200px",
+                                    borderRadius: "100px",
+                                    marginTop: "3em",
+                                }}
+                                onClick={() => {
+                                    setPreviewTmage(null);
+                                }}
+                            />
+                        ) : (
+                            <div className="combin_profile">
+                                <button
+                                    onClick={(event) => {
+                                        event.preventDefault();
+                                        fileInputRef.current.click();
+                                    }}
+                                >
+                                    <img
+                                        src={
+                                            trainerCardData.profilepic
+                                                ? trainerCardData.profilepic
+                                                : Profile
+                                        }
+                                        alt="icon"
+                                        style={{
+                                            objectFit: "cover",
+                                            width: "200px",
+                                            height: "200px",
+                                            borderRadius: "100px",
+                                        }}
+                                    />
+                                </button>
+                                <img
+                                    src={ProfileAdd}
+                                    alt="icon"
+                                    style={{
+                                        objectFit: "cover",
+                                        width: "20px",
+                                        height: "20px",
+                                        borderRadius: "100px",
+                                    }}
+                                    onClick={(event) => {
+                                        event.preventDefault();
+                                        fileInputRef.current.click();
+                                    }}
+                                />
+                            </div>
+                        )}
+
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            accept="image/*"
+                            style={{ display: "none" }}
+                            onChange={(event) => {
+                                const file = event.target.files[0];
+                                if (
+                                    file &&
+                                    file.type.substr(0, 5) === "image"
+                                ) {
+                                    setImage(file);
+                                } else {
+                                    setImage(null);
+                                }
                             }}
-                          />
-                        </button>
-                        <img
-                          src={ProfileAdd}
-                          alt="icon"
-                          style={{
-                            objectFit: "cover",
-                            width: "20px",
-                            height: "20px",
-                            borderRadius: "100px",
-                          }}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            fileInputRef.current.click();
-                          }}
                         />
-                      </div>
-                    )}
-
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      accept="image/*"
-                      onChange={(event) => {
-                        const file = event.target.files[0];
-                        if (file && file.type.substr(0, 5) === "image") {
-                          setImage(file);
-                        } else {
-                          setImage(null);
-                        }
-                      }}
-                    />
-                    <h5>{data.upload}</h5>
-                  </div>
-                  <div className="card_item2 ">
-                    <div className="card_innerItem">
-                      <h6>First Name</h6>
-                      <input
-                        type="text"
-                        name="firstName"
-                        onChange={handleInputChange}
-                        value={trainerData.firstName}
-                        style={{
-                          textTransform: "capitalize",
-                        }}
-                      />
+                        <h5>Upload your profile picture, hotshot!</h5>
                     </div>
-                    <div className="card_innerItem">
-                      <h6>Last Name</h6>
-                      <input
-                        name="lastName"
-                        style={{
-                          textTransform: "capitalize",
-                        }}
-                        onChange={handleInputChange}
-                        value={trainerData.lastName}
-                      />
+                </div>
+                <div className="item2_card">
+                    <div className="item2_card_inner">
+                        <label>First Name</label> <br />
+                        <input
+                            value={trainerCardData.firstName}
+                            onChange={(e) => {
+                                setTrainerCardData({
+                                    ...trainerCardData,
+                                    firstName: e.target.value,
+                                });
+                            }}
+                        />
                     </div>
-                  </div>
-                  <div className="card_item3">
-                    <h6>{data.tellus}</h6>
 
-                    <div className="inputs_experience">
-                      <Checkbox
-                        checked={checkedHIIT}
-                        onChange={(e) => {
-                          setCheckedHIIT(e.target.checked);
-                          console.log(e.target.checked);
-
-                          if (e.target.checked) {
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Strength & HIIT",
-                              ],
-                            });
-
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Strength & HIIT"
-                              );
-                            // console.log(index);
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          }
-
-                          console.log(trainerbackgroundData);
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <div className="checkbox_label">Strength & HIIT</div>
-                      <Checkbox
-                        checked={checkedBoxing}
-                        onChange={(e) => {
-                          setCheckedBoxing(e.target.checked);
-                          console.log(e.target.checked);
-
-                          if (e.target.checked) {
-                            console.log("setBoxing");
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Boxing",
-                              ],
-                            });
-
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          } else {
-                            console.log("unsetBoxing");
-
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Boxing"
-                              );
-                            // console.log(index);
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                            console.log(trainerbackgroundData.areaOfExpertise);
-                          }
-
-                          console.log(trainerbackgroundData);
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <div className="checkbox_label">Boxing</div>
-                      <Checkbox
-                        checked={checkedYoga}
-                        onChange={(e) => {
-                          setCheckedYoga(e.target.checked);
-
-                          if (e.target.checked) {
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Yoga",
-                              ],
-                            });
-                          } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Yoga"
-                              );
-
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                          }
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <div className="checkbox_label">Yoga</div>
-                      <Checkbox
-                        checked={checkedPilates}
-                        onChange={(e) => {
-                          setCheckedPilates(e.target.checked);
-
-                          if (e.target.checked) {
-                            setTrainerbackgroundData({
-                              ...trainerbackgroundData,
-                              areaOfExpertise: [
-                                ...trainerbackgroundData.areaOfExpertise,
-                                "Pilates",
-                              ],
-                            });
-                          } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Pilates"
-                              );
-                            // console.log(index);
-                            if (index > -1) {
-                              trainerbackgroundData.areaOfExpertise.splice(
-                                index,
-                                1
-                              );
-                            }
-                          }
-                        }}
-                        style={{
-                          color: "#53BFD2",
-                        }}
-                      />
-                      <div className="checkbox_label">Pilates</div>
+                    <div className="item2_card_inner">
+                        <label>Last Name</label> <br />
+                        <input
+                            value={trainerCardData.lastName}
+                            onChange={(e) => {
+                                setTrainerCardData({
+                                    ...trainerCardData,
+                                    lastName: e.target.value,
+                                });
+                            }}
+                        />
                     </div>
-                  </div>
-                  <div className="card_item4">
-                    <h6>{data.clientDesc}</h6>
+                </div>
+
+                <div className="item3_card">
+                    <label>
+                        Tell Us What You Train! Select All The Categories That
+                        Apply
+                    </label>
+                    <br />
+                    <div className="item3_card_inner">
+                        <Checkbox
+                            checked={checkedHIIT}
+                            icon={
+                                <RadioButtonUncheckedIcon className="vertical_checkbox" />
+                            }
+                            checkedIcon={
+                                <RadioButtonCheckedIcon className="vertical_checkbox" />
+                            }
+                            onChange={(e) => {
+                                setCheckedHIIT(!checkedHIIT);
+                                if (e.target.checked) {
+                                    setTrainerCardData({
+                                        ...trainerCardData,
+                                        verticals: [
+                                            ...trainerCardData.verticals,
+                                            "Strength & HIIT",
+                                        ],
+                                    });
+                                } else {
+                                    const index =
+                                        trainerCardData.verticals.indexOf(
+                                            "Strength & HIIT"
+                                        );
+                                    if (index > -1) {
+                                        trainerCardData.verticals.splice(
+                                            index,
+                                            1
+                                        );
+                                    }
+                                }
+                            }}
+                        />
+                        &ensp;
+                        <h6 style={{ marginRight: "1em" }}>Strength & HIIT</h6>
+                        &ensp;
+                        <Checkbox
+                            checked={checkedBoxing}
+                            icon={
+                                <RadioButtonUncheckedIcon className="vertical_checkbox" />
+                            }
+                            checkedIcon={
+                                <RadioButtonCheckedIcon className="vertical_checkbox" />
+                            }
+                            onChange={(e) => {
+                                setCheckedBoxing(!checkedBoxing);
+
+                                if (e.target.checked) {
+                                    setTrainerCardData({
+                                        ...trainerCardData,
+                                        verticals: [
+                                            ...trainerCardData.verticals,
+                                            "Boxing",
+                                        ],
+                                    });
+                                } else {
+                                    const index =
+                                        trainerCardData.verticals.indexOf(
+                                            "Boxing"
+                                        );
+                                    if (index > -1) {
+                                        trainerCardData.verticals.splice(
+                                            index,
+                                            1
+                                        );
+                                    }
+                                }
+                            }}
+                        />
+                        &ensp;
+                        <h6 style={{ marginRight: "1em" }}>Boxing</h6> &ensp;
+                        <Checkbox
+                            checked={checkedYoga}
+                            icon={
+                                <RadioButtonUncheckedIcon className="vertical_checkbox" />
+                            }
+                            checkedIcon={
+                                <RadioButtonCheckedIcon className="vertical_checkbox" />
+                            }
+                            onChange={(e) => {
+                                setCheckedYoga(!checkedYoga);
+                                if (e.target.checked) {
+                                    setTrainerCardData({
+                                        ...trainerCardData,
+                                        verticals: [
+                                            ...trainerCardData.verticals,
+                                            "Yoga",
+                                        ],
+                                    });
+                                } else {
+                                    const index =
+                                        trainerCardData.verticals.indexOf(
+                                            "Yoga"
+                                        );
+                                    if (index > -1) {
+                                        trainerCardData.verticals.splice(
+                                            index,
+                                            1
+                                        );
+                                    }
+                                }
+                            }}
+                        />
+                        &ensp;
+                        <h6 style={{ marginRight: "1em" }}>Yoga</h6> &ensp;
+                        <Checkbox
+                            checked={checkedPilates}
+                            icon={
+                                <RadioButtonUncheckedIcon className="vertical_checkbox" />
+                            }
+                            checkedIcon={
+                                <RadioButtonCheckedIcon className="vertical_checkbox" />
+                            }
+                            onChange={(e) => {
+                                setCheckedPilates(!checkedPilates);
+                                if (e.target.checked) {
+                                    setTrainerCardData({
+                                        ...trainerCardData,
+                                        verticals: [
+                                            ...trainerCardData.verticals,
+                                            "Pilates",
+                                        ],
+                                    });
+                                } else {
+                                    const index =
+                                        trainerCardData.verticals.indexOf(
+                                            "Pilates"
+                                        );
+                                    if (index > -1) {
+                                        trainerCardData.verticals.splice(
+                                            index,
+                                            1
+                                        );
+                                    }
+                                }
+                            }}
+                        />
+                        &ensp;
+                        <h6 style={{ marginRight: "1em" }}>Pilates</h6> &ensp;
+                    </div>
+                </div>
+
+                <div>
+                    <label>
+                        Write A Short And Sweet Description For Clients To Pick
+                        You In 100 Characterss
+                    </label>
+                    <br />
                     <textarea
-                      type="text"
-                      value={trainerData.description}
-                      name="description"
-                      placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into your full profile."
-                      onChange={handleInputChange}
-                      maxLength="75"
+                        value={trainerCardData.description}
+                        onChange={(e) => {
+                            setTrainerCardData({
+                                ...trainerCardData,
+                                description: e.target.value,
+                            });
+                        }}
+                        placeholder="Give us your elevator pitch! This is all clients will see on the search results page until they click into your full profile."
                     />
-                  </div>
-                  <div className="card_item5">
-                    <h6>Tell us about your Pricing</h6>
-                    <p>{data.pricingDesc}</p>
-                  </div>
-                  <div className="card_item6">
+                </div>
+                <div>
+                    <label>Tell Us About Your Pricing</label>
+                    <br />
+                    <p>
+                        Please fill only those fields relevant to the various
+                        kinds of training you offer. We recommend that the
+                        pricing of the social sessions (2-4 people) should
+                        provide savings to each client in comparison to a 1 on 1
+                        individual session. The pricing for a 5-15 person group
+                        class is a flat rate that will be split evenly amongst
+                        each client.
+                    </p>
+                </div>
+                <div>
                     <Accordion title="In Person Training Session Pricing (at the clients location)">
-                      <div className="card_accordion">
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Individual charge"
-                            onChange={handleInputChange}
-                            value={trainerData.individualCharge}
-                            name="individualCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 2 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssTwoPeopleCharge}
-                            name="ssTwoPeopleCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
+                        <div className="card_accordion">
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Individual Charge"
+                                    value={
+                                        trainerCardData.inPersonAtClient_individualCharge
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtClient_individualCharge:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <br />
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 2 People)"
+                                    value={
+                                        trainerCardData.inPersonAtClient_twoPPL
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtClient_twoPPL:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
 
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 3 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssThreePeopleCharge}
-                            name="ssThreePeopleCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
+                                <br />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 3 People)"
+                                    value={
+                                        trainerCardData.inPersonAtClient_threePPL
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtClient_threePPL:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                                <br />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 4 People)"
+                                    value={
+                                        trainerCardData.inPersonAtClient_fourPPL
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtClient_fourPPL:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                                <br />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Class Flat Rate (5-15 People)"
+                                    value={
+                                        trainerCardData.inPersonAtClient_classFlatRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtClient_classFlatRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+
+                                <br />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="3 Session Rate"
+                                    value={
+                                        trainerCardData.inPersonAtClient_threeSessionRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtClient_threeSessionRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="10 Session Pass Rate"
+                                    value={
+                                        trainerCardData.inPersonAtClient_tenSessionRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtClient_tenSessionRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+
+                                <br />
+                            </div>
                         </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total Charge for 4 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssFourPeopleCharge}
-                            name="ssFourPeopleCharge"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Class Flat Rate (5-15 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.classFlatRate}
-                            name="classFlatRate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="3 Session Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.threeSessionRate}
-                            name="threeSessionRate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="10 Session Pass Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.tenSessionRate}
-                            name="tenSessionRate"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                      </div>
                     </Accordion>
+                </div>
+                <div>
                     <Accordion title="In Person Training Session Pricing (at your location)">
-                      <div className="card_accordion">
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Individual Charge"
-                            onChange={handleInputChange}
-                            value={trainerData.individualChargeTl}
-                            name="individualChargeTl"
-                          />
-                          <img src={DollarIcon} alt="icon" />
+                        <div className="card_accordion">
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Individual Charge"
+                                    value={
+                                        trainerCardData.inPersonAtTrainer_individualCharge
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtTrainer_individualCharge:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 2 People)"
+                                    value={
+                                        trainerCardData.inPersonAtTrainer_twoPPL
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtTrainer_twoPPL:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 3 People)"
+                                    value={
+                                        trainerCardData.inPersonAtTrainer_threePPL
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtTrainer_threePPL:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 4 People)"
+                                    value={
+                                        trainerCardData.inPersonAtTrainer_fourPPL
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtTrainer_fourPPL:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Class Flat Rate (5-15 People)"
+                                    value={
+                                        trainerCardData.inPersonAtTrainer_classFlatRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtTrainer_classFlatRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="3 Session Rate"
+                                    value={
+                                        trainerCardData.inPersonAtTrainer_threeSessionRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtTrainer_threeSessionRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="10 Session Pass Rate"
+                                    value={
+                                        trainerCardData.inPersonAtTrainer_tenSessionRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            inPersonAtTrainer_tenSessionRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
                         </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total for 2 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssTwoPeopleChargeTl}
-                            name="ssTwoPeopleChargeTl"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total for 3 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssThreePeopleChargeTl}
-                            name="ssThreePeopleChargeTl"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total for 4 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssFourPeopleChargeTl}
-                            name="ssFourPeopleChargeTl"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Class Flat Rate (5-15 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.classFlatRateTl}
-                            name="classFlatRateTl"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="3 Session Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.threeSessionRateTl}
-                            name="threeSessionRateTl"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="10 Session Pass Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.tenSessionRateTl}
-                            name="tenSessionRateTl"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                      </div>
                     </Accordion>
+                </div>
+
+                <div>
                     <Accordion title="Virtual Training Session Pricing">
-                      <div className="card_accordion">
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Individual Charge"
-                            onChange={handleInputChange}
-                            value={trainerData.individualChargeVt}
-                            name="individualChargeVt"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total for 2 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssTwoPeopleChargeVt}
-                            name="ssTwoPeopleChargeVt"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
+                        <div className="card_accordion">
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Individual Charge"
+                                    value={
+                                        trainerCardData.virtual_individualCharge
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            virtual_individualCharge:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
 
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total for 3 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssThreePeopleChargeVt}
-                            name="ssThreePeopleChargeVt"
-                          />
-                          <img src={DollarIcon} alt="icon" />
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 2 People)"
+                                    value={trainerCardData.virtual_twoPPL}
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            virtual_twoPPL: e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 3 People)"
+                                    value={trainerCardData.virtual_threePPL}
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            virtual_threePPL: e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Social Session (Total for 4 People)"
+                                    value={trainerCardData.virtual_fourPPL}
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            virtual_fourPPL: e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="Class Flat Rate (5-15 People)"
+                                    value={
+                                        trainerCardData.virtual_classFlatRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            virtual_classFlatRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="3 Session Rate"
+                                    value={
+                                        trainerCardData.virtual_threeSessionRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            virtual_threeSessionRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+                            </div>
+                            <div className="card_accordion_input">
+                                <input
+                                    placeholder="10 Session Pass Rate"
+                                    value={
+                                        trainerCardData.virtual_tenSessionRate
+                                    }
+                                    onChange={(e) => {
+                                        setTrainerCardData({
+                                            ...trainerCardData,
+                                            virtual_tenSessionRate:
+                                                e.target.value,
+                                        });
+                                    }}
+                                    type="number"
+                                />
+                                <img src={DollarIcon} alt="icon" />
+
+                                <br />
+                            </div>
                         </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Social Session (Total for 4 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.ssFourPeopleChargeVt}
-                            name="ssFourPeopleChargeVt"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="Class Flat Rate (5-15 People)"
-                            onChange={handleInputChange}
-                            value={trainerData.classFlatRateVt}
-                            name="classFlatRateVt"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="3 Session Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.threeSessionRateVt}
-                            name="threeSessionRateVt"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                        <div className="iconwrapper">
-                          <input
-                            type="text"
-                            placeholder="10 Session Pass Rate"
-                            onChange={handleInputChange}
-                            value={trainerData.tenSessionRateVt}
-                            name="tenSessionRateVt"
-                          />
-                          <img src={DollarIcon} alt="icon" />
-                        </div>
-                      </div>
-                    </Accordion>{" "}
-                  </div>
-                  <div className="submit_button">
-                    <button
-                      onClick={handleChangeToTrainerProfile}
-                      type="submit"
-                      // onClick={handleTrainerAvailability}
-                    >
-                      Save Changes <ArrowHoverBlacked />
-                      {/* <img src={Arrow} alt="icon" /> */}
+                    </Accordion>
+                </div>
+                <div className="error_span">
+                    {validationtxt ? (
+                        <span>
+                            Please enter Individual Charge (atleast one){" "}
+                        </span>
+                    ) : null}
+                </div>
+                <div className="card_submit">
+                    <button onClick={() => handleSubmit()}>
+                        Continue To profile <ArrowHoverBlacked />
                     </button>
-                  </div>
-                </form>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </>
-  );
-};
-
-function Accordion({ title, children }) {
-  const [isOpenAccodion, setAccordion] = useState(false);
-
-  // for radio button
-  const [selectedValue, setSelectedValue] = useState("a");
-
-  // for radio
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
-  return (
-    <div className="accordion-wrapper">
-      <div className="cyanRadio_wrapper">
-        <CyanRadio
-          checked={selectedValue === ""}
-          onChange={handleChange}
-          onClick={() => setAccordion(!isOpenAccodion)}
-        />
-        <h6
-          className={`accordion-title ${isOpenAccodion ? "open" : ""}`}
-          onClick={() => setAccordion(!isOpenAccodion)}
-        >
-          {title}
-        </h6>
-      </div>
-      <div className={`accordion-item ${!isOpenAccodion ? "collapsed" : ""}`}>
-        <div className="accordion-content">{children}</div>
-      </div>
-    </div>
-  );
+    );
 }
 
-const mapStateToProps = (state) => ({
-  details: state.trainerReducer.details,
-  trainerPersonalData: state.trainerReducer.data,
-});
+//Accordion
+function Accordion({ title, children }) {
+    const [isOpenAccodion, setAccordion] = useState(false);
 
+    return (
+        <div className="accordion-wrapper">
+            <div className="cyanRadio_wrapper">
+                <label
+                    className={`accordion-title ${
+                        isOpenAccodion ? "open" : ""
+                    }`}
+                    onClick={() => setAccordion(!isOpenAccodion)}
+                >
+                    {title}
+                </label>
+            </div>
+            <div
+                className={`accordion-item ${
+                    !isOpenAccodion ? "collapsed" : ""
+                }`}
+            >
+                <div className="accordion-content">{children}</div>
+            </div>
+        </div>
+    );
+}
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      updateTrainerDetails,
-      getTrainerDetails,
-      fileUpload,
-    },
-    dispatch
-  );
+    return bindActionCreators(
+        {
+            trainerDetail,
+            updateTrainerDetailsApicall,
+        },
+        dispatch
+    );
 };
 
-const TrainerCard = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TrainerCardDashboard);
-
-export default TrainerCard;
+const TrainerCardNew = connect(null, mapDispatchToProps)(TrainerCardDashboard);
+export default TrainerCardNew;

@@ -124,10 +124,8 @@ const Location = () => {
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-
-        speed: 4000,
-        autoplaySpeed: 2000,
-
+        speed: 2000,
+        autoplaySpeed: 3000,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
