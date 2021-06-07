@@ -214,7 +214,7 @@ const MyProfileFC = ({
             trainingFacilityLocation: trainingFacilityLocation,
           },
         };
-        if (data.images && data.images.length !== "") {
+        if (data.images && data.images.length !== 0) {
           setImageList(data.images);
         }
         if (
