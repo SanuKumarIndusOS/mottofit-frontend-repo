@@ -1,290 +1,294 @@
 .session_outter_container {
-    width: 100%;
-    height: 1100px;
-    .seesion_inner_container {
-        .link_wrapper {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            margin-top: 2em;
+  width: 100%;
+  height: 1100px;
+  .seesion_inner_container {
+    .link_wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 2em;
 
-            .inner_links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                a {
-                    margin-left: 1em;
-                    text-align: left;
-                    letter-spacing: 0.18px;
-                    color: #161616;
-                    font-size: 16px;
-                    line-height: 22px;
-                    font-weight: normal;
-                    font-family: "Montserrat", sans-serif;
-                    text-decoration: none;
-                }
-                div {
-                    width: 95%;
-                    height: 2px;
-                    margin-left: 1.5em;
-                    background-color: #53bfd2;
-                }
-            }
+      .inner_links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        a {
+          margin-left: 1em;
+          text-align: left;
+          letter-spacing: 0.18px;
+          color: #161616;
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: normal;
+          font-family: "Montserrat", sans-serif;
+          text-decoration: none;
         }
-        .session_inner_wrapper {
-            margin-top: 3em;
-            .session_heading {
+        div {
+          width: 95%;
+          height: 2px;
+          margin-left: 1.5em;
+          background-color: #53bfd2;
+        }
+      }
+    }
+    .session_inner_wrapper {
+      margin-top: 3em;
+      .session_heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h2 {
+          text-align: center;
+          letter-spacing: 0px;
+          color: #161616;
+          font-size: 35px;
+          line-height: 58px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+        }
+        p {
+          width: 810px;
+          text-align: center;
+          letter-spacing: 0.27px;
+          color: #696969;
+          font-size: 18px;
+          line-height: 30px;
+          font-weight: normal;
+          font-family: "Montserrat", sans-serif;
+        }
+      }
+      .session_tabs {
+        margin-top: 2em;
+        .session_tabs_inner {
+          .sesstion_tabslist {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 100%;
+            .rwt__tablist .rwt__tab:after {
+              border: none;
+            }
+            .rwt__tab {
+              padding: 0;
+              height: 40px;
+              button {
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                width: 135px;
+                height: 40px;
+                border: 2px solid #bcbcbc;
+                border-radius: 30px 0px 0px 30px;
+                opacity: 1;
+                background: transparent;
+                text-align: center;
+                letter-spacing: 0.2px;
+                font-size: 20px;
+                line-height: 42px;
+                font-weight: 600;
+                font-family: "Montserrat", sans-serif;
+              }
+
+              button {
+                &:active,
+                &:focus,
+                &:hover,
+                &.active {
+                  background-color: #000;
+                  color: #fff;
+                }
+              }
+            }
+
+            .rwt__tab:nth-child(2) {
+              padding: 0;
+              button {
+                width: 147px;
+                height: 40px;
+                background: #fff;
+                border: 2px solid #bcbcbc;
+                border-radius: 0px 30px 30px 0px;
+                color: #000;
+                text-align: center;
+                letter-spacing: 0.2px;
+                font-size: 20px;
+                line-height: 42px;
+                font-weight: 600;
+                font-family: "Montserrat", sans-serif;
+              }
+              button {
+                &:active,
+                &:focus,
+                &:hover,
+                &.active {
+                  background-color: #000;
+                  color: #fff;
+                }
+              }
+            }
+
+            .session_location_dd {
+              display: grid;
+              grid-template-columns: 40% 50%;
+              grid-template-rows: auto;
+              grid-column-gap: 20px;
+              align-items: center;
+              width: 550px;
+              height: 40px;
+
+              background: #ffffff;
+              border: 2px solid #bcbcbc;
+              border-radius: 30px;
+
+              .session_location {
+                width: 100%;
+                .session_location_select {
+                  width: 100%;
+                  margin-left: 1em;
+
+                  .css-yk16xz-control {
+                    border: none;
+                    background-color: transparent;
+
+                    .css-1uccc91-singleValue {
+                      text-align: left;
+                      letter-spacing: 0.2px;
+                      color: #898989;
+                      font-size: 20px;
+                      line-height: 42px;
+                      font-weight: 600;
+                      font-family: "Montserrat", sans-serif;
+                    }
+
+                    .css-1hb7zxy-IndicatorsContainer {
+                      .css-1okebmr-indicatorSeparator {
+                        display: none;
+                      }
+                    }
+                  }
+                  .css-1pahdxg-control {
+                    border: 0px solid transparent !important;
+                    outline: none;
+                  }
+                  .css-26l3qy-menu {
+                    background-color: rgb(255, 255, 255);
+                  }
+                }
+              }
+            }
+            .session_view_location {
+              a {
+                color: #53bfd2;
+                opacity: 1;
+                font-style: italic;
+                font-family: 15px;
+                font-weight: 800;
+                font-family: "Montserrat", sans-serif;
+              }
+            }
+          }
+        }
+        .inPerson_tab_inner {
+          margin-top: 5em;
+          .inPerson_tab_wrapper {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            grid-template-rows: auto;
+            grid-column-gap: 50px;
+            align-items: center;
+            justify-content: center;
+            .session_cards {
+              width: 355px;
+              height: 425px;
+              background-color: #f6f6f6;
+              box-shadow: 0px 3px 12px #1616160d;
+              opacity: 1;
+              .session_card_content {
+                padding: 2em 2em 0 2em;
                 h2 {
-                    text-align: center;
-                    letter-spacing: 0px;
-                    color: #161616;
-                    font-size: 35px;
-                    line-height: 58px;
-                    font-weight: 600;
-                    font-family: "Montserrat", sans-serif;
+                  text-align: left;
+                  letter-spacing: 0px;
+                  color: #161616;
+                  font-size: 28px;
+                  line-height: 54px;
+                  font-weight: bolder;
+                  font-family: "Montserrat", sans-serif;
                 }
                 p {
-                    width: 810px;
-                    text-align: center;
+                  text-align: left;
+                  letter-spacing: 0.27px;
+                  color: #696969;
+                  font-size: 18px;
+                  line-height: 30px;
+                  font-weight: normal;
+                  font-family: "Montserrat", sans-serif;
+                }
+              }
+              .session_card_inner {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 0.4em 0 2em;
+
+                h6 {
+                  margin-top: 2em;
+                  letter-spacing: 0px;
+                  color: #161616;
+                  opacity: 1;
+                  font-size: 28px;
+                  font-weight: 600;
+                  font-family: Montserrat;
+                  span {
                     letter-spacing: 0.27px;
                     color: #696969;
                     font-size: 18px;
-                    line-height: 30px;
-                    font-weight: normal;
+                    font-weight: 500;
                     font-family: "Montserrat", sans-serif;
-                }
-            }
-            .session_tabs {
-                margin-top: 2em;
-                .session_tabs_inner {
-                    .sesstion_tabslist {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-evenly;
-                        width: 100%;
-                        .rwt__tablist .rwt__tab:after {
-                            border: none;
-                        }
-                        .rwt__tab {
-                            padding: 0;
-                            height: 40px;
-                            button {
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                width: 135px;
-                                height: 40px;
-                                border: 2px solid #bcbcbc;
-                                border-radius: 30px 0px 0px 30px;
-                                opacity: 1;
-                                background: transparent;
-                                text-align: center;
-                                letter-spacing: 0.2px;
-                                font-size: 20px;
-                                line-height: 42px;
-                                font-weight: 600;
-                                font-family: "Montserrat", sans-serif;
-                            }
-
-                            button {
-                                &:active,
-                                &:focus,
-                                &:hover,
-                                &.active {
-                                    background-color: #000;
-                                    color: #fff;
-                                }
-                            }
-                        }
-
-                        .rwt__tab:nth-child(2) {
-                            padding: 0;
-                            button {
-                                width: 147px;
-                                height: 40px;
-                                background: #fff;
-                                border: 2px solid #bcbcbc;
-                                border-radius: 0px 30px 30px 0px;
-                                color: #000;
-                                text-align: center;
-                                letter-spacing: 0.2px;
-                                font-size: 20px;
-                                line-height: 42px;
-                                font-weight: 600;
-                                font-family: "Montserrat", sans-serif;
-                            }
-                            button {
-                                &:active,
-                                &:focus,
-                                &:hover,
-                                &.active {
-                                    background-color: #000;
-                                    color: #fff;
-                                }
-                            }
-                        }
-
-                        .session_location_dd {
-                            display: grid;
-                            grid-template-columns: 40% 50%;
-                            grid-template-rows: auto;
-                            grid-column-gap: 20px;
-                            align-items: center;
-                            width: 550px;
-                            height: 40px;
-
-                            background: #ffffff;
-                            border: 2px solid #bcbcbc;
-                            border-radius: 30px;
-
-                            .session_location {
-                                width: 100%;
-                                .session_location_select {
-                                    width: 100%;
-                                    margin-left: 1em;
-
-                                    .css-yk16xz-control {
-                                        border: none;
-                                        background-color: transparent;
-
-                                        .css-1uccc91-singleValue {
-                                            text-align: left;
-                                            letter-spacing: 0.2px;
-                                            color: #898989;
-                                            font-size: 20px;
-                                            line-height: 42px;
-                                            font-weight: 600;
-                                            font-family: "Montserrat",
-                                                sans-serif;
-                                        }
-
-                                        .css-1hb7zxy-IndicatorsContainer {
-                                            .css-1okebmr-indicatorSeparator {
-                                                display: none;
-                                            }
-                                        }
-                                    }
-                                    .css-1pahdxg-control {
-                                        border: 0px solid transparent !important;
-                                        outline: none;
-                                    }
-                                    .css-26l3qy-menu {
-                                        background-color: rgb(255, 255, 255);
-                                    }
-                                }
-                            }
-                        }
-                        .session_view_location {
-                            a {
-                                color: #53bfd2;
-                                opacity: 1;
-                                font-style: italic;
-                                font-family: 15px;
-                                font-weight: 800;
-                                font-family: "Montserrat", sans-serif;
-                            }
-                        }
+                    margin-left: 0.5em;
+                    img {
+                      position: relative;
+                      top: -12px;
+                      width: 20px;
+                      height: 20px;
                     }
+                  }
                 }
-                .inPerson_tab_inner {
-                    margin-top: 5em;
-                    .inPerson_tab_wrapper {
-                        display: grid;
-                        grid-template-columns: 30% 30% 30%;
-                        grid-template-rows: auto;
-                        grid-column-gap: 50px;
-                        align-items: center;
-                        justify-content: center;
-                        .session_cards {
-                            width: 355px;
-                            height: 425px;
-                            background-color: #f6f6f6;
-                            box-shadow: 0px 3px 12px #1616160d;
-                            opacity: 1;
-                            .session_card_content {
-                                padding: 2em 2em 0 2em;
-                                h2 {
-                                    text-align: left;
-                                    letter-spacing: 0px;
-                                    color: #161616;
-                                    font-size: 28px;
-                                    line-height: 54px;
-                                    font-weight: bolder;
-                                    font-family: "Montserrat", sans-serif;
-                                }
-                                p {
-                                    text-align: left;
-                                    letter-spacing: 0.27px;
-                                    color: #696969;
-                                    font-size: 18px;
-                                    line-height: 30px;
-                                    font-weight: normal;
-                                    font-family: "Montserrat", sans-serif;
-                                }
-                            }
-                            .session_card_inner {
-                                display: flex;
-                                justify-content: space-between;
-                                padding: 0 0.4em 0 2em;
 
-                                h6 {
-                                    margin-top: 2em;
-                                    letter-spacing: 0px;
-                                    color: #161616;
-                                    opacity: 1;
-                                    font-size: 28px;
-                                    font-weight: 600;
-                                    font-family: Montserrat;
-                                    span {
-                                        letter-spacing: 0.27px;
-                                        color: #696969;
-                                        font-size: 18px;
-                                        font-weight: 500;
-                                        font-family: "Montserrat", sans-serif;
-                                        margin-left: 0.5em;
-                                        img {
-                                            position: relative;
-                                            top: -12px;
-                                            width: 20px;
-                                            height: 20px;
-                                        }
-                                    }
-                                }
-
-                                img {
-                                    justify-content: flex-end;
-                                    width: 120px;
-                                    height: 123px;
-                                }
-                            }
-                        }
-                        button {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            width: 100%;
-                            height: 70px;
-                            background: #53bfd2;
-                            opacity: 1;
-                            outline: none;
-                            border: none;
-                            text-align: right;
-                            letter-spacing: 0.45px;
-                            color: #ffffff;
-                            text-transform: uppercase;
-                            font-size: 18px;
-                            line-height: 22px;
-                            font-weight: bold;
-                            font-family: "Montserrat", sans-serif;
-                        }
-                    }
+                img {
+                  justify-content: flex-end;
+                  width: 120px;
+                  height: 123px;
                 }
+              }
             }
+            button {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              height: 70px;
+              background: #53bfd2;
+              //   opacity: 1;
+              outline: none;
+              border: none;
+              text-align: right;
+              letter-spacing: 0.45px;
+              color: #ffffff;
+              text-transform: uppercase;
+              font-size: 18px;
+              line-height: 22px;
+              font-weight: bold;
+              font-family: "Montserrat", sans-serif;
+            }
+          }
         }
+      }
     }
+  }
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

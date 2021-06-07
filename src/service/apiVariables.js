@@ -18,6 +18,10 @@ export const AuthApi = {
     api: "login",
     method: "post",
   },
+  adminApi: {
+    api: "admin/login",
+    method: "post",
+  },
 };
 
 export const TrainerApi = {

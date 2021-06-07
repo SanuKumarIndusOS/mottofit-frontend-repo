@@ -124,10 +124,10 @@ const SignInFC = ({
             "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
         },
         length: {
-          minimum: 7,
-          tooShort: "must contain alteast 7 character",
-          maximum: 15,
-          tooLong: "must contain less than 15 character",
+          minimum: 8,
+          tooShort: "must contain alteast 8 character",
+          maximum: 12,
+          tooLong: "must contain less than 12 character",
         },
       },
     };
