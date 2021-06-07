@@ -16,22 +16,13 @@ import { AuthApi } from "service/apiVariables";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { login, loginOrSignUp } from "action/authAct";
-import useForm from "./useForm";
-import validateInfo from "./validation";
 import { trainerDetail } from "action/trainerAct";
 import { history } from "helpers";
 import validate from "service/validation";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
-const SignInFC = ({
-  showModel,
-  setShowModel,
-  loginAct,
-  submitForm,
-  trainerDetail,
-}) => {
-  // const history = useHistory();
+const SignInFC = ({ showModel, setShowModel, loginAct, trainerDetail }) => {
   const myRef = useRef(null);
   const [data, setData] = useState({
     email: "",
@@ -41,10 +32,6 @@ const SignInFC = ({
   });
 
   const [error, setErrors] = useState({});
-  // const { data, handleFormSubmit, error, setData } = useForm(
-  //   validateInfo,
-  //   submitForm
-  // );
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [apiError, setApiError] = useState("");
@@ -81,7 +68,6 @@ const SignInFC = ({
 
     // NEED USER DATA AFTER LOGIN AND SIGNUP
 
-    // if (Object.keys(error).length === 0) {
     loginAct(loginApi, payload)
       .then((res) => {
         localStorage.setItem("user-id", res.id);
@@ -100,7 +86,6 @@ const SignInFC = ({
       .catch((error) => {
         setApiError("Sorry, something went wrong.", error.message);
       });
-    // }
   }
 
   const validationRules = () => {
@@ -118,16 +103,17 @@ const SignInFC = ({
           message: "^Password is required",
         },
         format: {
-          pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
+          pattern:
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/,
           flags: "i",
           message:
             "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
         },
         length: {
-          minimum: 7,
-          tooShort: "must contain alteast 7 character",
-          maximum: 15,
-          tooLong: "must contain less than 15 character",
+          minimum: 8,
+          tooShort: "must contain alteast 8 character",
+          maximum: 12,
+          tooLong: "must contain less than 12 character",
         },
       },
     };
@@ -141,7 +127,6 @@ const SignInFC = ({
         ...fieldInvalidList,
       };
 
-      // console.log(errors);
       setErrors({ ...errors, ...fieldInvalidList });
     }
 
