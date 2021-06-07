@@ -1,690 +1,709 @@
-.setup_link {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 2em 0;
+.profile_main {
+  height: 100%;
+  .profile_outter_container {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 9em;
 
-  .inner_link {
-    display: flex;
-    align-items: center;
-    a {
-      text-align: left;
-      letter-spacing: 0.18px;
-      color: #161616;
-      opacity: 1;
-      text-decoration: none;
-      border-bottom: 2px solid rgb(83, 191, 210);
-      line-height: 22px;
-      font-size: 16px;
-      font-weight: normal;
-      font-family: "Montserrat", sans-serif;
-    }
+      .profile_wrapper_container {
+          .profile_header {
+              width: 100%;
+              height: 400px;
+              background: #141414;
 
-    img {
-      margin-right: 0.5em;
-    }
-  }
+              .inner_profile {
+                  position: relative;
+                  top: 150px;
+                  display: grid;
+                  grid-template-columns: auto 30% 35%;
+                  align-items: flex-start;
+                  img {
+                      width: 350px;
+                      height: 400px;
+                      opacity: 1;
+                      object-position: center;
+                      object-fit: cover;
+                  }
+                  .profile_header_inner {
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: flex-start;
+                      align-items: flex-start;
+                      margin: 4em 0 0 2em;
+                      width: 410px;
+                      h2 {
+                          text-align: left;
+                          letter-spacing: -0.45px;
+                          color: #ffffff;
+                          font-size: 45px;
+                          line-height: 55px;
+                          font-weight: bold;
+                          text-transform: capitalize;
+                          font-family: "Cormorant Garamond", sans-serif;
+                      }
+                      p {
+                          text-align: left;
+                          letter-spacing: 1.1px;
+                          color: #898989;
+                          text-transform: uppercase;
+                          opacity: 1;
+                          text-decoration: none;
+                          // font-size: 22px;
+                          line-height: 22px;
+                          font-weight: 500;
+                          display: flex;
+                          font-family: "Montserrat", sans-serif;
+                      }
+                  }
+                  .profile_header_link {
+                      display: flex;
+                      align-items: center;
+                      justify-content: flex-end;
+                      text-align: right;
+                      margin: 4em 0 0 4em;
 
-  .inner_link_preview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .prev_profile {
-      text-decoration: underline;
-      cursor: pointer;
-      letter-spacing: 0px;
-      color: rgb(83, 191, 210);
-      font-size: 15px;
-      font-family: Montserrat;
-      font-weight: 500;
-    }
+                      a {
+                          display: flex;
+                          align-items: center;
+                          justify-content: flex-end;
+                          text-align: left;
+                          letter-spacing: 0.18px;
+                          color: #bcbcbc;
+                          opacity: 1;
+                          border-bottom: 2px solid #53bfd2;
+                          font-size: 18px;
+                          font-weight: normal;
+                          font-family: "Montserrat", sans-serif;
+                      }
+                      a:hover {
+                          text-decoration: none;
+                      }
+                      img {
+                          margin-right: 0.5em;
+                          width: 10px;
+                          height: 15px;
+                      }
+                  }
+              }
+          }
+          .profile_main_contents {
+              display: grid;
+              grid-template-columns: 30% 69%;
+              grid-template-rows: auto;
+              margin-top: 10em;
+              grid-column-gap: 50px;
+              // height: 900px;
+              .profile_aside {
+                  // background: chocolate;
+                  .profile_aside_link {
+                      a {
+                          text-align: left;
+                          letter-spacing: 0.18px;
+                          color: #161616;
+                          opacity: 1;
+                          border-bottom: 2px solid #53bfd2;
+                          font-size: 18px;
+                          line-height: 42px;
+                          font-weight: normal;
+                          font-family: "Montserrat", sans-serif;
+                      }
+                      a:hover {
+                          text-decoration: none;
+                      }
+                      img {
+                          margin-left: 0.5em;
+                      }
+                  }
+                  .profile_aside_items {
+                      height: auto;
+                      width: 100%;
+                      margin: 1em 0;
+                      .profile_aside_item {
+                          margin-top: 3em;
+                          h2 {
+                              text-align: left;
+                              letter-spacing: 1px;
+                              color: #2c2c2c;
+                              text-transform: uppercase;
+                              font-size: 16px;
+                              line-height: 22px;
+                              font-weight: 600;
+                              font-family: "Montserrat", sans-serif;
+                          }
+                          hr {
+                              width: 350px;
+                              height: 0px;
+                              border: 2px solid #e3e3e3;
+                              opacity: 1;
+                          }
+                          .model_Qmark {
+                              position: relative;
+                              bottom: 10px;
+                              margin-left: 0.2em;
+                              cursor: pointer;
+                              border: none;
+                          }
+                          .profile_aside_inner_item {
+                              h6 {
+                                  text-align: left;
+                                  font-size: 25px;
+                                  font-weight: bold;
+                                  font-family: Montserrat;
+                                  letter-spacing: 0.63px;
+                                  color: #2c2c2c;
+                                  opacity: 1;
+                                  span {
+                                      text-align: left;
+                                      letter-spacing: 0.24px;
+                                      color: #696969;
+                                      font-size: 16px;
+                                      line-height: 30px;
+                                      font-weight: normal;
+                                      font-family: "Montserrat", sans-serif;
+                                  }
+                              }
+                              h5 {
+                                  text-align: left;
+                                  font-style: italic;
+                                  font-size: 18px;
+                                  font-weight: medium;
+                                  font-family: "Cormorant Garamond",
+                                      sans-serif;
+                                  letter-spacing: 0.27px;
+                                  color: #696969;
+                                  opacity: 1;
+                                  width: 350px;
+                              }
+                              .profile_location {
+                                  display: flex;
+                                  align-items: center;
+                                  img {
+                                      width: 20px;
+                                      height: 20px;
+                                  }
+                                  h4 {
+                                      display: flex;
+                                      text-align: left;
+                                      letter-spacing: 0.24px;
+                                      color: #696969;
+                                      opacity: 1;
+                                      margin: 0 0 0 0em;
+                                      padding: 0 0 0 0.5em;
+                                      font-size: 16px;
+                                      line-height: 30px;
+                                      font-weight: normal;
+                                      font-family: "Montserrat", sans-serif;
+                                      text-transform: capitalize;
+                                      a {
+                                          text-align: left;
+                                          text-decoration: underline;
+                                          font-size: 15px;
+                                          font-weight: bold;
+                                          font-family: "Montserrat",
+                                              sans-serif;
+                                          letter-spacing: 0px;
+                                          color: #53bfd2;
+                                          opacity: 1;
+                                          padding: 0 0 0 0.5em;
+                                      }
+                                  }
+                              }
+                              .profile_share {
+                                  display: flex;
+                                  align-items: center;
+                                  margin-top: 3em;
+                                  a {
+                                      text-align: left;
+                                      text-decoration: underline;
+                                      font-size: 15px;
+                                      font-weight: bold;
+                                      font-family: "Montserrat", sans-serif;
+                                      letter-spacing: 0px;
+                                      color: #53bfd2;
+
+                                      padding: 0 0 0 1em;
+                                  }
+                              }
+                          }
+                      }
+                      button {
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          margin-top: 3em;
+                          width: 350px;
+                          height: 52px;
+                          background: #53bfd2;
+                          text-transform: uppercase;
+                          text-align: right;
+                          letter-spacing: 0.45px;
+                          color: #ffffff;
+                          outline: none;
+                          border: none;
+                          font-size: 18px;
+                          line-height: 22px;
+                          font-weight: bold;
+                          font-family: "Montserrat", sans-serif;
+                      }
+                  }
+              }
+              .profile_trainer_data {
+                  .profile_right_data {
+                      .profile_right_item1 {
+                          display: flex;
+                          align-items: flex-start;
+                          h6 {
+                              text-align: left;
+                              letter-spacing: 0.33px;
+                              color: #696969;
+                              opacity: 1;
+                              margin-left: 1em;
+                              font-size: 22px;
+                              line-height: 38px;
+                              font-weight: normal;
+                              font-family: "Montserrat", sans-serif;
+                          }
+                      }
+                      .profile_right_item2 {
+                          margin-top: 3em;
+                          h4 {
+                              text-align: left;
+                              letter-spacing: 1px;
+                              color: #2c2c2c;
+                              text-transform: uppercase;
+                              font-size: 20px;
+                              line-height: 22px;
+                              font-weight: 600;
+                              font-family: "Montserrat", sans-serif;
+                          }
+                          p {
+                              text-align: left;
+                              letter-spacing: 0.27px;
+                              color: #696969;
+                              font-size: 18px;
+                              line-height: 32px;
+                              font-weight: normal;
+                              font-family: "Montserrat", sans-serif;
+                          }
+                          .profile_images_grid {
+                              display: flex;
+                              flex-direction: column;
+                              box-sizing: border-box;
+                              width: 100%;
+                              margin: 0.5em 0;
+                              .profile_images_container {
+                                  display: flex;
+                                  box-sizing: border-box;
+                                  margin: 0.5em 0;
+
+                                  .profile_images_card {
+                                      font-family: sans-serif;
+                                      font-size: 30px;
+                                      font-weight: bold;
+                                      height: 40%;
+                                      display: flex;
+                                      color: white;
+                                      justify-content: center;
+                                  }
+                                  .box1 {
+                                      width: 320px;
+                                      height: 360px;
+                                      object-position: center;
+                                      object-fit: cover;
+                                  }
+
+                                  .box2 {
+                                      width: 400px;
+                                      height: 175px;
+                                      object-position: center;
+                                      object-fit: cover;
+                                      margin-left: 10px;
+                                  }
+
+                                  .box3 {
+                                      width: 194px;
+                                      height: 165px;
+                                      object-position: center;
+                                      object-fit: cover;
+                                      margin: 0 0 0 10px;
+                                  }
+
+                                  .box4 {
+                                      width: 194px;
+                                      height: 165px;
+                                      object-position: center;
+                                      object-fit: cover;
+                                      margin-left: 10px;
+                                  }
+                                  .flex-try-2 {
+                                      width: 408px;
+                                  }
+                                  .flex-try-3 {
+                                      display: flex;
+                                      margin-top: 20px;
+                                  }
+                              }
+                          }
+                          .image_more {
+                              display: flex;
+                              align-items: center;
+                              h5 {
+                                  margin: 0;
+                                  text-align: left;
+                                  letter-spacing: 0.18px;
+                                  color: #161616;
+                                  border-bottom: 2px solid #53bfd2;
+                                  font-size: 18px;
+                                  line-height: 25px;
+                                  font-weight: normal;
+                                  font-family: "Montserrat", sans-serif;
+                              }
+                              img {
+                                  margin-left: 0.5em;
+                              }
+                          }
+                      }
+                      .profile_right_item3 {
+                          margin-top: 3em;
+                          h2 {
+                              letter-spacing: 0px;
+                              color: #161616;
+                              opacity: 1;
+                              font-size: 28px;
+                              font-weight: 600;
+                              line-height: 58px;
+                              font-family: "Montserrat", sans-serif;
+                              margin-bottom: 1em;
+                          }
+                          .profile_item3_inner {
+                              display: grid;
+                              grid-template-columns: auto auto;
+                              grid-template-rows: auto;
+                              align-items: center;
+                              .inner_items {
+                                  display: flex;
+                                  align-items: center;
+                                  margin: 0.5em 0;
+                                  img {
+                                      width: 20px;
+                                      height: 20px;
+                                  }
+                                  h6 {
+                                      text-align: left;
+                                      letter-spacing: 0.6px;
+                                      color: #898989;
+                                      text-transform: uppercase;
+                                      opacity: 1;
+                                      margin: 0 0 0 0.5em;
+                                      display: flex;
+                                      align-items: center;
+                                      font-size: 18px;
+                                      line-height: 22px;
+                                      font-weight: 600;
+                                      font-family: "Montserrat", sans-serif;
+                                  }
+                              }
+                          }
+                      }
+                      .profile_right_item4 {
+                          margin-top: 2em;
+                          h2 {
+                              letter-spacing: 0px;
+                              color: #161616;
+                              font-size: 28px;
+                              font-weight: 600;
+                              line-height: 58px;
+                              font-family: "Montserrat", sans-serif;
+                              margin-bottom: 1em;
+                              // text-transform: capitalize;
+                          }
+                          .schedular_slots {
+                              display: grid !important;
+                              grid-template-columns: 100%;
+                              grid-template-rows: auto;
+                              grid-column-gap: 20px;
+                              width: 807px;
+                              margin: 2em 0 3em 0;
+                              align-items: center;
+                              .items_slots {
+                                  display: flex;
+                                  align-items: center;
+                                  justify-content: space-between;
+                                  width: 100%;
+                                  .item_slot1 {
+                                      display: flex;
+                                      align-items: center;
+                                      .indicator {
+                                          width: 60px;
+                                          height: 15px;
+                                          background: #f2f2f2;
+                                          opacity: 1;
+                                      }
+                                      h5 {
+                                          letter-spacing: 0.54px;
+                                          color: #2c2c2c;
+                                          text-transform: uppercase;
+                                          margin: 0 1em;
+                                          font-size: 12px;
+                                          font-weight: 700;
+                                          font-family: Montserrat;
+                                      }
+                                  }
+                                  .item_slot2 {
+                                      display: flex;
+                                      align-items: center;
+                                      .indicator2 {
+                                          width: 60px;
+                                          height: 15px;
+                                          background: #dedede;
+                                          opacity: 1;
+                                      }
+                                      h5 {
+                                          letter-spacing: 0.54px;
+                                          color: #2c2c2c;
+                                          text-transform: uppercase;
+                                          margin: 0 1em;
+                                          font-size: 12px;
+                                          font-weight: 700;
+                                          font-family: Montserrat;
+                                      }
+                                  }
+                                  .item_slot3 {
+                                      display: flex;
+                                      align-items: center;
+                                      .indicator3 {
+                                          width: 60px;
+                                          height: 15px;
+                                          background: #53bfd2;
+                                          opacity: 1;
+                                      }
+                                      h5 {
+                                          letter-spacing: 0.54px;
+                                          color: #2c2c2c;
+                                          text-transform: uppercase;
+                                          margin: 0 0 0 1em;
+                                          font-size: 12px;
+                                          font-weight: 700;
+                                          font-family: Montserrat;
+                                      }
+                                  }
+                                  .item_slot4 {
+                                      display: flex;
+                                      align-items: center;
+
+                                      button {
+                                          display: flex;
+                                          align-items: center;
+                                          letter-spacing: 0.54px;
+                                          border: none;
+                                          outline: none;
+                                          color: #2c2c2c;
+                                          text-transform: uppercase;
+                                          margin: 0 0 0 1em;
+                                          font-size: 14px;
+                                          font-weight: 700;
+                                          font-family: Montserrat;
+                                          background-color: transparent;
+                                      }
+                                  }
+                              }
+                              .items_slot_button {
+                                  display: flex;
+                                  align-items: center;
+                                  justify-content: flex-end;
+                                  button {
+                                      display: flex;
+                                      align-items: center;
+                                      text-align: right;
+                                      letter-spacing: 0.45px;
+                                      color: #161616;
+                                      text-transform: uppercase;
+                                      border: none;
+                                      font-family: "Montserrat", sans-serif;
+                                      font-size: 18px;
+                                      font-weight: bold;
+                                      line-height: 22px;
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
   }
 }
-.setup_container {
+
+//Payment
+.payment_container {
   width: 100%;
-
-  padding: 0 4em;
-
-  .setup_headings {
-    margin-top: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    h2 {
-      text-align: center;
-      letter-spacing: -0.45px;
-      color: #161616;
-      line-height: 55px;
-      font-size: 45px;
-      font-weight: bold;
-      font-family: "Cormorant Garamond", sans-serif;
-    }
-    p {
-      text-align: center;
-
-      letter-spacing: 0.27px;
-      color: #696969;
-      opacity: 1;
-      width: 70%;
-      line-height: 30px;
-      font-size: 18px;
-      font-weight: normal;
-      font-family: "Montserrat", sans-serif;
-    }
-  }
-  .setup_wrapper {
-    .setup_formInner {
-      width: 100%;
-
-      .setup_card1,
-      .setup_card2 {
-        margin: 1em 2em 1em 1em;
-        h6 {
-          margin-top: 1em;
-          color: #161616;
-          text-align: left;
-          letter-spacing: 0px;
-          line-height: 42px;
-          font-size: 22px;
-          font-weight: 500;
-          font-family: "Montserrat", sans-serif;
-        }
-        textarea {
-          width: 100%;
-          height: 135px;
-
-          border: 2px solid #bcbcbc;
-          border-radius: 20px;
-          font-size: 18px;
-          color: #161616;
-          font-family: "Montserrat", sans-serif;
-          font-weight: 500;
-          padding: 0.5em 1em;
-        }
-        textarea::placeholder {
-          font-size: 18px;
-          color: #bcbcbc;
-          font-style: italic;
-          font-family: "Montserrat", sans-serif;
-          font-weight: 500;
-        }
-        textarea:focus {
-          outline: none;
-        }
-      }
-      .setup_card3 {
-        margin: 1em 2em 1em 1em;
-        .row {
-          display: -webkit-flex;
-          display: flex;
-          -webkit-flex-wrap: wrap;
-          flex-wrap: wrap;
-          margin-right: -15px;
-          margin-left: -15px;
-        }
-        h6 {
-          margin-top: 1em;
-          font-size: 22px;
-          color: #161616;
-          font-family: "Montserrat", sans-serif;
-          font-weight: 500;
-          line-height: 45px;
-          text-align: left;
-          letter-spacing: 0px;
-        }
-        .read_image {
+  height: auto;
+  .payment_wrapper {
+      .payment_heading {
           display: flex;
           flex-direction: column;
-          align-items: stretch;
-          justify-content: space-evenly;
-          h5 {
-            color: rgb(83, 191, 210);
-            font-size: 16px;
-            margin-bottom: 1em;
-            cursor: pointer;
-            font-family: Montserrat;
-            text-decoration: underline;
-          }
-          .render_image {
-            display: flex;
-          }
+          align-items: center;
           h2 {
-            margin: 0 2em;
-          }
-          input {
-            display: none;
-          }
-        }
-      }
-      .setup_card4 {
-        margin: 1em 2em 2em 1em;
-        h5 {
-          color: rgb(83, 191, 210);
-          font-size: 16px;
-          margin-bottom: 1em;
-          cursor: pointer;
-          font-family: Montserrat;
-          text-decoration: underline;
-        }
-        h6 {
-          margin-top: 1em;
-          font-size: 22px;
-          color: #161616;
-          font-family: "Montserrat", sans-serif;
-          line-height: 42px;
-          font-weight: 500;
-          text-align: left;
-          letter-spacing: 0px;
-        }
-        .inputs_certificate {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          margin-bottom: 0.5em;
-          align-items: center;
-
-          input {
-            width: 50%;
-            margin: 1em 1em 1em 0;
-            padding: 0.3em 1em;
-            height: 45px;
-            border: 2px solid #bcbcbc;
-            border-radius: 30px;
-            opacity: 1;
-            font-family: "Montserrat", sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            top: -10px;
-            position: relative;
-          }
-          input::placeholder {
-            color: #bcbcbc;
-            font-family: Montserrat;
-            font-size: 18px;
-            font-weight: 400;
-          }
-          input:focus {
-            outline: none;
-          }
-          .custom-file-input {
-            color: transparent;
-            width: 65%;
-          }
-          .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-          }
-          .custom-file-input::before {
-            content: "upload";
-            outline: none;
-
-            border: 0;
-
-            text-transform: uppercase;
-            color: black;
-            font-weight: bold;
-          }
-          .custom-file-input:hover::before {
-            border-color: black;
-          }
-          .custom-file-input:active {
-            outline: 0;
-          }
-          .custom-file-input:active::before {
-            background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-          }
-
-          .checkarrow {
-            position: relative;
-            right: 150px;
-          }
-        }
-      }
-
-      .setup_card5 {
-        h6 {
-          // margin-top: 1em;
-          font-size: 22px;
-          color: #161616;
-          font-family: "Montserrat", sans-serif;
-          font-weight: 500;
-
-          text-align: left;
-          letter-spacing: 0px;
-          line-height: 42px;
-        }
-        .setupcontent_wrapper {
-          margin: 3em 0.5em;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, 50% 50%);
-          grid-template-rows: auto;
-          align-items: center;
-          width: 100%;
-          height: auto;
-          word-wrap: normal;
-          grid-column-gap: 40px;
-          height: auto;
-          .setup_item {
-            margin: 1em 0 2em 0;
-            .inputs_platform {
-              button {
-                border-radius: 50px;
-                padding: 0.5em 2.5em;
-                border: 0;
-                font-family: "Montserrat", sans-serif;
-                font-size: 18px;
-                font-weight: 500;
-                height: 45px;
-                margin: 0.7em 0.7em 0.7em 0;
-
-                &.active,
-                &:hover,
-                &:focus {
-                  background-color: #000;
-                  color: #fff;
-                }
-              }
-            }
-            .social_meeting_links {
-              h5 {
-                margin-top: 1em;
-                font-size: 22px;
-                color: #161616;
-                font-weight: 500;
-                text-align: left;
-                letter-spacing: 0px;
-                font-family: "Montserrat", sans-serif;
-                line-height: 42px;
-              }
-              .inputs_platform {
-                textarea {
-                  width: 100%;
-                  height: 135px;
-                  border: 2px solid #bcbcbc;
-                  border-radius: 20px;
-                  font-size: 18px;
-                  color: #161616;
-                  font-family: "Montserrat", sans-serif;
-                  font-weight: 500;
-                  padding: 0.5em 1em;
-                }
-                textarea::placeholder {
-                  font-size: 18px;
-                  color: #bcbcbc;
-                  font-style: italic;
-                  font-family: "Montserrat", sans-serif;
-                  font-weight: 500;
-                }
-                textarea:focus {
-                  outline: none;
-                }
-              }
-            }
-          }
-          .setup_item1 {
-            margin: 0em 0 2em 0;
-
-            h6 {
-              margin-top: 1em;
-              font-size: 22px;
+              text-align: center;
+              letter-spacing: -0.45px;
               color: #161616;
+              line-height: 55px;
+              font-size: 45px;
+              font-weight: bold;
+              font-family: "Cormorant Garamond", sans-serif;
+          }
+          p {
+              width: 70%;
+              text-align: center;
+              letter-spacing: 0.27px;
+              color: #696969;
+              line-height: 30px;
+              font-size: 18px;
+              font-weight: normal;
               font-family: "Montserrat", sans-serif;
-              font-weight: 500;
+          }
+      }
+      .payment_inner {
+          .payment_item1 {
+              margin: 1em 0 2em 0;
 
-              text-align: left;
-              letter-spacing: 0px;
-              line-height: 10px;
-            }
-
-            .inputs_platform {
-              input {
-                width: 100% !important;
-                margin: 1em 1em 1em 0;
-                border-radius: 50px;
-                background: transparent;
-                width: 500px;
-                height: 45px;
-                font-size: 22px;
-                color: #161616;
-                font-family: "Montserrat", sans-serif;
-                font-weight: 500;
-                border: 2px solid #bcbcbc;
-                border-radius: 30px;
-                opacity: 1;
-                margin-right: 1em;
-                padding: 0.3em 2em 0.3em 1em;
-                opacity: 1;
-                top: -10px;
-                position: relative;
-                @media screen and (max-width: 1023px) {
-                  width: 100% !important;
-                }
-              }
-              input::placeholder {
-                text-align: left;
-                color: #898989;
-                font-size: 18px;
-                font-family: "Montserrat", sans-serif;
-                font-weight: normal;
-                letter-spacing: 0px;
-                line-height: 30px;
-              }
-              .iconwrapper {
-                display: flex;
-                margin: 0;
-                padding: 0;
-                height: 70px;
-                width: 95% !important;
-                img {
-                  margin-left: -3.7em;
-                  position: relative;
-                  top: 25px;
-                  height: 20px;
-                }
-                .location_icon {
-                  position: relative;
-                  top: 25px;
-                  right: -2px;
-                  height: 20px;
-                }
-                select {
-                  background: transparent;
-                  width: 90% !important;
-                  margin: 0.5em 1em 0.5em 0;
-                  padding: 0em 1.5em;
-                  border-radius: 50px;
-                  border: 2px solid #bcbcbc;
-                  outline: none;
-                  appearance: none;
-                  font-family: "Montserrat", sans-serif;
+              h6 {
+                  font-size: 22px !important;
+                  margin: 2em 0 0 0;
+                  color: #161616;
+                  opacity: 1;
                   font-size: 22px;
+                  font-family: "Montserrat";
                   font-weight: 500;
-                  color: #161616;
-                  height: 45px;
+              }
+              .inputs_payment1 {
+                  display: grid;
+                  grid-template-columns: 33% 30% auto 8%;
+                  grid-template-rows: auto;
+                  align-items: center;
+                  width: 1100px;
+                  grid-column-gap: 23px;
 
-                  option {
-                    color: black;
-                    border-radius: 100px;
-                    border: 2px solid #bcbcbc;
+                  input {
+                      width: 100% !important;
+                      margin: 1em 1em 1em 0;
+                      border-radius: 50px;
+                      background: transparent;
+                      height: 45px;
+                      font-size: 22px;
+                      color: #161616;
+                      font-family: Montserrat;
+                      font-weight: 500;
+
+                      border: 2px solid #bcbcbc;
+                      border-radius: 30px;
+                      opacity: 1;
+                      margin-right: 1em;
+                      padding: 0.3em 2em 0.3em 1em;
                   }
-                }
-                select::placeholder {
-                  color: #bcbcbc;
-                  font-family: "Montserrat", sans-serif;
+                  input::placeholder {
+                      font-size: 18px;
+                      font-weight: 400;
+                      font-family: Montserrat;
+                      color: #898989;
+                  }
+                  input:nth-child(3) {
+                      border: none;
+                      cursor: pointer;
+                  }
+                  .custom-file-input {
+                      color: transparent;
+                      width: 65%;
+                  }
+                  .custom-file-input::-webkit-file-upload-button {
+                      visibility: hidden;
+                  }
+                  .custom-file-input::before {
+                      content: "upload";
+                      outline: none;
 
-                  font-size: 18px;
-                  font-weight: 400;
-                }
-                select:invalid {
-                  color: #bcbcbc;
-                  font-family: "Montserrat", sans-serif;
+                      border: 0;
 
-                  font-size: 18px;
+                      text-transform: uppercase;
+                      color: black;
+                      font-weight: bold;
+                  }
+                  .custom-file-input:hover::before {
+                      border-color: black;
+                  }
+                  .custom-file-input:active {
+                      outline: 0;
+                  }
+                  .custom-file-input:active::before {
+                      background: -webkit-linear-gradient(
+                          top,
+                          #e3e3e3,
+                          #f9f9f9
+                      );
+                  }
+
+                  .checkarrow {
+                      position: relative;
+                      right: 150px;
+                  }
+              }
+          }
+          .payment_item2 {
+              margin: 1em 0 2em 0;
+
+              h6 {
+                  margin: 2em 0 0 0;
+                  color: #161616;
+                  opacity: 1;
+                  font-size: 22px;
+                  font-family: "Montserrat", sans-serif;
                   font-weight: 500;
-                }
+
+                  letter-spacing: 0px;
               }
-            }
+              .inputs_payment {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  width: 85%;
+
+                  input {
+                      width: 320px !important;
+                      margin: 1em 1em 1em 0;
+                      border-radius: 50px;
+                      background: transparent;
+                      width: 500px;
+                      height: 45px;
+                      font-size: 22px;
+                      color: #161616;
+                      font-family: Montserrat;
+                      font-weight: 500;
+                      border: 1.5px solid var(--unnamed-color-bcbcbc);
+                      border: 2px solid #bcbcbc;
+                      border-radius: 30px;
+                      opacity: 1;
+                      margin-right: 1em;
+                      padding: 0.3em 2em 0.3em 1em;
+                      opacity: 1;
+                      position: relative;
+                      right: 40px;
+
+                      @media screen and (max-width: 1023px) {
+                          width: 100% !important;
+                      }
+                  }
+                  input::placeholder {
+                      font-size: 18px;
+                      font-weight: 400;
+                      font-family: "Montserrat", sans-serif;
+
+                      color: #898989;
+                  }
+                  input:nth-child(3) {
+                      border: none;
+                  }
+              }
           }
-          .item_3 {
-            margin: 2em 0 1.5em 0;
-            position: relative;
-            h6 {
-              color: #161616;
-              font-size: 22px;
-              font-family: "Montserrat", sans-serif;
-              line-height: 28px;
-              font-weight: 500;
-
-              letter-spacing: 0px;
-              text-align: left;
-            }
-            label {
-              margin-right: 3em;
-              color: #2c2c2c;
-              font-size: 20px;
-              font-family: "Montserrat", sans-serif;
-
-              font-weight: 500;
-            }
-            .inputs_platform {
-              display: flex;
-              justify-content: space-around;
-            }
-          }
-          .item_4 {
-            margin: 1em 0 0em 0;
-            position: relative;
-            top: -5px;
-
-            h6 {
-              color: #161616;
-              opacity: 1;
-              font-size: 22px;
-              font-family: "Montserrat", sans-serif;
-
-              font-weight: 500;
-              line-height: 28px;
-              letter-spacing: 0px;
-              text-align: left;
-
-              position: relative;
-            }
-
-            .inputs_platform {
-              display: flex;
-              textarea {
-                width: 95%;
-                height: 70px;
-
-                border: 2px solid #bcbcbc;
-                border-radius: 20px;
-                font-size: 18px;
-                color: #161616;
-                font-family: "Montserrat", sans-serif;
-
-                font-weight: 500;
-                padding: 0.5em 1em;
-              }
-              textarea::placeholder {
-                font-size: 18px;
-                color: #bcbcbc;
-                font-family: "Montserrat", sans-serif;
-
-                font-weight: 400;
-              }
-              textarea:focus {
-                outline: none;
-              }
-              label {
-                margin-right: 3em;
-                color: #2c2c2c;
-                font-size: 20px;
-                font-family: "Montserrat", sans-serif;
-
-                font-weight: 500;
-              }
-
-              .loction_img_select {
-                position: relative;
-                left: -60px;
-              }
-            }
-          }
-          .item_5 {
-            margin: 1em 0 2em 0;
-            position: relative;
-            top: -15px;
-            h6 {
-              color: #161616;
-              opacity: 1;
-              font-size: 22px;
-              font-family: "Montserrat", sans-serif;
-              line-height: 28px;
-
-              font-weight: 500;
-
-              letter-spacing: 0px;
-              text-align: left;
-            }
-            label {
-              margin-right: 3em;
-              color: #2c2c2c;
-              font-size: 20px;
-              font-family: "Montserrat", sans-serif;
-
-              font-weight: 500;
-            }
-
-            .inputs_platform {
-              display: flex;
-              justify-content: space-around;
-            }
-          }
-          .item_6 {
-            margin: 1em 0 2em 0;
-            position: relative;
-            h6 {
-              color: #161616;
-              opacity: 1;
-              font-size: 22px;
-              font-family: "Montserrat", sans-serif;
-              line-height: 28px;
-
-              font-weight: 500;
-
-              letter-spacing: 0px;
-              text-align: left;
-
-              position: relative;
-            }
-
-            .inputs_platform {
-              display: flex;
-              textarea {
-                width: 100%;
-                height: 70px;
-
-                border: 2px solid #bcbcbc;
-                border-radius: 20px;
-                font-size: 18px;
-                color: #161616;
-                font-family: "Montserrat", sans-serif;
-
-                font-weight: 500;
-                padding: 0.5em 1em;
-              }
-              textarea::placeholder {
-                font-size: 18px;
-                color: #bcbcbc;
-                font-family: "Montserrat", sans-serif;
-
-                font-weight: 400;
-              }
-              textarea:focus {
-                outline: none;
-              }
-              .loction_img_select {
-                position: relative;
-                left: -60px;
-              }
-            }
-          }
-        }
       }
-      .card_agree {
-        display: flex;
-        align-items: center;
-        margin-bottom: 2em;
-        input {
-          padding: 1em;
-          height: 20px;
-          background-color: rgb(83, 191, 210);
-        }
-        label {
-          display: flex;
-          align-items: center;
-          font-size: 18px;
-          padding: 0 0 0 0.5em;
-          color: #898989;
-          text-align: left;
-          letter-spacing: 0px;
-          margin: 0;
-          font-weight: 500;
-          line-height: 42px;
-          font-family: "Montserrat", sans-serif;
-
-          a {
-            color: rgb(83, 191, 210);
-            padding-left: 0.2em;
-            font-family: 800;
-          }
-        }
-      }
-    }
-    .submit_button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 5em;
-
-      button {
-        display: block;
-        outline: none;
-        background: rgb(83, 191, 210);
-        border: 0;
-        height: 50px;
-        margin: 1em 1em 2em 1em;
-        text-decoration: none;
-        padding: 0.2em 0.5em 0.2em 2em;
-        text-transform: uppercase;
-        color: #fff;
-        font-weight: bold;
-
-        &.loading {
-          padding-right: 2rem;
-        }
-        a {
-          display: flex;
-          align-items: center;
-        }
-      }
-
-      .terms_msg {
-        margin-bottom: 6em;
-        text-align: left;
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 42px;
-        font-family: "Montserrat", sans-serif;
-      }
-    }
   }
-}
-.renderImage {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  margin: 0.5em 1em 0.5em 0;
-  cursor: pointer;
-
-  input {
-    display: none;
-  }
-  button {
-    border: none;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-    background-color: #f3f3f3;
-    border-radius: 20px;
-  }
-}
-
-.customModal {
-  max-width: 100% !important;
-}
-
-img {
-  color: #ffff;
-  font: 20px Impact;
 }

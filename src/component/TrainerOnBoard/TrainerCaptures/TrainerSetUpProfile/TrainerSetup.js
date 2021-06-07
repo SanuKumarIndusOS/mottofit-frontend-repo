@@ -230,7 +230,7 @@ function TrainerSetupClass(props) {
           <SetupPrevModal
             open={open}
             setOpen={setOpen}
-            trainerSetupData={trainerSetupData}
+            trainerdetailData={trainerdetailData}
           />
           <div className="setup_headings">
             <h2>Build out the rest of your Profile!</h2>
@@ -350,7 +350,7 @@ function TrainerSetupClass(props) {
                       </button>
                       {index + 1 ===
                         trainerSetupData.certificateFields.length &&
-                      trainerSetupData.certificateFields.length !== 1 ? (
+                        trainerSetupData.certificateFields.length !== 1 ? (
                         <button
                           className="certificate_button text-danger pl-3"
                           type="button"
