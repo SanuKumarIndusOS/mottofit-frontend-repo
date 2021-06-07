@@ -1,5 +1,3 @@
-import { generateQuery } from "./helperFunctions";
-
 export const AuthApi = {
   loginApi: {
     api: "login",
