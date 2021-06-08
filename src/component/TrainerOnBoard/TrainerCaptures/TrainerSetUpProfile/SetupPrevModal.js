@@ -180,8 +180,8 @@ const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
                         <hr />
                         <div className="profile_aside_inner_item">
                           {trainerdetailData
-                            .currentExperience
-                            .workLocation ? (
+                            .currentExperience && trainerdetailData
+                            .currentExperience.workLocation ? (
                             <div className="profile_location">
                               <img src={Tick} alt="icon" />
                               <h4>
@@ -236,7 +236,7 @@ const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
 
                         <div className="profile_images">
                           {
-                            trainerdetailData.images ? (
+                            trainerdetailData.images && trainerdetailData.images.length !== 0 ? (
                               trainerdetailData.images.map((imgVal) => (
                                 <img src={imgVal} alt="image1" />
                               ))
