@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import Tick from "../../../../assets/files/FindTrainer/Tick 1.svg";
+//import Tick from "../../../../assets/files/FindTrainer/Tick 1.svg";
+import Tick from '../../../../assets/files/FindTrainer/Tick 1.svg';
 import ArrowNext from "../../../../assets/files/SVG/Arrow Next.svg";
 import { Modal } from "react-responsive-modal";
 import QMark from "../../../../assets/files/FindTrainer/Q Mark.svg";
@@ -178,23 +179,23 @@ const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
 
                         <hr />
                         <div className="profile_aside_inner_item">
-                          {/* {trainerdetailData
-                                                        .currentExperience
-                                                        .workLocation ? ( */}
-                          <div className="profile_location">
-                            <img src={Tick} alt="icon" />
-                            <h4>
+                          {trainerdetailData
+                            .currentExperience
+                            .workLocation ? (
+                            <div className="profile_location">
+                              <img src={Tick} alt="icon" />
+                              <h4>
 
-                              {
-                                trainerdetailData
-                                  .currentExperience
-                                  .workLocation
-                              }
-                            </h4>
-                          </div>
-                          {/* ) : (
-                                                        ""
-                                                    )} */}
+                                {
+                                  trainerdetailData
+                                    .currentExperience
+                                    .workLocation
+                                }
+                              </h4>
+                            </div>
+                          ) : (
+                            ""
+                          )}
                           <div className="profile_location">
                             <img src={Tick} alt="icon" />
                             <h4>
@@ -236,11 +237,11 @@ const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
                         <div className="profile_images">
                           {
                             trainerdetailData.images ? (
-                              trainerdetailData.images.map((imgVal)=>(
-                                <img src={imgVal} alt="image1"/>
+                              trainerdetailData.images.map((imgVal) => (
+                                <img src={imgVal} alt="image1" />
                               ))
                             ) :
-                            "NO IMAGES ADDED"
+                              "NO IMAGES ADDED"
                           }
                         </div>
                       </div>
@@ -256,13 +257,13 @@ const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
                                   .certification[0]
                                   .certification
                                 : "Not Added"}
-                              certification 1
+                              {/* certification 1 */}
                             </h6>
                           </div>
                           <div className="inner_items">
                             <img src={Tick} alt="check" />
                             <h6>
-                              certification2
+                              {/* certification2 */}
                               {trainerdetailData
                                 .certification[1]
                                 ? trainerdetailData
@@ -274,7 +275,7 @@ const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
                           <div className="inner_items">
                             <img src={Tick} alt="check" />
                             <h6>
-                              certification 3
+                              {/* certification 3 */}
                               {trainerdetailData
                                 .certification[2]
                                 ? trainerdetailData
@@ -286,7 +287,7 @@ const SetupPrevModal = ({ open, setOpen, trainerdetailData }) => {
                           <div className="inner_items">
                             <img src={Tick} alt="check" />
                             <h6>
-                              certification 4
+                              {/* certification 4 */}
                               {trainerdetailData
                                 .certification[3]
                                 ? trainerdetailData
