@@ -88,8 +88,9 @@ const TrainerCardOutside = (props) => {
                     book a session
                     <BlackCircleButton />
                     <p>
-                      from{" $"}
+                      from{" "}
                       <span>
+                        $
                         {
                           outSideData[data]["oneOnOnePricing"][
                             "inPersonAtClientLocation"

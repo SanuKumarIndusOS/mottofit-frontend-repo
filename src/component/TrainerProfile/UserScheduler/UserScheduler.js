@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+import "./styles.scss";
 import moment from "moment";
 import BackIcon from "../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
-import "./styles.scss";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
 import EarlyInActive from "../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/EarlyBird_Inactive.svg";

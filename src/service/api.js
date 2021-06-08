@@ -61,19 +61,19 @@ let getServiceUrl = (baseURL) => {
 
   switch (baseURL) {
     case "normal":
-      finalURL = "https://apis.bookmotto.com/user/v1/";
+      finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
     case "session":
-      finalURL = "https://apis.bookmotto.com/session/v1/";
+      finalURL = "http://doodlebluelive.com:2337/v1/";
       break;
     case "payment":
-      finalURL = "https://apis.bookmotto.com/payments/v1/";
+      finalURL = "http://doodlebluelive.com:2336/v1/";
       break;
     case "message":
-      finalURL = "https://apis.bookmotto.com/messaging/v1/";
+      finalURL = "http://doodlebluelive.com:2338/v1/";
       break;
     default:
-      finalURL = "https://apis.bookmotto.com/user/v1/";
+      finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
   }
 
