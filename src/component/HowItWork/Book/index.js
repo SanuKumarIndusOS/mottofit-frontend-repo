@@ -15,7 +15,7 @@ const Book = () => {
                     <div className="book_grid">
                         <div className="book_left">
                             <div className="book_left_content">
-                                <h5>Book with Motto is simple</h5>
+                                <h5>Book with Motto is simple!</h5>
                                 <p>
                                     Lorem Ipsum is simply dummy text of the
                                     printing and typesetting industry. Lorem
@@ -34,18 +34,21 @@ const Book = () => {
                             <div className="book_right_content">
                                 <RenderRightCol
                                     image={Icon1}
-                                    heading="Select your TRAINING preferences"
-                                    description="Set your session filters to easily start browsing from our community of the highest quality personal trainers."
+                                    heading="Choose your training preference, time & trainer"
+                                    description="set your session filters to easily start browsing from our dedicated trainer community.
+                                    "
                                 />
                                 <RenderRightCol
                                     image={Icon2}
-                                    heading="Curate your fitness experience"
-                                    description="Train your way 1 : 1 with a trainer, social sessions for 2-4 people and group training classes for 5-15 people."
+                                    heading="Create your own fitness experience"
+                                    description="Train 1 on 1, as social sessions for up to 4 people, or group training (do we want this to say “classes”?)  for 5-15 people. Add friends to social sessions and classes after checkout. 
+                                    "
                                 />
                                 <RenderRightCol
                                     image={Icon3}
-                                    heading="Crush your workout & enjoy rewards"
-                                    description="Benefit both in and outside of the gym! More sessions mean more perks for you from our brand partners."
+                                    heading="Crush your workout & get rewarded"
+                                    description="Benefit both in and out of the gym! More sessions mean more perks for you from our brand partners.
+                                    "
                                 />
                             </div>
                         </div>

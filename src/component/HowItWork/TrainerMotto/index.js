@@ -5,24 +5,20 @@ import svgBG from "../../../assets/files/Home/Experience/Oval Stamp.png";
 
 const accordionData = [
     {
-        title: "We find you the top training talent!",
-        desc:
-            "Each one of our elite fitness professionals are thoughtfully selected & vetted. Each one of them offers something specialized with their unique training “mottos”, diverse training locations and session sizes.",
+        title: "Top Training Talent! ",
+        desc: "Each one of our elite fitness professionals are thoughtfully selected & vetted. Each one of them offers something specialized with their unique training “mottos”, diverse training locations and session sizes.",
     },
     {
-        title: "A unique personal trainer marketplace.",
-        desc:
-            "Each one of our elite fitness professionals are thoughtfully selected & vetted. Each one of them offers something specialized with their unique training “mottos”, diverse training locations and session sizes.",
+        title: "The only in-person & virtual personal trainer marketplace        ",
+        desc: "No streaming, no recording. We focus exclusively on personalized training sessions with trainers in real time.",
     },
     {
-        title: "We make it easy to book a trainer.",
-        desc:
-            "Each one of our elite fitness professionals are thoughtfully selected & vetted. Each one of them offers something specialized with their unique training “mottos”, diverse training locations and session sizes.",
+        title: "Easiest way to book a trainer",
+        desc: "Browse and book your ideal session in a matter of clicks. No lengthy questionnaires or sign up process before seeing our trainers and available times. ",
     },
     {
-        title: "No need to pay a subscription fees",
-        desc:
-            "Each one of our elite fitness professionals are thoughtfully selected & vetted. Each one of them offers something specialized with their unique training “mottos”, diverse training locations and session sizes.",
+        title: "No subscription fees!",
+        desc: "Only pay for the sessions you book. There are no initiation fees, membership fees, or hidden costs. ",
     },
 ];
 
