@@ -59,11 +59,11 @@ const TrainerAvailabilityFC = ({
       preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
       willingToTravel: setSelectedOneValue == "1" ? true : false,
       servicableLocation: trainerAvailabilityData.servicableLocation,
-      trainingFacilityLocation: [
+      trainingFacilityLocation:
         trainerAvailabilityData.trainingFacilityLocation,
-      ],
       stripeId: "",
       serviceableCity: trainerAvailabilityData.servicableLocation,
+      applicationStatus: "submitted",
     };
     if (trainerAvailabilityData.hoursPerWeek !== "") {
       data.hoursPerWeek = parseFloat(trainerAvailabilityData.hoursPerWeek);

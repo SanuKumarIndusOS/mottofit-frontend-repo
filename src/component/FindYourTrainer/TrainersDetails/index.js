@@ -99,7 +99,7 @@ const TrainerCards = (props) => {
                     book a session
                     <BlackCircleButton />
                     <p>
-                      from{" "}
+                      from{" $"}
                       <span>
                         {
                           bestMatchData[data]["oneOnOnePricing"][
