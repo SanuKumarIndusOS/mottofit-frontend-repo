@@ -10,11 +10,11 @@ const CustomizesSection = () => {
             <div className="container">
                 <div className="cust_main">
                     <div className="cust_headings">
-                        <h2>Customize your workout</h2>
+                        <h2>What Kind of Sessions can I book with Motto</h2>
                         <p>
-                            Book a training session for Strength & HIIT, Boxing,
-                            Yoga & Pilates. Train virtually from anywhere or
-                            in-person in Motto cities.
+                            Book strength/HIIT, boxing, Yoga and Pilates
+                            sessions in-person in Motto cities or virtually
+                            anywhere.
                         </p>
                     </div>
                     <div className="cust_wrapper">
