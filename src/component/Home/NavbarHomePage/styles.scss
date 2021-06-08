@@ -1,252 +1,252 @@
 .navbar-sass {
+  display: flex;
+  height: 100px;
+  margin-top: -3em;
+  align-items: center;
+  transition: 0.5s;
+  position: sticky;
+  top: 0;
+  background-color: transparent;
+  @media screen and (max-width: 1024px) {
+    margin: 0;
+    background-color: #fff;
+  }
+  .main_navbar {
     display: flex;
-    height: 100px;
-    margin-top: -3em;
+    justify-content: space-between;
     align-items: center;
-    transition: 0.5s;
-    position: sticky;
-    top: 0;
-    background-color: transparent;
-    @media screen and (max-width: 1024px) {
-        margin: 0;
-        background-color: #fff;
-    }
-    .main_navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        @media screen and (max-width: 1024px) {
-            width: 100%;
-            height: 100px;
-            background-color: #fff;
-        }
-        .main_container_home {
-            margin-top: 2em;
-            padding: 5em 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            height: 0px !important;
-            position: relative;
-            transition: 0.5s;
-            @media screen and (max-width: 1024px) {
-                width: 100%;
-                height: 100px;
-                background-color: #fff;
-            }
-            .header-links {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                a {
-                    padding: 0 0.5em !important;
-                    text-decoration: none;
-                    letter-spacing: 0px;
-                    color: #2c2c2c;
-                    text-transform: capitalize;
-                    font-size: 17px;
-                    font-weight: 600;
-                    font-family: "Montserrat", sans-serif;
-                }
-                @media screen and (max-width: 1024px) {
-                    display: none;
-                }
-            }
-            .logo-content_home img {
-                width: 150px;
-                height: 90px;
-                position: relative;
-                left: 3.5pc;
-
-                .defaultLogo {
-                    padding: 1em;
-                    margin-top: 1em !important;
-                    display: flex;
-                    width: 100px;
-                    height: 97px;
-                    justify-content: center;
-                    position: relative;
-                    left: 2pc;
-                    @media screen and (max-width: 1024px) {
-                        width: 100px;
-                        padding: 1em;
-                        height: 67px;
-                    }
-                }
-            }
-            .search-items {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                .input-item {
-                    input {
-                        width: 299px;
-                        height: 40px;
-                        border: 2px solid #53bfd2;
-                        border-radius: 30px;
-                        font-size: 17px;
-                        font-family: "Montserrat", sans-serif;
-                        letter-spacing: 0px;
-                        color: #161616;
-                        font-weight: 600;
-                        padding: 0.3em 0.8em;
-                    }
-                    input::placeholder {
-                        color: #161616;
-                        font-size: 17px;
-                        font-family: "Montserrat", sans-serif;
-                    }
-                    .search-icon {
-                        width: 20px;
-                        height: 18px;
-                        position: relative;
-                        right: 30px;
-                        color: #bcbcbc;
-                    }
-                    @media screen and (max-width: 1024px) {
-                        display: none;
-                    }
-                }
-                .login-item {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    img {
-                        margin: 0 1em;
-                        cursor: pointer;
-                    }
-                    img:nth-child(1) {
-                        @media screen and (max-width: 1024px) {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-.navbaractive.active {
-    transition: 0.5s;
-    position: sticky;
-    top: 0;
-    z-index: 9999;
     width: 100%;
-
     @media screen and (max-width: 1024px) {
-        position: sticky;
-        top: 0;
+      width: 100%;
+      height: 100px;
+      background-color: #fff;
     }
-
-    .main_navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .main_container_home {
+      margin-top: 2em;
+      padding: 5em 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 0px !important;
+      position: relative;
+      transition: 0.5s;
+      @media screen and (max-width: 1024px) {
         width: 100%;
         height: 100px;
         background-color: #fff;
-        -webkit-box-shadow: 0 8px 6px -6px black;
-        -moz-box-shadow: 0 8px 6px -6px black;
-        box-shadow: 0 5px 10px -8px rgb(0, 0, 0);
-        .main_container_home {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            height: 100px;
-
-            position: relative;
-            padding: 0;
-            transition: 0.5s;
-            .header-links {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-
-                a {
-                    padding: 0 0.5em !important;
-                    letter-spacing: 0px;
-                    color: #898989;
-                    text-transform: capitalize;
-                    text-decoration: none;
-                    font-size: 17px;
-                    font-weight: 600;
-                    font-family: "Montserrat", sans-serif;
-                }
-                @media screen and (max-width: 1024px) {
-                    display: none;
-                }
-            }
-            .logo-content_home {
-                width: 150px;
-                height: 87px;
-                padding: 1em;
-            }
-            .logo-content_home {
-                width: 150px;
-                height: 87px;
-                position: relative;
-                left: 3pc;
-                .defaultLogo img {
-                    padding: 1em;
-                    margin-top: 1em !important;
-                    display: flex;
-                    width: 100px;
-                    height: 87px;
-                    justify-content: center;
-                    position: relative;
-                }
-            }
-            .search-items {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                .input-item {
-                    input {
-                        width: 299px;
-                        height: 40px;
-                        border: 2px solid #53bfd2;
-                        border-radius: 30px;
-                        letter-spacing: 0px;
-                        font-size: 17px;
-                        font-family: "Montserrat", sans-serif;
-                        font-weight: 600;
-                        color: #161616;
-                        padding: 0.3em 0.8em;
-                    }
-                    input::placeholder {
-                        font-size: 17px;
-                        font-weight: 600;
-                        font-family: "Montserrat", sans-serif;
-                        color: #161616;
-                    }
-                    .search-icon {
-                        width: 20px;
-                        height: 20px;
-                        position: relative;
-                        right: 40px;
-                        color: #bcbcbc;
-                    }
-                    @media screen and (max-width: 1024px) {
-                        display: none;
-                    }
-                }
-                .login-item {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    img {
-                        margin: 0 1em;
-                        cursor: pointer;
-                    }
-                    img:nth-child(1) {
-                        @media screen and (max-width: 1024px) {
-                            display: none;
-                        }
-                    }
-                }
-            }
+      }
+      .header-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        a {
+          padding: 0 0.5em !important;
+          text-decoration: none;
+          letter-spacing: 0px;
+          color: #2c2c2c;
+          text-transform: capitalize;
+          font-size: 17px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
         }
+        @media screen and (max-width: 1024px) {
+          display: none;
+        }
+      }
+      .logo-content_home img {
+        width: 150px;
+        height: 90px;
+        position: relative;
+        left: 3.5pc;
+
+        .defaultLogo {
+          padding: 1em;
+          margin-top: 1em !important;
+          display: flex;
+          width: 100px;
+          height: 97px;
+          justify-content: center;
+          position: relative;
+          left: 2pc;
+          @media screen and (max-width: 1024px) {
+            width: 100px;
+            padding: 1em;
+            height: 67px;
+          }
+        }
+      }
+      .search-items {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .input-item {
+          input {
+            width: 299px;
+            height: 40px;
+            border: 2px solid #53bfd2;
+            border-radius: 30px;
+            font-size: 17px;
+            font-family: "Montserrat", sans-serif;
+            letter-spacing: 0px;
+            color: #161616;
+            font-weight: 600;
+            padding: 0.3em 0.8em;
+          }
+          input::placeholder {
+            color: #161616;
+            font-size: 17px;
+            font-family: "Montserrat", sans-serif;
+          }
+          .search-icon {
+            width: 20px;
+            height: 18px;
+            position: relative;
+            right: 30px;
+            color: #bcbcbc;
+          }
+          @media screen and (max-width: 1024px) {
+            display: none;
+          }
+        }
+        .login-item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            margin: 0 1em;
+            cursor: pointer;
+          }
+          img:nth-child(1) {
+            @media screen and (max-width: 1024px) {
+              display: none;
+            }
+          }
+        }
+      }
     }
+  }
+}
+.navbaractive.active {
+  transition: 0.5s;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+
+  @media screen and (max-width: 1024px) {
+    position: sticky;
+    top: 0;
+  }
+
+  .main_navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 5px 10px -8px rgb(0, 0, 0);
+    .main_container_home {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+
+      position: relative;
+      padding: 0;
+      transition: 0.5s;
+      .header-links {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        a {
+          padding: 0 0.5em !important;
+          letter-spacing: 0px;
+          color: #898989;
+          text-transform: capitalize;
+          text-decoration: none;
+          font-size: 17px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+        }
+        @media screen and (max-width: 1024px) {
+          display: none;
+        }
+      }
+      .logo-content_home {
+        width: 150px;
+        height: 87px;
+        padding: 1em;
+      }
+      .logo-content_home {
+        width: 150px;
+        height: 87px;
+        position: relative;
+        left: 3pc;
+        .defaultLogo img {
+          padding: 1em;
+          margin-top: 1em !important;
+          display: flex;
+          width: 100px;
+          height: 87px;
+          justify-content: center;
+          position: relative;
+        }
+      }
+      .search-items {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .input-item {
+          input {
+            width: 299px;
+            height: 40px;
+            border: 2px solid #53bfd2;
+            border-radius: 30px;
+            letter-spacing: 0px;
+            font-size: 17px;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            color: #161616;
+            padding: 0.3em 0.8em;
+          }
+          input::placeholder {
+            font-size: 17px;
+            font-weight: 600;
+            font-family: "Montserrat", sans-serif;
+            color: #161616;
+          }
+          .search-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            right: 40px;
+            color: #bcbcbc;
+          }
+          @media screen and (max-width: 1024px) {
+            display: none;
+          }
+        }
+        .login-item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            margin: 0 1em;
+            cursor: pointer;
+          }
+          img:nth-child(1) {
+            @media screen and (max-width: 1024px) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -17,6 +17,8 @@ import { history } from "helpers";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import "./dropdown.scss";
 import { ListRounded } from "@material-ui/icons";
+import { getFormattedYears } from "../../../service/helperFunctions";
+import { YearDropDown } from "component/common/YearDropdown";
 
 const worksMode = [
   {
@@ -194,10 +196,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Strength & HIIT"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Strength & HIIT"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -225,10 +226,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Boxing"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Boxing"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -256,10 +256,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Yoga"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Yoga"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -287,10 +286,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Pilates"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Pilates"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -365,26 +363,41 @@ const TrainerBackgroundFC = ({
                     {inputCertificatesFields.map(
                       (inputCertificatesField, index) => (
                         <React.Fragment key={index}>
-                          <div className="inputs_background" key={index}>
-                            <input
+                          <div
+                            className="inputs_background row no-gutters"
+                            key={index}
+                          >
+                            <div className="col-6">
+                              <input
+                                type="text"
+                                placeholder="Certification Title"
+                                value={inputCertificatesField.certificate}
+                                name="certificate"
+                                onChange={(event) =>
+                                  handleChangeCertificateInput(index, event)
+                                }
+                              />
+                            </div>
+                            <div className="col-6">
+                              <YearDropDown
+                                label="Year you were Certified"
+                                value={inputCertificatesField.year}
+                                name="year"
+                                handleChange={(event) =>
+                                  handleChangeCertificateInput(index, event)
+                                }
+                              />
+                            </div>
+                            {/* <input
                               type="text"
-                              placeholder="Certification Title"
-                              value={inputCertificatesField.certificate}
-                              name="certificate"
-                              onChange={(event) =>
-                                handleChangeCertificateInput(index, event)
-                              }
-                            />
-                            <input
-                              type="text"
-                              placeholder="Year you were Certified"
+                              placeholder=""
                               value={inputCertificatesField.year}
                               name="year"
                               onChange={(event) =>
                                 handleChangeCertificateInput(index, event)
                               }
                               type="number"
-                            />
+                            /> */}
                           </div>
                           {index + 1 === inputCertificatesFields.length ? (
                             <div className="d-flex">

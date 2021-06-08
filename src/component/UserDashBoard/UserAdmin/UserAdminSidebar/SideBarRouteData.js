@@ -8,47 +8,51 @@ import SettingIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets
 import LogoutIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Logout Icon.svg";
 
 export const SideBarRouteData = [
-    {
-        title: "MY Session",
-        path: "/users/dashboard/session",
-        icon: <img src={SessionIcon} alt="icon" />,
+  {
+    title: "MY Session",
+    path: "/users/dashboard/session",
+    icon: <img src={SessionIcon} alt="icon" />,
 
-        iconClosed: <RiIcons.RiArrowDownSFill />,
-        iconOpened: <RiIcons.RiArrowUpSFill />,
-    },
-    {
-        title: "Messages",
-        path: "/users/dashboard/message",
-        icon: <img src={MessageIcon} alt="icon" />,
-    },
-    {
-        title: "Notifications",
-        path: "/users/dashboard/notification",
-        icon: <img src={NotificationIcon} alt="icon" />,
-    },
-    {
-        title: "Settings",
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+  },
+  {
+    title: "Messages",
+    path: "/users/dashboard/message",
+    icon: <img src={MessageIcon} alt="icon" />,
+  },
+  {
+    title: "Notifications",
+    path: "/users/dashboard/notification",
+    icon: <img src={NotificationIcon} alt="icon" />,
+  },
+  {
+    title: "Settings",
+    path: "/users/dashboard/settings/profile",
+    icon: <img src={SettingIcon} alt="icon" />,
+
+    subNav: [
+      {
+        title: "My Profile",
         path: "/users/dashboard/settings/profile",
-        icon: <img src={SettingIcon} alt="icon" />,
-
-        subNav: [
-            {
-                title: "My Profile",
-                path: "/users/dashboard/settings/profile",
-            },
-            {
-                title: "Payment History",
-                path: "/users/dashboard/settings/profile",
-            },
-            {
-                title: "Notification Settings",
-                path: "/users/dashboard/settings/profile",
-            },
-        ],
-    },
-    {
-        title: "Log out",
-        path: "/",
-        icon: <img src={LogoutIcon} alt="icon" />,
-    },
+      },
+      {
+        title: "Payment History",
+        path: "/users/dashboard/settings/profile",
+      },
+      {
+        title: "Notification Settings",
+        path: "/users/dashboard/settings/profile",
+      },
+      {
+        title: "Change Password",
+        path: "/users/dashboard/settings/password",
+      },
+    ],
+  },
+  {
+    title: "Log out",
+    path: "/",
+    icon: <img src={LogoutIcon} alt="icon" />,
+  },
 ];

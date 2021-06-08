@@ -71,7 +71,7 @@ const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
           res.session.trainingType === "class"
         ) {
           history.push({
-            pathname: "user/with-friends",
+            pathname: "/user/with-friends",
 
             state: {
               slotDetails: location.state["slotDetails"],

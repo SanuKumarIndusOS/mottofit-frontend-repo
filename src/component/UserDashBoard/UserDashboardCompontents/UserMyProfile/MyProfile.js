@@ -10,6 +10,10 @@ import "react-phone-input-2/lib/style.css";
 import { getUserDetail } from "action/userAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { NormalMultiSelect } from "component/common/NormalMultiSelect";
+import validate from "service/validation";
+import { PaymentApi, userApi } from "service/apiVariables";
+import { api } from "service/api";
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -21,8 +25,8 @@ const options = [
   { label: "Miami", value: "Miami", name: "serviceableLocation" },
 ];
 const gender = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
 ];
 
 // firstName
@@ -44,9 +48,13 @@ const MyProfileClass = ({ getUserDetail }) => {
     mottoPasses: "",
     signUpType: "email",
   });
+
+  const [errors, setErrors] = useState({});
+
   const [getUserData, setGetUserData] = useState();
   const [image, setImage] = useState();
   const [previewImage, setPreviewTmage] = useState();
+  const [paymentMethod, setPaymentMethod] = useState("");
   const fileInputRef = useRef();
 
   useEffect(() => {
@@ -61,16 +69,164 @@ const MyProfileClass = ({ getUserDetail }) => {
     }
   }, [image]);
 
+  const getUserPaymentDetails = () => {
+    const { getPaymentMethods } = PaymentApi;
+
+    api({ ...getPaymentMethods }).then(({ data }) => {
+      const { type } = data[0] || {};
+
+      setPaymentMethod(type);
+    });
+  };
+
   useEffect(() => {
     getUserProfileData();
+    getUserPaymentDetails();
   }, []);
 
   function getUserProfileData() {
     getUserDetail().then((data) => {
-      setUserData(data);
+      let tempData = {
+        firstName: data.firstName || "",
+        lastName: data.lastName || "",
+        email: data.email || "",
+        phoneNo: data.phoneNo || "",
+        paymentProfileId: data.paymentProfileId || "",
+        mottoPasses: data.mottoPasses || "",
+        location: data.location || "",
+        gender: data.gender || "",
+        DOB: data.DOB || "",
+        signUpType: "email",
+      };
+
+      setUserData(tempData);
     });
   }
 
+  const handleInput = (e) => {
+    const { name, value, label } = e.target || e || {};
+
+    let tempErrors = { ...errors };
+
+    tempErrors[name] = undefined;
+
+    let tempUserData = { ...userData };
+
+    tempUserData[name] = value;
+
+    setUserData({ ...tempUserData });
+
+    setErrors({ ...errors, ...tempErrors });
+  };
+
+  const validationRules = () => {
+    let nameValidation = {
+      format: {
+        pattern: /^[a-zA-Z ]*$/,
+        flags: "i",
+        message: "must be alphabets and spaces",
+      },
+      length: {
+        minimum: 3,
+        tooShort: "must contain alteast 3 character",
+        maximum: 35,
+        tooLong: "must contain less than 35 character",
+      },
+    };
+
+    return {
+      firstName: {
+        presence: {
+          allowEmpty: false,
+          message: "^First name is required",
+        },
+        ...nameValidation,
+      },
+      location: {
+        presence: {
+          allowEmpty: false,
+          message: "^Location is required",
+        },
+        ...nameValidation,
+      },
+      phoneNo: {
+        presence: {
+          allowEmpty: false,
+          message: "^Phone number is required",
+        },
+        format: {
+          pattern: /^[1-9][0-9]*$/,
+          flags: "i",
+          message: "^Invalid number",
+        },
+        length: {
+          minimum: 8,
+          tooShort: "^Invalid number",
+          maximum: 15,
+          tooLong: "^Invalid number",
+        },
+      },
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: "^Email is required",
+        },
+        email: true,
+      },
+      location: {
+        presence: {
+          allowEmpty: false,
+          message: "^Location is required",
+        },
+      },
+      gender: {
+        presence: {
+          allowEmpty: false,
+          message: "^Gender is required",
+        },
+      },
+      DOB: {
+        presence: {
+          allowEmpty: false,
+          message: "^Date of birth is required",
+        },
+      },
+    };
+  };
+
+  const validateFields = (data) => {
+    let fieldInvalidList = validate(data, validationRules());
+
+    if (fieldInvalidList !== undefined) {
+      let errors = {
+        ...fieldInvalidList,
+      };
+      setErrors({ ...errors, ...fieldInvalidList });
+    }
+
+    return !fieldInvalidList;
+  };
+
+  const handleSubmit = () => {
+    let payload = {
+      firstName: userData.firstName,
+      location: userData.location,
+      DOB: userData.DOB,
+      gender: userData.gender,
+      email: userData.email,
+      phoneNo: userData.phoneNo,
+    };
+
+    if (!validateFields(payload)) return;
+
+    const { editUserData } = userApi;
+
+    editUserData.body = payload;
+
+    api({ ...editUserData });
+
+    // console.log(payload);
+  };
   // const handleSaveChange = () => {
   //     const { firstName } = userData;
 
@@ -169,25 +325,40 @@ const MyProfileClass = ({ getUserDetail }) => {
                 </div>
                 <div className="profile_form_col">
                   <div className="outter_profile_form">
-                    <form>
+                    <form onSubmit={(e) => e.preventDefault()}>
                       <div className="inner_profile_form">
                         <div className="input_profile">
                           <label>Name </label>
                           <input
                             type="text"
                             value={userData.firstName}
-                            onChange={(e) => {
-                              setUserData({
-                                ...userData,
-                                firstName: e.target.value,
-                              });
-                            }}
+                            onChange={handleInput}
                             name="firstName"
                           />
+
+                          {errors.firstName && (
+                            <span className="d-block w-100 text-danger fs-14">
+                              {errors.firstName[0]}
+                            </span>
+                          )}
                         </div>
                         <div className="input_profile">
                           <label>Location </label>
-                          <Dropdown
+                          <NormalMultiSelect
+                            placeholder="Select Your City"
+                            value={userData.location}
+                            arrow={true}
+                            name="location"
+                            options={options}
+                            handleChange={handleInput}
+                          />
+
+                          {errors.location && (
+                            <span className="d-block w-100 text-danger fs-14">
+                              {errors.location[0]}
+                            </span>
+                          )}
+                          {/* <Dropdown
                             className="custom_dropdown"
                             title="Select Location"
                             list={options}
@@ -200,46 +371,57 @@ const MyProfileClass = ({ getUserDetail }) => {
                               console.log(e.value);
                             }}
                             name="location"
-                          />
+                          /> */}
                         </div>
                         <div className="input_profile">
                           <label>Date of Birth </label>
                           <input
                             type="date"
-                            value={userData.location}
+                            value={userData.DOB}
                             onKeyDown={(e) =>
                               e.keyCode !== 8 ? e.preventDefault() : ""
                             }
+                            name="DOB"
+                            onChange={handleInput}
                           />
+                          {errors.DOB && (
+                            <span className="d-block w-100 text-danger fs-14">
+                              {errors.DOB[0]}
+                            </span>
+                          )}
                         </div>
                         <div className="input_profile">
                           <label>Gender </label>
-                          {/* <Dropdown
-                                        className="custom_dropdown"
-                                        title="Select Gender"
-                                        list={gender}
-                                        value={aboutTrainerData.gender}
-                                        onChange={(e) => {
-                                            setAboutTrainerData({
-                                                ...aboutTrainerData,
-                                                gender: e.value,
-                                            });
-                                        }}
-                                        name="gender"
-                                    /> */}
+
+                          <NormalMultiSelect
+                            placeholder="Select Your Gender"
+                            value={userData.gender}
+                            arrow={true}
+                            name="gender"
+                            options={gender}
+                            handleChange={handleInput}
+                          />
+
+                          {errors.gender && (
+                            <span className="d-block w-100 text-danger fs-14">
+                              {errors.gender[0]}
+                            </span>
+                          )}
                         </div>
                         <div className="input_profile">
                           <label>Email </label>
                           <input
                             type="text"
                             value={userData.email}
-                            onChange={(e) => {
-                              setUserData({
-                                ...userData,
-                                email: e.target.value,
-                              });
-                            }}
+                            onChange={handleInput}
+                            name="email"
                           />
+
+                          {errors.email && (
+                            <span className="d-block w-100 text-danger fs-14">
+                              {errors.email[0]}
+                            </span>
+                          )}
                         </div>
                         <div className="input_profile">
                           <label>Phone </label>
@@ -248,7 +430,7 @@ const MyProfileClass = ({ getUserDetail }) => {
                             type="phone"
                             disableDropdown
                             // disableAreaCodes
-                            countryCodeEditable={false}
+                            countryCodeEditable={true}
                             value={userData.phoneNo}
                             placeholder="Phone Number"
                             country="us"
@@ -257,27 +439,47 @@ const MyProfileClass = ({ getUserDetail }) => {
                             }}
                             name="phoneNo"
                             onChange={(e) =>
-                              setUserData({
-                                ...userData,
-                                phoneNo: e,
+                              handleInput({
+                                target: { name: "phoneNo", value: e },
                               })
                             }
                           />
+
+                          {errors.phoneNo && (
+                            <span className="d-block w-100 text-danger fs-14">
+                              {errors.phoneNo[0]}
+                            </span>
+                          )}
                         </div>
                         <div className="input_profile">
                           <label>Payment Method </label>
-                          <input type="text" />
+                          <input
+                            type="text"
+                            value={paymentMethod}
+                            disabled
+                            onChange={() => {}}
+                          />
                         </div>
-                        <div className="input_profile">
+                        {/* <div className="input_profile">
                           <label>Password </label>
-                          <input type="text" />
-                        </div>
+                          <input
+                            type="password"
+                            onChange={handleInput}
+                            name="password"
+                          />
+
+                          {errors.password && (
+                            <span className="d-block w-100 text-danger fs-14">
+                              {errors.password[0]}
+                            </span>
+                          )}
+                        </div> */}
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
-              <button className="profile_save">
+              <button className="profile_save" onClick={handleSubmit}>
                 SAVE CHANGES <BlueHoverButton />
               </button>
             </div>
