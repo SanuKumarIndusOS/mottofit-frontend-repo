@@ -4,19 +4,17 @@ import { getFormattedYears } from "service/helperFunctions";
 
 export const YearDropDown = ({ label = "", name = "", ...restProps }) => {
   const options = getFormattedYears().map((year) => ({
-    label: year,
-    value: year,
+    label: year.toString(),
+    value: year.toString(),
     name,
   }));
   return (
     <NormalMultiSelect
       placeholder={label}
-      // value={userData.location}
       arrow={true}
       name={name}
       options={options}
       {...restProps}
-      // handleChange={handleInput}
     />
   );
 };

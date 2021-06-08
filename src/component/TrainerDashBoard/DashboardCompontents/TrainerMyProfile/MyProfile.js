@@ -20,8 +20,7 @@ import { api } from "service/api";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
-import "./dropdown.scss";
-
+import { YearDropDown } from "component/common/YearDropdown";
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -109,6 +108,11 @@ const MyProfileFC = ({
       { certificate: "", year: "", remove: "" },
     ]);
   };
+  const handleRemoveCertificateFields = (index) => {
+    const values = [...inputCertificatesFields];
+    values.splice(index, 1);
+    setInputCertificatesFields(values);
+  };
   const handleChangeCertificateInput = (index, event) => {
     const values = [...inputCertificatesFields];
     values[index][event.target.name] = event.target.value;
@@ -121,7 +125,7 @@ const MyProfileFC = ({
   const handleInputChange = (e, trainingType) => {
     e.preventDefault && e.preventDefault();
 
-    const { name, value, label } = e.target || e || {};
+    const { name, value } = e.target || e || {};
 
     const tempData = {
       ...trainerData,
@@ -341,31 +345,52 @@ const MyProfileFC = ({
                     <h6>Certifications you’d like to display</h6>
                     {inputCertificatesFields?.map(
                       (inputCertificatesField, index) => (
-                        <div className="inputs_certificate" key={index}>
-                          <input
-                            type="text"
-                            placeholder="Certification Title"
-                            value={inputCertificatesField.certificate}
-                            name="certificate"
-                            onChange={(event) =>
-                              handleChangeCertificateInput(index, event)
-                            }
-                          />
-                          <input
-                            type="text"
-                            placeholder="Year you were Certified"
-                            value={inputCertificatesField.year}
-                            name="year"
-                            onChange={(event) =>
-                              handleChangeCertificateInput(index, event)
-                            }
-                          />
-                        </div>
+                        <React.Fragment key={index}>
+                          <div className="inputs_certificate">
+                            <div className="col-6 px-2">
+                              <input
+                                type="text"
+                                placeholder="Certification Title"
+                                value={inputCertificatesField.certificate}
+                                name="certificate"
+                                onChange={(event) =>
+                                  handleChangeCertificateInput(index, event)
+                                }
+                                className="w-100 my-2"
+                              />
+                            </div>
+                            <div className="col-6 px-2">
+                              <YearDropDown
+                                label="Year you were Certified"
+                                value={inputCertificatesField.year}
+                                name="year"
+                                handleChange={(event) =>
+                                  handleChangeCertificateInput(index, event)
+                                }
+                              />
+                            </div>
+                          </div>
+                          {index + 1 === inputCertificatesFields.length ? (
+                            <div className="d-flex">
+                              <h5 onClick={handleAddCertificateFields}>
+                                + Add Certificate's
+                              </h5>
+                              {index + 1 === inputCertificatesFields.length &&
+                              inputCertificatesFields.length !== 1 ? (
+                                <h5
+                                  className="text-danger pl-3"
+                                  onClick={() =>
+                                    handleRemoveCertificateFields(index)
+                                  }
+                                >
+                                  Remove
+                                </h5>
+                              ) : null}
+                            </div>
+                          ) : null}
+                        </React.Fragment>
                       )
                     )}
-                    <h5 onClick={handleAddCertificateFields}>
-                      + Add Certification
-                    </h5>
                   </div>
                   <div className="setup_card5">
                     <div className="setupcontent_wrapper">

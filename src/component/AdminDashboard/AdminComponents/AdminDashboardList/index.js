@@ -1,36 +1,26 @@
 import React, { useState, useEffect } from "react";
 import AdminTrainerSection from "../AdminTrainerSection";
 import "./styles.scss";
-import { getAllTrainerLists, getAllUsersLists } from "action/adminAct";
+import { getStatsData } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 
-const AdminDashboardClass = ({
-  getAllTrainerListsApi,
-  getAllUsersListsApi,
-}) => {
-  const [noTrainer, setNoTrainer] = useState([]);
-  const [noUser, setNoUser] = useState([]);
+const AdminDashboardClass = ({ getStatsDataApi }) => {
   const [loading, setLoading] = useState(false);
+  const [statsData, setStatsData] = useState({});
   useEffect(() => {
     setLoading(true);
-    fetchNoTrainers();
-    fetchNoUsers();
+    fetchStatsData();
   }, []);
 
-  function fetchNoTrainers() {
-    getAllTrainerListsApi(1).then((data) => {
-      setNoTrainer(data.pageMetaData);
-      setLoading(false);
-    });
-  }
-
-  function fetchNoUsers() {
-    getAllUsersListsApi(1).then((data) => {
-      setNoUser(data.pageMetaData);
-      setLoading(false);
-    });
+  function fetchStatsData() {
+    getStatsDataApi()
+      .then((data) => {
+        setStatsData(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }
   return (
     <div className="outter_container_AD">
@@ -45,24 +35,24 @@ const AdminDashboardClass = ({
                 <div className="views_AD">
                   <p>No of</p>
                   <h3>
-                    User's :<span> {noUser.total}</span>
+                    User's :<span> {statsData.userCount}</span>
                   </h3>
                 </div>
                 <div className="views_AD">
                   <p>No of</p>
                   <h3>
-                    Trainer's :<span> {noTrainer.total}</span>
+                    Trainer's :<span> {statsData.trainerCount}</span>
                   </h3>
                 </div>
                 <div className="views_AD">
                   <p>No of</p>
                   <h3>
-                    Page Views : <span>300</span>
+                    Page Views : <span>{statsData.pageViews}</span>
                   </h3>
                 </div>
                 <div className="views_AD">
                   <h3>
-                    Revenue : <span>$100</span>
+                    Revenue : <span>${statsData.totalRevenue}</span>
                   </h3>{" "}
                 </div>
               </div>
@@ -77,8 +67,7 @@ const AdminDashboardClass = ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      getAllTrainerListsApi: getAllTrainerLists,
-      getAllUsersListsApi: getAllUsersLists,
+      getStatsDataApi: getStatsData,
     },
     dispatch
   );

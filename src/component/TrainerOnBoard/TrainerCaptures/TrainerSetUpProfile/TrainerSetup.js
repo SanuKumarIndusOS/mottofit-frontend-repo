@@ -10,7 +10,6 @@ import PaymentSectionSetup from "./SetUpPaymentSection/PaymentSectionSetup";
 import SetupPrevModal from "./SetupPrevModal";
 import Instagram from "../../../../assets/files/SVG/Insta Icon.svg";
 import Web from "../../../../assets/files/SVG/Web Icon.svg";
-import { history } from "helpers";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import { TrainerApi } from "service/apiVariables";
@@ -18,7 +17,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { api } from "service/api";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
-import { NormalMultiSelect } from "component/common/NormalMultiSelect";
+import { YearDropDown } from "component/common/YearDropdown";
 import ImageBG from "../../../../assets/files/SVG/Image 1.svg";
 const CyanRadio = withStyles({
   root: {
@@ -328,24 +327,31 @@ function TrainerSetupClass(props) {
             {trainerSetupData.certificateFields.map((field, index) => {
               return (
                 <React.Fragment key={index}>
-                  <div key={`${field}-${index}`} className="certificate_fields">
-                    <input
-                      placeholder="Certification Title"
-                      name="certificate"
-                      value={field.certificate}
-                      onChange={(event) =>
-                        handleChangeCertificateInput(index, event)
-                      }
-                    />
-                    <input
-                      placeholder="Year you were certified"
-                      name="year"
-                      value={field.year}
-                      onChange={(event) =>
-                        handleChangeCertificateInput(index, event)
-                      }
-                      type="number"
-                    />
+                  <div
+                    key={`${field}-${index}`}
+                    className="certificate_fields row no-gutters"
+                  >
+                    <div className="col-6 px-2">
+                      <input
+                        placeholder="Certification Title"
+                        name="certificate"
+                        value={field.certificate}
+                        onChange={(event) =>
+                          handleChangeCertificateInput(index, event)
+                        }
+                        className="w-100"
+                      />
+                    </div>
+                    <div className="col-6 px-2">
+                      <YearDropDown
+                        label="Year you were Certified"
+                        value={field.year}
+                        name="year"
+                        handleChange={(event) =>
+                          handleChangeCertificateInput(index, event)
+                        }
+                      />
+                    </div>
                   </div>
                   {index + 1 === trainerSetupData.certificateFields.length ? (
                     <div className="d-flex">

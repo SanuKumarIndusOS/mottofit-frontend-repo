@@ -14,10 +14,7 @@ import {
   trainerDetail,
 } from "action/trainerAct";
 import { history } from "helpers";
-import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import "./dropdown.scss";
-import { ListRounded } from "@material-ui/icons";
-import { getFormattedYears } from "../../../service/helperFunctions";
 import { YearDropDown } from "component/common/YearDropdown";
 
 const worksMode = [
@@ -196,9 +193,10 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                              "Strength & HIIT"
-                            );
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Strength & HIIT"
+                              );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -226,9 +224,10 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                              "Boxing"
-                            );
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Boxing"
+                              );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -256,9 +255,10 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                              "Yoga"
-                            );
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Yoga"
+                              );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -286,9 +286,10 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
-                              "Pilates"
-                            );
+                            const index =
+                              trainerbackgroundData.areaOfExpertise.indexOf(
+                                "Pilates"
+                              );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -367,7 +368,7 @@ const TrainerBackgroundFC = ({
                             className="inputs_background row no-gutters"
                             key={index}
                           >
-                            <div className="col-6">
+                            <div className="col-6 px-2">
                               <input
                                 type="text"
                                 placeholder="Certification Title"
@@ -378,7 +379,7 @@ const TrainerBackgroundFC = ({
                                 }
                               />
                             </div>
-                            <div className="col-6">
+                            <div className="col-6 px-2">
                               <YearDropDown
                                 label="Year you were Certified"
                                 value={inputCertificatesField.year}
@@ -445,26 +446,25 @@ const TrainerBackgroundFC = ({
                     <h6>
                       Do you have a facility to train new & outside clients?
                     </h6>
-                    <div className="">
-                      <div className="row">
-                        <div className="col-6">
-                          <select
-                            value={currentExperience.workMode}
-                            name="workMode"
-                            onChange={(e) => {
-                              setCurrentExperience({
-                                ...currentExperience,
-                                workMode: e.target.value,
-                              });
-                            }}
-                          >
-                            {worksMode.map((list, index) => (
-                              <option value={list.value} key={index}>
-                                {list.label}
-                              </option>
-                            ))}
-                          </select>
-                          {/* <NormalMultiSelect
+                    <div className="row d-flex">
+                      <div className="col-6">
+                        <select
+                          value={currentExperience.workMode}
+                          name="workMode"
+                          onChange={(e) => {
+                            setCurrentExperience({
+                              ...currentExperience,
+                              workMode: e.target.value,
+                            });
+                          }}
+                        >
+                          {worksMode.map((list, index) => (
+                            <option value={list.value} key={index}>
+                              {list.label}
+                            </option>
+                          ))}
+                        </select>
+                        {/* <NormalMultiSelect
                             placeholder="Select Your Answer"
                             value={currentExperience.workMode}
                             arrow={true}
@@ -477,26 +477,25 @@ const TrainerBackgroundFC = ({
                               });
                             }}
                           /> */}
-                        </div>
-                        <div className="col-6">
-                          {currentExperience.workMode === "yes" ? (
-                            <div className="inputs_experience_drop">
-                              <input
-                                type="text"
-                                placeholder="Details of facility"
-                                value={currentExperience.workLocation}
-                                name="answer"
-                                onChange={(e) => {
-                                  setCurrentExperience({
-                                    ...currentExperience,
-                                    workLocation: e.target.value,
-                                  });
-                                }}
-                              />
-                            </div>
-                          ) : null}
-                        </div>
                       </div>
+                      {currentExperience.workMode === "yes" ? (
+                        <div className="col-6">
+                          <div className="inputs_experience_drop">
+                            <input
+                              type="text"
+                              placeholder="Details of facility"
+                              value={currentExperience.workLocation}
+                              name="answer"
+                              onChange={(e) => {
+                                setCurrentExperience({
+                                  ...currentExperience,
+                                  workLocation: e.target.value,
+                                });
+                              }}
+                            />
+                          </div>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                   <div className="item6">
