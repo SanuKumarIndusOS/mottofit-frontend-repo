@@ -28,7 +28,7 @@ const TrainerCardOutside = (props) => {
                             <div className="card" key={index}>
                                 <div className="inner_card">
                                     <img
-                                        className="card-img-top"
+                                        className="card-img-top card-img"
                                         src={imgdb}
                                         style={{ objectFit: "cover" }}
                                         onError={(e) => {

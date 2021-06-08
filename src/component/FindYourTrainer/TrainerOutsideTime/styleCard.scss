@@ -1,8 +1,8 @@
 .inner_card {
     position: relative;
     transition: all 1.5s ease;
-    width: 332px;
-    height: 200px;
+    width: 332px !important;
+    height: 200px !important;
     border-radius: 20px 20px 0 0;
 }
 .inner_card img {
@@ -52,7 +52,7 @@
     height: 100%;
     width: 100%;
     transition: ease 0.5s;
-    background: rgba(7, 7, 7, 0.301);
+    background: rgba(7, 7, 7, 0.301) !important;
     opacity: 0;
     border-radius: 20px 20px 0 0;
 }
