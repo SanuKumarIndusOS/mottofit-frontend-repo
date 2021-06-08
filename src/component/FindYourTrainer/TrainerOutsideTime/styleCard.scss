@@ -15,7 +15,7 @@
 .content_card {
     position: absolute;
     top: 45%;
-    .circle_hover {
+    .circle_hover_card {
         background-color: #53bfd2;
         width: 80px;
         height: 80px;
@@ -30,11 +30,10 @@
         right: 0;
         left: 230px;
         p {
-            padding: 0 0.5em;
+            padding: 0 0.5em !important;
             text-align: center;
             font-size: 10px;
             margin: 0 auto;
-            font: normal normal 600 14px/16px Montserrat;
             font-family: Montserrat;
             font-size: 14px;
             font-weight: 600;

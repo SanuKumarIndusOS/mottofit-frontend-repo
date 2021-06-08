@@ -40,7 +40,7 @@ const TrainerCardOutside = (props) => {
 
                                     <div className="overlay_card">
                                         <div className="content_card">
-                                            <div className="circle_hover">
+                                            <div className="circle_hover_card">
                                                 <p>check me out</p>
                                             </div>
                                         </div>
