@@ -358,7 +358,7 @@ function TrainerSetupClass(props) {
                       </button>
                       {index + 1 ===
                         trainerSetupData.certificateFields.length &&
-                        trainerSetupData.certificateFields.length !== 1 ? (
+                      trainerSetupData.certificateFields.length !== 1 ? (
                         <button
                           className="certificate_button text-danger pl-3"
                           type="button"
@@ -385,7 +385,7 @@ function TrainerSetupClass(props) {
                   Virtual
                 </button>
                 <button
-                  onClick={(e) => handleInPerson(e, "inperson")}
+                  onClick={(e) => handleInPerson(e, "inPerson")}
                   className={checkButtonInPerson ? "buttonTrue" : "buttonFalse"}
                 >
                   In Person

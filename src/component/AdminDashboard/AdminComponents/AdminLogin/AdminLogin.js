@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./styles.scss";
-// import { useForm } from "react-hook-form";
 import Mail from "../../../../assets/files/SignUp/Email Icon.svg";
 import Password from "../../../../assets/files/SignUp/Password Icon.svg";
-import { COMMON_URL } from "helpers/baseURL";
 import { bindActionCreators } from "redux";
 import { loginOrSignUp } from "action/authAct";
 import { connect } from "react-redux";
@@ -21,7 +19,7 @@ const AdminLoginFC = ({ loginAct }) => {
 
   const [error, setErrors] = useState({});
   const [passwordShown, setPasswordShown] = useState(false);
-
+  const [isLoading, setisLoading] = useState(false);
   const showPassword = () => {
     setPasswordShown(passwordShown ? false : true);
   };
@@ -42,40 +40,21 @@ const AdminLoginFC = ({ loginAct }) => {
     if (!validateFields(payload)) return;
 
     const { adminApi } = AuthApi;
-
+    setisLoading(true);
     setApiError("");
 
     loginAct(adminApi, payload)
       .then(({ type, token }) => {
+        setisLoading(false);
         if (type === "admin") {
           localStorage.setItem("admin-token", token);
           history.push("/admins/dashboard");
         }
       })
-      .catch((error) => {
-        setApiError("Sorry, something went wrong.", error.message);
+      .catch((err) => {
+        setisLoading(false);
+        setApiError("Sorry, something went wrong.", err.message);
       });
-
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
-    //   body: JSON.stringify(item),
-    // };
-    // fetch(`${COMMON_URL}/v1/admin/login`, requestOptions)
-    //   .then(async (response) => {
-    //     const data = await response.json();
-    //     localStorage.setItem("admin-token", data["token"]);
-    //     if (response.ok) {
-    //     } else {
-    //       setApiError("User Not Registered", response.statusText);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     setApiError("Sorry, something went wrong.", error.message);
-    //   });
   }
   const onChangeValue = (e) => {
     e.persist && e.persist();
@@ -174,8 +153,12 @@ const AdminLoginFC = ({ loginAct }) => {
                     )}
                   </div>
                   {apiError && <span className="errorMessage">{apiError}</span>}
-                  <button type="submit" onClick={handleSubmit}>
-                    Login
+                  <button
+                    type="submit"
+                    onClick={(e) => handleSubmit(e)}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Loading..." : "Login"}
                   </button>
                 </div>
               </form>

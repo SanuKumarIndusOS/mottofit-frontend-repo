@@ -128,9 +128,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                         </Tab>
                         <Tab tabFor="inPerson">
                           <button
-                            onClick={() => setPreferedTrainingMode("inperson")}
+                            onClick={() => setPreferedTrainingMode("inPerson")}
                             className={`${
-                              preferedTrainingMode === "inperson"
+                              preferedTrainingMode === "inPerson"
                                 ? "active"
                                 : ""
                             }`}

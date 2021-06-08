@@ -384,10 +384,10 @@ const MyProfileFC = ({
                             Virtual
                           </button>
                           <button
-                            onClick={(e) => handleInputChange(e, "inperson")}
+                            onClick={(e) => handleInputChange(e, "inPerson")}
                             className={`${
                               trainerData?.trainingLocation?.includes(
-                                "inperson"
+                                "inPerson"
                               )
                                 ? "active"
                                 : ""

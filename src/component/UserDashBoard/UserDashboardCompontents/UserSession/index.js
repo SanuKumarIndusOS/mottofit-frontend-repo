@@ -12,10 +12,10 @@ import BlueHoverButton from "../../../common/BlueArrowButton";
 import { history } from "helpers";
 import { useEffect } from "react";
 import moment from "moment";
-import { userSession } from "action/userAct";
+import { userSession, cancelSession } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-const UserSessionClass = ({ userSession }) => {
+const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
     pastSessions: [],
@@ -23,87 +23,113 @@ const UserSessionClass = ({ userSession }) => {
   });
 
   useEffect(() => {
-    userSession()
+    _userSession();
+  }, []);
+  const _userSession = () => {
+    props
+      .userSession()
       .then((data) => {
         setUserData(data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
 
   return (
-    <>
-      <div className="outter_user_container">
-        <div className="container">
-          <div className="inner_user_container ">
-            <div className="userSession_heading">
-              <h2>My Session</h2>
-            </div>
-            <div className="US_tabs_wrapper">
-              <Tabs
-                defaultTab="overview"
-                onChange={(tabId) => {
-                  console.log(tabId);
-                }}
-              >
-                <TabList>
-                  <Tab tabFor="overview">Overview</Tab>
-                  <Tab tabFor="upcoming">Upcoming</Tab>
-                  <Tab tabFor="pass">Motto pass</Tab>
-                  <Tab tabFor="previous">Previous</Tab>
-                </TabList>
-                <div className="tabPanel_outter">
-                  <TabPanel tabId="overview">
-                    <TabOne
-                      tabname={"Overview"}
-                      tabData={userData.upcomingSessions}
-                      prevData={userData.pastSessions}
-                    />
-                  </TabPanel>
-                </div>
-                <div className="tabPanel_outter">
-                  <TabPanel tabId="upcoming">
-                    <TabOne
-                      tabname={"Upcoming"}
-                      tabData={userData.upcomingSessions}
-                      prevData={userData.pastSessions}
-                    />
-                  </TabPanel>
-                </div>
-                <div className="tabPanel_outter">
-                  <TabPanel tabId="pass">
-                    <TabOne
-                      tabname={"Moto Pass"}
-                      tabData={userData.pastSessions}
-                      prevData={userData.pastSessions}
-                    />
-                  </TabPanel>
-                </div>
-                <div className="tabPanel_outter">
-                  <TabPanel tabId="previous">
-                    <TabOne
-                      tabname={"Previous"}
-                      tabData={userData.pastSessions}
-                      prevData={userData.pastSessions}
-                    />
-                  </TabPanel>
-                </div>
-              </Tabs>
-            </div>
+    <div className="outter_user_container">
+      <div className="container">
+        <div className="inner_user_container ">
+          <div className="userSession_heading">
+            <h2>My Session</h2>
+          </div>
+          <div className="US_tabs_wrapper">
+            <Tabs defaultTab="overview">
+              <TabList>
+                <Tab tabFor="overview">Overview</Tab>
+                <Tab tabFor="upcoming">Upcoming</Tab>
+                <Tab tabFor="pass">Motto pass</Tab>
+                <Tab tabFor="previous">Previous</Tab>
+              </TabList>
+              <div className="tabPanel_outter">
+                <TabPanel tabId="overview">
+                  <TabOne
+                    tabname={"Overview"}
+                    tabData={userData.upcomingSessions}
+                    prevData={userData.pastSessions}
+                    cancelSessionApi={props.cancelSession}
+                    handleChange={() => _userSession()}
+                  />
+                </TabPanel>
+              </div>
+              <div className="tabPanel_outter">
+                <TabPanel tabId="upcoming">
+                  <TabOne
+                    tabname={"Upcoming"}
+                    tabData={userData.upcomingSessions}
+                    prevData={userData.pastSessions}
+                    cancelSessionApi={props.cancelSession}
+                    handleChange={() => _userSession()}
+                  />
+                </TabPanel>
+              </div>
+              <div className="tabPanel_outter">
+                <TabPanel tabId="pass">
+                  <TabOne
+                    tabname={"Moto Pass"}
+                    tabData={userData.pastSessions}
+                    prevData={userData.pastSessions}
+                    cancelSessionApi={props.cancelSession}
+                    handleChange={() => _userSession()}
+                  />
+                </TabPanel>
+              </div>
+              <div className="tabPanel_outter">
+                <TabPanel tabId="previous">
+                  <TabOne
+                    tabname={"Previous"}
+                    tabData={userData.pastSessions}
+                    prevData={userData.pastSessions}
+                    cancelSessionApi={props.cancelSession}
+                    handleChange={() => _userSession()}
+                  />
+                </TabPanel>
+              </div>
+            </Tabs>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-const TabOne = ({ tabname, tabData, prevData }) => {
+const TabOne = ({
+  tabname,
+  tabData,
+  prevData,
+  cancelSessionApi,
+  handleChange = {},
+}) => {
   const [visible, setVisible] = useState([3]);
-
+  const [isLoading, setisLoading] = useState(false);
   const setViewMore = () => {
     setVisible((prevValue) => prevValue + 1);
   };
+
+  const handleCancel = (sessionId) => {
+    let payload = {
+      sessionId,
+      sessionStatus: "cancelled",
+    };
+    setisLoading(true);
+    cancelSessionApi(payload)
+      .then(() => {
+        setisLoading(false);
+        handleChange();
+      })
+      .catch(() => setisLoading(false));
+  };
+
   return (
     <div className="tabPanel_overview">
       <div className="tabPanel_overview_left">
@@ -112,9 +138,10 @@ const TabOne = ({ tabname, tabData, prevData }) => {
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
               {tabData.slice(0, visible).map((data, index) => {
+                console.log(data, "datadata");
                 return (
-                  <>
-                    <div className="TP_upcomeSession_overview" key={index}>
+                  <React.Fragment key={index}>
+                    <div className="TP_upcomeSession_overview">
                       <div className="TP_USession_dates">
                         <h4>
                           {data.sessionDate.substr(8, 2)}
@@ -146,7 +173,6 @@ const TabOne = ({ tabname, tabData, prevData }) => {
                             {data.trainerDetail.firstName}
                           </h2>
                         </h2>
-                        {/* // ></div>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2> */}
                         <div className="TP_USession_data_icons">
                           <h5>
                             <img src={AvailabilityIcon} alt="icon" />
@@ -159,7 +185,19 @@ const TabOne = ({ tabname, tabData, prevData }) => {
                         </div>
                         <div className="TP_USession_data_buttons">
                           <button>Reschedule</button>
-                          <button>Cancel</button>
+                          {data.sessionStatus !== "cancelled" ? (
+                            <button
+                              disabled={isLoading}
+                              onClick={() => handleCancel(data.id)}
+                            >
+                              Cancel
+                            </button>
+                          ) : (
+                            <button className="text-danger" disabled={true}>
+                              Cancelled
+                            </button>
+                          )}
+
                           <div className="button_boarder">
                             <button
                               onClick={() =>
@@ -176,7 +214,7 @@ const TabOne = ({ tabname, tabData, prevData }) => {
                       </div>
                     </div>
                     <hr />
-                  </>
+                  </React.Fragment>
                 );
               })}
             </div>
@@ -336,6 +374,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       userSession,
+      cancelSession,
     },
     dispatch
   );

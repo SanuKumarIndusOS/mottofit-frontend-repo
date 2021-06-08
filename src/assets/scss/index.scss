@@ -1,3 +1,12 @@
 @import "./reset/reset";
 
 @import "./layout/layout";
+
+input,
+button,
+.form-control {
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0;
+  }
+}

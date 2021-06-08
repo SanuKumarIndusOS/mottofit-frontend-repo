@@ -168,8 +168,8 @@ const TabOne = ({ datas = [] }) => {
                 {datas.length > 0 ? (
                   datas.map((data, index) => {
                     return (
-                      <>
-                        <div className="row_previous_data" key={index}>
+                      <React.Fragment key={index}>
+                        <div className="row_previous_data">
                           <div className="row_previous_avater">
                             <img src={data.previousImg} alt="profile" />
                           </div>
@@ -179,7 +179,7 @@ const TabOne = ({ datas = [] }) => {
                           </div>
                         </div>
                         <hr />
-                      </>
+                      </React.Fragment>
                     );
                   })
                 ) : (

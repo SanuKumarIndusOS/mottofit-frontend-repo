@@ -13,7 +13,7 @@ const AdminTrainerSectionClass = (props) => {
     fetchAllTrainers(1);
   }, []);
 
-  function fetchAllTrainers(page) {
+  function fetchAllTrainers(page = 1) {
     props.getAllTrainerLists(page).then((data) => {
       setTrainerList(data.list);
       setpageMetaData(data.pageMetaData);

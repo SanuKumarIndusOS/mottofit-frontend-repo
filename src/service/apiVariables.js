@@ -203,6 +203,11 @@ export const userApi = {
     method: "get",
     baseURL: "session",
   },
+  cancelSession: {
+    api: "session/update",
+    method: "put",
+    baseURL: "session",
+  },
   scheduleSession: {
     api: "session/schedule",
     method: "post",

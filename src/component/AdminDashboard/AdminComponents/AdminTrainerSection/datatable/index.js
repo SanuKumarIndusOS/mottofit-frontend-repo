@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import { changeApproval } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import BootstrapTable from "react-bootstrap-table-next";
-// import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
-// import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
-// import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.css";
 const DatatableClass = ({
   trainerList,
   fetchAllTrainers,
@@ -23,7 +19,7 @@ const DatatableClass = ({
 
     changeApproval(data, id)
       .then(() => {
-        alert("Approved");
+        // alert("Approved");
         fetchAllTrainers();
       })
       .catch((error) => {
@@ -36,13 +32,15 @@ const DatatableClass = ({
       <thead>
         <tr>
           <th scope="row">First Name</th>
-          {/* <th scope="row">Last Name</th> */}
           <th scope="row">Email</th>
           <th scope="row">Phone Number</th>
           <th scope="row">Location</th>
           <th scope="row">Expertise</th>
           <th scope="row">Servicable Location</th>
           <th scope="row">Trainer Status</th>
+          <th scope="row" colSpan="2">
+            Actions
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -52,7 +50,7 @@ const DatatableClass = ({
             approve = (
               <div
                 onClick={() => ChangeApproval(item["id"], "disapproved")}
-                className="btn btn-danger"
+                className="btn btn-danger mx-0"
               >
                 Disapprove
               </div>
@@ -61,37 +59,35 @@ const DatatableClass = ({
             approve = (
               <div
                 onClick={() => ChangeApproval(item["id"], "approved")}
-                className="btn btn-success"
+                className="btn btn-success mx-0"
               >
                 Approve
               </div>
             );
           }
           return (
-            <>
-              <tr>
-                <td> {item["firstName"]}</td>
-                {/* <td> {item["lastName"]}</td> */}
-                <td> {item["email"]}</td>
-                <td> {item["phoneNumber"]}</td>
-                <td> {item["location"]}</td>
-                <td> {item["areaOfExpertise"]}</td>
-
-                <td> {item["servicableLocation"]}</td>
-                <td> {item["trainerStatus"]}</td>
-                <td>
-                  <Link
-                    className="btn btn-primary"
-                    to={`/admins/view/${item["id"]}`}
-                  >
-                    view
-                  </Link>
-                </td>
-                <div>
-                  <button style={{ border: "none" }}>{approve}</button>
-                </div>
-              </tr>
-            </>
+            <tr>
+              <td> {item.firstName ? item.firstName : "-"}</td>
+              <td> {item.email ? item.email : "-"}</td>
+              <td> {item.phoneNumber ? item.phoneNumber : "-"}</td>
+              <td> {item.location ? item.location : "-"}</td>
+              <td> {item.areaOfExpertise ? item.areaOfExpertise : "-"}</td>
+              <td>{item.servicableLocation ? item.servicableLocation : "-"}</td>
+              <td> {item.trainerStatus ? item.trainerStatus : "-"}</td>
+              <td>
+                <Link
+                  className="btn btn-primary"
+                  to={`/admins/view/${item["id"]}`}
+                >
+                  view
+                </Link>
+              </td>
+              <div>
+                <button style={{ border: "none" }} className="p-0">
+                  {approve}
+                </button>
+              </div>
+            </tr>
           );
         })}
       </tbody>

@@ -14,9 +14,7 @@ export const getUserDetail =
   () =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
-      const { getUserDetail } = userApi;
-
-      api({ ...getUserDetail })
+      api({ ...userApi.getUserDetail })
         .then(({ data }) => {
           resolve(data);
         })
@@ -31,9 +29,22 @@ export const userSession =
   () =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
-      const { userSession } = userApi;
+      api({ ...userApi.userSession })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
 
-      api({ ...userSession })
+//Cancel Session
+export const cancelSession =
+  (body) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      api({ ...userApi.cancelSession, body })
         .then(({ data }) => {
           resolve(data);
         })
@@ -48,9 +59,7 @@ export const scheduleSession =
   (body) =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
-      const { scheduleSession } = userApi;
-
-      api({ ...scheduleSession, body })
+      api({ ...userApi.scheduleSession, body })
         .then((data) => {
           resolve(data);
         })
