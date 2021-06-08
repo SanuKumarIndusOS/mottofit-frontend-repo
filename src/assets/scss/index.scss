@@ -222,3 +222,26 @@ button,
     }
   }
 }
+.event_wrapper_inner {
+  .submit_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding-left: 1em;
+    width: 230px;
+    text-decoration: none;
+    height: 52px;
+    background: #53bfd2;
+    text-align: right;
+    letter-spacing: 0.45px;
+    color: #ffffff;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+  }
+}
