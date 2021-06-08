@@ -104,7 +104,7 @@ const SignInFC = ({ showModel, setShowModel, loginAct, trainerDetail }) => {
         },
         format: {
           pattern:
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
           flags: "i",
           message:
             "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
