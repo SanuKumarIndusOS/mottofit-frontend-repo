@@ -28,6 +28,10 @@ export const AuthApi = {
     api: "trainer/change-password",
     method: "post",
   },
+  changePasswordUser: {
+    api: "user/change-password",
+    method: "post",
+  },
 };
 
 export const TrainerApi = {
@@ -190,6 +194,11 @@ export const PaymentApi = {
     method: "post",
     baseURL: "payment",
   },
+  getPaymentMethods: {
+    api: "payment-methods",
+    method: "get",
+    baseURL: "payment",
+  },
 };
 
 export const userApi = {
@@ -234,5 +243,10 @@ export const userApi = {
         `&timeZone=America/New_York`
       );
     },
+  },
+  editUserData: {
+    api: "user/edit",
+    method: "post",
+    baseURL: "normal",
   },
 };

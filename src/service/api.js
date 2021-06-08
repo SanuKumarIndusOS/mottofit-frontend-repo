@@ -14,13 +14,17 @@ export var api = async function ({
   return await new Promise((resolve, reject) => {
     // setting token
     if (isAdmin) {
-      axiosInstance.defaults.headers.common["Authorization"] =
-        localStorage.getItem("admin-token")
-          ? `${localStorage.getItem("admin-token")}`
-          : "";
+      axiosInstance.defaults.headers.common[
+        "Authorization"
+      ] = localStorage.getItem("admin-token")
+        ? `${localStorage.getItem("admin-token")}`
+        : "";
     } else {
-      axiosInstance.defaults.headers.common["Authorization"] =
-        localStorage.getItem("token") ? `${localStorage.getItem("token")}` : "";
+      axiosInstance.defaults.headers.common[
+        "Authorization"
+      ] = localStorage.getItem("token")
+        ? `${localStorage.getItem("token")}`
+        : "";
     }
 
     axiosInstance[method](`${getServiceUrl(baseURL)}${api}`, body ? body : "")
@@ -44,7 +48,7 @@ export var api = async function ({
 
 var statusHelper = (status, data) => {
   if (data.status == 401 || data.status == 403) {
-    // logout();
+    logout();
   }
   if (status) {
     return {

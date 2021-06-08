@@ -3,11 +3,12 @@ import "./styles.scss";
 import { history } from "helpers";
 import Password from "../../../../assets/files/SignUp/Password Icon.svg";
 import ArrowHoverBlacked from "component/common/BlackCircleButton/ArrowHoverBlacked";
-import { changePasswordTrainer } from "action/authAct";
+import { changePasswordAct } from "action/authAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import validate from "service/validation";
 import { ErrorComponent } from "component/common/ErrorComponent";
+import { AuthApi } from "service/apiVariables";
 const PasswordSettingClass = (props) => {
   // Password show or hide
   const [passwordShown, setPasswordShown] = useState(false);
@@ -32,9 +33,18 @@ const PasswordSettingClass = (props) => {
       confirmPassword: passwordData.confirmPassword,
     };
 
+    const { pathname = "" } = props.location;
+
+    const userType = pathname.split("/")[1];
+
+    let currentApi =
+      userType === "users"
+        ? AuthApi.changePasswordUser
+        : AuthApi.changePasswordTrainer;
+
     if (!validateFields(payload)) return;
     props
-      .changePasswordTrainer(body)
+      .changePasswordAct(body, currentApi)
       .then(() => {
         history.push("/trainers/dashboard/schedule");
       })
@@ -44,8 +54,7 @@ const PasswordSettingClass = (props) => {
   const validationRules = () => {
     let passwordValidation = {
       format: {
-        pattern:
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
         flags: "i",
         message:
           "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
@@ -194,7 +203,7 @@ const PasswordSettingClass = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      changePasswordTrainer,
+      changePasswordAct,
     },
     dispatch
   );

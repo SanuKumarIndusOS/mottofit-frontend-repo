@@ -73,8 +73,9 @@ class RoutesClass extends Component {
                                   exact={exact}
                                   key={path + childrenPath}
                                   render={(props) => {
-                                    let PageComponent =
-                                      CodeSplitter.getComponent(name);
+                                    let PageComponent = CodeSplitter.getComponent(
+                                      name
+                                    );
 
                                     return <PageComponent {...props} />;
                                   }}

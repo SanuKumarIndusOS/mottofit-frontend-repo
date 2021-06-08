@@ -81,6 +81,19 @@ export const getFormatDate = (
     : moment(date).format(format);
 };
 
+export const getFormattedYears = (startYear = 1950, endYear = null) => {
+  const tempEndYear = !isNaN(endYear) ? parseInt(moment().year()) : endYear;
+  const tempStartYear = !isNaN(startYear) ? 1950 : startYear;
+
+  const noOfYears = Math.abs(tempEndYear - tempStartYear) + 1;
+
+  const yearsData = [...new Array(noOfYears)].map((_, index) =>
+    parseInt(tempStartYear + index)
+  );
+
+  return yearsData;
+};
+
 export const convertStringToObject = (searchQuery) => {
   try {
     if (!!searchQuery) {
