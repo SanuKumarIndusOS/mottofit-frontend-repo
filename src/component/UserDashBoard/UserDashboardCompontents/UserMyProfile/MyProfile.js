@@ -3,8 +3,6 @@ import "./styles.scss";
 import Profile from "../../../../assets/files/SVG/Profile Picture.svg";
 import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
-import { Dropdown } from "reactjs-dropdown-component";
-import "./dropdown.scss";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { getUserDetail } from "action/userAct";
@@ -13,6 +11,7 @@ import { connect } from "react-redux";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import validate from "service/validation";
 import { PaymentApi, userApi } from "service/apiVariables";
+import { fileUpload } from "action/trainerAct";
 import { api } from "service/api";
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
@@ -29,16 +28,7 @@ const gender = [
   { value: "Female", label: "Female" },
 ];
 
-// firstName
-// lastName
-// password
-// email
-// phoneNo
-// signUpType
-// mottoPasses
-// status
-// paymentProfileId
-const MyProfileClass = ({ getUserDetail }) => {
+const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -50,24 +40,9 @@ const MyProfileClass = ({ getUserDetail }) => {
   });
 
   const [errors, setErrors] = useState({});
-
-  const [getUserData, setGetUserData] = useState();
-  const [image, setImage] = useState();
-  const [previewImage, setPreviewTmage] = useState();
+  const [image, setImage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("");
   const fileInputRef = useRef();
-
-  useEffect(() => {
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewTmage(reader.result);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreviewTmage(null);
-    }
-  }, [image]);
 
   const getUserPaymentDetails = () => {
     const { getPaymentMethods } = PaymentApi;
@@ -85,7 +60,10 @@ const MyProfileClass = ({ getUserDetail }) => {
   }, []);
 
   function getUserProfileData() {
-    getUserDetail().then((data) => {
+    getUserDetailApi().then((data) => {
+      if (data.profilePicture) {
+        setImage(data.profilePicture);
+      }
       let tempData = {
         firstName: data.firstName || "",
         lastName: data.lastName || "",
@@ -104,7 +82,7 @@ const MyProfileClass = ({ getUserDetail }) => {
   }
 
   const handleInput = (e) => {
-    const { name, value, label } = e.target || e || {};
+    const { name, value } = e.target || e || {};
 
     let tempErrors = { ...errors };
 
@@ -215,6 +193,7 @@ const MyProfileClass = ({ getUserDetail }) => {
       gender: userData.gender,
       email: userData.email,
       phoneNo: userData.phoneNo,
+      profilePicture: image,
     };
 
     if (!validateFields(payload)) return;
@@ -223,29 +202,26 @@ const MyProfileClass = ({ getUserDetail }) => {
 
     editUserData.body = payload;
 
-    api({ ...editUserData });
-
-    // console.log(payload);
+    api({ ...editUserData }).then(() => {
+      getUserProfileData();
+    });
   };
-  // const handleSaveChange = () => {
-  //     const { firstName } = userData;
 
-  //     let payload = {
-  //         firstName: firstName,
-  //     };
+  const handleProfileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fd = new FormData();
 
-  //     fetch("http://doodlebluelive.com:2307/v1/user/edit", {
-  //         method: "POST",
-  //         headers: new Headers({
-  //             Authorization: localStorage.getItem("token"),
-  //             "Content-Type": "application/x-www-form-urlencoded",
-  //         }),
-  //     })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //             setUserData(data["data"]);
-  //         });
-  // };
+      fd.append("profilePicture", file);
+      fileUploadApi(fd).then((data) => {
+        setImage(data.urlPath);
+      });
+    }
+  };
+
+  const handleRemovePic = () => {
+    setImage(null);
+  };
 
   return (
     <>
@@ -259,34 +235,25 @@ const MyProfileClass = ({ getUserDetail }) => {
               <div className="profile_grid">
                 <div className="profile_pic_col">
                   <div className="profile_picture">
-                    {previewImage ? (
-                      <img
-                        src={previewImage}
-                        style={{
-                          objectFit: "cover",
-                          width: "200px",
-                          height: "200px",
-                          borderRadius: "100px",
-                        }}
-                        onClick={() => {
-                          setPreviewTmage(null);
-                        }}
-                      />
-                    ) : (
+                    {image ? (
                       <div className="combin_profile">
                         <button
-                          onClick={(event) => {
-                            event.preventDefault();
+                          onClick={(e) => {
+                            e.preventDefault();
                             fileInputRef.current.click();
                           }}
                         >
                           <img
-                            src={Profile}
+                            src={image ? image : Profile}
                             alt="icon"
                             style={{
                               objectFit: "cover",
-                              width: "100px",
-                              height: "100px",
+                              width: "200px",
+                              height: "200px",
+                              borderRadius: "100px",
+                              position: "relative",
+                              left: "-6px",
+                              top: "-2px",
                             }}
                           />
                         </button>
@@ -299,28 +266,58 @@ const MyProfileClass = ({ getUserDetail }) => {
                             height: "20px",
                             borderRadius: "100px",
                           }}
-                          onClick={(event) => {
-                            event.preventDefault();
+                          onClick={(e) => {
+                            e.preventDefault();
+                            fileInputRef.current.click();
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="combin_profile">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            fileInputRef.current.click();
+                          }}
+                        >
+                          <img
+                            src={Profile}
+                            style={{
+                              objectFit: "cover",
+                              width: "100px",
+                              height: "100px",
+                              borderRadius: "100px",
+                            }}
+                          />
+                        </button>
+                        <img
+                          src={ProfileAdd}
+                          alt="icon"
+                          style={{
+                            objectFit: "cover",
+                            width: "20px",
+                            height: "20px",
+                            borderRadius: "100px",
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
                             fileInputRef.current.click();
                           }}
                         />
                       </div>
                     )}
-
                     <input
                       type="file"
                       ref={fileInputRef}
                       accept="image/*"
-                      onChange={(event) => {
-                        const file = event.target.files[0];
-                        if (file && file.type.substr(0, 5) === "image") {
-                          setImage(file);
-                        } else {
-                          setImage(null);
-                        }
-                      }}
+                      onChange={(e) => handleProfileUpload(e)}
                     />
-                    <h5>Remove Profile Picture</h5>
+                    <h5
+                      className="cursor-pointer"
+                      onClick={() => handleRemovePic()}
+                    >
+                      Remove Profile Picture
+                    </h5>
                   </div>
                 </div>
                 <div className="profile_form_col">
@@ -358,20 +355,6 @@ const MyProfileClass = ({ getUserDetail }) => {
                               {errors.location[0]}
                             </span>
                           )}
-                          {/* <Dropdown
-                            className="custom_dropdown"
-                            title="Select Location"
-                            list={options}
-                            value={userData.location}
-                            onChange={(e) => {
-                              setUserData({
-                                ...userData,
-                                location: e.value,
-                              });
-                              console.log(e.value);
-                            }}
-                            name="location"
-                          /> */}
                         </div>
                         <div className="input_profile">
                           <label>Date of Birth </label>
@@ -492,7 +475,8 @@ const MyProfileClass = ({ getUserDetail }) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      getUserDetail,
+      getUserDetailApi: getUserDetail,
+      fileUploadApi: fileUpload,
     },
     dispatch
   );
