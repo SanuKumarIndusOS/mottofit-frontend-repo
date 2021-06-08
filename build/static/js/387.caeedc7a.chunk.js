@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[387],{347:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/NYC.e195b1c3.png"}}]);
-//# sourceMappingURL=387.caeedc7a.chunk.js.map

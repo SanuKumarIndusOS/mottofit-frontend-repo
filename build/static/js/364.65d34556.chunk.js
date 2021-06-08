@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[364],{412:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/NoImageFound.298b9820.png"}}]);
-//# sourceMappingURL=364.65d34556.chunk.js.map

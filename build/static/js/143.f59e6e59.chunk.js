@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[143],{227:function(t,o,e){"use strict";e.r(o),e.d(o,"COMMON_URL",(function(){return n})),e.d(o,"MESSAGING_URL",(function(){return u})),e.d(o,"SESSION_URL",(function(){return c})),e.d(o,"NOTIFICATION_URL",(function(){return d})),e.d(o,"PAYMENT_URL",(function(){return i}));var n="http://doodlebluelive.com:2307",u="http://doodlebluelive.com:2338",c="http://doodlebluelive.com:2337",d="",i="http://doodlebluelive.com:2336"}}]);
-//# sourceMappingURL=143.f59e6e59.chunk.js.map
