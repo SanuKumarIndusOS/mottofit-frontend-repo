@@ -14,17 +14,13 @@ export var api = async function ({
   return await new Promise((resolve, reject) => {
     // setting token
     if (isAdmin) {
-      axiosInstance.defaults.headers.common[
-        "Authorization"
-      ] = localStorage.getItem("admin-token")
-        ? `${localStorage.getItem("admin-token")}`
-        : "";
+      axiosInstance.defaults.headers.common["Authorization"] =
+        localStorage.getItem("admin-token")
+          ? `${localStorage.getItem("admin-token")}`
+          : "";
     } else {
-      axiosInstance.defaults.headers.common[
-        "Authorization"
-      ] = localStorage.getItem("token")
-        ? `${localStorage.getItem("token")}`
-        : "";
+      axiosInstance.defaults.headers.common["Authorization"] =
+        localStorage.getItem("token") ? `${localStorage.getItem("token")}` : "";
     }
 
     axiosInstance[method](`${getServiceUrl(baseURL)}${api}`, body ? body : "")
@@ -65,19 +61,19 @@ let getServiceUrl = (baseURL) => {
 
   switch (baseURL) {
     case "normal":
-      finalURL = "http://doodlebluelive.com:2307/v1/";
+      finalURL = "https://apis.bookmotto.com/user/v1/";
       break;
     case "session":
-      finalURL = "http://doodlebluelive.com:2337/v1/";
+      finalURL = "https://apis.bookmotto.com/session/v1/";
       break;
     case "payment":
-      finalURL = "http://doodlebluelive.com:2336/v1/";
+      finalURL = "https://apis.bookmotto.com/payments/v1/";
       break;
     case "message":
-      finalURL = "http://doodlebluelive.com:2338/v1/";
+      finalURL = "https://apis.bookmotto.com/messaging/v1/";
       break;
     default:
-      finalURL = "http://doodlebluelive.com:2307/v1/";
+      finalURL = "https://apis.bookmotto.com/user/v1/";
       break;
   }
 
