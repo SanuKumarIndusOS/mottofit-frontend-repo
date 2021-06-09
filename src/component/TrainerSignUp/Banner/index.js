@@ -18,301 +18,345 @@ import "react-phone-input-2/lib/style.css";
 import validate from "service/validation";
 
 const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
-  const history = useHistory();
+    const history = useHistory();
 
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    cpassword: "",
-    signUpType: "email",
-  });
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        cpassword: "",
+        signUpType: "email",
+    });
 
-  const [error, setErrors] = useState({});
+    const [error, setErrors] = useState({});
 
-  // const { data, handleFormSubmit, error, setData, dataSubmit } = useForm(
-  //     validateInfo,
-  //     submitForm
-  // );
+    // const { data, handleFormSubmit, error, setData, dataSubmit } = useForm(
+    //     validateInfo,
+    //     submitForm
+    // );
 
-  const onChangeValue = (e) => {
-    e.persist && e.persist();
-    const { name, value } = e.target || e || {};
+    const onChangeValue = (e) => {
+        e.persist && e.persist();
+        const { name, value } = e.target || e || {};
 
-    let tempErrors = { ...error };
+        let tempErrors = { ...error };
 
-    tempErrors[name] = undefined;
-    setData({ ...data, [name]: value });
-    setErrors({ ...error, ...tempErrors });
-  };
-
-  const [passwordShown, setPasswordShown] = useState(false);
-  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-  const [apiError, setApiError] = useState("");
-  const showPassword = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
-  const showConfirmPassword = () => {
-    setConfirmPasswordShown(confirmPasswordShown ? false : true);
-  };
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const payload = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      cpassword: data.cpassword,
-      phoneNumber: data.phoneNumber,
-      signUpType: data.signUpType,
+        tempErrors[name] = undefined;
+        setData({ ...data, [name]: value });
+        setErrors({ ...error, ...tempErrors });
     };
 
-    if (!validateFields(payload)) return;
-
-    const { trainerSignUp } = AuthApi;
-    // console.log(payload);
-
-    // if (dataSubmit) {
-    loginOrSignupAct(trainerSignUp, payload)
-      .then(({ data }) => {
-        history.push("/trainer/about");
-      })
-      .catch((error) => {
-        setApiError(error.message);
-      });
-    // }
-  }
-
-  const validationRules = () => {
-    let passwordValidation = {
-      format: {
-        pattern:
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
-        flags: "i",
-        message:
-          "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
-      },
-      length: {
-        minimum: 8,
-        tooShort: "must contain alteast 8 character",
-        maximum: 12,
-        tooLong: "must contain less than 12 character",
-      },
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+    const [apiError, setApiError] = useState("");
+    const showPassword = () => {
+        setPasswordShown(passwordShown ? false : true);
     };
-    return {
-      name: {
-        presence: {
-          allowEmpty: false,
-          message: "^Name is required",
-        },
-        format: {
-          pattern: /^[a-zA-Z ]*$/,
-          flags: "i",
-          message: "^Enter a valid name",
-        },
-        length: {
-          minimum: 3,
-          tooShort: "must contain alteast 3 character",
-          maximum: 35,
-          tooLong: "must contain less than 35 character",
-        },
-      },
-      phoneNumber: {
-        presence: {
-          allowEmpty: false,
-          message: "^Phone number is required",
-        },
-        format: {
-          pattern: /^[1-9][0-9]*$/,
-          flags: "i",
-          message: "^Invalid number",
-        },
-        length: {
-          minimum: 8,
-          tooShort: "Invalid number",
-          maximum: 15,
-          tooLong: "Invalid number",
-        },
-      },
-      email: {
-        presence: {
-          allowEmpty: false,
-          message: "^Email is required",
-        },
-        email: true,
-      },
-      password: {
-        presence: {
-          allowEmpty: false,
-          message: "^Password is required",
-        },
-        ...passwordValidation,
-      },
-      cpassword: {
-        presence: {
-          allowEmpty: false,
-          message: "^Confirm password is required",
-        },
-        equality: {
-          attribute: "password",
-          message: "^Passwords doesn't match",
-          comparator: function (v1, v2) {
-            return JSON.stringify(v1) === JSON.stringify(v2);
-          },
-        },
-        ...passwordValidation,
-      },
+    const showConfirmPassword = () => {
+        setConfirmPasswordShown(confirmPasswordShown ? false : true);
     };
-  };
 
-  const validateFields = (data) => {
-    let fieldInvalidList = validate(data, validationRules());
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const payload = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            cpassword: data.cpassword,
+            phoneNumber: data.phoneNumber,
+            signUpType: data.signUpType,
+        };
 
-    if (fieldInvalidList !== undefined) {
-      let errors = {
-        ...fieldInvalidList,
-      };
+        if (!validateFields(payload)) return;
 
-      console.log(errors);
-      setErrors({ ...errors, ...fieldInvalidList });
+        const { trainerSignUp } = AuthApi;
+        // console.log(payload);
+
+        // if (dataSubmit) {
+        loginOrSignupAct(trainerSignUp, payload)
+            .then(({ data }) => {
+                history.push("/trainer/about");
+            })
+            .catch((error) => {
+                setApiError(error.message);
+            });
+        // }
     }
 
-    return !fieldInvalidList;
-  };
+    const validationRules = () => {
+        let passwordValidation = {
+            format: {
+                pattern:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+                flags: "i",
+                message:
+                    "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+            },
+            length: {
+                minimum: 8,
+                tooShort: "must contain alteast 8 character",
+                maximum: 12,
+                tooLong: "must contain less than 12 character",
+            },
+        };
+        return {
+            name: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Name is required",
+                },
+                format: {
+                    pattern: /^[a-zA-Z ]*$/,
+                    flags: "i",
+                    message: "^Enter a valid name",
+                },
+                length: {
+                    minimum: 3,
+                    tooShort: "must contain alteast 3 character",
+                    maximum: 35,
+                    tooLong: "must contain less than 35 character",
+                },
+            },
+            phoneNumber: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Phone number is required",
+                },
+                format: {
+                    pattern: /^[1-9][0-9]*$/,
+                    flags: "i",
+                    message: "^Invalid number",
+                },
+                length: {
+                    minimum: 8,
+                    tooShort: "Invalid number",
+                    maximum: 15,
+                    tooLong: "Invalid number",
+                },
+            },
+            email: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Email is required",
+                },
+                email: true,
+            },
+            password: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Password is required",
+                },
+                ...passwordValidation,
+            },
+            cpassword: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Confirm password is required",
+                },
+                equality: {
+                    attribute: "password",
+                    message: "^Passwords doesn't match",
+                    comparator: function (v1, v2) {
+                        return JSON.stringify(v1) === JSON.stringify(v2);
+                    },
+                },
+                ...passwordValidation,
+            },
+        };
+    };
 
-  return (
-    <>
-      <div className="banner_container_trainer">
-        <div className="wrapper_main container">
-          <div className="item_left">
-            <h2>Sign Up to be a part of the Motto Family</h2>
-            <h6>
-              Create an account to start the application process of becoming a
-              Motto trainer in one of our live cities.
-            </h6>
-          </div>
-          <div className="wrapper">
-            <div className="item_right">
-              <div className="inner_wrapper ">
-                <div className="inner_items">
-                  <h3>Train with Motto!</h3>
-                  <p>Sign up to apply to become a Motto Trainer</p>
-                  <div className="form_items_trainer">
-                    <form onSubmit={handleSubmit}>
-                      <div className="input_items_trainer">
-                        <input
-                          placeholder="Full Name"
-                          type="text"
-                          value={data.name}
-                          name="name"
-                          onChange={onChangeValue}
-                          className="fullname"
-                        />
-                        <img src={Person} alt="icon" />
-                        {error.name && <span>{error.name[0]}</span>}
-                      </div>
+    const validateFields = (data) => {
+        let fieldInvalidList = validate(data, validationRules());
 
-                      <div className="input_items_trainer">
-                        <input
-                          placeholder="Email"
-                          type="email"
-                          value={data.email}
-                          name="email"
-                          onChange={onChangeValue}
-                        />
-                        <img src={Mail} alt="icon" />
-                        {error.email && <span>{error.email[0]}</span>}
-                      </div>
+        if (fieldInvalidList !== undefined) {
+            let errors = {
+                ...fieldInvalidList,
+            };
 
-                      <div className="input_items_trainer">
-                        <ReactPhoneInput
-                          disableDropdown
-                          countryCodeEditable={false}
-                          country="us"
-                          placeholder="Phone Number"
-                          inputProps={{
-                            name: "phoneNumber",
-                          }}
-                          value={data.phoneNumber}
-                          name="phoneNumber"
-                          onChange={(e) => {
-                            onChangeValue({
-                              target: { name: "phoneNumber", value: e },
-                            });
-                          }}
-                        />
+            console.log(errors);
+            setErrors({ ...errors, ...fieldInvalidList });
+        }
 
-                        <img src={Phone} alt="icon" />
-                        {error.phoneNumber && (
-                          <span>{error.phoneNumber[0]}</span>
-                        )}
-                      </div>
+        return !fieldInvalidList;
+    };
 
-                      <div className="input_items_trainer">
-                        <input
-                          placeholder="Create Password"
-                          type={passwordShown ? "text" : "password"}
-                          value={data.password}
-                          name="password"
-                          onChange={onChangeValue}
-                        />
-                        <img src={Password} alt="icon" onClick={showPassword} />
-                        {error.password && <span>{error.password[0]}</span>}
-                      </div>
+    return (
+        <>
+            <div className="banner_container_trainer">
+                <div className="wrapper_main container">
+                    <div className="item_left">
+                        <h2>Sign Up to be a part of the Motto Family</h2>
+                        <h6>
+                            Create an account to start the application process
+                            of becoming a Motto trainer in one of our live
+                            cities.
+                        </h6>
+                    </div>
+                    <div className="wrapper">
+                        <div className="item_right">
+                            <div className="inner_wrapper ">
+                                <div className="inner_items">
+                                    <h3>Train with Motto!</h3>
+                                    <p>
+                                        Sign up to apply to become a Motto
+                                        Trainer
+                                    </p>
+                                    <div className="form_items_trainer">
+                                        <form onSubmit={handleSubmit}>
+                                            <div className="input_items_trainer">
+                                                <input
+                                                    placeholder="Full Name"
+                                                    type="text"
+                                                    value={data.name}
+                                                    name="name"
+                                                    onChange={onChangeValue}
+                                                    className="fullname"
+                                                />
+                                                <img src={Person} alt="icon" />
+                                                {error.name && (
+                                                    <span>{error.name[0]}</span>
+                                                )}
+                                            </div>
 
-                      <div className="input_items_trainer">
-                        <input
-                          placeholder="Confirm Password"
-                          type={confirmPasswordShown ? "text" : "password"}
-                          value={data.cpassword}
-                          name="cpassword"
-                          onChange={onChangeValue}
-                        />
-                        <img
-                          src={Password}
-                          alt="icon"
-                          onClick={showConfirmPassword}
-                        />
-                        {error.cpassword && <span>{error.cpassword[0]}</span>}
-                      </div>
-                      {apiError && (
-                        <span className="errorMessage">{apiError}</span>
-                      )}
+                                            <div className="input_items_trainer">
+                                                <input
+                                                    placeholder="Email"
+                                                    type="email"
+                                                    value={data.email}
+                                                    name="email"
+                                                    onChange={onChangeValue}
+                                                />
+                                                <img src={Mail} alt="icon" />
+                                                {error.email && (
+                                                    <span>
+                                                        {error.email[0]}
+                                                    </span>
+                                                )}
+                                            </div>
 
-                      <div className="submit_button">
-                        <button type="submit" onClick={handleSubmit}>
-                          <p className="mb-0 text-black">Continue to Account</p>
-                          <ArrowHoverBlacked />
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="login_items">
-                    <h4>Already have an account?</h4>
+                                            <div className="input_items_trainer">
+                                                <ReactPhoneInput
+                                                    disableDropdown
+                                                    countryCodeEditable={false}
+                                                    country="us"
+                                                    placeholder="Phone Number"
+                                                    inputProps={{
+                                                        name: "phoneNumber",
+                                                    }}
+                                                    value={data.phoneNumber}
+                                                    name="phoneNumber"
+                                                    onChange={(e) => {
+                                                        onChangeValue({
+                                                            target: {
+                                                                name: "phoneNumber",
+                                                                value: e,
+                                                            },
+                                                        });
+                                                    }}
+                                                />
 
-                    <Link to="/">
-                      Sign In now
-                      <BlueHoverButton />
-                    </Link>
-                  </div>
+                                                <img src={Phone} alt="icon" />
+                                                {error.phoneNumber && (
+                                                    <span>
+                                                        {error.phoneNumber[0]}
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            <div className="input_items_trainer">
+                                                <input
+                                                    placeholder="Create Password"
+                                                    type={
+                                                        passwordShown
+                                                            ? "text"
+                                                            : "password"
+                                                    }
+                                                    value={data.password}
+                                                    name="password"
+                                                    onChange={onChangeValue}
+                                                />
+                                                <img
+                                                    src={Password}
+                                                    alt="icon"
+                                                    onClick={showPassword}
+                                                />
+                                                {error.password && (
+                                                    <span>
+                                                        {error.password[0]}
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            <div className="input_items_trainer">
+                                                <input
+                                                    placeholder="Confirm Password"
+                                                    type={
+                                                        confirmPasswordShown
+                                                            ? "text"
+                                                            : "password"
+                                                    }
+                                                    value={data.cpassword}
+                                                    name="cpassword"
+                                                    onChange={onChangeValue}
+                                                />
+                                                <img
+                                                    src={Password}
+                                                    alt="icon"
+                                                    onClick={
+                                                        showConfirmPassword
+                                                    }
+                                                />
+                                                {error.cpassword && (
+                                                    <span>
+                                                        {error.cpassword[0]}
+                                                    </span>
+                                                )}
+                                            </div>
+                                            {apiError && (
+                                                <span className="errorMessage">
+                                                    {apiError}
+                                                </span>
+                                            )}
+
+                                            <div className="submit_button">
+                                                <button
+                                                    type="submit"
+                                                    onClick={handleSubmit}
+                                                >
+                                                    <p className="mb-0">
+                                                        Continue to Account
+                                                    </p>
+                                                    <ArrowHoverBlacked />
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="login_items">
+                                        <h4>Already have an account?</h4>
+
+                                        <Link to="/">
+                                            Sign In now
+                                            <BlueHoverButton />
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      loginOrSignupAct: loginOrSignUp,
-    },
-    dispatch
-  );
+    return bindActionCreators(
+        {
+            loginOrSignupAct: loginOrSignUp,
+        },
+        dispatch
+    );
 };
 
 const BannerTrainer = connect(null, mapDispatchToProps)(BannerTrainerFC);
