@@ -1,7 +1,7 @@
 @import "./reset/reset";
 
 @import "./layout/layout";
-
+@import "../../component/TrainerProfile/UserScheduler/dropdown.scss";
 input,
 button,
 .form-control {
@@ -125,5 +125,123 @@ button,
         }
       }
     }
+  }
+}
+.schedular_slots_user {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  grid-column-gap: 20px;
+  width: 100%;
+  margin: 2em 0 3em 0;
+  align-items: center;
+  .items_slots_user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .item_slot1_user {
+      display: flex;
+      align-items: center;
+      .indicator {
+        width: 60px;
+        height: 15px;
+        background: #f2f2f2 0% 0% no-repeat padding-box;
+        opacity: 1;
+      }
+      h5 {
+        letter-spacing: 0.54px;
+        color: #2c2c2c;
+        text-transform: uppercase;
+        margin: 0 1em;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: Montserrat;
+      }
+    }
+    .item_slot2_user {
+      display: flex;
+      align-items: center;
+      .indicator2 {
+        width: 60px;
+        height: 15px;
+        background: #dedede;
+        opacity: 1;
+      }
+      h5 {
+        letter-spacing: 0.54px;
+        color: #2c2c2c;
+        text-transform: uppercase;
+        margin: 0 1em;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: Montserrat;
+      }
+    }
+    .item_slot3_user {
+      display: flex;
+      align-items: center;
+      .indicator3 {
+        width: 60px;
+        height: 15px;
+        background: #53bfd2;
+        opacity: 1;
+      }
+      h5 {
+        letter-spacing: 0.54px;
+        color: #2c2c2c;
+        text-transform: uppercase;
+        margin: 0 0 0 1em;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: Montserrat;
+      }
+    }
+
+    .item_slot5_user {
+      display: flex;
+      align-items: center;
+
+      a {
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.54px;
+        border: none;
+        outline: none;
+        text-transform: uppercase;
+        margin: 0 0 0 1em;
+        font-size: 15px !important;
+        background-color: transparent !important;
+        font-weight: 600 !important;
+        font-family: Montserrat;
+        font-style: italic !important;
+        width: 350px !important;
+        text-decoration: underline !important;
+        color: #53bfd2 !important;
+      }
+    }
+  }
+}
+.event_wrapper_inner {
+  .submit_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding-left: 1em;
+    width: 230px;
+    text-decoration: none;
+    height: 52px;
+    background: #53bfd2;
+    text-align: right;
+    letter-spacing: 0.45px;
+    color: #ffffff;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
   }
 }
