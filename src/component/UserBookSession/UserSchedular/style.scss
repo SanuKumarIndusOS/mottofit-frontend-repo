@@ -1,128 +1,155 @@
 .event_outter_container {
-  width: 100%;
-  height: 1400px;
-  .event_inner_container {
-    .link_wrapper {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      margin-top: 2em;
-
-      .inner_links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        a {
-          margin-left: 1em;
-          text-align: left;
-          letter-spacing: 0.18px;
-          color: #161616;
-          font-size: 16px;
-          line-height: 22px;
-          font-weight: normal;
-          font-family: "Montserrat", sans-serif;
-          text-decoration: none;
-        }
-        div {
-          width: 95%;
-          height: 2px;
-          margin-left: 1.5em;
-          background-color: #53bfd2;
-        }
-      }
-    }
-    .event_wrapper {
-      .event_wrapper_inner {
-        margin: 0 3em;
-        .event_header {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          margin-top: 2em;
-          h2 {
-            text-align: center;
-            letter-spacing: 0px;
-            color: #161616;
-            font-size: 35px;
-            line-height: 58px;
-            font-weight: 600;
-            font-family: "Montserrat", sans-serif;
-          }
-          p {
-            width: 900px;
-            height: 54px;
-            text-align: center;
-            letter-spacing: 0.27px;
-            color: #696969;
-            font-size: 18px;
-            line-height: 30px;
-            font-weight: normal;
-            font-family: "Montserrat", sans-serif;
-          }
-        }
-        .user_profile_details {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 5em 0 2em 1em;
-          img {
-            width: 125px;
-            height: 125px;
-            opacity: 1;
-            border-radius: 100px;
-          }
-          .user_content {
+    width: 100%;
+    height: 1400px;
+    .event_inner_container {
+        .link_wrapper {
+            display: flex;
+            flex-direction: row;
             align-items: center;
-            margin: 0em 0 0em 1em;
-            h2 {
-              text-align: left;
-              letter-spacing: -0.45px;
-              color: #161616;
-              font-size: 45px;
-              line-height: 55px;
-              font-weight: bold;
-              font-family: "Cormorant
-                            Garamond",
-                sans-serif !important;
-              font-size: Cormorant Garamond;
+            justify-content: flex-start;
+            margin-top: 2em;
+
+            .inner_links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                a {
+                    margin-left: 1em;
+                    text-align: left;
+                    letter-spacing: 0.18px;
+                    color: #161616;
+                    font-size: 16px;
+                    line-height: 22px;
+                    font-weight: normal;
+                    font-family: "Montserrat", sans-serif;
+                    text-decoration: none;
+                }
+                div {
+                    width: 95%;
+                    height: 2px;
+                    margin-left: 1.5em;
+                    background-color: #53bfd2;
+                }
             }
-            p {
-              text-align: left;
-              letter-spacing: 1.1px;
-              color: #898989;
-              text-transform: uppercase;
-              opacity: 1;
-              font-size: 22px;
-              font-family: "Montserrat", sans-serif;
-              font-weight: 500;
-            }
-          }
         }
-        .schedular_slots_user {
-          display: grid;
-          grid-template-columns: 100%;
-          grid-template-rows: auto;
-          grid-column-gap: 20px;
-          width: 100%;
-          margin: 2em 0 3em 0;
-          align-items: center;
-          .items_slots_user {
+        .event_wrapper {
+            .event_wrapper_inner {
+                margin: 0 3em;
+                .event_header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    margin-top: 2em;
+                    h2 {
+                        text-align: center;
+                        letter-spacing: 0px;
+                        color: #161616;
+                        font-size: 35px;
+                        line-height: 58px;
+                        font-weight: 600;
+                        font-family: "Montserrat", sans-serif;
+                    }
+                    p {
+                        width: 900px;
+                        height: 54px;
+                        text-align: center;
+                        letter-spacing: 0.27px;
+                        color: #696969;
+                        font-size: 18px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        font-family: "Montserrat", sans-serif;
+                    }
+                }
+                .user_profile_details {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 5em 0 2em 1em;
+                    img {
+                        width: 125px;
+                        height: 125px;
+                        opacity: 1;
+                        border-radius: 100px;
+                    }
+                    .user_content {
+                        align-items: center;
+                        margin: 0em 0 0em 1em;
+                        h2 {
+                            text-align: left;
+                            letter-spacing: -0.45px;
+                            color: #161616;
+                            font-size: 45px;
+                            line-height: 55px;
+                            font-weight: bold;
+                            font-family: "Cormorant
+                            Garamond",
+                                sans-serif !important;
+                            font-size: Cormorant Garamond;
+                        }
+                        p {
+                            text-align: left;
+                            letter-spacing: 1.1px;
+                            color: #898989;
+                            text-transform: uppercase;
+                            opacity: 1;
+                            font-size: 22px;
+                            font-family: "Montserrat", sans-serif;
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                .submit_user {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0 auto;
+                    padding-left: 1em;
+                    width: 230px;
+                    text-decoration: none;
+                    height: 52px;
+                    background: #53bfd2;
+                    text-align: right;
+                    letter-spacing: 0.45px;
+                    color: #ffffff;
+                    text-transform: uppercase;
+                    border: none;
+                    outline: none;
+                    font-size: 18px;
+                    line-height: 22px;
+                    font-weight: bold;
+                    font-family: "Montserrat", sans-serif;
+                }
+            }
+        }
+    }
+}
+
+.schedular_slots_user {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-column-gap: 20px;
+    width: 100%;
+    margin: 2em 0 3em 0;
+    align-items: center;
+    .items_slots_user {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        .item_slot1_user {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            .item_slot1_user {
-              display: flex;
-              align-items: center;
-              .indicator {
+            .indicator {
                 width: 60px;
                 height: 15px;
                 background: #f2f2f2 0% 0% no-repeat padding-box;
                 opacity: 1;
-              }
-              h5 {
+            }
+            h5 {
                 letter-spacing: 0.54px;
                 color: #2c2c2c;
                 text-transform: uppercase;
@@ -130,18 +157,18 @@
                 font-size: 14px;
                 font-weight: 700;
                 font-family: Montserrat;
-              }
             }
-            .item_slot2_user {
-              display: flex;
-              align-items: center;
-              .indicator2 {
+        }
+        .item_slot2_user {
+            display: flex;
+            align-items: center;
+            .indicator2 {
                 width: 60px;
                 height: 15px;
                 background: #dedede;
                 opacity: 1;
-              }
-              h5 {
+            }
+            h5 {
                 letter-spacing: 0.54px;
                 color: #2c2c2c;
                 text-transform: uppercase;
@@ -149,18 +176,18 @@
                 font-size: 14px;
                 font-weight: 700;
                 font-family: Montserrat;
-              }
             }
-            .item_slot3_user {
-              display: flex;
-              align-items: center;
-              .indicator3 {
+        }
+        .item_slot3_user {
+            display: flex;
+            align-items: center;
+            .indicator3 {
                 width: 60px;
                 height: 15px;
                 background: #53bfd2;
                 opacity: 1;
-              }
-              h5 {
+            }
+            h5 {
                 letter-spacing: 0.54px;
                 color: #2c2c2c;
                 text-transform: uppercase;
@@ -168,14 +195,14 @@
                 font-size: 14px;
                 font-weight: 700;
                 font-family: Montserrat;
-              }
             }
+        }
 
-            .item_slot5_user {
-              display: flex;
-              align-items: center;
+        .item_slot5_user {
+            display: flex;
+            align-items: center;
 
-              a {
+            a {
                 display: flex;
                 align-items: center;
                 letter-spacing: 0.54px;
@@ -191,33 +218,7 @@
                 width: 350px !important;
                 text-decoration: underline !important;
                 color: #53bfd2 !important;
-              }
             }
-          }
         }
-
-        .submit_user {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 0 auto;
-          padding-left: 1em;
-          width: 230px;
-          text-decoration: none;
-          height: 52px;
-          background: #53bfd2;
-          text-align: right;
-          letter-spacing: 0.45px;
-          color: #ffffff;
-          text-transform: uppercase;
-          border: none;
-          outline: none;
-          font-size: 18px;
-          line-height: 22px;
-          font-weight: bold;
-          font-family: "Montserrat", sans-serif;
-        }
-      }
     }
-  }
 }

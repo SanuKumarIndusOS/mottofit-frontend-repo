@@ -106,7 +106,7 @@ class AboutTrainerFC extends Component {
       phone,
       location,
       websiteLink: websiteURL,
-      instaHandle: instagram,
+      instagramProfile: instagram,
     };
 
     if (this.validator.allValid()) {

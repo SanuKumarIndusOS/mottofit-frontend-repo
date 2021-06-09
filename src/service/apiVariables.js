@@ -89,6 +89,16 @@ export const TrainerApi = {
       return this.url + this.id;
     },
   },
+  changeTrainerStatus: {
+    url: "approve/trainers",
+    method: "post",
+    baseURL: "normal",
+    isAdmin: true,
+    id: null,
+    get api() {
+      return this.url;
+    },
+  },
   getAllTrainerLists: {
     url: "admin/trainers?limit=5&page=",
     method: "get",

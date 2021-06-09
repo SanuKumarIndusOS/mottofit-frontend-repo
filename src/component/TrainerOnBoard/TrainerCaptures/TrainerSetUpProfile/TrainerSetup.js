@@ -93,7 +93,6 @@ function TrainerSetupClass(props) {
         facility_details: res.trainingFacilityLocation,
         zoom_link: res.virtualMeetingLink,
         neighborhood_list: res.servicableLocation,
-        location: res.location,
         identityNameUS: identityInfromation
           ? identityInfromation.identityName
           : "",
@@ -158,28 +157,27 @@ function TrainerSetupClass(props) {
       images: imagesList.filter((x) => x != ""),
       myMotto: trainerSetupData.motto,
       applicationStatus: "setupComplete",
-      trainingProcess: trainerSetupData.training_process || "",
-      certification: trainerSetupData.certificateFields || "",
-      virtualMeetingLink: trainerSetupData.zoom_link || "",
-      trainingFacility: trainerSetupData.haveAFacility || "",
-      willingToTravel: trainerSetupData.willingToTravel || "",
-      servicableLocation: trainerSetupData.neighborhood_list || "",
-      location: trainerSetupData.location || "",
-      instagramProfile: trainerSetupData.instagram || "",
-      websiteLink: trainerSetupData.website || "",
-      firstName: trainerdetailData.firstName || "",
-      lastName: trainerdetailData.lastName || "",
-      areaOfExpertise: trainerdetailData.areaOfExpertise || "",
-      description: trainerdetailData.description || "",
-      oneOnOnePricing: trainerdetailData.oneOnOnePricing || "",
-      socialSessionPricing: trainerdetailData.socialSessionPricing || "",
-      classSessionPricing: trainerdetailData.classSessionPricing || "",
-      identityName: trainerSetupData.identityNameUS || "",
-      identityNo: trainerSetupData.governmentIdNumber || "",
-      insuranceName: trainerSetupData.insuranceNameUS || "",
-      insuranceAmount: trainerSetupData.coverAmount || "",
-      insurance: trainerSetupData.insurance || "",
-      identity: trainerSetupData.governmentId || "",
+      trainingProcess: trainerSetupData.training_process,
+      certification: trainerSetupData.certificateFields,
+      virtualMeetingLink: trainerSetupData.zoom_link,
+      trainingFacility: trainerSetupData.haveAFacility,
+      willingToTravel: trainerSetupData.willingToTravel,
+      servicableLocation: trainerSetupData.neighborhood_list,
+      instagramProfile: trainerSetupData.instagram,
+      websiteLink: trainerSetupData.website,
+      firstName: trainerdetailData.firstName,
+      lastName: trainerdetailData.lastName,
+      areaOfExpertise: trainerdetailData.areaOfExpertise,
+      description: trainerdetailData.description,
+      oneOnOnePricing: trainerdetailData.oneOnOnePricing,
+      socialSessionPricing: trainerdetailData.socialSessionPricing,
+      classSessionPricing: trainerdetailData.classSessionPricing,
+      identityName: trainerSetupData.identityNameUS,
+      identityNo: trainerSetupData.governmentIdNumber,
+      insuranceName: trainerSetupData.insuranceNameUS,
+      insuranceAmount: trainerSetupData.coverAmount,
+      insurance: trainerSetupData.insurance,
+      identity: trainerSetupData.governmentId,
     };
     const { updateTrainerAvailabilityApi } = TrainerApi;
     updateTrainerAvailabilityApi.body = payload;
@@ -239,6 +237,7 @@ function TrainerSetupClass(props) {
             open={open}
             setOpen={setOpen}
             trainerdetailData={trainerdetailData}
+            trainerSetupData={trainerSetupData}
           />
           <div className="setup_headings">
             <h2>Build out the rest of your Profile!</h2>
@@ -282,7 +281,7 @@ function TrainerSetupClass(props) {
             <div className="row">
               {imagesList.map((list, index) => {
                 return (
-                  <div className="col-3 w-100 mt-3 px-2" key={index}>
+                  <div className=" image_upload_init" key={index}>
                     <div className="image-upload-card btn-file-input">
                       {list !== "" ? (
                         <button className="uploaded-image">
@@ -419,12 +418,12 @@ function TrainerSetupClass(props) {
             <div className="dd_content">
               <h5>Which city will you train in?</h5>
               <select
-                value={trainerSetupData.location}
+                value={trainerSetupData.neighborhood_list}
                 name="location"
                 onChange={(e) => {
                   setTrainerSetupData({
                     ...trainerSetupData,
-                    location: e.target.value,
+                    neighborhood_list: e.target.value,
                   });
                 }}
               >
@@ -577,7 +576,7 @@ function TrainerSetupClass(props) {
 
           <div className="submit_button">
             <button
-              onClick={handleSubmit}
+              onClick={() => handleSubmit()}
               type="submit"
               disabled={(isLoading, !agreed)}
               className={`${isLoading ? "loading" : "btn"}`}

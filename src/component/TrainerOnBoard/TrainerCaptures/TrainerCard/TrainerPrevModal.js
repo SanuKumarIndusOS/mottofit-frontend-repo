@@ -5,8 +5,13 @@ import { Modal } from "react-responsive-modal";
 import { useSelector, useDispatch } from "react-redux";
 import "./trainer.sass";
 
-export const TrainerPrevModal = ({ open, setOpen, trainerCardData }) => {
-    const [previewImage, setPreviewTmage] = useState();
+export const TrainerPrevModal = ({
+    open,
+    setOpen,
+    trainerCardData,
+    image,
+    // setImage,
+}) => {
     const myRef = useRef(null);
     const closeIconModal = <img src={CloseIcon} alt="close" />;
 
@@ -68,18 +73,18 @@ export const TrainerPrevModal = ({ open, setOpen, trainerCardData }) => {
                         boaderRadius: "10px",
                     }}
                 >
-                    <div className="container" style={{ paddingLeft: "50px" }}>
+                    <div className="container">
                         <div className="row m-0" style={{ alignleft: "auto" }}>
                             <div className="card">
                                 <img
                                     className="card-img-top"
                                     src={
-                                        previewImage
-                                            ? previewImage
+                                        image
+                                            ? image
                                             : "https://www.solidbackgrounds.com/images/2048x1536/2048x1536-powder-blue-web-solid-color-background.jpg"
                                     }
                                     style={
-                                        previewImage
+                                        image
                                             ? { objectFit: "cover" }
                                             : {
                                                   objectFit: "cover",
@@ -101,24 +106,27 @@ export const TrainerPrevModal = ({ open, setOpen, trainerCardData }) => {
                                         style={{
                                             color: "#898989",
                                             fontWeight: "bold",
-                                            display: "flex",
                                         }}
                                     >
                                         {trainerCardData.verticals !== undefined
                                             ? trainerCardData.verticals.map(
                                                   (item) => {
                                                       return (
-                                                          <div>
+                                                          <h6
+                                                              style={{
+                                                                  margin: "0 0.3em 0 0",
+                                                              }}
+                                                          >
                                                               {item}
                                                               {","}
-                                                          </div>
+                                                          </h6>
                                                       );
                                                   }
                                               )
                                             : null}
                                     </h6>
 
-                                    <p>{trainerCardData.shortDescription}</p>
+                                    <p>{trainerCardData.description}</p>
                                 </div>
                                 <div className="card-button">
                                     <button
