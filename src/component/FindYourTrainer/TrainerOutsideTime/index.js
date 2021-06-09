@@ -47,7 +47,6 @@ const TrainerCardOutside = (props) => {
                                     </div>
                                 </div>
 
-<<<<<<< HEAD
                                 <div className="card-body">
                                     <h3 style={{ textTransform: "capitalize" }}>
                                         {outSideData[data]["firstName"]}&nbsp;
@@ -143,52 +142,6 @@ const TrainerCardOutside = (props) => {
                             </div>
                         );
                     })}
-=======
-                    <button
-                      onClick={() => {
-                        history.push({
-                          pathname: `/trainer/profile/${outSideData[data]["id"]}`,
-                          state: {
-                            trainerId: outSideData[data]["id"],
-                            trainerData: outSideData[data],
-                          },
-                        });
-                      }}
-                    >
-                      Read More
-                    </button>
-                  </p>
-                </div>
-                <div className="card-button">
-                  <button
-                    style={{
-                      backgroundColor: "#53BFD2",
-                    }}
-                    onClick={() => {
-                      history.push({
-                        pathname: "/user/scheduler",
-                        state: {
-                          trainerId: outSideData[data]["id"],
-                          trainerData: outSideData[data],
-                        },
-                      });
-                    }}
-                  >
-                    book a session
-                    <BlackCircleButton />
-                    <p>
-                      from{" "}
-                      <span>
-                        $
-                        {
-                          outSideData[data]["oneOnOnePricing"][
-                            "inPersonAtClientLocation"
-                          ]
-                        }
-                      </span>
-                    </p>
-                  </button>
->>>>>>> 15c74dd09fe4b4332ce270d78040ace8638dcb54
                 </div>
             </div>
         </>
