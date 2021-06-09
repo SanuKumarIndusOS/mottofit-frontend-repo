@@ -1,535 +1,533 @@
 .profile_main {
+  height: 100%;
+  .profile_outter_container {
+    width: 100%;
     height: 100%;
-    .profile_outter_container {
+    margin-bottom: 9em;
+
+    .profile_wrapper_container {
+      .profile_header {
         width: 100%;
-        height: 100%;
-        margin-bottom: 9em;
+        height: 400px;
+        background: #141414;
 
-        .profile_wrapper_container {
-            .profile_header {
-                width: 100%;
-                height: 400px;
-                background: #141414;
-
-                .inner_profile {
-                    position: relative;
-                    top: 150px;
-                    display: grid;
-                    grid-template-columns: auto 30% 35%;
-                    align-items: flex-start;
-                    img {
-                        width: 350px;
-                        height: 400px;
-                        opacity: 1;
-                        object-position: center;
-                        object-fit: cover;
-                    }
-                    .profile_header_inner {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        margin: 4em 0 0 2em;
-                        width: 410px;
-                        h2 {
-                            text-align: left;
-                            letter-spacing: -0.45px;
-                            color: #ffffff;
-                            font-size: 45px;
-                            line-height: 55px;
-                            font-weight: bold;
-                            text-transform: capitalize;
-                            font-family: "Cormorant Garamond", sans-serif;
-                        }
-                        p {
-                            text-align: left;
-                            letter-spacing: 1.1px;
-                            color: #898989;
-                            text-transform: uppercase;
-                            opacity: 1;
-                            text-decoration: none;
-                            // font-size: 22px;
-                            line-height: 22px;
-                            font-weight: 500;
-                            display: flex;
-                            font-family: "Montserrat", sans-serif;
-                        }
-                    }
-                    .profile_header_link {
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-                        text-align: right;
-                        margin: 4em 0 0 4em;
-
-                        a {
-                            display: flex;
-                            align-items: center;
-                            justify-content: flex-end;
-                            text-align: left;
-                            letter-spacing: 0.18px;
-                            color: #bcbcbc;
-                            opacity: 1;
-                            border-bottom: 2px solid #53bfd2;
-                            font-size: 18px;
-                            font-weight: normal;
-                            font-family: "Montserrat", sans-serif;
-                        }
-                        a:hover {
-                            text-decoration: none;
-                        }
-                        img {
-                            margin-right: 0.5em;
-                            width: 10px;
-                            height: 15px;
-                        }
-                    }
-                }
+        .inner_profile {
+          position: relative;
+          top: 150px;
+          display: grid;
+          grid-template-columns: auto 30% 35%;
+          align-items: flex-start;
+          img {
+            width: 350px;
+            height: 400px;
+            opacity: 1;
+            object-position: center;
+            object-fit: cover;
+          }
+          .profile_header_inner {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin: 4em 0 0 2em;
+            width: 410px;
+            h2 {
+              text-align: left;
+              letter-spacing: -0.45px;
+              color: #ffffff;
+              font-size: 45px;
+              line-height: 55px;
+              font-weight: bold;
+              text-transform: capitalize;
+              font-family: "Cormorant Garamond", sans-serif;
             }
-            .profile_main_contents {
-                display: grid;
-                grid-template-columns: 30% 69%;
-                grid-template-rows: auto;
-                margin-top: 10em;
-                grid-column-gap: 50px;
-                // height: 900px;
-                .profile_aside {
-                    // background: chocolate;
-                    .profile_aside_link {
-                        a {
-                            text-align: left;
-                            letter-spacing: 0.18px;
-                            color: #161616;
-                            opacity: 1;
-                            border-bottom: 2px solid #53bfd2;
-                            font-size: 18px;
-                            line-height: 42px;
-                            font-weight: normal;
-                            font-family: "Montserrat", sans-serif;
-                        }
-                        a:hover {
-                            text-decoration: none;
-                        }
-                        img {
-                            margin-left: 0.5em;
-                        }
-                    }
-                    .profile_aside_items {
-                        height: auto;
-                        width: 100%;
-                        margin: 1em 0;
-                        .profile_aside_item {
-                            margin-top: 3em;
-                            h2 {
-                                text-align: left;
-                                letter-spacing: 1px;
-                                color: #2c2c2c;
-                                text-transform: uppercase;
-                                font-size: 16px;
-                                line-height: 22px;
-                                font-weight: 600;
-                                font-family: "Montserrat", sans-serif;
-                            }
-                            hr {
-                                width: 350px;
-                                height: 0px;
-                                border: 2px solid #e3e3e3;
-                                opacity: 1;
-                            }
-                            .model_Qmark {
-                                position: relative;
-                                bottom: 10px;
-                                margin-left: 0.2em;
-                                cursor: pointer;
-                                border: none;
-                            }
-                            .profile_aside_inner_item {
-                                h6 {
-                                    text-align: left;
-                                    font-size: 25px;
-                                    font-weight: bold;
-                                    font-family: Montserrat;
-                                    letter-spacing: 0.63px;
-                                    color: #2c2c2c;
-                                    opacity: 1;
-                                    span {
-                                        text-align: left;
-                                        letter-spacing: 0.24px;
-                                        color: #696969;
-                                        font-size: 16px;
-                                        line-height: 30px;
-                                        font-weight: normal;
-                                        font-family: "Montserrat", sans-serif;
-                                    }
-                                }
-                                h5 {
-                                    text-align: left;
-                                    font-style: italic;
-                                    font-size: 18px;
-                                    font-weight: medium;
-                                    font-family: "Cormorant Garamond",
-                                        sans-serif;
-                                    letter-spacing: 0.27px;
-                                    color: #696969;
-                                    opacity: 1;
-                                    width: 350px;
-                                }
-                                .profile_location {
-                                    display: flex;
-                                    align-items: center;
-                                    img {
-                                        width: 20px;
-                                        height: 20px;
-                                    }
-                                    h4 {
-                                        display: flex;
-                                        text-align: left;
-                                        letter-spacing: 0.24px;
-                                        color: #696969;
-                                        opacity: 1;
-                                        margin: 0 0 0 0em;
-                                        padding: 0 0 0 0.5em;
-                                        font-size: 16px;
-                                        line-height: 30px;
-                                        font-weight: normal;
-                                        font-family: "Montserrat", sans-serif;
-                                        text-transform: capitalize;
-                                        a {
-                                            text-align: left;
-                                            text-decoration: underline;
-                                            font-size: 15px;
-                                            font-weight: bold;
-                                            font-family: "Montserrat",
-                                                sans-serif;
-                                            letter-spacing: 0px;
-                                            color: #53bfd2;
-                                            opacity: 1;
-                                            padding: 0 0 0 0.5em;
-                                        }
-                                    }
-                                }
-                                .profile_share {
-                                    display: flex;
-                                    align-items: center;
-                                    margin-top: 3em;
-                                    a {
-                                        text-align: left;
-                                        text-decoration: underline;
-                                        font-size: 15px;
-                                        font-weight: bold;
-                                        font-family: "Montserrat", sans-serif;
-                                        letter-spacing: 0px;
-                                        color: #53bfd2;
-
-                                        padding: 0 0 0 1em;
-                                    }
-                                }
-                            }
-                        }
-                        button {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            margin-top: 3em;
-                            width: 350px;
-                            height: 52px;
-                            background: #53bfd2;
-                            text-transform: uppercase;
-                            text-align: right;
-                            letter-spacing: 0.45px;
-                            color: #ffffff;
-                            outline: none;
-                            border: none;
-                            font-size: 18px;
-                            line-height: 22px;
-                            font-weight: bold;
-                            font-family: "Montserrat", sans-serif;
-                        }
-                    }
-                }
-                .profile_trainer_data {
-                    .profile_right_data {
-                        .profile_right_item1 {
-                            display: flex;
-                            align-items: flex-start;
-                            h6 {
-                                text-align: left;
-                                letter-spacing: 0.33px;
-                                color: #696969;
-                                opacity: 1;
-                                margin-left: 1em;
-                                font-size: 22px;
-                                line-height: 38px;
-                                font-weight: normal;
-                                font-family: "Montserrat", sans-serif;
-                            }
-                        }
-                        .profile_right_item2 {
-                            margin-top: 3em;
-                            h4 {
-                                text-align: left;
-                                letter-spacing: 1px;
-                                color: #2c2c2c;
-                                text-transform: uppercase;
-                                font-size: 20px;
-                                line-height: 22px;
-                                font-weight: 600;
-                                font-family: "Montserrat", sans-serif;
-                            }
-                            p {
-                                text-align: left;
-                                letter-spacing: 0.27px;
-                                color: #696969;
-                                font-size: 18px;
-                                line-height: 32px;
-                                font-weight: normal;
-                                font-family: "Montserrat", sans-serif;
-                            }
-                            .profile_images_grid {
-                                display: flex;
-                                flex-direction: column;
-                                box-sizing: border-box;
-                                width: 100%;
-                                margin: 0.5em 0;
-                                .profile_images_container {
-                                    display: flex;
-                                    box-sizing: border-box;
-                                    margin: 0.5em 0;
-
-                                    .profile_images_card {
-                                        font-family: sans-serif;
-                                        font-size: 30px;
-                                        font-weight: bold;
-                                        height: 40%;
-                                        display: flex;
-                                        color: white;
-                                        justify-content: center;
-                                    }
-                                    .box1 {
-                                        width: 320px;
-                                        height: 360px;
-                                        object-position: center;
-                                        object-fit: cover;
-                                    }
-
-                                    .box2 {
-                                        width: 400px;
-                                        height: 175px;
-                                        object-position: center;
-                                        object-fit: cover;
-                                        margin-left: 10px;
-                                    }
-
-                                    .box3 {
-                                        width: 194px;
-                                        height: 165px;
-                                        object-position: center;
-                                        object-fit: cover;
-                                        margin: 0 0 0 10px;
-                                    }
-
-                                    .box4 {
-                                        width: 194px;
-                                        height: 165px;
-                                        object-position: center;
-                                        object-fit: cover;
-                                        margin-left: 10px;
-                                    }
-                                    .flex-try-2 {
-                                        width: 408px;
-                                    }
-                                    .flex-try-3 {
-                                        display: flex;
-                                        margin-top: 20px;
-                                    }
-                                }
-                            }
-                            .image_more {
-                                display: flex;
-                                align-items: center;
-                                h5 {
-                                    margin: 0;
-                                    text-align: left;
-                                    letter-spacing: 0.18px;
-                                    color: #161616;
-                                    border-bottom: 2px solid #53bfd2;
-                                    font-size: 18px;
-                                    line-height: 25px;
-                                    font-weight: normal;
-                                    font-family: "Montserrat", sans-serif;
-                                }
-                                img {
-                                    margin-left: 0.5em;
-                                }
-                            }
-                        }
-                        .profile_right_item3 {
-                            margin-top: 3em;
-                            h2 {
-                                letter-spacing: 0px;
-                                color: #161616;
-                                opacity: 1;
-                                font-size: 28px;
-                                font-weight: 600;
-                                line-height: 58px;
-                                font-family: "Montserrat", sans-serif;
-                                margin-bottom: 1em;
-                            }
-                            .profile_item3_inner {
-                                display: grid;
-                                grid-template-columns: auto auto;
-                                grid-template-rows: auto;
-                                align-items: center;
-                                .inner_items {
-                                    display: flex;
-                                    align-items: center;
-                                    margin: 0.5em 0;
-                                    img {
-                                        width: 20px;
-                                        height: 20px;
-                                    }
-                                    h6 {
-                                        text-align: left;
-                                        letter-spacing: 0.6px;
-                                        color: #898989;
-                                        text-transform: uppercase;
-                                        opacity: 1;
-                                        margin: 0 0 0 0.5em;
-                                        display: flex;
-                                        align-items: center;
-                                        font-size: 18px;
-                                        line-height: 22px;
-                                        font-weight: 600;
-                                        font-family: "Montserrat", sans-serif;
-                                    }
-                                }
-                            }
-                        }
-                        .profile_right_item4 {
-                            margin-top: 2em;
-                            h2 {
-                                letter-spacing: 0px;
-                                color: #161616;
-                                font-size: 28px;
-                                font-weight: 600;
-                                line-height: 58px;
-                                font-family: "Montserrat", sans-serif;
-                                margin-bottom: 1em;
-                                // text-transform: capitalize;
-                            }
-                            .schedular_slots {
-                                display: grid !important;
-                                grid-template-columns: 100%;
-                                grid-template-rows: auto;
-                                grid-column-gap: 20px;
-                                width: 807px;
-                                margin: 2em 0 3em 0;
-                                align-items: center;
-                                .items_slots {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: space-between;
-                                    width: 100%;
-                                    .item_slot1 {
-                                        display: flex;
-                                        align-items: center;
-                                        .indicator {
-                                            width: 60px;
-                                            height: 15px;
-                                            background: #f2f2f2;
-                                            opacity: 1;
-                                        }
-                                        h5 {
-                                            letter-spacing: 0.54px;
-                                            color: #2c2c2c;
-                                            text-transform: uppercase;
-                                            margin: 0 1em;
-                                            font-size: 12px;
-                                            font-weight: 700;
-                                            font-family: Montserrat;
-                                        }
-                                    }
-                                    .item_slot2 {
-                                        display: flex;
-                                        align-items: center;
-                                        .indicator2 {
-                                            width: 60px;
-                                            height: 15px;
-                                            background: #dedede;
-                                            opacity: 1;
-                                        }
-                                        h5 {
-                                            letter-spacing: 0.54px;
-                                            color: #2c2c2c;
-                                            text-transform: uppercase;
-                                            margin: 0 1em;
-                                            font-size: 12px;
-                                            font-weight: 700;
-                                            font-family: Montserrat;
-                                        }
-                                    }
-                                    .item_slot3 {
-                                        display: flex;
-                                        align-items: center;
-                                        .indicator3 {
-                                            width: 60px;
-                                            height: 15px;
-                                            background: #53bfd2;
-                                            opacity: 1;
-                                        }
-                                        h5 {
-                                            letter-spacing: 0.54px;
-                                            color: #2c2c2c;
-                                            text-transform: uppercase;
-                                            margin: 0 0 0 1em;
-                                            font-size: 12px;
-                                            font-weight: 700;
-                                            font-family: Montserrat;
-                                        }
-                                    }
-                                    .item_slot4 {
-                                        display: flex;
-                                        align-items: center;
-
-                                        button {
-                                            display: flex;
-                                            align-items: center;
-                                            letter-spacing: 0.54px;
-                                            border: none;
-                                            outline: none;
-                                            color: #2c2c2c;
-                                            text-transform: uppercase;
-                                            margin: 0 0 0 1em;
-                                            font-size: 14px;
-                                            font-weight: 700;
-                                            font-family: Montserrat;
-                                            background-color: transparent;
-                                        }
-                                    }
-                                }
-                                .items_slot_button {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: flex-end;
-                                    button {
-                                        display: flex;
-                                        align-items: center;
-                                        text-align: right;
-                                        letter-spacing: 0.45px;
-                                        color: #161616;
-                                        text-transform: uppercase;
-                                        border: none;
-                                        font-family: "Montserrat", sans-serif;
-                                        font-size: 18px;
-                                        font-weight: bold;
-                                        line-height: 22px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            p {
+              text-align: left;
+              letter-spacing: 1.1px;
+              color: #898989;
+              text-transform: uppercase;
+              opacity: 1;
+              text-decoration: none;
+              // font-size: 22px;
+              line-height: 22px;
+              font-weight: 500;
+              display: flex;
+              font-family: "Montserrat", sans-serif;
             }
+          }
+          .profile_header_link {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            text-align: right;
+            margin: 4em 0 0 4em;
+
+            a {
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              text-align: left;
+              letter-spacing: 0.18px;
+              color: #bcbcbc;
+              opacity: 1;
+              border-bottom: 2px solid #53bfd2;
+              font-size: 18px;
+              font-weight: normal;
+              font-family: "Montserrat", sans-serif;
+            }
+            a:hover {
+              text-decoration: none;
+            }
+            img {
+              margin-right: 0.5em;
+              width: 10px;
+              height: 15px;
+            }
+          }
         }
+      }
+      .profile_main_contents {
+        display: grid;
+        grid-template-columns: 30% 69%;
+        grid-template-rows: auto;
+        margin-top: 10em;
+        grid-column-gap: 50px;
+        // height: 900px;
+        .profile_aside {
+          // background: chocolate;
+          .profile_aside_link {
+            a {
+              text-align: left;
+              letter-spacing: 0.18px;
+              color: #161616;
+              opacity: 1;
+              border-bottom: 2px solid #53bfd2;
+              font-size: 18px;
+              line-height: 42px;
+              font-weight: normal;
+              font-family: "Montserrat", sans-serif;
+            }
+            a:hover {
+              text-decoration: none;
+            }
+            img {
+              margin-left: 0.5em;
+            }
+          }
+          .profile_aside_items {
+            height: auto;
+            width: 100%;
+            margin: 1em 0;
+            .profile_aside_item {
+              margin-top: 3em;
+              h2 {
+                text-align: left;
+                letter-spacing: 1px;
+                color: #2c2c2c;
+                text-transform: uppercase;
+                font-size: 16px;
+                line-height: 22px;
+                font-weight: 600;
+                font-family: "Montserrat", sans-serif;
+              }
+              hr {
+                width: 350px;
+                height: 0px;
+                border: 2px solid #e3e3e3;
+                opacity: 1;
+              }
+              .model_Qmark {
+                position: relative;
+                bottom: 10px;
+                margin-left: 0.2em;
+                cursor: pointer;
+                border: none;
+              }
+              .profile_aside_inner_item {
+                h6 {
+                  text-align: left;
+                  font-size: 25px;
+                  font-weight: bold;
+                  font-family: Montserrat;
+                  letter-spacing: 0.63px;
+                  color: #2c2c2c;
+                  opacity: 1;
+                  span {
+                    text-align: left;
+                    letter-spacing: 0.24px;
+                    color: #696969;
+                    font-size: 16px;
+                    line-height: 30px;
+                    font-weight: normal;
+                    font-family: "Montserrat", sans-serif;
+                  }
+                }
+                h5 {
+                  text-align: left;
+                  font-style: italic;
+                  font-size: 18px;
+                  font-weight: medium;
+                  font-family: "Cormorant Garamond", sans-serif;
+                  letter-spacing: 0.27px;
+                  color: #696969;
+                  opacity: 1;
+                  width: 350px;
+                }
+                .profile_location {
+                  display: flex;
+                  align-items: center;
+                  img {
+                    width: 20px;
+                    height: 20px;
+                  }
+                  h4 {
+                    display: flex;
+                    text-align: left;
+                    letter-spacing: 0.24px;
+                    color: #696969;
+                    opacity: 1;
+                    margin: 0 0 0 0em;
+                    padding: 0 0 0 0.5em;
+                    font-size: 16px;
+                    line-height: 30px;
+                    font-weight: normal;
+                    font-family: "Montserrat", sans-serif;
+                    text-transform: capitalize;
+                    a {
+                      text-align: left;
+                      text-decoration: underline;
+                      font-size: 15px;
+                      font-weight: bold;
+                      font-family: "Montserrat", sans-serif;
+                      letter-spacing: 0px;
+                      color: #53bfd2;
+                      opacity: 1;
+                      padding: 0 0 0 0.5em;
+                    }
+                  }
+                }
+                .profile_share {
+                  display: flex;
+                  align-items: center;
+                  margin-top: 3em;
+                  a {
+                    text-align: left;
+                    text-decoration: underline;
+                    font-size: 15px;
+                    font-weight: bold;
+                    font-family: "Montserrat", sans-serif;
+                    letter-spacing: 0px;
+                    color: #53bfd2;
+
+                    padding: 0 0 0 1em;
+                  }
+                }
+              }
+            }
+            button {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-top: 3em;
+              width: 350px;
+              height: 52px;
+              background: #53bfd2;
+              text-transform: uppercase;
+              text-align: right;
+              letter-spacing: 0.45px;
+              color: #ffffff;
+              outline: none;
+              border: none;
+              font-size: 18px;
+              line-height: 22px;
+              font-weight: bold;
+              font-family: "Montserrat", sans-serif;
+            }
+          }
+        }
+        .profile_trainer_data {
+          .profile_right_data {
+            .profile_right_item1 {
+              display: flex;
+              align-items: flex-start;
+              h6 {
+                text-align: left;
+                letter-spacing: 0.33px;
+                color: #696969;
+                opacity: 1;
+                margin-left: 1em;
+                font-size: 22px;
+                line-height: 38px;
+                font-weight: normal;
+                font-family: "Montserrat", sans-serif;
+              }
+            }
+            .profile_right_item2 {
+              margin-top: 3em;
+              h4 {
+                text-align: left;
+                letter-spacing: 1px;
+                color: #2c2c2c;
+                text-transform: uppercase;
+                font-size: 20px;
+                line-height: 22px;
+                font-weight: 600;
+                font-family: "Montserrat", sans-serif;
+              }
+              p {
+                text-align: left;
+                letter-spacing: 0.27px;
+                color: #696969;
+                font-size: 18px;
+                line-height: 32px;
+                font-weight: normal;
+                font-family: "Montserrat", sans-serif;
+              }
+              .profile_images_grid {
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                width: 100%;
+                margin: 0.5em 0;
+                .profile_images_container {
+                  display: flex;
+                  box-sizing: border-box;
+                  margin: 0.5em 0;
+
+                  .profile_images_card {
+                    font-family: sans-serif;
+                    font-size: 30px;
+                    font-weight: bold;
+                    height: 40%;
+                    display: flex;
+                    color: white;
+                    justify-content: center;
+                  }
+                  .box1 {
+                    width: 320px;
+                    height: 360px;
+                    object-position: center;
+                    object-fit: cover;
+                  }
+
+                  .box2 {
+                    width: 400px;
+                    height: 175px;
+                    object-position: center;
+                    object-fit: cover;
+                    margin-left: 10px;
+                  }
+
+                  .box3 {
+                    width: 194px;
+                    height: 165px;
+                    object-position: center;
+                    object-fit: cover;
+                    margin: 0 0 0 10px;
+                  }
+
+                  .box4 {
+                    width: 194px;
+                    height: 165px;
+                    object-position: center;
+                    object-fit: cover;
+                    margin-left: 10px;
+                  }
+                  .flex-try-2 {
+                    width: 408px;
+                  }
+                  .flex-try-3 {
+                    display: flex;
+                    margin-top: 20px;
+                  }
+                }
+              }
+              .image_more {
+                display: flex;
+                align-items: center;
+                h5 {
+                  margin: 0;
+                  text-align: left;
+                  letter-spacing: 0.18px;
+                  color: #161616;
+                  border-bottom: 2px solid #53bfd2;
+                  font-size: 18px;
+                  line-height: 25px;
+                  font-weight: normal;
+                  font-family: "Montserrat", sans-serif;
+                }
+                img {
+                  margin-left: 0.5em;
+                }
+              }
+            }
+            .profile_right_item3 {
+              margin-top: 3em;
+              h2 {
+                letter-spacing: 0px;
+                color: #161616;
+                opacity: 1;
+                font-size: 28px;
+                font-weight: 600;
+                line-height: 58px;
+                font-family: "Montserrat", sans-serif;
+                margin-bottom: 1em;
+              }
+              .profile_item3_inner {
+                display: grid;
+                grid-template-columns: auto auto;
+                grid-template-rows: auto;
+                align-items: center;
+                .inner_items {
+                  display: flex;
+                  align-items: center;
+                  margin: 0.5em 0;
+                  img {
+                    width: 20px;
+                    height: 20px;
+                  }
+                  h6 {
+                    text-align: left;
+                    letter-spacing: 0.6px;
+                    color: #898989;
+                    text-transform: uppercase;
+                    opacity: 1;
+                    margin: 0 0 0 0.5em;
+                    display: flex;
+                    align-items: center;
+                    font-size: 18px;
+                    line-height: 22px;
+                    font-weight: 600;
+                    font-family: "Montserrat", sans-serif;
+                  }
+                }
+              }
+            }
+            .profile_right_item4 {
+              margin-top: 2em;
+              h2 {
+                letter-spacing: 0px;
+                color: #161616;
+                font-size: 28px;
+                font-weight: 600;
+                line-height: 58px;
+                font-family: "Montserrat", sans-serif;
+                margin-bottom: 1em;
+                // text-transform: capitalize;
+              }
+              .schedular_slots {
+                display: grid !important;
+                grid-template-columns: 100%;
+                grid-template-rows: auto;
+                grid-column-gap: 20px;
+                width: 807px;
+                margin: 2em 0 3em 0;
+                align-items: center;
+                .items_slots {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  width: 100%;
+                  .item_slot1 {
+                    display: flex;
+                    align-items: center;
+                    .indicator {
+                      width: 60px;
+                      height: 15px;
+                      background: #f2f2f2;
+                      opacity: 1;
+                    }
+                    h5 {
+                      letter-spacing: 0.54px;
+                      color: #2c2c2c;
+                      text-transform: uppercase;
+                      margin: 0 1em;
+                      font-size: 12px;
+                      font-weight: 700;
+                      font-family: Montserrat;
+                    }
+                  }
+                  .item_slot2 {
+                    display: flex;
+                    align-items: center;
+                    .indicator2 {
+                      width: 60px;
+                      height: 15px;
+                      background: #dedede;
+                      opacity: 1;
+                    }
+                    h5 {
+                      letter-spacing: 0.54px;
+                      color: #2c2c2c;
+                      text-transform: uppercase;
+                      margin: 0 1em;
+                      font-size: 12px;
+                      font-weight: 700;
+                      font-family: Montserrat;
+                    }
+                  }
+                  .item_slot3 {
+                    display: flex;
+                    align-items: center;
+                    .indicator3 {
+                      width: 60px;
+                      height: 15px;
+                      background: #53bfd2;
+                      opacity: 1;
+                    }
+                    h5 {
+                      letter-spacing: 0.54px;
+                      color: #2c2c2c;
+                      text-transform: uppercase;
+                      margin: 0 0 0 1em;
+                      font-size: 12px;
+                      font-weight: 700;
+                      font-family: Montserrat;
+                    }
+                  }
+                  .item_slot4 {
+                    display: flex;
+                    align-items: center;
+
+                    button {
+                      display: flex;
+                      align-items: center;
+                      letter-spacing: 0.54px;
+                      border: none;
+                      outline: none;
+                      color: #2c2c2c;
+                      text-transform: uppercase;
+                      margin: 0 0 0 1em;
+                      font-size: 14px;
+                      font-weight: 700;
+                      font-family: Montserrat;
+                      background-color: transparent;
+                    }
+                  }
+                }
+                .items_slot_button {
+                  display: flex;
+                  align-items: center;
+                  justify-content: flex-end;
+                  button {
+                    display: flex;
+                    align-items: center;
+                    text-align: right;
+                    letter-spacing: 0.45px;
+                    color: #161616;
+                    text-transform: uppercase;
+                    border: none;
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 18px;
+                    font-weight: bold;
+                    line-height: 22px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }

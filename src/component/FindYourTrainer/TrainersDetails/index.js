@@ -101,6 +101,7 @@ const TrainerCards = (props) => {
                     <p>
                       from{" "}
                       <span>
+                        $
                         {
                           bestMatchData[data]["oneOnOnePricing"][
                             "inPersonAtClientLocation"
