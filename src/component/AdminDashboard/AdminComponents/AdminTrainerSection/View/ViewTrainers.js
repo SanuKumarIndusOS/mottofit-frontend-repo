@@ -47,7 +47,7 @@ const ViewTrainersClass = (props) => {
                 <span>Loading...</span>
             ) : (
                 <div>
-                    <div className="profile_main">
+                    <div className="profile_main_admin">
                         <div className="profile_outter_container">
                             {/* <div className="profile"> */}
                             <div className="profile_wrapper_container ">
