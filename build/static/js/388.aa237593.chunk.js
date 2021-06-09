@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[388],{352:function(t,a,i){"use strict";i.r(a),a.default=i.p+"static/media/Miami Image.a63d3986.png"}}]);
-//# sourceMappingURL=388.aa237593.chunk.js.map

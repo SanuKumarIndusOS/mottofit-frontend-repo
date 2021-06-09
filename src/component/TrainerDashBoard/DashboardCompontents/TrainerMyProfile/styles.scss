@@ -365,6 +365,13 @@
                   padding: 0;
                   height: 70px;
                   width: 95% !important;
+
+                  .trainer-profile-dropdown {
+                    img {
+                      top: 0;
+                      height: auto;
+                    }
+                  }
                   img {
                     margin-left: -3.7em;
                     position: relative;

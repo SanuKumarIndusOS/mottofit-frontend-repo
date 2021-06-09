@@ -13,6 +13,8 @@ import validate from "service/validation";
 import { PaymentApi, userApi } from "service/apiVariables";
 import { fileUpload } from "action/trainerAct";
 import { api } from "service/api";
+import moment from "moment";
+import { findDatesValid } from "service/helperFunctions";
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -112,6 +114,8 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
       },
     };
 
+    // let dateOptionalValidation = {};
+
     return {
       firstName: {
         presence: {
@@ -179,6 +183,14 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
       let errors = {
         ...fieldInvalidList,
       };
+
+      setErrors({ ...errors, ...fieldInvalidList });
+    }
+    // console.log(findDatesValid(data.DOB));
+
+    if (!findDatesValid(data.DOB)) {
+      fieldInvalidList = {};
+      fieldInvalidList["DOB"] = ["Date should be after 1900 and before 2099"];
       setErrors({ ...errors, ...fieldInvalidList });
     }
 
@@ -222,6 +234,8 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
   const handleRemovePic = () => {
     setImage(null);
   };
+
+  const maxDate = moment().format("YYYY-MM-DD");
 
   return (
     <>
@@ -361,9 +375,11 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
                           <input
                             type="date"
                             value={userData.DOB}
-                            onKeyDown={(e) =>
-                              e.keyCode !== 8 ? e.preventDefault() : ""
-                            }
+                            // onKeyDown={(e) =>
+                            //   e.keyCode !== 8 ? e.preventDefault() : ""
+                            // }
+                            min="1900-01-01"
+                            max={maxDate}
                             name="DOB"
                             onChange={handleInput}
                           />

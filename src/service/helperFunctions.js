@@ -81,6 +81,14 @@ export const getFormatDate = (
     : moment(date).format(format);
 };
 
+export const findDatesValid = (date) => {
+  const isStartingDateValid = moment(date).isAfter("1900-01-01", "day");
+
+  const isEndDateValid = moment(date).isBefore("2099-12-31", "day");
+
+  return isStartingDateValid && isEndDateValid;
+};
+
 export const getFormattedYears = (startYear = 1950, endYear = null) => {
   const tempEndYear = !isNaN(endYear) ? parseInt(moment().year()) : endYear;
   const tempStartYear = !isNaN(startYear) ? 1950 : startYear;

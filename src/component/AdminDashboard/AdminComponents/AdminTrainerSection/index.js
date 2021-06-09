@@ -15,7 +15,10 @@ const AdminTrainerSectionClass = (props) => {
 
   function fetchAllTrainers(page = 1) {
     props.getAllTrainerLists(page).then((data) => {
-      setTrainerList(data.list);
+      const tempData = data.list?.filter(
+        ({ trainerStatus }) => trainerStatus !== "removed"
+      );
+      setTrainerList([...tempData]);
       setpageMetaData(data.pageMetaData);
     });
   }
@@ -41,10 +44,18 @@ const AdminTrainerSectionClass = (props) => {
         <h3>Trainer List</h3>
         <div className="admin">
           <div className="tariner_info">
-            <div className="tariner_info_item_heading">Name</div>
-            <div className="tariner_info_item_heading">Email</div>
-            <div className="tariner_info_item_heading">Trainer Status</div>
-            <div className="tariner_info_item_heading">Action</div>
+            <div className="tariner_info_item_heading d-flex align-item-center justofy-content-center">
+              <span className="mx-auto">Name</span>
+            </div>
+            <div className="tariner_info_item_heading d-flex align-item-center justofy-content-center">
+              <span className="mx-auto">Email</span>
+            </div>
+            <div className="tariner_info_item_heading d-flex align-item-center justofy-content-center">
+              <span className="mx-auto">Trainer Status</span>
+            </div>
+            <div className="tariner_info_item_heading d-flex align-item-center justofy-content-center">
+              <span className="mx-auto">Action</span>
+            </div>
           </div>
 
           {trainerList.map((item) => {
@@ -70,8 +81,14 @@ const AdminTrainerSectionClass = (props) => {
                 <div className="tariner_info_item">{item["trainerStatus"]}</div>
                 <div className="tariner_info_item">
                   {" "}
-                  <button className="tariner_info_button">
+                  <button className="tariner_info_button mr-4">
                     {approve}
+                  </button>{" "}
+                  <button
+                    className="tariner_info_button"
+                    onClick={() => ChangeApproval(item["id"], "removed")}
+                  >
+                    Remove
                   </button>{" "}
                 </div>
               </div>

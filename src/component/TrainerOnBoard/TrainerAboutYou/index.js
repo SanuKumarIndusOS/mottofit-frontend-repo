@@ -207,9 +207,11 @@ class AboutTrainerFC extends Component {
                     value={dob}
                     onChange={(e) => this.handleInput(e)}
                     name="dob"
-                    onKeyDown={(e) =>
-                      e.keyCode !== 8 ? e.preventDefault() : ""
-                    }
+                    min="1900-01-01"
+                    max="2099-12-31"
+                    // onKeyDown={(e) =>
+                    //   e.keyCode !== 8 ? e.preventDefault() : ""
+                    // }
                   />
                   {this.validator.message("dob", dob, "required")}
                   {dob && moment().diff(dob, "years", false) <= 21 && (
