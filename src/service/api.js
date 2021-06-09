@@ -7,7 +7,6 @@ export var api = async function ({
   api,
   body,
   status = false,
-  token = "",
   baseURL = "normal",
   isAdmin = false,
 }) {

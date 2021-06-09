@@ -16,6 +16,7 @@ import {
 import { history } from "helpers";
 import "./dropdown.scss";
 import { YearDropDown } from "component/common/YearDropdown";
+import { CloseIcon } from "component/common/SideBar/SidebarStyled";
 
 const worksMode = [
   {
@@ -193,10 +194,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Strength & HIIT"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Strength & HIIT"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -224,10 +224,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Boxing"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Boxing"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -255,10 +254,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Yoga"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Yoga"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -286,10 +284,9 @@ const TrainerBackgroundFC = ({
                               ],
                             });
                           } else {
-                            const index =
-                              trainerbackgroundData.areaOfExpertise.indexOf(
-                                "Pilates"
-                              );
+                            const index = trainerbackgroundData.areaOfExpertise.indexOf(
+                              "Pilates"
+                            );
                             if (index > -1) {
                               trainerbackgroundData.areaOfExpertise.splice(
                                 index,
@@ -310,49 +307,62 @@ const TrainerBackgroundFC = ({
                     {inputFields.map((input, index) => {
                       return (
                         <React.Fragment key={index}>
-                          <div className="inputs_experience">
-                            <input
-                              type="text"
-                              placeholder="Name of the organization / GYM"
-                              value={input.orgnization}
-                              name="orgnization"
-                              onChange={(event) =>
-                                handleChangeInput(index, event)
-                              }
-                            />
-                            <input
-                              type="text"
-                              placeholder="Job Title"
-                              value={input.job}
-                              name="job"
-                              onChange={(event) =>
-                                handleChangeInput(index, event)
-                              }
-                            />
-                            <input
-                              type="number"
-                              placeholder="Years"
-                              name="years"
-                              value={input.years}
-                              onChange={(event) =>
-                                handleChangeInput(index, event)
-                              }
-                            />
+                          <div className="inputs_experience row no-gutters">
+                            <div className="col-4 pr-1">
+                              <input
+                                type="text"
+                                placeholder="Name of the organization / GYM"
+                                value={input.orgnization}
+                                className="w-100"
+                                name="orgnization"
+                                onChange={(event) =>
+                                  handleChangeInput(index, event)
+                                }
+                              />
+                            </div>
+                            <div className="col-3 pr-1">
+                              <input
+                                type="text"
+                                placeholder="Job Title"
+                                value={input.job}
+                                className="w-100"
+                                name="job"
+                                onChange={(event) =>
+                                  handleChangeInput(index, event)
+                                }
+                              />
+                            </div>
+                            <div className="col-3">
+                              <input
+                                type="number"
+                                placeholder="Years"
+                                className="w-100"
+                                name="years"
+                                value={input.years}
+                                onChange={(event) =>
+                                  handleChangeInput(index, event)
+                                }
+                              />
+                            </div>
+
+                            <div className="col-1">
+                              {index !== 0 ? (
+                                <h5
+                                  className="text-danger pl-3"
+                                  onClick={() => handleRemoveFields(index)}
+                                >
+                                  <CloseIcon />
+                                </h5>
+                              ) : null}
+                            </div>
+
+                            <span></span>
                           </div>
                           {index + 1 === inputFields.length ? (
                             <div className="d-flex">
                               <h5 onClick={() => handleAddFields()}>
                                 + Add Work Experience
                               </h5>
-                              {index + 1 === inputFields.length &&
-                              inputFields.length !== 1 ? (
-                                <h5
-                                  className="text-danger pl-3"
-                                  onClick={() => handleRemoveFields(index)}
-                                >
-                                  Remove
-                                </h5>
-                              ) : null}
                             </div>
                           ) : null}
                         </React.Fragment>
@@ -368,7 +378,7 @@ const TrainerBackgroundFC = ({
                             className="inputs_background row no-gutters"
                             key={index}
                           >
-                            <div className="col-6 px-2">
+                            <div className="col-5 px-2">
                               <input
                                 type="text"
                                 placeholder="Certification Title"
@@ -379,7 +389,7 @@ const TrainerBackgroundFC = ({
                                 }
                               />
                             </div>
-                            <div className="col-6 px-2">
+                            <div className="col-5 px-2">
                               <YearDropDown
                                 label="Year you were Certified"
                                 value={inputCertificatesField.year}
@@ -389,6 +399,19 @@ const TrainerBackgroundFC = ({
                                 }
                               />
                             </div>
+                            <div className="col-2">
+                              {index !== 0 ? (
+                                <h5
+                                  className="text-danger pl-3"
+                                  onClick={() =>
+                                    handleRemoveCertificateFields(index)
+                                  }
+                                >
+                                  <CloseIcon />
+                                </h5>
+                              ) : null}
+                            </div>
+
                             {/* <input
                               type="text"
                               placeholder=""
@@ -405,7 +428,7 @@ const TrainerBackgroundFC = ({
                               <h5 onClick={handleAddCertificateFields}>
                                 + Add Certificate's
                               </h5>
-                              {index + 1 === inputCertificatesFields.length &&
+                              {/* {index + 1 === inputCertificatesFields.length &&
                               inputCertificatesFields.length !== 1 ? (
                                 <h5
                                   className="text-danger pl-3"
@@ -415,7 +438,7 @@ const TrainerBackgroundFC = ({
                                 >
                                   Remove
                                 </h5>
-                              ) : null}
+                              ) : null} */}
                             </div>
                           ) : null}
                         </React.Fragment>

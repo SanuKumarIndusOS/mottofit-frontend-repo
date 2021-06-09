@@ -411,6 +411,13 @@ const routers = [
         auth: false,
         exact: true,
       },
+      {
+        path: "/settings/payment-history",
+        componentPath: "pages/TrainerDashboard/Settings/PaymentHistory",
+        name: "PaymentHistoryBase",
+        auth: false,
+        exact: true,
+      },
     ],
   },
   {

@@ -72,96 +72,110 @@ const PaymentSectionSetupClass = ({
             {/* <form> */}
             <div className="payment_item1">
               <h6>Please upload any one of your US government issued ID’s</h6>
-              <div className="inputs_payment1">
-                <select
-                  value={trainerSetupData.identityNameUS}
-                  name="identityNameUS"
-                  onChange={(e) => {
-                    setTrainerSetupData({
-                      ...trainerSetupData,
-                      identityNameUS: e.target.value,
-                    });
-                  }}
-                >
-                  {info.map((list, index) => (
-                    <option value={list.value} key={index}>
-                      {list.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  placeholder="Add your ID Number"
-                  value={trainerSetupData.governmentIdNumber}
-                  onChange={(e) => {
-                    setTrainerSetupData({
-                      ...trainerSetupData,
-                      governmentIdNumber: e.target.value,
-                    });
-                  }}
-                  name="governmentIdNumber"
-                />
-                <input
-                  type="file"
-                  name="governmentId"
-                  className="custom-file-input"
-                  onChange={(e) => {
-                    uploadAreaId(e);
-                  }}
-                />
+              <div>
+                <div className="inputs_payment1">
+                  <select
+                    value={trainerSetupData.identityNameUS}
+                    name="identityNameUS"
+                    onChange={(e) => {
+                      setTrainerSetupData({
+                        ...trainerSetupData,
+                        identityNameUS: e.target.value,
+                      });
+                    }}
+                  >
+                    {info.map((list, index) => (
+                      <option value={list.value} key={index}>
+                        {list.label}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="text"
+                    placeholder="Add your ID Number"
+                    value={trainerSetupData.governmentIdNumber}
+                    onChange={(e) => {
+                      setTrainerSetupData({
+                        ...trainerSetupData,
+                        governmentIdNumber: e.target.value,
+                      });
+                    }}
+                    name="governmentIdNumber"
+                  />
+                  <input
+                    type="file"
+                    name="governmentId"
+                    className="custom-file-input"
+                    onChange={(e) => {
+                      uploadAreaId(e);
+                    }}
+                  />
 
-                {trainerSetupData.governmentId ? (
-                  <a className="checkarrow pl-3">
-                    <img src={Tick} alt="Uploaded" />
-                  </a>
-                ) : (
-                  <a className="checkarrow">
-                    <BlueHoverButton />
+                  {trainerSetupData.governmentId ? (
+                    <a className="checkarrow pl-3">
+                      <img src={Tick} alt="Uploaded" />
+                    </a>
+                  ) : (
+                    <a className="checkarrow">
+                      <BlueHoverButton />
+                    </a>
+                  )}
+                </div>
+                {trainerSetupData.governmentId && (
+                  <a href={trainerSetupData.governmentId} target="_blank">
+                    View File
                   </a>
                 )}
               </div>
             </div>
             <div className="payment_item1">
               <h6>Please upload your insurance information</h6>
-              <div className="inputs_payment1">
-                <input
-                  type="text"
-                  placeholder="Enter your Insurance Name"
-                  value={trainerSetupData.insuranceNameUS}
-                  onChange={(e) => {
-                    setTrainerSetupData({
-                      ...trainerSetupData,
-                      insuranceNameUS: e.target.value,
-                    });
-                  }}
-                  name="insuranceNameUS"
-                />
-                <input
-                  type="text"
-                  placeholder="Add your Cover Amount"
-                  value={trainerSetupData.coverAmount}
-                  onChange={(e) => {
-                    setTrainerSetupData({
-                      ...trainerSetupData,
-                      coverAmount: e.target.value,
-                    });
-                  }}
-                  name="coverAmount"
-                />
-                <input
-                  type="file"
-                  name="insurance"
-                  className="custom-file-input"
-                  onChange={(e) => uploadArea(e)}
-                />
+              <div>
+                <div className="inputs_payment1">
+                  <input
+                    type="text"
+                    placeholder="Enter your Insurance Name"
+                    value={trainerSetupData.insuranceNameUS}
+                    onChange={(e) => {
+                      setTrainerSetupData({
+                        ...trainerSetupData,
+                        insuranceNameUS: e.target.value,
+                      });
+                    }}
+                    name="insuranceNameUS"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Add your Cover Amount"
+                    value={trainerSetupData.coverAmount}
+                    onChange={(e) => {
+                      setTrainerSetupData({
+                        ...trainerSetupData,
+                        coverAmount: e.target.value,
+                      });
+                    }}
+                    name="coverAmount"
+                  />
+                  <input
+                    type="file"
+                    name="insurance"
+                    className="custom-file-input"
+                    onChange={(e) => uploadArea(e)}
+                  />
 
-                {trainerSetupData.insurance ? (
-                  <a className="checkarrow pl-3">
-                    <img src={Tick} alt="Uploaded" />
-                  </a>
-                ) : (
-                  <a className="checkarrow">
-                    <BlueHoverButton />
+                  {trainerSetupData.insurance ? (
+                    <a className="checkarrow pl-3">
+                      <img src={Tick} alt="Uploaded" />
+                    </a>
+                  ) : (
+                    <a className="checkarrow">
+                      <BlueHoverButton />
+                    </a>
+                  )}
+                </div>
+                {trainerSetupData.insurance && (
+                  <a href={trainerSetupData.insurance} target="_blank">
+                    View File
                   </a>
                 )}
               </div>

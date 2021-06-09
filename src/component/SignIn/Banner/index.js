@@ -103,8 +103,7 @@ const SignInFC = ({ showModel, setShowModel, loginAct, trainerDetail }) => {
           message: "^Password is required",
         },
         format: {
-          pattern:
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+          pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
           flags: "i",
           message:
             "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
@@ -232,11 +231,14 @@ const SignInFC = ({ showModel, setShowModel, loginAct, trainerDetail }) => {
                 <div className="login_items">
                   <h4>Don't have an account yet?</h4>
                   <div className="links_item_signup">
-                    <Link to="/user/signup">
+                    <Link to="/user/signup" onClick={() => setShowModel(false)}>
                       User Sign Up
                       <BlueHoverButton />
                     </Link>
-                    <Link to="/trainer/signup">
+                    <Link
+                      to="/trainer/signup"
+                      onClick={() => setShowModel(false)}
+                    >
                       Trainer Sign Up
                       <BlueHoverButton />
                     </Link>

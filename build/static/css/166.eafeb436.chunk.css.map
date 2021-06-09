@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/assets/scss/reset/_reset.scss"],"names":[],"mappings":"AAIA,YAEQ,YAAa","file":"166.eafeb436.chunk.css","sourcesContent":["body {\r\n    // padding-top: 100px;\r\n}\r\n\r\ninput {\r\n    &:focus {\r\n        outline: none;\r\n    }\r\n}\r\n"]}

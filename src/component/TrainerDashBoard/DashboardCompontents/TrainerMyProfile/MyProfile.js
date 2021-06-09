@@ -21,6 +21,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import { YearDropDown } from "component/common/YearDropdown";
+import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -199,6 +200,7 @@ const MyProfileFC = ({
           currentExperience = {},
           certification = [],
           servicableLocation = [],
+          location = "",
           virtualMeetingLink = "",
           trainingFacilityLocation = [],
         } = data || {};
@@ -213,6 +215,7 @@ const MyProfileFC = ({
             location: workLocation,
             websiteLink: websiteLink,
             instaHandle: instagramProfile,
+            location,
             virtualMeetingLink: virtualMeetingLink,
             servicableLocation: servicableLocation,
             trainingFacilityLocation: trainingFacilityLocation,
@@ -447,22 +450,20 @@ const MyProfileFC = ({
                         <h6>Which city will you train in?</h6>
                         <div className="inputs_platform">
                           <div className="iconwrapper">
-                            <select
-                              value={trainerData.serviceableLocation}
-                              name="serviceableLocation"
-                              onChange={(e) => {
+                            <NormalMultiSelect
+                              placeholder="Select Your City"
+                              value={trainerData.location}
+                              arrow={true}
+                              name="location"
+                              className="trainer-profile-dropdown"
+                              options={options}
+                              handleChange={(e) => {
                                 setTrainerData({
                                   ...trainerData,
-                                  serviceableLocation: e.target.value,
+                                  location: e.target.value,
                                 });
                               }}
-                            >
-                              {options.map((list, index) => (
-                                <option value={list.value} key={index}>
-                                  {list.label}
-                                </option>
-                              ))}
-                            </select>
+                            />
                           </div>
                         </div>
                       </div>
