@@ -46,10 +46,15 @@
                 font-family: "Montserrat", sans-serif;
                 @media screen and (max-width: 1023px) {
                     text-align: center;
-                    font-size: 24px;
-                    line-height: 38px;
+                    font-size: 38px;
+                    line-height: 45px;
+                }
+                @media only screen and (min-width: 100px) and (max-width: 765px) {
+                    font-size: 25px;
+                    line-height: 35px;
                 }
             }
+
             p {
                 padding-bottom: 30px;
                 text-align: left;
@@ -66,25 +71,28 @@
                 }
             }
         }
-        .right_container {
+        .right_container_trainer {
             display: grid;
             grid-template-columns: auto auto;
             grid-template-rows: auto;
             grid-column-gap: 0px;
+            grid-row-gap: 32px;
             height: 550px;
             @media screen and (max-width: 1023px) {
-                grid-template-columns: auto;
+                grid-template-columns: auto auto;
                 height: auto;
+                grid-row-gap: 25px;
+            }
+            @media only screen and (min-width: 100px) and (max-width: 765px) {
+                grid-template-columns: auto;
             }
         }
         .flex-contents_trainer {
             display: flex;
             align-items: center;
-            // margin: 0 0em 1em 0;
             height: 100px;
             @media screen and (max-width: 1023px) {
                 justify-content: space-between;
-                padding: 0 1em;
             }
             .image img {
                 width: 100px;

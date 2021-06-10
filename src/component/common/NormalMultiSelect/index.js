@@ -69,7 +69,7 @@ export class NormalMultiSelect extends Component {
             return (
                 components.DropdownIndicator && (
                     <components.DropdownIndicator {...props}>
-                        <img src={logo} alt="dropdown" />
+                        <img src={logo} alt="dropdown" className="dd_icon" />
                     </components.DropdownIndicator>
                 )
             );
