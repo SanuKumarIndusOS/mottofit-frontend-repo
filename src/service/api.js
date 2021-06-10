@@ -74,7 +74,7 @@ let getServiceUrl = (baseURL) => {
     default:
       finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
-    //   case "normal":
+    // case "normal":
     //   finalURL = "https://apis.bookmotto.com/user/v1/";
     //   break;
     // case "session":
