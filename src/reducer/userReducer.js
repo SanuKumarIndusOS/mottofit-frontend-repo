@@ -3,6 +3,9 @@ import { UserActionType } from "service/actionType";
 const initialState = {
   data: "",
   sessionData: {},
+  bookingData: {},
+  selectedTrainerData: {},
+  selectedTimes: [],
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {

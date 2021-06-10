@@ -8,6 +8,8 @@ export const axiosInstance = axios.create({
   },
 });
 
+export const cancelTokenSource = axios.CancelToken.source();
+
 export const logout = () => {
   axiosInstance.defaults.headers.common["Authorization"] = "";
   localStorage.clear();

@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[287],{364:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Insta Icon.432b9d08.svg"}}]);
-//# sourceMappingURL=287.fa40e301.chunk.js.map

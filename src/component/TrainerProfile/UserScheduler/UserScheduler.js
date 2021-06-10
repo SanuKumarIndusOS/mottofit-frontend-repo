@@ -13,6 +13,7 @@ import NeverTooInActive from "../../../assets/files/TrainerDashboard/Avaliablity
 import { getCalenderDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { getFormatDate } from "service/helperFunctions";
 const timeZone = [
   {
     label: "Early Bird",
@@ -139,7 +140,15 @@ function UserSchedulerClass(props) {
   useEffect(() => {
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
+
+    // setuserSlots([props.startTime, props.endTime]);
   }, []);
+
+  useEffect(() => {
+    if (props?.selectedTimes?.length === 2) {
+      setuserSlots(props.selectedTimes);
+    }
+  }, [props.selectedTimes]);
 
   useEffect(() => {
     setSelectedCell([]);
@@ -250,6 +259,8 @@ function UserSchedulerClass(props) {
     // var temp = [date + time]
     // setuserSlots(temp);
 
+    // console.log(date, time);
+
     var cellCollection = [];
     var temp = aslot[date];
     cellCollection.push(time + date);
@@ -262,6 +273,14 @@ function UserSchedulerClass(props) {
       tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
         .add(60, "minutes")
         .valueOf();
+
+      console.log(cellCollection, "cellCollection1");
+
+      let reduxData = {
+        selectedTimes: cellCollection,
+      };
+
+      props.updateUserDetails(reduxData);
 
       props.parentCallback(ts, tss, date);
     } else {
@@ -277,6 +296,14 @@ function UserSchedulerClass(props) {
         .add(30, "minutes")
         .valueOf();
 
+      console.log(cellCollection, "cellCollection1");
+
+      let reduxData = {
+        selectedTimes: cellCollection,
+      };
+
+      props.updateUserDetails(reduxData);
+
       props.parentCallback(tss, ts, date);
     }
 
@@ -290,11 +317,14 @@ function UserSchedulerClass(props) {
   const getAvailableSlots = (start, end) => {
     var startDate = start.format("YYYY-MM-DD");
     var endDate = end.format("YYYY-MM-DD");
-    props
-      .getCalenderDetails(props.id, startDate, endDate, TimeSlot)
-      .then(({ data }) => {
-        setData(data);
-      });
+
+    if (props.id) {
+      props
+        .getCalenderDetails(props.id, startDate, endDate, TimeSlot)
+        .then(({ data }) => {
+          setData(data);
+        });
+    }
   };
 
   let tableData2;

@@ -45,6 +45,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
   const location = useLocation();
 
   React.useEffect(() => {
+    setSelectedOption(sessionData?.location);
+    setTrainingVenue(sessionData?.trainingVenue);
+    setPreferedTrainingMode(sessionData?.preferedTrainingMode);
     // console.log(location.state["slotDetails"]);
   }, []);
 
@@ -55,20 +58,15 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
         trainingVenue,
         preferedTrainingMode,
         price,
+        sessionType,
       },
     };
 
-    console.log("called", storeData["sessionData"]);
+    // console.log("called", storeData["sessionData"]);
     updateUserDetails(storeData);
 
     history.push({
       pathname: "/user/payment",
-
-      state: {
-        slotDetails: location.state["slotDetails"],
-        sessionData: storeData["sessionData"],
-        sessionType: sessionType,
-      },
     });
     // if(price === 20)
     // {
@@ -83,8 +81,6 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     preferedTrainingMode !== "" &&
     selectedOption?.value &&
     trainingVenue?.value;
-
-  console.log(!!hasDataEntered);
 
   return (
     <>
@@ -142,7 +138,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                       <div className="session_location_dd">
                         <div className="session_location">
                           <Select
-                            defaultValue={selectedOption}
+                            value={selectedOption}
                             onChange={setSelectedOption}
                             options={options}
                             className="session_location_select"
@@ -151,7 +147,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                         <div className="session_venue">
                           <div className="session_location">
                             <Select
-                              defaultValue={trainingVenue}
+                              value={trainingVenue}
                               onChange={setTrainingVenue}
                               options={trainingVenueOptions}
                               placeholder="Select Training Venue"
@@ -223,7 +219,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               <img src={TrainerIcon} alt="icon" />
                             </div>
                             <button
-                              onClick={() => handleBookSession(20, "1on1")}
+                              onClick={() =>
+                                handleBookSession(20, "1 ON 1 TRAINING")
+                              }
                               disabled={!hasDataEntered}
                               className={`${
                                 !hasDataEntered ? "btn-disabled" : ""
@@ -256,7 +254,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               <img src={Social} alt="icon" />
                             </div>
                             <button
-                              onClick={() => handleBookSession(15, "group")}
+                              onClick={() =>
+                                handleBookSession(15, "SOCIAL SESSION")
+                              }
                               disabled={!hasDataEntered}
                               className={`${
                                 !hasDataEntered ? "btn-disabled" : ""
@@ -289,7 +289,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               <img src={ClassIcon} alt="icon" />
                             </div>
                             <button
-                              onClick={() => handleBookSession(20, "class")}
+                              onClick={() =>
+                                handleBookSession(20, "CREATE A CLASS")
+                              }
                               disabled={!hasDataEntered}
                               className={`${
                                 !hasDataEntered ? "btn-disabled" : ""
@@ -324,7 +326,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               <img src={TrainerIcon} alt="icon" />
                             </div>
                             <button
-                              onClick={() => handleBookSession(120)}
+                              onClick={() =>
+                                handleBookSession(120, "1 ON 1 TRAINING")
+                              }
                               disabled={!hasDataEntered}
                               className={`${
                                 !hasDataEntered ? "btn-disabled" : ""
@@ -352,7 +356,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               <img src={Social} alt="icon" />
                             </div>
                             <button
-                              onClick={() => handleBookSession(20)}
+                              onClick={() =>
+                                handleBookSession(20, "SOCIAL SESSION")
+                              }
                               disabled={!hasDataEntered}
                               className={`${
                                 !hasDataEntered ? "btn-disabled" : ""
@@ -380,7 +386,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                               <img src={ClassIcon} alt="icon" />
                             </div>
                             <button
-                              onClick={() => handleBookSession(30)}
+                              onClick={() =>
+                                handleBookSession(30, "CREATE A CLASS")
+                              }
                               disabled={!hasDataEntered}
                               className={`${
                                 !hasDataEntered ? "btn-disabled" : ""

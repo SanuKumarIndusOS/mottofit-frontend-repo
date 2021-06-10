@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import Radio from "@material-ui/core/Radio";
 import paymentMethodImg from "../../../assets/files/UserOnboard/PaymentAsset/Card Icons.png";
@@ -17,11 +17,17 @@ import { connect } from "react-redux";
 import { scheduleSession } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
+import { getFormatDate } from "service/helperFunctions";
 const stripePromise = loadStripe(
   "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
 );
 
-const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
+const UserPaymentsFC = ({
+  sessionData,
+  scheduleSession,
+  trainerData,
+  bookingData,
+}) => {
   //for material ui radio buttom (temp)
   const [selectedValue, setSelectedValue] = useState("a");
 
@@ -84,6 +90,25 @@ const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
         console.log(error);
       });
   };
+
+  const areaOfExpertise = trainerData?.areaOfExpertise.toString();
+
+  const trainingDate = bookingData?.start_slot
+    ? getFormatDate(bookingData?.start_slot, "MMMM Do, YYYY hh:mm A.")
+    : "";
+
+  let incentivePrice = 10;
+  let trxFee = 0;
+  let tax = 1;
+  let cancellationFee = 0;
+  let totalPrice = Math.round(
+    (sessionData?.price || 0) + incentivePrice + trxFee + tax + cancellationFee
+  );
+
+  useEffect(() => {
+    if (Object.keys(sessionData).length === 0)
+      return history.push("/trainer/find");
+  }, []);
 
   return (
     <>
@@ -166,8 +191,10 @@ const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
                 <div className="user_payment_profile">
                   <img src={Jenny} alt="icon" />
                   <div className="up_profile_name">
-                    <h2>John Doe</h2>
-                    <p>BOXING, STRENGTH & HIIT</p>
+                    <h2>{`${trainerData?.firstName || ""} ${
+                      trainerData?.lastName || ""
+                    }`}</h2>
+                    <p>{areaOfExpertise}</p>
                   </div>
                 </div>
                 <div className="user_details_wrapper">
@@ -175,21 +202,21 @@ const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
                     <h3>I WANT TO TRAIN IN</h3>
                     <div className="user_data_inner">
                       <img src={StrengthIcon} alt="icon" />
-                      <h4>Strength & HIIT</h4>
+                      <h4>{bookingData?.activity}</h4>
                     </div>
                   </div>
                   <div className="user_payment_details">
                     <h3>I want to train on</h3>
                     <div className="user_data_inner">
                       <img src={SheduleIcon} alt="icon" />
-                      <h4>February 16th, 2021 at 5:00 A.M.</h4>
+                      <h4>{trainingDate}</h4>
                     </div>
                   </div>
                   <div className="user_payment_details">
                     <h3>I WANT TO TRAIN AT</h3>
                     <div className="user_data_inner">
                       <img src={LocationIcon} alt="icon" />
-                      <h4>The Trainer’s Gym</h4>
+                      <h4>{`${sessionData?.trainingVenue?.label}`}</h4>
                     </div>
                   </div>
                   <hr />
@@ -207,7 +234,7 @@ const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
                         <div className="service_header">
                           <h3>Service Details</h3>
                           <div className="user_data_table_left">
-                            <h5>1 Hour Training Session</h5>
+                            <h5>{sessionData?.sessionType}</h5>
                             <h5>Incentive</h5>
                             <h5>Transaction Fee</h5>
                             <h5>Tax</h5>
@@ -221,13 +248,13 @@ const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
                         <div className="service_header">
                           <h3>Price / Hour</h3>
                           <div className="user_data_table_right">
-                            <h5>$100.00</h5>
-                            <h5>$10.00</h5>
-                            <h5>$00.00</h5>
-                            <h5>$01.00</h5>
-                            <h5>$00.00</h5>
+                            <h5>{`$${sessionData?.price}`}</h5>
+                            <h5>{`$${incentivePrice}`}</h5>
+                            <h5>{`$${trxFee}`}</h5>
+                            <h5>{`$${tax}`}</h5>
+                            <h5>{`$${cancellationFee}`}</h5>
                             <hr />
-                            <h3>$120.00</h3>
+                            <h3>{totalPrice}</h3>
                           </div>
                         </div>
                       </div>
@@ -244,7 +271,9 @@ const UserPaymentsFC = ({ sessionData, scheduleSession }) => {
 };
 
 const mapStateToProps = (state) => ({
+  bookingData: state.userReducer.bookingData,
   sessionData: state.userReducer.sessionData,
+  trainerData: state.userReducer.selectedTrainerData?.trainerData,
 });
 
 const mapDispatchToProps = (dispatch) => {

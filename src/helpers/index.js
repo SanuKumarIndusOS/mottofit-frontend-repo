@@ -1,14 +1,22 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { reducers } from "../reducer";
 import thunk from "redux-thunk";
 import routers from "routes/routes";
 import { api } from "service/api";
 import { Toast } from "service/toast";
 
-export const store = createStore(
-  reducers,
+const composeEnhancers =
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+      })
+    : compose;
+
+const enhancers = composeEnhancers(
   applyMiddleware(thunk.withExtraArgument({ api, Toast }))
 );
+
+export const store = createStore(reducers, enhancers);
 export const history = require("history").createBrowserHistory({
   basename: process.env.PUBLIC_URL,
 });

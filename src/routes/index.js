@@ -5,6 +5,7 @@ import * as Layout from "../layout";
 import { history } from "../helpers";
 import CodeSplitter from "helpers/CodeSplitter";
 import { NotificationContainer } from "react-notifications";
+import { logout } from "service/utilities";
 class RoutesClass extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,35 @@ class RoutesClass extends Component {
 
   routerGuard = (auth, path) => {
     // const expireTime =/ ;
+
+    const { pathname } = history.location || {};
+
+    const isUserLoggedIn =
+      localStorage.getItem("token") || localStorage.getItem("admin-token");
+
+    const noTokenPaths = [
+      "/",
+      "/welcome",
+      "/forgot",
+      "/trainer/signup",
+      "/user/signup",
+      "/admin/login",
+    ];
+
+    const emptyTokenPath = noTokenPaths.includes(pathname);
+
+    if (!isUserLoggedIn && !emptyTokenPath) {
+      // console.log(pathname);
+
+      logout();
+
+      // console.log(path);
+    }
   };
+
+  componentDidMount() {
+    this.routerGuard();
+  }
 
   render() {
     return (
@@ -34,7 +63,6 @@ class RoutesClass extends Component {
               auth = true,
               childrens = [],
             }) => {
-              this.routerGuard(auth, path);
               if (childrens.length > 0) {
                 return (
                   <Route
@@ -66,6 +94,9 @@ class RoutesClass extends Component {
                                 childComponentPath,
                                 name
                               );
+
+                              // console.log(path + childrenPath);
+                              // this.routerGuard(auth, path + childrenPath);
 
                               return (
                                 <Route

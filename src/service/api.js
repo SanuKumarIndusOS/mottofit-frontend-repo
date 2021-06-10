@@ -1,16 +1,16 @@
-import { axiosInstance } from "./utilities";
-
-import { logout } from "./utilities";
+import { logout, cancelTokenSource, axiosInstance } from "./utilities";
+import { Toast } from "./toast";
 
 export var api = async function ({
   method = "get",
   api,
   body,
   status = false,
-  token = "",
   baseURL = "normal",
   isAdmin = false,
+  configObj = {},
 }) {
+  configObj["cancelToken"] = cancelTokenSource.token;
   return await new Promise((resolve, reject) => {
     // setting token
     if (isAdmin) {
@@ -27,7 +27,11 @@ export var api = async function ({
         : "";
     }
 
-    axiosInstance[method](`${getServiceUrl(baseURL)}${api}`, body ? body : "")
+    axiosInstance[method](
+      `${getServiceUrl(baseURL)}${api}`,
+      body ? body : "",
+      configObj
+    )
       .then((data) => {
         resolve(statusHelper(status, data));
       })
@@ -47,8 +51,11 @@ export var api = async function ({
 };
 
 var statusHelper = (status, data) => {
-  if (data.status == 401 || data.status == 403) {
-    // logout();
+  if (data.status === 401 || data.status === 403) {
+    // console.log(status, data);
+    Toast({ type: "error", message: data.statusText });
+
+    setTimeout(() => logout(), 1000);
   }
   if (status) {
     return {
@@ -79,7 +86,7 @@ let getServiceUrl = (baseURL) => {
     default:
       finalURL = "http://doodlebluelive.com:2307/v1/";
       break;
-    //   case "normal":
+    // case "normal":
     //   finalURL = "https://apis.bookmotto.com/user/v1/";
     //   break;
     // case "session":

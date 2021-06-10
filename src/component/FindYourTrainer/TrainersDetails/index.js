@@ -4,7 +4,10 @@ import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { COMMON_URL } from "helpers/baseURL";
-const TrainerCards = (props) => {
+import { connect } from "react-redux";
+import { updateUserDetails } from "action/userAct";
+import { bindActionCreators } from "redux";
+const TrainerCardsFC = (props) => {
   const [bestMatchData, setbestMatchData] = useState([]);
 
   useEffect(() => {
@@ -19,6 +22,21 @@ const TrainerCards = (props) => {
   if (bestMatchData.length === 0) {
     no_match = <h1 className="no_match">No Matches found</h1>;
   }
+
+  const handleClick = (data) => {
+    let reduxData = {
+      selectedTrainerData: {
+        trainerId: bestMatchData[data]["id"],
+        trainerData: bestMatchData[data],
+      },
+    };
+
+    history.push({
+      pathname: "/user/scheduler",
+    });
+
+    props.updateUserDetails(reduxData);
+  };
 
   return (
     <>
@@ -82,19 +100,7 @@ const TrainerCards = (props) => {
                     style={{
                       backgroundColor: "#53BFD2",
                     }}
-                    onClick={() => {
-                      // if (localStorage.getItem("token")) {
-                      history.push({
-                        pathname: "/user/scheduler",
-                        state: {
-                          trainerId: bestMatchData[data]["id"],
-                          trainerData: bestMatchData[data],
-                        },
-                      });
-                      // } else {
-                      //     alert("Please Login");
-                      // }
-                    }}
+                    onClick={() => handleClick(data)}
                   >
                     book a session
                     <BlackCircleButton />
@@ -142,5 +148,23 @@ const HeadingTrainer = () => {
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateUserDetails,
+    },
+    dispatch
+  );
+};
+
+const TrainerCards = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrainerCardsFC);
 
 export default TrainerCards;
