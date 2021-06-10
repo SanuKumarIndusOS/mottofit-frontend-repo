@@ -159,4 +159,7 @@ input:focus {
     .main_navbar1 {
         align-items: center;
     }
+    .logo-content1 img {
+        position: unset;
+    }
 }

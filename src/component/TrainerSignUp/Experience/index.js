@@ -24,7 +24,7 @@ export default class ExperienceTrainer extends Component {
                                 from anywhere or locally in Motto markets.
                             </p>
                         </div>
-                        <div className="right_container">
+                        <div className="right_container_trainer">
                             <ExperienceParent
                                 icon={Icon1}
                                 description="Be a part of an elite community of trainers to boost your brand"

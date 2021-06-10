@@ -324,9 +324,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                                                     type="submit"
                                                     onClick={handleSubmit}
                                                 >
-                                                    <p className="mb-0">
-                                                        Continue to Account
-                                                    </p>
+                                                    Continue to Account
                                                     <ArrowHoverBlacked />
                                                 </button>
                                             </div>
@@ -344,6 +342,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                             </div>
                         </div>
                     </div>
+                    <br />
                 </div>
             </div>
         </>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "./find.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { BiSearch } from "react-icons/bi";
 import HoverImage from "react-hover-image";
+import InPersonDropDown from "./InPersonDropDown";
 
 //Assets for Inactive
 import BoxingIcon from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Inactive.svg";
@@ -35,7 +36,6 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     if (trainerQueryData.location && trainerQueryData.date) {
       getTrainerDataByQuery();
       setqueryObject(trainerQueryData);
-
       SetLocation(trainerQueryData.location);
     } else {
       let payload = {
@@ -54,13 +54,13 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
   const [bestMatchData, setbestMatchData] = useState([]);
   const [bestOthersData, setbestOthersData] = useState([]);
-
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [DropdownState, setDropdownState] = useState(false);
   const [
     DropdownTrainerAvailabilityState,
     setDropdownTrainerAvailabilityState,
   ] = useState(false);
+  const [InPersonDD, setInPersonDD] = useState(false);
 
   const [ddBoxingState, setddBoxingState] = useState(false);
   const [ddPilatesState, setddPilatesState] = useState(false);
@@ -68,10 +68,14 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const [ddHiitState, setddHiitState] = useState(false);
   const [queryObject, setqueryObject] = useState({
     location: "Online",
-    vertical: "Boxing",
+    vertical: "Select a Category",
     date: "",
-    availability: "EarlyBird",
+    availability: "Select a Time",
+    // inPerson: "In Person",
   });
+
+  const bestMatchRef = useRef(null);
+  const otherRef = useRef(null);
 
   const onClickHandle = () => {
     setSelectedDate(selectedDate);
@@ -89,7 +93,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       />
     );
   } else {
-    <div>hello</div>;
+    <div></div>;
   }
 
   const TriggerDropDownTrainerAvailability = () => {
@@ -200,6 +204,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         <p style={{ borderBottom: "3px solid #53BFD2" }}>In Person</p>
       );
       setqueryObject({ ...queryObject, location: "Person" });
+      setInPersonDD(!InPersonDD);
     }
   };
 
@@ -210,6 +215,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         date: queryObject.date,
         trainingType: queryObject.vertical,
         availability: queryObject.availability,
+        // inPerson: queryObject.inPerson,
       },
     };
 
@@ -232,17 +238,48 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     api({ ...trainerAvailableApi }).then(({ data }) => {
       setbestMatchData(data.bestMatch);
       setbestOthersData(data.others);
+
+      if (data.bestMatch.length > 0) {
+        return bestMatchRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+      if (data.others.length > 0) {
+        return otherRef.current.scrollIntoView({ behavior: "smooth" });
+      }
     });
   };
 
+  //inPerson_dropdown
+  let DropdownHomeInPerson;
+  if (InPersonDD) {
+    DropdownHomeInPerson = (
+      <InPersonDropDown
+        onClick={({ inPerson }) => {
+          setqueryObject({ ...queryObject, inPerson });
+          TriggerInPersonDropDown();
+        }}
+      />
+    );
+  } else {
+    <div></div>;
+  }
+  const TriggerInPersonDropDown = () => {
+    setInPersonDD(!InPersonDD);
+  };
   return (
     <>
       <div className="card container border-0">
         <div className="card-wrapper">
           <div className="item1">
             <h3>Location</h3>
-            <div className="card-item">
-              <div onClick={() => SetLocation("Virtual")}>{virtualMarkup}</div>
+            <div className="location">
+              <div className="card-item">
+                <div
+                  onClick={() => SetLocation("Virtual")}
+                  className="card-selection"
+                >
+                  {virtualMarkup}
+                </div>
+              </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="9"
@@ -262,9 +299,18 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   </tspan>
                 </text>
               </svg>
-              <div onClick={() => SetLocation("InPerson")}>
-                {/* <p style={{ fontWeight: "normal" }}>In Person</p> */}{" "}
-                {inPersonMarkup}
+              <div
+                onClick={() =>
+                  SetLocation("In Person") && TriggerInPersonDropDown
+                }
+              >
+                <h6>{inPersonMarkup}</h6>
+                <div
+                  className="inPerson-dd"
+                  // onClick={TriggerInPersonDropDown}
+                >
+                  {DropdownHomeInPerson}
+                </div>
               </div>
             </div>
           </div>
@@ -334,8 +380,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </div>
         </div>
       </div>
-      <TrainerCards content={bestMatchData}></TrainerCards>
-      <TrainerCardOutside content={bestOthersData}></TrainerCardOutside>
+      <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
+      <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
     </>
   );
 };

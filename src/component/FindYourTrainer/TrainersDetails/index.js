@@ -41,7 +41,7 @@ const TrainerCardsFC = (props) => {
   return (
     <>
       <div className="container">
-        <HeadingTrainer />
+        <HeadingTrainer bestMatchRef={props.bestMatchRef} />
         {no_match}
         <div className="row" style={{ alignleft: "auto" }}>
           {Object.keys(bestMatchData).map((data, index) => {
@@ -132,11 +132,11 @@ const TrainerCardsFC = (props) => {
   );
 };
 
-const HeadingTrainer = () => {
+const HeadingTrainer = ({ bestMatchRef }) => {
   return (
     <>
       <div className="container">
-        <div className="wrapper_heading">
+        <div className="wrapper_heading" ref={bestMatchRef}>
           <h2>Your Motto Matches</h2>
           <p>
             These matches are the perfect fit based on your filters. The prices

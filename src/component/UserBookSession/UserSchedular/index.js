@@ -86,12 +86,11 @@ const UserEventSchedularFC = (props) => {
       },
     };
 
-    console.log(reduxData);
-
     props.updateUserDetails(reduxData);
+
+    history.push("/user/session-type");
   };
 
-  console.log(location);
   return (
     <>
       <div className="event_outter_container">
@@ -165,19 +164,6 @@ const UserEventSchedularFC = (props) => {
                 <Link
                   className="submit_user"
                   onClick={handleContinue}
-                  to={{
-                    pathname: "/user/session-type",
-                    state: {
-                      slotDetails: {
-                        Name: trainerName,
-                        start_slot: trainerstartSlot,
-                        end_slot: trainerEndSlot,
-                        date: DateSlot,
-                        activity: activity,
-                        id: location["trainerId"],
-                      },
-                    },
-                  }}
                   style={{ marginBottom: "500px" }}
                 >
                   CONTINUE <ArrowHoverBlacked />{" "}

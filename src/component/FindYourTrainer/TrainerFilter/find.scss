@@ -21,11 +21,20 @@
 .card .card-wrapper .item1 {
     cursor: pointer;
 }
+.card .card-wrapper .item1 .location {
+    display: flex;
+    align-items: flex-start;
+    .inPerson-dd {
+        position: relative;
+        right: 80px;
+    }
+}
 
 .card .card-wrapper .item1 svg {
     bottom: 8px;
     position: relative;
     left: 5px;
+    top: 0px;
 }
 
 .card .card-wrapper .item2 {
@@ -70,9 +79,8 @@
 .card .card-wrapper .item2,
 .card .card-wrapper .item4 {
     width: 250px;
-    padding: 1em 1em 0 2em;
+    padding: 1em 0.1em 0 1.8em;
 }
-
 .card .card-wrapper .item1 p,
 .card .card-wrapper .item2 p,
 .card .card-wrapper .item3 p,
@@ -81,7 +89,7 @@
     font-size: 20px;
     color: #898989;
     font-family: "Montserrat";
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .card .card-wrapper .item1 h3,
@@ -95,8 +103,11 @@
     font-family: "Montserrat";
     font-weight: 600;
 }
+.card .card-wrapper .item1 .card-item {
+    display: flex;
+}
 
-.card .card-wrapper .item1 .card-item,
+// .card .card-wrapper .item1 .card-item,
 .card .card-wrapper .item2 .card-item,
 .card .card-wrapper .item4 .card-item {
     display: flex;
