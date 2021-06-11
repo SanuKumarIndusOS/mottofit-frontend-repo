@@ -49,6 +49,8 @@ const TrainerProfileClass = ({ getTrainerDetail }) => {
     setDateSlot(date);
   };
 
+  const areaOfExpertise = trainerProfileData?.areaOfExpertise.toString();
+
   return (
     <>
       <div className="profile_main">
@@ -74,37 +76,7 @@ const TrainerProfileClass = ({ getTrainerDetail }) => {
                     {trainerProfileData.firstName}&nbsp;
                     {trainerProfileData.lastName}
                   </h2>
-                  <p>
-                    {trainerProfileData &&
-                    trainerProfileData.areaOfExpertise &&
-                    trainerProfileData.areaOfExpertise[0] ? (
-                      <p> {trainerProfileData.areaOfExpertise[0]}</p>
-                    ) : null}
-                    {trainerProfileData &&
-                    trainerProfileData.areaOfExpertise &&
-                    trainerProfileData.areaOfExpertise[1] ? (
-                      <p>
-                        {","}&nbsp;
-                        {trainerProfileData.areaOfExpertise[1]}
-                      </p>
-                    ) : null}
-                    {trainerProfileData &&
-                    trainerProfileData.areaOfExpertise &&
-                    trainerProfileData.areaOfExpertise[2] ? (
-                      <p>
-                        {","}&nbsp;
-                        {trainerProfileData.areaOfExpertise[2]}
-                      </p>
-                    ) : null}
-                    {trainerProfileData &&
-                    trainerProfileData.areaOfExpertise &&
-                    trainerProfileData.areaOfExpertise[3] ? (
-                      <p>
-                        {","}&nbsp;
-                        {trainerProfileData.areaOfExpertise[3]}
-                      </p>
-                    ) : null}
-                  </p>
+                  <p>{areaOfExpertise}</p>
                 </div>
                 <div className="profile_header_link">
                   <img src={ArrowBack} alt="icon" />
@@ -567,6 +539,10 @@ const ImageGrid = ({ trainerProfileData }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  selectedTrainerData: state.userReducer.selectedTrainerData,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
@@ -576,6 +552,9 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-const TrainerProfile = connect(null, mapDispatchToProps)(TrainerProfileClass);
+const TrainerProfile = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrainerProfileClass);
 
 export default TrainerProfile;

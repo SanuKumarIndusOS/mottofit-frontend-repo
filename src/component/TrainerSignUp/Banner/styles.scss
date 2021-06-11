@@ -11,6 +11,7 @@
     background-blend-mode: multiply;
     @media screen and (max-width: 1023px) {
         height: auto;
+        background-size: cover;
     }
 
     .wrapper_main {

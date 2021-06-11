@@ -16,15 +16,11 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
-import useOnClickOutside from "use-onclickoutside";
-
-const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
+const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     const [DropdownState, setDropdownState] = useState(false);
-
     const [DropdownAvailabilityState, setDropdownAvailabilityState] =
         useState(false);
     const [InPersonDD, setInPersonDD] = useState(false);
-
     const [virtualMarkup, setvirtualMarkup] = useState(
         <h2 style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</h2>
     );
@@ -32,14 +28,33 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
         <h2 style={{ fontWeight: "normal" }}>In Person</h2>
     );
     const [queryObject, setqueryObject] = useState({
-        location: "Online",
+        location: "virtual",
         vertical: "Select a Category",
         date: "",
         availability: "Select a Time",
         // inPerson: "In Person",
     });
     const [date, setDate] = useState(new Date());
-
+    const [inPerson, setInPerson] = useState({
+        newYork: { value: "nyw", selected: false },
+        miami: { value: "maimi", selected: false },
+        hamptons: { value: "hampton", selected: false },
+        plamBeach: { value: "plam", selected: false },
+    });
+    const handleChange = (value) => {
+        let tempData = {
+            newYork: { value: "nyw", selected: false },
+            miami: { value: "maimi", selected: false },
+            hamptons: { value: "hampton", selected: false },
+            plamBeach: { value: "plam", selected: false },
+        };
+        tempData[value] = {
+            ...tempData[value],
+            selected: true,
+        };
+        setInPerson(tempData);
+        TriggerInPersonDropDown();
+    };
     //Training_type_dropdown
     let DropdownTraining;
     if (DropdownState) {
@@ -49,12 +64,12 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                     setqueryObject({ ...queryObject, vertical });
                     TriggerVerticalDropDown();
                 }}
+                selectedData={queryObject.vertical}
             />
         );
     } else {
         <div>hello</div>;
     }
-
     const SetLocation = (value) => {
         if (value === "Virtual") {
             setvirtualMarkup(
@@ -65,8 +80,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
             setinPersonMarkup(
                 <h2 style={{ fontWeight: "normal" }}>In Person</h2>
             );
-
-            setqueryObject({ ...queryObject, location: "Online" });
+            setqueryObject({ ...queryObject, location: "virtual" });
         } else {
             setvirtualMarkup(
                 <h2 style={{ fontWeight: "normal", margin: "0" }}>Virtual</h2>
@@ -81,7 +95,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
             setqueryObject({ ...queryObject, location: "Person" });
         }
     };
-
     //availabilty_dropdown
     let DropdownHomeAvailability;
     if (DropdownAvailabilityState) {
@@ -91,10 +104,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                     setqueryObject({ ...queryObject, availability });
                     TriggerDropDownAvailability();
                 }}
+                selectedData={queryObject.availability}
             />
         );
     } else {
-        <div></div>;
+        <div>hello</div>;
     }
     //inPerson_dropdown
     let DropdownHomeInPerson;
@@ -105,23 +119,22 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                     setqueryObject({ ...queryObject, inPerson });
                     TriggerInPersonDropDown();
                 }}
+                handleChange={handleChange}
+                inPerson={inPerson}
             />
         );
     } else {
-        <div></div>;
+        <div>hello</div>;
     }
-
     const TriggerDropDownAvailability = () => {
         setDropdownAvailabilityState(!DropdownAvailabilityState);
     };
     const TriggerInPersonDropDown = () => {
         setInPersonDD(!InPersonDD);
     };
-
     const TriggerVerticalDropDown = () => {
         setDropdownState(!DropdownState);
     };
-
     const search_action = () => {
         let payload = {
             query: {
@@ -129,15 +142,16 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                 date: getFormatDate(date, "YYYY-MM-DD"),
                 trainingType: queryObject.vertical,
                 availability: queryObject.availability,
+                // inPerson: queryObject.inPerson,
+                city:
+                    Object.values(inPerson).filter(
+                        ({ selected }) => selected
+                    )[0]?.value || "",
             },
         };
-
         updateTrainerDetails(payload);
-
         history.push("/trainer/find");
     };
-    const ref = React.useRef(null);
-    useOnClickOutside(ref, close);
     return (
         <div className="background">
             <div className="cntr_cotainer">
@@ -156,24 +170,16 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                             <div className="card_item_home">
                                 <div className="custom_dropdown">
                                     <div
-                                        onClick={() => {SetLocation("Virtual");setInPersonDD(false)}}
-                                         >
-                                        <h6 style={{ margin: "0" }} ref={ref}>
-                                            {virtualMarkup}
-                                        </h6>
-                                    </div>
-                                    <img
-                                        src={Between}
-                                        alt="icon"
-                                        className="between"
-                                    />
-                                    <div
-                                        onClick={() => SetLocation("In Person")}
+                                        onClick={() => {
+                                            SetLocation("Virtual");
+                                            setInPersonDD(false);
+                                        }}
                                     >
-                                        <h6
-                                            onClick={TriggerInPersonDropDown}
-                                            ref={ref}
-                                        >
+                                        {virtualMarkup}
+                                    </div>
+                                    <img src={Between} alt="icon" />
+                                    <div onClick={() => SetLocation("")}>
+                                        <h6 onClick={TriggerInPersonDropDown}>
                                             {inPersonMarkup}
                                         </h6>
                                         <div className="card_item_home">
@@ -230,7 +236,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                                         />
                                     )}
                                 </DatePicker>
-
                                 <img src={SheduleIcon} ali="icon" />
                             </div>
                         </div>
@@ -264,7 +269,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
         </div>
     );
 };
-
 function LineBetween() {
     return (
         <div className="line">
@@ -309,11 +313,9 @@ function DropDownSVG() {
         </svg>
     );
 }
-
 const mapStateToProps = (state) => ({
     trainerQueryData: state.trainerReducer.query,
 });
-
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
@@ -322,7 +324,5 @@ const mapDispatchToProps = (dispatch) => {
         dispatch
     );
 };
-
 const Banner = connect(mapStateToProps, mapDispatchToProps)(BannerFC);
-
 export default Banner;

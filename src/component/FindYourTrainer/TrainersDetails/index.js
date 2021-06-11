@@ -23,19 +23,24 @@ const TrainerCardsFC = (props) => {
     no_match = <h1 className="no_match">No Matches found</h1>;
   }
 
-  const handleClick = (data) => {
+  const handleClick = (data, isReadMore = false) => {
     let reduxData = {
       selectedTrainerData: {
         trainerId: bestMatchData[data]["id"],
         trainerData: bestMatchData[data],
       },
     };
-
-    history.push({
-      pathname: "/user/scheduler",
-    });
-
     props.updateUserDetails(reduxData);
+
+    if (!isReadMore) {
+      history.push({
+        pathname: "/user/scheduler",
+      });
+    } else {
+      history.push({
+        pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
+      });
+    }
   };
 
   return (
@@ -80,17 +85,7 @@ const TrainerCardsFC = (props) => {
                   <p>
                     {bestMatchData[data]["description"]}
                     &nbsp;
-                    <button
-                      onClick={() => {
-                        history.push({
-                          pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
-                          state: {
-                            trainerId: bestMatchData[data]["id"],
-                            trainerData: bestMatchData[data],
-                          },
-                        });
-                      }}
-                    >
+                    <button onClick={() => handleClick(data, true)}>
                       Read More
                     </button>
                   </p>

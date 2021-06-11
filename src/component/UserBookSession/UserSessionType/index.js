@@ -28,8 +28,8 @@ const options = [
 ];
 
 const trainingVenueOptions = [
-  { value: "trainerlocation", label: "Trainer's Location" },
-  { value: "yourlocation", label: "Your Location" },
+  { value: "trainerLocation", label: "Trainer's Location" },
+  { value: "clientLocation", label: "Your Location" },
 ];
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
@@ -49,6 +49,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
     setTrainingVenue(sessionData?.trainingVenue);
     setPreferedTrainingMode(sessionData?.preferedTrainingMode);
     // console.log(location.state["slotDetails"]);
+    window.scrollTo(0, 0);
   }, []);
 
   const handleBookSession = (price, sessionType) => {
