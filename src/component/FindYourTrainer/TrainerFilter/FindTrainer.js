@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { BiSearch } from "react-icons/bi";
 import HoverImage from "react-hover-image";
 import InPersonDropDown from "component/Home/Banner/InPersonDropDown";
+import Between from "../../../assets/files/Home/Banner/SearchBar/between.svg";
 
 //Assets for Inactive
 import BoxingIcon from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Inactive.svg";
@@ -252,6 +253,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         <p
           style={{
             borderBottom: "3px solid #53BFD2",
+            width: "222px",
+            maxWidth: "fit-content",
           }}
         >
           In Person
@@ -287,7 +290,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     trainerAvailableApi.query.location = location;
     trainerAvailableApi.query.trainingType = trainingType;
     trainerAvailableApi.query.date = date;
-    trainerAvailableApi.query.city = city;
+    trainerAvailableApi.query.city =
+      Object.values(inPerson).filter(({ selected }) => selected)[0]?.value ||
+      city;
     trainerAvailableApi.query.availability = availability;
 
     api({ ...trainerAvailableApi }).then(({ data }) => {
@@ -340,25 +345,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   {virtualMarkup}
                 </div>
               </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="9"
-                height="27"
-                viewBox="0 0 9 27"
-              >
-                <text
-                  id="_"
-                  data-name="/"
-                  transform="translate(1 22)"
-                  fill="#53bfd2"
-                  fontSize="20"
-                  fontFamily="SegoeUI, Segoe UI"
-                >
-                  <tspan x="0" y="0">
-                    /
-                  </tspan>
-                </text>
-              </svg>
+              <img src={Between} alt="icon" />
               <div
                 onClick={() => {
                   SetLocation("In Person") && TriggerInPersonDropDown();
