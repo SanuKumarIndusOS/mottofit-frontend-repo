@@ -208,14 +208,22 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                 <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
             );
             setinPersonMarkup(
-                <p style={{ fontWeight: "normal" }}>In Person</p>
+                <p style={{ fontWeight: "normal", lineHeight: "30px" }}>
+                    In Person
+                </p>
             );
 
             setqueryObject({ ...queryObject, location: "Online" });
         } else {
             setvirtualMarkup(<p style={{ fontWeight: "normal" }}>Virtual</p>);
             setinPersonMarkup(
-                <p style={{ borderBottom: "3px solid #53BFD2", width: "97px" }}>
+                <p
+                    style={{
+                        borderBottom: "3px solid #53BFD2",
+                        width: "97px",
+                        lineHeight: "30px",
+                    }}
+                >
                     In Person
                 </p>
             );

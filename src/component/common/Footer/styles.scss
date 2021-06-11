@@ -72,7 +72,7 @@
                                 padding: 0 !important;
                                 align-items: center;
                                 text-align: center !important;
-                                margin: 3em 0 -1em 0;
+                                margin: 3em 0 0em 0;
                             }
                         }
                         .footer_socialIcons {
@@ -102,6 +102,9 @@
                                             width: 23px;
                                             height: 24px;
                                         }
+                                    }
+                                    @media screen and (max-width: 1023px) {
+                                        justify-content: center;
                                     }
                                 }
                             }
