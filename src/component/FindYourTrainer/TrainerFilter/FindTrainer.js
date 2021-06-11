@@ -292,7 +292,10 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                         <div className="location">
                             <div className="card-item">
                                 <div
-                                    onClick={() => SetLocation("Virtual")}
+                                    onClick={() => {
+                                        SetLocation("Virtual");
+                                        setInPersonDD(false);
+                                    }}
                                     className="card-selection"
                                 >
                                     {virtualMarkup}

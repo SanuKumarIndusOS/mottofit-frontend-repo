@@ -16,7 +16,6 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
-import useOnClickOutside from "use-onclickoutside";
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
     const [DropdownState, setDropdownState] = useState(false);
@@ -39,15 +38,21 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
         // inPerson: "In Person",
     });
     const [date, setDate] = useState(new Date());
+    const [selectHightlight, setSelectHightlight] = useState(false);
 
     //Training_type_dropdown
     let DropdownTraining;
     if (DropdownState) {
         DropdownTraining = (
             <Dropdown
+                className={DropdownState ? "buttonFalse" : "buttonTrue"}
                 onClick={({ vertical }) => {
                     setqueryObject({ ...queryObject, vertical });
                     TriggerVerticalDropDown();
+                    setSelectHightlight(
+                        (selectHightlight) => !selectHightlight
+                    );
+                    console.log(selectHightlight, "selectHightlight");
                 }}
             />
         );
@@ -122,11 +127,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
         setDropdownState(!DropdownState);
     };
 
-    const handleBlur = (e) => {
-        console.log("on blur");
-        setInPersonDD(false);
-    };
-
     const search_action = () => {
         let payload = {
             query: {
@@ -142,8 +142,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
         history.push("/trainer/find");
     };
 
-    const ref = React.useRef(null);
-    useOnClickOutside(ref, close);
     return (
         <div className="background">
             <div className="cntr_cotainer">
@@ -162,10 +160,12 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                             <div className="card_item_home">
                                 <div className="custom_dropdown">
                                     <div
-                                        onClick={() => SetLocation("Virtual")}
-                                        onBlur={handleBlur}
+                                        onClick={() => {
+                                            SetLocation("Virtual");
+                                            setInPersonDD(false);
+                                        }}
                                     >
-                                        <h6 style={{ margin: "0" }} ref={ref}>
+                                        <h6 style={{ margin: "0" }}>
                                             {virtualMarkup}
                                         </h6>
                                     </div>
@@ -177,10 +177,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                                     <div
                                         onClick={() => SetLocation("In Person")}
                                     >
-                                        <h6
-                                            onClick={TriggerInPersonDropDown}
-                                            ref={ref}
-                                        >
+                                        <h6 onClick={TriggerInPersonDropDown}>
                                             {inPersonMarkup}
                                         </h6>
                                         <div className="card_item_home">

@@ -4,7 +4,7 @@ import PilatesIcon from "../../../assets/files/FindTrainer/DropDownAssets/Pilate
 import StrengthIcon from "../../../assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Inactive.svg";
 import YogaIcon from "../../../assets/files/FindTrainer/DropDownAssets/Yoga_Inactive.svg";
 import HoverImage from "react-hover-image";
-
+import "./style.scss";
 // Assets when hoveded
 import BoxingIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Active.svg";
 import PilatesIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Pilates_Active.svg";
@@ -16,17 +16,18 @@ const Dropdown = ({ onClick = () => {} }) => {
     const [ddPilatesState, setddPilatesState] = useState(false);
     const [ddYogaState, setddYogaState] = useState(false);
     const [ddHiitState, setddHiitState] = useState(false);
+    // const [select, ser]
 
     return (
         <>
             <div className="box_3_active_home">
                 <div className="dd_row_one">
                     <div
-                        className="option"
+                        className={ddBoxingState ? "notoption" : "option"}
                         onClick={() => {
-                            setddBoxingState(!ddBoxingState);
+                            setddBoxingState((ddBoxingState) => !ddBoxingState);
                             onClick({ vertical: "Boxing" });
-                            console.log(ddBoxingState, "boxing");
+                            console.log(!ddBoxingState, "boxing");
                         }}
                     >
                         <div className="option_wapper">
