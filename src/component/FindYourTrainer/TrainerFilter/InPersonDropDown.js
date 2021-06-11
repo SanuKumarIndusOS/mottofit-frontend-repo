@@ -34,6 +34,7 @@ export const InPersonDropDown = () => {
                                                     !inPerson.newYork &&
                                                     e.target.value,
                                             });
+                                            console.log("clicked New york");
                                         }}
                                         className="inperson_radio"
                                     />
@@ -52,6 +53,7 @@ export const InPersonDropDown = () => {
                                                     !inPerson.miami &&
                                                     e.target.value,
                                             });
+                                            console.log("clicked Miami");
                                         }}
                                         className="inperson_radio"
                                     />
@@ -70,6 +72,7 @@ export const InPersonDropDown = () => {
                                                     !inPerson.hamptons &&
                                                     e.target.value,
                                             });
+                                            console.log("clicked Hamptons");
                                         }}
                                         className="inperson_radio"
                                     />
@@ -88,6 +91,7 @@ export const InPersonDropDown = () => {
                                                     !inPerson.plamBeach &&
                                                     e.target.value,
                                             });
+                                            console.log("clicked Plam Beach");
                                         }}
                                         className="inperson_checkbox"
                                     />

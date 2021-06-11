@@ -16,8 +16,9 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
+import useOnClickOutside from "use-onclickoutside";
 
-const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
     const [DropdownState, setDropdownState] = useState(false);
 
     const [DropdownAvailabilityState, setDropdownAvailabilityState] =
@@ -35,7 +36,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         vertical: "Select a Category",
         date: "",
         availability: "Select a Time",
-        inPerson: "In Person",
+        // inPerson: "In Person",
     });
     const [date, setDate] = useState(new Date());
 
@@ -57,7 +58,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     const SetLocation = (value) => {
         if (value === "Virtual") {
             setvirtualMarkup(
-                <h2 style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</h2>
+                <h2 style={{ borderBottom: "3px solid #53BFD2", margin: "0" }}>
+                    Virtual
+                </h2>
             );
             setinPersonMarkup(
                 <h2 style={{ fontWeight: "normal" }}>In Person</h2>
@@ -65,9 +68,15 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
             setqueryObject({ ...queryObject, location: "Online" });
         } else {
-            setvirtualMarkup(<h2 style={{ fontWeight: "normal" }}>Virtual</h2>);
+            setvirtualMarkup(
+                <h2 style={{ fontWeight: "normal", margin: "0" }}>Virtual</h2>
+            );
             setinPersonMarkup(
-                <h2 style={{ borderBottom: "3px solid #53BFD2" }}>In Person</h2>
+                <h2
+                    style={{ borderBottom: "3px solid #53BFD2", width: "88px" }}
+                >
+                    In Person
+                </h2>
             );
             setqueryObject({ ...queryObject, location: "Person" });
         }
@@ -85,7 +94,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             />
         );
     } else {
-        <div>hello</div>;
+        <div></div>;
     }
     //inPerson_dropdown
     let DropdownHomeInPerson;
@@ -99,7 +108,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             />
         );
     } else {
-        <div>hello</div>;
+        <div></div>;
     }
 
     const TriggerDropDownAvailability = () => {
@@ -113,6 +122,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         setDropdownState(!DropdownState);
     };
 
+    const handleBlur = (e) => {
+        console.log("on blur");
+        setInPersonDD(false);
+    };
+
     const search_action = () => {
         let payload = {
             query: {
@@ -120,7 +134,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                 date: getFormatDate(date, "YYYY-MM-DD"),
                 trainingType: queryObject.vertical,
                 availability: queryObject.availability,
-                inPerson: queryObject.inPerson,
             },
         };
 
@@ -128,6 +141,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
         history.push("/trainer/find");
     };
+
+    const ref = React.useRef(null);
+    useOnClickOutside(ref, close);
     return (
         <div className="background">
             <div className="cntr_cotainer">
@@ -145,18 +161,30 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                             <h3>Location</h3>
                             <div className="card_item_home">
                                 <div className="custom_dropdown">
-                                    <div onClick={() => SetLocation("Virtual")}>
-                                        {virtualMarkup}
+                                    <div
+                                        onClick={() => SetLocation("Virtual")}
+                                        onBlur={handleBlur}
+                                    >
+                                        <h6 style={{ margin: "0" }} ref={ref}>
+                                            {virtualMarkup}
+                                        </h6>
                                     </div>
-                                    <img src={Between} alt="icon" />
-                                    <div onClick={() => SetLocation("")}>
+                                    <img
+                                        src={Between}
+                                        alt="icon"
+                                        className="between"
+                                    />
+                                    <div
+                                        onClick={() => SetLocation("In Person")}
+                                    >
+                                        <h6
+                                            onClick={TriggerInPersonDropDown}
+                                            ref={ref}
+                                        >
+                                            {inPersonMarkup}
+                                        </h6>
                                         <div className="card_item_home">
-                                            <div
-                                                className="custom_dropdown"
-                                                onClick={
-                                                    TriggerInPersonDropDown
-                                                }
-                                            >
+                                            <div className="custom_dropdown">
                                                 <h2>{`${
                                                     queryObject.inPerson || ""
                                                 }`}</h2>

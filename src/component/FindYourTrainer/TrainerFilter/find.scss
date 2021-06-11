@@ -26,15 +26,17 @@
     align-items: flex-start;
     .inPerson-dd {
         position: relative;
-        right: 80px;
+        right: 90px;
+        width: 222px;
     }
 }
 
-.card .card-wrapper .item1 svg {
+.card .card-wrapper .item1 .betweenSvg {
     bottom: 8px;
     position: relative;
     left: 5px;
     top: 0px;
+    margin: 0 0.8em 0 0.2em;
 }
 
 .card .card-wrapper .item2 {
@@ -81,7 +83,17 @@
     width: 250px;
     padding: 1em 0.1em 0 1.8em;
 }
-.card .card-wrapper .item1 p,
+.card .card-wrapper .item1 p {
+    margin: 0px;
+    font-size: 20px;
+    color: #898989;
+    font-family: "Montserrat";
+    font-weight: 500;
+    &:nth-child(2) {
+        margin-left: 10px;
+    }
+}
+
 .card .card-wrapper .item2 p,
 .card .card-wrapper .item3 p,
 .card .card-wrapper .item4 p {

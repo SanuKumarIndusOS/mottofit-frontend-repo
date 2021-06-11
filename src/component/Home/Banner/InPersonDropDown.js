@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import "./inPersonStyles.scss";
 import Radio from "@material-ui/core/Radio";
@@ -17,8 +17,31 @@ export const InPersonDropDown = () => {
         hamptons: "",
         plamBeach: "",
     });
+    const [open, setOpen] = useState(false);
+    const node = useRef();
+    const handleClickOutside = (e) => {
+        console.log("clicking anywhere");
+        if (node.current.contains(e.target)) {
+            // inside click
+            return;
+        }
+        // outside click
+        setOpen(false);
+    };
+
+    useEffect(() => {
+        if (open) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [open]);
     return (
-        <div className="inPersonBG">
+        <div className="inPersonBG" ref={node}>
             <div className="list_inPerson">
                 <form>
                     <FormControl component="fieldset">
