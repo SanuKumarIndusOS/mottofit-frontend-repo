@@ -1,623 +1,867 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
-
+import ReactPhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 import ImageBG from "assets/files/SVG/Image 1.svg";
 import Instagram from "assets/files/SVG/Insta Icon.svg";
 import Web from "assets/files/SVG/Web Icon.svg";
 import Location from "assets/files/SVG/Location Icon.svg";
+import moment from "moment";
+import SimpleReactValidator from "simple-react-validator";
 import {
-  getTrainerDetails,
-  updateTrainerDetails,
-  fileUpload,
+    getTrainerDetails,
+    updateTrainerDetails,
+    fileUpload,
 } from "action/trainerAct";
 import CloseIcon from "../../../../assets/files/FindTrainer/Cross.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
-
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import { YearDropDown } from "component/common/YearDropdown";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 const options = [
-  { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
-  {
-    label: "New York City",
-    value: "New York City",
-    name: "serviceableLocation",
-  },
-  { label: "Hamptons", value: "Hamptons", name: "serviceableLocation" },
-  { label: "Miami", value: "Miami", name: "serviceableLocation" },
+    { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
+    {
+        label: "New York City",
+        value: "New York City",
+        name: "serviceableLocation",
+    },
+    { label: "Hamptons", value: "Hamptons", name: "serviceableLocation" },
+    { label: "Miami", value: "Miami", name: "serviceableLocation" },
 ];
 
 const CyanRadio = withStyles({
-  root: {
-    "&$checked": {
-      color: cyan[600],
+    root: {
+        "&$checked": {
+            color: cyan[600],
+        },
     },
-  },
-  checked: {},
+    checked: {},
 })((props) => <Radio color="default" {...props} />);
 
 const MyProfileFC = ({
-  getTrainerDetails,
-  details,
-  updateTrainerDetails,
-  fileUploadApi,
+    getTrainerDetails,
+    details,
+    updateTrainerDetails,
+    fileUploadApi,
 }) => {
-  const [trainerData, setTrainerData] = useState({
-    motto: "",
-    trainingProcessDescription: "",
-    trainingLocation: [],
-    servicableLocation: "",
-    location: "",
-    websiteLink: "",
-    instaHandle: "",
-    youtubeChannel: "",
-    governmentId: "",
-    insurance: "",
-    governmentIdNumber: "",
-    coverAmount: "",
-    virtualMeetingHandle: "",
-    virtualMeetingLink: "",
-    identityNameUS: "",
-    trainingFacilityLocation: [],
-    insuranceNameUS: "",
-  });
-  const [trainerAvailabilityData, setTrainerAvailabilityData] = React.useState({
-    hoursPerWeek: "",
-    preferedTrainingMode: [],
-    trainingFacilityLocation: "",
-    servicableLocation: "",
-  });
-
-  //state for radio buttons
-  const [selectedValue, setSelectedValue] = React.useState("a");
-  const [selectedOneValue, setSelectedOneValue] = React.useState("");
-
-  const handleOneChange = (event) => {
-    setSelectedOneValue(event.target.value);
-
-    setTrainerAvailabilityData({
-      ...trainerAvailabilityData,
-      willingToTravel: event.target.value,
+    const [trainerData, setTrainerData] = useState({
+        motto: "",
+        trainingProcessDescription: "",
+        trainingLocation: [],
+        servicableLocation: "",
+        location: "",
+        websiteLink: "",
+        instaHandle: "",
+        youtubeChannel: "",
+        governmentId: "",
+        insurance: "",
+        governmentIdNumber: "",
+        coverAmount: "",
+        virtualMeetingHandle: "",
+        virtualMeetingLink: "",
+        identityNameUS: "",
+        trainingFacilityLocation: [],
+        insuranceNameUS: "",
+        dob: "",
+        phone: "",
     });
-  };
+    const [trainerAvailabilityData, setTrainerAvailabilityData] =
+        React.useState({
+            hoursPerWeek: "",
+            preferedTrainingMode: [],
+            trainingFacilityLocation: "",
+            servicableLocation: "",
+        });
 
-  //handleChange for radio
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+    //state for radio buttons
+    const [selectedValue, setSelectedValue] = React.useState("a");
+    const [selectedOneValue, setSelectedOneValue] = React.useState("");
 
-  //Image
-  const [imagesList, setImageList] = useState(["", "", "", "", ""]);
+    const handleOneChange = (event) => {
+        setSelectedOneValue(event.target.value);
 
-  // input certification
-  const [inputCertificatesFields, setInputCertificatesFields] = useState([
-    {
-      certificate: "",
-      year: "",
-      remove: "",
-    },
-  ]);
-  const handleAddCertificateFields = () => {
-    setInputCertificatesFields([
-      ...inputCertificatesFields,
-      { certificate: "", year: "", remove: "" },
+        setTrainerAvailabilityData({
+            ...trainerAvailabilityData,
+            willingToTravel: event.target.value,
+        });
+    };
+
+    //handleChange for radio
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
+
+    //Image
+    const [imagesList, setImageList] = useState(["", "", "", "", ""]);
+
+    // input certification
+    const [inputCertificatesFields, setInputCertificatesFields] = useState([
+        {
+            certificate: "",
+            year: "",
+            remove: "",
+        },
     ]);
-  };
-  const handleRemoveCertificateFields = (index) => {
-    const values = [...inputCertificatesFields];
-    values.splice(index, 1);
-    setInputCertificatesFields(values);
-  };
-  const handleChangeCertificateInput = (index, event) => {
-    const values = [...inputCertificatesFields];
-    values[index][event.target.name] = event.target.value;
-    setInputCertificatesFields(values);
-  };
-  const handleMoreImageUploadArea = () => {
-    imagesList.push("");
-    setImageList([...imagesList]);
-  };
-  const handleInputChange = (e, trainingType) => {
-    e.preventDefault && e.preventDefault();
+    const handleAddCertificateFields = () => {
+        setInputCertificatesFields([
+            ...inputCertificatesFields,
+            { certificate: "", year: "", remove: "" },
+        ]);
+    };
+    const handleRemoveCertificateFields = (index) => {
+        const values = [...inputCertificatesFields];
+        values.splice(index, 1);
+        setInputCertificatesFields(values);
+    };
+    const handleChangeCertificateInput = (index, event) => {
+        const values = [...inputCertificatesFields];
+        values[index][event.target.name] = event.target.value;
+        setInputCertificatesFields(values);
+    };
+    const handleMoreImageUploadArea = () => {
+        imagesList.push("");
+        setImageList([...imagesList]);
+    };
+    const handleInputChange = (e, trainingType) => {
+        e.preventDefault && e.preventDefault();
 
-    const { name, value } = e.target || e || {};
+        const { name, value } = e.target || e || {};
 
-    const tempData = {
-      ...trainerData,
+        const tempData = {
+            ...trainerData,
+        };
+
+        const isMultiSelect = Array.isArray(e);
+
+        if (name === "trainingLocation") {
+            if (tempData["trainingLocation"].includes(trainingType)) {
+                tempData["trainingLocation"] = tempData[
+                    "trainingLocation"
+                ].filter((location) => location !== trainingType);
+            } else {
+                tempData["trainingLocation"] = [
+                    ...tempData["trainingLocation"],
+                    trainingType,
+                ];
+            }
+        } else {
+            tempData[`${isMultiSelect ? e[0].name : name}`] = isMultiSelect
+                ? e
+                : value;
+        }
+
+        setTrainerData(tempData);
     };
 
-    const isMultiSelect = Array.isArray(e);
-
-    if (name === "trainingLocation") {
-      if (tempData["trainingLocation"].includes(trainingType)) {
-        tempData["trainingLocation"] = tempData["trainingLocation"].filter(
-          (location) => location !== trainingType
-        );
-      } else {
-        tempData["trainingLocation"] = [
-          ...tempData["trainingLocation"],
-          trainingType,
-        ];
-      }
-    } else {
-      tempData[`${isMultiSelect ? e[0].name : name}`] = isMultiSelect
-        ? e
-        : value;
-    }
-
-    setTrainerData(tempData);
-  };
-
-  const handleSubmit = () => {
-    const {
-      instaHandle,
-      motto,
-      servicableLocation,
-      trainingProcessDescription,
-      websiteLink,
-      trainingFacilityLocation,
-      virtualMeetingLink,
-    } = trainerData;
-
-    let payload = {
-      trainingProcess: trainingProcessDescription,
-      myMotto: motto,
-      websiteLink: websiteLink,
-      instagramProfile: instaHandle,
-      certification: inputCertificatesFields,
-      virtualMeetingLink: virtualMeetingLink,
-      servicableLocation: servicableLocation,
-      trainingFacilityLocation: trainingFacilityLocation,
-      images: imagesList.filter((x) => x !== ""),
-    };
-
-    const { updateTrainerAvailabilityApi } = TrainerApi;
-
-    updateTrainerAvailabilityApi.body = payload;
-
-    api({ ...updateTrainerAvailabilityApi })
-      .then(() => {
-        _getTrainerDetails();
-        alert("Successfully added changes");
-      })
-      .catch((err) => console.log(err));
-  };
-  const _getTrainerDetails = () => {
-    getTrainerDetails()
-      .then((data) => {
+    const handleSubmit = () => {
         const {
-          trainingProcess = "",
-          myMotto = "",
-          preferedTrainingMode = [],
-          websiteLink = "",
-          instagramProfile = "",
-          currentExperience = {},
-          certification = [],
-          servicableLocation = [],
-          location = "",
-          virtualMeetingLink = "",
-          trainingFacilityLocation = [],
-        } = data || {};
-        const { workLocation = "" } = currentExperience || {};
+            dob,
+            phone,
+            instaHandle,
+            motto,
+            servicableLocation,
+            trainingProcessDescription,
+            websiteLink,
+            trainingFacilityLocation,
+            virtualMeetingLink,
+        } = trainerData;
 
-        const storeData = {
-          details: {
-            ...details,
-            motto: myMotto,
-            trainingProcessDescription: trainingProcess,
-            trainingLocation: preferedTrainingMode,
-            location: workLocation,
+        let payload = {
+            DOB: dob,
+            phoneNumber: phone,
+            trainingProcess: trainingProcessDescription,
+            myMotto: motto,
             websiteLink: websiteLink,
-            instaHandle: instagramProfile,
-            location,
+            instagramProfile: instaHandle,
+            certification: inputCertificatesFields,
             virtualMeetingLink: virtualMeetingLink,
             servicableLocation: servicableLocation,
             trainingFacilityLocation: trainingFacilityLocation,
-          },
+            images: imagesList.filter((x) => x !== ""),
         };
-        if (data.images && data.images.length !== 0) {
-          setImageList(data.images);
-        }
-        if (
-          data.willingToTravel !== null &&
-          data.willingToTravel !== undefined
-        ) {
-          setSelectedOneValue(data.willingToTravel ? "1" : "0");
-        }
-        if (certification) {
-          setInputCertificatesFields(certification);
-        }
-        setTrainerData(storeData.details);
-        updateTrainerDetails(storeData);
-      })
-      .catch((err) => console.log(err));
-  };
 
-  useEffect(() => {
-    _getTrainerDetails();
-  }, []);
+        const { updateTrainerAvailabilityApi } = TrainerApi;
 
-  const handleUploadArea = (e, index) => {
-    let image = e.target.files[0];
-    if (image !== undefined) {
-      const fd = new FormData();
+        updateTrainerAvailabilityApi.body = payload;
 
-      fd.append("images", image);
-      fileUploadApi(fd).then((data) => {
-        imagesList[index] = URL.createObjectURL(image);
+        api({ ...updateTrainerAvailabilityApi })
+            .then(() => {
+                _getTrainerDetails();
+                alert("Successfully added changes");
+            })
+            .catch((err) => console.log(err));
+    };
+    const _getTrainerDetails = () => {
+        getTrainerDetails()
+            .then((data) => {
+                const {
+                    phoneNumber = "",
+                    DOB = "",
+                    trainingProcess = "",
+                    myMotto = "",
+                    preferedTrainingMode = [],
+                    websiteLink = "",
+                    instagramProfile = "",
+                    currentExperience = {},
+                    certification = [],
+                    servicableLocation = [],
+                    location = "",
+                    virtualMeetingLink = "",
+                    trainingFacilityLocation = [],
+                } = data || {};
+                const { workLocation = "" } = currentExperience || {};
+
+                const storeData = {
+                    details: {
+                        ...details,
+                        dob: DOB,
+                        phone: phoneNumber,
+                        motto: myMotto,
+                        trainingProcessDescription: trainingProcess,
+                        trainingLocation: preferedTrainingMode,
+                        location: workLocation,
+                        websiteLink: websiteLink,
+                        instaHandle: instagramProfile,
+                        location,
+                        virtualMeetingLink: virtualMeetingLink,
+                        servicableLocation: servicableLocation,
+                        trainingFacilityLocation: trainingFacilityLocation,
+                    },
+                };
+                if (data.images && data.images.length !== 0) {
+                    setImageList(data.images);
+                }
+                if (
+                    data.willingToTravel !== null &&
+                    data.willingToTravel !== undefined
+                ) {
+                    setSelectedOneValue(data.willingToTravel ? "1" : "0");
+                }
+                if (certification) {
+                    setInputCertificatesFields(certification);
+                }
+                setTrainerData(storeData.details);
+                updateTrainerDetails(storeData);
+            })
+            .catch((err) => console.log(err));
+    };
+
+    useEffect(() => {
+        _getTrainerDetails();
+    }, []);
+
+    const handleUploadArea = (e, index) => {
+        let image = e.target.files[0];
+        if (image !== undefined) {
+            const fd = new FormData();
+
+            fd.append("images", image);
+            fileUploadApi(fd).then((data) => {
+                imagesList[index] = URL.createObjectURL(image);
+                setImageList([...imagesList]);
+            });
+        }
+    };
+
+    const handleRemoveImage = (index) => {
+        imagesList[index] = "";
         setImageList([...imagesList]);
-      });
-    }
-  };
+    };
 
-  const handleRemoveImage = (index) => {
-    imagesList[index] = "";
-    setImageList([...imagesList]);
-  };
-
-  return (
-    <>
-      <div className="outter_tp_container">
-        <div className="container">
-          <div className="inner_trinerpro_container">
-            <div className="tp_wrapper">
-              <div className="tp_header">
-                <h2>My Profile</h2>
-              </div>
-              <div className="tp_outter_form container">
-                <form onSubmit={(e) => e.preventDefault()}>
-                  <div className="setup_card1">
-                    <h6>What’s your Motto?</h6>
-                    <textarea
-                      type="text"
-                      placeholder="Tell us all about it"
-                      onChange={handleInputChange}
-                      value={trainerData.motto}
-                      name="motto"
-                      maxlength="500"
-                    />
-                  </div>
-                  <div className="setup_card2">
-                    <h6>
-                      Tell us about you and describe your training process
-                    </h6>
-                    <textarea
-                      type="text"
-                      name="comment"
-                      placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here will be searchable through our search bar"
-                      onChange={handleInputChange}
-                      value={trainerData.trainingProcessDescription}
-                      name="trainingProcessDescription"
-                    />
-                  </div>
-                  <div className="setup_card3">
-                    <h6>Throw in some photos showcasing you & your skills</h6>
-                    <div className="row">
-                      {imagesList.map((list, index) => {
-                        return (
-                          <div className="col-3 w-100 mb-3 px-2" key={index}>
-                            <div className="image-upload-card btn-file-input">
-                              {list !== "" ? (
-                                <button className="uploaded-image">
-                                  <img
-                                    src={list}
-                                    alt={"card-image"}
-                                    accept="image/*"
-                                  />
-                                  <div id="overlay"></div>
-                                  <img
-                                    src={CloseIcon}
-                                    className="remove-image"
-                                    alt="close"
-                                    onClick={() => handleRemoveImage(index)}
-                                  />
-                                </button>
-                              ) : (
-                                <button>
-                                  <img
-                                    src={ImageBG}
-                                    alt={"card-image"}
-                                    accept="image/*"
-                                  />
-                                  <input
-                                    type="file"
-                                    name="insurance"
-                                    className="custom-file-input"
-                                    onChange={(e) => handleUploadArea(e, index)}
-                                  />
-                                </button>
-                              )}
+    //validation
+    const validator = new SimpleReactValidator({
+        messages: {
+            email: "Invalid Email address",
+        },
+        element: (message) => (
+            <span className="error-message text-danger fs-14">{message}</span>
+        ),
+        autoForceUpdate: this,
+        validators: {
+            email: {
+                message: "must be a valid Email.",
+                rule: (val, params, validator) => {
+                    return validator.helpers.testRegex(
+                        val,
+                        /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/
+                    );
+                },
+                messageReplace: (message, params) =>
+                    message.replace("", this.helpers.toSentence(params)),
+                required: true,
+            },
+        },
+    });
+    return (
+        <>
+            <div className="outter_tp_container">
+                <div className="container">
+                    <div className="inner_trinerpro_container">
+                        <div className="tp_wrapper">
+                            <div className="tp_header">
+                                <h2>My Profile</h2>
                             </div>
-                          </div>
-                        );
-                      })}
-                      {imagesList.length < 10 ? (
-                        <h5 onClick={() => handleMoreImageUploadArea()}>
-                          + Add More Images
-                        </h5>
-                      ) : null}
+                            <div className="tp_outter_form container">
+                                <form onSubmit={(e) => e.preventDefault()}>
+                                    <div className="setup_card1">
+                                        <h6>What’s your Motto?</h6>
+                                        <textarea
+                                            type="text"
+                                            placeholder="Tell us all about it"
+                                            onChange={handleInputChange}
+                                            value={trainerData.motto}
+                                            name="motto"
+                                            maxlength="500"
+                                        />
+                                    </div>
+                                    <div className="setup_card2">
+                                        <h6>
+                                            Tell us about you and describe your
+                                            training process
+                                        </h6>
+                                        <textarea
+                                            type="text"
+                                            name="comment"
+                                            placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here will be searchable through our search bar"
+                                            onChange={handleInputChange}
+                                            value={
+                                                trainerData.trainingProcessDescription
+                                            }
+                                            name="trainingProcessDescription"
+                                        />
+                                    </div>
+                                    <div className="setup_card3">
+                                        <h6>
+                                            Throw in some photos showcasing you
+                                            & your skills
+                                        </h6>
+                                        <div className="row">
+                                            {imagesList.map((list, index) => {
+                                                return (
+                                                    <div
+                                                        className="col-3 w-100 mb-3 px-2"
+                                                        key={index}
+                                                    >
+                                                        <div className="image-upload-card btn-file-input">
+                                                            {list !== "" ? (
+                                                                <button className="uploaded-image">
+                                                                    <img
+                                                                        src={
+                                                                            list
+                                                                        }
+                                                                        alt={
+                                                                            "card-image"
+                                                                        }
+                                                                        accept="image/*"
+                                                                    />
+                                                                    <div id="overlay"></div>
+                                                                    <img
+                                                                        src={
+                                                                            CloseIcon
+                                                                        }
+                                                                        className="remove-image"
+                                                                        alt="close"
+                                                                        onClick={() =>
+                                                                            handleRemoveImage(
+                                                                                index
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                </button>
+                                                            ) : (
+                                                                <button>
+                                                                    <img
+                                                                        src={
+                                                                            ImageBG
+                                                                        }
+                                                                        alt={
+                                                                            "card-image"
+                                                                        }
+                                                                        accept="image/*"
+                                                                    />
+                                                                    <input
+                                                                        type="file"
+                                                                        name="insurance"
+                                                                        className="custom-file-input"
+                                                                        onChange={(
+                                                                            e
+                                                                        ) =>
+                                                                            handleUploadArea(
+                                                                                e,
+                                                                                index
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                            {imagesList.length < 10 ? (
+                                                <h5
+                                                    onClick={() =>
+                                                        handleMoreImageUploadArea()
+                                                    }
+                                                >
+                                                    + Add More Images
+                                                </h5>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                    <div className="setup_card4">
+                                        <h6>
+                                            Certifications you’d like to display
+                                        </h6>
+                                        {inputCertificatesFields?.map(
+                                            (inputCertificatesField, index) => (
+                                                <React.Fragment key={index}>
+                                                    <div className="inputs_certificate">
+                                                        <div className="col-6 px-2">
+                                                            <input
+                                                                type="text"
+                                                                placeholder="Certification Title"
+                                                                value={
+                                                                    inputCertificatesField.certificate
+                                                                }
+                                                                name="certificate"
+                                                                onChange={(
+                                                                    event
+                                                                ) =>
+                                                                    handleChangeCertificateInput(
+                                                                        index,
+                                                                        event
+                                                                    )
+                                                                }
+                                                                className="w-100 my-2"
+                                                            />
+                                                        </div>
+                                                        <div className="col-6 px-2">
+                                                            <YearDropDown
+                                                                label="Year you were Certified"
+                                                                value={
+                                                                    inputCertificatesField.year
+                                                                }
+                                                                name="year"
+                                                                handleChange={(
+                                                                    event
+                                                                ) =>
+                                                                    handleChangeCertificateInput(
+                                                                        index,
+                                                                        event
+                                                                    )
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    {index + 1 ===
+                                                    inputCertificatesFields.length ? (
+                                                        <div className="d-flex">
+                                                            <h5
+                                                                onClick={
+                                                                    handleAddCertificateFields
+                                                                }
+                                                            >
+                                                                + Add
+                                                                Certificate's
+                                                            </h5>
+                                                            {index + 1 ===
+                                                                inputCertificatesFields.length &&
+                                                            inputCertificatesFields.length !==
+                                                                1 ? (
+                                                                <h5
+                                                                    className="text-danger pl-3"
+                                                                    onClick={() =>
+                                                                        handleRemoveCertificateFields(
+                                                                            index
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    Remove
+                                                                </h5>
+                                                            ) : null}
+                                                        </div>
+                                                    ) : null}
+                                                </React.Fragment>
+                                            )
+                                        )}
+                                    </div>
+                                    <div className="setup_card5">
+                                        <div className="setupcontent_wrapper">
+                                            <div className="setup_item">
+                                                <h6>
+                                                    Where will you be training
+                                                </h6>
+                                                <div className="inputs_platform">
+                                                    <button
+                                                        onClick={(e) =>
+                                                            handleInputChange(
+                                                                e,
+                                                                "Online"
+                                                            )
+                                                        }
+                                                        className={`${
+                                                            trainerData?.trainingLocation?.includes(
+                                                                "Online"
+                                                            )
+                                                                ? "active"
+                                                                : ""
+                                                        }`}
+                                                        name="trainingLocation"
+                                                    >
+                                                        Virtual
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) =>
+                                                            handleInputChange(
+                                                                e,
+                                                                "inPerson"
+                                                            )
+                                                        }
+                                                        className={`${
+                                                            trainerData?.trainingLocation?.includes(
+                                                                "inPerson"
+                                                            )
+                                                                ? "active"
+                                                                : ""
+                                                        }`}
+                                                        name="trainingLocation"
+                                                    >
+                                                        In Person
+                                                    </button>
+                                                </div>
+                                                <div className="social_meeting_links">
+                                                    {trainerData?.trainingLocation?.includes(
+                                                        "Online"
+                                                    ) ? (
+                                                        // <div className="setup_ite1">
+                                                        <>
+                                                            <h5>
+                                                                Add your Google
+                                                                or Zoom meeting
+                                                                link
+                                                            </h5>
+                                                            <div className="inputs_platform">
+                                                                <div className="iconwrapper">
+                                                                    <textarea
+                                                                        type="text"
+                                                                        placeholder="Add a Google or Zoom meeting link"
+                                                                        value={
+                                                                            trainerData.virtualMeetingLink
+                                                                        }
+                                                                        onChange={
+                                                                            handleInputChange
+                                                                        }
+                                                                        name="virtualMeetingLink"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    ) : null}
+                                                </div>
+                                            </div>
+
+                                            <div className="setup_item1">
+                                                <h6>
+                                                    Which city will you train
+                                                    in?
+                                                </h6>
+                                                <div className="inputs_platform">
+                                                    <div className="iconwrapper">
+                                                        <NormalMultiSelect
+                                                            placeholder="Select Your City"
+                                                            value={
+                                                                trainerData.location
+                                                            }
+                                                            arrow={true}
+                                                            name="location"
+                                                            className="trainer-profile-dropdown"
+                                                            options={options}
+                                                            handleChange={(
+                                                                e
+                                                            ) => {
+                                                                setTrainerData({
+                                                                    ...trainerData,
+                                                                    location:
+                                                                        e.target
+                                                                            .value,
+                                                                });
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="item_3">
+                                                <h6>
+                                                    Do you have a facility or
+                                                    location where you will
+                                                    train clients?
+                                                </h6>
+                                                <CyanRadio
+                                                    checked={
+                                                        selectedValue === "a"
+                                                    }
+                                                    onChange={handleChange}
+                                                    value="a"
+                                                    name="radio-button-demo"
+                                                    label="Strength & Hitt"
+                                                    inputProps={{
+                                                        "aria-label": "a",
+                                                    }}
+                                                />
+                                                <label>Yes</label>
+                                                <CyanRadio
+                                                    checked={
+                                                        selectedValue === "b"
+                                                    }
+                                                    onChange={handleChange}
+                                                    value="b"
+                                                    name="radio-button-demo"
+                                                    label="Strength & Hitt"
+                                                    inputProps={{
+                                                        "aria-label": "b",
+                                                    }}
+                                                />
+                                                <label>No</label>
+                                            </div>
+                                            <div className="item_4">
+                                                <h6>
+                                                    Details of the
+                                                    facility/location
+                                                </h6>
+                                                <div className="inputs_platform">
+                                                    <textarea
+                                                        type="text"
+                                                        placeholder="Enter the Details of the location"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.trainingFacilityLocation
+                                                        }
+                                                        name="trainingFacilityLocation"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="item_5">
+                                                <h6>
+                                                    Are you willing to travel to
+                                                    clients in your city/region?
+                                                </h6>
+                                                <CyanRadio
+                                                    checked={
+                                                        selectedOneValue === "1"
+                                                    }
+                                                    onChange={handleOneChange}
+                                                    value="1"
+                                                    label="Strength & Hitt"
+                                                    inputProps={{
+                                                        "aria-label": "1",
+                                                    }}
+                                                />
+                                                <label> Yes!</label>
+                                                <CyanRadio
+                                                    checked={
+                                                        selectedOneValue === "0"
+                                                    }
+                                                    onChange={handleOneChange}
+                                                    value="0"
+                                                    label="Strength & Hitt"
+                                                    inputProps={{
+                                                        "aria-label": "0",
+                                                    }}
+                                                />
+                                                <label>No</label>
+                                            </div>
+                                            <div className="item_6">
+                                                <h6>
+                                                    List the areas/neighborhoods
+                                                    you’re willing to travel to
+                                                </h6>
+                                                <div className="inputs_platform">
+                                                    <textarea
+                                                        type="text"
+                                                        placeholder="Neighborhood List"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            trainerData.servicableLocation
+                                                        }
+                                                        name="servicableLocation"
+                                                    />
+
+                                                    <img
+                                                        src={Location}
+                                                        alt="icon"
+                                                        className="loction_img_select"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="setup_item1">
+                                                <h6>DOB</h6>
+                                                <div className="inputs_platform">
+                                                    <div className="iconwrapper">
+                                                        <input
+                                                            placeholder="DD/MM/YYYY"
+                                                            type="date"
+                                                            onFocus={(e) =>
+                                                                (e.currentTarget.type =
+                                                                    "date")
+                                                            }
+                                                            placeholder="MM/DD/YYYY"
+                                                            value={
+                                                                trainerData.dob
+                                                            }
+                                                            onChange={(e) => {
+                                                                setTrainerData({
+                                                                    ...trainerData,
+                                                                    dob: e
+                                                                        .target
+                                                                        .value,
+                                                                });
+                                                            }}
+                                                            name="dob"
+                                                            min="1900-01-01"
+                                                            max="2099-12-31"
+                                                            // onKeyDown={(e) =>
+                                                            //   e.keyCode !== 8 ? e.preventDefault() : ""
+                                                            // }
+                                                        />
+                                                    </div>
+                                                    {validator.message(
+                                                        "dob",
+                                                        trainerData.dob,
+                                                        "required"
+                                                    )}
+                                                    {trainerData.dob &&
+                                                        moment().diff(
+                                                            trainerData.dob,
+                                                            "years",
+                                                            false
+                                                        ) <= 21 && (
+                                                            <span className="text-danger">
+                                                                Trainer should
+                                                                be more than 21
+                                                                years of age
+                                                            </span>
+                                                        )}
+                                                </div>
+                                            </div>
+                                            <div className="setup_item1">
+                                                <h6>Phone Number</h6>
+                                                <div className="inputs_platform">
+                                                    <div className="iconwrapper">
+                                                        <ReactPhoneInput
+                                                            type="phone"
+                                                            disableDropdown
+                                                            disableAreaCodes
+                                                            countryCodeEditable={
+                                                                false
+                                                            }
+                                                            value={
+                                                                trainerData.phone
+                                                            }
+                                                            placeholder="Phone Number"
+                                                            // country="us"
+                                                            inputProps={{
+                                                                name: "phone",
+                                                            }}
+                                                            name="phoneNumber"
+                                                            onChange={(e) => {
+                                                                setTrainerData({
+                                                                    ...trainerData,
+                                                                    phone: e,
+                                                                });
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="setup_item1">
+                                                <h6>Instagram</h6>
+                                                <div className="inputs_platform">
+                                                    <div className="iconwrapper">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Add your Instagram Handle"
+                                                            onChange={
+                                                                handleInputChange
+                                                            }
+                                                            value={
+                                                                trainerData.instaHandle
+                                                            }
+                                                            name="instaHandle"
+                                                        />
+                                                        <img
+                                                            src={Instagram}
+                                                            alt="icon"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="setup_item1">
+                                                <h6>Website</h6>
+                                                <div className="inputs_platform">
+                                                    <div className="iconwrapper">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Add your Web Link"
+                                                            onChange={
+                                                                handleInputChange
+                                                            }
+                                                            value={
+                                                                trainerData.websiteLink
+                                                            }
+                                                            name="websiteLink"
+                                                        />
+                                                        <img
+                                                            src={Web}
+                                                            alt="icon"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="tp_button_save mb-5">
+                                        <button onClick={handleSubmit}>
+                                            Save changes <ArrowHoverBlacked />
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div className="setup_card4">
-                    <h6>Certifications you’d like to display</h6>
-                    {inputCertificatesFields?.map(
-                      (inputCertificatesField, index) => (
-                        <React.Fragment key={index}>
-                          <div className="inputs_certificate">
-                            <div className="col-6 px-2">
-                              <input
-                                type="text"
-                                placeholder="Certification Title"
-                                value={inputCertificatesField.certificate}
-                                name="certificate"
-                                onChange={(event) =>
-                                  handleChangeCertificateInput(index, event)
-                                }
-                                className="w-100 my-2"
-                              />
-                            </div>
-                            <div className="col-6 px-2">
-                              <YearDropDown
-                                label="Year you were Certified"
-                                value={inputCertificatesField.year}
-                                name="year"
-                                handleChange={(event) =>
-                                  handleChangeCertificateInput(index, event)
-                                }
-                              />
-                            </div>
-                          </div>
-                          {index + 1 === inputCertificatesFields.length ? (
-                            <div className="d-flex">
-                              <h5 onClick={handleAddCertificateFields}>
-                                + Add Certificate's
-                              </h5>
-                              {index + 1 === inputCertificatesFields.length &&
-                              inputCertificatesFields.length !== 1 ? (
-                                <h5
-                                  className="text-danger pl-3"
-                                  onClick={() =>
-                                    handleRemoveCertificateFields(index)
-                                  }
-                                >
-                                  Remove
-                                </h5>
-                              ) : null}
-                            </div>
-                          ) : null}
-                        </React.Fragment>
-                      )
-                    )}
-                  </div>
-                  <div className="setup_card5">
-                    <div className="setupcontent_wrapper">
-                      <div className="setup_item">
-                        <h6>Where will you be training</h6>
-                        <div className="inputs_platform">
-                          <button
-                            onClick={(e) => handleInputChange(e, "Online")}
-                            className={`${
-                              trainerData?.trainingLocation?.includes("Online")
-                                ? "active"
-                                : ""
-                            }`}
-                            name="trainingLocation"
-                          >
-                            Virtual
-                          </button>
-                          <button
-                            onClick={(e) => handleInputChange(e, "inPerson")}
-                            className={`${
-                              trainerData?.trainingLocation?.includes(
-                                "inPerson"
-                              )
-                                ? "active"
-                                : ""
-                            }`}
-                            name="trainingLocation"
-                          >
-                            In Person
-                          </button>
-                        </div>
-                        <div className="social_meeting_links">
-                          {trainerData?.trainingLocation?.includes("Online") ? (
-                            // <div className="setup_ite1">
-                            <>
-                              <h5>Add your Google or Zoom meeting link</h5>
-                              <div className="inputs_platform">
-                                <div className="iconwrapper">
-                                  <textarea
-                                    type="text"
-                                    placeholder="Add a Google or Zoom meeting link"
-                                    value={trainerData.virtualMeetingLink}
-                                    onChange={handleInputChange}
-                                    name="virtualMeetingLink"
-                                  />
-                                </div>
-                              </div>
-                            </>
-                          ) : null}
-                        </div>
-                      </div>
-
-                      <div className="setup_item1">
-                        <h6>Which city will you train in?</h6>
-                        <div className="inputs_platform">
-                          <div className="iconwrapper">
-                            <NormalMultiSelect
-                              placeholder="Select Your City"
-                              value={trainerData.location}
-                              arrow={true}
-                              name="location"
-                              className="trainer-profile-dropdown"
-                              options={options}
-                              handleChange={(e) => {
-                                setTrainerData({
-                                  ...trainerData,
-                                  location: e.target.value,
-                                });
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="item_3">
-                        <h6>
-                          Do you have a facility or location where you will
-                          train clients?
-                        </h6>
-                        <CyanRadio
-                          checked={selectedValue === "a"}
-                          onChange={handleChange}
-                          value="a"
-                          name="radio-button-demo"
-                          label="Strength & Hitt"
-                          inputProps={{
-                            "aria-label": "a",
-                          }}
-                        />
-                        <label>Yes</label>
-                        <CyanRadio
-                          checked={selectedValue === "b"}
-                          onChange={handleChange}
-                          value="b"
-                          name="radio-button-demo"
-                          label="Strength & Hitt"
-                          inputProps={{
-                            "aria-label": "b",
-                          }}
-                        />
-                        <label>No</label>
-                      </div>
-                      <div className="item_4">
-                        <h6>Details of the facility/location</h6>
-                        <div className="inputs_platform">
-                          <textarea
-                            type="text"
-                            placeholder="Enter the Details of the location"
-                            onChange={handleInputChange}
-                            value={trainerData.trainingFacilityLocation}
-                            name="trainingFacilityLocation"
-                          />
-                        </div>
-                      </div>
-                      <div className="item_5">
-                        <h6>
-                          Are you willing to travel to clients in your
-                          city/region?
-                        </h6>
-                        <CyanRadio
-                          checked={selectedOneValue === "1"}
-                          onChange={handleOneChange}
-                          value="1"
-                          label="Strength & Hitt"
-                          inputProps={{
-                            "aria-label": "1",
-                          }}
-                        />
-                        <label> Yes!</label>
-                        <CyanRadio
-                          checked={selectedOneValue === "0"}
-                          onChange={handleOneChange}
-                          value="0"
-                          label="Strength & Hitt"
-                          inputProps={{
-                            "aria-label": "0",
-                          }}
-                        />
-                        <label>No</label>
-                      </div>
-                      <div className="item_6">
-                        <h6>
-                          List the areas/neighborhoods you’re willing to travel
-                          to
-                        </h6>
-                        <div className="inputs_platform">
-                          <textarea
-                            type="text"
-                            placeholder="Neighborhood List"
-                            onChange={handleInputChange}
-                            value={trainerData.servicableLocation}
-                            name="servicableLocation"
-                          />
-
-                          <img
-                            src={Location}
-                            alt="icon"
-                            className="loction_img_select"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="setup_item1">
-                        <h6>Instagram</h6>
-                        <div className="inputs_platform">
-                          <div className="iconwrapper">
-                            <input
-                              type="text"
-                              placeholder="Add your Instagram Handle"
-                              onChange={handleInputChange}
-                              value={trainerData.instaHandle}
-                              name="instaHandle"
-                            />
-                            <img src={Instagram} alt="icon" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="setup_item1">
-                        <h6>Website</h6>
-                        <div className="inputs_platform">
-                          <div className="iconwrapper">
-                            <input
-                              type="text"
-                              placeholder="Add your Web Link"
-                              onChange={handleInputChange}
-                              value={trainerData.websiteLink}
-                              name="websiteLink"
-                            />
-                            <img src={Web} alt="icon" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="tp_button_save mb-5">
-                    <button onClick={handleSubmit}>
-                      Save changes <ArrowHoverBlacked />
-                    </button>
-                  </div>
-                </form>
-              </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 const mapStateToProps = (state) => ({
-  details: state.trainerReducer.details,
+    details: state.trainerReducer.details,
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      updateTrainerDetails,
-      getTrainerDetails,
-      fileUploadApi: fileUpload,
-    },
-    dispatch
-  );
+    return bindActionCreators(
+        {
+            updateTrainerDetails,
+            getTrainerDetails,
+            fileUploadApi: fileUpload,
+        },
+        dispatch
+    );
 };
 
 const MyProfile = connect(mapStateToProps, mapDispatchToProps)(MyProfileFC);

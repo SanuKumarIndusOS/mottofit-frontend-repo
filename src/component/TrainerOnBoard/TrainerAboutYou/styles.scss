@@ -1,6 +1,9 @@
 .main {
     height: auto;
     padding: 0 5.5em;
+    @media screen and (max-width: 1023px) {
+        padding: 0 2em;
+    }
     .wrapper_about {
         height: auto;
 
@@ -12,6 +15,12 @@
             font-size: 35px;
             line-height: 30px;
             font-weight: 600;
+            @media only screen and (min-width: 100px) and (max-width: 765px) {
+                width: 80%;
+                font-size: 25px;
+                line-height: 40px;
+                text-align: left;
+            }
         }
         p {
             letter-spacing: 0.27px;
@@ -26,6 +35,12 @@
             color: #696969;
             opacity: 1;
             font-weight: 500;
+            @media only screen and (min-width: 100px) and (max-width: 765px) {
+                width: 80%;
+                font-size: 25px;
+                line-height: 30px;
+                text-align: left;
+            }
         }
         .outter_form {
             height: auto;
@@ -38,6 +53,11 @@
                 .wrapper_innerInput {
                     margin: 1em;
                     width: 40%;
+
+                    @media only screen and (min-width: 100px) and (max-width: 765px) {
+                        width: 100%;
+                        margin: 2em 0;
+                    }
                     span {
                         color: tomato;
                         font-family: "Montserrat", sans-serif;
@@ -64,6 +84,10 @@
                         font-family: "Montserrat", sans-serif;
                         font-weight: 450;
                         margin-bottom: 0.5em;
+                        @media only screen and (min-width: 100px) and (max-width: 765px) {
+                            font-size: 18px;
+                            margin-bottom: 1em;
+                        }
                     }
                     .bg_down {
                         position: relative;

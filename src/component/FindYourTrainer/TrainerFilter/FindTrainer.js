@@ -17,7 +17,6 @@ import BoxingIconActive from "../../../assets/files/FindTrainer/DropDownAssets/B
 import PilatesIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Pilates_Active.svg";
 import StrengthIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
 import YogaIconIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Yoga_Active.svg";
-
 import TrainerCards from "../TrainersDetails/index";
 import TrainerCardOutside from "../TrainerOutsideTime/index";
 import Weight from "../../../assets/files/SVG/findTrainer/weight.svg";
@@ -258,7 +257,6 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     style={{
                         borderBottom: "3px solid #53BFD2",
                         width: "97px",
-                        lineHeight: "30px",
                     }}
                 >
                     In Person

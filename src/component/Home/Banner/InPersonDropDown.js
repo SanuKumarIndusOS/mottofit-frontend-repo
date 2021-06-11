@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
-
+import React from "react";
 import "./inPersonStyles.scss";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 export const InPersonDropDown = ({ inPerson, handleChange }) => {
     const options = [
-        { label: "New York", value: "newYork" },
+        { label: "New York City", value: "newYork" },
         { label: "Miami", value: "miami" },
         { label: "Hamptons", value: "hamptons" },
         { label: "Plam Beach", value: "plamBeach" },
