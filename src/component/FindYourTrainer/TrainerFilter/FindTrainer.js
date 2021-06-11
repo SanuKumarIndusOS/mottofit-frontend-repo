@@ -4,7 +4,7 @@ import "./find.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { BiSearch } from "react-icons/bi";
 import HoverImage from "react-hover-image";
-import InPersonDropDown from "./InPersonDropDown";
+import InPersonDropDown from "component/Home/Banner/InPersonDropDown";
 
 //Assets for Inactive
 import BoxingIcon from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Inactive.svg";
@@ -33,14 +33,28 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (trainerQueryData.location && trainerQueryData.date) {
+            let payload = {
+                query: {
+                    location: trainerQueryData?.location,
+                    vertical: trainerQueryData?.trainingType,
+                    date: getFormatDate(),
+                    availability: trainerQueryData?.availability,
+                    city: trainerQueryData?.city,
+                },
+            };
+
+            console.log("logged...", payload);
+
+            setqueryObject(payload.query);
             getTrainerDataByQuery();
-            setqueryObject(trainerQueryData);
-            SetLocation(trainerQueryData.location);
+            // setqueryObject(trainerQueryData);
+            // SetLocation(trainerQueryData.location);
         } else {
             let payload = {
                 query: {
-                    location: "Online",
+                    location: "virtual",
                     vertical: "Boxing",
                     date: getFormatDate(),
                     availability: "EarlyBird",
@@ -67,11 +81,18 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     const [ddYogaState, setddYogaState] = useState(false);
     const [ddHiitState, setddHiitState] = useState(false);
     const [queryObject, setqueryObject] = useState({
-        location: "Online",
+        location: "virtual",
         vertical: "Select a Category",
         date: "",
         availability: "Select a Time",
         // inPerson: "In Person",
+    });
+
+    const [inPerson, setInPerson] = useState({
+        newYork: { value: "nyw", selected: false },
+        miami: { value: "maimi", selected: false },
+        hamptons: { value: "hampton", selected: false },
+        plamBeach: { value: "plam", selected: false },
     });
 
     const bestMatchRef = useRef(null);
@@ -98,6 +119,24 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
     const TriggerDropDownTrainerAvailability = () => {
         setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
+    };
+
+    const handleChange = (value) => {
+        let tempData = {
+            newYork: { value: "nyw", selected: false },
+            miami: { value: "maimi", selected: false },
+            hamptons: { value: "hampton", selected: false },
+            plamBeach: { value: "plam", selected: false },
+        };
+
+        tempData[value] = {
+            ...tempData[value],
+            selected: true,
+        };
+
+        setInPerson(tempData);
+
+        TriggerInPersonDropDown();
     };
 
     let Dropdown;
@@ -203,17 +242,15 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     );
 
     const SetLocation = (value) => {
-        if (value === "Online" || value === "Virtual") {
+        if (value === "virtual" || value === "Virtual") {
             setvirtualMarkup(
                 <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
             );
             setinPersonMarkup(
-                <p style={{ fontWeight: "normal", lineHeight: "30px" }}>
-                    In Person
-                </p>
+                <p style={{ fontWeight: "normal" }}>In Person</p>
             );
 
-            setqueryObject({ ...queryObject, location: "Online" });
+            setqueryObject({ ...queryObject, location: "virtual" });
         } else {
             setvirtualMarkup(<p style={{ fontWeight: "normal" }}>Virtual</p>);
             setinPersonMarkup(
@@ -249,7 +286,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     };
 
     const getTrainerDataByQuery = (currData) => {
-        const { location, date, trainingType, availability } =
+        const { location, date, trainingType, availability, city } =
             currData || trainerQueryData;
 
         const { trainerAvailableApi } = TrainerApi;
@@ -257,6 +294,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         trainerAvailableApi.query.location = location;
         trainerAvailableApi.query.trainingType = trainingType;
         trainerAvailableApi.query.date = date;
+        trainerAvailableApi.query.city = city;
         trainerAvailableApi.query.availability = availability;
 
         api({ ...trainerAvailableApi }).then(({ data }) => {
@@ -283,6 +321,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     setqueryObject({ ...queryObject, inPerson });
                     TriggerInPersonDropDown();
                 }}
+                handleChange={handleChange}
+                inPerson={inPerson}
             />
         );
     } else {
@@ -330,15 +370,19 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                                 </text>
                             </svg>
                             <div
-                                onClick={() => SetLocation("In Person")}
+                                onClick={() => {
+                                    SetLocation("In Person");
+                                }}
                                 className="card-selection"
                                 style={{ width: "108px" }}
                             >
                                 <h6 onClick={TriggerInPersonDropDown}>
                                     {inPersonMarkup}
                                 </h6>
-                                <h2>{`${queryObject.inPerson || ""}`}</h2>
-                                <div className="inPerson-dd">
+                                <div
+                                    className="inPerson-dd"
+                                    // onClick={TriggerInPersonDropDown}
+                                >
                                     {DropdownHomeInPerson}
                                 </div>
                             </div>

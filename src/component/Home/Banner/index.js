@@ -17,7 +17,7 @@ import { bindActionCreators } from "redux";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
 
-const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
+const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     const [DropdownState, setDropdownState] = useState(false);
 
     const [DropdownAvailabilityState, setDropdownAvailabilityState] =
@@ -31,29 +31,49 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
         <h2 style={{ fontWeight: "normal" }}>In Person</h2>
     );
     const [queryObject, setqueryObject] = useState({
-        location: "Online",
+        location: "virtual",
         vertical: "Select a Category",
         date: "",
         availability: "Select a Time",
         // inPerson: "In Person",
     });
     const [date, setDate] = useState(new Date());
-    const [selectHightlight, setSelectHightlight] = useState(false);
+
+    const [inPerson, setInPerson] = useState({
+        newYork: { value: "nyw", selected: false },
+        miami: { value: "maimi", selected: false },
+        hamptons: { value: "hampton", selected: false },
+        plamBeach: { value: "plam", selected: false },
+    });
+
+    const handleChange = (value) => {
+        let tempData = {
+            newYork: { value: "nyw", selected: false },
+            miami: { value: "maimi", selected: false },
+            hamptons: { value: "hampton", selected: false },
+            plamBeach: { value: "plam", selected: false },
+        };
+
+        tempData[value] = {
+            ...tempData[value],
+            selected: true,
+        };
+
+        setInPerson(tempData);
+
+        TriggerInPersonDropDown();
+    };
 
     //Training_type_dropdown
     let DropdownTraining;
     if (DropdownState) {
         DropdownTraining = (
             <Dropdown
-                className={DropdownState ? "buttonFalse" : "buttonTrue"}
                 onClick={({ vertical }) => {
                     setqueryObject({ ...queryObject, vertical });
                     TriggerVerticalDropDown();
-                    setSelectHightlight(
-                        (selectHightlight) => !selectHightlight
-                    );
-                    console.log(selectHightlight, "selectHightlight");
                 }}
+                selectedData={queryObject.vertical}
             />
         );
     } else {
@@ -71,7 +91,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                 <h2 style={{ fontWeight: "normal" }}>In Person</h2>
             );
 
-            setqueryObject({ ...queryObject, location: "Online" });
+            setqueryObject({ ...queryObject, location: "virtual" });
         } else {
             setvirtualMarkup(
                 <h2 style={{ fontWeight: "normal", margin: "0" }}>Virtual</h2>
@@ -96,10 +116,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                     setqueryObject({ ...queryObject, availability });
                     TriggerDropDownAvailability();
                 }}
+                selectedData={queryObject.availability}
             />
         );
     } else {
-        <div></div>;
+        <div>hello</div>;
     }
     //inPerson_dropdown
     let DropdownHomeInPerson;
@@ -110,10 +131,12 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                     setqueryObject({ ...queryObject, inPerson });
                     TriggerInPersonDropDown();
                 }}
+                handleChange={handleChange}
+                inPerson={inPerson}
             />
         );
     } else {
-        <div></div>;
+        <div>hello</div>;
     }
 
     const TriggerDropDownAvailability = () => {
@@ -134,6 +157,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                 date: getFormatDate(date, "YYYY-MM-DD"),
                 trainingType: queryObject.vertical,
                 availability: queryObject.availability,
+                // inPerson: queryObject.inPerson,
+                city:
+                    Object.values(inPerson).filter(
+                        ({ selected }) => selected
+                    )[0]?.value || "",
             },
         };
 
@@ -141,7 +169,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
 
         history.push("/trainer/find");
     };
-
     return (
         <div className="background">
             <div className="cntr_cotainer">
@@ -165,18 +192,10 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                                             setInPersonDD(false);
                                         }}
                                     >
-                                        <h6 style={{ margin: "0" }}>
-                                            {virtualMarkup}
-                                        </h6>
+                                        {virtualMarkup}
                                     </div>
-                                    <img
-                                        src={Between}
-                                        alt="icon"
-                                        className="between"
-                                    />
-                                    <div
-                                        onClick={() => SetLocation("In Person")}
-                                    >
+                                    <img src={Between} alt="icon" />
+                                    <div onClick={() => SetLocation("")}>
                                         <h6 onClick={TriggerInPersonDropDown}>
                                             {inPersonMarkup}
                                         </h6>

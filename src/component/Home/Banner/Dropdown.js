@@ -11,23 +11,24 @@ import PilatesIconActive from "../../../assets/files/FindTrainer/DropDownAssets/
 import StrengthIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
 import YogaIconIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Yoga_Active.svg";
 
-const Dropdown = ({ onClick = () => {} }) => {
+const Dropdown = ({ onClick = () => {}, selectedData }) => {
     const [ddBoxingState, setddBoxingState] = useState(false);
     const [ddPilatesState, setddPilatesState] = useState(false);
     const [ddYogaState, setddYogaState] = useState(false);
     const [ddHiitState, setddHiitState] = useState(false);
-    // const [select, ser]
 
     return (
         <>
             <div className="box_3_active_home">
                 <div className="dd_row_one">
                     <div
-                        className={ddBoxingState ? "notoption" : "option"}
+                        className={`option ${
+                            selectedData === "Boxing" ? "selected-data" : ""
+                        }`}
                         onClick={() => {
-                            setddBoxingState((ddBoxingState) => !ddBoxingState);
+                            setddBoxingState(!ddBoxingState);
                             onClick({ vertical: "Boxing" });
-                            console.log(!ddBoxingState, "boxing");
+                            console.log(ddBoxingState, "boxing");
                         }}
                     >
                         <div className="option_wapper">
@@ -39,7 +40,9 @@ const Dropdown = ({ onClick = () => {} }) => {
                         </div>
                     </div>
                     <div
-                        className="option"
+                        className={`option ${
+                            selectedData === "Pilates" ? "selected-data" : ""
+                        }`}
                         onClick={() => {
                             setddPilatesState(!ddPilatesState);
                             onClick({ vertical: "Pilates" });
@@ -57,7 +60,11 @@ const Dropdown = ({ onClick = () => {} }) => {
                 </div>
                 <div className="dd_row_two">
                     <div
-                        className="option"
+                        className={`option ${
+                            selectedData === "Strength & Hiit"
+                                ? "selected-data"
+                                : ""
+                        }`}
                         onClick={() => {
                             setddHiitState(!ddHiitState);
                             console.log(ddHiitState, "hiit");
@@ -73,7 +80,9 @@ const Dropdown = ({ onClick = () => {} }) => {
                         </div>
                     </div>
                     <div
-                        className="option"
+                        className={`option ${
+                            selectedData === "Yoga" ? "selected-data" : ""
+                        }`}
                         onClick={() => {
                             setddYogaState(!ddYogaState);
                             console.log(ddYogaState, "yoga");

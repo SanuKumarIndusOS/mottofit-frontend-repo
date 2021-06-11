@@ -13,6 +13,12 @@ export const loginOrSignUp = (currentApi, payload) => (
       .then((data) => {
         resolve(data);
         const { token, expiresIn, type } = data;
+
+        if (type === "user") {
+          localStorage.setItem("type", 3);
+        } else {
+          localStorage.setItem("type", 2);
+        }
         localStorage.setItem("token", token);
 
         const expireTime = addDate(null, 2).unix();

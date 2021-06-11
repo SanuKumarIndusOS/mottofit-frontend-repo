@@ -141,6 +141,8 @@ function UserSchedulerClass(props) {
     getAvailableSlots(startWeek, endWeek);
     populate(startWeek, endWeek);
 
+    window.scrollTo(0, 0);
+
     // setuserSlots([props.startTime, props.endTime]);
   }, []);
 
