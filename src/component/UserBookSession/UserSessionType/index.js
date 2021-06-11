@@ -259,9 +259,10 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                 handleBookSession(15, "SOCIAL SESSION")
                               }
                               disabled={!hasDataEntered}
-                              className={`${
-                                !hasDataEntered ? "btn-disabled" : ""
-                              }`}
+                              className={`btn-disabled`}
+                              // className={`${
+                              //   !hasDataEntered ? "btn-disabled" : ""
+                              // }`}
                             >
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
@@ -294,9 +295,10 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                 handleBookSession(20, "CREATE A CLASS")
                               }
                               disabled={!hasDataEntered}
-                              className={`${
-                                !hasDataEntered ? "btn-disabled" : ""
-                              }`}
+                              className={`btn-disabled`}
+                              // className={`${
+                              //   !hasDataEntered ? "btn-disabled" : ""
+                              // }`}
                             >
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
@@ -361,9 +363,10 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                 handleBookSession(20, "SOCIAL SESSION")
                               }
                               disabled={!hasDataEntered}
-                              className={`${
-                                !hasDataEntered ? "btn-disabled" : ""
-                              }`}
+                              className={`btn-disabled`}
+                              // className={`${
+                              //   !hasDataEntered ? "btn-disabled" : ""
+                              // }`}
                             >
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>
@@ -391,9 +394,10 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                 handleBookSession(30, "CREATE A CLASS")
                               }
                               disabled={!hasDataEntered}
-                              className={`${
-                                !hasDataEntered ? "btn-disabled" : ""
-                              }`}
+                              className={`btn-disabled`}
+                              // className={`${
+                              //   !hasDataEntered ? "btn-disabled" : ""
+                              // }`}
                             >
                               BOOK YOUR SESSION <ArrowHoverBlacked />
                             </button>

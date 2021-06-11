@@ -14,7 +14,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CardForm from "./subcomponents/CardForm";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { scheduleSession } from "action/userAct";
+import { scheduleSession, resetUserDetails } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
@@ -29,9 +29,11 @@ const UserPaymentsFC = ({
   trainerData,
   bookingData,
   defaulCardDetails,
+  ...restProps
 }) => {
   //for material ui radio buttom (temp)
   const [selectedValue, setSelectedValue] = useState("a");
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const [price, setprice] = useState();
 
@@ -84,6 +86,8 @@ const UserPaymentsFC = ({
         ) {
           history.push("/user/with-friends");
         }
+
+        restProps.resetUserDetails();
       })
       .catch((error) => {
         console.log(error);
@@ -158,12 +162,19 @@ const UserPaymentsFC = ({
 
                         <div className="payment_input">
                           <Elements stripe={stripePromise}>
-                            <CardForm />
+                            <CardForm
+                              agreedToTerms={agreedToTerms}
+                              handleChange={() =>
+                                setAgreedToTerms(!agreedToTerms)
+                              }
+                            />
                           </Elements>
                           <button
-                            className={`ud_but`}
+                            className={`ud_but ${
+                              !agreedToTerms ? "disable-btn" : ""
+                            }`}
                             onClick={ScheduleSession}
-                            // disabled={!defaulCardDetails?.default}
+                            disabled={!agreedToTerms}
                           >
                             Continue <ArrowHoverBlacked />
                           </button>
@@ -285,6 +296,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       scheduleSession,
+      resetUserDetails,
     },
     dispatch
   );
