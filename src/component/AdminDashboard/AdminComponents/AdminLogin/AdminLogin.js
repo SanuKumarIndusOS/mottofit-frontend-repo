@@ -48,6 +48,7 @@ const AdminLoginFC = ({ loginAct }) => {
         setisLoading(false);
         if (type === "admin") {
           localStorage.setItem("admin-token", token);
+          localStorage.setItem("type", 1);
           history.push("/admins/dashboard");
         }
       })

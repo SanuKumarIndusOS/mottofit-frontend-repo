@@ -4,8 +4,11 @@ import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import { COMMON_URL } from "helpers/baseURL";
 import "./styleCard.scss";
+import { updateUserDetails } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const TrainerCardOutside = (props) => {
+const TrainerCardOutsideFC = (props) => {
   const [outSideData, setOutSideData] = useState([]);
 
   useEffect(() => {
@@ -15,6 +18,26 @@ const TrainerCardOutside = (props) => {
   useEffect(() => {
     setOutSideData(props.content);
   }, [props.content]);
+
+  const handleClick = (data, isReadMore = false) => {
+    let reduxData = {
+      selectedTrainerData: {
+        trainerId: outSideData[data]["id"],
+        trainerData: outSideData[data],
+      },
+    };
+    props.updateUserDetails(reduxData);
+
+    if (!isReadMore) {
+      history.push({
+        pathname: "/user/scheduler",
+      });
+    } else {
+      history.push({
+        pathname: `/trainer/profile/${outSideData[data]["id"]}`,
+      });
+    }
+  };
 
   return (
     <>
@@ -66,17 +89,7 @@ const TrainerCardOutside = (props) => {
                   <p>
                     {outSideData[data]["description"]}
 
-                    <button
-                      onClick={() => {
-                        history.push({
-                          pathname: `/trainer/profile/${outSideData[data]["id"]}`,
-                          state: {
-                            trainerId: outSideData[data]["id"],
-                            trainerData: outSideData[data],
-                          },
-                        });
-                      }}
-                    >
+                    <button onClick={() => handleClick(handleClick, true)}>
                       Read More
                     </button>
                   </p>
@@ -86,15 +99,7 @@ const TrainerCardOutside = (props) => {
                     style={{
                       backgroundColor: "#53BFD2",
                     }}
-                    onClick={() => {
-                      history.push({
-                        pathname: "/user/scheduler",
-                        state: {
-                          trainerId: outSideData[data]["id"],
-                          trainerData: outSideData[data],
-                        },
-                      });
-                    }}
+                    onClick={() => handleClick(data)}
                   >
                     book a session
                     <BlackCircleButton />
@@ -152,5 +157,23 @@ const ReadMore = ({ children, maxChar = 110 }) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateUserDetails,
+    },
+    dispatch
+  );
+};
+
+const TrainerCardOutside = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrainerCardOutsideFC);
 
 export default TrainerCardOutside;

@@ -6,6 +6,7 @@ const initialState = {
   bookingData: {},
   selectedTrainerData: {},
   selectedTimes: [],
+  defaulCardDetails: {},
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {

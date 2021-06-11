@@ -18,6 +18,7 @@ import { scheduleSession } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
+import { Toast } from "service/toast";
 const stripePromise = loadStripe(
   "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
 );
@@ -27,6 +28,7 @@ const UserPaymentsFC = ({
   scheduleSession,
   trainerData,
   bookingData,
+  defaulCardDetails,
 }) => {
   //for material ui radio buttom (temp)
   const [selectedValue, setSelectedValue] = useState("a");
@@ -41,49 +43,46 @@ const UserPaymentsFC = ({
 
   const ScheduleSession = () => {
     console.log(location, "locationlocation");
-    let trainingtype = location.state.sessionType;
-    if (trainingtype === "group") {
+
+    if (!defaulCardDetails?.default)
+      return Toast({
+        type: "info",
+        message: "Need atleast one default card details",
+      });
+
+    let trainingtype = sessionData?.sessionType;
+    if (trainingtype.includes("1 ON 1")) {
+      trainingtype = "1on1";
+    } else if (trainingtype.includes("SOCIAL")) {
       trainingtype = "social";
+    } else if (trainingtype.includes("CLASS")) {
+      trainingtype = "class";
     }
 
     const scheduleBody = {
-      trainerId: location.state.slotDetails["id"],
-      title: location.state.slotDetails["activity"],
+      trainerId: trainerData?.id,
+      title: bookingData?.activity,
       trainingType: trainingtype,
-      sessionType: location.state.sessionData["preferedTrainingMode"],
-      activity: location.state.slotDetails["activity"],
+      sessionType: sessionData?.preferedTrainingMode,
+      activity: bookingData?.activity,
       sessionStatus: "created",
-      sessionDate: location.state.slotDetails["date"],
-      sessionStartTime: location.state.slotDetails["start_slot"],
-      sessionEndTime: location.state.slotDetails["end_slot"],
-      city: location.state.sessionData["location"]["value"],
-      venue: location.state.sessionData["trainingVenue"]["value"],
-      price: location.state.sessionData.price,
+      sessionDate: bookingData?.date,
+      sessionStartTime: bookingData?.start_slot,
+      sessionEndTime: bookingData?.end_slot,
+      city: sessionData?.location?.value,
+      venue: sessionData?.trainingVenue?.value,
+      price: sessionData?.price,
     };
 
     scheduleSession(scheduleBody)
       .then((res) => {
         if (res.session.trainingType === "1on1") {
-          history.push({
-            pathname: "/users/dashboard/session",
-
-            state: {
-              slotDetails: location.state["slotDetails"],
-              sessionData: location.state["sessionData"],
-            },
-          });
+          history.push("/users/dashboard/session");
         } else if (
           res.session.trainingType === "social" ||
           res.session.trainingType === "class"
         ) {
-          history.push({
-            pathname: "/user/with-friends",
-
-            state: {
-              slotDetails: location.state["slotDetails"],
-              sessionData: location.state["sessionData"],
-            },
-          });
+          history.push("/user/with-friends");
         }
       })
       .catch((error) => {
@@ -106,6 +105,7 @@ const UserPaymentsFC = ({
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (Object.keys(sessionData).length === 0)
       return history.push("/trainer/find");
   }, []);
@@ -160,7 +160,11 @@ const UserPaymentsFC = ({
                           <Elements stripe={stripePromise}>
                             <CardForm />
                           </Elements>
-                          <button className="ud_but" onClick={ScheduleSession}>
+                          <button
+                            className={`ud_but`}
+                            onClick={ScheduleSession}
+                            // disabled={!defaulCardDetails?.default}
+                          >
                             Continue <ArrowHoverBlacked />
                           </button>
                         </div>
@@ -272,6 +276,7 @@ const UserPaymentsFC = ({
 
 const mapStateToProps = (state) => ({
   bookingData: state.userReducer.bookingData,
+  defaulCardDetails: state.userReducer.defaulCardDetails,
   sessionData: state.userReducer.sessionData,
   trainerData: state.userReducer.selectedTrainerData?.trainerData,
 });

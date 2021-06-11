@@ -264,3 +264,23 @@ button,
     align-items: center;
   }
 }
+
+.link-btn {
+  text-decoration: underline;
+  letter-spacing: 0px;
+  color: #53bfd2;
+  opacity: 1;
+  border: none;
+  outline: none;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 42px;
+  font-weight: 500;
+  background-color: transparent;
+  font-family: "Montserrat", sans-serif;
+}
+
+.disable-btn {
+  opacity: 0.5;
+  pointer-events: none;
+}
