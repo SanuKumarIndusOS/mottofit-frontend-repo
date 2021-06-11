@@ -33,10 +33,23 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (trainerQueryData.location && trainerQueryData.date) {
+      let payload = {
+        query: {
+          location: trainerQueryData?.location,
+          vertical: trainerQueryData?.trainingType,
+          date: getFormatDate(),
+          availability: trainerQueryData?.availability,
+        },
+      };
+
+      console.log("logged...", payload);
+
+      setqueryObject(payload.query);
       getTrainerDataByQuery();
-      setqueryObject(trainerQueryData);
-      SetLocation(trainerQueryData.location);
+      // setqueryObject(trainerQueryData);
+      // SetLocation(trainerQueryData.location);
     } else {
       let payload = {
         query: {

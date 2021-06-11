@@ -65,6 +65,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
 
     loginOrSignupAct(userSignUp, payload)
       .then(() => {
+        localStorage.setItem("type", 3);
         history.push("/trainer/find");
       })
       .catch((error) => {
@@ -82,8 +83,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
   const validationRules = () => {
     let passwordValidation = {
       format: {
-        pattern:
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
         flags: "i",
         message:
           "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",

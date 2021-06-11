@@ -8,6 +8,7 @@ import LogoImage from "../../../assets/files/SVG/Motto Logo.svg";
 import Line from "../../../assets/files/SVG/Blue Line.svg";
 import Line2 from "../../../assets/files/SVG/Blue Line 2.svg";
 import SignIn from "../../SignIn/Banner";
+import { logout } from "service/utilities";
 
 export const NavBar = ({ toggle }) => {
   const [showModel, setShowModel] = useState(false);
@@ -43,7 +44,7 @@ export const NavBar = ({ toggle }) => {
               ></input>
               <BiSearch className="search-icon1" />
             </div>
-            {!isUserLoggedIn && (
+            {!isUserLoggedIn ? (
               <div className="login-item1">
                 <img src={Line2} alt="icon" />
 
@@ -51,6 +52,10 @@ export const NavBar = ({ toggle }) => {
 
                 <SignIn showModel={showModel} setShowModel={setShowModel} />
               </div>
+            ) : (
+              <button className="link-btn ml-3" onClick={logout}>
+                Logout
+              </button>
             )}
           </div>
         </div>
