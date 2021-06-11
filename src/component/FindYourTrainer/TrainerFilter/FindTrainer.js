@@ -23,7 +23,7 @@ import TrainerCardOutside from "../TrainerOutsideTime/index";
 import Weight from "../../../assets/files/SVG/findTrainer/weight.svg";
 import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
 import AvailabilityIcon from "../../../assets/files/Home/Banner/SearchBar/Availability Icon.svg";
-import DropdownTrainerAvailability from "./DropdownTrainerAvailability";
+import DropdownTrainerAvailability from "../../Home/Banner/DropdownAvailability";
 import "./find.scss";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
@@ -57,7 +57,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           location: "virtual",
           vertical: "Boxing",
           date: getFormatDate(),
-          availability: "EarlyBird",
+          availability: "Early Bird",
         },
       };
       setqueryObject(payload.query);
@@ -111,6 +111,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           setqueryObject({ ...queryObject, availability });
           TriggerDropDownTrainerAvailability();
         }}
+        selectedData={queryObject.availability}
       />
     );
   } else {
@@ -146,7 +147,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       <div className="box_3_active_trainer">
         <div className="dd_row_one">
           <div
-            className="option"
+            className={`option ${
+              queryObject?.vertical === "Boxing" ? "selected-data" : ""
+            }`}
             onClick={() => {
               setddBoxingState(!ddBoxingState);
               setDropdownState(!DropdownState);
@@ -162,7 +165,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
           <div
-            className="option"
+            className={`option ${
+              queryObject?.vertical === "Pilates" ? "selected-data" : ""
+            }`}
             onClick={() => {
               setddPilatesState(!ddPilatesState);
               setDropdownState(!DropdownState);
@@ -180,7 +185,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         </div>
         <div className="dd_row_two">
           <div
-            className="option"
+            className={`option ${
+              queryObject?.vertical === "Strength & Hiit" ? "selected-data" : ""
+            }`}
             onClick={() => {
               setddHiitState(!ddHiitState);
               setqueryObject({
@@ -196,7 +203,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
           <div
-            className="option"
+            className={`option ${
+              queryObject?.vertical === "Yoga" ? "selected-data" : ""
+            }`}
             onClick={() => {
               setddYogaState(!ddYogaState);
               setqueryObject({
@@ -240,7 +249,13 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     } else {
       setvirtualMarkup(<p style={{ fontWeight: "normal" }}>Virtual</p>);
       setinPersonMarkup(
-        <p style={{ borderBottom: "3px solid #53BFD2" }}>In Person</p>
+        <p
+          style={{
+            borderBottom: "3px solid #53BFD2",
+          }}
+        >
+          In Person
+        </p>
       );
       setqueryObject({ ...queryObject, location: "Person" });
       setInPersonDD(!InPersonDD);
