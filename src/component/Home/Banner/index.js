@@ -122,11 +122,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
         setDropdownState(!DropdownState);
     };
 
-    const handleBlur = (e) => {
-        console.log("on blur");
-        setInPersonDD(false);
-    };
-
     const search_action = () => {
         let payload = {
             query: {
@@ -141,7 +136,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
 
         history.push("/trainer/find");
     };
-
     const ref = React.useRef(null);
     useOnClickOutside(ref, close);
     return (
@@ -162,9 +156,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails, close }) => {
                             <div className="card_item_home">
                                 <div className="custom_dropdown">
                                     <div
-                                        onClick={() => SetLocation("Virtual")}
-                                        onBlur={handleBlur}
-                                    >
+                                        onClick={() => {SetLocation("Virtual");setInPersonDD(false)}}
+                                         >
                                         <h6 style={{ margin: "0" }} ref={ref}>
                                             {virtualMarkup}
                                         </h6>
