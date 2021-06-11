@@ -20,9 +20,10 @@ import { history } from "helpers";
 import { getTrainerDetail } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { updateUserDetails } from "action/userAct";
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
-const TrainerProfileClass = ({ getTrainerDetail }) => {
+const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);
@@ -49,7 +50,7 @@ const TrainerProfileClass = ({ getTrainerDetail }) => {
     setDateSlot(date);
   };
 
-  const areaOfExpertise = trainerProfileData?.areaOfExpertise.toString();
+  const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
 
   return (
     <>
@@ -399,7 +400,11 @@ const TrainerProfileClass = ({ getTrainerDetail }) => {
                       Schedule{" "}
                     </h2>
 
-                    <UserScheduler id={id} parentCallback={callbackFunction} />
+                    <UserScheduler
+                      id={id}
+                      parentCallback={callbackFunction}
+                      updateUserDetails={updateUserDetails}
+                    />
                     <ButtonSection />
                   </div>
                   {/* </div> */}
@@ -547,6 +552,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getTrainerDetail,
+      updateUserDetails,
     },
     dispatch
   );

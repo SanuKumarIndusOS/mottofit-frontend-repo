@@ -67,34 +67,34 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
         <div className="dd_row_two">
           <div
             className={`option ${
-              selectedData === "Mid-day Break" ? "selected-data" : ""
+              selectedData === "MidDayBreak1" ? "selected-data" : ""
             }`}
             onClick={() => {
               // setddHiitState(!ddHiitState);
-              onClick({ availability: "Mid-day Break" });
+              onClick({ availability: "MidDayBreak1" });
               // console.log(ddHiitState, "hiit");
             }}
           >
             <div className="option_wapper">
               <HoverImage src={MidInActive} hoverSrc={MidActive} />
               <h2>Mid-day Break</h2>
-              <label>(11:30am-4pm)</label>
+              <label>(11:30am-2pm)</label>
             </div>
           </div>
           <div
             className={`option ${
-              selectedData === "Happy Hour" ? "selected-data" : ""
+              selectedData === "MidDayBreak2" ? "selected-data" : ""
             }`}
             onClick={() => {
               //setddYogaState(!ddYogaState);
-              onClick({ availability: "Happy Hour" });
+              onClick({ availability: "MidDayBreak2" });
               //console.log(ddYogaState, "yoga");
             }}
           >
             <div className="option_wapper">
-              <HoverImage src={HappyInActive} hoverSrc={HappyActive} />
-              <h2>Happy Hour</h2>
-              <label>(4:30pm-7pm)</label>
+              <HoverImage src={MidInActive} hoverSrc={MidActive} />
+              <h2>Mid-Day LunchTime</h2>
+              <label>(2pm-5pm)</label>
             </div>
           </div>
         </div>
@@ -112,7 +112,25 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
             <div className="option_wapper">
               <HoverImage src={NeverTooInActive} hoverSrc={NeverTooActive} />
               <h2>Never Too Late</h2>
-              <label>(7:30pm-9:30pm)</label>
+              <label>(5pm-8pm)</label>
+            </div>
+          </div>
+        </div>
+        <div className="dd_row_two">
+          <div
+            className={`option ${
+              selectedData === "Never Too Late" ? "selected-data" : ""
+            }`}
+            onClick={() => {
+              // setddYogaState(!ddYogaState);
+              onClick({ availability: "Never Too Late" });
+              // console.log(ddYogaState, "yoga");
+            }}
+          >
+            <div className="option_wapper">
+              <HoverImage src={NeverTooInActive} hoverSrc={NeverTooActive} />
+              <h2>Never Too Late</h2>
+              <label>(8pm-11pm)</label>
             </div>
           </div>
         </div>

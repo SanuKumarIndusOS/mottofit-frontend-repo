@@ -14,6 +14,7 @@ import { api } from "service/api";
 import { updateUserDetails } from "action/userAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Toast } from "service/toast";
 
 const useOptions = () => {
   const options = useMemo(() => ({
@@ -35,13 +36,14 @@ const useOptions = () => {
   return options;
 };
 
-function CardFormFC({ updateUserDetails }) {
+function CardFormFC({ updateUserDetails, agreedToTerms, handleChange }) {
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
   const [isRememberCard, setRememberCard] = useState(false);
   const [defaulCardDetails, setDefaultCardDetails] = useState({});
   const [showCardComp, setShowCardComp] = useState(true);
+  // const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   useEffect(() => {
     getUserPaymentInfo();
@@ -78,8 +80,8 @@ function CardFormFC({ updateUserDetails }) {
 
     stripe.createToken(cardElement).then(function ({ token }) {
       // Handle result.error or result.token
-
       addCard(token.id);
+
       //   console.log(result, "token");
     });
 
@@ -91,7 +93,7 @@ function CardFormFC({ updateUserDetails }) {
 
     let payload = {
       cardToken: token,
-      SetDefault: isRememberCard,
+      setDefault: isRememberCard,
     };
 
     addCardDetails.body = payload;
@@ -99,6 +101,9 @@ function CardFormFC({ updateUserDetails }) {
     api({ ...addCardDetails })
       .then(({ data }) => {
         console.log(data);
+
+        Toast({ type: "success", message: "Card details added" });
+        getUserPaymentInfo();
       })
       .catch((err) => {
         console.log(err);
@@ -267,6 +272,8 @@ function CardFormFC({ updateUserDetails }) {
             <input
               type="checkbox"
               style={{ width: "20px", marginRight: "10px" }}
+              onChange={handleChange}
+              checked={agreedToTerms}
             />
             <label>
               By proceeding, you accept the latest versions of our{" "}

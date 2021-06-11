@@ -282,7 +282,7 @@ function UserSchedulerClass(props) {
         selectedTimes: cellCollection,
       };
 
-      props.updateUserDetails(reduxData);
+      props?.updateUserDetails && props?.updateUserDetails(reduxData);
 
       props.parentCallback(ts, tss, date);
     } else {

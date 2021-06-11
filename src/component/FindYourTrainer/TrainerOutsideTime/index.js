@@ -89,7 +89,7 @@ const TrainerCardOutsideFC = (props) => {
                   <p>
                     {outSideData[data]["description"]}
 
-                    <button onClick={() => handleClick(handleClick, true)}>
+                    <button onClick={() => handleClick(data, true)}>
                       Read More
                     </button>
                   </p>
