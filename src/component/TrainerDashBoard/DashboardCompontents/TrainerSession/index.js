@@ -29,7 +29,7 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
             month: getFormatDate(sessionDate, "MMM"),
             heading: title,
             imgAva: AvailabilityIcon,
-            avaTime: `${getFormatDate(sessionStartTime, "LT", true)} PST`,
+            avaTime: `${getFormatDate(sessionStartTime, "LT", true)} EST`,
             imgLoc: LocationIcon,
             loc: venue,
             previousImg: Jenny,

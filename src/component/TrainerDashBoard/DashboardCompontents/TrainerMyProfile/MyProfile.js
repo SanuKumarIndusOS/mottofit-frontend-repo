@@ -177,6 +177,7 @@ const MyProfileFC = ({
       virtualMeetingLink: virtualMeetingLink,
       servicableLocation: servicableLocation,
       trainingFacilityLocation: trainingFacilityLocation,
+      preferedTrainingMode: trainerData?.trainingLocation,
       images: imagesList.filter((x) => x !== ""),
     };
 
@@ -221,7 +222,9 @@ const MyProfileFC = ({
             instaHandle: instagramProfile,
             location,
             virtualMeetingLink: virtualMeetingLink,
-            servicableLocation: servicableLocation,
+            servicableLocation: Array.isArray(servicableLocation)
+              ? servicableLocation.toString()
+              : servicableLocation,
             trainingFacilityLocation: trainingFacilityLocation,
           },
         };
@@ -422,9 +425,9 @@ const MyProfileFC = ({
                         <h6>Where will you be training</h6>
                         <div className="inputs_platform">
                           <button
-                            onClick={(e) => handleInputChange(e, "Online")}
+                            onClick={(e) => handleInputChange(e, "virtual")}
                             className={`${
-                              trainerData?.trainingLocation?.includes("Online")
+                              trainerData?.trainingLocation?.includes("virtual")
                                 ? "active"
                                 : ""
                             }`}
@@ -473,15 +476,15 @@ const MyProfileFC = ({
                           <div className="iconwrapper">
                             <NormalMultiSelect
                               placeholder="Select Your City"
-                              value={trainerData.location}
+                              value={trainerData.servicableLocation}
                               arrow={true}
-                              name="location"
+                              name="servicableLocation"
                               className="trainer-profile-dropdown"
                               options={options}
                               handleChange={(e) => {
                                 setTrainerData({
                                   ...trainerData,
-                                  location: e.target.value,
+                                  servicableLocation: e.target.value,
                                 });
                               }}
                             />

@@ -92,7 +92,7 @@ function TrainerSetupClass(props) {
         haveAFacility: res.trainingFacility,
         facility_details: res.trainingFacilityLocation,
         zoom_link: res.virtualMeetingLink,
-        neighborhood_list: res.servicableLocation,
+        // neighborhood_list: res.servicableLocation,
         identityNameUS: identityInfromation
           ? identityInfromation.identityName
           : "",
@@ -512,13 +512,13 @@ function TrainerSetupClass(props) {
               <br />
               <textarea
                 placeholder="Neighborhood List"
-                value={trainerSetupData.neighborhood_list}
-                onChange={(e) => {
-                  setTrainerSetupData({
-                    ...trainerSetupData,
-                    neighborhood_list: e.target.value,
-                  });
-                }}
+                // value={trainerSetupData.neighborhood_list}
+                // onChange={(e) => {
+                //   setTrainerSetupData({
+                //     ...trainerSetupData,
+                //     neighborhood_list: e.target.value,
+                //   });
+                // }}
               />
             </div>
             <div className="input_content">

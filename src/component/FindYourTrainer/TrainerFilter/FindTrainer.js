@@ -303,14 +303,13 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       ({ selected }) => selected
     )[0]?.value;
 
-    let cityValue = tempCityValue
-      ? JSON.stringify([tempCityValue])
-      : city
-      ? JSON.stringify([city])
-      : [];
-
+    let cityValue = tempCityValue ? tempCityValue : city;
     trainerAvailableApi.query.location = location;
-    trainerAvailableApi.query.trainingType = JSON.stringify(trainingValue);
+    trainerAvailableApi.query.trainingType = encodeURIComponent(
+      JSON.stringify(trainingValue)
+    );
+    // trainerAvailableApi.query.trainingType = JSON.stringify(trainingValue);
+
     trainerAvailableApi.query.date = date;
     trainerAvailableApi.query.city = location === "inPerson" ? cityValue : "";
     trainerAvailableApi.query.availability = JSON.stringify(availabilityValue);

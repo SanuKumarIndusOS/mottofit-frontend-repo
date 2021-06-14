@@ -329,6 +329,39 @@ function UserSchedulerClass(props) {
     }
   };
 
+  // useEffect(() => {
+  //   let tempValue = props.queryQbject?.availability?.value;
+
+  //   if (tempValue && TimeSlot !== tempValue) {
+  //     // switch (props.queryQbject?.availability?.value) {
+  //     //   case "EarlyBird":
+  //     // }
+  //     setTimeSlot(tempValue);
+  //     if (tempValue === "EarlyBird") {
+  //       setTime(early_bird);
+  //     }
+
+  //     if (tempValue === "RiseAndShine") {
+  //       setTime(rise_shine);
+  //     }
+
+  //     if (tempValue === "MidDayBreak1") {
+  //       setTime(mid_day);
+  //     }
+
+  //     if (tempValue === "MidDayBreak2") {
+  //       setTime(mid_day_2);
+  //     }
+
+  //     if (tempValue === "HappyHours") {
+  //       setTime(happy_hour);
+  //     }
+
+  //     if (tempValue === "NeverTooLate") {
+  //       setTime(never_too_late);
+  //     }
+  //   }
+  // }, []);
   let tableData2;
 
   if (cellData.length === 0) {
@@ -685,6 +718,11 @@ function UserSchedulerClass(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  queryQbject: state.trainerReducer.query,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
@@ -694,6 +732,9 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-const UserScheduler = connect(null, mapDispatchToProps)(UserSchedulerClass);
+const UserScheduler = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserSchedulerClass);
 
 export default UserScheduler;
