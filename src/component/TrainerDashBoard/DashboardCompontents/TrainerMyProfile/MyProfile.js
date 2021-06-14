@@ -6,6 +6,7 @@ import ImageBG from "assets/files/SVG/Image 1.svg";
 import Instagram from "assets/files/SVG/Insta Icon.svg";
 import Web from "assets/files/SVG/Web Icon.svg";
 import Location from "assets/files/SVG/Location Icon.svg";
+import Share from "assets/files/FindTrainer/share.svg";
 import {
   getTrainerDetails,
   updateTrainerDetails,
@@ -22,6 +23,8 @@ import { cyan } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import { YearDropDown } from "component/common/YearDropdown";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
+import { Link } from "react-router-dom";
+import { copyTextToClipboard } from "service/helperFunctions";
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -209,6 +212,7 @@ const MyProfileFC = ({
         const storeData = {
           details: {
             ...details,
+            trainerId: data.id,
             motto: myMotto,
             trainingProcessDescription: trainingProcess,
             trainingLocation: preferedTrainingMode,
@@ -261,14 +265,31 @@ const MyProfileFC = ({
     setImageList([...imagesList]);
   };
 
+  const handleCopy = () => {
+    let trainerId = details?.trainerId;
+
+    let urlPath = "trainer/profile/";
+
+    let host = `${window.location.host}`;
+
+    let fullURLPath = `${host}/${urlPath}${trainerId}`;
+
+    fullURLPath && copyTextToClipboard(fullURLPath, "Link copied");
+  };
+
   return (
     <>
       <div className="outter_tp_container">
         <div className="container">
           <div className="inner_trinerpro_container">
             <div className="tp_wrapper">
-              <div className="tp_header">
+              <div className="tp_header d-flex align-items-center pr-5 mr-5">
                 <h2>My Profile</h2>
+
+                <div className="profile_share mt-0 ml-auto">
+                  <img src={Share} alt="icon" />
+                  <Link onClick={handleCopy}>Share Profile</Link>
+                </div>
               </div>
               <div className="tp_outter_form container">
                 <form onSubmit={(e) => e.preventDefault()}>

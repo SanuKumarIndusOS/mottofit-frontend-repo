@@ -1,4 +1,5 @@
-import moment from "moment";
+import moment from "moment-timezone";
+import { Toast } from "./toast";
 export const addQuery = (dataObject, apiObject) => {
   if (!dataObject) {
     return "";
@@ -71,6 +72,17 @@ export const addDate = (date, number = 1, unit = "h") => {
   return moment(date1).add(number, unit);
 };
 
+export const convertToESTMs = (time) => {
+  // var newYork = moment.tz(time, "America/New_York");
+  const tempTime = moment(time).format("YYYY-MM-DD hh:mm A");
+
+  console.log(`${tempTime} GMT-0400`, "q2");
+
+  let temp = moment(`${tempTime} GMT-0400`).valueOf();
+
+  return temp;
+};
+
 export const getFormatDate = (
   date = moment(),
   format = "YYYY-MM-DD",
@@ -137,3 +149,45 @@ export const convertStringToObject = (searchQuery) => {
     console.log(error, "d4sds4d");
   }
 };
+
+function fallbackCopyTextToClipboard(text, message) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+
+  // Avoid scrolling to bottom
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand("copy");
+    var msg = successful ? "successful" : "unsuccessful";
+    Toast({ type: "success", message });
+    console.log("Fallback: Copying text command was " + msg);
+  } catch (err) {
+    console.error("Fallback: Oops, unable to copy", err);
+  }
+
+  document.body.removeChild(textArea);
+}
+
+export function copyTextToClipboard(text, message) {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text, message);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(
+    function () {
+      Toast({ type: "success", message });
+      console.log("Async: Copying to clipboard was successful!");
+    },
+    function (err) {
+      // Toast({ type: "error", err });
+      console.error("Async: Could not copy text: ", err);
+    }
+  );
+}

@@ -83,17 +83,17 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const [ddHiitState, setddHiitState] = useState(false);
   const [queryObject, setqueryObject] = useState({
     location: "virtual",
-    vertical: "Select a Category",
+    vertical: "",
     date: "",
-    availability: "Select a Time",
+    availability: "",
     // inPerson: "In Person",
   });
 
   const [inPerson, setInPerson] = useState({
-    newYork: { value: "nyw", selected: false },
-    miami: { value: "maimi", selected: false },
-    hamptons: { value: "hampton", selected: false },
-    plamBeach: { value: "plam", selected: false },
+    newYork: { value: "New York City", selected: false },
+    miami: { value: "Miami", selected: false },
+    hamptons: { value: "Hamptons", selected: false },
+    plamBeach: { value: "Palm Beach", selected: false },
   });
 
   const bestMatchRef = useRef(null);
@@ -112,7 +112,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           setqueryObject({ ...queryObject, availability });
           TriggerDropDownTrainerAvailability();
         }}
-        selectedData={queryObject.availability}
+        selectedData={queryObject.availability?.value}
       />
     );
   } else {
@@ -125,10 +125,10 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
   const handleChange = (value) => {
     let tempData = {
-      newYork: { value: "nyw", selected: false },
-      miami: { value: "maimi", selected: false },
-      hamptons: { value: "hampton", selected: false },
-      plamBeach: { value: "plam", selected: false },
+      newYork: { value: "New York City", selected: false },
+      miami: { value: "Miami", selected: false },
+      hamptons: { value: "Hamptons", selected: false },
+      plamBeach: { value: "Palm Beach", selected: false },
     };
 
     tempData[value] = {
@@ -149,14 +149,14 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         <div className="dd_row_one">
           <div
             className={`option ${
-              queryObject?.vertical === "Boxing" ? "selected-data" : ""
+              queryObject?.vertical?.value === "Boxing" ? "selected-data" : ""
             }`}
             onClick={() => {
               setddBoxingState(!ddBoxingState);
               setDropdownState(!DropdownState);
               setqueryObject({
                 ...queryObject,
-                vertical: "Boxing",
+                vertical: { label: "Boxing", value: "Boxing" },
               });
             }}
           >
@@ -167,14 +167,14 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </div>
           <div
             className={`option ${
-              queryObject?.vertical === "Pilates" ? "selected-data" : ""
+              queryObject?.vertical?.value === "Pilates" ? "selected-data" : ""
             }`}
             onClick={() => {
               setddPilatesState(!ddPilatesState);
               setDropdownState(!DropdownState);
               setqueryObject({
                 ...queryObject,
-                vertical: "Pilates",
+                vertical: { label: "Pilates", value: "Pilates" },
               });
             }}
           >
@@ -187,13 +187,18 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         <div className="dd_row_two">
           <div
             className={`option ${
-              queryObject?.vertical === "Strength & Hiit" ? "selected-data" : ""
+              queryObject?.vertical?.value === "Strength & HIIT"
+                ? "selected-data"
+                : ""
             }`}
             onClick={() => {
               setddHiitState(!ddHiitState);
               setqueryObject({
                 ...queryObject,
-                vertical: "Strength & Hiit",
+                vertical: {
+                  label: "Strength & HIIT",
+                  value: "Strength & HIIT",
+                },
               });
               setDropdownState(!DropdownState);
             }}
@@ -205,13 +210,16 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </div>
           <div
             className={`option ${
-              queryObject?.vertical === "Yoga" ? "selected-data" : ""
+              queryObject?.vertical?.value === "Yoga" ? "selected-data" : ""
             }`}
             onClick={() => {
               setddYogaState(!ddYogaState);
               setqueryObject({
                 ...queryObject,
-                vertical: "Yoga",
+                vertical: {
+                  label: "Yoga",
+                  value: "Yoga",
+                },
               });
               setDropdownState(!DropdownState);
             }}
@@ -260,7 +268,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           In Person
         </p>
       );
-      setqueryObject({ ...queryObject, location: "Person" });
+      setqueryObject({ ...queryObject, location: "inPerson" });
       setInPersonDD(!InPersonDD);
     }
   };
@@ -287,13 +295,25 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
     const { trainerAvailableApi } = TrainerApi;
 
+    let trainingValue = trainingType?.value ? [trainingType?.value] : [];
+
+    let availabilityValue = availability?.value ? [availability?.value] : [];
+
+    let tempCityValue = Object.values(inPerson).filter(
+      ({ selected }) => selected
+    )[0]?.value;
+
+    let cityValue = tempCityValue
+      ? JSON.stringify([tempCityValue])
+      : city
+      ? JSON.stringify([city])
+      : [];
+
     trainerAvailableApi.query.location = location;
-    trainerAvailableApi.query.trainingType = trainingType;
+    trainerAvailableApi.query.trainingType = JSON.stringify(trainingValue);
     trainerAvailableApi.query.date = date;
-    trainerAvailableApi.query.city =
-      Object.values(inPerson).filter(({ selected }) => selected)[0]?.value ||
-      city;
-    trainerAvailableApi.query.availability = availability;
+    trainerAvailableApi.query.city = location === "inPerson" ? cityValue : "";
+    trainerAvailableApi.query.availability = JSON.stringify(availabilityValue);
 
     api({ ...trainerAvailableApi }).then(({ data }) => {
       setbestMatchData(data.bestMatch);
@@ -366,7 +386,11 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             <h3>Training Vertical</h3>
             <div className="card-item" onClick={TriggerVerticalDropDown}>
               <img src={Weight} alt="icon" />
-              <p>{queryObject.vertical || queryObject.trainingType}</p>
+              <p>
+                {queryObject.vertical?.label ||
+                  queryObject.trainingType?.label ||
+                  "Select a Category"}
+              </p>
             </div>
             {Dropdown}
           </div>
@@ -415,7 +439,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               onClick={TriggerDropDownTrainerAvailability}
             >
               <img src={AvailabilityIcon} alt="icon" />
-              <p>{queryObject.availability}</p>
+              <p>{queryObject.availability?.label || "Select a Time"}</p>
             </div>
             {DropdownAvailability}
           </div>

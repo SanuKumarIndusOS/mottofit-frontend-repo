@@ -36,7 +36,12 @@ const useOptions = () => {
   return options;
 };
 
-function CardFormFC({ updateUserDetails, agreedToTerms, handleChange }) {
+function CardFormFC({
+  updateUserDetails,
+  agreedToTerms,
+  handleChange,
+  ScheduleSession,
+}) {
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
@@ -52,6 +57,8 @@ function CardFormFC({ updateUserDetails, agreedToTerms, handleChange }) {
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
+
+    if (!showCardComp) return ScheduleSession();
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -103,6 +110,7 @@ function CardFormFC({ updateUserDetails, agreedToTerms, handleChange }) {
         console.log(data);
 
         Toast({ type: "success", message: "Card details added" });
+        ScheduleSession();
         getUserPaymentInfo();
       })
       .catch((err) => {
@@ -242,7 +250,7 @@ function CardFormFC({ updateUserDetails, agreedToTerms, handleChange }) {
                     className="link-btn"
                     onClick={() => setShowCardComp(true)}
                   >
-                    Change Card
+                    Edit Card
                   </button>
                 </div>
               )}
@@ -283,13 +291,18 @@ function CardFormFC({ updateUserDetails, agreedToTerms, handleChange }) {
           </div>
         </div>
 
-        {showCardComp && (
-          <div className="submit">
-            <button type="submit" disabled={!stripe}>
-              Save Card <ArrowHoverBlacked />
-            </button>
-          </div>
-        )}
+        {/* {showCardComp && ( */}
+        <div className="submit">
+          <button
+            type="click"
+            className={`${!agreedToTerms ? "disable-btn" : ""}`}
+            disabled={!agreedToTerms}
+            onClick={handleSubmit}
+          >
+            Continue <ArrowHoverBlacked />
+          </button>
+        </div>
+        {/* )} */}
       </form>
     </div>
   );

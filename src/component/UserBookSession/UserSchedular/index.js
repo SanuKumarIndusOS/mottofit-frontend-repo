@@ -53,12 +53,6 @@ const UserEventSchedularFC = (props) => {
 
       setUserSelectedData(tempData);
     }
-
-    // let selectedStartTime = getFormatDate(
-    //   props.bookingData?.start_slot,
-    //   "hh:mm AYYYY-MM-DD"
-    // );
-    // let selectedEndTime = "";
   }, []);
 
   const callbackFunction = (ts, tss, date) => {
@@ -145,7 +139,7 @@ const UserEventSchedularFC = (props) => {
                         textTransform: "uppercase",
                       }}
                     >
-                      {activity}
+                      {activity?.value}
                     </p>
                   </div>
                 </div>

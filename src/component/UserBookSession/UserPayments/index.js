@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import { scheduleSession, resetUserDetails } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
-import { getFormatDate } from "service/helperFunctions";
+import { getFormatDate, convertToESTMs } from "service/helperFunctions";
 import { Toast } from "service/toast";
 const stripePromise = loadStripe(
   "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
@@ -29,16 +29,29 @@ const UserPaymentsFC = ({
   trainerData,
   bookingData,
   defaulCardDetails,
+  queryQbject,
   ...restProps
 }) => {
   //for material ui radio buttom (temp)
   const [selectedValue, setSelectedValue] = useState("a");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [coupondCode, setCouponCode] = useState("");
+  const [isCouponCodeValid, setCouponCodeValid] = useState(false);
 
   const [price, setprice] = useState();
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+  };
+
+  const handleCouponCode = ({ target: { value } }) => {
+    setCouponCode(value);
+  };
+
+  const checkCouponCode = () => {
+    let isCodeValid = coupondCode === "MOTTO1";
+
+    setCouponCodeValid(isCodeValid);
   };
 
   const location = useLocation();
@@ -63,17 +76,19 @@ const UserPaymentsFC = ({
 
     const scheduleBody = {
       trainerId: trainerData?.id,
-      title: bookingData?.activity,
+      title: bookingData?.activity?.value,
       trainingType: trainingtype,
       sessionType: sessionData?.preferedTrainingMode,
-      activity: bookingData?.activity,
+      activity: bookingData?.activity?.value,
       sessionStatus: "created",
       sessionDate: bookingData?.date,
-      sessionStartTime: bookingData?.start_slot,
-      sessionEndTime: bookingData?.end_slot,
+      sessionStartTime: convertToESTMs(bookingData?.start_slot),
+      sessionEndTime: convertToESTMs(bookingData?.end_slot),
       city: sessionData?.location?.value,
       venue: sessionData?.trainingVenue?.value,
       price: sessionData?.price,
+      sessionMode: queryQbject?.availability?.value,
+      paidByUser: true,
     };
 
     scheduleSession(scheduleBody)
@@ -90,6 +105,10 @@ const UserPaymentsFC = ({
         restProps.resetUserDetails();
       })
       .catch((error) => {
+        Toast({
+          type: "error",
+          message: error.message || "Something went wrong",
+        });
         console.log(error);
       });
   };
@@ -100,12 +119,12 @@ const UserPaymentsFC = ({
     ? getFormatDate(bookingData?.start_slot, "MMMM Do, YYYY hh:mm A.")
     : "";
 
-  let incentivePrice = 10;
+  let discountPrice = isCouponCodeValid ? 10 : 0;
   let trxFee = 0;
   let tax = 1;
   let cancellationFee = 0;
   let totalPrice = Math.round(
-    (sessionData?.price || 0) + incentivePrice + trxFee + tax + cancellationFee
+    (sessionData?.price || 0) - discountPrice + trxFee + tax + cancellationFee
   );
 
   useEffect(() => {
@@ -167,9 +186,10 @@ const UserPaymentsFC = ({
                               handleChange={() =>
                                 setAgreedToTerms(!agreedToTerms)
                               }
+                              ScheduleSession={ScheduleSession}
                             />
                           </Elements>
-                          <button
+                          {/* <button
                             className={`ud_but ${
                               !agreedToTerms ? "disable-btn" : ""
                             }`}
@@ -177,7 +197,7 @@ const UserPaymentsFC = ({
                             disabled={!agreedToTerms}
                           >
                             Continue <ArrowHoverBlacked />
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
@@ -217,7 +237,7 @@ const UserPaymentsFC = ({
                     <h3>I WANT TO TRAIN IN</h3>
                     <div className="user_data_inner">
                       <img src={StrengthIcon} alt="icon" />
-                      <h4>{bookingData?.activity}</h4>
+                      <h4>{bookingData?.activity?.label}</h4>
                     </div>
                   </div>
                   <div className="user_payment_details">
@@ -236,12 +256,16 @@ const UserPaymentsFC = ({
                   </div>
                   <hr />
                   <div className="user_coupon">
-                    <h2>Have an incentive code? Avail it now!</h2>
+                    <h2>Have a discount code? Avail it now!</h2>
                     <input
                       type="text"
                       placeholder="Enter the coupon code here"
+                      onChange={handleCouponCode}
                     />
-                    <button>Apply</button>
+                    <button onClick={checkCouponCode}>Apply</button>
+                    {isCouponCodeValid && (
+                      <p className="w-100 text-success fs-12">Code applied!</p>
+                    )}
                   </div>
                   <div className="user_service_details">
                     <div className="user_service_wrapper">
@@ -250,7 +274,7 @@ const UserPaymentsFC = ({
                           <h3>Service Details</h3>
                           <div className="user_data_table_left">
                             <h5>{sessionData?.sessionType}</h5>
-                            <h5>Incentive</h5>
+                            <h5>Discount</h5>
                             <h5>Transaction Fee</h5>
                             <h5>Tax</h5>
                             <h5>Cancellation Fee</h5>
@@ -264,7 +288,7 @@ const UserPaymentsFC = ({
                           <h3>Price / Hour</h3>
                           <div className="user_data_table_right">
                             <h5>{`$${sessionData?.price}`}</h5>
-                            <h5>{`$${incentivePrice}`}</h5>
+                            <h5>{`-$${discountPrice}`}</h5>
                             <h5>{`$${trxFee}`}</h5>
                             <h5>{`$${tax}`}</h5>
                             <h5>{`$${cancellationFee}`}</h5>
@@ -288,6 +312,7 @@ const UserPaymentsFC = ({
 const mapStateToProps = (state) => ({
   bookingData: state.userReducer.bookingData,
   defaulCardDetails: state.userReducer.defaulCardDetails,
+  queryQbject: state.trainerReducer.query,
   sessionData: state.userReducer.sessionData,
   trainerData: state.userReducer.selectedTrainerData?.trainerData,
 });

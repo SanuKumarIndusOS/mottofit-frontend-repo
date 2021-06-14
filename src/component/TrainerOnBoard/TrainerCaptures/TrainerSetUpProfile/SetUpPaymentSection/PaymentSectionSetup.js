@@ -25,6 +25,7 @@ const PaymentSectionSetupClass = ({
   trainerSetupData,
   setTrainerSetupData,
   fileUploadApi,
+  showSaveBtn,
 }) => {
   const uploadArea = (e) => {
     let image = e.target.files[0];
@@ -82,6 +83,7 @@ const PaymentSectionSetupClass = ({
                         ...trainerSetupData,
                         identityNameUS: e.target.value,
                       });
+                      showSaveBtn();
                     }}
                   >
                     {info.map((list, index) => (
@@ -99,6 +101,7 @@ const PaymentSectionSetupClass = ({
                         ...trainerSetupData,
                         governmentIdNumber: e.target.value,
                       });
+                      showSaveBtn();
                     }}
                     name="governmentIdNumber"
                   />
@@ -141,6 +144,7 @@ const PaymentSectionSetupClass = ({
                         ...trainerSetupData,
                         insuranceNameUS: e.target.value,
                       });
+                      showSaveBtn();
                     }}
                     name="insuranceNameUS"
                   />
@@ -153,6 +157,7 @@ const PaymentSectionSetupClass = ({
                         ...trainerSetupData,
                         coverAmount: e.target.value,
                       });
+                      showSaveBtn();
                     }}
                     name="coverAmount"
                   />

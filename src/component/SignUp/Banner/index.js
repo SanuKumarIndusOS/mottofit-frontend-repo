@@ -52,7 +52,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
-      phoneNo: data.phoneNo,
+      phoneNo: `+1${data.phoneNo}`,
       password: data.password,
       cpassword: data.cpassword,
       location: data.location,

@@ -1,494 +1,498 @@
 .card {
-    width: 1400px;
-    height: 250px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 50px;
+  width: 1400px;
+  height: 250px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 50px;
 }
 
 .card .card-wrapper {
-    width: 1400px;
-    height: 100px;
-    border-radius: 150px;
-    border: none;
-    box-shadow: 0px 3px 12px #dedede;
-    display: flex;
-    background: #f8f8f8;
-    flex-direction: row;
+  width: 1400px;
+  height: 100px;
+  border-radius: 150px;
+  border: none;
+  box-shadow: 0px 3px 12px #dedede;
+  display: flex;
+  background: #f8f8f8;
+  flex-direction: row;
 }
 
 .card .card-wrapper .item1 {
-    cursor: pointer;
+  cursor: pointer;
 }
 .card .card-wrapper .item1 .location {
-    display: flex;
-    align-items: flex-start;
-    .inPerson-dd {
-        position: relative;
-        right: 90px;
-        width: 222px;
-    }
+  display: flex;
+  align-items: flex-start;
+  .inPerson-dd {
+    position: relative;
+    right: 90px;
+    width: 222px;
+  }
 }
 
 .card .card-wrapper .item1 .betweenSvg {
-    bottom: 8px;
-    position: relative;
-    left: 5px;
-    top: 0px;
-    margin: 0 0.8em 0 0.2em;
+  bottom: 8px;
+  position: relative;
+  left: 5px;
+  top: 0px;
+  margin: 0 0.8em 0 0.2em;
 }
 
 .card .card-wrapper .item2 {
-    cursor: pointer;
-    user-select: none;
+  cursor: pointer;
+  user-select: none;
 }
 
 .card .card-wrapper .item2 img {
-    position: relative;
-    bottom: 5px;
-    left: 5px;
+  position: relative;
+  bottom: 5px;
+  left: 5px;
 }
 
 .card .card-wrapper .item3 h3 {
-    padding-left: 0px !important;
+  padding-left: 0px !important;
 }
 
 .card .card-wrapper .item3 img {
-    position: relative;
-    right: 9px;
+  position: relative;
+  right: 9px;
 }
 
 .card .card-wrapper .item3 input {
-    margin-left: 0px !important;
-    font-size: 20px;
-    color: #898989;
-    font-family: "Montserrat";
-    font-weight: 600;
+  margin-left: 0px !important;
+  font-size: 20px;
+  color: #898989;
+  font-family: "Montserrat";
+  font-weight: 600;
 }
 
 .card .card-wrapper .item4 img {
-    position: relative;
-    bottom: 9px;
-    left: 5px;
+  position: relative;
+  bottom: 9px;
+  left: 5px;
 }
 
 .card .card-wrapper .item3 {
-    width: 250px;
-    padding: 1em 1em 0 2em;
+  width: 250px;
+  padding: 1em 1em 0 2em;
 }
 .card .card-wrapper .item1,
 .card .card-wrapper .item2,
 .card .card-wrapper .item4 {
-    width: 250px;
-    padding: 1em 0.1em 0 1.8em;
+  width: 250px;
+  padding: 1em 0.1em 0 1.8em;
 }
 .card .card-wrapper .item1 p {
-    margin: 0px;
-    font-size: 20px;
-    color: #898989;
-    font-family: "Montserrat";
-    font-weight: 500;
-    &:nth-child(2) {
-        margin-left: 10px;
-    }
+  margin: 0px;
+  font-size: 20px;
+  color: #898989;
+  font-family: "Montserrat";
+  font-weight: 500;
+  &:nth-child(2) {
+    margin-left: 10px;
+  }
 }
 
 .card .card-wrapper .item2 p,
 .card .card-wrapper .item3 p,
 .card .card-wrapper .item4 p {
-    margin-left: 10px;
-    font-size: 20px;
-    color: #898989;
-    font-family: "Montserrat";
-    font-weight: 500;
+  margin-left: 10px;
+  font-size: 20px;
+  color: #898989;
+  font-family: "Montserrat";
+  font-weight: 500;
 }
 
 .card .card-wrapper .item1 h3,
 .card .card-wrapper .item2 h3,
 .card .card-wrapper .item3 h3,
 .card .card-wrapper .item4 h3 {
-    font-size: 18px;
-    // padding: 1em 1em 0 1em;
-    color: #161616;
-    text-align: left;
-    font-family: "Montserrat";
-    font-weight: 600;
+  font-size: 18px;
+  // padding: 1em 1em 0 1em;
+  color: #161616;
+  text-align: left;
+  font-family: "Montserrat";
+  font-weight: 600;
 }
 .card .card-wrapper .item1 .card-item {
-    display: flex;
+  display: flex;
 }
 
 // .card .card-wrapper .item1 .card-item,
 .card .card-wrapper .item2 .card-item,
 .card .card-wrapper .item4 .card-item {
-    display: flex;
-    align-items: center;
-    position: relative;
-    bottom: 5px;
-    left: -8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  bottom: 5px;
+  left: -8px;
 }
 
 .card .card-wrapper .item3 .card-item {
-    display: flex;
-    align-items: center;
-    position: relative;
-    bottom: 5px;
-    margin: 0 0 0 0.7em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  bottom: 5px;
+  margin: 0 0 0 0.7em;
 }
 
 .card .card-wrapper .item1 .card-item input,
 .card .card-wrapper .item2 .card-item input,
 .card .card-wrapper .item3 .card-item input,
 .card .card-wrapper .item4 .card-item input {
-    width: 100%;
-    background: transparent;
-    outline: none;
-    border: 0;
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border: 0;
 }
 
 .card .card-wrapper .item1 .card-item:nth-child(3),
 .card .card-wrapper .item2 .card-item:nth-child(3),
 .card .card-wrapper .item3 .card-item:nth-child(3),
 .card .card-wrapper .item4 .card-item:nth-child(3) {
-    width: 100%;
+  width: 100%;
 }
 
 .card .card-wrapper .item1 .card-item select,
 .card .card-wrapper .item2 .card-item select,
 .card .card-wrapper .item3 .card-item select,
 .card .card-wrapper .item4 .card-item select {
-    background: transparent;
-    outline: none;
-    border: 0;
-    width: 60%;
+  background: transparent;
+  outline: none;
+  border: 0;
+  width: 60%;
 }
 
 .card .item5 {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .card .item5 .circle_search {
-    cursor: pointer;
-    background: #53bfd2;
-    border-radius: 100px;
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    right: 25px;
-    display: flex;
-    align-items: center;
+  cursor: pointer;
+  background: #53bfd2;
+  border-radius: 100px;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  right: 25px;
+  display: flex;
+  align-items: center;
 }
 
 .card .item5 .circle_search svg {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    font-size: 2em;
-    color: #ffffff;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  font-size: 2em;
+  color: #ffffff;
 }
 
 .line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .box_3_active_trainer {
-    display: block;
-    position: relative;
-    top: 12px;
-    width: 260px;
-    height: 240px;
-    background: #fff;
-    box-shadow: 1px 3px 12px #1616160d;
-    opacity: 1;
-    flex-direction: column;
-    border: none;
-    left: -20px !important;
+  display: block;
+  position: relative;
+  top: 12px;
+  width: 260px;
+  height: 240px;
+  background: #fff;
+  box-shadow: 1px 3px 12px #1616160d;
+  opacity: 1;
+  flex-direction: column;
+  border: none;
+  left: -20px !important;
 }
 
 .box_3_active_trainer .dd_row_one {
-    display: flex;
+  display: flex;
 }
 
 .box_3_active_trainer .dd_row_one .option .option_wapper {
-    width: 130px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid #eaeaea;
-    padding: 2em 0 1em 0;
+  width: 130px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #eaeaea;
+  padding: 2em 0 1em 0;
 }
 
 .box_3_active_trainer .dd_row_one .option .option_wapper img {
-    width: 54px;
-    position: relative;
-    left: 0px;
-    top: -7px;
-    height: 60px;
+  width: 54px;
+  position: relative;
+  left: 0px;
+  top: -7px;
+  height: 60px;
 }
 
 .box_3_active_trainer .dd_row_one .option .option_wapper h2 {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
 
-    text-align: center;
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase;
-    line-height: 18px;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: "Montserrat", sans-serif;
+  text-align: center;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase;
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  line-height: 12px;
 }
 .box_3_active_trainer .dd_row_one .option .option_wapper label {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
-    text-align: center;
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase !important;
-    font-style: italic !important;
-    line-height: 18px;
-    font-size: 12px;
-    font-weight: 500;
-    font-family: "Montserrat", sans-serif;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
+  text-align: center;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase !important;
+  font-style: italic !important;
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
 }
 
 .box_3_active_trainer .dd_row_one .option:hover {
-    background: #53bfd2;
-    border: none;
+  background: #53bfd2;
+  border: none;
 }
 
 .box_3_active_trainer .dd_row_two {
-    flex: 1;
-    display: flex;
-    height: auto;
-    background: #fff;
+  flex: 1;
+  display: flex;
+  height: auto;
+  background: #fff;
 }
 
 .box_3_active_trainer .dd_row_two .option .option_wapper {
-    width: 130px;
-    height: 130px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    transition: all 0.2s ease-in;
-    border: 1px solid #eaeaea;
-    padding: 2em 0 1em 0;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.2s ease-in;
+  border: 1px solid #eaeaea;
+  padding: 2em 0 1em 0;
 }
 
 .box_3_active_trainer .dd_row_two .option .option_wapper img {
-    width: 54px;
-    position: relative;
-    left: 0px;
-    top: -7px;
+  width: 54px;
+  position: relative;
+  left: 0px;
+  top: -7px;
 
-    height: 60px;
+  height: 60px;
 }
 
 .box_3_active_trainer .dd_row_two .option .option_wapper h2 {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
 
-    text-align: center;
+  text-align: center;
 
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase;
-    line-height: 18px;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase;
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  line-height: 12px;
 }
 .box_3_active_trainer .dd_row_two .option .option_wapper label {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
-    text-align: center;
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase !important;
-    font-style: italic !important;
-    line-height: 18px;
-    font-size: 12px;
-    font-weight: 500;
-    font-family: "Montserrat", sans-serif;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
+  text-align: center;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase !important;
+  font-style: italic !important;
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
 }
 
 .box_3_active_trainer .dd_row_two .option:hover {
-    background: #53bfd2;
-    border: none;
+  background: #53bfd2;
+  border: none;
 }
 
 .box_3_inactive {
-    display: none;
-    opacity: 0;
+  display: none;
+  opacity: 0;
 }
 
 .circle_search {
-    position: relative !important;
-    left: 10px;
+  position: relative !important;
+  left: 10px;
 }
 
 //Availablity styles
 
 .box_3_active_trainer {
-    display: block;
-    position: relative;
-    top: 12px;
-    width: 260px;
-    height: 240px;
-    background: #fff;
-    box-shadow: 1px 3px 12px #1616160d;
-    opacity: 1;
-    display: flex;
-    flex-direction: column;
-    left: 45px !important;
+  display: block;
+  position: relative;
+  top: 12px;
+  width: 260px;
+  height: 240px;
+  background: #fff;
+  box-shadow: 1px 3px 12px #1616160d;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  left: 45px !important;
 }
 
 .box_3_active_trainer {
-    display: block;
-    position: relative;
-    top: 12px;
-    width: 260px;
-    height: 240px;
-    background: #fff;
-    box-shadow: 1px 3px 12px #1616160d;
-    opacity: 1;
-    flex-direction: column;
-    border: none;
-    left: -20px !important;
+  display: block;
+  position: relative;
+  top: 12px;
+  width: 260px;
+  height: 240px;
+  background: #fff;
+  box-shadow: 1px 3px 12px #1616160d;
+  opacity: 1;
+  flex-direction: column;
+  border: none;
+  left: -20px !important;
 }
 
 .box_3_active_trainer .dd_row_one {
-    display: flex;
+  display: flex;
 }
 
 .box_3_active_trainer .dd_row_one .option .option_wapper {
-    width: 130px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid #eaeaea;
+  width: 130px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #eaeaea;
 }
 
 .box_3_active_trainer .dd_row_one .option .option_wapper img {
-    width: 54px;
-    position: relative;
-    left: 0px;
-    height: 60px;
-    top: -7px;
+  width: 54px;
+  position: relative;
+  left: 0px;
+  height: 60px;
+  top: -7px;
 }
 
 .box_3_active_trainer .dd_row_one .option .option_wapper h2 {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
-    text-align: center;
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 600;
-    font-family: Montserrat;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
+  text-align: center;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  font-family: Montserrat;
+  line-height: 12px;
 }
 .box_3_active_trainer .dd_row_one .option .option_wapper label {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
-    text-align: center;
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase !important;
-    font-style: italic !important;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 500;
-    font-family: Montserrat;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
+  text-align: center;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase !important;
+  font-style: italic !important;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  font-family: Montserrat;
 }
 
 .box_3_active_trainer .dd_row_one .option:hover {
-    background: #53bfd2;
-    border: none;
+  background: #53bfd2;
+  border: none;
 }
 
 .box_3_active_trainer .dd_row_two {
-    flex: 1;
-    display: flex;
-    height: auto;
-    background: #fff;
+  flex: 1;
+  display: flex;
+  height: auto;
+  background: #fff;
 }
 
 .box_3_active_trainer .dd_row_two .option .option_wapper {
-    width: 130px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    transition: all 0.2s ease-in;
-    border: 1px solid #eaeaea;
+  width: 130px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.2s ease-in;
+  border: 1px solid #eaeaea;
 }
 
 .box_3_active_trainer .dd_row_two .option .option_wapper img {
-    position: relative;
-    left: 0px;
-    width: 85px;
-    height: 53px;
-    top: -7px;
+  position: relative;
+  left: 0px;
+  width: 85px;
+  height: 53px;
+  top: -7px;
 }
 
 .box_3_active_trainer .dd_row_two .option .option_wapper h2 {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
-    text-align: center;
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 600;
-    font-family: Montserrat;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
+  text-align: center;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  font-family: Montserrat;
+  line-height: 12px;
 }
 .box_3_active_trainer .dd_row_two .option .option_wapper label {
-    padding-top: 0.5em;
-    width: 140px;
-    height: 16px;
-    text-align: center;
-    letter-spacing: 0.7px;
-    color: #161616;
-    text-transform: uppercase !important;
-    font-style: italic !important;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 500;
-    font-family: Montserrat;
+  padding-top: 0.5em;
+  width: 140px;
+  height: 16px;
+  text-align: center;
+  letter-spacing: 0.7px;
+  color: #161616;
+  text-transform: uppercase !important;
+  font-style: italic !important;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  font-family: Montserrat;
 }
 
 .box_3_active_trainer .dd_row_two .option:hover {
-    background: #53bfd2;
-    border: none;
+  background: #53bfd2;
+  border: none;
 }
 
 .box_3_inactive {
-    display: none;
-    opacity: 0;
+  display: none;
+  opacity: 0;
 }
 
 .circle {
-    position: relative !important;
-    left: 10px;
+  position: relative !important;
+  left: 10px;
 }

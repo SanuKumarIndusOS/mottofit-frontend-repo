@@ -21,6 +21,8 @@ import { getTrainerDetail } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
+import { copyTextToClipboard } from "service/helperFunctions";
+
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
 const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
@@ -51,6 +53,11 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
+
+  const handleCopy = () => {
+    let profileLink = window?.location?.href;
+    profileLink && copyTextToClipboard(profileLink, "Link copied");
+  };
 
   return (
     <>
@@ -299,7 +306,7 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       </div>
                       <div className="profile_share">
                         <img src={Share} alt="icon" />
-                        <Link to="/">Share Profile</Link>
+                        <Link onClick={handleCopy}>Share Profile</Link>
                       </div>
                     </div>
                   </div>

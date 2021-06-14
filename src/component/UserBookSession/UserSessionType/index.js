@@ -21,10 +21,10 @@ import { history } from "helpers";
 import { useLocation } from "react-router-dom";
 
 const options = [
-  { value: "nyw", label: "New York" },
-  { value: "maimi", label: "Maimi" },
-  { value: "hampton", label: "Hampton" },
-  { value: "plam", label: "Plam Beach" },
+  { value: "New York City", label: "New York" },
+  { value: "Miami", label: "Maimi" },
+  { value: "Hamptons", label: "Hampton" },
+  { value: "Palm Beach", label: "Plam Beach" },
 ];
 
 const trainingVenueOptions = [

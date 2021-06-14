@@ -33,7 +33,12 @@ class RoutesClass extends Component {
       "/admin/login",
     ];
 
+    const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];
+
     const emptyTokenPath = noTokenPaths.includes(pathname);
+
+    if (isUserLoggedIn && blockSignUpPath.includes(pathname))
+      return history.push("/");
 
     if (!isUserLoggedIn && !emptyTokenPath) {
       // console.log(pathname);

@@ -29,11 +29,13 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
         <div className="dd_row_one">
           <div
             className={`option ${
-              selectedData === "Early Bird" ? "selected-data" : ""
+              selectedData === "EarlyBird" ? "selected-data" : ""
             }`}
             onClick={() => {
               // setddBoxingState(!ddBoxingState);
-              onClick({ availability: "Early Bird" });
+              onClick({
+                availability: { label: "Early Bird", value: "EarlyBird" },
+              });
               //console.log(ddBoxingState, "boxing");
             }}
           >
@@ -44,16 +46,18 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
                 onClick={React.MouseEventHandler}
               />
               <h2>Early Bird</h2>
-              <label>(5am-7:30am)</label>
+              <label>(5am-8am)</label>
             </div>
           </div>
           <div
             className={`option ${
-              selectedData === "Rise & Shine" ? "selected-data" : ""
+              selectedData === "RiseAndShine" ? "selected-data" : ""
             }`}
             onClick={() => {
               // setddPilatesState(!ddPilatesState);
-              onClick({ availability: "Rise & Shine" });
+              onClick({
+                availability: { label: "Rise & Shine", value: "RiseAndShine" },
+              });
               // console.log(ddPilatesState, "pilates");
             }}
           >
@@ -71,7 +75,9 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
             }`}
             onClick={() => {
               // setddHiitState(!ddHiitState);
-              onClick({ availability: "MidDayBreak1" });
+              onClick({
+                availability: { label: "Mid-Day Break", value: "MidDayBreak1" },
+              });
               // console.log(ddHiitState, "hiit");
             }}
           >
@@ -87,7 +93,12 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
             }`}
             onClick={() => {
               //setddYogaState(!ddYogaState);
-              onClick({ availability: "MidDayBreak2" });
+              onClick({
+                availability: {
+                  label: "Mid-Day LunchTime",
+                  value: "MidDayBreak2",
+                },
+              });
               //console.log(ddYogaState, "yoga");
             }}
           >
@@ -101,29 +112,37 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
         <div className="dd_row_two">
           <div
             className={`option ${
-              selectedData === "Never Too Late" ? "selected-data" : ""
+              selectedData === "HappyHours" ? "selected-data" : ""
             }`}
             onClick={() => {
               // setddYogaState(!ddYogaState);
-              onClick({ availability: "Never Too Late" });
+              onClick({
+                availability: {
+                  label: "Happy Hour",
+                  value: "HappyHours",
+                },
+              });
               // console.log(ddYogaState, "yoga");
             }}
           >
             <div className="option_wapper">
               <HoverImage src={NeverTooInActive} hoverSrc={NeverTooActive} />
-              <h2>Never Too Late</h2>
+              <h2>Happy Hours</h2>
               <label>(5pm-8pm)</label>
             </div>
           </div>
-        </div>
-        <div className="dd_row_two">
           <div
             className={`option ${
-              selectedData === "Never Too Late" ? "selected-data" : ""
+              selectedData === "NeverTooLate" ? "selected-data" : ""
             }`}
             onClick={() => {
               // setddYogaState(!ddYogaState);
-              onClick({ availability: "Never Too Late" });
+              onClick({
+                availability: {
+                  label: "Never Too Late",
+                  value: "NeverTooLate",
+                },
+              });
               // console.log(ddYogaState, "yoga");
             }}
           >

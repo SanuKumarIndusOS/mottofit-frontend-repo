@@ -18,6 +18,7 @@ const PaymentHistoryFC = (props) => {
   });
 
   const [isLoading, setLoading] = useState(false);
+  const [showSaveBtn, setShowSaveBtn] = useState(false);
 
   const handleSubmit = () => {
     let payload = {
@@ -85,32 +86,36 @@ const PaymentHistoryFC = (props) => {
       <PaymentSectionSetup
         trainerSetupData={trainerSetupData}
         setTrainerSetupData={setTrainerSetupData}
+        showSaveBtn={() => setShowSaveBtn(true)}
       />
 
       <div className="action-btn d-flex justify-content-center">
-        <button
-          onClick={handleSubmit}
-          type="submit"
-          disabled={isLoading || !hasAllFieldsFilled}
-          className={`${isLoading ? "loading" : "btn"} normal-btn`}
-        >
-          {isLoading ? (
-            "Loading..."
-          ) : (
+        {showSaveBtn ? (
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            disabled={isLoading || !hasAllFieldsFilled}
+            className={`${isLoading ? "loading" : "btn"} normal-btn`}
+          >
+            {isLoading ? (
+              "Loading..."
+            ) : (
+              <a>
+                {" "}
+                Save Details
+                <ArrowHoverBlacked />
+              </a>
+            )}
+          </button>
+        ) : (
+          <button onClick={getStripeURL} type="submit" className={`normal-btn`}>
             <a>
               {" "}
-              Save Details
+              Edit Payment Details
               <ArrowHoverBlacked />
             </a>
-          )}
-        </button>
-        <button onClick={getStripeURL} type="submit" className={`normal-btn`}>
-          <a>
-            {" "}
-            View Payment Details
-            <ArrowHoverBlacked />
-          </a>
-        </button>
+          </button>
+        )}
       </div>
     </div>
   );
