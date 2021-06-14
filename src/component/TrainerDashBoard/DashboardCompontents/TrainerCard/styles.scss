@@ -78,6 +78,10 @@
             img {
                 position: relative;
                 top: -9px;
+                object-fit: cover;
+                width:20px;
+                height:20px;
+                border-radius: 100px;
             }
 
             img:nth-child(2) {
@@ -115,6 +119,7 @@
                 border-radius: 50px;
                 width: 90%;
                 padding: 0.5em 1em;
+                text-transform: capitalize;
                 &::placeholder {
                     font-size: 18px;
                     color: #bcbcbc;
@@ -270,4 +275,27 @@ h6 {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.combin_profile_btn_img{
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    position: relative;
+    left: -6px;
+    top: -2px;
+}
+
+.wdht{
+    width:100px;
+    height:100px;
+}
+
+.inputDisplay{
+    display: none;
+}
+
+.display_heading{
+    margin-right: 1em;
 }

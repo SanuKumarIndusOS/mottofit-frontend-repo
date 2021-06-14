@@ -148,9 +148,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       <div className="box_3_active_trainer">
         <div className="dd_row_one">
           <div
-            className={`option ${
-              queryObject?.vertical === "Boxing" ? "selected-data" : ""
-            }`}
+            className={`option ${queryObject?.vertical === "Boxing" ? "selected-data" : ""
+              }`}
             onClick={() => {
               setddBoxingState(!ddBoxingState);
               setDropdownState(!DropdownState);
@@ -166,9 +165,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
           <div
-            className={`option ${
-              queryObject?.vertical === "Pilates" ? "selected-data" : ""
-            }`}
+            className={`option ${queryObject?.vertical === "Pilates" ? "selected-data" : ""
+              }`}
             onClick={() => {
               setddPilatesState(!ddPilatesState);
               setDropdownState(!DropdownState);
@@ -186,9 +184,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         </div>
         <div className="dd_row_two">
           <div
-            className={`option ${
-              queryObject?.vertical === "Strength & Hiit" ? "selected-data" : ""
-            }`}
+            className={`option ${queryObject?.vertical === "Strength & Hiit" ? "selected-data" : ""
+              }`}
             onClick={() => {
               setddHiitState(!ddHiitState);
               setqueryObject({
@@ -204,9 +201,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
           <div
-            className={`option ${
-              queryObject?.vertical === "Yoga" ? "selected-data" : ""
-            }`}
+            className={`option ${queryObject?.vertical === "Yoga" ? "selected-data" : ""
+              }`}
             onClick={() => {
               setddYogaState(!ddYogaState);
               setqueryObject({
@@ -233,29 +229,25 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   };
 
   const [virtualMarkup, setvirtualMarkup] = useState(
-    <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
+    <p className="virtualHighlight">Virtual</p>
   );
   const [inPersonMarkup, setinPersonMarkup] = useState(
-    <p style={{ fontWeight: "normal" }}>In Person</p>
+    <p className="noHighlight">In Person</p>
   );
 
   const SetLocation = (value) => {
     if (value === "virtual" || value === "Virtual") {
       setvirtualMarkup(
-        <p style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</p>
+        <p className="virtualHighlight">Virtual</p>
       );
-      setinPersonMarkup(<p style={{ fontWeight: "normal" }}>In Person</p>);
+      setinPersonMarkup(<p className="noHighlight">In Person</p>);
 
       setqueryObject({ ...queryObject, location: "virtual" });
     } else {
-      setvirtualMarkup(<p style={{ fontWeight: "normal" }}>Virtual</p>);
+      setvirtualMarkup(<p className="noHighlight">Virtual</p>);
       setinPersonMarkup(
         <p
-          style={{
-            borderBottom: "3px solid #53BFD2",
-            width: "222px",
-            maxWidth: "fit-content",
-          }}
+          className="inpersonHighlight"
         >
           In Person
         </p>
@@ -354,7 +346,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                 <h6>{inPersonMarkup}</h6>
                 <div
                   className="inPerson-dd"
-                  // onClick={TriggerInPersonDropDown}
+                // onClick={TriggerInPersonDropDown}
                 >
                   {DropdownHomeInPerson}
                 </div>

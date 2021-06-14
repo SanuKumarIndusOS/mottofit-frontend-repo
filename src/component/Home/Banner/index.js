@@ -22,10 +22,10 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         useState(false);
     const [InPersonDD, setInPersonDD] = useState(false);
     const [virtualMarkup, setvirtualMarkup] = useState(
-        <h2 style={{ borderBottom: "3px solid #53BFD2" }}>Virtual</h2>
+        <h2 className="highlight">Virtual</h2>
     );
     const [inPersonMarkup, setinPersonMarkup] = useState(
-        <h2 style={{ fontWeight: "normal" }}>In Person</h2>
+        <h2 className="nohighlight">In Person</h2>
     );
     const [queryObject, setqueryObject] = useState({
         location: "virtual",
@@ -73,21 +73,21 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     const SetLocation = (value) => {
         if (value === "Virtual") {
             setvirtualMarkup(
-                <h2 style={{ borderBottom: "3px solid #53BFD2", margin: "0" }}>
+                <h2 className="highlight nomargin">
                     Virtual
                 </h2>
             );
             setinPersonMarkup(
-                <h2 style={{ fontWeight: "normal" }}>In Person</h2>
+                <h2 className="nohighlight">In Person</h2>
             );
             setqueryObject({ ...queryObject, location: "virtual" });
         } else {
             setvirtualMarkup(
-                <h2 style={{ fontWeight: "normal", margin: "0" }}>Virtual</h2>
+                <h2 className="highlight nomargin">Virtual</h2>
             );
             setinPersonMarkup(
                 <h2
-                    style={{ borderBottom: "3px solid #53BFD2", width: "88px" }}
+                    className="highlight withwidth"
                 >
                     In Person
                 </h2>
@@ -219,12 +219,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                         <div className="item3">
                             <h3>Schedule</h3>
                             <div className="card_item_home_item3 mt-2">
-                                <DatePicker
+                                <DatePicker className="datePicker"
                                     date={date}
                                     onDateChange={setDate}
                                     locale={enGB}
                                     startDate={new Date()}
-                                    style={{ height: "100px" }}
                                 >
                                     {({ inputProps, focused }) => (
                                         <input

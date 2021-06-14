@@ -31,7 +31,7 @@ const UserDashboardClass = ({ children, getUserDetail }) => {
                 }}
               />
             </div>
-            <h2 style={{ textTransform: "capitalize" }}>
+            <h2>
               {userData ? userData.firstName : "Not Added"}&nbsp;
               {userData ? userData.lastName : "Not Added"}
             </h2>

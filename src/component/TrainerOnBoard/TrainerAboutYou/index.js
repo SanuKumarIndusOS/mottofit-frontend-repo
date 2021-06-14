@@ -169,9 +169,8 @@ class AboutTrainerFC extends Component {
               <div className="wrapper_inputs">
                 <div className="wrapper_innerInput">
                   <label>Name*</label>
-                  <input
+                  <input className="wrapperInput_caps"
                     placeholder="Name"
-                    style={{ textTransform: "capitalize" }}
                     onChange={(e) => this.handleInput(e)}
                     value={firstName}
                     name="firstName"

@@ -74,7 +74,7 @@ export const TrainerPrevModal = ({
                     }}
                 >
                     <div className="container">
-                        <div className="row m-0" style={{ alignleft: "auto" }}>
+                        <div className="row m-0 card-container">
                             <div className="card">
                                 <img
                                     className="card-img-top"
@@ -87,53 +87,38 @@ export const TrainerPrevModal = ({
                                         image
                                             ? { objectFit: "cover" }
                                             : {
-                                                  objectFit: "cover",
-                                                  backgroundColor: "blue",
-                                              }
+                                                objectFit: "cover",
+                                                backgroundColor: "blue",
+                                            }
                                     }
                                 />
                                 <div className="card-body">
-                                    <h3
-                                        style={{
-                                            textTransform: "capitalize",
-                                        }}
-                                    >
+                                    <h3>
                                         {trainerCardData.firstName}
                                         &nbsp;
                                         {trainerCardData.lastName}
                                     </h3>
-                                    <h6
-                                        style={{
-                                            color: "#898989",
-                                            fontWeight: "bold",
-                                        }}
+                                    <h6 className="card-body-verticals"
                                     >
                                         {trainerCardData.verticals !== undefined
                                             ? trainerCardData.verticals.map(
-                                                  (item) => {
-                                                      return (
-                                                          <h6
-                                                              style={{
-                                                                  margin: "0 0.3em 0 0",
-                                                              }}
-                                                          >
-                                                              {item}
-                                                              {","}
-                                                          </h6>
-                                                      );
-                                                  }
-                                              )
+                                                (item) => {
+                                                    return (
+                                                        <h6
+                                                        >
+                                                            {item}
+                                                            {","}
+                                                        </h6>
+                                                    );
+                                                }
+                                            )
                                             : null}
                                     </h6>
 
                                     <p>{trainerCardData.description}</p>
                                 </div>
                                 <div className="card-button">
-                                    <button
-                                        style={{
-                                            backgroundColor: "#53BFD2",
-                                        }}
-                                    >
+                                    <button>
                                         book a session
                                         <p>
                                             from <span>${price || ""}</span>

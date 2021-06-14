@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 // import "./styles.scss";
+import "./tablestyle.scss"
 import moment from "moment";
 import BackIcon from "../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
@@ -338,21 +339,9 @@ function UserSchedulerClass(props) {
       <table>
         <thead>
           <tr>
-            <th style={{ height: "70px" }}>
-              <img src={time[7]} style={{ width: "30px", height: "30px" }} />
-              <h6
-                style={{
-                  wordWrap: "break-word",
-                  lineHeight: "18px",
-                  paddingLeft: "0.5em",
-                  paddingRight: "0.5em",
-                  paddingBottom: "0em",
-                  fontFamily: "Montserrat",
-                  fontWeight: "600",
-                  color: "#898989",
-                  margin: 0,
-                }}
-              >
+            <th className="table-heading">
+              <img src={time[7]}/>
+              <h6>
                 {" "}
                 {time[6]}
               </h6>
@@ -397,21 +386,15 @@ function UserSchedulerClass(props) {
                     return userSlots.find(
                       (el) => el === item.time + item.date
                     ) ? (
-                      <td
-                        style={{
-                          backgroundColor: "#53bfd2",
-                        }}
-                        onClick={() => selectUserSlot(item.date, item.time)}
+                      <td className="user_time_slot_data"
+                       onClick={() => selectUserSlot(item.date, item.time)}
                         className="avaiable_slot"
                       >
                         {item.time}
                       </td>
                     ) : (
-                      <td
-                        style={{
-                          backgroundColor: "#fff",
-                        }}
-                        onClick={() => selectUserSlot(item.date, item.time)}
+                      <td className="user_time_slot_data1"
+                       onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     );
                   } else {
@@ -434,18 +417,13 @@ function UserSchedulerClass(props) {
                     return userSlots.find(
                       (el) => el === item.time + item.date
                     ) ? (
-                      <td
-                        style={{
-                          backgroundColor: "#53bfd2",
-                        }}
-                        onClick={() => selectUserSlot(item.date, item.time)}
+                      <td className="user_time_slot_data"
+                       onClick={() => selectUserSlot(item.date, item.time)}
                         className="avaiable_slot"
                       ></td>
                     ) : (
                       <td
-                        style={{
-                          backgroundColor: "#fff",
-                        }}
+                      className="user_time_slot_data1"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     );
@@ -470,16 +448,12 @@ function UserSchedulerClass(props) {
                       (el) => el === item.time + item.date
                     ) ? (
                       <td
-                        style={{
-                          backgroundColor: "#53bfd2",
-                        }}
+                      className="user_time_slot_data"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     ) : (
                       <td
-                        style={{
-                          backgroundColor: "#fff",
-                        }}
+                      className="user_time_slot_data1"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     );
@@ -504,16 +478,12 @@ function UserSchedulerClass(props) {
                       (el) => el === item.time + item.date
                     ) ? (
                       <td
-                        style={{
-                          backgroundColor: "#53bfd2",
-                        }}
+                      className="user_time_slot_data"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     ) : (
                       <td
-                        style={{
-                          backgroundColor: "#fff",
-                        }}
+                      className="user_time_slot_data1"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     );
@@ -538,16 +508,12 @@ function UserSchedulerClass(props) {
                       (el) => el === item.time + item.date
                     ) ? (
                       <td
-                        style={{
-                          backgroundColor: "#53bfd2",
-                        }}
+                       className="user_time_slot_data"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     ) : (
                       <td
-                        style={{
-                          backgroundColor: "#fff",
-                        }}
+                       className="user_time_slot_data1"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     );
@@ -572,16 +538,12 @@ function UserSchedulerClass(props) {
                       (el) => el === item.time + item.date
                     ) ? (
                       <td
-                        style={{
-                          backgroundColor: "#53bfd2",
-                        }}
+                       className="user_time_slot_data"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     ) : (
                       <td
-                        style={{
-                          backgroundColor: "#fff",
-                        }}
+                       className="user_time_slot_data1"
                         onClick={() => selectUserSlot(item.date, item.time)}
                       ></td>
                     );
@@ -610,11 +572,10 @@ function UserSchedulerClass(props) {
               "day"
             ) ? (
               <div>
-                <img
+                <img className="table_date_backicon"
                   src={BackIcon}
                   onClick={PreviousWeek}
-                  style={{ cursor: "pointer" }}
-                />{" "}
+                 />{" "}
                 &ensp;
               </div>
             ) : (
@@ -622,10 +583,7 @@ function UserSchedulerClass(props) {
                 <img
                   src={BackIcon}
                   disabled="true"
-                  style={{
-                    opacity: "0.5",
-                    cursor: "not-allowed",
-                  }}
+                  className="table_date_backicon1"
                 />{" "}
                 &ensp;
               </div>
@@ -638,7 +596,7 @@ function UserSchedulerClass(props) {
             <img
               src={NextIcon}
               onClick={NextWeek}
-              style={{ cursor: "pointer" }}
+              className="table_date_backicon"
             />{" "}
             &ensp; &ensp;
           </div>

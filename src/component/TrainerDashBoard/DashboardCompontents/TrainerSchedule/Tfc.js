@@ -261,13 +261,13 @@ function TfcClass({
                         availableMode: TimeSlot,
                         availableSlots: [
                             sortDate[0].time +
-                                "-" +
-                                moment(
-                                    sortDate[sortDate.length - 1].time,
-                                    "HH:mm a"
-                                )
-                                    .add(30, "minutes")
-                                    .format("hh:mm A"),
+                            "-" +
+                            moment(
+                                sortDate[sortDate.length - 1].time,
+                                "HH:mm a"
+                            )
+                                .add(30, "minutes")
+                                .format("hh:mm A"),
                         ],
                     },
                 ],
@@ -298,7 +298,7 @@ function TfcClass({
         populate(startWeek, endWeek);
     };
 
-    useEffect(() => {}, [startWeek]);
+    useEffect(() => { }, [startWeek]);
 
     const NextWeek = () => {
         //Reset current cells
@@ -406,22 +406,8 @@ function TfcClass({
                     <td disabled>
                         <img
                             src={time[7]}
-                            style={{ width: "30px", height: "30px" }}
                         />
-                        <h6
-                            style={{
-                                wordWrap: "break-word",
-                                lineHeight: "18px",
-                                paddingLeft: "0.5em",
-                                paddingRight: "0.5em",
-                                paddingBottom: "0em",
-                                fontFamily: "Montserrat",
-                                fontWeight: "800",
-                                color: "#898989",
-                                margin: 0,
-                                textAlign: "center",
-                            }}
-                        >
+                        <h6>
                             {" "}
                             {time[6]}
                         </h6>
@@ -462,14 +448,14 @@ function TfcClass({
                         </div>
                         <div className="table_header_txt">SAT</div>
                     </td>
-                    <td disabled style={{ height: "120px" }}>
+                    <td disabled className="table_header_number_td">
                         <div className="table_header_number">
                             {cal[6].slice(8, 10)}
                         </div>
                         <div className="table_header_txt">SUN</div>
                     </td>
                 </thead>
-                <tr style={{ height: "70px" }}>
+                <tr className="trstyle">
                     <td disabled className="slot_time">
                         {time[0]}
                     </td>
@@ -500,7 +486,7 @@ function TfcClass({
                         }
                     })}
                 </tr>
-                <tr style={{ height: "70px" }}>
+                <tr className="trstyle">
                     <td disabled className="slot_time">
                         {time[1]}
                     </td>
@@ -531,7 +517,7 @@ function TfcClass({
                         }
                     })}
                 </tr>
-                <tr style={{ height: "70px" }}>
+                <tr className="trstyle">
                     <td disabled className="slot_time">
                         {time[2]}
                     </td>
@@ -562,7 +548,7 @@ function TfcClass({
                         }
                     })}
                 </tr>
-                <tr style={{ height: "70px" }}>
+                <tr className="trstyle">
                     <td disabled className="slot_time">
                         {time[3]}
                     </td>
@@ -593,7 +579,7 @@ function TfcClass({
                         }
                     })}
                 </tr>
-                <tr style={{ height: "70px" }}>
+                <tr className="trstyle">
                     <td disabled className="slot_time">
                         {time[4]}
                     </td>
@@ -624,7 +610,7 @@ function TfcClass({
                         }
                     })}
                 </tr>
-                <tr style={{ height: "70px" }}>
+                <tr className="trstyle">
                     <td disabled className="slot_time">
                         {time[5]}
                     </td>
@@ -660,26 +646,12 @@ function TfcClass({
         tableData2 = (
             <table className="table2">
                 <thead>
-                    <tr style={{ height: "70px" }}>
+                    <tr className="trstyle">
                         <th disabled>
                             <img
                                 src={time[7]}
-                                style={{ width: "30px", height: "30px" }}
                             />
-                            <h6
-                                style={{
-                                    wordWrap: "break-word",
-                                    lineHeight: "18px",
-                                    paddingLeft: "0.5em",
-                                    paddingRight: "0.5em",
-                                    paddingBottom: "0em",
-                                    fontFamily: "Montserrat",
-                                    fontWeight: "600",
-                                    color: "#898989",
-                                    margin: 0,
-                                    textAlign: "center",
-                                }}
-                            >
+                            <h6>
                                 {" "}
                                 {time[6]}
                             </h6>
@@ -730,11 +702,10 @@ function TfcClass({
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style={{ height: "70px" }}>
+                    <tr className="trstyle">
                         <td
                             disabled
-                            className="slot_time"
-                            style={{ backgroundColor: "fff" }}
+                            className="slot_time tdBgcolor"
                         >
                             {time[0]}
                         </td>
@@ -763,7 +734,7 @@ function TfcClass({
                             }
                         })}
                     </tr>
-                    <tr style={{ height: "70px" }}>
+                    <tr className="trstyle">
                         <td disabled className="slot_time">
                             {time[1]}
                         </td>
@@ -792,7 +763,7 @@ function TfcClass({
                             }
                         })}
                     </tr>
-                    <tr style={{ height: "70px" }}>
+                    <tr className="trstyle">
                         <td disabled className="slot_time">
                             {time[2]}
                         </td>
@@ -821,7 +792,7 @@ function TfcClass({
                             }
                         })}
                     </tr>
-                    <tr style={{ height: "70px" }}>
+                    <tr className="trstyle">
                         <td disabled className="slot_time">
                             {time[3]}
                         </td>
@@ -850,7 +821,7 @@ function TfcClass({
                             }
                         })}
                     </tr>
-                    <tr style={{ height: "70px" }}>
+                    <tr className="trstyle">
                         <td disabled className="slot_time">
                             {time[4]}
                         </td>
@@ -879,7 +850,7 @@ function TfcClass({
                             }
                         })}
                     </tr>
-                    <tr style={{ height: "70px" }}>
+                    <tr className="trstyle">
                         <td disabled className="slot_time">
                             {time[5]}
                         </td>
@@ -943,8 +914,8 @@ function TfcClass({
                                     <img
                                         src={BackIcon}
                                         disabled="true"
-                                        style={{ opacity: "0.5" }}
-                                    />{" "}
+                                        className="imgOpacity"
+                                        />{" "}
                                     &ensp;
                                 </div>
                             )}
@@ -998,11 +969,11 @@ function TfcClass({
                     {
                         //Check if message failed
                         editMode ? (
-                            <div style={{ height: "100%", width: "960px" }}>
+                            <div className="inEditMode">
                                 {tableData}
                             </div>
                         ) : (
-                            <div style={{ height: "100%", width: "960px" }}>
+                            <div className="inEditMode">
                                 {tableData2}
                             </div>
                         )
@@ -1020,19 +991,14 @@ function TfcClass({
                                 />
                                 <label
                                     for="defualt"
-                                    style={{ color: "#898989" }}
-                                    className="default_label"
+                                    className="default_label colorlabel"
                                 >
                                     {" "}
                                     Make defualt
                                 </label>
                                 <button
                                     onClick={toggleEditMode}
-                                    className="scheduler_button"
-                                    style={{
-                                        backgroundColor: "#53d27d",
-                                        width: "100%",
-                                    }}
+                                    className="scheduler_button styling"
                                 >
                                     SAVE
                                 </button>
@@ -1040,12 +1006,8 @@ function TfcClass({
                         ) : (
                             <button
                                 onClick={toggleEditMode}
-                                className="scheduler_button"
-                                style={{
-                                    backgroundColor: "#53bfd2",
+                                className="scheduler_button styling"
 
-                                    width: "100%",
-                                }}
                             >
                                 ADD YOUR SLOT
                             </button>

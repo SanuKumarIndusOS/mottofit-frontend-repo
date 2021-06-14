@@ -47,8 +47,7 @@ const MainClass = ({ fetchTrainersListsApi }) => {
                 Trainer's :<span> {pageMetaData.total}</span>
               </h3>
             </div>
-            <Input
-              style={{ width: "20%" }}
+            <Input className="admin_trainer_input"
               type="text"
               placeholder="Search for Trainer's"
               value={q}

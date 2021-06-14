@@ -441,6 +441,8 @@
               display: flex;
               align-items: center;
               justify-content: center;
+              text-decoration: none;
+              color: #FFFFFF;
               a {
                 display: flex;
                 align-items: center;
@@ -462,4 +464,8 @@
       left: -50px;
     }
   }
+}
+
+.inputs_experience_checkbox{
+  color: #53BFD2;
 }

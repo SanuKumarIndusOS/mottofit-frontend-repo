@@ -119,7 +119,7 @@ const UserEventSchedularFC = (props) => {
                                         <img
                                             src={trainerName.profilePicture}
                                             alt="profile"
-                                            style={{ objectFit: "cover" }}
+                                            
                                         />
                                     ) : (
                                         "dj"
@@ -127,23 +127,15 @@ const UserEventSchedularFC = (props) => {
                   <img
                     src={Profile}
                     alt="profile"
-                    style={{ objectFit: "cover" }}
                   />
                   <div className="user_content">
                     <h2
-                      style={{
-                        textTransform: "capitalize",
-                        fontFamily: "Cormorant Garamond",
-                      }}
+
                     >
                       {trainerName?.firstName}
                     </h2>
                     <p
-                      style={{
-                        color: "#898989",
-                        fontFamily: "Montserrat",
-                        textTransform: "uppercase",
-                      }}
+
                     >
                       {activity}
                     </p>
@@ -161,11 +153,9 @@ const UserEventSchedularFC = (props) => {
                 <BottomSection trainerName={trainerName} />
                 {/* </div> */}
 
-                <Link
-                  className="submit_user"
+                <Link className="link_icon"
                   onClick={handleContinue}
-                  style={{ marginBottom: "500px" }}
-                >
+                  >
                   CONTINUE <ArrowHoverBlacked />{" "}
                 </Link>
               </div>

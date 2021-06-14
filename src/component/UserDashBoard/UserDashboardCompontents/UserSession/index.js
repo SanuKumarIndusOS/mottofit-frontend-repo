@@ -134,7 +134,7 @@ const TabOne = ({
     <div className="tabPanel_overview">
       <div className="tabPanel_overview_left">
         <div className="TP_overview_wrapper">
-          <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
+          <h3>{tabname} Sessions</h3>
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
               {tabData.slice(0, visible).map((data, index) => {
@@ -151,25 +151,13 @@ const TabOne = ({
                         </h4>
                       </div>
                       <div className="TP_USession_data">
-                        <h2
-                          style={{
-                            textTransform: "capitalize",
-                          }}
-                        >
+                        <h2>
                           {data.activity}&nbsp;
-                          <span
-                            style={{
-                              textTransform: "lowerCase",
-                            }}
-                          >
+                          <span>
                             with
                           </span>{" "}
                           &nbsp;
-                          <h2
-                            style={{
-                              textTransform: "capitalize",
-                            }}
-                          >
+                          <h2>
                             {data.trainerDetail.firstName}
                           </h2>
                         </h2>
@@ -251,33 +239,21 @@ const TabOne = ({
                         </div>
                         <div className="row_previous_header">
                           <h2
-                            className="d-flex flex-wrap"
-                            style={{
-                              textTransform: "capitalize",
-                            }}
-                          >
+                            className="d-flex flex-wrap">
                             {data.activity}&nbsp;
-                            <span
-                              style={{
-                                textTransform: "lowerCase",
-                              }}
-                            >
+                            <span>
                               with
                             </span>{" "}
                             &nbsp;
                             <h2
                               className="d-flex flex-wrap"
-                              style={{
-                                textTransform: "capitalize",
-                              }}
                             >
                               {data.trainerDetail.firstName}
                             </h2>
                           </h2>
                           {/* <h2>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2> */}
-                          <p>{`${data.sessionDate.substr(8, 2)} ${
-                            datamonth[data.sessionDate.substr(5, 2)]
-                          } ${data.sessionDate.substr(0, 4)}`}</p>
+                          <p>{`${data.sessionDate.substr(8, 2)} ${datamonth[data.sessionDate.substr(5, 2)]
+                            } ${data.sessionDate.substr(0, 4)}`}</p>
                         </div>
                       </div>
                       <hr />

@@ -59,6 +59,7 @@
                     .combin_profile {
                         display: flex;
 
+
                         img:nth-child(2) {
                             margin-top: 9em;
                             margin-left: -3em;
@@ -144,4 +145,21 @@
 }
 .react-tel-input .flag-dropdown {
     border: none !important;
+}
+
+.combin_profile_img_button{
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    position: relative;
+    left: -6px;
+    top: -2px;
+}
+
+.combin_profile_img{
+    object-fit: cover;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
 }

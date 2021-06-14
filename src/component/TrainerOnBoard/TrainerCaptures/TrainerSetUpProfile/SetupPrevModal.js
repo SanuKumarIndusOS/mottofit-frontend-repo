@@ -261,10 +261,7 @@ const SetupPrevModal = ({
                                             </div>
                                             <div
                                                 className="profile_right_item2"
-                                                style={{
-                                                    width: "40rem",
-                                                }}
-                                            >
+                                               >
                                                 <h4>
                                                     About{" "}
                                                     {

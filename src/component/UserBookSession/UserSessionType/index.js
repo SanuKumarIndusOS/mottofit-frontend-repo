@@ -185,13 +185,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
                                 }}
                               >
                                 <div
-                                  style={{
-                                    textAlign: "center",
-                                    height: "300px",
-                                    width: "600px",
-                                    padding: "2em",
-                                  }}
-                                  className="model_styles"
+                                 className="model_styles"
                                 >
                                   <h2>Want to Train with Friends?</h2>
                                   <p>

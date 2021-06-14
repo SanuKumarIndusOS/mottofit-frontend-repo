@@ -99,7 +99,7 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <h6>
                         $
                         {trainerProfileData &&
-                        trainerProfileData.oneOnOnePricing
+                          trainerProfileData.oneOnOnePricing
                           ? trainerProfileData.oneOnOnePricing.virtualSession
                           : "N/A"}
                         &nbsp;
@@ -108,9 +108,9 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <h6>
                         $
                         {trainerProfileData &&
-                        trainerProfileData.oneOnOnePricing
+                          trainerProfileData.oneOnOnePricing
                           ? trainerProfileData.oneOnOnePricing
-                              .inPersonAtClientLocation
+                            .inPersonAtClientLocation
                           : "N/A"}
                         &nbsp;
                         <span>(In Person Session)</span>
@@ -142,12 +142,6 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                         }}
                       >
                         <div
-                          style={{
-                            textAlign: "center",
-                            height: "300px",
-                            width: "600px",
-                            padding: "2em",
-                          }}
                           className="model_styles"
                         >
                           <h2>Want to Train with Friends?</h2>
@@ -165,9 +159,9 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <h6>
                         $
                         {trainerProfileData &&
-                        trainerProfileData.socialSessionPricing
+                          trainerProfileData.socialSessionPricing
                           ? trainerProfileData.socialSessionPricing
-                              .virtualSessionfor2People
+                            .virtualSessionfor2People
                           : "N/A"}
                         &ensp;
                         <span>/ Session (Virtual For 2 People)</span>
@@ -175,9 +169,9 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <h6>
                         $
                         {trainerProfileData &&
-                        trainerProfileData.socialSessionPricing
+                          trainerProfileData.socialSessionPricing
                           ? trainerProfileData.socialSessionPricing
-                              .virtualSessionfor3People
+                            .virtualSessionfor3People
                           : "N/A"}
                         &ensp;
                         <span>/ Session (Virtual For 3 People)</span>
@@ -185,9 +179,9 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <h6>
                         $
                         {trainerProfileData &&
-                        trainerProfileData.socialSessionPricing
+                          trainerProfileData.socialSessionPricing
                           ? trainerProfileData.socialSessionPricing
-                              .virtualSessionfor4People
+                            .virtualSessionfor4People
                           : "N/A"}
                         &ensp;
                         <span>/ Session (Virtual For 4 People)</span>
@@ -218,12 +212,6 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                         }}
                       >
                         <div
-                          style={{
-                            textAlign: "center",
-                            height: "300px",
-                            width: "600px",
-                            padding: "2em",
-                          }}
                           className="model_styles"
                         >
                           <h2>Want to Create a Class?</h2>
@@ -240,9 +228,9 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <h6>
                         $
                         {trainerProfileData &&
-                        trainerProfileData.classSessionPricing
+                          trainerProfileData.classSessionPricing
                           ? trainerProfileData.classSessionPricing
-                              .virtualSessionfor15People
+                            .virtualSessionfor15People
                           : "N/A"}
                         &ensp;
                         <span>Flat Rate Class (For 5-15 People)</span>
@@ -262,15 +250,15 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <div className="profile_location">
                         <img src={Tick} alt="icon" />
                         {trainerProfileData &&
-                        trainerProfileData.preferedTrainingMode &&
-                        trainerProfileData.preferedTrainingMode[0] ? (
+                          trainerProfileData.preferedTrainingMode &&
+                          trainerProfileData.preferedTrainingMode[0] ? (
                           <h4>{trainerProfileData.preferedTrainingMode[0]}</h4>
                         ) : (
                           "N/A"
                         )}
                         {trainerProfileData &&
-                        trainerProfileData.preferedTrainingMode &&
-                        trainerProfileData.preferedTrainingMode[1] ? (
+                          trainerProfileData.preferedTrainingMode &&
+                          trainerProfileData.preferedTrainingMode[1] ? (
                           <h4 className="p-0">
                             {","}&nbsp;
                             {trainerProfileData.preferedTrainingMode[1]}
@@ -292,7 +280,7 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                         <img src={Tick} alt="icon" />
                         <h4>
                           {trainerProfileData &&
-                          trainerProfileData.servicableLocation
+                            trainerProfileData.servicableLocation
                             ? trainerProfileData.servicableLocation
                             : "Not Added"}
                         </h4>
@@ -336,8 +324,8 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <div className="inner_items">
                         <img src={Tick} alt="check" />
                         {trainerProfileData &&
-                        trainerProfileData.certification &&
-                        trainerProfileData.certification[0] ? (
+                          trainerProfileData.certification &&
+                          trainerProfileData.certification[0] ? (
                           <h6>
                             {trainerProfileData.certification[0].certification}{" "}
                           </h6>
@@ -348,8 +336,8 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <div className="inner_items">
                         <img src={Tick} alt="check" />
                         {trainerProfileData &&
-                        trainerProfileData.certification &&
-                        trainerProfileData.certification[1] ? (
+                          trainerProfileData.certification &&
+                          trainerProfileData.certification[1] ? (
                           <h6>
                             {trainerProfileData.certification[1].certification}{" "}
                           </h6>
@@ -360,8 +348,8 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <div className="inner_items">
                         <img src={Tick} alt="check" />
                         {trainerProfileData &&
-                        trainerProfileData.certification &&
-                        trainerProfileData.certification[2] ? (
+                          trainerProfileData.certification &&
+                          trainerProfileData.certification[2] ? (
                           <h6>
                             {trainerProfileData.certification[2].certification}{" "}
                           </h6>
@@ -372,8 +360,8 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                       <div className="inner_items">
                         <img src={Tick} alt="check" />
                         {trainerProfileData &&
-                        trainerProfileData.certification &&
-                        trainerProfileData.certification[3] ? (
+                          trainerProfileData.certification &&
+                          trainerProfileData.certification[3] ? (
                           <h6>
                             {trainerProfileData.certification[3].certification}{" "}
                           </h6>
@@ -385,16 +373,9 @@ const TrainerProfileClass = ({ getTrainerDetail, updateUserDetails }) => {
                   </div>
                   <div className="profile_right_item4">
                     <h2
-                      style={{
-                        textTransform: "capitalize",
-                      }}
                     >
                       {trainerProfileData.firstName}
-                      <span
-                        style={{
-                          textTransform: "none",
-                        }}
-                      >
+                      <span>
                         's
                       </span>{" "}
                       Schedule{" "}
@@ -470,8 +451,8 @@ const ImageGrid = ({ trainerProfileData }) => {
                     <img
                       src={
                         trainerProfileData &&
-                        trainerProfileData.images &&
-                        trainerProfileData.images[1]
+                          trainerProfileData.images &&
+                          trainerProfileData.images[1]
                           ? trainerProfileData.images[1]
                           : images.image
                       }
@@ -484,8 +465,8 @@ const ImageGrid = ({ trainerProfileData }) => {
                       <img
                         src={
                           trainerProfileData &&
-                          trainerProfileData.images &&
-                          trainerProfileData.images[1]
+                            trainerProfileData.images &&
+                            trainerProfileData.images[1]
                             ? trainerProfileData.images[1]
                             : images.image
                         }
@@ -499,8 +480,8 @@ const ImageGrid = ({ trainerProfileData }) => {
                         <img
                           src={
                             trainerProfileData &&
-                            trainerProfileData.images &&
-                            trainerProfileData.images[2]
+                              trainerProfileData.images &&
+                              trainerProfileData.images[2]
                               ? trainerProfileData.images[2]
                               : images.image
                           }
@@ -513,8 +494,8 @@ const ImageGrid = ({ trainerProfileData }) => {
                         <img
                           src={
                             trainerProfileData &&
-                            trainerProfileData.images &&
-                            trainerProfileData.images[3]
+                              trainerProfileData.images &&
+                              trainerProfileData.images[3]
                               ? trainerProfileData.images[3]
                               : images.image
                           }
@@ -533,8 +514,8 @@ const ImageGrid = ({ trainerProfileData }) => {
         })}
       </div>
       {trainerProfileData &&
-      trainerProfileData.images &&
-      trainerProfileData.images[4] ? (
+        trainerProfileData.images &&
+        trainerProfileData.images[4] ? (
         <div className="image_more" onClick={() => handleViewImages()}>
           <h5>View More Images</h5>
           <img src={ArrowNext} ali="icon" />

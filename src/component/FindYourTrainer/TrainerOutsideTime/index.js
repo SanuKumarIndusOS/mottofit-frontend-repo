@@ -53,7 +53,6 @@ const TrainerCardOutsideFC = (props) => {
                   <img
                     className="card-img-top card-img"
                     src={imgdb}
-                    style={{ objectFit: "cover" }}
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src =
@@ -71,7 +70,7 @@ const TrainerCardOutsideFC = (props) => {
                 </div>
 
                 <div className="card-body">
-                  <h3 style={{ textTransform: "capitalize" }}>
+                  <h3>
                     {outSideData[data]["firstName"]}&nbsp;
                     {outSideData[data]["lastName"]}
                   </h3>
@@ -96,10 +95,7 @@ const TrainerCardOutsideFC = (props) => {
                 </div>
                 <div className="card-button">
                   <button
-                    style={{
-                      backgroundColor: "#53BFD2",
-                    }}
-                    onClick={() => handleClick(data)}
+                  onClick={() => handleClick(data)}
                   >
                     book a session
                     <BlackCircleButton />

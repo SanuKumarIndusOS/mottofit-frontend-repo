@@ -492,3 +492,17 @@
     position: relative !important;
     left: 10px;
 }
+
+.virtualHighlight{
+    border-bottom: 3px solid #53BFD2;
+}
+
+.noHighlight{
+    font-weight: normal;
+}
+
+.inpersonHighlight{
+    border-bottom: 3px solid #53BFD2;
+    width: 222px;
+    max-width: fit-content;
+}

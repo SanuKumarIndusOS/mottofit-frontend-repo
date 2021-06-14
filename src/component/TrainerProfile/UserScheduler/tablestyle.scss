@@ -1,0 +1,35 @@
+.table-heading{
+    height:70px;
+    img{
+        width:30px;
+        height:30px;
+    }
+    h6{
+        word-wrap: break-word;
+        line-height: 18px;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        padding-bottom: 0em;
+        font-family: Montserrat;
+        font-weight: 600;
+        color: #898989;
+        margin: 0;
+    }
+}
+
+.user_time_slot_data{
+    background-color: #53bfd2;
+}
+
+.user_time_slot_data1{
+    background-color: #fff;
+}
+
+.table_date_backicon{
+    cursor:pointer;
+}
+
+.table_date_backicon1{
+    opacity: 0.5;
+    cursor:not-allowed;
+}
