@@ -83,7 +83,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             setqueryObject({ ...queryObject, location: "virtual" });
         } else {
             setvirtualMarkup(
-                <h2 className="highlight nomargin">Virtual</h2>
+                <h2 className="nohighlight nomargin">Virtual</h2>
             );
             setinPersonMarkup(
                 <h2
