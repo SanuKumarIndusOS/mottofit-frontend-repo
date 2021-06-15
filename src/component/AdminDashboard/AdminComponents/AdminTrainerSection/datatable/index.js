@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { changeApproval } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import "./styles.scss";
 const DatatableClass = ({
   trainerList,
   fetchAllTrainers,
@@ -83,7 +84,7 @@ const DatatableClass = ({
                 </Link>
               </td>
               <div>
-                <button style={{ border: "none" }} className="p-0">
+                <button className="p-0 but_border">
                   {approve}
                 </button>
               </div>

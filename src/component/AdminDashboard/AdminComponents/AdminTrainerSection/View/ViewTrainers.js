@@ -193,7 +193,7 @@ const ViewTrainersClass = (props) => {
                                                 <hr />
                                                 {/* model */}
                                                 {open ? (
-                                                    <Modal
+                                                    <Modal className="profile_modal_container"
                                                         open={open}
                                                         onClose={() =>
                                                             setOpen(false)
@@ -203,20 +203,8 @@ const ViewTrainersClass = (props) => {
                                                         container={
                                                             myRef.current
                                                         }
-                                                        styles={{
-                                                            boaderRadius:
-                                                                "10px",
-                                                        }}
                                                     >
-                                                        <div
-                                                            style={{
-                                                                textAlign:
-                                                                    "center",
-                                                                height: "300px",
-                                                                width: "600px",
-                                                                padding: "2em",
-                                                            }}
-                                                            className="model_styles"
+                                                        <div className="model_styles"
                                                         >
                                                             <h2>
                                                                 Want to Train
@@ -305,7 +293,7 @@ const ViewTrainersClass = (props) => {
                                                 <hr />
                                                 {/* model */}
                                                 {openClassModel ? (
-                                                    <Modal
+                                                    <Modal className="profile_modal_container"
                                                         open={openClassModel}
                                                         onClose={() =>
                                                             setOpenClassModel(
@@ -317,19 +305,8 @@ const ViewTrainersClass = (props) => {
                                                         container={
                                                             myRef.current
                                                         }
-                                                        styles={{
-                                                            boaderRadius:
-                                                                "10px",
-                                                        }}
                                                     >
                                                         <div
-                                                            style={{
-                                                                textAlign:
-                                                                    "center",
-                                                                height: "300px",
-                                                                width: "600px",
-                                                                padding: "2em",
-                                                            }}
                                                             className="model_styles"
                                                         >
                                                             <h2>
@@ -584,13 +561,7 @@ const ViewTrainersClass = (props) => {
                                                 <div className="profile_personal_data_inner">
                                                     <div
                                                         className="previousExperience"
-                                                        style={{
-                                                            fontFamily:
-                                                                "Montserrat",
-                                                            color: "#53bfd2",
-                                                            fontSize: "28px",
-                                                        }}
-                                                    >
+                                                      >
                                                         {TrainerViewData &&
                                                         TrainerViewData.previousExperience ? (
                                                             <h6>
@@ -778,21 +749,11 @@ const ViewTrainersClass = (props) => {
                                                         )}
                                                     </div>
                                                     <div className="profile_personal_data1">
-                                                        <h2
-                                                            style={{
-                                                                textTransform:
-                                                                    "capitalize",
-                                                            }}
-                                                        >
+                                                        <h2>
                                                             {
                                                                 TrainerViewData.firstName
                                                             }
-                                                            <span
-                                                                style={{
-                                                                    textTransform:
-                                                                        "none",
-                                                                }}
-                                                            >
+                                                            <span>
                                                                 's
                                                             </span>{" "}
                                                             Personal Infomation
@@ -915,21 +876,11 @@ const ViewTrainersClass = (props) => {
                                                     </div>
 
                                                     <div className="profile_personal_data1">
-                                                        <h2
-                                                            style={{
-                                                                textTransform:
-                                                                    "capitalize",
-                                                            }}
-                                                        >
+                                                        <h2>
                                                             {
                                                                 TrainerViewData.firstName
                                                             }
-                                                            <span
-                                                                style={{
-                                                                    textTransform:
-                                                                        "none",
-                                                                }}
-                                                            >
+                                                            <span>
                                                                 's
                                                             </span>{" "}
                                                             Payments and
@@ -945,10 +896,6 @@ const ViewTrainersClass = (props) => {
                                                                 <h4>
                                                                     Identity:{" "}
                                                                     <img
-                                                                        style={{
-                                                                            height: "200px",
-                                                                            width: "200px",
-                                                                        }}
                                                                         src={
                                                                             TrainerViewData &&
                                                                             TrainerViewData.identityInfromation
@@ -994,12 +941,7 @@ const ViewTrainersClass = (props) => {
                                                                 <h4>
                                                                     Insurance
                                                                     Name:{" "}
-                                                                    <img
-                                                                        style={{
-                                                                            height: "200px",
-                                                                            width: "200px",
-                                                                        }}
-                                                                        src={
+                                                                    <img src={
                                                                             TrainerViewData &&
                                                                             TrainerViewData.insuranceInformation
                                                                                 ? TrainerViewData
@@ -1064,15 +1006,8 @@ const ImageGrid = ({ TrainerViewData }) => {
             <div className="profile_images_grid">
                 {imageView.map((images, index) => {
                     return (
-                        <div
-                            key={index}
-                            style={{
-                                fontFamily: "Montserrat",
-                                color: "#53bfd2",
-                                fontSize: "28px",
-                                textAlign: "center",
-                            }}
-                        >
+                        <div className="profile_images_grid_block"
+                            key={index}>
                             {TrainerViewData && TrainerViewData.images ? (
                                 <div className="profile_images_container">
                                     <div className="profile_images_card box1">
@@ -1086,7 +1021,6 @@ const ImageGrid = ({ TrainerViewData }) => {
                                             }
                                             alt="picture"
                                             className="box1"
-                                            style={{ objectFit: "cover" }}
                                         />
                                     </div>
                                     <div className="flex-try-2">
@@ -1101,9 +1035,7 @@ const ImageGrid = ({ TrainerViewData }) => {
                                                         : images.image
                                                 }
                                                 alt="picture"
-                                                className="box2"
-                                                style={{ objectFit: "cover" }}
-                                            />
+                                                className="box2"/>
                                         </div>
 
                                         <div className="flex-try-3">
@@ -1119,11 +1051,7 @@ const ImageGrid = ({ TrainerViewData }) => {
                                                             : images.image
                                                     }
                                                     alt="Not Added"
-                                                    className="box3"
-                                                    style={{
-                                                        objectFit: "cover",
-                                                    }}
-                                                />
+                                                    className="box3"/>
                                             </div>
 
                                             <div className="profile_images_card box4">
@@ -1138,11 +1066,7 @@ const ImageGrid = ({ TrainerViewData }) => {
                                                             : images.image
                                                     }
                                                     alt="picture"
-                                                    className="box4"
-                                                    style={{
-                                                        objectFit: "cover",
-                                                    }}
-                                                />
+                                                    className="box4"/>
                                             </div>
                                         </div>
                                     </div>
@@ -1160,11 +1084,10 @@ const ImageGrid = ({ TrainerViewData }) => {
                 <div className="image_more" onClick={() => handleViewImages()}>
                     <h5>View More Images</h5>
 
-                    <img
+                    <img className="viewmore_img"
                         src={ArrowNext}
                         alt="icon"
-                        style={{ objectFit: "cover" }}
-                    />
+                       />
                 </div>
             ) : null}
         </>

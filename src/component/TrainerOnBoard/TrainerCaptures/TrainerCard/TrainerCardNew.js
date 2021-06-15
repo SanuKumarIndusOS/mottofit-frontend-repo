@@ -349,29 +349,14 @@ function TrainerCardNewClass(props) {
                                         fileInputRef.current.click();
                                     }}
                                 >
-                                    <img
+                                    <img className="combin_profile_img img1"
                                         src={image ? image : Profile}
                                         alt="icon"
-                                        style={{
-                                            objectFit: "cover",
-                                            width: "200px",
-                                            height: "200px",
-                                            borderRadius: "100px",
-                                            position: "relative",
-                                            left: "-6px",
-                                            top: "-1px",
-                                        }}
-                                    />
+                                      />
                                 </button>
-                                <img
+                                <img className="combin_profile_img img2"
                                     src={ProfileAdd}
                                     alt="icon"
-                                    style={{
-                                        objectFit: "cover",
-                                        width: "20px",
-                                        height: "20px",
-                                        borderRadius: "100px",
-                                    }}
                                     onClick={(event) => {
                                         event.preventDefault();
                                         fileInputRef.current.click();
@@ -386,25 +371,13 @@ function TrainerCardNewClass(props) {
                                         fileInputRef.current.click();
                                     }}
                                 >
-                                    <img
+                                    <img className="combin_profile_img img3"
                                         src={Profile}
-                                        style={{
-                                            objectFit: "cover",
-                                            width: "100px",
-                                            height: "100px",
-                                            borderRadius: "100px",
-                                        }}
-                                    />
+                                      />
                                 </button>
-                                <img
+                                <img className="combin_profile_img img2"
                                     src={ProfileAdd}
                                     alt="icon"
-                                    style={{
-                                        objectFit: "cover",
-                                        width: "20px",
-                                        height: "20px",
-                                        borderRadius: "100px",
-                                    }}
                                     onClick={(event) => {
                                         event.preventDefault();
                                         fileInputRef.current.click();
@@ -413,11 +386,10 @@ function TrainerCardNewClass(props) {
                             </div>
                         )}
 
-                        <input
+                        <input className="fileinputdisplay"
                             type="file"
                             ref={fileInputRef}
                             accept="image/*"
-                            style={{ display: "none" }}
                             onChange={(e) => handleProfileUpload(e)}
                         />
                         <h5>Upload your profile picture, hotshot!</h5>
@@ -427,7 +399,6 @@ function TrainerCardNewClass(props) {
                     <div className="item2_card_inner">
                         <label>First Name</label> <br />
                         <input
-                            style={{ textTransform: "capitalize" }}
                             value={trainerCardData.firstName}
                             onChange={(e) => setInputData(e)}
                             name="firstName"
@@ -441,7 +412,6 @@ function TrainerCardNewClass(props) {
                     <div className="item2_card_inner">
                         <label>Last Name</label> <br />
                         <input
-                            style={{ textTransform: "capitalize" }}
                             value={trainerCardData.lastName}
                             onChange={(e) => setInputData(e)}
                             name="lastName"
@@ -493,7 +463,7 @@ function TrainerCardNewClass(props) {
                             }}
                         />
                         &ensp;
-                        <h6 style={{ marginRight: "1em" }}>Strength & HIIT</h6>
+                        <h6 className="categoryTitle">Strength & HIIT</h6>
                         &ensp;
                         <Checkbox
                             checked={checkedBoxing}
@@ -529,7 +499,7 @@ function TrainerCardNewClass(props) {
                             }}
                         />
                         &ensp;
-                        <h6 style={{ marginRight: "1em" }}>Boxing</h6> &ensp;
+                        <h6 className="categoryTitle">Boxing</h6> &ensp;
                         <Checkbox
                             checked={checkedYoga}
                             icon={
@@ -563,7 +533,7 @@ function TrainerCardNewClass(props) {
                             }}
                         />
                         &ensp;
-                        <h6 style={{ marginRight: "1em" }}>Yoga</h6> &ensp;
+                        <h6 className="categoryTitle">Yoga</h6> &ensp;
                         <Checkbox
                             checked={checkedPilates}
                             icon={
@@ -597,7 +567,7 @@ function TrainerCardNewClass(props) {
                             }}
                         />
                         &ensp;
-                        <h6 style={{ marginRight: "1em" }}>Pilates</h6> &ensp;
+                        <h6 className="categoryTitle">Pilates</h6> &ensp;
                     </div>
                 </div>
 

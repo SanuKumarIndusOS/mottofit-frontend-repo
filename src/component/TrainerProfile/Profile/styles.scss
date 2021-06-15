@@ -413,7 +413,10 @@
                 line-height: 58px;
                 font-family: "Montserrat", sans-serif;
                 margin-bottom: 1em;
-                // text-transform: capitalize;
+                text-transform: capitalize;
+                span{
+                  text-transform: none;
+                }
               }
               .schedular_slots {
                 display: grid !important;
@@ -530,4 +533,11 @@
       }
     }
   }
+}
+
+.model_styles{
+  text-align: center;
+  height: 300px;
+  width:600px;
+  padding:2rem;
 }

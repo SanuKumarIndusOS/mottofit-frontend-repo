@@ -70,7 +70,7 @@ const Datatable = ({ userList, fetchAllTrainers, loading, noTrainer }) => {
     //                         <tr>
     //                             <div>
     //                                 {" "}
-    //                                 <button style={{ border: "none" }}>
+    //                                 <button>
     //                                     {approve}
     //                                 </button>{" "}
     //                             </div>
@@ -149,7 +149,7 @@ const Datatable = ({ userList, fetchAllTrainers, loading, noTrainer }) => {
     //                     <tr>
     //                         <div>
     //                             {" "}
-    //                             <button style={{ border: "none" }}>
+    //                             <button>
     //                                 {approve}
     //                             </button>{" "}
     //                         </div>

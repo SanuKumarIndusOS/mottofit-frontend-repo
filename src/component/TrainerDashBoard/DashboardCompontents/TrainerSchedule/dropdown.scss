@@ -44,3 +44,54 @@
         }
     }
 }
+
+.trstyle{
+    height: 70px;
+}
+
+th{
+    img{
+        width:30px;
+        height:30px;
+    }
+    h6{
+        word-wrap: break-word;
+        line-height: 18px;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        padding-bottom: 0em;
+        font-family: "Montserrat";
+        font-weight: 600;
+        color: #898989;
+        margin: 0;
+        text-align: center;
+    }
+}
+
+.inEditMode{
+    height:100%;
+    width:960px;
+}
+
+.table_header_number_td{
+    height: "120px"
+}
+
+
+.styling{
+    background-color: #53d27d;
+    width: 100%;
+}
+
+.colorlabel{
+    color: #898989; 
+}
+
+.tdBgcolor{
+    background-color: #fff;
+}
+
+.imgOpacity{
+    opacity:0.5;
+}
+

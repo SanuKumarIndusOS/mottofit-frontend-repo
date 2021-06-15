@@ -49,9 +49,8 @@ const MainClass = ({ getAllUsersListsApi }) => {
               </h3>
             </div>
           </div>
-          <Input
-            style={{ width: "20%" }}
-            type="text"
+          <Input className="admin_user_input"
+           type="text"
             placeholder="Search for User's"
             value={q}
             onChange={(e) => setQ(e.target.value)}

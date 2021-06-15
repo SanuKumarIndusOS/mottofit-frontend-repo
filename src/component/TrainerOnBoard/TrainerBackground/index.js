@@ -189,7 +189,7 @@ const TrainerBackgroundFC = ({
                                             the verticals that apply
                                         </h6>
                                         <div className="inputs_experience">
-                                            <Checkbox
+                                            <Checkbox className="inputs_experience_checkbox"
                                                 checked={checkedHIIT}
                                                 onChange={(e) => {
                                                     setCheckedHIIT(
@@ -220,10 +220,7 @@ const TrainerBackgroundFC = ({
                                                         }
                                                     }
                                                 }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
-                                            />
+                                              />
                                             <div className="checkbox_label">
                                                 Strength & HIIT
                                             </div>
@@ -258,9 +255,7 @@ const TrainerBackgroundFC = ({
                                                         }
                                                     }
                                                 }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
+                                                className="inputs_experience_checkbox"
                                             />
                                             <div className="checkbox_label">
                                                 Boxing
@@ -296,9 +291,7 @@ const TrainerBackgroundFC = ({
                                                         }
                                                     }
                                                 }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
+                                                className="inputs_experience_checkbox"
                                             />
                                             <div className="checkbox_label">
                                                 Yoga
@@ -334,9 +327,7 @@ const TrainerBackgroundFC = ({
                                                         }
                                                     }
                                                 }}
-                                                style={{
-                                                    color: "#53BFD2",
-                                                }}
+                                                className="inputs_experience_checkbox"
                                             />
                                             <div className="checkbox_label">
                                                 Pilates
@@ -710,10 +701,6 @@ const TrainerBackgroundFC = ({
                                     <div className="submit_button">
                                         <button
                                             type="submit"
-                                            style={{
-                                                textDecoration: "none",
-                                                color: "#FFFFFF",
-                                            }}
                                             type="submit"
                                             onClick={handleSubmit}
                                         >

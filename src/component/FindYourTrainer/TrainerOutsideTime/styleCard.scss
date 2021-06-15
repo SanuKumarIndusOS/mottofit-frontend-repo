@@ -11,6 +11,7 @@
     width: 332px !important;
     height: 200px;
     border-radius: 20px 20px 0 0;
+    object-fit: cover;
 }
 .content_card {
     position: absolute;
@@ -67,3 +68,16 @@
 //     transition: all 1s;
 //     -webkit-transition: all 1s;
 // }
+
+.card-body{
+    h3{
+        text-transform: capitalize;
+    }
+}
+
+.card-button{
+    button{
+        background-color: #53BFD2,
+    }
+}
+

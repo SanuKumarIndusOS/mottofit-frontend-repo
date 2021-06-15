@@ -32,3 +32,22 @@ td {
     align-items: center;
     justify-content: center;
 }
+
+.scheduler_row1{
+    background-color: #53bfd2;
+    border: 2px solid #53bfd2;
+    height: 70px,
+}
+
+.scheduler_row2{
+    background-color: #F8F8F8;
+    border: 2px solid #E6E6E6;
+    height: 70px,
+}
+
+.scheduler_row3{
+    border: 2px solid #E6E6E6;
+    height: 70px,
+}
+
+

@@ -257,29 +257,13 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
                             fileInputRef.current.click();
                           }}
                         >
-                          <img
+                          <img className="combin_profile_img_button"
                             src={image ? image : Profile}
-                            alt="icon"
-                            style={{
-                              objectFit: "cover",
-                              width: "200px",
-                              height: "200px",
-                              borderRadius: "100px",
-                              position: "relative",
-                              left: "-6px",
-                              top: "-2px",
-                            }}
-                          />
+                            alt="icon"/>
                         </button>
-                        <img
+                        <img className="combin_profile_img"
                           src={ProfileAdd}
                           alt="icon"
-                          style={{
-                            objectFit: "cover",
-                            width: "20px",
-                            height: "20px",
-                            borderRadius: "100px",
-                          }}
                           onClick={(e) => {
                             e.preventDefault();
                             fileInputRef.current.click();
@@ -287,32 +271,19 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
                         />
                       </div>
                     ) : (
-                      <div className="combin_profile">
+                      <div className="combin_profile_img">
                         <button
                           onClick={(e) => {
                             e.preventDefault();
                             fileInputRef.current.click();
                           }}
                         >
-                          <img
-                            src={Profile}
-                            style={{
-                              objectFit: "cover",
-                              width: "100px",
-                              height: "100px",
-                              borderRadius: "100px",
-                            }}
-                          />
+                          <img className="combin_profile_img"
+                            src={Profile}/>
                         </button>
-                        <img
+                        <img className="combin_profile_img"
                           src={ProfileAdd}
                           alt="icon"
-                          style={{
-                            objectFit: "cover",
-                            width: "20px",
-                            height: "20px",
-                            borderRadius: "100px",
-                          }}
                           onClick={(e) => {
                             e.preventDefault();
                             fileInputRef.current.click();

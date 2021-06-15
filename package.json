@@ -53,6 +53,7 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
     "twilio-chat": "^4.1.0",
+    "use-onclickoutside": "^0.3.2",
     "validate.js": "^0.13.1",
     "web-vitals": "^1.0.1"
   },

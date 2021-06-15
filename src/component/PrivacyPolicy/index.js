@@ -50,13 +50,13 @@ const PrivacyPolicy = () => {
                                 <p>{data.thridPoint}</p>
                                 <h2>{data.headingTwo}</h2>
                                 <p>
-                                    <span style={{ fontWeight: 800 }}>
+                                    <span>
                                         {data.spanOne}
                                     </span>
                                     {data.fouthPoint}
                                 </p>
                                 <p>
-                                    <span style={{ fontWeight: 800 }}>
+                                    <span>
                                         {data.spanTwo}
                                     </span>
                                     {data.fivthPoint}

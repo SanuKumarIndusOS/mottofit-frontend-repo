@@ -287,6 +287,12 @@
                                 box-sizing: border-box;
                                 width: 100%;
                                 margin: 0.5em 0;
+                                .profile_images_grid_block{
+                                    font-family: "Montserrat";
+                                    color: #53bfd2;
+                                    font-size: 28px;
+                                    text-align: center;
+                                }
                                 .profile_images_container {
                                     display: flex;
                                     box-sizing: border-box;
@@ -304,12 +310,14 @@
                                     .box1 {
                                         width: 260px !important;
                                         height: 360px;
+                                        object-fit: cover;
                                         // background: rgb(144, 144, 221);
                                     }
 
                                     .box2 {
                                         width: 340px !important;
                                         height: 175px;
+                                        object-fit: cover;
                                         // background: rgb(75, 189, 189);
                                         margin-left: 10px;
                                     }
@@ -319,6 +327,7 @@
                                         height: 165px;
                                         // background: rgb(78, 221, 150);
                                         margin: 0 0 0 10px;
+                                        object-fit: cover;
                                     }
 
                                     .box4 {
@@ -326,6 +335,7 @@
                                         height: 165px;
                                         // background-color: rgb(245, 201, 148);
                                         margin-left: 10px;
+                                        object-fit: cover;
                                     }
                                     .flex-try-2 {
                                         width: 408px;
@@ -414,6 +424,9 @@
                                     flex-wrap: wrap;
                                     align-items: center;
                                     margin: 2em 0 0.5em 0;
+                                    font-family:"Montserrat";
+                                    color: "#53bfd2";
+                                    font-size: "28px";
 
                                     h6 {
                                         font-size: 18px;
@@ -437,6 +450,11 @@
                                     font-weight: 600;
                                     color: #898989;
 
+                                    img{
+                                        height: 200px;
+                                        width: 200px;
+                                    }
+
                                     span {
                                         font-weight: 700;
                                         color: #696969;
@@ -450,3 +468,31 @@
         }
     }
 }
+
+.profile_modal_container{
+    border-radius: 10px;
+}
+
+.model_styles{
+    text-align:center;
+    height:300px;
+    width:60px;
+    padding:2em; 
+}
+
+.profile_personal_data1{
+    h2{
+        text-transform: capitalize;
+    }
+    span{
+        text-transform: none;
+    }
+}
+
+.viewmore_img{
+    object-fit: cover;
+}
+
+
+
+

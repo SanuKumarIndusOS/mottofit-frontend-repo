@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./trainer.sass";
+import "./trainer.scss";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
@@ -48,7 +49,7 @@ const TrainerCardsFC = (props) => {
       <div className="container">
         <HeadingTrainer bestMatchRef={props.bestMatchRef} />
         {no_match}
-        <div className="row" style={{ alignleft: "auto" }}>
+        <div className="row containerRow">
           {Object.keys(bestMatchData).map((data, index) => {
             let imgdb = `${COMMON_URL}${bestMatchData[data]["profilePicture"]}`;
 
@@ -57,7 +58,6 @@ const TrainerCardsFC = (props) => {
                 <img
                   className="card-img-top"
                   src={imgdb}
-                  style={{ objectFit: "cover" }}
                   alt="Profile Picture Not Found "
                   onError={(e) => {
                     e.target.onerror = null;
@@ -67,7 +67,7 @@ const TrainerCardsFC = (props) => {
                 />
 
                 <div className="card-body">
-                  <h3 style={{ textTransform: "capitalize" }}>
+                  <h3>
                     {bestMatchData[data]["firstName"]}&nbsp;
                     {bestMatchData[data]["lastName"]}
                   </h3>
@@ -91,10 +91,7 @@ const TrainerCardsFC = (props) => {
                   </p>
                 </div>
                 <div className="card-button">
-                  <button
-                    style={{
-                      backgroundColor: "#53BFD2",
-                    }}
+                  <button 
                     onClick={() => handleClick(data)}
                   >
                     book a session

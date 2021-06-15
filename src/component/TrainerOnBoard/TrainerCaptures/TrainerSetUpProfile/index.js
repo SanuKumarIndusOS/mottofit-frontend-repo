@@ -840,9 +840,7 @@
 //                                                     </div>
 //                                                     <div
 //                                                         className="profile_right_item2"
-//                                                         style={{
-//                                                             width: "40rem",
-//                                                         }}
+//                                                        
 //                                                     >
 //                                                         <h4>
 //                                                             About{" "}
@@ -1443,12 +1441,7 @@
 //             <div className="renderImage">
 //                 {previewImage ? (
 //                     <img
-//                         src={previewImage}
-//                         style={{
-//                             objectFit: "cover",
-//                             width: "180px",
-//                             height: "180px",
-//                         }}
+//                        
 //                         onClick={() => {
 //                             setPreviewTmage(null);
 //                         }}
@@ -1466,11 +1459,7 @@
 //                                 // src={Profile}
 //                                 src={props.value ? props.value : image}
 //                                 alt="icon"
-//                                 style={{
-//                                     objectFit: "cover",
-//                                     width: "180px",
-//                                     height: "180px",
-//                                 }}
+//                                 
 //                             />
 //                         </button>
 //                     </div>

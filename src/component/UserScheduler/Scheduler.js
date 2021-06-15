@@ -266,12 +266,7 @@ function Scheduler(props) {
                       if (lt[t].find((el) => el === time)) {
                         if (cellColor.find((el) => el === time + t)) {
                           return (
-                            <td
-                              style={{
-                                backgroundColor: "#53bfd2 ",
-                                border: "2px solid #53bfd2 ",
-                                height: "70px",
-                              }}
+                            <td className="scheduler_row1"
                               key={time + t}
                               onClick={() => {
                                 setCellSelection(time, t);
@@ -280,12 +275,7 @@ function Scheduler(props) {
                           );
                         } else {
                           return (
-                            <td
-                              style={{
-                                backgroundColor: "#F8F8F8",
-                                border: "2px solid #E6E6E6",
-                                height: "70px",
-                              }}
+                            <td className="scheduler_row2"
                               key={time + t}
                               onClick={() => {
                                 setCellSelection(time, t);
@@ -295,12 +285,8 @@ function Scheduler(props) {
                         }
                       } else {
                         return (
-                          <td
+                          <td className="scheduler_row3"
                             key={time + t}
-                            style={{
-                              border: "2px solid #E6E6E6",
-                              height: "70px",
-                            }}
                           ></td>
                         );
                       }

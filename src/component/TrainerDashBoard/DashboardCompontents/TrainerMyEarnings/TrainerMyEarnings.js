@@ -119,11 +119,7 @@ const TransactionSection = ({ paymentHistory }) => {
                             <h4>Client</h4>
                             <div className="wrap_content_ts">
                               <img src={PersonIcon} alt="icon" />
-                              <p
-                                style={{
-                                  textTransform: "capitalize",
-                                }}
-                              >
+                              <p className="capitals">
                                 {data.userDetail.firstName}
                               </p>
                             </div>
@@ -150,10 +146,8 @@ const TransactionSection = ({ paymentHistory }) => {
                         <div className="card_payment">
                           <div className="payment_card_content">
                             <h4>Payment type</h4>
-                            <p
-                              style={{
-                                textTransform: "capitalize",
-                              }}
+                            <p className="capitals"
+                  
                             >
                               {data.paymentDetail.card.brand}
                             </p>

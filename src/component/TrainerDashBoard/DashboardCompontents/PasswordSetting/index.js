@@ -150,7 +150,7 @@ const PasswordSettingClass = (props) => {
                   src={Password}
                   alt="icon"
                   onClick={showPassword}
-                  style={{ cursor: "pointer" }}
+
                 />
               </div>
               {error.password && <ErrorComponent message={error.password[0]} />}
@@ -166,7 +166,7 @@ const PasswordSettingClass = (props) => {
                   src={Password}
                   alt="icon"
                   onClick={showNewPassword}
-                  style={{ cursor: "pointer" }}
+
                 />
               </div>
               {error.newPassword && (
@@ -184,7 +184,7 @@ const PasswordSettingClass = (props) => {
                   src={Password}
                   alt="icon"
                   onClick={showNewPassword}
-                  style={{ cursor: "pointer" }}
+
                 />
               </div>
               {error.confirmPassword && (

@@ -119,6 +119,7 @@
                 border-radius: 50px;
                 width: 90%;
                 padding: 0.5em 1em;
+                text-transform: capitalize;
                 &::placeholder {
                     font-size: 18px;
                     color: #bcbcbc;
@@ -275,3 +276,37 @@ h6 {
     display: flex;
     justify-content: center;
 }
+
+.combin_profile_img{
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.img1{
+    
+    width: 200px;
+    height: 200px;
+   
+    position: relative;
+    left: -6px;
+    top: -1px;
+}
+
+.img2{
+    width: 20px;
+    height: 20px;
+}
+
+.img3{
+    width: 100px;
+    height: 100px;
+}
+
+.categoryTitle{
+    margin-right: 1em;
+}
+
+.fileinputdisplay{
+    display:none;
+}
+

@@ -49,7 +49,7 @@ export const TrainerApi = {
       return (
         this.url +
         `?location=${this.query.location}&trainingType=["${this.query.trainingType}"]&date=["${this.query.date}","${this.query.date}"]&availability=["${this.query.availability}"]` +
-        `&timeZone=America/New_York&city=["${this.query.city || ""}"]`
+        `&timeZone=America/New_York&city="${this.query.city || ""}"`
       );
     },
     set addQuery({ key, payload }) {

@@ -34,7 +34,7 @@ const TrainerDashboardTempClass = ({ children, trainerDetail }) => {
       <div className="admin_sidenav">
         <div className="admin_profile">
           {proPic}
-          <h2 style={{ textTransform: "capitalize" }}>{userName}</h2>
+          <h2>{userName}</h2>
         </div>
         <div className="admin_sidenav_links">
           {SideBarRouteData.map((item, index) => {

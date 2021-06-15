@@ -16,6 +16,15 @@ export default (state = Object.assign({}, initialState), { type, payload }) => {
         ...state,
         ...payload,
       };
+    case UserActionType.restUserDetails:
+      return {
+        data: "",
+        sessionData: {},
+        bookingData: {},
+        selectedTrainerData: {},
+        selectedTimes: [],
+        defaulCardDetails: {},
+      };
     default:
       return state;
   }
