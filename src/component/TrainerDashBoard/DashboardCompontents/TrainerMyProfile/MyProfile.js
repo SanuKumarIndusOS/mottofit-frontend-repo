@@ -175,7 +175,7 @@ const MyProfileFC = ({
       instagramProfile: instaHandle,
       certification: inputCertificatesFields,
       virtualMeetingLink: virtualMeetingLink,
-      servicableLocation: servicableLocation,
+      servicableLocation: [servicableLocation],
       trainingFacilityLocation: trainingFacilityLocation,
       preferedTrainingMode: trainerData?.trainingLocation,
       images: imagesList.filter((x) => x !== ""),

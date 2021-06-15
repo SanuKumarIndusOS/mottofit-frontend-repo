@@ -8,6 +8,7 @@ import Profile from "assets/files/TrainerDashboard/MyEarning/Profile Picture.svg
 import { trainerMyEarning } from "action/trainerAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Toast } from "../../../../service/toast";
 
 const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
   const [paymentHistory, setPaymentHistory] = useState();
@@ -25,6 +26,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
         setMyEarning(data);
       })
       .catch((error) => {
+        Toast({ type: "error", message: error.message || "Error" });
         console.log(error, "error");
       });
   }

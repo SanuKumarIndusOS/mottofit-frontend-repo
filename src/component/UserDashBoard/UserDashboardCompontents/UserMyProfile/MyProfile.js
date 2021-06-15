@@ -15,6 +15,7 @@ import { fileUpload } from "action/trainerAct";
 import { api } from "service/api";
 import moment from "moment";
 import { findDatesValid } from "service/helperFunctions";
+import { Toast } from "../../../../service/toast";
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -62,25 +63,29 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
   }, []);
 
   function getUserProfileData() {
-    getUserDetailApi().then((data) => {
-      if (data.profilePicture) {
-        setImage(data.profilePicture);
-      }
-      let tempData = {
-        firstName: data.firstName || "",
-        lastName: data.lastName || "",
-        email: data.email || "",
-        phoneNo: data.phoneNo || "",
-        paymentProfileId: data.paymentProfileId || "",
-        mottoPasses: data.mottoPasses || "",
-        location: data.location || "",
-        gender: data.gender || "",
-        DOB: data.DOB || "",
-        signUpType: "email",
-      };
+    getUserDetailApi()
+      .then((data) => {
+        if (data.profilePicture) {
+          setImage(data.profilePicture);
+        }
+        let tempData = {
+          firstName: data.firstName || "",
+          lastName: data.lastName || "",
+          email: data.email || "",
+          phoneNo: data.phoneNo || "",
+          paymentProfileId: data.paymentProfileId || "",
+          mottoPasses: data.mottoPasses || "",
+          location: data.location || "",
+          gender: data.gender || "",
+          DOB: data.DOB || "",
+          signUpType: "email",
+        };
 
-      setUserData(tempData);
-    });
+        setUserData(tempData);
+      })
+      .catch((err) => {
+        Toast({ type: "success", message: err.message || "Error" });
+      });
   }
 
   const handleInput = (e) => {
@@ -136,11 +141,11 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
           allowEmpty: false,
           message: "^Phone number is required",
         },
-        format: {
-          pattern: /^[1-9][0-9]*$/,
-          flags: "i",
-          message: "^Invalid number",
-        },
+        // format: {
+        //   pattern: /^[1-9][0-9]*$/,
+        //   flags: "i",
+        //   message: "^Invalid number",
+        // },
         length: {
           minimum: 8,
           tooShort: "^Invalid number",
@@ -214,9 +219,14 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
 
     editUserData.body = payload;
 
-    api({ ...editUserData }).then(() => {
-      getUserProfileData();
-    });
+    api({ ...editUserData })
+      .then((data) => {
+        getUserProfileData();
+        Toast({ type: "success", message: data.message || "success" });
+      })
+      .catch((err) => {
+        Toast({ type: "success", message: err.message || "Error" });
+      });
   };
 
   const handleProfileUpload = (e) => {

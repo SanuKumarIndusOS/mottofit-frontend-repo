@@ -180,7 +180,7 @@ const TabOne = ({ datas = [], handleSessionStatus }) => {
                                   handleSessionStatus(data.id, "completed")
                                 }
                               >
-                                Completed
+                                Complete
                               </button>
                             </div>
                           ) : (
@@ -300,7 +300,7 @@ const TabTwo = ({ datas = [], handleSessionStatus }) => {
                                   handleSessionStatus(data.id, "completed")
                                 }
                               >
-                                Completed
+                                Complete
                               </button>
                             </div>
                           ) : (
