@@ -100,6 +100,14 @@ export const TrainerApi = {
       return this.url;
     },
   },
+  changeSessionStatus: {
+    url: "session/update",
+    method: "put",
+    baseURL: "session",
+    get api() {
+      return this.url;
+    },
+  },
   getAllTrainerLists: {
     url: "admin/trainers?limit=5&page=",
     method: "get",

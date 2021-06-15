@@ -289,3 +289,34 @@ button,
   background: #53bfd2;
   border: none;
 }
+
+select {
+  border-radius: 50px;
+  border: 2px solid #bcbcbc;
+  box-shadow: 0 0;
+  outline: 0;
+  background: white;
+  max-height: 45px;
+  min-height: 45px;
+  width: 100%;
+  padding: 0px 20px;
+  font-size: 18px;
+  background: url("../files/SVG/Drop Down 4.svg") 95% center no-repeat;
+  background-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-weight: 500;
+  option {
+    color: black;
+    border: 2px solid #bcbcbc;
+  }
+
+  &::placeholder {
+    color: #bcbcbc;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}

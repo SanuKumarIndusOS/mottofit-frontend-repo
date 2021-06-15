@@ -52,6 +52,10 @@ const TrainerCardsFC = (props) => {
           {Object.keys(bestMatchData).map((data, index) => {
             let imgdb = `${COMMON_URL}${bestMatchData[data]["profilePicture"]}`;
 
+            const areaOfExpertise = bestMatchData[
+              data
+            ]?.areaOfExpertise?.toString();
+
             return (
               <div className="card" key={index}>
                 <img
@@ -68,22 +72,12 @@ const TrainerCardsFC = (props) => {
 
                 <div className="card-body">
                   <h3 style={{ textTransform: "capitalize" }}>
-                    {bestMatchData[data]["firstName"]}&nbsp;
-                    {bestMatchData[data]["lastName"]}
+                    {bestMatchData[data]?.firstName}&nbsp;
+                    {bestMatchData[data]?.lastName}
                   </h3>
-                  <h6>
-                    {bestMatchData[data]["areaOfExpertise"][0]}
-                    {bestMatchData[data]["areaOfExpertise"][1] ? "," : ""}
-                    &nbsp;
-                    {bestMatchData[data]["areaOfExpertise"][1]}
-                    {bestMatchData[data]["areaOfExpertise"][2] ? "," : ""}
-                    &nbsp;
-                    {bestMatchData[data]["areaOfExpertise"][2]}
-                    &nbsp;
-                    {bestMatchData[data]["areaOfExpertise"][3]}
-                  </h6>
+                  <h6>{areaOfExpertise}</h6>
                   <p>
-                    {bestMatchData[data]["description"]}
+                    {bestMatchData[data]?.description}
                     &nbsp;
                     <button onClick={() => handleClick(data, true)}>
                       Read More
@@ -104,9 +98,8 @@ const TrainerCardsFC = (props) => {
                       <span>
                         $
                         {
-                          bestMatchData[data]["oneOnOnePricing"][
-                            "inPersonAtClientLocation"
-                          ]
+                          bestMatchData[data]?.oneOnOnePricing
+                            ?.inPersonAtClientLocation
                         }
                       </span>
                     </p>

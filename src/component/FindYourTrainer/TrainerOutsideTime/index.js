@@ -47,6 +47,9 @@ const TrainerCardOutsideFC = (props) => {
         <div className="row">
           {Object.keys(outSideData).map((data, index) => {
             let imgdb = `${COMMON_URL}${outSideData[data]["profilePicture"]}`;
+            const areaOfExpertise = outSideData[
+              data
+            ]?.areaOfExpertise?.toString();
             return (
               <div className="card" key={index}>
                 <div className="inner_card">
@@ -72,22 +75,12 @@ const TrainerCardOutsideFC = (props) => {
 
                 <div className="card-body">
                   <h3 style={{ textTransform: "capitalize" }}>
-                    {outSideData[data]["firstName"]}&nbsp;
-                    {outSideData[data]["lastName"]}
+                    {outSideData[data]?.firstName}&nbsp;
+                    {outSideData[data]?.lastName}
                   </h3>
-                  <h6>
-                    {outSideData[data]["areaOfExpertise"][0]}
-                    {outSideData[data]["areaOfExpertise"][1] ? "," : ""}
-                    &nbsp;
-                    {outSideData[data]["areaOfExpertise"][1]}
-                    {outSideData[data]["areaOfExpertise"][2] ? "," : ""}
-                    &nbsp;
-                    {outSideData[data]["areaOfExpertise"][2]}
-                    &nbsp;
-                    {outSideData[data]["areaOfExpertise"][3]}
-                  </h6>
+                  <h6>{areaOfExpertise}</h6>
                   <p>
-                    {outSideData[data]["description"]}
+                    {outSideData[data]?.description}
 
                     <button onClick={() => handleClick(data, true)}>
                       Read More
@@ -107,9 +100,8 @@ const TrainerCardOutsideFC = (props) => {
                       from
                       <span>
                         {
-                          outSideData[data]["oneOnOnePricing"][
-                            "inPersonAtClientLocation"
-                          ]
+                          outSideData[data]?.oneOnOnePricing
+                            ?.inPersonAtClientLocation
                         }{" "}
                         $
                       </span>

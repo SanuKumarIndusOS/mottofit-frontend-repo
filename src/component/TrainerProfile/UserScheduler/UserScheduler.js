@@ -14,6 +14,7 @@ import { getCalenderDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
+import { updateTrainerDetails } from "../../../action/trainerAct";
 const timeZone = [
   {
     label: "Early Bird",
@@ -329,39 +330,107 @@ function UserSchedulerClass(props) {
     }
   };
 
-  // useEffect(() => {
-  //   let tempValue = props.queryQbject?.availability?.value;
+  useEffect(() => {
+    let tempValue = props.queryObject?.availability?.value;
 
-  //   if (tempValue && TimeSlot !== tempValue) {
-  //     // switch (props.queryQbject?.availability?.value) {
-  //     //   case "EarlyBird":
-  //     // }
-  //     setTimeSlot(tempValue);
-  //     if (tempValue === "EarlyBird") {
-  //       setTime(early_bird);
-  //     }
+    console.log(tempValue, TimeSlot);
 
-  //     if (tempValue === "RiseAndShine") {
-  //       setTime(rise_shine);
-  //     }
+    let selectedTime = {};
 
-  //     if (tempValue === "MidDayBreak1") {
-  //       setTime(mid_day);
-  //     }
+    if (tempValue && TimeSlot !== tempValue) {
+      // switch (props.queryObject?.availability?.value) {
+      //   case "EarlyBird":
+      // }
 
-  //     if (tempValue === "MidDayBreak2") {
-  //       setTime(mid_day_2);
-  //     }
+      setTimeSlot(tempValue);
 
-  //     if (tempValue === "HappyHours") {
-  //       setTime(happy_hour);
-  //     }
+      switch (tempValue) {
+        case "EarlyBird":
+          setTime(early_bird);
+          break;
+        case "RiseAndShine":
+          setTime(rise_shine);
+          break;
+        case "MidDayBreak1":
+          setTime(mid_day);
+          break;
+        case "MidDayBreak2":
+          setTime(mid_day_2);
+          break;
+        case "HappyHours":
+          setTime(happy_hour);
+          break;
+        case "NeverTooLate":
+          setTime(never_too_late);
+          break;
+        default:
+          setTime(early_bird);
+          break;
+      }
 
-  //     if (tempValue === "NeverTooLate") {
-  //       setTime(never_too_late);
-  //     }
-  //   }
-  // }, []);
+      selectedTime = timeZone.filter((data) => data.value === tempValue)[0];
+
+      console.log(selectedTime);
+    } else {
+      selectedTime = timeZone.filter((data) => data.value === "EarlyBird")[0];
+
+      console.log(selectedTime);
+    }
+
+    let payload = {
+      query: {
+        location: props.queryObject.location,
+        date: props.queryObject.date,
+        trainingType: props.queryObject.trainingType,
+        availability: selectedTime,
+      },
+    };
+
+    props.updateTrainerDetails(payload);
+  }, []);
+
+  // HANDLE DROPDOWN CHANGE
+
+  const handleChange = ({ target: { value } }) => {
+    setTimeSlot(value);
+    if (value === "EarlyBird") {
+      setTime(early_bird);
+    }
+
+    if (value === "RiseAndShine") {
+      setTime(rise_shine);
+    }
+
+    if (value === "MidDayBreak1") {
+      setTime(mid_day);
+    }
+
+    if (value === "MidDayBreak2") {
+      setTime(mid_day_2);
+    }
+
+    if (value === "HappyHours") {
+      setTime(happy_hour);
+    }
+
+    if (value === "NeverTooLate") {
+      setTime(never_too_late);
+    }
+
+    const selectedTime = timeZone.filter((data) => data.value === value)[0];
+
+    let payload = {
+      query: {
+        location: props.queryObject.location,
+        date: props.queryObject.date,
+        trainingType: props.queryObject.trainingType,
+        availability: selectedTime,
+      },
+    };
+
+    props.updateTrainerDetails(payload);
+  };
+
   let tableData2;
 
   if (cellData.length === 0) {
@@ -654,7 +723,7 @@ function UserSchedulerClass(props) {
               <div>
                 <img
                   src={BackIcon}
-                  disabled="true"
+                  disabled={true}
                   style={{
                     opacity: "0.5",
                     cursor: "not-allowed",
@@ -676,39 +745,22 @@ function UserSchedulerClass(props) {
             &ensp; &ensp;
           </div>
 
-          <Dropdown
+          <select value={TimeSlot} name="TimeSlot" onChange={handleChange}>
+            {timeZone.map((list, index) => (
+              <option value={list.value} key={index}>
+                {list.label}
+              </option>
+            ))}
+          </select>
+
+          {/* <Dropdown
             className="custom_dropdown"
             title="Select Time Zone"
-            list={timeZone}
+            list={timeZone}            
             value={TimeSlot}
-            onChange={(e) => {
-              setTimeSlot(e.value);
-              if (e.value === "EarlyBird") {
-                setTime(early_bird);
-              }
-
-              if (e.value === "RiseAndShine") {
-                setTime(rise_shine);
-              }
-
-              if (e.value === "MidDayBreak1") {
-                setTime(mid_day);
-              }
-
-              if (e.value === "MidDayBreak2") {
-                setTime(mid_day_2);
-              }
-
-              if (e.value === "HappyHours") {
-                setTime(happy_hour);
-              }
-
-              if (e.value === "NeverTooLate") {
-                setTime(never_too_late);
-              }
-            }}
+            
             name="TimeSlot"
-          />
+          /> */}
         </div>
       </div>
 
@@ -720,13 +772,14 @@ function UserSchedulerClass(props) {
 }
 
 const mapStateToProps = (state) => ({
-  queryQbject: state.trainerReducer.query,
+  queryObject: state.trainerReducer.query,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getCalenderDetails,
+      updateTrainerDetails,
     },
     dispatch
   );

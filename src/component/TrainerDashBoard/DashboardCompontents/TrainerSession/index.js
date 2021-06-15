@@ -12,6 +12,9 @@ import { getTrainerSessionDetails } from "action/trainerAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
+import { TrainerApi } from "../../../../service/apiVariables";
+import { api } from "../../../../service/api";
+import { Toast } from "../../../../service/toast";
 
 const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
   const [trainerSessionData, setTrainerSessionData] = useState({
@@ -20,11 +23,22 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
     onGoingSessions: [],
   });
   useEffect(() => {
+    getAllDetails();
+  }, []);
+
+  const getAllDetails = () => {
     getTrainerSessionDetailsApi().then((data) => {
       const tempSessionData = {};
       Object.keys(data).forEach((sessionKey) => {
         tempSessionData[sessionKey] = data[sessionKey].map(
-          ({ title, venue, sessionDate, sessionStartTime }) => ({
+          ({
+            title,
+            venue,
+            sessionDate,
+            sessionStartTime,
+            id,
+            sessionStatus,
+          }) => ({
             date: getFormatDate(sessionDate, "D"),
             month: getFormatDate(sessionDate, "MMM"),
             heading: title,
@@ -35,13 +49,36 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
             previousImg: Jenny,
             prevHeading: "Yoga with Kane",
             prevDate: getFormatDate(sessionData, "DD MMMM YYYY"),
+            sessionStatus,
+            id,
           })
         );
       });
 
       setTrainerSessionData(tempSessionData);
     });
-  }, []);
+  };
+
+  const handleSessionStatus = (trainerId, sessionStatus) => {
+    let payload = {
+      sessionId: trainerId,
+      sessionStatus,
+    };
+
+    const { changeSessionStatus } = TrainerApi;
+
+    changeSessionStatus.body = payload;
+
+    api({ ...changeSessionStatus })
+      .then(({ data }) => {
+        console.log(data);
+        getAllDetails();
+      })
+      .catch((err) => {
+        console.log(err);
+        Toast({ type: "error", message: err.message || "" });
+      });
+  };
 
   return (
     <>
@@ -61,12 +98,18 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
                 </TabList>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="overview">
-                    <TabOne datas={trainerSessionData.upcomingSessions} />
+                    <TabOne
+                      datas={trainerSessionData.upcomingSessions}
+                      handleSessionStatus={handleSessionStatus}
+                    />
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="upcoming">
-                    <TabTwo datas={trainerSessionData.upcomingSessions} />
+                    <TabTwo
+                      datas={trainerSessionData.upcomingSessions}
+                      handleSessionStatus={handleSessionStatus}
+                    />
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
@@ -76,7 +119,10 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
                 </div>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="previous">
-                    <TabFour datas={trainerSessionData.pastSessions} />
+                    <TabFour
+                      datas={trainerSessionData.pastSessions}
+                      handleSessionStatus={handleSessionStatus}
+                    />
                   </TabPanel>
                 </div>
               </Tabs>
@@ -88,7 +134,7 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
   );
 };
 
-const TabOne = ({ datas = [] }) => {
+const TabOne = ({ datas = [], handleSessionStatus }) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
@@ -124,10 +170,24 @@ const TabOne = ({ datas = [] }) => {
                               {data.loc}
                             </h5>
                           </div>
-                          <div className="TP_USession_data_buttons">
-                            <button>Reschedule</button>
-                            <button>Cancel</button>
-                          </div>
+                          {data.sessionStatus !== "completed" ? (
+                            <div className="TP_USession_data_buttons">
+                              <button>Reschedule</button>
+                              <button>Cancel</button>
+                              <button
+                                className="text-primary"
+                                onClick={() =>
+                                  handleSessionStatus(data.id, "completed")
+                                }
+                              >
+                                Completed
+                              </button>
+                            </div>
+                          ) : (
+                            <div>
+                              <p>Completed</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <hr />
@@ -194,7 +254,7 @@ const TabOne = ({ datas = [] }) => {
   );
 };
 
-const TabTwo = ({ datas = [] }) => {
+const TabTwo = ({ datas = [], handleSessionStatus }) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
@@ -230,10 +290,24 @@ const TabTwo = ({ datas = [] }) => {
                               {data.loc}
                             </h5>
                           </div>
-                          <div className="TP_USession_data_buttons">
-                            <button>Reschedule</button>
-                            <button>Cancel</button>
-                          </div>
+                          {data.sessionStatus !== "completed" ? (
+                            <div className="TP_USession_data_buttons">
+                              <button>Reschedule</button>
+                              <button>Cancel</button>
+                              <button
+                                className="text-primary"
+                                onClick={() =>
+                                  handleSessionStatus(data.id, "completed")
+                                }
+                              >
+                                Completed
+                              </button>
+                            </div>
+                          ) : (
+                            <div>
+                              <p>Completed</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <hr />
