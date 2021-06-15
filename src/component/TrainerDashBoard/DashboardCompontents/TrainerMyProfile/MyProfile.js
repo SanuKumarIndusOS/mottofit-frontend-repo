@@ -450,7 +450,9 @@ const MyProfileFC = ({
                           </button>
                         </div>
                         <div className="social_meeting_links">
-                          {trainerData?.trainingLocation?.includes("Online") ? (
+                          {trainerData?.trainingLocation?.includes(
+                            "virtual"
+                          ) ? (
                             // <div className="setup_ite1">
                             <>
                               <h5>Add your Google or Zoom meeting link</h5>

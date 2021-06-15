@@ -57,12 +57,13 @@ const TrainerAvailabilityFC = ({
 
     let data = {
       preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
-      willingToTravel: setSelectedOneValue == "1" ? true : false,
-      servicableLocation: trainerAvailabilityData.servicableLocation,
+      willingToTravel:
+        parseInt(selectedOneValue) === parseInt("1") ? true : false,
+      // servicableLocation: trainerAvailabilityData.servicableLocation,
       trainingFacilityLocation:
         trainerAvailabilityData.trainingFacilityLocation,
       stripeId: "",
-      serviceableCity: trainerAvailabilityData.servicableLocation,
+      // serviceableCity: trainerAvailabilityData.servicableLocation,
       applicationStatus: "submitted",
     };
     if (trainerAvailabilityData.hoursPerWeek !== "") {
@@ -143,13 +144,13 @@ const TrainerAvailabilityFC = ({
           data.preferedTrainingMode.length !== 0
         ) {
           let tempArray = [];
-          tempArray = data.preferedTrainingMode.filter((x) => x == "Online");
+          tempArray = data.preferedTrainingMode.filter((x) => x === "virtual");
           if (tempArray.length !== 0) {
             setCheckButton(true);
           }
           let tempArrayPerson = [];
           tempArrayPerson = data.preferedTrainingMode.filter(
-            (x) => x == "inperson"
+            (x) => x == "inPerson"
           );
           if (tempArrayPerson.length !== 0) {
             setCheckButtonInPerson(true);
@@ -193,13 +194,13 @@ const TrainerAvailabilityFC = ({
                   <h6>Where are you willing to train?</h6>
                   <div className="inputs_platform">
                     <button
-                      onClick={(e) => handleTrianingData(e, "Online")}
+                      onClick={(e) => handleTrianingData(e, "virtual")}
                       className={checkButton ? "buttonFalse" : "buttonTrue"}
                     >
                       Virtual
                     </button>
                     <button
-                      onClick={(e) => handleTrainingData(e, "inperson")}
+                      onClick={(e) => handleTrainingData(e, "inPerson")}
                       className={
                         checkButtonInPerson ? "buttonFalse" : "buttonTrue"
                       }
