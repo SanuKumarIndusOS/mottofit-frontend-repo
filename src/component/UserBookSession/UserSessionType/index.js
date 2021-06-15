@@ -33,7 +33,7 @@ const trainingVenueOptions = [
 ];
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
-const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
+const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
   const [selectedOption, setSelectedOption] = useState([]);
   const [trainingVenue, setTrainingVenue] = useState([]);
 
@@ -45,9 +45,13 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
   const location = useLocation();
 
   React.useEffect(() => {
-    setSelectedOption(sessionData?.location);
     setTrainingVenue(sessionData?.trainingVenue);
     setPreferedTrainingMode(sessionData?.preferedTrainingMode);
+
+    let tempValue = options.filter(
+      ({ value }) => value === queryObject?.city
+    )[0];
+    tempValue?.value && setSelectedOption(tempValue);
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
   }, []);
@@ -418,6 +422,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData }) => {
 
 const mapStateToProps = (state) => ({
   sessionData: state.userReducer.sessionData,
+  queryObject: state.trainerReducer.query,
 });
 
 const mapDispatchToProps = (dispatch) => {

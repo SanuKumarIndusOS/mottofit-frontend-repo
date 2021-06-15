@@ -119,7 +119,7 @@ const UserEventSchedularFC = (props) => {
                                         "dj"
                                     )} */}
                   <img
-                    src={Profile}
+                    src={location?.trainerData?.profilePicture || Profile}
                     alt="profile"
                     style={{ objectFit: "cover" }}
                   />
@@ -156,7 +156,9 @@ const UserEventSchedularFC = (props) => {
                 {/* </div> */}
 
                 <Link
-                  className="submit_user"
+                  className={`submit_user ${
+                    props.selectedTimes.length > 0 ? "" : "disable-btn"
+                  }`}
                   onClick={handleContinue}
                   style={{ marginBottom: "500px" }}
                 >

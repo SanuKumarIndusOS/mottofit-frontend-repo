@@ -56,11 +56,16 @@ const TrainerCardsFC = (props) => {
               data
             ]?.areaOfExpertise?.toString();
 
+            console.log(data);
+
             return (
               <div className="card" key={index}>
                 <img
                   className="card-img-top"
-                  src={imgdb}
+                  src={
+                    bestMatchData[data].profilePicture ||
+                    "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                  }
                   style={{ objectFit: "cover" }}
                   alt="Profile Picture Not Found "
                   onError={(e) => {

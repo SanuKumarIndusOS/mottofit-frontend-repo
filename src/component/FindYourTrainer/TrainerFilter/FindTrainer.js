@@ -274,12 +274,16 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   };
 
   const search_action = () => {
+    let city =
+      Object.values(inPerson).filter(({ selected }) => selected)[0]?.value ||
+      "";
     let payload = {
       query: {
         location: queryObject.location,
         date: queryObject.date,
         trainingType: queryObject.vertical,
         availability: queryObject.availability,
+        city,
         // inPerson: queryObject.inPerson,
       },
     };

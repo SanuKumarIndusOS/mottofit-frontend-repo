@@ -383,6 +383,7 @@ function UserSchedulerClass(props) {
         date: props.queryObject.date,
         trainingType: props.queryObject.trainingType,
         availability: selectedTime,
+        city: props.queryObject.city,
       },
     };
 

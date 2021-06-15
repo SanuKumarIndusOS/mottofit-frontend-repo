@@ -55,7 +55,10 @@ const TrainerCardOutsideFC = (props) => {
                 <div className="inner_card">
                   <img
                     className="card-img-top card-img"
-                    src={imgdb}
+                    src={
+                      outSideData[data].profilePicture ||
+                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                    }
                     style={{ objectFit: "cover" }}
                     onError={(e) => {
                       e.target.onerror = null;

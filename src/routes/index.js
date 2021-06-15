@@ -21,6 +21,8 @@ class RoutesClass extends Component {
 
     const { pathname } = history.location || {};
 
+    console.log(pathname);
+
     const isUserLoggedIn =
       localStorage.getItem("token") || localStorage.getItem("admin-token");
 
@@ -31,11 +33,16 @@ class RoutesClass extends Component {
       "/trainer/signup",
       "/user/signup",
       "/admin/login",
+      "/trainer/profile/",
     ];
 
     const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];
 
-    const emptyTokenPath = noTokenPaths.includes(pathname);
+    let emptyTokenPath = noTokenPaths.includes(pathname);
+
+    if (pathname.includes("/trainer/profile/")) emptyTokenPath = true;
+
+    // console.log(emptyTokenPath);
 
     if (isUserLoggedIn && blockSignUpPath.includes(pathname))
       return history.push("/");
