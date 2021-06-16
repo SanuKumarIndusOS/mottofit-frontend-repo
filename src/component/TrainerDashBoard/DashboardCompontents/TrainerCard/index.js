@@ -458,7 +458,7 @@ function TrainerCardDashboard(props) {
         <div>
           <label>
             Write A Short And Sweet Description For Clients To Pick You In 100
-            Characterss
+            Characters
           </label>
           <br />
           <textarea
