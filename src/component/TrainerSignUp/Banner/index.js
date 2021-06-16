@@ -64,7 +64,9 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
       email: data.email,
       password: data.password,
       cpassword: data.cpassword,
-      phoneNumber: data.phoneNumber,
+      phoneNumber: data.phoneNumber.includes("+")
+        ? data.phoneNumber
+        : `+${data?.phoneNumber}`,
       signUpType: data.signUpType,
     };
 

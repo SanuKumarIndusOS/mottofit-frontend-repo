@@ -17,11 +17,11 @@ import { connect } from "react-redux";
 import { scheduleSession, resetUserDetails } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
+import { STRIPE_URL } from "../../../helpers/baseURL";
 import { getFormatDate, convertToESTMs } from "service/helperFunctions";
 import { Toast } from "service/toast";
-const stripePromise = loadStripe(
-  "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm"
-);
+
+const stripePromise = loadStripe(STRIPE_URL);
 
 const UserPaymentsFC = ({
   sessionData,
