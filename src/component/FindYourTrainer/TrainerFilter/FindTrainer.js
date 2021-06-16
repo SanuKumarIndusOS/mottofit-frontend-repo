@@ -342,6 +342,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         }}
         handleChange={handleChange}
         inPerson={inPerson}
+        type="findtrainer"
       />
     );
   } else {

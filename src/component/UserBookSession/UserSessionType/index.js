@@ -46,7 +46,8 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
 
   React.useEffect(() => {
     setTrainingVenue(sessionData?.trainingVenue);
-    setPreferedTrainingMode(sessionData?.preferedTrainingMode);
+    // setPreferedTrainingMode(sessionData?.preferedTrainingMode);
+    setPreferedTrainingMode(queryObject?.location);
 
     let tempValue = options.filter(
       ({ value }) => value === queryObject?.city

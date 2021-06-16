@@ -6,6 +6,7 @@ import MessageIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets
 import NotificationIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Notifications Icon.svg";
 import SettingIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Settings Icon.svg";
 import LogoutIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Logout Icon.svg";
+import { logout } from "../../../../service/utilities";
 
 export const SideBarRouteData = [
   {
@@ -40,10 +41,10 @@ export const SideBarRouteData = [
         title: "Payment History",
         path: "/users/dashboard/settings/paymenthistory",
       },
-      {
-        title: "Notification Settings",
-        path: "/users/dashboard/settings/profile",
-      },
+      // {
+      //   title: "Notification Settings",
+      //   path: "/users/dashboard/settings/profile",
+      // },
       {
         title: "Change Password",
         path: "/users/dashboard/settings/password",
@@ -53,6 +54,7 @@ export const SideBarRouteData = [
   {
     title: "Log out",
     path: "/",
+    onClick: logout,
     icon: <img src={LogoutIcon} alt="icon" />,
   },
 ];

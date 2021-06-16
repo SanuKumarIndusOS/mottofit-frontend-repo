@@ -320,3 +320,16 @@ select {
     font-weight: 500;
   }
 }
+
+.custom-dropdown {
+  background: transparent;
+  border: 0;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: transparent;
+    border: 0;
+    box-shadow: 0 0;
+  }
+}

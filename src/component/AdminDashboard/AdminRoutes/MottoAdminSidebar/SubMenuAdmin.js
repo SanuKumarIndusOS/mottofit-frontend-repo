@@ -87,10 +87,15 @@ const SubMenuAdmin = ({ item }) => {
         </div>
       </SidebarLink>
       {subnav &&
-        item.subNav.map((item, index) => {
+        item.subNav.map(({ onClick, ...item }, index) => {
           return (
             <div className="sub_links">
-              <Link to={item.path} key={index} className="sub_link">
+              <Link
+                to={item.path}
+                key={index}
+                className="sub_link"
+                onClick={() => onClick && onClick()}
+              >
                 {item.icon}
                 <p className="sub_title">{item.title}</p>
                 <img src={ArrowNext} alt="icon" />

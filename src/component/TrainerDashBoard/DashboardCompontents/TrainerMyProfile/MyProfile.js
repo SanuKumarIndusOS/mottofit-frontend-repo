@@ -189,7 +189,7 @@ const MyProfileFC = ({
       images: imagesList.filter((x) => x !== ""),
       DOB,
       email,
-      phoneNumber: phoneNo,
+      phoneNumber: `+${phoneNo}`,
     };
 
     const { updateTrainerAvailabilityApi } = TrainerApi;
@@ -244,9 +244,9 @@ const MyProfileFC = ({
             DOB,
             email,
             serviceableNeighbourHood: serviceableNeighbourHood || "",
-            phoneNo: phoneNumber.includes("+1")
+            phoneNo: phoneNumber.includes("+")
               ? phoneNumber
-              : `+1${phoneNumber}`,
+              : `+${phoneNumber}`,
           },
         };
         if (data.images && data.images.length !== 0) {
@@ -556,6 +556,10 @@ const MyProfileFC = ({
                             onChange={handleInputChange}
                             value={trainerData.trainingFacilityLocation}
                             name="trainingFacilityLocation"
+                            disabled={selectedValue !== "a"}
+                            className={`${
+                              selectedValue !== "a" ? "disable-btn" : ""
+                            }`}
                           />
                         </div>
                       </div>
@@ -597,6 +601,12 @@ const MyProfileFC = ({
                             onChange={handleInputChange}
                             value={trainerData.serviceableNeighbourHood}
                             name="serviceableNeighbourHood"
+                            disabled={parseInt(selectedOneValue) !== 1}
+                            className={`${
+                              parseInt(selectedOneValue) !== 1
+                                ? "disable-btn"
+                                : ""
+                            }`}
                           />
 
                           <img

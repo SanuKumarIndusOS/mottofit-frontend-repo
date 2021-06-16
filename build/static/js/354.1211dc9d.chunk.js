@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[354],{468:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Strength Icon.533b1e81.svg"}}]);
+//# sourceMappingURL=354.1211dc9d.chunk.js.map

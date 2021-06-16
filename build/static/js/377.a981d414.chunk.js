@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[377],{588:function(t,o,p){"use strict";p.r(o),o.default=p.p+"static/media/Top Bar.a2320b30.png"}}]);
+//# sourceMappingURL=377.a981d414.chunk.js.map

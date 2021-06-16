@@ -10,11 +10,22 @@ import Line2 from "../../../assets/files/SVG/Blue Line 2.svg";
 import "./styles.scss";
 import SignIn from "../../SignIn/Banner";
 import { logout } from "service/utilities";
+import { history } from "../../../helpers";
+import {
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
 const NavBarHome = ({ toggle }) => {
   const [navbar, setNavbar] = useState(false);
   const [showModel, setShowModel] = useState(false);
   const [logo, setLogo] = useState(false);
+
+  const [dropdownOpen, setOpen] = useState(false);
+
+  const toggleDrop = () => setOpen(!dropdownOpen);
 
   const openModal = () => {
     setShowModel((prev) => !prev);
@@ -38,6 +49,22 @@ const NavBarHome = ({ toggle }) => {
     window.addEventListener("scroll", changeBackground);
     return () => window.removeEventListener("scroll", changeBackground);
   }, []);
+
+  const handleDashboard = () => {
+    let userType = parseInt(localStorage.getItem("type"));
+
+    switch (userType) {
+      case 1:
+        history.push(`/admins/dashboard`);
+        break;
+      case 2:
+        history.push(`/trainers/dashboard/session`);
+        break;
+      case 3:
+        history.push(`/users/dashboard/session`);
+        break;
+    }
+  };
 
   const isUserLoggedIn =
     localStorage.getItem("token") || localStorage.getItem("admin-token");
@@ -82,9 +109,22 @@ const NavBarHome = ({ toggle }) => {
                 <SignIn showModel={showModel} setShowModel={setShowModel} />
               </div>
             ) : (
-              <button className="link-btn ml-3" onClick={logout}>
-                Logout
-              </button>
+              <>
+                <img src={Line2} alt="icon" className="ml-2" />
+                <ButtonDropdown isOpen={dropdownOpen} toggle={toggleDrop}>
+                  <DropdownToggle className="custom-dropdown ml-3">
+                    <div>
+                      <img src={Person} alt="icon" />
+                    </div>
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={handleDashboard}>
+                      Dashboard
+                    </DropdownItem>
+                    <DropdownItem onClick={logout}>Logout</DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown>
+              </>
             )}
           </div>
         </div>

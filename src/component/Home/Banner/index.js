@@ -130,6 +130,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         }}
         handleChange={handleChange}
         inPerson={inPerson}
+        type="banner"
       />
     );
   } else {

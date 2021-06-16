@@ -426,7 +426,7 @@ const routers = [
     auth: false,
     name: "UserDashboardLayout",
     exact: false,
-    redirect: "/user-dashboard/settings/profile",
+    redirect: "/users/dashboard/profile",
     childrens: [
       {
         path: "/session",

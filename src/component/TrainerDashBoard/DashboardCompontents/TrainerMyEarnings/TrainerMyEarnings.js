@@ -127,14 +127,17 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
               </div>
             )}
 
-            <TransactionSection paymentHistory={paymentHistory} />
+            <TransactionSection
+              paymentHistory={paymentHistory}
+              isTrainer={isTrainer}
+            />
           </div>
         </div>
       </div>
     </>
   );
 };
-const TransactionSection = ({ paymentHistory }) => {
+const TransactionSection = ({ paymentHistory, isTrainer }) => {
   return (
     <>
       <div className="outter_ts">
@@ -158,11 +161,20 @@ const TransactionSection = ({ paymentHistory }) => {
                     date = getFormatDate(data?.createdAt, "YYYY-MM-DD");
                   return (
                     <div className="ts_wrapper" key={index}>
-                      <div className="ts_card">
-                        <div className="card_profile">
-                          <img src={Profile} className="profile_card_img" />
+                      <div className="ts_card row no-gutters">
+                        <div className="card_profile col-4">
+                          <img
+                            src={
+                              data?.trainerDetail?.profilePicture ||
+                              data?.userDetail?.profilePicture ||
+                              Profile
+                            }
+                            className="profile_card_img"
+                          />
                           <div className="profile_card_content">
-                            <h4>Client</h4>
+                            <h4 className="text-uppercase">
+                              {!isTrainer ? "Trainer" : "Client"}
+                            </h4>
                             <div className="wrap_content_ts">
                               <img src={PersonIcon} alt="icon" />
                               <p
@@ -170,12 +182,13 @@ const TransactionSection = ({ paymentHistory }) => {
                                   textTransform: "capitalize",
                                 }}
                               >
-                                {data?.userDetail?.firstName}
+                                {data?.userDetail?.firstName ||
+                                  data?.trainerDetail?.firstName}
                               </p>
                             </div>
                           </div>
                         </div>
-                        <div className="card_transaction">
+                        <div className="card_transaction col-2">
                           <div className="transaction_card_content">
                             <h4>Transaction Date</h4>
                             <div className="wrap_content_ts">
@@ -184,7 +197,7 @@ const TransactionSection = ({ paymentHistory }) => {
                             </div>
                           </div>
                         </div>
-                        <div className="card_amount">
+                        <div className="card_amount col-2">
                           <div className="amount_card_content">
                             <h4>Amount</h4>
                             <div className="wrap_content_ts">
@@ -193,7 +206,7 @@ const TransactionSection = ({ paymentHistory }) => {
                             </div>
                           </div>
                         </div>
-                        <div className="card_payment">
+                        <div className="card_payment col-2">
                           <div className="payment_card_content">
                             <h4>Payment type</h4>
                             <p
@@ -202,6 +215,18 @@ const TransactionSection = ({ paymentHistory }) => {
                               }}
                             >
                               {data?.paymentDetail?.card?.brand}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="card_payment col-2">
+                          <div className="payment_card_content">
+                            <h4>Status</h4>
+                            <p
+                              style={{
+                                textTransform: "capitalize",
+                              }}
+                            >
+                              {data?.status}
                             </p>
                           </div>
                         </div>

@@ -6,6 +6,7 @@ import MessageIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets
 import NotificationIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Notifications Icon.svg";
 import SettingIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Settings Icon.svg";
 import LogoutIcon from "../../../../assets/files/TrainerDashboard/SideBarAssets/Logout Icon.svg";
+import { logout } from "../../../../service/utilities";
 
 export const SideBarRouteDataAdmin = [
   {
@@ -50,6 +51,7 @@ export const SideBarRouteDataAdmin = [
   {
     title: "Log out",
     path: "/",
+    onClick: logout,
     icon: <img src={LogoutIcon} alt="icon" />,
   },
 ];

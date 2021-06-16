@@ -116,6 +116,7 @@ function CardFormFC({
         getUserPaymentInfo();
       })
       .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
         console.log(err);
       });
   };

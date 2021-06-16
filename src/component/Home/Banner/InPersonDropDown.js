@@ -6,7 +6,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-export const InPersonDropDown = ({ inPerson, handleChange }) => {
+export const InPersonDropDown = ({ inPerson, handleChange, type }) => {
   const options = [
     { label: "New York", value: "newYork" },
     { label: "Miami", value: "miami" },
@@ -23,13 +23,13 @@ export const InPersonDropDown = ({ inPerson, handleChange }) => {
               {options.map(({ label, value }, index) => (
                 <FormControlLabel
                   key={`${label}_${index}`}
-                  htmlFor={value}
+                  htmlFor={`${value}_${type}`}
                   control={
                     <Radio
                       checked={inPerson[value]?.selected}
                       onChange={() => handleChange(value)}
                       className="inperson_radio"
-                      id={value}
+                      id={`${value}_${type}`}
                     />
                   }
                   label={label}

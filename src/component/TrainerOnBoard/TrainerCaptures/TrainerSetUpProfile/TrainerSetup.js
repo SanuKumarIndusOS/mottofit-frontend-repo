@@ -45,8 +45,8 @@ function TrainerSetupClass(props) {
     training_process: "",
     facility_details: "",
     neighborhood_list: "",
-    haveAFacility: "",
-    willingToTravel: "",
+    haveAFacility: true,
+    willingToTravel: true,
     instagram: "",
     website: "",
     serviceableLocation: "",
@@ -82,7 +82,10 @@ function TrainerSetupClass(props) {
         setImageList(res.images);
       }
       let { identityInfromation = {}, insuranceInformation = {} } = res;
-      setTrainerSetupData({
+
+      let location = res.serviceableLocation;
+
+      let tempSetupData = {
         ...trainerSetupData,
         motto: res.myMotto,
         training_process: res.trainingProcess,
@@ -108,6 +111,15 @@ function TrainerSetupClass(props) {
           : "",
         insurance: insuranceInformation ? insuranceInformation.insurance : "",
         governmentId: identityInfromation ? identityInfromation.identity : "",
+        neighborhood_list: res.servicableLocation
+          ? res.servicableLocation[0]
+          : "",
+      };
+
+      console.log(tempSetupData);
+
+      setTrainerSetupData({
+        ...tempSetupData,
       });
     });
   }, []);
@@ -470,6 +482,10 @@ function TrainerSetupClass(props) {
               <textarea
                 placeholder="Enter the Details of the location"
                 value={trainerSetupData.facility_details}
+                disabled={!trainerSetupData.haveAFacility}
+                className={`${
+                  !trainerSetupData.haveAFacility ? "disable-btn" : ""
+                }`}
                 onChange={(e) => {
                   setTrainerSetupData({
                     ...trainerSetupData,
@@ -514,6 +530,10 @@ function TrainerSetupClass(props) {
               <textarea
                 placeholder="Neighborhood List"
                 value={trainerSetupData.serviceableNeighbourHood}
+                disabled={!trainerSetupData.willingToTravel}
+                className={`${
+                  !trainerSetupData.willingToTravel ? "disable-btn" : ""
+                }`}
                 onChange={(e) => {
                   setTrainerSetupData({
                     ...trainerSetupData,

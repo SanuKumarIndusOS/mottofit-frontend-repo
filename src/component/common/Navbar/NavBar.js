@@ -9,9 +9,20 @@ import Line from "../../../assets/files/SVG/Blue Line.svg";
 import Line2 from "../../../assets/files/SVG/Blue Line 2.svg";
 import SignIn from "../../SignIn/Banner";
 import { logout } from "service/utilities";
+import { history } from "../../../helpers";
+import {
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
 export const NavBar = ({ toggle }) => {
   const [showModel, setShowModel] = useState(false);
+
+  const [dropdownOpen, setOpen] = useState(false);
+
+  const toggleDrop = () => setOpen(!dropdownOpen);
 
   const openModal = () => {
     setShowModel((prev) => !prev);
@@ -19,6 +30,22 @@ export const NavBar = ({ toggle }) => {
 
   const isUserLoggedIn =
     localStorage.getItem("token") || localStorage.getItem("admin-token");
+
+  const handleDashboard = () => {
+    let userType = parseInt(localStorage.getItem("type"));
+
+    switch (userType) {
+      case 1:
+        history.push(`/admins/dashboard`);
+        break;
+      case 2:
+        history.push(`/trainers/dashboard/session`);
+        break;
+      case 3:
+        history.push(`/users/dashboard/session`);
+        break;
+    }
+  };
 
   return (
     <>
@@ -44,6 +71,7 @@ export const NavBar = ({ toggle }) => {
               ></input>
               <BiSearch className="search-icon1" />
             </div>
+
             {!isUserLoggedIn ? (
               <div className="login-item1">
                 <img src={Line2} alt="icon" />
@@ -53,9 +81,22 @@ export const NavBar = ({ toggle }) => {
                 <SignIn showModel={showModel} setShowModel={setShowModel} />
               </div>
             ) : (
-              <button className="link-btn ml-3" onClick={logout}>
-                Logout
-              </button>
+              <>
+                <img src={Line2} alt="icon" className="ml-2" />
+                <ButtonDropdown isOpen={dropdownOpen} toggle={toggleDrop}>
+                  <DropdownToggle className="custom-dropdown ml-3">
+                    <div>
+                      <img src={Person} alt="icon" />
+                    </div>
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={handleDashboard}>
+                      Dashboard
+                    </DropdownItem>
+                    <DropdownItem onClick={logout}>Logout</DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown>
+              </>
             )}
           </div>
         </div>
