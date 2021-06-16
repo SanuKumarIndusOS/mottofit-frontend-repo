@@ -59,6 +59,7 @@ function TrainerSetupClass(props) {
     governmentId: "",
     governmentIdNumber: "",
     insurance: "",
+    serviceableNeighbourHood: "",
   });
 
   const [imagesList, setImageList] = useState(["", "", "", "", ""]);
@@ -92,7 +93,7 @@ function TrainerSetupClass(props) {
         haveAFacility: res.trainingFacility,
         facility_details: res.trainingFacilityLocation,
         zoom_link: res.virtualMeetingLink,
-        // neighborhood_list: res.servicableLocation,
+        serviceableNeighbourHood: res.serviceableNeighbourHood || "",
         identityNameUS: identityInfromation
           ? identityInfromation.identityName
           : "",
@@ -178,6 +179,7 @@ function TrainerSetupClass(props) {
       insuranceAmount: trainerSetupData.coverAmount,
       insurance: trainerSetupData.insurance,
       identity: trainerSetupData.governmentId,
+      serviceableNeighbourHood: trainerSetupData.serviceableNeighbourHood,
     };
     const { updateTrainerAvailabilityApi } = TrainerApi;
     updateTrainerAvailabilityApi.body = payload;
@@ -251,7 +253,7 @@ function TrainerSetupClass(props) {
             <label>What’s your Motto?</label>
             <br />
             <textarea
-              placeholder="Tell us all about it"
+              placeholder="Share your favorite motto quote that represents you or your philosophy in less than 75 words"
               value={trainerSetupData.motto}
               onChange={(e) => {
                 setTrainerSetupData({
@@ -259,14 +261,13 @@ function TrainerSetupClass(props) {
                   motto: e.target.value,
                 });
               }}
-              maxlength="500"
             />
           </div>
           <div className="textarea_content">
             <label>Tell us about you and describe your training process</label>
             <br />
             <textarea
-              placeholder="Tell us all about it"
+              placeholder="Tell potential clients everything you think they should know about you as a trainer & individual. Utilize keywords as anything you write here will also be searchable in our search box."
               value={trainerSetupData.training_process}
               onChange={(e) => {
                 setTrainerSetupData({
@@ -512,13 +513,13 @@ function TrainerSetupClass(props) {
               <br />
               <textarea
                 placeholder="Neighborhood List"
-                // value={trainerSetupData.neighborhood_list}
-                // onChange={(e) => {
-                //   setTrainerSetupData({
-                //     ...trainerSetupData,
-                //     neighborhood_list: e.target.value,
-                //   });
-                // }}
+                value={trainerSetupData.serviceableNeighbourHood}
+                onChange={(e) => {
+                  setTrainerSetupData({
+                    ...trainerSetupData,
+                    serviceableNeighbourHood: e.target.value,
+                  });
+                }}
               />
             </div>
             <div className="input_content">

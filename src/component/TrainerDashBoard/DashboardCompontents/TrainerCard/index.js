@@ -14,7 +14,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 function TrainerCardDashboard(props) {
-  const [validationtxt, setValidationtxt] = useState(false);
+  const [isValidationError, setValidationError] = useState(false);
   // const history = useHistory();
   const [trainerCardData, setTrainerCardData] = useState({
     firstName: "",
@@ -210,14 +210,32 @@ function TrainerCardDashboard(props) {
         },
       };
 
-      console.log(payload);
+      if (!handleValidation()) return;
 
       props.updateTrainerDetailsApicall(payload).then(() => {
         alert("Successfully, Updated the changes");
       });
-    } else {
-      setValidationtxt(true);
     }
+  };
+
+  const handleValidation = () => {
+    let tempTrainerData = { ...trainerCardData };
+
+    tempTrainerData = Object.keys(tempTrainerData).filter(
+      (data) =>
+        data !== "description" &&
+        data !== "firstName" &&
+        data !== "verticals" &&
+        data !== "lastName"
+    );
+
+    const isAllDataFilled = tempTrainerData
+      .map((name) => parseInt(trainerCardData[name]))
+      .every((data) => data > 0);
+
+    setValidationError(!isAllDataFilled);
+
+    return isAllDataFilled;
   };
   const handleProfileUpload = (e) => {
     const file = e.target.files[0];
@@ -230,6 +248,7 @@ function TrainerCardDashboard(props) {
       });
     }
   };
+
   return (
     <div className="container">
       <div className="card_inner">
@@ -458,7 +477,7 @@ function TrainerCardDashboard(props) {
         <div>
           <label>
             Write A Short And Sweet Description For Clients To Pick You In 100
-            Characterss
+            Characters
           </label>
           <br />
           <textarea
@@ -808,9 +827,10 @@ function TrainerCardDashboard(props) {
             </div>
           </Accordion>
         </div>
+
         <div className="error_span">
-          {validationtxt ? (
-            <span>Please enter Individual Charge (atleast one) </span>
+          {isValidationError ? (
+            <span>Please enter all charge prices </span>
           ) : null}
         </div>
         <div className="card_submit">

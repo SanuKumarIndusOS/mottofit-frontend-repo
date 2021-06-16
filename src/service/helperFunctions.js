@@ -89,7 +89,7 @@ export const getFormatDate = (
   isUnix = false
 ) => {
   return isUnix
-    ? moment.unix(date).format(format)
+    ? moment.tz(date, "America/New_York").format(format)
     : moment(date).format(format);
 };
 

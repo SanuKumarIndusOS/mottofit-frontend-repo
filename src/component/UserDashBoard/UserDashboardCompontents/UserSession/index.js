@@ -15,6 +15,7 @@ import moment from "moment";
 import { userSession, cancelSession } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { getFormatDate } from "service/helperFunctions";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -176,7 +177,7 @@ const TabOne = ({
                         <div className="TP_USession_data_icons">
                           <h5>
                             <img src={AvailabilityIcon} alt="icon" />
-                            {moment(data.sessionStartTime).format("MMM")}
+                            {getFormatDate(data.sessionStartTime, "LT", true)}
                           </h5>
                           <h5>
                             <img src={LocationIcon} alt="icon" />

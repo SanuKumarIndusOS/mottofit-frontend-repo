@@ -38,7 +38,7 @@ export const SideBarRouteData = [
       },
       {
         title: "Payment History",
-        path: "/users/dashboard/settings/profile",
+        path: "/users/dashboard/settings/paymenthistory",
       },
       {
         title: "Notification Settings",

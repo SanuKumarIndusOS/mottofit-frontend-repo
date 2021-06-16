@@ -24,7 +24,7 @@ function TrainerCardNewClass(props) {
   const openModal = () => {
     setOpen((prev) => !prev);
   };
-  const [validationtxt, setValidationtxt] = useState(false);
+  const [isValidationError, setValidationError] = useState(false);
   const history = useHistory();
   const [trainerCardData, setTrainerCardData] = useState({
     firstName: "",
@@ -229,6 +229,9 @@ function TrainerCardNewClass(props) {
       firstName: trainerCardData.firstName,
       lastName: trainerCardData.lastName,
     };
+
+    if (!handleValidation()) return;
+
     if (!validateFields(payloadData)) return;
     if (
       trainerCardData.inPersonAtClient_individualCharge ||
@@ -294,9 +297,27 @@ function TrainerCardNewClass(props) {
         .catch(() => {
           setisLoading(false);
         });
-    } else {
-      setValidationtxt(true);
     }
+  };
+
+  const handleValidation = () => {
+    let tempTrainerData = { ...trainerCardData };
+
+    tempTrainerData = Object.keys(tempTrainerData).filter(
+      (data) =>
+        data !== "description" &&
+        data !== "firstName" &&
+        data !== "verticals" &&
+        data !== "lastName"
+    );
+
+    const isAllDataFilled = tempTrainerData
+      .map((name) => parseInt(trainerCardData[name]))
+      .every((data) => data > 0);
+
+    setValidationError(!isAllDataFilled);
+
+    return isAllDataFilled;
   };
 
   const handleProfileUpload = (e) => {
@@ -908,8 +929,8 @@ function TrainerCardNewClass(props) {
           </Accordion>
         </div>
         <div className="error_span">
-          {validationtxt ? (
-            <span>Please enter Individual Charge (atleast one) </span>
+          {isValidationError ? (
+            <span>Please enter all charge prices </span>
           ) : null}
         </div>
         <div className="card_submit">

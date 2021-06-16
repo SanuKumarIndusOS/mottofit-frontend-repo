@@ -207,9 +207,9 @@ export const TrainerApi = {
     url: "payment-history/trainer?trainerId=",
     method: "get",
     baseURL: "payment",
-    trainerId: null,
+    id: null,
     get api() {
-      return this.url + this.trainerId;
+      return this.url + this.id;
     },
   },
 };
@@ -279,5 +279,14 @@ export const userApi = {
     api: "user/edit",
     method: "post",
     baseURL: "normal",
+  },
+  userPaymentHistoryApi: {
+    method: "get",
+    url: "payment-history/user?userId=",
+    baseURL: "payment",
+    id: null,
+    get api() {
+      return this.url + this.id;
+    },
   },
 };

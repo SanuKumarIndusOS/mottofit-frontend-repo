@@ -6,145 +6,149 @@ import { useSelector, useDispatch } from "react-redux";
 import "./trainer.sass";
 
 export const TrainerPrevModal = ({
-    open,
-    setOpen,
-    trainerCardData,
-    image,
-    // setImage,
+  open,
+  setOpen,
+  trainerCardData,
+  image,
+  // setImage,
 }) => {
-    const myRef = useRef(null);
-    const closeIconModal = <img src={CloseIcon} alt="close" />;
+  const myRef = useRef(null);
+  const closeIconModal = <img src={CloseIcon} alt="close" />;
 
-    const TrainerCardPayload = useSelector(
-        (state) => state.trainerCaptureReducer.cardData
+  //   const TrainerCardPayload = useSelector(
+  //     (state) => state.trainerCaptureReducer.cardData
+  //   );
+
+  //   const priceArray = [
+  //     TrainerCardPayload.inPersonAtClient_individualCharge,
+  //     TrainerCardPayload.inPersonAtClient_twoPPL,
+  //     TrainerCardPayload.inPersonAtClient_threePPL,
+  //     TrainerCardPayload.inPersonAtClient_fourPPL,
+  //     TrainerCardPayload.inPersonAtClient_classFlatRate,
+  //     TrainerCardPayload.inPersonAtClient_threeSessionRate,
+  //     TrainerCardPayload.inPersonAtClient_tenSessionRate,
+  //     TrainerCardPayload.inPersonAtTrainer_individualCharge,
+  //     TrainerCardPayload.inPersonAtTrainer_twoPPL,
+  //     TrainerCardPayload.inPersonAtTrainer_threePPL,
+  //     TrainerCardPayload.inPersonAtTrainer_fourPPL,
+  //     TrainerCardPayload.inPersonAtTrainer_classFlatRate,
+  //     TrainerCardPayload.inPersonAtTrainer_threeSessionRate,
+  //     TrainerCardPayload.inPersonAtTrainer_tenSessionRate,
+  //     TrainerCardPayload.virtual_individualCharge,
+  //     TrainerCardPayload.virtual_twoPPL,
+  //     TrainerCardPayload.virtual_threePPL,
+  //     TrainerCardPayload.virtual_fourPPL,
+  //     TrainerCardPayload.virtual_classFlatRate,
+  //     TrainerCardPayload.virtual_threeSessionRate,
+  //     TrainerCardPayload.virtual_tenSessionRate,
+  //   ];
+  const [price, setPrice] = React.useState(0);
+  React.useEffect(() => {
+    let tempTrainerData = { ...trainerCardData };
+
+    tempTrainerData = Object.keys(tempTrainerData).filter(
+      (data) =>
+        data !== "description" &&
+        data !== "firstName" &&
+        data !== "verticals" &&
+        data !== "lastName"
     );
 
-    const priceArray = [
-        TrainerCardPayload.inPersonAtClient_individualCharge,
-        TrainerCardPayload.inPersonAtClient_twoPPL,
-        TrainerCardPayload.inPersonAtClient_threePPL,
-        TrainerCardPayload.inPersonAtClient_fourPPL,
-        TrainerCardPayload.inPersonAtClient_classFlatRate,
-        TrainerCardPayload.inPersonAtClient_threeSessionRate,
-        TrainerCardPayload.inPersonAtClient_tenSessionRate,
-        TrainerCardPayload.inPersonAtTrainer_individualCharge,
-        TrainerCardPayload.inPersonAtTrainer_twoPPL,
-        TrainerCardPayload.inPersonAtTrainer_threePPL,
-        TrainerCardPayload.inPersonAtTrainer_fourPPL,
-        TrainerCardPayload.inPersonAtTrainer_classFlatRate,
-        TrainerCardPayload.inPersonAtTrainer_threeSessionRate,
-        TrainerCardPayload.inPersonAtTrainer_tenSessionRate,
-        TrainerCardPayload.virtual_individualCharge,
-        TrainerCardPayload.virtual_twoPPL,
-        TrainerCardPayload.virtual_threePPL,
-        TrainerCardPayload.virtual_fourPPL,
-        TrainerCardPayload.virtual_classFlatRate,
-        TrainerCardPayload.virtual_threeSessionRate,
-        TrainerCardPayload.virtual_tenSessionRate,
-    ];
-    const [price, setPrice] = React.useState(0);
-    React.useEffect(() => {
-        var temp = [];
+    const totalCost = tempTrainerData
+      .map((name) => parseInt(trainerCardData[name]))
+      .filter((value) => !isNaN(value))
+      .reduce((prev, curr) => {
+        return prev + curr;
+      }, 0);
 
-        priceArray.map((v) => {
-            if (!isNaN(parseInt(v))) {
-                temp.push(parseInt(v));
-            }
-        });
+    setPrice(totalCost);
+  }, [open]);
 
-        let min = Math.min(...temp);
-        setPrice(min);
-
-        console.log(min);
-    }, [TrainerCardPayload]);
-
-    return (
-        <div>
-            {open ? (
-                <Modal
-                    open={open}
-                    onClose={() => {
-                        setOpen(false);
+  return (
+    <div>
+      {open ? (
+        <Modal
+          open={open}
+          onClose={() => {
+            setOpen(false);
+          }}
+          center
+          closeIcon={closeIconModal}
+          container={myRef.current}
+          styles={{
+            boaderRadius: "10px",
+          }}
+        >
+          <div className="container">
+            <div className="row m-0" style={{ alignleft: "auto" }}>
+              <div className="card">
+                <img
+                  className="card-img-top"
+                  src={
+                    image
+                      ? image
+                      : "https://www.solidbackgrounds.com/images/2048x1536/2048x1536-powder-blue-web-solid-color-background.jpg"
+                  }
+                  style={
+                    image
+                      ? { objectFit: "cover" }
+                      : {
+                          objectFit: "cover",
+                          backgroundColor: "blue",
+                        }
+                  }
+                />
+                <div className="card-body">
+                  <h3
+                    style={{
+                      textTransform: "capitalize",
                     }}
-                    center
-                    closeIcon={closeIconModal}
-                    container={myRef.current}
-                    styles={{
-                        boaderRadius: "10px",
+                  >
+                    {trainerCardData.firstName}
+                    &nbsp;
+                    {trainerCardData.lastName}
+                  </h3>
+                  <h6
+                    style={{
+                      color: "#898989",
+                      fontWeight: "bold",
                     }}
-                >
-                    <div className="container">
-                        <div className="row m-0" style={{ alignleft: "auto" }}>
-                            <div className="card">
-                                <img
-                                    className="card-img-top"
-                                    src={
-                                        image
-                                            ? image
-                                            : "https://www.solidbackgrounds.com/images/2048x1536/2048x1536-powder-blue-web-solid-color-background.jpg"
-                                    }
-                                    style={
-                                        image
-                                            ? { objectFit: "cover" }
-                                            : {
-                                                  objectFit: "cover",
-                                                  backgroundColor: "blue",
-                                              }
-                                    }
-                                />
-                                <div className="card-body">
-                                    <h3
-                                        style={{
-                                            textTransform: "capitalize",
-                                        }}
-                                    >
-                                        {trainerCardData.firstName}
-                                        &nbsp;
-                                        {trainerCardData.lastName}
-                                    </h3>
-                                    <h6
-                                        style={{
-                                            color: "#898989",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        {trainerCardData.verticals !== undefined
-                                            ? trainerCardData.verticals.map(
-                                                  (item) => {
-                                                      return (
-                                                          <h6
-                                                              style={{
-                                                                  margin: "0 0.3em 0 0",
-                                                              }}
-                                                          >
-                                                              {item}
-                                                              {","}
-                                                          </h6>
-                                                      );
-                                                  }
-                                              )
-                                            : null}
-                                    </h6>
+                  >
+                    {trainerCardData.verticals !== undefined
+                      ? trainerCardData.verticals.map((item) => {
+                          return (
+                            <h6
+                              style={{
+                                margin: "0 0.3em 0 0",
+                              }}
+                            >
+                              {item}
+                              {","}
+                            </h6>
+                          );
+                        })
+                      : null}
+                  </h6>
 
-                                    <p>{trainerCardData.description}</p>
-                                </div>
-                                <div className="card-button">
-                                    <button
-                                        style={{
-                                            backgroundColor: "#53BFD2",
-                                        }}
-                                    >
-                                        book a session
-                                        <p>
-                                            from <span>${price || ""}</span>
-                                        </p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Modal>
-            ) : null}
-        </div>
-    );
+                  <p>{trainerCardData.description}</p>
+                </div>
+                <div className="card-button">
+                  <button
+                    style={{
+                      backgroundColor: "#53BFD2",
+                    }}
+                  >
+                    book a session
+                    <p>
+                      from <span>${price || ""}</span>
+                    </p>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      ) : null}
+    </div>
+  );
 };

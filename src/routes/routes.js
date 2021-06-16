@@ -463,6 +463,13 @@ const routers = [
         auth: false,
         exact: true,
       },
+      {
+        path: "/settings/paymenthistory",
+        componentPath: "pages/TrainerDashboard/Earnings/index",
+        name: "TrainerEarnings",
+        auth: false,
+        exact: true,
+      },
     ],
   },
 ];

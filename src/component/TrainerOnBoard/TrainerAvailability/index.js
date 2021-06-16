@@ -59,7 +59,8 @@ const TrainerAvailabilityFC = ({
       preferedTrainingMode: trainerAvailabilityData.preferedTrainingMode,
       willingToTravel:
         parseInt(selectedOneValue) === parseInt("1") ? true : false,
-      // servicableLocation: trainerAvailabilityData.servicableLocation,
+      serviceableNeighbourHood:
+        trainerAvailabilityData.serviceableNeighbourHood,
       trainingFacilityLocation:
         trainerAvailabilityData.trainingFacilityLocation,
       stripeId: "",
@@ -124,6 +125,9 @@ const TrainerAvailabilityFC = ({
             : "",
           servicableLocation: data.servicableLocation
             ? data.servicableLocation
+            : "",
+          serviceableNeighbourHood: data.serviceableNeighbourHood
+            ? data.serviceableNeighbourHood
             : "",
         };
         setTrainerAvailabilityData(tempData);
@@ -274,11 +278,11 @@ const TrainerAvailabilityFC = ({
                     <textarea
                       type="text"
                       placeholder="Neighborhood List"
-                      value={trainerAvailabilityData.servicableLocation}
+                      value={trainerAvailabilityData.serviceableNeighbourHood}
                       onChange={(e) => {
                         setTrainerAvailabilityData({
                           ...trainerAvailabilityData,
-                          servicableLocation: e.target.value,
+                          serviceableNeighbourHood: e.target.value,
                         });
                       }}
                     />

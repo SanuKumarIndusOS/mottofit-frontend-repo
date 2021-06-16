@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
-
+import ReactPhoneInput from "react-phone-input-2";
 import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 import ImageBG from "assets/files/SVG/Image 1.svg";
 import Instagram from "assets/files/SVG/Insta Icon.svg";
@@ -25,6 +25,8 @@ import { YearDropDown } from "component/common/YearDropdown";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import { Link } from "react-router-dom";
 import { copyTextToClipboard } from "service/helperFunctions";
+import moment from "moment";
+
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -69,6 +71,7 @@ const MyProfileFC = ({
     identityNameUS: "",
     trainingFacilityLocation: [],
     insuranceNameUS: "",
+    serviceableNeighbourHood: "",
   });
   const [trainerAvailabilityData, setTrainerAvailabilityData] = React.useState({
     hoursPerWeek: "",
@@ -166,6 +169,10 @@ const MyProfileFC = ({
       websiteLink,
       trainingFacilityLocation,
       virtualMeetingLink,
+      DOB,
+      phoneNo,
+      email,
+      serviceableNeighbourHood,
     } = trainerData;
 
     let payload = {
@@ -176,9 +183,13 @@ const MyProfileFC = ({
       certification: inputCertificatesFields,
       virtualMeetingLink: virtualMeetingLink,
       servicableLocation: [servicableLocation],
+      serviceableNeighbourHood: serviceableNeighbourHood || "",
       trainingFacilityLocation: trainingFacilityLocation,
       preferedTrainingMode: trainerData?.trainingLocation,
       images: imagesList.filter((x) => x !== ""),
+      DOB,
+      email,
+      phoneNumber: phoneNo,
     };
 
     const { updateTrainerAvailabilityApi } = TrainerApi;
@@ -207,6 +218,10 @@ const MyProfileFC = ({
           location = "",
           virtualMeetingLink = "",
           trainingFacilityLocation = [],
+          DOB,
+          phoneNumber,
+          email,
+          serviceableNeighbourHood,
         } = data || {};
         const { workLocation = "" } = currentExperience || {};
 
@@ -226,6 +241,12 @@ const MyProfileFC = ({
               ? servicableLocation.toString()
               : servicableLocation,
             trainingFacilityLocation: trainingFacilityLocation,
+            DOB,
+            email,
+            serviceableNeighbourHood: serviceableNeighbourHood || "",
+            phoneNo: phoneNumber.includes("+1")
+              ? phoneNumber
+              : `+1${phoneNumber}`,
           },
         };
         if (data.images && data.images.length !== 0) {
@@ -280,6 +301,8 @@ const MyProfileFC = ({
     fullURLPath && copyTextToClipboard(fullURLPath, "Link copied");
   };
 
+  const maxDate = moment().format("YYYY-MM-DD");
+
   return (
     <>
       <div className="outter_tp_container">
@@ -300,11 +323,13 @@ const MyProfileFC = ({
                     <h6>What’s your Motto?</h6>
                     <textarea
                       type="text"
-                      placeholder="Tell us all about it"
-                      onChange={handleInputChange}
+                      placeholder="Share your favorite motto quote that represents you or your philosophy in less than 75 words"
+                      onChange={(e) => {
+                        handleInputChange(e);
+                      }}
                       value={trainerData.motto}
                       name="motto"
-                      maxlength="500"
+                      maxLength="500"
                     />
                   </div>
                   <div className="setup_card2">
@@ -314,7 +339,7 @@ const MyProfileFC = ({
                     <textarea
                       type="text"
                       name="comment"
-                      placeholder="Tell clients everything you think they should know! Utilize Key words as anything you write here will be searchable through our search bar"
+                      placeholder="Tell potential clients everything you think they should know about you as a trainer & individual. Utilize keywords as anything you write here will also be searchable in our search box."
                       onChange={handleInputChange}
                       value={trainerData.trainingProcessDescription}
                       name="trainingProcessDescription"
@@ -570,8 +595,8 @@ const MyProfileFC = ({
                             type="text"
                             placeholder="Neighborhood List"
                             onChange={handleInputChange}
-                            value={trainerData.servicableLocation}
-                            name="servicableLocation"
+                            value={trainerData.serviceableNeighbourHood}
+                            name="serviceableNeighbourHood"
                           />
 
                           <img
@@ -580,6 +605,66 @@ const MyProfileFC = ({
                             className="loction_img_select"
                           />
                         </div>
+                      </div>
+
+                      <div className="input_profile">
+                        <label>Date of Birth </label>
+                        <input
+                          type="date"
+                          value={trainerData.DOB}
+                          // onKeyDown={(e) =>
+                          //   e.keyCode !== 8 ? e.preventDefault() : ""
+                          // }
+                          min="1900-01-01"
+                          max={maxDate}
+                          name="DOB"
+                          onChange={handleInputChange}
+                        />
+                        {/* {errors.DOB && (
+                          <span className="d-block w-100 text-danger fs-14">
+                            {errors.DOB[0]}
+                          </span>
+                        )} */}
+                      </div>
+
+                      <div className="input_profile">
+                        <label>Email </label>
+                        <input
+                          type="text"
+                          value={trainerData.email}
+                          onChange={handleInputChange}
+                          name="email"
+                        />
+                      </div>
+
+                      <div className="input_profile">
+                        <label>Phone </label>
+
+                        <ReactPhoneInput
+                          // type="phone"
+                          disableDropdown
+                          // disableAreaCodes
+                          countryCodeEditable={true}
+                          value={trainerData.phoneNo}
+                          // placeholder="Phone Number"
+                          country="us"
+                          inputProps={{
+                            name: "phoneNo",
+                          }}
+                          specialLabel=""
+                          name="phoneNo"
+                          onChange={(e) =>
+                            handleInputChange({
+                              target: { name: "phoneNo", value: e },
+                            })
+                          }
+                        />
+
+                        {/* {errors.phoneNo && (
+                          <span className="d-block w-100 text-danger fs-14">
+                            {errors.phoneNo[0]}
+                          </span>
+                        )} */}
                       </div>
 
                       <div className="setup_item1">

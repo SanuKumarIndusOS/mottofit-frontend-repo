@@ -15,6 +15,8 @@ import { updateUserDetails } from "action/userAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Toast } from "service/toast";
+import InfoIcon from "@material-ui/icons/Info";
+import { AiFillAlert, AiOutlineAlert } from "react-icons/ai";
 
 const useOptions = () => {
   const options = useMemo(() => ({
@@ -289,6 +291,15 @@ function CardFormFC({
               <Link to="/">Privacy Policy</Link>
             </label>
           </div>
+        </div>
+
+        <div className="disclaimer">
+          <p className="text-info">
+            <InfoIcon />
+            <span>
+              Payment will happen only after the session is completed.
+            </span>
+          </p>
         </div>
 
         {/* {showCardComp && ( */}
