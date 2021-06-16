@@ -14,6 +14,7 @@ import { loginOrSignUp } from "action/authAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import validate from "service/validation";
+import ReactPhoneInput from "react-phone-input-2";
 
 const SignUpFC = ({ loginOrSignupAct }) => {
   const [data, setData] = useState({
@@ -33,7 +34,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
   const [apiError, setApiError] = useState("");
   const onChangeValue = (e) => {
-    e.persist();
+    e.persist && e.persist();
 
     const { name, value } = e.target || e || {};
 
@@ -52,7 +53,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
-      phoneNo: `+1${data.phoneNo}`,
+      phoneNo: data.phoneNo.includes("+") ? data.phoneNo : `+${data.phoneNo}`,
       password: data.password,
       cpassword: data.cpassword,
       location: data.location,
@@ -60,6 +61,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
     };
 
     const { userSignUp } = AuthApi;
+
+    // console.log(payload);
 
     if (!validateFields(payload)) return;
 
@@ -251,12 +254,32 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                     {error.email && <span>{error.email[0]}</span>}
                   </div>
                   <div className="input_items">
-                    <input
+                    {/* <input
                       placeholder="Phone"
                       type="text"
                       value={data.phoneNo}
                       name="phoneNo"
                       onChange={onChangeValue}
+                    /> */}
+                    <ReactPhoneInput
+                      disableDropdown
+                      countryCodeEditable={false}
+                      country="us"
+                      placeholder="Phone"
+                      inputProps={{
+                        name: "phone",
+                      }}
+                      specialLabel=""
+                      value={data.phoneNo}
+                      name="phoneNo"
+                      onChange={(e) => {
+                        onChangeValue({
+                          target: {
+                            name: "phoneNo",
+                            value: e,
+                          },
+                        });
+                      }}
                     />
                     <img src={Phone} alt="icon" />
                     {error.phoneNo && <span>{error.phoneNo[0]}</span>}

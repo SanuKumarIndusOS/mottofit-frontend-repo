@@ -30,7 +30,7 @@ const TrainerAvailabilityFC = ({
   trainerDetail,
 }) => {
   const [selectedValue, setSelectedValue] = useState("a");
-  const [selectedOneValue, setSelectedOneValue] = useState("");
+  const [selectedOneValue, setSelectedOneValue] = useState("1");
   const [checkButton, setCheckButton] = useState(false);
   const [checkButtonInPerson, setCheckButtonInPerson] = useState(false);
   const [isLoading, setisLoading] = useState(false);
@@ -242,6 +242,10 @@ const TrainerAvailabilityFC = ({
                       type="text"
                       placeholder="Enter the Details of the location"
                       value={trainerAvailabilityData.trainingFacilityLocation}
+                      className={`${
+                        selectedValue !== "a" ? "disable-btn" : ""
+                      }`}
+                      disabled={selectedValue !== "a"}
                       onChange={(e) => {
                         setTrainerAvailabilityData({
                           ...trainerAvailabilityData,
@@ -279,6 +283,10 @@ const TrainerAvailabilityFC = ({
                       type="text"
                       placeholder="Neighborhood List"
                       value={trainerAvailabilityData.serviceableNeighbourHood}
+                      className={`${
+                        parseInt(selectedOneValue) !== 1 ? "disable-btn" : ""
+                      }`}
+                      disabled={parseInt(selectedOneValue) !== 1}
                       onChange={(e) => {
                         setTrainerAvailabilityData({
                           ...trainerAvailabilityData,

@@ -125,11 +125,11 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
           allowEmpty: false,
           message: "^Phone number is required",
         },
-        format: {
-          pattern: /^[1-9][0-9]*$/,
-          flags: "i",
-          message: "^Invalid number",
-        },
+        // format: {
+        //   pattern: /^[1-9][0-9]*$/,
+        //   flags: "i",
+        //   message: "^Invalid number",
+        // },
         length: {
           minimum: 8,
           tooShort: "Invalid number",
