@@ -19,6 +19,9 @@ import { updateUserDetails } from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
+// import { Modal } from "react-responsive-modal";
+// import "react-responsive-modal/styles.css";
+// import "./modal.scss";
 
 let options = [
   { value: "New York City", label: "New York" },
@@ -45,6 +48,7 @@ const UserBookSessionFC = ({
   const [preferedTrainingMode, setPreferedTrainingMode] = useState("");
 
   const [open, setOpen] = useState(false);
+  const [trainerLocationModal, setTrainerLocationModal] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);
   const location = useLocation();
@@ -127,6 +131,23 @@ const UserBookSessionFC = ({
     "inPerson"
   );
 
+  const { virtualSession = "", inPersonAtClientLocation = "" } =
+    tempTrainerData?.oneOnOnePricing || {};
+
+  const {
+    virtualSessionfor2People = "",
+    virtualSessionfor3People = "",
+    virtualSessionfor4People = "",
+    inPeronAtClientLocationfor2People = "",
+    inPeronAtClientLocationfor3People = "",
+    inPeronAtClientLocationfor4People = "",
+  } = tempTrainerData.socialSessionPricing || {};
+
+  const {
+    virtualSessionfor15People = "",
+    inPersonAtclientLocationfor15People = "",
+  } = tempTrainerData.classSessionPricing || {};
+
   return (
     <>
       <div className="session_outter_container">
@@ -150,7 +171,11 @@ const UserBookSessionFC = ({
               <div className="session_tabs">
                 <div className="session_tabs_inner">
                   <Tabs
-                    defaultTab="virtual"
+                    defaultTab={`${
+                      preferedTrainingMode === "inPerson"
+                        ? "inPerson"
+                        : "virtual"
+                    }`}
                     onChange={(tabId) => {
                       console.log(tabId);
                     }}
@@ -212,9 +237,22 @@ const UserBookSessionFC = ({
                           </div>
                         </div>
                       )}
-                      <div className="session_view_location">
-                        <Link to="">View Trainer’s Location</Link>
-                      </div>
+
+                      {trainingVenue?.label && (
+                        <div className="session_view_location">
+                          <Link
+                            onClick={() =>
+                              setTrainerLocationModal(!trainerLocationModal)
+                            }
+                          >
+                            {` View ${
+                              trainingVenue?.label === "Trainer's Location"
+                                ? "Trainer's Location"
+                                : "Neighbourhood Location"
+                            }`}
+                          </Link>
+                        </div>
+                      )}
                     </div>
                     <TabPanel tabId="virtual">
                       <div className="inPerson_tab_inner">
@@ -466,6 +504,42 @@ const UserBookSessionFC = ({
             </div>
           </div>
         </div>
+        {trainerLocationModal ? (
+          <Modal
+            open={trainerLocationModal}
+            onClose={() => {
+              setTrainerLocationModal(false);
+              // history.push("card");
+            }}
+            center
+            closeIcon={<img src={CloseIcon} alt="close" />}
+            // container={myRef.current}
+            styles={{
+              boaderRadius: "10px",
+            }}
+          >
+            <div className="model_styles modal-heading">
+              <h2>
+                {`${
+                  trainingVenue?.label === "Trainer's Location"
+                    ? "Trainer's Locations"
+                    : "Neighbourhood Locations"
+                }`}
+              </h2>
+              {trainingVenue?.label === "Trainer's Location" ? (
+                <p>
+                  {tempTrainerData?.trainingFacilityLocation ||
+                    "No trainer locations"}
+                </p>
+              ) : (
+                <p>
+                  {tempTrainerData?.serviceableNeighbourHood ||
+                    "No neighbourhood locations"}
+                </p>
+              )}
+            </div>
+          </Modal>
+        ) : null}
       </div>
     </>
   );

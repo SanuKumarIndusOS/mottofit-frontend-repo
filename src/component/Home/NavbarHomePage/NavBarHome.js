@@ -71,7 +71,7 @@ const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails }) => {
         history.push(`/admins/dashboard`);
         break;
       case 2:
-        history.push(`/trainers/dashboard/session`);
+        history.push(`/trainers/dashboard/schedule`);
         break;
       case 3:
         history.push(`/users/dashboard/session`);

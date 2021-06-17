@@ -92,7 +92,7 @@ const SignInFC = ({
             if (response.applicationStatus === null) {
               history.push("/trainer/about");
             } else {
-              history.push("/trainers/dashboard/session");
+              history.push("/trainers/dashboard/schedule");
             }
           });
         } else {

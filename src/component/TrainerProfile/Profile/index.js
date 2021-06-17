@@ -96,10 +96,31 @@ const TrainerProfileClass = ({
     virtualSessionfor2People = "",
     virtualSessionfor3People = "",
     virtualSessionfor4People = "",
+    inPeronAtClientLocationfor2People = "",
+    inPeronAtClientLocationfor3People = "",
+    inPeronAtClientLocationfor4People = "",
   } = trainerProfileData.socialSessionPricing || {};
 
-  const { virtualSessionfor15People = "" } =
-    trainerProfileData.classSessionPricing || {};
+  const {
+    virtualSessionfor15People = "",
+    inPersonAtclientLocationfor15People = "",
+  } = trainerProfileData.classSessionPricing || {};
+
+  const isAnyOneonOnePriceAvailable =
+    virtualSession || inPersonAtClientLocation;
+
+  const isAnySocialPriceAvailable = [
+    virtualSessionfor2People,
+    virtualSessionfor3People,
+    virtualSessionfor4People,
+    inPeronAtClientLocationfor2People,
+    inPeronAtClientLocationfor3People,
+    inPeronAtClientLocationfor4People,
+  ].some((price) => price !== "");
+
+  const isAnyClassPriceAvailable =
+    virtualSessionfor15People || inPeronAtClientLocationfor4People;
+
   return (
     <>
       <div className="profile_main">
@@ -140,7 +161,7 @@ const TrainerProfileClass = ({
                   <img src={ArrowNext} alt="icon" />
                 </div>
                 <div className="profile_aside_items">
-                  {(virtualSession || inPersonAtClientLocation) && (
+                  {isAnyOneonOnePriceAvailable && (
                     <div className="profile_aside_item">
                       <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
                       <hr />
@@ -165,9 +186,7 @@ const TrainerProfileClass = ({
                       </div>
                     </div>
                   )}
-                  {virtualSessionfor2People ||
-                  virtualSessionfor3People ||
-                  virtualSessionfor4People ? (
+                  {isAnySocialPriceAvailable ? (
                     <div className="profile_aside_item">
                       <h2>
                         SOCIAL SESSIONS{" "}
@@ -215,8 +234,16 @@ const TrainerProfileClass = ({
                       <div className="profile_aside_inner_item">
                         {virtualSessionfor2People ? (
                           <h6>
-                            {`$${virtualSessionfor2People}`}
+                            {`$${virtualSessionfor2People} `}
                             <span>/ Session (Virtual For 2 People)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPeronAtClientLocationfor2People ? (
+                          <h6>
+                            {`$${inPeronAtClientLocationfor2People} `}
+                            <span>(In Person Session)</span>
                           </h6>
                         ) : (
                           ""
@@ -229,10 +256,26 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+                        {inPeronAtClientLocationfor3People ? (
+                          <h6>
+                            {`$${inPeronAtClientLocationfor3People} `}
+                            <span>(In Person Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         {virtualSessionfor4People ? (
                           <h6>
                             {`$${virtualSessionfor4People} `}
                             <span>/ Session (Virtual For 4 People)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPeronAtClientLocationfor4People ? (
+                          <h6>
+                            {`$${inPeronAtClientLocationfor4People} `}
+                            <span>(In Person Session)</span>
                           </h6>
                         ) : (
                           ""
@@ -243,7 +286,7 @@ const TrainerProfileClass = ({
                     ""
                   )}
 
-                  {virtualSessionfor15People ? (
+                  {isAnyClassPriceAvailable ? (
                     <div className="profile_aside_item">
                       <h2>
                         CREATE A CLASS
@@ -287,10 +330,22 @@ const TrainerProfileClass = ({
                         </Modal>
                       ) : null}
                       <div className="profile_aside_inner_item">
-                        <h6>
-                          {`$${virtualSessionfor15People} `}
-                          <span>Flat Rate Class (For 5-15 People)</span>
-                        </h6>
+                        {virtualSessionfor15People ? (
+                          <h6>
+                            {`$${virtualSessionfor15People} `}
+                            <span>Flat Rate Class (For 5-15 People)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtclientLocationfor15People ? (
+                          <h6>
+                            {`$${inPersonAtclientLocationfor15People} `}
+                            <span>(In Person Session) (For 5-15 People)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         <h5>
                           If trainer offers Virtual Social Sessions and Classes
                           they will be at a discount to in person rates above.
