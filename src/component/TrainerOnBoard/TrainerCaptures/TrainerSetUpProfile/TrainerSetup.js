@@ -286,8 +286,8 @@ function TrainerSetupClass(props) {
               onChange={(e) => {
                 const tempValue = e.target.value;
 
-                if (tempValue?.split(" ")?.length <= 75) return;
-                if (tempValue?.length <= 500) return;
+                if (tempValue?.split(" ")?.length > 75) return;
+                if (tempValue?.length > 500) return;
 
                 setTrainerSetupData({
                   ...trainerSetupData,

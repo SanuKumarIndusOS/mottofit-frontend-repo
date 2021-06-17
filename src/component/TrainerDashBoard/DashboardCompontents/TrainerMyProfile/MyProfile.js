@@ -329,8 +329,10 @@ const MyProfileFC = ({
                       onChange={(e) => {
                         const tempValue = e.target.value;
 
-                        if (tempValue?.split(" ")?.length <= 75) return;
-                        if (tempValue?.length <= 500) return;
+                        console.log(tempValue);
+
+                        if (tempValue?.split(" ")?.length > 75) return;
+                        if (tempValue?.length > 500) return;
                         handleInputChange(e);
                       }}
                       value={trainerData.motto}
