@@ -24,8 +24,15 @@ const UserEventSchedularFC = (props) => {
   console.log(trainerName, "trainerName");
 
   React.useEffect(() => {
-    if (!localStorage.getItem("token"))
-      return history.push("/welcome?login=true");
+    if (!localStorage.getItem("token")) {
+      let reduxData = {
+        isModelOpen: true,
+      };
+      props.updateUserDetails(reduxData);
+      return history.push(
+        `/welcome?${encodeURIComponent("nextPath=/user/scheduler")}`
+      );
+    }
 
     if (!location["trainerId"]) return history.push("/trainer/find");
 

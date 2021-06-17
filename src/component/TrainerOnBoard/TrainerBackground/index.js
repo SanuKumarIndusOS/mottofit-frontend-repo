@@ -109,6 +109,7 @@ const TrainerBackgroundFC = ({
       interestInMotto: trainerbackgroundData.interestInMotto,
       awaitingCertification: trainerbackgroundData.awaitingCertification,
       trainingFacility: currentExperience.workMode === "yes",
+      trainingFacilityLocation: currentExperience.workLocation,
     };
     updateTrainerDetailsApicall(storeData).then(() => {
       history.push(`/trainer/availability`);

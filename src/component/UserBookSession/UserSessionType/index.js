@@ -105,6 +105,13 @@ const UserBookSessionFC = ({
 
   const tempTrainerData = selectedTrainerData?.trainerData;
 
+  let isVirtualPresent = tempTrainerData?.preferedTrainingMode?.includes(
+    "virtual"
+  );
+  let isInPersonPresent = tempTrainerData?.preferedTrainingMode?.includes(
+    "inPerson"
+  );
+
   return (
     <>
       <div className="session_outter_container">
@@ -135,63 +142,61 @@ const UserBookSessionFC = ({
                   >
                     <div className="sesstion_tabslist container">
                       <TabList>
-                        {/* {tempTrainerData?.preferedTrainingMode?.include(
-                          "virtual"
-                        ) && ( */}
-                        <Tab tabFor="virtual">
-                          <button
-                            onClick={() => setPreferedTrainingMode("virtual")}
-                            className={`${
-                              preferedTrainingMode === "virtual" ? "active" : ""
-                            }`}
-                          >
-                            Virtual
-                          </button>
-                        </Tab>
-                        {/* )} */}
-                        {/* {tempTrainerData?.preferedTrainingMode?.include(
-                          "inPerson"
-                        ) && ( */}
-                        <Tab tabFor="inPerson">
-                          <button
-                            onClick={() => setPreferedTrainingMode("inPerson")}
-                            className={`${
-                              preferedTrainingMode === "inPerson"
-                                ? "active"
-                                : ""
-                            }`}
-                          >
-                            In Person
-                          </button>
-                        </Tab>
-                        {/* )} */}
+                        {isVirtualPresent && (
+                          <Tab tabFor="virtual">
+                            <button
+                              onClick={() => setPreferedTrainingMode("virtual")}
+                              className={`${
+                                preferedTrainingMode === "virtual"
+                                  ? "active"
+                                  : ""
+                              }`}
+                            >
+                              Virtual
+                            </button>
+                          </Tab>
+                        )}
+                        {isInPersonPresent && (
+                          <Tab tabFor="inPerson">
+                            <button
+                              onClick={() =>
+                                setPreferedTrainingMode("inPerson")
+                              }
+                              className={`${
+                                preferedTrainingMode === "inPerson"
+                                  ? "active"
+                                  : ""
+                              }`}
+                            >
+                              In Person
+                            </button>
+                          </Tab>
+                        )}
                       </TabList>
 
-                      {/* {tempTrainerData?.preferedTrainingMode?.include(
-                        "inPerson"
-                      ) && ( */}
-                      <div className="session_location_dd">
-                        <div className="session_location">
-                          <Select
-                            value={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options}
-                            className="session_location_select"
-                          />
-                        </div>
-                        <div className="session_venue">
+                      {isInPersonPresent && (
+                        <div className="session_location_dd">
                           <div className="session_location">
                             <Select
-                              value={trainingVenue}
-                              onChange={setTrainingVenue}
-                              options={trainingVenueOptions}
-                              placeholder="Select Training Venue"
+                              value={selectedOption}
+                              onChange={setSelectedOption}
+                              options={options}
                               className="session_location_select"
                             />
                           </div>
+                          <div className="session_venue">
+                            <div className="session_location">
+                              <Select
+                                value={trainingVenue}
+                                onChange={setTrainingVenue}
+                                options={trainingVenueOptions}
+                                placeholder="Select Training Venue"
+                                className="session_location_select"
+                              />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      {/* )} */}
+                      )}
                       <div className="session_view_location">
                         <Link to="">View Trainer’s Location</Link>
                       </div>

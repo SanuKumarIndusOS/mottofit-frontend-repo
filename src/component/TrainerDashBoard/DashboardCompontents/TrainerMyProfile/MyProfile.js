@@ -327,6 +327,10 @@ const MyProfileFC = ({
                       type="text"
                       placeholder="Share your favorite motto quote that represents you or your philosophy in less than 75 words"
                       onChange={(e) => {
+                        const tempValue = e.target.value;
+
+                        if (tempValue?.split(" ")?.length <= 75) return;
+                        if (tempValue?.length <= 500) return;
                         handleInputChange(e);
                       }}
                       value={trainerData.motto}

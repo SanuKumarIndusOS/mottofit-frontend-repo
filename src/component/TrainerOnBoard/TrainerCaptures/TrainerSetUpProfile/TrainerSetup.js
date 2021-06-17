@@ -65,8 +65,8 @@ function TrainerSetupClass(props) {
   const [imagesList, setImageList] = useState(["", "", "", "", ""]);
 
   //buttons virtual and in person active
-  const [checkButtonVirtual, setCheckButtonVirtual] = useState(true);
-  const [checkButtonInPerson, setCheckButtonInPerson] = useState(true);
+  const [checkButtonVirtual, setCheckButtonVirtual] = useState(false);
+  const [checkButtonInPerson, setCheckButtonInPerson] = useState(false);
 
   // loading the submit button
   const [isLoading, setLoading] = useState(false);
@@ -84,6 +84,13 @@ function TrainerSetupClass(props) {
       let { identityInfromation = {}, insuranceInformation = {} } = res;
 
       let location = res.serviceableLocation;
+
+      if (res?.preferedTrainingMode?.includes("virtual")) {
+        setCheckButtonVirtual(true);
+      }
+      if (res?.preferedTrainingMode?.includes("inPerson")) {
+        setCheckButtonInPerson(true);
+      }
 
       let tempSetupData = {
         ...trainerSetupData,
@@ -166,6 +173,14 @@ function TrainerSetupClass(props) {
   };
 
   const handleSubmit = () => {
+    let temppreferedTrainingMode = [];
+
+    if (checkButtonInPerson) {
+      temppreferedTrainingMode.push("inPerson");
+    }
+    if (checkButtonVirtual) {
+      temppreferedTrainingMode.push("vitual");
+    }
     let payload = {
       images: imagesList.filter((x) => x != ""),
       myMotto: trainerSetupData.motto,
@@ -192,6 +207,7 @@ function TrainerSetupClass(props) {
       insurance: trainerSetupData.insurance,
       identity: trainerSetupData.governmentId,
       serviceableNeighbourHood: trainerSetupData.serviceableNeighbourHood,
+      preferedTrainingMode: temppreferedTrainingMode,
     };
     const { updateTrainerAvailabilityApi } = TrainerApi;
     updateTrainerAvailabilityApi.body = payload;
@@ -241,11 +257,11 @@ function TrainerSetupClass(props) {
               <img src={ArrowBack} alt="icon" />
               <Link to="/trainer/card"> Edit Trainer Card </Link>
             </div>
-            <div className="inner_link_preview">
+            {/* <div className="inner_link_preview">
               <div onClick={openModal} className="prev_profile">
                 Preview Your Trainer Profile
               </div>
-            </div>
+            </div> */}
           </div>
           <SetupPrevModal
             open={open}
@@ -268,6 +284,11 @@ function TrainerSetupClass(props) {
               placeholder="Share your favorite motto quote that represents you or your philosophy in less than 75 words"
               value={trainerSetupData.motto}
               onChange={(e) => {
+                const tempValue = e.target.value;
+
+                if (tempValue?.split(" ")?.length <= 75) return;
+                if (tempValue?.length <= 500) return;
+
                 setTrainerSetupData({
                   ...trainerSetupData,
                   motto: e.target.value,
