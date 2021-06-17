@@ -171,16 +171,19 @@ export const TrainerApi = {
     startDate: null,
     endDate: null,
     timeSlot: null,
+    trainerId: null,
     get api() {
-      return (
+      let url =
         this.url +
         this.startDate +
         "&endDate=" +
         this.endDate +
         "&timeBlock=" +
         this.timeSlot +
-        `&timeZone=America/New_York`
-      );
+        `&timeZone=America/New_York`;
+
+      if (this.trainerId) url = `${url}&trainerId=${this.trainerId}`;
+      return url;
     },
   },
   trainerSlot: {

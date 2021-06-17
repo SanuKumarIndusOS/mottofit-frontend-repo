@@ -92,6 +92,8 @@ export const getTrainerCalenderDetails = (startDate, endDate, timeSlot) => (
     getTrainerCalenderDetails.startDate = startDate;
     getTrainerCalenderDetails.endDate = endDate;
     getTrainerCalenderDetails.timeSlot = timeSlot;
+    getTrainerCalenderDetails.trainerId = localStorage.getItem("user-id");
+
     api({ ...getTrainerCalenderDetails })
       .then((data) => {
         resolve(data);
