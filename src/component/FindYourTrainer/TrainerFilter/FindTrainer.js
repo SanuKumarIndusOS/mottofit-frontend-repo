@@ -46,8 +46,6 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         },
       };
 
-      console.log("logged...", payload);
-
       setqueryObject(payload.query);
       getTrainerDataByQuery();
       // setqueryObject(trainerQueryData);

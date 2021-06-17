@@ -59,18 +59,20 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const payload = {
+    let payload = {
       name: data.name,
       email: data.email,
       password: data.password,
       cpassword: data.cpassword,
-      phoneNumber: data.phoneNumber.includes("+")
-        ? data.phoneNumber
-        : `+${data?.phoneNumber}`,
+      phoneNumber: data.phoneNumber,
       signUpType: data.signUpType,
     };
 
     if (!validateFields(payload)) return;
+
+    payload["phoneNumber"] = data.phoneNumber.includes("+")
+      ? data.phoneNumber
+      : `+${data?.phoneNumber}`;
 
     const { trainerSignUp } = AuthApi;
     // console.log(payload);
@@ -132,9 +134,9 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         // },
         length: {
           minimum: 8,
-          tooShort: "Invalid number",
+          tooShort: "^Invalid number",
           maximum: 15,
-          tooLong: "Invalid number",
+          tooLong: "^Invalid number",
         },
       },
       email: {

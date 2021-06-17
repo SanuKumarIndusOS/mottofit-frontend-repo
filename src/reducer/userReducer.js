@@ -7,6 +7,7 @@ const initialState = {
   selectedTrainerData: {},
   selectedTimes: [],
   defaulCardDetails: {},
+  isModelOpen: false,
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {

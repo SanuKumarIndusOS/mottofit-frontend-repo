@@ -230,9 +230,9 @@ function TrainerCardNewClass(props) {
       lastName: trainerCardData.lastName,
     };
 
-    if (!handleValidation()) return;
+    // if (!handleValidation()) return;
 
-    if (!validateFields(payloadData)) return;
+    // if (!validateFields(payloadData)) return;
     if (
       trainerCardData.inPersonAtClient_individualCharge ||
       trainerCardData.inPersonAtTrainer_individualCharge
@@ -297,6 +297,8 @@ function TrainerCardNewClass(props) {
         .catch(() => {
           setisLoading(false);
         });
+    } else {
+      setValidationError(true);
     }
   };
 
@@ -330,6 +332,10 @@ function TrainerCardNewClass(props) {
         setImage(data.urlPath);
       });
     }
+  };
+
+  const blockWheelBehaviour = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -617,7 +623,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtClient_individualCharge: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -632,7 +639,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtClient_twoPPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
 
@@ -648,7 +656,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtClient_threePPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
                 <br />
@@ -663,7 +672,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtClient_fourPPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
                 <br />
@@ -678,7 +688,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtClient_classFlatRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
 
@@ -694,7 +705,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtClient_threeSessionRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -708,7 +720,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtClient_tenSessionRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
 
@@ -730,7 +743,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtTrainer_individualCharge: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -744,7 +758,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtTrainer_twoPPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -758,7 +773,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtTrainer_threePPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -772,7 +788,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtTrainer_fourPPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -786,7 +803,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtTrainer_classFlatRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -800,8 +818,10 @@ function TrainerCardNewClass(props) {
                       inPersonAtTrainer_threeSessionRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
+                <img src={DollarIcon} alt="icon" />
               </div>
               <div className="card_accordion_input">
                 <input
@@ -813,7 +833,8 @@ function TrainerCardNewClass(props) {
                       inPersonAtTrainer_tenSessionRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -834,7 +855,8 @@ function TrainerCardNewClass(props) {
                       virtual_individualCharge: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -849,7 +871,8 @@ function TrainerCardNewClass(props) {
                       virtual_twoPPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -863,7 +886,8 @@ function TrainerCardNewClass(props) {
                       virtual_threePPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -877,7 +901,8 @@ function TrainerCardNewClass(props) {
                       virtual_fourPPL: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -891,7 +916,8 @@ function TrainerCardNewClass(props) {
                       virtual_classFlatRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -905,7 +931,8 @@ function TrainerCardNewClass(props) {
                       virtual_threeSessionRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
@@ -919,7 +946,8 @@ function TrainerCardNewClass(props) {
                       virtual_tenSessionRate: e.target.value,
                     });
                   }}
-                  type="number"
+                  type="text"
+                  blockWheelBehaviour={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
 
@@ -930,7 +958,7 @@ function TrainerCardNewClass(props) {
         </div>
         <div className="error_span">
           {isValidationError ? (
-            <span>Please enter all charge prices </span>
+            <span>Please enter any one individual charge price </span>
           ) : null}
         </div>
         <div className="card_submit">

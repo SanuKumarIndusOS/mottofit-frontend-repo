@@ -22,9 +22,9 @@ import { useLocation } from "react-router-dom";
 
 const options = [
   { value: "New York City", label: "New York" },
-  { value: "Miami", label: "Maimi" },
+  { value: "Miami", label: "Miami" },
   { value: "Hamptons", label: "Hampton" },
-  { value: "Palm Beach", label: "Plam Beach" },
+  { value: "Palm Beach", label: "Palm Beach" },
 ];
 
 const trainingVenueOptions = [
@@ -33,7 +33,12 @@ const trainingVenueOptions = [
 ];
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
-const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
+const UserBookSessionFC = ({
+  updateUserDetails,
+  sessionData,
+  queryObject,
+  selectedTrainerData,
+}) => {
   const [selectedOption, setSelectedOption] = useState([]);
   const [trainingVenue, setTrainingVenue] = useState([]);
 
@@ -45,6 +50,16 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
   const location = useLocation();
 
   React.useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      let reduxData = {
+        isModelOpen: true,
+      };
+
+      history.push(`?${encodeURIComponent("nextpath=/user/session-type")}`);
+
+      return updateUserDetails(reduxData);
+    }
+
     setTrainingVenue(sessionData?.trainingVenue);
     // setPreferedTrainingMode(sessionData?.preferedTrainingMode);
     setPreferedTrainingMode(queryObject?.location);
@@ -88,6 +103,8 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
     selectedOption?.value &&
     trainingVenue?.value;
 
+  const tempTrainerData = selectedTrainerData?.trainerData;
+
   return (
     <>
       <div className="session_outter_container">
@@ -118,6 +135,9 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
                   >
                     <div className="sesstion_tabslist container">
                       <TabList>
+                        {/* {tempTrainerData?.preferedTrainingMode?.include(
+                          "virtual"
+                        ) && ( */}
                         <Tab tabFor="virtual">
                           <button
                             onClick={() => setPreferedTrainingMode("virtual")}
@@ -128,6 +148,10 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
                             Virtual
                           </button>
                         </Tab>
+                        {/* )} */}
+                        {/* {tempTrainerData?.preferedTrainingMode?.include(
+                          "inPerson"
+                        ) && ( */}
                         <Tab tabFor="inPerson">
                           <button
                             onClick={() => setPreferedTrainingMode("inPerson")}
@@ -140,7 +164,12 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
                             In Person
                           </button>
                         </Tab>
+                        {/* )} */}
                       </TabList>
+
+                      {/* {tempTrainerData?.preferedTrainingMode?.include(
+                        "inPerson"
+                      ) && ( */}
                       <div className="session_location_dd">
                         <div className="session_location">
                           <Select
@@ -162,6 +191,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
                           </div>
                         </div>
                       </div>
+                      {/* )} */}
                       <div className="session_view_location">
                         <Link to="">View Trainer’s Location</Link>
                       </div>
@@ -424,6 +454,7 @@ const UserBookSessionFC = ({ updateUserDetails, sessionData, queryObject }) => {
 const mapStateToProps = (state) => ({
   sessionData: state.userReducer.sessionData,
   queryObject: state.trainerReducer.query,
+  selectedTrainerData: state.userReducer.selectedTrainerData,
 });
 
 const mapDispatchToProps = (dispatch) => {

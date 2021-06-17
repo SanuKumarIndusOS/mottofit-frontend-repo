@@ -18,6 +18,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import SimpleReactValidator from "simple-react-validator";
 import moment from "moment";
+import validate from "service/validation";
 
 const locations = [
   {
@@ -59,6 +60,7 @@ class AboutTrainerFC extends Component {
     instagram: "",
     firstName: "",
     isLoading: false,
+    errors: {},
   };
 
   //validation
@@ -86,6 +88,110 @@ class AboutTrainerFC extends Component {
     },
   });
 
+  validationRules = () => {
+    validate.validators.dateValidation = function (
+      value,
+      options,
+      key,
+      attributes
+    ) {
+      var maxDate = moment();
+      maxDate = maxDate.subtract(options, "years");
+
+      maxDate = maxDate.format("YYYY-MM-DD");
+
+      let trainerDOB = moment(value).format("YYYY-MM-DD");
+
+      let isTrainerValid = moment(trainerDOB).isBefore(maxDate);
+
+      return isTrainerValid
+        ? undefined
+        : ["^Trainer should be atleast 21 years old"];
+    };
+
+    return {
+      firstName: {
+        presence: {
+          allowEmpty: false,
+          message: "^First name is required",
+        },
+        format: {
+          pattern: /^[A-Za-z ]+$/,
+          flags: "i",
+          message: "^First name must contain only letters and spaces",
+        },
+      },
+      DOB: {
+        presence: {
+          allowEmpty: false,
+          message: "^Date of birth is required",
+        },
+        dateValidation: 21,
+      },
+      gender: {
+        presence: {
+          allowEmpty: false,
+          message: "^Gender is required",
+        },
+      },
+      location: {
+        presence: {
+          allowEmpty: false,
+          message: "^Location is required",
+        },
+      },
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: "^Email is required",
+        },
+        email: true,
+      },
+      phoneNumber: {
+        presence: {
+          allowEmpty: false,
+          message: "^Phone number is required",
+        },
+        // format: {
+        //   pattern: /^[1-9][0-9]*$/,
+        //   flags: "i",
+        //   message: "^Invalid number",
+        // },
+        length: {
+          minimum: 8,
+          tooShort: "^Invalid number",
+          maximum: 15,
+          tooLong: "^Invalid number",
+        },
+      },
+    };
+  };
+
+  validateFields = (data) => {
+    let fieldInvalidList = validate(data, this.validationRules());
+
+    console.log(fieldInvalidList);
+
+    if (fieldInvalidList !== undefined) {
+      let errors = {
+        ...fieldInvalidList,
+      };
+
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          ...fieldInvalidList,
+        },
+      });
+
+      console.log(errors);
+
+      // setErrors();
+    }
+
+    return !fieldInvalidList;
+  };
+
   handleTrainerBackground = async (e) => {
     e.preventDefault();
     let {
@@ -103,28 +209,30 @@ class AboutTrainerFC extends Component {
       DOB: dob,
       email,
       gender,
-      phone,
+      phoneNumber: phone.includes("+") ? phone : `+${phone}`,
       location,
       websiteLink: websiteURL,
       instagramProfile: instagram,
     };
 
-    if (this.validator.allValid()) {
-      this.setState({ isLoading: true });
-      this.props
-        .updateTrainerDetailsApicall(storeData)
-        .then(() => {
-          this.validator.hideMessages();
-          this.setState({ isLoading: false });
-          history.push(`/trainer/background`);
-        })
-        .catch(() => {
-          this.setState({ isLoading: false });
-        });
-    } else {
-      this.validator.showMessages();
-      this.forceUpdate();
-    }
+    if (!this.validateFields(storeData)) return;
+
+    // if (this.validator.allValid()) {
+    this.setState({ isLoading: true });
+    this.props
+      .updateTrainerDetailsApicall(storeData)
+      .then(() => {
+        // this.validator.hideMessages();
+        this.setState({ isLoading: false });
+        history.push(`/trainer/background`);
+      })
+      .catch(() => {
+        this.setState({ isLoading: false });
+      });
+    // } else {
+    //   this.validator.showMessages();
+    //   this.forceUpdate();
+    // }
   };
 
   handleInput = ({ target: { value, name } }) => {
@@ -158,7 +266,14 @@ class AboutTrainerFC extends Component {
       instagram,
       firstName,
       isLoading,
+      errors,
     } = this.state;
+
+    var maxDate = moment();
+    maxDate = maxDate.subtract(21, "years");
+
+    maxDate = maxDate.format("YYYY-MM-DD");
+
     return (
       <>
         <div className="container main">
@@ -176,11 +291,7 @@ class AboutTrainerFC extends Component {
                     value={firstName}
                     name="firstName"
                   />
-                  {this.validator.message(
-                    "firstName",
-                    firstName,
-                    "required|alpha_space"
-                  )}
+                  {errors.firstName && <span>{errors.firstName[0]}</span>}
                 </div>
 
                 <div className="wrapper_innerInput">
@@ -195,7 +306,7 @@ class AboutTrainerFC extends Component {
                       handleChange={(e) => this.handleInput(e)}
                     />
                   </div>
-                  {this.validator.message("location", location, "required")}
+                  {errors.location && <span>{errors.location[0]}</span>}
                 </div>
                 <div className="wrapper_innerInput">
                   <label>Date of Birth*</label>
@@ -203,20 +314,17 @@ class AboutTrainerFC extends Component {
                     placeholder="DD/MM/YYYY"
                     type="date"
                     onFocus={(e) => (e.currentTarget.type = "date")}
-                    placeholder="MM/DD/YYYY"
+                    // placeholder="MM/DD/YYYY"
                     value={dob}
                     onChange={(e) => this.handleInput(e)}
                     name="dob"
                     min="1900-01-01"
-                    max="2099-12-31"
+                    max={maxDate}
                     // onKeyDown={(e) =>
                     //   e.keyCode !== 8 ? e.preventDefault() : ""
                     // }
                   />
-                  {this.validator.message("dob", dob, "required")}
-                  {dob && moment().diff(dob, "years", false) <= 21 && (
-                    <span>Trainer should be more than 21 years of age</span>
-                  )}
+                  {errors.DOB && <span>{errors.DOB[0]}</span>}
                 </div>
                 <div className="wrapper_innerInput">
                   <label>Select Your Gender*</label>
@@ -230,7 +338,7 @@ class AboutTrainerFC extends Component {
                       handleChange={(e) => this.handleInput(e)}
                     />
                   </div>
-                  {this.validator.message("gender", gender, "required")}
+                  {errors.gender && <span>{errors.gender[0]}</span>}
                 </div>
                 <div className="wrapper_innerInput">
                   <label>Email*</label>
@@ -241,7 +349,7 @@ class AboutTrainerFC extends Component {
                     onChange={(e) => this.handleInput(e)}
                     name="email"
                   />
-                  {this.validator.message("email", email, "required|email")}
+                  {errors.email && <span>{errors.email[0]}</span>}
                 </div>
                 <div className="wrapper_innerInput">
                   <label>Phone*</label>
@@ -264,7 +372,8 @@ class AboutTrainerFC extends Component {
                       });
                     }}
                   />
-                  {this.validator.message("phone", phone, "required|phone")}
+
+                  {errors.phoneNumber && <span>{errors.phoneNumber[0]}</span>}
                 </div>
 
                 <div className="wrapper_innerInput">

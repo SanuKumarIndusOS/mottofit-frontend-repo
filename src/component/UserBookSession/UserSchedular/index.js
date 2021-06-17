@@ -12,6 +12,7 @@ import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 import { getFormatDate } from "service/helperFunctions";
 import { history } from "helpers/index";
+import { logout } from "service/utilities";
 
 const UserEventSchedularFC = (props) => {
   const [trainerName, setTrainerName] = React.useState("");
@@ -23,6 +24,9 @@ const UserEventSchedularFC = (props) => {
   console.log(trainerName, "trainerName");
 
   React.useEffect(() => {
+    if (!localStorage.getItem("token"))
+      return history.push("/welcome?login=true");
+
     if (!location["trainerId"]) return history.push("/trainer/find");
 
     setTrainerName(location["trainerData"]);

@@ -49,11 +49,11 @@ const SignUpFC = ({ loginOrSignupAct }) => {
 
   async function signUp(e) {
     e.preventDefault();
-    const payload = {
+    let payload = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
-      phoneNo: data.phoneNo.includes("+") ? data.phoneNo : `+${data.phoneNo}`,
+      phoneNo: data.phoneNo,
       password: data.password,
       cpassword: data.cpassword,
       location: data.location,
@@ -65,6 +65,10 @@ const SignUpFC = ({ loginOrSignupAct }) => {
     // console.log(payload);
 
     if (!validateFields(payload)) return;
+
+    payload["phoneNo"] = data.phoneNo.includes("+")
+      ? data.phoneNo
+      : `+${data.phoneNo}`;
 
     loginOrSignupAct(userSignUp, payload)
       .then(() => {

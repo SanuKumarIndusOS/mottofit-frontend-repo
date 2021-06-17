@@ -17,8 +17,11 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { updateUserDetails } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const NavBarHome = ({ toggle }) => {
+const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails }) => {
   const [navbar, setNavbar] = useState(false);
   const [showModel, setShowModel] = useState(false);
   const [logo, setLogo] = useState(false);
@@ -31,10 +34,20 @@ const NavBarHome = ({ toggle }) => {
     setShowModel((prev) => !prev);
   };
 
-  // useEffect(() => {
-  //     setNavbar(true);
-  //     return () => setNavbar(false);
-  // }, []);
+  useEffect(() => {
+    console.log(history);
+    const { search } = history.location;
+
+    const canOpen = search.split("=") ? search.split("=")[1] : false;
+
+    if (Boolean(canOpen) && !isModelOpen) {
+      let reduxData = {
+        isModelOpen: true,
+      };
+
+      updateUserDetails(reduxData);
+    }
+  }, []);
 
   const changeBackground = () => {
     if (window.scrollY >= 180) {
@@ -64,6 +77,14 @@ const NavBarHome = ({ toggle }) => {
         history.push(`/users/dashboard/session`);
         break;
     }
+  };
+
+  const toggleModel = () => {
+    let reduxData = {
+      isModelOpen: !isModelOpen,
+    };
+
+    updateUserDetails(reduxData);
   };
 
   const isUserLoggedIn =
@@ -104,9 +125,9 @@ const NavBarHome = ({ toggle }) => {
               <div className="login-item1">
                 <img src={Line2} alt="icon" />
 
-                <img src={Person} alt="icon" onClick={openModal} />
+                <img src={Person} alt="icon" onClick={toggleModel} />
 
-                <SignIn showModel={showModel} setShowModel={setShowModel} />
+                <SignIn showModel={isModelOpen} setShowModel={toggleModel} />
               </div>
             ) : (
               <>
@@ -132,5 +153,20 @@ const NavBarHome = ({ toggle }) => {
     </Nav>
   );
 };
+
+const mapStateToProps = (state) => ({
+  isModelOpen: state.userReducer.isModelOpen,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateUserDetails,
+    },
+    dispatch
+  );
+};
+
+const NavBarHome = connect(mapStateToProps, mapDispatchToProps)(NavBarHomeFC);
 
 export default NavBarHome;

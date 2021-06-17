@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import Person from "../../../assets/files/SignUp/Person Icon.svg";
@@ -16,8 +16,11 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { bindActionCreators } from "redux";
+import { updateUserDetails } from "action/userAct";
+import { connect } from "react-redux";
 
-export const NavBar = ({ toggle }) => {
+const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
   const [showModel, setShowModel] = useState(false);
 
   const [dropdownOpen, setOpen] = useState(false);
@@ -46,6 +49,26 @@ export const NavBar = ({ toggle }) => {
         break;
     }
   };
+
+  const toggleModel = () => {
+    let reduxData = {
+      isModelOpen: !isModelOpen,
+    };
+
+    updateUserDetails(reduxData);
+  };
+
+  // useEffect(() => {
+  //   const { search } = history.location;
+
+  //   const nextPath = search.split("?") ? search.split("?")[1] : "";
+
+  //   if (nextPath) {
+  //     const decodedNextPath = decodeURIComponent(nextPath).split("=")[1];
+
+  //     console.log(decodedNextPath);
+  //   }
+  // }, [isModelOpen]);
 
   return (
     <>
@@ -76,9 +99,9 @@ export const NavBar = ({ toggle }) => {
               <div className="login-item1">
                 <img src={Line2} alt="icon" />
 
-                <img src={Person} alt="icon" onClick={openModal} />
+                <img src={Person} alt="icon" onClick={toggleModel} />
 
-                <SignIn showModel={showModel} setShowModel={setShowModel} />
+                <SignIn showModel={isModelOpen} setShowModel={toggleModel} />
               </div>
             ) : (
               <>
@@ -104,3 +127,18 @@ export const NavBar = ({ toggle }) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  isModelOpen: state.userReducer.isModelOpen,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateUserDetails,
+    },
+    dispatch
+  );
+};
+
+export const NavBar = connect(mapStateToProps, mapDispatchToProps)(NavBarFC);

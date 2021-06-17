@@ -278,7 +278,9 @@ const MyProfileFC = ({
 
       fd.append("images", image);
       fileUploadApi(fd).then((data) => {
-        imagesList[index] = URL.createObjectURL(image);
+        const { urlPath } = data;
+
+        imagesList[index] = urlPath;
         setImageList([...imagesList]);
       });
     }

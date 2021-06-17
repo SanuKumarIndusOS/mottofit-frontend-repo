@@ -10,7 +10,7 @@ export const axiosInstance = axios.create({
 
 export const cancelTokenSource = axios.CancelToken.source();
 
-export const logout = () => {
+export const logout = (canOpenModel = false) => {
   axiosInstance.defaults.headers.common["Authorization"] = "";
   localStorage.clear();
   history.push("/");

@@ -65,3 +65,15 @@ export const pageNavigationByName = (locationDetails) => {
 
   history.push({ pathname, ...locationProps });
 };
+
+export const nextPathReRouter = () => {
+  const { search } = history.location;
+  const nextPath = search.split("?") ? search.split("?")[1] : "";
+  if (nextPath) {
+    const decodedNextPath = decodeURIComponent(nextPath).split("=")[1];
+    // console.log(decodedNextPath);
+    history.push(decodedNextPath);
+  }
+
+  return nextPath;
+};

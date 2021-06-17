@@ -17,12 +17,19 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { login, loginOrSignUp } from "action/authAct";
 import { trainerDetail } from "action/trainerAct";
-import { history } from "helpers";
+import { history, nextPathReRouter } from "helpers";
 import validate from "service/validation";
+import { updateUserDetails } from "action/userAct";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
-const SignInFC = ({ showModel, setShowModel, loginAct, trainerDetail }) => {
+const SignInFC = ({
+  showModel,
+  setShowModel,
+  loginAct,
+  trainerDetail,
+  updateUserDetails,
+}) => {
   const myRef = useRef(null);
   const [data, setData] = useState({
     email: "",
@@ -71,6 +78,15 @@ const SignInFC = ({ showModel, setShowModel, loginAct, trainerDetail }) => {
     loginAct(loginApi, payload)
       .then((res) => {
         localStorage.setItem("user-id", res.id);
+
+        if (nextPathReRouter()) return;
+
+        let reduxData = {
+          isModelOpen: false,
+        };
+
+        updateUserDetails(reduxData);
+
         if (res["type"] === "trainer") {
           trainerDetail().then((response) => {
             if (response.applicationStatus === null) {
@@ -258,6 +274,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       loginAct: loginOrSignUp,
       trainerDetail,
+      updateUserDetails,
     },
     dispatch
   );
