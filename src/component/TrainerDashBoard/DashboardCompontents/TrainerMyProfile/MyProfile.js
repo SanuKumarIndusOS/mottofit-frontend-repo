@@ -192,7 +192,7 @@ const MyProfileFC = ({
       images: imagesList.filter((x) => x !== ""),
       DOB,
       email,
-      phoneNumber: `+${phoneNo}`,
+      phoneNumber: phoneNo.includes("+") ? phoneNo : `+${phoneNo}`,
     };
 
     if (!validateFields(payload)) return;
