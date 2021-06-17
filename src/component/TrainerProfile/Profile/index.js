@@ -69,6 +69,18 @@ const TrainerProfileClass = ({
   const handleBookSession = () => {
     history.push("/user/scheduler");
   };
+  const handleSessionType = () => {
+    let reduxData = {
+      selectedTrainerData: {
+        ...trainerProfileData,
+      },
+    };
+
+    // console.log("logged", reduxData);
+
+    updateUserDetails(reduxData);
+    history.push("/user/session-type");
+  };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
 
@@ -393,7 +405,10 @@ const TrainerProfileClass = ({
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
                     />
-                    <ButtonSection selectedTimes={selectedTimes} />
+                    <ButtonSection
+                      selectedTimes={selectedTimes}
+                      handleSessionType={handleSessionType}
+                    />
                   </div>
                   {/* </div> */}
                 </div>
@@ -407,7 +422,7 @@ const TrainerProfileClass = ({
   );
 };
 
-const ButtonSection = ({ selectedTimes }) => {
+const ButtonSection = ({ selectedTimes, handleSessionType }) => {
   const disableBtn = selectedTimes?.length > 0;
 
   return (
@@ -427,9 +442,7 @@ const ButtonSection = ({ selectedTimes }) => {
         </div>
         <div className="item_slot4">
           <button
-            onClick={() => {
-              history.push("/user/session-type");
-            }}
+            onClick={handleSessionType}
             disabled={!disableBtn}
             className={`${!disableBtn ? "disable-btn" : ""}`}
           >

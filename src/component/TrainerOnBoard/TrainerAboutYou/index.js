@@ -170,8 +170,6 @@ class AboutTrainerFC extends Component {
   validateFields = (data) => {
     let fieldInvalidList = validate(data, this.validationRules());
 
-    console.log(fieldInvalidList);
-
     if (fieldInvalidList !== undefined) {
       let errors = {
         ...fieldInvalidList,
@@ -183,8 +181,6 @@ class AboutTrainerFC extends Component {
           ...fieldInvalidList,
         },
       });
-
-      console.log(errors);
 
       // setErrors();
     }

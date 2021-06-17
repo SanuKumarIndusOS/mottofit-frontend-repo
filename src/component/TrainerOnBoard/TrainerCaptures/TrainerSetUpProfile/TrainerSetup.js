@@ -257,11 +257,11 @@ function TrainerSetupClass(props) {
               <img src={ArrowBack} alt="icon" />
               <Link to="/trainer/card"> Edit Trainer Card </Link>
             </div>
-            {/* <div className="inner_link_preview">
+            <div className="inner_link_preview">
               <div onClick={openModal} className="prev_profile">
                 Preview Your Trainer Profile
               </div>
-            </div> */}
+            </div>
           </div>
           <SetupPrevModal
             open={open}

@@ -103,7 +103,8 @@ const UserBookSessionFC = ({
     selectedOption?.value &&
     trainingVenue?.value;
 
-  const tempTrainerData = selectedTrainerData?.trainerData;
+  const tempTrainerData =
+    selectedTrainerData?.trainerData || selectedTrainerData;
 
   let isVirtualPresent = tempTrainerData?.preferedTrainingMode?.includes(
     "virtual"

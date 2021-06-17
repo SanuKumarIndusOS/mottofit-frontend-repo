@@ -26,6 +26,7 @@ import { NormalMultiSelect } from "component/common/NormalMultiSelect";
 import { Link } from "react-router-dom";
 import { copyTextToClipboard } from "service/helperFunctions";
 import moment from "moment";
+import validate from "service/validation";
 
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
@@ -83,6 +84,8 @@ const MyProfileFC = ({
   //state for radio buttons
   const [selectedValue, setSelectedValue] = React.useState("a");
   const [selectedOneValue, setSelectedOneValue] = React.useState("");
+
+  const [errors, setErrors] = useState({});
 
   const handleOneChange = (event) => {
     setSelectedOneValue(event.target.value);
@@ -192,6 +195,8 @@ const MyProfileFC = ({
       phoneNumber: `+${phoneNo}`,
     };
 
+    if (!validateFields(payload)) return;
+
     const { updateTrainerAvailabilityApi } = TrainerApi;
 
     updateTrainerAvailabilityApi.body = payload;
@@ -249,6 +254,7 @@ const MyProfileFC = ({
               : `+${phoneNumber}`,
           },
         };
+
         if (data.images && data.images.length !== 0) {
           setImageList(data.images);
         }
@@ -286,6 +292,73 @@ const MyProfileFC = ({
     }
   };
 
+  const validationRules = () => {
+    validate.validators.dateValidation = function (
+      value,
+      options,
+      key,
+      attributes
+    ) {
+      var maxDate = moment();
+      maxDate = maxDate.subtract(options, "years");
+
+      maxDate = maxDate.format("YYYY-MM-DD");
+
+      let trainerDOB = moment(value).format("YYYY-MM-DD");
+
+      let isTrainerValid = moment(trainerDOB).isBefore(maxDate);
+
+      return isTrainerValid
+        ? undefined
+        : ["^Trainer should be atleast 21 years old"];
+    };
+
+    return {
+      DOB: {
+        presence: {
+          allowEmpty: false,
+          message: "^Date of birth is required",
+        },
+        dateValidation: 21,
+      },
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: "^Email is required",
+        },
+        email: true,
+      },
+      phoneNumber: {
+        presence: {
+          allowEmpty: false,
+          message: "^Phone number is required",
+        },
+        length: {
+          minimum: 8,
+          tooShort: "^Invalid number",
+          maximum: 15,
+          tooLong: "^Invalid number",
+        },
+      },
+    };
+  };
+
+  const validateFields = (data) => {
+    let fieldInvalidList = validate(data, validationRules());
+
+    if (fieldInvalidList !== undefined) {
+      let errors = {
+        ...fieldInvalidList,
+      };
+
+      setErrors({ ...errors, ...fieldInvalidList });
+
+      // setErrors();
+    }
+
+    return !fieldInvalidList;
+  };
+
   const handleRemoveImage = (index) => {
     imagesList[index] = "";
     setImageList([...imagesList]);
@@ -303,7 +376,10 @@ const MyProfileFC = ({
     fullURLPath && copyTextToClipboard(fullURLPath, "Link copied");
   };
 
-  const maxDate = moment().format("YYYY-MM-DD");
+  var maxDate = moment();
+  maxDate = maxDate.subtract(21, "years");
+
+  maxDate = maxDate.format("YYYY-MM-DD");
 
   return (
     <>
@@ -328,8 +404,6 @@ const MyProfileFC = ({
                       placeholder="Share your favorite motto quote that represents you or your philosophy in less than 75 words"
                       onChange={(e) => {
                         const tempValue = e.target.value;
-
-                        console.log(tempValue);
 
                         if (tempValue?.split(" ")?.length > 75) return;
                         if (tempValue?.length > 500) return;
@@ -628,21 +702,17 @@ const MyProfileFC = ({
                       <div className="input_profile">
                         <label>Date of Birth </label>
                         <input
+                          placeholder="DD/MM/YYYY"
                           type="date"
                           value={trainerData.DOB}
-                          // onKeyDown={(e) =>
-                          //   e.keyCode !== 8 ? e.preventDefault() : ""
-                          // }
+                          onChange={handleInputChange}
+                          name="DOB"
                           min="1900-01-01"
                           max={maxDate}
-                          name="DOB"
-                          onChange={handleInputChange}
                         />
-                        {/* {errors.DOB && (
-                          <span className="d-block w-100 text-danger fs-14">
-                            {errors.DOB[0]}
-                          </span>
-                        )} */}
+                        {errors.DOB && (
+                          <span className="text-danger">{errors.DOB[0]}</span>
+                        )}
                       </div>
 
                       <div className="input_profile">
@@ -653,6 +723,10 @@ const MyProfileFC = ({
                           onChange={handleInputChange}
                           name="email"
                         />
+
+                        {errors.email && (
+                          <span className="text-danger">{errors.email[0]}</span>
+                        )}
                       </div>
 
                       <div className="input_profile">
@@ -683,6 +757,12 @@ const MyProfileFC = ({
                             {errors.phoneNo[0]}
                           </span>
                         )} */}
+
+                        {errors.phoneNumber && (
+                          <span className="text-danger">
+                            {errors.phoneNumber[0]}
+                          </span>
+                        )}
                       </div>
 
                       <div className="setup_item1">
