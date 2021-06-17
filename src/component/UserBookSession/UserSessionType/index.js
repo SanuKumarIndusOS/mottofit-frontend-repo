@@ -20,7 +20,7 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
 
-const options = [
+let options = [
   { value: "New York City", label: "New York" },
   { value: "Miami", label: "Miami" },
   { value: "Hamptons", label: "Hampton" },
@@ -60,6 +60,11 @@ const UserBookSessionFC = ({
       return updateUserDetails(reduxData);
     }
 
+    const tempTrainerData =
+      selectedTrainerData?.trainerData || selectedTrainerData;
+
+    if (!tempTrainerData?.id) return history.push("/trainer/find");
+
     setTrainingVenue(sessionData?.trainingVenue);
     // setPreferedTrainingMode(sessionData?.preferedTrainingMode);
     setPreferedTrainingMode(queryObject?.location);
@@ -68,6 +73,15 @@ const UserBookSessionFC = ({
       ({ value }) => value === queryObject?.city
     )[0];
     tempValue?.value && setSelectedOption(tempValue);
+
+    const { servicableLocation = [] } = tempTrainerData;
+
+    if (servicableLocation?.length > 0) {
+      options = servicableLocation.map((location) => ({
+        label: location,
+        value: location,
+      }));
+    }
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
   }, []);
