@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[396],{404:function(t,a,s){"use strict";s.r(a),a.default=s.p+"static/media/Hamptons Image.0daace2f.png"}}]);
-//# sourceMappingURL=396.5509317c.chunk.js.map

@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[401],{407:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/tessa-wilson.b4101337.jpeg"}}]);
-//# sourceMappingURL=401.958da64d.chunk.js.map

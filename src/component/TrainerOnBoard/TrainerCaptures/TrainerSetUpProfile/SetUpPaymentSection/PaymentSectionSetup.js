@@ -6,6 +6,9 @@ import Tick from "../../../../../assets/files/FindTrainer/Tick 1.svg";
 import { fileUpload } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { api } from "service/api";
+import { TrainerApi } from "service/apiVariables";
+import { Toast } from "service/toast";
 const info = [
   {
     label: "Passport",
@@ -38,8 +41,26 @@ const PaymentSectionSetupClass = ({
           ...trainerSetupData,
           insurance: data.urlPath,
         });
+
+        data.urlPath && updateUploadedFile("insurance", data.urlPath);
       });
     }
+  };
+
+  const updateUploadedFile = (name, url) => {
+    const { updateTrainerAvailabilityApi } = TrainerApi;
+
+    let payload = {
+      [name]: url,
+    };
+    updateTrainerAvailabilityApi.body = payload;
+    api({ ...updateTrainerAvailabilityApi })
+      .then(({ message }) => {
+        Toast({ type: "success", message: message || "Success" });
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+      });
   };
 
   const uploadAreaId = (e) => {
@@ -53,6 +74,8 @@ const PaymentSectionSetupClass = ({
           ...trainerSetupData,
           governmentId: data.urlPath,
         });
+
+        data.urlPath && updateUploadedFile("identity", data.urlPath);
       });
     }
   };

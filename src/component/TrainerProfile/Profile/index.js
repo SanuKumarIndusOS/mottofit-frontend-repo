@@ -22,6 +22,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 import { copyTextToClipboard } from "service/helperFunctions";
+import FullScreenCarousel from "component/common/FullScreenCarousel";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -36,6 +37,8 @@ const TrainerProfileClass = ({
   const [trainerstartSlot, settrainerstartSlot] = React.useState();
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [DateSlot, setDateSlot] = React.useState();
+  const [isCarouselOpen, setCarouselOpen] = useState(false);
+  const [currItemIndex, setCurrIndex] = useState("");
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
 
@@ -64,6 +67,12 @@ const TrainerProfileClass = ({
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
+  };
+
+  const toggleCarouselModel = (itemIndex) => {
+    setCarouselOpen(!isCarouselOpen);
+    setCurrIndex(itemIndex);
+    // console.log(itemIndex);
   };
 
   const handleBookSession = () => {
@@ -415,7 +424,11 @@ const TrainerProfileClass = ({
                     </p>
 
                     <div className="profile_images">
-                      <ImageGrid trainerProfileData={trainerProfileData} />
+                      <ImageGrid
+                        trainerProfileData={trainerProfileData}
+                        toggle={toggleCarouselModel}
+                        currItemIndex={currItemIndex}
+                      />
                     </div>
                   </div>
                   <div className="profile_right_item3 mb-5 pb-5">
@@ -471,6 +484,14 @@ const TrainerProfileClass = ({
             </div>
           </div>
         </div>
+        {isCarouselOpen && (
+          <FullScreenCarousel
+            images={trainerProfileData?.images}
+            toggle={toggleCarouselModel}
+            currItemIndex={currItemIndex}
+            // index={currItemIndex}
+          />
+        )}
       </div>
       {/* )} */}
     </>
@@ -509,7 +530,7 @@ const ButtonSection = ({ selectedTimes, handleSessionType }) => {
   );
 };
 
-const ImageGrid = ({ trainerProfileData }) => {
+const ImageGrid = ({ trainerProfileData, toggle }) => {
   const [imageView, setImageView] = useState([
     {
       image: NotFoundImage,
@@ -529,7 +550,10 @@ const ImageGrid = ({ trainerProfileData }) => {
           {/* {images?.length > 0 ? ( */}
           <div className="profile_images_container">
             {images[0] && (
-              <div className="profile_images_card box1">
+              <div
+                className="profile_images_card box1"
+                onClick={() => toggle(0)}
+              >
                 <img
                   src={images[0] || imageView[0]?.image}
                   alt="picture"
@@ -542,7 +566,10 @@ const ImageGrid = ({ trainerProfileData }) => {
             )}
             <div className="flex-try-2">
               {images[1] && (
-                <div className="profile_images_card box2">
+                <div
+                  className="profile_images_card box2"
+                  onClick={() => toggle(1)}
+                >
                   <img
                     src={images[1] || imageView[0]?.image}
                     alt="picture"
@@ -553,7 +580,10 @@ const ImageGrid = ({ trainerProfileData }) => {
 
               <div className="flex-try-3">
                 {images[2] && (
-                  <div className="profile_images_card box3">
+                  <div
+                    className="profile_images_card box3"
+                    onClick={() => toggle(2)}
+                  >
                     <img
                       src={images[2] || imageView[0]?.image}
                       alt="Not Added"
@@ -563,7 +593,10 @@ const ImageGrid = ({ trainerProfileData }) => {
                 )}
 
                 {images[3] && (
-                  <div className="profile_images_card box4">
+                  <div
+                    className="profile_images_card box4"
+                    onClick={() => toggle(3)}
+                  >
                     <img
                       src={images[3] || imageView[0]?.image}
                       alt="picture"
