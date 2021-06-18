@@ -30,6 +30,8 @@ const UserPaymentsFC = ({
   bookingData,
   defaulCardDetails,
   queryQbject,
+  selectedTimes,
+  selectedTrainerData,
   ...restProps
 }) => {
   //for material ui radio buttom (temp)
@@ -57,7 +59,7 @@ const UserPaymentsFC = ({
   const location = useLocation();
 
   const ScheduleSession = () => {
-    console.log(location, "locationlocation");
+    // console.log(location, "locationlocation");
 
     if (!defaulCardDetails?.default)
       return Toast({
@@ -74,14 +76,18 @@ const UserPaymentsFC = ({
       trainingtype = "class";
     }
 
+    const tempTrainingActivity =
+      sessionData?.trainingType?.value || bookingData?.activity?.value;
+
     const scheduleBody = {
-      trainerId: trainerData?.id,
-      title: bookingData?.activity?.value,
+      trainerId: trainerData?.id || selectedTrainerData?.id,
+      title: tempTrainingActivity,
       trainingType: trainingtype,
       sessionType: sessionData?.preferedTrainingMode,
-      activity: bookingData?.activity?.value,
+      activity: tempTrainingActivity,
       sessionStatus: "created",
-      sessionDate: bookingData?.date,
+      sessionDate:
+        bookingData?.date || getFormatDate(selectedTimes[0], "YYYY-MM-DD"),
       sessionStartTime: convertToESTMs(bookingData?.start_slot),
       sessionEndTime: convertToESTMs(bookingData?.end_slot),
       city: sessionData?.location?.value,
@@ -113,7 +119,9 @@ const UserPaymentsFC = ({
       });
   };
 
-  const areaOfExpertise = trainerData?.areaOfExpertise.toString();
+  const tempTrainerData = trainerData || selectedTrainerData;
+
+  const areaOfExpertise = tempTrainerData?.areaOfExpertise?.toString();
 
   const trainingDate = bookingData?.start_slot
     ? getFormatDate(bookingData?.start_slot, "MMMM Do, YYYY hh:mm A.")
@@ -128,6 +136,8 @@ const UserPaymentsFC = ({
   );
 
   useEffect(() => {
+    // console.log(getFormatDate(selectedTimes[0], "YYYY-MM-DD"));
+
     window.scrollTo(0, 0);
     if (Object.keys(sessionData).length === 0)
       return history.push("/trainer/find");
@@ -226,8 +236,8 @@ const UserPaymentsFC = ({
                 <div className="user_payment_profile">
                   <img src={Jenny} alt="icon" />
                   <div className="up_profile_name">
-                    <h2>{`${trainerData?.firstName || ""} ${
-                      trainerData?.lastName || ""
+                    <h2>{`${tempTrainerData?.firstName || ""} ${
+                      tempTrainerData?.lastName || ""
                     }`}</h2>
                     <p>{areaOfExpertise}</p>
                   </div>
@@ -237,14 +247,20 @@ const UserPaymentsFC = ({
                     <h3>I WANT TO TRAIN IN</h3>
                     <div className="user_data_inner">
                       <img src={StrengthIcon} alt="icon" />
-                      <h4>{bookingData?.activity?.label}</h4>
+                      <h4>
+                        {bookingData?.activity?.label ||
+                          sessionData?.trainingType?.label}
+                      </h4>
                     </div>
                   </div>
                   <div className="user_payment_details">
                     <h3>I want to train on</h3>
                     <div className="user_data_inner">
                       <img src={SheduleIcon} alt="icon" />
-                      <h4>{trainingDate}</h4>
+                      <h4>
+                        {trainingDate ||
+                          getFormatDate(selectedTimes[0], "YYYY-MM-DD")}
+                      </h4>
                     </div>
                   </div>
                   <div className="user_payment_details">
@@ -311,10 +327,12 @@ const UserPaymentsFC = ({
 
 const mapStateToProps = (state) => ({
   bookingData: state.userReducer.bookingData,
+  selectedTimes: state.userReducer.selectedTimes,
   defaulCardDetails: state.userReducer.defaulCardDetails,
   queryQbject: state.trainerReducer.query,
   sessionData: state.userReducer.sessionData,
   trainerData: state.userReducer.selectedTrainerData?.trainerData,
+  selectedTrainerData: state.userReducer.selectedTrainerData,
 });
 
 const mapDispatchToProps = (dispatch) => {

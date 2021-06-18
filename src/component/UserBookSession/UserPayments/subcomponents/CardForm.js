@@ -143,6 +143,7 @@ function CardFormFC({
         }
       })
       .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
         console.log(err);
       });
   };
@@ -295,9 +296,9 @@ function CardFormFC({
         </div>
 
         <div className="disclaimer">
-          <p className="text-info">
+          <p className="text-info d-flex alignn-items-center">
             <InfoIcon />
-            <span>
+            <span className="ml-2">
               Payment will happen only after the session is completed.
             </span>
           </p>

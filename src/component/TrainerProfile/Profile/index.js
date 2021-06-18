@@ -98,8 +98,11 @@ const TrainerProfileClass = ({
     profileLink && copyTextToClipboard(profileLink, "Link copied");
   };
 
-  const { virtualSession = "", inPersonAtClientLocation = "" } =
-    trainerProfileData?.oneOnOnePricing || {};
+  const {
+    virtualSession = "",
+    inPersonAtClientLocation = "",
+    inPersonAtTrainerLocation = "",
+  } = trainerProfileData?.oneOnOnePricing || {};
 
   const {
     virtualSessionfor2People = "",
@@ -108,15 +111,22 @@ const TrainerProfileClass = ({
     inPeronAtClientLocationfor2People = "",
     inPeronAtClientLocationfor3People = "",
     inPeronAtClientLocationfor4People = "",
+    inPeronAtTrainerLocationfor2People = "",
+    inPeronAtTrainerLocationfor3People = "",
+    inPeronAtTrainerLocationfor4People = "",
   } = trainerProfileData.socialSessionPricing || {};
 
   const {
     virtualSessionfor15People = "",
     inPersonAtclientLocationfor15People = "",
+    inPersonAttrainerLocationfor15People = "",
   } = trainerProfileData.classSessionPricing || {};
 
-  const isAnyOneonOnePriceAvailable =
-    virtualSession || inPersonAtClientLocation;
+  const isAnyOneonOnePriceAvailable = [
+    virtualSession,
+    inPersonAtClientLocation,
+    inPersonAtTrainerLocation,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
 
   const isAnySocialPriceAvailable = [
     virtualSessionfor2People,
@@ -125,10 +135,16 @@ const TrainerProfileClass = ({
     inPeronAtClientLocationfor2People,
     inPeronAtClientLocationfor3People,
     inPeronAtClientLocationfor4People,
-  ].some((price) => price !== "");
+    inPeronAtTrainerLocationfor2People,
+    inPeronAtTrainerLocationfor3People,
+    inPeronAtTrainerLocationfor4People,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
 
-  const isAnyClassPriceAvailable =
-    virtualSessionfor15People || inPeronAtClientLocationfor4People;
+  const isAnyClassPriceAvailable = [
+    virtualSessionfor15People,
+    inPersonAtclientLocationfor15People,
+    inPersonAttrainerLocationfor15People,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
 
   return (
     <>
@@ -187,6 +203,14 @@ const TrainerProfileClass = ({
                           <h6>
                             {`$${inPersonAtClientLocation} `}
                             <span>(In Person Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtTrainerLocation ? (
+                          <h6>
+                            {`$${inPersonAtTrainerLocation} `}
+                            <span>(Trainer Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -257,6 +281,14 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+                        {inPeronAtTrainerLocationfor2People ? (
+                          <h6>
+                            {`$${inPeronAtTrainerLocationfor2People} `}
+                            <span>(Trainer Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         {virtualSessionfor3People ? (
                           <h6>
                             {`$${virtualSessionfor3People} `}
@@ -273,6 +305,14 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+                        {inPeronAtTrainerLocationfor3People ? (
+                          <h6>
+                            {`$${inPeronAtTrainerLocationfor3People} `}
+                            <span>(Trainer Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         {virtualSessionfor4People ? (
                           <h6>
                             {`$${virtualSessionfor4People} `}
@@ -285,6 +325,14 @@ const TrainerProfileClass = ({
                           <h6>
                             {`$${inPeronAtClientLocationfor4People} `}
                             <span>(In Person Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPeronAtTrainerLocationfor4People ? (
+                          <h6>
+                            {`$${inPeronAtTrainerLocationfor4People} `}
+                            <span>(Trainer Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -355,6 +403,14 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+                        {inPersonAttrainerLocationfor15People ? (
+                          <h6>
+                            {`$${inPersonAttrainerLocationfor15People} `}
+                            <span>(Trainer Location) (For 5-15 People)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         <h5>
                           If trainer offers Virtual Social Sessions and Classes
                           they will be at a discount to in person rates above.
@@ -418,8 +474,8 @@ const TrainerProfileClass = ({
                   <div className="profile_right_item2">
                     <h4>About {trainerProfileData.firstName}</h4>
                     <p>
-                      {trainerProfileData.description
-                        ? trainerProfileData.description
+                      {trainerProfileData.trainingProcess
+                        ? trainerProfileData.trainingProcess
                         : "Not Added"}
                     </p>
 

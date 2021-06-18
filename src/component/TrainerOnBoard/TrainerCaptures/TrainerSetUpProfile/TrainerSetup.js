@@ -420,13 +420,19 @@ function TrainerSetupClass(props) {
               <label>Where will you be training</label>
               <div className="options_button">
                 <button
-                  onClick={(e) => handleVirtual(e, "virtual")}
+                  onClick={(e) => {
+                    handleVirtual(e, "virtual");
+                    e.target.blur();
+                  }}
                   className={checkButtonVirtual ? "buttonTrue" : "buttonFalse"}
                 >
                   Virtual
                 </button>
                 <button
-                  onClick={(e) => handleInPerson(e, "inPerson")}
+                  onClick={(e) => {
+                    handleInPerson(e, "inPerson");
+                    e.target.blur();
+                  }}
                   className={checkButtonInPerson ? "buttonTrue" : "buttonFalse"}
                 >
                   In Person

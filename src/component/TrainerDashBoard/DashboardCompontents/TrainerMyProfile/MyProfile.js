@@ -532,7 +532,10 @@ const MyProfileFC = ({
                         <h6>Where will you be training</h6>
                         <div className="inputs_platform">
                           <button
-                            onClick={(e) => handleInputChange(e, "virtual")}
+                            onClick={(e) => {
+                              handleInputChange(e, "virtual");
+                              e.target.blur();
+                            }}
                             className={`${
                               trainerData?.trainingLocation?.includes("virtual")
                                 ? "active"
@@ -543,7 +546,10 @@ const MyProfileFC = ({
                             Virtual
                           </button>
                           <button
-                            onClick={(e) => handleInputChange(e, "inPerson")}
+                            onClick={(e) => {
+                              handleInputChange(e, "inPerson");
+                              e.target.blur();
+                            }}
                             className={`${
                               trainerData?.trainingLocation?.includes(
                                 "inPerson"
