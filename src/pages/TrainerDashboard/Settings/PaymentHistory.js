@@ -6,6 +6,7 @@ import { api } from "service/api";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getStripeAccLink, trainerDetail } from "action/trainerAct";
+import { Toast } from "../../../service/toast";
 
 const PaymentHistoryFC = (props) => {
   const [trainerSetupData, setTrainerSetupData] = useState({
@@ -16,6 +17,8 @@ const PaymentHistoryFC = (props) => {
     governmentIdNumber: "",
     insurance: "",
   });
+
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const [isLoading, setLoading] = useState(false);
   const [showSaveBtn, setShowSaveBtn] = useState(false);
@@ -36,9 +39,12 @@ const PaymentHistoryFC = (props) => {
     updateTrainerAvailabilityApi.body = payload;
     setLoading(true);
     api({ ...updateTrainerAvailabilityApi })
-      .then(() => {
+      .then(({ message }) => {
         // getStripeURL();
         setLoading(false);
+        Toast({ type: "success", message: message || "Success" });
+        setShowSaveBtn(false);
+        setAgreeToTerms(false);
       })
       .catch(() => setLoading(false));
   };
@@ -57,8 +63,8 @@ const PaymentHistoryFC = (props) => {
   useEffect(() => {
     props.trainerDetail().then((res) => {
       let { identityInfromation = {}, insuranceInformation = {} } = res;
-      setTrainerSetupData({
-        ...trainerSetupData,
+
+      let tempData = {
         identityNameUS: identityInfromation
           ? identityInfromation.identityName
           : "",
@@ -73,13 +79,29 @@ const PaymentHistoryFC = (props) => {
           : "",
         insurance: insuranceInformation ? insuranceInformation.insurance : "",
         governmentId: identityInfromation ? identityInfromation.identity : "",
-      });
+      };
+
+      const isAllUploaded = Object.values(tempData).every(
+        (value) => value !== ""
+      );
+
+      setShowSaveBtn(!isAllUploaded);
+
+      setTrainerSetupData({ ...trainerSetupData, ...tempData });
     });
   }, []);
 
   const hasAllFieldsFilled = Object.values({ ...trainerSetupData }).every(
     (data) => data !== ""
   );
+
+  const handleAgreedCheck = () => {
+    setAgreeToTerms(!agreeToTerms);
+  };
+
+  let disableBtn = isLoading || !hasAllFieldsFilled;
+
+  if (showSaveBtn && !agreeToTerms) disableBtn = true;
 
   return (
     <div>
@@ -89,12 +111,30 @@ const PaymentHistoryFC = (props) => {
         showSaveBtn={() => setShowSaveBtn(true)}
       />
 
+      {showSaveBtn && (
+        <div className="card_agree">
+          <input
+            type="checkbox"
+            id="agree"
+            name="agree"
+            onChange={handleAgreedCheck}
+          />
+          <label>
+            Check here to acknowledge that you have read and agree to the Motto
+            trainer
+            <a href="/agreement" target="_blank">
+              terms and conditions
+            </a>
+          </label>
+        </div>
+      )}
+
       <div className="action-btn d-flex justify-content-center">
         {showSaveBtn ? (
           <button
             onClick={handleSubmit}
             type="submit"
-            disabled={isLoading || !hasAllFieldsFilled}
+            disabled={disableBtn}
             className={`${isLoading ? "loading" : "btn"} normal-btn`}
           >
             {isLoading ? (
