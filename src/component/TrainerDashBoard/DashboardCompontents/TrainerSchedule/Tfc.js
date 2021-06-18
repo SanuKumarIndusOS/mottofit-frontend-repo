@@ -6,6 +6,7 @@ import BackIcon from "../../../../assets/files/SVG/SchedulerAsset/Left Button.sv
 import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import { Dropdown } from "reactjs-dropdown-component";
 import "./dropdown.scss";
+import ArrowHoverBlacked from "../../../common/BlackCircleButton/ArrowHoverBlacked";
 import EarlyInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/EarlyBird_Inactive.svg";
 import RiseInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Rise_Shine_Inactive.svg";
 import MidInActive from "../../../../assets/files/TrainerDashboard/AvaliablityDropDownAssets/Mid-DayBreak_Inactive.svg";
@@ -1030,11 +1031,12 @@ function TfcClass({
                                     onClick={toggleEditMode}
                                     className="scheduler_button"
                                     style={{
-                                        backgroundColor: "#53d27d",
+                                        backgroundColor: "rgb(83, 191, 210)",
                                         width: "100%",
                                     }}
                                 >
                                     SAVE
+                                    <ArrowHoverBlacked/>
                                 </button>
                             </>
                         ) : (
@@ -1048,6 +1050,7 @@ function TfcClass({
                                 }}
                             >
                                 ADD YOUR SLOT
+                                <ArrowHoverBlacked />
                             </button>
                         )}
                     </div>
