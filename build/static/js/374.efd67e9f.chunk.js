@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[374],{582:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/Inactive Drop-Downs.2937f081.png"}}]);
-//# sourceMappingURL=374.efd67e9f.chunk.js.map

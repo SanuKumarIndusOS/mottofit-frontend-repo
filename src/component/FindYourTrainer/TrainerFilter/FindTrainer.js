@@ -91,7 +91,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     newYork: { value: "New York City", selected: false },
     miami: { value: "Miami", selected: false },
     hamptons: { value: "Hamptons", selected: false },
-    plamBeach: { value: "Palm Beach", selected: false },
+    palmBeach: { value: "Palm Beach", selected: false },
   });
 
   const bestMatchRef = useRef(null);
@@ -126,7 +126,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       newYork: { value: "New York City", selected: false },
       miami: { value: "Miami", selected: false },
       hamptons: { value: "Hamptons", selected: false },
-      plamBeach: { value: "Palm Beach", selected: false },
+      palmBeach: { value: "Palm Beach", selected: false },
     };
 
     tempData[value] = {

@@ -22,6 +22,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 import { copyTextToClipboard } from "service/helperFunctions";
+import FullScreenCarousel from "component/common/FullScreenCarousel";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -36,6 +37,8 @@ const TrainerProfileClass = ({
   const [trainerstartSlot, settrainerstartSlot] = React.useState();
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [DateSlot, setDateSlot] = React.useState();
+  const [isCarouselOpen, setCarouselOpen] = useState(false);
+  const [currItemIndex, setCurrIndex] = useState("");
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
 
@@ -66,6 +69,12 @@ const TrainerProfileClass = ({
     setDateSlot(date);
   };
 
+  const toggleCarouselModel = (itemIndex) => {
+    setCarouselOpen(!isCarouselOpen);
+    setCurrIndex(itemIndex);
+    // console.log(itemIndex);
+  };
+
   const handleBookSession = () => {
     history.push("/user/scheduler");
   };
@@ -89,8 +98,11 @@ const TrainerProfileClass = ({
     profileLink && copyTextToClipboard(profileLink, "Link copied");
   };
 
-  const { virtualSession = "", inPersonAtClientLocation = "" } =
-    trainerProfileData?.oneOnOnePricing || {};
+  const {
+    virtualSession = "",
+    inPersonAtClientLocation = "",
+    inPersonAtTrainerLocation = "",
+  } = trainerProfileData?.oneOnOnePricing || {};
 
   const {
     virtualSessionfor2People = "",
@@ -99,15 +111,22 @@ const TrainerProfileClass = ({
     inPeronAtClientLocationfor2People = "",
     inPeronAtClientLocationfor3People = "",
     inPeronAtClientLocationfor4People = "",
+    inPeronAtTrainerLocationfor2People = "",
+    inPeronAtTrainerLocationfor3People = "",
+    inPeronAtTrainerLocationfor4People = "",
   } = trainerProfileData.socialSessionPricing || {};
 
   const {
     virtualSessionfor15People = "",
     inPersonAtclientLocationfor15People = "",
+    inPersonAttrainerLocationfor15People = "",
   } = trainerProfileData.classSessionPricing || {};
 
-  const isAnyOneonOnePriceAvailable =
-    virtualSession || inPersonAtClientLocation;
+  const isAnyOneonOnePriceAvailable = [
+    virtualSession,
+    inPersonAtClientLocation,
+    inPersonAtTrainerLocation,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
 
   const isAnySocialPriceAvailable = [
     virtualSessionfor2People,
@@ -116,10 +135,16 @@ const TrainerProfileClass = ({
     inPeronAtClientLocationfor2People,
     inPeronAtClientLocationfor3People,
     inPeronAtClientLocationfor4People,
-  ].some((price) => price !== "");
+    inPeronAtTrainerLocationfor2People,
+    inPeronAtTrainerLocationfor3People,
+    inPeronAtTrainerLocationfor4People,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
 
-  const isAnyClassPriceAvailable =
-    virtualSessionfor15People || inPeronAtClientLocationfor4People;
+  const isAnyClassPriceAvailable = [
+    virtualSessionfor15People,
+    inPersonAtclientLocationfor15People,
+    inPersonAttrainerLocationfor15People,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
 
   return (
     <>
@@ -178,6 +203,14 @@ const TrainerProfileClass = ({
                           <h6>
                             {`$${inPersonAtClientLocation} `}
                             <span>(In Person Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtTrainerLocation ? (
+                          <h6>
+                            {`$${inPersonAtTrainerLocation} `}
+                            <span>(Trainer Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -248,6 +281,14 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+                        {inPeronAtTrainerLocationfor2People ? (
+                          <h6>
+                            {`$${inPeronAtTrainerLocationfor2People} `}
+                            <span>(Trainer Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         {virtualSessionfor3People ? (
                           <h6>
                             {`$${virtualSessionfor3People} `}
@@ -264,6 +305,14 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+                        {inPeronAtTrainerLocationfor3People ? (
+                          <h6>
+                            {`$${inPeronAtTrainerLocationfor3People} `}
+                            <span>(Trainer Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         {virtualSessionfor4People ? (
                           <h6>
                             {`$${virtualSessionfor4People} `}
@@ -276,6 +325,14 @@ const TrainerProfileClass = ({
                           <h6>
                             {`$${inPeronAtClientLocationfor4People} `}
                             <span>(In Person Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPeronAtTrainerLocationfor4People ? (
+                          <h6>
+                            {`$${inPeronAtTrainerLocationfor4People} `}
+                            <span>(Trainer Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -346,6 +403,14 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+                        {inPersonAttrainerLocationfor15People ? (
+                          <h6>
+                            {`$${inPersonAttrainerLocationfor15People} `}
+                            <span>(Trainer Location) (For 5-15 People)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
                         <h5>
                           If trainer offers Virtual Social Sessions and Classes
                           they will be at a discount to in person rates above.
@@ -409,13 +474,17 @@ const TrainerProfileClass = ({
                   <div className="profile_right_item2">
                     <h4>About {trainerProfileData.firstName}</h4>
                     <p>
-                      {trainerProfileData.description
-                        ? trainerProfileData.description
+                      {trainerProfileData.trainingProcess
+                        ? trainerProfileData.trainingProcess
                         : "Not Added"}
                     </p>
 
                     <div className="profile_images">
-                      <ImageGrid trainerProfileData={trainerProfileData} />
+                      <ImageGrid
+                        trainerProfileData={trainerProfileData}
+                        toggle={toggleCarouselModel}
+                        currItemIndex={currItemIndex}
+                      />
                     </div>
                   </div>
                   <div className="profile_right_item3 mb-5 pb-5">
@@ -471,6 +540,14 @@ const TrainerProfileClass = ({
             </div>
           </div>
         </div>
+        {isCarouselOpen && (
+          <FullScreenCarousel
+            images={trainerProfileData?.images}
+            toggle={toggleCarouselModel}
+            currItemIndex={currItemIndex}
+            // index={currItemIndex}
+          />
+        )}
       </div>
       {/* )} */}
     </>
@@ -509,7 +586,7 @@ const ButtonSection = ({ selectedTimes, handleSessionType }) => {
   );
 };
 
-const ImageGrid = ({ trainerProfileData }) => {
+const ImageGrid = ({ trainerProfileData, toggle }) => {
   const [imageView, setImageView] = useState([
     {
       image: NotFoundImage,
@@ -529,7 +606,10 @@ const ImageGrid = ({ trainerProfileData }) => {
           {/* {images?.length > 0 ? ( */}
           <div className="profile_images_container">
             {images[0] && (
-              <div className="profile_images_card box1">
+              <div
+                className="profile_images_card box1"
+                onClick={() => toggle(0)}
+              >
                 <img
                   src={images[0] || imageView[0]?.image}
                   alt="picture"
@@ -542,7 +622,10 @@ const ImageGrid = ({ trainerProfileData }) => {
             )}
             <div className="flex-try-2">
               {images[1] && (
-                <div className="profile_images_card box2">
+                <div
+                  className="profile_images_card box2"
+                  onClick={() => toggle(1)}
+                >
                   <img
                     src={images[1] || imageView[0]?.image}
                     alt="picture"
@@ -553,7 +636,10 @@ const ImageGrid = ({ trainerProfileData }) => {
 
               <div className="flex-try-3">
                 {images[2] && (
-                  <div className="profile_images_card box3">
+                  <div
+                    className="profile_images_card box3"
+                    onClick={() => toggle(2)}
+                  >
                     <img
                       src={images[2] || imageView[0]?.image}
                       alt="Not Added"
@@ -563,7 +649,10 @@ const ImageGrid = ({ trainerProfileData }) => {
                 )}
 
                 {images[3] && (
-                  <div className="profile_images_card box4">
+                  <div
+                    className="profile_images_card box4"
+                    onClick={() => toggle(3)}
+                  >
                     <img
                       src={images[3] || imageView[0]?.image}
                       alt="picture"

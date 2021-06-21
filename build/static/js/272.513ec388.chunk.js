@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[272],{589:function(t,o,s){"use strict";s.r(o),o.default=s.p+"static/media/onHover.de7bc9ac.svg"}}]);
-//# sourceMappingURL=272.513ec388.chunk.js.map

@@ -56,7 +56,26 @@ const TrainerCardsFC = (props) => {
               data
             ]?.areaOfExpertise?.toString();
 
-            console.log(data);
+            const oneOnOnePricingValues = Object.values(
+              bestMatchData[data]?.oneOnOnePricing
+            );
+
+            const socialSessionPricingValues = Object.values(
+              bestMatchData[data]?.socialSessionPricing
+            );
+            const classSessionPricingValues = Object.values(
+              bestMatchData[data]?.classSessionPricing
+            );
+
+            const allSessionPricing = [
+              ...oneOnOnePricingValues,
+              ...socialSessionPricingValues,
+              ...classSessionPricingValues,
+            ]
+              .map((price) => parseFloat(price))
+              .filter((price) => !isNaN(price) && price > 0);
+
+            const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
 
             return (
               <div className="card" key={index}>
@@ -99,14 +118,7 @@ const TrainerCardsFC = (props) => {
                     book a session
                     <BlackCircleButton />
                     <p>
-                      from{" "}
-                      <span>
-                        $
-                        {
-                          bestMatchData[data]?.oneOnOnePricing
-                            ?.inPersonAtClientLocation
-                        }
-                      </span>
+                      from <span>${sortedPricingList[0] || ""}</span>
                     </p>
                   </button>
                 </div>

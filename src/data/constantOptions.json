@@ -3,7 +3,7 @@
     { "value": "New York City", "label": "New York" },
     { "value": "Miami", "label": "Maimi" },
     { "value": "Hamptons", "label": "Hampton" },
-    { "value": "Palm Beach", "label": "Plam Beach" }
+    { "value": "Palm Beach", "label": "Palm Beach" }
   ],
   "trainingVenueOptions": [
     { "value": "trainerLocation", "label": "Trainer's Location" },

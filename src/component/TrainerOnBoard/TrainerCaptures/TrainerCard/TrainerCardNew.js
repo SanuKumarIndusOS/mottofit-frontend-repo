@@ -967,7 +967,7 @@ function TrainerCardNewClass(props) {
               "Loading..."
             ) : (
               <>
-                Continue To profile <ArrowHoverBlacked />
+                Save Changes <ArrowHoverBlacked />
               </>
             )}
           </button>

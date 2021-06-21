@@ -65,7 +65,7 @@
           .sesstion_tabslist {
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
+            // justify-content: space-evenly;
             width: 100%;
             .rwt__tablist .rwt__tab:after {
               border: none;
@@ -130,14 +130,14 @@
             }
 
             .session_location_dd {
-              display: grid;
-              grid-template-columns: 40% 50%;
-              grid-template-rows: auto;
-              grid-column-gap: 20px;
-              align-items: center;
-              width: 550px;
+              // display: grid;
+              // grid-template-columns: 40% 50%;
+              // grid-template-rows: auto;
+              // grid-column-gap: 20px;
+              // align-items: center;
+              width: 100%;
               height: 40px;
-
+              display: flex;
               background: #ffffff;
               border: 2px solid #bcbcbc;
               border-radius: 30px;
@@ -176,16 +176,6 @@
                     background-color: rgb(255, 255, 255);
                   }
                 }
-              }
-            }
-            .session_view_location {
-              a {
-                color: #53bfd2;
-                opacity: 1;
-                font-style: italic;
-                font-family: 15px;
-                font-weight: 800;
-                font-family: "Montserrat", sans-serif;
               }
             }
           }
@@ -286,6 +276,9 @@
       }
     }
   }
+  .rwt__tablist:not([aria-orientation="vertical"]) {
+    border: 0;
+  }
 }
 
 .btn-disabled {
@@ -297,4 +290,34 @@
   // height: 300px;
   width: 600px;
   padding: 2em;
+}
+
+.session_view_location {
+  a {
+    color: #53bfd2;
+    opacity: 1;
+    font-style: italic;
+    font-family: 15px;
+    font-weight: 800;
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+.session_venue {
+  width: 32%;
+}
+
+.single-session {
+  .session_location_select {
+    & > div {
+      &:nth-child(2) {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        background: #ffffff;
+        border: 2px solid #bcbcbc;
+        border-radius: 30px;
+      }
+    }
+  }
 }

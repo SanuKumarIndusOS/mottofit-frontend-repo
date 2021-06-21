@@ -11,7 +11,7 @@ export const InPersonDropDown = ({ inPerson, handleChange, type }) => {
     { label: "New York", value: "newYork" },
     { label: "Miami", value: "miami" },
     { label: "Hamptons", value: "hamptons" },
-    { label: "Plam Beach", value: "plamBeach" },
+    { label: "Palm Beach", value: "palmBeach" },
   ];
 
   return (

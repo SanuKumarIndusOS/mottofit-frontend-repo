@@ -19,9 +19,23 @@ import { updateUserDetails } from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
+
 // import { Modal } from "react-responsive-modal";
 // import "react-responsive-modal/styles.css";
 // import "./modal.scss";
+
+let trainingTypeOption = [
+  { label: "Boxing", value: "Boxing" },
+  { label: "Pilates", value: "Pilates" },
+  {
+    label: "Strength & HIIT",
+    value: "Strength & HIIT",
+  },
+  {
+    label: "Yoga",
+    value: "Yoga",
+  },
+];
 
 let options = [
   { value: "New York City", label: "New York" },
@@ -43,7 +57,11 @@ const UserBookSessionFC = ({
   selectedTrainerData,
 }) => {
   const [selectedOption, setSelectedOption] = useState([]);
-  const [trainingVenue, setTrainingVenue] = useState([]);
+  const [trainingType, setTrainingType] = useState("");
+  const [trainingVenue, setTrainingVenue] = useState({
+    value: "trainerLocation",
+    label: "Trainer's Location",
+  });
 
   const [preferedTrainingMode, setPreferedTrainingMode] = useState("");
 
@@ -69,14 +87,30 @@ const UserBookSessionFC = ({
 
     if (!tempTrainerData?.id) return history.push("/trainer/find");
 
-    setTrainingVenue(sessionData?.trainingVenue);
+    // setTrainingVenue(sessionData?.trainingVenue);
     // setPreferedTrainingMode(sessionData?.preferedTrainingMode);
-    setPreferedTrainingMode(queryObject?.location);
+
+    if (tempTrainerData?.preferedTrainingMode.length === 1) {
+      setPreferedTrainingMode(tempTrainerData?.preferedTrainingMode[0]);
+    } else {
+      setPreferedTrainingMode(queryObject?.location);
+    }
 
     let tempValue = options.filter(
       ({ value }) => value === queryObject?.city
     )[0];
+    let tempTrainingValue = trainingTypeOption.filter(
+      ({ value }) =>
+        value ===
+        (queryObject?.trainingType?.value || queryObject?.trainingType)
+    )[0];
+
+    // console.log(queryObject?.trainingType || queryObject?.trainingType?.value);
+
+    // ()
+
     tempValue?.value && setSelectedOption(tempValue);
+    tempTrainingValue?.value && setTrainingType(tempTrainingValue);
 
     const { servicableLocation = [] } = tempTrainerData;
 
@@ -86,9 +120,181 @@ const UserBookSessionFC = ({
         value: location,
       }));
     }
+
+    if (servicableLocation.length === 1) {
+      setSelectedOption(options[0]);
+    }
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
   }, []);
+
+  const getPricingObject = () => {
+    const tempTrainerData =
+      selectedTrainerData?.trainerData || selectedTrainerData;
+
+    const {
+      virtualSession = "",
+      inPersonAtClientLocation = "",
+      inPersonAtTrainerLocation = "",
+    } = tempTrainerData?.oneOnOnePricing || {};
+
+    const {
+      virtualSessionfor2People = "",
+      virtualSessionfor3People = "",
+      virtualSessionfor4People = "",
+      inPeronAtClientLocationfor2People = "",
+      inPeronAtClientLocationfor3People = "",
+      inPeronAtClientLocationfor4People = "",
+      inPeronAtTrainerLocationfor2People = "",
+      inPeronAtTrainerLocationfor3People = "",
+      inPeronAtTrainerLocationfor4People = "",
+    } = tempTrainerData.socialSessionPricing || {};
+
+    const {
+      virtualSessionfor15People = "",
+      inPersonAtclientLocationfor15People = "",
+      inPersonAttrainerLocationfor15People = "",
+    } = tempTrainerData.classSessionPricing || {};
+
+    //  VIRTUAL PRICING
+
+    const sessionOneonOne = !isNaN(virtualSession)
+      ? parseFloat(virtualSession)
+      : null;
+
+    const virtualSessionClass = !isNaN(virtualSessionfor15People)
+      ? parseFloat(virtualSessionfor15People)
+      : null;
+
+    const tempSocialSession = [
+      virtualSessionfor2People,
+      virtualSessionfor3People,
+      virtualSessionfor4People,
+    ].some((price) => price !== "" && parseFloat(price) > 0);
+
+    // console.log(
+    //   tempSocialSession,
+    //   virtualSessionfor2People,
+    //   virtualSessionfor3People,
+    //   virtualSessionfor4People
+    // );
+
+    let virtualSessionSocial = {};
+
+    if (tempSocialSession) {
+      if (!isNaN(virtualSessionfor2People)) {
+        virtualSessionSocial = {
+          label: "2 People",
+          value: virtualSessionfor2People,
+        };
+      }
+      if (!isNaN(virtualSessionfor3People)) {
+        virtualSessionSocial = {
+          label: "3 People",
+          value: virtualSessionfor3People,
+        };
+      }
+
+      if (!isNaN(virtualSessionfor4People)) {
+        virtualSessionSocial = {
+          label: "4 People",
+          value: virtualSessionfor4People,
+        };
+      }
+    }
+
+    // IN PERSON PRICING
+
+    // INPERSON 1ON1 PRICING
+
+    const inPersonOneOneOne = {};
+
+    if (!isNaN(inPersonAtClientLocation)) {
+      inPersonOneOneOne["clientLocation"] = {
+        value: inPersonAtClientLocation,
+      };
+    }
+    if (!isNaN(inPersonAtTrainerLocation)) {
+      inPersonOneOneOne["trainerLocation"] = {
+        value: inPersonAtTrainerLocation,
+      };
+    }
+
+    // INPERSON SOCIAL PRICING
+
+    const inPersonSocial = {};
+
+    if (!isNaN(inPeronAtClientLocationfor2People)) {
+      inPersonSocial["clientLocation"] = {
+        value: inPeronAtClientLocationfor2People,
+        label: "2 People",
+      };
+    }
+    if (!isNaN(inPeronAtClientLocationfor3People)) {
+      inPersonSocial["clientLocation"] = {
+        value: inPeronAtClientLocationfor3People,
+        label: "3 People",
+      };
+    }
+    if (!isNaN(inPeronAtClientLocationfor4People)) {
+      inPersonSocial["clientLocation"] = {
+        value: inPeronAtClientLocationfor4People,
+        label: "4 People",
+      };
+    }
+
+    if (!isNaN(inPeronAtTrainerLocationfor2People)) {
+      inPersonSocial["trainerLocation"] = {
+        value: inPeronAtTrainerLocationfor2People,
+        label: "2 People",
+      };
+    }
+    if (!isNaN(inPeronAtTrainerLocationfor3People)) {
+      inPersonSocial["trainerLocation"] = {
+        value: inPeronAtTrainerLocationfor3People,
+        label: "3 People",
+      };
+    }
+    if (!isNaN(inPeronAtTrainerLocationfor4People)) {
+      inPersonSocial["trainerLocation"] = {
+        value: inPeronAtTrainerLocationfor4People,
+        label: "4 People",
+      };
+    }
+
+    // INPERSON CLASS PRICING
+
+    const inPersonClass = {};
+
+    if (!isNaN(inPersonAtclientLocationfor15People)) {
+      inPersonClass["clientLocation"] = {
+        value: inPersonAtclientLocationfor15People,
+      };
+    }
+    if (!isNaN(inPersonAttrainerLocationfor15People)) {
+      inPersonClass["trainerLocation"] = {
+        value: inPersonAttrainerLocationfor15People,
+      };
+    }
+
+    //  console.log({
+    //    inPersonClass,
+    //    inPersonSocial,
+    //    inPersonOneOneOne,
+    //    virtualSessionSocial,
+    //    virtualSessionClass,
+    //    sessionOneonOne,
+    //   });
+
+    return {
+      inPersonClass,
+      inPersonSocial,
+      inPersonOneOneOne,
+      virtualSessionSocial,
+      virtualSessionClass,
+      sessionOneonOne,
+    };
+  };
 
   const handleBookSession = (price, sessionType) => {
     let storeData = {
@@ -98,6 +304,7 @@ const UserBookSessionFC = ({
         preferedTrainingMode,
         price,
         sessionType,
+        trainingType,
       },
     };
 
@@ -116,10 +323,16 @@ const UserBookSessionFC = ({
     // }
   };
 
-  const hasDataEntered =
-    preferedTrainingMode !== "" &&
-    selectedOption?.value &&
-    trainingVenue?.value;
+  let hasDataEntered = false;
+
+  if (preferedTrainingMode === "virtual") {
+    hasDataEntered = trainingType?.value;
+  }
+
+  if (preferedTrainingMode === "inPerson") {
+    hasDataEntered =
+      trainingType?.value && selectedOption?.value && trainingVenue?.value;
+  }
 
   const tempTrainerData =
     selectedTrainerData?.trainerData || selectedTrainerData;
@@ -131,22 +344,9 @@ const UserBookSessionFC = ({
     "inPerson"
   );
 
-  const { virtualSession = "", inPersonAtClientLocation = "" } =
-    tempTrainerData?.oneOnOnePricing || {};
+  const pricingObject = getPricingObject();
 
-  const {
-    virtualSessionfor2People = "",
-    virtualSessionfor3People = "",
-    virtualSessionfor4People = "",
-    inPeronAtClientLocationfor2People = "",
-    inPeronAtClientLocationfor3People = "",
-    inPeronAtClientLocationfor4People = "",
-  } = tempTrainerData.socialSessionPricing || {};
-
-  const {
-    virtualSessionfor15People = "",
-    inPersonAtclientLocationfor15People = "",
-  } = tempTrainerData.classSessionPricing || {};
+  console.log(pricingObject);
 
   return (
     <>
@@ -181,7 +381,7 @@ const UserBookSessionFC = ({
                     }}
                   >
                     <div className="sesstion_tabslist container">
-                      <TabList>
+                      <TabList className="w-50">
                         {isVirtualPresent && (
                           <Tab tabFor="virtual">
                             <button
@@ -214,15 +414,29 @@ const UserBookSessionFC = ({
                         )}
                       </TabList>
 
-                      {isInPersonPresent && (
+                      {isInPersonPresent &&
+                      preferedTrainingMode === "inPerson" ? (
                         <div className="session_location_dd">
-                          <div className="session_location">
-                            <Select
-                              value={selectedOption}
-                              onChange={setSelectedOption}
-                              options={options}
-                              className="session_location_select"
-                            />
+                          <div className="session_venue">
+                            <div className="session_location">
+                              <Select
+                                value={selectedOption}
+                                onChange={setSelectedOption}
+                                options={options}
+                                className="session_location_select"
+                              />
+                            </div>
+                          </div>
+                          <div className="session_venue">
+                            <div className="session_location">
+                              <Select
+                                value={trainingType}
+                                onChange={setTrainingType}
+                                options={trainingTypeOption}
+                                placeholder="Select Training Type"
+                                className="session_location_select"
+                              />
+                            </div>
                           </div>
                           <div className="session_venue">
                             <div className="session_location">
@@ -236,8 +450,23 @@ const UserBookSessionFC = ({
                             </div>
                           </div>
                         </div>
+                      ) : (
+                        <div className="w-100 single-session">
+                          <div className="session_venue">
+                            <div className="session_location">
+                              <Select
+                                value={trainingType}
+                                onChange={setTrainingType}
+                                options={trainingTypeOption}
+                                placeholder="Select Training Type"
+                                className="session_location_select"
+                              />
+                            </div>
+                          </div>
+                        </div>
                       )}
-
+                    </div>
+                    <div className="text-right pt-4">
                       {trainingVenue?.label && (
                         <div className="session_view_location">
                           <Link
@@ -257,244 +486,315 @@ const UserBookSessionFC = ({
                     <TabPanel tabId="virtual">
                       <div className="inPerson_tab_inner">
                         <div className="inPerson_tab_wrapper">
-                          <div className="session_cards">
-                            <div className="session_card_content">
-                              <h2>1 ON 1 TRAINING</h2>
-                              <p>
-                                Train individually with a top trainer for the
-                                highest quality of training and a personalized
-                                experience.
-                              </p>
-                            </div>
-                            {open ? (
-                              <Modal
-                                open={open}
-                                onClose={() => setOpen(false)}
-                                center
-                                closeIcon={closeIcon}
-                                container={myRef.current}
-                                styles={{
-                                  boaderRadius: "10px",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    textAlign: "center",
-                                    height: "300px",
-                                    width: "600px",
-                                    padding: "2em",
+                          {pricingObject.sessionOneonOne ? (
+                            <div className="session_cards">
+                              <div className="session_card_content">
+                                <h2>1 ON 1 TRAINING</h2>
+                                <p>
+                                  Train individually with a top trainer for the
+                                  highest quality of training and a personalized
+                                  experience.
+                                </p>
+                              </div>
+                              {open ? (
+                                <Modal
+                                  open={open}
+                                  onClose={() => setOpen(false)}
+                                  center
+                                  closeIcon={closeIcon}
+                                  container={myRef.current}
+                                  styles={{
+                                    boaderRadius: "10px",
                                   }}
-                                  className="model_styles"
                                 >
-                                  <h2>Want to Train with Friends?</h2>
-                                  <p>
-                                    Make your workout social & fun, while saving
-                                    money! Complete your payment and add friends
-                                    to your session simply by sending them an
-                                    invite. Once they accept your invite, your
-                                    session rate will automatically be adjusted.
-                                  </p>
-                                </div>
-                              </Modal>
-                            ) : null}
-                            <div className="session_card_inner">
-                              <h6>
-                                $20
-                                <span>
-                                  / Session{" "}
-                                  <img
-                                    src={QMark}
-                                    alt="icon"
-                                    onClick={() => setOpen(true)}
-                                  />
-                                </span>
-                              </h6>
+                                  <div
+                                    style={{
+                                      textAlign: "center",
+                                      height: "300px",
+                                      width: "600px",
+                                      padding: "2em",
+                                    }}
+                                    className="model_styles"
+                                  >
+                                    <h2>Want to Train with Friends?</h2>
+                                    <p>
+                                      Make your workout social & fun, while
+                                      saving money! Complete your payment and
+                                      add friends to your session simply by
+                                      sending them an invite. Once they accept
+                                      your invite, your session rate will
+                                      automatically be adjusted.
+                                    </p>
+                                  </div>
+                                </Modal>
+                              ) : null}
+                              <div className="session_card_inner">
+                                <h6>
+                                  {`$${pricingObject.sessionOneonOne}`}
+                                  <span>
+                                    / Session{" "}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
+                                  </span>
+                                </h6>
 
-                              <img src={TrainerIcon} alt="icon" />
+                                <img src={TrainerIcon} alt="icon" />
+                              </div>
+                              <button
+                                onClick={() =>
+                                  handleBookSession(
+                                    pricingObject.sessionOneonOne,
+                                    "1 ON 1 TRAINING"
+                                  )
+                                }
+                                disabled={!hasDataEntered}
+                                className={`${
+                                  !hasDataEntered ? "btn-disabled" : ""
+                                }`}
+                              >
+                                BOOK YOUR SESSION <ArrowHoverBlacked />
+                              </button>
                             </div>
-                            <button
-                              onClick={() =>
-                                handleBookSession(20, "1 ON 1 TRAINING")
-                              }
-                              disabled={!hasDataEntered}
-                              className={`${
-                                !hasDataEntered ? "btn-disabled" : ""
-                              }`}
-                            >
-                              BOOK YOUR SESSION <ArrowHoverBlacked />
-                            </button>
-                          </div>
-                          <div className="session_cards">
-                            <div className="session_card_content">
-                              <h2>SOCIAL SESSION</h2>
-                              <p>
-                                Add up to 3 friends to your session. Get
-                                personal attention, while you enjoy a social
-                                experience at lower costs.
-                              </p>
+                          ) : (
+                            ""
+                          )}
+                          {pricingObject.virtualSessionSocial?.value ? (
+                            <div className="session_cards">
+                              <div className="session_card_content">
+                                <h2>SOCIAL SESSION</h2>
+                                <p>
+                                  Add up to 3 friends to your session. Get
+                                  personal attention, while you enjoy a social
+                                  experience at lower costs.
+                                </p>
+                              </div>
+                              <div className="session_card_inner">
+                                <h6>
+                                  {`$${pricingObject.virtualSessionSocial?.value}`}
+                                  <span>
+                                    /{" "}
+                                    {`${pricingObject.virtualSessionSocial?.label}`}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
+                                  </span>
+                                </h6>
+                                <img src={Social} alt="icon" />
+                              </div>
+                              <button
+                                onClick={() =>
+                                  handleBookSession(
+                                    pricingObject.virtualSessionSocial?.value,
+                                    "SOCIAL SESSION"
+                                  )
+                                }
+                                disabled={!hasDataEntered}
+                                className={`btn-disabled`}
+                                // className={`${
+                                //   !hasDataEntered ? "btn-disabled" : ""
+                                // }`}
+                              >
+                                BOOK YOUR SESSION <ArrowHoverBlacked />
+                              </button>
                             </div>
-                            <div className="session_card_inner">
-                              <h6>
-                                $15
-                                <span>
-                                  / 5 People{" "}
-                                  <img
-                                    src={QMark}
-                                    alt="icon"
-                                    onClick={() => setOpen(true)}
-                                  />
-                                </span>
-                              </h6>
-                              <img src={Social} alt="icon" />
+                          ) : (
+                            ""
+                          )}
+
+                          {pricingObject?.virtualSessionClass ? (
+                            <div className="session_cards">
+                              <div className="session_card_content">
+                                <h2>CREATE A CLASS</h2>
+                                <p>
+                                  Design your very own workout party. Choose a
+                                  top trainer, and add up to 14 more friends to
+                                  split the cost evenly.
+                                </p>
+                              </div>
+                              <div className="session_card_inner">
+                                <h6>
+                                  {`$${pricingObject?.virtualSessionClass}`}
+                                  <span>
+                                    / 12 People{" "}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
+                                  </span>
+                                </h6>
+                                <img src={ClassIcon} alt="icon" />
+                              </div>
+                              <button
+                                onClick={() =>
+                                  handleBookSession(20, "CREATE A CLASS")
+                                }
+                                disabled={!hasDataEntered}
+                                className={`btn-disabled`}
+                                // className={`${
+                                //   !hasDataEntered ? "btn-disabled" : ""
+                                // }`}
+                              >
+                                BOOK YOUR SESSION <ArrowHoverBlacked />
+                              </button>
                             </div>
-                            <button
-                              onClick={() =>
-                                handleBookSession(15, "SOCIAL SESSION")
-                              }
-                              disabled={!hasDataEntered}
-                              className={`btn-disabled`}
-                              // className={`${
-                              //   !hasDataEntered ? "btn-disabled" : ""
-                              // }`}
-                            >
-                              BOOK YOUR SESSION <ArrowHoverBlacked />
-                            </button>
-                          </div>
-                          <div className="session_cards">
-                            <div className="session_card_content">
-                              <h2>CREATE A CLASS</h2>
-                              <p>
-                                Design your very own workout party. Choose a top
-                                trainer, and add up to 14 more friends to split
-                                the cost evenly.
-                              </p>
-                            </div>
-                            <div className="session_card_inner">
-                              <h6>
-                                $20
-                                <span>
-                                  / 12 People{" "}
-                                  <img
-                                    src={QMark}
-                                    alt="icon"
-                                    onClick={() => setOpen(true)}
-                                  />
-                                </span>
-                              </h6>
-                              <img src={ClassIcon} alt="icon" />
-                            </div>
-                            <button
-                              onClick={() =>
-                                handleBookSession(20, "CREATE A CLASS")
-                              }
-                              disabled={!hasDataEntered}
-                              className={`btn-disabled`}
-                              // className={`${
-                              //   !hasDataEntered ? "btn-disabled" : ""
-                              // }`}
-                            >
-                              BOOK YOUR SESSION <ArrowHoverBlacked />
-                            </button>
-                          </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                     </TabPanel>
                     <TabPanel tabId="inPerson">
                       <div className="inPerson_tab_inner">
                         <div className="inPerson_tab_wrapper">
-                          <div className="session_cards">
-                            <div className="session_card_content">
-                              <h2>1 ON 1 TRAINING</h2>
-                              <p>
-                                Train individually with a top trainer for the
-                                highest quality of training and a personalized
-                                experience.
-                              </p>
-                            </div>
-                            <div className="session_card_inner">
-                              <h6>
-                                $125
-                                <span>
-                                  / Session <img src={QMark} alt="icon" />
-                                </span>
-                              </h6>
+                          {pricingObject?.inPersonOneOneOne[
+                            trainingVenue?.value
+                          ]?.value ? (
+                            <div className="session_cards">
+                              <div className="session_card_content">
+                                <h2>1 ON 1 TRAINING</h2>
+                                <p>
+                                  Train individually with a top trainer for the
+                                  highest quality of training and a personalized
+                                  experience.
+                                </p>
+                              </div>
+                              <div className="session_card_inner">
+                                <h6>
+                                  {`$${
+                                    pricingObject?.inPersonOneOneOne[
+                                      trainingVenue?.value
+                                    ]?.value
+                                  }`}
+                                  <span>
+                                    / Session <img src={QMark} alt="icon" />
+                                  </span>
+                                </h6>
 
-                              <img src={TrainerIcon} alt="icon" />
+                                <img src={TrainerIcon} alt="icon" />
+                              </div>
+
+                              <button
+                                onClick={() =>
+                                  handleBookSession(
+                                    pricingObject?.inPersonOneOneOne[
+                                      trainingVenue?.value
+                                    ]?.value,
+                                    "1 ON 1 TRAINING"
+                                  )
+                                }
+                                disabled={!hasDataEntered}
+                                className={`${
+                                  !hasDataEntered ? "btn-disabled" : ""
+                                }`}
+                              >
+                                BOOK YOUR SESSION <ArrowHoverBlacked />
+                              </button>
                             </div>
-                            <button
-                              onClick={() =>
-                                handleBookSession(120, "1 ON 1 TRAINING")
-                              }
-                              disabled={!hasDataEntered}
-                              className={`${
-                                !hasDataEntered ? "btn-disabled" : ""
-                              }`}
-                            >
-                              BOOK YOUR SESSION <ArrowHoverBlacked />
-                            </button>
-                          </div>
-                          <div className="session_cards">
-                            <div className="session_card_content">
-                              <h2>SOCIAL SESSION</h2>
-                              <p>
-                                Add up to 3 friends to your session. Get
-                                personal attention, while you enjoy a social
-                                experience at lower costs.
-                              </p>
+                          ) : (
+                            ""
+                          )}
+                          {pricingObject?.inPersonSocial[trainingVenue?.value]
+                            ?.value ? (
+                            <div className="session_cards">
+                              <div className="session_card_content">
+                                <h2>SOCIAL SESSION</h2>
+                                <p>
+                                  Add up to 3 friends to your session. Get
+                                  personal attention, while you enjoy a social
+                                  experience at lower costs.
+                                </p>
+                              </div>
+                              <div className="session_card_inner">
+                                <h6>
+                                  {`$${
+                                    pricingObject?.inPersonSocial[
+                                      trainingVenue?.value
+                                    ]?.value
+                                  }`}
+                                  <span>
+                                    /{" "}
+                                    {`${
+                                      pricingObject?.inPersonSocial[
+                                        trainingVenue?.value
+                                      ]?.label
+                                    }`}{" "}
+                                    <img src={QMark} alt="icon" />
+                                  </span>
+                                </h6>
+                                <img src={Social} alt="icon" />
+                              </div>
+                              <button
+                                onClick={() =>
+                                  handleBookSession(
+                                    pricingObject?.inPersonSocial[
+                                      trainingVenue?.value
+                                    ]?.value,
+                                    "SOCIAL SESSION"
+                                  )
+                                }
+                                disabled={!hasDataEntered}
+                                className={`btn-disabled`}
+                                // className={`${
+                                //   !hasDataEntered ? "btn-disabled" : ""
+                                // }`}
+                              >
+                                BOOK YOUR SESSION <ArrowHoverBlacked />
+                              </button>
                             </div>
-                            <div className="session_card_inner">
-                              <h6>
-                                $20
-                                <span>
-                                  / 4 People <img src={QMark} alt="icon" />
-                                </span>
-                              </h6>
-                              <img src={Social} alt="icon" />
+                          ) : (
+                            ""
+                          )}
+                          {pricingObject?.inPersonClass[trainingVenue?.value]
+                            ?.value ? (
+                            <div className="session_cards">
+                              <div className="session_card_content">
+                                <h2>CREATE A CLASS</h2>
+                                <p>
+                                  Design your very own workout party. Choose a
+                                  top trainer, and add up to 14 more friends to
+                                  split the cost evenly.
+                                </p>
+                              </div>
+                              <div className="session_card_inner">
+                                <h6>
+                                  {`$${
+                                    pricingObject?.inPersonClass[
+                                      trainingVenue?.value
+                                    ]?.value
+                                  }`}
+                                  <span>
+                                    / 15 People <img src={QMark} alt="icon" />
+                                  </span>
+                                </h6>
+                                <img src={ClassIcon} alt="icon" />
+                              </div>
+                              <button
+                                onClick={() =>
+                                  handleBookSession(
+                                    pricingObject?.inPersonClass[
+                                      trainingVenue?.value
+                                    ]?.value,
+                                    "CREATE A CLASS"
+                                  )
+                                }
+                                disabled={!hasDataEntered}
+                                className={`btn-disabled`}
+                                // className={`${
+                                //   !hasDataEntered ? "btn-disabled" : ""
+                                // }`}
+                              >
+                                BOOK YOUR SESSION <ArrowHoverBlacked />
+                              </button>
                             </div>
-                            <button
-                              onClick={() =>
-                                handleBookSession(20, "SOCIAL SESSION")
-                              }
-                              disabled={!hasDataEntered}
-                              className={`btn-disabled`}
-                              // className={`${
-                              //   !hasDataEntered ? "btn-disabled" : ""
-                              // }`}
-                            >
-                              BOOK YOUR SESSION <ArrowHoverBlacked />
-                            </button>
-                          </div>
-                          <div className="session_cards">
-                            <div className="session_card_content">
-                              <h2>CREATE A CLASS</h2>
-                              <p>
-                                Design your very own workout party. Choose a top
-                                trainer, and add up to 14 more friends to split
-                                the cost evenly.
-                              </p>
-                            </div>
-                            <div className="session_card_inner">
-                              <h6>
-                                $30
-                                <span>
-                                  / 15 People <img src={QMark} alt="icon" />
-                                </span>
-                              </h6>
-                              <img src={ClassIcon} alt="icon" />
-                            </div>
-                            <button
-                              onClick={() =>
-                                handleBookSession(30, "CREATE A CLASS")
-                              }
-                              disabled={!hasDataEntered}
-                              className={`btn-disabled`}
-                              // className={`${
-                              //   !hasDataEntered ? "btn-disabled" : ""
-                              // }`}
-                            >
-                              BOOK YOUR SESSION <ArrowHoverBlacked />
-                            </button>
-                          </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                     </TabPanel>
