@@ -198,19 +198,22 @@ const Location = () => {
 
         <div className="mobile-location">
           <div className="img_loc">
-            <img src={NYC} style={{ width: "100%" }}></img>
+            <img src={NYC} style={{ width: "100%", height: "98%" }}></img>
           </div>
           <div className="txt">NEW YORK CITY</div>
           <div className="img_loc">
-            <img src={Miami} style={{ width: "100%" }}></img>
+            <img src={Miami} style={{ width: "100%", height: "98%" }}></img>
           </div>
           <div className="txt">MIAMI</div>
           <div className="img_loc">
-            <img src={Hamptons} style={{ width: "100%" }}></img>
+            <img src={Hamptons} style={{ width: "100%", height: "98%" }}></img>
           </div>
           <div className="txt">HAMPTONS</div>
           <div className="img_loc">
-            <img src={TessaWilson} style={{ width: "100%" }}></img>
+            <img
+              src={TessaWilson}
+              style={{ width: "100%", height: "98%" }}
+            ></img>
           </div>
           <div className="txt">PALM BEACH</div>
         </div>
