@@ -17,6 +17,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+
     // @media screen and (max-width: 1023px) {
     //   justify-content: space-between;
     // }
@@ -88,22 +89,104 @@
   }
 }
 
+// .mobile-search {
+//   height: 100px;
+//   width: 100%;
+//   position: fixed;
+//   z-index: 10000;
+//   bottom: 0;
+
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   .mobile-search-card {
+//     height: 60px;
+//     width: 90%;
+//     background-color: white;
+//     border-radius: 60px;
+//     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+//     display: flex;
+//     align-items: center;
+//   }
+
+//   .mobile-search-txt {
+//     font-size: 18px;
+//     margin-left: 20px;
+//     font-weight: 500;
+//     font-family: "Montserrat", sans-serif;
+//     flex: 2;
+//   }
+
+//   .mobile-search-icon {
+//     height: 50px;
+//     width: 50px;
+//     border-radius: 50px;
+//     background-color: #53bfd2;
+//     margin-right: 5px;
+//   }
+// }
+
 @media only screen and (max-width: 600px) {
   .background {
     background: transparent
-    url("../../../../src/assets/files/Home/Banner/Mobile_Homepage_Banner_Image.jpg") 0% 0% no-repeat
-    padding-box;
-    background-size:100%;
+      url("../../../../src/assets/files/Home/Banner/Mobile_Homepage_Banner_Image.jpg")
+      0% 0% no-repeat padding-box;
+    background-size: 100%;
     display: flex;
     justify-content: center;
     .cntr_cotainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .mobile-search {
+        height: 100px;
+        width: 100%;
+        position: fixed;
+        z-index: 10000;
+        bottom: 0;
+
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
+        align-items: center;
+
+        .mobile-search-card {
+          height: 60px;
+          width: 90%;
+          background-color: white;
+          border-radius: 60px;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+            0 3px 6px rgba(0, 0, 0, 0.23);
+          display: flex;
+          align-items: center;
+        }
+
+        .mobile-search-txt {
+          font-size: 18px;
+          margin-left: 20px;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          flex: 2;
+        }
+
+        .mobile-search-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 25px;
+          height: 50px;
+          width: 50px;
+          border-radius: 50px;
+          background-color: #53bfd2;
+          margin-right: 5px;
+          color: white;
+        }
+      }
+
       .heading_items {
         width: 100%;
         padding: 3%;
-        margin-top: 5rem;
+        margin-top: 3rem;
         .heading_txt {
           font-size: 45px;
         }
