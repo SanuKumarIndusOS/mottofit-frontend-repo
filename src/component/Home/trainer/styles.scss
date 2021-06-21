@@ -137,3 +137,10 @@
         }
     }
 }
+
+@media only screen and (max-width: 600px) {
+
+    .outter_bg_container{
+        display: none;
+    }
+}
