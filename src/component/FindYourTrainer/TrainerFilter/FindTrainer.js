@@ -453,6 +453,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </div>
         </div>
       </div>
+      <div className="mobile-search"></div>
       <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
       <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
     </>
