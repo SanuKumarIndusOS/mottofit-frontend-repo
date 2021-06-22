@@ -38,6 +38,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     // inPerson: "In Person",
   });
   const [date, setDate] = useState(new Date());
+  const [showMenu, setshowMenu] = useState(false);
 
   const [inPerson, setInPerson] = useState({
     newYork: { value: "New York City", selected: false },
@@ -266,14 +267,59 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
         </div>
-       
+
         <div className="mobile-search">
-          <div className="mobile-search-card">
+          <div
+            className="mobile-search-card"
+            onClick={() => {
+              console.log("Hit");
+              setshowMenu(!showMenu);
+            }}
+          >
             <div className="mobile-search-txt">Find Your Trainer</div>
-            <div className="mobile-search-icon"> <BiSearch /></div>
+            <div className="mobile-search-icon">
+              <BiSearch />
+            </div>
           </div>
         </div>
-     
+
+        <div
+          className="mobile-search-menu"
+          style={{ display: showMenu ? "block" : "none" }}
+        >
+          <div className="header">
+            <div className="title">Find Your Best Match</div>
+            <div
+              className="close"
+              onClick={() => {
+                setshowMenu(!showMenu);
+              }}
+            >
+              x
+            </div>
+          </div>
+          <div className="content">
+            <div className="clear-filters">Clear All Filters</div>
+            <div className="location">
+              <div>Location</div>
+              <div className="element">
+                Virtual <div className="slash">/</div> In Person
+              </div>
+              <div></div>
+              <hr></hr>
+            </div>
+            <div className="vertical">
+              Training Vertical
+              <hr></hr>
+            </div>
+            <div className="schedule">
+              Schedule
+              <hr></hr>
+            </div>
+            <div className="availability">Availability</div>
+          </div>
+          <div className="search">APPLY ALL FILTERS </div>
+        </div>
       </div>
     </div>
   );

@@ -65,6 +65,8 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     }
   }, []);
 
+  const [showMenu, setshowMenu] = useState(false);
+
   const [bestMatchData, setbestMatchData] = useState([]);
   const [bestOthersData, setbestOthersData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -452,6 +454,49 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mobile-find-wrapper">
+        <div className="cat">Strength & HIIT</div>
+        <div className="date">16/03/2021</div>
+        <div className="find-filters" onClick={() => { setshowMenu(!showMenu) }}></div>
+      </div>
+
+      <div
+        className="mobile-search-menu"
+        style={{ display: showMenu ? "block" : "none" }}
+      >
+        <div className="header">
+          <div className="title">Find Your Best Match</div>
+          <div
+            className="close"
+            onClick={() => {
+              setshowMenu(!showMenu);
+            }}
+          >
+            x
+          </div>
+        </div>
+        <div className="content">
+          <div className="clear-filters">Clear All Filters</div>
+          <div className="location">
+            <div>Location</div>
+            <div className="element">
+              Virtual <div className="slash">/</div> In Person
+            </div>
+            <div></div>
+            <hr></hr>
+          </div>
+          <div className="vertical">
+            Training Vertical
+            <hr></hr>
+          </div>
+          <div className="schedule">
+            Schedule
+            <hr></hr>
+          </div>
+          <div className="availability">Availability</div>
+        </div>
+        <div className="search">APPLY ALL FILTERS </div>
       </div>
       <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
       <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
