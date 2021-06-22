@@ -292,4 +292,22 @@ export const userApi = {
       return this.url + this.id;
     },
   },
+  getSessionData: {
+    method: "get",
+    url: "session?sessionId=",
+    baseURL: "session",
+    id: null,
+    get api() {
+      return this.url + this.id;
+    },
+  },
+  editSessionData: {
+    method: "put",
+    url: "session/update",
+    baseURL: "session",
+    id: null,
+    get api() {
+      return this.url;
+    },
+  },
 };

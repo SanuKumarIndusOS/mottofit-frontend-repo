@@ -112,17 +112,44 @@ const UserBookSessionFC = ({
     tempValue?.value && setSelectedOption(tempValue);
     tempTrainingValue?.value && setTrainingType(tempTrainingValue);
 
-    const { servicableLocation = [] } = tempTrainerData;
+    const { servicableLocation = [], areaOfExpertise = [] } = tempTrainerData;
 
     if (servicableLocation?.length > 0) {
-      options = servicableLocation.map((location) => ({
-        label: location,
-        value: location,
-      }));
+      if (typeof servicableLocation === "string") {
+        options = [
+          {
+            label: servicableLocation,
+            value: servicableLocation,
+          },
+        ];
+      } else {
+        options = servicableLocation?.map((location) => ({
+          label: location,
+          value: location,
+        }));
+      }
+    }
+    if (areaOfExpertise?.length > 0) {
+      if (typeof areaOfExpertise === "string") {
+        trainingTypeOption = [
+          {
+            label: areaOfExpertise,
+            value: areaOfExpertise,
+          },
+        ];
+      } else {
+        trainingTypeOption = areaOfExpertise?.map((trainingType) => ({
+          label: trainingType,
+          value: trainingType,
+        }));
+      }
     }
 
     if (servicableLocation.length === 1) {
       setSelectedOption(options[0]);
+    }
+    if (areaOfExpertise.length === 1) {
+      setSelectedOption(trainingTypeOption[0]);
     }
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
@@ -346,7 +373,7 @@ const UserBookSessionFC = ({
 
   const pricingObject = getPricingObject();
 
-  console.log(pricingObject);
+  console.log(pricingObject, hasDataEntered);
 
   return (
     <>
@@ -477,7 +504,7 @@ const UserBookSessionFC = ({
                             {` View ${
                               trainingVenue?.label === "Trainer's Location"
                                 ? "Trainer's Location"
-                                : "Neighbourhood Location"
+                                : "areas trainer services"
                             }`}
                           </Link>
                         </div>
@@ -594,7 +621,9 @@ const UserBookSessionFC = ({
                                   )
                                 }
                                 disabled={!hasDataEntered}
-                                className={`btn-disabled`}
+                                className={`${
+                                  !hasDataEntered ? "btn-disabled" : ""
+                                }`}
                                 // className={`${
                                 //   !hasDataEntered ? "btn-disabled" : ""
                                 // }`}
@@ -635,7 +664,9 @@ const UserBookSessionFC = ({
                                   handleBookSession(20, "CREATE A CLASS")
                                 }
                                 disabled={!hasDataEntered}
-                                className={`btn-disabled`}
+                                className={`${
+                                  !hasDataEntered ? "btn-disabled" : ""
+                                }`}
                                 // className={`${
                                 //   !hasDataEntered ? "btn-disabled" : ""
                                 // }`}
@@ -739,7 +770,9 @@ const UserBookSessionFC = ({
                                   )
                                 }
                                 disabled={!hasDataEntered}
-                                className={`btn-disabled`}
+                                className={`${
+                                  !hasDataEntered ? "btn-disabled" : ""
+                                }`}
                                 // className={`${
                                 //   !hasDataEntered ? "btn-disabled" : ""
                                 // }`}
@@ -784,7 +817,9 @@ const UserBookSessionFC = ({
                                   )
                                 }
                                 disabled={!hasDataEntered}
-                                className={`btn-disabled`}
+                                className={`${
+                                  !hasDataEntered ? "btn-disabled" : ""
+                                }`}
                                 // className={`${
                                 //   !hasDataEntered ? "btn-disabled" : ""
                                 // }`}

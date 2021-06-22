@@ -12,6 +12,7 @@ import Profile from "../../../../assets/files/SVG/Profile Picture.svg";
 import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Toast } from "service/toast";
 
 function TrainerCardDashboard(props) {
   const [isValidationError, setValidationError] = useState(false);
@@ -70,69 +71,67 @@ function TrainerCardDashboard(props) {
         lastName: res.lastName,
         description: res.description,
         verticals: res.areaOfExpertise,
-        inPersonAtClient_individualCharge: oneOnOnePricing
-          ? oneOnOnePricing.inPersonAtClientLocation
-          : "",
-        inPersonAtClient_twoPPL: socialSessionPricing
-          ? socialSessionPricing.inPeronAtClientLocationfor2People
-          : "",
-        inPersonAtClient_threePPL: socialSessionPricing
-          ? socialSessionPricing.inPeronAtClientLocationfor3People
-          : "",
-        inPersonAtClient_fourPPL: socialSessionPricing
-          ? socialSessionPricing.inPeronAtClientLocationfor4People
-          : "",
-        inPersonAtClient_classFlatRate: classSessionPricing
-          ? classSessionPricing.inPersonAtclientLocationfor15People
-          : "",
-        inPersonAtClient_threeSessionRate: oneOnOnePricing
-          ? oneOnOnePricing.passRatefor3SessionAtClientLocation
-          : "",
-        inPersonAtClient_tenSessionRate: oneOnOnePricing
-          ? oneOnOnePricing.passRatefor10SessionAtClientLocation
-          : "",
-        inPersonAtTrainer_individualCharge: oneOnOnePricing
-          ? oneOnOnePricing.inPersonAtTrainerLocation
-          : "",
-        inPersonAtTrainer_twoPPL: socialSessionPricing
-          ? socialSessionPricing.inPeronAtTrainerLocationfor2People
-          : "",
-        inPersonAtTrainer_threePPL: socialSessionPricing
-          ? socialSessionPricing.inPeronAtTrainerLocationfor3People
-          : "",
-        inPersonAtTrainer_fourPPL: socialSessionPricing
-          ? socialSessionPricing.inPeronAtTrainerLocationfor4People
-          : "",
-        inPersonAtTrainer_classFlatRate: classSessionPricing
-          ? classSessionPricing.inPersonAttrainerLocationfor15People
-          : "",
-        inPersonAtTrainer_threeSessionRate: oneOnOnePricing
-          ? oneOnOnePricing.passRatefor3SessionAtTrainerLocation
-          : "",
-        inPersonAtTrainer_tenSessionRate: oneOnOnePricing
-          ? oneOnOnePricing.passRatefor10SessionAtTrainerLocation
-          : "",
-        virtual_individualCharge: oneOnOnePricing
-          ? oneOnOnePricing.virtualSession
-          : "",
-        virtual_twoPPL: socialSessionPricing
-          ? socialSessionPricing.virtualSessionfor2People
-          : "",
-        virtual_threePPL: socialSessionPricing
-          ? socialSessionPricing.virtualSessionfor3People
-          : "",
-        virtual_fourPPL: socialSessionPricing
-          ? socialSessionPricing.virtualSessionfor4People
-          : "",
-        virtual_classFlatRate: classSessionPricing
-          ? classSessionPricing.virtualSessionfor15People
-          : "",
-        virtual_threeSessionRate: oneOnOnePricing
-          ? oneOnOnePricing.passRatefor3SessionAtVirtual
-          : "",
-        virtual_tenSessionRate: oneOnOnePricing
-          ? oneOnOnePricing.passRatefor10SessionAtVirtual
-          : "",
+        inPersonAtClient_individualCharge: covertToValid(
+          oneOnOnePricing.inPersonAtClientLocation
+        ),
+        inPersonAtClient_twoPPL: covertToValid(
+          socialSessionPricing.inPeronAtClientLocationfor2People
+        ),
+        inPersonAtClient_threePPL: covertToValid(
+          socialSessionPricing.inPeronAtClientLocationfor3People
+        ),
+        inPersonAtClient_fourPPL: covertToValid(
+          socialSessionPricing.inPeronAtClientLocationfor4People
+        ),
+        inPersonAtClient_classFlatRate: covertToValid(
+          classSessionPricing.inPersonAtclientLocationfor15People
+        ),
+        inPersonAtClient_threeSessionRate: covertToValid(
+          oneOnOnePricing.passRatefor3SessionAtClientLocation
+        ),
+        inPersonAtClient_tenSessionRate: covertToValid(
+          oneOnOnePricing.passRatefor10SessionAtClientLocation
+        ),
+        inPersonAtTrainer_individualCharge: covertToValid(
+          oneOnOnePricing.inPersonAtTrainerLocation
+        ),
+        inPersonAtTrainer_twoPPL: covertToValid(
+          socialSessionPricing.inPeronAtTrainerLocationfor2People
+        ),
+        inPersonAtTrainer_threePPL: covertToValid(
+          socialSessionPricing.inPeronAtTrainerLocationfor3People
+        ),
+        inPersonAtTrainer_fourPPL: covertToValid(
+          socialSessionPricing.inPeronAtTrainerLocationfor4People
+        ),
+        inPersonAtTrainer_classFlatRate: covertToValid(
+          classSessionPricing.inPersonAttrainerLocationfor15People
+        ),
+        inPersonAtTrainer_threeSessionRate: covertToValid(
+          oneOnOnePricing.passRatefor3SessionAtTrainerLocation
+        ),
+        inPersonAtTrainer_tenSessionRate: covertToValid(
+          oneOnOnePricing.passRatefor10SessionAtTrainerLocation
+        ),
+        virtual_individualCharge: covertToValid(oneOnOnePricing.virtualSession),
+        virtual_twoPPL: covertToValid(
+          socialSessionPricing.virtualSessionfor2People
+        ),
+        virtual_threePPL: covertToValid(
+          socialSessionPricing.virtualSessionfor3People
+        ),
+        virtual_fourPPL: covertToValid(
+          socialSessionPricing.virtualSessionfor4People
+        ),
+        virtual_classFlatRate: covertToValid(
+          classSessionPricing.virtualSessionfor15People
+        ),
+        virtual_threeSessionRate: covertToValid(
+          oneOnOnePricing.passRatefor3SessionAtVirtual
+        ),
+        virtual_tenSessionRate: covertToValid(
+          oneOnOnePricing.passRatefor10SessionAtVirtual
+        ),
       });
       if (res.areaOfExpertise) {
         if (res.areaOfExpertise.find((el) => el === "Strength & HIIT")) {
@@ -213,7 +212,10 @@ function TrainerCardDashboard(props) {
       // if (!handleValidation()) return;
 
       props.updateTrainerDetailsApicall(payload).then(() => {
-        alert("Successfully, Updated the changes");
+        Toast({
+          type: "success",
+          message: "Successfully, Updated the changes",
+        });
       });
     } else {
       setValidationError(true);
@@ -253,6 +255,10 @@ function TrainerCardDashboard(props) {
 
   const blockWheelBehaviour = (e) => {
     e.preventDefault();
+  };
+
+  const covertToValid = (value) => {
+    return value === null || value === undefined ? "" : parseInt(value) || "";
   };
 
   return (

@@ -15,33 +15,6 @@ export const TrainerPrevModal = ({
   const myRef = useRef(null);
   const closeIconModal = <img src={CloseIcon} alt="close" />;
 
-  //   const TrainerCardPayload = useSelector(
-  //     (state) => state.trainerCaptureReducer.cardData
-  //   );
-
-  //   const priceArray = [
-  //     TrainerCardPayload.inPersonAtClient_individualCharge,
-  //     TrainerCardPayload.inPersonAtClient_twoPPL,
-  //     TrainerCardPayload.inPersonAtClient_threePPL,
-  //     TrainerCardPayload.inPersonAtClient_fourPPL,
-  //     TrainerCardPayload.inPersonAtClient_classFlatRate,
-  //     TrainerCardPayload.inPersonAtClient_threeSessionRate,
-  //     TrainerCardPayload.inPersonAtClient_tenSessionRate,
-  //     TrainerCardPayload.inPersonAtTrainer_individualCharge,
-  //     TrainerCardPayload.inPersonAtTrainer_twoPPL,
-  //     TrainerCardPayload.inPersonAtTrainer_threePPL,
-  //     TrainerCardPayload.inPersonAtTrainer_fourPPL,
-  //     TrainerCardPayload.inPersonAtTrainer_classFlatRate,
-  //     TrainerCardPayload.inPersonAtTrainer_threeSessionRate,
-  //     TrainerCardPayload.inPersonAtTrainer_tenSessionRate,
-  //     TrainerCardPayload.virtual_individualCharge,
-  //     TrainerCardPayload.virtual_twoPPL,
-  //     TrainerCardPayload.virtual_threePPL,
-  //     TrainerCardPayload.virtual_fourPPL,
-  //     TrainerCardPayload.virtual_classFlatRate,
-  //     TrainerCardPayload.virtual_threeSessionRate,
-  //     TrainerCardPayload.virtual_tenSessionRate,
-  //   ];
   const [price, setPrice] = React.useState(0);
   React.useEffect(() => {
     let tempTrainerData = { ...trainerCardData };
@@ -54,14 +27,12 @@ export const TrainerPrevModal = ({
         data !== "lastName"
     );
 
-    const totalCost = tempTrainerData
+    const minCost = tempTrainerData
       .map((name) => parseInt(trainerCardData[name]))
-      .filter((value) => !isNaN(value))
-      .reduce((prev, curr) => {
-        return prev + curr;
-      }, 0);
+      .filter((value) => !isNaN(value) && parseFloat(value) > 0)
+      .sort((a, b) => a - b);
 
-    setPrice(totalCost);
+    if (minCost?.length > 0) setPrice(minCost[0]);
   }, [open]);
 
   return (

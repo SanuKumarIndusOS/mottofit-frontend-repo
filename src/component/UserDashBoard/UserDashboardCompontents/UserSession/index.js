@@ -12,7 +12,7 @@ import BlueHoverButton from "../../../common/BlueArrowButton";
 import { history } from "helpers";
 import { useEffect } from "react";
 import moment from "moment";
-import { userSession, cancelSession } from "action/userAct";
+import { userSession, cancelSession, updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
@@ -25,6 +25,7 @@ const UserSessionClass = (props) => {
 
   useEffect(() => {
     _userSession();
+    window.scrollTo(0, 0);
   }, []);
   const _userSession = () => {
     props
@@ -60,6 +61,7 @@ const UserSessionClass = (props) => {
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
+                    {...props}
                   />
                 </TabPanel>
               </div>
@@ -71,6 +73,7 @@ const UserSessionClass = (props) => {
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
+                    {...props}
                   />
                 </TabPanel>
               </div>
@@ -82,6 +85,7 @@ const UserSessionClass = (props) => {
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
+                    {...props}
                   />
                 </TabPanel>
               </div>
@@ -93,6 +97,7 @@ const UserSessionClass = (props) => {
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
+                    {...props}
                   />
                 </TabPanel>
               </div>
@@ -110,6 +115,7 @@ const TabOne = ({
   prevData,
   cancelSessionApi,
   handleChange = {},
+  ...restProps
 }) => {
   const [visible, setVisible] = useState([3]);
   const [isLoading, setisLoading] = useState(false);
@@ -131,6 +137,62 @@ const TabOne = ({
       .catch(() => setisLoading(false));
   };
 
+  const handleAddFriends = (data) => {
+    // console.log(data);
+
+    let trainingType = "";
+
+    if (data.trainingType === "social") {
+      trainingType = "SOCIAL SESSION";
+    } else if (data.trainingType === "class") {
+      trainingType = "CREATE A CLASS";
+    } else if (data.trainingType === "1on1") {
+      trainingType = "1 ON 1 TRAINING";
+    }
+
+    let sessionData = {
+      location: { label: data?.city || "", value: data?.city || "" },
+      trainingVenue: {
+        label:
+          data.venue === "clientLocation"
+            ? "Your Location"
+            : "Trainer's Location",
+        value: data?.venue || "",
+      },
+      preferedTrainingMode: data?.sessionType || "",
+      price: data.price || "",
+      sessionType: trainingType || "",
+      trainingType: {
+        label: data?.activity || "",
+        value: data?.activity || "",
+      },
+    };
+
+    let bookingData = {
+      start_slot: data.sessionStartTime,
+      end_slot: data.sessionEndTime,
+      date: data.sessionDate,
+    };
+
+    let selectedTrainerData = {
+      ...data.trainerDetail,
+    };
+    let reduxData = {
+      bookingData,
+      sessionData,
+      selectedTrainerData,
+      submittedData: { ...data },
+    };
+
+    restProps?.updateUserDetails(reduxData);
+
+    // console.log(reduxData);
+
+    history.push({
+      pathname: "/user/with-friends",
+    });
+  };
+
   return (
     <div className="tabPanel_overview">
       <div className="tabPanel_overview_left">
@@ -139,7 +201,7 @@ const TabOne = ({
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
               {tabData.slice(0, visible).map((data, index) => {
-                console.log(data, "datadata");
+                // console.log(data, "datadata");
                 return (
                   <React.Fragment key={index}>
                     <div className="TP_upcomeSession_overview">
@@ -200,13 +262,7 @@ const TabOne = ({
                           )}
 
                           <div className="button_boarder">
-                            <button
-                              onClick={() =>
-                                history.push({
-                                  pathname: "/user/with-friends",
-                                })
-                              }
-                            >
+                            <button onClick={() => handleAddFriends(data)}>
                               Add Friends{" "}
                             </button>
                             <img src={ArrowNext} alt="icon" />
@@ -376,6 +432,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       userSession,
       cancelSession,
+      updateUserDetails,
     },
     dispatch
   );

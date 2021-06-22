@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import { Toast } from "service/toast";
 import InfoIcon from "@material-ui/icons/Info";
 import { AiFillAlert, AiOutlineAlert } from "react-icons/ai";
+import { history } from "helpers";
 
 const useOptions = () => {
   const options = useMemo(() => ({
@@ -43,6 +44,7 @@ function CardFormFC({
   agreedToTerms,
   handleChange,
   ScheduleSession,
+  sessionData,
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -83,18 +85,41 @@ function CardFormFC({
 
     if (error) {
       console.log("[error]", error);
+
+      return Toast({ type: "error", message: error.message || "Error" });
     } else {
       console.log("[PaymentMethod]", paymentMethod);
     }
 
-    stripe.createToken(cardElement).then(function ({ token }) {
-      // Handle result.error or result.token
-      addCard(token.id);
+    stripe
+      .createToken(cardElement)
+      .then(function ({ token }) {
+        // Handle result.error or result.token
+        console.log(token);
 
-      //   console.log(result, "token");
-    });
+        token?.id && addCard(token?.id);
+
+        //   console.log(result, "token");
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+      });
 
     // alert("Card Saved");
+  };
+
+  const scheduleData = () => {
+    let sessionTypeRoute = {
+      ["1 ON 1 TRAINING"]: () => ScheduleSession(),
+      ["SOCIAL SESSION"]: () => history.push("/user/with-friends"),
+      ["CREATE A CLASS"]: () => history.push("/user/with-friends"),
+    };
+
+    let sessionType = sessionData?.sessionType;
+
+    if (sessionType && sessionTypeRoute[sessionType])
+      sessionTypeRoute[sessionType]();
+    // console.log(sessionTypeRoute[sessionType]);
   };
 
   const addCard = (token) => {
@@ -112,8 +137,19 @@ function CardFormFC({
         console.log(data);
 
         Toast({ type: "success", message: "Card details added" });
-        ScheduleSession();
         getUserPaymentInfo();
+
+        let sessionTypeRoute = {
+          ["1 ON 1 TRAINING"]: () => ScheduleSession(),
+          ["SOCIAL SESSION"]: () => history.push("/user/with-friends"),
+          ["CREATE A CLASS"]: () => history.push("/user/with-friends"),
+        };
+
+        let sessionType = sessionData?.sessionType;
+
+        if (sessionType && sessionTypeRoute[sessionType])
+          console.log(sessionTypeRoute[sessionType]);
+        //   sessionTypeRoute[sessionType]();
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
@@ -321,6 +357,10 @@ function CardFormFC({
   );
 }
 
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
@@ -330,6 +370,6 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-const CardForm = connect(null, mapDispatchToProps)(CardFormFC);
+const CardForm = connect(mapStateToProps, mapDispatchToProps)(CardFormFC);
 
 export default CardForm;
