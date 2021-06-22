@@ -27,6 +27,7 @@ import { Link } from "react-router-dom";
 import { copyTextToClipboard } from "service/helperFunctions";
 import moment from "moment";
 import validate from "service/validation";
+import { Toast } from "service/toast";
 
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
@@ -204,7 +205,7 @@ const MyProfileFC = ({
     api({ ...updateTrainerAvailabilityApi })
       .then(() => {
         _getTrainerDetails();
-        alert("Successfully added changes");
+        Toast({ type: "success", message: "Successfully added changes" });
       })
       .catch((err) => console.log(err));
   };

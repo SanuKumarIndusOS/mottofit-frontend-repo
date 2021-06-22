@@ -27,7 +27,7 @@ const TrainerMessageClass = ({ trainerChannel }) => {
   // Make Id dynamic
   useEffect(() => {
     fetch(
-      "http://doodlebluelive.com:2338/v1/token?identity=7f007fd1-7042-4c1c-b8ea-3d739cf9f707",
+      "https://apis.bookmotto.com/messaging/token?identity=7f007fd1-7042-4c1c-b8ea-3d739cf9f707",
       {
         method: "get",
         headers: new Headers({
