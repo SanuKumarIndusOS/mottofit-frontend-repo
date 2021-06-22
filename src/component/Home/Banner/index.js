@@ -20,9 +20,8 @@ import { getFormatDate } from "service/helperFunctions";
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const [DropdownState, setDropdownState] = useState(false);
 
-  const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
-    false
-  );
+  const [DropdownAvailabilityState, setDropdownAvailabilityState] =
+    useState(false);
   const [InPersonDD, setInPersonDD] = useState(false);
 
   const [virtualMarkup, setvirtualMarkup] = useState(
@@ -172,11 +171,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         <div className="heading_items">
           <h2 className="heading_txt">Train with the Best</h2>
           <p className="sub_heading_txt">
-            Discover & book trusted personal trainers for
-            <br />
-            Strength & HIIT, Boxing, Yoga & Pilates
+            Discover & book trusted personal trainers for Strength & HIIT,
+            Boxing, Yoga & Pilates
           </p>
         </div>
+
         <div className="card-box ">
           <div className="card-wrapper_home">
             <div className="item1">
@@ -267,6 +266,14 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
         </div>
+       
+        <div className="mobile-search">
+          <div className="mobile-search-card">
+            <div className="mobile-search-txt">Find Your Trainer</div>
+            <div className="mobile-search-icon"> <BiSearch /></div>
+          </div>
+        </div>
+     
       </div>
     </div>
   );

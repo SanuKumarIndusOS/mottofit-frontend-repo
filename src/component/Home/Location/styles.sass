@@ -14,9 +14,9 @@ $small-text: #696969
     align-content: center
     width: 100%
     background: #f6f6f6
-    height: 858px
+
     @media screen and (max-width:920px)
-        padding: 0 2em
+        padding: 2em 2em
 
     .inner_location
         padding: 5em 3em
@@ -45,12 +45,15 @@ $small-text: #696969
             letter-spacing: 0.27px
             color: #696969
             opacity: 1
-            width: 733px
+           
 
             @media screen and (max-width:1120px)
 
                 padding: 0
                 margin: 0
+    .mobile-location
+        display: none
+
     .slider_wrapper_container
         padding: 2em 2em 1em 2em
         .slick-slider
@@ -108,3 +111,43 @@ $small-text: #696969
                 user-select: none
                 z-index: 10
                 margin-right: 1.5em
+
+@media screen and (max-width:600px)
+   .slide-container
+     
+     
+     
+     .inner_location
+        padding: 0px
+
+     .header-content
+       h1
+          font-size: 35px
+       p 
+          font-size: 16px
+      
+     .slider_wrapper_container
+       display: none
+       
+
+     .mobile-location
+       display: flex
+       flex-direction: column
+       justify-content: center
+       align-items: center
+       
+
+       .img_loc
+         height: 200px
+         width: 200px
+         background-color: #53BFD2
+         margin-top: 3rem
+         margin-bottom: 1rem  
+       
+       .txt 
+         color: #2C2C2C
+         font-size: 16px
+         font-weight: 600
+         letter-spacing: 0.7px
+         
+
