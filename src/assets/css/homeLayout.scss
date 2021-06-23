@@ -1,0 +1,19 @@
+.desk_nav {
+  display: block;
+}
+
+
+@media only screen and (max-width: 700px) {
+  .desk_nav {
+    display: none;
+  }
+
+  .mobile_nav {
+//    height: 75px;
+//    width: 100%;
+//    background-color: white;
+//    position: fixed;
+//    top: 0;
+//    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+}
