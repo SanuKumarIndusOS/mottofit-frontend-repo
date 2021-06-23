@@ -79,7 +79,7 @@ const UserBookSessionFC = ({
 
       history.push(`?${encodeURIComponent("nextpath=/user/session-type")}`);
 
-      return updateUserDetails(reduxData);
+      updateUserDetails(reduxData);
     }
 
     const tempTrainerData =
@@ -149,7 +149,7 @@ const UserBookSessionFC = ({
       setSelectedOption(options[0]);
     }
     if (areaOfExpertise.length === 1) {
-      setSelectedOption(trainingTypeOption[0]);
+      setTrainingType(trainingTypeOption[0]);
     }
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
@@ -373,7 +373,7 @@ const UserBookSessionFC = ({
 
   const pricingObject = getPricingObject();
 
-  console.log(pricingObject, hasDataEntered);
+  if (!localStorage.getItem("token")) hasDataEntered = false;
 
   return (
     <>

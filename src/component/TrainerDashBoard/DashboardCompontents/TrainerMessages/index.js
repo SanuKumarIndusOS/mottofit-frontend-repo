@@ -11,6 +11,9 @@ import BlueHoverButton from "../../../common/BlueArrowButton/index";
 import { trainerChannel } from "action/trainerAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { twilioApi } from "../../../../service/apiVariables";
+import { api } from "../../../../service/api";
+import { Toast } from "../../../../service/toast";
 const Chatt = require("twilio-chat");
 
 const TrainerMessageClass = ({ trainerChannel }) => {
@@ -26,45 +29,56 @@ const TrainerMessageClass = ({ trainerChannel }) => {
 
   // Make Id dynamic
   useEffect(() => {
-    fetch(
-      "https://apis.bookmotto.com/messaging/token?identity=7f007fd1-7042-4c1c-b8ea-3d739cf9f707",
-      {
-        method: "get",
-        headers: new Headers({
-          Authorization: localStorage.getItem("token"),
-          "Content-Type": "application/x-www-form-urlencoded",
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setToken(data["chatToken"]);
+    const { getIdentityToken } = twilioApi;
 
-        // var channel;
+    getIdentityToken.id = localStorage.getItem("user-id");
 
-        // Chatt.Client.create(data["chatToken"]).then((client) => {
-        //   // Use client
-
-        //   // client.getChannelByUniqueName(channel_id).then((res) => {
-        //   //   console.log(res);
-        //   //   channel = res;
-        //   //   setChannel(channel);
-        //   //   channel.join();
-        //   // });
-
-        //   setClient(client);
-
-        //   // client.on("channelJoined", async (channel) => {
-        //   //   // getting list of all messages since this is an existing channel
-        //   //   console.log("joined");
-        //   //   const message = await channel.getMessages();
-        //   //   // this.setState({ messages: messages.items || [] });
-        //   //   setMessages(message["items"]);
-        //   //   console.log(message["items"][0]);
-        //   //   // scrollToBottom();
-        //   // });
-        // });
+    api({ ...getIdentityToken })
+      .then(({ chatToken }) => {
+        console.log(chatToken);
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
       });
+    // fetch(
+    //   "https://apis.bookmotto.com/messaging/v1/token?identity=7f007fd1-7042-4c1c-b8ea-3d739cf9f707",
+    //   {
+    //     method: "get",
+    //     headers: new Headers({
+    //       Authorization: localStorage.getItem("token"),
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //     }),
+    //   }
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setToken(data["chatToken"]);
+
+    //     // var channel;
+
+    //     // Chatt.Client.create(data["chatToken"]).then((client) => {
+    //     //   // Use client
+
+    //     //   // client.getChannelByUniqueName(channel_id).then((res) => {
+    //     //   //   console.log(res);
+    //     //   //   channel = res;
+    //     //   //   setChannel(channel);
+    //     //   //   channel.join();
+    //     //   // });
+
+    //     //   setClient(client);
+
+    //     //   // client.on("channelJoined", async (channel) => {
+    //     //   //   // getting list of all messages since this is an existing channel
+    //     //   //   console.log("joined");
+    //     //   //   const message = await channel.getMessages();
+    //     //   //   // this.setState({ messages: messages.items || [] });
+    //     //   //   setMessages(message["items"]);
+    //     //   //   console.log(message["items"][0]);
+    //     //   //   // scrollToBottom();
+    //     //   // });
+    //     // });
+    //   });
 
     // Twilio initialisation
     // var token = chattoken;

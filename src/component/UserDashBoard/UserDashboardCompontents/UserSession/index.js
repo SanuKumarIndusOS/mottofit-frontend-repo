@@ -261,12 +261,14 @@ const TabOne = ({
                             </button>
                           )}
 
-                          <div className="button_boarder">
-                            <button onClick={() => handleAddFriends(data)}>
-                              Add Friends{" "}
-                            </button>
-                            <img src={ArrowNext} alt="icon" />
-                          </div>
+                          {data.trainingType !== "1on1" && (
+                            <div className="button_boarder">
+                              <button onClick={() => handleAddFriends(data)}>
+                                Add Friends{" "}
+                              </button>
+                              <img src={ArrowNext} alt="icon" />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

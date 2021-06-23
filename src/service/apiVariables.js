@@ -311,3 +311,15 @@ export const userApi = {
     },
   },
 };
+
+export const twilioApi = {
+  getIdentityToken: {
+    method: "get",
+    url: "token?identity=",
+    baseURL: "message",
+    id: null,
+    get api() {
+      return this.url + this.id;
+    },
+  },
+};

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 // import "./styles.scss";
 import moment from "moment";
+import momentTZ from "moment-timezone";
 import BackIcon from "../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import { Dropdown } from "reactjs-dropdown-component";
@@ -169,11 +170,34 @@ function UserSchedulerClass(props) {
       ta = [];
       dt[item].map((a) => {
         // ta.push(a["end"]);
-        ta.push(a["start"]);
+
+        let fulltime = momentTZ.tz(a["startTime"], "America/New_York");
+
+        let currentTime = momentTZ().tz("America/New_York");
+
+        // console.log(
+        //   fulltime.format("YYYY-MM-DD hh:mm A"),
+        //   currentTime.format("YYYY-MM-DD hh:mm A")
+        // );
+
+        //  getFormatDate(
+        //   a["startTime"],
+        //   "YYYY-MM-DD hh:mm A",
+        //   true
+        // );
+
+        const isOldDate = fulltime.isBefore(currentTime, "minutes");
+        // console.log(a, item, isOldDate);
+
+        // console.log(a, fulltime);
+
+        if (!isOldDate) ta.push(a["start"]);
       });
 
       lt[item] = ta;
     });
+
+    // console.log(lt);
 
     setAslot(lt);
     setAslotKeys(Object.keys(lt));
@@ -245,13 +269,21 @@ function UserSchedulerClass(props) {
     }
     setCal(dates);
 
+    // console.log(dates);
+
+    // console.log(time);
+
     if (cellData.length === 0) {
       time.map((time) => {
         var temp = [];
         dates.map((date) => {
+          console.log({ date: date, time: time });
+
           // temp.push(date + " " + time);
           temp.push({ date: date, time: time });
         });
+
+        console.log(temp);
 
         setCellData((cellData) => [...cellData, temp]);
       });
@@ -262,7 +294,9 @@ function UserSchedulerClass(props) {
     // var temp = [date + time]
     // setuserSlots(temp);
 
-    // console.log(date, time);
+    // console.log(date, time, isOldDate);
+
+    // if(isOldDate) return
 
     var cellCollection = [];
     var temp = aslot[date];

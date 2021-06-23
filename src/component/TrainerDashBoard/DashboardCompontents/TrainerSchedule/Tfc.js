@@ -277,8 +277,11 @@ function TfcClass({
 
       const isOldDate = fulltime.isBefore(moment());
 
-      if (isOldDate)
+      if (isOldDate) {
+        setCells(tempcells);
+        getAvailableSlots(startWeek, endWeek);
         return Toast({ type: "error", message: "Cannot add slot at past" });
+      }
 
       addTrainerSlotApi(data)
         .then(() => {
@@ -363,6 +366,9 @@ function TfcClass({
       state: "BLOCK",
       timeZone: "America/New_York",
     };
+
+    // console.log(editData);
+
     trainerSlotApi(editData)
       .then(() => {
         setCells(tempcells);
@@ -406,7 +412,14 @@ function TfcClass({
     console.log("hitu");
   } else {
     tableData = (
-      <TableDragSelect value={cells} onChange={(cells) => setCells(cells)}>
+      <TableDragSelect
+        value={cells}
+        onChange={(cells) => {
+          // console.log(cells);
+
+          setCells(cells);
+        }}
+      >
         <thead>
           <td disabled>
             <img src={time[7]} style={{ width: "30px", height: "30px" }} />
