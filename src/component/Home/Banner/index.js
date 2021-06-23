@@ -167,7 +167,27 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     history.push("/trainer/find");
   };
   return (
-    <div className="background">
+    <div
+      className="background"
+      onClick={() => {
+        console.log("hit");
+
+        //Availability Dropdown
+        if (DropdownAvailabilityState) {
+          setDropdownAvailabilityState(!DropdownAvailabilityState);
+        }
+
+        //TrainingType DropDown
+        if (DropdownState) {
+          setDropdownState(!DropdownState);
+        }
+
+        //Inperson DropDown
+        if (InPersonDD) {
+          setInPersonDD(!InPersonDD);
+        }
+      }}
+    >
       <div className="cntr_cotainer">
         <div className="heading_items">
           <h2 className="heading_txt">Train with the Best</h2>
