@@ -167,27 +167,29 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     history.push("/trainer/find");
   };
   return (
-    <div
-      className="background"
-      onClick={() => {
-        console.log("hit");
+    <div className="background" onClick={()=> {
+      console.log("hit");
+      
+      //Availability Dropdown
+      if(DropdownAvailabilityState)
+      {
+        setDropdownAvailabilityState(!DropdownAvailabilityState)
+      }
+      
+      //TrainingType DropDown
+      if(DropdownState){
+        setDropdownState(!DropdownState);
+      }
 
-        //Availability Dropdown
-        if (DropdownAvailabilityState) {
-          setDropdownAvailabilityState(!DropdownAvailabilityState);
-        }
+      //Inperson DropDown
+      if(InPersonDD)
+      {
+        setInPersonDD(!InPersonDD);
+      }
+     
 
-        //TrainingType DropDown
-        if (DropdownState) {
-          setDropdownState(!DropdownState);
-        }
 
-        //Inperson DropDown
-        if (InPersonDD) {
-          setInPersonDD(!InPersonDD);
-        }
-      }}
-    >
+      }}>
       <div className="cntr_cotainer">
         <div className="heading_items">
           <h2 className="heading_txt">Train with the Best</h2>
@@ -287,6 +289,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
         </div>
+
+
 
         <div className="mobile-search">
           <div
