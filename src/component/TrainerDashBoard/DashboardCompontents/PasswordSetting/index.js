@@ -9,6 +9,7 @@ import { bindActionCreators } from "redux";
 import validate from "service/validation";
 import { ErrorComponent } from "component/common/ErrorComponent";
 import { AuthApi } from "service/apiVariables";
+import { Toast } from "service/toast";
 const PasswordSettingClass = (props) => {
   // Password show or hide
   const [passwordShown, setPasswordShown] = useState(false);
@@ -48,7 +49,9 @@ const PasswordSettingClass = (props) => {
       .then(() => {
         history.push("/trainers/dashboard/schedule");
       })
-      .catch(() => alert("You're Old Password was not correct "));
+      .catch((err) =>
+        Toast({ type: "error", message: err.message || "Error" })
+      );
   };
   const [error, setErrors] = useState({});
   const validationRules = () => {

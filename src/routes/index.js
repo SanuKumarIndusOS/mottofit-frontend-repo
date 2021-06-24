@@ -18,10 +18,11 @@ class RoutesClass extends Component {
 
   routerGuard = (auth, path) => {
     // const expireTime =/ ;
+    window.scrollTo(0, 0);
 
     const { pathname } = history.location || {};
 
-    console.log(pathname);
+    // console.log(pathname);
 
     const isUserLoggedIn =
       localStorage.getItem("token") || localStorage.getItem("admin-token");

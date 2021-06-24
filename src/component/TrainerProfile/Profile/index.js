@@ -276,7 +276,7 @@ const TrainerProfileClass = ({
                         {inPeronAtClientLocationfor2People ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor2People} `}
-                            <span>(In Person Session)</span>
+                            <span>(In person session for 2 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -284,7 +284,7 @@ const TrainerProfileClass = ({
                         {inPeronAtTrainerLocationfor2People ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor2People} `}
-                            <span>(Trainer Location)</span>
+                            <span>(In trainer location for 2 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -300,7 +300,7 @@ const TrainerProfileClass = ({
                         {inPeronAtClientLocationfor3People ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor3People} `}
-                            <span>(In Person Session)</span>
+                            <span>(In person session for 3 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -308,7 +308,7 @@ const TrainerProfileClass = ({
                         {inPeronAtTrainerLocationfor3People ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor3People} `}
-                            <span>(Trainer Location)</span>
+                            <span>(In trainer location for 3 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -324,7 +324,7 @@ const TrainerProfileClass = ({
                         {inPeronAtClientLocationfor4People ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor4People} `}
-                            <span>(In Person Session)</span>
+                            <span>(In person session for 4 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -332,7 +332,7 @@ const TrainerProfileClass = ({
                         {inPeronAtTrainerLocationfor4People ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor4People} `}
-                            <span>(Trainer Location)</span>
+                            <span>(In trainer location for 4 people)</span>
                           </h6>
                         ) : (
                           ""

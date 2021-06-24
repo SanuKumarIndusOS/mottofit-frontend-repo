@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
+import { Toast } from "service/toast";
 
 const MyProfileDemoFC = ({
   getTrainerDetails,
@@ -24,7 +25,7 @@ const MyProfileDemoFC = ({
     updateTrainerAvailabilityApi.body = payload;
     api({ ...updateTrainerAvailabilityApi })
       .then(({ data, message }) => {
-        alert("Data modified");
+        Toast({ type: "success", message: message || "Success" });
         console.log(data, message);
       })
       .catch((err) => console.log(err));

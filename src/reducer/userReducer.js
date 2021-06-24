@@ -7,6 +7,7 @@ const initialState = {
   selectedTrainerData: {},
   selectedTimes: [],
   defaulCardDetails: {},
+  submittedData: {},
   isModelOpen: false,
 };
 
