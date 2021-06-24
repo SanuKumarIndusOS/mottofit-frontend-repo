@@ -566,7 +566,12 @@ const TrainerProfileClass = ({
           <div className="social"></div>
           <div className="class"></div>
         </div>
-        <div className="short_description"></div>
+        <div className="short_description">
+          This trainers motto can go over here. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed di nonumy eirmod tempor invidunt ut
+          labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+          et accusam.
+        </div>
         <div className="about"></div>
         <div className="mob_image_grid"></div>
         <div className="certifications"></div>

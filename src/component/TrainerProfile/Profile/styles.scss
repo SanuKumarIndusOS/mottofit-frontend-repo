@@ -549,14 +549,13 @@
         background-color: #161616;
         padding-left: 30px;
 
-        p
-        { 
+        p {
           padding-top: 50px;
-          color: #BCBCBC;
+          color: #bcbcbc;
           font-size: 16px;
           font-family: "Montserrat", sans-serif;
           text-decoration: underline;
-          text-decoration-color: #53BFD2;
+          text-decoration-color: #53bfd2;
           text-underline-offset: 2px;
         }
       }
@@ -579,8 +578,7 @@
         font-family: "Cormorant Garamond";
       }
 
-      .activity
-      {
+      .activity {
         color: #898989;
         padding-left: 30px;
         font-weight: 500;
@@ -589,12 +587,17 @@
       }
     }
 
-
-    .pricing
-    {
+    .pricing {
       margin-top: 100px;
       width: 100%;
+    }
 
+    .short_description {
+      margin-top: 100px;
+      width: 100%;
+      color: #696969;
+      font-size: 16px;
+      font-family: "Montserrat", sans-serif;
     }
   }
 }

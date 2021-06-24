@@ -273,6 +273,8 @@ function TfcClass({
                 ],
             };
 
+            console.log(data, "Selected CElls");
+
             addTrainerSlotApi(data)
                 .then(() => {
                     setCells(tempcells);
@@ -395,7 +397,7 @@ function TfcClass({
 
     let tableData2;
     if (cellData.length === 0) {
-        console.log("hitu");
+        // console.log("hitu");
     } else {
         tableData = (
             <TableDragSelect
