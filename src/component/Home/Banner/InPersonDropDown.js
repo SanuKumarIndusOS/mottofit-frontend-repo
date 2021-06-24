@@ -22,11 +22,14 @@ export const InPersonDropDown = ({ inPerson, handleChange, type }) => {
             <RadioGroup>
               {options.map(({ label, value }, index) => (
                 <FormControlLabel
+                  onClick={() => {
+                    handleChange(value);
+                  }}
                   key={`${label}_${index}`}
                   htmlFor={`${value}_${type}`}
                   control={
                     <Radio
-                      checked={inPerson[value]?.selected}
+                      checked={inPerson[value].selected}
                       onChange={() => handleChange(value)}
                       className="inperson_radio"
                       id={`${value}_${type}`}
