@@ -21,7 +21,9 @@ const UserEventSchedularFC = (props) => {
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [userSelectedData, setUserSelectedData] = React.useState({});
   const [DateSlot, setDateSlot] = React.useState();
-  console.log(trainerName, "trainerName");
+
+  console.log(props.selectedTrainerData["id"], "trainerName");
+  console.log(props.selectedTrainerData);
 
   React.useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -34,11 +36,13 @@ const UserEventSchedularFC = (props) => {
       );
     }
 
-    if (!location["trainerId"]) return history.push("/trainer/find");
+    // if (!location["trainerId"]) return history.push("/trainer/find");
 
     setTrainerName(location["trainerData"]);
+    // setTrainerName(props.selectedTrainerData);
 
     console.log(location["trainerData"]);
+    console.log(props.selectedTrainerData, "props");
 
     console.log(localStorage.getItem("trainertime"), "ee");
 
@@ -156,7 +160,11 @@ const UserEventSchedularFC = (props) => {
                 </div>
                 {/* <div className="container"> */}
                 <UserScheduler
-                  id={location["trainerId"]}
+                  id={
+                    !location["trainerId"]
+                      ? props.selectedTrainerData["id"]
+                      : location["trainerId"]
+                  }
                   parentCallback={callbackFunction}
                   startTime={userSelectedData?.startDate}
                   endTime={userSelectedData?.endDate}

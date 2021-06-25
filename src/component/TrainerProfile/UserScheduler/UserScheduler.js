@@ -145,6 +145,8 @@ function UserSchedulerClass(props) {
 
     window.scrollTo(0, 0);
 
+    console.log(props);
+
     // setuserSlots([props.startTime, props.endTime]);
   }, []);
 
@@ -277,13 +279,13 @@ function UserSchedulerClass(props) {
       time.map((time) => {
         var temp = [];
         dates.map((date) => {
-          console.log({ date: date, time: time });
+          // console.log({ date: date, time: time });
 
           // temp.push(date + " " + time);
           temp.push({ date: date, time: time });
         });
 
-        console.log(temp);
+        // console.log(temp);
 
         setCellData((cellData) => [...cellData, temp]);
       });
