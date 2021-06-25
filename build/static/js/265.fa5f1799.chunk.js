@@ -1,0 +1,2 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[265],{425:function(t,s,i){"use strict";i.r(s),s.default=i.p+"static/media/Boxing_Active.d97da098.svg"}}]);
+//# sourceMappingURL=265.fa5f1799.chunk.js.map

@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[393],{494:function(t,e,s){"use strict";s.r(e),e.default=s.p+"static/media/Strength & HIIT Image.18f0ef28.png"}}]);
-//# sourceMappingURL=393.ec563b0b.chunk.js.map
