@@ -3,93 +3,309 @@
 @import "./find.scss";
 
 .background {
-    background: transparent
-        url("../../../../src/assets/files/Home/Banner/Banner.png") 0% 0%
-        no-repeat padding-box;
-    opacity: 1;
-    width: 100%;
-    background-size: cover;
-    height: 975px;
+  background: transparent
+    url("../../../../src/assets/files/Home/Banner/Banner.png") 0% 0% no-repeat
+    padding-box;
+  opacity: 1;
+
+  background-size: cover;
+  height: 975px;
+  display: flex;
+  justify-content: center;
+
+  .cntr_cotainer {
     display: flex;
     justify-content: center;
-    max-width: 100%;
-    min-width: 100%;
+    flex-direction: column;
 
+    .mobile-search {
+      display: none;
+    }
+
+    .heading_items {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      .heading_txt {
+        text-align: center;
+        font-weight: 800;
+        font-family: "Cormorant Garamond";
+        font-size: 60px;
+        letter-spacing: -1.2px;
+        color: #000000;
+        text-shadow: 0px 3px 6px #c6c6c6;
+        opacity: 1;
+        // @media screen and (max-width: 1023px) {
+        //   font: normal normal bold 40px/75px Cormorant Garamond;
+        // }
+      }
+
+      .sub_heading_txt {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+        text-align: center;
+        letter-spacing: 0.3px;
+        color: #2c2c2c;
+        text-shadow: 0px 3px 6px #62412329;
+        opacity: 1;
+        // @media screen and (max-width: 1023px) {
+        //   font: normal normal medium 14px/30px Montserrat;
+        // }
+      }
+    }
+
+    // .search-box {
+    //   height: 100px;
+    //   background: #f8f8f8 0% 0% no-repeat padding-box;
+    //   box-shadow: 0px 3px 12px #624123;
+    //   border-radius: 150px;
+    //   opacity: 1;
+    //   margin-top: 5rem;
+    //   min-width: 1000px;
+    //   max-width: 1920px;
+    //   display: flex;
+    //   justify-content: space-between;
+    //   align-items: center;
+
+    //   .inner-choice-1 {
+    //     margin-left: 50px;
+    //     text-align: left;
+    //     letter-spacing: 0px;
+    //     color: #161616;
+    //     text-transform: capitalize;
+    //     font-family: Montserrat;
+    //     font-size: 18px;
+    //     opacity: 1;
+    //   }
+
+    //   .inner-choice {
+    //     img {
+    //       padding: 11px;
+    //     }
+    //   }
+    // }
+  }
+}
+
+// .mobile-search {
+//   height: 100px;
+//   width: 100%;
+//   position: fixed;
+//   z-index: 10000;
+//   bottom: 0;
+
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   .mobile-search-card {
+//     height: 60px;
+//     width: 90%;
+//     background-color: white;
+//     border-radius: 60px;
+//     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+//     display: flex;
+//     align-items: center;
+//   }
+
+//   .mobile-search-txt {
+//     font-size: 18px;
+//     margin-left: 20px;
+//     font-weight: 500;
+//     font-family: "Montserrat", sans-serif;
+//     flex: 2;
+//   }
+
+//   .mobile-search-icon {
+//     height: 50px;
+//     width: 50px;
+//     border-radius: 50px;
+//     background-color: #53bfd2;
+//     margin-right: 5px;
+//   }
+// }
+
+@media only screen and (max-width: 600px) {
+  .background {
+    background: transparent
+      url("../../../../src/assets/files/Home/Banner/Mobile_Homepage_Banner_Image.jpg")
+      0% 0% no-repeat padding-box;
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
     .cntr_cotainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .mobile-search {
+        height: 100px;
+        width: 100%;
+        position: fixed;
+        z-index: 10000;
+        bottom: 0;
+
         display: flex;
         justify-content: center;
-        flex-direction: column;
-        @media screen and (max-width: 1023px) {
-            justify-content: space-between;
+        align-items: center;
+
+        .mobile-search-card {
+          height: 60px;
+          width: 90%;
+          background-color: white;
+          border-radius: 60px;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+            0 3px 6px rgba(0, 0, 0, 0.23);
+          display: flex;
+          align-items: center;
         }
 
-        .heading_items {
+        .mobile-search-txt {
+          font-size: 18px;
+          margin-left: 20px;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          flex: 2;
+        }
+
+        .mobile-search-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 25px;
+          height: 50px;
+          width: 50px;
+          border-radius: 50px;
+          background-color: #53bfd2;
+          margin-right: 5px;
+          color: white;
+        }
+      }
+
+      .mobile-search-menu {
+        height: 100vh;
+        width: 100%;
+        background-color: #f6f6f6;
+        position: fixed;
+        z-index: 40000;
+        top: 0;
+
+        .header {
+          height: 55px;
+          background-color: #53bfd2;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding: 2rem;
+
+          .title {
+            font-size: 16px;
+            color: #ffffff;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            flex: 2;
+          }
+
+          .close {
+            flex: 1;
             display: flex;
-            justify-content: center;
-            flex-direction: column;
-            @media screen and (max-width: 1023px) {
-                align-items: flex;
-                justify-content: flex-start;
-            }
-
-            .heading_txt {
-                text-align: center;
-                font-weight: 800;
-                font-family: "Cormorant Garamond";
-                font-size: 60px;
-                letter-spacing: -1.2px;
-                color: #000000;
-                text-shadow: 0px 3px 6px #c6c6c6;
-                opacity: 1;
-                @media screen and (max-width: 1023px) {
-                    font: normal normal bold 40px/75px Cormorant Garamond;
-                }
-            }
-
-            .sub_heading_txt {
-                font-size: 20px;
-                font-weight: 600;
-                font-family: "Montserrat", sans-serif;
-                text-align: center;
-                letter-spacing: 0.3px;
-                color: #2c2c2c;
-                text-shadow: 0px 3px 6px #62412329;
-                opacity: 1;
-                @media screen and (max-width: 1023px) {
-                    font: normal normal medium 14px/30px Montserrat;
-                }
-            }
+            justify-content: flex-end;
+            color: black;
+            font-size: 24px;
+          }
         }
 
-        .search-box {
-            height: 100px;
-            background: #f8f8f8 0% 0% no-repeat padding-box;
-            box-shadow: 0px 3px 12px #624123;
-            border-radius: 150px;
-            opacity: 1;
-            margin-top: 5rem;
-            min-width: 1000px;
-            max-width: 1920px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .content {
+          margin: 1.5rem;
+          .clear-filters {
+            text-decoration: underline;
+            color: #53bfd2;
+            font-size: 17px;
+            font-weight: 400;
+            font-family: "Montserrat", sans-serif;
+            margin-bottom: 2rem;
+          }
 
-            .inner-choice-1 {
-                margin-left: 50px;
-                text-align: left;
-                letter-spacing: 0px;
-                color: #161616;
-                text-transform: capitalize;
-                font-family: Montserrat;
-                font-size: 18px;
-                opacity: 1;
+          .location {
+            font-size: 17px;
+            color: #161616;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+
+            .element {
+              font-size: 20px;
+              color: #898989;
+              display: flex;
+
+              .slash {
+                color: #53bfd2;
+                margin-left: 10px;
+                margin-right: 10px;
+              }
             }
 
-            .inner-choice {
-                img {
-                    padding: 11px;
-                }
+            hr {
+              width: 85%;
             }
+          }
+
+          .vertical{
+            font-size: 17px;
+            color: #161616;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+            
+            hr {
+              width: 85%;
+            }
+          }
+
+          .schedule{
+            font-size: 17px;
+            color: #161616;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+            
+            hr {
+              width: 85%;
+            }
+          }
+
+          .availability{
+            font-size: 17px;
+            color: #161616;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+          }
         }
+
+        .search
+        {
+          margin: 2rem;
+          background-color: #53bfd2;
+          color: white;
+          height: 45px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          font-family: "Montserrat", sans-serif;
+          justify-content: center;
+        }
+      }
+
+      .heading_items {
+        width: 100%;
+        padding: 3%;
+        margin-top: 3rem;
+        .heading_txt {
+          font-size: 45px;
+        }
+
+        .sub_heading_txt {
+          font-size: 16px;
+        }
+      }
     }
+  }
 }

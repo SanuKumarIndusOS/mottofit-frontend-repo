@@ -542,12 +542,15 @@ const TrainerBackgroundFC = ({
                         name="comment"
                         placeholder="Tell us all about it."
                         value={trainerbackgroundData.interestInMotto}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          const tempValue = e.target.value;
+                          if (tempValue?.split(" ")?.length > 75) return;
+                          if (tempValue?.length > 500) return;
                           setTrainerbackgroundData({
                             ...trainerbackgroundData,
                             interestInMotto: e.target.value,
-                          })
-                        }
+                          });
+                        }}
                       />
                     </div>
                   </div>
@@ -562,12 +565,15 @@ const TrainerBackgroundFC = ({
                         name="comment"
                         placeholder="Tell us all about it."
                         value={trainerbackgroundData.clientAssessment}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          const tempValue = e.target.value;
+                          if (tempValue?.split(" ")?.length > 75) return;
+                          if (tempValue?.length > 500) return;
                           setTrainerbackgroundData({
                             ...trainerbackgroundData,
                             clientAssessment: e.target.value,
-                          })
-                        }
+                          });
+                        }}
                       />
                     </div>
                   </div>
@@ -579,12 +585,15 @@ const TrainerBackgroundFC = ({
                         name="comment"
                         placeholder="Tell us all about it."
                         value={trainerbackgroundData.trainingProcess}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          const tempValue = e.target.value;
+                          if (tempValue?.split(" ")?.length > 75) return;
+                          if (tempValue?.length > 500) return;
                           setTrainerbackgroundData({
                             ...trainerbackgroundData,
                             trainingProcess: e.target.value,
-                          })
-                        }
+                          });
+                        }}
                       />
                     </div>
                   </div>

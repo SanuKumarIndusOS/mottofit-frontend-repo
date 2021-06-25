@@ -14,7 +14,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import CardForm from "./subcomponents/CardForm";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { scheduleSession, resetUserDetails } from "action/userAct";
+import {
+  scheduleSession,
+  resetUserDetails,
+  updateUserDetails,
+} from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
 import { STRIPE_URL } from "../../../helpers/baseURL";
@@ -105,10 +109,17 @@ const UserPaymentsFC = ({
           res.session.trainingType === "social" ||
           res.session.trainingType === "class"
         ) {
+          let reduxData = {
+            submittedData: {
+              ...res.session,
+            },
+          };
+          // console.log(res);
+          restProps?.updateUserDetails(reduxData);
           history.push("/user/with-friends");
         }
 
-        restProps.resetUserDetails();
+        // restProps.resetUserDetails();
       })
       .catch((error) => {
         Toast({
@@ -234,7 +245,10 @@ const UserPaymentsFC = ({
               </div>
               <div className="user_payment_right">
                 <div className="user_payment_profile">
-                  <img src={Jenny} alt="icon" />
+                  <img
+                    src={tempTrainerData?.profilePicture || Jenny}
+                    alt="icon"
+                  />
                   <div className="up_profile_name">
                     <h2>{`${tempTrainerData?.firstName || ""} ${
                       tempTrainerData?.lastName || ""
@@ -340,6 +354,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       scheduleSession,
       resetUserDetails,
+      updateUserDetails,
     },
     dispatch
   );

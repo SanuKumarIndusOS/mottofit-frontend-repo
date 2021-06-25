@@ -88,9 +88,10 @@ export const getFormatDate = (
   format = "YYYY-MM-DD",
   isUnix = false
 ) => {
+  let tempDate = date || moment();
   return isUnix
-    ? moment.tz(date, "America/New_York").format(format)
-    : moment(date).format(format);
+    ? moment.tz(tempDate, "America/New_York").format(format)
+    : moment(tempDate).format(format);
 };
 
 export const findDatesValid = (date) => {

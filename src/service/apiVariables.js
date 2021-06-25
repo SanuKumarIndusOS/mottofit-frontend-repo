@@ -202,9 +202,13 @@ export const TrainerApi = {
     baseURL: "normal",
   },
   trainerChannel: {
-    api: "trainer/channel",
+    url: "channel",
     method: "get",
     baseURL: "message",
+    id: "trainer",
+    get api() {
+      return `${this.id}/${this.url}`;
+    },
   },
   trainerMyEarning: {
     url: "payment-history/trainer?trainerId=",
@@ -287,6 +291,36 @@ export const userApi = {
     method: "get",
     url: "payment-history/user?userId=",
     baseURL: "payment",
+    id: null,
+    get api() {
+      return this.url + this.id;
+    },
+  },
+  getSessionData: {
+    method: "get",
+    url: "session?sessionId=",
+    baseURL: "session",
+    id: null,
+    get api() {
+      return this.url + this.id;
+    },
+  },
+  editSessionData: {
+    method: "put",
+    url: "session/update",
+    baseURL: "session",
+    id: null,
+    get api() {
+      return this.url;
+    },
+  },
+};
+
+export const twilioApi = {
+  getIdentityToken: {
+    method: "get",
+    url: "token?identity=",
+    baseURL: "message",
     id: null,
     get api() {
       return this.url + this.id;

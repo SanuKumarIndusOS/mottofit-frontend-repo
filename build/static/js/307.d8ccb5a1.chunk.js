@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[307],{410:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Right Button.648b272c.svg"}}]);
-//# sourceMappingURL=307.d8ccb5a1.chunk.js.map
