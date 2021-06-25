@@ -549,7 +549,36 @@ const TrainerProfileClass = ({
           />
         )}
       </div>
-      {/* )} */}
+
+      {/* Mobile Layout */}
+
+      <div className="trainer_profile_mob">
+        <div className="heading">
+          <div className="back_to_search">
+            <p>Back to Search</p>
+          </div>
+          <div className="profile_pic"></div>
+          <div className="name">Praveen Nat</div>
+          <div className="activity">PILATES, STRENGTH & HIIT, BOXING, YOGA</div>
+        </div>
+        <div className="pricing">
+          <div className="on1"></div>
+          <div className="social"></div>
+          <div className="class"></div>
+        </div>
+        <div className="short_description">
+          This trainers motto can go over here. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed di nonumy eirmod tempor invidunt ut
+          labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+          et accusam.
+        </div>
+        <div className="about"></div>
+        <div className="mob_image_grid"></div>
+        <div className="certifications"></div>
+        <div className="scheduler"></div>
+        <div className="book_button"></div>
+        <div className="other_trainers"></div>
+      </div>
     </>
   );
 };

@@ -352,7 +352,27 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     setInPersonDD(!InPersonDD);
   };
   return (
-    <>
+    <div
+      id="find-trainer"
+      onClick={() => {
+        console.log("findhit");
+
+        //Availability Dropdown
+        if (DropdownTrainerAvailabilityState) {
+          setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
+        }
+
+        //TrainingType DropDown
+        if (DropdownState) {
+          setDropdownState(!DropdownState);
+        }
+
+        //Inperson DropDown
+        if (InPersonDD) {
+          setInPersonDD(!InPersonDD);
+        }
+      }}
+    >
       <div className="card container border-0">
         <div className="card-wrapper">
           <div className="item1">
@@ -458,7 +478,12 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       <div className="mobile-find-wrapper">
         <div className="cat">Strength & HIIT</div>
         <div className="date">16/03/2021</div>
-        <div className="find-filters" onClick={() => { setshowMenu(!showMenu) }}></div>
+        <div
+          className="find-filters"
+          onClick={() => {
+            setshowMenu(!showMenu);
+          }}
+        ></div>
       </div>
 
       <div
@@ -500,7 +525,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       </div>
       <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
       <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
-    </>
+    </div>
   );
 };
 

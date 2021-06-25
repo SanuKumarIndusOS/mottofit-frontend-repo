@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { BiSearch } from "react-icons/bi";
 import Between from "../../../assets/files/Home/Banner/SearchBar/between.svg";
@@ -16,8 +16,11 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
+import { useHistory } from "react-router-dom";
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+  const [locationKeys, setLocationKeys] = useState([]);
+  const history = useHistory();
   const [DropdownState, setDropdownState] = useState(false);
 
   const [DropdownAvailabilityState, setDropdownAvailabilityState] =
@@ -166,6 +169,30 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
     history.push("/trainer/find");
   };
+
+  // useEffect(() => {
+  //   return history.listen((location) => {
+  //     if (history.action === "PUSH") {
+  //       setLocationKeys([location.key]);
+  //       history.push("/trainer/find");
+  //     }
+
+  //     if (history.action === "POP") {
+  //       if (locationKeys[1] === location.key) {
+  //         setLocationKeys(([_, ...keys]) => keys);
+  //         console.log("back");
+  //         history.push("/trainer/find");
+  //         // Handle forward event
+  //       } else {
+  //         setLocationKeys((keys) => [location.key, ...keys]);
+  //         console.log("back");
+  //         // Handle back event
+  //         history.push("/trainer/find");
+  //       }
+  //     }
+  //   });
+  // }, [locationKeys]);
+
   return (
     <div
       className="background"

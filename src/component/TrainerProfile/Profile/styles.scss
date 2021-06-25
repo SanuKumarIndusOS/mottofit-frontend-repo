@@ -531,3 +531,73 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .profile_main {
+    display: none;
+  }
+
+  .trainer_profile_mob {
+    .heading {
+      height: 500px;
+      width: 100%;
+      background-color: #fff;
+
+      .back_to_search {
+        height: 50%;
+        width: 100%;
+        background-color: #161616;
+        padding-left: 30px;
+
+        p {
+          padding-top: 50px;
+          color: #bcbcbc;
+          font-size: 16px;
+          font-family: "Montserrat", sans-serif;
+          text-decoration: underline;
+          text-decoration-color: #53bfd2;
+          text-underline-offset: 2px;
+        }
+      }
+
+      .profile_pic {
+        height: 200px;
+        width: 175px;
+        background-color: aqua;
+        position: absolute;
+        top: 250px;
+        left: 30px;
+      }
+
+      .name {
+        margin-top: 100px;
+        padding-left: 30px;
+        color: #161616;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: "Cormorant Garamond";
+      }
+
+      .activity {
+        color: #898989;
+        padding-left: 30px;
+        font-weight: 500;
+        font-size: 15px;
+        font-family: "Montserrat", sans-serif;
+      }
+    }
+
+    .pricing {
+      margin-top: 100px;
+      width: 100%;
+    }
+
+    .short_description {
+      margin-top: 100px;
+      width: 100%;
+      color: #696969;
+      font-size: 16px;
+      font-family: "Montserrat", sans-serif;
+    }
+  }
+}

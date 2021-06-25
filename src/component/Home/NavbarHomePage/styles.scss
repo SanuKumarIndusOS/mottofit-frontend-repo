@@ -251,10 +251,41 @@
   }
 }
 
+.home_nav_mob {
+  display: none;
+}
 
-@media screen and (max-width: 500px) {
- 
-  .navbar-sass{
+// Mobile Layout header css
+@media screen and (max-width: 600px) {
+  .navbar-sass {
     display: none;
+  }
+
+  .home_nav_mob {
+    height: 75px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+    .ham_but {
+      flex: 1;
+    }
+
+    .logo_mob {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+    }
+
+    .usr_icon_mob {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }
