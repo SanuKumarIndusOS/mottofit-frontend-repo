@@ -5,10 +5,19 @@ const initialState = {
   activeChannel: {},
   activeChannelMessages: [],
   typingMembers: [],
+  chatClientInstance: null,
+  currentChannelMembers: [],
+  channelData: {},
+  isLoading: false,
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {
   switch (type) {
+    case MessagingActionType.UPDATE_CLIENT_INSTANCE:
+      return {
+        ...state,
+        chatClientInstance: payload,
+      };
     case MessagingActionType.INITIALIZE_CLIENT:
       return {
         ...state,
@@ -30,6 +39,15 @@ export default (state = Object.assign({}, initialState), { type, payload }) => {
       return {
         ...state,
         ...payload,
+      };
+    case MessagingActionType.RESET_CHANNEL_DETAILS:
+      return {
+        ...state,
+        activeChannel: {},
+        activeChannelMessages: [],
+        typingMembers: [],
+        currentChannelMembers: [],
+        channelData: {},
       };
     default:
       return state;

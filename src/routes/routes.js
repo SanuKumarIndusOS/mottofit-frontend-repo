@@ -437,7 +437,7 @@ const routers = [
       },
       {
         path: "/message",
-        componentPath: "pages/UserDashboard/Message/index",
+        componentPath: "pages/TrainerDashboard/TrainerMessage",
         name: "UserMessage",
         auth: false,
         exact: true,

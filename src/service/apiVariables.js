@@ -202,9 +202,13 @@ export const TrainerApi = {
     baseURL: "normal",
   },
   trainerChannel: {
-    api: "trainer/channel",
+    url: "channel",
     method: "get",
     baseURL: "message",
+    id: "trainer",
+    get api() {
+      return `${this.id}/${this.url}`;
+    },
   },
   trainerMyEarning: {
     url: "payment-history/trainer?trainerId=",

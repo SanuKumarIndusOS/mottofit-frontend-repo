@@ -150,6 +150,9 @@ export const addTrainerSlotApi = (body) => (dispatch, getState, { api }) => {
 export const trainerChannel = () => (dispatch, getState, { api }) => {
   return new Promise((resolve, reject) => {
     const { trainerChannel } = TrainerApi;
+
+    trainerChannel.id =
+      parseInt(localStorage.getItem("type")) === 3 ? "user" : "trainer";
     api({ ...trainerChannel })
       .then(({ data }) => {
         resolve(data);
