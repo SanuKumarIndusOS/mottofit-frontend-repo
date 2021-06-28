@@ -143,14 +143,17 @@ class ChatBoxClass extends Component {
                     <div className="message_header_items">
                       <img src={SheduleIcon} alt="icon" />
                       <h5>
-                        {" "}
-                        {new Date(channelData?.startTime).toDateString()}
+                        {getFormatDate(
+                          channelData?.startTime,
+                          "ddd MMM DD YYYY",
+                          true
+                        )}
                       </h5>
                     </div>
                     <div className="message_header_items">
                       <img src={AvailabilityIcon} alt="icon" />
                       <h5>
-                        {new Date(channelData?.startTime).toLocaleTimeString()}
+                        {getFormatDate(channelData?.startTime, "hh:mm A", true)}
                       </h5>
                     </div>
                     <div className="message_header_items">

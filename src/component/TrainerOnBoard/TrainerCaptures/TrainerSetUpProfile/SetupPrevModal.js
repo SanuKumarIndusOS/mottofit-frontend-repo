@@ -19,22 +19,59 @@ const SetupPrevModal = ({
 }) => {
   const myRef = useRef(null);
 
+  const [trainerLocationModal, setTrainerLocationModal] = useState(false);
+
   const closeIconModal = (
     <img src={CloseIcon} alt="close" className="close_setup" />
   );
-  console.log(trainerdetailData);
 
-  const { virtualSession = "", inPersonAtClientLocation = "" } =
-    trainerdetailData?.oneOnOnePricing || {};
+  const {
+    virtualSession = "",
+    inPersonAtClientLocation = "",
+    inPersonAtTrainerLocation = "",
+  } = trainerdetailData?.oneOnOnePricing || {};
 
   const {
     virtualSessionfor2People = "",
     virtualSessionfor3People = "",
     virtualSessionfor4People = "",
+    inPeronAtClientLocationfor2People = "",
+    inPeronAtClientLocationfor3People = "",
+    inPeronAtClientLocationfor4People = "",
+    inPeronAtTrainerLocationfor2People = "",
+    inPeronAtTrainerLocationfor3People = "",
+    inPeronAtTrainerLocationfor4People = "",
   } = trainerdetailData.socialSessionPricing || {};
 
-  const { virtualSessionfor15People = "" } =
-    trainerdetailData.classSessionPricing || {};
+  const {
+    virtualSessionfor15People = "",
+    inPersonAtclientLocationfor15People = "",
+    inPersonAttrainerLocationfor15People = "",
+  } = trainerdetailData.classSessionPricing || {};
+
+  const isAnyOneonOnePriceAvailable = [
+    virtualSession,
+    inPersonAtClientLocation,
+    inPersonAtTrainerLocation,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
+
+  const isAnySocialPriceAvailable = [
+    virtualSessionfor2People,
+    virtualSessionfor3People,
+    virtualSessionfor4People,
+    inPeronAtClientLocationfor2People,
+    inPeronAtClientLocationfor3People,
+    inPeronAtClientLocationfor4People,
+    inPeronAtTrainerLocationfor2People,
+    inPeronAtTrainerLocationfor3People,
+    inPeronAtTrainerLocationfor4People,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
+
+  const isAnyClassPriceAvailable = [
+    virtualSessionfor15People,
+    inPersonAtclientLocationfor15People,
+    inPersonAttrainerLocationfor15People,
+  ].some((price) => price !== "" && parseFloat(price) > 0);
 
   const { certification = [] } = trainerdetailData;
 
@@ -85,7 +122,7 @@ const SetupPrevModal = ({
                       <img src={ArrowNext} alt="icon" />
                     </div>
                     <div className="profile_aside_items">
-                      {virtualSession || inPersonAtClientLocation ? (
+                      {isAnyOneonOnePriceAvailable ? (
                         <div className="profile_aside_item">
                           <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
                           <hr />
@@ -106,6 +143,14 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
+                            {inPersonAtTrainerLocation ? (
+                              <h6>
+                                {`$${inPersonAtTrainerLocation} `}
+                                <span>(Trainer Location)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
                             <h5>See package rates during checkout</h5>
                           </div>
                         </div>
@@ -113,9 +158,7 @@ const SetupPrevModal = ({
                         ""
                       )}
 
-                      {virtualSessionfor2People ||
-                      virtualSessionfor3People ||
-                      virtualSessionfor4People ? (
+                      {isAnySocialPriceAvailable ? (
                         <div className="profile_aside_item">
                           <h2>
                             SOCIAL SESSIONS{" "}
@@ -131,8 +174,24 @@ const SetupPrevModal = ({
                           <div className="profile_aside_inner_item">
                             {virtualSessionfor2People ? (
                               <h6>
-                                {`$${virtualSessionfor2People}`}
+                                {`$${virtualSessionfor2People} `}
                                 <span>/ Session (Virtual For 2 People)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtClientLocationfor2People ? (
+                              <h6>
+                                {`$${inPeronAtClientLocationfor2People} `}
+                                <span>(In person session for 2 people)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtTrainerLocationfor2People ? (
+                              <h6>
+                                {`$${inPeronAtTrainerLocationfor2People} `}
+                                <span>(In trainer location for 2 people)</span>
                               </h6>
                             ) : (
                               ""
@@ -145,10 +204,42 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
+                            {inPeronAtClientLocationfor3People ? (
+                              <h6>
+                                {`$${inPeronAtClientLocationfor3People} `}
+                                <span>(In person session for 3 people)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtTrainerLocationfor3People ? (
+                              <h6>
+                                {`$${inPeronAtTrainerLocationfor3People} `}
+                                <span>(In trainer location for 3 people)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
                             {virtualSessionfor4People ? (
                               <h6>
                                 {`$${virtualSessionfor4People} `}
                                 <span>/ Session (Virtual For 4 People)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtClientLocationfor4People ? (
+                              <h6>
+                                {`$${inPeronAtClientLocationfor4People} `}
+                                <span>(In person session for 4 people)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtTrainerLocationfor4People ? (
+                              <h6>
+                                {`$${inPeronAtTrainerLocationfor4People} `}
+                                <span>(In trainer location for 4 people)</span>
                               </h6>
                             ) : (
                               ""
@@ -159,7 +250,7 @@ const SetupPrevModal = ({
                         ""
                       )}
 
-                      {virtualSessionfor15People ? (
+                      {isAnyClassPriceAvailable ? (
                         <div className="profile_aside_item">
                           <h2>
                             CREATE A CLASS
@@ -172,10 +263,34 @@ const SetupPrevModal = ({
                           <hr />
 
                           <div className="profile_aside_inner_item">
-                            <h6>
-                              {`$${virtualSessionfor15People} `}
-                              <span>Flat Rate Class (For 5-15 People)</span>
-                            </h6>
+                            {virtualSessionfor15People ? (
+                              <h6>
+                                {`$${virtualSessionfor15People} `}
+                                <span>Flat Rate Class (For 5-15 People)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPersonAtclientLocationfor15People ? (
+                              <h6>
+                                {`$${inPersonAtclientLocationfor15People} `}
+                                <span>
+                                  (In Person Session) (For 5-15 People)
+                                </span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPersonAttrainerLocationfor15People ? (
+                              <h6>
+                                {`$${inPersonAttrainerLocationfor15People} `}
+                                <span>
+                                  (Trainer Location) (For 5-15 People)
+                                </span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
                             <h5>
                               If trainer offers Virtual Social Sessions and
                               Classes they will be at a discount to in person
@@ -214,7 +329,13 @@ const SetupPrevModal = ({
                               {trainerdetailData && trainerdetailData.location
                                 ? trainerdetailData.location
                                 : "Not Added"}
-                              <Link to="/">View Location</Link>
+                              <Link
+                                onClick={() => {
+                                  setTrainerLocationModal(true);
+                                }}
+                              >
+                                View Location
+                              </Link>
                             </h4>
                           </div>
                         </div>
@@ -274,6 +395,35 @@ const SetupPrevModal = ({
                 </div>
               </div>
             </div>
+          </div>
+        </Modal>
+      ) : null}
+
+      {trainerLocationModal ? (
+        <Modal
+          open={trainerLocationModal}
+          onClose={() => {
+            setTrainerLocationModal(false);
+          }}
+          center
+          closeIcon={<img src={CloseIcon} alt="close" />}
+          styles={{
+            boaderRadius: "10px",
+          }}
+        >
+          <div className="model_styles modal-heading">
+            <h2>Trainer's Locations</h2>
+            <p>
+              {trainerdetailData?.trainingFacilityLocation ||
+                "No trainer locations"}
+            </p>
+            {/* {trainingVenue?.label === "Trainer's Location" ? (
+              ) : (
+                <p>
+                  {trainerProfileData?.serviceableNeighbourHood ||
+                    "No neighbourhood locations"}
+                </p>
+              )} */}
           </div>
         </Modal>
       ) : null}

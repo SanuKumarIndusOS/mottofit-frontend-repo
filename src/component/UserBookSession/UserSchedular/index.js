@@ -26,15 +26,15 @@ const UserEventSchedularFC = (props) => {
   console.log(props.selectedTrainerData);
 
   React.useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      let reduxData = {
-        isModelOpen: true,
-      };
-      props.updateUserDetails(reduxData);
-      return history.push(
-        `/welcome?${encodeURIComponent("nextPath=/user/scheduler")}`
-      );
-    }
+    // if (!localStorage.getItem("token")) {
+    //   let reduxData = {
+    //     isModelOpen: true,
+    //   };
+    //   props.updateUserDetails(reduxData);
+    //   return history.push(
+    //     `/welcome?${encodeURIComponent("nextPath=/user/scheduler")}`
+    //   );
+    // }
 
     // if (!location["trainerId"]) return history.push("/trainer/find");
 

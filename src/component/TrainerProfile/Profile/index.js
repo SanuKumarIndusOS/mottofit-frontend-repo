@@ -39,6 +39,7 @@ const TrainerProfileClass = ({
   const [DateSlot, setDateSlot] = React.useState();
   const [isCarouselOpen, setCarouselOpen] = useState(false);
   const [currItemIndex, setCurrIndex] = useState("");
+  const [trainerLocationModal, setTrainerLocationModal] = useState(false);
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
 
@@ -438,18 +439,11 @@ const TrainerProfileClass = ({
                           {trainerProfileData && trainerProfileData.location
                             ? trainerProfileData.location
                             : "Not Added"}
-                          <Link to="/">View Location</Link>
+                          <Link onClick={() => setTrainerLocationModal(true)}>
+                            View Location
+                          </Link>
                         </h4>
                       </div>
-                      {/* <div className="profile_location">
-                        <img src={Tick} alt="icon" />
-                        <h4>
-                          {trainerProfileData &&
-                          trainerProfileData.servicableLocation
-                            ? trainerProfileData.servicableLocation
-                            : "Not Added"}
-                        </h4>
-                      </div> */}
                       <div className="profile_share">
                         <img src={Share} alt="icon" />
                         <Link onClick={handleCopy}>Share Profile</Link>
@@ -548,6 +542,35 @@ const TrainerProfileClass = ({
             // index={currItemIndex}
           />
         )}
+
+        {trainerLocationModal ? (
+          <Modal
+            open={trainerLocationModal}
+            onClose={() => {
+              setTrainerLocationModal(false);
+            }}
+            center
+            closeIcon={<img src={CloseIcon} alt="close" />}
+            styles={{
+              boaderRadius: "10px",
+            }}
+          >
+            <div className="model_styles modal-heading">
+              <h2>Trainer's Locations</h2>
+              <p>
+                {trainerProfileData?.trainingFacilityLocation ||
+                  "No trainer locations"}
+              </p>
+              {/* {trainingVenue?.label === "Trainer's Location" ? (
+              ) : (
+                <p>
+                  {trainerProfileData?.serviceableNeighbourHood ||
+                    "No neighbourhood locations"}
+                </p>
+              )} */}
+            </div>
+          </Modal>
+        ) : null}
       </div>
 
       {/* Mobile Layout */}

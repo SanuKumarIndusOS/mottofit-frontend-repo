@@ -50,6 +50,27 @@ const TrainerCardOutsideFC = (props) => {
             const areaOfExpertise = outSideData[
               data
             ]?.areaOfExpertise?.toString();
+
+            const oneOnOnePricingValues = Object.values(
+              outSideData[data]?.oneOnOnePricing || {}
+            );
+
+            const socialSessionPricingValues = Object.values(
+              outSideData[data]?.socialSessionPricing || {}
+            );
+            const classSessionPricingValues = Object.values(
+              outSideData[data]?.classSessionPricing || {}
+            );
+
+            const allSessionPricing = [
+              ...oneOnOnePricingValues,
+              ...socialSessionPricingValues,
+              ...classSessionPricingValues,
+            ]
+              .map((price) => parseFloat(price))
+              .filter((price) => !isNaN(price) && price > 0);
+
+            const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
             return (
               <div className="card" key={index}>
                 <div className="inner_card">
@@ -100,14 +121,7 @@ const TrainerCardOutsideFC = (props) => {
                     book a session
                     <BlackCircleButton />
                     <p>
-                      from
-                      <span>
-                        {
-                          outSideData[data]?.oneOnOnePricing
-                            ?.inPersonAtClientLocation
-                        }{" "}
-                        $
-                      </span>
+                      from <span>${sortedPricingList[0] || ""}</span>
                     </p>
                   </button>
                 </div>
