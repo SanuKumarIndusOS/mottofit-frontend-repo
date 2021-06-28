@@ -49,7 +49,6 @@
           font-family: "Montserrat", sans-serif;
         }
         p {
-         
           text-align: center;
           letter-spacing: 0.27px;
           color: #696969;
@@ -329,20 +328,44 @@
     .seesion_inner_container {
       .session_inner_wrapper {
         .session_tabs {
+          .session_tabs_inner {
+            .sesstion_tabslist {
+              flex-direction: column;
+              align-items: center;
+              height: 200px;
+
+              .rwt__tablist {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 2rem;
+              }
+
+              .session_location_dd {
+                border: none;
+                flex-direction: column;
+                display: contents;
+                .session_venue
+                {
+                  width: 70vw;
+                  border: 2px solid #bcbcbc;
+                  border-radius: 20px;
+                }
+              }
+
+              
+            }
+          }
           .inPerson_tab_inner {
-           display: flex;
-           justify-content: center;
-           .inPerson_tab_wrapper
-           {
-             display: flex;
-             flex-direction: column;
+            display: flex;
+            justify-content: center;
+            .inPerson_tab_wrapper {
+              display: flex;
+              flex-direction: column;
 
-             .session_cards
-             {
-               margin-top: 2rem;
-             }
-
-           }
+              .session_cards {
+                margin-top: 2rem;
+              }
+            }
           }
         }
       }
