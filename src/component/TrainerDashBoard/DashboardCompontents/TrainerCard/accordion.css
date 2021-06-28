@@ -1,0 +1,67 @@
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.accordion-wrapper {
+  width: 100%;
+}
+
+.accordion-wrapper + * {
+  margin-top: 0.5em;
+}
+
+.accordion-wrapper .cyanRadio_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.accordion-item {
+  overflow: hidden;
+  -webkit-transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+  transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+  height: auto;
+  max-height: 9999px;
+}
+
+.accordion-item.collapsed {
+  max-height: 0;
+  -webkit-transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+  transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+}
+
+.accordion-title {
+  font-weight: 500;
+  cursor: pointer;
+  color: black;
+  margin: 1em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: "Montserrat";
+  font-size: 22px;
+  width: 100%;
+}
+
+.accordion-title::after {
+  content: url("../../../../assets/files/SVG/Cross 2.svg");
+}
+
+.accordion-title:hover, .accordion-title.open {
+  color: #666;
+}
+
+.accordion-title.open::after {
+  content: url("../../../../assets/files/SVG/Negative.svg");
+}
+/*# sourceMappingURL=accordion.css.map */

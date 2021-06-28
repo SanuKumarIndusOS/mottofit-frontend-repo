@@ -332,27 +332,49 @@
             .sesstion_tabslist {
               flex-direction: column;
               align-items: center;
-              height: 200px;
 
               .rwt__tablist {
                 display: flex;
                 justify-content: center;
                 margin-bottom: 2rem;
+
+                button {
+                  width: 35vw;
+                }
+              }
+
+              .rwt__tab:nth-child(2) {
+                button {
+                  width: 35vw;
+                }
               }
 
               .session_location_dd {
                 border: none;
                 flex-direction: column;
                 display: contents;
-                .session_venue
-                {
+                .session_venue {
+                  padding-right: 1rem;
                   width: 70vw;
                   border: 2px solid #bcbcbc;
                   border-radius: 20px;
+                  margin-bottom: 20px;
                 }
               }
+            }
 
-              
+            .text-right {
+              text-align: center !important;
+            }
+
+            .w-100 {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .session_venue
+              {
+                width: 70vw;
+              }
             }
           }
           .inPerson_tab_inner {

@@ -1,0 +1,84 @@
+.inner_card {
+  position: relative;
+  -webkit-transition: all 1.5s ease;
+  transition: all 1.5s ease;
+  width: 332px !important;
+  height: 200px !important;
+  border-radius: 20px 20px 0 0;
+}
+
+.inner_card img {
+  display: block;
+  -webkit-transition: all 1.5s ease;
+  transition: all 1.5s ease;
+  width: 332px !important;
+  height: 200px;
+  border-radius: 20px 20px 0 0;
+}
+
+.content_card {
+  position: absolute;
+  top: 45%;
+}
+
+.content_card .circle_hover_card {
+  background-color: #53bfd2;
+  width: 80px;
+  height: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  text-align: center;
+  border-radius: 100px;
+  position: relative;
+  top: -70px;
+  right: 0;
+  left: 230px;
+}
+
+.content_card .circle_hover_card p {
+  padding: 0 0.5em !important;
+  text-align: center;
+  font-size: 10px;
+  margin: 0 auto;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.overlay_card {
+  position: absolute;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-transition: ease 0.5s;
+  transition: ease 0.5s;
+  background: rgba(7, 7, 7, 0.301) !important;
+  opacity: 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.inner_card:hover .overlay_card {
+  opacity: 1;
+}
+/*# sourceMappingURL=styleCard.css.map */

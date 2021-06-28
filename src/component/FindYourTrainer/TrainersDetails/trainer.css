@@ -1,0 +1,238 @@
+.wrapper_heading {
+  margin: 2em 0 1em 0;
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.wrapper_heading h2 {
+  text-align: center;
+  margin: 0 0 0.5em 0;
+  line-height: 30px;
+  font-size: 40px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+}
+
+.wrapper_heading p {
+  text-align: center;
+  letter-spacing: 0.27px;
+  color: #696969;
+  width: 80%;
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: normal;
+  font-family: "Montserrat", sans-serif;
+}
+
+.row {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 920px) {
+  .row {
+    -ms-grid-columns: auto;
+        grid-template-columns: auto;
+  }
+}
+
+.row .card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1em 0;
+  width: 314px;
+  height: 450px !important;
+  border-radius: 50px;
+  background: #fff !important;
+}
+
+.row .card .card-img-top {
+  width: 314px;
+  height: 200px;
+  border-radius: 20px 20px 0 0;
+}
+
+.row .card .card-body {
+  width: 314px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.row .card .card-body h3 {
+  text-align: center;
+  letter-spacing: -0.35px;
+  color: #161616;
+  line-height: 45px;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: "Cormorant Garamond", sans-serif;
+}
+
+.row .card .card-body h6 {
+  text-align: center;
+  letter-spacing: 0.9px;
+  color: #898989;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+  font-family: 'Montserrat';
+  font-size: 14px !important;
+  font-weight: 600;
+}
+
+.row .card .card-body p {
+  text-align: center;
+  letter-spacing: 0.24px;
+  color: #898989;
+  font-family: 'Montserrat';
+  font-size: 12px !important;
+  font-weight: 500;
+}
+
+.row .card .card-body p button {
+  outline: none;
+  border: none;
+  text-align: center;
+  text-decoration: underline;
+  letter-spacing: 0.24px;
+  color: #2C2C2C;
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+}
+
+.row .card .card-button button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 0.6em !important;
+  margin: 0 auto;
+  width: 314px;
+  height: 62px;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 0 0 20px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+}
+
+.row .card .card-button button p {
+  margin: 0;
+  text-transform: lowercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+}
+
+.row .card .card-button button img {
+  position: absolute;
+  left: 50%;
+  width: 40px;
+}
+
+.row .card .card-button button span {
+  margin-left: 0.3em;
+  font-size: 16px;
+  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
+}
+
+.showmore {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1em 0 3em 0;
+  padding: 0 1em;
+}
+
+.showmore .showmore_btn {
+  outline: none;
+  border: none;
+  padding: 0 1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.showmore .showmore_btn img {
+  margin: 0 0 0 1em;
+}
+
+.readmore {
+  margin: 0 0.5em;
+  text-decoration: underline;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+
+.readmore:hover {
+  color: #53BFD2;
+}
+
+.no_match {
+  color: #53BFD2;
+  text-align: center;
+  margin: 2em 0 0em 0;
+  line-height: 30px;
+  font-size: 40px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+}
+/*# sourceMappingURL=trainer.css.map */

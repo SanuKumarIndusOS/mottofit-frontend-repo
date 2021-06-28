@@ -1,0 +1,45 @@
+.inPersonBG {
+  background: #fff;
+  position: relative;
+  top: 9px;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.inPersonBG .list_inPerson {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1em;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.inPersonBG .list_inPerson .radio_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-transform: uppercase;
+}
+
+.inPersonBG .list_inPerson span {
+  color: #898989;
+  font-family: "Montserrat", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+}
+
+.inPersonBG .list_inPerson span :nth-child(1) {
+  color: #53bfd2;
+}
+
+.inperson_checkbox {
+  color: #898989;
+}
+/*# sourceMappingURL=inPersonStyles.css.map */
