@@ -326,6 +326,9 @@
     height: 2000px;
     width: 100%;
     .seesion_inner_container {
+      .link_wrapper {
+       display: none;
+      }
       .session_inner_wrapper {
         .session_tabs {
           .session_tabs_inner {
@@ -371,8 +374,7 @@
               display: flex;
               align-items: center;
               justify-content: center;
-              .session_venue
-              {
+              .session_venue {
                 width: 70vw;
               }
             }
