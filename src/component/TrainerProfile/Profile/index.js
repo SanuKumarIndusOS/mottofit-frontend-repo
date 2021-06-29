@@ -84,6 +84,11 @@ const TrainerProfileClass = ({
       selectedTrainerData: {
         ...trainerProfileData,
       },
+      bookingData: {
+        start_slot: trainerstartSlot,
+        end_slot: trainerEndSlot,
+        date: DateSlot,
+      },
     };
 
     // console.log("logged", reduxData);

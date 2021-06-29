@@ -98,8 +98,10 @@ const UserPaymentsFC = ({
       venue: sessionData?.trainingVenue?.value,
       price: sessionData?.price,
       sessionMode: queryQbject?.availability?.value,
-      paidByUser: true,
+      paidByUser: trainingtype === "1on1",
     };
+
+    // console.log(scheduleBody);
 
     scheduleSession(scheduleBody)
       .then((res) => {
@@ -273,7 +275,10 @@ const UserPaymentsFC = ({
                       <img src={SheduleIcon} alt="icon" />
                       <h4>
                         {trainingDate ||
-                          getFormatDate(selectedTimes[0], "YYYY-MM-DD")}
+                          getFormatDate(
+                            selectedTimes[0],
+                            "MMMM Do, YYYY hh:mm A."
+                          )}
                       </h4>
                     </div>
                   </div>
