@@ -92,6 +92,7 @@
                     .inner_input {
                       display: flex;
                       width: 100%;
+                      position: relative;
                       input {
                         height: 45px;
                         width: 100%;
@@ -107,8 +108,9 @@
                         outline: none;
                       }
                       img {
-                        position: relative;
-                        right: 50px;
+                        position: absolute;
+                        right: 15px;
+                        bottom: 0.9rem;
                       }
                     }
                     .TF_input {
@@ -144,8 +146,9 @@
                           outline: none;
                         }
                         img {
-                          position: relative;
-                          right: 50px;
+                          position: absolute;
+                          right: 15px;
+                          // bottom: 2.3rem;
                         }
                       }
                     }

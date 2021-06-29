@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 
 import Jonn from "../../../assets/files/TrainerDashboard/Message/Image 1.png";
+import { UserAvatar } from "../UserAvatar";
 
 export const ChatItem = ({
   currentChannelMembers = [],
@@ -28,14 +29,16 @@ export const ChatItem = ({
           <span className="msg-time">{msgTime}</span>
         </div>
 
-        <img
+        <UserAvatar {...currentChatItemOwner} />
+
+        {/* <img
           src={currentChatItemOwner?.profilePicture || Jonn}
           alt="icon"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = Jonn;
           }}
-        />
+        /> */}
       </div>
     );
   } else {

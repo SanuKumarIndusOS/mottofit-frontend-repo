@@ -83,6 +83,10 @@ const TrainWithFriendsClass = ({
     const { name, value } = event.target;
     values[index][name] = value;
 
+    if (errors["friendsData"] && errors["friendsData"][index]) {
+      let tempErrors = { ...errors };
+      tempErrors["friendsData"][index][name] = undefined;
+    }
     // console.log(values);
 
     setFriendsInput(values);
@@ -184,20 +188,59 @@ const TrainWithFriendsClass = ({
       paidByUser: iWillPay,
     };
 
-    // console.log(payload);
-    editSessionData.body = payload;
+    let validateData = {
+      friendsData: [...friendsInput],
+    };
 
-    api({ ...editSessionData })
-      .then((data) => {
-        Toast({ type: "success", message: data.message || "Success" });
-        history.push("/users/dashboard/session");
-      })
-      .catch((err) => {
-        Toast({ type: "error", message: err.message || "Error" });
-      });
+    validateFields(validateData);
+
+    // console.log(payload);
+    // editSessionData.body = payload;
+
+    // api({ ...editSessionData })
+    //   .then((data) => {
+    //     Toast({ type: "success", message: data.message || "Success" });
+    //     history.push("/users/dashboard/session");
+    //   })
+    //   .catch((err) => {
+    //     Toast({ type: "error", message: err.message || "Error" });
+    //   });
   };
 
   const validationRules = () => {
+    validate.validators.array = (arrayItems, itemConstraints) => {
+      const arrayItemErrors = arrayItems.reduce((errors, item, index) => {
+        let isAnyData = Object.values({
+          friendEmail: item.friendEmail,
+          friendName: item.friendName,
+          friendPhone: item.friendName,
+        }).some((data) => data !== "");
+
+        console.log(isAnyData);
+
+        let error;
+
+        let itemValidation = { ...item };
+
+        if (index === 0 || isAnyData) {
+          error = validate(itemValidation, itemConstraints);
+          console.log(error);
+        }
+        if (error) {
+          errors[index] = error;
+        } else {
+          errors[index] = null;
+        }
+
+        return errors;
+      }, []);
+
+      let isNoError = arrayItemErrors.every((error) => error === null);
+
+      console.log(isNoError);
+
+      return isNoError ? null : arrayItemErrors;
+    };
     let nameValidation = {
       format: {
         pattern: /^[a-zA-Z ]*$/,
@@ -212,43 +255,42 @@ const TrainWithFriendsClass = ({
       },
     };
     return {
-      firstName: {
-        presence: {
-          allowEmpty: false,
-          message: "^First name is required",
+      friendsData: {
+        array: {
+          friendEmail: {
+            presence: {
+              allowEmpty: false,
+              message: "^Email is required",
+            },
+            email: true,
+          },
+          friendPhone: {
+            presence: {
+              allowEmpty: false,
+              message: "^Phone number is required",
+            },
+            length: {
+              minimum: 8,
+              tooShort: "^Invalid number",
+              maximum: 15,
+              tooLong: "^Invalid number",
+            },
+          },
+          friendName: {
+            presence: {
+              allowEmpty: false,
+              message: "^Name is required",
+            },
+            ...nameValidation,
+          },
         },
-        ...nameValidation,
-      },
-      location: {
-        presence: {
-          allowEmpty: false,
-          message: "^Location is required",
-        },
-        ...nameValidation,
-      },
-      phoneNo: {
-        presence: {
-          allowEmpty: false,
-          message: "^Phone number is required",
-        },
-        length: {
-          minimum: 8,
-          tooShort: "^Invalid number",
-          maximum: 15,
-          tooLong: "^Invalid number",
-        },
-      },
-      email: {
-        presence: {
-          allowEmpty: false,
-          message: "^Email is required",
-        },
-        email: true,
       },
     };
   };
 
   const validateFields = (data) => {
+    // console.log(data, validationRules());
+
     let fieldInvalidList = validate(data, validationRules());
 
     if (fieldInvalidList !== undefined) {
@@ -400,6 +442,7 @@ const TrainWithFriendsClass = ({
                             return (
                               <div key={index} className="TF_wrapper_input">
                                 <h4>Friend #{index + 1}</h4>
+                                {/* <div> */}
                                 <div className="inner_input">
                                   <input
                                     type="text"
@@ -412,42 +455,76 @@ const TrainWithFriendsClass = ({
                                   />
                                   <img src={Person} alt="icon" />
                                 </div>
-
+                                {errors["friendsData"] &&
+                                  errors["friendsData"][index] &&
+                                  errors["friendsData"][index][
+                                    "friendName"
+                                  ] && (
+                                    <span className="text-danger fs-12 d-inline-block w-100">
+                                      {
+                                        errors["friendsData"][index][
+                                          "friendName"
+                                        ][0]
+                                      }
+                                    </span>
+                                  )}
                                 <div className="TF_input">
                                   <div className="inner_input">
-                                    <input
-                                      type="text"
-                                      placeholder="Email"
-                                      name="friendEmail"
-                                      value={input.friendEmail}
-                                      onChange={(event) =>
-                                        handleChangeFriendInput(index, event)
-                                      }
-                                    />
-                                    <img src={Mail} alt="icon" />
+                                    <div className="w-100">
+                                      <div className="position-relative">
+                                        <input
+                                          type="text"
+                                          placeholder="Email"
+                                          name="friendEmail"
+                                          value={input.friendEmail}
+                                          onChange={(event) =>
+                                            handleChangeFriendInput(
+                                              index,
+                                              event
+                                            )
+                                          }
+                                        />
 
-                                    <ReactPhoneInput
-                                      disableDropdown
-                                      countryCodeEditable={false}
-                                      country="us"
-                                      placeholder="Phone"
-                                      inputProps={{
-                                        name: "phone",
-                                      }}
-                                      specialLabel=""
-                                      value={input.friendPhone}
-                                      name="phoneNo"
-                                      onChange={(e) => {
-                                        handleChangeFriendInput(index, {
-                                          target: {
-                                            name: "friendPhone",
-                                            value: e,
-                                          },
-                                        });
-                                      }}
-                                    />
+                                        <img src={Mail} alt="icon" />
+                                      </div>
+                                      {errors["friendsData"] &&
+                                        errors["friendsData"][index] &&
+                                        errors["friendsData"][index][
+                                          "friendEmail"
+                                        ] && (
+                                          <span className="text-danger fs-12 d-inline-block w-100">
+                                            {
+                                              errors["friendsData"][index][
+                                                "friendEmail"
+                                              ][0]
+                                            }
+                                          </span>
+                                        )}
+                                    </div>
+                                    <div className="w-100">
+                                      <div className="position-relative">
+                                        <ReactPhoneInput
+                                          disableDropdown
+                                          countryCodeEditable={false}
+                                          country="us"
+                                          placeholder="Phone"
+                                          inputProps={{
+                                            name: "phone",
+                                          }}
+                                          specialLabel=""
+                                          value={input.friendPhone}
+                                          name="phoneNo"
+                                          onChange={(e) => {
+                                            handleChangeFriendInput(index, {
+                                              target: {
+                                                name: "friendPhone",
+                                                value: e,
+                                              },
+                                            });
+                                          }}
+                                        />
 
-                                    {/* <input
+                                        {/* <input
                                       type="text"
                                       placeholder="Phone Number"
                                       name="phone"
@@ -456,7 +533,23 @@ const TrainWithFriendsClass = ({
                                         handleChangeFriendInput(index, event)
                                       }
                                     /> */}
-                                    <img src={Phone} alt="icon" />
+
+                                        <img src={Phone} alt="icon" />
+                                      </div>
+                                      {errors["friendsData"] &&
+                                        errors["friendsData"][index] &&
+                                        errors["friendsData"][index][
+                                          "friendPhone"
+                                        ] && (
+                                          <span className="text-danger fs-12 d-inline-block w-100">
+                                            {
+                                              errors["friendsData"][index][
+                                                "friendPhone"
+                                              ][0]
+                                            }
+                                          </span>
+                                        )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -597,25 +690,31 @@ const AccordationService = ({ data }) => {
             </div>
 
             <div className="session-block">
-              {item?.price && (
+              {item?.price ? (
                 <div className="session-item d-flex aling-items-center">
                   <p>{item.session}</p>
                   <p className="ml-auto">
                     {item.isPrice ? `$${item?.price} / Person` : item?.price}
                   </p>
                 </div>
+              ) : (
+                ""
               )}
-              {item.price1 && (
+              {item.price1 ? (
                 <div className="session-item d-flex aling-items-center">
                   <p>{item.session1}</p>
                   <p className="ml-auto">{`$${item?.price1} / Person`}</p>
                 </div>
+              ) : (
+                ""
               )}
-              {item.price2 && (
+              {item.price2 ? (
                 <div className="session-item d-flex aling-items-center">
                   <p>{item.session2}</p>
                   <p className="ml-auto">{`$${item?.price2} / Person`}</p>
                 </div>
+              ) : (
+                ""
               )}
             </div>
           </div>

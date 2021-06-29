@@ -28,12 +28,12 @@ class ChatBoxClass extends Component {
       prevProps.activeChannelMessages.length
     ) {
       this.scrollToMessageListBottom();
-      console.log("hrllo");
+      // console.log("hrllo");
     }
     if (this.props.isLoading === false && prevProps.isLoading === true) {
       setTimeout(() => {
         this.scrollToMessageListBottom();
-        console.log("hrllo", this.props.isLoading, prevProps.isLoading);
+        // console.log("hrllo", this.props.isLoading, prevProps.isLoading);
       }, 100);
     }
   }

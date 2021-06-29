@@ -103,7 +103,13 @@ const MyProfileFC = ({
   };
 
   //Image
-  const [imagesList, setImageList] = useState(["", "", "", "", ""]);
+  const [imagesList, setImageList] = useState([
+    { url: "" },
+    { url: "" },
+    { url: "" },
+    { url: "" },
+    { url: "" },
+  ]);
 
   // input certification
   const [inputCertificatesFields, setInputCertificatesFields] = useState([
@@ -130,7 +136,7 @@ const MyProfileFC = ({
     setInputCertificatesFields(values);
   };
   const handleMoreImageUploadArea = () => {
-    imagesList.push("");
+    imagesList.push({ url: "" });
     setImageList([...imagesList]);
   };
   const handleInputChange = (e, trainingType) => {
@@ -190,7 +196,7 @@ const MyProfileFC = ({
       serviceableNeighbourHood: serviceableNeighbourHood || "",
       trainingFacilityLocation: trainingFacilityLocation,
       preferedTrainingMode: trainerData?.trainingLocation,
-      images: imagesList.filter((x) => x !== ""),
+      images: imagesList.filter(({ url }) => url !== "").map(({ url }) => url),
       DOB,
       email,
       phoneNumber: phoneNo.includes("+") ? phoneNo : `+${phoneNo}`,
@@ -224,6 +230,7 @@ const MyProfileFC = ({
           location = "",
           virtualMeetingLink = "",
           trainingFacilityLocation = [],
+          trainingFacility = {},
           DOB,
           phoneNumber,
           email,
@@ -257,7 +264,8 @@ const MyProfileFC = ({
         };
 
         if (data.images && data.images.length !== 0) {
-          setImageList(data.images);
+          let tempImages = data.images.map((img) => ({ url: img }));
+          setImageList(tempImages);
         }
         if (
           data.willingToTravel !== null &&
@@ -268,6 +276,11 @@ const MyProfileFC = ({
         if (certification) {
           setInputCertificatesFields(certification);
         }
+
+        if (trainingFacility !== null) {
+          setSelectedValue(trainingFacility ? "a" : "b");
+        }
+
         setTrainerData(storeData.details);
         updateTrainerDetails(storeData);
       })
@@ -283,13 +296,46 @@ const MyProfileFC = ({
     if (image !== undefined) {
       const fd = new FormData();
 
-      fd.append("images", image);
-      fileUploadApi(fd).then((data) => {
-        const { urlPath } = data;
+      imagesList[index] = {
+        url: URL.createObjectURL(image),
+        isUploaded: false,
+      };
 
-        imagesList[index] = urlPath;
-        setImageList([...imagesList]);
-      });
+      setImageList([...imagesList]);
+
+      const configData = {
+        onUploadProgress: function (progressEvent) {
+          var percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+
+          document.getElementsByClassName("upload-img-overlay")[
+            index
+          ].innerText = `Uploading ${percentCompleted}%`;
+          // console.log(payload);
+        },
+      };
+
+      fd.append("images", image);
+      fileUploadApi(fd, configData)
+        .then((data) => {
+          const { urlPath } = data;
+
+          imagesList[index] = {
+            url: urlPath,
+            isUploaded: true,
+          };
+          document.getElementsByClassName("upload-img-overlay")[
+            index
+          ].innerText = ``;
+          setImageList([...imagesList]);
+        })
+        .catch((err) => {
+          document.getElementsByClassName("upload-img-overlay")[
+            index
+          ].innerText = `Failed`;
+          Toast({ type: "error", message: err.message || "Error" });
+        });
     }
   };
 
@@ -361,7 +407,7 @@ const MyProfileFC = ({
   };
 
   const handleRemoveImage = (index) => {
-    imagesList[index] = "";
+    imagesList[index] = { url: "" };
     setImageList([...imagesList]);
   };
 
@@ -435,14 +481,22 @@ const MyProfileFC = ({
                         return (
                           <div className="col-3 w-100 mb-3 px-2" key={index}>
                             <div className="image-upload-card btn-file-input">
-                              {list !== "" ? (
+                              {list.url !== "" ? (
                                 <button className="uploaded-image">
                                   <img
-                                    src={list}
+                                    src={list?.url}
                                     alt={"card-image"}
                                     accept="image/*"
                                   />
-                                  <div id="overlay"></div>
+                                  {/* {&& ()} */}
+                                  <div
+                                    id="overlay"
+                                    className={`${
+                                      list.isUploaded === false
+                                        ? "d-flex fs-12 align-items-center justify-content-center"
+                                        : ""
+                                    } upload-img-overlay`}
+                                  ></div>
                                   <img
                                     src={CloseIcon}
                                     className="remove-image"

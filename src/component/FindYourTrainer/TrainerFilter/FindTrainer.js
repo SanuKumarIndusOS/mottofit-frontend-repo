@@ -32,10 +32,22 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
+import { Toast } from "service/toast";
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (trainerQueryData.location && trainerQueryData.date) {
+      let selectedCity = Object.values(inPerson).filter(
+        ({ value }) => value === trainerQueryData?.city
+      )[0];
+
+      if (selectedCity?.name) {
+        let tempInperson = { ...inPerson };
+        tempInperson[selectedCity?.name] = { ...selectedCity, selected: true };
+
+        setInPerson(tempInperson);
+      }
+
       let payload = {
         query: {
           location: trainerQueryData?.location,
@@ -90,10 +102,10 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   });
 
   const [inPerson, setInPerson] = useState({
-    newYork: { value: "New York City", selected: false },
-    miami: { value: "Miami", selected: false },
-    hamptons: { value: "Hamptons", selected: false },
-    palmBeach: { value: "Palm Beach", selected: false },
+    newYork: { value: "New York City", selected: false, name: "newYork" },
+    miami: { value: "Miami", selected: false, name: "miami" },
+    hamptons: { value: "Hamptons", selected: false, name: "hamptons" },
+    palmBeach: { value: "Palm Beach", selected: false, name: "palmBeach" },
   });
 
   const bestMatchRef = useRef(null);
@@ -288,6 +300,12 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       },
     };
 
+    if (queryObject.location === "inPerson" && !city) {
+      setInPersonDD(true);
+
+      return Toast({ type: "error", message: "City is mandatory" });
+    }
+
     updateTrainerDetails(payload);
 
     getTrainerDataByQuery(payload.query);
@@ -359,7 +377,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
         //Availability Dropdown
         if (DropdownTrainerAvailabilityState) {
-          setDropdownTrainerAvailabilityState(!DropdownTrainerAvailabilityState);
+          setDropdownTrainerAvailabilityState(
+            !DropdownTrainerAvailabilityState
+          );
         }
 
         //TrainingType DropDown

@@ -20,6 +20,7 @@ import {
   updateMessagingDetails,
 } from "action/messagingAct";
 import { getFormatDate } from "service/helperFunctions";
+import { UserAvatar } from "component/common/UserAvatar";
 const Chatt = require("twilio-chat");
 
 const TrainerMessageClass = ({
@@ -116,7 +117,9 @@ const TrainerMessageClass = ({
                           let lastUserProfilePic =
                             item["members"]?.filter(
                               ({ userId }) => userId === from
-                            )[0] || {};
+                            )[0] ||
+                            item["members"][0] ||
+                            {};
 
                           return (
                             <div
@@ -124,7 +127,7 @@ const TrainerMessageClass = ({
                               key={`${Date.now()}_all_${index}`}
                             >
                               <div className="inner_link">
-                                <img
+                                {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -133,7 +136,10 @@ const TrainerMessageClass = ({
                                     e.target.onerror = null;
                                     e.target.src = Jenny;
                                   }}
-                                />
+                                /> */}
+                                {/* {JSON.stringify(lastUserProfilePic)} */}
+
+                                <UserAvatar {...lastUserProfilePic} />
 
                                 <div
                                   className="message_link_notify"
@@ -183,14 +189,16 @@ const TrainerMessageClass = ({
                           let lastUserProfilePic =
                             item["members"]?.filter(
                               ({ userId }) => userId === from
-                            )[0] || {};
+                            )[0] ||
+                            item["members"][0] ||
+                            {};
                           return (
                             <div
                               className="contact_item"
                               key={`${Date.now()}_${index}`}
                             >
                               <div className="inner_link">
-                                <img
+                                {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -199,7 +207,8 @@ const TrainerMessageClass = ({
                                     e.target.onerror = null;
                                     e.target.src = Jenny;
                                   }}
-                                />
+                                /> */}
+                                <UserAvatar {...lastUserProfilePic} />
                                 <div
                                   className="message_link_notify"
                                   onClick={() =>
@@ -240,14 +249,16 @@ const TrainerMessageClass = ({
                           let lastUserProfilePic =
                             item["members"]?.filter(
                               ({ userId }) => userId === from
-                            )[0] || {};
+                            )[0] ||
+                            item["members"][0] ||
+                            {};
                           return (
                             <div
                               className="contact_item"
                               key={`${index}_${Date.now()}`}
                             >
                               <div className="inner_link">
-                                <img
+                                {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -256,7 +267,8 @@ const TrainerMessageClass = ({
                                     e.target.onerror = null;
                                     e.target.src = Jenny;
                                   }}
-                                />
+                                /> */}
+                                <UserAvatar {...lastUserProfilePic} />
                                 <div
                                   className="message_link_notify"
                                   onClick={() =>
@@ -297,11 +309,13 @@ const TrainerMessageClass = ({
                           let lastUserProfilePic =
                             item["members"]?.filter(
                               ({ userId }) => userId === from
-                            )[0] || {};
+                            )[0] ||
+                            item["members"][0] ||
+                            {};
                           return (
                             <div className="contact_item">
                               <div className="inner_link">
-                                <img
+                                {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -310,7 +324,8 @@ const TrainerMessageClass = ({
                                     e.target.onerror = null;
                                     e.target.src = Jenny;
                                   }}
-                                />
+                                /> */}
+                                <UserAvatar {...lastUserProfilePic} />
                                 <div
                                   className="message_link_notify"
                                   onClick={() =>

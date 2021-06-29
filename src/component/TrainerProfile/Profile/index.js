@@ -93,6 +93,12 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
+  const isVirtualPresent = trainerProfileData?.preferedTrainingMode.includes(
+    "virtual"
+  );
+  const isInPersonPresent = trainerProfileData?.preferedTrainingMode.includes(
+    "inPerson"
+  );
 
   const handleCopy = () => {
     let profileLink = window?.location?.href;
@@ -192,7 +198,7 @@ const TrainerProfileClass = ({
                       <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
                       <hr />
                       <div className="profile_aside_inner_item">
-                        {virtualSession ? (
+                        {virtualSession && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSession} `}
                             <span>(Virtual Session)</span>
@@ -200,7 +206,7 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPersonAtClientLocation ? (
+                        {inPersonAtClientLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtClientLocation} `}
                             <span>(In Person Session)</span>
@@ -208,7 +214,7 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPersonAtTrainerLocation ? (
+                        {inPersonAtTrainerLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtTrainerLocation} `}
                             <span>(Trainer Location)</span>
@@ -266,7 +272,7 @@ const TrainerProfileClass = ({
                       ) : null}
 
                       <div className="profile_aside_inner_item">
-                        {virtualSessionfor2People ? (
+                        {virtualSessionfor2People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor2People} `}
                             <span>/ Session (Virtual For 2 People)</span>
@@ -274,7 +280,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPeronAtClientLocationfor2People ? (
+                        {inPeronAtClientLocationfor2People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor2People} `}
                             <span>(In person session for 2 people)</span>
@@ -282,7 +289,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPeronAtTrainerLocationfor2People ? (
+                        {inPeronAtTrainerLocationfor2People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor2People} `}
                             <span>(In trainer location for 2 people)</span>
@@ -290,7 +298,7 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {virtualSessionfor3People ? (
+                        {virtualSessionfor3People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor3People} `}
                             <span>/ Session (Virtual For 3 People)</span>
@@ -298,7 +306,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPeronAtClientLocationfor3People ? (
+                        {inPeronAtClientLocationfor3People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor3People} `}
                             <span>(In person session for 3 people)</span>
@@ -306,7 +315,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPeronAtTrainerLocationfor3People ? (
+                        {inPeronAtTrainerLocationfor3People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor3People} `}
                             <span>(In trainer location for 3 people)</span>
@@ -314,7 +324,7 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {virtualSessionfor4People ? (
+                        {virtualSessionfor4People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor4People} `}
                             <span>/ Session (Virtual For 4 People)</span>
@@ -322,7 +332,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPeronAtClientLocationfor4People ? (
+                        {inPeronAtClientLocationfor4People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor4People} `}
                             <span>(In person session for 4 people)</span>
@@ -330,7 +341,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPeronAtTrainerLocationfor4People ? (
+                        {inPeronAtTrainerLocationfor4People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor4People} `}
                             <span>(In trainer location for 4 people)</span>
@@ -388,7 +400,7 @@ const TrainerProfileClass = ({
                         </Modal>
                       ) : null}
                       <div className="profile_aside_inner_item">
-                        {virtualSessionfor15People ? (
+                        {virtualSessionfor15People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor15People} `}
                             <span>Flat Rate Class (For 5-15 People)</span>
@@ -396,7 +408,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPersonAtclientLocationfor15People ? (
+                        {inPersonAtclientLocationfor15People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtclientLocationfor15People} `}
                             <span>(In Person Session) (For 5-15 People)</span>
@@ -404,7 +417,8 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        {inPersonAttrainerLocationfor15People ? (
+                        {inPersonAttrainerLocationfor15People &&
+                        isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAttrainerLocationfor15People} `}
                             <span>(Trainer Location) (For 5-15 People)</span>

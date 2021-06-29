@@ -67,9 +67,15 @@ export const trainerDetail = () => (dispatch, getState, { api }) => {
 };
 
 //file Upload
-export const fileUpload = (body) => (dispatch, getState, { api }) => {
+export const fileUpload = (body, configData) => (
+  dispatch,
+  getState,
+  { api }
+) => {
   return new Promise((resolve, reject) => {
     const { fileUpload } = TrainerApi;
+
+    if (configData) fileUpload.configObj = configData;
 
     api({ ...fileUpload, body })
       .then(({ data }) => {

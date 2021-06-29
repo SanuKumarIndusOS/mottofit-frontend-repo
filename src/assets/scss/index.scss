@@ -366,3 +366,7 @@ select {
 .rwt__tablist:not([aria-orientation="vertical"]) {
   border: 0;
 }
+
+.pointer-none {
+  pointer-events: none;
+}

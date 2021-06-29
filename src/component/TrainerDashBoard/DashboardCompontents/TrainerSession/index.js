@@ -9,6 +9,7 @@ import BlueArrowButton from "../../../common/BlueArrowButton";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { getTrainerSessionDetails } from "action/trainerAct";
+import { cancelSession } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
@@ -16,12 +17,18 @@ import { TrainerApi } from "../../../../service/apiVariables";
 import { api } from "../../../../service/api";
 import { Toast } from "../../../../service/toast";
 
-const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
+const TrainerSessionFC = ({
+  sessionData,
+  getTrainerSessionDetailsApi,
+  cancelSession,
+}) => {
   const [trainerSessionData, setTrainerSessionData] = useState({
     upcomingSessions: [],
     pastSessions: [],
     onGoingSessions: [],
   });
+
+  const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
     getAllDetails();
   }, []);
@@ -80,6 +87,21 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
       });
   };
 
+  const handleCancel = (sessionId) => {
+    let payload = {
+      sessionId,
+      sessionStatus: "cancelled",
+    };
+    // setisLoading(true);
+
+    // cancelSession(payload)
+    //   .then(() => {
+    //     setisLoading(false);
+    //     getAllDetails();
+    //   })
+    //   .catch(() => setisLoading(false));
+  };
+
   return (
     <>
       <div className="outter_user_container">
@@ -101,6 +123,8 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
                     <TabOne
                       datas={trainerSessionData.upcomingSessions}
                       handleSessionStatus={handleSessionStatus}
+                      handleCancel={handleCancel}
+                      isLoading={isLoading}
                     />
                   </TabPanel>
                 </div>
@@ -134,7 +158,12 @@ const TrainerSessionFC = ({ sessionData, getTrainerSessionDetailsApi }) => {
   );
 };
 
-const TabOne = ({ datas = [], handleSessionStatus }) => {
+const TabOne = ({
+  datas = [],
+  handleSessionStatus,
+  handleCancel,
+  isLoading,
+}) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
@@ -173,7 +202,16 @@ const TabOne = ({ datas = [], handleSessionStatus }) => {
                           {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
                               <button>Reschedule</button>
-                              <button>Cancel</button>
+                              {/* {data.sessionStatus !== "cancelled" ? ( */}
+                              <button
+                                disabled={isLoading}
+                                onClick={() => handleCancel(data.id)}
+                              >
+                                Cancel
+                              </button>
+                              {/* ) : (
+                               
+                              )} */}
                               <button
                                 className="text-primary"
                                 onClick={() =>
@@ -398,6 +436,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getTrainerSessionDetailsApi: getTrainerSessionDetails,
+      cancelSession,
     },
     dispatch
   );

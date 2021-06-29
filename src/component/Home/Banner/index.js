@@ -17,14 +17,16 @@ import { bindActionCreators } from "redux";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
 import { useHistory } from "react-router-dom";
+import { Toast } from "service/toast";
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const [locationKeys, setLocationKeys] = useState([]);
   const history = useHistory();
   const [DropdownState, setDropdownState] = useState(false);
 
-  const [DropdownAvailabilityState, setDropdownAvailabilityState] =
-    useState(false);
+  const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
+    false
+  );
   const [InPersonDD, setInPersonDD] = useState(false);
 
   const [virtualMarkup, setvirtualMarkup] = useState(
@@ -44,10 +46,10 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const [showMenu, setshowMenu] = useState(false);
 
   const [inPerson, setInPerson] = useState({
-    newYork: { value: "New York City", selected: false },
-    miami: { value: "Miami", selected: false },
-    hamptons: { value: "Hamptons", selected: false },
-    palmBeach: { value: "Palm Beach", selected: false },
+    newYork: { value: "New York City", selected: false, name: "newYork" },
+    miami: { value: "Miami", selected: false, name: "miami" },
+    hamptons: { value: "Hamptons", selected: false, name: "hamptons" },
+    palmBeach: { value: "Palm Beach", selected: false, name: "palmBeach" },
   });
 
   const handleChange = (value) => {
@@ -164,6 +166,12 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             ?.value || "",
       },
     };
+
+    if (queryObject.location === "inPerson" && !payload.query.city) {
+      setInPersonDD(true);
+
+      return Toast({ type: "error", message: "City is mandatory" });
+    }
 
     updateTrainerDetails(payload);
 

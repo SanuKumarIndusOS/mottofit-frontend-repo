@@ -409,36 +409,44 @@ const UserBookSessionFC = ({
                   >
                     <div className="sesstion_tabslist container">
                       <TabList className="w-50">
-                        {isVirtualPresent && (
-                          <Tab tabFor="virtual">
-                            <button
-                              onClick={() => setPreferedTrainingMode("virtual")}
-                              className={`${
-                                preferedTrainingMode === "virtual"
-                                  ? "active"
-                                  : ""
-                              }`}
-                            >
-                              Virtual
-                            </button>
-                          </Tab>
-                        )}
-                        {isInPersonPresent && (
-                          <Tab tabFor="inPerson">
-                            <button
-                              onClick={() =>
-                                setPreferedTrainingMode("inPerson")
-                              }
-                              className={`${
-                                preferedTrainingMode === "inPerson"
-                                  ? "active"
-                                  : ""
-                              }`}
-                            >
-                              In Person
-                            </button>
-                          </Tab>
-                        )}
+                        {/* {JSON.stringify(isVirtualPresent)} */}
+                        {/* {isVirtualPresent && ( */}
+                        <Tab tabFor="virtual" disabled={!isVirtualPresent}>
+                          <button
+                            onClick={() => setPreferedTrainingMode("virtual")}
+                            className={`${
+                              preferedTrainingMode === "virtual" ? "active" : ""
+                            } ${
+                              !isVirtualPresent
+                                ? "disable-btn pointer-none"
+                                : ""
+                            }`}
+                            disabled={!isVirtualPresent}
+                          >
+                            Virtual
+                          </button>
+                        </Tab>
+                        {/* )} */}
+                        {/* {isInPersonPresent && ( */}
+                        {/* {JSON.stringify(isInPersonPresent)} */}
+                        <Tab tabFor="inPerson" disabled={!isInPersonPresent}>
+                          <button
+                            onClick={() => setPreferedTrainingMode("inPerson")}
+                            className={`${
+                              preferedTrainingMode === "inPerson"
+                                ? "active"
+                                : ""
+                            } ${
+                              !isVirtualPresent
+                                ? "disable-btn pointer-none"
+                                : ""
+                            }`}
+                            disabled={!isInPersonPresent}
+                          >
+                            In Person
+                          </button>
+                        </Tab>
+                        {/* )} */}
                       </TabList>
 
                       {isInPersonPresent &&
