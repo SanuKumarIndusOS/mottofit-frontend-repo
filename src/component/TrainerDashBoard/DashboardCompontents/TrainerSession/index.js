@@ -92,14 +92,16 @@ const TrainerSessionFC = ({
       sessionId,
       sessionStatus: "cancelled",
     };
-    // setisLoading(true);
+    // console.log(payload);
 
-    // cancelSession(payload)
-    //   .then(() => {
-    //     setisLoading(false);
-    //     getAllDetails();
-    //   })
-    //   .catch(() => setisLoading(false));
+    setisLoading(true);
+
+    cancelSession(payload)
+      .then(() => {
+        setisLoading(false);
+        getAllDetails();
+      })
+      .catch(() => setisLoading(false));
   };
 
   return (
@@ -199,33 +201,40 @@ const TabOne = ({
                               {data.loc}
                             </h5>
                           </div>
-                          {data.sessionStatus !== "completed" ? (
-                            <div className="TP_USession_data_buttons">
-                              <button>Reschedule</button>
-                              {/* {data.sessionStatus !== "cancelled" ? ( */}
+                          <div className="d-flex align-items-center mt-2 TP_USession_data_buttons">
+                            {data.sessionStatus !== "cancelled" ? (
                               <button
-                                disabled={isLoading}
-                                onClick={() => handleCancel(data.id)}
+                                disabled={true}
+                                // onClick={() => handleCancel(data.id)}
+                                className={`mr-2 disable-btn`}
                               >
                                 Cancel
                               </button>
-                              {/* ) : (
-                               
-                              )} */}
-                              <button
-                                className="text-primary"
-                                onClick={() =>
-                                  handleSessionStatus(data.id, "completed")
-                                }
-                              >
-                                Complete
-                              </button>
-                            </div>
-                          ) : (
-                            <div>
-                              <p>Completed</p>
-                            </div>
-                          )}
+                            ) : (
+                              <div className="d-flex align-items-center">
+                                <p className="text-danger text-underline mb-0 fs-15 fw-600 mr-2">
+                                  Cancelled
+                                </p>
+                              </div>
+                            )}
+                            {data.sessionStatus !== "completed" ? (
+                              <div className="TP_USession_data_buttons mt-0">
+                                <button>Reschedule</button>
+                                <button
+                                  className="text-primary"
+                                  onClick={() =>
+                                    handleSessionStatus(data.id, "completed")
+                                  }
+                                >
+                                  Complete
+                                </button>
+                              </div>
+                            ) : (
+                              <div>
+                                <p>Completed</p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                       <hr />
@@ -246,7 +255,7 @@ const TabOne = ({
       </div>
       <div className="tabPanel_overview_right">
         <div className="TB_overview_right">
-          <div className="TB_overview_row_one">
+          {/* <div className="TB_overview_row_one">
             <div className="row_one_data">
               <h2>Want to Do More for Less?</h2>
               <p>
@@ -257,7 +266,7 @@ const TabOne = ({
                 Get A pass <BlueArrowButton />{" "}
               </Link>
             </div>
-          </div>
+          </div> */}
 
           <div className="TB_overview_row_two">
             <div className="row_two_data">
@@ -331,7 +340,9 @@ const TabTwo = ({ datas = [], handleSessionStatus }) => {
                           {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
                               <button>Reschedule</button>
-                              <button>Cancel</button>
+                              <button className="disable-btn" disabled>
+                                Cancel
+                              </button>
                               <button
                                 className="text-primary"
                                 onClick={() =>

@@ -248,18 +248,28 @@ const TabOne = ({
                         </div>
                         <div className="TP_USession_data_buttons">
                           <button>Reschedule</button>
+                          {/* {tabname !== "Previous" && (
+                            <> */}
                           {data.sessionStatus !== "cancelled" ? (
-                            <button
-                              disabled={isLoading}
-                              onClick={() => handleCancel(data.id)}
-                            >
-                              Cancel
-                            </button>
+                            <>
+                              {tabname !== "Previous" ? (
+                                <button
+                                  disabled={isLoading}
+                                  onClick={() => handleCancel(data.id)}
+                                >
+                                  Cancel
+                                </button>
+                              ) : (
+                                ""
+                              )}
+                            </>
                           ) : (
                             <button className="text-danger" disabled={true}>
                               Cancelled
                             </button>
                           )}
+                          {/* </>
+                          )} */}
 
                           {data.trainingType !== "1on1" && (
                             <div className="button_boarder">

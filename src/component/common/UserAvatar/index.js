@@ -12,7 +12,9 @@ export const UserAvatar = ({ userName = "", profilePicture = "" }) => {
       ? tempLastName[tempLastName.length - 1]
       : userName[userName.length - 1];
 
-  let initialLetters = `${firstLetter}${lastLetter}`.toUpperCase();
+  let initialLetters = `${firstLetter || "A"}${
+    lastLetter || "Z"
+  }`.toUpperCase();
 
   const backgroundColor = ["green", "red", "brown", "orange", "blue"];
 

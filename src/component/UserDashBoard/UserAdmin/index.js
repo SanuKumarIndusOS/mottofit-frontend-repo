@@ -6,6 +6,7 @@ import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 import { getUserDetail } from "action/userAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { UserAvatar } from "component/common/UserAvatar";
 const UserDashboardClass = ({ children, getUserDetail }) => {
   const [userData, setUserData] = useState();
 
@@ -15,13 +16,18 @@ const UserDashboardClass = ({ children, getUserDetail }) => {
     });
   }, []);
 
+  let nameProps = {
+    userName: `${userData?.firstName || ""} ${userData?.lastName || ""}`,
+  };
+
   return (
     <>
       <div className="admin_container">
         <div className="admin_sidenav">
           <div className="admin_profile">
             <div className="profilepic">
-              <img
+              <UserAvatar {...userData} {...nameProps} />
+              {/* <img
                 className="profile_pic"
                 src={userData === "" ? userData.profilePicture : ""}
                 onError={(e) => {
@@ -29,7 +35,7 @@ const UserDashboardClass = ({ children, getUserDetail }) => {
                   e.target.src =
                     "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
                 }}
-              />
+              /> */}
             </div>
             <h2 style={{ textTransform: "capitalize" }}>
               {userData ? userData.firstName : "Not Added"}&nbsp;

@@ -192,19 +192,17 @@ const TrainWithFriendsClass = ({
       friendsData: [...friendsInput],
     };
 
-    validateFields(validateData);
+    if (!validateFields(validateData)) return;
+    editSessionData.body = payload;
 
-    // console.log(payload);
-    // editSessionData.body = payload;
-
-    // api({ ...editSessionData })
-    //   .then((data) => {
-    //     Toast({ type: "success", message: data.message || "Success" });
-    //     history.push("/users/dashboard/session");
-    //   })
-    //   .catch((err) => {
-    //     Toast({ type: "error", message: err.message || "Error" });
-    //   });
+    api({ ...editSessionData })
+      .then((data) => {
+        Toast({ type: "success", message: data.message || "Success" });
+        history.push("/users/dashboard/session");
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+      });
   };
 
   const validationRules = () => {
