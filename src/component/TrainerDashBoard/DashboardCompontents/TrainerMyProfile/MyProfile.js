@@ -83,7 +83,7 @@ const MyProfileFC = ({
   });
 
   //state for radio buttons
-  const [selectedValue, setSelectedValue] = React.useState("a");
+  const [selectedValue, setSelectedValue] = React.useState("");
   const [selectedOneValue, setSelectedOneValue] = React.useState("");
 
   const [errors, setErrors] = useState({});
@@ -195,6 +195,7 @@ const MyProfileFC = ({
       servicableLocation: [servicableLocation],
       serviceableNeighbourHood: serviceableNeighbourHood || "",
       trainingFacilityLocation: trainingFacilityLocation,
+      trainingFacility: selectedValue === "a",
       preferedTrainingMode: trainerData?.trainingLocation,
       images: imagesList.filter(({ url }) => url !== "").map(({ url }) => url),
       DOB,
