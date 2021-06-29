@@ -135,6 +135,7 @@ const TrainerSessionFC = ({
                     <TabTwo
                       datas={trainerSessionData.upcomingSessions}
                       handleSessionStatus={handleSessionStatus}
+                      handleCancel={handleCancel}
                     />
                   </TabPanel>
                 </div>
@@ -204,9 +205,9 @@ const TabOne = ({
                           <div className="d-flex align-items-center mt-2 TP_USession_data_buttons">
                             {data.sessionStatus !== "cancelled" ? (
                               <button
-                                disabled={true}
-                                // onClick={() => handleCancel(data.id)}
-                                className={`mr-2 disable-btn`}
+                                // disabled={true}
+                                onClick={() => handleCancel(data.id)}
+                                className={`mr-2`}
                               >
                                 Cancel
                               </button>
@@ -301,7 +302,7 @@ const TabOne = ({
   );
 };
 
-const TabTwo = ({ datas = [], handleSessionStatus }) => {
+const TabTwo = ({ datas = [], handleSessionStatus, handleCancel }) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
@@ -340,7 +341,7 @@ const TabTwo = ({ datas = [], handleSessionStatus }) => {
                           {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
                               <button>Reschedule</button>
-                              <button className="disable-btn" disabled>
+                              <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>
                               <button
