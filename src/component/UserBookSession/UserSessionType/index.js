@@ -703,6 +703,38 @@ const UserBookSessionFC = ({
                                   experience.
                                 </p>
                               </div>
+                              {open ? (
+                                <Modal
+                                  open={open}
+                                  onClose={() => setOpen(false)}
+                                  center
+                                  closeIcon={closeIcon}
+                                  container={myRef.current}
+                                  styles={{
+                                    boaderRadius: "10px",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      textAlign: "center",
+                                      height: "300px",
+                                      width: "600px",
+                                      padding: "2em",
+                                    }}
+                                    className="model_styles"
+                                  >
+                                    <h2>Want to Train with Friends?</h2>
+                                    <p>
+                                      Make your workout social & fun, while
+                                      saving money! Complete your payment and
+                                      add friends to your session simply by
+                                      sending them an invite. Once they accept
+                                      your invite, your session rate will
+                                      automatically be adjusted.
+                                    </p>
+                                  </div>
+                                </Modal>
+                              ) : null}
                               <div className="session_card_inner">
                                 <h6>
                                   {`$${
@@ -711,7 +743,12 @@ const UserBookSessionFC = ({
                                     ]?.value
                                   }`}
                                   <span>
-                                    / Session <img src={QMark} alt="icon" />
+                                    / Session{" "}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
                                   </span>
                                 </h6>
 
@@ -749,6 +786,38 @@ const UserBookSessionFC = ({
                                   experience at lower costs.
                                 </p>
                               </div>
+                              {open ? (
+                                <Modal
+                                  open={open}
+                                  onClose={() => setOpen(false)}
+                                  center
+                                  closeIcon={closeIcon}
+                                  container={myRef.current}
+                                  styles={{
+                                    boaderRadius: "10px",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      textAlign: "center",
+                                      height: "300px",
+                                      width: "600px",
+                                      padding: "2em",
+                                    }}
+                                    className="model_styles"
+                                  >
+                                    <h2>Want to Train with Friends?</h2>
+                                    <p>
+                                      Make your workout social & fun, while
+                                      saving money! Complete your payment and
+                                      add friends to your session simply by
+                                      sending them an invite. Once they accept
+                                      your invite, your session rate will
+                                      automatically be adjusted.
+                                    </p>
+                                  </div>
+                                </Modal>
+                              ) : null}
                               <div className="session_card_inner">
                                 <h6>
                                   {`$${
@@ -763,7 +832,11 @@ const UserBookSessionFC = ({
                                         trainingVenue?.value
                                       ]?.label
                                     }`}{" "}
-                                    <img src={QMark} alt="icon" />
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
                                   </span>
                                 </h6>
                                 <img src={Social} alt="icon" />
@@ -802,6 +875,38 @@ const UserBookSessionFC = ({
                                   split the cost evenly.
                                 </p>
                               </div>
+                              {open ? (
+                                <Modal
+                                  open={open}
+                                  onClose={() => setOpen(false)}
+                                  center
+                                  closeIcon={closeIcon}
+                                  container={myRef.current}
+                                  styles={{
+                                    boaderRadius: "10px",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      textAlign: "center",
+                                      height: "300px",
+                                      width: "600px",
+                                      padding: "2em",
+                                    }}
+                                    className="model_styles"
+                                  >
+                                    <h2>Want to Train with Friends?</h2>
+                                    <p>
+                                      Make your workout social & fun, while
+                                      saving money! Complete your payment and
+                                      add friends to your session simply by
+                                      sending them an invite. Once they accept
+                                      your invite, your session rate will
+                                      automatically be adjusted.
+                                    </p>
+                                  </div>
+                                </Modal>
+                              ) : null}
                               <div className="session_card_inner">
                                 <h6>
                                   {`$${
@@ -810,7 +915,12 @@ const UserBookSessionFC = ({
                                     ]?.value
                                   }`}
                                   <span>
-                                    / 15 People <img src={QMark} alt="icon" />
+                                    / 15 People{" "}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
                                   </span>
                                 </h6>
                                 <img src={ClassIcon} alt="icon" />
