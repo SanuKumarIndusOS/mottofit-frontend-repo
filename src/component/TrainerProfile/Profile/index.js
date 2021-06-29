@@ -93,10 +93,10 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent = trainerProfileData?.preferedTrainingMode.includes(
+  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
     "virtual"
   );
-  const isInPersonPresent = trainerProfileData?.preferedTrainingMode.includes(
+  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
     "inPerson"
   );
 

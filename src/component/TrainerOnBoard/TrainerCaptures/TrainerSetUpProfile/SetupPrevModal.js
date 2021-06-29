@@ -31,6 +31,13 @@ const SetupPrevModal = ({
     inPersonAtTrainerLocation = "",
   } = trainerdetailData?.oneOnOnePricing || {};
 
+  const isVirtualPresent = trainerdetailData?.preferedTrainingMode?.includes(
+    "virtual"
+  );
+  const isInPersonPresent = trainerdetailData?.preferedTrainingMode?.includes(
+    "inPerson"
+  );
+
   const {
     virtualSessionfor2People = "",
     virtualSessionfor3People = "",
@@ -127,7 +134,7 @@ const SetupPrevModal = ({
                           <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
                           <hr />
                           <div className="profile_aside_inner_item">
-                            {virtualSession ? (
+                            {virtualSession && isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSession} `}
                                 <span>(Virtual Session)</span>
@@ -135,7 +142,7 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPersonAtClientLocation ? (
+                            {inPersonAtClientLocation && isInPersonPresent ? (
                               <h6>
                                 {`$${inPersonAtClientLocation} `}
                                 <span>(In Person Session)</span>
@@ -143,7 +150,7 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPersonAtTrainerLocation ? (
+                            {inPersonAtTrainerLocation && isInPersonPresent ? (
                               <h6>
                                 {`$${inPersonAtTrainerLocation} `}
                                 <span>(Trainer Location)</span>
@@ -172,7 +179,7 @@ const SetupPrevModal = ({
                           <hr />
 
                           <div className="profile_aside_inner_item">
-                            {virtualSessionfor2People ? (
+                            {virtualSessionfor2People && isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor2People} `}
                                 <span>/ Session (Virtual For 2 People)</span>
@@ -180,7 +187,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPeronAtClientLocationfor2People ? (
+                            {inPeronAtClientLocationfor2People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor2People} `}
                                 <span>(In person session for 2 people)</span>
@@ -188,7 +196,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPeronAtTrainerLocationfor2People ? (
+                            {inPeronAtTrainerLocationfor2People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor2People} `}
                                 <span>(In trainer location for 2 people)</span>
@@ -196,7 +205,7 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {virtualSessionfor3People ? (
+                            {virtualSessionfor3People && isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor3People} `}
                                 <span>/ Session (Virtual For 3 People)</span>
@@ -204,7 +213,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPeronAtClientLocationfor3People ? (
+                            {inPeronAtClientLocationfor3People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor3People} `}
                                 <span>(In person session for 3 people)</span>
@@ -212,7 +222,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPeronAtTrainerLocationfor3People ? (
+                            {inPeronAtTrainerLocationfor3People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor3People} `}
                                 <span>(In trainer location for 3 people)</span>
@@ -220,7 +231,7 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {virtualSessionfor4People ? (
+                            {virtualSessionfor4People && isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor4People} `}
                                 <span>/ Session (Virtual For 4 People)</span>
@@ -228,7 +239,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPeronAtClientLocationfor4People ? (
+                            {inPeronAtClientLocationfor4People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor4People} `}
                                 <span>(In person session for 4 people)</span>
@@ -236,7 +248,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPeronAtTrainerLocationfor4People ? (
+                            {inPeronAtTrainerLocationfor4People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor4People} `}
                                 <span>(In trainer location for 4 people)</span>
@@ -263,7 +276,7 @@ const SetupPrevModal = ({
                           <hr />
 
                           <div className="profile_aside_inner_item">
-                            {virtualSessionfor15People ? (
+                            {virtualSessionfor15People && isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor15People} `}
                                 <span>Flat Rate Class (For 5-15 People)</span>
@@ -271,7 +284,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPersonAtclientLocationfor15People ? (
+                            {inPersonAtclientLocationfor15People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPersonAtclientLocationfor15People} `}
                                 <span>
@@ -281,7 +295,8 @@ const SetupPrevModal = ({
                             ) : (
                               ""
                             )}
-                            {inPersonAttrainerLocationfor15People ? (
+                            {inPersonAttrainerLocationfor15People &&
+                            isInPersonPresent ? (
                               <h6>
                                 {`$${inPersonAttrainerLocationfor15People} `}
                                 <span>
