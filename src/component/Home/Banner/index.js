@@ -30,7 +30,8 @@ import FormLabel from "@material-ui/core/FormLabel";
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   //Responsive search
   const [Calvalue, onChangeCal] = useState(new Date());
-  const [IPCvalue, setIPCValue] = React.useState("");
+  const [IPCvalue, setIPCValue] = useState("");
+  const [VerticalVal, setVerticalVal] = useState("");
 
   const handleIPCChange = (event) => {
     setIPCValue(event.target.value);
@@ -412,7 +413,90 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               <hr></hr>
             </div>
             <div className="vertical">
-              Training Vertical
+              <div> Training Vertical</div>
+
+              <div className="listv">
+                {( VerticalVal !== "Strength & HIIT" || VerticalVal === "" ) ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Strength & HIIT");
+                    }}
+                  >
+                    STRENGTH
+                  </div>
+                ) : (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    STRENGTH selected
+                  </div>
+                )}
+
+                {(VerticalVal !== "Boxing" || VerticalVal === "" ) ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Boxing");
+                    }}
+                  >
+                    BOXING
+                  </div>
+                ) : (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    BOXING selected
+                  </div>
+                )}
+
+                {(VerticalVal !== "Yoga" || VerticalVal === "") ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Yoga");
+                    }}
+                  >
+                    YOGA
+                  </div>
+                ) : (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    YOGA selected
+                  </div>
+                )}
+
+                {(VerticalVal !== "Pilates" || VerticalVal === "") ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Pilates");
+                    }}
+                  >
+                    PILATES
+                  </div>
+                ) : (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    PILATES selected
+                  </div>
+                )}
+              </div>
+
               <hr></hr>
             </div>
             <div className="schedule">
