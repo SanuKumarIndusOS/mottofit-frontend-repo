@@ -4,6 +4,12 @@
     @media screen and (max-width: 1024px) {
         width: auto;
     }
+
+    @media screen and (max-width: 600px) {
+        width: 100%;
+
+       
+    }
 }
 .close_login {
     position: relative;
@@ -327,4 +333,13 @@
             }
         }
     }
+}
+
+
+@media only screen and (max-width: 600px) {
+
+ .outter_container
+        {
+           width: 100%;
+        }
 }

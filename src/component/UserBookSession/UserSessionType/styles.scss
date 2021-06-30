@@ -49,7 +49,6 @@
           font-family: "Montserrat", sans-serif;
         }
         p {
-          width: 810px;
           text-align: center;
           letter-spacing: 0.27px;
           color: #696969;
@@ -317,6 +316,82 @@
         background: #ffffff;
         border: 2px solid #bcbcbc;
         border-radius: 30px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .session_outter_container {
+    height: 2000px;
+    width: 100%;
+    .seesion_inner_container {
+      .link_wrapper {
+       display: none;
+      }
+      .session_inner_wrapper {
+        .session_tabs {
+          .session_tabs_inner {
+            .sesstion_tabslist {
+              flex-direction: column;
+              align-items: center;
+
+              .rwt__tablist {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 2rem;
+
+                button {
+                  width: 35vw;
+                }
+              }
+
+              .rwt__tab:nth-child(2) {
+                button {
+                  width: 35vw;
+                }
+              }
+
+              .session_location_dd {
+                border: none;
+                flex-direction: column;
+                display: contents;
+                .session_venue {
+                  padding-right: 1rem;
+                  width: 70vw;
+                  border: 2px solid #bcbcbc;
+                  border-radius: 20px;
+                  margin-bottom: 20px;
+                }
+              }
+            }
+
+            .text-right {
+              text-align: center !important;
+            }
+
+            .w-100 {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .session_venue {
+                width: 70vw;
+              }
+            }
+          }
+          .inPerson_tab_inner {
+            display: flex;
+            justify-content: center;
+            .inPerson_tab_wrapper {
+              display: flex;
+              flex-direction: column;
+
+              .session_cards {
+                margin-top: 2rem;
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -569,3 +569,41 @@
   height: 92px;
   border-radius: 50px;
 }
+
+@media only screen and (max-width: 600px) {
+  .user_payment_outer_container {
+    .user_payment_inner_container {
+      .user_payment_grid {
+        display: contents;
+
+        .user_payment_right {
+          .user_details_wrapper {
+            .user_coupon button {
+              position: inherit;
+            }
+          }
+        }
+
+        .user_payment_left_outter {
+          .user_payment_left {
+            .user_payment_left_wrapper {
+              .user_payment_section {
+                .inner_payment_form {
+                  .payment_form_radio {
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 8rem;
+                    margin-bottom: 2rem;
+                    align-items: flex-start;
+                  }
+                }
+
+                .payment_input{ .payment_input_inner{ padding: 0 0.5em; } }  
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

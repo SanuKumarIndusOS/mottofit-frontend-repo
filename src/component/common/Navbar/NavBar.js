@@ -21,6 +21,8 @@ import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 
 const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
+  const [activeMobMenu, setActiveMobMenu] = useState(false);
+
   const [showModel, setShowModel] = useState(false);
 
   const [dropdownOpen, setOpen] = useState(false);
@@ -124,6 +126,51 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
           </div>
         </div>
       </nav>
+
+      {/* Mobile header Markup  */}
+      <div className="mobile_navbar">
+        <div className="mobile_hamburger_menu">ham</div>
+        <div className="mobile_nav_logo">logo</div>
+        <div
+          className="mobile_profile_menu"
+          onClick={() => {
+            setActiveMobMenu(true);
+          }}
+        >
+          pro
+        </div>
+      </div>
+
+      {/* user Menu items */}
+
+      <div className="login-item1">
+        <img src={Line2} alt="icon" />
+
+        <img src={Person} alt="icon" onClick={toggleModel} />
+
+        <SignIn showModel={isModelOpen} setShowModel={toggleModel} />
+      </div>
+
+      {activeMobMenu ? (
+        <div className="mobile_profile_menu_items">
+          <div
+            className="pro_menu_container_left"
+            onClick={() => {
+              setActiveMobMenu(false);
+            }}
+          ></div>
+          <div className="pro_menu_container_right">
+            <div className="pro_menu_header"></div>
+            <div className="pro_menu_content">
+              <div className="menu_li">MY SESSIONS</div>
+              <div className="menu_li">MESSAGES</div>
+              <div className="menu_li">NOTIFICATIONS</div>
+              <div className="menu_li">SETTINGS</div>
+              <div className="menu_li">LOGOUT</div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 };
