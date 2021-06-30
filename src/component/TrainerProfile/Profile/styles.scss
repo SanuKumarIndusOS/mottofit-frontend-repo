@@ -582,16 +582,29 @@
               .profile_right_item2 {
                 .profile_images_grid {
                   .profile_images_container {
-                    display: none;
+                    flex-direction: column;
+
+                    .box1 {
+                      width: 100%;
+                    }
+                    .box2 {
+                      width: 50%;
+                      margin-left: 0px;
+                    }
+                    .box3 {
+                      width: 20%;
+                      margin-left: 0px;
+                    }
+                    .box4 {
+                      width: 20%;
+                      margin-left: 0px;
+                    }
                   }
                 }
               }
 
               .profile_right_item3 {
                 .profile_item3_inner {
-                 
-                    display: block;
-                 
                 }
               }
             }
