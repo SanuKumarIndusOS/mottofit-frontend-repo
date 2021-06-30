@@ -134,7 +134,7 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
         <div className="mobile_hamburger_menu">ham</div>
         <div className="mobile_nav_logo">
           <Link to="">
-            <img src={LogoImage} alt="logo" style={{height:"30px"}} />
+            <img src={LogoImage} alt="logo" style={{ height: "30px" }} />
           </Link>
         </div>
         <div
@@ -175,16 +175,35 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                   setActiveMobMenu(false);
                 }}
               ></div>
+
               <div className="pro_menu_container_right">
                 <div className="pro_menu_header"></div>
                 <div className="pro_menu_content">
-                  <div className="menu_li">
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      history.push("/users/dashboard/session");
+                      setActiveMobMenu(false);
+                    }}
+                  >
                     <p>MY SESSIONS</p>
                   </div>
-                  <div className="menu_li">
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      history.push("/users/dashboard/message");
+                      setActiveMobMenu(false);
+                    }}
+                  >
                     <p>MESSAGES</p>
                   </div>
-                  <div className="menu_li">
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      history.push("/users/dashboard/notification");
+                      setActiveMobMenu(false);
+                    }}
+                  >
                     <p>NOTIFICATIONS</p>
                   </div>
                   <div className="menu_li">
