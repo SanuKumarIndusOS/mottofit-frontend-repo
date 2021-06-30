@@ -29,6 +29,8 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
 
   const toggleDrop = () => setOpen(!dropdownOpen);
 
+  let userType = parseInt(localStorage.getItem("type"));
+
   const openModal = () => {
     setShowModel((prev) => !prev);
   };
@@ -37,7 +39,7 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
     localStorage.getItem("token") || localStorage.getItem("admin-token");
 
   const handleDashboard = () => {
-    let userType = parseInt(localStorage.getItem("type"));
+    // let userType = parseInt(localStorage.getItem("type"));
 
     switch (userType) {
       case 1:
@@ -130,45 +132,73 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
       {/* Mobile header Markup  */}
       <div className="mobile_navbar">
         <div className="mobile_hamburger_menu">ham</div>
-        <div className="mobile_nav_logo">logo</div>
+        <div className="mobile_nav_logo">
+          <Link to="">
+            <img src={LogoImage} alt="logo" style={{height:"30px"}} />
+          </Link>
+        </div>
         <div
           className="mobile_profile_menu"
-          onClick={() => {
-            setActiveMobMenu(true);
-          }}
+          // onClick={() => {
+          //   setActiveMobMenu(true);
+          // }}
         >
-          pro
+          {!isUserLoggedIn ? (
+            <div className="login-item1">
+              <img src={Line2} alt="icon" />
+
+              <img src={Person} alt="icon" onClick={toggleModel} />
+
+              <SignIn showModel={isModelOpen} setShowModel={toggleModel} />
+            </div>
+          ) : (
+            <img
+              src={Person}
+              alt="icon"
+              onClick={() => {
+                setActiveMobMenu(true);
+              }}
+            />
+          )}
         </div>
       </div>
 
       {/* user Menu items */}
 
-      <div className="login-item1">
-        <img src={Line2} alt="icon" />
-
-        <img src={Person} alt="icon" onClick={toggleModel} />
-
-        <SignIn showModel={isModelOpen} setShowModel={toggleModel} />
-      </div>
-
       {activeMobMenu ? (
-        <div className="mobile_profile_menu_items">
-          <div
-            className="pro_menu_container_left"
-            onClick={() => {
-              setActiveMobMenu(false);
-            }}
-          ></div>
-          <div className="pro_menu_container_right">
-            <div className="pro_menu_header"></div>
-            <div className="pro_menu_content">
-              <div className="menu_li">MY SESSIONS</div>
-              <div className="menu_li">MESSAGES</div>
-              <div className="menu_li">NOTIFICATIONS</div>
-              <div className="menu_li">SETTINGS</div>
-              <div className="menu_li">LOGOUT</div>
+        <div>
+          {userType === 3 ? (
+            <div className="mobile_profile_menu_items">
+              <div
+                className="pro_menu_container_left"
+                onClick={() => {
+                  setActiveMobMenu(false);
+                }}
+              ></div>
+              <div className="pro_menu_container_right">
+                <div className="pro_menu_header"></div>
+                <div className="pro_menu_content">
+                  <div className="menu_li">
+                    <p>MY SESSIONS</p>
+                  </div>
+                  <div className="menu_li">
+                    <p>MESSAGES</p>
+                  </div>
+                  <div className="menu_li">
+                    <p>NOTIFICATIONS</p>
+                  </div>
+                  <div className="menu_li">
+                    <p>SETTINGS</p>
+                  </div>
+                  <div className="menu_li" onClick={logout}>
+                    <p>LOGOUT</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div>Trainer Menu</div>
+          )}
         </div>
       ) : null}
     </>
