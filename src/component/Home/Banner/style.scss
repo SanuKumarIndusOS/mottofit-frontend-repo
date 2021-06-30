@@ -245,6 +245,11 @@
               color: #898989;
               display: flex;
 
+              .sel
+              {
+                border-bottom: 5px solid #53bfd2;
+              }
+
               .slash {
                 color: #53bfd2;
                 margin-left: 10px;

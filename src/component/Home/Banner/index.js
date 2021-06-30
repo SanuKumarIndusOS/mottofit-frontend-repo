@@ -33,6 +33,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const [IPCvalue, setIPCValue] = useState("");
   const [Avalvalue, setAvalValue] = useState("");
   const [VerticalVal, setVerticalVal] = useState("");
+  const [LocationVal, setLocationVal] = useState("virtual");
 
   const handleIPCChange = (event) => {
     setIPCValue(event.target.value);
@@ -401,49 +402,100 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
           <div className="content">
-            <div className="clear-filters">Clear All Filters</div>
+            <div
+              className="clear-filters"
+              onClick={() => {
+                setLocationVal("virtual");
+                setIPCValue("");
+                setVerticalVal("");
+                setAvalValue("");
+                onChangeCal(new Date());
+              }}
+            >
+              Clear All Filters
+            </div>
             <div className="location">
               <div>Location</div>
-              <div className="element">
-                Virtual <div className="slash">/</div> In Person
-              </div>
-              <div>
-                <FormControl component="fieldset">
-                  {IPCvalue}
-                  <RadioGroup
-                    aria-label="gender"
-                    name="gender1"
-                    value={IPCvalue}
-                    onChange={handleIPCChange}
+
+              {LocationVal === "virtual" ? (
+                <div className="element">
+                  <div
+                    className="sel"
+                    onClick={() => {
+                      setLocationVal("virtual");
+                    }}
                   >
-                    <FormControlLabel
-                      value="New York City"
-                      control={<Radio />}
-                      label="NEW YORK"
-                    />
-                    <FormControlLabel
-                      value="Miami"
-                      control={<Radio />}
-                      label="MIAMI"
-                    />
-                    <FormControlLabel
-                      value="Hamptons"
-                      control={<Radio />}
-                      label="HAMPTONS"
-                    />
-                    <FormControlLabel
-                      value="Palm Beach"
-                      control={<Radio />}
-                      label="PALM BEACH"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </div>
+                    Virtual
+                  </div>
+                  <div className="slash">/</div>
+                  <div
+                    onClick={() => {
+                      setLocationVal("inPerson");
+                    }}
+                  >
+                    In Person
+                  </div>
+                </div>
+              ) : (
+                <div className="element">
+                  <div
+                    onClick={() => {
+                      setLocationVal("virtual");
+                    }}
+                  >
+                    Virtual
+                  </div>
+                  <div className="slash">/</div>
+                  <div
+                    className="sel"
+                    onClick={() => {
+                      setLocationVal("inPerson");
+                    }}
+                  >
+                    In Person
+                  </div>
+                </div>
+              )}
+              {LocationVal === "inPerson" ? (
+                <div>
+                  <FormControl component="fieldset">
+                    {/* {IPCvalue} */}
+                    <RadioGroup
+                      aria-label="gender"
+                      name="gender1"
+                      value={IPCvalue}
+                      onChange={handleIPCChange}
+                    >
+                      <FormControlLabel
+                        value="New York City"
+                        control={<Radio />}
+                        label="NEW YORK"
+                      />
+                      <FormControlLabel
+                        value="Miami"
+                        control={<Radio />}
+                        label="MIAMI"
+                      />
+                      <FormControlLabel
+                        value="Hamptons"
+                        control={<Radio />}
+                        label="HAMPTONS"
+                      />
+                      <FormControlLabel
+                        value="Palm Beach"
+                        control={<Radio />}
+                        label="PALM BEACH"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              ) : null}
+
               <hr></hr>
             </div>
             <div className="vertical">
               <div> Training Vertical</div>
-              {VerticalVal}
+              {/* {VerticalVal} */}
               <div className="listv">
                 {VerticalVal !== "Strength & HIIT" || VerticalVal === "" ? (
                   <div
@@ -529,13 +581,13 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               <hr></hr>
             </div>
             <div className="schedule">
-              Schedule {moment(Calvalue).format("YYYY-MM-DD")}
+              Schedule <br></br> {moment(Calvalue).format("YYYY/MM/DD")}
               <Calendar onChange={onChangeCal} value={Calvalue} />
               <hr></hr>
             </div>
             <div className="availability">
               <div>Availability</div>
-              {Avalvalue}
+              {Avalvalue} <br></br>
               <FormControl component="fieldset">
                 <RadioGroup
                   aria-label="gender"
@@ -577,7 +629,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               </FormControl>
             </div>
           </div>
-          <div className="search" onClick={search_action_mob}>APPLY ALL FILTERS </div>
+          <div className="search" onClick={search_action_mob}>
+            APPLY ALL FILTERS{" "}
+          </div>
         </div>
       </div>
     </div>
