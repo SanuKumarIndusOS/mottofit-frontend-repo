@@ -24,6 +24,7 @@ import { history } from "helpers";
 import { STRIPE_URL } from "../../../helpers/baseURL";
 import { getFormatDate, convertToESTMs } from "service/helperFunctions";
 import { Toast } from "service/toast";
+import { UserAvatar } from "component/common/UserAvatar";
 
 const stripePromise = loadStripe(STRIPE_URL);
 
@@ -156,6 +157,13 @@ const UserPaymentsFC = ({
       return history.push("/trainer/find");
   }, []);
 
+  let userData = {
+    profilePicture: tempTrainerData?.profilePicture,
+    userName: `${tempTrainerData?.firstName || ""} ${
+      tempTrainerData?.lastName || ""
+    }`,
+  };
+
   return (
     <>
       <div className="user_payment_outer_container">
@@ -247,14 +255,10 @@ const UserPaymentsFC = ({
               </div>
               <div className="user_payment_right">
                 <div className="user_payment_profile">
-                  <img
-                    src={tempTrainerData?.profilePicture || Jenny}
-                    alt="icon"
-                  />
+                  <UserAvatar {...userData} className="img-md" />
+
                   <div className="up_profile_name">
-                    <h2>{`${tempTrainerData?.firstName || ""} ${
-                      tempTrainerData?.lastName || ""
-                    }`}</h2>
+                    <h2>{userData.userName}</h2>
                     <p>{areaOfExpertise}</p>
                   </div>
                 </div>
