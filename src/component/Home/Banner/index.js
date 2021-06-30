@@ -19,6 +19,7 @@ import { getFormatDate } from "service/helperFunctions";
 import { useHistory } from "react-router-dom";
 import { Toast } from "service/toast";
 import "react-calendar/dist/Calendar.css";
+
 import Calendar from "react-calendar";
 import moment from "moment";
 import Radio from "@material-ui/core/Radio";
@@ -26,6 +27,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+
+
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   //Responsive search
@@ -414,6 +417,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             >
               Clear All Filters
             </div>
+          
             <div className="location">
               <div>Location</div>
 
@@ -493,6 +497,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
               <hr></hr>
             </div>
+         
+       
             <div className="vertical">
               <div> Training Vertical</div>
               {/* {VerticalVal} */}
