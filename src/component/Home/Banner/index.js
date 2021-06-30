@@ -31,10 +31,15 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   //Responsive search
   const [Calvalue, onChangeCal] = useState(new Date());
   const [IPCvalue, setIPCValue] = useState("");
+  const [Avalvalue, setAvalValue] = useState("");
   const [VerticalVal, setVerticalVal] = useState("");
 
   const handleIPCChange = (event) => {
     setIPCValue(event.target.value);
+  };
+
+  const handleAvalChange = (event) => {
+    setAvalValue(event.target.value);
   };
 
   // Desktop
@@ -181,6 +186,30 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         city:
           Object.values(inPerson).filter(({ selected }) => selected)[0]
             ?.value || "",
+      },
+    };
+
+    if (queryObject.location === "inPerson" && !payload.query.city) {
+      setInPersonDD(true);
+
+      return Toast({ type: "error", message: "City is mandatory" });
+    }
+
+    console.log(payload, "payload");
+    updateTrainerDetails(payload);
+
+    history.push("/trainer/find");
+  };
+
+  const search_action_mob = () => {
+    let payload = {
+      query: {
+        location: queryObject.location,
+        date: moment(Calvalue).format("YYYY-MM-DD"),
+        trainingType: VerticalVal,
+        availability: Avalvalue,
+        // inPerson: queryObject.inPerson,
+        city: IPCvalue || "",
       },
     };
 
@@ -388,22 +417,22 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     onChange={handleIPCChange}
                   >
                     <FormControlLabel
-                      value="female"
+                      value="New York City"
                       control={<Radio />}
                       label="NEW YORK"
                     />
                     <FormControlLabel
-                      value="male"
+                      value="Miami"
                       control={<Radio />}
                       label="MIAMI"
                     />
                     <FormControlLabel
-                      value="other"
+                      value="Hamptons"
                       control={<Radio />}
                       label="HAMPTONS"
                     />
                     <FormControlLabel
-                      value="disabled"
+                      value="Palm Beach"
                       control={<Radio />}
                       label="PALM BEACH"
                     />
@@ -414,9 +443,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
             <div className="vertical">
               <div> Training Vertical</div>
-
+              {VerticalVal}
               <div className="listv">
-                {( VerticalVal !== "Strength & HIIT" || VerticalVal === "" ) ? (
+                {VerticalVal !== "Strength & HIIT" || VerticalVal === "" ? (
                   <div
                     className="litem"
                     onClick={() => {
@@ -427,16 +456,16 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   </div>
                 ) : (
                   <div
-                    className="litem"
+                    className="litem_active"
                     onClick={() => {
                       setVerticalVal("");
                     }}
                   >
-                    STRENGTH selected
+                    STRENGTH
                   </div>
                 )}
 
-                {(VerticalVal !== "Boxing" || VerticalVal === "" ) ? (
+                {VerticalVal !== "Boxing" || VerticalVal === "" ? (
                   <div
                     className="litem"
                     onClick={() => {
@@ -447,16 +476,16 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   </div>
                 ) : (
                   <div
-                    className="litem"
+                    className="litem_active"
                     onClick={() => {
                       setVerticalVal("");
                     }}
                   >
-                    BOXING selected
+                    BOXING
                   </div>
                 )}
 
-                {(VerticalVal !== "Yoga" || VerticalVal === "") ? (
+                {VerticalVal !== "Yoga" || VerticalVal === "" ? (
                   <div
                     className="litem"
                     onClick={() => {
@@ -467,16 +496,16 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   </div>
                 ) : (
                   <div
-                    className="litem"
+                    className="litem_active"
                     onClick={() => {
                       setVerticalVal("");
                     }}
                   >
-                    YOGA selected
+                    YOGA
                   </div>
                 )}
 
-                {(VerticalVal !== "Pilates" || VerticalVal === "") ? (
+                {VerticalVal !== "Pilates" || VerticalVal === "" ? (
                   <div
                     className="litem"
                     onClick={() => {
@@ -487,12 +516,12 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   </div>
                 ) : (
                   <div
-                    className="litem"
+                    className="litem_active"
                     onClick={() => {
                       setVerticalVal("");
                     }}
                   >
-                    PILATES selected
+                    PILATES
                   </div>
                 )}
               </div>
@@ -504,9 +533,51 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               <Calendar onChange={onChangeCal} value={Calvalue} />
               <hr></hr>
             </div>
-            <div className="availability">Availability</div>
+            <div className="availability">
+              <div>Availability</div>
+              {Avalvalue}
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="gender"
+                  name="availability"
+                  value={Avalvalue}
+                  onChange={handleAvalChange}
+                >
+                  <FormControlLabel
+                    value="EarlyBird"
+                    control={<Radio />}
+                    label="EARLY BIRD (5AM-8AM)"
+                  />
+                  <FormControlLabel
+                    value="RiseAndShine"
+                    control={<Radio />}
+                    label="RISE & SHINE (8AM-11AM)"
+                  />
+                  <FormControlLabel
+                    value="MidDayBreak1"
+                    control={<Radio />}
+                    label="MID-DAY BREAK (11:30AM-2PM)"
+                  />
+                  <FormControlLabel
+                    value="MidDayBreak2"
+                    control={<Radio />}
+                    label="MID-DAY LUNCHTIME (2AM-5PM)"
+                  />
+                  <FormControlLabel
+                    value="HappyHours"
+                    control={<Radio />}
+                    label="HAPPY HOUR (5PM-8PM)"
+                  />
+                  <FormControlLabel
+                    value="NeverTooLate"
+                    control={<Radio />}
+                    label="NEVER TOO LATE (8PM-11PM)"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
           </div>
-          <div className="search">APPLY ALL FILTERS </div>
+          <div className="search" onClick={search_action_mob}>APPLY ALL FILTERS </div>
         </div>
       </div>
     </div>
