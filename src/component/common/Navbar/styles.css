@@ -246,13 +246,20 @@ input:focus {
   }
 
   .menu_li {
-    height: 60px;
+    height: 65px;
     width: 100%;
     color: #161616;
     font-size: 15px;
+    font-weight: 500;
     font-family: "Montserrat", sans-serif;
     display: flex;
     align-items: center ;
+    padding-left: 1rem;
+  }
+
+  .menu_li_text
+  {
+    margin-left: 2rem;
   }
 
   .menu_li:hover {

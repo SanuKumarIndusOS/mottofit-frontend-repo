@@ -186,7 +186,11 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                       setActiveMobMenu(false);
                     }}
                   >
-                    <p>MY SESSIONS</p>
+                    <img
+                      src="/static/media/Session Icon.4a000f79.svg"
+                      alt="icon"
+                    ></img>
+                    <div className="menu_li_text">MY SESSIONS</div>
                   </div>
                   <div
                     className="menu_li"
@@ -195,7 +199,11 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                       setActiveMobMenu(false);
                     }}
                   >
-                    <p>MESSAGES</p>
+                    <img
+                      src="/static/media/Message Icon.9b7bba91.svg"
+                      alt="icon"
+                    ></img>
+                    <div className="menu_li_text"> MESSAGES </div>
                   </div>
                   <div
                     className="menu_li"
@@ -204,13 +212,26 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                       setActiveMobMenu(false);
                     }}
                   >
-                    <p>NOTIFICATIONS</p>
+                    <img
+                      src="/static/media/Notifications Icon.132c5113.svg"
+                      alt="icon"
+                    ></img>
+                    
+                    <div className="menu_li_text"> NOTIFICATIONS </div>
                   </div>
                   <div className="menu_li">
-                    <p>SETTINGS</p>
+                    <img
+                      src="/static/media/Settings Icon.5ae0ca78.svg"
+                      alt="icon"
+                    />
+                   <div className="menu_li_text"> SETTINGS </div>
                   </div>
                   <div className="menu_li" onClick={logout}>
-                    <p>LOGOUT</p>
+                    <img
+                      src="/static/media/Logout Icon.97acadbd.svg"
+                      alt="icon"
+                    />
+                   <div className="menu_li_text"> LOGOUT </div>
                   </div>
                 </div>
               </div>
