@@ -40,6 +40,7 @@ const TrainerProfileClass = ({
   const [isCarouselOpen, setCarouselOpen] = useState(false);
   const [currItemIndex, setCurrIndex] = useState("");
   const [trainerLocationModal, setTrainerLocationModal] = useState(false);
+  const [viewLocationType, setViewLocationType] = useState("");
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
 
@@ -452,17 +453,54 @@ const TrainerProfileClass = ({
                           {trainerProfileData?.preferedTrainingMode?.toString()}
                         </h4>
                       </div>
-                      <div className="profile_location">
-                        <img src={Tick} alt="icon" />
-                        <h4>
-                          {trainerProfileData && trainerProfileData.location
-                            ? trainerProfileData.location
-                            : "Not Added"}
-                          <Link onClick={() => setTrainerLocationModal(true)}>
-                            View Location
-                          </Link>
-                        </h4>
+                      <div className="profile_location flex-column mt-2">
+                        <p className="w-100 mb-2 text-secondary">
+                          Trainer Location:
+                        </p>
+                        <div className="d-flex align-items-center w-100">
+                          <img src={Tick} alt="icon" />
+                          <h4>
+                            {trainerProfileData && trainerProfileData.location
+                              ? trainerProfileData.location
+                              : "Not Added"}
+                            <Link
+                              onClick={() => {
+                                setTrainerLocationModal(true);
+                                setViewLocationType("trainer");
+                              }}
+                            >
+                              View Location
+                            </Link>
+                          </h4>
+                        </div>
                       </div>
+                      {trainerProfileData &&
+                      trainerProfileData.servicableLocation?.length > 0 ? (
+                        <div className="profile_location flex-column mt-2">
+                          <p className="w-100 mb-2 text-secondary">
+                            Servicable Location:
+                          </p>
+                          <div className="d-flex align-items-center w-100">
+                            <img src={Tick} alt="icon" />
+                            <h4>
+                              {trainerProfileData &&
+                              trainerProfileData.servicableLocation?.length > 0
+                                ? trainerProfileData.servicableLocation[0]
+                                : "Not Added"}
+                              <Link
+                                onClick={() => {
+                                  setTrainerLocationModal(true);
+                                  setViewLocationType("servicable");
+                                }}
+                              >
+                                View Location
+                              </Link>
+                            </h4>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                       <div className="profile_share">
                         <img src={Share} alt="icon" />
                         <Link onClick={handleCopy}>Share Profile</Link>
@@ -567,6 +605,7 @@ const TrainerProfileClass = ({
             open={trainerLocationModal}
             onClose={() => {
               setTrainerLocationModal(false);
+              setViewLocationType("");
             }}
             center
             closeIcon={<img src={CloseIcon} alt="close" />}
@@ -575,10 +614,14 @@ const TrainerProfileClass = ({
             }}
           >
             <div className="model_styles modal-heading">
-              <h2>Trainer's Locations</h2>
+              <h2>{`${
+                viewLocationType === "trainer" ? " Trainer's" : "Servicable"
+              } Locations`}</h2>
               <p>
-                {trainerProfileData?.trainingFacilityLocation ||
-                  "No trainer locations"}
+                {viewLocationType === "trainer"
+                  ? trainerProfileData?.trainingFacilityLocation
+                  : trainerProfileData?.servicableLocation ||
+                    "No trainer locations"}
               </p>
               {/* {trainingVenue?.label === "Trainer's Location" ? (
               ) : (

@@ -158,10 +158,20 @@
   }
 }
 
-.profilepic {
+.profilepic,
+.admin_profile {
   .user-avatar-pic {
     min-height: 90px;
     min-width: 90px;
     font-size: 30px;
+
+    img {
+      min-height: 90px;
+      min-width: 90px;
+      max-height: 90px;
+      max-width: 90px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
   }
 }

@@ -34,8 +34,47 @@ import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "service/toast";
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+  const [showMenu, setshowMenu] = useState(false);
+
+  const [bestMatchData, setbestMatchData] = useState([]);
+  const [bestOthersData, setbestOthersData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [DropdownState, setDropdownState] = useState(false);
+  const [
+    DropdownTrainerAvailabilityState,
+    setDropdownTrainerAvailabilityState,
+  ] = useState(false);
+  const [InPersonDD, setInPersonDD] = useState(false);
+
+  const [ddBoxingState, setddBoxingState] = useState(false);
+  const [ddPilatesState, setddPilatesState] = useState(false);
+  const [ddYogaState, setddYogaState] = useState(false);
+  const [ddHiitState, setddHiitState] = useState(false);
+  const [queryObject, setqueryObject] = useState({
+    location: "virtual",
+    vertical: "",
+    date: "",
+    availability: "",
+    // inPerson: "In Person",
+  });
+
+  const [inPerson, setInPerson] = useState({
+    newYork: { value: "New York City", selected: false, name: "newYork" },
+    miami: { value: "Miami", selected: false, name: "miami" },
+    hamptons: { value: "Hamptons", selected: false, name: "hamptons" },
+    palmBeach: { value: "Palm Beach", selected: false, name: "palmBeach" },
+  });
+
+  const bestMatchRef = useRef(null);
+  const otherRef = useRef(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    if (trainerQueryData.location === "inPerson") {
+      SetLocation("In Person");
+      setInPersonDD(false);
+    }
     if (trainerQueryData.location && trainerQueryData.date) {
       let selectedCity = Object.values(inPerson).filter(
         ({ value }) => value === trainerQueryData?.city
@@ -76,40 +115,6 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       updateTrainerDetails(payload);
     }
   }, []);
-
-  const [showMenu, setshowMenu] = useState(false);
-
-  const [bestMatchData, setbestMatchData] = useState([]);
-  const [bestOthersData, setbestOthersData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [DropdownState, setDropdownState] = useState(false);
-  const [
-    DropdownTrainerAvailabilityState,
-    setDropdownTrainerAvailabilityState,
-  ] = useState(false);
-  const [InPersonDD, setInPersonDD] = useState(false);
-
-  const [ddBoxingState, setddBoxingState] = useState(false);
-  const [ddPilatesState, setddPilatesState] = useState(false);
-  const [ddYogaState, setddYogaState] = useState(false);
-  const [ddHiitState, setddHiitState] = useState(false);
-  const [queryObject, setqueryObject] = useState({
-    location: "virtual",
-    vertical: "",
-    date: "",
-    availability: "",
-    // inPerson: "In Person",
-  });
-
-  const [inPerson, setInPerson] = useState({
-    newYork: { value: "New York City", selected: false, name: "newYork" },
-    miami: { value: "Miami", selected: false, name: "miami" },
-    hamptons: { value: "Hamptons", selected: false, name: "hamptons" },
-    palmBeach: { value: "Palm Beach", selected: false, name: "palmBeach" },
-  });
-
-  const bestMatchRef = useRef(null);
-  const otherRef = useRef(null);
 
   const onClickHandle = () => {
     setSelectedDate(selectedDate);

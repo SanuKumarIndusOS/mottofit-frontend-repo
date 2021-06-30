@@ -64,6 +64,7 @@ const TrainerAvailabilityFC = ({
       trainingFacilityLocation:
         trainerAvailabilityData.trainingFacilityLocation,
       stripeId: "",
+      trainingFacility: selectedValue === "a",
       // serviceableCity: trainerAvailabilityData.servicableLocation,
       applicationStatus: "submitted",
     };
@@ -143,6 +144,9 @@ const TrainerAvailabilityFC = ({
         ) {
           setSelectedOneValue(data.willingToTravel ? "1" : "0");
         }
+        // if (data.trainingFacility !== null)
+        //   setSelectedValue(data.trainingFacility ? "a" : "b");
+
         if (
           data.preferedTrainingMode &&
           data.preferedTrainingMode.length !== 0

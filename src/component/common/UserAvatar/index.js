@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "./styles.scss";
 
-export const UserAvatar = ({ userName = "", profilePicture = "" }) => {
+export const UserAvatar = ({
+  userName = "",
+  profilePicture = "",
+  className = "",
+}) => {
   const [isError, setError] = useState(false);
   let firstLetter = userName[0];
 
@@ -43,19 +47,23 @@ export const UserAvatar = ({ userName = "", profilePicture = "" }) => {
 
   if (profilePicture) {
     StyleComponent = (
-      <img
-        src={profilePicture}
-        alt="icon"
-        onError={(e) => {
-          !isError && setError(true);
-        }}
-      />
+      <div className={`user-avatar-pic ${className}`}>
+        <img
+          src={profilePicture}
+          alt="icon"
+          onError={(e) => {
+            !isError && setError(true);
+          }}
+        />
+      </div>
     );
   }
 
   if (isError || !profilePicture) {
     StyleComponent = (
-      <div className={`user-avatar-pic background-${backgroundColorByName}`}>
+      <div
+        className={`user-avatar-pic background-${backgroundColorByName} ${className}`}
+      >
         {initialLetters}
       </div>
     );

@@ -143,7 +143,7 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
 
       {/* user Menu items */}
 
-      <div className="login-item1">
+      <div className="login-item1 d-lg-none">
         <img src={Line2} alt="icon" />
 
         <img src={Person} alt="icon" onClick={toggleModel} />

@@ -16,6 +16,7 @@ import { userSession, cancelSession, updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
+import { Toast } from "../../../../service/toast";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -34,7 +35,7 @@ const UserSessionClass = (props) => {
         setUserData(data);
       })
       .catch((error) => {
-        console.log(error);
+        Toast({ type: "error", message: error.message || "Error" });
       });
   };
 

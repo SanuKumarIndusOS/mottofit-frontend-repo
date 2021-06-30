@@ -388,7 +388,7 @@ const SetupPrevModal = ({
                       <div className="profile_right_item3 mb-5 pb-5">
                         <h2>Certifications</h2>
                         <div className="profile_item3_inner">
-                          {tempCertificate.length > 0 ? (
+                          {tempCertificate?.length > 0 ? (
                             <>
                               {tempCertificate.map(({ certificate }, index) => (
                                 <div
@@ -465,7 +465,7 @@ const ImageGrid = ({ trainerProfileData }) => {
         <div>
           {/* {images?.length > 0 ? ( */}
           <div className="profile_images_container">
-            {images[0] && (
+            {images && images[0] && (
               <div className="profile_images_card box1">
                 <img
                   src={images[0] || imageView[0]?.image}
@@ -478,7 +478,7 @@ const ImageGrid = ({ trainerProfileData }) => {
               </div>
             )}
             <div className="flex-try-2">
-              {images[1] && (
+              {images && images[1] && (
                 <div className="profile_images_card box2">
                   <img
                     src={images[1] || imageView[0]?.image}
@@ -489,7 +489,7 @@ const ImageGrid = ({ trainerProfileData }) => {
               )}
 
               <div className="flex-try-3">
-                {images[2] && (
+                {images && images[2] && (
                   <div className="profile_images_card box3">
                     <img
                       src={images[2] || imageView[0]?.image}
@@ -499,7 +499,7 @@ const ImageGrid = ({ trainerProfileData }) => {
                   </div>
                 )}
 
-                {images[3] && (
+                {images && images[3] && (
                   <div className="profile_images_card box4">
                     <img
                       src={images[3] || imageView[0]?.image}
@@ -512,7 +512,7 @@ const ImageGrid = ({ trainerProfileData }) => {
             </div>
           </div>
 
-          {images.length === 0 && <p>Images Not Added</p>}
+          {images?.length === 0 && <p>Images Not Added</p>}
           {/* ) : (
                 "Image's Not Added" */}
           {/* )} */}

@@ -78,7 +78,7 @@ function TrainerSetupClass(props) {
   useEffect(() => {
     props.trainerDetail().then((res) => {
       setTrainerDetails(res);
-      if (res.images && res.images.length !== 0) {
+      if (res.images && res.images.length > 0) {
         setImageList(res.images);
       }
       let { identityInfromation = {}, insuranceInformation = {} } = res;

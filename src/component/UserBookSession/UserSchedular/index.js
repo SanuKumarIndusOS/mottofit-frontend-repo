@@ -13,6 +13,7 @@ import { updateUserDetails } from "action/userAct";
 import { getFormatDate } from "service/helperFunctions";
 import { history } from "helpers/index";
 import { logout } from "service/utilities";
+import { UserAvatar } from "../../common/UserAvatar";
 
 const UserEventSchedularFC = (props) => {
   const [trainerName, setTrainerName] = React.useState("");
@@ -21,9 +22,6 @@ const UserEventSchedularFC = (props) => {
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [userSelectedData, setUserSelectedData] = React.useState({});
   const [DateSlot, setDateSlot] = React.useState();
-
-  console.log(props.selectedTrainerData["id"], "trainerName");
-  console.log(props.selectedTrainerData);
 
   React.useEffect(() => {
     // if (!localStorage.getItem("token")) {
@@ -40,11 +38,6 @@ const UserEventSchedularFC = (props) => {
 
     setTrainerName(location["trainerData"]);
     // setTrainerName(props.selectedTrainerData);
-
-    console.log(location["trainerData"]);
-    console.log(props.selectedTrainerData, "props");
-
-    console.log(localStorage.getItem("trainertime"), "ee");
 
     props?.query?.trainingType && setActivity(props.query.trainingType);
 
@@ -71,7 +64,7 @@ const UserEventSchedularFC = (props) => {
   }, []);
 
   const callbackFunction = (ts, tss, date) => {
-    console.log(ts, tss, "Callback");
+    // console.log(ts, tss, "Callback");
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
@@ -100,6 +93,11 @@ const UserEventSchedularFC = (props) => {
     history.push("/user/session-type");
   };
 
+  let userData = {
+    profilePicture: location?.trainerData?.profilePicture,
+    userName: `${trainerName?.firstName || ""}${trainerName?.lastName || ""}`,
+  };
+
   return (
     <>
       <div className="event_outter_container">
@@ -123,27 +121,14 @@ const UserEventSchedularFC = (props) => {
                   </p>
                 </div>
                 <div className="user_profile_details">
-                  {/* {trainerName &&
-                                    trainerName.profilePicture ? (
-                                        <img
-                                            src={trainerName.profilePicture}
-                                            alt="profile"
-                                            style={{ objectFit: "cover" }}
-                                        />
-                                    ) : (
-                                        "dj"
-                                    )} */}
-                  <img
-                    src={location?.trainerData?.profilePicture || Profile}
-                    alt="profile"
-                    style={{ objectFit: "cover" }}
-                  />
-                  <div className="user_content">
+                  <UserAvatar {...userData} className="img-lg" />
+                  <div className="user_content d-flex">
                     <h2
                       style={{
                         textTransform: "capitalize",
                         fontFamily: "Cormorant Garamond",
                       }}
+                      className="mb-0"
                     >
                       {trainerName?.firstName}
                     </h2>

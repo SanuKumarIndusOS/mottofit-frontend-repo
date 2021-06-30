@@ -20,6 +20,7 @@ import { trainerDetail } from "action/trainerAct";
 import { history, nextPathReRouter } from "helpers";
 import validate from "service/validation";
 import { updateUserDetails } from "action/userAct";
+import { Toast } from "../../../service/toast";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
@@ -79,13 +80,17 @@ const SignInFC = ({
       .then((res) => {
         localStorage.setItem("user-id", res.id);
 
-        if (nextPathReRouter()) return;
-
         let reduxData = {
           isModelOpen: false,
         };
 
         updateUserDetails(reduxData);
+
+        console.log("log1");
+
+        if (nextPathReRouter()) return;
+
+        console.log("log1");
 
         if (res["type"] === "trainer") {
           trainerDetail().then((response) => {
@@ -96,11 +101,12 @@ const SignInFC = ({
             }
           });
         } else {
-          history.push("/trainer/find");
+          history.push("/users/dashboard/session");
         }
       })
       .catch((err) => {
-        setApiError("Sorry, something went wrong.", err.message);
+        Toast({ type: "error", message: err.message || "Error" });
+        // setApiError(err.message);
       });
   }
 

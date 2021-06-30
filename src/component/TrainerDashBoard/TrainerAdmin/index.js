@@ -6,6 +6,7 @@ import WaterMark from "../../../assets/files/SVG/M Watermark.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { trainerDetail } from "action/trainerAct";
+import { UserAvatar } from "../../common/UserAvatar";
 
 const TrainerDashboardTempClass = ({ children, trainerDetail }) => {
   const [imgUrl, setImgUrl] = React.useState("");
@@ -29,11 +30,17 @@ const TrainerDashboardTempClass = ({ children, trainerDetail }) => {
     );
   }
 
+  let userData = {
+    userName,
+    profilePicture: imgUrl,
+  };
+
   return (
     <div className="admin_container_trainer">
       <div className="admin_sidenav">
         <div className="admin_profile">
-          {proPic}
+          {/* {proPic} */}
+          <UserAvatar {...userData} />
           <h2 style={{ textTransform: "capitalize" }}>{userName}</h2>
         </div>
         <div className="admin_sidenav_links">
