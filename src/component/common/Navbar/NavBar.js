@@ -143,6 +143,14 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
 
       {/* user Menu items */}
 
+      <div className="login-item1">
+        <img src={Line2} alt="icon" />
+
+        <img src={Person} alt="icon" onClick={toggleModel} />
+
+        <SignIn showModel={isModelOpen} setShowModel={toggleModel} />
+      </div>
+
       {activeMobMenu ? (
         <div className="mobile_profile_menu_items">
           <div
