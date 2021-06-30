@@ -21,6 +21,7 @@ import {
 } from "action/messagingAct";
 import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
+import { CommonPageLoader } from "component/common/CommonPageLoader";
 const Chatt = require("twilio-chat");
 
 const TrainerMessageClass = ({
@@ -42,26 +43,36 @@ const TrainerMessageClass = ({
   const [text_thread, setText_thread] = useState([]);
   const [chattoken, setToken] = useState("");
   const [channel_id, setChannel_id] = useState("");
+  const [isMessageListLoading, setMessageListLoading] = useState(true);
 
   // Make Id dynamic
   useEffect(() => {
     // Get Contact_list
 
-    initClientDispatch();
+    initClientDispatch(getChannelDetails);
 
-    trainerChannel().then((data) => {
-      setIndividual(data.individualClient);
-      setSocialGroup_list(data.socialGroups);
-      setAdmin_list(data.admins);
-    });
+    getChannelDetails();
 
     return () => {
       chatClientInstance && chatClientInstance.removeChatClient();
     };
   }, []);
 
+  const getChannelDetails = () => {
+    trainerChannel().then((data) => {
+      setIndividual(data.individualClient);
+      setSocialGroup_list(data.socialGroups);
+      setAdmin_list(data.admins);
+      setMessageListLoading(false);
+
+      let messageLeftDOMs = document.getElementsByClassName("message_left");
+
+      [...messageLeftDOMs]?.forEach((dom) => dom?.scrollTo(0, 0));
+    });
+  };
+
   function PopulateContacts(channelID, members, channelData) {
-    console.log(channelID, chatClientInstance);
+    // console.log(channelID, chatClientInstance);
 
     // "CH15f50302975a435799691ca5f8d71092";
     chatClientInstance.joinChannelByID(channelID).then(() => {
@@ -111,27 +122,28 @@ const TrainerMessageClass = ({
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
-                        {[
-                          ...individual_list,
-                          ...socialGroup_list,
-                          ...admin_list,
-                        ].map((item, index) => {
-                          const { from, body, date_updated } = item.message;
+                        {!isMessageListLoading ? (
+                          [
+                            ...individual_list,
+                            ...socialGroup_list,
+                            ...admin_list,
+                          ].map((item, index) => {
+                            const { from, body, date_updated } = item.message;
 
-                          let lastUserProfilePic =
-                            item["members"]?.filter(
-                              ({ userId }) => userId === from
-                            )[0] ||
-                            item["members"][0] ||
-                            {};
+                            let lastUserProfilePic =
+                              item["members"]?.filter(
+                                ({ userId }) => userId === from
+                              )[0] ||
+                              item["members"][0] ||
+                              {};
 
-                          return (
-                            <div
-                              className="contact_item"
-                              key={`${Date.now()}_all_${index}`}
-                            >
-                              <div className="inner_link">
-                                {/* <img
+                            return (
+                              <div
+                                className="contact_item"
+                                key={`${Date.now()}_all_${index}`}
+                              >
+                                <div className="inner_link">
+                                  {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -141,34 +153,37 @@ const TrainerMessageClass = ({
                                     e.target.src = Jenny;
                                   }}
                                 /> */}
-                                {/* {JSON.stringify(lastUserProfilePic)} */}
+                                  {/* {JSON.stringify(lastUserProfilePic)} */}
 
-                                <UserAvatar {...lastUserProfilePic} />
+                                  <UserAvatar {...lastUserProfilePic} />
 
-                                <div
-                                  className="message_link_notify"
-                                  onClick={() =>
-                                    PopulateContacts(
-                                      item["channelUniqueName"],
-                                      item["members"],
-                                      item
-                                    )
-                                  }
-                                >
-                                  <h3>{item["chatTitle"] || ""}</h3>
-                                  <div>
-                                    {body && <p>{body}</p>}
-                                    {date_updated && (
-                                      <span className="msg-timestamp-left">
-                                        {getFormatDate(date_updated, "LT")}
-                                      </span>
-                                    )}
+                                  <div
+                                    className="message_link_notify"
+                                    onClick={() =>
+                                      PopulateContacts(
+                                        item["channelUniqueName"],
+                                        item["members"],
+                                        item
+                                      )
+                                    }
+                                  >
+                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div>
+                                      {body && <p>{body}</p>}
+                                      {date_updated && (
+                                        <span className="msg-timestamp-left">
+                                          {getFormatDate(date_updated, "LT")}
+                                        </span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })
+                        ) : (
+                          <CommonPageLoader />
+                        )}
                       </div>
                       <div className="message_right">
                         <ChatBox
@@ -188,22 +203,23 @@ const TrainerMessageClass = ({
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
-                        {individual_list.map((item, index) => {
-                          const { from, body, date_updated } = item.message;
+                        {!isMessageListLoading ? (
+                          individual_list.map((item, index) => {
+                            const { from, body, date_updated } = item.message;
 
-                          let lastUserProfilePic =
-                            item["members"]?.filter(
-                              ({ userId }) => userId === from
-                            )[0] ||
-                            item["members"][0] ||
-                            {};
-                          return (
-                            <div
-                              className="contact_item"
-                              key={`${Date.now()}_${index}`}
-                            >
-                              <div className="inner_link">
-                                {/* <img
+                            let lastUserProfilePic =
+                              item["members"]?.filter(
+                                ({ userId }) => userId === from
+                              )[0] ||
+                              item["members"][0] ||
+                              {};
+                            return (
+                              <div
+                                className="contact_item"
+                                key={`${Date.now()}_${index}`}
+                              >
+                                <div className="inner_link">
+                                  {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -213,31 +229,34 @@ const TrainerMessageClass = ({
                                     e.target.src = Jenny;
                                   }}
                                 /> */}
-                                <UserAvatar {...lastUserProfilePic} />
-                                <div
-                                  className="message_link_notify"
-                                  onClick={() =>
-                                    PopulateContacts(
-                                      item["channelUniqueName"],
-                                      item["members"],
-                                      item
-                                    )
-                                  }
-                                >
-                                  <h3>{item["chatTitle"] || ""}</h3>
-                                  <div>
-                                    {body && <p>{body}</p>}
-                                    {date_updated && (
-                                      <span className="msg-timestamp-left">
-                                        {getFormatDate(date_updated, "LT")}
-                                      </span>
-                                    )}
+                                  <UserAvatar {...lastUserProfilePic} />
+                                  <div
+                                    className="message_link_notify"
+                                    onClick={() =>
+                                      PopulateContacts(
+                                        item["channelUniqueName"],
+                                        item["members"],
+                                        item
+                                      )
+                                    }
+                                  >
+                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div>
+                                      {body && <p>{body}</p>}
+                                      {date_updated && (
+                                        <span className="msg-timestamp-left">
+                                          {getFormatDate(date_updated, "LT")}
+                                        </span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })
+                        ) : (
+                          <CommonPageLoader />
+                        )}
                       </div>
                       <div className="message_right">
                         <ChatBox isDataPresent={individual_list.length > 0} />
@@ -248,22 +267,23 @@ const TrainerMessageClass = ({
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
-                        {socialGroup_list.map((item, index) => {
-                          const { from, body, date_updated } = item.message;
+                        {!isMessageListLoading ? (
+                          socialGroup_list.map((item, index) => {
+                            const { from, body, date_updated } = item.message;
 
-                          let lastUserProfilePic =
-                            item["members"]?.filter(
-                              ({ userId }) => userId === from
-                            )[0] ||
-                            item["members"][0] ||
-                            {};
-                          return (
-                            <div
-                              className="contact_item"
-                              key={`${index}_${Date.now()}`}
-                            >
-                              <div className="inner_link">
-                                {/* <img
+                            let lastUserProfilePic =
+                              item["members"]?.filter(
+                                ({ userId }) => userId === from
+                              )[0] ||
+                              item["members"][0] ||
+                              {};
+                            return (
+                              <div
+                                className="contact_item"
+                                key={`${index}_${Date.now()}`}
+                              >
+                                <div className="inner_link">
+                                  {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -273,31 +293,34 @@ const TrainerMessageClass = ({
                                     e.target.src = Jenny;
                                   }}
                                 /> */}
-                                <UserAvatar {...lastUserProfilePic} />
-                                <div
-                                  className="message_link_notify"
-                                  onClick={() =>
-                                    PopulateContacts(
-                                      item["channelUniqueName"],
-                                      item["members"],
-                                      item
-                                    )
-                                  }
-                                >
-                                  <h3>{item["chatTitle"] || ""}</h3>
-                                  <div>
-                                    {body && <p>{body}</p>}
-                                    {date_updated && (
-                                      <span className="msg-timestamp-left">
-                                        {getFormatDate(date_updated, "LT")}
-                                      </span>
-                                    )}
+                                  <UserAvatar {...lastUserProfilePic} />
+                                  <div
+                                    className="message_link_notify"
+                                    onClick={() =>
+                                      PopulateContacts(
+                                        item["channelUniqueName"],
+                                        item["members"],
+                                        item
+                                      )
+                                    }
+                                  >
+                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div>
+                                      {body && <p>{body}</p>}
+                                      {date_updated && (
+                                        <span className="msg-timestamp-left">
+                                          {getFormatDate(date_updated, "LT")}
+                                        </span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })
+                        ) : (
+                          <CommonPageLoader />
+                        )}
                       </div>
                       <div className="message_right">
                         <ChatBox isDataPresent={socialGroup_list.length > 0} />
@@ -308,19 +331,20 @@ const TrainerMessageClass = ({
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
-                        {admin_list.map((item) => {
-                          const { from, body, date_updated } = item.message;
+                        {!isMessageListLoading ? (
+                          admin_list.map((item) => {
+                            const { from, body, date_updated } = item.message;
 
-                          let lastUserProfilePic =
-                            item["members"]?.filter(
-                              ({ userId }) => userId === from
-                            )[0] ||
-                            item["members"][0] ||
-                            {};
-                          return (
-                            <div className="contact_item">
-                              <div className="inner_link">
-                                {/* <img
+                            let lastUserProfilePic =
+                              item["members"]?.filter(
+                                ({ userId }) => userId === from
+                              )[0] ||
+                              item["members"][0] ||
+                              {};
+                            return (
+                              <div className="contact_item">
+                                <div className="inner_link">
+                                  {/* <img
                                   src={
                                     lastUserProfilePic?.profilePicture || Jenny
                                   }
@@ -330,31 +354,34 @@ const TrainerMessageClass = ({
                                     e.target.src = Jenny;
                                   }}
                                 /> */}
-                                <UserAvatar {...lastUserProfilePic} />
-                                <div
-                                  className="message_link_notify"
-                                  onClick={() =>
-                                    PopulateContacts(
-                                      item["channelUniqueName"],
-                                      item["members"],
-                                      item
-                                    )
-                                  }
-                                >
-                                  <h3>{item["chatTitle"] || ""}</h3>
-                                  <div>
-                                    {body && <p>{body}</p>}
-                                    {date_updated && (
-                                      <span className="msg-timestamp-left">
-                                        {getFormatDate(date_updated, "LT")}
-                                      </span>
-                                    )}
+                                  <UserAvatar {...lastUserProfilePic} />
+                                  <div
+                                    className="message_link_notify"
+                                    onClick={() =>
+                                      PopulateContacts(
+                                        item["channelUniqueName"],
+                                        item["members"],
+                                        item
+                                      )
+                                    }
+                                  >
+                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div>
+                                      {body && <p>{body}</p>}
+                                      {date_updated && (
+                                        <span className="msg-timestamp-left">
+                                          {getFormatDate(date_updated, "LT")}
+                                        </span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })
+                        ) : (
+                          <CommonPageLoader />
+                        )}
                       </div>
                       <div className="message_right">
                         <ChatBox isDataPresent={admin_list.length > 0} />

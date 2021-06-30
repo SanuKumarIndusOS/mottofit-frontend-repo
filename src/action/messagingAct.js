@@ -52,9 +52,9 @@ export const updateMessagingDetails = (payload) => (dispatch) => {
   });
 };
 
-export const initClientDispatch = () => (dispatch, getState) => {
+export const initClientDispatch = (callback) => (dispatch, getState) => {
   dispatch({
     type: MessagingActionType.UPDATE_CLIENT_INSTANCE,
-    payload: new ChatClientInstance(dispatch, getState),
+    payload: new ChatClientInstance(dispatch, getState, callback),
   });
 };
