@@ -204,6 +204,8 @@ input:focus {
     align-items: center;
   }
 
+
+
   .mobile_profile_menu {
     flex: 1;
     display: flex;
@@ -237,6 +239,10 @@ input:focus {
     height: 75px;
     width: 100%;
     background-color: #161616;
+  }
+
+  .pro_menu_content{
+    margin-top: 60px;
   }
 
   .menu_li {
