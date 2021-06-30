@@ -78,6 +78,13 @@ const TrainerProfileClass = ({
   };
 
   const handleBookSession = () => {
+    let reduxData = {
+      selectedTrainerData: {
+        trainerId: trainerProfileData["id"],
+        trainerData: { ...trainerProfileData },
+      },
+    };
+    updateUserDetails(reduxData);
     history.push("/user/scheduler");
   };
   const handleSessionType = () => {
@@ -195,7 +202,7 @@ const TrainerProfileClass = ({
             <div className="profile_main_contents container">
               <div className="profile_aside">
                 <div className="profile_aside_link">
-                  <Link to="/user/scheduler">View Calender</Link>
+                  <Link onClick={handleBookSession}>View Calender</Link>
                   <img src={ArrowNext} alt="icon" />
                 </div>
                 <div className="profile_aside_items">
