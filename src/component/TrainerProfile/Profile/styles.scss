@@ -532,17 +532,77 @@
   }
 }
 
-.trainer_profile_mob 
-{
+.trainer_profile_mob {
   display: none;
 }
 
 @media only screen and (max-width: 600px) {
   .profile_main {
-    display: none;
+    display: block;
+
+    .profile_outter_container {
+      .profile_wrapper_container {
+        .profile_header {
+          height: unset;
+          .inner_profile {
+            display: block;
+
+            .profile_header_inner {
+              display: none;
+            }
+
+            .profile_header_link {
+              position: relative;
+              bottom: 290px;
+              justify-content: flex-start;
+              margin: 0px;
+            }
+
+            img {
+              height: 200px;
+              width: 175px;
+            }
+          }
+        }
+        .profile_main_contents {
+          display: block;
+
+          .profile_trainer_data {
+            .profile_right_data {
+              .profile_right_item1 {
+                display: block;
+                position: relative;
+                top: 40px;
+                z-index: -1;
+                margin-bottom: 100px;
+              }
+              .profile_right_item4 {
+                display: none;
+              }
+              .profile_right_item2 {
+                .profile_images_grid {
+                  .profile_images_container {
+                    display: none;
+                  }
+                }
+              }
+
+              .profile_right_item3 {
+                .profile_item3_inner {
+                 
+                    display: block;
+                 
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   .trainer_profile_mob {
+    display: none;
     .heading {
       height: 500px;
       width: 100%;

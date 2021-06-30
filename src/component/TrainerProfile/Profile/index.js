@@ -637,7 +637,7 @@ const TrainerProfileClass = ({
 
       {/* Mobile Layout */}
 
-      <div className="trainer_profile_mob">
+      {/* <div className="trainer_profile_mob">
         <div className="heading">
           <div className="back_to_search">
             <p>Back to Search</p>
@@ -663,7 +663,7 @@ const TrainerProfileClass = ({
         <div className="scheduler"></div>
         <div className="book_button"></div>
         <div className="other_trainers"></div>
-      </div>
+      </div> */}
     </>
   );
 };
