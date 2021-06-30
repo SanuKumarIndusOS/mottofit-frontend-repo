@@ -287,6 +287,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   locale={enGB}
                   startDate={new Date()}
                   style={{ height: "100px" }}
+                  format="MM/dd/yyyy"
                 >
                   {({ inputProps, focused }) => (
                     <input

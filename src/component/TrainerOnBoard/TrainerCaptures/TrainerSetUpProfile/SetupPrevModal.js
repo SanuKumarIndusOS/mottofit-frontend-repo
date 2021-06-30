@@ -341,8 +341,9 @@ const SetupPrevModal = ({
                           <div className="profile_location">
                             <img src={Tick} alt="icon" />
                             <h4>
-                              {trainerdetailData && trainerdetailData.location
-                                ? trainerdetailData.location
+                              {trainerdetailData &&
+                              trainerdetailData?.servicableLocation?.length > 0
+                                ? trainerdetailData?.servicableLocation[0]
                                 : "Not Added"}
                               <Link
                                 onClick={() => {
@@ -427,9 +428,9 @@ const SetupPrevModal = ({
           }}
         >
           <div className="model_styles modal-heading">
-            <h2>Trainer's Locations</h2>
+            <h2>Serviceable Locations</h2>
             <p>
-              {trainerdetailData?.trainingFacilityLocation ||
+              {trainerdetailData?.serviceableNeighbourHood ||
                 "No trainer locations"}
             </p>
             {/* {trainingVenue?.label === "Trainer's Location" ? (

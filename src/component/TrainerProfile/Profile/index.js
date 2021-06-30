@@ -460,7 +460,7 @@ const TrainerProfileClass = ({
                           {trainerProfileData?.preferedTrainingMode?.toString()}
                         </h4>
                       </div>
-                      <div className="profile_location flex-column mt-2">
+                      {/* <div className="profile_location flex-column mt-2">
                         <p className="w-100 mb-2 text-secondary">
                           Trainer Location:
                         </p>
@@ -480,13 +480,10 @@ const TrainerProfileClass = ({
                             </Link>
                           </h4>
                         </div>
-                      </div>
+                      </div> */}
                       {trainerProfileData &&
                       trainerProfileData.servicableLocation?.length > 0 ? (
                         <div className="profile_location flex-column mt-2">
-                          <p className="w-100 mb-2 text-secondary">
-                            Servicable Location:
-                          </p>
                           <div className="d-flex align-items-center w-100">
                             <img src={Tick} alt="icon" />
                             <h4>
@@ -621,22 +618,11 @@ const TrainerProfileClass = ({
             }}
           >
             <div className="model_styles modal-heading">
-              <h2>{`${
-                viewLocationType === "trainer" ? " Trainer's" : "Servicable"
-              } Locations`}</h2>
+              <h2>{`${"Servicable"} Locations`}</h2>
               <p>
-                {viewLocationType === "trainer"
-                  ? trainerProfileData?.trainingFacilityLocation
-                  : trainerProfileData?.servicableLocation ||
-                    "No trainer locations"}
+                {trainerProfileData?.servicableLocation ||
+                  "No trainer locations"}
               </p>
-              {/* {trainingVenue?.label === "Trainer's Location" ? (
-              ) : (
-                <p>
-                  {trainerProfileData?.serviceableNeighbourHood ||
-                    "No neighbourhood locations"}
-                </p>
-              )} */}
             </div>
           </Modal>
         ) : null}

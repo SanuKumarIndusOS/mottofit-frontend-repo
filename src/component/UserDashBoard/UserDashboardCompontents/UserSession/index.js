@@ -47,11 +47,11 @@ const UserSessionClass = (props) => {
             <h2>My Session</h2>
           </div>
           <div className="US_tabs_wrapper">
-            <Tabs defaultTab="overview">
+            <Tabs defaultTab="upcoming">
               <TabList>
-                <Tab tabFor="overview">Overview</Tab>
+                {/* <Tab tabFor="overview">Overview</Tab> */}
                 <Tab tabFor="upcoming">Upcoming</Tab>
-                <Tab tabFor="pass">Motto pass</Tab>
+                {/* <Tab tabFor="pass">Motto pass</Tab> */}
                 <Tab tabFor="previous">Previous</Tab>
               </TabList>
               <div className="tabPanel_outter">
@@ -296,7 +296,7 @@ const TabOne = ({
       </div>
       <div className="tabPanel_overview_right">
         <div className="TB_overview_right">
-          <div className="TB_overview_row_one">
+          {/* <div className="TB_overview_row_one">
             <div className="row_one_data">
               <h2>Want to Do More for Less?</h2>
               <p>
@@ -307,7 +307,7 @@ const TabOne = ({
                 Get A pass <BlueArrowButton />{" "}
               </Link>
             </div>
-          </div>
+          </div> */}
           <div className="TB_overview_row_two">
             <div className="row_two_data">
               <h2>PREVIOUS SESSIONS</h2>

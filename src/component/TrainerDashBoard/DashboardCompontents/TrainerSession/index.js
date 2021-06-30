@@ -113,11 +113,11 @@ const TrainerSessionFC = ({
               <h2>My Session</h2>
             </div>
             <div className="US_tabs_wrapper">
-              <Tabs defaultTab="overview">
+              <Tabs defaultTab="upcoming">
                 <TabList>
-                  <Tab tabFor="overview">Overview</Tab>
+                  {/* <Tab tabFor="overview">Overview</Tab> */}
                   <Tab tabFor="upcoming">Upcoming</Tab>
-                  <Tab tabFor="pass">Motto pass</Tab>
+                  {/* <Tab tabFor="pass">Motto pass</Tab> */}
                   <Tab tabFor="previous">Previous</Tab>
                 </TabList>
                 <div className="tabPanel_outter">

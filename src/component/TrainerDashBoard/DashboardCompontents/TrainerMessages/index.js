@@ -80,6 +80,8 @@ const TrainerMessageClass = ({
     chatClientInstance && chatClientInstance.unSubscribeChannel();
   }
 
+  const isUser = parseInt(localStorage.getItem("type")) === 3;
+
   return (
     <>
       <div className="main_message_container">
@@ -92,9 +94,11 @@ const TrainerMessageClass = ({
                   <Tab tabFor="one" onClick={handleTabChange}>
                     All
                   </Tab>
-                  <Tab tabFor="two" onClick={handleTabChange}>
-                    INDIVIDUAL CLIENTS
-                  </Tab>
+                  {!isUser && (
+                    <Tab tabFor="two" onClick={handleTabChange}>
+                      INDIVIDUAL CLIENTS
+                    </Tab>
+                  )}
                   <Tab tabFor="three" onClick={handleTabChange}>
                     SOCIAL GROUPS
                   </Tab>
@@ -179,6 +183,7 @@ const TrainerMessageClass = ({
                       </div>
                     </div>
                   </TabPanel>
+
                   <TabPanel tabId="two">
                     <div className="message_inner_one">
                       <div className="message_left">

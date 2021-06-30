@@ -470,7 +470,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   });
                 }}
                 selected={selectedDate}
-                dateFormat="dd/MM/yyyy"
+                dateFormat="MM/dd/yyyy"
                 minDate={new Date()}
                 showYearDropdown
                 scrollableMonthYearDropdown

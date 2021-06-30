@@ -22,6 +22,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { COMMON_URL } from "helpers/baseURL";
 import { Toast } from "service/toast";
+import BlueHoverButton from "component/common/BlueArrowButton";
 const timeZone = [
   {
     label: "Early Bird",
@@ -889,7 +890,7 @@ function TfcClass({
               <div style={{ height: "100%", width: "960px" }}>{tableData2}</div>
             )
           }
-          <div className="scheduler_button">
+          <div className={`scheduler_button ${editMode ? "w-auto" : ""}`}>
             {editMode ? (
               <>
                 <input
@@ -916,7 +917,7 @@ function TfcClass({
                     width: "100%",
                   }}
                 >
-                  SAVE
+                  SAVE <ArrowHoverBlacked />
                 </button>
               </>
             ) : (
@@ -929,7 +930,7 @@ function TfcClass({
                   width: "100%",
                 }}
               >
-                ADD YOUR SLOT
+                ADD YOUR SLOT <ArrowHoverBlacked />
               </button>
             )}
           </div>
