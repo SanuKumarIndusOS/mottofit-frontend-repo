@@ -18,15 +18,31 @@ import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
 import { useHistory } from "react-router-dom";
 import { Toast } from "service/toast";
+import "react-calendar/dist/Calendar.css";
+import Calendar from "react-calendar";
+import moment from "moment";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+  //Responsive search
+  const [Calvalue, onChangeCal] = useState(new Date());
+  const [IPCvalue, setIPCValue] = React.useState("");
+
+  const handleIPCChange = (event) => {
+    setIPCValue(event.target.value);
+  };
+
+  // Desktop
   const [locationKeys, setLocationKeys] = useState([]);
   const history = useHistory();
   const [DropdownState, setDropdownState] = useState(false);
 
-  const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
-    false
-  );
+  const [DropdownAvailabilityState, setDropdownAvailabilityState] =
+    useState(false);
   const [InPersonDD, setInPersonDD] = useState(false);
 
   const [virtualMarkup, setvirtualMarkup] = useState(
@@ -173,6 +189,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
+    console.log(payload, "payload");
     updateTrainerDetails(payload);
 
     history.push("/trainer/find");
@@ -360,7 +377,38 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               <div className="element">
                 Virtual <div className="slash">/</div> In Person
               </div>
-              <div></div>
+              <div>
+                <FormControl component="fieldset">
+                  {IPCvalue}
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    value={IPCvalue}
+                    onChange={handleIPCChange}
+                  >
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="NEW YORK"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      control={<Radio />}
+                      label="MIAMI"
+                    />
+                    <FormControlLabel
+                      value="other"
+                      control={<Radio />}
+                      label="HAMPTONS"
+                    />
+                    <FormControlLabel
+                      value="disabled"
+                      control={<Radio />}
+                      label="PALM BEACH"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </div>
               <hr></hr>
             </div>
             <div className="vertical">
@@ -368,7 +416,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               <hr></hr>
             </div>
             <div className="schedule">
-              Schedule
+              Schedule {moment(Calvalue).format("YYYY-MM-DD")}
+              <Calendar onChange={onChangeCal} value={Calvalue} />
               <hr></hr>
             </div>
             <div className="availability">Availability</div>

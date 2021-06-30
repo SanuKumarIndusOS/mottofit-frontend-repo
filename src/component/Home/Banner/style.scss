@@ -18,6 +18,8 @@
     justify-content: center;
     flex-direction: column;
 
+    
+
     .mobile-search {
       display: none;
     }
@@ -190,6 +192,7 @@
         position: fixed;
         z-index: 40000;
         top: 0;
+        overflow-y: scroll;
 
         .header {
           height: 55px;
@@ -198,6 +201,9 @@
           display: flex;
           align-items: center;
           padding: 2rem;
+          position: sticky;
+          top:0;
+          z-index: 1000;
 
           .title {
             font-size: 16px;
@@ -218,6 +224,7 @@
 
         .content {
           margin: 1.5rem;
+          
           .clear-filters {
             text-decoration: underline;
             color: #53bfd2;
