@@ -28,6 +28,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
+import arrowSign from "assets/files/SVG/Arrow Next.svg";
+
 
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
@@ -419,7 +421,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           
             <div className="location">
-              <div>Location</div>
+              <div className="accheader">Location  <img  src= {arrowSign}></img></div>
 
               {LocationVal === "virtual" ? (
                 <div className="element">
