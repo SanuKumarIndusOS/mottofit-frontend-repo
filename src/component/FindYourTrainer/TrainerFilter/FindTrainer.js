@@ -33,7 +33,12 @@ import { bindActionCreators } from "redux";
 import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "service/toast";
-const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+import { updateUserDetails } from "action/userAct";
+const FindTrainerFC = ({
+  trainerQueryData,
+  updateTrainerDetails,
+  updateUserDetails,
+}) => {
   const [showMenu, setshowMenu] = useState(false);
 
   const [bestMatchData, setbestMatchData] = useState([]);
@@ -114,6 +119,12 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
       updateTrainerDetails(payload);
     }
+
+    let reduxData = {
+      selectedTimes: [],
+    };
+
+    updateUserDetails(reduxData);
   }, []);
 
   const onClickHandle = () => {
@@ -607,6 +618,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
+      updateUserDetails,
       updateTrainerDetails,
     },
     dispatch

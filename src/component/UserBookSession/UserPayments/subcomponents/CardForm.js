@@ -130,7 +130,7 @@ function CardFormFC({
 
     let payload = {
       cardToken: token,
-      setDefault: isRememberCard,
+      setDefault: isProfile ? true : isRememberCard,
     };
 
     addCardDetails.body = payload;

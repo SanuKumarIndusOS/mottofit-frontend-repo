@@ -114,10 +114,16 @@ const UserBookSessionFC = ({
 
     const { servicableLocation = [], areaOfExpertise = [] } = tempTrainerData;
 
-    const { inPersonAtClientLocation = "", inPersonAtTrainerLocation = "" } =
-      tempTrainerData?.oneOnOnePricing || {};
+    const {
+      inPersonAtClientLocation = "",
+      inPersonAtTrainerLocation = "",
+      virtualSession = "",
+    } = tempTrainerData?.oneOnOnePricing || {};
 
     const {
+      virtualSessionfor2People = "",
+      virtualSessionfor3People = "",
+      virtualSessionfor4People = "",
       inPeronAtClientLocationfor2People = "",
       inPeronAtClientLocationfor3People = "",
       inPeronAtClientLocationfor4People = "",
@@ -127,9 +133,18 @@ const UserBookSessionFC = ({
     } = tempTrainerData.socialSessionPricing || {};
 
     const {
+      virtualSessionfor15People = "",
       inPersonAtclientLocationfor15People = "",
       inPersonAttrainerLocationfor15People = "",
     } = tempTrainerData.classSessionPricing || {};
+
+    const isVirtualSessionAvailable = [
+      virtualSession,
+      virtualSessionfor2People,
+      virtualSessionfor3People,
+      virtualSessionfor4People,
+      virtualSessionfor15People,
+    ];
 
     const isInPersonClientLocationAvailable = [
       inPersonAtClientLocation,
@@ -206,6 +221,10 @@ const UserBookSessionFC = ({
         value: "clientLocation",
         label: "Your Location",
       });
+    }
+
+    if (!isVirtualSessionAvailable) {
+      setPreferedTrainingMode("inPerson");
     }
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);

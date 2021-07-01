@@ -346,23 +346,45 @@ const TabOne = ({
                             </>
                           ) : (
                             <>
-                              {data.sessionStatus !== "cancelled" ? (
+                              {!data.asFriend ? (
                                 <>
-                                  {tabname !== "Previous" ? (
-                                    <button
-                                      disabled={isLoading}
-                                      onClick={() => handleCancel(data.id)}
-                                    >
-                                      Cancel
-                                    </button>
+                                  {data.sessionStatus !== "cancelled" ? (
+                                    <>
+                                      {tabname !== "Previous" ? (
+                                        <button
+                                          disabled={isLoading}
+                                          onClick={() => handleCancel(data.id)}
+                                        >
+                                          Cancel
+                                        </button>
+                                      ) : (
+                                        ""
+                                      )}
+                                    </>
                                   ) : (
-                                    ""
+                                    <button
+                                      className="text-danger"
+                                      disabled={true}
+                                    >
+                                      Cancelled
+                                    </button>
                                   )}
                                 </>
                               ) : (
-                                <button className="text-danger" disabled={true}>
-                                  Cancelled
-                                </button>
+                                <div className="d-flex align-items-center">
+                                  <span className="text-black mr-4">
+                                    Invited session
+                                  </span>
+                                  <button
+                                    disabled={isLoading}
+                                    onClick={() =>
+                                      handleTrainerRoute(data.trainerId)
+                                    }
+                                    className="text-primary"
+                                  >
+                                    View Trainer
+                                  </button>
+                                </div>
                               )}
                             </>
                           )}

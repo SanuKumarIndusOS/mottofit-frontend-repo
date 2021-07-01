@@ -868,7 +868,7 @@ function TrainerCardDashboard(props) {
         </div>
         <div className="card_submit">
           <button onClick={() => handleSubmit()}>
-            Continue To profile <ArrowHoverBlacked />
+            Save Changes <ArrowHoverBlacked />
           </button>
         </div>
       </div>
