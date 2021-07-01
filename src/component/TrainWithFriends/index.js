@@ -73,12 +73,11 @@ const TrainWithFriendsClass = ({
   const [accordionData, setAccordionData] = useState(tempaccordionData);
   const [errors, setErrors] = useState([]);
   const [iWillPay, setIPay] = useState(false);
+  const [maxUser, setMaxUser] = useState(0);
 
   let trainingType = localStorage.getItem("sessionTrainingType");
   const handleChangeFriendInput = (index, event) => {
     const values = [...friendsInput];
-
-    // console.log(values[index], index);
 
     const { name, value } = event.target;
     values[index][name] = value;
@@ -87,7 +86,6 @@ const TrainWithFriendsClass = ({
       let tempErrors = { ...errors };
       tempErrors["friendsData"][index][name] = undefined;
     }
-    // console.log(values);
 
     setFriendsInput(values);
   };
@@ -214,15 +212,12 @@ const TrainWithFriendsClass = ({
           friendPhone: item.friendName,
         }).some((data) => data !== "");
 
-        console.log(isAnyData);
-
         let error;
 
         let itemValidation = { ...item };
 
         if (index === 0 || isAnyData) {
           error = validate(itemValidation, itemConstraints);
-          console.log(error);
         }
         if (error) {
           errors[index] = error;
@@ -234,8 +229,6 @@ const TrainWithFriendsClass = ({
       }, []);
 
       let isNoError = arrayItemErrors.every((error) => error === null);
-
-      console.log(isNoError);
 
       return isNoError ? null : arrayItemErrors;
     };
@@ -287,8 +280,6 @@ const TrainWithFriendsClass = ({
   };
 
   const validateFields = (data) => {
-    // console.log(data, validationRules());
-
     let fieldInvalidList = validate(data, validationRules());
 
     if (fieldInvalidList !== undefined) {
@@ -343,7 +334,7 @@ const TrainWithFriendsClass = ({
         ? tempTrainerData?.socialSessionPricing
             ?.inPeronAtTrainerLocationfor3People
         : tempTrainerData?.socialSessionPricing
-            ?.inPeronAtClientLocationfor2People;
+            ?.inPeronAtClientLocationfor3People;
 
     const inPerson4People =
       trainingLocation === "trainerLocation"
@@ -374,8 +365,6 @@ const TrainWithFriendsClass = ({
 
     let tempData = [...accordionData];
 
-    // console.log(tempData, "123");
-
     tempData[0] = {
       ...tempData[0],
       price: !isNaN(pricingObject.social.twoPeople)
@@ -395,10 +384,20 @@ const TrainWithFriendsClass = ({
         : null,
     };
 
-    // console.log(tempData);
+    if (tempData[1]?.price) {
+      setMaxUser(15);
+    } else if (tempData[0]?.price2) {
+      setMaxUser(4);
+    } else if (tempData[0]?.price1) {
+      setMaxUser(3);
+    } else if (tempData[0]?.price) {
+      setMaxUser(2);
+    }
 
     setAccordionData([...tempData]);
     // }
+
+    window.scrollTo(0, 0);
 
     // console.log(pricingObject);
   }, []);
@@ -412,6 +411,12 @@ const TrainWithFriendsClass = ({
     : "";
 
   const sessionType = sessionData?.sessionType || "";
+
+  const normalSessionValidation =
+    (sessionType.includes("SOCIAL") && friendsInput.length < 3) ||
+    (sessionType.includes("CLASS") && friendsInput.length < 14);
+
+  const maxSessionValidation = friendsInput.length + 1 < maxUser;
 
   return (
     <>
@@ -468,7 +473,7 @@ const TrainWithFriendsClass = ({
                                   )}
                                 <div className="TF_input">
                                   <div className="inner_input">
-                                    <div className="w-100">
+                                    <div className="w-100 mr-3">
                                       <div className="position-relative">
                                         <input
                                           type="text"
@@ -572,10 +577,7 @@ const TrainWithFriendsClass = ({
                           <button onClick={updateSessionApi}>
                             Invite Friends <ArrowHoverBlacked />{" "}
                           </button>
-                          {(sessionType.includes("SOCIAL") &&
-                            friendsInput.length < 3) ||
-                          (sessionType.includes("CLASS") &&
-                            friendsInput.length < 14) ? (
+                          {normalSessionValidation && maxSessionValidation ? (
                             <h5 onClick={handleAddFriendFields}>
                               + Add More Friends
                             </h5>
@@ -674,6 +676,8 @@ const AccordationService = ({ data }) => {
     <>
       {data.map((item, index) => {
         // console.log(item);
+
+        if (!item?.price && !item.price1 && !item.price2) return null;
 
         return (
           <div
