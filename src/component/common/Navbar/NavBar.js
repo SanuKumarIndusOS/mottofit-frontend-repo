@@ -31,9 +31,15 @@ const NavBarFC = ({
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    getUserDetail().then((data) => {
-      setUserData(data);
-    });
+
+    if(userType !== 1 && userType === NaN){
+      getUserDetail().then((data) => {
+        setUserData(data);
+      });
+    }
+
+    console.log(userType);
+  
   }, []);
 
   let nameProps = {
