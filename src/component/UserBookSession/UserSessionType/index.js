@@ -326,40 +326,58 @@ const UserBookSessionFC = ({
 
     const inPersonSocial = {};
 
-    if (!isNaN(inPeronAtClientLocationfor2People)) {
+    if (
+      !isNaN(inPeronAtClientLocationfor2People) &&
+      parseInt(inPeronAtClientLocationfor2People) > 0
+    ) {
       inPersonSocial["clientLocation"] = {
-        value: inPeronAtClientLocationfor2People,
+        value: parseInt(inPeronAtClientLocationfor2People),
         label: "2 People",
       };
     }
-    if (!isNaN(inPeronAtClientLocationfor3People)) {
+    if (
+      !isNaN(inPeronAtClientLocationfor3People) &&
+      parseInt(inPeronAtClientLocationfor3People) > 0
+    ) {
       inPersonSocial["clientLocation"] = {
-        value: inPeronAtClientLocationfor3People,
+        value: parseInt(inPeronAtClientLocationfor3People),
         label: "3 People",
       };
     }
-    if (!isNaN(inPeronAtClientLocationfor4People)) {
+    if (
+      !isNaN(inPeronAtClientLocationfor4People) &&
+      parseInt(inPeronAtClientLocationfor4People) > 0
+    ) {
       inPersonSocial["clientLocation"] = {
-        value: inPeronAtClientLocationfor4People,
+        value: parseInt(inPeronAtClientLocationfor4People),
         label: "4 People",
       };
     }
 
-    if (!isNaN(inPeronAtTrainerLocationfor2People)) {
+    if (
+      !isNaN(inPeronAtTrainerLocationfor2People) &&
+      parseInt(inPeronAtTrainerLocationfor2People) > 0
+    ) {
       inPersonSocial["trainerLocation"] = {
-        value: inPeronAtTrainerLocationfor2People,
+        value: parseInt(inPeronAtTrainerLocationfor2People),
         label: "2 People",
       };
     }
-    if (!isNaN(inPeronAtTrainerLocationfor3People)) {
+    if (
+      !isNaN(inPeronAtTrainerLocationfor3People) &&
+      parseInt(inPeronAtTrainerLocationfor3People) > 0
+    ) {
       inPersonSocial["trainerLocation"] = {
-        value: inPeronAtTrainerLocationfor3People,
+        value: parseInt(inPeronAtTrainerLocationfor3People),
         label: "3 People",
       };
     }
-    if (!isNaN(inPeronAtTrainerLocationfor4People)) {
+    if (
+      !isNaN(inPeronAtTrainerLocationfor4People) &&
+      parseInt(inPeronAtTrainerLocationfor4People) > 0
+    ) {
       inPersonSocial["trainerLocation"] = {
-        value: inPeronAtTrainerLocationfor4People,
+        value: parseInt(inPeronAtTrainerLocationfor4People),
         label: "4 People",
       };
     }
