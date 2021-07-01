@@ -18,15 +18,41 @@ import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
 import { useHistory } from "react-router-dom";
 import { Toast } from "service/toast";
+import "react-calendar/dist/Calendar.css";
+
+import Calendar from "react-calendar";
+import moment from "moment";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+
+
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+  //Responsive search
+  const [Calvalue, onChangeCal] = useState(new Date());
+  const [IPCvalue, setIPCValue] = useState("");
+  const [Avalvalue, setAvalValue] = useState("");
+  const [VerticalVal, setVerticalVal] = useState("");
+  const [LocationVal, setLocationVal] = useState("virtual");
+
+  const handleIPCChange = (event) => {
+    setIPCValue(event.target.value);
+  };
+
+  const handleAvalChange = (event) => {
+    setAvalValue(event.target.value);
+  };
+
+  // Desktop
   const [locationKeys, setLocationKeys] = useState([]);
   const history = useHistory();
   const [DropdownState, setDropdownState] = useState(false);
 
-  const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
-    false
-  );
+  const [DropdownAvailabilityState, setDropdownAvailabilityState] =
+    useState(false);
   const [InPersonDD, setInPersonDD] = useState(false);
 
   const [virtualMarkup, setvirtualMarkup] = useState(
@@ -173,6 +199,31 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
+    console.log(payload, "payload");
+    updateTrainerDetails(payload);
+
+    history.push("/trainer/find");
+  };
+
+  const search_action_mob = () => {
+    let payload = {
+      query: {
+        location: queryObject.location,
+        date: moment(Calvalue).format("YYYY-MM-DD"),
+        trainingType: VerticalVal,
+        availability: Avalvalue,
+        // inPerson: queryObject.inPerson,
+        city: IPCvalue || "",
+      },
+    };
+
+    if (queryObject.location === "inPerson" && !payload.query.city) {
+      setInPersonDD(true);
+
+      return Toast({ type: "error", message: "City is mandatory" });
+    }
+
+    console.log(payload, "payload");
     updateTrainerDetails(payload);
 
     history.push("/trainer/find");
@@ -355,26 +406,239 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
           <div className="content">
-            <div className="clear-filters">Clear All Filters</div>
+            <div
+              className="clear-filters"
+              onClick={() => {
+                setLocationVal("virtual");
+                setIPCValue("");
+                setVerticalVal("");
+                setAvalValue("");
+                onChangeCal(new Date());
+              }}
+            >
+              Clear All Filters
+            </div>
+          
             <div className="location">
               <div>Location</div>
-              <div className="element">
-                Virtual <div className="slash">/</div> In Person
-              </div>
-              <div></div>
+
+              {LocationVal === "virtual" ? (
+                <div className="element">
+                  <div
+                    className="sel"
+                    onClick={() => {
+                      setLocationVal("virtual");
+                    }}
+                  >
+                    Virtual
+                  </div>
+                  <div className="slash">/</div>
+                  <div
+                    onClick={() => {
+                      setLocationVal("inPerson");
+                    }}
+                  >
+                    In Person
+                  </div>
+                </div>
+              ) : (
+                <div className="element">
+                  <div
+                    onClick={() => {
+                      setLocationVal("virtual");
+                    }}
+                  >
+                    Virtual
+                  </div>
+                  <div className="slash">/</div>
+                  <div
+                    className="sel"
+                    onClick={() => {
+                      setLocationVal("inPerson");
+                    }}
+                  >
+                    In Person
+                  </div>
+                </div>
+              )}
+              {LocationVal === "inPerson" ? (
+                <div>
+                  <FormControl component="fieldset">
+                    {/* {IPCvalue} */}
+                    <RadioGroup
+                      aria-label="gender"
+                      name="gender1"
+                      value={IPCvalue}
+                      onChange={handleIPCChange}
+                    >
+                      <FormControlLabel
+                        value="New York City"
+                        control={<Radio />}
+                        label="NEW YORK"
+                      />
+                      <FormControlLabel
+                        value="Miami"
+                        control={<Radio />}
+                        label="MIAMI"
+                      />
+                      <FormControlLabel
+                        value="Hamptons"
+                        control={<Radio />}
+                        label="HAMPTONS"
+                      />
+                      <FormControlLabel
+                        value="Palm Beach"
+                        control={<Radio />}
+                        label="PALM BEACH"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              ) : null}
+
               <hr></hr>
             </div>
+         
+       
             <div className="vertical">
-              Training Vertical
+              <div> Training Vertical</div>
+              {/* {VerticalVal} */}
+              <div className="listv">
+                {VerticalVal !== "Strength & HIIT" || VerticalVal === "" ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Strength & HIIT");
+                    }}
+                  >
+                    STRENGTH
+                  </div>
+                ) : (
+                  <div
+                    className="litem_active"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    STRENGTH
+                  </div>
+                )}
+
+                {VerticalVal !== "Boxing" || VerticalVal === "" ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Boxing");
+                    }}
+                  >
+                    BOXING
+                  </div>
+                ) : (
+                  <div
+                    className="litem_active"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    BOXING
+                  </div>
+                )}
+
+                {VerticalVal !== "Yoga" || VerticalVal === "" ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Yoga");
+                    }}
+                  >
+                    YOGA
+                  </div>
+                ) : (
+                  <div
+                    className="litem_active"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    YOGA
+                  </div>
+                )}
+
+                {VerticalVal !== "Pilates" || VerticalVal === "" ? (
+                  <div
+                    className="litem"
+                    onClick={() => {
+                      setVerticalVal("Pilates");
+                    }}
+                  >
+                    PILATES
+                  </div>
+                ) : (
+                  <div
+                    className="litem_active"
+                    onClick={() => {
+                      setVerticalVal("");
+                    }}
+                  >
+                    PILATES
+                  </div>
+                )}
+              </div>
+
               <hr></hr>
             </div>
             <div className="schedule">
-              Schedule
+              Schedule <br></br> {moment(Calvalue).format("YYYY/MM/DD")}
+              <Calendar onChange={onChangeCal} value={Calvalue} />
               <hr></hr>
             </div>
-            <div className="availability">Availability</div>
+            <div className="availability">
+              <div>Availability</div>
+              {Avalvalue} <br></br>
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="gender"
+                  name="availability"
+                  value={Avalvalue}
+                  onChange={handleAvalChange}
+                >
+                  <FormControlLabel
+                    value="EarlyBird"
+                    control={<Radio />}
+                    label="EARLY BIRD (5AM-8AM)"
+                  />
+                  <FormControlLabel
+                    value="RiseAndShine"
+                    control={<Radio />}
+                    label="RISE & SHINE (8AM-11AM)"
+                  />
+                  <FormControlLabel
+                    value="MidDayBreak1"
+                    control={<Radio />}
+                    label="MID-DAY BREAK (11:30AM-2PM)"
+                  />
+                  <FormControlLabel
+                    value="MidDayBreak2"
+                    control={<Radio />}
+                    label="MID-DAY LUNCHTIME (2AM-5PM)"
+                  />
+                  <FormControlLabel
+                    value="HappyHours"
+                    control={<Radio />}
+                    label="HAPPY HOUR (5PM-8PM)"
+                  />
+                  <FormControlLabel
+                    value="NeverTooLate"
+                    control={<Radio />}
+                    label="NEVER TOO LATE (8PM-11PM)"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
           </div>
-          <div className="search">APPLY ALL FILTERS </div>
+          <div className="search" onClick={search_action_mob}>
+            APPLY ALL FILTERS{" "}
+          </div>
         </div>
       </div>
     </div>

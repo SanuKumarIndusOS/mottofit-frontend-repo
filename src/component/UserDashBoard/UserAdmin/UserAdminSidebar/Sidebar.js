@@ -10,11 +10,9 @@ import { IconContext } from "react-icons/lib";
 const Nav = styled.div`
     display: none;
     @media screen and (max-width: 1023px) {
-        background: #151c;
-        height: 80px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+       
+        display: none;
+      
     }
 `;
 

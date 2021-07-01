@@ -16,11 +16,36 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { getUserDetail } from "action/userAct";
 import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
+import { UserAvatar } from "component/common/UserAvatar";
 
-const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
+const NavBarFC = ({
+  toggle,
+  isModelOpen,
+  updateUserDetails,
+  getUserDetail,
+}) => {
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+
+    if(userType !== 1 && userType === NaN){
+      getUserDetail().then((data) => {
+        setUserData(data);
+      });
+    }
+
+    console.log(userType);
+  
+  }, []);
+
+  let nameProps = {
+    userName: `${userData?.firstName || ""} ${userData?.lastName || ""}`,
+  };
+
   const [activeMobMenu, setActiveMobMenu] = useState(false);
 
   const [showModel, setShowModel] = useState(false);
@@ -131,7 +156,7 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
 
       {/* Mobile header Markup  */}
       <div className="mobile_navbar">
-        <div className="mobile_hamburger_menu">ham</div>
+        <div className="mobile_hamburger_menu">&#x2630;</div>
         <div className="mobile_nav_logo">
           <Link to="">
             <img src={LogoImage} alt="logo" style={{ height: "30px" }} />
@@ -177,7 +202,25 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
               ></div>
 
               <div className="pro_menu_container_right">
-                <div className="pro_menu_header"></div>
+                <div className="pro_menu_header">
+                  <div className="mob_menu_user">
+                    <div className="mob_menu_user_pic">
+                      <UserAvatar {...userData} {...nameProps} />
+                    </div>
+                    <div className="mob_menu_user_name">
+                      {userData ? userData.firstName : ""}&nbsp;
+                      {userData ? userData.lastName : ""}
+                    </div>
+                  </div>
+                  <div
+                    className="mob_menu_close"
+                    onClick={() => {
+                      setActiveMobMenu(false);
+                    }}
+                  >
+                    x
+                  </div>
+                </div>
                 <div className="pro_menu_content">
                   <div
                     className="menu_li"
@@ -186,7 +229,11 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                       setActiveMobMenu(false);
                     }}
                   >
-                    <p>MY SESSIONS</p>
+                    <img
+                      src="/static/media/Session Icon.4a000f79.svg"
+                      alt="icon"
+                    ></img>
+                    <div className="menu_li_text">MY SESSIONS</div>
                   </div>
                   <div
                     className="menu_li"
@@ -195,7 +242,11 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                       setActiveMobMenu(false);
                     }}
                   >
-                    <p>MESSAGES</p>
+                    <img
+                      src="/static/media/Message Icon.9b7bba91.svg"
+                      alt="icon"
+                    ></img>
+                    <div className="menu_li_text"> MESSAGES </div>
                   </div>
                   <div
                     className="menu_li"
@@ -204,13 +255,26 @@ const NavBarFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                       setActiveMobMenu(false);
                     }}
                   >
-                    <p>NOTIFICATIONS</p>
+                    <img
+                      src="/static/media/Notifications Icon.132c5113.svg"
+                      alt="icon"
+                    ></img>
+
+                    <div className="menu_li_text"> NOTIFICATIONS </div>
                   </div>
                   <div className="menu_li">
-                    <p>SETTINGS</p>
+                    <img
+                      src="/static/media/Settings Icon.5ae0ca78.svg"
+                      alt="icon"
+                    />
+                    <div className="menu_li_text"> SETTINGS </div>
                   </div>
                   <div className="menu_li" onClick={logout}>
-                    <p>LOGOUT</p>
+                    <img
+                      src="/static/media/Logout Icon.97acadbd.svg"
+                      alt="icon"
+                    />
+                    <div className="menu_li_text"> LOGOUT </div>
                   </div>
                 </div>
               </div>
@@ -232,6 +296,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       updateUserDetails,
+      getUserDetail,
     },
     dispatch
   );
