@@ -43,7 +43,9 @@ const UserSessionClass = (props) => {
     props
       .userSession()
       .then((data) => {
-        setUserData(data);
+        console.log(data);
+
+        // setUserData(data);
       })
       .catch((error) => {
         Toast({ type: "error", message: error.message || "Error" });
@@ -270,7 +272,7 @@ const TabOne = ({
           <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
-              {tabData.slice(0, visible).map((data, index) => {
+              {tabData?.slice(0, visible).map((data, index) => {
                 // console.log(data, "datadata");
                 return (
                   <React.Fragment key={index}>
