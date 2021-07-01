@@ -365,9 +365,40 @@
           .tabPanel_overview {
             .tabPanel_overview_right {
               .TB_overview_right {
-                  margin-top: 20px;
+                margin-top: 20px;
+              }
+            }
 
-                  
+            .tabPanel_overview_left {
+              width: 95vw;
+              .TP_overview_wrapper {
+                .TP_US_overview {
+                  .TP_US_overview_inner {
+                    .TP_upcomeSession_overview {
+
+                        .TP_USession_dates
+                        {
+                           background-color: unset;
+                           align-items: flex-start;
+                            h4
+                            {
+                                font-size: 30px;
+                            }
+                        }
+                      .TP_USession_data {
+                        h2 {
+                            font-size: 18px;
+
+                        }
+                        .TP_USession_data_icons{ h5{
+                            font-size: 11px;
+                            margin-top: 5px;
+                            margin-bottom: 5px;
+                        }} 
+                      }
+                    }
+                  }
+                }
               }
             }
           }

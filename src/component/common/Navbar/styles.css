@@ -196,7 +196,7 @@ input:focus {
     justify-content: flex-start;
     align-items: center;
     font-size: 24px;
-    color: #DBDBDB;
+    color: #dbdbdb;
   }
 
   .mobile_nav_logo {
@@ -205,8 +205,6 @@ input:focus {
     justify-content: center;
     align-items: center;
   }
-
-
 
   .mobile_profile_menu {
     flex: 1;
@@ -243,9 +241,17 @@ input:focus {
     background-color: #161616;
     display: flex;
   }
- 
-  .mob_menu_user
+
+  .pro_menu_header img 
   {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 300px;
+  }
+
+
+  .mob_menu_user {
     flex: 2;
     display: flex;
     align-items: center;
@@ -258,15 +264,13 @@ input:focus {
     font-weight: bold;
   }
 
-  .mob_menu_user_name
-  {
+  .mob_menu_user_name {
     padding-left: 1rem;
   }
 
-  .mob_menu_close
-  {
+  .mob_menu_close {
     flex: 1;
-    
+
     color: #6e6e6e;
     display: flex;
     align-items: center;
@@ -275,8 +279,7 @@ input:focus {
     font-weight: 500;
   }
 
-
-  .pro_menu_content{
+  .pro_menu_content {
     margin-top: 60px;
   }
 
@@ -288,14 +291,23 @@ input:focus {
     font-weight: 500;
     font-family: "Montserrat", sans-serif;
     display: flex;
-    align-items: center ;
+    align-items: center;
     padding-left: 1rem;
   }
 
-  .menu_li_text
+  .seetings_li {
+    margin-left: 65px;
+  }
+
+  .set_item
   {
+    margin-bottom: 10px;
+  }
+
+  .menu_li_text {
     margin-left: 2rem;
   }
+
 
   .menu_li:hover {
     background-color: #53bfd2;
