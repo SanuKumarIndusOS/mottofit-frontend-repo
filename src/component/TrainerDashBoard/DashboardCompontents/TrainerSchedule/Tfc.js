@@ -20,7 +20,6 @@ import {
 } from "action/trainerAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { COMMON_URL } from "helpers/baseURL";
 import { Toast } from "service/toast";
 import BlueHoverButton from "component/common/BlueArrowButton";
 const timeZone = [

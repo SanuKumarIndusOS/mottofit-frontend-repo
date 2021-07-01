@@ -1,0 +1,1 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[378],{445:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Arrow InActive.71319793.svg"}}]);

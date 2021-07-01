@@ -19,9 +19,9 @@ import { Toast } from "../../../../service/toast";
 import CardForm from "component/UserBookSession/UserPayments/subcomponents/CardForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { STRIPE_URL } from "../../../../helpers/baseURL";
+import config from "config";
 
-const stripePromise = loadStripe(STRIPE_URL);
+const stripePromise = loadStripe(config.stripeUrl);
 
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },

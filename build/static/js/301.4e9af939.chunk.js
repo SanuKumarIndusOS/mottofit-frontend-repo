@@ -1,0 +1,1 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[301],{513:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Icon 1.1128b396.svg"}}]);

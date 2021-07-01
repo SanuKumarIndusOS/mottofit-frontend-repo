@@ -179,7 +179,7 @@ function TrainerSetupClass(props) {
       temppreferedTrainingMode.push("inPerson");
     }
     if (checkButtonVirtual) {
-      temppreferedTrainingMode.push("vitual");
+      temppreferedTrainingMode.push("virtual");
     }
     let payload = {
       images: imagesList.filter((x) => x != ""),

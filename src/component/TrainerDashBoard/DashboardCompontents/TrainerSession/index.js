@@ -9,7 +9,7 @@ import BlueArrowButton from "../../../common/BlueArrowButton";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { getTrainerSessionDetails } from "action/trainerAct";
-import { cancelSession } from "action/userAct";
+import { cancelSession, updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
@@ -21,6 +21,7 @@ const TrainerSessionFC = ({
   sessionData,
   getTrainerSessionDetailsApi,
   cancelSession,
+  updateUserDetails,
 }) => {
   const [trainerSessionData, setTrainerSessionData] = useState({
     upcomingSessions: [],
@@ -55,7 +56,7 @@ const TrainerSessionFC = ({
             loc: venue,
             previousImg: Jenny,
             prevHeading: "Yoga with Kane",
-            prevDate: getFormatDate(sessionData, "DD MMMM YYYY"),
+            prevDate: getFormatDate(sessionStartTime, "DD MMMM YYYY", true),
             sessionStatus,
             id,
           })
@@ -146,9 +147,14 @@ const TrainerSessionFC = ({
                 </div>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="previous">
-                    <TabFour
-                      datas={trainerSessionData.pastSessions}
+                    <TabPast
+                      tabname={"Previous"}
+                      tabData={trainerSessionData.pastSessions}
+                      prevData={trainerSessionData.pastSessions}
                       handleSessionStatus={handleSessionStatus}
+                      cancelSessionApi={handleCancel}
+                      handleChange={() => getAllDetails()}
+                      updateUserDetails={updateUserDetails}
                     />
                   </TabPanel>
                 </div>
@@ -440,6 +446,158 @@ const TabFour = ({ datas = [] }) => {
   );
 };
 
+const TabPast = ({
+  tabname,
+  tabData,
+  prevData,
+  cancelSessionApi,
+  invitationApi,
+  handleChange = {},
+  isDefaultCardPresent,
+  handleSessionStatus,
+  ...restProps
+}) => {
+  const [visible, setVisible] = useState([3]);
+  const [isLoading, setisLoading] = useState(false);
+  const setViewMore = () => {
+    setVisible((prevValue) => prevValue + 1);
+  };
+
+  const handleCancel = (sessionId) => {
+    let payload = {
+      sessionId,
+      sessionStatus: "cancelled",
+    };
+    setisLoading(true);
+    cancelSessionApi(payload)
+      .then(() => {
+        setisLoading(false);
+        handleChange();
+      })
+      .catch(() => setisLoading(false));
+  };
+
+  return (
+    <div className="tabPanel_overview">
+      <div className="tabPanel_overview_left">
+        <div className="TP_overview_wrapper">
+          <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
+          <div className="TP_US_overview">
+            <div className="TP_US_overview_inner">
+              {tabData?.slice(0, visible).map((data, index) => {
+                // console.log(data, "datadata");
+                return (
+                  <React.Fragment key={index}>
+                    <div className="TP_upcomeSession_overview">
+                      <div className="TP_USession_dates">
+                        <h4>
+                          {data.date}
+                          <span>{data.month}</span>
+                        </h4>
+                      </div>
+                      <div className="TP_USession_data">
+                        <h2
+                          style={{
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {data?.heading}
+                        </h2>
+                        <div className="TP_USession_data_icons">
+                          <h5>
+                            <img src={AvailabilityIcon} alt="icon" />
+                            {data.avaTime}
+                          </h5>
+                          <h5>
+                            <img src={LocationIcon} alt="icon" />
+                            {data.loc}
+                          </h5>
+                        </div>
+                        <div className="TP_USession_data_buttons">
+                          {data.sessionStatus !== "completed" ? (
+                            <div className="TP_USession_data_buttons">
+                              {/* <button>Reschedule</button> */}
+                              <button onClick={() => handleCancel(data.id)}>
+                                Cancel
+                              </button>
+                              <button
+                                className="text-primary"
+                                onClick={() =>
+                                  handleSessionStatus(data.id, "completed")
+                                }
+                              >
+                                Complete
+                              </button>
+                            </div>
+                          ) : (
+                            <div>
+                              <p>Completed</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                  </React.Fragment>
+                );
+              })}
+            </div>
+            <button onClick={setViewMore} className="viewMoreButton">
+              View all Session <BlueHoverButton />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="tabPanel_overview_right">
+        <div className="TB_overview_right">
+          <div className="TB_overview_row_two">
+            <div className="row_two_data">
+              <h2>PREVIOUS SESSIONS</h2>
+              <div className="row_two_scroll">
+                {tabData.length > 0 ? (
+                  tabData.map((data, index) => {
+                    return (
+                      <>
+                        <div className="row_previous_data" key={index}>
+                          <div className="row_previous_avater">
+                            <img src={data.previousImg} alt="profile" />
+                          </div>
+                          <div className="row_previous_header">
+                            <h2 className="text-capitalize">{data.heading}</h2>
+                            <p>{data.prevDate}</p>
+                          </div>
+                        </div>
+                        <hr />
+                      </>
+                    );
+                  })
+                ) : (
+                  <h3 className="my-5 py-5 text-center">No Data Found</h3>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const datamonth = {
+  "01": "Jan",
+  "02": "Feb",
+  "03": "Mar",
+  "04": "Apr",
+  "05": "May",
+  "06": "Jun",
+  "07": "Jul",
+  "08": "Aug",
+  "09": "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec",
+};
+
 const mapStateToProps = (state) => ({
   sessionData: state.trainerReducer.sessionData,
 });
@@ -449,6 +607,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getTrainerSessionDetailsApi: getTrainerSessionDetails,
       cancelSession,
+      updateUserDetails,
     },
     dispatch
   );

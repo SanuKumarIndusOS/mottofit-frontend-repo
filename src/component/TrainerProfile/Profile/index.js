@@ -476,7 +476,7 @@ const TrainerProfileClass = ({
                                   setViewLocationType("trainer");
                                 }}
                               >
-                                Location Details
+                                location details
                               </Link>
                             </h4>
                           </div>
@@ -490,14 +490,14 @@ const TrainerProfileClass = ({
                           <div className="d-flex align-items-center w-100">
                             <img src={Tick} alt="icon" />
                             <h4>
-                              {`${trainerProfileData?.location}(Your Location)`}
+                              {`${trainerProfileData?.servicableLocation[0]}(Your Location)`}
                               <Link
                                 onClick={() => {
                                   setTrainerLocationModal(true);
                                   setViewLocationType("servicable");
                                 }}
                               >
-                                Location Details
+                                areas serviced
                               </Link>
                             </h4>
                           </div>

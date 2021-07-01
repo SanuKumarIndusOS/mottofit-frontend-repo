@@ -13,6 +13,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "date-fns": "^2.21.1",
+    "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.0.0",
     "express": "^4.17.1",
     "libphonenumber-js": "^1.9.17",
     "moment": "^2.29.1",
@@ -60,8 +62,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "dotenv -e .env.development react-scripts start",
+    "build-staging": "dotenv -e .env.development react-scripts build",
+    "build": "dotenv -e .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

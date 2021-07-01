@@ -3,7 +3,6 @@ import "./trainer.sass";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
-import { COMMON_URL } from "helpers/baseURL";
 import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
 import { bindActionCreators } from "redux";
@@ -50,8 +49,6 @@ const TrainerCardsFC = (props) => {
         {no_match}
         <div className="row" style={{ alignleft: "auto" }}>
           {Object.keys(bestMatchData).map((data, index) => {
-            let imgdb = `${COMMON_URL}${bestMatchData[data]["profilePicture"]}`;
-
             const areaOfExpertise = bestMatchData[
               data
             ]?.areaOfExpertise?.toString();

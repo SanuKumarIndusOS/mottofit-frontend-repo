@@ -9,7 +9,7 @@ import NextIcon from "../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import DropdownTrainerAvailability from "../Home/Banner/DropdownAvailability";
 
 import BlueArrowHover from "../common/BlueArrowButton";
-import { COMMON_URL } from "helpers/baseURL";
+import config from "config";
 
 function Scheduler(props) {
   // const forceUpdate = useForceUpdate();
@@ -65,7 +65,7 @@ function Scheduler(props) {
   useEffect(() => {
     populate(startWeek, endWeek);
     fetch(
-      `${COMMON_URL}/v1/trainer/calenderView?trainerId=` +
+      `${config.api.baseUrl}/v1/trainer/calenderView?trainerId=` +
         `${props.trainerID}` +
         "&startDate=2021-05-01&endDate=2021-05-08&timeBlock=EarlyBird",
       {

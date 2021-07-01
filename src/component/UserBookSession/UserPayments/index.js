@@ -21,12 +21,12 @@ import {
 } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
-import { STRIPE_URL } from "../../../helpers/baseURL";
+import config from "config";
 import { getFormatDate, convertToESTMs } from "service/helperFunctions";
 import { Toast } from "service/toast";
 import { UserAvatar } from "component/common/UserAvatar";
 
-const stripePromise = loadStripe(STRIPE_URL);
+const stripePromise = loadStripe(config.stripeUrl);
 
 const UserPaymentsFC = ({
   sessionData,

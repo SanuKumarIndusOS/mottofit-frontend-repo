@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[405],{604:function(t,a,s){"use strict";s.r(a),a.default=s.p+"static/media/Banner Image.f118ab40.png"}}]);
-//# sourceMappingURL=405.88fda367.chunk.js.map
