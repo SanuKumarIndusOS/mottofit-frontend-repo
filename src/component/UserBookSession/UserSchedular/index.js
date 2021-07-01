@@ -36,7 +36,7 @@ const UserEventSchedularFC = (props) => {
 
     // if (!location["trainerId"]) return history.push("/trainer/find");
 
-    setTrainerName(location["trainerData"]);
+    setTrainerName(location["trainerData"] || location);
     // setTrainerName(props.selectedTrainerData);
 
     props?.query?.trainingType && setActivity(props.query.trainingType);
@@ -94,7 +94,8 @@ const UserEventSchedularFC = (props) => {
   };
 
   let userData = {
-    profilePicture: location?.trainerData?.profilePicture,
+    profilePicture:
+      location?.trainerData?.profilePicture || location?.profilePicture,
     userName: `${trainerName?.firstName || ""}${trainerName?.lastName || ""}`,
   };
 

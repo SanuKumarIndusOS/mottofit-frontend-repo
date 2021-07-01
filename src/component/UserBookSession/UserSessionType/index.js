@@ -44,7 +44,7 @@ let options = [
   { value: "Palm Beach", label: "Palm Beach" },
 ];
 
-const trainingVenueOptions = [
+let trainingVenueOptions = [
   { value: "trainerLocation", label: "Trainer's Location" },
   { value: "clientLocation", label: "Your Location" },
 ];
@@ -59,8 +59,8 @@ const UserBookSessionFC = ({
   const [selectedOption, setSelectedOption] = useState([]);
   const [trainingType, setTrainingType] = useState("");
   const [trainingVenue, setTrainingVenue] = useState({
-    value: "trainerLocation",
-    label: "Trainer's Location",
+    value: "clientLocation",
+    label: "Your Location",
   });
 
   const [preferedTrainingMode, setPreferedTrainingMode] = useState("");
@@ -114,6 +114,39 @@ const UserBookSessionFC = ({
 
     const { servicableLocation = [], areaOfExpertise = [] } = tempTrainerData;
 
+    const { inPersonAtClientLocation = "", inPersonAtTrainerLocation = "" } =
+      tempTrainerData?.oneOnOnePricing || {};
+
+    const {
+      inPeronAtClientLocationfor2People = "",
+      inPeronAtClientLocationfor3People = "",
+      inPeronAtClientLocationfor4People = "",
+      inPeronAtTrainerLocationfor2People = "",
+      inPeronAtTrainerLocationfor3People = "",
+      inPeronAtTrainerLocationfor4People = "",
+    } = tempTrainerData.socialSessionPricing || {};
+
+    const {
+      inPersonAtclientLocationfor15People = "",
+      inPersonAttrainerLocationfor15People = "",
+    } = tempTrainerData.classSessionPricing || {};
+
+    const isInPersonClientLocationAvailable = [
+      inPersonAtClientLocation,
+      inPeronAtClientLocationfor2People,
+      inPeronAtClientLocationfor3People,
+      inPeronAtClientLocationfor4People,
+      inPersonAtclientLocationfor15People,
+    ].some((price) => price !== "" && parseFloat(price) > 0);
+
+    const isInPersonTrainerLocationAvailable = [
+      inPersonAtTrainerLocation,
+      inPeronAtTrainerLocationfor2People,
+      inPeronAtTrainerLocationfor3People,
+      inPeronAtTrainerLocationfor4People,
+      inPersonAttrainerLocationfor15People,
+    ].some((price) => price !== "" && parseFloat(price) > 0);
+
     if (servicableLocation?.length > 0) {
       if (typeof servicableLocation === "string") {
         options = [
@@ -150,6 +183,29 @@ const UserBookSessionFC = ({
     }
     if (areaOfExpertise.length === 1) {
       setTrainingType(trainingTypeOption[0]);
+    }
+
+    if (!isInPersonClientLocationAvailable) {
+      isInPersonTrainerLocationAvailable &&
+        setTrainingVenue({
+          value: "trainerLocation",
+          label: "Trainer's Location",
+        });
+    }
+
+    trainingVenueOptions = [];
+
+    if (isInPersonTrainerLocationAvailable) {
+      trainingVenueOptions.push({
+        value: "trainerLocation",
+        label: "Trainer's Location",
+      });
+    }
+    if (isInPersonClientLocationAvailable) {
+      trainingVenueOptions.push({
+        value: "clientLocation",
+        label: "Your Location",
+      });
     }
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
@@ -437,7 +493,7 @@ const UserBookSessionFC = ({
                                 ? "active"
                                 : ""
                             } ${
-                              !isVirtualPresent
+                              !isInPersonPresent
                                 ? "disable-btn pointer-none"
                                 : ""
                             }`}

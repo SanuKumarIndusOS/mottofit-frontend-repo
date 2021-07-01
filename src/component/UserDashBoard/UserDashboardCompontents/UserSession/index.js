@@ -43,9 +43,9 @@ const UserSessionClass = (props) => {
     props
       .userSession()
       .then((data) => {
-        console.log(data);
+        // console.log(data);
 
-        // setUserData(data);
+        setUserData(data);
       })
       .catch((error) => {
         Toast({ type: "error", message: error.message || "Error" });
