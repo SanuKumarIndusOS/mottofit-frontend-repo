@@ -210,7 +210,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       query: {
         location: queryObject.location,
         date: moment(Calvalue).format("YYYY-MM-DD"),
-        trainingType: VerticalVal,
+        trainingType:{label: VerticalVal, value: VerticalVal } ,
         availability: Avalvalue,
         // inPerson: queryObject.inPerson,
         city: IPCvalue || "",

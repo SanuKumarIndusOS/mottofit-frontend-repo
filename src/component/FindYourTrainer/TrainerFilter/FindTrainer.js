@@ -33,9 +33,68 @@ import { bindActionCreators } from "redux";
 import { updateTrainerDetails } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "service/toast";
+
+import "react-calendar/dist/Calendar.css";
+
+import Calendar from "react-calendar";
+import moment from "moment";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import { useHistory } from "react-router-dom";
+
 const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+  //Responsive search
+  const [Calvalue, onChangeCal] = useState(new Date());
+  const [IPCvalue, setIPCValue] = useState("");
+  const [Avalvalue, setAvalValue] = useState("");
+  const [VerticalVal, setVerticalVal] = useState("");
+  const [LocationVal, setLocationVal] = useState("virtual");
+  const history = useHistory();
+
+  const [LocTrigger, setLocTrigger] = useState(false);
+  const [VerTrigger, setVerTrigger] = useState(false);
+  const [CalTrigger, setCalTrigger] = useState(false);
+  const [AvalTrigger, setAvalTrigger] = useState(false);
+
+  const handleIPCChange = (event) => {
+    setIPCValue(event.target.value);
+  };
+
+  const handleAvalChange = (event) => {
+    setAvalValue(event.target.value);
+  };
+
   const [showMenu, setshowMenu] = useState(false);
 
+  const search_action_mob = () => {
+    let payload = {
+      query: {
+        location: queryObject.location,
+        date: moment(Calvalue).format("YYYY-MM-DD"),
+        trainingType: { label: VerticalVal, value: VerticalVal },
+        availability: Avalvalue,
+        // inPerson: queryObject.inPerson,
+        city: IPCvalue || "",
+      },
+    };
+
+    if (queryObject.location === "inPerson" && !payload.query.city) {
+      setInPersonDD(true);
+
+      return Toast({ type: "error", message: "City is mandatory" });
+    }
+
+    console.log(payload, "payload");
+    updateTrainerDetails(payload);
+    getTrainerDataByQuery(payload.query);
+    setshowMenu(false);
+    // history.push("/trainer/find");
+  };
+
+  //DESKTOP
   const [bestMatchData, setbestMatchData] = useState([]);
   const [bestOthersData, setbestOthersData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -70,7 +129,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    //Mobile
 
+    //Desktop
     if (trainerQueryData.location === "inPerson") {
       SetLocation("In Person");
       setInPersonDD(false);
@@ -98,6 +159,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       };
 
       setqueryObject(payload.query);
+
       getTrainerDataByQuery();
       // setqueryObject(trainerQueryData);
       // SetLocation(trainerQueryData.location);
@@ -501,8 +563,22 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         </div>
       </div>
       <div className="mobile-find-wrapper">
-        <div className="cat">Strength & HIIT</div>
-        <div className="date">16/03/2021</div>
+        <div className="cat">
+          {VerticalVal === "" ? (
+            queryObject.vertical?.label === "" ? (
+              <div>All</div>
+            ) : (
+              queryObject.vertical?.label
+            )
+          ) : (
+            VerticalVal
+          )}
+        </div>
+        <div className="date">
+          {Calvalue === new Date()
+            ? queryObject.date
+            : moment(Calvalue).format("YYYY/MM/DD")}
+        </div>
         <div
           className="find-filters"
           onClick={() => {
@@ -516,7 +592,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         style={{ display: showMenu ? "block" : "none" }}
       >
         <div className="header">
-          <div className="title">Find Your Best Match</div>
+          <div className="title">Find Your Best Match </div>
           <div
             className="close"
             onClick={() => {
@@ -527,27 +603,242 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </div>
         </div>
         <div className="content">
-          <div className="clear-filters">Clear All Filters</div>
-          <div className="location">
-            <div>Location</div>
-            <div className="element">
-              Virtual <div className="slash">/</div> In Person
+          <div
+            className="clear-filters"
+            onClick={() => {
+              setLocationVal("virtual");
+              setIPCValue("");
+              setVerticalVal("");
+              setAvalValue("");
+              onChangeCal(new Date());
+            }}
+          >
+            Clear All Filters
+          </div>
+
+          <div className="location" onClick={()=> { setLocTrigger(!LocTrigger) }}>
+            <div className="accord_text" >
+              Location <span className="accord_arrow"></span>
             </div>
-            <div></div>
+            <div style={{display:(LocTrigger)? "block": "none"}} >
+              {LocationVal === "virtual" ? (
+                <div className="element">
+                  <div
+                    className="sel"
+                    onClick={() => {
+                      setLocationVal("virtual");
+                    }}
+                  >
+                    Virtual
+                  </div>
+                  <div className="slash">/</div>
+                  <div
+                    onClick={() => {
+                      setLocationVal("inPerson");
+                    }}
+                  >
+                    In Person
+                  </div>
+                </div>
+              ) : (
+                <div className="element">
+                  <div
+                    onClick={() => {
+                      setLocationVal("virtual");
+                    }}
+                  >
+                    Virtual
+                  </div>
+                  <div className="slash">/</div>
+                  <div
+                    className="sel"
+                    onClick={() => {
+                      setLocationVal("inPerson");
+                    }}
+                  >
+                    In Person
+                  </div>
+                </div>
+              )}
+              {LocationVal === "inPerson" ? (
+                <div>
+                  <FormControl component="fieldset">
+                    {/* {IPCvalue} */}
+                    <RadioGroup
+                      aria-label="gender"
+                      name="gender1"
+                      value={IPCvalue}
+                      onChange={handleIPCChange}
+                    >
+                      <FormControlLabel
+                        value="New York City"
+                        control={<Radio />}
+                        label="NEW YORK"
+                      />
+                      <FormControlLabel
+                        value="Miami"
+                        control={<Radio />}
+                        label="MIAMI"
+                      />
+                      <FormControlLabel
+                        value="Hamptons"
+                        control={<Radio />}
+                        label="HAMPTONS"
+                      />
+                      <FormControlLabel
+                        value="Palm Beach"
+                        control={<Radio />}
+                        label="PALM BEACH"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              ) : null}
+            </div>
             <hr></hr>
           </div>
+
           <div className="vertical">
-            Training Vertical
+            <div> Training Vertical</div>
+            {/* {VerticalVal} */}
+            <div className="listv">
+              {VerticalVal !== "Strength & HIIT" || VerticalVal === "" ? (
+                <div
+                  className="litem"
+                  onClick={() => {
+                    setVerticalVal("Strength & HIIT");
+                  }}
+                >
+                  STRENGTH
+                </div>
+              ) : (
+                <div
+                  className="litem_active"
+                  onClick={() => {
+                    setVerticalVal("");
+                  }}
+                >
+                  STRENGTH
+                </div>
+              )}
+
+              {VerticalVal !== "Boxing" || VerticalVal === "" ? (
+                <div
+                  className="litem"
+                  onClick={() => {
+                    setVerticalVal("Boxing");
+                  }}
+                >
+                  BOXING
+                </div>
+              ) : (
+                <div
+                  className="litem_active"
+                  onClick={() => {
+                    setVerticalVal("");
+                  }}
+                >
+                  BOXING
+                </div>
+              )}
+
+              {VerticalVal !== "Yoga" || VerticalVal === "" ? (
+                <div
+                  className="litem"
+                  onClick={() => {
+                    setVerticalVal("Yoga");
+                  }}
+                >
+                  YOGA
+                </div>
+              ) : (
+                <div
+                  className="litem_active"
+                  onClick={() => {
+                    setVerticalVal("");
+                  }}
+                >
+                  YOGA
+                </div>
+              )}
+
+              {VerticalVal !== "Pilates" || VerticalVal === "" ? (
+                <div
+                  className="litem"
+                  onClick={() => {
+                    setVerticalVal("Pilates");
+                  }}
+                >
+                  PILATES
+                </div>
+              ) : (
+                <div
+                  className="litem_active"
+                  onClick={() => {
+                    setVerticalVal("");
+                  }}
+                >
+                  PILATES
+                </div>
+              )}
+            </div>
+
             <hr></hr>
           </div>
           <div className="schedule">
-            Schedule
+            Schedule <br></br> {moment(Calvalue).format("YYYY/MM/DD")}
+            <Calendar onChange={onChangeCal} value={Calvalue} />
             <hr></hr>
           </div>
-          <div className="availability">Availability</div>
+          <div className="availability">
+            <div>Availability</div>
+            {Avalvalue} <br></br>
+            <FormControl component="fieldset">
+              <RadioGroup
+                aria-label="gender"
+                name="availability"
+                value={Avalvalue}
+                onChange={handleAvalChange}
+              >
+                <FormControlLabel
+                  value="EarlyBird"
+                  control={<Radio />}
+                  label="EARLY BIRD (5AM-8AM)"
+                />
+                <FormControlLabel
+                  value="RiseAndShine"
+                  control={<Radio />}
+                  label="RISE & SHINE (8AM-11AM)"
+                />
+                <FormControlLabel
+                  value="MidDayBreak1"
+                  control={<Radio />}
+                  label="MID-DAY BREAK (11:30AM-2PM)"
+                />
+                <FormControlLabel
+                  value="MidDayBreak2"
+                  control={<Radio />}
+                  label="MID-DAY LUNCHTIME (2AM-5PM)"
+                />
+                <FormControlLabel
+                  value="HappyHours"
+                  control={<Radio />}
+                  label="HAPPY HOUR (5PM-8PM)"
+                />
+                <FormControlLabel
+                  value="NeverTooLate"
+                  control={<Radio />}
+                  label="NEVER TOO LATE (8PM-11PM)"
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
         </div>
-        <div className="search">APPLY ALL FILTERS </div>
+        <div className="search" onClick={search_action_mob}>
+          APPLY ALL FILTERS{" "}
+        </div>
       </div>
+
       <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
       <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
     </div>
