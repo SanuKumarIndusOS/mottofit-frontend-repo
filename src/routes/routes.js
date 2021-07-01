@@ -444,7 +444,7 @@ const routers = [
       },
       {
         path: "/notification",
-        componentPath: "pages/UserDashboard/Notifications/index",
+        componentPath: "pages/TrainerDashboard/Notifications/index",
         name: "UserNotification",
         auth: false,
         exact: true,

@@ -130,7 +130,12 @@ class ChatBoxClass extends Component {
 
     const messages = activeChannelMessages;
 
-    if (!isDataPresent) return null;
+    if (!isDataPresent)
+      return (
+        <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+          {!isLoading ? <h3>No People</h3> : ""}
+        </div>
+      );
     return (
       <div className="message_right_chatarea">
         {activeChannel?.sid ? (

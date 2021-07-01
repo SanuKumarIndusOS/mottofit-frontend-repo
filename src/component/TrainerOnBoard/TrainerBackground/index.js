@@ -40,7 +40,7 @@ const TrainerBackgroundFC = ({
   const [checkedPilates, setCheckedPilates] = React.useState(false);
 
   const [currentExperience, setCurrentExperience] = useState({
-    workMode: "",
+    workMode: "yes",
     workLocation: "",
   });
   const [trainerbackgroundData, setTrainerbackgroundData] = useState({

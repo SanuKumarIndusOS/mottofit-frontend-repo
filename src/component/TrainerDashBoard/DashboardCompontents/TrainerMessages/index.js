@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Tabs, Tab, TabPanel, TabList } from "react-web-tabs";
 import "react-web-tabs/dist/react-web-tabs.css";
 import "./style.scss";
@@ -33,6 +33,10 @@ const TrainerMessageClass = ({
   typingMembers,
   chatClientInstance,
   updateMessagingDetails,
+  socialMessages,
+  individualMessages,
+  adminMessages,
+  allMessages,
 }) => {
   const [individual_list, setIndividual] = useState([]);
   const [socialGroup_list, setSocialGroup_list] = useState([]);
@@ -49,7 +53,7 @@ const TrainerMessageClass = ({
   useEffect(() => {
     // Get Contact_list
 
-    initClientDispatch(getChannelDetails);
+    initClientDispatch();
 
     getChannelDetails();
 
@@ -59,16 +63,30 @@ const TrainerMessageClass = ({
   }, []);
 
   const getChannelDetails = () => {
-    trainerChannel().then((data) => {
-      setIndividual(data.individualClient);
-      setSocialGroup_list(data.socialGroups);
-      setAdmin_list(data.admins);
-      setMessageListLoading(false);
+    trainerChannel()
+      .then((data) => {
+        setIndividual(data.individualClient);
+        setSocialGroup_list(data.socialGroups);
+        setAdmin_list(data.admins);
+        setMessageListLoading(false);
 
-      let messageLeftDOMs = document.getElementsByClassName("message_left");
+        let reduxData = {
+          socialMessages: [...data.socialGroups],
+          individualMessages: [...data.individualClient],
+          adminMessages: [...data.admins],
+          allMessages: [
+            ...data.individualClient,
+            ...data.socialGroups,
+            ...data.admins,
+          ],
+        };
 
-      [...messageLeftDOMs]?.forEach((dom) => dom?.scrollTo(0, 0));
-    });
+        updateMessagingDetails(reduxData);
+      })
+      .catch((err) => {
+        setMessageListLoading(false);
+        Toast({ type: "error", message: err.message || "error" });
+      });
   };
 
   function PopulateContacts(channelID, members, channelData) {
@@ -123,11 +141,7 @@ const TrainerMessageClass = ({
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
-                          [
-                            ...individual_list,
-                            ...socialGroup_list,
-                            ...admin_list,
-                          ].map((item, index) => {
+                          allMessages.map((item, index) => {
                             const { from, body, date_updated } = item.message;
 
                             let lastUserProfilePic =
@@ -186,15 +200,7 @@ const TrainerMessageClass = ({
                         )}
                       </div>
                       <div className="message_right">
-                        <ChatBox
-                          isDataPresent={
-                            [
-                              ...individual_list,
-                              ...socialGroup_list,
-                              ...admin_list,
-                            ].length > 0
-                          }
-                        />
+                        <ChatBox isDataPresent={allMessages?.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
@@ -204,7 +210,7 @@ const TrainerMessageClass = ({
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
-                          individual_list.map((item, index) => {
+                          individualMessages.map((item, index) => {
                             const { from, body, date_updated } = item.message;
 
                             let lastUserProfilePic =
@@ -259,7 +265,9 @@ const TrainerMessageClass = ({
                         )}
                       </div>
                       <div className="message_right">
-                        <ChatBox isDataPresent={individual_list.length > 0} />
+                        <ChatBox
+                          isDataPresent={individualMessages.length > 0}
+                        />
                       </div>
                     </div>
                   </TabPanel>
@@ -268,7 +276,7 @@ const TrainerMessageClass = ({
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
-                          socialGroup_list.map((item, index) => {
+                          socialMessages.map((item, index) => {
                             const { from, body, date_updated } = item.message;
 
                             let lastUserProfilePic =
@@ -323,7 +331,7 @@ const TrainerMessageClass = ({
                         )}
                       </div>
                       <div className="message_right">
-                        <ChatBox isDataPresent={socialGroup_list.length > 0} />
+                        <ChatBox isDataPresent={socialMessages.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
@@ -332,7 +340,7 @@ const TrainerMessageClass = ({
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
-                          admin_list.map((item) => {
+                          adminMessages.map((item) => {
                             const { from, body, date_updated } = item.message;
 
                             let lastUserProfilePic =
@@ -384,7 +392,7 @@ const TrainerMessageClass = ({
                         )}
                       </div>
                       <div className="message_right">
-                        <ChatBox isDataPresent={admin_list.length > 0} />
+                        <ChatBox isDataPresent={adminMessages.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
@@ -431,6 +439,10 @@ const mapStateToProps = (state) => ({
   activeChannelMessages: state.messagingReducer.activeChannelMessages,
   typingMembers: state.messagingReducer.typingMembers,
   chatClientInstance: state.messagingReducer.chatClientInstance,
+  socialMessages: state.messagingReducer.socialMessages,
+  individualMessages: state.messagingReducer.individualMessages,
+  adminMessages: state.messagingReducer.adminMessages,
+  allMessages: state.messagingReducer.allMessages,
 });
 
 const mapDispatchToProps = (dispatch) => {

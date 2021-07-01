@@ -90,3 +90,16 @@ export const getCalenderDetails = (trainerId, startDate, endDate, timeSlot) => (
       });
   });
 };
+
+//handle invidation
+export const invitationSession = (body) => (dispatch, getState, { api }) => {
+  return new Promise((resolve, reject) => {
+    api({ ...userApi.invitationSession, body })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

@@ -220,7 +220,7 @@ const TabOne = ({
                             )}
                             {data.sessionStatus !== "completed" ? (
                               <div className="TP_USession_data_buttons mt-0">
-                                <button>Reschedule</button>
+                                {/* <button>Reschedule</button> */}
                                 <button
                                   className="text-primary"
                                   onClick={() =>
@@ -340,7 +340,7 @@ const TabTwo = ({ datas = [], handleSessionStatus, handleCancel }) => {
                           </div>
                           {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
-                              <button>Reschedule</button>
+                              {/* <button>Reschedule</button> */}
                               <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>

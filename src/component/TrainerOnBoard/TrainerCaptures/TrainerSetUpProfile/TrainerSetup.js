@@ -467,6 +467,13 @@ function TrainerSetupClass(props) {
                   });
                 }}
               >
+                {trainerSetupData.neighborhood_list === "" ? (
+                  <option disabled selected value="">
+                    Select option
+                  </option>
+                ) : (
+                  ""
+                )}
                 {options.map((list, index) => (
                   <option value={list.value} key={index}>
                     {list.label}

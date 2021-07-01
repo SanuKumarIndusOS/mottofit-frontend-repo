@@ -314,6 +314,14 @@ export const userApi = {
       return this.url;
     },
   },
+  invitationSession: {
+    method: "post",
+    url: "sessions/accept-invite",
+    baseURL: "session",
+    get api() {
+      return this.url;
+    },
+  },
 };
 
 export const twilioApi = {

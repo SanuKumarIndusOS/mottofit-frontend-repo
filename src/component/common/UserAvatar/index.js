@@ -39,7 +39,7 @@ export const UserAvatar = ({
     backgroundColorByName = backgroundColor[2];
   } else if (colorByName <= "T") {
     backgroundColorByName = backgroundColor[3];
-  } else if (colorByName <= "Z") {
+  } else if (colorByName > "T") {
     backgroundColorByName = backgroundColor[4];
   }
 

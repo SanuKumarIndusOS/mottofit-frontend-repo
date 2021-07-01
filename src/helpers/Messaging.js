@@ -7,6 +7,7 @@ import { Toast } from "../service/toast";
 import {
   updatePersonTyping,
   resetChannelDetails,
+  updateGlobalMessagingDetails,
 } from "../action/messagingAct";
 
 const Chat = require("twilio-chat");
@@ -86,12 +87,7 @@ export default class TwilioMessaging {
   };
 
   globalMessage = (message) => {
-    // console.log(message.channel, this.activeChannel);
-
-    // if (message.channel.sid !== this.activeChannel.sid) {
-    //   console.log(message);
-    this.callbackApi && this.callbackApi();
-    // }
+    updateGlobalMessagingDetails(message)(this.handler, this.getState);
   };
 
   joinChannelByID = async (uniqueChannelId) => {
