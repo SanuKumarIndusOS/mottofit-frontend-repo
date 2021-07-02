@@ -12,11 +12,13 @@ import { Toast } from "../../../../service/toast";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
+import { CommonPageLoader } from "component/common/CommonPageLoader";
 
 const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
   const [paymentHistory, setPaymentHistory] = useState();
   const [myEarning, setMyEarning] = useState();
   const [isTrainer, setIsTrainer] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     getTrainerPaymentHistory();
@@ -32,14 +34,14 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
     let id = localStorage.getItem("user-id");
     trainerMyEarning(id, isTrainer)
       .then((data) => {
+        setLoading(false);
         setPaymentHistory(data.history);
-        console.log(data);
 
         setMyEarning(data);
       })
       .catch((error) => {
         Toast({ type: "error", message: error.message || "Error" });
-        console.log(error, "error");
+        setLoading(false);
       });
   }
 
@@ -53,6 +55,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                 <h2>{`${isTrainer ? "My Earnings" : "Payment History"}`}</h2>
               </div>
             </div>
+
             {isTrainer && (
               <div className="earn_wrapper">
                 <div className="earn_graph">
@@ -128,10 +131,14 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
               </div>
             )}
 
-            <TransactionSection
-              paymentHistory={paymentHistory}
-              isTrainer={isTrainer}
-            />
+            {isLoading ? (
+              <CommonPageLoader />
+            ) : (
+              <TransactionSection
+                paymentHistory={paymentHistory}
+                isTrainer={isTrainer}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@ import { AuthApi } from "service/apiVariables";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import validate from "service/validation";
+import { Toast } from "service/toast";
 
 const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
   const history = useHistory();
@@ -84,7 +85,8 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         history.push("/trainer/about");
       })
       .catch((error) => {
-        setApiError(error.message);
+        // setApiError(error.message);
+        Toast({ type: "error", message: error.message || "Error" });
       });
     // }
   }

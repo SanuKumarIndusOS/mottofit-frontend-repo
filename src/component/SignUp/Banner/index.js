@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import validate from "service/validation";
 import ReactPhoneInput from "react-phone-input-2";
+import { Toast } from "service/toast";
 
 const SignUpFC = ({ loginOrSignupAct }) => {
   const [data, setData] = useState({
@@ -76,7 +77,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
         history.push("/trainer/find");
       })
       .catch((error) => {
-        setApiError("Sorry, something went wrong.", error.message);
+        // setApiError("Sorry, something went wrong.", error.message);
+        Toast({ type: "error", message: error.message || "Error" });
       });
   }
 
