@@ -395,6 +395,7 @@ select {
     table {
       thead {
         tr {
+        
           .user_time_slot{
             line-height: unset;
             font-size: 12px;
@@ -415,6 +416,15 @@ select {
             .table_header_txt{
               font-size: 12px !important;
             }
+          }
+        }
+      }
+
+      tbody
+      {
+        tr{
+          td{
+            border: solid 1px rgb(61, 61, 61)!important;
           }
         }
       }
