@@ -22,6 +22,7 @@ import { userApi } from "service/apiVariables";
 import { api } from "service/api";
 import { Toast } from "service/toast";
 import validate from "validate.js";
+import { UserAvatar } from "component/common/UserAvatar";
 
 let tempaccordionData = [
   {
@@ -467,6 +468,13 @@ const TrainWithFriendsClass = ({
 
   const maxSessionValidation = friendsInput.length + 1 < maxUser;
 
+  let userProps = {
+    profilePicture: tempTrainerData?.profilePicture,
+    userName: `${tempTrainerData?.firstName || ""} ${
+      tempTrainerData?.lastName || ""
+    }`,
+  };
+
   return (
     <>
       <div className="TF_outter_container">
@@ -661,10 +669,7 @@ const TrainWithFriendsClass = ({
                 <div className="TF_wrapper_right">
                   <div className="TF_right">
                     <div className="TF_profile">
-                      <img
-                        src={tempTrainerData?.profilePicture || Jenny}
-                        alt={`Trainer ${tempTrainerData?.firstName}`}
-                      />
+                      <UserAvatar {...userProps} className="img-md" />
                       <div className="TF_name">
                         <h2>{`${tempTrainerData?.firstName || ""} ${
                           tempTrainerData?.lastName || ""
