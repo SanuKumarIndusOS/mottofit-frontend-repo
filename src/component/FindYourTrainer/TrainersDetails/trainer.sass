@@ -12,6 +12,8 @@
         font-size: 40px
         font-weight: 600
         font-family: "Montserrat", sans-serif
+        @media screen and (max-width: 600px)
+           font-size: 25px
 
     p
 
@@ -23,11 +25,16 @@
         font-size: 18px
         font-weight: normal
         font-family: "Montserrat", sans-serif
+        @media screen and (max-width: 600px)
+           width: 100%
+           text-align: justify
+
 
 .row
     display: grid
     justify-items: center
     align-items: center
+    grid-row-gap: 30px
     @media screen and (max-width: 920px)
         grid-template-columns: auto
 

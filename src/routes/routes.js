@@ -119,6 +119,15 @@ const routers = [
         auth: false,
         exact: true,
       },
+
+      
+      {
+        path: "/bookings",
+        componentPath: "pages/AdminDashboard/AdminBookings/AdminBookings",
+        name: "AdminBooking",
+        auth: false,
+        exact: true,
+      },
     ],
     // childrens: [
     //     {

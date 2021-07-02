@@ -194,3 +194,34 @@ label {
   margin: 1em 0 0.5em;
   margin-left: 10px;
 }
+@media only screen and (max-width: 600px) {
+  .myprofile_outter_container {
+    height: unset;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    .myprofile_inner_container {
+      padding: unset;
+
+      .profile_wrapper {
+        .profile_grid {
+          display: unset;
+          .profile_pic_col {
+            height: unset;
+          }
+
+          .profile_form_col {
+            height: unset;
+            .outter_profile_form {
+              .inner_profile_form {
+                display: block;
+                .input_profile {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

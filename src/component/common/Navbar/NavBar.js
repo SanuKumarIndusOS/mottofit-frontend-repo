@@ -31,15 +31,13 @@ const NavBarFC = ({
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-
-    if(userType !== 1 && userType === NaN){
+    if (userType === 3) {
       getUserDetail().then((data) => {
         setUserData(data);
       });
     }
 
     console.log(userType);
-  
   }, []);
 
   let nameProps = {
@@ -267,8 +265,32 @@ const NavBarFC = ({
                       src="/static/media/Settings Icon.5ae0ca78.svg"
                       alt="icon"
                     />
-                    <div className="menu_li_text"> SETTINGS </div>
+                    <div className="menu_li_text"> SETTINGS</div>
                   </div>
+                  <div className="seetings_li">
+                    <div
+                      className="set_item"
+                      onClick={() => {
+                        history.push("/users/dashboard/settings/profile");
+                        setActiveMobMenu(false);
+                      }}
+                    >
+                      {" "}
+                      PROFILE{" "}
+                    </div>
+
+                    <div
+                      className="set_item"
+                      onClick={() => {
+                        history.push("/users/dashboard/settings/password");
+                        setActiveMobMenu(false);
+                      }}
+                    >
+                      {" "}
+                      CHANGE PASSWORD{" "}
+                    </div>
+                  </div>
+
                   <div className="menu_li" onClick={logout}>
                     <img
                       src="/static/media/Logout Icon.97acadbd.svg"

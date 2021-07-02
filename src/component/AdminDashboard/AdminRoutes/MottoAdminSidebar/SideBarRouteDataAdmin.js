@@ -30,7 +30,7 @@ export const SideBarRouteDataAdmin = [
   },
   {
     title: "Bookings",
-    // path: "/trainers/dashboard/earnings",
+    path: "/admins/bookings",
     icon: <img src={MessageIcon} alt="icon" />,
   },
   {
