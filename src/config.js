@@ -9,6 +9,9 @@ let config = {
     },
     stripeUrl:
       "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm",
+    googleClientId:
+      "667288998529-mltflfijefc7u5r8eaon8j8e1cmcfsot.apps.googleusercontent.com",
+    facebookAppId: "310220110776502",
   },
   production: {
     api: {

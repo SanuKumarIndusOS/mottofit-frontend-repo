@@ -713,6 +713,9 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
   };
 
   const { images = [] } = trainerProfileData;
+
+  console.log(images);
+
   return (
     <>
       <div className="profile_images_grid">

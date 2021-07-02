@@ -305,11 +305,11 @@ function UserSchedulerClass(props) {
     cellCollection.push(time + date);
 
     var newTime = moment(time, "hh:mm A").add(30, "minutes").format("hh:mm A");
-    var ts = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm").valueOf();
+    var ts = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm A").valueOf();
     var tss;
     if (temp.find((el) => el === newTime)) {
       cellCollection.push(newTime + date);
-      tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
+      tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm A")
         .add(60, "minutes")
         .valueOf();
 

@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[397],{668:function(t,s,a){"use strict";a.r(s),s.default=a.p+"static/media/index.css.ea0ff354.map"}}]);

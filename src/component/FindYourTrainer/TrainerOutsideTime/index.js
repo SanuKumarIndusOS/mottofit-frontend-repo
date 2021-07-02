@@ -70,7 +70,11 @@ const TrainerCardOutsideFC = (props) => {
 
             const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
             return (
-              <div className="card" key={index}>
+              <div
+                className="card cursor-pointer"
+                key={index}
+                onClick={() => handleClick(data, true)}
+              >
                 <div className="inner_card">
                   <img
                     className="card-img-top card-img"
@@ -114,7 +118,11 @@ const TrainerCardOutsideFC = (props) => {
                     style={{
                       backgroundColor: "#53BFD2",
                     }}
-                    onClick={() => handleClick(data)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleClick(data);
+                    }}
                   >
                     book a session
                     <BlackCircleButton />

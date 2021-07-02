@@ -304,15 +304,17 @@ const MyProfileFC = ({
 
       setImageList([...imagesList]);
 
+      let dom = document.getElementsByClassName("upload-img-overlay")[index];
+
       const configData = {
         onUploadProgress: function (progressEvent) {
           var percentCompleted = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
           );
 
-          document.getElementsByClassName("upload-img-overlay")[
-            index
-          ].innerText = `Uploading ${percentCompleted}%`;
+          if (dom) {
+            dom.innerText = `Uploading ${percentCompleted}%`;
+          }
           // console.log(payload);
         },
       };
@@ -326,15 +328,16 @@ const MyProfileFC = ({
             url: urlPath,
             isUploaded: true,
           };
-          document.getElementsByClassName("upload-img-overlay")[
-            index
-          ].innerText = ``;
+
+          if (dom) {
+            dom.innerHTML = "";
+          }
           setImageList([...imagesList]);
         })
         .catch((err) => {
-          document.getElementsByClassName("upload-img-overlay")[
-            index
-          ].innerText = `Failed`;
+          if (dom) {
+            dom.innerHTML = "Failed";
+          }
           Toast({ type: "error", message: err.message || "Error" });
         });
     }
