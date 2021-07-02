@@ -620,6 +620,8 @@
 
               .profile_right_item3 {
                 .profile_item3_inner {
+                  grid-template-columns: unset;
+                  grid-row-gap: 5px;
                 }
               }
             }
@@ -639,10 +641,10 @@
             height: unset;
             max-width: unset;
             width: unset;
-            top: 100px;
+            top: 200px;
             img
             {
-              height: 400px;
+              width: 90vw;
             }
           }
         } 

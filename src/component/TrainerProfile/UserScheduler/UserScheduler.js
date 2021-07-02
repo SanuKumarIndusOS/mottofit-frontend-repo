@@ -510,7 +510,7 @@ function UserSchedulerClass(props) {
             </th>
             <th>
               <div className="table_header_number">{cal[3].slice(8, 10)}</div>
-              <div className="table_header_txt">THURS</div>
+              <div className="table_header_txt">THU</div>
             </th>
             <th>
               <div className="table_header_number">{cal[4].slice(8, 10)}</div>

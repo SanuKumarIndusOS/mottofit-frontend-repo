@@ -26,8 +26,8 @@ const UserTracker = () => {
 
   let Icon_mobile;
   let Icon_text;
-  let Prev_mobile;
-  let Next_mobile;
+  // let Prev_mobile;
+  // let Next_mobile;
 
   // ScheduleBarIcon
   if (window.location.pathname.includes("/user/scheduler")) {
@@ -46,8 +46,8 @@ const UserTracker = () => {
     Icon_mobile = <img src={ScheduleIcon} alt="icon" />;
     Icon_text = <p className="active">Schedule your slot</p>;
    
-    Prev_mobile = <div className="tracker_prev_mobile">&lt;</div>;
-    Next_mobile = <div className="tracker_next_mobile">&gt;</div>;
+    // Prev_mobile = <div className="tracker_prev_mobile">&lt;</div>;
+    // Next_mobile = <div className="tracker_next_mobile">&gt;</div>;
   }
 
   // SessionBar
@@ -69,8 +69,8 @@ const UserTracker = () => {
     Icon_mobile = <img src={SessionActive} alt="icon" />;
     Icon_text = <p className="active">Book Your Slot</p>;
 
-    Prev_mobile = <div className="tracker_prev_mobile" onClick={()=>{history.push("/user/scheduler")}}>&lt;</div>;
-    Next_mobile = <div className="tracker_next_mobile">&gt;</div>;
+    // Prev_mobile = <div className="tracker_prev_mobile" onClick={()=>{history.push("/user/scheduler")}}>&lt;</div>;
+    // Next_mobile = <div className="tracker_next_mobile">&gt;</div>;
   }
 
   if (window.location.pathname.includes("/user/motto-pass")) {
@@ -89,8 +89,8 @@ const UserTracker = () => {
     Icon_mobile = <img src={MottoIconBar} alt="icon" />;
     Icon_text = <p className="active">Get a motto pass</p>;
 
-    Prev_mobile = <div className="tracker_prev_mobile" onClick={()=>{history.push("/user/session-type")}}>&lt;</div>;
-    Next_mobile = <div className="tracker_next_mobile">&gt;</div>;
+    // Prev_mobile = <div className="tracker_prev_mobile" onClick={()=>{history.push("/user/session-type")}}>&lt;</div>;
+    // Next_mobile = <div className="tracker_next_mobile">&gt;</div>;
   }
 
   if (window.location.pathname.includes("/user/payment")) {
@@ -109,8 +109,8 @@ const UserTracker = () => {
     Icon_mobile = <img src={PaymentActive} alt="icon" />;
     Icon_text = <p className="active">Make a Payment</p>;
 
-    Prev_mobile = <div className="tracker_prev_mobile" onClick={()=>{history.push("/user/session-type")}}>&lt;</div>;
-    Next_mobile = <div className="tracker_next_mobile" >&gt;</div>;
+    // Prev_mobile = <div className="tracker_prev_mobile" onClick={()=>{history.push("/user/session-type")}}>&lt;</div>;
+    // Next_mobile = <div className="tracker_next_mobile" >&gt;</div>;
   }
 
   return (
@@ -139,13 +139,13 @@ const UserTracker = () => {
       </div>
 
       <div className="tracker_mobile">
-        {Prev_mobile}
+        {/* {Prev_mobile} */}
         <div className="tracker_content_mobile">
           <div className="tracker_icon">{Icon_mobile}</div>
           <div className="tracker_text">{Icon_text}</div>
           <div className="tracker_step"></div>
         </div>
-        {Next_mobile}
+        {/* {Next_mobile} */}
       </div>
     </>
   );
