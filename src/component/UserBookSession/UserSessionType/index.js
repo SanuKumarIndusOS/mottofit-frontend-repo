@@ -58,6 +58,7 @@ const UserBookSessionFC = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState([]);
   const [trainingType, setTrainingType] = useState("");
+  const [availableLocation, setAvailableLocation] = useState([]);
   const [trainingVenue, setTrainingVenue] = useState({
     value: "clientLocation",
     label: "Your Location",
@@ -144,7 +145,7 @@ const UserBookSessionFC = ({
       virtualSessionfor3People,
       virtualSessionfor4People,
       virtualSessionfor15People,
-    ];
+    ].some((price) => price !== "" && parseFloat(price) > 0);
 
     const isInPersonClientLocationAvailable = [
       inPersonAtClientLocation,
@@ -202,6 +203,7 @@ const UserBookSessionFC = ({
 
     if (!isInPersonClientLocationAvailable) {
       isInPersonTrainerLocationAvailable &&
+        tempTrainerData?.trainingFacility &&
         setTrainingVenue({
           value: "trainerLocation",
           label: "Trainer's Location",
@@ -210,22 +212,46 @@ const UserBookSessionFC = ({
 
     trainingVenueOptions = [];
 
-    if (isInPersonTrainerLocationAvailable) {
+    if (
+      isInPersonTrainerLocationAvailable &&
+      tempTrainerData?.trainingFacility
+    ) {
       trainingVenueOptions.push({
         value: "trainerLocation",
         label: "Trainer's Location",
       });
     }
-    if (isInPersonClientLocationAvailable) {
+    if (isInPersonClientLocationAvailable && tempTrainerData?.willingToTravel) {
       trainingVenueOptions.push({
         value: "clientLocation",
         label: "Your Location",
       });
+    } else {
+      setTrainingVenue({
+        value: "trainerLocation",
+        label: "Trainer's Location",
+      });
     }
+
+    // console.log(isVirtualSessionAvailable);
 
     if (!isVirtualSessionAvailable) {
       setPreferedTrainingMode("inPerson");
     }
+
+    let tempAvailableLocation = [];
+
+    if (isVirtualSessionAvailable) {
+      tempAvailableLocation.push("virtual");
+    }
+    if (
+      isInPersonClientLocationAvailable ||
+      isInPersonTrainerLocationAvailable
+    ) {
+      tempAvailableLocation.push("inPerson");
+    }
+
+    setAvailableLocation(tempAvailableLocation);
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
   }, []);
@@ -311,12 +337,17 @@ const UserBookSessionFC = ({
 
     const inPersonOneOneOne = {};
 
-    if (!isNaN(inPersonAtClientLocation)) {
+    // if (tempTrainerData?.willingToTravel) {
+    if (!isNaN(inPersonAtClientLocation) && tempTrainerData?.willingToTravel) {
       inPersonOneOneOne["clientLocation"] = {
         value: inPersonAtClientLocation,
       };
     }
-    if (!isNaN(inPersonAtTrainerLocation)) {
+    // }
+    if (
+      !isNaN(inPersonAtTrainerLocation) &&
+      tempTrainerData?.trainingFacility
+    ) {
       inPersonOneOneOne["trainerLocation"] = {
         value: inPersonAtTrainerLocation,
       };
@@ -326,72 +357,82 @@ const UserBookSessionFC = ({
 
     const inPersonSocial = {};
 
-    if (
-      !isNaN(inPeronAtClientLocationfor2People) &&
-      parseInt(inPeronAtClientLocationfor2People) > 0
-    ) {
-      inPersonSocial["clientLocation"] = {
-        value: parseInt(inPeronAtClientLocationfor2People),
-        label: "2 People",
-      };
-    }
-    if (
-      !isNaN(inPeronAtClientLocationfor3People) &&
-      parseInt(inPeronAtClientLocationfor3People) > 0
-    ) {
-      inPersonSocial["clientLocation"] = {
-        value: parseInt(inPeronAtClientLocationfor3People),
-        label: "3 People",
-      };
-    }
-    if (
-      !isNaN(inPeronAtClientLocationfor4People) &&
-      parseInt(inPeronAtClientLocationfor4People) > 0
-    ) {
-      inPersonSocial["clientLocation"] = {
-        value: parseInt(inPeronAtClientLocationfor4People),
-        label: "4 People",
-      };
+    if (tempTrainerData?.willingToTravel) {
+      if (
+        !isNaN(inPeronAtClientLocationfor2People) &&
+        parseInt(inPeronAtClientLocationfor2People) > 0
+      ) {
+        inPersonSocial["clientLocation"] = {
+          value: parseInt(inPeronAtClientLocationfor2People),
+          label: "2 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtClientLocationfor3People) &&
+        parseInt(inPeronAtClientLocationfor3People) > 0
+      ) {
+        inPersonSocial["clientLocation"] = {
+          value: parseInt(inPeronAtClientLocationfor3People),
+          label: "3 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtClientLocationfor4People) &&
+        parseInt(inPeronAtClientLocationfor4People) > 0
+      ) {
+        inPersonSocial["clientLocation"] = {
+          value: parseInt(inPeronAtClientLocationfor4People),
+          label: "4 People",
+        };
+      }
     }
 
-    if (
-      !isNaN(inPeronAtTrainerLocationfor2People) &&
-      parseInt(inPeronAtTrainerLocationfor2People) > 0
-    ) {
-      inPersonSocial["trainerLocation"] = {
-        value: parseInt(inPeronAtTrainerLocationfor2People),
-        label: "2 People",
-      };
-    }
-    if (
-      !isNaN(inPeronAtTrainerLocationfor3People) &&
-      parseInt(inPeronAtTrainerLocationfor3People) > 0
-    ) {
-      inPersonSocial["trainerLocation"] = {
-        value: parseInt(inPeronAtTrainerLocationfor3People),
-        label: "3 People",
-      };
-    }
-    if (
-      !isNaN(inPeronAtTrainerLocationfor4People) &&
-      parseInt(inPeronAtTrainerLocationfor4People) > 0
-    ) {
-      inPersonSocial["trainerLocation"] = {
-        value: parseInt(inPeronAtTrainerLocationfor4People),
-        label: "4 People",
-      };
+    if (tempTrainerData?.trainingFacility) {
+      if (
+        !isNaN(inPeronAtTrainerLocationfor2People) &&
+        parseInt(inPeronAtTrainerLocationfor2People) > 0
+      ) {
+        inPersonSocial["trainerLocation"] = {
+          value: parseInt(inPeronAtTrainerLocationfor2People),
+          label: "2 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtTrainerLocationfor3People) &&
+        parseInt(inPeronAtTrainerLocationfor3People) > 0
+      ) {
+        inPersonSocial["trainerLocation"] = {
+          value: parseInt(inPeronAtTrainerLocationfor3People),
+          label: "3 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtTrainerLocationfor4People) &&
+        parseInt(inPeronAtTrainerLocationfor4People) > 0
+      ) {
+        inPersonSocial["trainerLocation"] = {
+          value: parseInt(inPeronAtTrainerLocationfor4People),
+          label: "4 People",
+        };
+      }
     }
 
     // INPERSON CLASS PRICING
 
     const inPersonClass = {};
 
-    if (!isNaN(inPersonAtclientLocationfor15People)) {
+    if (
+      !isNaN(inPersonAtclientLocationfor15People) &&
+      tempTrainerData?.willingToTravel
+    ) {
       inPersonClass["clientLocation"] = {
         value: inPersonAtclientLocationfor15People,
       };
     }
-    if (!isNaN(inPersonAttrainerLocationfor15People)) {
+    if (
+      !isNaN(inPersonAttrainerLocationfor15People) &&
+      tempTrainerData?.trainingFacility
+    ) {
       inPersonClass["trainerLocation"] = {
         value: inPersonAttrainerLocationfor15People,
       };
@@ -457,12 +498,8 @@ const UserBookSessionFC = ({
   const tempTrainerData =
     selectedTrainerData?.trainerData || selectedTrainerData;
 
-  let isVirtualPresent = tempTrainerData?.preferedTrainingMode?.includes(
-    "virtual"
-  );
-  let isInPersonPresent = tempTrainerData?.preferedTrainingMode?.includes(
-    "inPerson"
-  );
+  let isVirtualPresent = availableLocation?.includes("virtual");
+  let isInPersonPresent = availableLocation?.includes("inPerson");
 
   const pricingObject = getPricingObject();
 

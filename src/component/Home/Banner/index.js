@@ -30,8 +30,6 @@ import FormLabel from "@material-ui/core/FormLabel";
 
 import arrowSign from "assets/files/SVG/Arrow Next.svg";
 
-
-
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   //Responsive search
   const [Calvalue, onChangeCal] = useState(new Date());
@@ -53,8 +51,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const history = useHistory();
   const [DropdownState, setDropdownState] = useState(false);
 
-  const [DropdownAvailabilityState, setDropdownAvailabilityState] =
-    useState(false);
+  const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
+    false
+  );
   const [InPersonDD, setInPersonDD] = useState(false);
 
   const [virtualMarkup, setvirtualMarkup] = useState(
@@ -212,7 +211,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       query: {
         location: queryObject.location,
         date: moment(Calvalue).format("YYYY-MM-DD"),
-        trainingType:{label: VerticalVal, value: VerticalVal } ,
+        trainingType: { label: VerticalVal, value: VerticalVal },
         availability: Avalvalue,
         // inPerson: queryObject.inPerson,
         city: IPCvalue || "",
@@ -225,34 +224,13 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
-    console.log(payload, "payload");
     updateTrainerDetails(payload);
 
     history.push("/trainer/find");
   };
 
-  // useEffect(() => {
-  //   return history.listen((location) => {
-  //     if (history.action === "PUSH") {
-  //       setLocationKeys([location.key]);
-  //       history.push("/trainer/find");
-  //     }
-
-  //     if (history.action === "POP") {
-  //       if (locationKeys[1] === location.key) {
-  //         setLocationKeys(([_, ...keys]) => keys);
-  //         console.log("back");
-  //         history.push("/trainer/find");
-  //         // Handle forward event
-  //       } else {
-  //         setLocationKeys((keys) => [location.key, ...keys]);
-  //         console.log("back");
-  //         // Handle back event
-  //         history.push("/trainer/find");
-  //       }
-  //     }
-  //   });
-  // }, [locationKeys]);
+  let selectedValue =
+    Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
 
   return (
     <div
@@ -300,13 +278,26 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     {virtualMarkup}
                   </div>
                   <img src={Between} alt="icon" />
-                  <div onClick={() => SetLocation("")}>
-                    <h6 onClick={TriggerInPersonDropDown}>{inPersonMarkup}</h6>
+                  <div
+                    onClick={() => SetLocation("")}
+                    className="position-realtive"
+                  >
+                    <h6
+                      onClick={TriggerInPersonDropDown}
+                      className={`${selectedValue ? "in-person-option" : ""} `}
+                    >
+                      {inPersonMarkup}
+                      <span>{selectedValue}</span>
+                    </h6>
                     <div className="card_item_home">
                       <div className="custom_dropdown">
                         <h2>{`${queryObject.inPerson || ""}`}</h2>
                       </div>
-                      <div className="home_dropdown">
+                      <div
+                        className={`home_dropdown ${
+                          selectedValue ? "option-selected" : ""
+                        }`}
+                      >
                         {DropdownHomeInPerson}
                       </div>
                     </div>
@@ -420,9 +411,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             >
               Clear All Filters
             </div>
-          
+
             <div className="location">
-              <div className="accheader">Location  <img  src= {arrowSign}></img></div>
+              <div className="accheader">
+                Location <img src={arrowSign}></img>
+              </div>
 
               {LocationVal === "virtual" ? (
                 <div className="element">
@@ -500,8 +493,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
               <hr></hr>
             </div>
-         
-       
+
             <div className="vertical">
               <div> Training Vertical</div>
               {/* {VerticalVal} */}

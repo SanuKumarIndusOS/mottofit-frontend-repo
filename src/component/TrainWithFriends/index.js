@@ -144,10 +144,12 @@ const TrainWithFriendsClass = ({
         ...data.trainerDetail,
       };
 
-      let tempFriendsData = friends.map(({ userDetail }) => ({
+      let tempFriendsData = friends.map(({ userDetail, userId }) => ({
         friendName: userDetail?.firstName || "",
         friendEmail: userDetail?.email || "",
         friendPhone: userDetail?.phoneNo || "",
+        id: userId,
+        isSubmitted: true,
       }));
 
       if (tempFriendsData.length > 0) setFriendsInput(tempFriendsData);
@@ -170,8 +172,8 @@ const TrainWithFriendsClass = ({
     const { editSessionData } = userApi;
 
     let tempPhoneData = friendsInput.filter(
-      ({ friendEmail, friendName, friendPhone }) =>
-        friendEmail && friendName && friendPhone
+      ({ friendEmail, friendName, friendPhone, id }) =>
+        friendEmail && friendName && friendPhone && !id
     );
 
     let payload = {
@@ -201,6 +203,53 @@ const TrainWithFriendsClass = ({
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
       });
+  };
+
+  // REMOVE FRINEDS API
+  const handleRemoveFriend = (e, friendId, index) => {
+    e.preventDefault();
+
+    let tempFriendsData = [...friendsInput];
+
+    tempFriendsData = tempFriendsData.filter((_, i) => i !== index);
+
+    if (!friendId) {
+      setFriendsInput(tempFriendsData);
+
+      let tempErrors = {
+        ...errors,
+      };
+
+      tempErrors["friendsData"] = tempErrors["friendsData"].filter(
+        (_, i) => i !== index
+      );
+
+      setErrors(tempErrors);
+
+      return;
+    }
+
+    const { editSessionData } = userApi;
+
+    let sessionId = submittedData?.id;
+
+    let payload = {
+      sessionId,
+      removeFriend: friendId,
+    };
+
+    editSessionData.body = payload;
+
+    api({ ...editSessionData })
+      .then((data) => {
+        Toast({ type: "success", message: data.message || "Success" });
+        setFriendsInput(tempFriendsData);
+        //  history.push("/users/dashboard/session");
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+      });
+    // console.log(friendId);
   };
 
   const validationRules = () => {
@@ -443,8 +492,13 @@ const TrainWithFriendsClass = ({
                         <div className="TF_inner_form">
                           {friendsInput.map((input, index) => {
                             return (
-                              <div key={index} className="TF_wrapper_input">
-                                <h4>Friend #{index + 1}</h4>
+                              <div
+                                key={index}
+                                className="TF_wrapper_input d-flex flex-column"
+                              >
+                                <h4 className="text-left">
+                                  Friend #{index + 1}
+                                </h4>
                                 {/* <div> */}
                                 <div className="inner_input">
                                   <input
@@ -455,6 +509,10 @@ const TrainWithFriendsClass = ({
                                     onChange={(event) =>
                                       handleChangeFriendInput(index, event)
                                     }
+                                    disabled={input.isSubmitted}
+                                    className={`${
+                                      input.isSubmitted ? "disable-btn" : ""
+                                    }`}
                                   />
                                   <img src={Person} alt="icon" />
                                 </div>
@@ -486,6 +544,12 @@ const TrainWithFriendsClass = ({
                                               event
                                             )
                                           }
+                                          disabled={input.isSubmitted}
+                                          className={`${
+                                            input.isSubmitted
+                                              ? "disable-btn"
+                                              : ""
+                                          }`}
                                         />
 
                                         <img src={Mail} alt="icon" />
@@ -525,17 +589,13 @@ const TrainWithFriendsClass = ({
                                               },
                                             });
                                           }}
+                                          disabled={input.isSubmitted}
+                                          className={`${
+                                            input.isSubmitted
+                                              ? "disable-btn"
+                                              : ""
+                                          }`}
                                         />
-
-                                        {/* <input
-                                      type="text"
-                                      placeholder="Phone Number"
-                                      name="phone"
-                                      value={input.friendPhone}
-                                      onChange={(event) =>
-                                        handleChangeFriendInput(index, event)
-                                      }
-                                    /> */}
 
                                         <img src={Phone} alt="icon" />
                                       </div>
@@ -555,6 +615,17 @@ const TrainWithFriendsClass = ({
                                     </div>
                                   </div>
                                 </div>
+
+                                {(input.id || index !== 0) && (
+                                  <button
+                                    className="btn-link btn text-underline fw-400 text-right"
+                                    onClick={(e) =>
+                                      handleRemoveFriend(e, input.id, index)
+                                    }
+                                  >
+                                    Remove
+                                  </button>
+                                )}
                               </div>
                             );
                           })}

@@ -24,6 +24,7 @@ import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "../../../../service/toast";
 import { api } from "service/api";
 import { PaymentApi } from "service/apiVariables";
+import { UserAvatar } from "component/common/UserAvatar";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -81,6 +82,7 @@ const UserSessionClass = (props) => {
                 <Tab tabFor="upcoming">Upcoming</Tab>
                 {/* <Tab tabFor="pass">Motto pass</Tab> */}
                 <Tab tabFor="previous">Previous</Tab>
+                <Tab tabFor="ongoing">Ongoing</Tab>
               </TabList>
               <div className="tabPanel_outter">
                 <TabPanel tabId="invited">
@@ -125,6 +127,18 @@ const UserSessionClass = (props) => {
                   <TabOne
                     tabname={"Previous"}
                     tabData={userData.pastSessions}
+                    prevData={userData.pastSessions}
+                    cancelSessionApi={props.cancelSession}
+                    handleChange={() => _userSession()}
+                    {...props}
+                  />
+                </TabPanel>
+              </div>
+              <div className="tabPanel_outter">
+                <TabPanel tabId="ongoing">
+                  <TabOne
+                    tabname={"OnGoing"}
+                    tabData={userData.onGoingSessions}
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
@@ -274,6 +288,7 @@ const TabOne = ({
             <div className="TP_US_overview_inner">
               {tabData?.slice(0, visible).map((data, index) => {
                 // console.log(data, "datadata");
+
                 return (
                   <React.Fragment key={index}>
                     <div className="TP_upcomeSession_overview">
@@ -315,92 +330,115 @@ const TabOne = ({
                           </h5>
                           <h5>
                             <img src={LocationIcon} alt="icon" />
-                            {Data[0].loc}
+                            {data?.venue}
                           </h5>
                         </div>
-                        <div className="TP_USession_data_buttons">
-                          {tabname === "Invited" ? (
-                            <>
-                              <button
-                                disabled={isLoading}
-                                onClick={() => handleInvitation(data.id, false)}
-                              >
-                                Decline
-                              </button>
-                              <button
-                                disabled={isLoading}
-                                onClick={() => handleInvitation(data.id, true)}
-                                className="text-success"
-                              >
-                                Accept
-                              </button>
-                              <button
-                                disabled={isLoading}
-                                onClick={() =>
-                                  handleTrainerRoute(data.trainerId)
-                                }
-                                className="text-primary"
-                              >
-                                View Trainer
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              {!data.asFriend ? (
-                                <>
-                                  {data.sessionStatus !== "cancelled" ? (
-                                    <>
-                                      {tabname !== "Previous" ? (
+                        {tabname !== "OnGoing" && (
+                          <div className="TP_USession_data_buttons">
+                            {tabname === "Invited" ? (
+                              <>
+                                <button
+                                  disabled={isLoading}
+                                  onClick={() =>
+                                    handleInvitation(data.id, false)
+                                  }
+                                >
+                                  Decline
+                                </button>
+                                <button
+                                  disabled={isLoading}
+                                  onClick={() =>
+                                    handleInvitation(data.id, true)
+                                  }
+                                  className="text-success"
+                                >
+                                  Accept
+                                </button>
+                                <button
+                                  disabled={isLoading}
+                                  onClick={() =>
+                                    handleTrainerRoute(data.trainerId)
+                                  }
+                                  className="text-primary"
+                                >
+                                  View Trainer
+                                </button>
+                              </>
+                            ) : (
+                              <>
+                                {data.sessionStatus === "completed" ? (
+                                  <button
+                                    className="text-primary"
+                                    disabled={true}
+                                  >
+                                    Completed
+                                  </button>
+                                ) : (
+                                  <>
+                                    {!data.asFriend ? (
+                                      <>
+                                        {data.sessionStatus !== "cancelled" ? (
+                                          <>
+                                            {tabname !== "Previous" ? (
+                                              <button
+                                                disabled={isLoading}
+                                                onClick={() =>
+                                                  handleCancel(data.id)
+                                                }
+                                              >
+                                                Cancel
+                                              </button>
+                                            ) : (
+                                              ""
+                                            )}
+                                          </>
+                                        ) : (
+                                          <button
+                                            className="text-danger"
+                                            disabled={true}
+                                          >
+                                            Cancelled
+                                          </button>
+                                        )}
+                                      </>
+                                    ) : (
+                                      <div className="d-flex align-items-center">
+                                        <span className="text-black mr-4">
+                                          Invited session
+                                        </span>
                                         <button
                                           disabled={isLoading}
-                                          onClick={() => handleCancel(data.id)}
+                                          onClick={() =>
+                                            handleTrainerRoute(data.trainerId)
+                                          }
+                                          className="text-primary"
                                         >
-                                          Cancel
+                                          View Trainer
                                         </button>
-                                      ) : (
-                                        ""
-                                      )}
-                                    </>
-                                  ) : (
-                                    <button
-                                      className="text-danger"
-                                      disabled={true}
-                                    >
-                                      Cancelled
-                                    </button>
-                                  )}
-                                </>
-                              ) : (
-                                <div className="d-flex align-items-center">
-                                  <span className="text-black mr-4">
-                                    Invited session
-                                  </span>
-                                  <button
-                                    disabled={isLoading}
-                                    onClick={() =>
-                                      handleTrainerRoute(data.trainerId)
-                                    }
-                                    className="text-primary"
-                                  >
-                                    View Trainer
-                                  </button>
-                                </div>
-                              )}
-                            </>
-                          )}
+                                      </div>
+                                    )}
+                                  </>
+                                )}
+                              </>
+                            )}
 
-                          {/* </>
+                            {/* </>
                           )} */}
 
-                          {data.trainingType !== "1on1" && !data.asFriend && (
-                            <div className="button_boarder">
-                              <button onClick={() => handleAddFriends(data)}>
-                                Add Friends{" "}
-                              </button>
-                              <img src={ArrowNext} alt="icon" />
-                            </div>
-                          )}
-                        </div>
+                            {data.trainingType !== "1on1" &&
+                              !data.asFriend &&
+                              tabname !== "Previous" && (
+                                <div className="button_boarder">
+                                  <button
+                                    onClick={() => handleAddFriends(data)}
+                                  >
+                                    Add Friends{" "}
+                                  </button>
+                                  <img src={ArrowNext} alt="icon" />
+                                </div>
+                              )}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <hr />
@@ -433,11 +471,18 @@ const TabOne = ({
               <h2>PREVIOUS SESSIONS</h2>
               <div className="row_two_scroll">
                 {prevData.map((data, index) => {
+                  let userProps = {
+                    profilePicture: data?.trainerDetail?.profilePicture,
+                    userName: `${data?.trainerDetail?.firstName || ""} ${
+                      data?.trainerDetail?.lastName || ""
+                    }`,
+                  };
                   return (
                     <>
                       <div className="row_previous_data" key={index}>
-                        <div className="row_previous_avater">
-                          <img src={Jenny} alt="profile" />
+                        <div className="row_previous_avater ml-2">
+                          <UserAvatar {...userProps} className="img-md-2" />
+                          {/* <img src={Jenny} alt="profile" /> */}
                         </div>
                         <div className="row_previous_header">
                           <h2
@@ -464,7 +509,7 @@ const TabOne = ({
                               {data.trainerDetail.firstName}
                             </h2>
                           </h2>
-                          {/* <h2>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2> */}
+
                           <p>{`${data.sessionDate.substr(8, 2)} ${
                             datamonth[data.sessionDate.substr(5, 2)]
                           } ${data.sessionDate.substr(0, 4)}`}</p>

@@ -11,6 +11,7 @@ import { bindActionCreators } from "redux";
 import { Toast } from "../../../../service/toast";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
+import { UserAvatar } from "component/common/UserAvatar";
 
 const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
   const [paymentHistory, setPaymentHistory] = useState();
@@ -159,18 +160,26 @@ const TransactionSection = ({ paymentHistory, isTrainer }) => {
 
                   if (data?.createdAt)
                     date = getFormatDate(data?.createdAt, "YYYY-MM-DD");
+
+                  let userProps = {
+                    profilePicture:
+                      data?.trainerDetail?.profilePicture ||
+                      data?.userDetail?.profilePicture,
+                    userName: `${
+                      data?.userDetail?.firstName ||
+                      data?.trainerDetail?.firstName ||
+                      ""
+                    } ${
+                      data?.userDetail?.lastName ||
+                      data?.trainerDetail?.lastName ||
+                      ""
+                    }`,
+                  };
                   return (
                     <div className="ts_wrapper" key={index}>
                       <div className="ts_card row no-gutters">
-                        <div className="card_profile col-4">
-                          <img
-                            src={
-                              data?.trainerDetail?.profilePicture ||
-                              data?.userDetail?.profilePicture ||
-                              Profile
-                            }
-                            className="profile_card_img"
-                          />
+                        <div className="card_profile col-3">
+                          <UserAvatar {...userProps} className="img-md-2" />
                           <div className="profile_card_content">
                             <h4 className="text-uppercase">
                               {!isTrainer ? "Trainer" : "Client"}
@@ -188,7 +197,7 @@ const TransactionSection = ({ paymentHistory, isTrainer }) => {
                             </div>
                           </div>
                         </div>
-                        <div className="card_transaction col-2">
+                        <div className="card_transaction col-3">
                           <div className="transaction_card_content">
                             <h4>Transaction Date</h4>
                             <div className="wrap_content_ts">

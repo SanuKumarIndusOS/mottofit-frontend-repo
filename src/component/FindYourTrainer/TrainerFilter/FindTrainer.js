@@ -44,8 +44,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router-dom";
+import { updateUserDetails } from "action/userAct";
 
-const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+const FindTrainerFC = ({
+  trainerQueryData,
+  updateTrainerDetails,
+  updateUserDetails,
+}) => {
   //Responsive search
   const [Calvalue, onChangeCal] = useState(new Date());
   const [IPCvalue, setIPCValue] = useState("");
@@ -87,7 +92,6 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
-    console.log(payload, "payload");
     updateTrainerDetails(payload);
     getTrainerDataByQuery(payload.query);
     setshowMenu(false);
@@ -442,6 +446,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const TriggerInPersonDropDown = () => {
     setInPersonDD(!InPersonDD);
   };
+
+  let selectedValue =
+    Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
   return (
     <div
       id="find-trainer"
@@ -487,8 +494,12 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                 onClick={() => {
                   SetLocation("In Person") && TriggerInPersonDropDown();
                 }}
+                className={`position-relative ${selectedValue ? "pt-2" : ""}`}
               >
-                <h6>{inPersonMarkup}</h6>
+                <h6 className={`${selectedValue ? "in-person-option" : ""} `}>
+                  {inPersonMarkup}
+                  <span>{selectedValue}</span>
+                </h6>
                 <div
                   className="inPerson-dd"
                   // onClick={TriggerInPersonDropDown}

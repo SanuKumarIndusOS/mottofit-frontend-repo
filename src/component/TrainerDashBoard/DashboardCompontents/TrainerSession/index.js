@@ -16,6 +16,7 @@ import { getFormatDate } from "service/helperFunctions";
 import { TrainerApi } from "../../../../service/apiVariables";
 import { api } from "../../../../service/api";
 import { Toast } from "../../../../service/toast";
+import { UserAvatar } from "component/common/UserAvatar";
 
 const TrainerSessionFC = ({
   sessionData,
@@ -46,6 +47,7 @@ const TrainerSessionFC = ({
             sessionStartTime,
             id,
             sessionStatus,
+            userDetail,
           }) => ({
             date: getFormatDate(sessionDate, "D"),
             month: getFormatDate(sessionDate, "MMM"),
@@ -58,6 +60,7 @@ const TrainerSessionFC = ({
             prevHeading: "Yoga with Kane",
             prevDate: getFormatDate(sessionStartTime, "DD MMMM YYYY", true),
             sessionStatus,
+            userDetail,
             id,
           })
         );
@@ -120,6 +123,7 @@ const TrainerSessionFC = ({
                   <Tab tabFor="upcoming">Upcoming</Tab>
                   {/* <Tab tabFor="pass">Motto pass</Tab> */}
                   <Tab tabFor="previous">Previous</Tab>
+                  <Tab tabFor="ongoing">OnGoing</Tab>
                 </TabList>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="overview">
@@ -150,6 +154,19 @@ const TrainerSessionFC = ({
                     <TabPast
                       tabname={"Previous"}
                       tabData={trainerSessionData.pastSessions}
+                      prevData={trainerSessionData.pastSessions}
+                      handleSessionStatus={handleSessionStatus}
+                      cancelSessionApi={handleCancel}
+                      handleChange={() => getAllDetails()}
+                      updateUserDetails={updateUserDetails}
+                    />
+                  </TabPanel>
+                </div>
+                <div className="tabPanel_outter">
+                  <TabPanel tabId="ongoing">
+                    <TabPast
+                      tabname={"OnGoing"}
+                      tabData={trainerSessionData.upcomingSessions}
                       prevData={trainerSessionData.pastSessions}
                       handleSessionStatus={handleSessionStatus}
                       cancelSessionApi={handleCancel}
@@ -208,6 +225,7 @@ const TabOne = ({
                               {data.loc}
                             </h5>
                           </div>
+
                           <div className="d-flex align-items-center mt-2 TP_USession_data_buttons">
                             {data.sessionStatus !== "cancelled" ? (
                               <button
@@ -484,63 +502,71 @@ const TabPast = ({
           <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
-              {tabData?.slice(0, visible).map((data, index) => {
-                // console.log(data, "datadata");
-                return (
-                  <React.Fragment key={index}>
-                    <div className="TP_upcomeSession_overview">
-                      <div className="TP_USession_dates">
-                        <h4>
-                          {data.date}
-                          <span>{data.month}</span>
-                        </h4>
-                      </div>
-                      <div className="TP_USession_data">
-                        <h2
-                          style={{
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {data?.heading}
-                        </h2>
-                        <div className="TP_USession_data_icons">
-                          <h5>
-                            <img src={AvailabilityIcon} alt="icon" />
-                            {data.avaTime}
-                          </h5>
-                          <h5>
-                            <img src={LocationIcon} alt="icon" />
-                            {data.loc}
-                          </h5>
+              {tabData.length > 0 ? (
+                tabData?.slice(0, visible).map((data, index) => {
+                  // console.log(data, "datadata");
+                  return (
+                    <React.Fragment key={index}>
+                      <div className="TP_upcomeSession_overview">
+                        <div className="TP_USession_dates">
+                          <h4>
+                            {data.date}
+                            <span>{data.month}</span>
+                          </h4>
                         </div>
-                        <div className="TP_USession_data_buttons">
-                          {data.sessionStatus !== "completed" ? (
+                        <div className="TP_USession_data">
+                          <h2
+                            style={{
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {data?.heading}
+                          </h2>
+                          <div className="TP_USession_data_icons">
+                            <h5>
+                              <img src={AvailabilityIcon} alt="icon" />
+                              {data.avaTime}
+                            </h5>
+                            <h5>
+                              <img src={LocationIcon} alt="icon" />
+                              {data.loc}
+                            </h5>
+                          </div>
+                          {tabname !== "Ongoing" && (
                             <div className="TP_USession_data_buttons">
-                              {/* <button>Reschedule</button> */}
-                              <button onClick={() => handleCancel(data.id)}>
-                                Cancel
-                              </button>
-                              <button
-                                className="text-primary"
-                                onClick={() =>
-                                  handleSessionStatus(data.id, "completed")
-                                }
-                              >
-                                Complete
-                              </button>
-                            </div>
-                          ) : (
-                            <div>
-                              <p>Completed</p>
+                              {data.sessionStatus !== "completed" ? (
+                                <div className="TP_USession_data_buttons">
+                                  {/* <button>Reschedule</button> */}
+                                  <button onClick={() => handleCancel(data.id)}>
+                                    Cancel
+                                  </button>
+                                  <button
+                                    className="text-primary"
+                                    onClick={() =>
+                                      handleSessionStatus(data.id, "completed")
+                                    }
+                                  >
+                                    Complete
+                                  </button>
+                                </div>
+                              ) : (
+                                <div>
+                                  <p>Completed</p>
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
                       </div>
-                    </div>
-                    <hr />
-                  </React.Fragment>
-                );
-              })}
+                      <hr />
+                    </React.Fragment>
+                  );
+                })
+              ) : (
+                <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+                  <h4>No Data Found</h4>
+                </div>
+              )}
             </div>
             <button onClick={setViewMore} className="viewMoreButton">
               View all Session <BlueHoverButton />
@@ -554,13 +580,19 @@ const TabPast = ({
             <div className="row_two_data">
               <h2>PREVIOUS SESSIONS</h2>
               <div className="row_two_scroll">
-                {tabData.length > 0 ? (
-                  tabData.map((data, index) => {
+                {prevData.length > 0 ? (
+                  prevData.map((data, index) => {
+                    let userProps = {
+                      profilePicture: data?.userDetail?.profilePicture,
+                      userName: `${data?.userDetail?.firstName || ""} ${
+                        data?.userDetail?.lastName || ""
+                      }`,
+                    };
                     return (
                       <>
                         <div className="row_previous_data" key={index}>
-                          <div className="row_previous_avater">
-                            <img src={data.previousImg} alt="profile" />
+                          <div className="row_previous_avater ml-2">
+                            <UserAvatar {...userProps} className="img-md-2" />
                           </div>
                           <div className="row_previous_header">
                             <h2 className="text-capitalize">{data.heading}</h2>
