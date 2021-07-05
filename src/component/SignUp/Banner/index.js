@@ -16,6 +16,7 @@ import { bindActionCreators } from "redux";
 import validate from "service/validation";
 import ReactPhoneInput from "react-phone-input-2";
 import { Toast } from "service/toast";
+import { SocialLogin } from "component/common/SocialLogin";
 
 const SignUpFC = ({ loginOrSignupAct }) => {
   const [data, setData] = useState({
@@ -327,7 +328,7 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                     <div className="hr_line"></div>
                   </div>
                   <div className="social_buttons">
-                    <button className="facebook-auth">
+                    {/* <button className="facebook-auth">
                       <img src={Facebook} alt="icon" />
                       Sign Up with Facebook
                     </button>
@@ -335,7 +336,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                     <button className="google-auth">
                       <img src={Google} alt="icon" />
                       Sign up with Google
-                    </button>
+                    </button> */}
+                    <SocialLogin type="user" loginType="singup" />
                   </div>
                   <div className="submit_button">
                     <button type="submit" onClick={signUp}>

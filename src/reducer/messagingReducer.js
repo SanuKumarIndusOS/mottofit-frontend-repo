@@ -8,10 +8,10 @@ const initialState = {
   chatClientInstance: null,
   currentChannelMembers: [],
   channelData: {},
-  socialMessages: [],
-  individualMessages: [],
+  pastSessions: [],
+  upcomingSessions: [],
   adminMessages: [],
-  allMessages: [],
+  invitedSessions: [],
   isLoading: false,
 };
 

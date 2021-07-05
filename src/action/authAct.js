@@ -58,3 +58,34 @@ export const changePasswordAct = (body, currentApi) => (
       });
   });
 };
+
+// social login api
+
+export const socialLoginAct = (payload, loginType, socialType, userType) => (
+  dispatch,
+  getState,
+  { api }
+) => {
+  return new Promise((resolve, reject) => {
+    const { socialLoginSignup, socialLoginSignin } = AuthApi;
+
+    let currentApi =
+      loginType === "login" ? socialLoginSignin : socialLoginSignup;
+
+    currentApi.userType = userType;
+
+    currentApi.socialType = socialType;
+
+    currentApi.baseURL = socialType === "facebook" ? "facebook" : "normal";
+
+    currentApi.body = payload;
+
+    api({ ...currentApi })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

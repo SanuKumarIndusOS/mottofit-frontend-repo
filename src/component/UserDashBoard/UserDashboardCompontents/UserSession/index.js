@@ -25,6 +25,7 @@ import { Toast } from "../../../../service/toast";
 import { api } from "service/api";
 import { PaymentApi } from "service/apiVariables";
 import { UserAvatar } from "component/common/UserAvatar";
+import { CommonPageLoader } from "component/common/CommonPageLoader";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -33,23 +34,49 @@ const UserSessionClass = (props) => {
     invitedSessions: [],
   });
 
+  const [pageData, setPageData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
+  });
+  const [totalData, setTotalData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
+  });
+
   const [isDefaultCardPresent, setDefaultCard] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [currentTab, setCurrentTab] = useState("invited");
 
   useEffect(() => {
-    _userSession();
     getUserPaymentDetails();
     window.scrollTo(0, 0);
   }, []);
-  const _userSession = () => {
+  const _userSession = (type, isPagination = false) => {
     props
-      .userSession()
-      .then((data) => {
-        // console.log(data);
+      .userSession(type, pageData[currentTab])
+      .then(({ data, documentCount }) => {
+        let sessionTypeData = {
+          invited: "invitedSessions",
+          upcoming: "upcomingSessions",
+          past: "pastSessions",
+        };
+        setTotalData((prevData) => ({ ...prevData, [type]: documentCount }));
 
-        setUserData(data);
+        setUserData((prevData) => {
+          let replaceData = [...prevData[sessionTypeData[type]], ...data];
+          return {
+            ...prevData,
+            [sessionTypeData[type]]: !isPagination ? [...data] : replaceData,
+          };
+        });
+
+        setLoading(false);
       })
       .catch((error) => {
         Toast({ type: "error", message: error.message || "Error" });
+        setLoading(false);
       });
   };
 
@@ -59,14 +86,40 @@ const UserSessionClass = (props) => {
     api({ ...getPaymentMethods }).then(({ data }) => {
       const { default: defaultCard } = data[0] || {};
 
-      // if (type) setChangeCard(false);
-
-      // console.log(data[0]);
       setDefaultCard(defaultCard);
-
-      // setPaymentMethod(type)/;
     });
   };
+
+  const handleChange = (tab, data) => {
+    let sessionTypeData = {
+      invited: "invitedSessions",
+      upcoming: "upcomingSessions",
+      past: "pastSessions",
+    };
+
+    let currentSession = sessionTypeData[tab];
+
+    setCurrentTab(tab);
+
+    setUserData((prevData) => {
+      if (prevData[currentSession]?.length > 0) return prevData;
+      setLoading(true);
+      _userSession(tab);
+
+      return prevData;
+    });
+  };
+
+  const handlePagination = () => {
+    setPageData((prevPageData) => ({
+      ...prevPageData,
+      [currentTab]: prevPageData[currentTab] + 1 || 0,
+    }));
+  };
+
+  useEffect(() => {
+    _userSession(currentTab, true);
+  }, [pageData]);
 
   return (
     <div className="outter_user_container">
@@ -76,38 +129,57 @@ const UserSessionClass = (props) => {
             <h2>My Session</h2>
           </div>
           <div className="US_tabs_wrapper">
-            <Tabs defaultTab="invited">
+            <Tabs
+              defaultTab="invited"
+              onChange={(tab) => {
+                handleChange(tab, userData);
+              }}
+            >
               <TabList>
                 <Tab tabFor="invited">Invited</Tab>
                 <Tab tabFor="upcoming">Upcoming</Tab>
                 {/* <Tab tabFor="pass">Motto pass</Tab> */}
-                <Tab tabFor="previous">Previous</Tab>
-                <Tab tabFor="ongoing">Ongoing</Tab>
+                <Tab tabFor="past">Previous</Tab>
+                {/* <Tab tabFor="ongoing">Ongoing</Tab> */}
               </TabList>
               <div className="tabPanel_outter">
                 <TabPanel tabId="invited">
-                  <TabOne
-                    tabname={"Invited"}
-                    tabData={userData.invitedSessions}
-                    prevData={userData.pastSessions}
-                    cancelSessionApi={props.cancelSession}
-                    invitationApi={props.invitationSession}
-                    handleChange={() => _userSession()}
-                    isDefaultCardPresent={isDefaultCardPresent}
-                    {...props}
-                  />
+                  {isLoading ? (
+                    <CommonPageLoader />
+                  ) : (
+                    <TabOne
+                      tabname={"Invited"}
+                      tabData={userData.invitedSessions}
+                      prevData={userData.pastSessions}
+                      cancelSessionApi={props.cancelSession}
+                      invitationApi={props.invitationSession}
+                      handleChange={() => _userSession("invited")}
+                      isDefaultCardPresent={isDefaultCardPresent}
+                      handlePagination={handlePagination}
+                      pageSize={pageData["invited"]}
+                      documentSize={totalData["invited"]}
+                      {...props}
+                    />
+                  )}
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
                 <TabPanel tabId="upcoming">
-                  <TabOne
-                    tabname={"Upcoming"}
-                    tabData={userData.upcomingSessions}
-                    prevData={userData.pastSessions}
-                    cancelSessionApi={props.cancelSession}
-                    handleChange={() => _userSession()}
-                    {...props}
-                  />
+                  {isLoading ? (
+                    <CommonPageLoader />
+                  ) : (
+                    <TabOne
+                      tabname={"Upcoming"}
+                      tabData={userData.upcomingSessions}
+                      prevData={userData.pastSessions}
+                      cancelSessionApi={props.cancelSession}
+                      handleChange={() => _userSession("upcoming")}
+                      handlePagination={handlePagination}
+                      pageSize={pageData["upcoming"]}
+                      documentSize={totalData["upcoming"]}
+                      {...props}
+                    />
+                  )}
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
@@ -123,15 +195,22 @@ const UserSessionClass = (props) => {
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
-                <TabPanel tabId="previous">
-                  <TabOne
-                    tabname={"Previous"}
-                    tabData={userData.pastSessions}
-                    prevData={userData.pastSessions}
-                    cancelSessionApi={props.cancelSession}
-                    handleChange={() => _userSession()}
-                    {...props}
-                  />
+                <TabPanel tabId="past">
+                  {isLoading ? (
+                    <CommonPageLoader />
+                  ) : (
+                    <TabOne
+                      tabname={"Previous"}
+                      tabData={userData.pastSessions}
+                      prevData={userData.pastSessions}
+                      cancelSessionApi={props.cancelSession}
+                      handleChange={() => _userSession("past")}
+                      handlePagination={handlePagination}
+                      pageSize={pageData["past"]}
+                      documentSize={totalData["past"]}
+                      {...props}
+                    />
+                  )}
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
@@ -142,6 +221,7 @@ const UserSessionClass = (props) => {
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
+                    handlePagination={handlePagination}
                     {...props}
                   />
                 </TabPanel>
@@ -162,12 +242,15 @@ const TabOne = ({
   invitationApi,
   handleChange = {},
   isDefaultCardPresent,
+  handlePagination,
+  pageSize,
+  documentSize,
   ...restProps
 }) => {
-  const [visible, setVisible] = useState([3]);
+  const [visible, setVisible] = useState([10]);
   const [isLoading, setisLoading] = useState(false);
   const setViewMore = () => {
-    setVisible((prevValue) => prevValue + 1);
+    // setVisible((prevValue) => prevValue + 1);
   };
 
   const handleCancel = (sessionId) => {
@@ -184,14 +267,14 @@ const TabOne = ({
       .catch(() => setisLoading(false));
   };
 
-  const handleInvitation = (sessionId, action) => {
+  const handleInvitation = (sessionId, action, paidByUser) => {
     let payload = {
       sessionId,
       acceptance: action,
     };
     setisLoading(true);
 
-    if (!isDefaultCardPresent && action) {
+    if (!isDefaultCardPresent && action && !paidByUser) {
       history.push("/users/dashboard/settings/profile");
       return Toast({
         type: "info",
@@ -279,6 +362,8 @@ const TabOne = ({
     trainerId && window.open(fullURLPath);
   };
 
+  const TotalsizeData = Math.ceil(documentSize / 10);
+
   return (
     <div className="tabPanel_overview">
       <div className="tabPanel_overview_left">
@@ -286,7 +371,7 @@ const TabOne = ({
           <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
-              {tabData?.slice(0, visible).map((data, index) => {
+              {tabData?.map((data, index) => {
                 // console.log(data, "datadata");
 
                 return (
@@ -337,23 +422,38 @@ const TabOne = ({
                           <div className="TP_USession_data_buttons">
                             {tabname === "Invited" ? (
                               <>
-                                <button
-                                  disabled={isLoading}
-                                  onClick={() =>
-                                    handleInvitation(data.id, false)
-                                  }
-                                >
-                                  Decline
-                                </button>
-                                <button
-                                  disabled={isLoading}
-                                  onClick={() =>
-                                    handleInvitation(data.id, true)
-                                  }
-                                  className="text-success"
-                                >
-                                  Accept
-                                </button>
+                                {data.acceptance ? (
+                                  <>
+                                    <span className="text-black mr-4">
+                                      Invited session
+                                    </span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      disabled={isLoading}
+                                      onClick={() =>
+                                        handleInvitation(data.id, false)
+                                      }
+                                    >
+                                      Decline
+                                    </button>
+                                    <button
+                                      disabled={isLoading}
+                                      onClick={() =>
+                                        handleInvitation(
+                                          data.id,
+                                          true,
+                                          data.paidByUser
+                                        )
+                                      }
+                                      className="text-success"
+                                    >
+                                      Accept
+                                    </button>
+                                  </>
+                                )}
+
                                 <button
                                   disabled={isLoading}
                                   onClick={() =>
@@ -446,9 +546,11 @@ const TabOne = ({
                 );
               })}
             </div>
-            <button onClick={setViewMore} className="viewMoreButton">
-              View all Session <BlueHoverButton />
-            </button>
+            {pageSize + 1 <= TotalsizeData && TotalsizeData > 1 && (
+              <button onClick={handlePagination} className="viewMoreButton">
+                View all Session <BlueHoverButton />
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -470,7 +572,7 @@ const TabOne = ({
             <div className="row_two_data">
               <h2>PREVIOUS SESSIONS</h2>
               <div className="row_two_scroll">
-                {prevData.map((data, index) => {
+                {prevData?.map((data, index) => {
                   let userProps = {
                     profilePicture: data?.trainerDetail?.profilePicture,
                     userName: `${data?.trainerDetail?.firstName || ""} ${

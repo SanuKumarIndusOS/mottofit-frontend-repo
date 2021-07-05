@@ -13,7 +13,7 @@ export const UserAvatar = ({
 
   let lastLetter =
     userName.split(" ").length > 1
-      ? tempLastName[tempLastName.length - 1]
+      ? tempLastName[0]
       : userName[userName.length - 1];
 
   let initialLetters = `${firstLetter || "A"}${

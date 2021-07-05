@@ -71,8 +71,6 @@ var statusHelper = (status, data) => {
 let getServiceUrl = (baseURL) => {
   let finalURL = "";
 
-  console.log(baseURL);
-
   switch (baseURL) {
     // case "normal":
     //   finalURL = "http://doodlebluelive.com:2307/v1/";
@@ -100,6 +98,9 @@ let getServiceUrl = (baseURL) => {
       break;
     case "message":
       finalURL = config.api.messgaeService;
+      break;
+    case "facebook":
+      finalURL = config.api.tempFacebookService;
       break;
     default:
       finalURL = config.api.normalService;

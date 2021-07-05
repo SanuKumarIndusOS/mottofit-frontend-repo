@@ -17,6 +17,7 @@ import { TrainerApi } from "../../../../service/apiVariables";
 import { api } from "../../../../service/api";
 import { Toast } from "../../../../service/toast";
 import { UserAvatar } from "component/common/UserAvatar";
+import { CommonPageLoader } from "component/common/CommonPageLoader";
 
 const TrainerSessionFC = ({
   sessionData,
@@ -27,19 +28,46 @@ const TrainerSessionFC = ({
   const [trainerSessionData, setTrainerSessionData] = useState({
     upcomingSessions: [],
     pastSessions: [],
-    onGoingSessions: [],
+    invitedSessions: [],
+  });
+
+  const [pageData, setPageData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
+  });
+
+  const [totalData, setTotalData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
   });
 
   const [isLoading, setisLoading] = useState(false);
-  useEffect(() => {
-    getAllDetails();
-  }, []);
+  const [isDataLoading, setDataLoading] = useState(true);
+  const [currentTab, setCurrentTab] = useState("upcoming");
+  // useEffect(() => {
+  //   getAllDetails(currentTab);
+  // }, []);
 
-  const getAllDetails = () => {
-    getTrainerSessionDetailsApi().then((data) => {
-      const tempSessionData = {};
-      Object.keys(data).forEach((sessionKey) => {
-        tempSessionData[sessionKey] = data[sessionKey].map(
+  const getAllDetails = (currentTab) => {
+    getTrainerSessionDetailsApi(currentTab, pageData[currentTab]).then(
+      ({ data, documentCount }) => {
+        const tempSessionData = {};
+        let sessionTypeData = {
+          invited: "invitedSessions",
+          upcoming: "upcomingSessions",
+          past: "pastSessions",
+        };
+        // console.log(data);
+
+        setTotalData((prevData) => ({
+          ...prevData,
+          [currentTab]: documentCount,
+        }));
+
+        // Object.keys(data).forEach((sessionKey) => {
+        let tempData = data?.map(
           ({
             title,
             venue,
@@ -64,10 +92,23 @@ const TrainerSessionFC = ({
             id,
           })
         );
-      });
 
-      setTrainerSessionData(tempSessionData);
-    });
+        // console.log(tempData [sessionTypeData[currentTab]]);
+
+        setTrainerSessionData((prevData) => {
+          return {
+            ...prevData,
+            [sessionTypeData[currentTab]]: [
+              ...prevData[sessionTypeData[currentTab]],
+              ...tempData,
+            ],
+          };
+        });
+
+        setDataLoading(false);
+        // });
+      }
+    );
   };
 
   const handleSessionStatus = (trainerId, sessionStatus) => {
@@ -108,6 +149,40 @@ const TrainerSessionFC = ({
       .catch(() => setisLoading(false));
   };
 
+  const handleChange = (tab, data) => {
+    let sessionTypeData = {
+      invited: "invitedSessions",
+      upcoming: "upcomingSessions",
+      past: "pastSessions",
+    };
+
+    let currentSession = sessionTypeData[tab];
+
+    setCurrentTab(tab);
+
+    // console.log(data);
+
+    setTrainerSessionData((prevData) => {
+      // console.log(prevData);
+      if (prevData[currentSession]?.length > 0) return prevData;
+      setDataLoading(true);
+      getAllDetails(tab);
+
+      return prevData;
+    });
+  };
+
+  const handlePagination = () => {
+    setPageData((prevPageData) => ({
+      ...prevPageData,
+      [currentTab]: prevPageData[currentTab] + 1 || 0,
+    }));
+  };
+
+  useEffect(() => {
+    getAllDetails(currentTab);
+  }, [pageData]);
+
   return (
     <>
       <div className="outter_user_container">
@@ -117,31 +192,46 @@ const TrainerSessionFC = ({
               <h2>My Session</h2>
             </div>
             <div className="US_tabs_wrapper">
-              <Tabs defaultTab="upcoming">
+              <Tabs defaultTab="upcoming" onChange={handleChange}>
                 <TabList>
                   {/* <Tab tabFor="overview">Overview</Tab> */}
                   <Tab tabFor="upcoming">Upcoming</Tab>
                   {/* <Tab tabFor="pass">Motto pass</Tab> */}
-                  <Tab tabFor="previous">Previous</Tab>
-                  <Tab tabFor="ongoing">OnGoing</Tab>
+                  <Tab tabFor="past">Previous</Tab>
+                  {/* <Tab tabFor="ongoing">OnGoing</Tab> */}
                 </TabList>
+
                 <div className="tabPanel_outter">
                   <TabPanel tabId="overview">
-                    <TabOne
-                      datas={trainerSessionData.upcomingSessions}
-                      handleSessionStatus={handleSessionStatus}
-                      handleCancel={handleCancel}
-                      isLoading={isLoading}
-                    />
+                    {isDataLoading ? (
+                      <CommonPageLoader />
+                    ) : (
+                      <TabOne
+                        datas={trainerSessionData.upcomingSessions}
+                        handleSessionStatus={handleSessionStatus}
+                        handleCancel={handleCancel}
+                        isLoading={isLoading}
+                        handlePagination={handlePagination}
+                        pageSize={pageData["invited"]}
+                        documentSize={totalData["invited"]}
+                      />
+                    )}
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="upcoming">
-                    <TabTwo
-                      datas={trainerSessionData.upcomingSessions}
-                      handleSessionStatus={handleSessionStatus}
-                      handleCancel={handleCancel}
-                    />
+                    {isDataLoading ? (
+                      <CommonPageLoader />
+                    ) : (
+                      <TabTwo
+                        datas={trainerSessionData.upcomingSessions}
+                        handleSessionStatus={handleSessionStatus}
+                        handleCancel={handleCancel}
+                        handlePagination={handlePagination}
+                        pageSize={pageData["upcoming"]}
+                        documentSize={totalData["upcoming"]}
+                      />
+                    )}
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
@@ -150,16 +240,23 @@ const TrainerSessionFC = ({
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
-                  <TabPanel tabId="previous">
-                    <TabPast
-                      tabname={"Previous"}
-                      tabData={trainerSessionData.pastSessions}
-                      prevData={trainerSessionData.pastSessions}
-                      handleSessionStatus={handleSessionStatus}
-                      cancelSessionApi={handleCancel}
-                      handleChange={() => getAllDetails()}
-                      updateUserDetails={updateUserDetails}
-                    />
+                  <TabPanel tabId="past">
+                    {isDataLoading ? (
+                      <CommonPageLoader />
+                    ) : (
+                      <TabPast
+                        tabname={"Previous"}
+                        tabData={trainerSessionData.pastSessions}
+                        prevData={trainerSessionData.pastSessions}
+                        handleSessionStatus={handleSessionStatus}
+                        cancelSessionApi={handleCancel}
+                        handleChange={() => getAllDetails()}
+                        updateUserDetails={updateUserDetails}
+                        handlePagination={handlePagination}
+                        pageSize={pageData["past"]}
+                        documentSize={totalData["past"]}
+                      />
+                    )}
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
@@ -189,12 +286,17 @@ const TabOne = ({
   handleSessionStatus,
   handleCancel,
   isLoading,
+  handlePagination,
+  pageSize,
+  documentSize,
 }) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
     setVisible((prevValue) => prevValue + 1);
   };
+
+  const TotalsizeData = Math.ceil(documentSize / 10);
   return (
     <div className="tabPanel_overview d-flex">
       <div className="tabPanel_overview_left w-100">
@@ -270,11 +372,11 @@ const TabOne = ({
                 <h3 className="my-5 py-5 text-center">No Data Found</h3>
               )}
             </div>
-            {datas.length > 0 ? (
-              <button onClick={setViewMore} className="viewMoreButton">
+            {pageSize + 1 < TotalsizeData && TotalsizeData > 1 && (
+              <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
@@ -326,12 +428,21 @@ const TabOne = ({
   );
 };
 
-const TabTwo = ({ datas = [], handleSessionStatus, handleCancel }) => {
+const TabTwo = ({
+  datas = [],
+  handleSessionStatus,
+  handleCancel,
+  handlePagination,
+  pageSize,
+  documentSize,
+}) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
     setVisible((prevValue) => prevValue + 1);
   };
+
+  const TotalsizeData = Math.ceil(documentSize / 10);
   return (
     <div className="tabPanel_overview d-flex">
       <div className="tabPanel_overview_left w-100">
@@ -392,11 +503,12 @@ const TabTwo = ({ datas = [], handleSessionStatus, handleCancel }) => {
                 <h3 className="my-5 py-5 text-center">No Data Found</h3>
               )}
             </div>
-            {datas.length > 0 ? (
-              <button onClick={setViewMore} className="viewMoreButton">
+
+            {pageSize + 1 < TotalsizeData && TotalsizeData > 1 && (
+              <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
@@ -426,7 +538,7 @@ const TabThree = () => {
     </div>
   );
 };
-const TabFour = ({ datas = [] }) => {
+const TabFour = ({ datas = [], handlePagination }) => {
   return (
     <div className="tabPanel_overview d-flex">
       <div className="tabPanel_overview_right w-100">
@@ -473,6 +585,9 @@ const TabPast = ({
   handleChange = {},
   isDefaultCardPresent,
   handleSessionStatus,
+  handlePagination,
+  pageSize,
+  documentSize,
   ...restProps
 }) => {
   const [visible, setVisible] = useState([3]);
@@ -495,6 +610,10 @@ const TabPast = ({
       .catch(() => setisLoading(false));
   };
 
+  const TotalsizeData = Math.ceil(documentSize / 10);
+
+  // console.log(documentSize);
+
   return (
     <div className="tabPanel_overview">
       <div className="tabPanel_overview_left">
@@ -503,7 +622,7 @@ const TabPast = ({
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
               {tabData.length > 0 ? (
-                tabData?.slice(0, visible).map((data, index) => {
+                tabData?.map((data, index) => {
                   // console.log(data, "datadata");
                   return (
                     <React.Fragment key={index}>
@@ -568,9 +687,12 @@ const TabPast = ({
                 </div>
               )}
             </div>
-            <button onClick={setViewMore} className="viewMoreButton">
-              View all Session <BlueHoverButton />
-            </button>
+
+            {pageSize + 1 < TotalsizeData && TotalsizeData > 1 && (
+              <button onClick={handlePagination} className="viewMoreButton">
+                View all Session <BlueHoverButton />
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ let config = {
       sessionService: "http://doodlebluelive.com:2337/v1/",
       paymentService: "http://doodlebluelive.com:2336/v1/",
       messgaeService: "http://doodlebluelive.com:2338/v1/",
+      tempFacebookService: "https://4db3af52de99.ngrok.io/v1/",
     },
     stripeUrl:
       "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm",
@@ -23,6 +24,9 @@ let config = {
     },
     stripeUrl:
       "pk_live_51IJnd4BqgEC4bFYp4gC7EoInjpEKKjJXZMZGZurak1aK2ft1XN72QU355hRhLry3QmEucSKialeSBOGevqDJqfIJ00sU4zSO7O",
+    googleClientId:
+      "667288998529-mltflfijefc7u5r8eaon8j8e1cmcfsot.apps.googleusercontent.com",
+    facebookAppId: "310220110776502",
   },
 };
 

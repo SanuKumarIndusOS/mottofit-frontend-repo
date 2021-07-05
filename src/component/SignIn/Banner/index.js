@@ -230,19 +230,19 @@ const SignInFC = ({
                     </div>
 
                     <div className="social_buttons">
-                      <button className="facebook-auth">
+                      {/* <button className="facebook-auth">
                         <img src={Facebook} alt="icon" />
                         Sign In with Facebook
-                      </button>
+                      </button> */}
 
-                      {/* <SocialLogin /> */}
+                      <SocialLogin loginType="login" />
 
                       {/* <GoogleLoginButton /> */}
 
-                      <button className="google-auth">
+                      {/* <button className="google-auth">
                         <img src={Google} alt="icon" />
                         Sign In with Google
-                      </button>
+                      </button> */}
                     </div>
                     <div className="submit_button">
                       <button

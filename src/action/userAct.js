@@ -31,11 +31,18 @@ export const getUserDetail = () => (dispatch, getState, { api }) => {
 };
 
 //user Session
-export const userSession = () => (dispatch, getState, { api }) => {
+export const userSession = (type, pageSize = 0) => (
+  dispatch,
+  getState,
+  { api }
+) => {
   return new Promise((resolve, reject) => {
+    userApi.userSession.sessionType = type || "invited";
+    userApi.userSession.pageSize = pageSize || 0;
+
     api({ ...userApi.userSession })
-      .then(({ data }) => {
-        resolve(data);
+      .then(({ data, documentCount }) => {
+        resolve({ data, documentCount });
       })
       .catch((err) => {
         reject(err);

@@ -222,7 +222,7 @@ const TrainerProfileClass = ({
                         {inPersonAtClientLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtClientLocation} `}
-                            <span>(In Person Session)</span>
+                            <span>(at your location)</span>
                           </h6>
                         ) : (
                           ""
@@ -230,7 +230,7 @@ const TrainerProfileClass = ({
                         {inPersonAtTrainerLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtTrainerLocation} `}
-                            <span>(Trainer Location)</span>
+                            <span>(at trainer location)</span>
                           </h6>
                         ) : (
                           ""
@@ -297,7 +297,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor2People} `}
-                            <span>(In person session for 2 people)</span>
+                            <span>(at your location for 2 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -306,7 +306,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor2People} `}
-                            <span>(In trainer location for 2 people)</span>
+                            <span>(at trainer location for 2 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -323,7 +323,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor3People} `}
-                            <span>(In person session for 3 people)</span>
+                            <span>(at your location for 3 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -332,7 +332,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor3People} `}
-                            <span>(In trainer location for 3 people)</span>
+                            <span>(at trainer location for 3 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -349,7 +349,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor4People} `}
-                            <span>(In person session for 4 people)</span>
+                            <span>(at your location for 4 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -358,7 +358,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor4People} `}
-                            <span>(In trainer location for 4 people)</span>
+                            <span>(at trainer location for 4 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -425,7 +425,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtclientLocationfor15People} `}
-                            <span>(In Person Session) (For 5-15 People)</span>
+                            <span>(at your location) (For 5-15 People)</span>
                           </h6>
                         ) : (
                           ""
@@ -434,7 +434,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAttrainerLocationfor15People} `}
-                            <span>(Trainer Location) (For 5-15 People)</span>
+                            <span>(at trainer location) (For 5-15 People)</span>
                           </h6>
                         ) : (
                           ""
@@ -713,8 +713,6 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
   };
 
   const { images = [] } = trainerProfileData;
-
-  console.log(images);
 
   return (
     <>

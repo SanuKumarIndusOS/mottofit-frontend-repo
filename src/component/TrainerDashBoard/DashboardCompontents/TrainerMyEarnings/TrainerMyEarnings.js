@@ -13,16 +13,23 @@ import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
+import BlueHoverButton from "component/common/BlueArrowButton";
 
 const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
   const [paymentHistory, setPaymentHistory] = useState();
   const [myEarning, setMyEarning] = useState();
   const [isTrainer, setIsTrainer] = useState(false);
   const [isLoading, setLoading] = useState(true);
+  const [pageSize, setPageSize] = useState(0);
+  const [totalSize, setTotalSize] = useState(0);
 
   useEffect(() => {
     getTrainerPaymentHistory();
-  }, []);
+  }, [pageSize]);
+
+  const handlePagination = () => {
+    setPageSize((prevData) => prevData + 1);
+  };
 
   function getTrainerPaymentHistory() {
     const { pathname } = history.location || {};
@@ -32,7 +39,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
     setIsTrainer(isTrainer);
 
     let id = localStorage.getItem("user-id");
-    trainerMyEarning(id, isTrainer)
+    trainerMyEarning(id, pageSize, isTrainer)
       .then((data) => {
         setLoading(false);
         setPaymentHistory(data.history);
@@ -137,6 +144,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
               <TransactionSection
                 paymentHistory={paymentHistory}
                 isTrainer={isTrainer}
+                handlePagination={handlePagination}
               />
             )}
           </div>
@@ -145,7 +153,11 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
     </>
   );
 };
-const TransactionSection = ({ paymentHistory, isTrainer }) => {
+const TransactionSection = ({
+  paymentHistory,
+  isTrainer,
+  handlePagination,
+}) => {
   return (
     <>
       <div className="outter_ts">
@@ -253,6 +265,11 @@ const TransactionSection = ({ paymentHistory, isTrainer }) => {
               ) : (
                 <h5 className="my-4 text-center">Data not found</h5>
               )}
+            </div>
+            <div className="d-flex align-items-center justify-content-end py-5">
+              <button onClick={handlePagination} className="viewMoreButton">
+                View all Payments <BlueHoverButton />
+              </button>
             </div>
           </div>
         </div>

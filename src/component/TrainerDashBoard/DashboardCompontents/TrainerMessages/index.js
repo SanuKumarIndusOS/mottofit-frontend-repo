@@ -22,7 +22,6 @@ import {
 import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
-const Chatt = require("twilio-chat");
 
 const TrainerMessageClass = ({
   trainerChannel,
@@ -33,10 +32,10 @@ const TrainerMessageClass = ({
   typingMembers,
   chatClientInstance,
   updateMessagingDetails,
-  socialMessages,
-  individualMessages,
+  pastSessions,
+  upcomingSessions,
   adminMessages,
-  allMessages,
+  invitedSessions,
 }) => {
   const [individual_list, setIndividual] = useState([]);
   const [socialGroup_list, setSocialGroup_list] = useState([]);
@@ -48,6 +47,14 @@ const TrainerMessageClass = ({
   const [chattoken, setToken] = useState("");
   const [channel_id, setChannel_id] = useState("");
   const [isMessageListLoading, setMessageListLoading] = useState(true);
+  const [pageData, setPageData] = useState({
+    invited: 0,
+    upcoming: 0,
+    past: 0,
+    admin: 0,
+  });
+
+  const [currentTab, setCurrentTab] = useState("invited");
 
   // Make Id dynamic
   useEffect(() => {
@@ -55,31 +62,45 @@ const TrainerMessageClass = ({
 
     initClientDispatch();
 
-    getChannelDetails();
+    getChannelDetails("invited");
 
     return () => {
       chatClientInstance && chatClientInstance.removeChatClient();
     };
   }, []);
 
-  const getChannelDetails = () => {
-    trainerChannel()
+  const getChannelDetails = (tab) => {
+    trainerChannel(tab, pageData[tab])
       .then((data) => {
-        setIndividual(data.individualClient);
-        setSocialGroup_list(data.socialGroups);
-        setAdmin_list(data.admins);
+        let sessionTypeData = {
+          invited: "invitedSessions",
+          upcoming: "upcomingSessions",
+          past: "pastSessions",
+          admin: "adminSessions",
+        };
+
+        let currentSession = sessionTypeData[tab];
+        // setIndividual(data.individualClient);
+        // setSocialGroup_list(data.socialGroups);
+        // setAdmin_list(data.admins);
+
         setMessageListLoading(false);
 
+        // let reduxData = {
+        //   pastSessions: [...data.socialGroups],
+        //   upcomingSessions: [...data.individualClient],
+        //   adminMessages: [...data.admins],
+        //   invitedSessions: [
+        //     ...data.individualClient,
+        //     ...data.socialGroups,
+        //     ...data.admins,
+        //   ],
+        // };
         let reduxData = {
-          socialMessages: [...data.socialGroups],
-          individualMessages: [...data.individualClient],
-          adminMessages: [...data.admins],
-          allMessages: [
-            ...data.individualClient,
-            ...data.socialGroups,
-            ...data.admins,
-          ],
+          [currentSession]: [...data],
         };
+
+        console.log(reduxData);
 
         updateMessagingDetails(reduxData);
       })
@@ -105,7 +126,24 @@ const TrainerMessageClass = ({
     });
   }
 
-  function handleTabChange() {
+  const handleChange = (tab) => {
+    // setUserData((prevData) => {
+    //   if (prevData[currentSession]?.length > 0) return prevData;
+    //   setLoading(true);
+    //   _userSession(tab);
+    //   return prevData;
+    // });
+    console.log(tab);
+  };
+
+  function handleTabChange(tab) {
+    // console.log(tab);
+
+    setCurrentTab(tab);
+
+    setMessageListLoading(true);
+
+    getChannelDetails(tab);
     chatClientInstance && chatClientInstance.unSubscribeChannel();
   }
 
@@ -118,30 +156,25 @@ const TrainerMessageClass = ({
           <h2>Messages</h2>
           <div className="message_inner">
             <div className="message_wrapper">
-              <Tabs defaultTab="one">
+              <Tabs
+                defaultTab="invited"
+                onChange={(tab) => {
+                  handleTabChange(tab);
+                }}
+              >
                 <TabList>
-                  <Tab tabFor="one" onClick={handleTabChange}>
-                    All
-                  </Tab>
-                  {!isUser && (
-                    <Tab tabFor="two" onClick={handleTabChange}>
-                      INDIVIDUAL CLIENTS
-                    </Tab>
-                  )}
-                  <Tab tabFor="three" onClick={handleTabChange}>
-                    SOCIAL GROUPS
-                  </Tab>
-                  <Tab tabFor="four" onClick={handleTabChange}>
-                    ADMIN
-                  </Tab>
+                  {isUser && <Tab tabFor="invited">Invited</Tab>}
+                  {!isUser && <Tab tabFor="upcoming">Upcoming</Tab>}
+                  <Tab tabFor="past">Previous</Tab>
+                  <Tab tabFor="admin">Admin</Tab>
                 </TabList>
                 <div className="message_inner">
-                  <TabPanel tabId="one">
+                  <TabPanel tabId="invited">
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
-                          allMessages.map((item, index) => {
+                          invitedSessions.map((item, index) => {
                             const { from, body, date_updated } = item.message;
 
                             let lastUserProfilePic =
@@ -157,18 +190,6 @@ const TrainerMessageClass = ({
                                 key={`${Date.now()}_all_${index}`}
                               >
                                 <div className="inner_link">
-                                  {/* <img
-                                  src={
-                                    lastUserProfilePic?.profilePicture || Jenny
-                                  }
-                                  alt={`${lastUserProfilePic?.userName} profile`}
-                                  onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = Jenny;
-                                  }}
-                                /> */}
-                                  {/* {JSON.stringify(lastUserProfilePic)} */}
-
                                   <UserAvatar {...lastUserProfilePic} />
 
                                   <div
@@ -200,17 +221,17 @@ const TrainerMessageClass = ({
                         )}
                       </div>
                       <div className="message_right">
-                        <ChatBox isDataPresent={allMessages?.length > 0} />
+                        <ChatBox isDataPresent={invitedSessions?.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
 
-                  <TabPanel tabId="two">
+                  <TabPanel tabId="upcoming">
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
-                          individualMessages.map((item, index) => {
+                          upcomingSessions.map((item, index) => {
                             const { from, body, date_updated } = item.message;
 
                             let lastUserProfilePic =
@@ -265,18 +286,16 @@ const TrainerMessageClass = ({
                         )}
                       </div>
                       <div className="message_right">
-                        <ChatBox
-                          isDataPresent={individualMessages.length > 0}
-                        />
+                        <ChatBox isDataPresent={upcomingSessions.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
-                  <TabPanel tabId="three">
+                  <TabPanel tabId="past">
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
-                          socialMessages.map((item, index) => {
+                          pastSessions.map((item, index) => {
                             const { from, body, date_updated } = item.message;
 
                             let lastUserProfilePic =
@@ -331,11 +350,11 @@ const TrainerMessageClass = ({
                         )}
                       </div>
                       <div className="message_right">
-                        <ChatBox isDataPresent={socialMessages.length > 0} />
+                        <ChatBox isDataPresent={pastSessions.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
-                  <TabPanel tabId="four">
+                  <TabPanel tabId="admin">
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
@@ -439,10 +458,10 @@ const mapStateToProps = (state) => ({
   activeChannelMessages: state.messagingReducer.activeChannelMessages,
   typingMembers: state.messagingReducer.typingMembers,
   chatClientInstance: state.messagingReducer.chatClientInstance,
-  socialMessages: state.messagingReducer.socialMessages,
-  individualMessages: state.messagingReducer.individualMessages,
+  pastSessions: state.messagingReducer.pastSessions,
+  upcomingSessions: state.messagingReducer.upcomingSessions,
   adminMessages: state.messagingReducer.adminMessages,
-  allMessages: state.messagingReducer.allMessages,
+  invitedSessions: state.messagingReducer.invitedSessions,
 });
 
 const mapDispatchToProps = (dispatch) => {

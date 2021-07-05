@@ -4,15 +4,15 @@ import "./style.scss";
 
 export class CommonPageLoaderClass extends Component {
   render() {
-    let { isSpinningLoader = false } = this.props;
+    let { isSpinningLoader = false, className = "" } = this.props;
     return (
       <>
         {!isSpinningLoader ? (
-          <div className="loader">
+          <div className={`loader ${className}`}>
             <div className="loader-circle"></div>
           </div>
         ) : (
-          <div className="lds-spinner">
+          <div className={`lds-spinner ${className}`}>
             <div></div>
             <div></div>
             <div></div>

@@ -495,6 +495,8 @@ function TrainerCardDashboard(props) {
           <textarea
             value={trainerCardData.description}
             onChange={(e) => {
+              const tempValue = e.target.value;
+              if (tempValue?.length > 100) return;
               setTrainerCardData({
                 ...trainerCardData,
                 description: e.target.value,
