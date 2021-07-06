@@ -372,7 +372,7 @@ const TabOne = ({
                 <h3 className="my-5 py-5 text-center">No Data Found</h3>
               )}
             </div>
-            {pageSize + 1 < TotalsizeData && TotalsizeData > 1 && (
+            {datas?.length < documentSize && (
               <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>
@@ -504,7 +504,7 @@ const TabTwo = ({
               )}
             </div>
 
-            {pageSize + 1 < TotalsizeData && TotalsizeData > 1 && (
+            {datas?.length < documentSize && (
               <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>
@@ -688,7 +688,7 @@ const TabPast = ({
               )}
             </div>
 
-            {pageSize + 1 < TotalsizeData && TotalsizeData > 1 && (
+            {tabData?.length < documentSize && (
               <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>

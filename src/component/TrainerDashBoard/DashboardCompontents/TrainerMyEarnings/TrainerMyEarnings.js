@@ -16,7 +16,7 @@ import { CommonPageLoader } from "component/common/CommonPageLoader";
 import BlueHoverButton from "component/common/BlueArrowButton";
 
 const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
-  const [paymentHistory, setPaymentHistory] = useState();
+  const [paymentHistory, setPaymentHistory] = useState([]);
   const [myEarning, setMyEarning] = useState();
   const [isTrainer, setIsTrainer] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -42,7 +42,9 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
     trainerMyEarning(id, pageSize, isTrainer)
       .then((data) => {
         setLoading(false);
-        setPaymentHistory(data.history);
+        setPaymentHistory((prevData) => [...prevData, ...data.history]);
+
+        setTotalSize(data.documentCount);
 
         setMyEarning(data);
       })
@@ -51,6 +53,13 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
         setLoading(false);
       });
   }
+
+  const totalSizeData = totalSize / 10;
+
+  const showPagination =
+    pageSize < totalSizeData && paymentHistory?.length < totalSize;
+
+  // console.log(totalSize, totalSizeData);
 
   return (
     <>
@@ -115,25 +124,6 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="earn_charts">
-                                    <div className="outter_chart_grid">
-                                        <div className="chart_flex">
-                                            <div className="chart_contents">
-                                                <h3>
-                                                    Here’s what the last quarter
-                                                    looked like!
-                                                </h3>
-                                                <p>
-                                                    Want to change your payout
-                                                    method? Head to Settings
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="chart_section">
-                                            chart
-                                        </div>
-                                    </div>
-                                </div> */}
                 </div>
               </div>
             )}
@@ -145,6 +135,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                 paymentHistory={paymentHistory}
                 isTrainer={isTrainer}
                 handlePagination={handlePagination}
+                showPagination={showPagination}
               />
             )}
           </div>
@@ -157,6 +148,7 @@ const TransactionSection = ({
   paymentHistory,
   isTrainer,
   handlePagination,
+  showPagination,
 }) => {
   return (
     <>
@@ -266,11 +258,13 @@ const TransactionSection = ({
                 <h5 className="my-4 text-center">Data not found</h5>
               )}
             </div>
-            <div className="d-flex align-items-center justify-content-end py-5">
-              <button onClick={handlePagination} className="viewMoreButton">
-                View all Payments <BlueHoverButton />
-              </button>
-            </div>
+            {showPagination && (
+              <div className="d-flex align-items-center justify-content-end py-5">
+                <button onClick={handlePagination} className="viewMoreButton">
+                  View all Payments <BlueHoverButton />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[349],{448:function(t,a,s){"use strict";s.r(a),a.default=s.p+"static/media/Mid-DayBreak_Inactive.edab2351.svg"}}]);

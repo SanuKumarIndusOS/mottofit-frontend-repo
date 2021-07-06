@@ -60,49 +60,47 @@ export const updateGlobalMessagingDetails = (message) => (
   const currentMesasge = message?.state?.body;
   const currentMesasgeAuthor = message?.state?.author;
   const {
-    individualMessages,
-    socialMessages,
+    pastSessions,
+    upcomingSessions,
     adminMessages,
+    invitedSessions,
   } = getState().messagingReducer;
 
-  let tempIndividualClient = [...individualMessages];
-  let tempSocialGroup = [...socialMessages];
-  let tempAdminList = [...adminMessages];
-  const currentIndividualChannel = handleChannelMessage(
-    tempIndividualClient,
+  let tempPastSessions = [...pastSessions];
+  let tempUpcomingSessions = [...upcomingSessions];
+  let tempInvitedSessions = [...invitedSessions];
+  let tempAdminSession = [...adminMessages];
+  const currentPastSessions = handleChannelMessage(
+    tempPastSessions,
     currentMesasgedChannelId,
     currentMesasge,
     currentMesasgeAuthor
   );
-  const currentSocialChannel = handleChannelMessage(
-    tempSocialGroup,
+  const currentUpcomingSessions = handleChannelMessage(
+    tempUpcomingSessions,
     currentMesasgedChannelId,
     currentMesasge,
     currentMesasgeAuthor
   );
-  const currentAdminChannel = handleChannelMessage(
-    tempAdminList,
+  const currentInvitedSessions = handleChannelMessage(
+    tempInvitedSessions,
     currentMesasgedChannelId,
     currentMesasge,
     currentMesasgeAuthor
   );
 
-  let currentAllChannel = [
-    ...individualMessages,
-    ...socialMessages,
-    ...adminMessages,
-  ].sort((channel1, channel2) => {
-    return (
-      new Date(channel2?.message?.date_updated || 1950) -
-      new Date(channel1?.message?.date_updated || 1950)
-    );
-  });
+  const currentAdminSessions = handleChannelMessage(
+    tempAdminSession,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
 
   let payload = {
-    individualMessages: currentIndividualChannel,
-    socialMessages: currentSocialChannel,
-    adminMessages: currentAdminChannel,
-    allMessages: currentAllChannel,
+    pastSessions: currentPastSessions,
+    upcomingSessions: currentUpcomingSessions,
+    adminMessages: currentAdminSessions,
+    invitedSessions: currentInvitedSessions,
   };
 
   let messageLeftDOMs = document.getElementsByClassName("message_left");

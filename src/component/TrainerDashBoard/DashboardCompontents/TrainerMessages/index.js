@@ -22,6 +22,7 @@ import {
 import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
+import { InfiniteScrollComponent } from "component/common/Scrollbars";
 
 const TrainerMessageClass = ({
   trainerChannel,
@@ -62,12 +63,14 @@ const TrainerMessageClass = ({
 
     initClientDispatch();
 
-    getChannelDetails("invited");
-
     return () => {
       chatClientInstance && chatClientInstance.removeChatClient();
     };
   }, []);
+
+  useEffect(() => {
+    getChannelDetails();
+  }, [pageData]);
 
   const getChannelDetails = (tab) => {
     trainerChannel(tab, pageData[tab])
@@ -126,15 +129,17 @@ const TrainerMessageClass = ({
     });
   }
 
-  const handleChange = (tab) => {
-    // setUserData((prevData) => {
-    //   if (prevData[currentSession]?.length > 0) return prevData;
-    //   setLoading(true);
-    //   _userSession(tab);
-    //   return prevData;
-    // });
-    console.log(tab);
-  };
+  // const handleScrollApi = (pageNo) => {
+  //   // setUserData((prevData) => {
+  //   //   if (prevData[currentSession]?.length > 0) return prevData;
+  //   //   setLoading(true);
+  //   //   _userSession(tab);
+  //   //   return prevData;
+  //   // });
+  //   // console.log(tab);
+  // };
+
+  const handleScrollChange = () => {};
 
   function handleTabChange(tab) {
     // console.log(tab);
@@ -190,7 +195,10 @@ const TrainerMessageClass = ({
                                 key={`${Date.now()}_all_${index}`}
                               >
                                 <div className="inner_link">
-                                  <UserAvatar {...lastUserProfilePic} />
+                                  <UserAvatar
+                                    {...lastUserProfilePic}
+                                    className="img-md-2"
+                                  />
 
                                   <div
                                     className="message_link_notify"
@@ -204,7 +212,11 @@ const TrainerMessageClass = ({
                                   >
                                     <h3>{item["chatTitle"] || ""}</h3>
                                     <div>
-                                      {body && <p>{body}</p>}
+                                      {body && (
+                                        <p>{`${body?.slice(0, 100)}${
+                                          body?.length > 100 ? "..." : ""
+                                        }`}</p>
+                                      )}
                                       {date_updated && (
                                         <span className="msg-timestamp-left">
                                           {getFormatDate(date_updated, "LT")}
@@ -256,7 +268,10 @@ const TrainerMessageClass = ({
                                     e.target.src = Jenny;
                                   }}
                                 /> */}
-                                  <UserAvatar {...lastUserProfilePic} />
+                                  <UserAvatar
+                                    {...lastUserProfilePic}
+                                    className="img-md-2"
+                                  />
                                   <div
                                     className="message_link_notify"
                                     onClick={() =>
@@ -269,7 +284,11 @@ const TrainerMessageClass = ({
                                   >
                                     <h3>{item["chatTitle"] || ""}</h3>
                                     <div>
-                                      {body && <p>{body}</p>}
+                                      {body && (
+                                        <p>{`${body?.slice(0, 100)}${
+                                          body?.length > 100 ? "..." : ""
+                                        }`}</p>
+                                      )}
                                       {date_updated && (
                                         <span className="msg-timestamp-left">
                                           {getFormatDate(date_updated, "LT")}
@@ -320,7 +339,10 @@ const TrainerMessageClass = ({
                                     e.target.src = Jenny;
                                   }}
                                 /> */}
-                                  <UserAvatar {...lastUserProfilePic} />
+                                  <UserAvatar
+                                    {...lastUserProfilePic}
+                                    className="img-md-2"
+                                  />
                                   <div
                                     className="message_link_notify"
                                     onClick={() =>
@@ -333,7 +355,11 @@ const TrainerMessageClass = ({
                                   >
                                     <h3>{item["chatTitle"] || ""}</h3>
                                     <div>
-                                      {body && <p>{body}</p>}
+                                      {body && (
+                                        <p>{`${body?.slice(0, 100)}${
+                                          body?.length > 100 ? "..." : ""
+                                        }`}</p>
+                                      )}
                                       {date_updated && (
                                         <span className="msg-timestamp-left">
                                           {getFormatDate(date_updated, "LT")}
@@ -358,6 +384,11 @@ const TrainerMessageClass = ({
                     <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
+                        {/* <InfiniteScrollComponent
+                          totalSize={100}
+                          currentDataSize={adminMessages?.length}
+                          handleApi={}
+                        > */}
                         {!isMessageListLoading ? (
                           adminMessages.map((item) => {
                             const { from, body, date_updated } = item.message;
@@ -381,7 +412,10 @@ const TrainerMessageClass = ({
                                     e.target.src = Jenny;
                                   }}
                                 /> */}
-                                  <UserAvatar {...lastUserProfilePic} />
+                                  <UserAvatar
+                                    {...lastUserProfilePic}
+                                    className="img-md-2"
+                                  />
                                   <div
                                     className="message_link_notify"
                                     onClick={() =>
@@ -394,7 +428,11 @@ const TrainerMessageClass = ({
                                   >
                                     <h3>{item["chatTitle"] || ""}</h3>
                                     <div>
-                                      {body && <p>{body}</p>}
+                                      {body && (
+                                        <p>{`${body?.slice(0, 100)}${
+                                          body?.length > 100 ? "..." : ""
+                                        }`}</p>
+                                      )}
                                       {date_updated && (
                                         <span className="msg-timestamp-left">
                                           {getFormatDate(date_updated, "LT")}
@@ -409,6 +447,7 @@ const TrainerMessageClass = ({
                         ) : (
                           <CommonPageLoader />
                         )}
+                        {/* </InfiniteScrollComponent> */}
                       </div>
                       <div className="message_right">
                         <ChatBox isDataPresent={adminMessages.length > 0} />

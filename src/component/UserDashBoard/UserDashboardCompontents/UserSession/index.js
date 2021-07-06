@@ -362,7 +362,7 @@ const TabOne = ({
     trainerId && window.open(fullURLPath);
   };
 
-  const TotalsizeData = Math.ceil(documentSize / 10);
+  // const TotalsizeData = Math.ceil(documentSize / 10);
 
   return (
     <div className="tabPanel_overview">
@@ -546,7 +546,7 @@ const TabOne = ({
                 );
               })}
             </div>
-            {pageSize + 1 <= TotalsizeData && TotalsizeData > 1 && (
+            {tabData?.length < documentSize && (
               <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>

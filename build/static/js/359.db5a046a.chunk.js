@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[359],{574:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/Person Icon.a4f87620.svg"}}]);

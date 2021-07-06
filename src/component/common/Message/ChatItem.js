@@ -30,15 +30,6 @@ export const ChatItem = ({
         </div>
 
         <UserAvatar {...currentChatItemOwner} />
-
-        {/* <img
-          src={currentChatItemOwner?.profilePicture || Jonn}
-          alt="icon"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = Jonn;
-          }}
-        /> */}
       </div>
     );
   } else {

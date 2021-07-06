@@ -130,6 +130,8 @@
                       font-size: 12px;
                       color: #2c2c2c;
                       margin-bottom: 0;
+                      min-height: 53px;
+                      max-height: 53px;
                     }
                   }
                 }
@@ -214,7 +216,7 @@
                       background: #efefef 0% 0% no-repeat padding-box;
                       opacity: 1;
                       h5 {
-                        width: 272px;
+                        // width: 272px;
                         text-align: left;
                         color: #2c2c2c;
                         padding: 1em;
