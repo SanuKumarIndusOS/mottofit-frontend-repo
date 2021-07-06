@@ -169,7 +169,7 @@ const TrainerMessageClass = ({
               >
                 <TabList>
                   {isUser && <Tab tabFor="invited">Invited</Tab>}
-                  {!isUser && <Tab tabFor="upcoming">Upcoming</Tab>}
+                  <Tab tabFor="upcoming">Upcoming</Tab>
                   <Tab tabFor="past">Previous</Tab>
                   <Tab tabFor="admin">Admin</Tab>
                 </TabList>
