@@ -96,7 +96,7 @@ export const TrainerApi = {
     pageSize: 0,
     limit: 10,
     get api() {
-      return `${this.url + this.sessionType}?offset=${this.pageSize}&limit=${
+      return `${this.url + this.sessionType}&offset=${this.pageSize}&limit=${
         this.limit
       }`;
     },

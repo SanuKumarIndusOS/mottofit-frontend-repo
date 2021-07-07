@@ -18,6 +18,8 @@ import ChatBox from "component/common/Message/ChatBox";
 import {
   initClientDispatch,
   updateMessagingDetails,
+  unSubscribeFromChannel,
+  unSubscribeFromClient,
 } from "action/messagingAct";
 import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
@@ -37,6 +39,8 @@ const TrainerMessageClass = ({
   upcomingSessions,
   adminMessages,
   invitedSessions,
+  unSubscribeAct,
+  unSubscribeClientAct,
 }) => {
   const [individual_list, setIndividual] = useState([]);
   const [socialGroup_list, setSocialGroup_list] = useState([]);
@@ -64,12 +68,12 @@ const TrainerMessageClass = ({
     initClientDispatch();
 
     return () => {
-      chatClientInstance && chatClientInstance.removeChatClient();
+      unSubscribeClientAct();
     };
   }, []);
 
   useEffect(() => {
-    getChannelDetails();
+    getChannelDetails(currentTab);
   }, [pageData]);
 
   const getChannelDetails = (tab) => {
@@ -83,27 +87,12 @@ const TrainerMessageClass = ({
         };
 
         let currentSession = sessionTypeData[tab];
-        // setIndividual(data.individualClient);
-        // setSocialGroup_list(data.socialGroups);
-        // setAdmin_list(data.admins);
 
         setMessageListLoading(false);
 
-        // let reduxData = {
-        //   pastSessions: [...data.socialGroups],
-        //   upcomingSessions: [...data.individualClient],
-        //   adminMessages: [...data.admins],
-        //   invitedSessions: [
-        //     ...data.individualClient,
-        //     ...data.socialGroups,
-        //     ...data.admins,
-        //   ],
-        // };
         let reduxData = {
           [currentSession]: [...data],
         };
-
-        console.log(reduxData);
 
         updateMessagingDetails(reduxData);
       })
@@ -114,12 +103,7 @@ const TrainerMessageClass = ({
   };
 
   function PopulateContacts(channelID, members, channelData) {
-    // console.log(channelID, chatClientInstance);
-
-    // "CH15f50302975a435799691ca5f8d71092";
     chatClientInstance.joinChannelByID(channelID).then(() => {
-      console.log("Channel Loaded");
-
       let reduxData = {
         currentChannelMembers: members,
         channelData,
@@ -128,16 +112,6 @@ const TrainerMessageClass = ({
       updateMessagingDetails(reduxData);
     });
   }
-
-  // const handleScrollApi = (pageNo) => {
-  //   // setUserData((prevData) => {
-  //   //   if (prevData[currentSession]?.length > 0) return prevData;
-  //   //   setLoading(true);
-  //   //   _userSession(tab);
-  //   //   return prevData;
-  //   // });
-  //   // console.log(tab);
-  // };
 
   const handleScrollChange = () => {};
 
@@ -148,8 +122,9 @@ const TrainerMessageClass = ({
 
     setMessageListLoading(true);
 
+    unSubscribeAct();
+
     getChannelDetails(tab);
-    chatClientInstance && chatClientInstance.unSubscribeChannel();
   }
 
   const isUser = parseInt(localStorage.getItem("type")) === 3;
@@ -509,6 +484,8 @@ const mapDispatchToProps = (dispatch) => {
       trainerChannel,
       initClientDispatch,
       updateMessagingDetails,
+      unSubscribeAct: unSubscribeFromChannel,
+      unSubscribeClientAct: unSubscribeFromClient,
     },
     dispatch
   );

@@ -118,6 +118,18 @@ export const initClientDispatch = (callback) => (dispatch, getState) => {
   });
 };
 
+export const unSubscribeFromChannel = () => (dispatch, getState) => {
+  const { chatClientInstance } = getState().messagingReducer;
+
+  chatClientInstance && chatClientInstance.unSubscribeChannel();
+};
+
+export const unSubscribeFromClient = () => (dispatch, getState) => {
+  const { chatClientInstance } = getState().messagingReducer;
+
+  chatClientInstance && chatClientInstance.removeChatClient();
+};
+
 const handleChannelMessage = (
   channelData,
   currentMesasgedChannelId,
