@@ -90,6 +90,17 @@ export const TrainerApi = {
       return this.url + this.id;
     },
   },
+
+  adminCancelSession: {
+    url: "session/update",
+    method: "put",
+    baseURL: "session",
+    isAdmin: true,
+    id: null,
+    get api() {
+      return this.url;
+    },
+  },
   changeTrainerStatus: {
     url: "approve/trainers",
     method: "post",
@@ -116,6 +127,17 @@ export const TrainerApi = {
     page: 1,
     get api() {
       return this.url + this.page;
+    },
+  },
+
+  getAdminSession: {
+    url: "sessionsList/upcoming?limit=10&offset=1",
+    method: "get",
+    baseUrl: "session",
+    isAdmin: true,
+    page: 1,
+    get api() {
+      return this.url;
     },
   },
   getStatsData: {
