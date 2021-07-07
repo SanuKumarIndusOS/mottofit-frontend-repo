@@ -22,6 +22,7 @@ import { userApi } from "service/apiVariables";
 import { api } from "service/api";
 import { Toast } from "service/toast";
 import validate from "validate.js";
+import { UserAvatar } from "component/common/UserAvatar";
 
 let tempaccordionData = [
   {
@@ -73,12 +74,11 @@ const TrainWithFriendsClass = ({
   const [accordionData, setAccordionData] = useState(tempaccordionData);
   const [errors, setErrors] = useState([]);
   const [iWillPay, setIPay] = useState(false);
+  const [maxUser, setMaxUser] = useState(0);
 
   let trainingType = localStorage.getItem("sessionTrainingType");
   const handleChangeFriendInput = (index, event) => {
     const values = [...friendsInput];
-
-    // console.log(values[index], index);
 
     const { name, value } = event.target;
     values[index][name] = value;
@@ -87,7 +87,6 @@ const TrainWithFriendsClass = ({
       let tempErrors = { ...errors };
       tempErrors["friendsData"][index][name] = undefined;
     }
-    // console.log(values);
 
     setFriendsInput(values);
   };
@@ -146,10 +145,12 @@ const TrainWithFriendsClass = ({
         ...data.trainerDetail,
       };
 
-      let tempFriendsData = friends.map(({ userDetail }) => ({
+      let tempFriendsData = friends.map(({ userDetail, userId }) => ({
         friendName: userDetail?.firstName || "",
         friendEmail: userDetail?.email || "",
         friendPhone: userDetail?.phoneNo || "",
+        id: userId,
+        isSubmitted: true,
       }));
 
       if (tempFriendsData.length > 0) setFriendsInput(tempFriendsData);
@@ -172,8 +173,8 @@ const TrainWithFriendsClass = ({
     const { editSessionData } = userApi;
 
     let tempPhoneData = friendsInput.filter(
-      ({ friendEmail, friendName, friendPhone }) =>
-        friendEmail && friendName && friendPhone
+      ({ friendEmail, friendName, friendPhone, id }) =>
+        friendEmail && friendName && friendPhone && !id
     );
 
     let payload = {
@@ -205,6 +206,53 @@ const TrainWithFriendsClass = ({
       });
   };
 
+  // REMOVE FRINEDS API
+  const handleRemoveFriend = (e, friendId, index) => {
+    e.preventDefault();
+
+    let tempFriendsData = [...friendsInput];
+
+    tempFriendsData = tempFriendsData.filter((_, i) => i !== index);
+
+    if (!friendId) {
+      setFriendsInput(tempFriendsData);
+
+      let tempErrors = {
+        ...errors,
+      };
+
+      tempErrors["friendsData"] = tempErrors["friendsData"].filter(
+        (_, i) => i !== index
+      );
+
+      setErrors(tempErrors);
+
+      return;
+    }
+
+    const { editSessionData } = userApi;
+
+    let sessionId = submittedData?.id;
+
+    let payload = {
+      sessionId,
+      removeFriend: friendId,
+    };
+
+    editSessionData.body = payload;
+
+    api({ ...editSessionData })
+      .then((data) => {
+        Toast({ type: "success", message: data.message || "Success" });
+        setFriendsInput(tempFriendsData);
+        //  history.push("/users/dashboard/session");
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+      });
+    // console.log(friendId);
+  };
+
   const validationRules = () => {
     validate.validators.array = (arrayItems, itemConstraints) => {
       const arrayItemErrors = arrayItems.reduce((errors, item, index) => {
@@ -214,15 +262,12 @@ const TrainWithFriendsClass = ({
           friendPhone: item.friendName,
         }).some((data) => data !== "");
 
-        console.log(isAnyData);
-
         let error;
 
         let itemValidation = { ...item };
 
         if (index === 0 || isAnyData) {
           error = validate(itemValidation, itemConstraints);
-          console.log(error);
         }
         if (error) {
           errors[index] = error;
@@ -234,8 +279,6 @@ const TrainWithFriendsClass = ({
       }, []);
 
       let isNoError = arrayItemErrors.every((error) => error === null);
-
-      console.log(isNoError);
 
       return isNoError ? null : arrayItemErrors;
     };
@@ -287,8 +330,6 @@ const TrainWithFriendsClass = ({
   };
 
   const validateFields = (data) => {
-    // console.log(data, validationRules());
-
     let fieldInvalidList = validate(data, validationRules());
 
     if (fieldInvalidList !== undefined) {
@@ -343,7 +384,7 @@ const TrainWithFriendsClass = ({
         ? tempTrainerData?.socialSessionPricing
             ?.inPeronAtTrainerLocationfor3People
         : tempTrainerData?.socialSessionPricing
-            ?.inPeronAtClientLocationfor2People;
+            ?.inPeronAtClientLocationfor3People;
 
     const inPerson4People =
       trainingLocation === "trainerLocation"
@@ -374,8 +415,6 @@ const TrainWithFriendsClass = ({
 
     let tempData = [...accordionData];
 
-    // console.log(tempData, "123");
-
     tempData[0] = {
       ...tempData[0],
       price: !isNaN(pricingObject.social.twoPeople)
@@ -395,10 +434,20 @@ const TrainWithFriendsClass = ({
         : null,
     };
 
-    // console.log(tempData);
+    if (tempData[1]?.price) {
+      setMaxUser(15);
+    } else if (tempData[0]?.price2) {
+      setMaxUser(4);
+    } else if (tempData[0]?.price1) {
+      setMaxUser(3);
+    } else if (tempData[0]?.price) {
+      setMaxUser(2);
+    }
 
     setAccordionData([...tempData]);
     // }
+
+    window.scrollTo(0, 0);
 
     // console.log(pricingObject);
   }, []);
@@ -412,6 +461,19 @@ const TrainWithFriendsClass = ({
     : "";
 
   const sessionType = sessionData?.sessionType || "";
+
+  const normalSessionValidation =
+    (sessionType.includes("SOCIAL") && friendsInput.length < 3) ||
+    (sessionType.includes("CLASS") && friendsInput.length < 14);
+
+  const maxSessionValidation = friendsInput.length + 1 < maxUser;
+
+  let userProps = {
+    profilePicture: tempTrainerData?.profilePicture,
+    userName: `${tempTrainerData?.firstName || ""} ${
+      tempTrainerData?.lastName || ""
+    }`,
+  };
 
   return (
     <>
@@ -438,8 +500,13 @@ const TrainWithFriendsClass = ({
                         <div className="TF_inner_form">
                           {friendsInput.map((input, index) => {
                             return (
-                              <div key={index} className="TF_wrapper_input">
-                                <h4>Friend #{index + 1}</h4>
+                              <div
+                                key={index}
+                                className="TF_wrapper_input d-flex flex-column"
+                              >
+                                <h4 className="text-left">
+                                  Friend #{index + 1}
+                                </h4>
                                 {/* <div> */}
                                 <div className="inner_input">
                                   <input
@@ -450,6 +517,10 @@ const TrainWithFriendsClass = ({
                                     onChange={(event) =>
                                       handleChangeFriendInput(index, event)
                                     }
+                                    disabled={input.isSubmitted}
+                                    className={`${
+                                      input.isSubmitted ? "disable-btn" : ""
+                                    }`}
                                   />
                                   <img src={Person} alt="icon" />
                                 </div>
@@ -468,7 +539,7 @@ const TrainWithFriendsClass = ({
                                   )}
                                 <div className="TF_input">
                                   <div className="inner_input">
-                                    <div className="w-100">
+                                    <div className="w-100 mr-3">
                                       <div className="position-relative">
                                         <input
                                           type="text"
@@ -481,6 +552,12 @@ const TrainWithFriendsClass = ({
                                               event
                                             )
                                           }
+                                          disabled={input.isSubmitted}
+                                          className={`${
+                                            input.isSubmitted
+                                              ? "disable-btn"
+                                              : ""
+                                          }`}
                                         />
 
                                         <img src={Mail} alt="icon" />
@@ -520,17 +597,13 @@ const TrainWithFriendsClass = ({
                                               },
                                             });
                                           }}
+                                          disabled={input.isSubmitted}
+                                          className={`${
+                                            input.isSubmitted
+                                              ? "disable-btn"
+                                              : ""
+                                          }`}
                                         />
-
-                                        {/* <input
-                                      type="text"
-                                      placeholder="Phone Number"
-                                      name="phone"
-                                      value={input.friendPhone}
-                                      onChange={(event) =>
-                                        handleChangeFriendInput(index, event)
-                                      }
-                                    /> */}
 
                                         <img src={Phone} alt="icon" />
                                       </div>
@@ -550,6 +623,17 @@ const TrainWithFriendsClass = ({
                                     </div>
                                   </div>
                                 </div>
+
+                                {(input.id || index !== 0) && (
+                                  <button
+                                    className="btn-link btn text-underline fw-400 text-right"
+                                    onClick={(e) =>
+                                      handleRemoveFriend(e, input.id, index)
+                                    }
+                                  >
+                                    Remove
+                                  </button>
+                                )}
                               </div>
                             );
                           })}
@@ -572,10 +656,7 @@ const TrainWithFriendsClass = ({
                           <button onClick={updateSessionApi}>
                             Invite Friends <ArrowHoverBlacked />{" "}
                           </button>
-                          {(sessionType.includes("SOCIAL") &&
-                            friendsInput.length < 3) ||
-                          (sessionType.includes("CLASS") &&
-                            friendsInput.length < 14) ? (
+                          {normalSessionValidation && maxSessionValidation ? (
                             <h5 onClick={handleAddFriendFields}>
                               + Add More Friends
                             </h5>
@@ -588,10 +669,7 @@ const TrainWithFriendsClass = ({
                 <div className="TF_wrapper_right">
                   <div className="TF_right">
                     <div className="TF_profile">
-                      <img
-                        src={tempTrainerData?.profilePicture || Jenny}
-                        alt={`Trainer ${tempTrainerData?.firstName}`}
-                      />
+                      <UserAvatar {...userProps} className="img-md" />
                       <div className="TF_name">
                         <h2>{`${tempTrainerData?.firstName || ""} ${
                           tempTrainerData?.lastName || ""
@@ -674,6 +752,8 @@ const AccordationService = ({ data }) => {
     <>
       {data.map((item, index) => {
         // console.log(item);
+
+        if (!item?.price && !item.price1 && !item.price2) return null;
 
         return (
           <div

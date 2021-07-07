@@ -1,5 +1,6 @@
 import { logout, cancelTokenSource, axiosInstance } from "./utilities";
 import { Toast } from "./toast";
+import config from "config";
 
 export var api = async function ({
   method = "get",
@@ -74,19 +75,22 @@ let getServiceUrl = (baseURL) => {
 
   switch (baseURL) {
     case "normal":
-      finalURL = "http://doodlebluelive.com:2307/v1/";
+      finalURL = config.api.normalService;
       break;
     case "session":
-      finalURL = "http://doodlebluelive.com:2337/v1/";
+      finalURL = config.api.sessionService;
       break;
     case "payment":
-      finalURL = "http://doodlebluelive.com:2336/v1/";
+      finalURL = config.api.paymentService;
       break;
     case "message":
-      finalURL = "http://doodlebluelive.com:2338/v1/";
+      finalURL = config.api.messgaeService;
+      break;
+    case "facebook":
+      finalURL = config.api.tempFacebookService;
       break;
     default:
-      finalURL = "http://doodlebluelive.com:2307/v1/";
+      finalURL = config.api.normalService;
       break;
     // case "normal":
     //   finalURL = "https://apis.bookmotto.com/user/v1/";

@@ -31,11 +31,18 @@ export const getUserDetail = () => (dispatch, getState, { api }) => {
 };
 
 //user Session
-export const userSession = () => (dispatch, getState, { api }) => {
+export const userSession = (type, pageSize = 0) => (
+  dispatch,
+  getState,
+  { api }
+) => {
   return new Promise((resolve, reject) => {
+    userApi.userSession.sessionType = type || "invited";
+    userApi.userSession.pageSize = pageSize || 0;
+
     api({ ...userApi.userSession })
-      .then(({ data }) => {
-        resolve(data);
+      .then(({ data, documentCount }) => {
+        resolve({ data, documentCount });
       })
       .catch((err) => {
         reject(err);
@@ -83,6 +90,19 @@ export const getCalenderDetails = (trainerId, startDate, endDate, timeSlot) => (
     getCalenderDetails.timeSlot = timeSlot;
     api({ ...getCalenderDetails })
       .then((data) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+//handle invidation
+export const invitationSession = (body) => (dispatch, getState, { api }) => {
+  return new Promise((resolve, reject) => {
+    api({ ...userApi.invitationSession, body })
+      .then(({ data }) => {
         resolve(data);
       })
       .catch((err) => {

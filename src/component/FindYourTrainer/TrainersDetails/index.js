@@ -3,7 +3,6 @@ import "./trainer.sass";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
-import { COMMON_URL } from "helpers/baseURL";
 import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
 import { bindActionCreators } from "redux";
@@ -50,8 +49,6 @@ const TrainerCardsFC = (props) => {
         {no_match}
         <div className="row" style={{ alignleft: "auto" }}>
           {Object.keys(bestMatchData).map((data, index) => {
-            let imgdb = `${COMMON_URL}${bestMatchData[data]["profilePicture"]}`;
-
             const areaOfExpertise = bestMatchData[
               data
             ]?.areaOfExpertise?.toString();
@@ -78,7 +75,11 @@ const TrainerCardsFC = (props) => {
             const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
 
             return (
-              <div className="card" key={index}>
+              <div
+                className="card cursor-pointer"
+                key={index}
+                onClick={() => handleClick(data, true)}
+              >
                 <img
                   className="card-img-top"
                   src={
@@ -113,7 +114,11 @@ const TrainerCardsFC = (props) => {
                     style={{
                       backgroundColor: "#53BFD2",
                     }}
-                    onClick={() => handleClick(data)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleClick(data);
+                    }}
                   >
                     book a session
                     <BlackCircleButton />

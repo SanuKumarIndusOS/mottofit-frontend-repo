@@ -32,6 +32,25 @@ export const AuthApi = {
     api: "user/change-password",
     method: "post",
   },
+  socialLoginSignup: {
+    url: "auth/",
+    socialType: "google",
+    userType: "",
+    method: "post",
+    baseURL: "facebook",
+    get api() {
+      return `${this.url}${this.socialType}/${this.userType}`;
+    },
+  },
+  socialLoginSignin: {
+    url: "auth/social/",
+    socialType: "google",
+    method: "post",
+    baseURL: "facebook",
+    get api() {
+      return `${this.url}${this.socialType}`;
+    },
+  },
 };
 
 export const TrainerApi = {
@@ -69,12 +88,17 @@ export const TrainerApi = {
     method: "get",
   },
   getTrainerSessionApi: {
-    url: "session/trainer",
-    method: "get",
     iscalenderView: false,
+    url: "session/trainer?sessionType=",
+    method: "get",
     baseURL: "session",
+    sessionType: "",
+    pageSize: 0,
+    limit: 10,
     get api() {
-      return this.url;
+      return `${this.url + this.sessionType}?offset=${this.pageSize}&limit=${
+        this.limit
+      }`;
     },
     set addQuery({ key, payload }) {
       this.query[key] = payload;
@@ -224,12 +248,15 @@ export const TrainerApi = {
     baseURL: "normal",
   },
   trainerChannel: {
-    url: "channel",
+    url: "channel?",
     method: "get",
     baseURL: "message",
     id: "trainer",
+    pageSize: 0,
+    limit: 10,
+    sessionType: "",
     get api() {
-      return `${this.id}/${this.url}`;
+      return `${this.id}/${this.url}sessionType=${this.sessionType}&offset=${this.pageSize}&limit=${this.limit}`;
     },
   },
   trainerMyEarning: {
@@ -237,8 +264,10 @@ export const TrainerApi = {
     method: "get",
     baseURL: "payment",
     id: null,
+    pageSize: 0,
+    limit: 10,
     get api() {
-      return this.url + this.id;
+      return `${this.url}${this.id}&offset=${this.pageSize}&limit=${this.limit}`;
     },
   },
 };
@@ -268,9 +297,17 @@ export const userApi = {
     baseURL: "normal",
   },
   userSession: {
-    api: "session/user",
+    url: "session/user?sessionType=",
     method: "get",
     baseURL: "session",
+    sessionType: "",
+    pageSize: 0,
+    limit: 10,
+    get api() {
+      return `${this.url + this.sessionType}&offset=${this.pageSize}&limit=${
+        this.limit
+      }`;
+    },
   },
   cancelSession: {
     api: "session/update",
@@ -314,8 +351,10 @@ export const userApi = {
     url: "payment-history/user?userId=",
     baseURL: "payment",
     id: null,
+    pageSize: 0,
+    limit: 10,
     get api() {
-      return this.url + this.id;
+      return `${this.url}${this.id}&offset=${this.pageSize}&limit=${this.limit}`;
     },
   },
   getSessionData: {
@@ -332,6 +371,14 @@ export const userApi = {
     url: "session/update",
     baseURL: "session",
     id: null,
+    get api() {
+      return this.url;
+    },
+  },
+  invitationSession: {
+    method: "post",
+    url: "sessions/accept-invite",
+    baseURL: "session",
     get api() {
       return this.url;
     },

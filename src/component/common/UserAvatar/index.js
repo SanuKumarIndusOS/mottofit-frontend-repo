@@ -13,7 +13,7 @@ export const UserAvatar = ({
 
   let lastLetter =
     userName.split(" ").length > 1
-      ? tempLastName[tempLastName.length - 1]
+      ? tempLastName[0]
       : userName[userName.length - 1];
 
   let initialLetters = `${firstLetter || "A"}${
@@ -39,7 +39,7 @@ export const UserAvatar = ({
     backgroundColorByName = backgroundColor[2];
   } else if (colorByName <= "T") {
     backgroundColorByName = backgroundColor[3];
-  } else if (colorByName <= "Z") {
+  } else if (colorByName > "T") {
     backgroundColorByName = backgroundColor[4];
   }
 

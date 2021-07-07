@@ -35,4 +35,27 @@
     min-height: 125px;
     font-size: 3rem;
   }
+  &.img-md {
+    max-width: 90px;
+    max-height: 90px;
+    min-width: 90px;
+    min-height: 90px;
+    font-size: 2rem;
+  }
+  &.img-md-2 {
+    max-width: 65px;
+    max-height: 65px;
+    min-width: 65px;
+    min-height: 65px;
+    font-size: 1.25rem;
+
+    img {
+      border-radius: 50%;
+      max-width: 65px;
+      max-height: 65px;
+      min-width: 65px;
+      min-height: 65px;
+      object-fit: cover;
+    }
+  }
 }

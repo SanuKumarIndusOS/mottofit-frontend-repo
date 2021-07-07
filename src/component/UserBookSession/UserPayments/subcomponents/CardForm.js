@@ -18,6 +18,7 @@ import { Toast } from "service/toast";
 import InfoIcon from "@material-ui/icons/Info";
 import { AiFillAlert, AiOutlineAlert } from "react-icons/ai";
 import { history } from "helpers";
+import BlueHoverButton from "component/common/BlueArrowButton";
 
 const useOptions = () => {
   const options = useMemo(() => ({
@@ -45,6 +46,7 @@ function CardFormFC({
   handleChange,
   ScheduleSession,
   sessionData,
+  isProfile = false,
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -84,10 +86,11 @@ function CardFormFC({
     });
 
     if (error) {
-      console.log("[error]", error);
+      // console.log("[error]", error);
 
       return Toast({ type: "error", message: error.message || "Error" });
     } else {
+      // return Toast({ type: "error", message: error.message || "Error" });
       console.log("[PaymentMethod]", paymentMethod);
     }
 
@@ -95,7 +98,7 @@ function CardFormFC({
       .createToken(cardElement)
       .then(function ({ token }) {
         // Handle result.error or result.token
-        console.log(token);
+        // console.log(token);
 
         token?.id && addCard(token?.id);
 
@@ -127,7 +130,7 @@ function CardFormFC({
 
     let payload = {
       cardToken: token,
-      setDefault: isRememberCard,
+      setDefault: isProfile ? true : isRememberCard,
     };
 
     addCardDetails.body = payload;
@@ -138,6 +141,8 @@ function CardFormFC({
 
         Toast({ type: "success", message: "Card details added" });
         getUserPaymentInfo();
+
+        if (isProfile) return ScheduleSession();
 
         let sessionTypeRoute = {
           ["1 ON 1 TRAINING"]: () => ScheduleSession(),
@@ -174,7 +179,7 @@ function CardFormFC({
             defaulCardDetails: defaulCardDetails[0],
           };
 
-          console.log(reduxData);
+          // console.log(reduxData);
           updateUserDetails(reduxData);
         }
       })
@@ -188,7 +193,7 @@ function CardFormFC({
     <div>
       <form onSubmit={handleSubmit} className="Card">
         <div className="payment_input_inner">
-          <label>Card Number</label>
+          <label className="card-detail">Card Number</label>
 
           {showCardComp ? (
             <CardNumberElement
@@ -218,38 +223,36 @@ function CardFormFC({
 
           <div className="payment_expire_input">
             <div className="payment_expire_inner">
-              <label>
-                Expiry Date
-                {showCardComp ? (
-                  <CardExpiryElement
-                    options={{
-                      style: {
-                        base: {
+              <label className="card-detail">Expiry Date</label>
+              {showCardComp ? (
+                <CardExpiryElement
+                  options={{
+                    style: {
+                      base: {
+                        fontSize: "16px",
+                        color: "#424770",
+                        "::placeholder": {
+                          color: "#898989",
+                          fontFamily: "Montserrat",
                           fontSize: "16px",
-                          color: "#424770",
-                          "::placeholder": {
-                            color: "#898989",
-                            fontFamily: "Montserrat",
-                            fontSize: "16px",
-                          },
-                        },
-                        invalid: {
-                          color: "#9e2146",
                         },
                       },
-                    }}
-                  />
-                ) : (
-                  <p className="fs-20">{`${
-                    defaulCardDetails?.card?.exp_month || ""
-                  }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
-                )}
-              </label>
+                      invalid: {
+                        color: "#9e2146",
+                      },
+                    },
+                  }}
+                />
+              ) : (
+                <p className="fs-20">{`${
+                  defaulCardDetails?.card?.exp_month || ""
+                }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
+              )}
             </div>
             <div className="payment_expire_inner">
               {showCardComp && (
-                <label>
-                  CVC/CVV
+                <>
+                  <label className="card-detail">CVC/CVV</label>
                   <CardCvcElement
                     options={{
                       style: {
@@ -268,7 +271,7 @@ function CardFormFC({
                       },
                     }}
                   />
-                </label>
+                </>
               )}
             </div>
           </div>
@@ -279,7 +282,11 @@ function CardFormFC({
                 <div className="payment_change d-flex justify-content-end">
                   <button
                     className="link-btn"
-                    onClick={() => setShowCardComp(false)}
+                    onClick={(e) => {
+                      setShowCardComp(false);
+                      e.preventDefault();
+                    }}
+                    type="click"
                   >
                     Reset Card
                   </button>
@@ -288,7 +295,11 @@ function CardFormFC({
                 <div className="payment_change d-flex justify-content-end">
                   <button
                     className="link-btn"
-                    onClick={() => setShowCardComp(true)}
+                    onClick={(e) => {
+                      setShowCardComp(true);
+                      e.preventDefault();
+                    }}
+                    type="click"
                   >
                     Edit Card
                   </button>
@@ -298,7 +309,7 @@ function CardFormFC({
           )}
 
           {showCardComp && (
-            <div className="payment_input_check mt-3">
+            <div className="payment_input_check mt-3 d-flex justify-content-between">
               <div className="payment_check_inner">
                 <input
                   type="checkbox"
@@ -308,8 +319,10 @@ function CardFormFC({
                 />
                 <label for="remember_card">Remember My Card Details</label>
               </div>
-              <div className="payment_check_inner">
-                <Link to="/">Session Cancellation Policy</Link>
+              <div className="payment_check_inner d-flex align-items-center">
+                <Link to="/" className="fw-600 text-underline">
+                  Session Cancellation Policy
+                </Link>
               </div>
             </div>
           )}
@@ -340,18 +353,24 @@ function CardFormFC({
           </p>
         </div>
 
-        {/* {showCardComp && ( */}
+        {/* {!isProfile ? ( */}
         <div className="submit">
           <button
             type="click"
-            className={`${!agreedToTerms ? "disable-btn" : ""}`}
+            className={`${!agreedToTerms ? "disable-btn" : ""} ${
+              isProfile ? "w-auto" : ""
+            }`}
             disabled={!agreedToTerms}
             onClick={handleSubmit}
           >
-            Continue <ArrowHoverBlacked />
+            {`${isProfile ? "Save Changes" : "Continue"}`} <ArrowHoverBlacked />
           </button>
         </div>
-        {/* )} */}
+        {/* ) : (
+          <button className="profile_save" onClick={handleSubmit}>
+            SAVE CHANGES <BlueHoverButton />
+          </button>
+        )} */}
       </form>
     </div>
   );

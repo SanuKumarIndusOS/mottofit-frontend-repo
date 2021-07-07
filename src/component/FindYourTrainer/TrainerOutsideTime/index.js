@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./styles.sass";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
-import { COMMON_URL } from "helpers/baseURL";
 import "./styleCard.scss";
 import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
@@ -46,7 +45,6 @@ const TrainerCardOutsideFC = (props) => {
 
         <div className="row">
           {Object.keys(outSideData).map((data, index) => {
-            let imgdb = `${COMMON_URL}${outSideData[data]["profilePicture"]}`;
             const areaOfExpertise = outSideData[
               data
             ]?.areaOfExpertise?.toString();
@@ -72,7 +70,11 @@ const TrainerCardOutsideFC = (props) => {
 
             const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
             return (
-              <div className="card" key={index}>
+              <div
+                className="card cursor-pointer"
+                key={index}
+                onClick={() => handleClick(data, true)}
+              >
                 <div className="inner_card">
                   <img
                     className="card-img-top card-img"
@@ -116,7 +118,11 @@ const TrainerCardOutsideFC = (props) => {
                     style={{
                       backgroundColor: "#53BFD2",
                     }}
-                    onClick={() => handleClick(data)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleClick(data);
+                    }}
                   >
                     book a session
                     <BlackCircleButton />

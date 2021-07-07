@@ -20,6 +20,7 @@ const SetupPrevModal = ({
   const myRef = useRef(null);
 
   const [trainerLocationModal, setTrainerLocationModal] = useState(false);
+  const [viewLocationType, setViewLocationType] = useState("");
 
   const closeIconModal = (
     <img src={CloseIcon} alt="close" className="close_setup" />
@@ -322,37 +323,57 @@ const SetupPrevModal = ({
 
                         <hr />
                         <div className="profile_aside_inner_item">
-                          {trainerdetailData?.preferedTrainingMode ? (
-                            <div className="profile_location">
-                              <img src={Tick} alt="icon" />
-                              <h4>
-                                {trainerdetailData?.preferedTrainingMode?.toString()}
-                              </h4>
+                          {trainerdetailData?.preferedTrainingMode &&
+                            trainerdetailData?.preferedTrainingMode?.includes(
+                              "virtual"
+                            ) && (
+                              <div className="profile_location">
+                                <img src={Tick} alt="icon" />
+                                <h4>Virtual</h4>
+                              </div>
+                            )}
+
+                          {trainerdetailData?.location ? (
+                            <div className="profile_location flex-column mt-2">
+                              <div className="d-flex align-items-center w-100">
+                                <img src={Tick} alt="icon" />
+                                <h4>
+                                  {`${trainerdetailData?.location}(Training Facility)`}
+                                  <Link
+                                    onClick={() => {
+                                      setTrainerLocationModal(true);
+                                      setViewLocationType("trainer");
+                                    }}
+                                  >
+                                    Location Details
+                                  </Link>
+                                </h4>
+                              </div>
                             </div>
                           ) : (
                             ""
                           )}
-                          {/* <div className="profile_location">
-                            <img src={Tick} alt="icon" />
-                            <h4>
-                              Trainer’s Location <Link>View Location</Link>
-                            </h4>
-                          </div> */}
-                          <div className="profile_location">
-                            <img src={Tick} alt="icon" />
-                            <h4>
-                              {trainerdetailData && trainerdetailData.location
-                                ? trainerdetailData.location
-                                : "Not Added"}
-                              <Link
-                                onClick={() => {
-                                  setTrainerLocationModal(true);
-                                }}
-                              >
-                                View Location
-                              </Link>
-                            </h4>
-                          </div>
+                          {trainerdetailData &&
+                          trainerdetailData.servicableLocation?.length > 0 ? (
+                            <div className="profile_location flex-column mt-2">
+                              <div className="d-flex align-items-center w-100">
+                                <img src={Tick} alt="icon" />
+                                <h4>
+                                  {`${trainerdetailData?.location}(Your Location)`}
+                                  <Link
+                                    onClick={() => {
+                                      setTrainerLocationModal(true);
+                                      setViewLocationType("servicable");
+                                    }}
+                                  >
+                                    Location Details
+                                  </Link>
+                                </h4>
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                     </div>
@@ -427,18 +448,22 @@ const SetupPrevModal = ({
           }}
         >
           <div className="model_styles modal-heading">
-            <h2>Trainer's Locations</h2>
-            <p>
-              {trainerdetailData?.trainingFacilityLocation ||
-                "No trainer locations"}
-            </p>
-            {/* {trainingVenue?.label === "Trainer's Location" ? (
+            <div className="model_styles modal-heading">
+              <h2>{`${
+                viewLocationType === "trainer" ? "Trainer's" : "Servicable"
+              } Locations`}</h2>
+              {viewLocationType === "trainer" ? (
+                <p>
+                  {trainerdetailData?.trainingFacilityLocation ||
+                    "No trainer locations"}
+                </p>
               ) : (
                 <p>
-                  {trainerProfileData?.serviceableNeighbourHood ||
+                  {trainerdetailData?.serviceableNeighbourHood ||
                     "No neighbourhood locations"}
                 </p>
-              )} */}
+              )}
+            </div>
           </div>
         </Modal>
       ) : null}

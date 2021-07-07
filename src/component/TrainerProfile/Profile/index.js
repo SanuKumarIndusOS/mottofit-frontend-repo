@@ -78,6 +78,13 @@ const TrainerProfileClass = ({
   };
 
   const handleBookSession = () => {
+    let reduxData = {
+      selectedTrainerData: {
+        trainerId: trainerProfileData["id"],
+        trainerData: { ...trainerProfileData },
+      },
+    };
+    updateUserDetails(reduxData);
     history.push("/user/scheduler");
   };
   const handleSessionType = () => {
@@ -195,7 +202,7 @@ const TrainerProfileClass = ({
             <div className="profile_main_contents container">
               <div className="profile_aside">
                 <div className="profile_aside_link">
-                  <Link to="/user/scheduler">View Calender</Link>
+                  <Link onClick={handleBookSession}>View Calender</Link>
                   <img src={ArrowNext} alt="icon" />
                 </div>
                 <div className="profile_aside_items">
@@ -215,7 +222,7 @@ const TrainerProfileClass = ({
                         {inPersonAtClientLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtClientLocation} `}
-                            <span>(In Person Session)</span>
+                            <span>(at your location)</span>
                           </h6>
                         ) : (
                           ""
@@ -223,7 +230,7 @@ const TrainerProfileClass = ({
                         {inPersonAtTrainerLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtTrainerLocation} `}
-                            <span>(Trainer Location)</span>
+                            <span>(at trainer location)</span>
                           </h6>
                         ) : (
                           ""
@@ -290,7 +297,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor2People} `}
-                            <span>(In person session for 2 people)</span>
+                            <span>(at your location for 2 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -299,7 +306,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor2People} `}
-                            <span>(In trainer location for 2 people)</span>
+                            <span>(at trainer location for 2 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -316,7 +323,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor3People} `}
-                            <span>(In person session for 3 people)</span>
+                            <span>(at your location for 3 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -325,7 +332,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor3People} `}
-                            <span>(In trainer location for 3 people)</span>
+                            <span>(at trainer location for 3 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -342,7 +349,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor4People} `}
-                            <span>(In person session for 4 people)</span>
+                            <span>(at your location for 4 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -351,7 +358,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor4People} `}
-                            <span>(In trainer location for 4 people)</span>
+                            <span>(at trainer location for 4 people)</span>
                           </h6>
                         ) : (
                           ""
@@ -418,7 +425,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtclientLocationfor15People} `}
-                            <span>(In Person Session) (For 5-15 People)</span>
+                            <span>(at your location) (For 5-15 People)</span>
                           </h6>
                         ) : (
                           ""
@@ -427,7 +434,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAttrainerLocationfor15People} `}
-                            <span>(Trainer Location) (For 5-15 People)</span>
+                            <span>(at trainer location) (For 5-15 People)</span>
                           </h6>
                         ) : (
                           ""
@@ -447,53 +454,50 @@ const TrainerProfileClass = ({
 
                     <hr />
                     <div className="profile_aside_inner_item">
-                      <div className="profile_location">
-                        <img src={Tick} alt="icon" />
-                        <h4>
-                          {trainerProfileData?.preferedTrainingMode?.toString()}
-                        </h4>
-                      </div>
-                      <div className="profile_location flex-column mt-2">
-                        <p className="w-100 mb-2 text-secondary">
-                          Trainer Location:
-                        </p>
-                        <div className="d-flex align-items-center w-100">
-                          <img src={Tick} alt="icon" />
-                          <h4>
-                            {trainerProfileData && trainerProfileData.location
-                              ? trainerProfileData.location
-                              : "Not Added"}
-                            <Link
-                              onClick={() => {
-                                setTrainerLocationModal(true);
-                                setViewLocationType("trainer");
-                              }}
-                            >
-                              View Location
-                            </Link>
-                          </h4>
-                        </div>
-                      </div>
-                      {trainerProfileData &&
-                      trainerProfileData.servicableLocation?.length > 0 ? (
+                      {trainerProfileData?.preferedTrainingMode &&
+                        trainerProfileData?.preferedTrainingMode?.includes(
+                          "virtual"
+                        ) && (
+                          <div className="profile_location">
+                            <img src={Tick} alt="icon" />
+                            <h4>Virtual</h4>
+                          </div>
+                        )}
+
+                      {trainerProfileData?.location ? (
                         <div className="profile_location flex-column mt-2">
-                          <p className="w-100 mb-2 text-secondary">
-                            Servicable Location:
-                          </p>
                           <div className="d-flex align-items-center w-100">
                             <img src={Tick} alt="icon" />
                             <h4>
-                              {trainerProfileData &&
-                              trainerProfileData.servicableLocation?.length > 0
-                                ? trainerProfileData.servicableLocation[0]
-                                : "Not Added"}
+                              {`${trainerProfileData?.location}(Training Facility)`}
+                              <Link
+                                onClick={() => {
+                                  setTrainerLocationModal(true);
+                                  setViewLocationType("trainer");
+                                }}
+                              >
+                                location details
+                              </Link>
+                            </h4>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      {trainerProfileData &&
+                      trainerProfileData.servicableLocation?.length > 0 ? (
+                        <div className="profile_location flex-column mt-2">
+                          <div className="d-flex align-items-center w-100">
+                            <img src={Tick} alt="icon" />
+                            <h4>
+                              {`${trainerProfileData?.servicableLocation[0]}(Your Location)`}
                               <Link
                                 onClick={() => {
                                   setTrainerLocationModal(true);
                                   setViewLocationType("servicable");
                                 }}
                               >
-                                View Location
+                                areas serviced
                               </Link>
                             </h4>
                           </div>
@@ -615,21 +619,19 @@ const TrainerProfileClass = ({
           >
             <div className="model_styles modal-heading">
               <h2>{`${
-                viewLocationType === "trainer" ? " Trainer's" : "Servicable"
+                viewLocationType === "trainer" ? "Trainer's" : "Servicable"
               } Locations`}</h2>
-              <p>
-                {viewLocationType === "trainer"
-                  ? trainerProfileData?.trainingFacilityLocation
-                  : trainerProfileData?.servicableLocation ||
+              {viewLocationType === "trainer" ? (
+                <p>
+                  {trainerProfileData?.trainingFacilityLocation ||
                     "No trainer locations"}
-              </p>
-              {/* {trainingVenue?.label === "Trainer's Location" ? (
+                </p>
               ) : (
                 <p>
                   {trainerProfileData?.serviceableNeighbourHood ||
                     "No neighbourhood locations"}
                 </p>
-              )} */}
+              )}
             </div>
           </Modal>
         ) : null}
@@ -711,6 +713,7 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
   };
 
   const { images = [] } = trainerProfileData;
+
   return (
     <>
       <div className="profile_images_grid">

@@ -44,7 +44,7 @@ let options = [
   { value: "Palm Beach", label: "Palm Beach" },
 ];
 
-const trainingVenueOptions = [
+let trainingVenueOptions = [
   { value: "trainerLocation", label: "Trainer's Location" },
   { value: "clientLocation", label: "Your Location" },
 ];
@@ -58,9 +58,10 @@ const UserBookSessionFC = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState([]);
   const [trainingType, setTrainingType] = useState("");
+  const [availableLocation, setAvailableLocation] = useState([]);
   const [trainingVenue, setTrainingVenue] = useState({
-    value: "trainerLocation",
-    label: "Trainer's Location",
+    value: "clientLocation",
+    label: "Your Location",
   });
 
   const [preferedTrainingMode, setPreferedTrainingMode] = useState("");
@@ -87,9 +88,6 @@ const UserBookSessionFC = ({
 
     if (!tempTrainerData?.id) return history.push("/trainer/find");
 
-    // setTrainingVenue(sessionData?.trainingVenue);
-    // setPreferedTrainingMode(sessionData?.preferedTrainingMode);
-
     if (tempTrainerData?.preferedTrainingMode.length === 1) {
       setPreferedTrainingMode(tempTrainerData?.preferedTrainingMode[0]);
     } else {
@@ -105,14 +103,58 @@ const UserBookSessionFC = ({
         (queryObject?.trainingType?.value || queryObject?.trainingType)
     )[0];
 
-    // console.log(queryObject?.trainingType || queryObject?.trainingType?.value);
-
-    // ()
-
     tempValue?.value && setSelectedOption(tempValue);
     tempTrainingValue?.value && setTrainingType(tempTrainingValue);
 
     const { servicableLocation = [], areaOfExpertise = [] } = tempTrainerData;
+
+    const {
+      inPersonAtClientLocation = "",
+      inPersonAtTrainerLocation = "",
+      virtualSession = "",
+    } = tempTrainerData?.oneOnOnePricing || {};
+
+    const {
+      virtualSessionfor2People = "",
+      virtualSessionfor3People = "",
+      virtualSessionfor4People = "",
+      inPeronAtClientLocationfor2People = "",
+      inPeronAtClientLocationfor3People = "",
+      inPeronAtClientLocationfor4People = "",
+      inPeronAtTrainerLocationfor2People = "",
+      inPeronAtTrainerLocationfor3People = "",
+      inPeronAtTrainerLocationfor4People = "",
+    } = tempTrainerData.socialSessionPricing || {};
+
+    const {
+      virtualSessionfor15People = "",
+      inPersonAtclientLocationfor15People = "",
+      inPersonAttrainerLocationfor15People = "",
+    } = tempTrainerData.classSessionPricing || {};
+
+    const isVirtualSessionAvailable = [
+      virtualSession,
+      virtualSessionfor2People,
+      virtualSessionfor3People,
+      virtualSessionfor4People,
+      virtualSessionfor15People,
+    ].some((price) => price !== "" && parseFloat(price) > 0);
+
+    const isInPersonClientLocationAvailable = [
+      inPersonAtClientLocation,
+      inPeronAtClientLocationfor2People,
+      inPeronAtClientLocationfor3People,
+      inPeronAtClientLocationfor4People,
+      inPersonAtclientLocationfor15People,
+    ].some((price) => price !== "" && parseFloat(price) > 0);
+
+    const isInPersonTrainerLocationAvailable = [
+      inPersonAtTrainerLocation,
+      inPeronAtTrainerLocationfor2People,
+      inPeronAtTrainerLocationfor3People,
+      inPeronAtTrainerLocationfor4People,
+      inPersonAttrainerLocationfor15People,
+    ].some((price) => price !== "" && parseFloat(price) > 0);
 
     if (servicableLocation?.length > 0) {
       if (typeof servicableLocation === "string") {
@@ -151,6 +193,58 @@ const UserBookSessionFC = ({
     if (areaOfExpertise.length === 1) {
       setTrainingType(trainingTypeOption[0]);
     }
+
+    if (!isInPersonClientLocationAvailable) {
+      isInPersonTrainerLocationAvailable &&
+        tempTrainerData?.trainingFacility &&
+        setTrainingVenue({
+          value: "trainerLocation",
+          label: "Trainer's Location",
+        });
+    }
+
+    trainingVenueOptions = [];
+
+    if (
+      isInPersonTrainerLocationAvailable &&
+      tempTrainerData?.trainingFacility
+    ) {
+      trainingVenueOptions.push({
+        value: "trainerLocation",
+        label: "Trainer's Location",
+      });
+    }
+    if (isInPersonClientLocationAvailable && tempTrainerData?.willingToTravel) {
+      trainingVenueOptions.push({
+        value: "clientLocation",
+        label: "Your Location",
+      });
+    } else {
+      setTrainingVenue({
+        value: "trainerLocation",
+        label: "Trainer's Location",
+      });
+    }
+
+    // console.log(isVirtualSessionAvailable);
+
+    if (!isVirtualSessionAvailable) {
+      setPreferedTrainingMode("inPerson");
+    }
+
+    let tempAvailableLocation = [];
+
+    if (isVirtualSessionAvailable) {
+      tempAvailableLocation.push("virtual");
+    }
+    if (
+      isInPersonClientLocationAvailable ||
+      isInPersonTrainerLocationAvailable
+    ) {
+      tempAvailableLocation.push("inPerson");
+    }
+
+    setAvailableLocation(tempAvailableLocation);
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
   }, []);
@@ -199,31 +293,24 @@ const UserBookSessionFC = ({
       virtualSessionfor4People,
     ].some((price) => price !== "" && parseFloat(price) > 0);
 
-    // console.log(
-    //   tempSocialSession,
-    //   virtualSessionfor2People,
-    //   virtualSessionfor3People,
-    //   virtualSessionfor4People
-    // );
-
     let virtualSessionSocial = {};
 
     if (tempSocialSession) {
       if (!isNaN(virtualSessionfor2People)) {
-        virtualSessionSocial = {
+        virtualSessionSocial["2people"] = {
           label: "2 People",
           value: virtualSessionfor2People,
         };
       }
       if (!isNaN(virtualSessionfor3People)) {
-        virtualSessionSocial = {
+        virtualSessionSocial["3people"] = {
           label: "3 People",
           value: virtualSessionfor3People,
         };
       }
 
       if (!isNaN(virtualSessionfor4People)) {
-        virtualSessionSocial = {
+        virtualSessionSocial["4people"] = {
           label: "4 People",
           value: virtualSessionfor4People,
         };
@@ -236,12 +323,17 @@ const UserBookSessionFC = ({
 
     const inPersonOneOneOne = {};
 
-    if (!isNaN(inPersonAtClientLocation)) {
+    // if (tempTrainerData?.willingToTravel) {
+    if (!isNaN(inPersonAtClientLocation) && tempTrainerData?.willingToTravel) {
       inPersonOneOneOne["clientLocation"] = {
         value: inPersonAtClientLocation,
       };
     }
-    if (!isNaN(inPersonAtTrainerLocation)) {
+    // }
+    if (
+      !isNaN(inPersonAtTrainerLocation) &&
+      tempTrainerData?.trainingFacility
+    ) {
       inPersonOneOneOne["trainerLocation"] = {
         value: inPersonAtTrainerLocation,
       };
@@ -249,56 +341,87 @@ const UserBookSessionFC = ({
 
     // INPERSON SOCIAL PRICING
 
-    const inPersonSocial = {};
+    const inPersonSocial = {
+      clientLocation: {},
+      trainerLocation: {},
+    };
 
-    if (!isNaN(inPeronAtClientLocationfor2People)) {
-      inPersonSocial["clientLocation"] = {
-        value: inPeronAtClientLocationfor2People,
-        label: "2 People",
-      };
-    }
-    if (!isNaN(inPeronAtClientLocationfor3People)) {
-      inPersonSocial["clientLocation"] = {
-        value: inPeronAtClientLocationfor3People,
-        label: "3 People",
-      };
-    }
-    if (!isNaN(inPeronAtClientLocationfor4People)) {
-      inPersonSocial["clientLocation"] = {
-        value: inPeronAtClientLocationfor4People,
-        label: "4 People",
-      };
+    if (tempTrainerData?.willingToTravel) {
+      if (
+        !isNaN(inPeronAtClientLocationfor2People) &&
+        parseInt(inPeronAtClientLocationfor2People) > 0
+      ) {
+        inPersonSocial["clientLocation"]["2people"] = {
+          value: parseInt(inPeronAtClientLocationfor2People),
+          label: "2 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtClientLocationfor3People) &&
+        parseInt(inPeronAtClientLocationfor3People) > 0
+      ) {
+        inPersonSocial["clientLocation"]["3people"] = {
+          value: parseInt(inPeronAtClientLocationfor3People),
+          label: "3 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtClientLocationfor4People) &&
+        parseInt(inPeronAtClientLocationfor4People) > 0
+      ) {
+        inPersonSocial["clientLocation"]["4people"] = {
+          value: parseInt(inPeronAtClientLocationfor4People),
+          label: "4 People",
+        };
+      }
     }
 
-    if (!isNaN(inPeronAtTrainerLocationfor2People)) {
-      inPersonSocial["trainerLocation"] = {
-        value: inPeronAtTrainerLocationfor2People,
-        label: "2 People",
-      };
-    }
-    if (!isNaN(inPeronAtTrainerLocationfor3People)) {
-      inPersonSocial["trainerLocation"] = {
-        value: inPeronAtTrainerLocationfor3People,
-        label: "3 People",
-      };
-    }
-    if (!isNaN(inPeronAtTrainerLocationfor4People)) {
-      inPersonSocial["trainerLocation"] = {
-        value: inPeronAtTrainerLocationfor4People,
-        label: "4 People",
-      };
+    if (tempTrainerData?.trainingFacility) {
+      if (
+        !isNaN(inPeronAtTrainerLocationfor2People) &&
+        parseInt(inPeronAtTrainerLocationfor2People) > 0
+      ) {
+        inPersonSocial["trainerLocation"]["2people"] = {
+          value: parseInt(inPeronAtTrainerLocationfor2People),
+          label: "2 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtTrainerLocationfor3People) &&
+        parseInt(inPeronAtTrainerLocationfor3People) > 0
+      ) {
+        inPersonSocial["trainerLocation"]["3people"] = {
+          value: parseInt(inPeronAtTrainerLocationfor3People),
+          label: "3 People",
+        };
+      }
+      if (
+        !isNaN(inPeronAtTrainerLocationfor4People) &&
+        parseInt(inPeronAtTrainerLocationfor4People) > 0
+      ) {
+        inPersonSocial["trainerLocation"]["4people"] = {
+          value: parseInt(inPeronAtTrainerLocationfor4People),
+          label: "4 People",
+        };
+      }
     }
 
     // INPERSON CLASS PRICING
 
     const inPersonClass = {};
 
-    if (!isNaN(inPersonAtclientLocationfor15People)) {
+    if (
+      !isNaN(inPersonAtclientLocationfor15People) &&
+      tempTrainerData?.willingToTravel
+    ) {
       inPersonClass["clientLocation"] = {
         value: inPersonAtclientLocationfor15People,
       };
     }
-    if (!isNaN(inPersonAttrainerLocationfor15People)) {
+    if (
+      !isNaN(inPersonAttrainerLocationfor15People) &&
+      tempTrainerData?.trainingFacility
+    ) {
       inPersonClass["trainerLocation"] = {
         value: inPersonAttrainerLocationfor15People,
       };
@@ -364,12 +487,8 @@ const UserBookSessionFC = ({
   const tempTrainerData =
     selectedTrainerData?.trainerData || selectedTrainerData;
 
-  let isVirtualPresent = tempTrainerData?.preferedTrainingMode?.includes(
-    "virtual"
-  );
-  let isInPersonPresent = tempTrainerData?.preferedTrainingMode?.includes(
-    "inPerson"
-  );
+  let isVirtualPresent = availableLocation?.includes("virtual");
+  let isInPersonPresent = availableLocation?.includes("inPerson");
 
   const pricingObject = getPricingObject();
 
@@ -437,7 +556,7 @@ const UserBookSessionFC = ({
                                 ? "active"
                                 : ""
                             } ${
-                              !isVirtualPresent
+                              !isInPersonPresent
                                 ? "disable-btn pointer-none"
                                 : ""
                             }`}
@@ -564,7 +683,7 @@ const UserBookSessionFC = ({
                                 </Modal>
                               ) : null}
                               <div className="session_card_inner">
-                                <h6>
+                                <h6 className="mt-3">
                                   {`$${pricingObject.sessionOneonOne}`}
                                   <span>
                                     / Session{" "}
@@ -596,7 +715,8 @@ const UserBookSessionFC = ({
                           ) : (
                             ""
                           )}
-                          {pricingObject.virtualSessionSocial?.value ? (
+                          {Object.values(pricingObject.virtualSessionSocial)
+                            ?.length > 0 ? (
                             <div className="session_cards">
                               <div className="session_card_content">
                                 <h2>SOCIAL SESSION</h2>
@@ -606,12 +726,36 @@ const UserBookSessionFC = ({
                                   experience at lower costs.
                                 </p>
                               </div>
-                              <div className="session_card_inner">
-                                <h6>
-                                  {`$${pricingObject.virtualSessionSocial?.value}`}
+                              <div className="session_card_inner flex-column mb-4">
+                                <h6 className="mt-3">
+                                  {`$${pricingObject.virtualSessionSocial?.["2people"]?.value}`}
                                   <span>
                                     /{" "}
-                                    {`${pricingObject.virtualSessionSocial?.label}`}
+                                    {`${pricingObject.virtualSessionSocial?.["2people"]?.label}`}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
+                                  </span>
+                                </h6>
+                                <h6 className="mt-0">
+                                  {`$${pricingObject.virtualSessionSocial["3people"]?.value}`}
+                                  <span>
+                                    /{" "}
+                                    {`${pricingObject.virtualSessionSocial["3people"]?.label}`}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
+                                  </span>
+                                </h6>
+                                <h6 className="mt-0">
+                                  {`$${pricingObject.virtualSessionSocial["4people"]?.value}`}
+                                  <span>
+                                    /{" "}
+                                    {`${pricingObject.virtualSessionSocial["4people"]?.label}`}
                                     <img
                                       src={QMark}
                                       alt="icon"
@@ -654,7 +798,7 @@ const UserBookSessionFC = ({
                                 </p>
                               </div>
                               <div className="session_card_inner">
-                                <h6>
+                                <h6 className="mt-3">
                                   {`$${pricingObject?.virtualSessionClass}`}
                                   <span>
                                     / 12 People{" "}
@@ -736,7 +880,7 @@ const UserBookSessionFC = ({
                                 </Modal>
                               ) : null}
                               <div className="session_card_inner">
-                                <h6>
+                                <h6 className="mt-3">
                                   {`$${
                                     pricingObject?.inPersonOneOneOne[
                                       trainingVenue?.value
@@ -775,8 +919,9 @@ const UserBookSessionFC = ({
                           ) : (
                             ""
                           )}
-                          {pricingObject?.inPersonSocial[trainingVenue?.value]
-                            ?.value ? (
+                          {Object.values(
+                            pricingObject?.inPersonSocial[trainingVenue?.value]
+                          )?.length > 0 ? (
                             <div className="session_cards">
                               <div className="session_card_content">
                                 <h2>SOCIAL SESSION</h2>
@@ -818,19 +963,59 @@ const UserBookSessionFC = ({
                                   </div>
                                 </Modal>
                               ) : null}
-                              <div className="session_card_inner">
-                                <h6>
+                              <div className="session_card_inner  flex-column mb-4">
+                                <h6 className="mt-3">
                                   {`$${
                                     pricingObject?.inPersonSocial[
                                       trainingVenue?.value
-                                    ]?.value
+                                    ]["2people"]?.value
                                   }`}
                                   <span>
                                     /{" "}
                                     {`${
                                       pricingObject?.inPersonSocial[
                                         trainingVenue?.value
-                                      ]?.label
+                                      ]["2people"]?.label
+                                    }`}{" "}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
+                                  </span>
+                                </h6>
+                                <h6 className="mt-0">
+                                  {`$${
+                                    pricingObject?.inPersonSocial[
+                                      trainingVenue?.value
+                                    ]["3people"]?.value
+                                  }`}
+                                  <span>
+                                    /{" "}
+                                    {`${
+                                      pricingObject?.inPersonSocial[
+                                        trainingVenue?.value
+                                      ]["3people"]?.label
+                                    }`}{" "}
+                                    <img
+                                      src={QMark}
+                                      alt="icon"
+                                      onClick={() => setOpen(true)}
+                                    />
+                                  </span>
+                                </h6>
+                                <h6 className="mt-0">
+                                  {`$${
+                                    pricingObject?.inPersonSocial[
+                                      trainingVenue?.value
+                                    ]["4people"]?.value
+                                  }`}
+                                  <span>
+                                    /{" "}
+                                    {`${
+                                      pricingObject?.inPersonSocial[
+                                        trainingVenue?.value
+                                      ]["4people"]?.label
                                     }`}{" "}
                                     <img
                                       src={QMark}
@@ -908,7 +1093,7 @@ const UserBookSessionFC = ({
                                 </Modal>
                               ) : null}
                               <div className="session_card_inner">
-                                <h6>
+                                <h6 className="mt-3">
                                   {`$${
                                     pricingObject?.inPersonClass[
                                       trainingVenue?.value

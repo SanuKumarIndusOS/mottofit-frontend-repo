@@ -16,6 +16,8 @@ import { AuthApi } from "service/apiVariables";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import validate from "service/validation";
+import { Toast } from "service/toast";
+import { SocialLogin } from "component/common/SocialLogin";
 
 const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
   const history = useHistory();
@@ -84,7 +86,8 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         history.push("/trainer/about");
       })
       .catch((error) => {
-        setApiError(error.message);
+        // setApiError(error.message);
+        Toast({ type: "error", message: error.message || "Error" });
       });
     // }
   }
@@ -287,6 +290,16 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                         <span className="errorMessage">{apiError}</span>
                       )}
 
+                      <div className="or_items">
+                        <div className="hr_line"></div>
+                        <div>
+                          <p>or</p>
+                        </div>
+                        <div className="hr_line"></div>
+                      </div>
+                      <div className="social_buttons">
+                        <SocialLogin type="trainer" loginType="singup" />
+                      </div>
                       <div className="submit_button">
                         <button type="submit" onClick={handleSubmit}>
                           Continue to Account

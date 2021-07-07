@@ -1,2 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[391],{659:function(t,s,i){"use strict";i.r(s),s.default=i.p+"static/media/mixins.css.33130eef.map"}}]);
-//# sourceMappingURL=391.4a4e0102.chunk.js.map

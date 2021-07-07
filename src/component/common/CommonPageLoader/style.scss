@@ -29,6 +29,10 @@
       }
     }
   }
+
+  &.small-loader {
+    min-height: 100px;
+  }
 }
 
 .lds-spinner {

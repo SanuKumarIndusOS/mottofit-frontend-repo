@@ -9,35 +9,65 @@ import BlueArrowButton from "../../../common/BlueArrowButton";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { getTrainerSessionDetails } from "action/trainerAct";
-import { cancelSession } from "action/userAct";
+import { cancelSession, updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
 import { TrainerApi } from "../../../../service/apiVariables";
 import { api } from "../../../../service/api";
 import { Toast } from "../../../../service/toast";
+import { UserAvatar } from "component/common/UserAvatar";
+import { CommonPageLoader } from "component/common/CommonPageLoader";
 
 const TrainerSessionFC = ({
   sessionData,
   getTrainerSessionDetailsApi,
   cancelSession,
+  updateUserDetails,
 }) => {
   const [trainerSessionData, setTrainerSessionData] = useState({
     upcomingSessions: [],
     pastSessions: [],
-    onGoingSessions: [],
+    invitedSessions: [],
+  });
+
+  const [pageData, setPageData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
+  });
+
+  const [totalData, setTotalData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
   });
 
   const [isLoading, setisLoading] = useState(false);
-  useEffect(() => {
-    getAllDetails();
-  }, []);
+  const [isDataLoading, setDataLoading] = useState(true);
+  const [currentTab, setCurrentTab] = useState("upcoming");
+  // useEffect(() => {
+  //   getAllDetails(currentTab);
+  // }, []);
 
-  const getAllDetails = () => {
-    getTrainerSessionDetailsApi().then((data) => {
-      const tempSessionData = {};
-      Object.keys(data).forEach((sessionKey) => {
-        tempSessionData[sessionKey] = data[sessionKey].map(
+  const getAllDetails = (currentTab) => {
+    getTrainerSessionDetailsApi(currentTab, pageData[currentTab]).then(
+      ({ data, documentCount }) => {
+        const tempSessionData = {};
+        let sessionTypeData = {
+          invited: "invitedSessions",
+          upcoming: "upcomingSessions",
+          past: "pastSessions",
+        };
+        // console.log(data);
+
+        setTotalData((prevData) => ({
+          ...prevData,
+          [currentTab]: documentCount,
+        }));
+
+        // Object.keys(data).forEach((sessionKey) => {
+        let tempData = data?.map(
           ({
             title,
             venue,
@@ -45,6 +75,7 @@ const TrainerSessionFC = ({
             sessionStartTime,
             id,
             sessionStatus,
+            userDetail,
           }) => ({
             date: getFormatDate(sessionDate, "D"),
             month: getFormatDate(sessionDate, "MMM"),
@@ -55,15 +86,29 @@ const TrainerSessionFC = ({
             loc: venue,
             previousImg: Jenny,
             prevHeading: "Yoga with Kane",
-            prevDate: getFormatDate(sessionData, "DD MMMM YYYY"),
+            prevDate: getFormatDate(sessionStartTime, "DD MMMM YYYY", true),
             sessionStatus,
+            userDetail,
             id,
           })
         );
-      });
 
-      setTrainerSessionData(tempSessionData);
-    });
+        // console.log(tempData [sessionTypeData[currentTab]]);
+
+        setTrainerSessionData((prevData) => {
+          return {
+            ...prevData,
+            [sessionTypeData[currentTab]]: [
+              ...prevData[sessionTypeData[currentTab]],
+              ...tempData,
+            ],
+          };
+        });
+
+        setDataLoading(false);
+        // });
+      }
+    );
   };
 
   const handleSessionStatus = (trainerId, sessionStatus) => {
@@ -104,6 +149,40 @@ const TrainerSessionFC = ({
       .catch(() => setisLoading(false));
   };
 
+  const handleChange = (tab, data) => {
+    let sessionTypeData = {
+      invited: "invitedSessions",
+      upcoming: "upcomingSessions",
+      past: "pastSessions",
+    };
+
+    let currentSession = sessionTypeData[tab];
+
+    setCurrentTab(tab);
+
+    // console.log(data);
+
+    setTrainerSessionData((prevData) => {
+      // console.log(prevData);
+      if (prevData[currentSession]?.length > 0) return prevData;
+      setDataLoading(true);
+      getAllDetails(tab);
+
+      return prevData;
+    });
+  };
+
+  const handlePagination = () => {
+    setPageData((prevPageData) => ({
+      ...prevPageData,
+      [currentTab]: prevPageData[currentTab] + 1 || 0,
+    }));
+  };
+
+  useEffect(() => {
+    getAllDetails(currentTab);
+  }, [pageData]);
+
   return (
     <>
       <div className="outter_user_container">
@@ -113,30 +192,46 @@ const TrainerSessionFC = ({
               <h2>My Session</h2>
             </div>
             <div className="US_tabs_wrapper">
-              <Tabs defaultTab="overview">
+              <Tabs defaultTab="upcoming" onChange={handleChange}>
                 <TabList>
-                  <Tab tabFor="overview">Overview</Tab>
+                  {/* <Tab tabFor="overview">Overview</Tab> */}
                   <Tab tabFor="upcoming">Upcoming</Tab>
-                  <Tab tabFor="pass">Motto pass</Tab>
-                  <Tab tabFor="previous">Previous</Tab>
+                  {/* <Tab tabFor="pass">Motto pass</Tab> */}
+                  <Tab tabFor="past">Previous</Tab>
+                  {/* <Tab tabFor="ongoing">OnGoing</Tab> */}
                 </TabList>
+
                 <div className="tabPanel_outter">
                   <TabPanel tabId="overview">
-                    <TabOne
-                      datas={trainerSessionData.upcomingSessions}
-                      handleSessionStatus={handleSessionStatus}
-                      handleCancel={handleCancel}
-                      isLoading={isLoading}
-                    />
+                    {isDataLoading ? (
+                      <CommonPageLoader />
+                    ) : (
+                      <TabOne
+                        datas={trainerSessionData.upcomingSessions}
+                        handleSessionStatus={handleSessionStatus}
+                        handleCancel={handleCancel}
+                        isLoading={isLoading}
+                        handlePagination={handlePagination}
+                        pageSize={pageData["invited"]}
+                        documentSize={totalData["invited"]}
+                      />
+                    )}
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="upcoming">
-                    <TabTwo
-                      datas={trainerSessionData.upcomingSessions}
-                      handleSessionStatus={handleSessionStatus}
-                      handleCancel={handleCancel}
-                    />
+                    {isDataLoading ? (
+                      <CommonPageLoader />
+                    ) : (
+                      <TabTwo
+                        datas={trainerSessionData.upcomingSessions}
+                        handleSessionStatus={handleSessionStatus}
+                        handleCancel={handleCancel}
+                        handlePagination={handlePagination}
+                        pageSize={pageData["upcoming"]}
+                        documentSize={totalData["upcoming"]}
+                      />
+                    )}
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
@@ -145,10 +240,35 @@ const TrainerSessionFC = ({
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
-                  <TabPanel tabId="previous">
-                    <TabFour
-                      datas={trainerSessionData.pastSessions}
+                  <TabPanel tabId="past">
+                    {isDataLoading ? (
+                      <CommonPageLoader />
+                    ) : (
+                      <TabPast
+                        tabname={"Previous"}
+                        tabData={trainerSessionData.pastSessions}
+                        prevData={trainerSessionData.pastSessions}
+                        handleSessionStatus={handleSessionStatus}
+                        cancelSessionApi={handleCancel}
+                        handleChange={() => getAllDetails()}
+                        updateUserDetails={updateUserDetails}
+                        handlePagination={handlePagination}
+                        pageSize={pageData["past"]}
+                        documentSize={totalData["past"]}
+                      />
+                    )}
+                  </TabPanel>
+                </div>
+                <div className="tabPanel_outter">
+                  <TabPanel tabId="ongoing">
+                    <TabPast
+                      tabname={"OnGoing"}
+                      tabData={trainerSessionData.upcomingSessions}
+                      prevData={trainerSessionData.pastSessions}
                       handleSessionStatus={handleSessionStatus}
+                      cancelSessionApi={handleCancel}
+                      handleChange={() => getAllDetails()}
+                      updateUserDetails={updateUserDetails}
                     />
                   </TabPanel>
                 </div>
@@ -166,12 +286,17 @@ const TabOne = ({
   handleSessionStatus,
   handleCancel,
   isLoading,
+  handlePagination,
+  pageSize,
+  documentSize,
 }) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
     setVisible((prevValue) => prevValue + 1);
   };
+
+  const TotalsizeData = Math.ceil(documentSize / 10);
   return (
     <div className="tabPanel_overview d-flex">
       <div className="tabPanel_overview_left w-100">
@@ -202,6 +327,7 @@ const TabOne = ({
                               {data.loc}
                             </h5>
                           </div>
+
                           <div className="d-flex align-items-center mt-2 TP_USession_data_buttons">
                             {data.sessionStatus !== "cancelled" ? (
                               <button
@@ -220,7 +346,7 @@ const TabOne = ({
                             )}
                             {data.sessionStatus !== "completed" ? (
                               <div className="TP_USession_data_buttons mt-0">
-                                <button>Reschedule</button>
+                                {/* <button>Reschedule</button> */}
                                 <button
                                   className="text-primary"
                                   onClick={() =>
@@ -246,11 +372,11 @@ const TabOne = ({
                 <h3 className="my-5 py-5 text-center">No Data Found</h3>
               )}
             </div>
-            {datas.length > 0 ? (
-              <button onClick={setViewMore} className="viewMoreButton">
+            {datas?.length < documentSize && (
+              <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
@@ -302,12 +428,21 @@ const TabOne = ({
   );
 };
 
-const TabTwo = ({ datas = [], handleSessionStatus, handleCancel }) => {
+const TabTwo = ({
+  datas = [],
+  handleSessionStatus,
+  handleCancel,
+  handlePagination,
+  pageSize,
+  documentSize,
+}) => {
   const [visible, setVisible] = useState([3]);
 
   const setViewMore = () => {
     setVisible((prevValue) => prevValue + 1);
   };
+
+  const TotalsizeData = Math.ceil(documentSize / 10);
   return (
     <div className="tabPanel_overview d-flex">
       <div className="tabPanel_overview_left w-100">
@@ -340,7 +475,7 @@ const TabTwo = ({ datas = [], handleSessionStatus, handleCancel }) => {
                           </div>
                           {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
-                              <button>Reschedule</button>
+                              {/* <button>Reschedule</button> */}
                               <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>
@@ -368,11 +503,12 @@ const TabTwo = ({ datas = [], handleSessionStatus, handleCancel }) => {
                 <h3 className="my-5 py-5 text-center">No Data Found</h3>
               )}
             </div>
-            {datas.length > 0 ? (
-              <button onClick={setViewMore} className="viewMoreButton">
+
+            {datas?.length < documentSize && (
+              <button onClick={handlePagination} className="viewMoreButton">
                 View all Session <BlueHoverButton />
               </button>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
@@ -402,7 +538,7 @@ const TabThree = () => {
     </div>
   );
 };
-const TabFour = ({ datas = [] }) => {
+const TabFour = ({ datas = [], handlePagination }) => {
   return (
     <div className="tabPanel_overview d-flex">
       <div className="tabPanel_overview_right w-100">
@@ -440,6 +576,182 @@ const TabFour = ({ datas = [] }) => {
   );
 };
 
+const TabPast = ({
+  tabname,
+  tabData,
+  prevData,
+  cancelSessionApi,
+  invitationApi,
+  handleChange = {},
+  isDefaultCardPresent,
+  handleSessionStatus,
+  handlePagination,
+  pageSize,
+  documentSize,
+  ...restProps
+}) => {
+  const [visible, setVisible] = useState([3]);
+  const [isLoading, setisLoading] = useState(false);
+  const setViewMore = () => {
+    setVisible((prevValue) => prevValue + 1);
+  };
+
+  const handleCancel = (sessionId) => {
+    let payload = {
+      sessionId,
+      sessionStatus: "cancelled",
+    };
+    setisLoading(true);
+    cancelSessionApi(payload)
+      .then(() => {
+        setisLoading(false);
+        handleChange();
+      })
+      .catch(() => setisLoading(false));
+  };
+
+  const TotalsizeData = Math.ceil(documentSize / 10);
+
+  // console.log(documentSize);
+
+  return (
+    <div className="tabPanel_overview">
+      <div className="tabPanel_overview_left">
+        <div className="TP_overview_wrapper">
+          <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
+          <div className="TP_US_overview">
+            <div className="TP_US_overview_inner">
+              {tabData.length > 0 ? (
+                tabData?.map((data, index) => {
+                  // console.log(data, "datadata");
+                  return (
+                    <React.Fragment key={index}>
+                      <div className="TP_upcomeSession_overview">
+                        <div className="TP_USession_dates">
+                          <h4>
+                            {data.date}
+                            <span>{data.month}</span>
+                          </h4>
+                        </div>
+                        <div className="TP_USession_data">
+                          <h2
+                            style={{
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {data?.heading}
+                          </h2>
+                          <div className="TP_USession_data_icons">
+                            <h5>
+                              <img src={AvailabilityIcon} alt="icon" />
+                              {data.avaTime}
+                            </h5>
+                            <h5>
+                              <img src={LocationIcon} alt="icon" />
+                              {data.loc}
+                            </h5>
+                          </div>
+                          {tabname !== "Ongoing" && (
+                            <div className="TP_USession_data_buttons">
+                              {data.sessionStatus !== "completed" ? (
+                                <div className="TP_USession_data_buttons">
+                                  {/* <button>Reschedule</button> */}
+                                  <button onClick={() => handleCancel(data.id)}>
+                                    Cancel
+                                  </button>
+                                  <button
+                                    className="text-primary"
+                                    onClick={() =>
+                                      handleSessionStatus(data.id, "completed")
+                                    }
+                                  >
+                                    Complete
+                                  </button>
+                                </div>
+                              ) : (
+                                <div>
+                                  <p>Completed</p>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <hr />
+                    </React.Fragment>
+                  );
+                })
+              ) : (
+                <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+                  <h4>No Data Found</h4>
+                </div>
+              )}
+            </div>
+
+            {tabData?.length < documentSize && (
+              <button onClick={handlePagination} className="viewMoreButton">
+                View all Session <BlueHoverButton />
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="tabPanel_overview_right">
+        <div className="TB_overview_right">
+          <div className="TB_overview_row_two">
+            <div className="row_two_data">
+              <h2>PREVIOUS SESSIONS</h2>
+              <div className="row_two_scroll">
+                {prevData.length > 0 ? (
+                  prevData.map((data, index) => {
+                    let userProps = {
+                      profilePicture: data?.userDetail?.profilePicture,
+                      userName: `${data?.userDetail?.firstName || ""} ${
+                        data?.userDetail?.lastName || ""
+                      }`,
+                    };
+                    return (
+                      <>
+                        <div className="row_previous_data" key={index}>
+                          <div className="row_previous_avater ml-2">
+                            <UserAvatar {...userProps} className="img-md-2" />
+                          </div>
+                          <div className="row_previous_header">
+                            <h2 className="text-capitalize">{data.heading}</h2>
+                            <p>{data.prevDate}</p>
+                          </div>
+                        </div>
+                        <hr />
+                      </>
+                    );
+                  })
+                ) : (
+                  <h3 className="my-5 py-5 text-center">No Data Found</h3>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const datamonth = {
+  "01": "Jan",
+  "02": "Feb",
+  "03": "Mar",
+  "04": "Apr",
+  "05": "May",
+  "06": "Jun",
+  "07": "Jul",
+  "08": "Aug",
+  "09": "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec",
+};
+
 const mapStateToProps = (state) => ({
   sessionData: state.trainerReducer.sessionData,
 });
@@ -449,6 +761,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getTrainerSessionDetailsApi: getTrainerSessionDetails,
       cancelSession,
+      updateUserDetails,
     },
     dispatch
   );

@@ -44,8 +44,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router-dom";
+import { updateUserDetails } from "action/userAct";
 
-const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+const FindTrainerFC = ({
+  trainerQueryData,
+  updateTrainerDetails,
+  updateUserDetails,
+}) => {
   //Responsive search
   const [Calvalue, onChangeCal] = useState(new Date());
   const [IPCvalue, setIPCValue] = useState("");
@@ -87,7 +92,6 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
-    console.log(payload, "payload");
     updateTrainerDetails(payload);
     getTrainerDataByQuery(payload.query);
     setshowMenu(false);
@@ -176,6 +180,12 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
 
       updateTrainerDetails(payload);
     }
+
+    let reduxData = {
+      selectedTimes: [],
+    };
+
+    updateUserDetails(reduxData);
   }, []);
 
   const onClickHandle = () => {
@@ -436,6 +446,9 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const TriggerInPersonDropDown = () => {
     setInPersonDD(!InPersonDD);
   };
+
+  let selectedValue =
+    Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
   return (
     <div
       id="find-trainer"
@@ -481,8 +494,12 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                 onClick={() => {
                   SetLocation("In Person") && TriggerInPersonDropDown();
                 }}
+                className={`position-relative ${selectedValue ? "pt-2" : ""}`}
               >
-                <h6>{inPersonMarkup}</h6>
+                <h6 className={`${selectedValue ? "in-person-option" : ""} `}>
+                  {inPersonMarkup}
+                  <span>{selectedValue}</span>
+                </h6>
                 <div
                   className="inPerson-dd"
                   // onClick={TriggerInPersonDropDown}
@@ -532,7 +549,7 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   });
                 }}
                 selected={selectedDate}
-                dateFormat="dd/MM/yyyy"
+                dateFormat="MM/dd/yyyy"
                 minDate={new Date()}
                 showYearDropdown
                 scrollableMonthYearDropdown
@@ -616,11 +633,16 @@ const FindTrainerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             Clear All Filters
           </div>
 
-          <div className="location" onClick={()=> { setLocTrigger(!LocTrigger) }}>
-            <div className="accord_text" >
+          <div
+            className="location"
+            onClick={() => {
+              setLocTrigger(!LocTrigger);
+            }}
+          >
+            <div className="accord_text">
               Location <span className="accord_arrow"></span>
             </div>
-            <div style={{display:(LocTrigger)? "block": "none"}} >
+            <div style={{ display: LocTrigger ? "block" : "none" }}>
               {LocationVal === "virtual" ? (
                 <div className="element">
                   <div
@@ -898,6 +920,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
+      updateUserDetails,
       updateTrainerDetails,
     },
     dispatch

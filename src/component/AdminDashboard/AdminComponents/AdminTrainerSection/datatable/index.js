@@ -36,7 +36,7 @@ const DatatableClass = ({
           <th scope="row">Phone Number</th>
           <th scope="row">Location</th>
           <th scope="row">Expertise</th>
-          <th scope="row">Servicable Location</th>
+          <th scope="row">Serviceable Location</th>
           <th scope="row">Trainer Status</th>
           <th scope="row" colSpan="2">
             Actions

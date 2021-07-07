@@ -11,15 +11,25 @@ import { bindActionCreators } from "redux";
 import { Toast } from "../../../../service/toast";
 import { history } from "helpers";
 import { getFormatDate } from "service/helperFunctions";
+import { UserAvatar } from "component/common/UserAvatar";
+import { CommonPageLoader } from "component/common/CommonPageLoader";
+import BlueHoverButton from "component/common/BlueArrowButton";
 
 const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
-  const [paymentHistory, setPaymentHistory] = useState();
+  const [paymentHistory, setPaymentHistory] = useState([]);
   const [myEarning, setMyEarning] = useState();
   const [isTrainer, setIsTrainer] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [pageSize, setPageSize] = useState(0);
+  const [totalSize, setTotalSize] = useState(0);
 
   useEffect(() => {
     getTrainerPaymentHistory();
-  }, []);
+  }, [pageSize]);
+
+  const handlePagination = () => {
+    setPageSize((prevData) => prevData + 1);
+  };
 
   function getTrainerPaymentHistory() {
     const { pathname } = history.location || {};
@@ -29,18 +39,27 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
     setIsTrainer(isTrainer);
 
     let id = localStorage.getItem("user-id");
-    trainerMyEarning(id, isTrainer)
+    trainerMyEarning(id, pageSize, isTrainer)
       .then((data) => {
-        setPaymentHistory(data.history);
-        console.log(data);
+        setLoading(false);
+        setPaymentHistory((prevData) => [...prevData, ...data.history]);
+
+        setTotalSize(data.documentCount);
 
         setMyEarning(data);
       })
       .catch((error) => {
         Toast({ type: "error", message: error.message || "Error" });
-        console.log(error, "error");
+        setLoading(false);
       });
   }
+
+  const totalSizeData = totalSize / 10;
+
+  const showPagination =
+    pageSize < totalSizeData && paymentHistory?.length < totalSize;
+
+  // console.log(totalSize, totalSizeData);
 
   return (
     <>
@@ -52,6 +71,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                 <h2>{`${isTrainer ? "My Earnings" : "Payment History"}`}</h2>
               </div>
             </div>
+
             {isTrainer && (
               <div className="earn_wrapper">
                 <div className="earn_graph">
@@ -104,40 +124,32 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="earn_charts">
-                                    <div className="outter_chart_grid">
-                                        <div className="chart_flex">
-                                            <div className="chart_contents">
-                                                <h3>
-                                                    Here’s what the last quarter
-                                                    looked like!
-                                                </h3>
-                                                <p>
-                                                    Want to change your payout
-                                                    method? Head to Settings
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="chart_section">
-                                            chart
-                                        </div>
-                                    </div>
-                                </div> */}
                 </div>
               </div>
             )}
 
-            <TransactionSection
-              paymentHistory={paymentHistory}
-              isTrainer={isTrainer}
-            />
+            {isLoading ? (
+              <CommonPageLoader />
+            ) : (
+              <TransactionSection
+                paymentHistory={paymentHistory}
+                isTrainer={isTrainer}
+                handlePagination={handlePagination}
+                showPagination={showPagination}
+              />
+            )}
           </div>
         </div>
       </div>
     </>
   );
 };
-const TransactionSection = ({ paymentHistory, isTrainer }) => {
+const TransactionSection = ({
+  paymentHistory,
+  isTrainer,
+  handlePagination,
+  showPagination,
+}) => {
   return (
     <>
       <div className="outter_ts">
@@ -159,18 +171,26 @@ const TransactionSection = ({ paymentHistory, isTrainer }) => {
 
                   if (data?.createdAt)
                     date = getFormatDate(data?.createdAt, "YYYY-MM-DD");
+
+                  let userProps = {
+                    profilePicture:
+                      data?.trainerDetail?.profilePicture ||
+                      data?.userDetail?.profilePicture,
+                    userName: `${
+                      data?.userDetail?.firstName ||
+                      data?.trainerDetail?.firstName ||
+                      ""
+                    } ${
+                      data?.userDetail?.lastName ||
+                      data?.trainerDetail?.lastName ||
+                      ""
+                    }`,
+                  };
                   return (
                     <div className="ts_wrapper" key={index}>
                       <div className="ts_card row no-gutters">
-                        <div className="card_profile col-4">
-                          <img
-                            src={
-                              data?.trainerDetail?.profilePicture ||
-                              data?.userDetail?.profilePicture ||
-                              Profile
-                            }
-                            className="profile_card_img"
-                          />
+                        <div className="card_profile col-3">
+                          <UserAvatar {...userProps} className="img-md-2" />
                           <div className="profile_card_content">
                             <h4 className="text-uppercase">
                               {!isTrainer ? "Trainer" : "Client"}
@@ -188,7 +208,7 @@ const TransactionSection = ({ paymentHistory, isTrainer }) => {
                             </div>
                           </div>
                         </div>
-                        <div className="card_transaction col-2">
+                        <div className="card_transaction col-3">
                           <div className="transaction_card_content">
                             <h4>Transaction Date</h4>
                             <div className="wrap_content_ts">
@@ -238,6 +258,13 @@ const TransactionSection = ({ paymentHistory, isTrainer }) => {
                 <h5 className="my-4 text-center">Data not found</h5>
               )}
             </div>
+            {showPagination && (
+              <div className="d-flex align-items-center justify-content-end py-5">
+                <button onClick={handlePagination} className="viewMoreButton">
+                  View all Payments <BlueHoverButton />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

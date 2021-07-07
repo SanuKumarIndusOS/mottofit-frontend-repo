@@ -190,10 +190,12 @@
             justify-content: center;
             .session_cards {
               width: 355px;
-              height: 425px;
+              height: 100%;
               background-color: #f6f6f6;
               box-shadow: 0px 3px 12px #1616160d;
               opacity: 1;
+              display: flex;
+              flex-direction: column;
               .session_card_content {
                 padding: 2em 2em 0 2em;
                 h2 {
@@ -219,6 +221,7 @@
                 display: flex;
                 justify-content: space-between;
                 padding: 0 0.4em 0 2em;
+                position: relative;
 
                 h6 {
                   margin-top: 2em;
@@ -248,6 +251,9 @@
                   justify-content: flex-end;
                   width: 120px;
                   height: 123px;
+                  position: absolute;
+                  right: 0;
+                  top: 2rem;
                 }
               }
             }
@@ -269,6 +275,7 @@
               line-height: 22px;
               font-weight: bold;
               font-family: "Montserrat", sans-serif;
+              margin-top: auto;
             }
           }
         }
@@ -327,7 +334,7 @@
     width: 100%;
     .seesion_inner_container {
       .link_wrapper {
-       display: none;
+        display: none;
       }
       .session_inner_wrapper {
         .session_tabs {

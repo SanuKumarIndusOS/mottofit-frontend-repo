@@ -7,12 +7,13 @@ import { Toast } from "../service/toast";
 import {
   updatePersonTyping,
   resetChannelDetails,
+  updateGlobalMessagingDetails,
 } from "../action/messagingAct";
 
 const Chat = require("twilio-chat");
 
 export default class TwilioMessaging {
-  constructor(handler, getState) {
+  constructor(handler, getState, callback) {
     this.getState = getState;
 
     this.handler = handler;
@@ -20,6 +21,8 @@ export default class TwilioMessaging {
     this.activeChannel = null;
 
     this.client = null;
+
+    this.callbackApi = callback;
 
     this.initClient();
   }
@@ -52,9 +55,9 @@ export default class TwilioMessaging {
 
     // LISTEN FOR GLOBAL MESSAGES
 
-    // client.on("messageAdded", async (message) => {
-    //   await this.handler(this.onMessagedAdded(message));
-    // });
+    client.on("messageAdded", async (message) => {
+      this.globalMessage(message);
+    });
 
     // LISTEN FOR PERSON WHOSE ARE TYPING
     client.on("typingStarted", (participant) => {
@@ -81,6 +84,10 @@ export default class TwilioMessaging {
       const token = await this.getToken();
       client.updateToken(token);
     });
+  };
+
+  globalMessage = (message) => {
+    updateGlobalMessagingDetails(message)(this.handler, this.getState);
   };
 
   joinChannelByID = async (uniqueChannelId) => {

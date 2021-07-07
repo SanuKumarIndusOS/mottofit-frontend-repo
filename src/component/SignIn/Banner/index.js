@@ -21,6 +21,8 @@ import { history, nextPathReRouter } from "helpers";
 import validate from "service/validation";
 import { updateUserDetails } from "action/userAct";
 import { Toast } from "../../../service/toast";
+import { GoogleLoginButton } from "../../common/SocialLogin/GoogleLoginButton";
+import { SocialLogin } from "component/common/SocialLogin";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
@@ -228,15 +230,19 @@ const SignInFC = ({
                     </div>
 
                     <div className="social_buttons">
-                      <button className="facebook-auth">
+                      {/* <button className="facebook-auth">
                         <img src={Facebook} alt="icon" />
                         Sign In with Facebook
-                      </button>
+                      </button> */}
 
-                      <button className="google-auth">
+                      <SocialLogin loginType="login" />
+
+                      {/* <GoogleLoginButton /> */}
+
+                      {/* <button className="google-auth">
                         <img src={Google} alt="icon" />
                         Sign In with Google
-                      </button>
+                      </button> */}
                     </div>
                     <div className="submit_button">
                       <button

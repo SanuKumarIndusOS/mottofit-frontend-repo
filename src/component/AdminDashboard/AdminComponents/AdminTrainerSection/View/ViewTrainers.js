@@ -405,7 +405,7 @@ const ViewTrainersClass = (props) => {
                                                         />
                                                         <h4>
                                                             {" "}
-                                                            Servicable Location:{" "}
+                                                            Serviecable Location:{" "}
                                                             {TrainerViewData.servicableLocation
                                                                 ? TrainerViewData[
                                                                       "servicableLocation"

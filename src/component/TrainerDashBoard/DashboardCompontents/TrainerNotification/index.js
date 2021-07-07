@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { Tabs, Tab, TabPanel, TabList } from "react-web-tabs";
 import "react-web-tabs/dist/react-web-tabs.css";
@@ -7,6 +7,20 @@ import AvailabilityIcon from "assets/files/TrainerDashboard/Message/Availability
 import CloseIcon from "assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 const TrainerNotification = () => {
+  const [allNotificationData, setAllNotificationData] = useState([]);
+
+  const [unReadedNotificationData, setUnreadedNotificationData] = useState([]);
+
+  useEffect(() => {
+    setAllNotificationData(MessageData);
+  }, []);
+
+  const handleNotificationClose = (index) => {
+    const tempData = [...allNotificationData].filter((_, i) => i !== index);
+
+    setAllNotificationData(tempData);
+  };
+
   return (
     <>
       <div className="user_notify_outter_container">
@@ -28,10 +42,13 @@ const TrainerNotification = () => {
                 </TabList>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="all">
-                    <MessageTemp />
+                    <MessageTemp
+                      data={allNotificationData}
+                      onClose={handleNotificationClose}
+                    />
                   </TabPanel>
                   <TabPanel tabId="unread">
-                    <MessageTemp />
+                    <MessageTemp data={unReadedNotificationData} />
                   </TabPanel>
                 </div>
               </Tabs>
@@ -43,7 +60,7 @@ const TrainerNotification = () => {
   );
 };
 
-const MessageTemp = () => {
+const MessageTemp = ({ data, onClose }) => {
   const [visiable, setVisiable] = React.useState(3);
   const handleMoreMessage = () => {
     setVisiable((prevValue) => prevValue + 1);
@@ -52,35 +69,48 @@ const MessageTemp = () => {
     <>
       <div className="notify_bx">
         <div className="notify_box_container">
-          {MessageData.slice(0, visiable).map((messageData, index) => {
-            return (
-              <div className="notify_box" key={index}>
-                <div className="closeIcon">
-                  <img src={CloseIcon} alt="icon" />
-                </div>
-                <div className="notify_inner_box">
-                  <div className="notify_profile">
-                    <img src={messageData.img} alt="icon" />
+          {data?.length > 0 ? (
+            data.slice(0, visiable).map((messageData, index) => {
+              return (
+                <div className="notify_box" key={index}>
+                  <div className="closeIcon">
+                    <img
+                      src={CloseIcon}
+                      alt="icon"
+                      onClick={() => onClose(index)}
+                      className="cursor-pointer"
+                    />
                   </div>
-                  <div className="notify_message">
-                    <h6>
-                      {messageData.message}
-                      <span>{messageData.click}</span> to view your session
-                      details.
-                    </h6>
-                    <div className="notify_time">
-                      <img src={AvailabilityIcon} alt="icon" />
-                      <p>{messageData.dates}</p>
+                  <div className="notify_inner_box">
+                    <div className="notify_profile">
+                      <img src={messageData.img} alt="icon" />
+                    </div>
+                    <div className="notify_message">
+                      <h6>
+                        {messageData.message}
+                        <span>{messageData.click}</span> to view your session
+                        details.
+                      </h6>
+                      <div className="notify_time">
+                        <img src={AvailabilityIcon} alt="icon" />
+                        <p>{messageData.dates}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+              <h2>No Notifications</h2>
+            </div>
+          )}
         </div>
-        <button onClick={handleMoreMessage}>
-          View More <BlueHoverButton />{" "}
-        </button>
+        {data.length > 5 && (
+          <button onClick={handleMoreMessage}>
+            View More <BlueHoverButton />{" "}
+          </button>
+        )}
       </div>
     </>
   );

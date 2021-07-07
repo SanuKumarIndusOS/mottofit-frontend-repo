@@ -12,32 +12,114 @@ import BlueHoverButton from "../../../common/BlueArrowButton";
 import { history } from "helpers";
 import { useEffect } from "react";
 import moment from "moment";
-import { userSession, cancelSession, updateUserDetails } from "action/userAct";
+import {
+  userSession,
+  cancelSession,
+  updateUserDetails,
+  invitationSession,
+} from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "../../../../service/toast";
+import { api } from "service/api";
+import { PaymentApi } from "service/apiVariables";
+import { UserAvatar } from "component/common/UserAvatar";
+import { CommonPageLoader } from "component/common/CommonPageLoader";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
     pastSessions: [],
     onGoingSessions: [],
+    invitedSessions: [],
   });
 
+  const [pageData, setPageData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
+  });
+  const [totalData, setTotalData] = useState({
+    upcoming: 0,
+    past: 0,
+    invited: 0,
+  });
+
+  const [isDefaultCardPresent, setDefaultCard] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [currentTab, setCurrentTab] = useState("invited");
+
   useEffect(() => {
-    _userSession();
+    getUserPaymentDetails();
     window.scrollTo(0, 0);
   }, []);
-  const _userSession = () => {
+  const _userSession = (type, isPagination = false) => {
     props
-      .userSession()
-      .then((data) => {
-        setUserData(data);
+      .userSession(type, pageData[currentTab])
+      .then(({ data, documentCount }) => {
+        let sessionTypeData = {
+          invited: "invitedSessions",
+          upcoming: "upcomingSessions",
+          past: "pastSessions",
+        };
+        setTotalData((prevData) => ({ ...prevData, [type]: documentCount }));
+
+        setUserData((prevData) => {
+          let replaceData = [...prevData[sessionTypeData[type]], ...data];
+          return {
+            ...prevData,
+            [sessionTypeData[type]]: !isPagination ? [...data] : replaceData,
+          };
+        });
+
+        setLoading(false);
       })
       .catch((error) => {
         Toast({ type: "error", message: error.message || "Error" });
+        setLoading(false);
       });
   };
+
+  const getUserPaymentDetails = () => {
+    const { getPaymentMethods } = PaymentApi;
+
+    api({ ...getPaymentMethods }).then(({ data }) => {
+      const { default: defaultCard } = data[0] || {};
+
+      setDefaultCard(defaultCard);
+    });
+  };
+
+  const handleChange = (tab, data) => {
+    let sessionTypeData = {
+      invited: "invitedSessions",
+      upcoming: "upcomingSessions",
+      past: "pastSessions",
+    };
+
+    let currentSession = sessionTypeData[tab];
+
+    setCurrentTab(tab);
+
+    setUserData((prevData) => {
+      if (prevData[currentSession]?.length > 0) return prevData;
+      setLoading(true);
+      _userSession(tab);
+
+      return prevData;
+    });
+  };
+
+  const handlePagination = () => {
+    setPageData((prevPageData) => ({
+      ...prevPageData,
+      [currentTab]: prevPageData[currentTab] + 1 || 0,
+    }));
+  };
+
+  useEffect(() => {
+    _userSession(currentTab, true);
+  }, [pageData]);
 
   return (
     <div className="outter_user_container">
@@ -47,35 +129,57 @@ const UserSessionClass = (props) => {
             <h2>My Session</h2>
           </div>
           <div className="US_tabs_wrapper">
-            <Tabs defaultTab="overview">
+            <Tabs
+              defaultTab="invited"
+              onChange={(tab) => {
+                handleChange(tab, userData);
+              }}
+            >
               <TabList>
-                <Tab tabFor="overview">Overview</Tab>
+                <Tab tabFor="invited">Invited</Tab>
                 <Tab tabFor="upcoming">Upcoming</Tab>
-                <Tab tabFor="pass">Motto pass</Tab>
-                <Tab tabFor="previous">Previous</Tab>
+                {/* <Tab tabFor="pass">Motto pass</Tab> */}
+                <Tab tabFor="past">Previous</Tab>
+                {/* <Tab tabFor="ongoing">Ongoing</Tab> */}
               </TabList>
               <div className="tabPanel_outter">
-                <TabPanel tabId="overview">
-                  <TabOne
-                    tabname={"Overview"}
-                    tabData={userData.upcomingSessions}
-                    prevData={userData.pastSessions}
-                    cancelSessionApi={props.cancelSession}
-                    handleChange={() => _userSession()}
-                    {...props}
-                  />
+                <TabPanel tabId="invited">
+                  {isLoading ? (
+                    <CommonPageLoader />
+                  ) : (
+                    <TabOne
+                      tabname={"Invited"}
+                      tabData={userData.invitedSessions}
+                      prevData={userData.pastSessions}
+                      cancelSessionApi={props.cancelSession}
+                      invitationApi={props.invitationSession}
+                      handleChange={() => _userSession("invited")}
+                      isDefaultCardPresent={isDefaultCardPresent}
+                      handlePagination={handlePagination}
+                      pageSize={pageData["invited"]}
+                      documentSize={totalData["invited"]}
+                      {...props}
+                    />
+                  )}
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
                 <TabPanel tabId="upcoming">
-                  <TabOne
-                    tabname={"Upcoming"}
-                    tabData={userData.upcomingSessions}
-                    prevData={userData.pastSessions}
-                    cancelSessionApi={props.cancelSession}
-                    handleChange={() => _userSession()}
-                    {...props}
-                  />
+                  {isLoading ? (
+                    <CommonPageLoader />
+                  ) : (
+                    <TabOne
+                      tabname={"Upcoming"}
+                      tabData={userData.upcomingSessions}
+                      prevData={userData.pastSessions}
+                      cancelSessionApi={props.cancelSession}
+                      handleChange={() => _userSession("upcoming")}
+                      handlePagination={handlePagination}
+                      pageSize={pageData["upcoming"]}
+                      documentSize={totalData["upcoming"]}
+                      {...props}
+                    />
+                  )}
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
@@ -91,13 +195,33 @@ const UserSessionClass = (props) => {
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
-                <TabPanel tabId="previous">
+                <TabPanel tabId="past">
+                  {isLoading ? (
+                    <CommonPageLoader />
+                  ) : (
+                    <TabOne
+                      tabname={"Previous"}
+                      tabData={userData.pastSessions}
+                      prevData={userData.pastSessions}
+                      cancelSessionApi={props.cancelSession}
+                      handleChange={() => _userSession("past")}
+                      handlePagination={handlePagination}
+                      pageSize={pageData["past"]}
+                      documentSize={totalData["past"]}
+                      {...props}
+                    />
+                  )}
+                </TabPanel>
+              </div>
+              <div className="tabPanel_outter">
+                <TabPanel tabId="ongoing">
                   <TabOne
-                    tabname={"Previous"}
-                    tabData={userData.pastSessions}
+                    tabname={"OnGoing"}
+                    tabData={userData.onGoingSessions}
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
+                    handlePagination={handlePagination}
                     {...props}
                   />
                 </TabPanel>
@@ -115,13 +239,18 @@ const TabOne = ({
   tabData,
   prevData,
   cancelSessionApi,
+  invitationApi,
   handleChange = {},
+  isDefaultCardPresent,
+  handlePagination,
+  pageSize,
+  documentSize,
   ...restProps
 }) => {
-  const [visible, setVisible] = useState([3]);
+  const [visible, setVisible] = useState([10]);
   const [isLoading, setisLoading] = useState(false);
   const setViewMore = () => {
-    setVisible((prevValue) => prevValue + 1);
+    // setVisible((prevValue) => prevValue + 1);
   };
 
   const handleCancel = (sessionId) => {
@@ -136,6 +265,33 @@ const TabOne = ({
         handleChange();
       })
       .catch(() => setisLoading(false));
+  };
+
+  const handleInvitation = (sessionId, action, paidByUser) => {
+    let payload = {
+      sessionId,
+      acceptance: action,
+    };
+    setisLoading(true);
+
+    if (!isDefaultCardPresent && action && !paidByUser) {
+      history.push("/users/dashboard/settings/profile");
+      return Toast({
+        type: "info",
+        message: "User needs to add default card to proceed futher",
+      });
+    }
+
+    invitationApi(payload)
+      .then(() => {
+        setisLoading(false);
+        handleChange();
+        Toast({ type: "success", message: "success" });
+      })
+      .catch((err) => {
+        setisLoading(false);
+        Toast({ type: "error", message: err.message || "Error" });
+      });
   };
 
   const handleAddFriends = (data) => {
@@ -194,6 +350,20 @@ const TabOne = ({
     });
   };
 
+  const handleTrainerRoute = (trainerId) => {
+    let urlPath = "trainer/profile/";
+
+    let host = `${window.location.host}`;
+
+    let protocol = `${window.location.protocol}`;
+
+    let fullURLPath = `${protocol}//${host}/${urlPath}${trainerId}`;
+
+    trainerId && window.open(fullURLPath);
+  };
+
+  // const TotalsizeData = Math.ceil(documentSize / 10);
+
   return (
     <div className="tabPanel_overview">
       <div className="tabPanel_overview_left">
@@ -201,8 +371,9 @@ const TabOne = ({
           <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
-              {tabData.slice(0, visible).map((data, index) => {
+              {tabData?.map((data, index) => {
                 // console.log(data, "datadata");
+
                 return (
                   <React.Fragment key={index}>
                     <div className="TP_upcomeSession_overview">
@@ -220,7 +391,7 @@ const TabOne = ({
                             textTransform: "capitalize",
                           }}
                         >
-                          {data.activity}&nbsp;
+                          {data?.activity}&nbsp;
                           <span
                             style={{
                               textTransform: "lowerCase",
@@ -234,7 +405,7 @@ const TabOne = ({
                               textTransform: "capitalize",
                             }}
                           >
-                            {data.trainerDetail.firstName}
+                            {data?.trainerDetail?.firstName}
                           </h2>
                         </h2>
                         <div className="TP_USession_data_icons">
@@ -244,43 +415,130 @@ const TabOne = ({
                           </h5>
                           <h5>
                             <img src={LocationIcon} alt="icon" />
-                            {Data[0].loc}
+                            {data?.venue}
                           </h5>
                         </div>
-                        <div className="TP_USession_data_buttons">
-                          <button>Reschedule</button>
-                          {/* {tabname !== "Previous" && (
-                            <> */}
-                          {data.sessionStatus !== "cancelled" ? (
-                            <>
-                              {tabname !== "Previous" ? (
+                        {tabname !== "OnGoing" && (
+                          <div className="TP_USession_data_buttons">
+                            {tabname === "Invited" ? (
+                              <>
+                                {data.acceptance ? (
+                                  <>
+                                    <span className="text-black mr-4">
+                                      Invited session
+                                    </span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      disabled={isLoading}
+                                      onClick={() =>
+                                        handleInvitation(data.id, false)
+                                      }
+                                    >
+                                      Decline
+                                    </button>
+                                    <button
+                                      disabled={isLoading}
+                                      onClick={() =>
+                                        handleInvitation(
+                                          data.id,
+                                          true,
+                                          data.paidByUser
+                                        )
+                                      }
+                                      className="text-success"
+                                    >
+                                      Accept
+                                    </button>
+                                  </>
+                                )}
+
                                 <button
                                   disabled={isLoading}
-                                  onClick={() => handleCancel(data.id)}
+                                  onClick={() =>
+                                    handleTrainerRoute(data.trainerId)
+                                  }
+                                  className="text-primary"
                                 >
-                                  Cancel
+                                  View Trainer
                                 </button>
-                              ) : (
-                                ""
-                              )}
-                            </>
-                          ) : (
-                            <button className="text-danger" disabled={true}>
-                              Cancelled
-                            </button>
-                          )}
-                          {/* </>
+                              </>
+                            ) : (
+                              <>
+                                {data.sessionStatus === "completed" ? (
+                                  <button
+                                    className="text-primary"
+                                    disabled={true}
+                                  >
+                                    Completed
+                                  </button>
+                                ) : (
+                                  <>
+                                    {!data.asFriend ? (
+                                      <>
+                                        {data.sessionStatus !== "cancelled" ? (
+                                          <>
+                                            {tabname !== "Previous" ? (
+                                              <button
+                                                disabled={isLoading}
+                                                onClick={() =>
+                                                  handleCancel(data.id)
+                                                }
+                                              >
+                                                Cancel
+                                              </button>
+                                            ) : (
+                                              ""
+                                            )}
+                                          </>
+                                        ) : (
+                                          <button
+                                            className="text-danger"
+                                            disabled={true}
+                                          >
+                                            Cancelled
+                                          </button>
+                                        )}
+                                      </>
+                                    ) : (
+                                      <div className="d-flex align-items-center">
+                                        <span className="text-black mr-4">
+                                          Invited session
+                                        </span>
+                                        <button
+                                          disabled={isLoading}
+                                          onClick={() =>
+                                            handleTrainerRoute(data.trainerId)
+                                          }
+                                          className="text-primary"
+                                        >
+                                          View Trainer
+                                        </button>
+                                      </div>
+                                    )}
+                                  </>
+                                )}
+                              </>
+                            )}
+
+                            {/* </>
                           )} */}
 
-                          {data.trainingType !== "1on1" && (
-                            <div className="button_boarder">
-                              <button onClick={() => handleAddFriends(data)}>
-                                Add Friends{" "}
-                              </button>
-                              <img src={ArrowNext} alt="icon" />
-                            </div>
-                          )}
-                        </div>
+                            {data.trainingType !== "1on1" &&
+                              !data.asFriend &&
+                              tabname !== "Previous" && (
+                                <div className="button_boarder">
+                                  <button
+                                    onClick={() => handleAddFriends(data)}
+                                  >
+                                    Add Friends{" "}
+                                  </button>
+                                  <img src={ArrowNext} alt="icon" />
+                                </div>
+                              )}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <hr />
@@ -288,15 +546,17 @@ const TabOne = ({
                 );
               })}
             </div>
-            <button onClick={setViewMore} className="viewMoreButton">
-              View all Session <BlueHoverButton />
-            </button>
+            {tabData?.length < documentSize && (
+              <button onClick={handlePagination} className="viewMoreButton">
+                View all Session <BlueHoverButton />
+              </button>
+            )}
           </div>
         </div>
       </div>
       <div className="tabPanel_overview_right">
         <div className="TB_overview_right">
-          <div className="TB_overview_row_one">
+          {/* <div className="TB_overview_row_one">
             <div className="row_one_data">
               <h2>Want to Do More for Less?</h2>
               <p>
@@ -307,17 +567,24 @@ const TabOne = ({
                 Get A pass <BlueArrowButton />{" "}
               </Link>
             </div>
-          </div>
+          </div> */}
           <div className="TB_overview_row_two">
             <div className="row_two_data">
               <h2>PREVIOUS SESSIONS</h2>
               <div className="row_two_scroll">
-                {prevData.map((data, index) => {
+                {prevData?.map((data, index) => {
+                  let userProps = {
+                    profilePicture: data?.trainerDetail?.profilePicture,
+                    userName: `${data?.trainerDetail?.firstName || ""} ${
+                      data?.trainerDetail?.lastName || ""
+                    }`,
+                  };
                   return (
                     <>
                       <div className="row_previous_data" key={index}>
-                        <div className="row_previous_avater">
-                          <img src={Jenny} alt="profile" />
+                        <div className="row_previous_avater ml-2">
+                          <UserAvatar {...userProps} className="img-md-2" />
+                          {/* <img src={Jenny} alt="profile" /> */}
                         </div>
                         <div className="row_previous_header">
                           <h2
@@ -344,7 +611,7 @@ const TabOne = ({
                               {data.trainerDetail.firstName}
                             </h2>
                           </h2>
-                          {/* <h2>{`${data.activity} with ${data.trainerDetail["firstName"]}`}</h2> */}
+
                           <p>{`${data.sessionDate.substr(8, 2)} ${
                             datamonth[data.sessionDate.substr(5, 2)]
                           } ${data.sessionDate.substr(0, 4)}`}</p>
@@ -445,6 +712,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       userSession,
       cancelSession,
+      invitationSession,
       updateUserDetails,
     },
     dispatch

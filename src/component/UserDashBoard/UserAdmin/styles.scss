@@ -139,7 +139,8 @@
     }
     .ud_watermark {
       position: relative;
-      top: 120px;
+      // top: 120px;
+      bottom: 0;
     }
   }
   .admin_content {

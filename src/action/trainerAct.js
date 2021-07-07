@@ -32,19 +32,26 @@ export const getTrainerDetails = () => (dispatch, getState, { api }) => {
   });
 };
 
-export const getTrainerSessionDetails = () => (dispatch, getState, { api }) => {
+export const getTrainerSessionDetails = (type, pageSize) => (
+  dispatch,
+  getState,
+  { api }
+) => {
   return new Promise((resolve, reject) => {
     const { getTrainerSessionApi } = TrainerApi;
 
+    getTrainerSessionApi.sessionType = type || "invited";
+    getTrainerSessionApi.pageSize = pageSize || 0;
+
     api({ ...getTrainerSessionApi })
-      .then(({ data }) => {
-        console.log(data);
+      .then(({ data, documentCount }) => {
+        // console.log(data);
         dispatch({
           type: TrainerActionType.updateTrainerDetails,
           payload: { sessionData: data },
         });
 
-        resolve(data);
+        resolve({ data, documentCount });
       })
       .catch((err) => {
         reject(err);
@@ -153,12 +160,20 @@ export const addTrainerSlotApi = (body) => (dispatch, getState, { api }) => {
 };
 
 //trainer Channel
-export const trainerChannel = () => (dispatch, getState, { api }) => {
+export const trainerChannel = (sessionType, pageSize) => (
+  dispatch,
+  getState,
+  { api }
+) => {
   return new Promise((resolve, reject) => {
     const { trainerChannel } = TrainerApi;
 
     trainerChannel.id =
       parseInt(localStorage.getItem("type")) === 3 ? "user" : "trainer";
+
+    trainerChannel.sessionType = sessionType;
+
+    trainerChannel.pageSize = pageSize || 0;
     api({ ...trainerChannel })
       .then(({ data }) => {
         resolve(data);
@@ -170,7 +185,7 @@ export const trainerChannel = () => (dispatch, getState, { api }) => {
 };
 
 //trainer My Earning
-export const trainerMyEarning = (id, isTrainer) => (
+export const trainerMyEarning = (id, pageSize, isTrainer) => (
   dispatch,
   getState,
   { api }
@@ -183,6 +198,7 @@ export const trainerMyEarning = (id, isTrainer) => (
     let currentApi = isTrainer ? trainerMyEarning : userPaymentHistoryApi;
 
     currentApi.id = id;
+    currentApi.pageSize = pageSize;
     // trainerMyEarning.trainerId = id;
     api({ ...currentApi })
       .then(({ data }) => {

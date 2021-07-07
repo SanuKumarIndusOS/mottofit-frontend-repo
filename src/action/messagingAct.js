@@ -52,9 +52,98 @@ export const updateMessagingDetails = (payload) => (dispatch) => {
   });
 };
 
-export const initClientDispatch = () => (dispatch, getState) => {
+export const updateGlobalMessagingDetails = (message) => (
+  dispatch,
+  getState
+) => {
+  const currentMesasgedChannelId = message?.channel?.sid;
+  const currentMesasge = message?.state?.body;
+  const currentMesasgeAuthor = message?.state?.author;
+  const {
+    pastSessions,
+    upcomingSessions,
+    adminMessages,
+    invitedSessions,
+  } = getState().messagingReducer;
+
+  let tempPastSessions = [...pastSessions];
+  let tempUpcomingSessions = [...upcomingSessions];
+  let tempInvitedSessions = [...invitedSessions];
+  let tempAdminSession = [...adminMessages];
+  const currentPastSessions = handleChannelMessage(
+    tempPastSessions,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
+  const currentUpcomingSessions = handleChannelMessage(
+    tempUpcomingSessions,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
+  const currentInvitedSessions = handleChannelMessage(
+    tempInvitedSessions,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
+
+  const currentAdminSessions = handleChannelMessage(
+    tempAdminSession,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
+
+  let payload = {
+    pastSessions: currentPastSessions,
+    upcomingSessions: currentUpcomingSessions,
+    adminMessages: currentAdminSessions,
+    invitedSessions: currentInvitedSessions,
+  };
+
+  let messageLeftDOMs = document.getElementsByClassName("message_left");
+  [...messageLeftDOMs]?.forEach((dom) => dom?.scrollTo(0, 0));
+  dispatch({
+    type: MessagingActionType.UPDATE_MESSAGING_DETAILS,
+    payload,
+  });
+};
+
+export const initClientDispatch = (callback) => (dispatch, getState) => {
   dispatch({
     type: MessagingActionType.UPDATE_CLIENT_INSTANCE,
-    payload: new ChatClientInstance(dispatch, getState),
+    payload: new ChatClientInstance(dispatch, getState, callback),
   });
+};
+
+const handleChannelMessage = (
+  channelData,
+  currentMesasgedChannelId,
+  currentMesasge,
+  author
+) => {
+  let tempChannelData = [...channelData].map((data) => {
+    let CurrentChannelData = { ...data };
+
+    if (data?.channelId === currentMesasgedChannelId) {
+      CurrentChannelData["message"]["body"] = currentMesasge;
+      CurrentChannelData["message"]["date_updated"] = new Date().toISOString();
+      CurrentChannelData["message"]["from"] = author;
+    }
+
+    return { ...CurrentChannelData };
+  });
+
+  // console.log(tempChannelData, channelData);
+
+  tempChannelData = tempChannelData.sort((channel1, channel2) => {
+    return (
+      new Date(channel2?.message?.date_updated || 1950) -
+      new Date(channel1?.message?.date_updated || 1950)
+    );
+  });
+
+  return [...tempChannelData];
 };

@@ -495,6 +495,8 @@ function TrainerCardDashboard(props) {
           <textarea
             value={trainerCardData.description}
             onChange={(e) => {
+              const tempValue = e.target.value;
+              if (tempValue?.length > 100) return;
               setTrainerCardData({
                 ...trainerCardData,
                 description: e.target.value,
@@ -868,7 +870,7 @@ function TrainerCardDashboard(props) {
         </div>
         <div className="card_submit">
           <button onClick={() => handleSubmit()}>
-            Continue To profile <ArrowHoverBlacked />
+            Save Changes <ArrowHoverBlacked />
           </button>
         </div>
       </div>

@@ -16,6 +16,13 @@ import { api } from "service/api";
 import moment from "moment";
 import { findDatesValid } from "service/helperFunctions";
 import { Toast } from "../../../../service/toast";
+import CardForm from "component/UserBookSession/UserPayments/subcomponents/CardForm";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import config from "config";
+
+const stripePromise = loadStripe(config.stripeUrl);
+
 const options = [
   { label: "Palm Beach", value: "Palm Beach", name: "serviceableLocation" },
   {
@@ -45,6 +52,8 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [changeCard, setChangeCard] = useState(true);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const fileInputRef = useRef();
 
   const getUserPaymentDetails = () => {
@@ -52,6 +61,8 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
 
     api({ ...getPaymentMethods }).then(({ data }) => {
       const { type } = data[0] || {};
+
+      if (type) setChangeCard(false);
 
       setPaymentMethod(type);
     });
@@ -84,7 +95,7 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
         setUserData(tempData);
       })
       .catch((err) => {
-        Toast({ type: "success", message: err.message || "Error" });
+        Toast({ type: "error", message: err.message || "Error" });
       });
   }
 
@@ -222,6 +233,7 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
     api({ ...editUserData })
       .then((data) => {
         getUserProfileData();
+        setChangeCard(false);
         Toast({ type: "success", message: data.message || "success" });
       })
       .catch((err) => {
@@ -460,15 +472,41 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
                             </span>
                           )}
                         </div>
-                        <div className="input_profile">
-                          <label>Payment Method </label>
-                          <input
-                            type="text"
-                            value={paymentMethod}
-                            disabled
-                            onChange={() => {}}
-                          />
-                        </div>
+                        {!changeCard ? (
+                          <div className="input_profile w-100">
+                            <label>Payment Method </label>
+                            <div className="w-100 d-flex align-items-center">
+                              <input
+                                type="text"
+                                value={paymentMethod}
+                                disabled
+                                onChange={() => {}}
+                                className="w-50 mr-3"
+                              />
+
+                              <button
+                                className="link-btn"
+                                onClick={() => setChangeCard(true)}
+                              >
+                                Change Card
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="mb-3">
+                            <Elements stripe={stripePromise}>
+                              <CardForm
+                                isProfile
+                                agreedToTerms={agreedToTerms}
+                                handleChange={() =>
+                                  setAgreedToTerms(!agreedToTerms)
+                                }
+                                ScheduleSession={handleSubmit}
+                              />
+                            </Elements>
+                          </div>
+                        )}
+
                         {/* <div className="input_profile">
                           <label>Password </label>
                           <input
@@ -488,9 +526,11 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
                   </div>
                 </div>
               </div>
-              <button className="profile_save" onClick={handleSubmit}>
-                SAVE CHANGES <BlueHoverButton />
-              </button>
+              {!changeCard && (
+                <button className="profile_save" onClick={handleSubmit}>
+                  SAVE CHANGES <BlueHoverButton />
+                </button>
+              )}
             </div>
           </div>
         </div>

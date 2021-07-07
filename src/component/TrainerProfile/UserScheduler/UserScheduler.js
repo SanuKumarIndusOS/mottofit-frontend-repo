@@ -145,7 +145,7 @@ function UserSchedulerClass(props) {
 
     window.scrollTo(0, 0);
 
-    console.log(props);
+    // console.log(props);
 
     // setuserSlots([props.startTime, props.endTime]);
   }, []);
@@ -305,15 +305,15 @@ function UserSchedulerClass(props) {
     cellCollection.push(time + date);
 
     var newTime = moment(time, "hh:mm A").add(30, "minutes").format("hh:mm A");
-    var ts = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm").valueOf();
+    var ts = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm A").valueOf();
     var tss;
     if (temp.find((el) => el === newTime)) {
       cellCollection.push(newTime + date);
-      tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm")
+      tss = moment(`${date} ${time}`, "YYYY-MM-DD hh:mm A")
         .add(60, "minutes")
         .valueOf();
 
-      console.log(cellCollection, "cellCollection1");
+      // console.log(cellCollection, "cellCollection1");
 
       let reduxData = {
         selectedTimes: cellCollection,
@@ -335,7 +335,7 @@ function UserSchedulerClass(props) {
         .add(30, "minutes")
         .valueOf();
 
-      console.log(cellCollection, "cellCollection1");
+      // console.log(cellCollection, "cellCollection1");
 
       let reduxData = {
         selectedTimes: cellCollection,
@@ -369,7 +369,7 @@ function UserSchedulerClass(props) {
   useEffect(() => {
     let tempValue = props.queryObject?.availability?.value;
 
-    console.log(tempValue, TimeSlot);
+    // console.log(tempValue, TimeSlot);
 
     let selectedTime = {};
 
@@ -406,11 +406,11 @@ function UserSchedulerClass(props) {
 
       selectedTime = timeZone.filter((data) => data.value === tempValue)[0];
 
-      console.log(selectedTime);
+      // console.log(selectedTime);
     } else {
       selectedTime = timeZone.filter((data) => data.value === "EarlyBird")[0];
 
-      console.log(selectedTime);
+      // console.log(selectedTime);
     }
 
     let payload = {
