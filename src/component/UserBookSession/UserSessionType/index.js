@@ -727,30 +727,41 @@ const UserBookSessionFC = ({
                                 </p>
                               </div>
                               <div className="session_card_inner flex-column mb-4">
-                                <h6 className="mt-3">
-                                  {`$${pricingObject.virtualSessionSocial?.["2people"]?.value}`}
-                                  <span>
-                                    /{" "}
-                                    {`${pricingObject.virtualSessionSocial?.["2people"]?.label}`}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
-                                </h6>
-                                <h6 className="mt-0">
-                                  {`$${pricingObject.virtualSessionSocial["3people"]?.value}`}
-                                  <span>
-                                    /{" "}
-                                    {`${pricingObject.virtualSessionSocial["3people"]?.label}`}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
-                                </h6>
+                                {pricingObject.virtualSessionSocial?.["2people"]
+                                  ?.value && (
+                                  <h6 className="mt-3">
+                                    {`$${pricingObject.virtualSessionSocial?.["2people"]?.value}`}
+                                    <span>
+                                      /{" "}
+                                      {`${pricingObject.virtualSessionSocial?.["2people"]?.label}`}
+                                      <img
+                                        src={QMark}
+                                        alt="icon"
+                                        onClick={() => setOpen(true)}
+                                      />
+                                    </span>
+                                  </h6>
+                                )}
+                                {pricingObject.virtualSessionSocial["3people"]
+                                  ?.value && (
+                                  <h6 className="mt-0">
+                                    {`$${pricingObject.virtualSessionSocial["3people"]?.value}`}
+                                    <span>
+                                      /{" "}
+                                      {`${pricingObject.virtualSessionSocial["3people"]?.label}`}
+                                      <img
+                                        src={QMark}
+                                        alt="icon"
+                                        onClick={() => setOpen(true)}
+                                      />
+                                    </span>
+                                  </h6>
+                                )}
+                                {
+                                  pricingObject.virtualSessionSocial["4people"]
+                                    ?.value
+                                }{" "}
+                                && (
                                 <h6 className="mt-0">
                                   {`$${pricingObject.virtualSessionSocial["4people"]?.value}`}
                                   <span>
@@ -763,6 +774,7 @@ const UserBookSessionFC = ({
                                     />
                                   </span>
                                 </h6>
+                                )}
                                 <img src={Social} alt="icon" />
                               </div>
                               <button
@@ -964,66 +976,78 @@ const UserBookSessionFC = ({
                                 </Modal>
                               ) : null}
                               <div className="session_card_inner  flex-column mb-4">
-                                <h6 className="mt-3">
-                                  {`$${
-                                    pricingObject?.inPersonSocial[
-                                      trainingVenue?.value
-                                    ]["2people"]?.value
-                                  }`}
-                                  <span>
-                                    /{" "}
-                                    {`${
+                                {pricingObject?.inPersonSocial[
+                                  trainingVenue?.value
+                                ]["2people"]?.value && (
+                                  <h6 className="mt-3">
+                                    {`$${
                                       pricingObject?.inPersonSocial[
                                         trainingVenue?.value
-                                      ]["2people"]?.label
-                                    }`}{" "}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
-                                </h6>
-                                <h6 className="mt-0">
-                                  {`$${
-                                    pricingObject?.inPersonSocial[
-                                      trainingVenue?.value
-                                    ]["3people"]?.value
-                                  }`}
-                                  <span>
-                                    /{" "}
-                                    {`${
+                                      ]["2people"]?.value
+                                    }`}
+                                    <span>
+                                      /{" "}
+                                      {`${
+                                        pricingObject?.inPersonSocial[
+                                          trainingVenue?.value
+                                        ]["2people"]?.label
+                                      }`}{" "}
+                                      <img
+                                        src={QMark}
+                                        alt="icon"
+                                        onClick={() => setOpen(true)}
+                                      />
+                                    </span>
+                                  </h6>
+                                )}
+                                {pricingObject?.inPersonSocial[
+                                  trainingVenue?.value
+                                ]["3people"]?.value && (
+                                  <h6 className="mt-0">
+                                    {`$${
                                       pricingObject?.inPersonSocial[
                                         trainingVenue?.value
-                                      ]["3people"]?.label
-                                    }`}{" "}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
-                                </h6>
-                                <h6 className="mt-0">
-                                  {`$${
-                                    pricingObject?.inPersonSocial[
-                                      trainingVenue?.value
-                                    ]["4people"]?.value
-                                  }`}
-                                  <span>
-                                    /{" "}
-                                    {`${
+                                      ]["3people"]?.value
+                                    }`}
+                                    <span>
+                                      /{" "}
+                                      {`${
+                                        pricingObject?.inPersonSocial[
+                                          trainingVenue?.value
+                                        ]["3people"]?.label
+                                      }`}{" "}
+                                      <img
+                                        src={QMark}
+                                        alt="icon"
+                                        onClick={() => setOpen(true)}
+                                      />
+                                    </span>
+                                  </h6>
+                                )}
+                                {pricingObject?.inPersonSocial[
+                                  trainingVenue?.value
+                                ]["4people"]?.value && (
+                                  <h6 className="mt-0">
+                                    {`$${
                                       pricingObject?.inPersonSocial[
                                         trainingVenue?.value
-                                      ]["4people"]?.label
-                                    }`}{" "}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
-                                </h6>
+                                      ]["4people"]?.value
+                                    }`}
+                                    <span>
+                                      /{" "}
+                                      {`${
+                                        pricingObject?.inPersonSocial[
+                                          trainingVenue?.value
+                                        ]["4people"]?.label
+                                      }`}{" "}
+                                      <img
+                                        src={QMark}
+                                        alt="icon"
+                                        onClick={() => setOpen(true)}
+                                      />
+                                    </span>
+                                  </h6>
+                                )}
                                 <img src={Social} alt="icon" />
                               </div>
                               <button

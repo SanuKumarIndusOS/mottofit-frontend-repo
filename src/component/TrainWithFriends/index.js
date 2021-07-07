@@ -153,6 +153,8 @@ const TrainWithFriendsClass = ({
         isSubmitted: true,
       }));
 
+      setIPay(data.paidByUser);
+
       if (tempFriendsData.length > 0) setFriendsInput(tempFriendsData);
 
       let reduxData = {

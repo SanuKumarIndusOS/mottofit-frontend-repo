@@ -430,27 +430,44 @@ const TabOne = ({
                                   </>
                                 ) : (
                                   <>
-                                    <button
-                                      disabled={isLoading}
-                                      onClick={() =>
-                                        handleInvitation(data.id, false)
-                                      }
-                                    >
-                                      Decline
-                                    </button>
-                                    <button
-                                      disabled={isLoading}
-                                      onClick={() =>
-                                        handleInvitation(
-                                          data.id,
-                                          true,
-                                          data.paidByUser
-                                        )
-                                      }
-                                      className="text-success"
-                                    >
-                                      Accept
-                                    </button>
+                                    {data.sessionStatus !== "cancelled" ? (
+                                      <>
+                                        {tabname !== "Previous" ? (
+                                          <>
+                                            <button
+                                              disabled={isLoading}
+                                              onClick={() =>
+                                                handleInvitation(data.id, false)
+                                              }
+                                            >
+                                              Decline
+                                            </button>
+                                            <button
+                                              disabled={isLoading}
+                                              onClick={() =>
+                                                handleInvitation(
+                                                  data.id,
+                                                  true,
+                                                  data.paidByUser
+                                                )
+                                              }
+                                              className="text-success"
+                                            >
+                                              Accept
+                                            </button>
+                                          </>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </>
+                                    ) : (
+                                      <button
+                                        className="text-danger"
+                                        disabled={true}
+                                      >
+                                        Cancelled
+                                      </button>
+                                    )}
                                   </>
                                 )}
 
