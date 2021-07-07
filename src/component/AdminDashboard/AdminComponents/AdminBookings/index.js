@@ -9,11 +9,15 @@ function AdminBookings(props) {
   const [pastData, setPastData] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [type, setType] = React.useState("all");
+  const [pageLimit, setPageLimit] = React.useState();
+
 
   React.useEffect(() => {
     props.getAdminSession(page, type).then((data) => {
       console.log(data, "session");
       setPastData(data.list);
+      setPageLimit(data.totalCount/10)
+
     });
   }, [page, type]);
 
@@ -197,7 +201,7 @@ function AdminBookings(props) {
           setPage(page + 1);
         }}
       >
-         {page+1}
+         {(pageLimit === page)? null : page+1}
       </div>
       </div>
     </div>
