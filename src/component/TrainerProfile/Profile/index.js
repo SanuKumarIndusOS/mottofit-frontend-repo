@@ -465,7 +465,8 @@ const TrainerProfileClass = ({
                         )}
 
                       {trainerProfileData &&
-                      trainerProfileData.servicableLocation?.length > 0 ? (
+                      trainerProfileData.servicableLocation?.length > 0 &&
+                      trainerProfileData?.trainingFacility ? (
                         <div className="profile_location flex-column mt-2">
                           <div className="d-flex align-items-center w-100">
                             <img src={Tick} alt="icon" />
@@ -486,7 +487,8 @@ const TrainerProfileClass = ({
                         ""
                       )}
                       {trainerProfileData &&
-                      trainerProfileData.servicableLocation?.length > 0 ? (
+                      trainerProfileData.servicableLocation?.length > 0 &&
+                      trainerProfileData?.willingToTravel ? (
                         <div className="profile_location flex-column mt-2">
                           <div className="d-flex align-items-center w-100">
                             <img src={Tick} alt="icon" />

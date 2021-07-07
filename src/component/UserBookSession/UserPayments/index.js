@@ -239,6 +239,12 @@ const UserPaymentsFC = ({
           price2: "$65.00 / Person",
           isPrice: true,
         },
+        {
+          title: "Cancellation Session",
+          session: "Cancellation Fee",
+          price: "Free upto 24 hours",
+          isPrice: false,
+        },
       ];
       tempData[0] = {
         ...tempData[0],
@@ -260,11 +266,38 @@ const UserPaymentsFC = ({
           price: "$15.00 / Person",
           isPrice: true,
         },
+        {
+          title: "Cancellation Session",
+          session: "Cancellation Fee",
+          price: "Free upto 24 hours",
+          isPrice: false,
+        },
       ];
       tempData[0] = {
         ...tempData[0],
         price: !isNaN(pricingObject.class.fifteenPeople)
           ? parseFloat(pricingObject.class.fifteenPeople)
+          : null,
+      };
+    } else {
+      tempData = [
+        {
+          title: "One on One Session",
+          session: "1 sesson / 1 person",
+          price: "$15.00 / Person",
+          isPrice: true,
+        },
+        {
+          title: "Cancellation Session",
+          session: "Cancellation Fee",
+          price: "Free upto 24 hours",
+          isPrice: false,
+        },
+      ];
+      tempData[0] = {
+        ...tempData[0],
+        price: !isNaN(sessionData?.price)
+          ? parseFloat(sessionData?.price)
           : null,
       };
     }
@@ -342,18 +375,6 @@ const UserPaymentsFC = ({
                     </div>
                   </div>
                 </div>
-                <div className="user_friends">
-                  <h2>
-                    Session cost too high? Train with friends and split the bill
-                  </h2>
-                  <p>
-                    Make your workout social & fun, while saving money. Complete
-                    your payment and add friends to your session simply by
-                    sending them an invite through your account dashboard. Once
-                    they accept your session, your rate will automatically be
-                    adjusted.
-                  </p>
-                </div>
               </div>
               <div className="user_payment_right">
                 <div className="user_payment_profile">
@@ -421,7 +442,7 @@ const UserPaymentsFC = ({
                     </div>
                     <AccordationService data={accordionData} />
                     <div className="user_service_wrapper">
-                      <div className="user_service_left">
+                      {/* <div className="user_service_left">
                         <div className="service_header">
                           <div className="user_data_table_left">
                             {sessionData?.sessionType === "1 ON 1 TRAINING" && (
@@ -435,8 +456,8 @@ const UserPaymentsFC = ({
                             <h3>Total</h3>
                           </div>
                         </div>
-                      </div>
-                      <div className="user_service_right">
+                      </div> */}
+                      {/* <div className="user_service_right">
                         <div className="service_header">
                           <div className="user_data_table_right">
                             {sessionData?.sessionType === "1 ON 1 TRAINING" && (
@@ -450,10 +471,23 @@ const UserPaymentsFC = ({
                             <h3>{totalPrice}</h3>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="info-desc">
+              <div className="user_friends">
+                <h2>
+                  Session cost too high? Train with friends and split the bill
+                </h2>
+                <p>
+                  Make your workout social & fun, while saving money. Complete
+                  your payment and add friends to your session simply by sending
+                  them an invite through your account dashboard. Once they
+                  accept your session, your rate will automatically be adjusted.
+                </p>
               </div>
             </div>
           </div>

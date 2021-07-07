@@ -102,6 +102,19 @@ const MyProfileFC = ({
     setSelectedValue(event.target.value);
   };
 
+  useEffect(() => {
+    trainerData?.trainingLocation?.includes("inPerson");
+
+    if (selectedOneValue === "0" && selectedValue === "b") {
+      let tempData = { ...trainerData };
+      tempData["trainingLocation"] = tempData["trainingLocation"].filter(
+        (value) => value !== "inPerson"
+      );
+
+      setTrainerData(tempData);
+    }
+  }, [selectedValue, selectedOneValue]);
+
   //Image
   const [imagesList, setImageList] = useState([
     { url: "" },
@@ -196,11 +209,16 @@ const MyProfileFC = ({
       serviceableNeighbourHood: serviceableNeighbourHood || "",
       trainingFacilityLocation: trainingFacilityLocation,
       trainingFacility: selectedValue === "a",
+      willingToTravel: selectedOneValue === "1",
       preferedTrainingMode: trainerData?.trainingLocation,
       images: imagesList.filter(({ url }) => url !== "").map(({ url }) => url),
       DOB,
       email,
-      phoneNumber: phoneNo.includes("+") ? phoneNo : `+${phoneNo}`,
+      phoneNumber: phoneNo
+        ? phoneNo.includes("+")
+          ? phoneNo
+          : `+${phoneNo}`
+        : null,
     };
 
     if (!validateFields(payload)) return;
@@ -604,6 +622,7 @@ const MyProfileFC = ({
                           >
                             Virtual
                           </button>
+
                           <button
                             onClick={(e) => {
                               handleInputChange(e, "inPerson");
@@ -615,8 +634,15 @@ const MyProfileFC = ({
                               )
                                 ? "active"
                                 : ""
+                            } ${
+                              selectedOneValue === "0" && selectedValue === "b"
+                                ? "disable-btn"
+                                : ""
                             }`}
                             name="trainingLocation"
+                            disabled={
+                              selectedOneValue === "0" && selectedValue === "b"
+                            }
                           >
                             In Person
                           </button>
