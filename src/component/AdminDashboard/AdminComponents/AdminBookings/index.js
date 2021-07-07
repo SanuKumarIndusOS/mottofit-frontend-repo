@@ -181,23 +181,25 @@ function AdminBookings(props) {
           </div>
         );
       })}
-      <button
+      <div style={{margin:"1rem", display:"flex", justifyContent:"flex-end", alignItems:"center"}}>
+      <div
         onClick={() => {
           if (page !== 1) {
             setPage(page - 1);
           }
         }}
       >
-        Prev
-      </button>
-      {page}
-      <button
+        { (page === 1)? null : page-1}
+      </div>
+     <b style={{margin:"1rem"}}>{page}</b> 
+      <div
         onClick={() => {
           setPage(page + 1);
         }}
       >
-        Next
-      </button>
+         {page+1}
+      </div>
+      </div>
     </div>
   );
 }
