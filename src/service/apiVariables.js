@@ -155,13 +155,13 @@ export const TrainerApi = {
   },
 
   getAdminSession: {
-    url: "sessionsList/upcoming?limit=10&offset=1",
+    url: "sessionsList/upcoming?limit=10&offset=",
     method: "get",
     baseURL: "session",
     isAdmin: true,
     page: 1,
     get api() {
-      return this.url;
+      return this.url + this.page ;
     },
   },
   getStatsData: {

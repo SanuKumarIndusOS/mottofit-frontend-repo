@@ -91,8 +91,8 @@ export const getAdminSession =
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
       const { getAdminSession } = TrainerApi;
-      getAdminSession.page = page;
-      console.log(getAdminSession.baseUrl,"action");
+      getAdminSession.page = (page * 10) - 10;
+      console.log(getAdminSession.baseUrl, getAdminSession.page ,"action");
       api({ ...getAdminSession, isAdmin })
         .then(({ data }) => {
           resolve(data);

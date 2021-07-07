@@ -7,9 +7,17 @@ import "./styles.scss";
 
 function AdminBookings(props) {
   const [pastData, setPastData] = React.useState([]);
+  const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
-    props.getAdminSession(1).then((data) => {
+    props.getAdminSession(page).then((data) => {
+      console.log(data, "session");
+      setPastData(data.list);
+    });
+  }, [page]);
+
+  React.useEffect(() => {
+    props.getAdminSession(page).then((data) => {
       console.log(data, "session");
       setPastData(data.list);
     });
@@ -19,7 +27,7 @@ function AdminBookings(props) {
     props
       .adminCancelSession(id, "cancelled")
       .then(() => {
-        props.getAdminSession(1).then((data) => {
+        props.getAdminSession(page).then((data) => {
           console.log(data, "session");
           setPastData(data.list);
         });
@@ -144,6 +152,24 @@ function AdminBookings(props) {
           </div>
         );
       })}
+      <button
+        onClick={() => {
+          if (page !== 1) {
+            setPage(page - 1);
+          }
+        }}
+      >
+        Prev
+      </button>
+      {page}
+      <button
+        onClick={() => {
+          setPage(page + 1);
+        }}
+      >
+        Next
+      </button>
+     
     </div>
   );
 }

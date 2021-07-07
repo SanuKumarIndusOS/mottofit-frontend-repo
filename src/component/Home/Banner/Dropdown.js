@@ -17,6 +17,10 @@ const Dropdown = ({ onClick = () => {}, selectedData }) => {
   const [ddYogaState, setddYogaState] = useState(false);
   const [ddHiitState, setddHiitState] = useState(false);
 
+  React.useEffect(() => {
+    console.log(ddBoxingState, selectedData, "mo");
+  }, []);
+
   return (
     <>
       <div className="box_3_active_home">
@@ -27,10 +31,15 @@ const Dropdown = ({ onClick = () => {}, selectedData }) => {
             }`}
             onClick={() => {
               setddBoxingState(!ddBoxingState);
-              onClick({
-                vertical: { label: "Boxing", value: "Boxing" },
-              });
-              console.log(ddBoxingState, "boxing");
+              console.log(!ddBoxingState, selectedData);
+              selectedData === "Boxing"
+                ? onClick({
+                    vertical: { label: "", value: "" },
+                  })
+                : onClick({
+                    vertical: { label: "Boxing", value: "Boxing" },
+                  });
+              // console.log(ddBoxingState, "boxing");
             }}
           >
             <div className="option_wapper">
@@ -44,9 +53,13 @@ const Dropdown = ({ onClick = () => {}, selectedData }) => {
             }`}
             onClick={() => {
               setddPilatesState(!ddPilatesState);
-              onClick({
-                vertical: { label: "Pilates", value: "Pilates" },
-              });
+              selectedData === "Pilates"
+                ? onClick({
+                    vertical: { label: "", value: "" },
+                  })
+                : onClick({
+                    vertical: { label: "Pilates", value: "Pilates" },
+                  });
               console.log(ddPilatesState, "pilates");
             }}
           >
@@ -64,12 +77,16 @@ const Dropdown = ({ onClick = () => {}, selectedData }) => {
             onClick={() => {
               setddHiitState(!ddHiitState);
               console.log(ddHiitState, "hiit");
-              onClick({
-                vertical: {
-                  label: "Strength & HIIT",
-                  value: "Strength & HIIT",
-                },
-              });
+              selectedData === "Strength & HIIT"
+                ? onClick({
+                    vertical: { label: "", value: "" },
+                  })
+                : onClick({
+                    vertical: {
+                      label: "Strength & HIIT",
+                      value: "Strength & HIIT",
+                    },
+                  });
             }}
           >
             <div className="option_wapper">
@@ -84,12 +101,16 @@ const Dropdown = ({ onClick = () => {}, selectedData }) => {
             onClick={() => {
               setddYogaState(!ddYogaState);
               console.log(ddYogaState, "yoga");
-              onClick({
-                vertical: {
-                  label: "Yoga",
-                  value: "Yoga",
-                },
-              });
+              selectedData === "Yoga"
+                ? onClick({
+                    vertical: { label: "", value: "" },
+                  })
+                : onClick({
+                    vertical: {
+                      label: "Yoga",
+                      value: "Yoga",
+                    },
+                  });
             }}
           >
             <div className="option_wapper">
