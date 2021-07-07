@@ -19,7 +19,16 @@ function AdminBookings(props) {
       setPageLimit(data.totalCount/10)
 
     });
-  }, [page, type]);
+  }, [page]);
+
+  React.useEffect(() => {
+    props.getAdminSession(page, type).then((data) => {
+      console.log(data, "session");
+      setPastData(data.list);
+      setPage(1)
+
+    });
+  }, [type]);
 
   React.useEffect(() => {
     props.getAdminSession(page, type).then((data) => {
@@ -186,7 +195,8 @@ function AdminBookings(props) {
         );
       })}
       <div style={{margin:"1rem", display:"flex", justifyContent:"flex-end", alignItems:"center"}}>
-      <div
+      <b
+       style={{cursor:"pointer"}}
         onClick={() => {
           if (page !== 1) {
             setPage(page - 1);
@@ -194,16 +204,18 @@ function AdminBookings(props) {
         }}
       >
         { (page === 1)? null : page-1}
-      </div>
-     <b style={{margin:"1rem"}}>{page}</b> 
-      <div
+      </b>
+     <b style={{margin:"1rem", backgroundColor:"#53BFD2", padding:"1rem", color:"white"}}>{page}</b> 
+      <b
+        style={{cursor:"pointer"}}
         onClick={() => {
           setPage(page + 1);
         }}
       >
          {(pageLimit === page)? null : page+1}
+      </b>
       </div>
-      </div>
+      {pageLimit}
     </div>
   );
 }
