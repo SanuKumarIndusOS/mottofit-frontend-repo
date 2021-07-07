@@ -87,12 +87,13 @@ export const getAllTrainerLists =
 
 // Get Admin SessionData list
 export const getAdminSession =
-  (page, isAdmin = true) =>
+  (page, type, isAdmin = true) =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
       const { getAdminSession } = TrainerApi;
-      getAdminSession.page = (page * 10) - 10;
-      console.log(getAdminSession.baseUrl, getAdminSession.page ,"action");
+      getAdminSession.page = "?limit=10&offset="+ page ;
+      getAdminSession.type = type+"/";
+      console.log(getAdminSession.type + getAdminSession.page ,"action");
       api({ ...getAdminSession, isAdmin })
         .then(({ data }) => {
           resolve(data);

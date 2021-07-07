@@ -1,6 +1,40 @@
 .admin_booking {
   margin-left: 5rem;
   margin-right: 5rem;
+  .filters
+  {
+    .type
+    {
+      display: flex;
+      .all
+      {
+          padding: 1rem;
+          border: solid 1px grey;
+          cursor: pointer;
+      }
+
+      .upcoming
+      {
+        padding: 1rem;
+        border: solid 1px grey;
+        cursor: pointer;
+      }
+
+      .cancelled
+      {
+        padding: 1rem;
+        border: solid 1px grey;
+        cursor: pointer;
+      }
+
+      .active{
+
+        background-color: lightseagreen;
+        color: white;
+        font-weight: bolder;
+      }
+    }
+  }
   .session_card_outer {
     .session_card {
       padding: 2rem;

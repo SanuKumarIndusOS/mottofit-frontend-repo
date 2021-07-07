@@ -8,16 +8,17 @@ import "./styles.scss";
 function AdminBookings(props) {
   const [pastData, setPastData] = React.useState([]);
   const [page, setPage] = React.useState(1);
+  const [type, setType] = React.useState("all");
 
   React.useEffect(() => {
-    props.getAdminSession(page).then((data) => {
+    props.getAdminSession(page, type).then((data) => {
       console.log(data, "session");
       setPastData(data.list);
     });
-  }, [page]);
+  }, [page, type]);
 
   React.useEffect(() => {
-    props.getAdminSession(page).then((data) => {
+    props.getAdminSession(page, type).then((data) => {
       console.log(data, "session");
       setPastData(data.list);
     });
@@ -40,6 +41,34 @@ function AdminBookings(props) {
 
   return (
     <div className="admin_booking">
+      <div className="filters">
+        <div className="type">
+          <div
+            className={type === "all" ? "all active" : "all"}
+            onClick={() => {
+              setType("all");
+            }}
+          >
+            All
+          </div>
+          <div
+            className={type === "upcoming" ? "upcoming active" : "upcoming"}
+            onClick={() => {
+              setType("upcoming");
+            }}
+          >
+            Upcoming
+          </div>
+          <div
+            className={type === "past" ? "cancelled active" : "cancelled"}
+            onClick={() => {
+              setType("past");
+            }}
+          >
+            Past
+          </div>
+        </div>
+      </div>
       {pastData.map((item) => {
         return (
           <div className="session_card_outer">
@@ -169,7 +198,6 @@ function AdminBookings(props) {
       >
         Next
       </button>
-     
     </div>
   );
 }
