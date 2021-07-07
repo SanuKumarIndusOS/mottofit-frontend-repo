@@ -133,7 +133,7 @@ export const TrainerApi = {
   getAdminSession: {
     url: "sessionsList/upcoming?limit=10&offset=1",
     method: "get",
-    baseUrl: "session",
+    baseURL: "session",
     isAdmin: true,
     page: 1,
     get api() {

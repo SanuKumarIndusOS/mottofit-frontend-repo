@@ -6,7 +6,7 @@ export var api = async function ({
   api,
   body,
   status = false,
-  baseURL = "session",
+  baseURL = "normal",
   isAdmin = false,
   configObj = {},
 }) {
