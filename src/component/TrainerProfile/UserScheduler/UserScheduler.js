@@ -757,7 +757,7 @@ function UserSchedulerClass(props) {
                 &ensp;
               </div>
             ) : (
-              <div>
+              <div style={{display:"flex"}}>
                 <img
                   src={BackIcon}
                   disabled={true}
