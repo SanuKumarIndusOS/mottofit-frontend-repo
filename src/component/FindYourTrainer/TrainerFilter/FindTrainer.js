@@ -45,12 +45,23 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router-dom";
 import { updateUserDetails } from "action/userAct";
+import { withStyles } from "@material-ui/core/styles";
+import { cyan } from "@material-ui/core/colors";
 
 const FindTrainerFC = ({
   trainerQueryData,
   updateTrainerDetails,
   updateUserDetails,
 }) => {
+  const CyanRadio = withStyles({
+    root: {
+      color: cyan[400],
+      "&$checked": {
+        color: cyan[600],
+      },
+    },
+    checked: {},
+  })((props) => <Radio color="default" {...props} />);
   //Responsive search
   const [Calvalue, onChangeCal] = useState(new Date());
   const [IPCvalue, setIPCValue] = useState("");
@@ -715,22 +726,22 @@ const FindTrainerFC = ({
                     >
                       <FormControlLabel
                         value="New York City"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="NEW YORK"
                       />
                       <FormControlLabel
                         value="Miami"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="MIAMI"
                       />
                       <FormControlLabel
                         value="Hamptons"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="HAMPTONS"
                       />
                       <FormControlLabel
                         value="Palm Beach"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="PALM BEACH"
                       />
                     </RadioGroup>
@@ -845,32 +856,32 @@ const FindTrainerFC = ({
               >
                 <FormControlLabel
                   value="EarlyBird"
-                  control={<Radio />}
+                  control={<CyanRadio />}
                   label="EARLY BIRD (5AM-8AM)"
                 />
                 <FormControlLabel
                   value="RiseAndShine"
-                  control={<Radio />}
+                  control={<CyanRadio />}
                   label="RISE & SHINE (8AM-11AM)"
                 />
                 <FormControlLabel
                   value="MidDayBreak1"
-                  control={<Radio />}
+                  control={<CyanRadio />}
                   label="MID-DAY BREAK (11:30AM-2PM)"
                 />
                 <FormControlLabel
                   value="MidDayBreak2"
-                  control={<Radio />}
+                  control={<CyanRadio />}
                   label="MID-DAY LUNCHTIME (2AM-5PM)"
                 />
                 <FormControlLabel
                   value="HappyHours"
-                  control={<Radio />}
+                  control={<CyanRadio />}
                   label="HAPPY HOUR (5PM-8PM)"
                 />
                 <FormControlLabel
                   value="NeverTooLate"
-                  control={<Radio />}
+                  control={<CyanRadio />}
                   label="NEVER TOO LATE (8PM-11PM)"
                 />
               </RadioGroup>
