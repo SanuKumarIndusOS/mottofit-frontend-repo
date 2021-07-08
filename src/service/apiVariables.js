@@ -125,6 +125,16 @@ export const TrainerApi = {
       return this.url;
     },
   },
+  AddorRemoveUser: {
+    url: "user/edit",
+    method: "post",
+    baseURL: "normal",
+    isAdmin: true,
+    id: null,
+    get api() {
+      return this.url;
+    },
+  },
   changeTrainerStatus: {
     url: "approve/trainers",
     method: "post",
@@ -161,7 +171,7 @@ export const TrainerApi = {
     isAdmin: true,
     page: 1,
     get api() {
-      return this.url + this.type + this.page ;
+      return this.url + this.type + this.page;
     },
   },
   getStatsData: {

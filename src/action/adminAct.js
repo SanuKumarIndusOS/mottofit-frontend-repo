@@ -91,9 +91,9 @@ export const getAdminSession =
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
       const { getAdminSession } = TrainerApi;
-      getAdminSession.page = "?limit=10&offset="+ page ;
-      getAdminSession.type = type+"/";
-      console.log(getAdminSession.type + getAdminSession.page ,"action");
+      getAdminSession.page = "?limit=10&offset=" + page;
+      getAdminSession.type = type + "/";
+      console.log(getAdminSession.type + getAdminSession.page, "action");
       api({ ...getAdminSession, isAdmin })
         .then(({ data }) => {
           resolve(data);
@@ -105,7 +105,6 @@ export const getAdminSession =
   };
 
 // Cancel session by admin
-
 
 //get Stats Data
 export const getStatsData =
@@ -129,6 +128,30 @@ export const getAllUsersLists =
       const { getAllUsersLists } = TrainerApi;
       getAllUsersLists.page = page;
       api({ ...getAllUsersLists, isAdmin })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+// Add or Remove user
+export const AddorRemoveUser =
+  (id, type) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { AddorRemoveUser } = TrainerApi;
+
+      let payload = {
+        userId: id,
+        status: type,
+      };
+
+      AddorRemoveUser.body = payload;
+      console.log(payload,AddorRemoveUser);
+      api({ ...AddorRemoveUser })
         .then(({ data }) => {
           resolve(data);
         })

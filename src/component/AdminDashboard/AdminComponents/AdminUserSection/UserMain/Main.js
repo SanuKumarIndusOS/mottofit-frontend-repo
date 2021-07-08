@@ -4,22 +4,41 @@ import CommonPagination from "component/common/CommonPagination";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import { Input } from "reactstrap";
 import "./styles.scss";
-import { getAllUsersLists } from "action/adminAct";
+import { getAllUsersLists, AddorRemoveUser } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const MainClass = ({ getAllUsersListsApi }) => {
+const MainClass = ({ getAllUsersListsApi, AddorRemoveUser }) => {
   const [userList, setUserList] = React.useState([]);
   const [pageMetaData, setpageMetaData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1)
 
   const [q, setQ] = useState("");
   useEffect(() => {
     setLoading(true);
     fetchAllTrainers(1);
   }, []);
+ 
+  useEffect(() => {
+    console.log(pageMetaData['page'], "page");
+   setCurrentPage(pageMetaData['page'])
+  }, [pageMetaData]);
+
+  function addOrRemove(id, type) {
+    console.log(id, type, currentPage);
+    AddorRemoveUser(id, type)
+      .then(() => {
+        fetchAllTrainers(currentPage)
+        console.log("s");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
   function fetchAllTrainers(page) {
+    console.log(currentPage);
     getAllUsersListsApi(page).then((data) => {
       setUserList(data.list);
       setpageMetaData(data.pageMetaData);
@@ -58,7 +77,11 @@ const MainClass = ({ getAllUsersListsApi }) => {
             className="mb-1"
           />
 
-          <Datatable userList={search(userList)} loading={loading} />
+          <Datatable
+            userList={search(userList)}
+            loading={loading}
+            addOrRemove={addOrRemove}
+          />
           <CommonPagination
             pageMetaData={pageMetaData}
             totalPosts={userList.length}
@@ -74,6 +97,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getAllUsersListsApi: getAllUsersLists,
+      AddorRemoveUser,
     },
     dispatch
   );
