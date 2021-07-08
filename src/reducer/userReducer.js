@@ -8,6 +8,7 @@ const initialState = {
   selectedTimes: [],
   defaulCardDetails: {},
   submittedData: {},
+  currentAcceptedInvitationId: "",
   isModelOpen: false,
 };
 

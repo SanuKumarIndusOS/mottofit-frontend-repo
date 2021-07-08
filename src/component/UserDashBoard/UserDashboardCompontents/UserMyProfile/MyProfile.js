@@ -5,7 +5,11 @@ import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { getUserDetail } from "action/userAct";
+import {
+  getUserDetail,
+  invitationSession,
+  updateUserDetails,
+} from "action/userAct";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { NormalMultiSelect } from "component/common/NormalMultiSelect";
@@ -38,7 +42,13 @@ const gender = [
   { value: "Female", label: "Female" },
 ];
 
-const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
+const MyProfileClass = ({
+  getUserDetailApi,
+  fileUploadApi,
+  currentAcceptedInvitationId,
+  invitationApi,
+  ...restProps
+}) => {
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -234,7 +244,27 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
       .then((data) => {
         getUserProfileData();
         setChangeCard(false);
-        Toast({ type: "success", message: data.message || "success" });
+
+        if (currentAcceptedInvitationId) {
+          let invitationPayload = {
+            sessionId: currentAcceptedInvitationId,
+            acceptance: true,
+          };
+
+          invitationApi(invitationPayload)
+            .then(() => {
+              Toast({ type: "success", message: "success" });
+              let reduxData = {
+                currentAcceptedInvitationId: "",
+              };
+              restProps?.updateUserDetails(reduxData);
+            })
+            .catch((err) => {
+              Toast({ type: "error", message: err.message || "Error" });
+            });
+        } else {
+          Toast({ type: "success", message: data.message || "success" });
+        }
       })
       .catch((err) => {
         Toast({ type: "success", message: err.message || "Error" });
@@ -538,16 +568,23 @@ const MyProfileClass = ({ getUserDetailApi, fileUploadApi }) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  currentAcceptedInvitationId: state.userReducer.currentAcceptedInvitationId,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getUserDetailApi: getUserDetail,
       fileUploadApi: fileUpload,
+      invitationApi: invitationSession,
+      updateUserDetails,
     },
     dispatch
   );
 };
 
-const MyProfile = connect(null, mapDispatchToProps)(MyProfileClass);
+const MyProfile = connect(mapStateToProps, mapDispatchToProps)(MyProfileClass);
 
 export default MyProfile;

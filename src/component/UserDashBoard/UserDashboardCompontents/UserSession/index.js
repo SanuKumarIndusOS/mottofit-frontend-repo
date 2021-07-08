@@ -278,6 +278,12 @@ const TabOne = ({
 
     if (!isDefaultCardPresent && action && !paidByUser) {
       history.push("/users/dashboard/settings/profile");
+
+      let reduxData = {
+        currentAcceptedInvitationId: sessionId,
+      };
+
+      restProps?.updateUserDetails(reduxData);
       return Toast({
         type: "info",
         message: "User needs to add default card to proceed futher",
