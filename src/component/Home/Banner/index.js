@@ -27,11 +27,23 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { withStyles } from '@material-ui/core/styles';
+import { cyan } from '@material-ui/core/colors';
 
 import arrowSign from "assets/files/SVG/Arrow Next.svg";
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
+
+  const CyanRadio = withStyles({
+    root: {
+      "&$checked": {
+        color: cyan[600],
+      },
+    },
+    checked: {},
+  })((props) => <Radio color="default" {...props} />);
   //Responsive search
+  
   const [Calvalue, onChangeCal] = useState(new Date());
   const [IPCvalue, setIPCValue] = useState("");
   const [Avalvalue, setAvalValue] = useState("");
@@ -468,22 +480,22 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                     >
                       <FormControlLabel
                         value="New York City"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="NEW YORK"
                       />
                       <FormControlLabel
                         value="Miami"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="MIAMI"
                       />
                       <FormControlLabel
                         value="Hamptons"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="HAMPTONS"
                       />
                       <FormControlLabel
                         value="Palm Beach"
-                        control={<Radio />}
+                        control={<CyanRadio />}
                         label="PALM BEACH"
                       />
                     </RadioGroup>
@@ -598,32 +610,32 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                 >
                   <FormControlLabel
                     value="EarlyBird"
-                    control={<Radio />}
+                    control={<CyanRadio />}
                     label="EARLY BIRD (5AM-8AM)"
                   />
                   <FormControlLabel
                     value="RiseAndShine"
-                    control={<Radio />}
+                    control={<CyanRadio />}
                     label="RISE & SHINE (8AM-11AM)"
                   />
                   <FormControlLabel
                     value="MidDayBreak1"
-                    control={<Radio />}
+                    control={<CyanRadio />}
                     label="MID-DAY BREAK (11:30AM-2PM)"
                   />
                   <FormControlLabel
                     value="MidDayBreak2"
-                    control={<Radio />}
+                    control={<CyanRadio />}
                     label="MID-DAY LUNCHTIME (2AM-5PM)"
                   />
                   <FormControlLabel
                     value="HappyHours"
-                    control={<Radio />}
+                    control={<CyanRadio />}
                     label="HAPPY HOUR (5PM-8PM)"
                   />
                   <FormControlLabel
                     value="NeverTooLate"
-                    control={<Radio />}
+                    control={<CyanRadio />}
                     label="NEVER TOO LATE (8PM-11PM)"
                   />
                 </RadioGroup>
