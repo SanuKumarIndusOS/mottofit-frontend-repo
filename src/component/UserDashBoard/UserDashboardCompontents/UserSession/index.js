@@ -56,7 +56,9 @@ const UserSessionClass = (props) => {
   const _userSession = (type, isPagination = false) => {
     props
       .userSession(type, pageData[currentTab])
-      .then(({ data, documentCount }) => {
+      .then(({ data: tempData, documentCount: tempDocumentCount }) => {
+        let data = tempData || [];
+        let documentCount = tempDocumentCount || 0;
         let sessionTypeData = {
           invited: "invitedSessions",
           upcoming: "upcomingSessions",

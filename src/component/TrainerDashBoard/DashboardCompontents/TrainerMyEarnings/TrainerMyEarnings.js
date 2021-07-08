@@ -84,7 +84,9 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                             <h2>
                               $
                               {myEarning
-                                ? myEarning.totalRevenue?.total_amount
+                                ? parseFloat(
+                                    myEarning.totalRevenue?.total_amount || 0
+                                  )?.toFixed(2)
                                 : "N/A"}
                             </h2>
                             <p>Total Earnings in q1</p>
@@ -97,7 +99,9 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                             <h2>
                               $
                               {myEarning
-                                ? myEarning.dayRevenue?.total_amount
+                                ? Math.round(
+                                    myEarning.dayRevenue?.total_amount || 0
+                                  )
                                 : "N/A"}
                             </h2>
                             <p>Today</p>
@@ -106,7 +110,9 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                             <h2>
                               $
                               {myEarning
-                                ? myEarning.weekRevenue?.total_amount
+                                ? Math.round(
+                                    myEarning.weekRevenue?.total_amount || 0
+                                  )
                                 : "N/A"}
                             </h2>
                             <p>This Week</p>
@@ -115,7 +121,9 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                             <h2>
                               $
                               {myEarning
-                                ? myEarning.monthRevenue?.total_amount
+                                ? Math.round(
+                                    myEarning.monthRevenue?.total_amount || 0
+                                  )
                                 : "N/A"}
                             </h2>
                             <p>This Month</p>

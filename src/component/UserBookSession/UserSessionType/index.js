@@ -726,7 +726,7 @@ const UserBookSessionFC = ({
                                   experience at lower costs.
                                 </p>
                               </div>
-                              <div className="session_card_inner flex-column mb-4">
+                              <div className="session_card_inner flex-column mb-4 justify-content-start">
                                 {pricingObject.virtualSessionSocial?.["2people"]
                                   ?.value && (
                                   <h6 className="mt-3">
@@ -757,24 +757,22 @@ const UserBookSessionFC = ({
                                     </span>
                                   </h6>
                                 )}
-                                {
-                                  pricingObject.virtualSessionSocial["4people"]
-                                    ?.value
-                                }{" "}
-                                && (
-                                <h6 className="mt-0">
-                                  {`$${pricingObject.virtualSessionSocial["4people"]?.value}`}
-                                  <span>
-                                    /{" "}
-                                    {`${pricingObject.virtualSessionSocial["4people"]?.label}`}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
-                                </h6>
+                                {pricingObject.virtualSessionSocial["4people"]
+                                  ?.value && (
+                                  <h6 className="mt-0">
+                                    {`$${pricingObject.virtualSessionSocial["4people"]?.value}`}
+                                    <span>
+                                      /{" "}
+                                      {`${pricingObject.virtualSessionSocial["4people"]?.label}`}
+                                      <img
+                                        src={QMark}
+                                        alt="icon"
+                                        onClick={() => setOpen(true)}
+                                      />
+                                    </span>
+                                  </h6>
                                 )}
+
                                 <img src={Social} alt="icon" />
                               </div>
                               <button
@@ -975,7 +973,7 @@ const UserBookSessionFC = ({
                                   </div>
                                 </Modal>
                               ) : null}
-                              <div className="session_card_inner  flex-column mb-4">
+                              <div className="session_card_inner  flex-column mb-4 justify-content-start">
                                 {pricingObject?.inPersonSocial[
                                   trainingVenue?.value
                                 ]["2people"]?.value && (

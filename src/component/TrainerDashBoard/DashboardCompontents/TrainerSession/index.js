@@ -50,7 +50,9 @@ const TrainerSessionFC = ({
 
   const getAllDetails = (currentTab, isPaginaion = false) => {
     getTrainerSessionDetailsApi(currentTab, pageData[currentTab])
-      .then(({ data, documentCount }) => {
+      .then(({ data: tData, documentCount: tempDocumentCount }) => {
+        let data = tData || [];
+        let documentCount = tempDocumentCount || 0;
         const tempSessionData = {};
         let sessionTypeData = {
           upcoming: "upcomingSessions",
