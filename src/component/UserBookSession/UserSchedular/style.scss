@@ -72,7 +72,6 @@
             height: 125px;
             opacity: 1;
             border-radius: 100px;
-            object-fit: cover;
           }
           .user_content {
             align-items: center;
@@ -219,6 +218,41 @@
         width: 350px !important;
         text-decoration: underline !important;
         color: #53bfd2 !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .schedular_slots_user {
+    .items_slots_user {
+     flex-direction: column;
+     align-items: flex-start;
+
+     .item_slot5_user
+     {
+       a{
+         margin-top: 30px;
+         width: 300px !important;
+       }
+     }
+    }
+  }
+
+  .event_outter_container {
+    height: 1700px;
+    .event_inner_container {
+      .event_wrapper {
+        .event_wrapper_inner {
+          .event_header {
+            p {
+              width: unset;
+            }
+          }
+          .user_profile_details {
+            margin: 10em 0 2em 1em;
+          }
+        }
       }
     }
   }

@@ -6,170 +6,198 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.css";
 // import "node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
-const Datatable = ({ userList, fetchAllTrainers, loading, noTrainer }) => {
-    if (loading) {
-        return <h2>loading...</h2>;
-    }
+const Datatable = ({
+  userList,
+  fetchAllTrainers,
+  loading,
+  noTrainer,
+  addOrRemove,
+}) => {
+  if (loading) {
+    return <h2>loading...</h2>;
+  }
 
-    // const formateButton = () => {
-    //     function ChangeApproval(id, state) {
-    //         const data = { trainerStatus: state };
-    //         useEffect(() => {
-    //             fetch(
-    //                 "http://doodlebluelive.com:2307/v1/trainer?trainerId=" + id,
-    //                 {
-    //                     method: "PUT", // or 'PUT'
-    //                     headers: {
-    //                         "Content-Type": "application/json",
-    //                         Authorization:
-    //                             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjQ4NzFkLTAyNjgtNDk3ZC04MWU3LTBhZTY5NjViNTAxNSIsInR5cGUiOiJhZG1pbiIsImlhdCI6MTYyMTUxMTM5OSwiZXhwIjoxNjIxNTE4NTk5fQ.N1CGenuza8yyR_FnczruJiqbFvl-crZmiw1lrvTYWnM",
-    //                     },
-    //                     body: JSON.stringify(data),
-    //                 }
-    //             )
-    //                 .then((response) => response.json())
-    //                 .then((data) => {
-    //                     console.log("Success:", data);
-    //                     fetchAllTrainers();
-    //                 })
-    //                 .catch((error) => {
-    //                     console.error("Error:", error);
-    //                 });
-    //         }, []);
-    // }
+  // const formateButton = () => {
+  //     function ChangeApproval(id, state) {
+  //         const data = { trainerStatus: state };
+  //         useEffect(() => {
+  //             fetch(
+  //                 "http://doodlebluelive.com:2307/v1/trainer?trainerId=" + id,
+  //                 {
+  //                     method: "PUT", // or 'PUT'
+  //                     headers: {
+  //                         "Content-Type": "application/json",
+  //                         Authorization:
+  //                             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjQ4NzFkLTAyNjgtNDk3ZC04MWU3LTBhZTY5NjViNTAxNSIsInR5cGUiOiJhZG1pbiIsImlhdCI6MTYyMTUxMTM5OSwiZXhwIjoxNjIxNTE4NTk5fQ.N1CGenuza8yyR_FnczruJiqbFvl-crZmiw1lrvTYWnM",
+  //                     },
+  //                     body: JSON.stringify(data),
+  //                 }
+  //             )
+  //                 .then((response) => response.json())
+  //                 .then((data) => {
+  //                     console.log("Success:", data);
+  //                     fetchAllTrainers();
+  //                 })
+  //                 .catch((error) => {
+  //                     console.error("Error:", error);
+  //                 });
+  //         }, []);
+  // }
 
-    //     return (
-    //         <>
-    //             {trainerList.map((item) => {
-    //                 var approve;
-    //                 if (item["trainerStatus"] === "approved") {
-    //                     approve = (
-    //                         <div
-    //                             onClick={() =>
-    //                                 ChangeApproval(item["id"], "disapproved")
-    //                             }
-    //                             className="btn btn-danger"
-    //                         >
-    //                             Disapprove
-    //                         </div>
-    //                     );
-    //                 } else {
-    //                     approve = (
-    //                         <div
-    //                             onClick={() =>
-    //                                 ChangeApproval(item["id"], "approved")
-    //                             }
-    //                             className="btn btn-success"
-    //                         >
-    //                             Approve
-    //                         </div>
-    //                     );
-    //                 }
-    //                 return (
-    //                     <>
-    //                         <tr>
-    //                             <div>
-    //                                 {" "}
-    //                                 <button style={{ border: "none" }}>
-    //                                     {approve}
-    //                                 </button>{" "}
-    //                             </div>
-    //                         </tr>
-    //                     </>
-    //                 );
-    //             })}
-    //         </>
-    //     );
-    // };
+  //     return (
+  //         <>
+  //             {trainerList.map((item) => {
+  //                 var approve;
+  //                 if (item["trainerStatus"] === "approved") {
+  //                     approve = (
+  //                         <div
+  //                             onClick={() =>
+  //                                 ChangeApproval(item["id"], "disapproved")
+  //                             }
+  //                             className="btn btn-danger"
+  //                         >
+  //                             Disapprove
+  //                         </div>
+  //                     );
+  //                 } else {
+  //                     approve = (
+  //                         <div
+  //                             onClick={() =>
+  //                                 ChangeApproval(item["id"], "approved")
+  //                             }
+  //                             className="btn btn-success"
+  //                         >
+  //                             Approve
+  //                         </div>
+  //                     );
+  //                 }
+  //                 return (
+  //                     <>
+  //                         <tr>
+  //                             <div>
+  //                                 {" "}
+  //                                 <button style={{ border: "none" }}>
+  //                                     {approve}
+  //                                 </button>{" "}
+  //                             </div>
+  //                         </tr>
+  //                     </>
+  //                 );
+  //             })}
+  //         </>
+  //     );
+  // };
 
-    const columns = [
-        {
-            dataField: "firstName",
-            text: "First Name",
-            sort: true,
-            filter: textFilter(),
-        },
-        {
-            dataField: "lastName",
-            text: "Last Name",
-            sort: true,
-            filter: textFilter(),
-        },
-        { dataField: "email", text: "Email", filter: textFilter() },
-        { dataField: "location", text: "Location", filter: textFilter() },
-        {
-            dataField: "phoneNo",
-            text: "Phone Number",
-            filter: textFilter(),
-        },
-        // {
-        //     // dataField: "trainerStatus",
-        //     text: "Approve",
-        //     // formatter: formateButton,
-        //     // formatter: formateButton,
-        //     // filter: textFilter(),
-        // },
-    ];
+  const AddorRemove = (cell, row) =>
+    row.status === "active" ? (
+      <div
+        onClick={() => {
+          addOrRemove(cell, "removed");
+        }}
+      >
+        REMOVE
+      </div>
+    ) : (
+      <div
+        onClick={() => {
+          addOrRemove(cell, "active");
+        }}
+      >
+        ADD
+      </div>
+    );
 
-    const column = userList && Object.keys(userList);
-    console.log(column, "column");
+  const columns = [
+    {
+      dataField: "firstName",
+      text: "First Name",
+      sort: true,
+      filter: textFilter(),
+    },
+    {
+      dataField: "lastName",
+      text: "Last Name",
+      sort: true,
+      filter: textFilter(),
+    },
+    { dataField: "email", text: "Email", filter: textFilter() },
+    { dataField: "location", text: "Location", filter: textFilter() },
 
-    const trainer = noTrainer && Object.keys(noTrainer);
-    console.log(trainer, "noTrainer");
+    {
+      dataField: "phoneNo",
+      text: "Phone Number",
+      filter: textFilter(),
+    },
+    { dataField: "status", text: "status", filter: textFilter() },
+    { dataField: "id", text: "id", formatter: AddorRemove },
+    // {
+    //     // dataField: "trainerStatus",
+    //     text: "Approve",
+    //     // formatter: formateButton,
+    //     // formatter: formateButton,
+    //     // filter: textFilter(),
+    // },
+  ];
 
-    // approveButton = () => {
-    //     {
-    //         trainerList.map((item) => {
-    //             var approve;
-    //             if (item["trainerStatus"] === "approved") {
-    //                 approve = (
-    //                     <div
-    //                         onClick={() =>
-    //                             ChangeApproval(item["id"], "disapproved")
-    //                         }
-    //                         className="btn btn-danger"
-    //                     >
-    //                         Disapprove
-    //                     </div>
-    //                 );
-    //             } else {
-    //                 approve = (
-    //                     <div
-    //                         onClick={() =>
-    //                             ChangeApproval(item["id"], "approved")
-    //                         }
-    //                         className="btn btn-success"
-    //                     >
-    //                         Approve
-    //                     </div>
-    //                 );
-    //             }
-    //             return (
-    //                 <>
-    //                     <tr>
-    //                         <div>
-    //                             {" "}
-    //                             <button style={{ border: "none" }}>
-    //                                 {approve}
-    //                             </button>{" "}
-    //                         </div>
-    //                     </tr>
-    //                 </>
-    //             );
-    //         });
-    //     }
-    // };
-    console.log(noTrainer, " data");
-    return (
-        <>
-            <BootstrapTable
-                bootstrap4
-                keyField="id"
-                columns={columns}
-                data={userList}
-                filter={filterFactory()}
-            />
-            {/* <Table bordered hover size="sm" responsive>
+  const column = userList && Object.keys(userList);
+  console.log(column, "column");
+
+  const trainer = noTrainer && Object.keys(noTrainer);
+  console.log(trainer, "noTrainer");
+
+  // approveButton = () => {
+  //     {
+  //         trainerList.map((item) => {
+  //             var approve;
+  //             if (item["trainerStatus"] === "approved") {
+  //                 approve = (
+  //                     <div
+  //                         onClick={() =>
+  //                             ChangeApproval(item["id"], "disapproved")
+  //                         }
+  //                         className="btn btn-danger"
+  //                     >
+  //                         Disapprove
+  //                     </div>
+  //                 );
+  //             } else {
+  //                 approve = (
+  //                     <div
+  //                         onClick={() =>
+  //                             ChangeApproval(item["id"], "approved")
+  //                         }
+  //                         className="btn btn-success"
+  //                     >
+  //                         Approve
+  //                     </div>
+  //                 );
+  //             }
+  //             return (
+  //                 <>
+  //                     <tr>
+  //                         <div>
+  //                             {" "}
+  //                             <button style={{ border: "none" }}>
+  //                                 {approve}
+  //                             </button>{" "}
+  //                         </div>
+  //                     </tr>
+  //                 </>
+  //             );
+  //         });
+  //     }
+  // };
+  console.log(noTrainer, " data");
+  return (
+    <>
+      <BootstrapTable
+        bootstrap4
+        keyField="id"
+        columns={columns}
+        data={userList}
+        filter={filterFactory()}
+      />
+      {/* <Table bordered hover size="sm" responsive>
                 <thead>
                     <tr>
                         <th scope="row">First Name</th>
@@ -202,8 +230,8 @@ const Datatable = ({ userList, fetchAllTrainers, loading, noTrainer }) => {
                     
                 </tbody>
             </Table> */}
-        </>
-    );
+    </>
+  );
 };
 
 export default Datatable;

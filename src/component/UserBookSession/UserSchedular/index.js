@@ -156,8 +156,9 @@ const UserEventSchedularFC = (props) => {
                   endTime={userSelectedData?.endDate}
                   updateUserDetails={props.updateUserDetails}
                   selectedTimes={props.selectedTimes}
+                  
                 />
-                <BottomSection trainerName={trainerName} />
+                <BottomSection  trainerName={trainerName} />
                 {/* </div> */}
 
                 <Link

@@ -375,32 +375,60 @@ select {
   text-decoration: underline;
 }
 
-.in-person-option {
-  margin-top: auto;
-  margin-bottom: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding-bottom: 30px;
-  position: relative;
-  h2,
-  p {
-    position: absolute;
-    top: -23px;
-    left: 12px;
-    font-size: 16px !important;
-    border: 0 !important;
-  }
 
-  span {
-    font-size: 17px;
-    /* padding-bottom: 10px; */
-    display: inline-block;
-    line-height: 10px;
+@media only screen and (max-width: 600px) {
+  .outter_table_user {
+    position: relative;
+    right: 50px;
+    .table_user {
+      .table_inner_trainer {
+        display: unset;
+
+        select
+        {
+          width: 100%;
+        }
+
+      }
+    }
+
+    table {
+      thead {
+        tr {
+        
+          .user_time_slot{
+            line-height: unset;
+            font-size: 12px;
+            
+          }
+          th {
+            h6
+            {
+              font-size: 0px;
+            }
+            min-width: 45px;
+            max-width: 50px;
+            // width: 45px;
+            .table_header_number {
+              font-size: 20px !important;
+            }
+
+            .table_header_txt{
+              font-size: 12px !important;
+            }
+          }
+        }
+      }
+
+      tbody
+      {
+        tr{
+          td{
+            border: solid 1px rgb(61, 61, 61)!important;
+          }
+        }
+      }
+    }
   }
 }
 
-button:focus:not(:focus-visible) {
-  box-shadow: 0 0;
-  border: 0;
-}

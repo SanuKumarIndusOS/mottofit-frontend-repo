@@ -243,10 +243,15 @@ const FindTrainerFC = ({
             onClick={() => {
               setddBoxingState(!ddBoxingState);
               setDropdownState(!DropdownState);
-              setqueryObject({
-                ...queryObject,
-                vertical: { label: "Boxing", value: "Boxing" },
-              });
+              queryObject?.vertical?.value === "Boxing"
+                ? setqueryObject({
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
+                : setqueryObject({
+                    ...queryObject,
+                    vertical: { label: "Boxing", value: "Boxing" },
+                  });
             }}
           >
             <div className="option_wapper">
@@ -261,10 +266,15 @@ const FindTrainerFC = ({
             onClick={() => {
               setddPilatesState(!ddPilatesState);
               setDropdownState(!DropdownState);
-              setqueryObject({
-                ...queryObject,
-                vertical: { label: "Pilates", value: "Pilates" },
-              });
+              queryObject?.vertical?.value === "Pilates"
+                ? setqueryObject({
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
+                : setqueryObject({
+                    ...queryObject,
+                    vertical: { label: "Pilates", value: "Pilates" },
+                  });
             }}
           >
             <div className="option_wapper">
@@ -282,13 +292,18 @@ const FindTrainerFC = ({
             }`}
             onClick={() => {
               setddHiitState(!ddHiitState);
-              setqueryObject({
-                ...queryObject,
-                vertical: {
-                  label: "Strength & HIIT",
-                  value: "Strength & HIIT",
-                },
-              });
+              queryObject?.vertical?.value === "Strength & HIIT"
+                ? setqueryObject({
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
+                : setqueryObject({
+                    ...queryObject,
+                    vertical: {
+                      label: "Strength & HIIT",
+                      value: "Strength & HIIT",
+                    },
+                  });
               setDropdownState(!DropdownState);
             }}
           >
@@ -303,13 +318,18 @@ const FindTrainerFC = ({
             }`}
             onClick={() => {
               setddYogaState(!ddYogaState);
-              setqueryObject({
-                ...queryObject,
-                vertical: {
-                  label: "Yoga",
-                  value: "Yoga",
-                },
-              });
+              queryObject?.vertical?.value === "Yoga"
+                ? setqueryObject({
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
+                : setqueryObject({
+                    ...queryObject,
+                    vertical: {
+                      label: "Yoga",
+                      value: "Yoga",
+                    },
+                  });
               setDropdownState(!DropdownState);
             }}
           >

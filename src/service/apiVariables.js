@@ -114,6 +114,27 @@ export const TrainerApi = {
       return this.url + this.id;
     },
   },
+
+  adminCancelSession: {
+    url: "session/update",
+    method: "put",
+    baseURL: "session",
+    isAdmin: true,
+    id: null,
+    get api() {
+      return this.url;
+    },
+  },
+  AddorRemoveUser: {
+    url: "user/edit",
+    method: "post",
+    baseURL: "normal",
+    isAdmin: true,
+    id: null,
+    get api() {
+      return this.url;
+    },
+  },
   changeTrainerStatus: {
     url: "approve/trainers",
     method: "post",
@@ -140,6 +161,17 @@ export const TrainerApi = {
     page: 1,
     get api() {
       return this.url + this.page;
+    },
+  },
+
+  getAdminSession: {
+    url: "sessionsList/",
+    method: "get",
+    baseURL: "session",
+    isAdmin: true,
+    page: 1,
+    get api() {
+      return this.url + this.type + this.page;
     },
   },
   getStatsData: {
