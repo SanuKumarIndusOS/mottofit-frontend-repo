@@ -506,6 +506,13 @@
 
 @media only screen and (max-width: 900px) {
 
+  .find-trainer
+  {
+    margin-top: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .card
   {
     display: none;

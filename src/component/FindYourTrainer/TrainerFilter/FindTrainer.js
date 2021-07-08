@@ -472,6 +472,7 @@ const FindTrainerFC = ({
   return (
     <div
       id="find-trainer"
+      className="find-trainer"
       onClick={() => {
         console.log("findhit");
 
