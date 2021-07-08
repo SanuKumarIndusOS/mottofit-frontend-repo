@@ -56,6 +56,43 @@ export default class Experience extends Component {
               </div>
               <img src={svgBG} className="svgBGMobile" alt="svg" />
             </div>
+
+            <div className="image_container_mobile">
+              <div className="row">
+                <div className="vertical">
+                  <img src={strength_img} alt="image" />
+                  <div className="bottom_bar">
+                    <div style={{ flex: "5" }}>STRENGTH</div>{" "}
+                    <div style={{ flex: "1" }}>&#10141;</div>
+                  </div>
+                </div>
+                <div className="vertical">
+                  <img src={boxing_img} alt="image" />
+                  <div className="bottom_bar">
+                    <div style={{ flex: "5" }}>BOXING</div>{" "}
+                    <div style={{ flex: "1" }}>&#10141;</div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="vertical">
+                  <img src={yoga_img} alt="image" />
+                  <div className="bottom_bar">
+                    <div style={{ flex: "5" }}>YOGA</div>{" "}
+                    <div style={{ flex: "1" }}>&#10141;</div>
+                  </div>
+                </div>
+                <div className="vertical">
+                  <img src={pilates_img} alt="image" />
+
+                  <div className="bottom_bar">
+                    <div style={{ flex: "5" }}>PILATES</div>{" "}
+                    <div style={{ flex: "1" }}>&#10141;</div>
+                  </div>
+                </div>
+              </div>
+              <div className="monogram"><img src={svgBG} className="svgBGMobile" alt="svg" /></div>
+            </div>
           </div>
           {/* ------------------------------------personal--------------- */}
 
@@ -101,11 +138,9 @@ export default class Experience extends Component {
                 description="Contactless & virtual training available"
               />
 
-             
-                  <Link to="/trainer/find" className="btn find_your_trainer">
-                    Find Your Best Match <BlueHoverButton />
-                  </Link>
-             
+              <Link to="/trainer/find" className="btn find_your_trainer">
+                Find Your Best Match <BlueHoverButton />
+              </Link>
             </div>
           </div>
         </div>
