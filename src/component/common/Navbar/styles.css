@@ -172,7 +172,7 @@ input:focus {
   display: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .navbar1 {
     display: none;
   }
