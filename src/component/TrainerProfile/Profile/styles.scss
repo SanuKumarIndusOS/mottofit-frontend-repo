@@ -537,6 +537,15 @@
 }
 
 @media only screen and (max-width: 900px) {
+  .react-responsive-modal-modal
+  {
+    margin: 0px !important;
+    max-width: 80vw !important;
+  }
+
+  .modal-heading{
+    width: unset !important;
+  }
   .profile_main {
     margin-top: 4rem;
     display: block;
