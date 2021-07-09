@@ -615,7 +615,7 @@ const FindTrainerFC = ({
         <div className="cat">
           {VerticalVal === "" ? (
             queryObject.vertical?.label === "" ? (
-              <div>All</div>
+              <div>All Verticals</div>
             ) : (
               queryObject.vertical?.label
             )
@@ -633,7 +633,8 @@ const FindTrainerFC = ({
           onClick={() => {
             setshowMenu(!showMenu);
           }}
-        ></div>
+         
+        >&#9776;</div>
       </div>
 
       <div
