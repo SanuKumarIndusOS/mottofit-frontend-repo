@@ -119,7 +119,6 @@ const UserPaymentsFC = ({
             submittedData: {
               ...res.session,
             },
-            sessionData: {},
           };
           // console.log(res);
           restProps?.updateUserDetails(reduxData);
@@ -225,8 +224,6 @@ const UserPaymentsFC = ({
     };
 
     let tempData = [...accordionData];
-
-    // console.log(sessionData?.sessionType);
 
     if (sessionData?.sessionType === "SOCIAL SESSION") {
       tempData = [
