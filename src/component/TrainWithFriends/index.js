@@ -107,6 +107,103 @@ const TrainWithFriendsClass = ({
     api({ ...getSessionData }).then(({ data }) => {
       const { friends = [] } = data;
 
+      const trainingLocation = data.venue;
+
+      const isVirtual = sessionType === "virtual";
+
+      const tempTrainerData = data.trainerDetail || {};
+
+      const pricingObject = {};
+
+      // if (sessionType.includes("SOCIAL")) {
+      const virtualSesion2People =
+        tempTrainerData?.socialSessionPricing?.virtualSessionfor2People;
+      const virtualSesion3People =
+        tempTrainerData?.socialSessionPricing?.virtualSessionfor3People;
+      const virtualSesion4People =
+        tempTrainerData?.socialSessionPricing?.virtualSessionfor4People;
+
+      const inPerson2People =
+        trainingLocation === "trainerLocation"
+          ? tempTrainerData?.socialSessionPricing
+              ?.inPeronAtTrainerLocationfor2People
+          : tempTrainerData?.socialSessionPricing
+              ?.inPeronAtClientLocationfor2People;
+
+      const inPerson3People =
+        trainingLocation === "trainerLocation"
+          ? tempTrainerData?.socialSessionPricing
+              ?.inPeronAtTrainerLocationfor3People
+          : tempTrainerData?.socialSessionPricing
+              ?.inPeronAtClientLocationfor3People;
+
+      const inPerson4People =
+        trainingLocation === "trainerLocation"
+          ? tempTrainerData?.socialSessionPricing
+              ?.inPeronAtTrainerLocationfor4People
+          : tempTrainerData?.socialSessionPricing
+              ?.inPeronAtClientLocationfor4People;
+
+      pricingObject["social"] = {
+        twoPeople: isVirtual ? virtualSesion2People : inPerson2People,
+        threePeople: isVirtual ? virtualSesion3People : inPerson3People,
+        foureople: isVirtual ? virtualSesion4People : inPerson4People,
+      };
+      // } else if (sessionType.includes("CLASS")) {
+      const virtualSesion15People =
+        tempTrainerData?.classSessionPricing?.virtualSessionfor15People;
+
+      const inPerson15People =
+        trainingLocation === "trainerLocation"
+          ? tempTrainerData?.classSessionPricing
+              ?.inPersonAttrainerLocationfor15People
+          : tempTrainerData?.classSessionPricing
+              ?.inPersonAtclientLocationfor15People;
+
+      pricingObject["class"] = {
+        fifteenPeople: isVirtual ? virtualSesion15People : inPerson15People,
+      };
+
+      let tempData = [...accordionData];
+
+      tempData[0] = {
+        ...tempData[0],
+        price: !isNaN(pricingObject.social.twoPeople)
+          ? parseFloat(pricingObject.social.twoPeople)
+          : null,
+        price1: !isNaN(pricingObject.social.threePeople)
+          ? parseFloat(pricingObject.social.threePeople)
+          : null,
+        price2: !isNaN(pricingObject.social.foureople)
+          ? parseFloat(pricingObject.social.foureople)
+          : null,
+        people: 2,
+        people1: 3,
+        people2: 4,
+      };
+      tempData[1] = {
+        ...tempData[1],
+        price: !isNaN(pricingObject.class.fifteenPeople)
+          ? parseFloat(pricingObject.class.fifteenPeople)
+          : null,
+        people: 15,
+      };
+
+      if (tempData[1]?.price) {
+        setMaxUser(15);
+      } else if (tempData[0]?.price2) {
+        setMaxUser(4);
+      } else if (tempData[0]?.price1) {
+        setMaxUser(3);
+      } else if (tempData[0]?.price) {
+        setMaxUser(2);
+      }
+
+      setAccordionData([...tempData]);
+      // }
+
+      window.scrollTo(0, 0);
+
       let trainingType = "";
 
       if (data.trainingType === "social") {
@@ -223,7 +320,7 @@ const TrainWithFriendsClass = ({
         ...errors,
       };
 
-      tempErrors["friendsData"] = tempErrors["friendsData"].filter(
+      tempErrors["friendsData"] = tempErrors["friendsData"]?.filter(
         (_, i) => i !== index
       );
 
@@ -355,106 +452,6 @@ const TrainWithFriendsClass = ({
   };
 
   useEffect(() => {
-    const trainingLocation = sessionData?.trainingVenue?.value;
-
-    const activity =
-      bookingData?.activity?.label || sessionData?.trainingType?.label;
-
-    const isVirtual = sessionData?.preferedTrainingMode === "virtual";
-
-    const tempTrainerData = trainerData || selectedTrainerData;
-
-    const pricingObject = {};
-
-    // if (sessionType.includes("SOCIAL")) {
-    const virtualSesion2People =
-      tempTrainerData?.socialSessionPricing?.virtualSessionfor2People;
-    const virtualSesion3People =
-      tempTrainerData?.socialSessionPricing?.virtualSessionfor3People;
-    const virtualSesion4People =
-      tempTrainerData?.socialSessionPricing?.virtualSessionfor4People;
-
-    const inPerson2People =
-      trainingLocation === "trainerLocation"
-        ? tempTrainerData?.socialSessionPricing
-            ?.inPeronAtTrainerLocationfor2People
-        : tempTrainerData?.socialSessionPricing
-            ?.inPeronAtClientLocationfor2People;
-
-    const inPerson3People =
-      trainingLocation === "trainerLocation"
-        ? tempTrainerData?.socialSessionPricing
-            ?.inPeronAtTrainerLocationfor3People
-        : tempTrainerData?.socialSessionPricing
-            ?.inPeronAtClientLocationfor3People;
-
-    const inPerson4People =
-      trainingLocation === "trainerLocation"
-        ? tempTrainerData?.socialSessionPricing
-            ?.inPeronAtTrainerLocationfor4People
-        : tempTrainerData?.socialSessionPricing
-            ?.inPeronAtClientLocationfor4People;
-
-    pricingObject["social"] = {
-      twoPeople: isVirtual ? virtualSesion2People : inPerson2People,
-      threePeople: isVirtual ? virtualSesion3People : inPerson3People,
-      foureople: isVirtual ? virtualSesion4People : inPerson4People,
-    };
-    // } else if (sessionType.includes("CLASS")) {
-    const virtualSesion15People =
-      tempTrainerData?.classSessionPricing?.virtualSessionfor15People;
-
-    const inPerson15People =
-      trainingLocation === "trainerLocation"
-        ? tempTrainerData?.classSessionPricing
-            ?.inPersonAttrainerLocationfor15People
-        : tempTrainerData?.classSessionPricing
-            ?.inPersonAtclientLocationfor15People;
-
-    pricingObject["class"] = {
-      fifteenPeople: isVirtual ? virtualSesion15People : inPerson15People,
-    };
-
-    let tempData = [...accordionData];
-
-    tempData[0] = {
-      ...tempData[0],
-      price: !isNaN(pricingObject.social.twoPeople)
-        ? parseFloat(pricingObject.social.twoPeople)
-        : null,
-      price1: !isNaN(pricingObject.social.threePeople)
-        ? parseFloat(pricingObject.social.threePeople)
-        : null,
-      price2: !isNaN(pricingObject.social.foureople)
-        ? parseFloat(pricingObject.social.foureople)
-        : null,
-      people: 2,
-      people1: 3,
-      people2: 4,
-    };
-    tempData[1] = {
-      ...tempData[1],
-      price: !isNaN(pricingObject.class.fifteenPeople)
-        ? parseFloat(pricingObject.class.fifteenPeople)
-        : null,
-      people: 15,
-    };
-
-    if (tempData[1]?.price) {
-      setMaxUser(15);
-    } else if (tempData[0]?.price2) {
-      setMaxUser(4);
-    } else if (tempData[0]?.price1) {
-      setMaxUser(3);
-    } else if (tempData[0]?.price) {
-      setMaxUser(2);
-    }
-
-    setAccordionData([...tempData]);
-    // }
-
-    window.scrollTo(0, 0);
-
     // console.log(pricingObject);
   }, []);
 
