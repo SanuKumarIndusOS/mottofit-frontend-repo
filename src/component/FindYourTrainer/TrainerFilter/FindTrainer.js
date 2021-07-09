@@ -633,7 +633,8 @@ const FindTrainerFC = ({
           onClick={() => {
             setshowMenu(!showMenu);
           }}
-        ></div>
+         
+        >&#9776;</div>
       </div>
 
       <div
