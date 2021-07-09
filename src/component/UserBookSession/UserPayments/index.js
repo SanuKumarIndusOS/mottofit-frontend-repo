@@ -119,6 +119,7 @@ const UserPaymentsFC = ({
             submittedData: {
               ...res.session,
             },
+            sessionData: {},
           };
           // console.log(res);
           restProps?.updateUserDetails(reduxData);
@@ -225,7 +226,7 @@ const UserPaymentsFC = ({
 
     let tempData = [...accordionData];
 
-    console.log(sessionData?.sessionType);
+    // console.log(sessionData?.sessionType);
 
     if (sessionData?.sessionType === "SOCIAL SESSION") {
       tempData = [
@@ -404,12 +405,18 @@ const UserPaymentsFC = ({
                     <h3>I want to train on</h3>
                     <div className="user_data_inner">
                       <img src={SheduleIcon} alt="icon" />
+                      {/* {JSON.stringify(trainingDate)}
+                      {JSON.stringify(
+                        getFormatDate(
+                          selectedTimes[0],
+                          "MMMM Do, YYYY hh:mm A."
+                        )
+                      )} */}
                       <h4>
-                        {trainingDate ||
-                          getFormatDate(
-                            selectedTimes[0],
-                            "MMMM Do, YYYY hh:mm A."
-                          )}
+                        {getFormatDate(
+                          selectedTimes[0],
+                          "MMMM Do, YYYY hh:mm A."
+                        )}
                       </h4>
                     </div>
                   </div>
