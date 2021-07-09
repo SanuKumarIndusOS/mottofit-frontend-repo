@@ -153,6 +153,8 @@ const TrainWithFriendsClass = ({
         isSubmitted: true,
       }));
 
+      setIPay(data.paidByUser);
+
       if (tempFriendsData.length > 0) setFriendsInput(tempFriendsData);
 
       let reduxData = {
@@ -426,12 +428,16 @@ const TrainWithFriendsClass = ({
       price2: !isNaN(pricingObject.social.foureople)
         ? parseFloat(pricingObject.social.foureople)
         : null,
+      people: 2,
+      people1: 3,
+      people2: 4,
     };
     tempData[1] = {
       ...tempData[1],
       price: !isNaN(pricingObject.class.fifteenPeople)
         ? parseFloat(pricingObject.class.fifteenPeople)
         : null,
+      people: 15,
     };
 
     if (tempData[1]?.price) {
@@ -772,7 +778,13 @@ const AccordationService = ({ data }) => {
                 <div className="session-item d-flex aling-items-center">
                   <p>{item.session}</p>
                   <p className="ml-auto">
-                    {item.isPrice ? `$${item?.price} / Person` : item?.price}
+                    {item.people
+                      ? `$${parseFloat(
+                          (item?.price || 0) / item.people
+                        ).toFixed(1)} / Person`
+                      : item.isPrice
+                      ? `$${item?.price} / Person`
+                      : item?.price}
                   </p>
                 </div>
               ) : (
@@ -781,7 +793,16 @@ const AccordationService = ({ data }) => {
               {item.price1 ? (
                 <div className="session-item d-flex aling-items-center">
                   <p>{item.session1}</p>
-                  <p className="ml-auto">{`$${item?.price1} / Person`}</p>
+                  <p className="ml-auto">
+                    {" "}
+                    {item.people1
+                      ? `$${parseFloat(
+                          (item?.price1 || 0) / item.people1
+                        ).toFixed(1)} / Person`
+                      : item.isPrice
+                      ? `$${item?.price1} / Person`
+                      : item?.price1}
+                  </p>
                 </div>
               ) : (
                 ""
@@ -789,7 +810,15 @@ const AccordationService = ({ data }) => {
               {item.price2 ? (
                 <div className="session-item d-flex aling-items-center">
                   <p>{item.session2}</p>
-                  <p className="ml-auto">{`$${item?.price2} / Person`}</p>
+                  <p className="ml-auto">
+                    {item.people2
+                      ? `$${parseFloat(
+                          (item?.price2 || 0) / item.people2
+                        ).toFixed(1)} / Person`
+                      : item.isPrice
+                      ? `$${item?.price2} / Person`
+                      : item?.price2}
+                  </p>
                 </div>
               ) : (
                 ""

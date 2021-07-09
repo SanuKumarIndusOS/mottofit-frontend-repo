@@ -16,9 +16,7 @@ export const UserAvatar = ({
       ? tempLastName[0]
       : userName[userName.length - 1];
 
-  let initialLetters = `${firstLetter || "A"}${
-    lastLetter || "Z"
-  }`.toUpperCase();
+  let initialLetters = `${firstLetter || "A"}${lastLetter || ""}`.toUpperCase();
 
   const backgroundColor = ["green", "red", "brown", "orange", "blue"];
 

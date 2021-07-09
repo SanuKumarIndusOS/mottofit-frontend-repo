@@ -264,18 +264,18 @@ export default class TwilioMessaging {
 
   // REMOVE THE LISTENERS FROM THE ACTIVE CHANNEL
 
-  unSubscribeChannel() {
+  unSubscribeChannel = () => {
     if (this.activeChannel) {
       this.activeChannel.removeAllListeners();
       this.activeChannel = null;
       this.log("Un subscribed from the channel");
     }
     resetChannelDetails()(this.handler);
-  }
+  };
 
   // REMOVE CHAT CLIENT
 
-  removeChatClient() {
+  removeChatClient = () => {
     if (this.client) {
       this.client.removeAllListeners();
       this.client = null;
@@ -286,7 +286,7 @@ export default class TwilioMessaging {
       this.unSubscribeChannel();
       this.log("chat client removed");
     }
-  }
+  };
 
   log(message) {
     console.log(`---------${message}------`);

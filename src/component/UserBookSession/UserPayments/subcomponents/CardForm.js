@@ -310,15 +310,17 @@ function CardFormFC({
 
           {showCardComp && (
             <div className="payment_input_check mt-3 d-flex justify-content-between">
-              <div className="payment_check_inner">
-                <input
-                  type="checkbox"
-                  checked={isRememberCard}
-                  onChange={() => setRememberCard(!isRememberCard)}
-                  id="remember_card"
-                />
-                <label for="remember_card">Remember My Card Details</label>
-              </div>
+              {!isProfile && (
+                <div className="payment_check_inner">
+                  <input
+                    type="checkbox"
+                    checked={isRememberCard}
+                    onChange={() => setRememberCard(!isRememberCard)}
+                    id="remember_card"
+                  />
+                  <label for="remember_card">Remember My Card Details</label>
+                </div>
+              )}
               <div className="payment_check_inner d-flex align-items-center">
                 <Link to="/" className="fw-600 text-underline">
                   Session Cancellation Policy

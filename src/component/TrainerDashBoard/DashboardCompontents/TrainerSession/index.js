@@ -34,13 +34,11 @@ const TrainerSessionFC = ({
   const [pageData, setPageData] = useState({
     upcoming: 0,
     past: 0,
-    invited: 0,
   });
 
   const [totalData, setTotalData] = useState({
     upcoming: 0,
     past: 0,
-    invited: 0,
   });
 
   const [isLoading, setisLoading] = useState(false);
@@ -50,12 +48,13 @@ const TrainerSessionFC = ({
   //   getAllDetails(currentTab);
   // }, []);
 
-  const getAllDetails = (currentTab) => {
-    getTrainerSessionDetailsApi(currentTab, pageData[currentTab]).then(
-      ({ data, documentCount }) => {
+  const getAllDetails = (currentTab, isPaginaion = false) => {
+    getTrainerSessionDetailsApi(currentTab, pageData[currentTab])
+      .then(({ data: tData, documentCount: tempDocumentCount }) => {
+        let data = tData || [];
+        let documentCount = tempDocumentCount || 0;
         const tempSessionData = {};
         let sessionTypeData = {
-          invited: "invitedSessions",
           upcoming: "upcomingSessions",
           past: "pastSessions",
         };
@@ -96,19 +95,24 @@ const TrainerSessionFC = ({
         // console.log(tempData [sessionTypeData[currentTab]]);
 
         setTrainerSessionData((prevData) => {
+          let replaceData = [
+            ...(prevData[sessionTypeData[currentTab]] || []),
+            ...tempData,
+          ];
+
           return {
             ...prevData,
-            [sessionTypeData[currentTab]]: [
-              ...prevData[sessionTypeData[currentTab]],
-              ...tempData,
-            ],
+            [sessionTypeData[currentTab]]: isPaginaion ? replaceData : tempData,
           };
         });
 
         setDataLoading(false);
         // });
-      }
-    );
+      })
+      .catch((err) => {
+        setDataLoading(false);
+        Toast({ type: "error", message: err.message || "Error" });
+      });
   };
 
   const handleSessionStatus = (trainerId, sessionStatus) => {
@@ -124,7 +128,7 @@ const TrainerSessionFC = ({
     api({ ...changeSessionStatus })
       .then(({ data }) => {
         console.log(data);
-        getAllDetails();
+        getAllDetails(currentTab);
       })
       .catch((err) => {
         console.log(err);
@@ -144,14 +148,13 @@ const TrainerSessionFC = ({
     cancelSession(payload)
       .then(() => {
         setisLoading(false);
-        getAllDetails();
+        getAllDetails(currentTab);
       })
       .catch(() => setisLoading(false));
   };
 
   const handleChange = (tab, data) => {
     let sessionTypeData = {
-      invited: "invitedSessions",
       upcoming: "upcomingSessions",
       past: "pastSessions",
     };
@@ -159,8 +162,6 @@ const TrainerSessionFC = ({
     let currentSession = sessionTypeData[tab];
 
     setCurrentTab(tab);
-
-    // console.log(data);
 
     setTrainerSessionData((prevData) => {
       // console.log(prevData);
@@ -180,7 +181,7 @@ const TrainerSessionFC = ({
   };
 
   useEffect(() => {
-    getAllDetails(currentTab);
+    getAllDetails(currentTab, true);
   }, [pageData]);
 
   return (
@@ -212,8 +213,7 @@ const TrainerSessionFC = ({
                         handleCancel={handleCancel}
                         isLoading={isLoading}
                         handlePagination={handlePagination}
-                        pageSize={pageData["invited"]}
-                        documentSize={totalData["invited"]}
+                        currentTab={currentTab}
                       />
                     )}
                   </TabPanel>
@@ -230,6 +230,7 @@ const TrainerSessionFC = ({
                         handlePagination={handlePagination}
                         pageSize={pageData["upcoming"]}
                         documentSize={totalData["upcoming"]}
+                        currentTab={currentTab}
                       />
                     )}
                   </TabPanel>
@@ -250,11 +251,12 @@ const TrainerSessionFC = ({
                         prevData={trainerSessionData.pastSessions}
                         handleSessionStatus={handleSessionStatus}
                         cancelSessionApi={handleCancel}
-                        handleChange={() => getAllDetails()}
+                        handleChange={() => getAllDetails(currentTab)}
                         updateUserDetails={updateUserDetails}
                         handlePagination={handlePagination}
                         pageSize={pageData["past"]}
                         documentSize={totalData["past"]}
+                        currentTab={currentTab}
                       />
                     )}
                   </TabPanel>
@@ -267,7 +269,7 @@ const TrainerSessionFC = ({
                       prevData={trainerSessionData.pastSessions}
                       handleSessionStatus={handleSessionStatus}
                       cancelSessionApi={handleCancel}
-                      handleChange={() => getAllDetails()}
+                      handleChange={() => getAllDetails(currentTab)}
                       updateUserDetails={updateUserDetails}
                     />
                   </TabPanel>
@@ -588,6 +590,7 @@ const TabPast = ({
   handlePagination,
   pageSize,
   documentSize,
+  currentTab,
   ...restProps
 }) => {
   const [visible, setVisible] = useState([3]);
@@ -601,11 +604,12 @@ const TabPast = ({
       sessionId,
       sessionStatus: "cancelled",
     };
+
     setisLoading(true);
     cancelSessionApi(payload)
       .then(() => {
         setisLoading(false);
-        handleChange();
+        handleChange(currentTab);
       })
       .catch(() => setisLoading(false));
   };
@@ -656,17 +660,33 @@ const TabPast = ({
                               {data.sessionStatus !== "completed" ? (
                                 <div className="TP_USession_data_buttons">
                                   {/* <button>Reschedule</button> */}
-                                  <button onClick={() => handleCancel(data.id)}>
-                                    Cancel
-                                  </button>
-                                  <button
-                                    className="text-primary"
-                                    onClick={() =>
-                                      handleSessionStatus(data.id, "completed")
-                                    }
-                                  >
-                                    Complete
-                                  </button>
+
+                                  {data.sessionStatus !== "cancelled" ? (
+                                    <>
+                                      <button
+                                        onClick={() => handleCancel(data.id)}
+                                      >
+                                        Cancel
+                                      </button>
+                                      <button
+                                        className="text-primary"
+                                        onClick={() =>
+                                          handleSessionStatus(
+                                            data.id,
+                                            "completed"
+                                          )
+                                        }
+                                      >
+                                        Complete
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <div>
+                                      <p className="text-danger text-underline">
+                                        Cancelled
+                                      </p>
+                                    </div>
+                                  )}
                                 </div>
                               ) : (
                                 <div>

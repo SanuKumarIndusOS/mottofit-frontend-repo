@@ -40,7 +40,7 @@ export const getTrainerSessionDetails = (type, pageSize) => (
   return new Promise((resolve, reject) => {
     const { getTrainerSessionApi } = TrainerApi;
 
-    getTrainerSessionApi.sessionType = type || "invited";
+    getTrainerSessionApi.sessionType = type || "upcoming";
     getTrainerSessionApi.pageSize = pageSize || 0;
 
     api({ ...getTrainerSessionApi })

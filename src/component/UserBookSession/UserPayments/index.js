@@ -28,6 +28,8 @@ import { UserAvatar } from "component/common/UserAvatar";
 
 const stripePromise = loadStripe(config.stripeUrl);
 
+let tempaccordionData = [];
+
 const UserPaymentsFC = ({
   sessionData,
   scheduleSession,
@@ -44,6 +46,7 @@ const UserPaymentsFC = ({
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [coupondCode, setCouponCode] = useState("");
   const [isCouponCodeValid, setCouponCodeValid] = useState(false);
+  const [accordionData, setAccordionData] = useState(tempaccordionData);
 
   const [price, setprice] = useState();
 
@@ -150,7 +153,7 @@ const UserPaymentsFC = ({
   );
 
   useEffect(() => {
-    // console.log(getFormatDate(selectedTimes[0], "YYYY-MM-DD"));
+    updatePricing();
 
     window.scrollTo(0, 0);
     if (Object.keys(sessionData).length === 0)
@@ -162,6 +165,148 @@ const UserPaymentsFC = ({
     userName: `${tempTrainerData?.firstName || ""} ${
       tempTrainerData?.lastName || ""
     }`,
+  };
+
+  const updatePricing = () => {
+    const trainingLocation = sessionData?.trainingVenue?.value;
+    const isVirtual = sessionData?.preferedTrainingMode === "virtual";
+    const tempTrainerData = trainerData || selectedTrainerData;
+
+    const pricingObject = {};
+
+    // if (sessionType.includes("SOCIAL")) {
+    const virtualSesion2People =
+      tempTrainerData?.socialSessionPricing?.virtualSessionfor2People;
+    const virtualSesion3People =
+      tempTrainerData?.socialSessionPricing?.virtualSessionfor3People;
+    const virtualSesion4People =
+      tempTrainerData?.socialSessionPricing?.virtualSessionfor4People;
+
+    const inPerson2People =
+      trainingLocation === "trainerLocation"
+        ? tempTrainerData?.socialSessionPricing
+            ?.inPeronAtTrainerLocationfor2People
+        : tempTrainerData?.socialSessionPricing
+            ?.inPeronAtClientLocationfor2People;
+
+    const inPerson3People =
+      trainingLocation === "trainerLocation"
+        ? tempTrainerData?.socialSessionPricing
+            ?.inPeronAtTrainerLocationfor3People
+        : tempTrainerData?.socialSessionPricing
+            ?.inPeronAtClientLocationfor3People;
+
+    const inPerson4People =
+      trainingLocation === "trainerLocation"
+        ? tempTrainerData?.socialSessionPricing
+            ?.inPeronAtTrainerLocationfor4People
+        : tempTrainerData?.socialSessionPricing
+            ?.inPeronAtClientLocationfor4People;
+
+    pricingObject["social"] = {
+      twoPeople: isVirtual ? virtualSesion2People : inPerson2People,
+      threePeople: isVirtual ? virtualSesion3People : inPerson3People,
+      foureople: isVirtual ? virtualSesion4People : inPerson4People,
+    };
+    // } else if (sessionType.includes("CLASS")) {
+    const virtualSesion15People =
+      tempTrainerData?.classSessionPricing?.virtualSessionfor15People;
+
+    const inPerson15People =
+      trainingLocation === "trainerLocation"
+        ? tempTrainerData?.classSessionPricing
+            ?.inPersonAttrainerLocationfor15People
+        : tempTrainerData?.classSessionPricing
+            ?.inPersonAtclientLocationfor15People;
+
+    pricingObject["class"] = {
+      fifteenPeople: isVirtual ? virtualSesion15People : inPerson15People,
+    };
+
+    let tempData = [...accordionData];
+
+    console.log(sessionData?.sessionType);
+
+    if (sessionData?.sessionType === "SOCIAL SESSION") {
+      tempData = [
+        {
+          title: "Social Session",
+          session: "1 Session / 2 People",
+          session1: "1 Session / 3 People",
+          session2: "1 Session / 4 People",
+          price: "$65.00 / Person",
+          price1: "$65.00 / Person",
+          price2: "$65.00 / Person",
+          people: 2,
+          people1: 3,
+          people2: 4,
+          isPrice: true,
+        },
+        {
+          title: "Cancellation Session",
+          session: "Cancellation Fee",
+          price: "Free upto 24 hours",
+          isPrice: false,
+        },
+      ];
+      tempData[0] = {
+        ...tempData[0],
+        price: !isNaN(pricingObject.social.twoPeople)
+          ? parseFloat(pricingObject.social.twoPeople)
+          : null,
+        price1: !isNaN(pricingObject.social.threePeople)
+          ? parseFloat(pricingObject.social.threePeople)
+          : null,
+        price2: !isNaN(pricingObject.social.foureople)
+          ? parseFloat(pricingObject.social.foureople)
+          : null,
+      };
+    } else if (sessionData?.sessionType === "CREATE A CLASS") {
+      tempData = [
+        {
+          title: "Class Session",
+          session: "Class (5-15 People)",
+          price: "$15.00 / Person",
+          isPrice: true,
+          people: 15,
+        },
+        {
+          title: "Cancellation Session",
+          session: "Cancellation Fee",
+          price: "Free upto 24 hours",
+          isPrice: false,
+        },
+      ];
+      tempData[0] = {
+        ...tempData[0],
+        price: !isNaN(pricingObject.class.fifteenPeople)
+          ? parseFloat(pricingObject.class.fifteenPeople)
+          : null,
+      };
+    } else {
+      tempData = [
+        {
+          title: "One on One Session",
+          session: "1 sesson / 1 person",
+          price: "$15.00 / Person",
+          isPrice: true,
+        },
+        {
+          title: "Cancellation Session",
+          session: "Cancellation Fee",
+          price: "Free upto 24 hours",
+          isPrice: false,
+        },
+      ];
+      tempData[0] = {
+        ...tempData[0],
+        price: !isNaN(sessionData?.price)
+          ? parseFloat(sessionData?.price)
+          : null,
+      };
+    }
+
+    setAccordionData(tempData);
   };
 
   return (
@@ -234,24 +379,6 @@ const UserPaymentsFC = ({
                     </div>
                   </div>
                 </div>
-                <div className="user_friends">
-                  {/* <button
-                                        className="ud_but"
-                                        onClick={ScheduleSession}
-                                    >
-                                        Continue <ArrowHoverBlacked />
-                                    </button> */}
-                  <h2>
-                    Session cost too high? Train with friends and split the bill
-                  </h2>
-                  <p>
-                    Make your workout social & fun, while saving money. Complete
-                    your payment and add friends to your session simply by
-                    sending them an invite through your account dashboard. Once
-                    they accept your session, your rate will automatically be
-                    adjusted.
-                  </p>
-                </div>
               </div>
               <div className="user_payment_right">
                 <div className="user_payment_profile">
@@ -307,12 +434,24 @@ const UserPaymentsFC = ({
                     )}
                   </div>
                   <div className="user_service_details">
+                    <div className="d-flex align-items-center justify-content-between">
+                      <div className="service_header">
+                        <h3 className="fs-20 text-secondary">
+                          Service Details
+                        </h3>
+                      </div>
+                      <div className="service_header">
+                        <h3 className="fs-20 text-secondary">Price / Hour</h3>
+                      </div>
+                    </div>
+                    <AccordationService data={accordionData} />
                     <div className="user_service_wrapper">
-                      <div className="user_service_left">
+                      {/* <div className="user_service_left">
                         <div className="service_header">
-                          <h3>Service Details</h3>
                           <div className="user_data_table_left">
-                            <h5>{sessionData?.sessionType}</h5>
+                            {sessionData?.sessionType === "1 ON 1 TRAINING" && (
+                              <h5>{sessionData?.sessionType}</h5>
+                            )}
                             <h5>Discount</h5>
                             <h5>Transaction Fee</h5>
                             <h5>Tax</h5>
@@ -321,12 +460,13 @@ const UserPaymentsFC = ({
                             <h3>Total</h3>
                           </div>
                         </div>
-                      </div>
-                      <div className="user_service_right">
+                      </div> */}
+                      {/* <div className="user_service_right">
                         <div className="service_header">
-                          <h3>Price / Hour</h3>
                           <div className="user_data_table_right">
-                            <h5>{`$${sessionData?.price}`}</h5>
+                            {sessionData?.sessionType === "1 ON 1 TRAINING" && (
+                              <h5>{`$${sessionData?.price}`}</h5>
+                            )}
                             <h5>{`-$${discountPrice}`}</h5>
                             <h5>{`$${trxFee}`}</h5>
                             <h5>{`$${tax}`}</h5>
@@ -335,16 +475,108 @@ const UserPaymentsFC = ({
                             <h3>{totalPrice}</h3>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="info-desc">
+              <div className="user_friends">
+                <h2>
+                  Session cost too high? Train with friends and split the bill
+                </h2>
+                <p>
+                  Make your workout social & fun, while saving money. Complete
+                  your payment and add friends to your session simply by sending
+                  them an invite through your account dashboard. Once they
+                  accept your session, your rate will automatically be adjusted.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </>
+  );
+};
+
+const AccordationService = ({ data }) => {
+  return (
+    <div className="d-flex flex-column">
+      {data.map((item, index) => {
+        // console.log(item);
+
+        if (!item?.price && !item.price1 && !item.price2) return null;
+
+        return (
+          <div
+            className={`TF_data_item ${
+              index === data.length - 1 ? "no-border" : ""
+            }`}
+            key={index}
+          >
+            <div className="TF_data_title">
+              <h3 className="fs-20 my-3">{item.title}</h3>
+            </div>
+
+            <div className="session-block">
+              {item?.price ? (
+                <div className="session-item d-flex aling-items-center">
+                  <p className="fs-20 text-secondary">{item.session}</p>
+                  <p className="ml-auto fs-20 text-secondary">
+                    {item.people
+                      ? `$${parseFloat(
+                          (item?.price || 0) / item.people
+                        ).toFixed(1)} / Person`
+                      : item.isPrice
+                      ? `$${item?.price} / Person`
+                      : item?.price}
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+              {item.price1 ? (
+                <div className="session-item d-flex aling-items-center">
+                  <p className="fs-20 text-secondary">{item.session1}</p>
+                  {/* <p className="ml-auto fs-20 text-secondary">{`$${item?.price1} / Person`}</p> */}
+                  <p className="ml-auto fs-20 text-secondary">
+                    {" "}
+                    {item.people1
+                      ? `$${parseFloat(
+                          (item?.price1 || 0) / item.people1
+                        ).toFixed(1)} / Person`
+                      : item.isPrice
+                      ? `$${item?.price1} / Person`
+                      : item?.price1}
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+              {item.price2 ? (
+                <div className="session-item d-flex aling-items-center">
+                  <p className="fs-20 text-secondary">{item.session2}</p>
+                  {/* <p className="ml-auto fs-20 text-secondary">{`$${item?.price2} / Person`}</p> */}
+                  <p className="ml-auto fs-20 text-secondary">
+                    {item.people2
+                      ? `$${parseFloat(
+                          (item?.price2 || 0) / item.people2
+                        ).toFixed(1)} / Person`
+                      : item.isPrice
+                      ? `$${item?.price2} / Person`
+                      : item?.price2}
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

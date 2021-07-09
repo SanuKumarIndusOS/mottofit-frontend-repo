@@ -56,7 +56,9 @@ const UserSessionClass = (props) => {
   const _userSession = (type, isPagination = false) => {
     props
       .userSession(type, pageData[currentTab])
-      .then(({ data, documentCount }) => {
+      .then(({ data: tempData, documentCount: tempDocumentCount }) => {
+        let data = tempData || [];
+        let documentCount = tempDocumentCount || 0;
         let sessionTypeData = {
           invited: "invitedSessions",
           upcoming: "upcomingSessions",
@@ -276,6 +278,12 @@ const TabOne = ({
 
     if (!isDefaultCardPresent && action && !paidByUser) {
       history.push("/users/dashboard/settings/profile");
+
+      let reduxData = {
+        currentAcceptedInvitationId: sessionId,
+      };
+
+      restProps?.updateUserDetails(reduxData);
       return Toast({
         type: "info",
         message: "User needs to add default card to proceed futher",
@@ -430,27 +438,44 @@ const TabOne = ({
                                   </>
                                 ) : (
                                   <>
-                                    <button
-                                      disabled={isLoading}
-                                      onClick={() =>
-                                        handleInvitation(data.id, false)
-                                      }
-                                    >
-                                      Decline
-                                    </button>
-                                    <button
-                                      disabled={isLoading}
-                                      onClick={() =>
-                                        handleInvitation(
-                                          data.id,
-                                          true,
-                                          data.paidByUser
-                                        )
-                                      }
-                                      className="text-success"
-                                    >
-                                      Accept
-                                    </button>
+                                    {data.sessionStatus !== "cancelled" ? (
+                                      <>
+                                        {tabname !== "Previous" ? (
+                                          <>
+                                            <button
+                                              disabled={isLoading}
+                                              onClick={() =>
+                                                handleInvitation(data.id, false)
+                                              }
+                                            >
+                                              Decline
+                                            </button>
+                                            <button
+                                              disabled={isLoading}
+                                              onClick={() =>
+                                                handleInvitation(
+                                                  data.id,
+                                                  true,
+                                                  data.paidByUser
+                                                )
+                                              }
+                                              className="text-success"
+                                            >
+                                              Accept
+                                            </button>
+                                          </>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </>
+                                    ) : (
+                                      <button
+                                        className="text-danger"
+                                        disabled={true}
+                                      >
+                                        Cancelled
+                                      </button>
+                                    )}
                                   </>
                                 )}
 

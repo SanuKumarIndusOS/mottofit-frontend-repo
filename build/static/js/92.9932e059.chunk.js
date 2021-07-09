@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[92],{139:function(t,s,n){"use strict";n.r(s);n(2);var o=n(1);s.default=function(){return Object(o.jsx)("div",{children:"dasd"})}}}]);
