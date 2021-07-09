@@ -48,9 +48,9 @@ const routers = [
   {
     component: "MainLayout",
     path: "/mobile",
-    auth: false,
-    name: "Dashboard",
-    exact: true,
+    auth: true,
+    name: "DashBoard",
+    exact: false,
     childrens: [
       {
         path: "/login",
@@ -58,7 +58,7 @@ const routers = [
         name: "MobileLogin",
         auth: false,
         exact: true,
-      },
+      }
   
     ],
   },
