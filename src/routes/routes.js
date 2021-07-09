@@ -58,6 +58,13 @@ const routers = [
         name: "MobileLogin",
         auth: false,
         exact: true,
+      },
+      {
+        path: "/menu",
+        componentPath: "pages/MobileHamburger/index",
+        name: "HamMenu",
+        auth: false,
+        exact: true,
       }
   
     ],

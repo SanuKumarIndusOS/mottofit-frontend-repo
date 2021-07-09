@@ -154,7 +154,12 @@ const NavBarFC = ({
 
       {/* Mobile header Markup  */}
       <div className="mobile_navbar">
-        <div className="mobile_hamburger_menu">&#x2630;</div>
+        <div className="mobile_hamburger_menu">
+          {" "}
+          <Link to="/mobile/menu" style={{ color: "lightgrey" }}>
+            &#x2630;
+          </Link>
+        </div>
         <div className="mobile_nav_logo">
           <Link to="">
             <img src={LogoImage} alt="logo" style={{ height: "30px" }} />
@@ -170,9 +175,15 @@ const NavBarFC = ({
             <div className="login-item1">
               <img src={Line2} alt="icon" />
 
-              <img src={Person} alt="icon" onClick={toggleModel} />
+              <img
+                src={Person}
+                alt="icon"
+                onClick={() => {
+                  history.push("/mobile/login");
+                }}
+              />
 
-              <SignIn showModel={isModelOpen} setShowModel={toggleModel} />
+              {/* <SignIn showModel={isModelOpen} setShowModel={toggleModel} /> */}
             </div>
           ) : (
             <img
