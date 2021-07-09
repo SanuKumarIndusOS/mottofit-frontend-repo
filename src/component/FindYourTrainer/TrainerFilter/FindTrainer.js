@@ -889,9 +889,9 @@ const FindTrainerFC = ({
             </FormControl>
           </div>
         </div>
-        <div className="search" onClick={search_action_mob} onTouchStart={search_action_mob}>
+        <button className="search" onClick={search_action_mob} onTouchStart={search_action_mob}>
           APPLY ALL FILTERS{" "}
-        </div>
+        </button>
       </div>
 
       <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />

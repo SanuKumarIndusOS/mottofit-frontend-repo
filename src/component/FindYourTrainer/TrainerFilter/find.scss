@@ -497,29 +497,26 @@
   left: 10px;
 }
 
-.mobile-find-wrapper
-{
+.mobile-find-wrapper {
   display: none;
 }
 
-.mobile-search-menu{display: none;}
+.mobile-search-menu {
+  display: none;
+}
 
 @media only screen and (max-width: 900px) {
-
-  .find-trainer
-  {
+  .find-trainer {
     margin-top: 10rem;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .card
-  {
+  .card {
     display: none;
   }
 
-  .mobile-find-wrapper
-  {
+  .mobile-find-wrapper {
     margin: 2rem;
     height: 50px;
     width: 90%;
@@ -529,8 +526,7 @@
     align-items: center;
     justify-content: flex-end;
 
-    .cat
-    {
+    .cat {
       flex: 3;
       margin-left: 1rem;
       font-size: 15px;
@@ -538,7 +534,7 @@
       font-weight: bold;
     }
 
-    .date{
+    .date {
       margin-right: 1rem;
       font-size: 15px;
       font-family: "Montserrat", sans-serif;
@@ -546,8 +542,7 @@
       color: #898989;
     }
 
-    .find-filters
-    {
+    .find-filters {
       height: 40px;
       width: 40px;
       border-radius: 40px;
@@ -632,7 +627,7 @@
   //       color: #161616;
   //       font-weight: 500;
   //       font-family: "Montserrat", sans-serif;
-        
+
   //       hr {
   //         width: 85%;
   //       }
@@ -643,7 +638,7 @@
   //       color: #161616;
   //       font-weight: 500;
   //       font-family: "Montserrat", sans-serif;
-        
+
   //       hr {
   //         width: 85%;
   //       }
@@ -688,7 +683,7 @@
       align-items: center;
       padding: 2rem;
       position: sticky;
-      top:0;
+      top: 0;
       z-index: 1000;
 
       .title {
@@ -710,7 +705,7 @@
 
     .content {
       margin: 1.5rem;
-      
+
       .clear-filters {
         text-decoration: underline;
         color: #53bfd2;
@@ -726,13 +721,10 @@
         font-weight: 500;
         font-family: "Montserrat", sans-serif;
 
-        .accord_text
-        {
-
+        .accord_text {
         }
 
-        .accord_arrow
-        {
+        .accord_arrow {
           -webkit-transform: rotate(-90deg);
         }
 
@@ -741,8 +733,7 @@
           color: #898989;
           display: flex;
 
-          .sel
-          {
+          .sel {
             border-bottom: 5px solid #53bfd2;
           }
 
@@ -758,65 +749,64 @@
         }
       }
 
-      .vertical{
+      .vertical {
         font-size: 17px;
         color: #161616;
         font-weight: 500;
         font-family: "Montserrat", sans-serif;
 
-        .listv
-        {
+        .listv {
           display: flex;
           margin-top: 20px;
         }
 
-        .litem{
+        .litem {
           height: 80px;
           width: 85px;
-          border: 1px solid #EAEAEA;
+          border: 1px solid #eaeaea;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           font-size: 12px;
-          color: #2C2C2C;
+          color: #2c2c2c;
           font-weight: 500;
           font-family: "Montserrat", sans-serif;
           background-color: white;
         }
 
-        .litem_active{
+        .litem_active {
           height: 80px;
           width: 85px;
-          border: 1px solid #EAEAEA;
+          border: 1px solid #eaeaea;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           font-size: 12px;
-          color: #2C2C2C;
+          color: #2c2c2c;
           font-weight: 500;
           font-family: "Montserrat", sans-serif;
-          background-color: #53BFD2;
+          background-color: #53bfd2;
         }
-        
+
         hr {
           width: 85%;
         }
       }
 
-      .schedule{
+      .schedule {
         font-size: 17px;
         color: #161616;
         font-weight: 500;
         font-family: "Montserrat", sans-serif;
-        
+
         hr {
           width: 85%;
         }
       }
 
-      .availability{
+      .availability {
         font-size: 17px;
         color: #161616;
         font-weight: 500;
@@ -824,9 +814,8 @@
       }
     }
 
-    .search
-    {
-      margin: 2rem;
+    .search {
+      // margin: 2rem;
       background-color: #53bfd2;
       color: white;
       height: 45px;
@@ -836,8 +825,9 @@
       font-family: "Montserrat", sans-serif;
       justify-content: center;
       cursor: pointer;
+       border: none;
+      padding: 1rem;
+      width: 100%;
     }
   }
-
-
 }
