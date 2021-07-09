@@ -142,3 +142,13 @@
         }
     }
 }
+
+
+
+    @media only screen and (max-width: 900px) {
+        .user_notify_outter_container {
+            .user_notify_inner_container{
+                display: none ;
+            }
+        }
+    }
