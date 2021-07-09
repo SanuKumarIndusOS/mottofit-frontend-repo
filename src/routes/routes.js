@@ -45,6 +45,23 @@ const routers = [
       },
     ],
   },
+  {
+    component: "MainLayout",
+    path: "/mobile",
+    auth: false,
+    name: "Dashboard",
+    exact: true,
+    childrens: [
+      {
+        path: "/login",
+        componentPath: "pages/Auth/MobileLogin/index",
+        name: "MobileLogin",
+        auth: false,
+        exact: true,
+      },
+  
+    ],
+  },
 
   {
     component: "HomeLayout",
