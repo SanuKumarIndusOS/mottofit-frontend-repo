@@ -513,16 +513,18 @@
 @media only screen and (max-width: 900px) {
   .TF_outter_container {
     margin-top: 2rem;
-    
+
     height: unset;
     .TF_inner_container {
-      
       .TF_wrapper {
-        .TF_skip
-        {
+        .TF_skip {
           display: unset;
-         
-          h2{
+
+          a {
+            font-size: 16px;
+          }
+
+          h2 {
             display: flex;
             justify-content: center;
             margin-bottom: 1rem;
@@ -532,11 +534,51 @@
         .TF_inner_wrapper {
           display: unset;
 
+          .TF_wrapper_right {
+            .TF_right {
+              margin-top: 1rem;
+            }
+          }
+
           .TF_wrapper_left {
             .TF_wrapper_content {
               padding-top: 3em;
               padding-left: 1em;
               padding-right: 1em;
+
+              .TF_form {
+                form {
+                  .TF_remember_left {
+                    margin: 1rem;
+                    input
+                    {
+                      width: 30px;
+                    }
+                    label {
+                       line-height: 20px;
+                    }
+                  }
+                  .TF_inner_form {
+                    .TF_wrapper_input {
+                      .TF_input {
+                        .inner_input {
+                          flex-direction: column;
+
+                          .react-tel-input {
+                            margin-top: 1rem;
+                          }
+                        }
+                      }
+                    }
+                  }
+                  .TF_button {
+                    display: unset;
+                    h5 {
+                      margin-top: 1rem;
+                    }
+                  }
+                }
+              }
             }
           }
         }
