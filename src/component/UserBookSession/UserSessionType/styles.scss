@@ -330,6 +330,10 @@
 }
 
 @media only screen and (max-width: 900px) {
+  .modal-heading
+  {
+    width: unset !important;
+  }
   .session_outter_container {
     height: 2000px;
     width: 100%;

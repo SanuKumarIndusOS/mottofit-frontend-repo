@@ -615,7 +615,7 @@ const FindTrainerFC = ({
         <div className="cat">
           {VerticalVal === "" ? (
             queryObject.vertical?.label === "" ? (
-              <div>All</div>
+              <div>All Verticals</div>
             ) : (
               queryObject.vertical?.label
             )
