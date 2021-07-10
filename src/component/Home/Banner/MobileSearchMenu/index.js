@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./styles.scss";
 
+import { connect } from "react-redux";
+import { updateTrainerDetails } from "action/trainerAct";
+import { bindActionCreators } from "redux";
+import { Toast } from "service/toast";
+
 import Calendar from "react-calendar";
 import moment from "moment";
 import Radio from "@material-ui/core/Radio";
@@ -11,8 +16,9 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import arrowSign from "assets/files/SVG/Arrow Next.svg";
+import { useHistory } from "react-router-dom";
 
-function MobileSearchMenu() {
+const MobileSearchMenu = ({ updateTrainerDetails }) => {
   const CyanRadio = withStyles({
     root: {
       "&$checked": {
@@ -36,25 +42,37 @@ function MobileSearchMenu() {
   const handleAvalChange = (event) => {
     setAvalValue(event.target.value);
   };
+
+  useEffect(() => {}, []);
   console.log("aswd");
 
+  const [queryObject, setqueryObject] = useState({
+    location: "virtual",
+    vertical: "",
+    date: "",
+    availability: "",
+    // inPerson: "In Person",
+  });
+
+  const history = useHistory();
+
   const search_action_mob = () => {
-    // let payload = {
-    //   query: {
-    //     location: queryObject.location,
-    //     date: moment(Calvalue).format("YYYY-MM-DD"),
-    //     trainingType: { label: VerticalVal, value: VerticalVal },
-    //     availability: Avalvalue,
-    //     // inPerson: queryObject.inPerson,
-    //     city: IPCvalue || "",
-    //   },
-    // };
-    // if (queryObject.location === "inPerson" && !payload.query.city) {
-    //   setInPersonDD(true);
-    //   return Toast({ type: "error", message: "City is mandatory" });
-    // }
-    // updateTrainerDetails(payload);
-    // history.push("/trainer/find");
+    let payload = {
+      query: {
+        location: queryObject.location,
+        date: moment(Calvalue).format("YYYY-MM-DD"),
+        trainingType: { label: VerticalVal, value: VerticalVal },
+        availability: Avalvalue,
+        // inPerson: queryObject.inPerson,
+        city: IPCvalue || "",
+      },
+    };
+    if (queryObject.location === "inPerson" && !payload.query.city) {
+      //  setInPersonDD(true);
+      return Toast({ type: "error", message: "City is mandatory" });
+    }
+    updateTrainerDetails(payload);
+    history.push("/trainer/find");
   };
 
   return (
@@ -306,6 +324,24 @@ function MobileSearchMenu() {
       </div>
     </div>
   );
-}
+};
 
-export default MobileSearchMenu;
+const mapStateToProps = (state) => ({
+  trainerQueryData: state.trainerReducer.query,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      updateTrainerDetails,
+    },
+    dispatch
+  );
+};
+
+const MobileSearchMenu_r = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MobileSearchMenu);
+
+export default MobileSearchMenu_r;
