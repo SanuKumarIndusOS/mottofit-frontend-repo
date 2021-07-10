@@ -22,6 +22,7 @@ const routers = [
   //     },
   //   ],
   // },
+
   {
     component: "MainLayout",
     path: "/forgot",
@@ -65,8 +66,23 @@ const routers = [
         name: "HamMenu",
         auth: false,
         exact: true,
-      }
-  
+      },
+    ],
+  },
+  {
+    component: "EmptyLayout",
+    path: "/mobiles",
+    auth: false,
+    name: "MobileEmpty",
+    exact: false,
+    childrens: [
+      {
+        path: "/filter",
+        componentPath: "pages/MobileFilter/index",
+        name: "FilterMenu",
+        auth: false,
+        exact: false,
+      },
     ],
   },
 
@@ -144,7 +160,6 @@ const routers = [
         exact: true,
       },
 
-      
       {
         path: "/bookings",
         componentPath: "pages/AdminDashboard/AdminBookings/AdminBookings",
