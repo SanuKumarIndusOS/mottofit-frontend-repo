@@ -18,6 +18,7 @@ import { api } from "../../../../service/api";
 import { Toast } from "../../../../service/toast";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
+import moment from "moment";
 
 const TrainerSessionFC = ({
   sessionData,
@@ -58,7 +59,7 @@ const TrainerSessionFC = ({
           upcoming: "upcomingSessions",
           past: "pastSessions",
         };
-        // console.log(data);
+        console.log(data);
 
         setTotalData((prevData) => ({
           ...prevData,
@@ -88,6 +89,8 @@ const TrainerSessionFC = ({
             prevDate: getFormatDate(sessionStartTime, "DD MMMM YYYY", true),
             sessionStatus,
             userDetail,
+            sessionDate,
+            sessionStartTime,
             id,
           })
         );
@@ -481,14 +484,41 @@ const TabTwo = ({
                               <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>
-                              <button
+                              {moment(
+                                moment
+                                  .tz("America/New_York")
+                                  .format("YYYY MM DD HH:MM")
+                              ).isAfter(
+                                moment
+                                  .tz(data.sessionStartTime, "America/New_York")
+                                  .format("YYYY MM DD HH:MM")
+                              ) ? (
+                                <button
                                 className="text-primary"
                                 onClick={() =>
-                                  handleSessionStatus(data.id, "completed")
+                                    handleSessionStatus(data.id, "completed")
+                                  // {
+                                  //   console.log(
+                                  //     data,
+                                  //     moment
+                                  //       .tz("America/New_York")
+                                  //       .format("YYYY MM DD HH:MM"),
+                                  //     moment
+                                  //       .tz(
+                                  //         data.sessionStartTime,
+                                  //         "America/New_York"
+                                  //       )
+                                  //       .format("YYYY MM DD HH:MM")
+                                  //   );
+                                  // }
                                 }
                               >
                                 Complete
                               </button>
+                              ) : (
+                               null
+                              )}
+                         
                             </div>
                           ) : (
                             <div>
