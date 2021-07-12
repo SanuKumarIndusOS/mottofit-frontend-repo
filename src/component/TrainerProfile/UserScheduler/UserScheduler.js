@@ -145,6 +145,8 @@ function UserSchedulerClass(props) {
 
     window.scrollTo(0, 0);
 
+    console.log("s");
+
     // console.log(props);
 
     // setuserSlots([props.startTime, props.endTime]);
@@ -383,24 +385,38 @@ function UserSchedulerClass(props) {
       switch (tempValue) {
         case "EarlyBird":
           setTime(early_bird);
+          getAvailableSlots(startWeek, endWeek);
+          populate(startWeek, endWeek);
           break;
         case "RiseAndShine":
           setTime(rise_shine);
+          getAvailableSlots(startWeek, endWeek);
+          populate(startWeek, endWeek);
           break;
         case "MidDayBreak1":
           setTime(mid_day);
+          getAvailableSlots(startWeek, endWeek);
+          populate(startWeek, endWeek);
           break;
         case "MidDayBreak2":
           setTime(mid_day_2);
+          getAvailableSlots(startWeek, endWeek);
+          populate(startWeek, endWeek);
           break;
         case "HappyHours":
           setTime(happy_hour);
+          getAvailableSlots(startWeek, endWeek);
+          populate(startWeek, endWeek);
           break;
         case "NeverTooLate":
           setTime(never_too_late);
+          getAvailableSlots(startWeek, endWeek);
+          populate(startWeek, endWeek);
           break;
         default:
           setTime(early_bird);
+          getAvailableSlots(startWeek, endWeek);
+          populate(startWeek, endWeek);
           break;
       }
 
