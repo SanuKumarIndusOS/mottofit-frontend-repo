@@ -140,12 +140,12 @@ function UserSchedulerClass(props) {
   const [aslotKeys, setAslotKeys] = React.useState();
 
   useEffect(() => {
-    getAvailableSlots(startWeek, endWeek);
-    populate(startWeek, endWeek);
+    // getAvailableSlots(startWeek, endWeek);
+    // populate(startWeek, endWeek);
 
     window.scrollTo(0, 0);
 
-    console.log("s");
+    // console.log("s");
 
     // console.log(props);
 
@@ -368,6 +368,13 @@ function UserSchedulerClass(props) {
     }
   };
 
+  // React.useEffect(() => {
+  //   console.log(TimeSlot);
+    
+  //   populate(startWeek, endWeek);
+  //  }, [TimeSlot])
+
+
   useEffect(() => {
     let tempValue = props.queryObject?.availability?.value;
 
@@ -385,38 +392,31 @@ function UserSchedulerClass(props) {
       switch (tempValue) {
         case "EarlyBird":
           setTime(early_bird);
-          getAvailableSlots(startWeek, endWeek);
-          populate(startWeek, endWeek);
+        
           break;
         case "RiseAndShine":
           setTime(rise_shine);
-          getAvailableSlots(startWeek, endWeek);
-          populate(startWeek, endWeek);
+         
           break;
         case "MidDayBreak1":
           setTime(mid_day);
-          getAvailableSlots(startWeek, endWeek);
-          populate(startWeek, endWeek);
+         
           break;
         case "MidDayBreak2":
           setTime(mid_day_2);
-          getAvailableSlots(startWeek, endWeek);
-          populate(startWeek, endWeek);
+          
           break;
         case "HappyHours":
           setTime(happy_hour);
-          getAvailableSlots(startWeek, endWeek);
-          populate(startWeek, endWeek);
+          
           break;
         case "NeverTooLate":
           setTime(never_too_late);
-          getAvailableSlots(startWeek, endWeek);
-          populate(startWeek, endWeek);
+         
           break;
         default:
           setTime(early_bird);
-          getAvailableSlots(startWeek, endWeek);
-          populate(startWeek, endWeek);
+         
           break;
       }
 
@@ -428,6 +428,7 @@ function UserSchedulerClass(props) {
 
       // console.log(selectedTime);
     }
+
 
     let payload = {
       query: {
