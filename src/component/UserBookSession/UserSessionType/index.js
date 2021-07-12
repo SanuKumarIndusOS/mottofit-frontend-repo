@@ -74,13 +74,14 @@ const UserBookSessionFC = ({
 
   React.useEffect(() => {
     if (!localStorage.getItem("token")) {
-      let reduxData = {
-        isModelOpen: true,
-      };
-
+      // let reduxData = {
+      //   isModelOpen: true,
+      // };
+   
+      history.push('/mobile/login')
       history.push(`?${encodeURIComponent("nextpath=/user/session-type")}`);
 
-      updateUserDetails(reduxData);
+    //  updateUserDetails(reduxData);
     }
 
     const tempTrainerData =
