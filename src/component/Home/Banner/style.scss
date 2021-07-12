@@ -340,7 +340,7 @@
         }
 
         .search {
-          margin: 2rem;
+         
           background-color: #53bfd2;
           color: white;
           height: 45px;
@@ -350,6 +350,9 @@
           font-family: "Montserrat", sans-serif;
           justify-content: center;
           cursor: pointer;
+          border: none;
+          padding: 1rem;
+          width: 100%;
         }
       }
 
