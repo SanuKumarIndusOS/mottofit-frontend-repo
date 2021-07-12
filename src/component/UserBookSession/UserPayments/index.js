@@ -105,35 +105,35 @@ const UserPaymentsFC = ({
       paidByUser: trainingtype === "1on1",
     };
 
-    // console.log(scheduleBody);
+     console.log(typeof scheduleBody.sessionStartTime);
 
-    scheduleSession(scheduleBody)
-      .then((res) => {
-        if (res.session.trainingType === "1on1") {
-          history.push("/users/dashboard/session");
-        } else if (
-          res.session.trainingType === "social" ||
-          res.session.trainingType === "class"
-        ) {
-          let reduxData = {
-            submittedData: {
-              ...res.session,
-            },
-          };
-          // console.log(res);
-          restProps?.updateUserDetails(reduxData);
-          history.push("/user/with-friends");
-        }
+    // scheduleSession(scheduleBody)
+    //   .then((res) => {
+    //     if (res.session.trainingType === "1on1") {
+    //       history.push("/users/dashboard/session");
+    //     } else if (
+    //       res.session.trainingType === "social" ||
+    //       res.session.trainingType === "class"
+    //     ) {
+    //       let reduxData = {
+    //         submittedData: {
+    //           ...res.session,
+    //         },
+    //       };
+    //       // console.log(res);
+    //       restProps?.updateUserDetails(reduxData);
+    //       history.push("/user/with-friends");
+    //     }
 
-        // restProps.resetUserDetails();
-      })
-      .catch((error) => {
-        Toast({
-          type: "error",
-          message: error.message || "Something went wrong",
-        });
-        console.log(error);
-      });
+    //     // restProps.resetUserDetails();
+    //   })
+    //   .catch((error) => {
+    //     Toast({
+    //       type: "error",
+    //       message: error.message || "Something went wrong",
+    //     });
+    //     console.log(error);
+    //   });
   };
 
   const tempTrainerData = trainerData || selectedTrainerData;
