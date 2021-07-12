@@ -79,7 +79,9 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
     <div className="mobile-search-menu">
       <div className="header">
         <div className="title">Find Your Best Match</div>
-        <div className="close" onClick={() => {}}>
+        <div className="close" onClick={() => {
+          history.goBack()
+        }}>
           x
         </div>
       </div>
