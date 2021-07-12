@@ -23,6 +23,7 @@ import { updateUserDetails } from "action/userAct";
 import { Toast } from "../../../service/toast";
 import { GoogleLoginButton } from "../../common/SocialLogin/GoogleLoginButton";
 import { SocialLogin } from "component/common/SocialLogin";
+import { nextPathPusher } from "../../../helpers";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
@@ -259,7 +260,14 @@ const SignInFC = ({
                 <div className="login_items">
                   <h4>Don't have an account yet?</h4>
                   <div className="links_item_signup">
-                    <Link to="/user/signup" onClick={() => setShowModel(false)}>
+                    <Link
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setShowModel(false);
+                        nextPathPusher("/user/signup");
+                      }}
+                    >
                       User Sign Up
                       <BlueHoverButton />
                     </Link>

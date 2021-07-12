@@ -42,6 +42,8 @@ const TrainerMessageClass = ({
   unSubscribeAct,
   unSubscribeClientAct,
 }) => {
+  const isUser = parseInt(localStorage.getItem("type")) === 3;
+
   const [individual_list, setIndividual] = useState([]);
   const [socialGroup_list, setSocialGroup_list] = useState([]);
   const [admin_list, setAdmin_list] = useState([]);
@@ -59,13 +61,15 @@ const TrainerMessageClass = ({
     admin: 0,
   });
 
-  const [currentTab, setCurrentTab] = useState("invited");
+  const [currentTab, setCurrentTab] = useState(isUser ? "invited" : "upcoming");
 
   // Make Id dynamic
   useEffect(() => {
     // Get Contact_list
 
     initClientDispatch();
+
+    // handleTabChange(isUser ? "invited" : "upcoming");
 
     return () => {
       unSubscribeClientAct();
@@ -127,8 +131,6 @@ const TrainerMessageClass = ({
     getChannelDetails(tab);
   }
 
-  const isUser = parseInt(localStorage.getItem("type")) === 3;
-
   return (
     <>
       <div className="main_message_container">
@@ -137,7 +139,7 @@ const TrainerMessageClass = ({
           <div className="message_inner">
             <div className="message_wrapper">
               <Tabs
-                defaultTab="invited"
+                defaultTab={isUser ? "invited" : "upcoming"}
                 onChange={(tab) => {
                   handleTabChange(tab);
                 }}

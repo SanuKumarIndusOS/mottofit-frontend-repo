@@ -17,6 +17,7 @@ import validate from "service/validation";
 import ReactPhoneInput from "react-phone-input-2";
 import { Toast } from "service/toast";
 import { SocialLogin } from "component/common/SocialLogin";
+import { nextPathReRouter } from "../../../helpers";
 
 const SignUpFC = ({ loginOrSignupAct }) => {
   const [data, setData] = useState({
@@ -75,6 +76,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
     loginOrSignupAct(userSignUp, payload)
       .then(() => {
         localStorage.setItem("type", 3);
+
+        if (nextPathReRouter()) return;
         history.push("/trainer/find");
       })
       .catch((error) => {
