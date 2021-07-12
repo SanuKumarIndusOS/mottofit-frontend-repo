@@ -77,3 +77,17 @@ export const nextPathReRouter = () => {
 
   return nextPath;
 };
+
+export const nextPathPusher = (url) => {
+  const { search } = history.location;
+  let nextPathTitle = encodeURIComponent("nextpath=");
+  const nextPath = search.split("?") ? search.split(nextPathTitle)[1] : "";
+
+  let finalURL = url;
+
+  if (nextPath) {
+    finalURL = `${url}?${encodeURIComponent("nextpath=")}${nextPath}`;
+  }
+
+  history.push(finalURL);
+};
