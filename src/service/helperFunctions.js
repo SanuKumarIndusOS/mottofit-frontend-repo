@@ -79,7 +79,7 @@ export const convertToESTMs = (time) => {
   console.log(`${tempTime} GMT-0400`, "q2");
 
   let temp = moment(`${tempTime} GMT-0400`).valueOf();
-
+  console.log(typeof temp, "temp")
   return temp;
 };
 
