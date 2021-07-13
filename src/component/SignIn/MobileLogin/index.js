@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import "./styles.scss";
 
@@ -13,7 +12,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { login, loginOrSignUp } from "action/authAct";
 import { trainerDetail } from "action/trainerAct";
-import { history, nextPathReRouter } from "helpers";
+import { history, nextPathReRouter, nextPathPusher } from "helpers";
 import validate from "service/validation";
 import { updateUserDetails } from "action/userAct";
 import { Toast } from "../../../service/toast";
@@ -21,7 +20,6 @@ import { GoogleLoginButton } from "../../common/SocialLogin/GoogleLoginButton";
 import { SocialLogin } from "component/common/SocialLogin";
 
 const Login = ({ loginAct, trainerDetail, updateUserDetails }) => {
- 
   const myRef = useRef(null);
   const [data, setData] = useState({
     email: "",
@@ -145,8 +143,6 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails }) => {
     return !fieldInvalidList;
   };
 
-
-
   return (
     <div className="mobile_login">
       <div className="outter_container">
@@ -232,15 +228,21 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails }) => {
           <div className="login_items">
             <h4>Don't have an account yet?</h4>
             <div className="links_item_signup">
-              <Link to="/user/signup"
-               // onClick={() => setShowModel(false)}
-               >
+              <Link
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  // setShowModel(false);
+                  nextPathPusher("/user/signup");
+                }}
+              >
                 User Sign Up
                 <BlueHoverButton />
               </Link>
-              <Link to="/trainer/signup"
-              //  onClick={() => setShowModel(false)}
-               >
+              <Link
+                to="/trainer/signup"
+                //  onClick={() => setShowModel(false)}
+              >
                 Trainer Sign Up
                 <BlueHoverButton />
               </Link>
