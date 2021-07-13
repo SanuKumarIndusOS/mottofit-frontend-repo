@@ -27,3 +27,29 @@
         }
     }
 }
+
+.mobile_banner
+{
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+
+    .work_banner{
+        display: none;
+    }
+
+    .mobile_banner
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100vw;
+    margin-top: 70px;
+    background-color: #53bfd2;
+    color: white;
+}
+
+
+}

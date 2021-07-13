@@ -13,6 +13,10 @@ const HowItWork = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="mobile_banner">
+            <h2>How Motto Works</h2>
+            </div>
         </>
     );
 };
