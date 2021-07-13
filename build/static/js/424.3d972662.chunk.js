@@ -1,0 +1,1 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[424],{518:function(t,a,o){"use strict";o.r(a),a.default=o.p+"static/media/Yoga Image.adf49aa8.png"}}]);
