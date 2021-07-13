@@ -7,7 +7,7 @@ export class EmptyLayout extends Component {
     console.log(children, "asdasd");
     return (
       <>
-        <div className="main-layout">{children}</div>
+        <div className="empty-layout">{children}</div>
       </>
     );
   }
