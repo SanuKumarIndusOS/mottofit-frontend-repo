@@ -17,6 +17,20 @@
           display: grid;
           grid-template-columns: auto 30% 35%;
           align-items: flex-start;
+
+          .not_found {
+            background-color: #53bfd2;
+            height: 400px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: capitalize;
+            font-size: 90px;
+            color: white;
+            font-weight: bold;
+            
+          }
           img {
             width: 350px;
             height: 400px;
@@ -537,13 +551,12 @@
 }
 
 @media only screen and (max-width: 900px) {
-  .react-responsive-modal-modal
-  {
+  .react-responsive-modal-modal {
     margin: 0px !important;
     max-width: 80vw !important;
   }
 
-  .modal-heading{
+  .modal-heading {
     width: unset !important;
   }
   .profile_main {
@@ -556,6 +569,20 @@
           height: unset;
           .inner_profile {
             display: block;
+
+            .not_found {
+              background-color: #53bfd2;
+              height: 200px;
+              width: 175px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-transform: capitalize;
+              font-size: 70px;
+              color: white;
+              font-weight: bold;
+              
+            }
 
             .profile_header_inner {
               display: none;
@@ -644,20 +671,18 @@
       z-index: 1000;
       .full-carousel {
         max-width: 100vw;
-        .full-carousel-inner{
-          .full-carousel-item
-          {
+        .full-carousel-inner {
+          .full-carousel-item {
             padding: unset;
             height: unset;
             max-width: unset;
             width: unset;
             top: 200px;
-            img
-            {
+            img {
               width: 90vw;
             }
           }
-        } 
+        }
       }
     }
   }

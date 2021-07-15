@@ -184,7 +184,8 @@ const TrainerProfileClass = ({
                     }}
                   />
                 ) : (
-                  <img src={NotFoundImage} alt="Not Found Image" />
+                  <div className="not_found" >  {trainerProfileData.firstName[0]}</div>
+                  //<img src={NotFoundImage} alt="Not Found Image" />
                 )}
                 <div className="profile_header_inner">
                   <h2>
