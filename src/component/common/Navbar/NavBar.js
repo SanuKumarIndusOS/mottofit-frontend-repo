@@ -156,7 +156,7 @@ const NavBarFC = ({
       <div className="mobile_navbar">
         <div className="mobile_hamburger_menu">
           {" "}
-          <Link to="/mobile/menu" style={{ color: "lightgrey" }}>
+          <Link to="/mobiles/menu" style={{ color: "lightgrey" }}>
             &#x2630;
           </Link>
         </div>

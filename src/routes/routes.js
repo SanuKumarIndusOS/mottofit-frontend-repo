@@ -60,13 +60,7 @@ const routers = [
         auth: false,
         exact: true,
       },
-      {
-        path: "/menu",
-        componentPath: "pages/MobileHamburger/index",
-        name: "HamMenu",
-        auth: false,
-        exact: true,
-      },
+     
     ],
   },
   {
@@ -82,6 +76,13 @@ const routers = [
         name: "FilterMenu",
         auth: false,
         exact: false,
+      },
+      {
+        path: "/menu",
+        componentPath: "pages/MobileHamburger/index",
+        name: "HamMenu",
+        auth: false,
+        exact: true,
       },
     ],
   },
