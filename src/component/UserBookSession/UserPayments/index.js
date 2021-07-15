@@ -105,7 +105,7 @@ const UserPaymentsFC = ({
       paidByUser: trainingtype === "1on1",
     };
 
-     console.log(typeof scheduleBody.sessionStartTime, scheduleBody.sessionStartTime ,"Time");
+     console.log( scheduleBody.sessionEndTime, scheduleBody.sessionStartTime ,"Time");
 
     scheduleSession(scheduleBody)
       .then((res) => {

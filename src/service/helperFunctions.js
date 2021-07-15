@@ -74,12 +74,13 @@ export const addDate = (date, number = 1, unit = "h") => {
 
 export const convertToESTMs = (time) => {
   // var newYork = moment.tz(time, "America/New_York");
-  const tempTime = moment(time).format("YYYY-MM-DD hh:mm A");
+  const tempTime = moment(time).format("YYYY/MM/DD hh:mm A");
 
   console.log(`${tempTime} GMT-0400`, "q2");
 
-  let temp = moment(`${tempTime} GMT-0400`).valueOf();
+  let temp =  moment(`${tempTime} GMT-0400`).valueOf();
   console.log(typeof temp, temp, "temp")
+  console.log(moment.tz(temp, "America/New_York").format("YYYY MM DD HH:MM A"));
   return temp;
 };
 
