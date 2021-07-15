@@ -59,7 +59,7 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
   const search_action_mob = () => {
     let payload = {
       query: {
-        location: queryObject.location,
+        location: LocationVal,
         date: moment(Calvalue).format("YYYY-MM-DD"),
         trainingType: { label: VerticalVal, value: VerticalVal },
         availability: Avalvalue,
@@ -71,6 +71,7 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
       //  setInPersonDD(true);
       return Toast({ type: "error", message: "City is mandatory" });
     }
+    console.log(payload);
     updateTrainerDetails(payload);
     history.push("/trainer/find");
   };
@@ -79,9 +80,12 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
     <div className="mobile-search-menu">
       <div className="header">
         <div className="title">Find Your Best Match</div>
-        <div className="close" onClick={() => {
-          history.goBack()
-        }}>
+        <div
+          className="close"
+          onClick={() => {
+            history.goBack();
+          }}
+        >
           x
         </div>
       </div>

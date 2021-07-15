@@ -260,7 +260,8 @@ const TrainWithFriendsClass = ({
         selectedTrainerData,
         submittedData: { ...data },
       };
-
+          
+     
       updateUserDetails(reduxData);
     });
   }, []);
@@ -295,6 +296,8 @@ const TrainWithFriendsClass = ({
     if (!validateFields(validateData)) return;
     editSessionData.body = payload;
 
+
+  console.log("hit,", editSessionData);
     api({ ...editSessionData })
       .then((data) => {
         Toast({ type: "success", message: data.message || "Success" });
