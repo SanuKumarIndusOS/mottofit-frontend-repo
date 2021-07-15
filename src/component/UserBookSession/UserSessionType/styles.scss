@@ -335,7 +335,8 @@
     width: unset !important;
   }
   .session_outter_container {
-    height: 2000px;
+    height: unset;
+    margin-bottom: 5rem;
     width: 100%;
     .seesion_inner_container {
       .link_wrapper {
