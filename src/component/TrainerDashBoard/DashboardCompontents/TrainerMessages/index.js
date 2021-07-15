@@ -108,10 +108,12 @@ const TrainerMessageClass = ({
 
   function PopulateContacts(channelID, members, channelData) {
     chatClientInstance.joinChannelByID(channelID).then(() => {
+    
       let reduxData = {
         currentChannelMembers: members,
         channelData,
       };
+      console.log(reduxData);
 
       updateMessagingDetails(reduxData);
     });
@@ -187,7 +189,10 @@ const TrainerMessageClass = ({
                                       )
                                     }
                                   >
-                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div style={{display:"flex"}}>
+                                    <h3>{item["chatTitle"]|| "" } </h3>
+                                    <h3>&ensp;{(item["members"].length > 2 )? "+  "+(item["members"].length-1):null}</h3>
+                                    </div>
                                     <div>
                                       {body && (
                                         <p>{`${body?.slice(0, 100)}${
