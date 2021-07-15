@@ -102,13 +102,12 @@ const TrainerMessageClass = ({
       })
       .catch((err) => {
         setMessageListLoading(false);
-       // Toast({ type: "error", message: err.message || "error" });
+        // Toast({ type: "error", message: err.message || "error" });
       });
   };
 
   function PopulateContacts(channelID, members, channelData) {
     chatClientInstance.joinChannelByID(channelID).then(() => {
-    
       let reduxData = {
         currentChannelMembers: members,
         channelData,
@@ -189,9 +188,14 @@ const TrainerMessageClass = ({
                                       )
                                     }
                                   >
-                                    <div style={{display:"flex"}}>
-                                    <h3>{item["chatTitle"]|| "" } </h3>
-                                    <h3>&ensp;{(item["members"].length > 2 )? "+  "+(item["members"].length-1):null}</h3>
+                                    <div style={{ display: "flex" }}>
+                                      <h3>{item["chatTitle"] || ""} </h3>
+                                      <h3>
+                                        &ensp;
+                                        {item["members"].length > 2
+                                          ? "+  " + (item["members"].length - 1)
+                                          : null}
+                                      </h3>
                                     </div>
                                     <div>
                                       {body && (
@@ -291,7 +295,15 @@ const TrainerMessageClass = ({
                                       )
                                     }
                                   >
-                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div style={{ display: "flex" }}>
+                                      <h3>{item["chatTitle"] || ""}</h3>
+                                      <h3>
+                                        &ensp;
+                                        {item["members"].length > 2
+                                          ? "+  " + (item["members"].length - 1)
+                                          : null}
+                                      </h3>
+                                    </div>
                                     <div>
                                       {body && (
                                         <p>{`${body?.slice(0, 100)}${
@@ -362,7 +374,15 @@ const TrainerMessageClass = ({
                                       )
                                     }
                                   >
-                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div style={{ display: "flex" }}>
+                                      <h3>{item["chatTitle"] || ""}</h3>
+                                      <h3>
+                                        &ensp;
+                                        {item["members"].length > 2
+                                          ? "+  " + (item["members"].length - 1)
+                                          : null}
+                                      </h3>
+                                    </div>
                                     <div>
                                       {body && (
                                         <p>{`${body?.slice(0, 100)}${
@@ -435,7 +455,15 @@ const TrainerMessageClass = ({
                                       )
                                     }
                                   >
+                                       <div style={{display:"flex"}}>
                                     <h3>{item["chatTitle"] || ""}</h3>
+                                    <h3>
+                                      &ensp;
+                                      {item["members"].length > 2
+                                        ? "+  " + (item["members"].length - 1)
+                                        : null}
+                                    </h3>
+                                    </div>
                                     <div>
                                       {body && (
                                         <p>{`${body?.slice(0, 100)}${
