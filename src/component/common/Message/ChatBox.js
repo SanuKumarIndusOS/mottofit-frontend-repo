@@ -133,7 +133,7 @@ class ChatBoxClass extends Component {
     if (!isDataPresent)
       return (
         <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-          {!isLoading ? <h3>No People</h3> : ""}
+          {!isLoading ? <h3>No New Messages</h3> : ""}
         </div>
       );
     return (
