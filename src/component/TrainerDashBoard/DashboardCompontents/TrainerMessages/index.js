@@ -102,7 +102,7 @@ const TrainerMessageClass = ({
       })
       .catch((err) => {
         setMessageListLoading(false);
-        Toast({ type: "error", message: err.message || "error" });
+       // Toast({ type: "error", message: err.message || "error" });
       });
   };
 
