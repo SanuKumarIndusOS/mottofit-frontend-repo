@@ -201,6 +201,33 @@ const TrainerMessageClass = ({
                                       )}
                                     </div>
                                   </div>
+
+                                  {/* <div
+                                    className="message_link_notify_mobile"
+                                    onClick={() => {
+                                      PopulateContacts(
+                                        item["channelUniqueName"],
+                                        item["members"],
+                                        item
+                                      );
+                                      alert("mob");
+                                      history.push("mobiles/chat")
+                                    }}
+                                  >
+                                    <h3>{item["chatTitle"] || ""}</h3>
+                                    <div>
+                                      {body && (
+                                        <p>{`${body?.slice(0, 100)}${
+                                          body?.length > 100 ? "..." : ""
+                                        }`}</p>
+                                      )}
+                                      {date_updated && (
+                                        <span className="msg-timestamp-left">
+                                          {getFormatDate(date_updated, "LT")}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div> */}
                                 </div>
                               </div>
                             );

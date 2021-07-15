@@ -68,7 +68,7 @@ const routers = [
     path: "/mobiles",
     auth: false,
     name: "MobileEmpty",
-    exact: false,
+    exact: true,
     childrens: [
       {
         path: "/filter",
@@ -81,6 +81,13 @@ const routers = [
         path: "/menu",
         componentPath: "pages/MobileHamburger/index",
         name: "HamMenu",
+        auth: false,
+        exact: false,
+      },
+      {
+        path: "/chat",
+        componentPath: "pages/MobileChatBox/index",
+        name: "ChatMobile",
         auth: false,
         exact: true,
       },
