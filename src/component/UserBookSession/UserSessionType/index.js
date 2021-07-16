@@ -299,20 +299,20 @@ const UserBookSessionFC = ({
     if (tempSocialSession) {
       if (!isNaN(virtualSessionfor2People)) {
         virtualSessionSocial["2people"] = {
-          label: "2 People",
+          label: "session (2 people)",
           value: virtualSessionfor2People,
         };
       }
       if (!isNaN(virtualSessionfor3People)) {
         virtualSessionSocial["3people"] = {
-          label: "3 People",
+          label: "session (3 people)",
           value: virtualSessionfor3People,
         };
       }
 
       if (!isNaN(virtualSessionfor4People)) {
         virtualSessionSocial["4people"] = {
-          label: "4 People",
+          label: "session (4 people)",
           value: virtualSessionfor4People,
         };
       }
@@ -354,7 +354,7 @@ const UserBookSessionFC = ({
       ) {
         inPersonSocial["clientLocation"]["2people"] = {
           value: parseInt(inPeronAtClientLocationfor2People),
-          label: "2 People",
+          label: "session (2 people)",
         };
       }
       if (
@@ -363,7 +363,7 @@ const UserBookSessionFC = ({
       ) {
         inPersonSocial["clientLocation"]["3people"] = {
           value: parseInt(inPeronAtClientLocationfor3People),
-          label: "3 People",
+          label: "session (3 people)",
         };
       }
       if (
@@ -372,7 +372,7 @@ const UserBookSessionFC = ({
       ) {
         inPersonSocial["clientLocation"]["4people"] = {
           value: parseInt(inPeronAtClientLocationfor4People),
-          label: "4 People",
+          label: "session (4 people)",
         };
       }
     }
@@ -384,7 +384,7 @@ const UserBookSessionFC = ({
       ) {
         inPersonSocial["trainerLocation"]["2people"] = {
           value: parseInt(inPeronAtTrainerLocationfor2People),
-          label: "2 People",
+          label: "session (2 people)",
         };
       }
       if (
@@ -393,7 +393,7 @@ const UserBookSessionFC = ({
       ) {
         inPersonSocial["trainerLocation"]["3people"] = {
           value: parseInt(inPeronAtTrainerLocationfor3People),
-          label: "3 People",
+          label: "session (3 people)",
         };
       }
       if (
@@ -402,7 +402,7 @@ const UserBookSessionFC = ({
       ) {
         inPersonSocial["trainerLocation"]["4people"] = {
           value: parseInt(inPeronAtTrainerLocationfor4People),
-          label: "4 People",
+          label: "session (4 people)",
         };
       }
     }
@@ -687,7 +687,7 @@ const UserBookSessionFC = ({
                                 <h6 className="mt-3">
                                   {`$${pricingObject.sessionOneonOne}`}
                                   <span>
-                                    / Session{" "}
+                                    / session{" "}
                                     <img
                                       src={QMark}
                                       alt="icon"
@@ -812,7 +812,7 @@ const UserBookSessionFC = ({
                                 <h6 className="mt-3">
                                   {`$${pricingObject?.virtualSessionClass}`}
                                   <span>
-                                    / 12 People{" "}
+                                    / session (5-15 people){" "}
                                     <img
                                       src={QMark}
                                       alt="icon"
@@ -898,7 +898,7 @@ const UserBookSessionFC = ({
                                     ]?.value
                                   }`}
                                   <span>
-                                    / Session{" "}
+                                    / session{" "}
                                     <img
                                       src={QMark}
                                       alt="icon"
