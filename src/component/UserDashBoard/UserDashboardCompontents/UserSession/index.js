@@ -380,7 +380,7 @@ const TabOne = ({
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
               {tabData?.map((data, index) => {
-                // console.log(data, "datadata");
+                 console.log(data, "datadata");
 
                 return (
                   <React.Fragment key={index}>
