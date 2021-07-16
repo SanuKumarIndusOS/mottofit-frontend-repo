@@ -38,7 +38,8 @@ class RoutesClass extends Component {
       "/trainer/find",
       "/mobile/login",
       "/mobiles/menu",
-      "/mobiles/filter"
+      "/mobiles/filter",
+      "/mobiles/chat"
     ];
 
     const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];

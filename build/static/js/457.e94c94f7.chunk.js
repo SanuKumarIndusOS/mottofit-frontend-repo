@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[457],{439:function(t,s,a){"use strict";a.r(s),s.default=a.p+"static/media/Image 1.5667afc3.png"}}]);

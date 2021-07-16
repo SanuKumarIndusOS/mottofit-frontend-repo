@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[362],{461:function(t,s,e){"use strict";e.r(s),s.default=e.p+"static/media/Rise_Shine_Inactive.fb11fce5.svg"}}]);

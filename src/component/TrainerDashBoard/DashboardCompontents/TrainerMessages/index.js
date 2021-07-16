@@ -193,7 +193,7 @@ const TrainerMessageClass = ({
                                       <h3>
                                         &ensp;
                                         {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 1)
+                                          ? "+  " + (item["members"].length - 2)
                                           : null}
                                       </h3>
                                     </div>
@@ -300,7 +300,7 @@ const TrainerMessageClass = ({
                                       <h3>
                                         &ensp;
                                         {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 1)
+                                          ? "+  " + (item["members"].length - 2)
                                           : null}
                                       </h3>
                                     </div>
@@ -379,7 +379,7 @@ const TrainerMessageClass = ({
                                       <h3>
                                         &ensp;
                                         {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 1)
+                                          ? "+  " + (item["members"].length - 2)
                                           : null}
                                       </h3>
                                     </div>
@@ -460,7 +460,7 @@ const TrainerMessageClass = ({
                                     <h3>
                                       &ensp;
                                       {item["members"].length > 2
-                                        ? "+  " + (item["members"].length - 1)
+                                        ? "+  " + (item["members"].length - 2)
                                         : null}
                                     </h3>
                                     </div>
