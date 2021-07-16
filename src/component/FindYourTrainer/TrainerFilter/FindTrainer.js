@@ -190,12 +190,14 @@ const FindTrainerFC = ({
       setqueryObject(payload.query);
 
       updateTrainerDetails(payload);
+      console.log(payload);
     }
 
     let reduxData = {
       selectedTimes: [],
     };
 
+    console.log(reduxData);
     updateUserDetails(reduxData);
   }, []);
 
@@ -414,6 +416,8 @@ const FindTrainerFC = ({
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
+    console.log(payload);
+
     updateTrainerDetails(payload);
 
     getTrainerDataByQuery(payload.query);
@@ -599,7 +603,7 @@ const FindTrainerFC = ({
               onClick={TriggerDropDownTrainerAvailability}
             >
               <img src={AvailabilityIcon} alt="icon" />
-              <p>{queryObject.availability?.label || "Select a Time"}</p>
+              <p>{queryObject.availability?.label?.split('(')[0] || "Select a Time"}</p>
             </div>
             {DropdownAvailability}
           </div>

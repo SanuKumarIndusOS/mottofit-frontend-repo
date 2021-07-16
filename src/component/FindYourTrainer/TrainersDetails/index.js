@@ -78,9 +78,10 @@ const TrainerCardsFC = (props) => {
               <div
                 className="card cursor-pointer"
                 key={index}
-                onClick={() => handleClick(data, true)}
+                // onClick={() => handleClick(data, true)}
               >
                 <img
+                 onClick={() => handleClick(data, true)}
                   className="card-img-top"
                   src={
                     bestMatchData[data].profilePicture ||

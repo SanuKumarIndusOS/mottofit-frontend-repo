@@ -24,27 +24,27 @@ import { Toast } from "service/toast";
 import BlueHoverButton from "component/common/BlueArrowButton";
 const timeZone = [
   {
-    label: "Early Bird",
+    label: "EARLY BIRD (5AM-8AM)",
     value: "EarlyBird",
   },
   {
-    label: "Rise & Shine",
+    label: "RISE & SHINE (8AM-11AM)",
     value: "RiseAndShine",
   },
   {
-    label: "Mid-Day Break",
+    label: "MID-DAY BREAK (11:30AM-2PM)",
     value: "MidDayBreak1",
   },
   {
-    label: "Mid-Day Lunchtime",
+    label: "MID-DAY LUNCHTIME (2AM-5PM)",
     value: "MidDayBreak2",
   },
   {
-    label: "Happy Hour",
+    label: "HAPPY HOUR (5PM-8PM)",
     value: "HappyHours",
   },
   {
-    label: "Never Too Late",
+    label: "NEVER TOO LATE (8PM-11PM)",
     value: "NeverTooLate",
   },
 ];
