@@ -63,7 +63,7 @@ const RenderRightCol = (props) => {
         <>
             <div className="book_right_innerItems">
                 <img src={props.image} alt="icon" />
-                <div>
+                <div >
                     <h3>{props.heading}</h3>
                     <p>{props.description}</p>
                 </div>
