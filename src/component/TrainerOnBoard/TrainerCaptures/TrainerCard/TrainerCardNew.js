@@ -613,7 +613,8 @@ function TrainerCardNewClass(props) {
             sessions (2-4 people) should provide savings to each client in
             comparison to a 1 on 1 individual session. The pricing for a 5-15
             person group class is a flat rate that will be split evenly amongst
-            each client.
+            each client.As a reminder, Motto takes 15% for each session that you’re booked for.
+
           </p>
         </div>
         <div>

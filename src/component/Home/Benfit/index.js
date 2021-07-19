@@ -11,13 +11,13 @@ const benifitList = [
     imageAsset: Personal,
   },
   {
-    heading: "Make a Date as a Social Session",
+    heading: "Make it a Social Session",
     description:
       "Add up to 3 friends to your session. Get personal attention, while you enjoy a social experience at lower costs.",
     imageAsset: Social,
   },
   {
-    heading: "Create a class",
+    heading: "Create a Class",
     description:
       "Design your very own workout party. Choose a top trainer, and add up to 14 more friends to split the cost evenly.",
     imageAsset: Session,

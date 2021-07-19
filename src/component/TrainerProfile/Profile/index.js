@@ -106,12 +106,10 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "virtual"
-  );
-  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "inPerson"
-  );
+  const isVirtualPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("virtual");
+  const isInPersonPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("inPerson");
 
   const handleCopy = () => {
     let profileLink = window?.location?.href;
@@ -184,7 +182,10 @@ const TrainerProfileClass = ({
                     }}
                   />
                 ) : (
-                  <div className="not_found" >  {trainerProfileData.firstName?.[0]}</div>
+                  <div className="not_found">
+                    {" "}
+                    {trainerProfileData.firstName?.[0]}
+                  </div>
                   //<img src={NotFoundImage} alt="Not Found Image" />
                 )}
                 <div className="profile_header_inner">
@@ -289,7 +290,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor2People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor2People} `}
-                            <span>/ Session (Virtual For 2 People)</span>
+                            <span>Session (Virtual For 2 People)</span>
                           </h6>
                         ) : (
                           ""
@@ -315,7 +316,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor3People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor3People} `}
-                            <span>/ Session (Virtual For 3 People)</span>
+                            <span> Session (Virtual For 3 People)</span>
                           </h6>
                         ) : (
                           ""
@@ -341,7 +342,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor4People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor4People} `}
-                            <span>/ Session (Virtual For 4 People)</span>
+                            <span> Session (Virtual For 4 People)</span>
                           </h6>
                         ) : (
                           ""
@@ -417,7 +418,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor15People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor15People} `}
-                            <span>Flat Rate Class (For 5-15 People)</span>
+                            <span>virtually for 5-15 people</span>
                           </h6>
                         ) : (
                           ""
@@ -426,7 +427,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtclientLocationfor15People} `}
-                            <span>(at your location) (For 5-15 People)</span>
+                            <span>at your location for 5-15 people</span>
                           </h6>
                         ) : (
                           ""
@@ -435,15 +436,15 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAttrainerLocationfor15People} `}
-                            <span>(at trainer location) (For 5-15 People)</span>
+                            <span>at trainer location for 5-15 people</span>
                           </h6>
                         ) : (
                           ""
                         )}
                         <h5>
-                          If trainer offers Virtual Social Sessions and Classes
+                          {/* If trainer offers Virtual Social Sessions and Classes
                           they will be at a discount to in person rates above.
-                          You will see these prior to checkout.
+                          You will see these prior to checkout. */}
                         </h5>
                       </div>
                     </div>

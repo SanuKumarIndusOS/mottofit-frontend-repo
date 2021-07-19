@@ -77,7 +77,7 @@ const DropdownTrainerAvailability = ({ onClick = () => {} }) => {
                                 src={MidInActive}
                                 hoverSrc={MidActive}
                             />
-                            <h2>Mid-day Break</h2>
+                            <h2>Lunchtime</h2>
                             <label>(11:30am-4pm)</label>
                         </div>
                     </div>

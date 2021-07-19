@@ -509,7 +509,7 @@ const UserBookSessionFC = ({
             </div>
             <div className="session_inner_wrapper">
               <div className="session_heading">
-                <h2>Choose your Session Type</h2>
+                <h2>Choose Your Session Type</h2>
                 <p>
                   Please select a preferable training location along with the
                   class size in order to book your training session.

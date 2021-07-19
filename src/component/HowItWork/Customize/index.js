@@ -10,7 +10,7 @@ const CustomizesSection = () => {
             <div className="container">
                 <div className="cust_main">
                     <div className="cust_headings">
-                        <h2>What Kind of Sessions can I book with Motto</h2>
+                        <h2>What Kind of Sessions Can I book with Motto</h2>
                         <p>
                             Book strength/HIIT, boxing, Yoga and Pilates
                             sessions in-person in Motto cities or virtually
@@ -26,7 +26,7 @@ const CustomizesSection = () => {
                             />
                             <RenderCards
                                 image={Image3}
-                                title="Make a Date as a Social Session"
+                                title="Make it a Social Session"
                                 detials="Add up to 3 friends to your session. Get personal attention, while you enjoy a social experience at lower costs."
                             />
                             <RenderCards

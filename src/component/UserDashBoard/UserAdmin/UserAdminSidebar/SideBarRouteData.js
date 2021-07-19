@@ -10,7 +10,7 @@ import { logout } from "../../../../service/utilities";
 
 export const SideBarRouteData = [
   {
-    title: "MY Session",
+    title: "MY Sessions",
     path: "/users/dashboard/session",
     icon: <img src={SessionIcon} alt="icon" />,
 

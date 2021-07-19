@@ -146,7 +146,10 @@ const HeadingTrainer = ({ otherRef }) => {
     <>
       <div className="container">
         <div className="wrapper_headings" ref={otherRef}>
-          <h2>just outside your time</h2>
+          <h2>Just Outside Your Time</h2>
+          <p>
+          These trainers are in your area. Browse their profiles to message them to find a time that works for you.
+          </p>
         </div>
       </div>
     </>

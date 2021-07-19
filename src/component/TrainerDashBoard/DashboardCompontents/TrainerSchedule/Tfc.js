@@ -906,7 +906,7 @@ function TfcClass({
                   className="default_label"
                 >
                   {" "}
-                  Make defualt
+                  Make default
                 </label>
                 <button
                   onClick={toggleEditMode}

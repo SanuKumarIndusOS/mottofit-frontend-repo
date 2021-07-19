@@ -15,7 +15,7 @@ const Book = () => {
                     <div className="book_grid">
                         <div className="book_left">
                             <div className="book_left_content">
-                                <h5>Book with Motto is simple!</h5>
+                                <h5>Booking with Motto is simple!</h5>
                                 <p>
                                     Lorem Ipsum is simply dummy text of the
                                     printing and typesetting industry. Lorem

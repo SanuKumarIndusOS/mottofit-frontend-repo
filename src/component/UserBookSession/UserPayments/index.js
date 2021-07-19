@@ -243,7 +243,7 @@ const UserPaymentsFC = ({
         {
           title: "Cancellation Session",
           session: "Cancellation Fee",
-          price: "Free upto 24 hours",
+          price: "Free up to 24 hours",
           isPrice: false,
         },
       ];
@@ -426,7 +426,7 @@ const UserPaymentsFC = ({
                   </div>
                   <hr />
                   <div className="user_coupon">
-                    <h2>Have a discount code? Avail it now!</h2>
+                    <h2>Have a discount code? Add it now!</h2>
                     <input
                       type="text"
                       placeholder="Enter the coupon code here"

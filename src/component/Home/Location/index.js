@@ -166,8 +166,8 @@ const Location = () => {
         <div className="header-content">
           <h1>Browse by Location</h1>
           <p>
-            In-Person training available in New York City, Hamptons, Miami &
-            Plam Beach with more locations coming soon. Live virtual training
+            In-person training available in New York City, Hamptons, Miami &
+            Palm Beach with more locations coming soon. Live virtual training
             available anywhere!
           </p>
         </div>
