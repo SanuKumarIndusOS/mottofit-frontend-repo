@@ -96,22 +96,22 @@ const Footer = () => {
                                         </div>
                                         <ul className="footer_links">
                                             <li>
-                                                <a href="/">Who we are</a>
+                                                <Link to="/who-we-are">Who we are</Link>
                                             </li>
                                             <li>
-                                                <a href="/how-it-works">
+                                                <Link to="/how-it-works">
                                                     How it works
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a href="/trainer/find">
+                                                <Link to="/trainer/find">
                                                     Find your trainer
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a href="/trainer/signup">
+                                                <Link to="/trainer/signup">
                                                     Be a trainer
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                         <hr />
