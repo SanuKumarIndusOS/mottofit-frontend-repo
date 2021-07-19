@@ -73,10 +73,11 @@ const TrainerCardOutsideFC = (props) => {
               <div
                 className="card cursor-pointer"
                 key={index}
-                onClick={() => handleClick(data, true)}
+               // onClick={() => handleClick(data, true)}
               >
                 <div className="inner_card">
                   <img
+                
                     className="card-img-top card-img"
                     src={
                       outSideData[data].profilePicture ||
@@ -90,7 +91,7 @@ const TrainerCardOutsideFC = (props) => {
                     }}
                   />
 
-                  <div className="overlay_card">
+                  <div className="overlay_card"   onClick={() => handleClick(data, true)}>
                     <div className="content_card">
                       <div className="circle_hover_card">
                         <p>check me out</p>
