@@ -25,7 +25,7 @@ const DropdownTrainerAvailability = ({ onClick = () => {}, selectedData }) => {
 
   return (
     <>
-      <div className="box_3_active_home">
+      <div className="box_3_active_home" >
         <div className="dd_row_one">
           <div
             className={`option ${

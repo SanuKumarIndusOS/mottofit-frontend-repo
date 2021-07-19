@@ -213,7 +213,7 @@ const SignInFC = ({
                         <label>Remember me</label>
                       </div>
                       <div className="forgotpass_right">
-                        <Link to="/forgot" className="forgotpass">
+                        <Link to="/forgot"  onClick={() => {setShowModel(false)}}  className="forgotpass">
                           Forgot Password?
                         </Link>
                       </div>
