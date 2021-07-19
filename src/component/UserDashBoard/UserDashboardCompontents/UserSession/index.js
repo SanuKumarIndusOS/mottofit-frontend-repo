@@ -423,7 +423,7 @@ const TabOne = ({
                           </h5>
                           <h5>
                             <img src={LocationIcon} alt="icon" />
-                            {data?.venue.replace(/([A-Z])/g, ' $1').trim()}
+                            {(data?.venue.charAt(0).toUpperCase() + data?.venue.slice(1)).replace(/([A-Z])/g, ' $1').trim()}
                           </h5>
                         </div>
                         {tabname !== "OnGoing" && (

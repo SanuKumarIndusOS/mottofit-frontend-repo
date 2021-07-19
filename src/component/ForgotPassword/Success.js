@@ -7,7 +7,7 @@ export const Success = () => {
         <div className="container h-100">
             <div className="success">
                 <h2> The New Password has been generated, successfully !</h2>
-                <p>Please check you're mail!</p>
+                <p>Please check your email!</p>
 
                 <Link to="/">Go Back to Home</Link>
             </div>

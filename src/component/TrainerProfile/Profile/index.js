@@ -290,7 +290,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor2People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor2People} `}
-                            <span>Session (Virtual For 2 People)</span>
+                            <span>virtual for 2 people</span>
                           </h6>
                         ) : (
                           ""
@@ -299,7 +299,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor2People} `}
-                            <span>(at your location for 2 people)</span>
+                            <span>at your location for 2 people</span>
                           </h6>
                         ) : (
                           ""
@@ -308,7 +308,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor2People} `}
-                            <span>(at trainer location for 2 people)</span>
+                            <span>at trainer location for 2 people</span>
                           </h6>
                         ) : (
                           ""
@@ -316,7 +316,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor3People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor3People} `}
-                            <span> Session (Virtual For 3 People)</span>
+                            <span>virtual for 3 people</span>
                           </h6>
                         ) : (
                           ""
@@ -325,7 +325,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor3People} `}
-                            <span>(at your location for 3 people)</span>
+                            <span>at your location for 3 people</span>
                           </h6>
                         ) : (
                           ""
@@ -334,7 +334,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor3People} `}
-                            <span>(at trainer location for 3 people)</span>
+                            <span>at trainer location for 3 people</span>
                           </h6>
                         ) : (
                           ""
@@ -342,7 +342,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor4People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor4People} `}
-                            <span> Session (Virtual For 4 People)</span>
+                            <span>virtual for 4 people</span>
                           </h6>
                         ) : (
                           ""
@@ -351,7 +351,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtClientLocationfor4People} `}
-                            <span>(at your location for 4 people)</span>
+                            <span>at your location for 4 people</span>
                           </h6>
                         ) : (
                           ""
@@ -360,7 +360,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPeronAtTrainerLocationfor4People} `}
-                            <span>(at trainer location for 4 people)</span>
+                            <span>at trainer location for 4 people</span>
                           </h6>
                         ) : (
                           ""
