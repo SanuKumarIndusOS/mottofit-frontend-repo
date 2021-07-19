@@ -274,7 +274,7 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
         </div>
         <div className="schedule">
           Schedule <br></br> {moment(Calvalue).format("YYYY/MM/DD")}
-          <Calendar onChange={onChangeCal} value={Calvalue} />
+          <Calendar onChange={onChangeCal} value={Calvalue} minDate={new Date()} />
           <hr></hr>
         </div>
         <div className="availability">
