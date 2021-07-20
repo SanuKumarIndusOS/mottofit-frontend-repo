@@ -478,9 +478,9 @@ const TabTwo = ({
                               {data.loc}
                             </h5>
                           </div>
-                          {data.sessionStatus !== "completed" ? (
+                          {/* {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
-                              {/* <button>Reschedule</button> */}
+                              
                               <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>
@@ -494,37 +494,28 @@ const TabTwo = ({
                                   .format("YYYY MM DD HH:MM")
                               ) ? (
                                 <button
-                                className="text-primary"
-                                onClick={() =>
+                                  className="text-primary"
+                                  onClick={() =>
                                     handleSessionStatus(data.id, "completed")
-                                  // {
-                                  //   console.log(
-                                  //     data,
-                                  //     moment
-                                  //       .tz("America/New_York")
-                                  //       .format("YYYY MM DD HH:MM"),
-                                  //     moment
-                                  //       .tz(
-                                  //         data.sessionStartTime,
-                                  //         "America/New_York"
-                                  //       )
-                                  //       .format("YYYY MM DD HH:MM")
-                                  //   );
-                                  // }
-                                }
-                              >
-                                Complete
-                              </button>
-                              ) : (
-                               null
-                              )}
-                         
+                                  }
+                                >
+                                  Complete
+                                </button>
+                              ) : null}
                             </div>
                           ) : (
                             <div>
                               <p>Completed</p>
                             </div>
-                          )}
+                          )} */}
+                            <button
+                                  className="text-primary"
+                                  onClick={() =>
+                                    handleSessionStatus(data.id, "completed")
+                                  }
+                                >
+                                  Complete
+                                </button>
                         </div>
                       </div>
                       <hr />

@@ -469,16 +469,11 @@ const TabOne = ({
                                             </button>
                                           </>
                                         ) : (
-                                          ""
+                                        null
                                         )}
                                       </>
                                     ) : (
-                                      <button
-                                        className="text-danger"
-                                        disabled={true}
-                                      >
-                                        Cancelled
-                                      </button>
+                                      data.sessionStatus === "completed" ? (<div style={{color:"red"}}><u>Completed</u></div>):data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>
                                     )}
                                   </>
                                 )}
