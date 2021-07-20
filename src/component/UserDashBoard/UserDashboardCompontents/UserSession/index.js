@@ -67,6 +67,7 @@ const UserSessionClass = (props) => {
         setTotalData((prevData) => ({ ...prevData, [type]: documentCount }));
 
         setUserData((prevData) => {
+         // console.log(prevData.invitedSessions);
           let replaceData = [...prevData[sessionTypeData[type]], ...data];
           return {
             ...prevData,
@@ -121,6 +122,7 @@ const UserSessionClass = (props) => {
 
   useEffect(() => {
     _userSession(currentTab, true);
+   // console.log(userData.invitedSessions);
   }, [pageData]);
 
   return (
@@ -380,7 +382,7 @@ const TabOne = ({
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
               {tabData?.map((data, index) => {
-                 console.log(data, "datadata");
+               //  console.log(data, "datadata");
 
                 return (
                   <React.Fragment key={index}>
@@ -433,7 +435,9 @@ const TabOne = ({
                                 {data.acceptance ? (
                                   <>
                                     <span className="text-black mr-4">
-                                      Invited session
+                                     
+                                      {/* {data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>} */}
+                                      {data.sessionStatus === "completed" ? (<div style={{color:"red"}}><u>Completed</u></div>):data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>}
                                     </span>
                                   </>
                                 ) : (
