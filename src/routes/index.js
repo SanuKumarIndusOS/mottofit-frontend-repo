@@ -39,7 +39,8 @@ class RoutesClass extends Component {
       "/mobile/login",
       "/mobiles/menu",
       "/mobiles/filter",
-      "/mobiles/chat"
+      "/mobiles/chat",
+      "/terms"
     ];
 
     const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];
@@ -172,3 +173,5 @@ class RoutesClass extends Component {
 }
 
 export default RoutesClass;
+
+

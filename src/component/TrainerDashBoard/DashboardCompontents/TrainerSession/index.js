@@ -478,7 +478,7 @@ const TabTwo = ({
                               {data.loc}
                             </h5>
                           </div>
-                          {/* {data.sessionStatus !== "completed" ? (
+                          {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
                               
                               <button onClick={() => handleCancel(data.id)}>
@@ -507,15 +507,15 @@ const TabTwo = ({
                             <div>
                               <p>Completed</p>
                             </div>
-                          )} */}
-                            <button
+                          )}
+                            {/* <button
                                   className="text-primary"
                                   onClick={() =>
                                     handleSessionStatus(data.id, "completed")
                                   }
                                 >
                                   Complete
-                                </button>
+                                </button> */}
                         </div>
                       </div>
                       <hr />
