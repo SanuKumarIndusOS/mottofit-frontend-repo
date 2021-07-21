@@ -159,7 +159,7 @@ const TrainerMessageClass = ({
                 </TabList>
                 <div className="message_inner">
                   <TabPanel tabId="invited">
-                    <div className="message_inner_one d-lg-grid d-block">
+                    <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
@@ -251,7 +251,7 @@ const TrainerMessageClass = ({
                           <CommonPageLoader />
                         )}
                       </div>
-                      <div className="message_right d-lg-block d-none">
+                      <div className="message_right ">
                         <ChatBox isDataPresent={invitedSessions?.length > 0} />
                       </div>
                     </div>
