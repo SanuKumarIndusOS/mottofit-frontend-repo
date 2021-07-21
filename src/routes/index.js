@@ -70,7 +70,7 @@ class RoutesClass extends Component {
   render() {
     return (
       <Router history={history}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={ <div className="load_parent"><div className="loaderss"></div></div>}>
           {Routers.map(
             ({
               component,
