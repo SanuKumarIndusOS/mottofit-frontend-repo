@@ -95,7 +95,7 @@ const TrainerCardsFC = (props) => {
                         "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
                     }}
                   />
-                  <div className="ocard">
+                  <div className="ocard"   onClick={() => handleClick(data, true)}>
                     <div className="circlepop">Check <br/> Me Out</div>
                   </div>
                
