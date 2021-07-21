@@ -54,6 +54,7 @@
 @mixin media-breakpoint-tab-land {
    @media screen and (max-width: 1199px) and (min-width: 992px) {
       @content;
+      
    }
 }
 @mixin media-breakpoint-mobile-port {

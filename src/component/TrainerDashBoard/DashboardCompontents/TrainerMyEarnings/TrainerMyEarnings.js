@@ -99,7 +99,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                             <h2>
                               $
                               {myEarning
-                                ? Math.round(
+                                ?(
                                     myEarning.dayRevenue?.total_amount || 0
                                   )
                                 : "N/A"}
@@ -110,7 +110,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                             <h2>
                               $
                               {myEarning
-                                ? Math.round(
+                                ?(
                                     myEarning.weekRevenue?.total_amount || 0
                                   )
                                 : "N/A"}
@@ -121,7 +121,7 @@ const TrainerMyEarningsClass = ({ trainerMyEarning }) => {
                             <h2>
                               $
                               {myEarning
-                                ? Math.round(
+                                ?(
                                     myEarning.monthRevenue?.total_amount || 0
                                   )
                                 : "N/A"}
