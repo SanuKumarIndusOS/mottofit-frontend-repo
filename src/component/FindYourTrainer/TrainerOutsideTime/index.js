@@ -71,7 +71,7 @@ const TrainerCardOutsideFC = (props) => {
             const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
             return (
               <div
-                className="card cursor-pointer"
+                className="card"
                 key={index}
                // onClick={() => handleClick(data, true)}
               >
