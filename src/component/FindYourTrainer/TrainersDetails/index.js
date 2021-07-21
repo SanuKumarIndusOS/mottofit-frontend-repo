@@ -49,9 +49,8 @@ const TrainerCardsFC = (props) => {
         {no_match}
         <div className="row" style={{ alignleft: "auto" }}>
           {Object.keys(bestMatchData).map((data, index) => {
-            const areaOfExpertise = bestMatchData[
-              data
-            ]?.areaOfExpertise?.toString();
+            const areaOfExpertise =
+              bestMatchData[data]?.areaOfExpertise?.toString();
 
             const oneOnOnePricingValues = Object.values(
               bestMatchData[data]?.oneOnOnePricing || {}
@@ -76,26 +75,30 @@ const TrainerCardsFC = (props) => {
 
             return (
               <div
-                className="card cursor-pointer"
+                className="card "
                 key={index}
                 // onClick={() => handleClick(data, true)}
               >
-                <img
-                 onClick={() => handleClick(data, true)}
-                  className="card-img-top"
-                  src={
-                    bestMatchData[data].profilePicture ||
-                    "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
-                  }
-                  style={{ objectFit: "cover" }}
-                  alt="Profile Picture Not Found "
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
-                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
-                  }}
-                />
-
+               
+                  <img
+                    onClick={() => handleClick(data, true)}
+                    className="card-img-top"
+                    src={
+                      bestMatchData[data].profilePicture ||
+                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                    }
+                    style={{ objectFit: "cover", cursor: "pointer" }}
+                    alt="Profile Picture Not Found "
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                    }}
+                  />
+                  <div className="ocard">
+                    <div className="circlepop">Check <br/> Me Out</div>
+                  </div>
+               
                 <div className="card-body">
                   <h3 style={{ textTransform: "capitalize" }}>
                     {bestMatchData[data]?.firstName}&nbsp;

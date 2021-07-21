@@ -451,3 +451,57 @@ select {
     }
 }
 
+.overlay_card {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: ease 0.5s;
+  background: rgba(7, 7, 7, 0.301) !important;
+  opacity: 0;
+  border-radius: 20px 20px 0 0;
+}
+.inner_card:hover .overlay_card {
+  opacity: 1;
+}
+
+
+.ocard{
+
+  position: absolute;
+  height: 200px;
+  width: 93%;
+  border-radius: 20px 20px 0px 0px;
+  background-color:  rgba(0, 0, 0, 0.5);
+  top: 0;
+   
+  opacity: 0;
+  padding: 1rem;
+  cursor: pointer;
+
+  .circlepop{
+    position: relative;
+    left: 200px;
+    height: 80px;
+    width: 80px;
+    border-radius: 100px;
+    background-color: #53bfd2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+
+}
+
+.ocard:hover{
+  
+  opacity: 1;
+}
