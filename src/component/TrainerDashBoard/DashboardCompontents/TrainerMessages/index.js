@@ -25,6 +25,7 @@ import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import { InfiniteScrollComponent } from "component/common/Scrollbars";
+import { history } from "helpers";
 
 const TrainerMessageClass = ({
   trainerChannel,
@@ -67,12 +68,14 @@ const TrainerMessageClass = ({
   useEffect(() => {
     // Get Contact_list
 
+    let mql = window.matchMedia("(max-width: 700px)");
+
     initClientDispatch();
 
     // handleTabChange(isUser ? "invited" : "upcoming");
 
     return () => {
-      unSubscribeClientAct();
+      if (!mql.matches) unSubscribeClientAct();
     };
   }, []);
 
@@ -107,6 +110,7 @@ const TrainerMessageClass = ({
   };
 
   function PopulateContacts(channelID, members, channelData) {
+    let mql = window.matchMedia("(max-width: 700px)");
     chatClientInstance.joinChannelByID(channelID).then(() => {
       let reduxData = {
         currentChannelMembers: members,
@@ -115,6 +119,8 @@ const TrainerMessageClass = ({
       console.log(reduxData);
 
       updateMessagingDetails(reduxData);
+
+      if (mql.matches) history.push("/mobiles/chat");
     });
   }
 
@@ -153,7 +159,7 @@ const TrainerMessageClass = ({
                 </TabList>
                 <div className="message_inner">
                   <TabPanel tabId="invited">
-                    <div className="message_inner_one">
+                    <div className="message_inner_one d-lg-grid d-block">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
@@ -245,14 +251,14 @@ const TrainerMessageClass = ({
                           <CommonPageLoader />
                         )}
                       </div>
-                      <div className="message_right">
+                      <div className="message_right d-lg-block d-none">
                         <ChatBox isDataPresent={invitedSessions?.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
 
                   <TabPanel tabId="upcoming">
-                    <div className="message_inner_one">
+                    <div className="message_inner_one d-lg-grid d-block">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
@@ -325,13 +331,13 @@ const TrainerMessageClass = ({
                           <CommonPageLoader />
                         )}
                       </div>
-                      <div className="message_right">
+                      <div className="message_right d-lg-block d-none">
                         <ChatBox isDataPresent={upcomingSessions.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
                   <TabPanel tabId="past">
-                    <div className="message_inner_one">
+                    <div className="message_inner_one d-lg-grid d-block">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
@@ -404,13 +410,13 @@ const TrainerMessageClass = ({
                           <CommonPageLoader />
                         )}
                       </div>
-                      <div className="message_right">
+                      <div className="message_right d-lg-block d-none">
                         <ChatBox isDataPresent={pastSessions.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
                   <TabPanel tabId="admin">
-                    <div className="message_inner_one">
+                    <div className="message_inner_one d-lg-grid d-block">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {/* <InfiniteScrollComponent
@@ -455,14 +461,14 @@ const TrainerMessageClass = ({
                                       )
                                     }
                                   >
-                                       <div style={{display:"flex"}}>
-                                    <h3>{item["chatTitle"] || ""}</h3>
-                                    <h3>
-                                      &ensp;
-                                      {item["members"].length > 2
-                                        ? "+  " + (item["members"].length - 2)
-                                        : null}
-                                    </h3>
+                                    <div style={{ display: "flex" }}>
+                                      <h3>{item["chatTitle"] || ""}</h3>
+                                      <h3>
+                                        &ensp;
+                                        {item["members"].length > 2
+                                          ? "+  " + (item["members"].length - 2)
+                                          : null}
+                                      </h3>
                                     </div>
                                     <div>
                                       {body && (
@@ -486,7 +492,7 @@ const TrainerMessageClass = ({
                         )}
                         {/* </InfiniteScrollComponent> */}
                       </div>
-                      <div className="message_right">
+                      <div className="message_right d-lg-block d-none">
                         <ChatBox isDataPresent={adminMessages.length > 0} />
                       </div>
                     </div>
