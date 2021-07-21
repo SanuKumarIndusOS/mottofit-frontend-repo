@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/abstracts/abstracts";
+
 .main_message_container {
   background-color: #f6f6f6;
   padding: 1em;
@@ -340,6 +342,12 @@
                   }
                 }
               }
+            }
+          }
+
+          @include media-breakpoint-mobile-land {
+            .message_inner_one {
+              display: block;
             }
           }
         }
