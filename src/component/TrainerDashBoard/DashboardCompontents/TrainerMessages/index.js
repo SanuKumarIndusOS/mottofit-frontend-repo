@@ -64,6 +64,8 @@ const TrainerMessageClass = ({
 
   const [currentTab, setCurrentTab] = useState(isUser ? "invited" : "upcoming");
 
+  
+
   // Make Id dynamic
   useEffect(() => {
     // Get Contact_list
@@ -146,14 +148,15 @@ const TrainerMessageClass = ({
           <div className="message_inner">
             <div className="message_wrapper">
               <Tabs
-                defaultTab={isUser ? "invited" : "upcoming"}
+                defaultTab={isUser ? "upcoming" : "upcoming"}
                 onChange={(tab) => {
                   handleTabChange(tab);
                 }}
               >
                 <TabList>
-                  {isUser && <Tab tabFor="invited">Invited</Tab>}
+                
                   <Tab tabFor="upcoming">Upcoming</Tab>
+                  {isUser && <Tab tabFor="invited">Invited</Tab>}
                   <Tab tabFor="past">Previous</Tab>
                   <Tab tabFor="admin">Admin</Tab>
                 </TabList>
@@ -258,7 +261,7 @@ const TrainerMessageClass = ({
                   </TabPanel>
 
                   <TabPanel tabId="upcoming">
-                    <div className="message_inner_one d-lg-grid d-block">
+                    <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
@@ -331,13 +334,13 @@ const TrainerMessageClass = ({
                           <CommonPageLoader />
                         )}
                       </div>
-                      <div className="message_right d-lg-block d-none">
+                      <div className="message_right">
                         <ChatBox isDataPresent={upcomingSessions.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
                   <TabPanel tabId="past">
-                    <div className="message_inner_one d-lg-grid d-block">
+                    <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {!isMessageListLoading ? (
@@ -410,13 +413,13 @@ const TrainerMessageClass = ({
                           <CommonPageLoader />
                         )}
                       </div>
-                      <div className="message_right d-lg-block d-none">
+                      <div className="message_right">
                         <ChatBox isDataPresent={pastSessions.length > 0} />
                       </div>
                     </div>
                   </TabPanel>
                   <TabPanel tabId="admin">
-                    <div className="message_inner_one d-lg-grid d-block">
+                    <div className="message_inner_one">
                       <div className="message_left">
                         {/* Todo Change to ALL */}
                         {/* <InfiniteScrollComponent
@@ -492,7 +495,7 @@ const TrainerMessageClass = ({
                         )}
                         {/* </InfiniteScrollComponent> */}
                       </div>
-                      <div className="message_right d-lg-block d-none">
+                      <div className="message_right">
                         <ChatBox isDataPresent={adminMessages.length > 0} />
                       </div>
                     </div>
