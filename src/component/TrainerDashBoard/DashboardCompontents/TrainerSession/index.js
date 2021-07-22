@@ -480,11 +480,10 @@ const TabTwo = ({
                           </div>
                           {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
-                              
                               <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>
-                              {moment(
+                              {/* {moment(
                                 moment
                                   .tz("America/New_York")
                                   .format("YYYY MM DD HH:MM")
@@ -501,14 +500,23 @@ const TabTwo = ({
                                 >
                                   Complete
                                 </button>
-                              ) : null}
+                              ) : null} */}
+
+                              <button
+                                className="text-primary"
+                                onClick={() =>
+                                  handleSessionStatus(data.id, "completed")
+                                }
+                              >
+                                Complete
+                              </button>
                             </div>
                           ) : (
                             <div>
                               <p>Completed</p>
                             </div>
                           )}
-                            {/* <button
+                          {/* <button
                                   className="text-primary"
                                   onClick={() =>
                                     handleSessionStatus(data.id, "completed")
