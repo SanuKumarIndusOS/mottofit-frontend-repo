@@ -62,7 +62,7 @@ const TrainerMessageClass = ({
     admin: 0,
   });
 
-  const [currentTab, setCurrentTab] = useState(isUser ? "invited" : "upcoming");
+  const [currentTab, setCurrentTab] = useState(isUser ? "upcoming" : "upcoming");
 
   
 

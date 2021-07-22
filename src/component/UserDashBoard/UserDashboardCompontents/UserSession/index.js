@@ -47,7 +47,7 @@ const UserSessionClass = (props) => {
 
   const [isDefaultCardPresent, setDefaultCard] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [currentTab, setCurrentTab] = useState("u");
+  const [currentTab, setCurrentTab] = useState("upcoming");
 
   useEffect(() => {
     getUserPaymentDetails();
@@ -60,14 +60,14 @@ const UserSessionClass = (props) => {
         let data = tempData || [];
         let documentCount = tempDocumentCount || 0;
         let sessionTypeData = {
-          u: "uSessions",
+          invited: "invitedSessions",
           upcoming: "upcomingSessions",
           past: "pastSessions",
         };
         setTotalData((prevData) => ({ ...prevData, [type]: documentCount }));
 
         setUserData((prevData) => {
-         // console.log(prevData.uSessions);
+         // console.log(prevData.invitedSessions);
           let replaceData = [...prevData[sessionTypeData[type]], ...data];
           return {
             ...prevData,
@@ -95,7 +95,7 @@ const UserSessionClass = (props) => {
 
   const handleChange = (tab, data) => {
     let sessionTypeData = {
-      u: "uSessions",
+      invited: "invitedSessions",
       upcoming: "upcomingSessions",
       past: "pastSessions",
     };
@@ -122,7 +122,7 @@ const UserSessionClass = (props) => {
 
   useEffect(() => {
     _userSession(currentTab, true);
-   // console.log(userData.uSessions);
+   // console.log(userData.invitedSessions);
   }, [pageData]);
 
   return (
@@ -140,8 +140,9 @@ const UserSessionClass = (props) => {
               }}
             >
               <TabList>
+              <Tab tabFor="upcoming">Upcoming</Tab>
                 <Tab tabFor="invited">Invited</Tab>
-                <Tab tabFor="upcoming">Upcoming</Tab>
+              
                 {/* <Tab tabFor="pass">Motto pass</Tab> */}
                 <Tab tabFor="past">Previous</Tab>
                 {/* <Tab tabFor="ongoing">Ongoing</Tab> */}

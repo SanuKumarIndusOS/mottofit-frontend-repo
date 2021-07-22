@@ -483,7 +483,7 @@ const TabTwo = ({
                               <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>
-                              {/* {moment(
+                              {moment(
                                 moment
                                   .tz("America/New_York")
                                   .format("YYYY MM DD HH:MM")
@@ -500,8 +500,8 @@ const TabTwo = ({
                                 >
                                   Complete
                                 </button>
-                              ) : null} */}
-
+                              ) : null}
+                              {/* 
                               <button
                                 className="text-primary"
                                 onClick={() =>
@@ -509,7 +509,7 @@ const TabTwo = ({
                                 }
                               >
                                 Complete
-                              </button>
+                              </button> */}
                             </div>
                           ) : (
                             <div>
@@ -531,7 +531,7 @@ const TabTwo = ({
                   );
                 })
               ) : (
-                <h3 className="my-5 py-5 text-center">No Data Found</h3>
+                <h3 className="my-5 py-5 text-center">No Upcoming Session</h3>
               )}
             </div>
 
