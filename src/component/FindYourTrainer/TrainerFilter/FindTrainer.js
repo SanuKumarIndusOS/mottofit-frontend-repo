@@ -174,11 +174,16 @@ const FindTrainerFC = ({
       };
 
       setqueryObject(payload.query);
+      console.log(payload.query,"pp");
+
+      localStorage.setItem('testObject', JSON.stringify(payload.query));
 
       getTrainerDataByQuery();
       // setqueryObject(trainerQueryData);
       // SetLocation(trainerQueryData.location);
     } else {
+
+      console.log("else");
       let payload = {
         query: {
           location: "virtual",
@@ -187,10 +192,10 @@ const FindTrainerFC = ({
           availability: "Early Bird",
         },
       };
-      setqueryObject(payload.query);
-
-      updateTrainerDetails(payload);
-      console.log(payload);
+      setqueryObject(JSON.parse(localStorage.getItem('testObject')));
+      getTrainerDataByQuery(JSON.parse(localStorage.getItem('testObject')));
+      updateTrainerDetails(JSON.parse(localStorage.getItem('testObject')));
+      console.log(JSON.parse(localStorage.getItem('testObject')),"cc");
     }
 
     let reduxData = {
@@ -198,6 +203,7 @@ const FindTrainerFC = ({
     };
 
     console.log(reduxData);
+    
     updateUserDetails(reduxData);
   }, []);
 
@@ -419,8 +425,9 @@ const FindTrainerFC = ({
     console.log(payload);
 
     updateTrainerDetails(payload);
-
-    getTrainerDataByQuery(payload.query);
+    localStorage.setItem('testObject', JSON.stringify(payload.query));
+   // getTrainerDataByQuery(payload.query);
+   getTrainerDataByQuery(JSON.parse(localStorage.getItem('testObject')));  
   };
 
   const getTrainerDataByQuery = (currData) => {
