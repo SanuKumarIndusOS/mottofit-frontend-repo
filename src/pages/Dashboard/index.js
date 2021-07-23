@@ -6,6 +6,10 @@ import Trainer from "component/Home/trainer";
 import Location from "component/Home/Location";
 
 export default function Main() {
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div>
       {/* Banner  */}
