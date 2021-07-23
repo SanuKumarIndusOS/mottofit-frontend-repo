@@ -141,6 +141,8 @@ const FindTrainerFC = ({
 
   const bestMatchRef = useRef(null);
   const otherRef = useRef(null);
+  
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -151,7 +153,14 @@ const FindTrainerFC = ({
       SetLocation("In Person");
       setInPersonDD(false);
     }
+   
     if (trainerQueryData.location && trainerQueryData.date) {
+
+      localStorage.setItem('search_location', trainerQueryData.location);
+      localStorage.setItem('search_city', trainerQueryData.city);
+
+      console.log(trainerQueryData)
+    
       let selectedCity = Object.values(inPerson).filter(
         ({ value }) => value === trainerQueryData?.city
       )[0];
@@ -183,13 +192,31 @@ const FindTrainerFC = ({
       // SetLocation(trainerQueryData.location);
     } else {
 
+       if (localStorage.getItem('search_location') === "inPerson") {
+      SetLocation("In Person");
+      setInPersonDD(false);
+    }
+
+      let selectedCity = Object.values(inPerson).filter(
+        ({ value }) => value === localStorage.getItem('search_city')
+      )[0];
+
+      if (selectedCity?.name) {
+        let tempInperson = { ...inPerson };
+        tempInperson[selectedCity?.name] = { ...selectedCity, selected: true };
+
+        setInPerson(tempInperson);
+      }
+
       console.log("else");
+   
       let payload = {
         query: {
-          location: "virtual",
-          vertical: "Boxing",
+          location: trainerQueryData?.location,
+          vertical: trainerQueryData?.trainingType,
           date: getFormatDate(),
-          availability: "Early Bird",
+          availability: trainerQueryData?.availability,
+          city: trainerQueryData?.city,
         },
       };
       setqueryObject(JSON.parse(localStorage.getItem('testObject')));
