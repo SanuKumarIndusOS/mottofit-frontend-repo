@@ -12,7 +12,10 @@ html {
         display: flex;
         justify-content: center;
         align-items: center;
-
+        @media only screen and (max-width: 900px) {
+            height: unset;
+            margin-top: 80px;
+        }
         h1 {
             text-align: center;
             letter-spacing: -0.6px;
@@ -22,6 +25,9 @@ html {
             font-size: 60px;
             font-weight: bold;
             font-family: "Cormorant Garamond", sans-serif;
+            @media only screen and (max-width: 900px) {
+                font-size: 30px;
+            }
         }
     }
 
@@ -35,6 +41,9 @@ html {
             grid-column-gap: 40px;
             margin-top: 100px;
             position: relative;
+            @media only screen and (max-width: 900px) {
+                display: unset;
+            }
             .side_menu_contents {
                 height: auto;
                 margin-bottom: 1em;
