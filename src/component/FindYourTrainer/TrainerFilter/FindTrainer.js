@@ -603,7 +603,10 @@ const FindTrainerFC = ({
               onClick={TriggerDropDownTrainerAvailability}
             >
               <img src={AvailabilityIcon} alt="icon" />
-              <p>{queryObject.availability?.label?.split('(')[0] || "Select a Time"}</p>
+              <p>
+                {queryObject.availability?.label?.split("(")[0] ||
+                  "Select a Time"}
+              </p>
             </div>
             {DropdownAvailability}
           </div>
@@ -615,7 +618,13 @@ const FindTrainerFC = ({
           </div>
         </div>
       </div>
-      <div className="mobile-find-wrapper">
+      <div
+        className="mobile-find-wrapper"
+        onClick={() => {
+          // setshowMenu(!showMenu);
+          history.push("/mobiles/filter");
+        }}
+      >
         <div className="cat">
           {VerticalVal === "" ? (
             queryObject.vertical?.label === "" ? (
@@ -634,15 +643,14 @@ const FindTrainerFC = ({
         </div>
         <div
           className="find-filters"
-          onClick={() => {
-           // setshowMenu(!showMenu);
-           history.push("/mobiles/filter")
-          }}
-         
-        >&#9776;</div>
+          // onClick={() => {
+          //  // setshowMenu(!showMenu);
+          //  history.push("/mobiles/filter")
+          // }}
+        >
+          &#9776;
+        </div>
       </div>
-
-
 
       <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
       <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
