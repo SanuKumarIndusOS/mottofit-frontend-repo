@@ -7,6 +7,13 @@ import AvailabilityIcon from "assets/files/TrainerDashboard/Message/Availability
 import CloseIcon from "assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 const UserNotification = () => {
+
+  fetch('http://doodlebluelive.com:2355/v1/get-notification')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+
+
   return (
     <>
       <div className="user_notify_outter_container">

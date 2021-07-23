@@ -6,13 +6,34 @@ import Jenny from "assets/files/TrainerDashboard/Message/Jenny.png";
 import AvailabilityIcon from "assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import CloseIcon from "assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
+import { io } from "socket.io-client";
+
 const TrainerNotification = () => {
   const [allNotificationData, setAllNotificationData] = useState([]);
 
   const [unReadedNotificationData, setUnreadedNotificationData] = useState([]);
 
+  const socket = io("http://doodlebluelive.com:2355");
+
   useEffect(() => {
-    setAllNotificationData(MessageData);
+    socket.on("connect", () => {
+      console.log("connetesd");
+    });
+
+    socket.on(
+      localStorage.getItem("user-id")+"-notification",
+       (data) => {
+        console.log("Received a notification from the server for bryan", data);
+      }
+    );
+
+    // fetch("http://doodlebluelive.com:2355/v1/get-notification", {
+    //   headers: {
+    //     Authorization: localStorage.getItem("token"),
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data));
   }, []);
 
   const handleNotificationClose = (index) => {
