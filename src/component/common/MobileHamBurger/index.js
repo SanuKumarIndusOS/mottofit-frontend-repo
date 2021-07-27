@@ -27,7 +27,7 @@ function Index() {
           </div>
           <hr></hr>
           <div className="menu_item">
-            <Link to="/trainer/find" style={{ color: "#2C2C2C" }}>
+            <Link to="/mobiles/filter" style={{ color: "#2C2C2C" }}>
               Find your trainer
             </Link>
           </div>
