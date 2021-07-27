@@ -103,6 +103,13 @@ const UserPaymentsFC = ({
       price: sessionData?.price,
       sessionMode: queryQbject?.availability?.value,
       paidByUser: trainingtype === "1on1",
+      // newPass:{
+      //   "price":6,
+      //   "purchaseDate":"2021-07-27",
+      //   "passValidity": 90,
+      //   "totalPasses":3,
+      //   "timeZone":"America/New_York"
+      //   },
     };
 
      console.log( scheduleBody.sessionEndTime, scheduleBody.sessionStartTime ,"Time");

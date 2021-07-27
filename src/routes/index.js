@@ -6,6 +6,9 @@ import { history } from "../helpers";
 import CodeSplitter from "helpers/CodeSplitter";
 import { NotificationContainer } from "react-notifications";
 import { logout } from "service/utilities";
+
+import IdleTimer, { useIdleTimer } from "react-idle-timer/dist/modern";
+
 class RoutesClass extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +43,7 @@ class RoutesClass extends Component {
       "/mobiles/menu",
       "/mobiles/filter",
       "/mobiles/chat",
-      "/terms"
+      "/terms",
     ];
 
     const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];
@@ -65,12 +68,36 @@ class RoutesClass extends Component {
 
   componentDidMount() {
     this.routerGuard();
+    window.addEventListener("beforeunload", (ev) => {
+      ev.preventDefault();
+      return (ev.returnValue = "Are you sure you want to close?");
+    });
+  }
+
+  componentWillUnmount() {
+   
   }
 
   render() {
     return (
       <Router history={history}>
-        <Suspense fallback={ <div className="load_parent"><div className="loaderss"></div></div>}>
+        <IdleTimer
+          ref={(ref) => {
+            this.idleTimer = ref;
+          }}
+          timeout={2000}
+          onActive={this.handleOnActive}
+          onIdle={this.handleOnIdle}
+          onAction={this.handleOnAction}
+          debounce={250}
+        />
+        <Suspense
+          fallback={
+            <div className="load_parent">
+              <div className="loaderss"></div>
+            </div>
+          }
+        >
           {Routers.map(
             ({
               component,
@@ -123,9 +150,8 @@ class RoutesClass extends Component {
                                   exact={exact}
                                   key={path + childrenPath}
                                   render={(props) => {
-                                    let PageComponent = CodeSplitter.getComponent(
-                                      name
-                                    );
+                                    let PageComponent =
+                                      CodeSplitter.getComponent(name);
 
                                     return <PageComponent {...props} />;
                                   }}
@@ -170,8 +196,18 @@ class RoutesClass extends Component {
       </Router>
     );
   }
+
+  // handleOnAction (event) {
+  //   console.log('user did something', event)
+  // }
+
+  handleOnActive(event) {
+    console.log("user is active");
+  }
+
+  handleOnIdle(event) {
+    console.log("user is idle");
+  }
 }
 
 export default RoutesClass;
-
-

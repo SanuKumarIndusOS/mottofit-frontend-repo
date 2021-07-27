@@ -77,15 +77,17 @@ const UserBookSessionFC = ({
       // let reduxData = {
       //   isModelOpen: true,
       // };
-   
-      history.push('/mobile/login')
+
+      history.push("/mobile/login");
       history.push(`?${encodeURIComponent("nextpath=/user/session-type")}`);
 
-    //  updateUserDetails(reduxData);
+      //  updateUserDetails(reduxData);
     }
 
     const tempTrainerData =
       selectedTrainerData?.trainerData || selectedTrainerData;
+
+      console.log( selectedTrainerData?.trainerData, "st");
 
     if (!tempTrainerData?.id) return history.push("/trainer/find");
 
@@ -456,15 +458,32 @@ const UserBookSessionFC = ({
         price,
         sessionType,
         trainingType,
+       
       },
     };
 
     // console.log("called", storeData["sessionData"]);
     updateUserDetails(storeData);
 
+    console.log(storeData);
+
     history.push({
-      pathname: "/user/payment",
-    });
+          pathname: "/user/payment",
+        });
+
+    
+    // if (sessionType === "1 ON 1 TRAINING") {
+    
+    //   //Check for motto pass if available go to checkout
+    //   history.push({
+    //     pathname: "/user/motto-pass",
+    //   });
+    // } else {
+    //   history.push({
+    //     pathname: "/user/payment",
+    //   });
+    // }
+
     // if(price === 20)
     // {
     //   history.push("/user/moto-pass");
