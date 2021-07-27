@@ -113,7 +113,7 @@ const NavBarFC = ({
             </Link>
           </div>
           <div className="search-items1">
-            <div className="input-item1">
+            <div className="input-item1" style={{opacity:"0"}}>
               <input
                 className="input"
                 type="text"

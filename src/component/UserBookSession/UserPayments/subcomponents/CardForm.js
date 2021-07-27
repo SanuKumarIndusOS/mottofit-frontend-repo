@@ -334,7 +334,7 @@ function CardFormFC({
           <div className="payment_terms">
             <input
               type="checkbox"
-              style={{ width: "20px", marginRight: "10px" }}
+              style={{ width: "50px", marginRight: "10px" }}
               onChange={handleChange}
               checked={agreedToTerms}
             />

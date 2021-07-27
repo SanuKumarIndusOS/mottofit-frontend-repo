@@ -141,8 +141,6 @@ const FindTrainerFC = ({
 
   const bestMatchRef = useRef(null);
   const otherRef = useRef(null);
-  
-  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -153,14 +151,13 @@ const FindTrainerFC = ({
       SetLocation("In Person");
       setInPersonDD(false);
     }
-   
+
     if (trainerQueryData.location && trainerQueryData.date) {
+      localStorage.setItem("search_location", trainerQueryData.location);
+      localStorage.setItem("search_city", trainerQueryData.city);
 
-      localStorage.setItem('search_location', trainerQueryData.location);
-      localStorage.setItem('search_city', trainerQueryData.city);
+      console.log(trainerQueryData);
 
-      console.log(trainerQueryData)
-    
       let selectedCity = Object.values(inPerson).filter(
         ({ value }) => value === trainerQueryData?.city
       )[0];
@@ -183,22 +180,21 @@ const FindTrainerFC = ({
       };
 
       setqueryObject(payload.query);
-      console.log(payload.query,"pp");
+      console.log(payload.query, "pp");
 
-      localStorage.setItem('testObject', JSON.stringify(payload.query));
+      localStorage.setItem("testObject", JSON.stringify(payload.query));
 
       getTrainerDataByQuery();
       // setqueryObject(trainerQueryData);
       // SetLocation(trainerQueryData.location);
     } else {
-
-       if (localStorage.getItem('search_location') === "inPerson") {
-      SetLocation("In Person");
-      setInPersonDD(false);
-    }
+      if (localStorage.getItem("search_location") === "inPerson") {
+        SetLocation("In Person");
+        setInPersonDD(false);
+      }
 
       let selectedCity = Object.values(inPerson).filter(
-        ({ value }) => value === localStorage.getItem('search_city')
+        ({ value }) => value === localStorage.getItem("search_city")
       )[0];
 
       if (selectedCity?.name) {
@@ -209,7 +205,7 @@ const FindTrainerFC = ({
       }
 
       console.log("else");
-   
+
       let payload = {
         query: {
           location: trainerQueryData?.location,
@@ -219,10 +215,10 @@ const FindTrainerFC = ({
           city: trainerQueryData?.city,
         },
       };
-      setqueryObject(JSON.parse(localStorage.getItem('testObject')));
-      getTrainerDataByQuery(JSON.parse(localStorage.getItem('testObject')));
-      updateTrainerDetails(JSON.parse(localStorage.getItem('testObject')));
-      console.log(JSON.parse(localStorage.getItem('testObject')),"cc");
+      setqueryObject(JSON.parse(localStorage.getItem("testObject")));
+      getTrainerDataByQuery(JSON.parse(localStorage.getItem("testObject")));
+      updateTrainerDetails(JSON.parse(localStorage.getItem("testObject")));
+      console.log(JSON.parse(localStorage.getItem("testObject")), "cc");
     }
 
     let reduxData = {
@@ -230,7 +226,7 @@ const FindTrainerFC = ({
     };
 
     console.log(reduxData);
-    
+
     updateUserDetails(reduxData);
   }, []);
 
@@ -452,9 +448,9 @@ const FindTrainerFC = ({
     console.log(payload);
 
     updateTrainerDetails(payload);
-    localStorage.setItem('testObject', JSON.stringify(payload.query));
-   // getTrainerDataByQuery(payload.query);
-   getTrainerDataByQuery(JSON.parse(localStorage.getItem('testObject')));  
+    localStorage.setItem("testObject", JSON.stringify(payload.query));
+    // getTrainerDataByQuery(payload.query);
+    getTrainerDataByQuery(JSON.parse(localStorage.getItem("testObject")));
   };
 
   const getTrainerDataByQuery = (currData) => {
@@ -584,11 +580,11 @@ const FindTrainerFC = ({
             <h3>Training Vertical</h3>
             <div className="card-item" onClick={TriggerVerticalDropDown}>
               <img src={Weight} alt="icon" />
-              <p>
+              {/* <p>
                 {queryObject.vertical?.label ||
                   queryObject.trainingType?.label ||
                   "Select a Category"}
-              </p>
+              </p> */}
             </div>
             {Dropdown}
           </div>

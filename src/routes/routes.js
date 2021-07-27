@@ -199,7 +199,7 @@ const routers = [
         componentPath: "pages/Trainer/Find/index",
         name: "FindTrainer",
         auth: false,
-        exact: true,
+        exact: false,
       },
       {
         path: "/profile/:id",

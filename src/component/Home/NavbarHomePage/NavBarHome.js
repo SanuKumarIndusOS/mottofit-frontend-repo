@@ -113,7 +113,7 @@ const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails }) => {
             )}
           </div>
           <div className="search-items">
-            <div className="input-item">
+            <div className="input-item" style={{opacity:"0"}}>
               <input
                 className="input"
                 type="text"
