@@ -581,8 +581,8 @@ const FindTrainerFC = ({
             <div className="card-item" onClick={TriggerVerticalDropDown}>
               <img src={Weight} alt="icon" />
               <p>
-                {queryObject.vertical?.label ||
-                  queryObject.trainingType?.label ||
+                { queryObject?.vertical?.label ||
+                  queryObject?.trainingType?.label ||
                   "Select a Category"}
               </p>
             </div>
@@ -634,7 +634,7 @@ const FindTrainerFC = ({
             >
               <img src={AvailabilityIcon} alt="icon" />
               <p>
-                {queryObject.availability?.label?.split("(")[0] ||
+                {queryObject?.availability?.label?.split("(")[0] ||
                   "Select a Time"}
               </p>
             </div>
@@ -657,10 +657,10 @@ const FindTrainerFC = ({
       >
         <div className="cat">
           {VerticalVal === "" ? (
-            queryObject.vertical?.label === "" ? (
+            queryObject?.vertical?.label === "" ? (
               <div>All Verticals</div>
             ) : (
-              queryObject.vertical?.label
+              queryObject?.vertical?.label
             )
           ) : (
             VerticalVal
@@ -668,7 +668,7 @@ const FindTrainerFC = ({
         </div>
         <div className="date">
           {Calvalue === new Date()
-            ? queryObject.date
+            ? queryObject?.date
             : moment(Calvalue).format("YYYY/MM/DD")}
         </div>
         <div
