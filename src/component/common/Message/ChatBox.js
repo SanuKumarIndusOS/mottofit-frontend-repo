@@ -37,10 +37,13 @@ class ChatBoxClass extends Component {
         // console.log("hrllo", this.props.isLoading, prevProps.isLoading);
       }, 100);
     }
+  
   }
 
   componentDidMount() {
     this.scrollToMessageListBottom();
+
+    
   }
 
   scrollToMessageListBottom = () => {
