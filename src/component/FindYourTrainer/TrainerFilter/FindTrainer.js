@@ -580,11 +580,11 @@ const FindTrainerFC = ({
             <h3>Training Vertical</h3>
             <div className="card-item" onClick={TriggerVerticalDropDown}>
               <img src={Weight} alt="icon" />
-              {/* <p>
+              <p>
                 {queryObject.vertical?.label ||
                   queryObject.trainingType?.label ||
                   "Select a Category"}
-              </p> */}
+              </p>
             </div>
             {Dropdown}
           </div>
