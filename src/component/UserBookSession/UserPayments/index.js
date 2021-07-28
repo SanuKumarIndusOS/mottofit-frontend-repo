@@ -162,6 +162,8 @@ const UserPaymentsFC = ({
   useEffect(() => {
     updatePricing();
 
+    console.log(sessionData);
+
     window.scrollTo(0, 0);
     if (Object.keys(sessionData).length === 0)
       return history.push("/trainer/find");
@@ -428,7 +430,7 @@ const UserPaymentsFC = ({
                     <h3>I WANT TO TRAIN AT</h3>
                     <div className="user_data_inner">
                       <img src={LocationIcon} alt="icon" />
-                      <h4>{`${sessionData?.trainingVenue?.label}`}</h4>
+                      <h4>{  (sessionData?.preferedTrainingMode === "inPerson")? `${sessionData?.trainingVenue?.label}`: "Virtual"}</h4>
                     </div>
                   </div>
                   <hr />
