@@ -112,7 +112,11 @@ const UserPaymentsFC = ({
       //   },
     };
 
-     console.log( scheduleBody.sessionEndTime, scheduleBody.sessionStartTime ,"Time");
+    console.log(
+      scheduleBody.sessionEndTime,
+      scheduleBody.sessionStartTime,
+      "Time"
+    );
 
     scheduleSession(scheduleBody)
       .then((res) => {
@@ -430,7 +434,11 @@ const UserPaymentsFC = ({
                     <h3>I WANT TO TRAIN AT</h3>
                     <div className="user_data_inner">
                       <img src={LocationIcon} alt="icon" />
-                      <h4>{  (sessionData?.preferedTrainingMode === "inPerson")? `${sessionData?.trainingVenue?.label}`: "Virtual"}</h4>
+                      <h4>
+                        {sessionData?.preferedTrainingMode === "inPerson"
+                          ? `${sessionData?.trainingVenue?.label}`
+                          : "Virtual"}
+                      </h4>
                     </div>
                   </div>
                   <hr />

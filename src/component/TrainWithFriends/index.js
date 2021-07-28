@@ -109,11 +109,13 @@ const TrainWithFriendsClass = ({
 
       const trainingLocation = data.venue;
 
-      const isVirtual = sessionType === "virtual";
+      const isVirtual = data.sessionType ==="virtual";
 
       const tempTrainerData = data.trainerDetail || {};
 
       const pricingObject = {};
+
+      console.log(data, isVirtual);
 
       // if (sessionType.includes("SOCIAL")) {
       const virtualSesion2People =
@@ -708,7 +710,7 @@ const TrainWithFriendsClass = ({
                         <h3>I WANT TO TRAIN AT</h3>
                         <div className="TF_data_inner">
                           <img src={LocationIcon} alt="icon" />
-                          <h4>{`${sessionData?.trainingVenue?.label}`}</h4>
+                          <h4>{ (sessionData.sessionType === "inPerson")? `${sessionData?.trainingVenue?.label}`: "Virtual"}</h4>
                         </div>
                       </div>
                       <hr />
