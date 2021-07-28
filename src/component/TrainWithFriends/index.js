@@ -409,11 +409,11 @@ const TrainWithFriendsClass = ({
           },
           friendPhone: {
             presence: {
-              allowEmpty: false,
+              allowEmpty: true,
               message: "^Phone number is required",
             },
             length: {
-              minimum: 8,
+              minimum: 0 ,
               tooShort: "^Invalid number",
               maximum: 15,
               tooLong: "^Invalid number",
