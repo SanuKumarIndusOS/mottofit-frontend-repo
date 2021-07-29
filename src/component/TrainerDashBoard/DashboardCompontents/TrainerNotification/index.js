@@ -58,7 +58,7 @@ const TrainerNotification = ({ getnotificationList }) => {
               {allNotificationData.map((item) => {
                 return (
                   <div className="notification_card">
-                    <img className="noti_img" src={item.picture} height="82" width="82"></img>
+                    <img className="noti_img" src={item.picture}></img>
 
                     <div className="noti_content">
                       <div className="noti_msg">{item.message}</div>

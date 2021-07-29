@@ -284,6 +284,8 @@ function TfcClass({
         return Toast({ type: "error", message: "Cannot add slot at past" });
       }
 
+      console.log(data);
+
       addTrainerSlotApi(data)
         .then(() => {
           setCells(tempcells);
