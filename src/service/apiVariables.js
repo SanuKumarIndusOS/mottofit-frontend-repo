@@ -416,4 +416,13 @@ export const notificationApi = {
       return this.url;
     },
   },
+  markAllRead:
+  {
+    method:"post",
+    url:"read/notifications",
+    baseURL: "notification",
+    get api() {
+      return this.url;
+    },
+  }
 };

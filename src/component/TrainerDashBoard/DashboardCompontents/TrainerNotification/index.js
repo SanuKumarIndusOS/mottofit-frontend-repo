@@ -8,12 +8,12 @@ import CloseIcon from "assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { io } from "socket.io-client";
 
-import { getnotificationList } from "action/NotificationAct";
+import { getnotificationList, mark_as_read } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 
-const TrainerNotification = ({ getnotificationList }) => {
+const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
   const [allNotificationData, setAllNotificationData] = useState([]);
 
   const [unReadedNotificationData, setUnreadedNotificationData] = useState([]);
@@ -53,36 +53,18 @@ const TrainerNotification = ({ getnotificationList }) => {
           <div className="user_notify_inner_container">
             <div className="notify_header">
               <h2>Notifications</h2>
+              <u onClick={()=>{
+                mark_as_read().then((data)=>
+                {
+                  getnotificationList().then((data) => {
+                    console.log(data);
+                    setAllNotificationData(data);
+                  });
+                })
+              }}>MARK ALL AS READ</u>
             </div>
             <div className="notify_wrapper">
-              {allNotificationData.map((item) => {
-                return (
-                  <div className="notification_card">
-                    <img className="noti_img" src={item.picture}></img>
-
-                    <div className="noti_content">
-                      <div className="noti_msg">{item.message}</div>
-
-                      <div className="noti_time">
-                        <img src={AvailabilityIcon} alt="icon" className="avail_img" />
-                        { moment(
-                          item.updatedAt.slice(0, 10),
-                          "yyyy-mm-dd"
-                        ).format("MMMM") +
-                          " " +
-                          item.updatedAt.slice(8, 10) +
-                          "th, " +
-                          item.updatedAt.slice(0, 4) +
-                          " at " +
-                          moment(item.updatedAt.slice(11, 16), "HH:mm").format(
-                            "h:mm A"
-                          )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-              {/* <Tabs
+              <Tabs
                 defaultTab="all"
                 onChange={(tabId) => {
                   console.log(tabId);
@@ -94,16 +76,83 @@ const TrainerNotification = ({ getnotificationList }) => {
                 </TabList>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="all">
-                    <MessageTemp
-                      data={allNotificationData}
-                      onClose={handleNotificationClose}
-                    />
+                    {allNotificationData.map((item) => {
+                      return (
+                        <div className="notification_card">
+                          {/* <div className="mark_as_read">Read</div> */}
+                          <div className="notification_card_noti" style={{ marginTop: "30px" }}>
+                            <img className="noti_img" src={item.picture}></img>
+
+                            <div className="noti_content">
+                              <div className="noti_msg">{item.message}</div>
+
+                              <div className="noti_time">
+                                <img
+                                  src={AvailabilityIcon}
+                                  alt="icon"
+                                  className="avail_img"
+                                />
+                                {moment(
+                                  item.updatedAt.slice(0, 10),
+                                  "yyyy-mm-dd"
+                                ).format("MMMM") +
+                                  " " +
+                                  item.updatedAt.slice(8, 10) +
+                                  "th, " +
+                                  item.updatedAt.slice(0, 4) +
+                                  " at " +
+                                  moment(
+                                    item.updatedAt.slice(11, 16),
+                                    "HH:mm"
+                                  ).format("h:mm A")}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </TabPanel>
                   <TabPanel tabId="unread">
-                    <MessageTemp data={unReadedNotificationData} />
+                    {allNotificationData.map((item, keys) => {
+                      return item.status === "unRead" ? (
+                        <div className="notification_card">
+                          <div
+                            className="notification_card_noti"
+                            style={{ marginTop: "30px" }}
+                          >
+                            <img className="noti_img" src={item.picture}></img>
+
+                            <div className="noti_content">
+                              <div className="noti_msg">{item.message}</div>
+
+                              <div className="noti_time">
+                                <img
+                                  src={AvailabilityIcon}
+                                  alt="icon"
+                                  className="avail_img"
+                                />
+                                {moment(
+                                  item.updatedAt.slice(0, 10),
+                                  "yyyy-mm-dd"
+                                ).format("MMMM") +
+                                  " " +
+                                  item.updatedAt.slice(8, 10) +
+                                  "th, " +
+                                  item.updatedAt.slice(0, 4) +
+                                  " at " +
+                                  moment(
+                                    item.updatedAt.slice(11, 16),
+                                    "HH:mm"
+                                  ).format("h:mm A")}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (keys === 0)?<div className="no_noti"><h2>No New Notifications</h2></div>:null;
+                    })}
                   </TabPanel>
                 </div>
-              </Tabs> */}
+              </Tabs>
             </div>
           </div>
         </div>
@@ -172,6 +221,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getnotificationList,
+      mark_as_read
     },
     dispatch
   );
