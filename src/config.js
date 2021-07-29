@@ -6,6 +6,7 @@ let config = {
       sessionService: "http://doodlebluelive.com:2337/v1/",
       paymentService: "http://doodlebluelive.com:2336/v1/",
       messgaeService: "http://doodlebluelive.com:2338/v1/",
+      notificationService: "http://doodlebluelive.com:2355/v1/",
       tempFacebookService: "https://4db3af52de99.ngrok.io/v1/",
     },
     stripeUrl:

@@ -16,17 +16,13 @@ export var api = async function ({
     // setting token
     if (isAdmin) {
       console.log("isAdmin");
-      axiosInstance.defaults.headers.common[
-        "Authorization"
-      ] = localStorage.getItem("admin-token")
-        ? `${localStorage.getItem("admin-token")}`
-        : "";
+      axiosInstance.defaults.headers.common["Authorization"] =
+        localStorage.getItem("admin-token")
+          ? `${localStorage.getItem("admin-token")}`
+          : "";
     } else {
-      axiosInstance.defaults.headers.common[
-        "Authorization"
-      ] = localStorage.getItem("token")
-        ? `${localStorage.getItem("token")}`
-        : "";
+      axiosInstance.defaults.headers.common["Authorization"] =
+        localStorage.getItem("token") ? `${localStorage.getItem("token")}` : "";
     }
 
     axiosInstance[method](
@@ -79,6 +75,9 @@ let getServiceUrl = (baseURL) => {
       break;
     case "session":
       finalURL = config.api.sessionService;
+      break;
+    case "notification":
+      finalURL = config.api.notificationService;
       break;
     case "payment":
       finalURL = config.api.paymentService;

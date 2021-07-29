@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { Tabs, Tab, TabPanel, TabList } from "react-web-tabs";
 import "react-web-tabs/dist/react-web-tabs.css";
-import Jenny from "assets/files/TrainerDashboard/Message/Jenny.png";
+
 import AvailabilityIcon from "assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import CloseIcon from "assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { io } from "socket.io-client";
 
-const TrainerNotification = () => {
+import { getnotificationList } from "action/NotificationAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import moment from "moment";
+
+const TrainerNotification = ({ getnotificationList }) => {
   const [allNotificationData, setAllNotificationData] = useState([]);
 
   const [unReadedNotificationData, setUnreadedNotificationData] = useState([]);
@@ -20,21 +25,26 @@ const TrainerNotification = () => {
       console.log("connetesd");
     });
 
-    socket.on(
-      localStorage.getItem("user-id")+"-notification",
-       (data) => {
-        console.log("Received a notification from the server for bryan", data);
-      }
-    );
+    socket.on(localStorage.getItem("user-id") + "-notification", (data) => {
+      console.log("Received a notification from the server for bryan", data);
 
-    
+      getnotificationList().then((data) => {
+        console.log(data);
+        setAllNotificationData(data);
+      });
+    });
+
+    getnotificationList().then((data) => {
+      console.log(data);
+      setAllNotificationData(data);
+    });
   }, []);
 
-  const handleNotificationClose = (index) => {
-    const tempData = [...allNotificationData].filter((_, i) => i !== index);
+  // const handleNotificationClose = (index) => {
+  //   const tempData = [...allNotificationData].filter((_, i) => i !== index);
 
-    setAllNotificationData(tempData);
-  };
+  //   setAllNotificationData(tempData);
+  // };
 
   return (
     <>
@@ -45,7 +55,34 @@ const TrainerNotification = () => {
               <h2>Notifications</h2>
             </div>
             <div className="notify_wrapper">
-              <Tabs
+              {allNotificationData.map((item) => {
+                return (
+                  <div className="notification_card">
+                    <img className="noti_img" src={item.picture} height="82" width="82"></img>
+
+                    <div className="noti_content">
+                      <div className="noti_msg">{item.message}</div>
+
+                      <div className="noti_time">
+                        <img src={AvailabilityIcon} alt="icon" className="avail_img" />
+                        { moment(
+                          item.updatedAt.slice(0, 10),
+                          "yyyy-mm-dd"
+                        ).format("MMMM") +
+                          " " +
+                          item.updatedAt.slice(8, 10) +
+                          "th, " +
+                          item.updatedAt.slice(0, 4) +
+                          " at " +
+                          moment(item.updatedAt.slice(11, 16), "HH:mm").format(
+                            "h:mm A"
+                          )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              {/* <Tabs
                 defaultTab="all"
                 onChange={(tabId) => {
                   console.log(tabId);
@@ -66,7 +103,7 @@ const TrainerNotification = () => {
                     <MessageTemp data={unReadedNotificationData} />
                   </TabPanel>
                 </div>
-              </Tabs>
+              </Tabs> */}
             </div>
           </div>
         </div>
@@ -131,42 +168,18 @@ const MessageTemp = ({ data, onClose }) => {
   );
 };
 
-const MessageData = [
-  {
-    img: Jenny,
-    message:
-      " Your pilates session with Jane Doe has been confirmed for 20th February, 2021. ",
-    click: "Click here",
-    dates: "February 16th, 2021 at 2:20 P.M.",
-  },
-  {
-    img: Jenny,
-    message:
-      " Your yoga session with Jane Doe has been confirmed for 20th May, 2021. ",
-    click: "Click here",
-    dates: "May 05th, 2021 at 2:20 P.M.",
-  },
-  {
-    img: Jenny,
-    message:
-      " Your yoga session with Jane Doe has been confirmed for 20th May, 2021. ",
-    click: "Click here",
-    dates: "May 05th, 2021 at 2:20 P.M.",
-  },
-  {
-    img: Jenny,
-    message:
-      " Your yoga session with Jane Doe has been confirmed for 20th May, 2021. ",
-    click: "Click here",
-    dates: "May 05th, 2021 at 2:20 P.M.",
-  },
-  {
-    img: Jenny,
-    message:
-      " Your yoga session with Jane Doe has been confirmed for 20th May, 2021. ",
-    click: "Click here",
-    dates: "May 05th, 2021 at 2:20 P.M.",
-  },
-];
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getnotificationList,
+    },
+    dispatch
+  );
+};
 
-export default TrainerNotification;
+const TrainerNotificationC = connect(
+  null,
+  mapDispatchToProps
+)(TrainerNotification);
+
+export default TrainerNotificationC;

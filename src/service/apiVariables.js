@@ -406,3 +406,14 @@ export const twilioApi = {
     },
   },
 };
+
+export const notificationApi = {
+  getNotificationList: {
+    method: "get",
+    url: "get-notification",
+    baseURL: "notification",
+    get api() {
+      return this.url;
+    },
+  },
+};
