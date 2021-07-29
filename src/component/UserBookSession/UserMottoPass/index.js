@@ -6,7 +6,59 @@ import BlueHoverButton from "../../common/BlueArrowButton";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 
-const UserMottoPass = () => {
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { updateUserDetails } from "action/userAct";
+
+const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
+  const [threeSessionRate, setthreeSessionRate] = React.useState();
+  const [tensessionRate, settensessionRate] = React.useState();
+  const [sessionType, setsessionType] = React.useState("");
+
+  React.useEffect(() => {
+    //const { oneOnOnePricing } = selectedTrainerData?.trainerData;
+    console.log(selectedTrainerData?.trainerData);
+   // console.log(sessionData);
+
+    if (sessionData?.preferedTrainingMode === "virtual") {
+      setsessionType("(Virtual)")
+      setthreeSessionRate(
+        selectedTrainerData?.trainerData?.oneOnOnePricing
+          ?.passRatefor3SessionAtVirtual
+      );
+      settensessionRate(
+        selectedTrainerData?.trainerData?.oneOnOnePricing
+          ?.passRatefor10SessionAtVirtual
+      );
+    } else {
+      if (sessionData?.trainingVenue?.value === "trainerLocation") {
+
+        setsessionType("(Trainer Location)")
+        setthreeSessionRate(
+          selectedTrainerData?.trainerData?.oneOnOnePricing
+            ?.passRatefor3SessionAtTrainerLocation
+        );
+
+        settensessionRate(
+          selectedTrainerData?.trainerData?.oneOnOnePricing
+            ?.passRatefor10SessionAtTrainerLocation
+        );
+      } else {
+
+        setsessionType("(Client Location)")
+        setthreeSessionRate(
+          selectedTrainerData?.trainerData?.oneOnOnePricing
+            ?.passRatefor3SessionAtClientLocation
+        );
+
+        settensessionRate(
+          selectedTrainerData?.trainerData?.oneOnOnePricing
+            ?.passRatefor10SessionAtClientLocation
+        );
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className="motto_outter_container">
@@ -42,7 +94,13 @@ const UserMottoPass = () => {
                       <div className="session_pass_content">
                         <img src={Tick} alt="icon" />
                         <h5>
-                          Valid for <span>Jane Doe</span> only
+                          Valid for{" "}
+                          <span>
+                            {selectedTrainerData?.trainerData?.firstName +
+                              " " +
+                              selectedTrainerData?.trainerData?.lastName}
+                          </span>{" "}
+                          only
                         </h5>
                       </div>
                       <div className="session_pass_content">
@@ -52,15 +110,19 @@ const UserMottoPass = () => {
                       <div className="session_pass_content">
                         <img src={Tick} alt="icon" />
                         <h5>
-                          It can be used anytime within 30 days of the purchase
+                          It can be used anytime within 30 days of the purchase {sessionType}.
                         </h5>
                       </div>
                       <div className="session_offer">
                         <h1>
-                          <span>$100</span> $90{" "}
-                          <span className="offer">/ Session</span>
+                          <span style={{ display: "none" }}>$100</span> $
+                          {threeSessionRate} 
+                          <span className="offer">/ Session </span>
                         </h1>
+
+                      
                       </div>
+                  
                     </div>
                     <div className="get_sessionPass">
                       <button>
@@ -78,7 +140,13 @@ const UserMottoPass = () => {
                       <div className="session_pass_content">
                         <img src={Tick} alt="icon" />
                         <h5>
-                          Valid for <span>Jane Doe</span> only
+                          Valid for{" "}
+                          <span>
+                            {selectedTrainerData?.trainerData?.firstName +
+                              " " +
+                              selectedTrainerData?.trainerData?.lastName}
+                          </span>{" "}
+                          only
                         </h5>
                       </div>
                       <div className="session_pass_content">
@@ -88,12 +156,13 @@ const UserMottoPass = () => {
                       <div className="session_pass_content">
                         <img src={Tick} alt="icon" />
                         <h5>
-                          It can be used anytime within 90 days of the purchase
+                          It can be used anytime within 90 days of the purchase    {sessionType}.
                         </h5>
                       </div>
                       <div className="session_offer">
                         <h1>
-                          <span>$100</span> $75{" "}
+                          <span style={{ display: "none" }}>$100</span>$
+                          {tensessionRate}
                           <span className="offer">/ Session</span>
                         </h1>
                       </div>
@@ -123,4 +192,19 @@ const UserMottoPass = () => {
   );
 };
 
-export default UserMottoPass;
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+  queryObject: state.trainerReducer.query,
+  selectedTrainerData: state.userReducer.selectedTrainerData,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({}, dispatch);
+};
+
+const UserMottoPassC = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserMottoPass);
+
+export default UserMottoPassC;

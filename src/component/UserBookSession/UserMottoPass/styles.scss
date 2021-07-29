@@ -73,7 +73,7 @@
                     width: 100%;
                     margin-top: 2em;
                     .motto_pass_left {
-                        height: 440px;
+                      //  height: 440px;
 
                         background: #f8f8f8;
                         box-shadow: 0px 3px 12px #16161626;
@@ -204,7 +204,7 @@
                         }
                     }
                     .motto_pass_right {
-                        height: 440px;
+                       // height: 440px;
 
                         background: #f8f8f8;
                         box-shadow: 0px 3px 12px #16161626;
@@ -348,6 +348,7 @@
                 position: relative;
                 top: -65px;
                 h4 {
+                    margin-top: 20%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
