@@ -27,13 +27,7 @@ const TrainerNotification = () => {
       }
     );
 
-    // fetch("http://doodlebluelive.com:2355/v1/get-notification", {
-    //   headers: {
-    //     Authorization: localStorage.getItem("token"),
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
+    
   }, []);
 
   const handleNotificationClose = (index) => {
