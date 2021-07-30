@@ -21,12 +21,14 @@ import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { UserAvatar } from "component/common/UserAvatar";
+import { change_login_status } from "action/NotificationAct";
 
 const NavBarFC = ({
   toggle,
   isModelOpen,
   updateUserDetails,
   getUserDetail,
+  change_login_status
 }) => {
   const [userData, setUserData] = useState();
 
@@ -113,7 +115,7 @@ const NavBarFC = ({
             </Link>
           </div>
           <div className="search-items1">
-            <div className="input-item1" style={{opacity:"0"}}>
+            <div className="input-item1" style={{ opacity: "0" }}>
               <input
                 className="input"
                 type="text"
@@ -143,7 +145,10 @@ const NavBarFC = ({
                     <DropdownItem onClick={handleDashboard}>
                       Dashboard
                     </DropdownItem>
-                    <DropdownItem onClick={logout}>Logout</DropdownItem>
+                    <DropdownItem onClick={() => {
+                      change_login_status({ "loginStatus": false })
+                      logout
+                    }}>Logout</DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>
               </>
@@ -167,9 +172,9 @@ const NavBarFC = ({
         </div>
         <div
           className="mobile_profile_menu"
-          // onClick={() => {
-          //   setActiveMobMenu(true);
-          // }}
+        // onClick={() => {
+        //   setActiveMobMenu(true);
+        // }}
         >
           {!isUserLoggedIn ? (
             <div className="login-item1">
@@ -302,7 +307,10 @@ const NavBarFC = ({
                     </div>
                   </div>
 
-                  <div className="menu_li" onClick={logout}>
+                  <div className="menu_li" onClick={() => {
+                    change_login_status({ "loginStatus": false })
+                    logout
+                  }}>
                     <img
                       src="/static/media/Logout Icon.97acadbd.svg"
                       alt="icon"
@@ -330,6 +338,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       getUserDetail,
+      change_login_status
     },
     dispatch
   );

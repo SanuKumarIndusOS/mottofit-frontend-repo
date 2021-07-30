@@ -132,32 +132,30 @@ class ChatBoxClass extends Component {
   };
 
   unread = () => {
+    var temp = []
 
     //console.log("hit");
 
     this.setState({
-      members: this.props.currentChannelMembers}, () => {
-         
-       
-        let rec = this.state.members.filter((item) => { 
-          return item.memberIdenity !== localStorage.getItem('user-id')
-        })
+      members: this.props.currentChannelMembers
+    }, () => {
 
-        var temp = []
 
-       temp = rec.map((item) => 
-       {return item.userId})
+      let rec = this.state.members.filter((item) => {
+        return item.memberIdenity !== localStorage.getItem('user-id')
+      })
 
-       
+      temp = rec.map((item) => { return item.userId })
 
-      
-        
-       
-        }
+      this.props.send_unread_notification({
+        "recepients": temp
+      })
+    }
     );
-    
 
-   
+
+
+
   }
 
   render() {

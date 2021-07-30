@@ -96,9 +96,8 @@ export const TrainerApi = {
     pageSize: 0,
     limit: 10,
     get api() {
-      return `${this.url + this.sessionType}&offset=${this.pageSize}&limit=${
-        this.limit
-      }`;
+      return `${this.url + this.sessionType}&offset=${this.pageSize}&limit=${this.limit
+        }`;
     },
     set addQuery({ key, payload }) {
       this.query[key] = payload;
@@ -314,9 +313,8 @@ export const userApi = {
     pageSize: 0,
     limit: 10,
     get api() {
-      return `${this.url + this.sessionType}&offset=${this.pageSize}&limit=${
-        this.limit
-      }`;
+      return `${this.url + this.sessionType}&offset=${this.pageSize}&limit=${this.limit
+        }`;
     },
   },
   cancelSession: {
@@ -418,8 +416,8 @@ export const notificationApi = {
   },
   markAllRead:
   {
-    method:"post",
-    url:"read/notifications",
+    method: "post",
+    url: "read/notifications",
     baseURL: "notification",
     get api() {
       return this.url;
@@ -427,11 +425,22 @@ export const notificationApi = {
   },
   sendUnReadNotification:
   {
-    method:"post",
+    method: "post",
     url: "send/unread-notification",
     baseURL: "notification",
     get api() {
       return this.url;
     },
+  },
+
+  changeLoginStatus:
+  {
+    method: "post",
+    url: "edit/login-status",
+    baseURL: "normal",
+    get api() {
+      return this.url;
+    },
+
   }
 };

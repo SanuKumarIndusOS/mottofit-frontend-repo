@@ -7,6 +7,11 @@ import CodeSplitter from "helpers/CodeSplitter";
 import { NotificationContainer } from "react-notifications";
 import { logout } from "service/utilities";
 
+
+import { change_login_status } from "action/NotificationAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import IdleTimer, { useIdleTimer } from "react-idle-timer/dist/modern";
 
 class RoutesClass extends Component {
@@ -75,7 +80,7 @@ class RoutesClass extends Component {
   }
 
   componentWillUnmount() {
-   
+
   }
 
   render() {
@@ -85,7 +90,7 @@ class RoutesClass extends Component {
           ref={(ref) => {
             this.idleTimer = ref;
           }}
-          timeout={2000}
+          timeout={30000}
           onActive={this.handleOnActive}
           onIdle={this.handleOnIdle}
           onAction={this.handleOnAction}
@@ -203,11 +208,33 @@ class RoutesClass extends Component {
 
   handleOnActive(event) {
     console.log("user is active");
+    change_login_status({"loginStatus": true})
   }
 
   handleOnIdle(event) {
     console.log("user is idle");
+
+    change_login_status({"loginStatus": false})
+
   }
 }
 
-export default RoutesClass;
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      change_login_status
+
+    },
+    dispatch
+  );
+};
+
+const RoutesClassC = connect(
+  null,
+  mapDispatchToProps
+)(RoutesClass);
+
+
+
+export default RoutesClassC;

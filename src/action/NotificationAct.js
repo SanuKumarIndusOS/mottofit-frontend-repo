@@ -31,6 +31,20 @@ export const mark_as_read =
       });
     };
 
+    export const change_login_status =
+  (body) =>
+    (dispatch, getState, { api }) => {
+      return new Promise((resolve, reject) => {
+        api({ ...notificationApi.changeLoginStatus, body })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    };
+
 export const send_unread_notification =
   (body) =>
     (dispatch, getState, { api }) => {
