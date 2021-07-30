@@ -75,6 +75,7 @@ class RoutesClass extends Component {
     this.routerGuard();
     window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault();
+      if (localStorage.getItem('token') !== null) { this.props.change_login_status({ loginStatus: false }) }
       return (ev.returnValue = "Are you sure you want to close?");
     });
   }
@@ -83,15 +84,16 @@ class RoutesClass extends Component {
 
   }
 
-  handleOnActive(event) {
+  handleOnActive = (event) => {
     console.log("user is active");
-    //this.props.change_login_status({loginStatus: true})
+    if (localStorage.getItem('token') !== null) { this.props.change_login_status({ loginStatus: true }) }
   }
 
-  handleOnIdle(event) {
+  handleOnIdle = (event) => {
     console.log("user is idle");
 
-    //this.props.change_login_status({loginStatus: false})
+    if (localStorage.getItem('token') !== null) { this.props.change_login_status({ loginStatus: false }) }
+
 
   }
 
@@ -218,7 +220,7 @@ class RoutesClass extends Component {
   //   console.log('user did something', event)
   // }
 
- 
+
 }
 
 
