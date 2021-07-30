@@ -11,6 +11,7 @@ import "./styles.scss";
 import SignIn from "../../SignIn/Banner";
 import { logout } from "service/utilities";
 import { history } from "../../../helpers";
+import { change_login_status } from "action/NotificationAct";
 import {
   ButtonDropdown,
   DropdownToggle,
@@ -21,7 +22,7 @@ import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails }) => {
+const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails , change_login_status}) => {
   const [navbar, setNavbar] = useState(false);
   const [showModel, setShowModel] = useState(false);
   const [logo, setLogo] = useState(false);
@@ -142,7 +143,10 @@ const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails }) => {
                     <DropdownItem onClick={handleDashboard}>
                       Dashboard
                     </DropdownItem>
-                    <DropdownItem onClick={logout}>Logout</DropdownItem>
+                    <DropdownItem onClick={() => {
+                    change_login_status({ "loginStatus": false })
+                    logout()
+                  }}>Logout</DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>
               </>
@@ -162,6 +166,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       updateUserDetails,
+      change_login_status
     },
     dispatch
   );
