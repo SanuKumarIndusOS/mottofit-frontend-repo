@@ -118,6 +118,8 @@ const UserPaymentsFC = ({
       "Time"
     );
 
+    console.log(scheduleBody,"l");
+
     scheduleSession(scheduleBody)
       .then((res) => {
         if (res.session.trainingType === "1on1") {

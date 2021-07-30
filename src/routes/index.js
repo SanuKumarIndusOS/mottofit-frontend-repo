@@ -83,6 +83,18 @@ class RoutesClass extends Component {
 
   }
 
+  handleOnActive(event) {
+    console.log("user is active");
+    //this.props.change_login_status({loginStatus: true})
+  }
+
+  handleOnIdle(event) {
+    console.log("user is idle");
+
+    //this.props.change_login_status({loginStatus: false})
+
+  }
+
   render() {
     return (
       <Router history={history}>
@@ -90,7 +102,7 @@ class RoutesClass extends Component {
           ref={(ref) => {
             this.idleTimer = ref;
           }}
-          timeout={30000}
+          timeout={5000}
           onActive={this.handleOnActive}
           onIdle={this.handleOnIdle}
           onAction={this.handleOnAction}
@@ -206,17 +218,7 @@ class RoutesClass extends Component {
   //   console.log('user did something', event)
   // }
 
-  handleOnActive(event) {
-    console.log("user is active");
-    change_login_status({"loginStatus": true})
-  }
-
-  handleOnIdle(event) {
-    console.log("user is idle");
-
-    change_login_status({"loginStatus": false})
-
-  }
+ 
 }
 
 

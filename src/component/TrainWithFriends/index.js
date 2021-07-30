@@ -275,8 +275,8 @@ const TrainWithFriendsClass = ({
     const { editSessionData } = userApi;
 
     let tempPhoneData = friendsInput.filter(
-      ({ friendEmail, friendName, friendPhone, id }) =>
-        friendEmail && friendName && friendPhone && !id
+      ({ friendEmail, friendName, id }) =>
+        friendEmail && friendName  && !id
     );
 
     let payload = {
