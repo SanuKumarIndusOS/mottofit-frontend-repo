@@ -424,5 +424,14 @@ export const notificationApi = {
     get api() {
       return this.url;
     },
+  },
+  sendUnReadNotification:
+  {
+    method:"post",
+    url: "send/unread-notification",
+    baseURL: "notification",
+    get api() {
+      return this.url;
+    },
   }
 };

@@ -8,12 +8,12 @@ import CloseIcon from "assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { io } from "socket.io-client";
 
-import { getnotificationList, mark_as_read } from "action/NotificationAct";
+import { getnotificationList, mark_as_read,  } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 
-const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
+const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
   const [allNotificationData, setAllNotificationData] = useState([]);
 
   const [unReadedNotificationData, setUnreadedNotificationData] = useState([]);
@@ -53,14 +53,17 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
           <div className="user_notify_inner_container">
             <div className="notify_header">
               <h2>Notifications</h2>
-              <u onClick={()=>{
-                mark_as_read().then((data)=>
-                {
+              <u onClick={() => {
+                mark_as_read().then((dataa) => {
+                  console.log(dataa);
                   getnotificationList().then((data) => {
                     console.log(data);
                     setAllNotificationData(data);
                   });
+
+                
                 })
+              
               }}>MARK ALL AS READ</u>
             </div>
             <div className="notify_wrapper">
@@ -148,7 +151,7 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
                             </div>
                           </div>
                         </div>
-                      ) : (keys === 0)?<div className="no_noti"><h2>No New Notifications</h2></div>:null;
+                      ) : (keys === 0) ? <div className="no_noti"><h2>No New Notifications</h2></div> : null;
                     })}
                   </TabPanel>
                 </div>
@@ -221,7 +224,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getnotificationList,
-      mark_as_read
+      mark_as_read,
+      
     },
     dispatch
   );

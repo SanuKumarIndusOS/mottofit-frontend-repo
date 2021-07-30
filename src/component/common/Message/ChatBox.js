@@ -9,8 +9,10 @@ import BlueHoverButton from "../BlueArrowButton";
 import { ChatItem } from "./ChatItem";
 import { bindActionCreators } from "redux";
 import { trainerChannel } from "action/trainerAct";
+import { send_unread_notification } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { getFormatDate } from "service/helperFunctions";
+import { TextFormatSharp } from "@material-ui/icons";
 
 class ChatBoxClass extends Component {
   constructor(props) {
@@ -19,6 +21,8 @@ class ChatBoxClass extends Component {
     this.messagesEndRef = React.createRef();
     this.state = {
       message: "",
+      members: []
+
     };
   }
 
@@ -37,13 +41,19 @@ class ChatBoxClass extends Component {
         // console.log("hrllo", this.props.isLoading, prevProps.isLoading);
       }, 100);
     }
-  
+
+
+
   }
 
   componentDidMount() {
     this.scrollToMessageListBottom();
 
-    
+    // temp = [];
+
+
+
+
   }
 
   scrollToMessageListBottom = () => {
@@ -80,6 +90,9 @@ class ChatBoxClass extends Component {
         this.scrollToMessageListBottom();
       });
     }
+
+
+
   };
 
   formatMessage = (messages = []) => {
@@ -117,6 +130,36 @@ class ChatBoxClass extends Component {
 
     return formattedMessage;
   };
+
+  unread = () => {
+
+    //console.log("hit");
+
+    this.setState({
+      members: this.props.currentChannelMembers}, () => {
+         
+       
+        let rec = this.state.members.filter((item) => { 
+          return item.memberIdenity !== localStorage.getItem('user-id')
+        })
+
+        var temp = []
+
+       temp = rec.map((item) => 
+       {return item.userId})
+
+       
+
+      
+        
+       
+        }
+    );
+    
+
+   
+  }
+
   render() {
     const {
       activeChannelMessages = [],
@@ -172,9 +215,8 @@ class ChatBoxClass extends Component {
                   </div>
                   <p>
                     {typingMembers.length > 0 && (
-                      <span className="ml-auto text-primary fw-600">{`${typingMembers.toString()} ${
-                        typingMembers.length > 1 ? "are" : "is"
-                      } typing...`}</span>
+                      <span className="ml-auto text-primary fw-600">{`${typingMembers.toString()} ${typingMembers.length > 1 ? "are" : "is"
+                        } typing...`}</span>
                     )}
                   </p>
                 </div>
@@ -207,8 +249,9 @@ class ChatBoxClass extends Component {
                       placeholder="Type your message here.."
                       value={message}
                       onChange={this.handleChange}
+
                     />
-                    <div className="submit-btn-block">
+                    <div className="submit-btn-block" onClick={this.unread}>
                       <button className="transparent-btn">
                         <BlueHoverButton />
                       </button>
@@ -218,17 +261,15 @@ class ChatBoxClass extends Component {
               </>
             ) : (
               <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-                <span className="info-badge">{`${
-                  isLoading ? "Loading..." : "Connecting..."
-                }`}</span>
+                <span className="info-badge">{`${isLoading ? "Loading..." : "Connecting..."
+                  }`}</span>
               </div>
             )}
           </>
         ) : (
           <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-            <span className="info-badge">{`${
-              isLoading ? "Loading..." : "Select a chat to start messaging"
-            }`}</span>
+            <span className="info-badge">{`${isLoading ? "Loading..." : "Select a chat to start messaging"
+              }`}</span>
           </div>
         )}
       </div>
@@ -251,6 +292,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       trainerChannel,
+      send_unread_notification
     },
     dispatch
   );
