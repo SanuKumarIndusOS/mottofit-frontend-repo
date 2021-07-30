@@ -18,7 +18,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
   React.useEffect(() => {
     //const { oneOnOnePricing } = selectedTrainerData?.trainerData;
     console.log(selectedTrainerData?.trainerData);
-   // console.log(sessionData);
+    // console.log(sessionData);
 
     if (sessionData?.preferedTrainingMode === "virtual") {
       setsessionType("(Virtual)")
@@ -116,13 +116,13 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
                       <div className="session_offer">
                         <h1>
                           <span style={{ display: "none" }}>$100</span> $
-                          {threeSessionRate} 
+                          {threeSessionRate}
                           <span className="offer">/ Session </span>
                         </h1>
 
-                      
+
                       </div>
-                  
+
                     </div>
                     <div className="get_sessionPass">
                       <button>
