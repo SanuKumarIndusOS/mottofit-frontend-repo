@@ -84,7 +84,8 @@ const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
                         <div className="notification_card">
                           {/* <div className="mark_as_read">Read</div> */}
                           <div className="notification_card_noti" style={{ marginTop: "30px" }}>
-                            <img className="noti_img" src={item.picture}></img>
+                       {
+                       (item.picture !== undefined)?<img className="noti_img" src={item.picture}></img>: <div className="noti_non">{(item.name !== null)? item?.name:null}</div> }   
 
                             <div className="noti_content">
                               <div className="noti_msg">{item.message}</div>

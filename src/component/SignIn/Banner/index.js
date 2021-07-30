@@ -25,6 +25,8 @@ import { GoogleLoginButton } from "../../common/SocialLogin/GoogleLoginButton";
 import { SocialLogin } from "component/common/SocialLogin";
 import { nextPathPusher } from "../../../helpers";
 
+import { change_login_status } from "action/NotificationAct";
+
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
 
 const SignInFC = ({
@@ -88,7 +90,7 @@ const SignInFC = ({
         };
 
         updateUserDetails(reduxData);
-
+        
         console.log("log1");
 
         if (nextPathReRouter()) return;
@@ -106,6 +108,9 @@ const SignInFC = ({
         } else {
           history.push("/users/dashboard/session");
         }
+
+       
+
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
@@ -295,6 +300,8 @@ const mapDispatchToProps = (dispatch) => {
       loginAct: loginOrSignUp,
       trainerDetail,
       updateUserDetails,
+      change_login_status
+      
     },
     dispatch
   );

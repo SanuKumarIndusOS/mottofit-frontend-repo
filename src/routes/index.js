@@ -104,7 +104,7 @@ class RoutesClass extends Component {
           ref={(ref) => {
             this.idleTimer = ref;
           }}
-          timeout={5000}
+          timeout={180000}
           onActive={this.handleOnActive}
           onIdle={this.handleOnIdle}
           onAction={this.handleOnAction}

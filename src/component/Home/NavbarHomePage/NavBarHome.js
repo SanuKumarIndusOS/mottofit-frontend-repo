@@ -144,8 +144,8 @@ const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails , change_login_st
                       Dashboard
                     </DropdownItem>
                     <DropdownItem onClick={() => {
-                    change_login_status({ "loginStatus": false })
-                    logout()
+                   change_login_status({ loginStatus: false }).then(logout)
+                   
                   }}>Logout</DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>

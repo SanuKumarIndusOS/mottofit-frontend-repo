@@ -146,8 +146,8 @@ const NavBarFC = ({
                       Dashboard
                     </DropdownItem>
                     <DropdownItem onClick={() => {
-                      change_login_status({ "loginStatus": false });
-                      logout()
+                     change_login_status({ loginStatus: false }).then(logout)
+                      // logout()
                     }}>Logout</DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>
@@ -308,8 +308,8 @@ const NavBarFC = ({
                   </div>
 
                   <div className="menu_li" onClick={() => {
-                    change_login_status({ "loginStatus": false })
-                    logout()
+                    change_login_status({ loginStatus: false }).then(logout)
+                    //logout()
                   }}>
                     <img
                       src="/static/media/Logout Icon.97acadbd.svg"
