@@ -47,8 +47,13 @@ const UserPaymentsFC = ({
   const [coupondCode, setCouponCode] = useState("");
   const [isCouponCodeValid, setCouponCodeValid] = useState(false);
   const [accordionData, setAccordionData] = useState(tempaccordionData);
+  const [checkPayAhead, setCheckPayAhead] = useState(false);
 
   const [price, setprice] = useState();
+
+  const handleChangeCPA = (event) => {
+    setCheckPayAhead(!checkPayAhead);
+  };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -135,7 +140,9 @@ const UserPaymentsFC = ({
           };
           // console.log(res);
           restProps?.updateUserDetails(reduxData);
-          history.push("/user/with-friends");
+          checkPayAhead && res.session.trainingType === "social"
+            ? history.push("/users/dashboard/session")
+            : history.push("/user/with-friends");
         }
 
         // restProps.resetUserDetails();
@@ -390,9 +397,12 @@ const UserPaymentsFC = ({
                           <Elements stripe={stripePromise}>
                             <CardForm
                               agreedToTerms={agreedToTerms}
+                              checkPayAhead={checkPayAhead}
                               handleChange={() =>
                                 setAgreedToTerms(!agreedToTerms)
                               }
+
+                              handleChangeCPA={handleChangeCPA}
                               ScheduleSession={ScheduleSession}
                             />
                           </Elements>

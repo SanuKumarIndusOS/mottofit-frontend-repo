@@ -43,7 +43,9 @@ const useOptions = () => {
 function CardFormFC({
   updateUserDetails,
   agreedToTerms,
+  checkPayAhead,
   handleChange,
+  handleChangeCPA,
   ScheduleSession,
   sessionData,
   isProfile = false,
@@ -54,6 +56,7 @@ function CardFormFC({
   const [isRememberCard, setRememberCard] = useState(false);
   const [defaulCardDetails, setDefaultCardDetails] = useState({});
   const [showCardComp, setShowCardComp] = useState(true);
+  // const [checkPayAhead, setCheckPayAhead] = useState(false);
   // const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   useEffect(() => {
@@ -114,7 +117,8 @@ function CardFormFC({
   const scheduleData = () => {
     let sessionTypeRoute = {
       ["1 ON 1 TRAINING"]: () => ScheduleSession(),
-      ["SOCIAL SESSION"]: () => history.push("/user/with-friends"),
+      ["SOCIAL SESSION"]: () =>
+        checkPayAhead ? ScheduleSession() : history.push("/user/with-friends"),
       ["CREATE A CLASS"]: () => history.push("/user/with-friends"),
     };
 
@@ -344,6 +348,26 @@ function CardFormFC({
               <Link to="/">Privacy Policy</Link>
             </label>
           </div>
+        </div>
+
+        <div className="payment_input_outter_check ">
+          <div className="payment_terms">
+            <input
+              type="checkbox"
+              style={{ width: "50px", marginRight: "10px" }}
+              onChange={handleChangeCPA}
+              checked={checkPayAhead}
+            />
+            <label>I will pay for the entire social session</label>
+
+           
+          </div>
+          {(checkPayAhead)? <select className="participants">
+              <option value="2">2 Participants</option>
+              <option value="3">3 Participants</option>
+              <option value="4">4 Participants</option>
+            </select> : null}
+         
         </div>
 
         <div className="disclaimer">

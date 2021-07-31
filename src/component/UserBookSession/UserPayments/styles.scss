@@ -260,6 +260,7 @@
             .payment_terms {
               display: flex;
               align-items: center;
+              //width: 100%;
               input {
                 width: 15px;
                 height: 15px;
@@ -613,7 +614,20 @@
       }
     }
   }
+ .payment_input_outter_check
+ {
+   flex-direction: column;
+   justify-content: flex-start;
+   .participants
+   {
+     margin-top: 1rem;
+     margin-bottom: 1rem;
+   }
+ }
+  
 }
+
+
 
 .user_friends {
   margin: 3em 0.5em 1em 0;
@@ -636,6 +650,13 @@
     font-weight: normal;
     font-family: "Montserrat", sans-serif;
   }
+}
+
+.participants
+{
+  color: #696969;
+  flex: 2;
+  margin-left: 10px ;
 }
 
 .info-desc {
