@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
-import Person from "../../../assets/files/SignUp/Person Icon.svg";
+import Person from "../../../assets/files/SignUp/personBlack.svg";
 import { Nav, Bars } from "./NavbarHomeStyled";
 import Logo from "../../../assets/files/SVG/Motto Logo Home.svg";
 import LogoImage from "../../../assets/files/SVG/Motto Logo.svg";
