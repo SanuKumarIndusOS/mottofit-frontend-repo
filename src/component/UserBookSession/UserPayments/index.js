@@ -48,12 +48,18 @@ const UserPaymentsFC = ({
   const [isCouponCodeValid, setCouponCodeValid] = useState(false);
   const [accordionData, setAccordionData] = useState(tempaccordionData);
   const [checkPayAhead, setCheckPayAhead] = useState(false);
+  const [friendsCount, setFriendsCount] = useState(2);
 
   const [price, setprice] = useState();
 
   const handleChangeCPA = (event) => {
     setCheckPayAhead(!checkPayAhead);
   };
+
+  const handleFriendsCount = (number) => 
+  {
+           setFriendsCount(number)
+  }
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -392,7 +398,7 @@ const UserPaymentsFC = ({
                           </div>
                           <img src={paymentMethodImg} alt="icon" />
                         </div>
-
+{friendsCount}
                         <div className="payment_input">
                           <Elements stripe={stripePromise}>
                             <CardForm
@@ -404,6 +410,7 @@ const UserPaymentsFC = ({
 
                               handleChangeCPA={handleChangeCPA}
                               ScheduleSession={ScheduleSession}
+                              handleFriendsCount={handleFriendsCount}
                             />
                           </Elements>
                           {/* <button

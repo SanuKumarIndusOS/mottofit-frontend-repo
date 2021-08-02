@@ -46,8 +46,10 @@ function CardFormFC({
   checkPayAhead,
   handleChange,
   handleChangeCPA,
+  handleFriendsCount,
   ScheduleSession,
   sessionData,
+ 
   isProfile = false,
 }) {
   const stripe = useStripe();
@@ -220,9 +222,8 @@ function CardFormFC({
               }}
             />
           ) : (
-            <p className="fs-20">{`**** **** **** ${
-              defaulCardDetails?.card?.last4 || "****"
-            }`}</p>
+            <p className="fs-20">{`**** **** **** ${defaulCardDetails?.card?.last4 || "****"
+              }`}</p>
           )}
 
           <div className="payment_expire_input">
@@ -248,9 +249,8 @@ function CardFormFC({
                   }}
                 />
               ) : (
-                <p className="fs-20">{`${
-                  defaulCardDetails?.card?.exp_month || ""
-                }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
+                <p className="fs-20">{`${defaulCardDetails?.card?.exp_month || ""
+                  }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
               )}
             </div>
             <div className="payment_expire_inner">
@@ -349,8 +349,7 @@ function CardFormFC({
             </label>
           </div>
         </div>
-
-        <div className="payment_input_outter_check ">
+        {sessionData?.sessionType === "SOCIAL SESSION" ? <div className="payment_input_outter_check ">
           <div className="payment_terms">
             <input
               type="checkbox"
@@ -360,15 +359,18 @@ function CardFormFC({
             />
             <label>I will pay for the entire social session</label>
 
-           
+
           </div>
-          {(checkPayAhead)? <select className="participants">
-              <option value="2">2 Participants</option>
-              <option value="3">3 Participants</option>
-              <option value="4">4 Participants</option>
-            </select> : null}
-         
-        </div>
+          {(checkPayAhead) ? <select className="participants" onChange={(e)=>{ console.log(e.target.value ); handleFriendsCount(e.target.value)}} >
+            <option value="2">2 Participants</option>
+            <option value="3">3 Participants</option>
+            
+          </select> : null}
+
+        </div> : null}
+
+
+
 
         <div className="disclaimer">
           <p className="text-info d-flex alignn-items-center">
@@ -383,9 +385,8 @@ function CardFormFC({
         <div className="submit">
           <button
             type="click"
-            className={`${!agreedToTerms ? "disable-btn" : ""} ${
-              isProfile ? "w-auto" : ""
-            }`}
+            className={`${!agreedToTerms ? "disable-btn" : ""} ${isProfile ? "w-auto" : ""
+              }`}
             disabled={!agreedToTerms}
             onClick={handleSubmit}
           >
