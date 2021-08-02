@@ -279,7 +279,7 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
         </div>
         <div className="availability">
           <div>Availability</div>
-          {Avalvalue} <br></br>
+           <br></br>
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="gender"
