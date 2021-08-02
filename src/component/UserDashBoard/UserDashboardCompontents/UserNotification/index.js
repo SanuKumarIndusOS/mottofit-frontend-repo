@@ -26,7 +26,7 @@ const UserNotification = () => {
               <Tabs
                 defaultTab="all"
                 onChange={(tabId) => {
-                  console.log(tabId);
+                 // console.log(tabId);
                 }}
               >
                 <TabList>

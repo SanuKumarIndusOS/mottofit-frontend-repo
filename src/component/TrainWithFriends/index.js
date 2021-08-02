@@ -115,7 +115,7 @@ const TrainWithFriendsClass = ({
 
       const pricingObject = {};
 
-      console.log(data, isVirtual);
+      // console.log(data, isVirtual);
 
       // if (sessionType.includes("SOCIAL")) {
       const virtualSesion2People =
@@ -299,7 +299,7 @@ const TrainWithFriendsClass = ({
     editSessionData.body = payload;
 
 
-  console.log("hit,", editSessionData);
+ // console.log("hit,", editSessionData);
     api({ ...editSessionData })
       .then((data) => {
         Toast({ type: "success", message: data.message || "Success" });

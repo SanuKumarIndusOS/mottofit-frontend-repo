@@ -158,7 +158,7 @@ const FindTrainerFC = ({
       localStorage.setItem("search_location", trainerQueryData.location);
       localStorage.setItem("search_city", trainerQueryData.city);
 
-      console.log(trainerQueryData);
+     // console.log(trainerQueryData);
 
       let selectedCity = Object.values(inPerson).filter(
         ({ value }) => value === trainerQueryData?.city
@@ -182,7 +182,7 @@ const FindTrainerFC = ({
       };
 
       setqueryObject(payload.query);
-      console.log(payload.query, "pp");
+     // console.log(payload.query, "pp");
 
       localStorage.setItem("testObject", JSON.stringify(payload.query));
 
@@ -206,7 +206,7 @@ const FindTrainerFC = ({
         setInPerson(tempInperson);
       }
 
-      console.log("else");
+     // console.log("else");
 
       let payload = {
         query: {
@@ -220,14 +220,14 @@ const FindTrainerFC = ({
       setqueryObject(JSON.parse(localStorage.getItem("testObject")));
       getTrainerDataByQuery(JSON.parse(localStorage.getItem("testObject")));
       updateTrainerDetails(JSON.parse(localStorage.getItem("testObject")));
-      console.log(JSON.parse(localStorage.getItem("testObject")), "cc");
+   //   console.log(JSON.parse(localStorage.getItem("testObject")), "cc");
     }
 
     let reduxData = {
       selectedTimes: [],
     };
 
-    console.log(reduxData);
+   // console.log(reduxData);
 
     updateUserDetails(reduxData);
   }, []);
@@ -443,7 +443,7 @@ const FindTrainerFC = ({
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
-    console.log(payload);
+   // console.log(payload);
 
     updateTrainerDetails(payload);
     localStorage.setItem("testObject", JSON.stringify(payload.query));
@@ -518,7 +518,7 @@ const FindTrainerFC = ({
       id="find-trainer"
       className="find-trainer"
       onClick={() => {
-        console.log("findhit");
+      //  console.log("findhit");
 
         //Availability Dropdown
         if (DropdownTrainerAvailabilityState) {

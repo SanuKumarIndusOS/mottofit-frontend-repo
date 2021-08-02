@@ -31,7 +31,7 @@ const Dropdown = ({ onClick = () => {}, selectedData }) => {
             }`}
             onClick={() => {
               setddBoxingState(!ddBoxingState);
-              console.log(!ddBoxingState, selectedData);
+              //console.log(!ddBoxingState, selectedData);
               selectedData === "Boxing"
                 ? onClick({
                     vertical: { label: "", value: "" },

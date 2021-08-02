@@ -22,20 +22,20 @@ const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("connetesd");
+      //console.log("connetesd");
     });
 
     socket.on(localStorage.getItem("user-id") + "-notification", (data) => {
-      console.log("Received a notification from the server for bryan", data);
+     // console.log("Received a notification from the server for bryan", data);
 
       getnotificationList().then((data) => {
-        console.log(data);
+       // console.log(data);
         setAllNotificationData(data);
       });
     });
 
     getnotificationList().then((data) => {
-      console.log(data);
+     // console.log(data);
       setAllNotificationData(data);
     });
   }, []);
@@ -55,9 +55,9 @@ const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
               <h2>Notifications</h2>
               <u onClick={() => {
                 mark_as_read().then((dataa) => {
-                  console.log(dataa);
+                  // console.log(dataa);
                   getnotificationList().then((data) => {
-                    console.log(data);
+                  //  console.log(data);
                     setAllNotificationData(data);
                   });
 

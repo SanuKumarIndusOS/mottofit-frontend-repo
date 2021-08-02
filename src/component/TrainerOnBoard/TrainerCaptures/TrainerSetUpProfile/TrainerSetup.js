@@ -123,7 +123,7 @@ function TrainerSetupClass(props) {
           : "",
       };
 
-      console.log(tempSetupData);
+      // console.log(tempSetupData);
 
       setTrainerSetupData({
         ...tempSetupData,

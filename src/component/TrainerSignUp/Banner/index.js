@@ -181,7 +181,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         ...fieldInvalidList,
       };
 
-      console.log(errors);
+     // console.log(errors);
       setErrors({ ...errors, ...fieldInvalidList });
     }
 

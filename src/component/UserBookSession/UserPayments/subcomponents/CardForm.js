@@ -164,7 +164,7 @@ function CardFormFC({
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
-        console.log(err);
+        //console.log(err);
       });
   };
 
@@ -191,7 +191,7 @@ function CardFormFC({
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
-        console.log(err);
+      //  console.log(err);
       });
   };
 

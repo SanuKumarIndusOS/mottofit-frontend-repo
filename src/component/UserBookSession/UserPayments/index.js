@@ -116,13 +116,13 @@ const UserPaymentsFC = ({
       participantsCount: checkPayAhead ? parseInt(friendsCount): 0
     };
 
-    console.log(
-      scheduleBody.sessionEndTime,
-      scheduleBody.sessionStartTime,
-      "Time"
-    );
+    // console.log(
+    //   scheduleBody.sessionEndTime,
+    //   scheduleBody.sessionStartTime,
+    //   "Time"
+    // );
 
-    console.log(scheduleBody, "l");
+    // console.log(scheduleBody, "l");
 
     scheduleSession(scheduleBody)
       .then((res) => {
@@ -151,7 +151,7 @@ const UserPaymentsFC = ({
           type: "error",
           message: error.message || "Something went wrong",
         });
-        console.log(error);
+       // console.log(error);
       });
   };
 
