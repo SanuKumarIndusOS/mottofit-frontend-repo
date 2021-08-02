@@ -500,14 +500,17 @@ const TabTwo = ({
                                 >
                                   Complete
                                 </button>
-                              ) :  <button
-                              className="text-primary"
-                              onClick={() =>
-                                handleSessionStatus(data.id, "completed")
-                              }
-                            >
-                              Complete
-                            </button>}
+                              ) : null
+                              
+                            //   <button
+                            //   className="text-primary"
+                            //   onClick={() =>
+                            //     handleSessionStatus(data.id, "completed")
+                            //   }
+                            // >
+                            //   Complete
+                            // </button>
+                            }
                               {/* 
                               <button
                                 className="text-primary"

@@ -640,7 +640,7 @@ const TrainerProfileClass = ({
                         onClick={handleRequestTrainer}
                         disabled={isLoading}
                       >
-                        {isLoading ? "Loading..." : "Request Trainer"}
+                        {isLoading ? "Loading..." : "Request Slot"}
                       </button>
                     </div>
                   </div>

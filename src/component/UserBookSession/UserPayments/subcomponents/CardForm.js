@@ -49,7 +49,7 @@ function CardFormFC({
   handleFriendsCount,
   ScheduleSession,
   sessionData,
- 
+
   isProfile = false,
 }) {
   const stripe = useStripe();
@@ -361,10 +361,11 @@ function CardFormFC({
 
 
           </div>
-          {(checkPayAhead) ? <select className="participants" onChange={(e)=>{ console.log(e.target.value ); handleFriendsCount(e.target.value)}} >
+          {(checkPayAhead) ? <select className="participants" onChange={(e) => { console.log(e.target.value); handleFriendsCount(e.target.value) }} >
+            <option value="1">1 Participants</option>
             <option value="2">2 Participants</option>
             <option value="3">3 Participants</option>
-            
+
           </select> : null}
 
         </div> : null}

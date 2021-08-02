@@ -48,7 +48,7 @@ const UserPaymentsFC = ({
   const [isCouponCodeValid, setCouponCodeValid] = useState(false);
   const [accordionData, setAccordionData] = useState(tempaccordionData);
   const [checkPayAhead, setCheckPayAhead] = useState(false);
-  const [friendsCount, setFriendsCount] = useState(2);
+  const [friendsCount, setFriendsCount] = useState(1);
 
   const [price, setprice] = useState();
 
@@ -390,7 +390,7 @@ const UserPaymentsFC = ({
                           </div>
                           <img src={paymentMethodImg} alt="icon" />
                         </div>
-                        {friendsCount}
+                        
                         <div className="payment_input">
                           <Elements stripe={stripePromise}>
                             <CardForm
