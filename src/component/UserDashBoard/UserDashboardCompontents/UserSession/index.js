@@ -550,18 +550,20 @@ const TabOne = ({
                             {/* </>
                           )} */}
 
-                            {data.trainingType !== "1on1" &&
+                          
+{data?.participantsCount === 0?  data.trainingType !== "1on1" &&
                               !data.asFriend &&
                               tabname !== "Previous" && (
                                 <div className="button_boarder">
                                   <button
                                     onClick={() => handleAddFriends(data)}
                                   >
-                                    Add Friends{" "}
+                                    Add Friends{" "} 
                                   </button>
                                   <img src={ArrowNext} alt="icon" />
                                 </div>
-                              )}
+                              ):null}
+                          
                           </div>
                         )}
                       </div>
