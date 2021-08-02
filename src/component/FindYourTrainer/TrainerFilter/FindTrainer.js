@@ -120,6 +120,8 @@ const FindTrainerFC = ({
   ] = useState(false);
   const [InPersonDD, setInPersonDD] = useState(false);
 
+  const [matchLoad, setMatchLoad] = useState(true);
+
   const [ddBoxingState, setddBoxingState] = useState(false);
   const [ddPilatesState, setddPilatesState] = useState(false);
   const [ddYogaState, setddYogaState] = useState(false);
@@ -279,21 +281,20 @@ const FindTrainerFC = ({
       <div className="box_3_active_trainer">
         <div className="dd_row_one">
           <div
-            className={`option ${
-              queryObject?.vertical?.value === "Boxing" ? "selected-data" : ""
-            }`}
+            className={`option ${queryObject?.vertical?.value === "Boxing" ? "selected-data" : ""
+              }`}
             onClick={() => {
               setddBoxingState(!ddBoxingState);
               setDropdownState(!DropdownState);
               queryObject?.vertical?.value === "Boxing"
                 ? setqueryObject({
-                    ...queryObject,
-                    vertical: { label: "", value: "" },
-                  })
+                  ...queryObject,
+                  vertical: { label: "", value: "" },
+                })
                 : setqueryObject({
-                    ...queryObject,
-                    vertical: { label: "Boxing", value: "Boxing" },
-                  });
+                  ...queryObject,
+                  vertical: { label: "Boxing", value: "Boxing" },
+                });
             }}
           >
             <div className="option_wapper">
@@ -302,21 +303,20 @@ const FindTrainerFC = ({
             </div>
           </div>
           <div
-            className={`option ${
-              queryObject?.vertical?.value === "Pilates" ? "selected-data" : ""
-            }`}
+            className={`option ${queryObject?.vertical?.value === "Pilates" ? "selected-data" : ""
+              }`}
             onClick={() => {
               setddPilatesState(!ddPilatesState);
               setDropdownState(!DropdownState);
               queryObject?.vertical?.value === "Pilates"
                 ? setqueryObject({
-                    ...queryObject,
-                    vertical: { label: "", value: "" },
-                  })
+                  ...queryObject,
+                  vertical: { label: "", value: "" },
+                })
                 : setqueryObject({
-                    ...queryObject,
-                    vertical: { label: "Pilates", value: "Pilates" },
-                  });
+                  ...queryObject,
+                  vertical: { label: "Pilates", value: "Pilates" },
+                });
             }}
           >
             <div className="option_wapper">
@@ -327,25 +327,24 @@ const FindTrainerFC = ({
         </div>
         <div className="dd_row_two">
           <div
-            className={`option ${
-              queryObject?.vertical?.value === "Strength & HIIT"
-                ? "selected-data"
-                : ""
-            }`}
+            className={`option ${queryObject?.vertical?.value === "Strength & HIIT"
+              ? "selected-data"
+              : ""
+              }`}
             onClick={() => {
               setddHiitState(!ddHiitState);
               queryObject?.vertical?.value === "Strength & HIIT"
                 ? setqueryObject({
-                    ...queryObject,
-                    vertical: { label: "", value: "" },
-                  })
+                  ...queryObject,
+                  vertical: { label: "", value: "" },
+                })
                 : setqueryObject({
-                    ...queryObject,
-                    vertical: {
-                      label: "Strength & HIIT",
-                      value: "Strength & HIIT",
-                    },
-                  });
+                  ...queryObject,
+                  vertical: {
+                    label: "Strength & HIIT",
+                    value: "Strength & HIIT",
+                  },
+                });
               setDropdownState(!DropdownState);
             }}
           >
@@ -355,23 +354,22 @@ const FindTrainerFC = ({
             </div>
           </div>
           <div
-            className={`option ${
-              queryObject?.vertical?.value === "Yoga" ? "selected-data" : ""
-            }`}
+            className={`option ${queryObject?.vertical?.value === "Yoga" ? "selected-data" : ""
+              }`}
             onClick={() => {
               setddYogaState(!ddYogaState);
               queryObject?.vertical?.value === "Yoga"
                 ? setqueryObject({
-                    ...queryObject,
-                    vertical: { label: "", value: "" },
-                  })
+                  ...queryObject,
+                  vertical: { label: "", value: "" },
+                })
                 : setqueryObject({
-                    ...queryObject,
-                    vertical: {
-                      label: "Yoga",
-                      value: "Yoga",
-                    },
-                  });
+                  ...queryObject,
+                  vertical: {
+                    label: "Yoga",
+                    value: "Yoga",
+                  },
+                });
               setDropdownState(!DropdownState);
             }}
           >
@@ -479,6 +477,7 @@ const FindTrainerFC = ({
     trainerAvailableApi.query.availability = JSON.stringify(availabilityValue);
 
     api({ ...trainerAvailableApi }).then(({ data }) => {
+      setMatchLoad(false)
       setbestMatchData(data.bestMatch);
       setbestOthersData(data.others);
 
@@ -568,7 +567,7 @@ const FindTrainerFC = ({
                 </h6>
                 <div
                   className="inPerson-dd"
-                  // onClick={TriggerInPersonDropDown}
+                // onClick={TriggerInPersonDropDown}
                 >
                   {DropdownHomeInPerson}
                 </div>
@@ -581,7 +580,7 @@ const FindTrainerFC = ({
             <div className="card-item" onClick={TriggerVerticalDropDown}>
               <img src={Weight} alt="icon" />
               <p>
-                { queryObject?.vertical?.label ||
+                {queryObject?.vertical?.label ||
                   queryObject?.trainingType?.label ||
                   "Select a Category"}
               </p>
@@ -673,17 +672,21 @@ const FindTrainerFC = ({
         </div>
         <div
           className="find-filters"
-          // onClick={() => {
-          //  // setshowMenu(!showMenu);
-          //  history.push("/mobiles/filter")
-          // }}
+        // onClick={() => {
+        //  // setshowMenu(!showMenu);
+        //  history.push("/mobiles/filter")
+        // }}
         >
           &#9776;
         </div>
       </div>
+      {matchLoad ? <div className="load_parent" style={{ paddingBottom: "500px" }}>
+        <div className="loaderss"></div>
+      </div> : <div>    <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
+        <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
+      </div>}
 
-      <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
-      <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
+
     </div>
   );
 };
