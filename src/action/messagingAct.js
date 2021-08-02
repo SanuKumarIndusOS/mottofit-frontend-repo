@@ -64,12 +64,14 @@ export const updateGlobalMessagingDetails = (message) => (
     upcomingSessions,
     adminMessages,
     invitedSessions,
+    requestedSessions,
   } = getState().messagingReducer;
 
   let tempPastSessions = [...pastSessions];
   let tempUpcomingSessions = [...upcomingSessions];
   let tempInvitedSessions = [...invitedSessions];
   let tempAdminSession = [...adminMessages];
+  let tempRequestedSessions = [...requestedSessions];
   const currentPastSessions = handleChannelMessage(
     tempPastSessions,
     currentMesasgedChannelId,
@@ -78,6 +80,12 @@ export const updateGlobalMessagingDetails = (message) => (
   );
   const currentUpcomingSessions = handleChannelMessage(
     tempUpcomingSessions,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
+  const currentRequestedSessions = handleChannelMessage(
+    tempRequestedSessions,
     currentMesasgedChannelId,
     currentMesasge,
     currentMesasgeAuthor
@@ -99,6 +107,7 @@ export const updateGlobalMessagingDetails = (message) => (
   let payload = {
     pastSessions: currentPastSessions,
     upcomingSessions: currentUpcomingSessions,
+    requestedSessions: currentRequestedSessions,
     adminMessages: currentAdminSessions,
     invitedSessions: currentInvitedSessions,
   };

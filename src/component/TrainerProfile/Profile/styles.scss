@@ -29,7 +29,6 @@
             font-size: 90px;
             color: white;
             font-weight: bold;
-            
           }
           img {
             width: 350px;
@@ -581,7 +580,6 @@
               font-size: 70px;
               color: white;
               font-weight: bold;
-              
             }
 
             .profile_header_inner {
@@ -749,6 +747,20 @@
       color: #696969;
       font-size: 16px;
       font-family: "Montserrat", sans-serif;
+    }
+  }
+}
+
+.request-trainer-block {
+  button {
+    color: #53bfd2;
+
+    &:hover {
+      color: #53bfd2;
+    }
+
+    &:focus {
+      box-shadow: 0 0;
     }
   }
 }

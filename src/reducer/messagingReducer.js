@@ -10,6 +10,7 @@ const initialState = {
   channelData: {},
   pastSessions: [],
   upcomingSessions: [],
+  requestedSessions: [],
   adminMessages: [],
   invitedSessions: [],
   isLoading: false,
