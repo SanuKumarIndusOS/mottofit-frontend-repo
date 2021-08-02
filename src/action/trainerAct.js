@@ -255,3 +255,21 @@ export const getStripeAccLink = () => (dispatch, getState, { api }) => {
       });
   });
 };
+
+// request trainer for personal message
+
+export const requestTrainerMessageAct = (payload) => (
+  dispatch,
+  getState,
+  { api }
+) => {
+  return new Promise((resolve, reject) => {
+    api({ ...TrainerApi.requestTrainerMessage, body: payload })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

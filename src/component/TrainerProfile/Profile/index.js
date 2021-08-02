@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
 import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import Tick from "../../../assets/files/FindTrainer/Tick 1.svg";
 import Share from "../../../assets/files/FindTrainer/share.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
@@ -23,6 +23,8 @@ import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 import { copyTextToClipboard } from "service/helperFunctions";
 import FullScreenCarousel from "component/common/FullScreenCarousel";
+import { requestTrainerMessageAct } from "action/trainerAct";
+import { Toast } from "service/toast";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -30,6 +32,7 @@ const TrainerProfileClass = ({
   getTrainerDetail,
   updateUserDetails,
   selectedTimes,
+  requestTrainerMessageApi,
 }) => {
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
@@ -41,6 +44,7 @@ const TrainerProfileClass = ({
   const [currItemIndex, setCurrIndex] = useState("");
   const [trainerLocationModal, setTrainerLocationModal] = useState(false);
   const [viewLocationType, setViewLocationType] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
 
@@ -106,10 +110,45 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent =
-    trainerProfileData?.preferedTrainingMode?.includes("virtual");
-  const isInPersonPresent =
-    trainerProfileData?.preferedTrainingMode?.includes("inPerson");
+  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
+    "virtual"
+  );
+  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
+    "inPerson"
+  );
+
+  const handleRequestTrainer = () => {
+    const userId = localStorage.getItem("user-id");
+
+    // CHECK WHETHER USER IS LOGGED IN,IF NOT REDURECT TO LOGIN PAGE
+
+    let redirectURL = `/mobile/login?${encodeURIComponent(
+      `nextpath=${history.location.pathname}`
+    )}`;
+
+    if (!userId) {
+      window.scrollTo(0, 0);
+      return history.push(redirectURL);
+    }
+
+    let payload = {
+      channelType: "directMessageTrainer",
+      trainerId: id,
+      userId: [userId],
+    };
+
+    setLoading(true);
+    requestTrainerMessageApi(payload)
+      .then((data) => {
+        setLoading(false);
+        Toast({ type: "success", message: "Success" });
+        history.push("/users/dashboard/message");
+      })
+      .catch((err) => {
+        setLoading(false);
+        Toast({ type: "error", message: err.message || "Error" });
+      });
+  };
 
   const handleCopy = () => {
     let profileLink = window?.location?.href;
@@ -593,6 +632,17 @@ const TrainerProfileClass = ({
                       selectedTimes={selectedTimes}
                       handleSessionType={handleSessionType}
                     />
+                    <div className="request-trainer-block">
+                      <button
+                        className={`btn btn-transparent  fw-600 fs-18 ${
+                          isLoading ? "btn-disabled" : "text-underline"
+                        }`}
+                        onClick={handleRequestTrainer}
+                        disabled={isLoading}
+                      >
+                        {isLoading ? "Loading..." : "Request Trainer"}
+                      </button>
+                    </div>
                   </div>
                   {/* </div> */}
                 </div>
@@ -815,6 +865,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getTrainerDetail,
       updateUserDetails,
+      requestTrainerMessageApi: requestTrainerMessageAct,
     },
     dispatch
   );
