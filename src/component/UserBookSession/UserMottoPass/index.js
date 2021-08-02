@@ -17,7 +17,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
 
   React.useEffect(() => {
     //const { oneOnOnePricing } = selectedTrainerData?.trainerData;
-    console.log(selectedTrainerData?.trainerData);
+   // console.log(selectedTrainerData?.trainerData);
     // console.log(sessionData);
 
     if (sessionData?.preferedTrainingMode === "virtual") {
