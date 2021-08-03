@@ -7,7 +7,6 @@ import CodeSplitter from "helpers/CodeSplitter";
 import { NotificationContainer } from "react-notifications";
 import { logout } from "service/utilities";
 
-
 import { change_login_status } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -76,32 +75,34 @@ class RoutesClass extends Component {
     this.routerGuard();
     window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault();
-      if (localStorage.getItem('token') !== null) { this.props.change_login_status({ loginStatus: false }) }
+      if (localStorage.getItem("token") !== null) {
+        this.props.change_login_status({ loginStatus: false });
+      }
       return (ev.returnValue = "Are you sure you want to close?");
     });
   }
 
-  componentWillUnmount() {
-
-  }
+  componentWillUnmount() {}
 
   handleOnActive = (event) => {
     console.log("user is active");
-    if (localStorage.getItem('token') !== null) { this.props.change_login_status({ loginStatus: true }) }
-  }
+    if (localStorage.getItem("token") !== null) {
+      this.props.change_login_status({ loginStatus: true });
+    }
+  };
 
   handleOnIdle = (event) => {
     console.log("user is idle");
 
-    if (localStorage.getItem('token') !== null) { this.props.change_login_status({ loginStatus: false }) }
-
-
-  }
+    if (localStorage.getItem("token") !== null) {
+      this.props.change_login_status({ loginStatus: false });
+    }
+  };
 
   render() {
     return (
       <Router history={history}>
-        <IdleTimer
+        {/* <IdleTimer
           ref={(ref) => {
             this.idleTimer = ref;
           }}
@@ -110,7 +111,7 @@ class RoutesClass extends Component {
           onIdle={this.handleOnIdle}
           onAction={this.handleOnAction}
           debounce={250}
-        />
+        /> */}
         <Suspense
           fallback={
             <div className="load_parent">
@@ -170,8 +171,9 @@ class RoutesClass extends Component {
                                   exact={exact}
                                   key={path + childrenPath}
                                   render={(props) => {
-                                    let PageComponent =
-                                      CodeSplitter.getComponent(name);
+                                    let PageComponent = CodeSplitter.getComponent(
+                                      name
+                                    );
 
                                     return <PageComponent {...props} />;
                                   }}
@@ -220,26 +222,17 @@ class RoutesClass extends Component {
   // handleOnAction (event) {
   //   console.log('user did something', event)
   // }
-
-
 }
-
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      change_login_status
-
+      change_login_status,
     },
     dispatch
   );
 };
 
-const RoutesClassC = connect(
-  null,
-  mapDispatchToProps
-)(RoutesClass);
-
-
+const RoutesClassC = connect(null, mapDispatchToProps)(RoutesClass);
 
 export default RoutesClassC;

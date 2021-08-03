@@ -9,6 +9,7 @@ const initialState = {
   defaulCardDetails: {},
   submittedData: {},
   currentAcceptedInvitationId: "",
+  nextAction: null,
   isModelOpen: false,
 };
 

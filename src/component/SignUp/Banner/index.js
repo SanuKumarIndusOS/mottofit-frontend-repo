@@ -19,7 +19,7 @@ import { Toast } from "service/toast";
 import { SocialLogin } from "component/common/SocialLogin";
 import { nextPathReRouter } from "../../../helpers";
 
-const SignUpFC = ({ loginOrSignupAct }) => {
+const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -32,6 +32,8 @@ const SignUpFC = ({ loginOrSignupAct }) => {
   });
 
   const [error, setErrors] = useState({});
+
+  const [isLoading, setLoading] = useState(false);
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
@@ -73,15 +75,23 @@ const SignUpFC = ({ loginOrSignupAct }) => {
       ? data.phoneNo
       : `+${data.phoneNo}`;
 
+    setLoading(true);
+
     loginOrSignupAct(userSignUp, payload)
-      .then(() => {
+      .then((data) => {
+        // console.log(res);
+
+        localStorage.setItem("user-id", data.id);
         localStorage.setItem("type", 3);
 
-        if (nextPathReRouter()) return;
+        // console.log(nextPathReRouter(nextAction));
+
+        if (nextPathReRouter(nextAction)) return;
         history.push("/trainer/find");
       })
       .catch((error) => {
         // setApiError("Sorry, something went wrong.", error.message);
+        setLoading(false);
         Toast({ type: "error", message: error.message || "Error" });
       });
   }
@@ -207,131 +217,138 @@ const SignUpFC = ({ loginOrSignupAct }) => {
 
   return (
     <>
-      <div className="main_container">
-        <div className="wrapper">
-          <div className="inner_wrapper">
-            <div className="inner_items">
-              <h2>Sign Up with Motto!</h2>
-              <p>Fill up the following details to create your account</p>
-              <div className="form_items">
-                <form onSubmit={signUp}>
-                  <div className="input_items">
-                    <input
-                      placeholder="Name"
-                      type="text"
-                      value={data.firstName}
-                      name="firstName"
-                      onChange={onChangeValue}
-                    />
-                    <img src={Person} alt="icon" />
+      {isLoading ? (
+        <div className="load_parent" style={{ paddingBottom: "500px" }}>
+          <div className="loaderss"></div>
+        </div>
+      ) : (
+        <div className="main_container">
+          <div className="wrapper">
+            <div className="inner_wrapper">
+              <div className="inner_items">
+                <h2>Sign Up with Motto!</h2>
+                <p>Fill up the following details to create your account</p>
+                <div className="form_items">
+                  <form onSubmit={signUp}>
+                    <div className="input_items">
+                      <input
+                        placeholder="Name"
+                        type="text"
+                        value={data.firstName}
+                        name="firstName"
+                        onChange={onChangeValue}
+                      />
+                      <img src={Person} alt="icon" />
 
-                    {error.firstName && <span>{error.firstName[0]}</span>}
-                  </div>
-                  <div className="input_items">
-                    <input
-                      placeholder="LastName"
-                      type="text"
-                      value={data.lastName}
-                      name="lastName"
-                      onChange={onChangeValue}
-                    />
-                    <img src={Person} alt="icon" />
-                    {error.lastName && <span>{error.lastName[0]}</span>}
-                  </div>
+                      {error.firstName && <span>{error.firstName[0]}</span>}
+                    </div>
+                    <div className="input_items">
+                      <input
+                        placeholder="LastName"
+                        type="text"
+                        value={data.lastName}
+                        name="lastName"
+                        onChange={onChangeValue}
+                      />
+                      <img src={Person} alt="icon" />
+                      {error.lastName && <span>{error.lastName[0]}</span>}
+                    </div>
 
-                  <div className="input_items">
-                    <input
-                      placeholder="Location"
-                      type="text"
-                      value={data.location}
-                      name="location"
-                      onChange={onChangeValue}
-                    />
-                    <img src={Person} alt="icon" />
-                    {error.location && <span>{error.location[0]}</span>}
-                  </div>
+                    <div className="input_items">
+                      <input
+                        placeholder="Location"
+                        type="text"
+                        value={data.location}
+                        name="location"
+                        onChange={onChangeValue}
+                      />
+                      <img src={Person} alt="icon" />
+                      {error.location && <span>{error.location[0]}</span>}
+                    </div>
 
-                  <div className="input_items">
-                    <input
-                      placeholder="Email"
-                      type="email"
-                      value={data.email}
-                      name="email"
-                      onChange={onChangeValue}
-                    />
-                    <img src={Mail} alt="icon" />
+                    <div className="input_items">
+                      <input
+                        placeholder="Email"
+                        type="email"
+                        value={data.email}
+                        name="email"
+                        onChange={onChangeValue}
+                      />
+                      <img src={Mail} alt="icon" />
 
-                    {error.email && <span>{error.email[0]}</span>}
-                  </div>
-                  <div className="input_items">
-                    {/* <input
+                      {error.email && <span>{error.email[0]}</span>}
+                    </div>
+                    <div className="input_items">
+                      {/* <input
                       placeholder="Phone"
                       type="text"
                       value={data.phoneNo}
                       name="phoneNo"
                       onChange={onChangeValue}
                     /> */}
-                    <ReactPhoneInput
-                      disableDropdown
-                      countryCodeEditable={false}
-                      country="us"
-                      placeholder="Phone"
-                      inputProps={{
-                        name: "phone",
-                      }}
-                      specialLabel=""
-                      value={data.phoneNo}
-                      name="phoneNo"
-                      onChange={(e) => {
-                        onChangeValue({
-                          target: {
-                            name: "phoneNo",
-                            value: e,
-                          },
-                        });
-                      }}
-                    />
-                    <img src={Phone} alt="icon" />
-                    {error.phoneNo && <span>{error.phoneNo[0]}</span>}
-                  </div>
-                  <div className="input_items">
-                    <input
-                      placeholder="Create Password"
-                      type={passwordShown ? "text" : "password"}
-                      value={data.password}
-                      name="password"
-                      onChange={onChangeValue}
-                    />
-                    <img src={Password} alt="icon" onClick={showPassword} />
-                    {error.password && <span>{error.password[0]}</span>}
-                  </div>
-                  <div className="input_items">
-                    <input
-                      placeholder="Confirm Password"
-                      type={confirmPasswordShown ? "text" : "password"}
-                      name="cpassword"
-                      value={data.cpassword}
-                      onChange={onChangeValue}
-                    />
-                    <img
-                      src={Password}
-                      alt="icon"
-                      onClick={showConfirmPassword}
-                    />
-
-                    {error.cpassword && <span>{error.cpassword[0]}</span>}
-                  </div>
-                  {apiError && <span className="errorMessage">{apiError}</span>}
-
-                  <div className="or_items">
-                    <div className="hr_line"></div>
-                    <div>
-                      <p>or</p>
+                      <ReactPhoneInput
+                        disableDropdown
+                        countryCodeEditable={false}
+                        country="us"
+                        placeholder="Phone"
+                        inputProps={{
+                          name: "phone",
+                        }}
+                        specialLabel=""
+                        value={data.phoneNo}
+                        name="phoneNo"
+                        onChange={(e) => {
+                          onChangeValue({
+                            target: {
+                              name: "phoneNo",
+                              value: e,
+                            },
+                          });
+                        }}
+                      />
+                      <img src={Phone} alt="icon" />
+                      {error.phoneNo && <span>{error.phoneNo[0]}</span>}
                     </div>
-                    <div className="hr_line"></div>
-                  </div>
-                  <div className="social_buttons">
-                    {/* <button className="facebook-auth">
+                    <div className="input_items">
+                      <input
+                        placeholder="Create Password"
+                        type={passwordShown ? "text" : "password"}
+                        value={data.password}
+                        name="password"
+                        onChange={onChangeValue}
+                      />
+                      <img src={Password} alt="icon" onClick={showPassword} />
+                      {error.password && <span>{error.password[0]}</span>}
+                    </div>
+                    <div className="input_items">
+                      <input
+                        placeholder="Confirm Password"
+                        type={confirmPasswordShown ? "text" : "password"}
+                        name="cpassword"
+                        value={data.cpassword}
+                        onChange={onChangeValue}
+                      />
+                      <img
+                        src={Password}
+                        alt="icon"
+                        onClick={showConfirmPassword}
+                      />
+
+                      {error.cpassword && <span>{error.cpassword[0]}</span>}
+                    </div>
+                    {apiError && (
+                      <span className="errorMessage">{apiError}</span>
+                    )}
+
+                    <div className="or_items">
+                      <div className="hr_line"></div>
+                      <div>
+                        <p>or</p>
+                      </div>
+                      <div className="hr_line"></div>
+                    </div>
+                    <div className="social_buttons">
+                      {/* <button className="facebook-auth">
                       <img src={Facebook} alt="icon" />
                       Sign Up with Facebook
                     </button>
@@ -340,31 +357,36 @@ const SignUpFC = ({ loginOrSignupAct }) => {
                       <img src={Google} alt="icon" />
                       Sign up with Google
                     </button> */}
-                    <SocialLogin type="user" loginType="singup" />
-                  </div>
-                  <div className="submit_button">
-                    <button type="submit" onClick={signUp}>
-                      {" "}
-                      <ArrowHoverBlacked />
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div className="login_content_signup">
-                <h1>Already have an account?</h1>
+                      <SocialLogin type="user" loginType="singup" />
+                    </div>
+                    <div className="submit_button">
+                      <button type="submit" onClick={signUp}>
+                        {" "}
+                        <ArrowHoverBlacked />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div className="login_content_signup">
+                  <h1>Already have an account?</h1>
 
-                <Link to="/">
-                  Sign In now
-                  <ArrowHover />
-                </Link>
+                  <Link to="/">
+                    Sign In now
+                    <ArrowHover />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  nextAction: state.userReducer.nextAction,
+});
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
@@ -375,6 +397,6 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-const SignUp = connect(null, mapDispatchToProps)(SignUpFC);
+const SignUp = connect(mapStateToProps, mapDispatchToProps)(SignUpFC);
 
 export default SignUp;

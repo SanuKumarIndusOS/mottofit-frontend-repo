@@ -85,6 +85,20 @@ const TrainerMessageClass = ({
   }, []);
 
   useEffect(() => {
+    // console.log(history.location);
+
+    const { search } = history.location;
+
+    const tempCurrentTab = search.split("=")[1];
+
+    // console.log(tempCurrentTab);
+
+    tempCurrentTab &&
+      currentTab !== tempCurrentTab &&
+      setCurrentTab(tempCurrentTab);
+  }, [history.location]);
+
+  useEffect(() => {
     getChannelDetails(currentTab);
   }, [pageData]);
 
@@ -134,6 +148,11 @@ const TrainerMessageClass = ({
 
   function handleTabChange(tab) {
     // console.log(tab);
+    const { search } = history.location;
+
+    const tempCurrentTab = search.split("=")[1];
+
+    tempCurrentTab && history.push("/users/dashboard/message");
 
     setCurrentTab(tab);
 
@@ -152,7 +171,7 @@ const TrainerMessageClass = ({
           <div className="message_inner">
             <div className="message_wrapper">
               <Tabs
-                defaultTab={isUser ? "upcoming" : "upcoming"}
+                defaultTab={currentTab}
                 onChange={(tab) => {
                   handleTabChange(tab);
                 }}

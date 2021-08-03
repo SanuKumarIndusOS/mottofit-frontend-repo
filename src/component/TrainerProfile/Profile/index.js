@@ -122,32 +122,49 @@ const TrainerProfileClass = ({
 
     // CHECK WHETHER USER IS LOGGED IN,IF NOT REDURECT TO LOGIN PAGE
 
+    // let callbackFunction = handleRequestTrainer;
+
+    let reduxData = {
+      nextAction: requestTrainerAct,
+    };
+
     let redirectURL = `/mobile/login?${encodeURIComponent(
-      `nextpath=${history.location.pathname}`
+      `nextpath=/users/dashboard/message?currentTab=requested`
     )}`;
 
     if (!userId) {
       window.scrollTo(0, 0);
+      updateUserDetails(reduxData);
+
       return history.push(redirectURL);
     }
 
-    let payload = {
-      channelType: "directMessageTrainer",
-      trainerId: id,
-      userId: [userId],
-    };
+    requestTrainerAct();
+  };
 
-    setLoading(true);
-    requestTrainerMessageApi(payload)
-      .then((data) => {
-        setLoading(false);
-        Toast({ type: "success", message: "Success" });
-        history.push("/users/dashboard/message");
-      })
-      .catch((err) => {
-        setLoading(false);
-        Toast({ type: "error", message: err.message || "Error" });
-      });
+  const requestTrainerAct = () => {
+    const userId = localStorage.getItem("user-id");
+    return new Promise((resolve, reject) => {
+      let payload = {
+        channelType: "directMessageTrainer",
+        trainerId: id,
+        userId: [userId],
+      };
+
+      setLoading(true);
+      requestTrainerMessageApi(payload)
+        .then((data) => {
+          setLoading(false);
+          Toast({ type: "success", message: "Success" });
+          history.push("/users/dashboard/message?currentTab=requested");
+          resolve();
+        })
+        .catch((err) => {
+          setLoading(false);
+          Toast({ type: "error", message: err.message || "Error" });
+          reject(err);
+        });
+    });
   };
 
   const handleCopy = () => {
