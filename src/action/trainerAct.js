@@ -276,12 +276,13 @@ export const requestTrainerMessageAct = (payload) => (
 
 //Global Trainer Search Results
 
-export const fetchGlobalSearchResults = () => (
+export const fetchGlobalSearchResults = (payload) => (
   dispatch,
   getState,
   { api }
 ) => {
   return new Promise((resolve, reject) => {
+    TrainerApi.globalSearch.key = payload
     api({ ...TrainerApi.globalSearch})
       .then(({ data }) => {
         resolve(data);

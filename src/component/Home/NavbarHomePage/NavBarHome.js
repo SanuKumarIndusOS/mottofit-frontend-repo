@@ -22,12 +22,18 @@ import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails , change_login_status}) => {
+const NavBarHomeFC = ({
+  toggle,
+  isModelOpen,
+  updateUserDetails,
+  change_login_status,
+}) => {
   const [navbar, setNavbar] = useState(false);
   const [showModel, setShowModel] = useState(false);
   const [logo, setLogo] = useState(false);
 
   const [dropdownOpen, setOpen] = useState(false);
+  const [keys, setKey] = useState("");
 
   const toggleDrop = () => setOpen(!dropdownOpen);
 
@@ -114,13 +120,27 @@ const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails , change_login_st
             )}
           </div>
           <div className="search-items">
-            <div className="input-item" style={{opacity:"0"}}>
+            <div className="input-item">
               <input
                 className="input"
                 type="text"
                 placeholder="Rotating prompts go here"
+                onChange={(e) => {
+                  setKey(e.target.value);
+                }}
               />
-              <BiSearch className="search-icon" />
+              <BiSearch
+                className="search-icon"
+                onClick={() => {
+                  history.push({
+                    pathname: "/trainer/results",
+                  });
+
+                localStorage.setItem("searchKey", keys)
+
+                
+                }}
+              />
             </div>
             {!isUserLoggedIn ? (
               <div className="login-item1">
@@ -143,10 +163,15 @@ const NavBarHomeFC = ({ toggle, isModelOpen, updateUserDetails , change_login_st
                     <DropdownItem onClick={handleDashboard}>
                       Dashboard
                     </DropdownItem>
-                    <DropdownItem onClick={() => {
-                   change_login_status({ loginStatus: false }).then(logout)
-                   
-                  }}>Logout</DropdownItem>
+                    <DropdownItem
+                      onClick={() => {
+                        change_login_status({ loginStatus: false }).then(
+                          logout
+                        );
+                      }}
+                    >
+                      Logout
+                    </DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>
               </>
@@ -166,7 +191,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       updateUserDetails,
-      change_login_status
+      change_login_status,
     },
     dispatch
   );

@@ -293,9 +293,9 @@ export const TrainerApi = {
     url: "trainers/search?",
     method: "get",
     baseURL: "normal",
-    page: "1",
-    limit: "9",
-    key:"yoga",
+    page:  1,
+    limit: 9,
+    key:"",
     get api() {
       return `${this.url}search=${this.key}&page=${this.page}&limit=${this.limit}`;
     },

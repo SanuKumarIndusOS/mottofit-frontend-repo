@@ -9,7 +9,8 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   const [searchResults, setSearchResults] = useState();
 
   useEffect(() => {
-    fetchGlobalSearchResults().then((data) => {
+    
+    fetchGlobalSearchResults(localStorage.getItem("searchKey")).then((data) => {
       console.log(data);
       setSearchResults(data.list);
     });
@@ -28,12 +29,6 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
     </div>
   );
 };
-
-// export default GloabalSearchResults;
-
-// // const mapStateToProps = (state) => ({
-// //   trainerQueryData: state.trainerReducer.query,
-// // });
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(

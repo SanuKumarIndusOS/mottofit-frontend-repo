@@ -9,7 +9,9 @@ export const UserActionType = {
 
 export const TrainerActionType = {
   updateTrainerDetails: "UPDATE_TRAINER_DETAILS",
+  searchKey: "SEARCH_KEY",
 };
+
 
 export const TrainerCaptureActionType = {
   CAPTURE_TRAINER_CARD: "CAPTURE_TRAINER_CARD",

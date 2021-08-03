@@ -9,6 +9,7 @@ const initialState = {
   },
   details: {},
   data: {},
+  key:{}
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {
@@ -18,6 +19,12 @@ export default (state = Object.assign({}, initialState), { type, payload }) => {
         ...state,
         ...payload,
       };
+    case TrainerActionType.searchKey:
+      return {
+        ...state,
+         key: payload,
+      };
+
     default:
       return state;
   }

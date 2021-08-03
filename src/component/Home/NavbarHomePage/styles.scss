@@ -103,7 +103,9 @@
             height: 18px;
             position: relative;
             right: 30px;
-            color: #bcbcbc;
+            color: #3f3f3f;
+            cursor: pointer;
+            bottom: 2px;
           }
           @media screen and (max-width: 1024px) {
             display: none;
