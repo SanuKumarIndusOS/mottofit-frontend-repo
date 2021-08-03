@@ -1,4 +1,4 @@
-import ResultsPage from "component/common/GloabalSearchResults";
+import ResultsPage from "component/common/GlobalResults/GloabalSearchResults";
 import React from "react";
 
 const FAQMain = () => {

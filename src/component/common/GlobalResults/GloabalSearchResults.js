@@ -1,9 +1,10 @@
 import React from 'react'
+import "./styles.scss";
 
 function GloabalSearchResults() {
     return (
-        <div>
-            sd
+        <div className="results_container">
+            <h1>Results</h1>
         </div>
     )
 }
