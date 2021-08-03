@@ -15,7 +15,7 @@ export var api = async function ({
   return await new Promise((resolve, reject) => {
     // setting token
     if (isAdmin) {
-   //   console.log("isAdmin");
+      //   console.log("isAdmin");
       axiosInstance.defaults.headers.common["Authorization"] =
         localStorage.getItem("admin-token")
           ? `${localStorage.getItem("admin-token")}`
@@ -41,7 +41,7 @@ export var api = async function ({
             reject(error);
           }
         } catch (err) {
-         // console.log(err);
+          // console.log(err);
           reject(err);
         }
       });
@@ -67,9 +67,13 @@ var statusHelper = (status, data) => {
 
 let getServiceUrl = (baseURL) => {
   let finalURL = "";
- // console.log(baseURL);
+  // console.log(baseURL);
 
   switch (baseURL) {
+   
+    case "search":
+      finalURL = config.api.newSearch;
+      break;
     case "normal":
       finalURL = config.api.normalService;
       break;

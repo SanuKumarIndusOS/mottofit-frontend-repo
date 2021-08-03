@@ -8,6 +8,7 @@ let config = {
       messgaeService: "http://doodlebluelive.com:2338/v1/",
       notificationService: "http://doodlebluelive.com:2355/v1/",
       tempFacebookService: "https://4db3af52de99.ngrok.io/v1/",
+      newSearch:"http://doodlebluelive.com:2307/v2/"
     },
     stripeUrl:
       "pk_test_51IJnd4BqgEC4bFYpGGizgTzbIgTjeilOIQ1ht7qe6UfgB3yfVYRrcJbEZp37oPu7ACIFACqNc6hWVIPcIAbGqHyA00aa6T2SRm",

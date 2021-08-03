@@ -57,6 +57,7 @@ export const TrainerApi = {
   trainerAvailableApi: {
     url: "availableTrainer",
     method: "get",
+    baseURL: "normal",
     query: {
       location: null,
       date: null,
@@ -300,6 +301,19 @@ export const TrainerApi = {
       return `${this.url}search=${this.key}&page=${this.page}&limit=${this.limit}`;
     },
   },
+
+  homeSearchBestMatch:
+  {
+    url: "/v2/availableTrainer?",
+    method: "get",
+    baseURL: "baseUrl",
+    page:  1,
+    limit: 9,
+    key:"",
+    get api() {
+      return `${this.url}page=1&limit=10&listType=unmatch`;
+    },
+  }
 };
 
 export const PaymentApi = {
