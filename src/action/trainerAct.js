@@ -282,7 +282,8 @@ export const fetchGlobalSearchResults = (payload) => (
   { api }
 ) => {
   return new Promise((resolve, reject) => {
-    TrainerApi.globalSearch.key = payload
+    TrainerApi.globalSearch.key = payload.key
+    TrainerApi.globalSearch.page = payload.page
     api({ ...TrainerApi.globalSearch})
       .then(({ data }) => {
         resolve(data);

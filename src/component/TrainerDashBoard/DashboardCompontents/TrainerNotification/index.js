@@ -8,13 +8,13 @@ import CloseIcon from "assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton";
 import { io } from "socket.io-client";
 
-import { getnotificationList, mark_as_read,  } from "action/NotificationAct";
+import { getnotificationList, mark_as_read } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import config from "config";
 
-const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
+const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
   const [allNotificationData, setAllNotificationData] = useState([]);
 
   const [unReadedNotificationData, setUnreadedNotificationData] = useState([]);
@@ -27,25 +27,19 @@ const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
     });
 
     socket.on(localStorage.getItem("user-id") + "-notification", (data) => {
-     // console.log("Received a notification from the server for bryan", data);
+      // console.log("Received a notification from the server for bryan", data);
 
       getnotificationList().then((data) => {
-       // console.log(data);
+        // console.log(data);
         setAllNotificationData(data);
       });
     });
 
     getnotificationList().then((data) => {
-     // console.log(data);
+      // console.log(data);
       setAllNotificationData(data);
     });
   }, []);
-
-  // const handleNotificationClose = (index) => {
-  //   const tempData = [...allNotificationData].filter((_, i) => i !== index);
-
-  //   setAllNotificationData(tempData);
-  // };
 
   return (
     <>
@@ -54,18 +48,19 @@ const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
           <div className="user_notify_inner_container">
             <div className="notify_header">
               <h2>Notifications</h2>
-              <u onClick={() => {
-                mark_as_read().then((dataa) => {
-                  // console.log(dataa);
-                  getnotificationList().then((data) => {
-                  //  console.log(data);
-                    setAllNotificationData(data);
+              <u
+                onClick={() => {
+                  mark_as_read().then((dataa) => {
+                    // console.log(dataa);
+                    getnotificationList().then((data) => {
+                      //  console.log(data);
+                      setAllNotificationData(data);
+                    });
                   });
-
-                
-                })
-              
-              }}>MARK ALL AS READ</u>
+                }}
+              >
+                MARK ALL AS READ
+              </u>
             </div>
             <div className="notify_wrapper">
               <Tabs
@@ -84,9 +79,20 @@ const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
                       return (
                         <div className="notification_card">
                           {/* <div className="mark_as_read">Read</div> */}
-                          <div className="notification_card_noti" style={{ marginTop: "30px" }}>
-                       {
-                       (item.picture !== undefined)?<img className="noti_img" src={item.picture}></img>: <div className="noti_non">{(item.name !== null)? item?.name:null}</div> }   
+                          <div
+                            className="notification_card_noti"
+                            style={{ marginTop: "30px" }}
+                          >
+                            {item.picture !== undefined ? (
+                              <img
+                                className="noti_img"
+                                src={item.picture}
+                              ></img>
+                            ) : (
+                              <div className="noti_non">
+                                {item.name !== null ? item?.name : null}
+                              </div>
+                            )}
 
                             <div className="noti_content">
                               <div className="noti_msg">{item.message}</div>
@@ -153,7 +159,11 @@ const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
                             </div>
                           </div>
                         </div>
-                      ) : (keys === 0) ? <div className="no_noti"><h2>No New Notifications</h2></div> : null;
+                      ) : keys === 0 ? (
+                        <div className="no_noti">
+                          <h2>No New Notifications</h2>
+                        </div>
+                      ) : null;
                     })}
                   </TabPanel>
                 </div>
@@ -227,7 +237,6 @@ const mapDispatchToProps = (dispatch) => {
     {
       getnotificationList,
       mark_as_read,
-      
     },
     dispatch
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.scss";
 import Pagination from "react-js-pagination";
+
 const CommonPagination = (props) => {
   let { pageMetaData = {}, total = 0, pageChange = {} } = props;
   return (
