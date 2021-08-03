@@ -12,17 +12,18 @@ import { getnotificationList, mark_as_read,  } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import config from "config";
 
 const TrainerNotification = ({ getnotificationList, mark_as_read,  }) => {
   const [allNotificationData, setAllNotificationData] = useState([]);
 
   const [unReadedNotificationData, setUnreadedNotificationData] = useState([]);
 
-  const socket = io("http://doodlebluelive.com:2355");
+  const socket = io(config.socketURL);
 
   useEffect(() => {
     socket.on("connect", () => {
-      //console.log("connetesd");
+      console.log("connetesd");
     });
 
     socket.on(localStorage.getItem("user-id") + "-notification", (data) => {
