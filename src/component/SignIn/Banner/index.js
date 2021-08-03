@@ -35,6 +35,7 @@ const SignInFC = ({
   loginAct,
   trainerDetail,
   updateUserDetails,
+  nextAction,
 }) => {
   const myRef = useRef(null);
   const [data, setData] = useState({
@@ -90,10 +91,12 @@ const SignInFC = ({
         };
 
         updateUserDetails(reduxData);
-        
+
         console.log("log1");
 
-        if (nextPathReRouter()) return;
+        console.log(nextPathReRouter(nextAction));
+
+        if (nextPathReRouter(nextAction)) return;
 
         console.log("log1");
 
@@ -108,9 +111,6 @@ const SignInFC = ({
         } else {
           history.push("/users/dashboard/session");
         }
-
-       
-
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
@@ -218,7 +218,13 @@ const SignInFC = ({
                         <label>Remember me</label>
                       </div>
                       <div className="forgotpass_right">
-                        <Link to="/forgot"  onClick={() => {setShowModel(false)}}  className="forgotpass">
+                        <Link
+                          to="/forgot"
+                          onClick={() => {
+                            setShowModel(false);
+                          }}
+                          className="forgotpass"
+                        >
                           Forgot Password?
                         </Link>
                       </div>
@@ -294,19 +300,22 @@ const SignInFC = ({
   );
 };
 
+const mapStateToProps = (state) => ({
+  nextAction: state.userReducer.nextAction,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       loginAct: loginOrSignUp,
       trainerDetail,
       updateUserDetails,
-      change_login_status
-      
+      change_login_status,
     },
     dispatch
   );
 };
 
-const SignIn = connect(null, mapDispatchToProps)(SignInFC);
+const SignIn = connect(mapStateToProps, mapDispatchToProps)(SignInFC);
 
 export default SignIn;

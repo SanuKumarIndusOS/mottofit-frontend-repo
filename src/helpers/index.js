@@ -66,14 +66,31 @@ export const pageNavigationByName = (locationDetails) => {
   history.push({ pathname, ...locationProps });
 };
 
-export const nextPathReRouter = () => {
+export const nextPathReRouter = (cb) => {
   const { search } = history.location;
   const nextPath = search.split("?") ? search.split("?")[1] : "";
+
+  const queryParams = decodeURIComponent(search).split("?")
+    ? decodeURIComponent(search).split("?")[2]
+    : "";
+
+  if (!nextPath) return undefined;
+
   if (nextPath) {
-    const decodedNextPath = decodeURIComponent(nextPath).split("=")[1];
-    // console.log(decodedNextPath);
-    history.push(decodedNextPath);
+    (async () => {
+      let decodedNextPath = decodeURIComponent(nextPath).split("=")[1];
+      const decodedQueryParams = decodeURIComponent(queryParams).split("=")[1];
+
+      if (queryParams)
+        decodedNextPath = `${decodedNextPath}=${decodedQueryParams}`;
+      // console.log(decodedNextPath);
+      if (cb) await cb();
+
+      history.push(decodedNextPath);
+    })();
   }
+
+  console.log(nextPath);
 
   return nextPath;
 };

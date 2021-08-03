@@ -7,10 +7,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { socialLoginAct } from "action/authAct";
 import { Toast } from "service/toast";
-import { history } from "helpers";
+import { history, nextPathReRouter } from "helpers";
 import { CommonPageLoader } from "../CommonPageLoader";
 
-const SocialLoginFC = ({ socialLoginApi, type, loginType }) => {
+const SocialLoginFC = ({ socialLoginApi, type, loginType, nextAction }) => {
   const [isLoading, setLoading] = useState(false);
   const responseGoogle = (response) => {
     let payload = {
@@ -34,10 +34,14 @@ const SocialLoginFC = ({ socialLoginApi, type, loginType }) => {
     setLoading(true);
 
     socialLoginApi(payload, loginType, socialLoginType, type)
-      .then(({ data }) => {
+      .then(async ({ data }) => {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user-id", data.id);
         let userType = type === "trainer" ? 2 : 3;
         localStorage.setItem("type", userType);
+
+        if (nextPathReRouter(nextAction)) return;
+
         setLoading(false);
 
         if (userType === "trainer") {
