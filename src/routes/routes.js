@@ -202,6 +202,13 @@ const routers = [
         exact: false,
       },
       {
+        path: "/results",
+        componentPath: "pages/GlobalSearchResults/index",
+        name: "GlobalResults",
+        auth: false,
+        exact: false,
+      },
+      {
         path: "/profile/:id",
         componentPath: "pages/Trainer/Profile/index",
         name: "TrainerProfile",

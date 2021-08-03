@@ -44,6 +44,7 @@ class RoutesClass extends Component {
       "/admin/login",
       "/trainer/profile/",
       "/trainer/find",
+      "/trainer/results",
       "/mobile/login",
       "/mobiles/menu",
       "/mobiles/filter",
