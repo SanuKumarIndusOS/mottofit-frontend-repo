@@ -42,6 +42,8 @@ const NavBarHomeFC = ({
   };
 
   useEffect(() => {
+
+    setKey("")
     console.log(history);
     const { search } = history.location;
 
@@ -134,9 +136,13 @@ const NavBarHomeFC = ({
                 onClick={() => {
                   history.push({
                     pathname: "/trainer/results",
+                    state:{
+
+                      key: keys
+                    }
                   });
 
-                localStorage.setItem("searchKey", keys)
+               
 
                 
                 }}

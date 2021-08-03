@@ -1,9 +1,9 @@
 .results_container {
-  min-height: 200vh;
+  //min-height: 200vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 100px;
+ 
   background-color: #f8f8f8;
 
   h1 {
@@ -98,6 +98,7 @@
       font-size: 20px;
       display: flex;
       justify-content: center;
+      margin-bottom: 300px;
 
       li.active {
         a {

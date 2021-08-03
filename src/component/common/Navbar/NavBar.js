@@ -28,11 +28,13 @@ const NavBarFC = ({
   isModelOpen,
   updateUserDetails,
   getUserDetail,
-  change_login_status
+  change_login_status,
 }) => {
   const [userData, setUserData] = useState();
 
+  const [keys, setKey] = useState("");
   useEffect(() => {
+    setKey("")
     if (userType === 3) {
       getUserDetail().then((data) => {
         setUserData(data);
@@ -51,6 +53,8 @@ const NavBarFC = ({
   const [showModel, setShowModel] = useState(false);
 
   const [dropdownOpen, setOpen] = useState(false);
+
+ 
 
   const toggleDrop = () => setOpen(!dropdownOpen);
 
@@ -115,13 +119,29 @@ const NavBarFC = ({
             </Link>
           </div>
           <div className="search-items1">
-            <div className="input-item1" style={{ opacity: "0" }}>
+            <div className="input-item1">
               <input
                 className="input"
                 type="text"
                 placeholder="Rotating prompts go here"
+                onChange={(e) => {
+                  setKey(e.target.value);
+                }}
               ></input>
-              <BiSearch className="search-icon1" />
+              <BiSearch
+                className="search-icon1"
+                onClick={() => {
+                  history.push({
+                    pathname: "/trainer/results",
+                    state:{
+
+                      key: keys
+                    }
+                  });
+
+                 
+                }}
+              />
             </div>
 
             {!isUserLoggedIn ? (
@@ -145,10 +165,16 @@ const NavBarFC = ({
                     <DropdownItem onClick={handleDashboard}>
                       Dashboard
                     </DropdownItem>
-                    <DropdownItem onClick={() => {
-                     change_login_status({ loginStatus: false }).then(logout)
-                      // logout()
-                    }}>Logout</DropdownItem>
+                    <DropdownItem
+                      onClick={() => {
+                        change_login_status({ loginStatus: false }).then(
+                          logout
+                        );
+                        // logout()
+                      }}
+                    >
+                      Logout
+                    </DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>
               </>
@@ -172,9 +198,9 @@ const NavBarFC = ({
         </div>
         <div
           className="mobile_profile_menu"
-        // onClick={() => {
-        //   setActiveMobMenu(true);
-        // }}
+          // onClick={() => {
+          //   setActiveMobMenu(true);
+          // }}
         >
           {!isUserLoggedIn ? (
             <div className="login-item1">
@@ -307,10 +333,13 @@ const NavBarFC = ({
                     </div>
                   </div>
 
-                  <div className="menu_li" onClick={() => {
-                    change_login_status({ loginStatus: false }).then(logout)
-                    //logout()
-                  }}>
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      change_login_status({ loginStatus: false }).then(logout);
+                      //logout()
+                    }}
+                  >
                     <img
                       src="/static/media/Logout Icon.97acadbd.svg"
                       alt="icon"
@@ -338,7 +367,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       getUserDetail,
-      change_login_status
+      change_login_status,
     },
     dispatch
   );
