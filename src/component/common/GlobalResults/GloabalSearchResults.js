@@ -62,7 +62,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       <h1>Results</h1>
 
       <div className="results_grid">
-        <div style={{marginBottom:"500px"}}>
+        <div style={{ marginBottom: "500px" }}>
           {searchResults?.length === 0 ? (
             <h1>No Results Found</h1>
           ) : (
@@ -103,15 +103,18 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
                   </div>
                 );
               })}{" "}
-              <Pagination
-                activePage={activePage}
-                itemsCountPerPage={10}
-                totalItemsCount={totalPage}
-                pageRangeDisplayed={5}
-                onChange={handlePageChange}
-              />
             </div>
           )}
+
+          {searchResults?.length !== 0 ? (
+            <Pagination
+              activePage={activePage}
+              itemsCountPerPage={10}
+              totalItemsCount={totalPage}
+              pageRangeDisplayed={5}
+              onChange={handlePageChange}
+            />
+          ) : null}
         </div>
       </div>
     </div>
