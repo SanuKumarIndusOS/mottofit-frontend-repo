@@ -1,7 +1,15 @@
 import React from "react";
 import "./styles.scss";
 
-function GloabalSearchResults() {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchGlobalSearchResults } from "action/trainerAct";
+
+const GloabalSearchResults = ({fetchGlobalSearchResults})=> {
+
+  React.useEffect(() => {
+    fetchGlobalSearchResults().then(data => {console.log(data);})
+  }, [])
   return (
     <div className="results_container">
       <h1>Results</h1>
@@ -18,4 +26,21 @@ function GloabalSearchResults() {
   );
 }
 
-export default GloabalSearchResults;
+// export default GloabalSearchResults;
+
+// // const mapStateToProps = (state) => ({
+// //   trainerQueryData: state.trainerReducer.query,
+// // });
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchGlobalSearchResults
+    },
+    dispatch
+  );
+};
+
+const GlobalSearch = connect(null, mapDispatchToProps)(GloabalSearchResults);
+
+export default GlobalSearch;

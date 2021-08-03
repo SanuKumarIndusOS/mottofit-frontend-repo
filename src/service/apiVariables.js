@@ -288,6 +288,18 @@ export const TrainerApi = {
       return `${this.url}`;
     },
   },
+
+  globalSearch: {
+    url: "trainers/search?",
+    method: "get",
+    baseURL: "normal",
+    page: "1",
+    limit: "9",
+    key:"yoga",
+    get api() {
+      return `${this.url}search=${this.key}&page=${this.page}&limit=${this.limit}`;
+    },
+  },
 };
 
 export const PaymentApi = {

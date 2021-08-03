@@ -273,3 +273,22 @@ export const requestTrainerMessageAct = (payload) => (
       });
   });
 };
+
+//Global Trainer Search Results
+
+export const fetchGlobalSearchResults = () => (
+  dispatch,
+  getState,
+  { api }
+) => {
+  return new Promise((resolve, reject) => {
+    api({ ...TrainerApi.globalSearch})
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
