@@ -1,11 +1,29 @@
-.results_container
-{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.results_container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    h1{
-        padding: 5rem;
+  h1 {
+    padding: 5rem;
+  }
+
+  .results_grid {
+    .row {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-template-rows: auto;
+      grid-column-gap: 20px;
+      justify-items: center;
+      align-items: center;
+      margin: 0em 0 8em 0;
     }
+
+    .card
+    {
+        width: 100px;
+        height: 100px;
+        background-color: violet;
+    }
+  }
 }
