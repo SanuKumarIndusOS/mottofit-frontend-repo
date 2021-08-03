@@ -8,7 +8,9 @@ function GloabalSearchResults() {
 
       <div className="results_grid">
         <div className="row">
-            <div className="card"></div>
+            <div className="card">
+                
+            </div>
       
         </div>
       </div>
