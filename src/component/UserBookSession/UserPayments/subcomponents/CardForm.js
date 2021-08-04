@@ -191,7 +191,7 @@ function CardFormFC({
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
-      //  console.log(err);
+        //  console.log(err);
       });
   };
 
@@ -222,8 +222,9 @@ function CardFormFC({
               }}
             />
           ) : (
-            <p className="fs-20">{`**** **** **** ${defaulCardDetails?.card?.last4 || "****"
-              }`}</p>
+            <p className="fs-20">{`**** **** **** ${
+              defaulCardDetails?.card?.last4 || "****"
+            }`}</p>
           )}
 
           <div className="payment_expire_input">
@@ -249,8 +250,9 @@ function CardFormFC({
                   }}
                 />
               ) : (
-                <p className="fs-20">{`${defaulCardDetails?.card?.exp_month || ""
-                  }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
+                <p className="fs-20">{`${
+                  defaulCardDetails?.card?.exp_month || ""
+                }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
               )}
             </div>
             <div className="payment_expire_inner">
@@ -349,29 +351,40 @@ function CardFormFC({
             </label>
           </div>
         </div>
-        {sessionData?.sessionType === "SOCIAL SESSION" ? <div className="payment_input_outter_check ">
-          <div className="payment_terms">
-            <input
-              type="checkbox"
-              style={{ width: "50px", marginRight: "10px" }}
-              onChange={handleChangeCPA}
-              checked={checkPayAhead}
-            />
-            <label>I will pay for the entire social session</label>
-
-
-          </div>
-          {(checkPayAhead) ? <select className="participants" onChange={(e) => { console.log(e.target.value); handleFriendsCount(e.target.value) }} >
-            <option value="1">1 Participants</option>
-            <option value="2">2 Participants</option>
-            <option value="3">3 Participants</option>
-
-          </select> : null}
-
-        </div> : null}
-
-
-
+        {sessionData?.sessionType === "SOCIAL SESSION" ? (
+          <>
+            <div className="payment_input_outter_check ">
+              <div className="payment_terms">
+                <input
+                  type="checkbox"
+                  style={{ width: "50px", marginRight: "10px" }}
+                  onChange={handleChangeCPA}
+                  checked={checkPayAhead}
+                />
+                <label className="my-0">
+                  I will pay for the entire social session
+                </label>
+              </div>
+            </div>
+            <div className="mb-3 mt-2">
+              <div className="col-12 d-flex justify-content-end">
+                {checkPayAhead ? (
+                  <select
+                    className="participants"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      handleFriendsCount(e.target.value);
+                    }}
+                  >
+                    <option value="1">1 Participants</option>
+                    <option value="2">2 Participants</option>
+                    <option value="3">3 Participants</option>
+                  </select>
+                ) : null}
+              </div>
+            </div>
+          </>
+        ) : null}
 
         <div className="disclaimer">
           <p className="text-info d-flex alignn-items-center">
@@ -386,8 +399,9 @@ function CardFormFC({
         <div className="submit">
           <button
             type="click"
-            className={`${!agreedToTerms ? "disable-btn" : ""} ${isProfile ? "w-auto" : ""
-              }`}
+            className={`${!agreedToTerms ? "disable-btn" : ""} ${
+              isProfile ? "w-auto" : ""
+            }`}
             disabled={!agreedToTerms}
             onClick={handleSubmit}
           >

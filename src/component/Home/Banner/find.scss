@@ -486,3 +486,29 @@
     display: none;
   }
 }
+
+.in-person-option {
+  position: absolute;
+  top: -24px;
+  left: 10px;
+  width: 100%;
+
+  h2,
+  p {
+    border: none !important;
+    font-size: 14px !important;
+    margin-bottom: 0 !important;
+  }
+
+  span {
+    position: absolute;
+  }
+
+  &.find-trainer {
+    top: -12px;
+  }
+}
+
+.position-realtive {
+  position: relative;
+}

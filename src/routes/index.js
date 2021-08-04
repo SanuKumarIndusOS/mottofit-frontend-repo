@@ -104,7 +104,7 @@ class RoutesClass extends Component {
   render() {
     return (
       <Router history={history}>
-        {/* <IdleTimer
+        <IdleTimer
           ref={(ref) => {
             this.idleTimer = ref;
           }}
@@ -113,7 +113,7 @@ class RoutesClass extends Component {
           onIdle={this.handleOnIdle}
           onAction={this.handleOnAction}
           debounce={250}
-        /> */}
+        />
         <Suspense
           fallback={
             <div className="load_parent">

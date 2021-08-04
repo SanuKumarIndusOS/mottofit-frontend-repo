@@ -44,10 +44,11 @@ const AdminLoginFC = ({ loginAct }) => {
     setApiError("");
 
     loginAct(adminApi, payload)
-      .then(({ type, token }) => {
+      .then(({ type, token, id }) => {
         setisLoading(false);
         if (type === "admin") {
           localStorage.setItem("admin-token", token);
+          localStorage.setItem("user-id", id);
           localStorage.setItem("type", 1);
           history.push("/admins/dashboard");
         }

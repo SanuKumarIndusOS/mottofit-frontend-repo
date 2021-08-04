@@ -272,12 +272,23 @@ const TabOne = ({
       sessionStatus: "cancelled",
     };
     setisLoading(true);
+    console.log(sessionId);
+
+    // Toast({ type: "success", message: "success" });
+
     cancelSessionApi(payload)
-      .then(() => {
+      .then((data) => {
         setisLoading(false);
+        // console.log(message);
+
+        Toast({ type: "success", message: data?.message || "success" });
         handleChange();
       })
-      .catch(() => setisLoading(false));
+      .catch((err) => {
+        setisLoading(false);
+
+        console.log(err);
+      });
   };
 
   const handleInvitation = (sessionId, action, paidByUser) => {
@@ -390,67 +401,115 @@ const TabOne = ({
           <h3 style={{ textTransform: "capitalize" }}>{tabname} Sessions</h3>
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
-              {tabData?.map((data, index) => {
-                //  console.log(data, "datadata");
+              {tabData.length > 0 ? (
+                tabData?.map((data, index) => {
+                  //  console.log(data, "datadata");
 
-                return (
-                  <React.Fragment key={index}>
-                    <div className="TP_upcomeSession_overview">
-                      <div className="TP_USession_dates">
-                        <h4>
-                          {data.sessionDate.substr(8, 2)}
-                          <span>
-                            {datamonth[data.sessionDate.substr(5, 2)]}
-                          </span>
-                        </h4>
-                      </div>
-                      <div className="TP_USession_data">
-                        <h2
-                          style={{
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {data?.activity}&nbsp;
-                          <span
-                            style={{
-                              textTransform: "lowerCase",
-                            }}
-                          >
-                            with
-                          </span>{" "}
-                          &nbsp;
+                  return (
+                    <React.Fragment key={index}>
+                      <div className="TP_upcomeSession_overview">
+                        <div className="TP_USession_dates">
+                          <h4>
+                            {data.sessionDate.substr(8, 2)}
+                            <span>
+                              {datamonth[data.sessionDate.substr(5, 2)]}
+                            </span>
+                          </h4>
+                        </div>
+                        <div className="TP_USession_data">
                           <h2
                             style={{
                               textTransform: "capitalize",
                             }}
                           >
-                            {data?.trainerDetail?.firstName}
+                            {data?.activity}&nbsp;
+                            <span
+                              style={{
+                                textTransform: "lowerCase",
+                              }}
+                            >
+                              with
+                            </span>{" "}
+                            &nbsp;
+                            <h2
+                              style={{
+                                textTransform: "capitalize",
+                              }}
+                            >
+                              {data?.trainerDetail?.firstName}
+                            </h2>
                           </h2>
-                        </h2>
-                        <div className="TP_USession_data_icons">
-                          <h5>
-                            <img src={AvailabilityIcon} alt="icon" />
-                            {getFormatDate(data.sessionStartTime, "LT", true)}
-                          </h5>
-                          <h5>
-                            <img src={LocationIcon} alt="icon" />
-                            {(
-                              data?.venue.charAt(0).toUpperCase() +
-                              data?.venue.slice(1)
-                            )
-                              .replace(/([A-Z])/g, " $1")
-                              .trim()}
-                          </h5>
-                        </div>
-                        {tabname !== "OnGoing" && (
-                          <div className="TP_USession_data_buttons">
-                            {tabname === "Invited" ? (
-                              <>
-                                {data.acceptance ? (
-                                  <>
-                                    <span className="text-black mr-4">
-                                      {/* {data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>} */}
-                                      {data.sessionStatus === "completed" ? (
+                          <div className="TP_USession_data_icons">
+                            <h5>
+                              <img src={AvailabilityIcon} alt="icon" />
+                              {getFormatDate(data.sessionStartTime, "LT", true)}
+                            </h5>
+                            <h5>
+                              <img src={LocationIcon} alt="icon" />
+                              {(
+                                data?.venue.charAt(0).toUpperCase() +
+                                data?.venue.slice(1)
+                              )
+                                .replace(/([A-Z])/g, " $1")
+                                .trim()}
+                            </h5>
+                          </div>
+                          {tabname !== "OnGoing" && (
+                            <div className="TP_USession_data_buttons">
+                              {tabname === "Invited" ? (
+                                <>
+                                  {data.acceptance ? (
+                                    <>
+                                      <span className="text-black mr-4">
+                                        {/* {data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>} */}
+                                        {data.sessionStatus === "completed" ? (
+                                          <div style={{ color: "red" }}>
+                                            <u>Completed</u>
+                                          </div>
+                                        ) : data.sessionStatus ===
+                                          "cancelled" ? (
+                                          <div style={{ color: "red" }}>
+                                            <u>Cancelled</u>
+                                          </div>
+                                        ) : (
+                                          <div> Invited session</div>
+                                        )}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {data.sessionStatus !== "cancelled" ? (
+                                        <>
+                                          {tabname !== "Previous" ? (
+                                            <>
+                                              <button
+                                                disabled={isLoading}
+                                                onClick={() =>
+                                                  handleInvitation(
+                                                    data.id,
+                                                    false
+                                                  )
+                                                }
+                                              >
+                                                Decline
+                                              </button>
+                                              <button
+                                                disabled={isLoading}
+                                                onClick={() =>
+                                                  handleInvitation(
+                                                    data.id,
+                                                    true,
+                                                    data.paidByUser
+                                                  )
+                                                }
+                                                className="text-success"
+                                              >
+                                                Accept
+                                              </button>
+                                            </>
+                                          ) : null}
+                                        </>
+                                      ) : data.sessionStatus === "completed" ? (
                                         <div style={{ color: "red" }}>
                                           <u>Completed</u>
                                         </div>
@@ -461,145 +520,106 @@ const TabOne = ({
                                       ) : (
                                         <div> Invited session</div>
                                       )}
-                                    </span>
-                                  </>
-                                ) : (
-                                  <>
-                                    {data.sessionStatus !== "cancelled" ? (
-                                      <>
-                                        {tabname !== "Previous" ? (
-                                          <>
-                                            <button
-                                              disabled={isLoading}
-                                              onClick={() =>
-                                                handleInvitation(data.id, false)
-                                              }
-                                            >
-                                              Decline
-                                            </button>
-                                            <button
-                                              disabled={isLoading}
-                                              onClick={() =>
-                                                handleInvitation(
-                                                  data.id,
-                                                  true,
-                                                  data.paidByUser
-                                                )
-                                              }
-                                              className="text-success"
-                                            >
-                                              Accept
-                                            </button>
-                                          </>
-                                        ) : null}
-                                      </>
-                                    ) : data.sessionStatus === "completed" ? (
-                                      <div style={{ color: "red" }}>
-                                        <u>Completed</u>
-                                      </div>
-                                    ) : data.sessionStatus === "cancelled" ? (
-                                      <div style={{ color: "red" }}>
-                                        <u>Cancelled</u>
-                                      </div>
-                                    ) : (
-                                      <div> Invited session</div>
-                                    )}
-                                  </>
-                                )}
+                                    </>
+                                  )}
 
-                                <button
-                                  disabled={isLoading}
-                                  onClick={() =>
-                                    handleTrainerRoute(data.trainerId)
-                                  }
-                                  className="text-primary"
-                                >
-                                  View Trainer
-                                </button>
-                              </>
-                            ) : (
-                              <>
-                                {data.sessionStatus === "completed" ? (
                                   <button
+                                    disabled={isLoading}
+                                    onClick={() =>
+                                      handleTrainerRoute(data.trainerId)
+                                    }
                                     className="text-primary"
-                                    disabled={true}
                                   >
-                                    Completed
+                                    View Trainer
                                   </button>
-                                ) : (
-                                  <>
-                                    {!data.asFriend ? (
-                                      <>
-                                        {data.sessionStatus !== "cancelled" ? (
-                                          <>
-                                            {tabname !== "Previous" ? (
-                                              <button
-                                                disabled={isLoading}
-                                                onClick={() =>
-                                                  handleCancel(data.id)
-                                                }
-                                              >
-                                                Cancel
-                                              </button>
-                                            ) : (
-                                              ""
-                                            )}
-                                          </>
-                                        ) : (
+                                </>
+                              ) : (
+                                <>
+                                  {data.sessionStatus === "completed" ? (
+                                    <button
+                                      className="text-primary"
+                                      disabled={true}
+                                    >
+                                      Completed
+                                    </button>
+                                  ) : (
+                                    <>
+                                      {!data.asFriend ? (
+                                        <>
+                                          {data.sessionStatus !==
+                                          "cancelled" ? (
+                                            <>
+                                              {tabname !== "Previous" ? (
+                                                <button
+                                                  disabled={isLoading}
+                                                  onClick={() =>
+                                                    handleCancel(data.id)
+                                                  }
+                                                >
+                                                  Cancel
+                                                </button>
+                                              ) : (
+                                                ""
+                                              )}
+                                            </>
+                                          ) : (
+                                            <button
+                                              className="text-danger"
+                                              disabled={true}
+                                            >
+                                              Cancelled
+                                            </button>
+                                          )}
+                                        </>
+                                      ) : (
+                                        <div className="d-flex align-items-center">
+                                          <span className="text-black mr-4">
+                                            Invited session
+                                          </span>
                                           <button
-                                            className="text-danger"
-                                            disabled={true}
+                                            disabled={isLoading}
+                                            onClick={() =>
+                                              handleTrainerRoute(data.trainerId)
+                                            }
+                                            className="text-primary"
                                           >
-                                            Cancelled
+                                            View Trainer
                                           </button>
-                                        )}
-                                      </>
-                                    ) : (
-                                      <div className="d-flex align-items-center">
-                                        <span className="text-black mr-4">
-                                          Invited session
-                                        </span>
-                                        <button
-                                          disabled={isLoading}
-                                          onClick={() =>
-                                            handleTrainerRoute(data.trainerId)
-                                          }
-                                          className="text-primary"
-                                        >
-                                          View Trainer
-                                        </button>
-                                      </div>
-                                    )}
-                                  </>
-                                )}
-                              </>
-                            )}
+                                        </div>
+                                      )}
+                                    </>
+                                  )}
+                                </>
+                              )}
 
-                            {/* </>
+                              {/* </>
                           )} */}
 
-                            {data?.participantsCount === 0
-                              ? data.trainingType !== "1on1" &&
-                                !data.asFriend &&
-                                tabname !== "Previous" && (
-                                  <div className="button_boarder">
-                                    <button
-                                      onClick={() => handleAddFriends(data)}
-                                    >
-                                      Add Friends{" "}
-                                    </button>
-                                    <img src={ArrowNext} alt="icon" />
-                                  </div>
-                                )
-                              : null}
-                          </div>
-                        )}
+                              {data?.participantsCount === 0
+                                ? data.trainingType !== "1on1" &&
+                                  !data.asFriend &&
+                                  tabname !== "Previous" && (
+                                    <div className="button_boarder">
+                                      <button
+                                        onClick={() => handleAddFriends(data)}
+                                      >
+                                        Add Friends{" "}
+                                      </button>
+                                      <img src={ArrowNext} alt="icon" />
+                                    </div>
+                                  )
+                                : null}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <hr />
-                  </React.Fragment>
-                );
-              })}
+                      <hr />
+                    </React.Fragment>
+                  );
+                })
+              ) : (
+                <h3 className="my-5 py-5 text-center">{`No  ${tabname} Session`}</h3>
+              )}
             </div>
             {tabData?.length < documentSize && (
               <button onClick={handlePagination} className="viewMoreButton">

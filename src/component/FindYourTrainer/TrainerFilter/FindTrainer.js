@@ -158,7 +158,7 @@ const FindTrainerFC = ({
       localStorage.setItem("search_location", trainerQueryData.location);
       localStorage.setItem("search_city", trainerQueryData.city);
 
-     // console.log(trainerQueryData);
+      // console.log(trainerQueryData);
 
       let selectedCity = Object.values(inPerson).filter(
         ({ value }) => value === trainerQueryData?.city
@@ -182,7 +182,7 @@ const FindTrainerFC = ({
       };
 
       setqueryObject(payload.query);
-     // console.log(payload.query, "pp");
+      // console.log(payload.query, "pp");
 
       localStorage.setItem("testObject", JSON.stringify(payload.query));
 
@@ -206,7 +206,7 @@ const FindTrainerFC = ({
         setInPerson(tempInperson);
       }
 
-     // console.log("else");
+      // console.log("else");
 
       let payload = {
         query: {
@@ -220,14 +220,14 @@ const FindTrainerFC = ({
       setqueryObject(JSON.parse(localStorage.getItem("testObject")));
       getTrainerDataByQuery(JSON.parse(localStorage.getItem("testObject")));
       updateTrainerDetails(JSON.parse(localStorage.getItem("testObject")));
-   //   console.log(JSON.parse(localStorage.getItem("testObject")), "cc");
+      //   console.log(JSON.parse(localStorage.getItem("testObject")), "cc");
     }
 
     let reduxData = {
       selectedTimes: [],
     };
 
-   // console.log(reduxData);
+    // console.log(reduxData);
 
     updateUserDetails(reduxData);
   }, []);
@@ -281,20 +281,21 @@ const FindTrainerFC = ({
       <div className="box_3_active_trainer">
         <div className="dd_row_one">
           <div
-            className={`option ${queryObject?.vertical?.value === "Boxing" ? "selected-data" : ""
-              }`}
+            className={`option ${
+              queryObject?.vertical?.value === "Boxing" ? "selected-data" : ""
+            }`}
             onClick={() => {
               setddBoxingState(!ddBoxingState);
               setDropdownState(!DropdownState);
               queryObject?.vertical?.value === "Boxing"
                 ? setqueryObject({
-                  ...queryObject,
-                  vertical: { label: "", value: "" },
-                })
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
                 : setqueryObject({
-                  ...queryObject,
-                  vertical: { label: "Boxing", value: "Boxing" },
-                });
+                    ...queryObject,
+                    vertical: { label: "Boxing", value: "Boxing" },
+                  });
             }}
           >
             <div className="option_wapper">
@@ -303,20 +304,21 @@ const FindTrainerFC = ({
             </div>
           </div>
           <div
-            className={`option ${queryObject?.vertical?.value === "Pilates" ? "selected-data" : ""
-              }`}
+            className={`option ${
+              queryObject?.vertical?.value === "Pilates" ? "selected-data" : ""
+            }`}
             onClick={() => {
               setddPilatesState(!ddPilatesState);
               setDropdownState(!DropdownState);
               queryObject?.vertical?.value === "Pilates"
                 ? setqueryObject({
-                  ...queryObject,
-                  vertical: { label: "", value: "" },
-                })
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
                 : setqueryObject({
-                  ...queryObject,
-                  vertical: { label: "Pilates", value: "Pilates" },
-                });
+                    ...queryObject,
+                    vertical: { label: "Pilates", value: "Pilates" },
+                  });
             }}
           >
             <div className="option_wapper">
@@ -327,24 +329,25 @@ const FindTrainerFC = ({
         </div>
         <div className="dd_row_two">
           <div
-            className={`option ${queryObject?.vertical?.value === "Strength & HIIT"
-              ? "selected-data"
-              : ""
-              }`}
+            className={`option ${
+              queryObject?.vertical?.value === "Strength & HIIT"
+                ? "selected-data"
+                : ""
+            }`}
             onClick={() => {
               setddHiitState(!ddHiitState);
               queryObject?.vertical?.value === "Strength & HIIT"
                 ? setqueryObject({
-                  ...queryObject,
-                  vertical: { label: "", value: "" },
-                })
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
                 : setqueryObject({
-                  ...queryObject,
-                  vertical: {
-                    label: "Strength & HIIT",
-                    value: "Strength & HIIT",
-                  },
-                });
+                    ...queryObject,
+                    vertical: {
+                      label: "Strength & HIIT",
+                      value: "Strength & HIIT",
+                    },
+                  });
               setDropdownState(!DropdownState);
             }}
           >
@@ -354,22 +357,23 @@ const FindTrainerFC = ({
             </div>
           </div>
           <div
-            className={`option ${queryObject?.vertical?.value === "Yoga" ? "selected-data" : ""
-              }`}
+            className={`option ${
+              queryObject?.vertical?.value === "Yoga" ? "selected-data" : ""
+            }`}
             onClick={() => {
               setddYogaState(!ddYogaState);
               queryObject?.vertical?.value === "Yoga"
                 ? setqueryObject({
-                  ...queryObject,
-                  vertical: { label: "", value: "" },
-                })
+                    ...queryObject,
+                    vertical: { label: "", value: "" },
+                  })
                 : setqueryObject({
-                  ...queryObject,
-                  vertical: {
-                    label: "Yoga",
-                    value: "Yoga",
-                  },
-                });
+                    ...queryObject,
+                    vertical: {
+                      label: "Yoga",
+                      value: "Yoga",
+                    },
+                  });
               setDropdownState(!DropdownState);
             }}
           >
@@ -443,7 +447,7 @@ const FindTrainerFC = ({
       return Toast({ type: "error", message: "City is mandatory" });
     }
 
-   // console.log(payload);
+    // console.log(payload);
 
     updateTrainerDetails(payload);
     localStorage.setItem("testObject", JSON.stringify(payload.query));
@@ -477,7 +481,7 @@ const FindTrainerFC = ({
     trainerAvailableApi.query.availability = JSON.stringify(availabilityValue);
 
     api({ ...trainerAvailableApi }).then(({ data }) => {
-      setMatchLoad(false)
+      setMatchLoad(false);
       setbestMatchData(data.bestMatch);
       setbestOthersData(data.others);
 
@@ -518,7 +522,7 @@ const FindTrainerFC = ({
       id="find-trainer"
       className="find-trainer"
       onClick={() => {
-      //  console.log("findhit");
+        //  console.log("findhit");
 
         //Availability Dropdown
         if (DropdownTrainerAvailabilityState) {
@@ -561,13 +565,17 @@ const FindTrainerFC = ({
                 }}
                 className={`position-relative ${selectedValue ? "pt-2" : ""}`}
               >
-                <h6 className={`${selectedValue ? "in-person-option" : ""} `}>
+                <h6
+                  className={`${
+                    selectedValue ? "in-person-option find-trainer" : ""
+                  } `}
+                >
                   {inPersonMarkup}
                   <span>{selectedValue}</span>
                 </h6>
                 <div
                   className="inPerson-dd"
-                // onClick={TriggerInPersonDropDown}
+                  // onClick={TriggerInPersonDropDown}
                 >
                   {DropdownHomeInPerson}
                 </div>
@@ -672,21 +680,25 @@ const FindTrainerFC = ({
         </div>
         <div
           className="find-filters"
-        // onClick={() => {
-        //  // setshowMenu(!showMenu);
-        //  history.push("/mobiles/filter")
-        // }}
+          // onClick={() => {
+          //  // setshowMenu(!showMenu);
+          //  history.push("/mobiles/filter")
+          // }}
         >
           &#9776;
         </div>
       </div>
-      {matchLoad ? <div className="load_parent" style={{ paddingBottom: "500px" }}>
-        <div className="loaderss"></div>
-      </div> : <div>    <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
-        <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
-      </div>}
-
-
+      {matchLoad ? (
+        <div className="load_parent" style={{ paddingBottom: "500px" }}>
+          <div className="loaderss"></div>
+        </div>
+      ) : (
+        <div>
+          {" "}
+          <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
+          <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
+        </div>
+      )}
     </div>
   );
 };

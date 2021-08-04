@@ -288,10 +288,14 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
                   >
                     {virtualMarkup}
                   </div>
-                  <img src={Between} alt="icon" />
+                  <img
+                    src={Between}
+                    alt="icon"
+                    className={`${selectedValue ? "in-person-img" : ""}`}
+                  />
                   <div
                     onClick={() => SetLocation("")}
-                    className="position-realtive"
+                    className="position-relative"
                   >
                     <h6
                       onClick={TriggerInPersonDropDown}

@@ -60,7 +60,6 @@ const routers = [
         auth: false,
         exact: true,
       },
-     
     ],
   },
   {
@@ -172,6 +171,13 @@ const routers = [
         path: "/bookings",
         componentPath: "pages/AdminDashboard/AdminBookings/AdminBookings",
         name: "AdminBooking",
+        auth: false,
+        exact: true,
+      },
+      {
+        path: "/message",
+        componentPath: "pages/TrainerDashboard/TrainerMessage",
+        name: "AdminMessage",
         auth: false,
         exact: true,
       },

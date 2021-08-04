@@ -294,26 +294,34 @@ export const TrainerApi = {
     url: "trainers/search?",
     method: "get",
     baseURL: "normal",
-    page:  1,
+    page: 1,
     limit: 9,
-    key:"",
+    key: "",
     get api() {
       return `${this.url}search=${this.key}&page=${this.page}&limit=${this.limit}`;
     },
   },
 
-  homeSearchBestMatch:
-  {
+  homeSearchBestMatch: {
     url: "/v2/availableTrainer?",
     method: "get",
     baseURL: "baseUrl",
-    page:  1,
+    page: 1,
     limit: 9,
-    key:"",
+    key: "",
     get api() {
       return `${this.url}page=1&limit=10&listType=unmatch`;
     },
-  }
+  },
+  createDirectAdminMessage: {
+    url: "admin/message",
+    method: "post",
+    baseURL: "message",
+    key: "",
+    get api() {
+      return `${this.url}`;
+    },
+  },
 };
 
 export const PaymentApi = {

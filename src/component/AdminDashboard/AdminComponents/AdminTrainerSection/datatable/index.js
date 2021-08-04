@@ -9,6 +9,7 @@ const DatatableClass = ({
   fetchAllTrainers,
   loading,
   changeApproval,
+  handleDirectRequest,
 }) => {
   if (loading) {
     return <h2>loading...</h2>;
@@ -82,9 +83,15 @@ const DatatableClass = ({
                   view
                 </Link>
               </td>
-              <div>
-                <button style={{ border: "none" }} className="p-0">
+              <div className="d-flex align-items-center">
+                <button style={{ border: "none" }} className="p-0 mr-3">
                   {approve}
+                </button>
+                <button
+                  className="btn btn-outline-primary border-none"
+                  onClick={() => handleDirectRequest(item["id"])}
+                >
+                  Message
                 </button>
               </div>
             </tr>
