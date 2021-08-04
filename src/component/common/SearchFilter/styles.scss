@@ -6,11 +6,19 @@
   display: flex;
   flex-direction: row-reverse;
   width: 100%;
-  padding: 1rem;
+  padding: 20px;
 
   .filter_type {
     flex: 3;
-    border-right: solid 2px #EAEAEA;
+    border-right: solid 2px #eaeaea;
+    padding-left: 2em;
+
+    .filter_header {
+      font-size: 18px;
+      color: #161616;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+    }
   }
 
   .search_cta {
@@ -18,13 +26,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .circle
-    {
-        height: 80px;
-        width: 80px;
-        border-radius: 80px;
-        background-color: #53BFD2;
+    .circle {
+      height: 80px;
+      width: 80px;
+      border-radius: 80px;
+      background-color: #53bfd2;
     }
-    
   }
 }
