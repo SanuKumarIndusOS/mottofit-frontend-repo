@@ -280,7 +280,7 @@ const TabOne = ({
     setisLoading(true);
 
     if (!isDefaultCardPresent && action && !paidByUser) {
-      history.push("/users/dashboard/settings/profile");
+      history.push({ pathname:"/users/dashboard/settings/profile", state:{ from:"invite" }});
 
       let reduxData = {
         currentAcceptedInvitationId: sessionId,

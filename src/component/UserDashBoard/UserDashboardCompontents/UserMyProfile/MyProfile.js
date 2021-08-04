@@ -23,7 +23,9 @@ import { Toast } from "../../../../service/toast";
 import CardForm from "component/UserBookSession/UserPayments/subcomponents/CardForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useLocation } from "react-router-dom";
 import config from "config";
+import { history } from "helpers";
 
 const stripePromise = loadStripe(config.stripeUrl);
 
@@ -65,6 +67,7 @@ const MyProfileClass = ({
   const [changeCard, setChangeCard] = useState(true);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const fileInputRef = useRef();
+  let location = useLocation();
 
   const getUserPaymentDetails = () => {
     const { getPaymentMethods } = PaymentApi;
@@ -79,6 +82,7 @@ const MyProfileClass = ({
   };
 
   useEffect(() => {
+ console.log(location.state?.from);
     getUserProfileData();
     getUserPaymentDetails();
   }, []);

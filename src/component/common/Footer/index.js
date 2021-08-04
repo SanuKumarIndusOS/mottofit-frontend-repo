@@ -137,23 +137,23 @@ const Footer = () => {
                                             <div className="footer_privacy">
                                                 <ul className="footer_privacy_ul">
                                                     <li>
-                                                        <a href="/faq">FAQs</a>
+                                                        <Link to="/faq">FAQs</Link>
                                                     </li>
                                                     <img src={Line} alt="svg" />
                                                     <li>
-                                                        <a href="/privacy">
+                                                        <Link to="/privacy">
                                                             Privacy Policy{" "}
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                     <img src={Line} alt="svg" />
                                                     <li>
-                                                        <a href="/terms">
+                                                        <Link to="/terms">
                                                             Terms of Use{" "}
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                     <img src={Line} alt="svg" />
                                                     <li>
-                                                        <a href="/">Legal </a>
+                                                        <Link href="/">Legal </Link>
                                                     </li>
                                                 </ul>
                                                 <div className="hr_mobile"></div>
