@@ -31,6 +31,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 
 import arrowSign from "assets/files/SVG/Arrow Next.svg";
+import SearchFilter from "component/common/SearchFilter/index";
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const CyanRadio = withStyles({
@@ -272,9 +273,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             HIIT, Boxing, Yoga & Pilates
           </p>
         </div>
-        
 
-        <div className="card-box ">
+        {/* <div className="card-box ">
           <div className="card-wrapper_home">
             <div className="item1">
               <h3>Location</h3>
@@ -381,6 +381,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               </button>
             </div>
           </div>
+        </div> */}
+        <div className="filter">
+          <SearchFilter />
         </div>
 
         <div className="mobile-search">

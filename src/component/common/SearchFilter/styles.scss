@@ -1,0 +1,30 @@
+.search_filter {
+  height: 100px;
+  border-radius: 100px;
+  background-color: #f8f8f8;
+  box-shadow: 0px 3px 12px #1616161a;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  padding: 1rem;
+
+  .filter_type {
+    flex: 3;
+    border-right: solid 2px #EAEAEA;
+  }
+
+  .search_cta {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .circle
+    {
+        height: 80px;
+        width: 80px;
+        border-radius: 80px;
+        background-color: #53BFD2;
+    }
+    
+  }
+}
