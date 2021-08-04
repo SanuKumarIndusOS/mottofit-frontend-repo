@@ -467,22 +467,22 @@ const UserBookSessionFC = ({
 
    // console.log(storeData);
 
-    // history.push({
-    //       pathname: "/user/payment",
-    //     });
+    history.push({
+          pathname: "/user/payment",
+        });
 
     
-    if (sessionType === "1 ON 1 TRAINING") {
+    // if (sessionType === "1 ON 1 TRAINING") {
     
-      //Check for motto pass if available go to checkout
-      history.push({
-        pathname: "/user/motto-pass",
-      });
-    } else {
-      history.push({
-        pathname: "/user/payment",
-      });
-    }
+    //   //Check for motto pass if available go to checkout
+    //   history.push({
+    //     pathname: "/user/motto-pass",
+    //   });
+    // } else {
+    //   history.push({
+    //     pathname: "/user/payment",
+    //   });
+    // }
 
     // if(price === 20)
     // {

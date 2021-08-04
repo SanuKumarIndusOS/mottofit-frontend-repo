@@ -270,7 +270,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         <div className="heading_items">
           <h2 className="heading_txt">Train with the Best</h2>
           <p className="sub_heading_txt">
-            Discover & book trusted personal trainers for Strength & HIIT,
+            Discover & book trusted personal trainers for Strength <br></br> & HIIT,
             Boxing, Yoga & Pilates
           </p>
         </div>

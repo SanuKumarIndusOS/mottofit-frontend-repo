@@ -111,7 +111,7 @@ const PaymentHistoryFC = (props) => {
         showSaveBtn={() => setShowSaveBtn(true)}
       />
 
-      {showSaveBtn && (
+      {/* {showSaveBtn && ( */}
         <div className="card_agree">
           <input
             type="checkbox"
@@ -127,7 +127,7 @@ const PaymentHistoryFC = (props) => {
             </a>
           </label>
         </div>
-      )}
+      {/* )} */}
 
       <div className="action-btn d-flex justify-content-center">
         {showSaveBtn ? (
