@@ -88,22 +88,34 @@ const Datatable = ({
   //     );
   // };
 
+  const ActionField = () => {
+    return (
+      <button className="btn btn-outline-primary border-none">Message</button>
+    );
+  };
+
   const AddorRemove = (cell, row) =>
     row.status === "active" ? (
-      <div
-        onClick={() => {
-          addOrRemove(cell, "removed");
-        }}
-      >
-        REMOVE
+      <div className="d-flex align-items-center">
+        <div
+          onClick={() => {
+            addOrRemove(cell, "removed");
+          }}
+          className="mr-3"
+        >
+          REMOVE
+        </div>
       </div>
     ) : (
-      <div
-        onClick={() => {
-          addOrRemove(cell, "active");
-        }}
-      >
-        ADD
+      <div className="d-flex align-items-center">
+        <div
+          onClick={() => {
+            addOrRemove(cell, "active");
+          }}
+          className="mr-3"
+        >
+          ADD
+        </div>
       </div>
     );
 
@@ -130,6 +142,7 @@ const Datatable = ({
     },
     { dataField: "status", text: "status", filter: textFilter() },
     { dataField: "id", text: "id", formatter: AddorRemove },
+    { dataField: "action", text: "action", formatter: ActionField },
     // {
     //     // dataField: "trainerStatus",
     //     text: "Approve",

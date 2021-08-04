@@ -149,8 +149,9 @@ const TrainerSessionFC = ({
     setisLoading(true);
 
     cancelSession(payload)
-      .then(() => {
+      .then(({ message }) => {
         setisLoading(false);
+        Toast({ type: "success", message: message });
         getAllDetails(currentTab);
       })
       .catch(() => setisLoading(false));
@@ -483,34 +484,38 @@ const TabTwo = ({
                               <button onClick={() => handleCancel(data.id)}>
                                 Cancel
                               </button>
-                              {moment(
-                                moment
-                                  .tz("America/New_York")
-                                  .format("YYYY MM DD HH:MM")
-                              ).isAfter(
-                                moment
-                                  .tz(data.sessionStartTime, "America/New_York")
-                                  .format("YYYY MM DD HH:MM")
-                              ) ? (
-                                <button
-                                  className="text-primary"
-                                  onClick={() =>
-                                    handleSessionStatus(data.id, "completed")
-                                  }
-                                >
-                                  Complete
-                                </button>
-                              ) : null
-                              
-                            //   <button
-                            //   className="text-primary"
-                            //   onClick={() =>
-                            //     handleSessionStatus(data.id, "completed")
-                            //   }
-                            // >
-                            //   Complete
-                            // </button>
-                            }
+                              {
+                                moment(
+                                  moment
+                                    .tz("America/New_York")
+                                    .format("YYYY MM DD HH:MM")
+                                ).isAfter(
+                                  moment
+                                    .tz(
+                                      data.sessionStartTime,
+                                      "America/New_York"
+                                    )
+                                    .format("YYYY MM DD HH:MM")
+                                ) ? (
+                                  <button
+                                    className="text-primary"
+                                    onClick={() =>
+                                      handleSessionStatus(data.id, "completed")
+                                    }
+                                  >
+                                    Complete
+                                  </button>
+                                ) : null
+
+                                //   <button
+                                //   className="text-primary"
+                                //   onClick={() =>
+                                //     handleSessionStatus(data.id, "completed")
+                                //   }
+                                // >
+                                //   Complete
+                                // </button>
+                              }
                               {/* 
                               <button
                                 className="text-primary"
@@ -646,8 +651,9 @@ const TabPast = ({
 
     setisLoading(true);
     cancelSessionApi(payload)
-      .then(() => {
+      .then(({ message }) => {
         setisLoading(false);
+        Toast({ type: "success", message: message });
         handleChange(currentTab);
       })
       .catch(() => setisLoading(false));

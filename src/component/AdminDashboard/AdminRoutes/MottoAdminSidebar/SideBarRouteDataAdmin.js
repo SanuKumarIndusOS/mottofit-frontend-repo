@@ -29,6 +29,11 @@ export const SideBarRouteDataAdmin = [
     icon: <img src={MessageIcon} alt="icon" />,
   },
   {
+    title: "Message",
+    path: "/admins/message",
+    icon: <img src={MessageIcon} alt="icon" />,
+  },
+  {
     title: "Bookings",
     path: "/admins/bookings",
     icon: <img src={MessageIcon} alt="icon" />,

@@ -3,12 +3,13 @@ import Datatable from "./datatable/index";
 import CommonPagination from "component/common/CommonPagination";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import { Input } from "reactstrap";
-import { fetchTrainersLists } from "action/adminAct";
+import { fetchTrainersLists, createDirectMessage } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./styles.scss";
+import { Toast } from "service/toast";
 
-const MainClass = ({ fetchTrainersListsApi }) => {
+const MainClass = ({ fetchTrainersListsApi, createDirectMessageApi }) => {
   const [trainerList, setTrainerList] = useState([]);
   const [pageMetaData, setpageMetaData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -33,6 +34,19 @@ const MainClass = ({ fetchTrainersListsApi }) => {
         row.firstName.toLowerCase().indexOf(q.toLowerCase()) > -1
     );
   }
+
+  const handleDirectRequest = (id) => {
+    if (!id) return;
+
+    createDirectMessageApi(id)
+      .then((data) => {
+        console.log(data);
+        Toast({ type: "success", message: data.message || "success" });
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+      });
+  };
   return (
     <div className="outter_container_AD container">
       {loading ? (
@@ -60,6 +74,7 @@ const MainClass = ({ fetchTrainersListsApi }) => {
             trainerList={search(trainerList)}
             loading={loading}
             fetchAllTrainers={() => fetchAllTrainers()}
+            handleDirectRequest={handleDirectRequest}
           />
           <CommonPagination
             pageMetaData={pageMetaData}
@@ -76,6 +91,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchTrainersListsApi: fetchTrainersLists,
+      createDirectMessageApi: createDirectMessage,
     },
     dispatch
   );

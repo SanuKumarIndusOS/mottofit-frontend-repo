@@ -703,7 +703,7 @@
 
   //   .content {
   //     margin: 1.5rem;
-      
+
   //     .clear-filters {
   //       text-decoration: underline;
   //       color: #53bfd2;
@@ -792,7 +792,7 @@
   //         font-family: "Montserrat", sans-serif;
   //         background-color: #53BFD2;
   //       }
-        
+
   //       hr {
   //         width: 85%;
   //       }
@@ -803,7 +803,7 @@
   //       color: #161616;
   //       font-weight: 500;
   //       font-family: "Montserrat", sans-serif;
-        
+
   //       hr {
   //         width: 85%;
   //       }
@@ -831,7 +831,26 @@
   //     cursor: pointer;
   //   }
   // }
-
-
 }
 
+.in-person-option {
+  position: absolute;
+  top: -24px;
+  left: 10px;
+  width: 100%;
+
+  h2,
+  p {
+    border: none !important;
+    font-size: 14px !important;
+    margin-bottom: 0 !important;
+  }
+
+  span {
+    position: absolute;
+  }
+}
+
+.position-realtive {
+  position: relative;
+}

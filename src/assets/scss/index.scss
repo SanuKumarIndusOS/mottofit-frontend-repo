@@ -35,7 +35,6 @@ button,
         align-items: center;
         margin-bottom: 2rem;
         margin-left: 1rem;
-
       }
       .date_week {
         width: 230px;
@@ -379,77 +378,68 @@ select {
   text-decoration: underline;
 }
 
-
 @media only screen and (max-width: 900px) {
   .outter_table_user {
-
     // position: relative;
     // right: 50px;
     .table_user {
       .table_inner_trainer {
         display: unset;
 
-        select
-        {
+        select {
           width: 100%;
         }
-
       }
     }
 
     table {
       thead {
         tr {
-        
-          .user_time_slot{
+          .user_time_slot {
             line-height: unset;
             font-size: 12px;
-            
           }
           th {
-            h6
-            {
+            h6 {
               font-size: 0px;
             }
-           // min-width: 45px;
+            // min-width: 45px;
             max-width: 50px;
             // width: 45px;
             .table_header_number {
               font-size: 20px !important;
             }
 
-            .table_header_txt{
+            .table_header_txt {
               font-size: 12px !important;
             }
           }
         }
       }
 
-      tbody
-      {
-        tr{
-          td{
-            border: solid 1px rgb(61, 61, 61)!important;
+      tbody {
+        tr {
+          td {
+            border: solid 1px rgb(61, 61, 61) !important;
           }
         }
       }
     }
   }
-  
-    .schedular_slots_user {
-      .items_slots_user {
-       flex-direction: column;
-       align-items: flex-start;
-  
-       .item_slot5_user
-       {
-         a{
-           margin-top: 30px;
-           width: 300px !important;
-         }
-       }
+
+  .schedular_slots_user {
+    .items_slots_user {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .item_slot5_user {
+        a {
+          margin-top: 30px;
+          width: 300px !important;
+        }
       }
     }
+  }
 }
 
 .overlay_card {
@@ -470,21 +460,19 @@ select {
   opacity: 1;
 }
 
-
-.ocard{
-
+.ocard {
   position: absolute;
   height: 200px;
   width: 93%;
   border-radius: 20px 20px 0px 0px;
-  background-color:  rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   top: 0;
-   
+
   opacity: 0;
   padding: 1rem;
   cursor: pointer;
 
-  .circlepop{
+  .circlepop {
     position: relative;
     left: 200px;
     height: 80px;
@@ -499,19 +487,13 @@ select {
     font-weight: 500;
     text-align: center;
   }
-
-
 }
 
-.ocard:hover{
-  
+.ocard:hover {
   opacity: 1;
 }
 
 // blue arrow
-
-
-
 
 .message_right_chatarea {
   display: flex;
@@ -549,7 +531,7 @@ select {
       display: flex;
       align-items: center;
       @media only screen and (max-width: 900px) {
-       flex-direction: column;
+        flex-direction: column;
       }
       .message_header_items {
         display: flex;
@@ -641,8 +623,7 @@ select {
   }
 
   .submit-btn-block {
-    button
-    {
+    button {
       border: none;
       background-color: white;
     }
@@ -675,4 +656,39 @@ select {
       line-height: 30px;
     }
   }
+}
+
+.react-bootstrap-table {
+  table {
+    td {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
+
+.in-person-img {
+  top: 0 !important;
+}
+
+.in-person-option {
+  position: absolute;
+  top: -24px;
+  left: 10px;
+  width: 100%;
+
+  h2,
+  p {
+    border: none !important;
+    margin-bottom: 0 !important;
+    font-size: 14px !important;
+  }
+
+  span {
+    position: absolute;
+  }
+}
+
+.position-realtive {
+  position: relative;
 }

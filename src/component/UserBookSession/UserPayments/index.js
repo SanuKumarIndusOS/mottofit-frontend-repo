@@ -57,8 +57,8 @@ const UserPaymentsFC = ({
   };
 
   const handleFriendsCount = (number) => {
-    setFriendsCount(number)
-  }
+    setFriendsCount(number);
+  };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -113,7 +113,7 @@ const UserPaymentsFC = ({
       price: sessionData?.price,
       sessionMode: queryQbject?.availability?.value,
       paidByUser: checkPayAhead ? checkPayAhead : trainingtype === "1on1",
-      participantsCount: checkPayAhead ? parseInt(friendsCount): 0
+      participantsCount: checkPayAhead ? parseInt(friendsCount) : 0,
     };
 
     // console.log(
@@ -151,7 +151,7 @@ const UserPaymentsFC = ({
           type: "error",
           message: error.message || "Something went wrong",
         });
-       // console.log(error);
+        // console.log(error);
       });
   };
 
@@ -173,7 +173,7 @@ const UserPaymentsFC = ({
 
   useEffect(() => {
     updatePricing();
-    setCheckPayAhead(false)
+    setCheckPayAhead(false);
     console.log(sessionData);
 
     window.scrollTo(0, 0);
@@ -183,8 +183,9 @@ const UserPaymentsFC = ({
 
   let userData = {
     profilePicture: tempTrainerData?.profilePicture,
-    userName: `${tempTrainerData?.firstName || ""} ${tempTrainerData?.lastName || ""
-      }`,
+    userName: `${tempTrainerData?.firstName || ""} ${
+      tempTrainerData?.lastName || ""
+    }`,
   };
 
   const updatePricing = () => {
@@ -205,23 +206,23 @@ const UserPaymentsFC = ({
     const inPerson2People =
       trainingLocation === "trainerLocation"
         ? tempTrainerData?.socialSessionPricing
-          ?.inPeronAtTrainerLocationfor2People
+            ?.inPeronAtTrainerLocationfor2People
         : tempTrainerData?.socialSessionPricing
-          ?.inPeronAtClientLocationfor2People;
+            ?.inPeronAtClientLocationfor2People;
 
     const inPerson3People =
       trainingLocation === "trainerLocation"
         ? tempTrainerData?.socialSessionPricing
-          ?.inPeronAtTrainerLocationfor3People
+            ?.inPeronAtTrainerLocationfor3People
         : tempTrainerData?.socialSessionPricing
-          ?.inPeronAtClientLocationfor3People;
+            ?.inPeronAtClientLocationfor3People;
 
     const inPerson4People =
       trainingLocation === "trainerLocation"
         ? tempTrainerData?.socialSessionPricing
-          ?.inPeronAtTrainerLocationfor4People
+            ?.inPeronAtTrainerLocationfor4People
         : tempTrainerData?.socialSessionPricing
-          ?.inPeronAtClientLocationfor4People;
+            ?.inPeronAtClientLocationfor4People;
 
     pricingObject["social"] = {
       twoPeople: isVirtual ? virtualSesion2People : inPerson2People,
@@ -235,9 +236,9 @@ const UserPaymentsFC = ({
     const inPerson15People =
       trainingLocation === "trainerLocation"
         ? tempTrainerData?.classSessionPricing
-          ?.inPersonAttrainerLocationfor15People
+            ?.inPersonAttrainerLocationfor15People
         : tempTrainerData?.classSessionPricing
-          ?.inPersonAtclientLocationfor15People;
+            ?.inPersonAtclientLocationfor15People;
 
     pricingObject["class"] = {
       fifteenPeople: isVirtual ? virtualSesion15People : inPerson15People,
@@ -357,11 +358,15 @@ const UserPaymentsFC = ({
                           <p>
                             If you choose to pay for the entire session, you'll
                             be charged for the total number of participants you
-                            select in the dropdown. If you choose not to cover
-                            the entire session, you will be prompted on the next
-                            page to invite friends and your session price will
-                            be split amongst you and your friends who accept
-                            your invite.
+                            select in the dropdown{" "}
+                            <span className="font-weight-bold text-black">
+                              {" "}
+                              located below.
+                            </span>{" "}
+                            If you choose not to cover the entire session, you
+                            will be prompted on the next page to invite friends
+                            and your session price will be split amongst you and
+                            your friends who accept your invite.
                           </p>
                         </div>
                       </div>
@@ -390,7 +395,7 @@ const UserPaymentsFC = ({
                           </div>
                           <img src={paymentMethodImg} alt="icon" />
                         </div>
-                        
+
                         <div className="payment_input">
                           <Elements stripe={stripePromise}>
                             <CardForm
@@ -399,7 +404,6 @@ const UserPaymentsFC = ({
                               handleChange={() =>
                                 setAgreedToTerms(!agreedToTerms)
                               }
-
                               handleChangeCPA={handleChangeCPA}
                               ScheduleSession={ScheduleSession}
                               handleFriendsCount={handleFriendsCount}
@@ -548,8 +552,9 @@ const AccordationService = ({ data }) => {
 
         return (
           <div
-            className={`TF_data_item ${index === data.length - 1 ? "no-border" : ""
-              }`}
+            className={`TF_data_item ${
+              index === data.length - 1 ? "no-border" : ""
+            }`}
             key={index}
           >
             <div className="TF_data_title">
@@ -563,11 +568,11 @@ const AccordationService = ({ data }) => {
                   <p className="ml-auto fs-20 text-secondary">
                     {item.people
                       ? `$${parseFloat(
-                        (item?.price || 0) / item.people
-                      ).toFixed(1)} / Person`
+                          (item?.price || 0) / item.people
+                        ).toFixed(1)} / Person`
                       : item.isPrice
-                        ? `$${item?.price} / Person`
-                        : item?.price}
+                      ? `$${item?.price} / Person`
+                      : item?.price}
                   </p>
                 </div>
               ) : (
@@ -581,11 +586,11 @@ const AccordationService = ({ data }) => {
                     {" "}
                     {item.people1
                       ? `$${parseFloat(
-                        (item?.price1 || 0) / item.people1
-                      ).toFixed(1)} / Person`
+                          (item?.price1 || 0) / item.people1
+                        ).toFixed(1)} / Person`
                       : item.isPrice
-                        ? `$${item?.price1} / Person`
-                        : item?.price1}
+                      ? `$${item?.price1} / Person`
+                      : item?.price1}
                   </p>
                 </div>
               ) : (
@@ -598,11 +603,11 @@ const AccordationService = ({ data }) => {
                   <p className="ml-auto fs-20 text-secondary">
                     {item.people2
                       ? `$${parseFloat(
-                        (item?.price2 || 0) / item.people2
-                      ).toFixed(1)} / Person`
+                          (item?.price2 || 0) / item.people2
+                        ).toFixed(1)} / Person`
                       : item.isPrice
-                        ? `$${item?.price2} / Person`
-                        : item?.price2}
+                      ? `$${item?.price2} / Person`
+                      : item?.price2}
                   </p>
                 </div>
               ) : (

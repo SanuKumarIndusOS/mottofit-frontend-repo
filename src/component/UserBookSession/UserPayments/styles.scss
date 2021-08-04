@@ -64,7 +64,7 @@
                 letter-spacing: -0.45px;
                 color: #161616;
                 opacity: 1;
-               // margin-bottom: 1em;
+                // margin-bottom: 1em;
                 font-size: 45px;
                 line-height: 55px;
                 font-weight: bolder;
@@ -80,7 +80,7 @@
                 font-family: "Montserrat", sans-serif;
               }
               p {
-               // height: 53px;
+                // height: 53px;
                 text-align: left;
                 letter-spacing: 0.27px;
                 color: #696969;
@@ -228,7 +228,7 @@
                 justify-content: space-between;
                 input {
                   width: 15px;
-                  height: 15px;
+                  height: 18px;
 
                   border: 1px solid #bcbcbc;
 
@@ -575,7 +575,6 @@
 
 @media only screen and (max-width: 900px) {
   .user_payment_outer_container {
-    
     .user_payment_inner_container {
       .user_payment_grid {
         display: contents;
@@ -614,20 +613,15 @@
       }
     }
   }
- .payment_input_outter_check
- {
-   flex-direction: column;
-   justify-content: flex-start;
-   .participants
-   {
-     margin-top: 1rem;
-     margin-bottom: 1rem;
-   }
- }
-  
+  .payment_input_outter_check {
+    flex-direction: column;
+    justify-content: flex-start;
+    .participants {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
 }
-
-
 
 .user_friends {
   margin: 3em 0.5em 1em 0;
@@ -652,11 +646,17 @@
   }
 }
 
-.participants
-{
+.participants {
   color: #696969;
   flex: 2;
-  margin-left: 10px ;
+  margin-left: 10px;
+  max-width: 200px;
+}
+
+.payment_terms {
+  label {
+    font-size: 18px !important;
+  }
 }
 
 .info-desc {

@@ -51,10 +51,14 @@ export const userSession = (type, pageSize = 0) => (
 };
 
 //Cancel Session
-export const cancelSession = (body) => (dispatch, getState, { api }) => {
+export const cancelSession = (body) => (dispatch, getState, { api, Toast }) => {
   return new Promise((resolve, reject) => {
     api({ ...userApi.cancelSession, body })
       .then(({ data }) => {
+        // console.log(data);
+
+        // Toast({ type: "success", message });
+
         resolve(data);
       })
       .catch((err) => {
