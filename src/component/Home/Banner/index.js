@@ -27,13 +27,12 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { withStyles } from '@material-ui/core/styles';
-import { cyan } from '@material-ui/core/colors';
+import { withStyles } from "@material-ui/core/styles";
+import { cyan } from "@material-ui/core/colors";
 
 import arrowSign from "assets/files/SVG/Arrow Next.svg";
 
 const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
-
   const CyanRadio = withStyles({
     root: {
       "&$checked": {
@@ -43,7 +42,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     checked: {},
   })((props) => <Radio color="default" {...props} />);
   //Responsive search
-  
+
   const [Calvalue, onChangeCal] = useState(new Date());
   const [IPCvalue, setIPCValue] = useState("");
   const [Avalvalue, setAvalValue] = useState("");
@@ -63,9 +62,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const history = useHistory();
   const [DropdownState, setDropdownState] = useState(false);
 
-  const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
-    false
-  );
+  const [DropdownAvailabilityState, setDropdownAvailabilityState] =
+    useState(false);
   const [InPersonDD, setInPersonDD] = useState(false);
 
   const [virtualMarkup, setvirtualMarkup] = useState(
@@ -270,10 +268,11 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
         <div className="heading_items">
           <h2 className="heading_txt">Train with the Best</h2>
           <p className="sub_heading_txt">
-            Discover & book trusted personal trainers for Strength <br></br> & HIIT,
-            Boxing, Yoga & Pilates
+            Discover & book trusted personal trainers for <br></br> Strength &
+            HIIT, Boxing, Yoga & Pilates
           </p>
         </div>
+        
 
         <div className="card-box ">
           <div className="card-wrapper_home">
@@ -386,7 +385,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             onClick={() => {
               console.log("Hit");
               // setshowMenu(!showMenu);
-              history.push("/mobiles/filter")
+              history.push("/mobiles/filter");
             }}
           >
             <div className="mobile-search-txt">Find Your Trainer</div>
@@ -395,8 +394,6 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
         </div>
-
-   
       </div>
     </div>
   );
