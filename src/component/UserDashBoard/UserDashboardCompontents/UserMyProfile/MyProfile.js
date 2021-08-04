@@ -67,7 +67,8 @@ const MyProfileClass = ({
   const [changeCard, setChangeCard] = useState(true);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const fileInputRef = useRef();
-  let location = useLocation();
+  
+ 
 
   const getUserPaymentDetails = () => {
     const { getPaymentMethods } = PaymentApi;
@@ -82,7 +83,7 @@ const MyProfileClass = ({
   };
 
   useEffect(() => {
- console.log(location.state?.from);
+
     getUserProfileData();
     getUserPaymentDetails();
   }, []);
@@ -262,6 +263,7 @@ const MyProfileClass = ({
                 currentAcceptedInvitationId: "",
               };
               restProps?.updateUserDetails(reduxData);
+              history.push({pathname:"/users/dashboard/session",state:{ from:"invite" }})
             })
             .catch((err) => {
               Toast({ type: "error", message: err.message || "Error" });

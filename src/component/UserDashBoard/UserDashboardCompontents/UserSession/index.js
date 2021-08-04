@@ -26,6 +26,7 @@ import { api } from "service/api";
 import { PaymentApi } from "service/apiVariables";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
+import { useLocation } from "react-router-dom";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -48,10 +49,17 @@ const UserSessionClass = (props) => {
   const [isDefaultCardPresent, setDefaultCard] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState("upcoming");
+  let location = useLocation();
 
   useEffect(() => {
+    
     getUserPaymentDetails();
     window.scrollTo(0, 0);
+    if(location.state?.from === "invite")
+    {
+      _userSession("invited");
+    }
+    
   }, []);
   const _userSession = (type, isPagination = false) => {
     props
@@ -67,7 +75,7 @@ const UserSessionClass = (props) => {
         setTotalData((prevData) => ({ ...prevData, [type]: documentCount }));
 
         setUserData((prevData) => {
-         // console.log(prevData.invitedSessions);
+          // console.log(prevData.invitedSessions);
           let replaceData = [...prevData[sessionTypeData[type]], ...data];
           return {
             ...prevData,
@@ -122,7 +130,7 @@ const UserSessionClass = (props) => {
 
   useEffect(() => {
     _userSession(currentTab, true);
-   // console.log(userData.invitedSessions);
+    // console.log(userData.invitedSessions);
   }, [pageData]);
 
   return (
@@ -134,15 +142,15 @@ const UserSessionClass = (props) => {
           </div>
           <div className="US_tabs_wrapper">
             <Tabs
-              defaultTab="upcoming"
+              defaultTab={location.state?.from === "invite"?"invited":"upcoming"}
               onChange={(tab) => {
                 handleChange(tab, userData);
               }}
             >
               <TabList>
-              <Tab tabFor="upcoming">Upcoming</Tab>
+                <Tab tabFor="upcoming">Upcoming</Tab>
                 <Tab tabFor="invited">Invited</Tab>
-              
+
                 {/* <Tab tabFor="pass">Motto pass</Tab> */}
                 <Tab tabFor="past">Previous</Tab>
                 {/* <Tab tabFor="ongoing">Ongoing</Tab> */}
@@ -280,7 +288,7 @@ const TabOne = ({
     setisLoading(true);
 
     if (!isDefaultCardPresent && action && !paidByUser) {
-      history.push({ pathname:"/users/dashboard/settings/profile", state:{ from:"invite" }});
+      history.push({ pathname: "/users/dashboard/settings/profile" });
 
       let reduxData = {
         currentAcceptedInvitationId: sessionId,
@@ -383,7 +391,7 @@ const TabOne = ({
           <div className="TP_US_overview">
             <div className="TP_US_overview_inner">
               {tabData?.map((data, index) => {
-               //  console.log(data, "datadata");
+                //  console.log(data, "datadata");
 
                 return (
                   <React.Fragment key={index}>
@@ -426,7 +434,12 @@ const TabOne = ({
                           </h5>
                           <h5>
                             <img src={LocationIcon} alt="icon" />
-                            {(data?.venue.charAt(0).toUpperCase() + data?.venue.slice(1)).replace(/([A-Z])/g, ' $1').trim()}
+                            {(
+                              data?.venue.charAt(0).toUpperCase() +
+                              data?.venue.slice(1)
+                            )
+                              .replace(/([A-Z])/g, " $1")
+                              .trim()}
                           </h5>
                         </div>
                         {tabname !== "OnGoing" && (
@@ -436,9 +449,18 @@ const TabOne = ({
                                 {data.acceptance ? (
                                   <>
                                     <span className="text-black mr-4">
-                                     
                                       {/* {data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>} */}
-                                      {data.sessionStatus === "completed" ? (<div style={{color:"red"}}><u>Completed</u></div>):data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>}
+                                      {data.sessionStatus === "completed" ? (
+                                        <div style={{ color: "red" }}>
+                                          <u>Completed</u>
+                                        </div>
+                                      ) : data.sessionStatus === "cancelled" ? (
+                                        <div style={{ color: "red" }}>
+                                          <u>Cancelled</u>
+                                        </div>
+                                      ) : (
+                                        <div> Invited session</div>
+                                      )}
                                     </span>
                                   </>
                                 ) : (
@@ -469,12 +491,18 @@ const TabOne = ({
                                               Accept
                                             </button>
                                           </>
-                                        ) : (
-                                        null
-                                        )}
+                                        ) : null}
                                       </>
+                                    ) : data.sessionStatus === "completed" ? (
+                                      <div style={{ color: "red" }}>
+                                        <u>Completed</u>
+                                      </div>
+                                    ) : data.sessionStatus === "cancelled" ? (
+                                      <div style={{ color: "red" }}>
+                                        <u>Cancelled</u>
+                                      </div>
                                     ) : (
-                                      data.sessionStatus === "completed" ? (<div style={{color:"red"}}><u>Completed</u></div>):data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>
+                                      <div> Invited session</div>
                                     )}
                                   </>
                                 )}
@@ -550,20 +578,20 @@ const TabOne = ({
                             {/* </>
                           )} */}
 
-                          
-{data?.participantsCount === 0?  data.trainingType !== "1on1" &&
-                              !data.asFriend &&
-                              tabname !== "Previous" && (
-                                <div className="button_boarder">
-                                  <button
-                                    onClick={() => handleAddFriends(data)}
-                                  >
-                                    Add Friends{" "} 
-                                  </button>
-                                  <img src={ArrowNext} alt="icon" />
-                                </div>
-                              ):null}
-                          
+                            {data?.participantsCount === 0
+                              ? data.trainingType !== "1on1" &&
+                                !data.asFriend &&
+                                tabname !== "Previous" && (
+                                  <div className="button_boarder">
+                                    <button
+                                      onClick={() => handleAddFriends(data)}
+                                    >
+                                      Add Friends{" "}
+                                    </button>
+                                    <img src={ArrowNext} alt="icon" />
+                                  </div>
+                                )
+                              : null}
                           </div>
                         )}
                       </div>
