@@ -137,18 +137,18 @@ function SearchFilter() {
             <div className="option_icon"></div>
           </div>
           {Location !== "virtual" ? (
-            <div className="filter_dropdown">
-              <div>
+            <div className="city_dropdown">
+              <div className="city">
                 <input type="radio"></input> New York
               </div>
-              <div>
-                <input type="radio"></input> New York
+              <div className="city">
+                <input type="radio"></input> Miami
               </div>
-              <div>
-                <input type="radio"></input> New York
+              <div className="city">
+                <input type="radio"></input> Hamptons
               </div>
-              <div>
-                <input type="radio"></input> New York
+              <div className="city">
+                <input type="radio"></input> Palm Beach
               </div>
             </div>
           ) : null}

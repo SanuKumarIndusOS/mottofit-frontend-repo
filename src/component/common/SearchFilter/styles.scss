@@ -61,15 +61,40 @@
       }
     }
 
+    .city_dropdown
+    {
+      background-color: #eaeaea;
+      display: block;
+      position: relative;
+      box-shadow: 0px 3px 12px #1616160d;
+      cursor: pointer;
+      bottom: 2px;
+      width: 190px;
+      left: 35px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #161616;
+      font-size: 15px;
+      font-weight: 600;
+
+      .city
+      {
+        background-color: #fff;
+        padding: 1rem;
+      }
+    }
+
     .filter_dropdown {
       background-color: #eaeaea;
       display: block;
       position: relative;
       box-shadow: 0px 3px 12px #1616160d;
       cursor: pointer;
-      top: 15px;
+      top: 10px;
       width: 255px;
       right: 18px;
+
+     
 
       .dropdown_grid {
         display: grid;
