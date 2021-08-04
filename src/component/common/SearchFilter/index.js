@@ -4,14 +4,17 @@ import { BiSearch } from "react-icons/bi";
 
 function SearchFilter() {
   const [VerticalDropdown, setVerticalDropdown] = useState(false);
+  const [VerticalVal, setVerticalVal] = useState({ label: "", value: "" });
   const [AvailabilityDropdown, setAvailabilityDropdown] = useState(false);
-  
-  
+  const [Location, setLocation] = useState("virtual");
+
   return (
     <>
       <div className="search_filter">
         <div className="search_cta">
-          <div className="circle"><BiSearch/></div>
+          <div className="circle">
+            <BiSearch />
+          </div>
         </div>
 
         <div className="filter_type">
@@ -40,16 +43,64 @@ function SearchFilter() {
         >
           <div className="filter_header">Training Type</div>
           <div className="filter_options">
-            <div className="option_txt">Select a Category</div>
+            {VerticalVal?.label === "" ? (
+              <div className="option_txt"> Select a Category</div>
+            ) : (
+              <div className="option_txt">{VerticalVal.label}</div>
+            )}
             <div className="option_icon">&#10094;</div>
           </div>
           {VerticalDropdown ? (
             <div className="filter_dropdown">
               <div className="dropdown_grid">
-                <div className="dropdown_item">Boxing</div>
-                <div className="dropdown_item">Pilates</div>
-                <div className="dropdown_item">Yoga</div>
-                <div className="dropdown_item">Strength</div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setVerticalVal({
+                      ...VerticalVal,
+                      label: "Boxing",
+                      value: "boxing",
+                    });
+                  }}
+                >
+                  Boxing
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setVerticalVal({
+                      ...VerticalVal,
+                      label: "Pilates",
+                      value: "Pilates",
+                    });
+                  }}
+                >
+                  Pilates
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setVerticalVal({
+                      ...VerticalVal,
+                      label: "Yoga",
+                      value: "Yoga",
+                    });
+                  }}
+                >
+                  Yoga
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setVerticalVal({
+                      ...VerticalVal,
+                      label: "Strength",
+                      value: "Strength",
+                    });
+                  }}
+                >
+                  Strength
+                </div>
               </div>
             </div>
           ) : null}
@@ -57,9 +108,50 @@ function SearchFilter() {
         <div className="filter_type">
           <div className="filter_header">Location</div>
           <div className="filter_options">
-            <div className="option_txt">Select a Time</div>
+            {Location === "virtual" ? (
+              <div className="option_txt">
+                <p className="active_bar">Virtual</p>
+                <span className="blue_bar">/</span>
+                <p
+                  onClick={() => {
+                    setLocation("Inperson");
+                  }}
+                >
+                  In Person
+                </p>
+              </div>
+            ) : (
+              <div className="option_txt">
+                <p
+                  onClick={() => {
+                    setLocation("virtual");
+                  }}
+                >
+                  Virtual
+                </p>{" "}
+                <span className="blue_bar">/</span>{" "}
+                <p className="active_bar">In Person</p>
+              </div>
+            )}
+
             <div className="option_icon"></div>
           </div>
+          {Location !== "virtual" ? (
+            <div className="filter_dropdown">
+              <div>
+                <input type="radio"></input> New York
+              </div>
+              <div>
+                <input type="radio"></input> New York
+              </div>
+              <div>
+                <input type="radio"></input> New York
+              </div>
+              <div>
+                <input type="radio"></input> New York
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </>

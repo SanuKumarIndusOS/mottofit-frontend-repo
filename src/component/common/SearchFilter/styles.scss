@@ -32,6 +32,25 @@
       .option_txt {
         color: #898989;
         font-size: 18px;
+
+        display: flex;
+        
+        justify-content: center;
+        
+        .blue_bar
+        {
+          color: #53bfd2;
+          font-weight: 600;
+          margin-left: 10px;
+          margin-right: 10px;
+          margin-top: 3px;
+        }
+
+        .active_bar
+        {
+          font-weight: 500;
+          border-bottom: solid 2px #53bfd2;
+        }
       }
 
       .option_icon {
