@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
+import { BiSearch } from "react-icons/bi";
 
 function SearchFilter() {
   const [VerticalDropdown, setVerticalDropdown] = useState(false);
@@ -10,7 +11,7 @@ function SearchFilter() {
     <>
       <div className="search_filter">
         <div className="search_cta">
-          <div className="circle"></div>
+          <div className="circle"><BiSearch/></div>
         </div>
 
         <div className="filter_type">
