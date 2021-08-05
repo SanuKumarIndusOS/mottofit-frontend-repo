@@ -63,8 +63,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   const history = useHistory();
   const [DropdownState, setDropdownState] = useState(false);
 
-  const [DropdownAvailabilityState, setDropdownAvailabilityState] =
-    useState(false);
+  const [DropdownAvailabilityState, setDropdownAvailabilityState] = useState(
+    false
+  );
   const [InPersonDD, setInPersonDD] = useState(false);
 
   const [virtualMarkup, setvirtualMarkup] = useState(
@@ -274,7 +275,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </p>
         </div>
 
-        {/* <div className="card-box ">
+        <div className="card-box ">
           <div className="card-wrapper_home">
             <div className="item1">
               <h3>Location</h3>
@@ -381,10 +382,10 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               </button>
             </div>
           </div>
-        </div> */}
-        <div className="filter">
-          <SearchFilter />
         </div>
+        {/* <div className="filter">
+          <SearchFilter />
+        </div> */}
 
         <div className="mobile-search">
           <div
