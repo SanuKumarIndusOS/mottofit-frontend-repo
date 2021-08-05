@@ -209,5 +209,5 @@ export const dataSet26 = {
 export const dataSet27 = {
     heading: "28. CHOICE OF LAW",
     desc: "The Agreement is made under and shall be governed by and construed in accordance with the laws of the State of New York, consistent with the Federal Arbitration Act, without giving effect to any principles that provide for the application of the law of another jurisdiction.",
-    desc1: "REVISION DATE: Mar 8, 2021",
+    desc1: "REVISION DATE: July 17, 2021 ",
 };
