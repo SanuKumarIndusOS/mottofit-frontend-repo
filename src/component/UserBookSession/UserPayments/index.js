@@ -349,27 +349,32 @@ const UserPaymentsFC = ({
                     <div className="up_header">
                       <h2>Secure Checkout</h2>
                       <hr></hr>
-                      <div className="info-desc">
-                        <div className="user_friends">
-                          <div className="too_high">
-                            Session cost too high? Train with friends and split
-                            the bill
+
+                      {sessionData?.sessionType === "SOCIAL SESSION" ? (
+                        <div className="info-desc">
+                          <div className="user_friends">
+                            <div className="too_high">
+                              Session cost too high? Train with friends and
+                              split the bill
+                            </div>
+                            <p>
+                              If you choose to pay for the entire session,
+                              you'll be charged for the total number of
+                              participants you select in the dropdown{" "}
+                              <span className="font-weight-bold text-black">
+                                {" "}
+                                located below.
+                              </span>{" "}
+                              If you choose not to cover the entire session, you
+                              will be prompted on the next page to invite
+                              friends and your session price will be split
+                              amongst you and your friends who accept your
+                              invite.
+                            </p>
                           </div>
-                          <p>
-                            If you choose to pay for the entire session, you'll
-                            be charged for the total number of participants you
-                            select in the dropdown{" "}
-                            <span className="font-weight-bold text-black">
-                              {" "}
-                              located below.
-                            </span>{" "}
-                            If you choose not to cover the entire session, you
-                            will be prompted on the next page to invite friends
-                            and your session price will be split amongst you and
-                            your friends who accept your invite.
-                          </p>
                         </div>
-                      </div>
+                      ) : null}
+
                       <h4>Choose your Payment Method</h4>
                       <p>
                         This is a hold on your card & payment won’t be complete
