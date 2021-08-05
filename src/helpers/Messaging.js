@@ -94,7 +94,7 @@ export default class TwilioMessaging {
     return new Promise(async (resolve, reject) => {
       try {
         this.unSubscribeChannel();
-        if (!this.client) return alert("Twilio loading");
+        if (!this.client) return 0;
 
         this.handler({
           type: MessagingActionType.UPDATE_MESSAGING_DETAILS,
