@@ -283,7 +283,7 @@ const TrainWithFriendsClass = ({
       sessionId,
       friends: tempPhoneData.map(
         ({ friendEmail, friendName, friendPhone }) => ({
-          email: friendEmail,
+          email: friendEmail.toLocaleLowerCase(),
           firstName: friendName,
           phoneNo: !friendPhone.includes("+") ? `+${friendPhone}` : friendPhone,
         })
