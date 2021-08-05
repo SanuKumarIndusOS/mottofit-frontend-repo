@@ -91,7 +91,9 @@ export default class Experience extends Component {
                   </div>
                 </div>
               </div>
-              <div className="monogram"><img src={svgBG} className="svgBGMobile" alt="svg" /></div>
+              <div className="monogram">
+                <img src={svgBG} className="svgBGMobile" alt="svg" />
+              </div>
             </div>
           </div>
           {/* ------------------------------------personal--------------- */}
@@ -138,7 +140,11 @@ export default class Experience extends Component {
                 description="Contactless & virtual training available"
               />
 
-              <Link to="/trainer/find" className="btn find_your_trainer">
+              <Link to="/trainer/find" className="btn find_your_trainer desk_">
+                Find Your Best Match <BlueHoverButton />
+              </Link>
+
+              <Link to="/mobiles/filter" className="btn find_your_trainer mobile_">
                 Find Your Best Match <BlueHoverButton />
               </Link>
             </div>
