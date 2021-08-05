@@ -43,7 +43,7 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
     setAvalValue(event.target.value);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {window.scrollTo(0, 0)}, []);
   console.log("aswd");
 
   const [queryObject, setqueryObject] = useState({
