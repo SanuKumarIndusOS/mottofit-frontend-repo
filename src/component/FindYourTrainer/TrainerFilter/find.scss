@@ -28,6 +28,11 @@
     position: relative;
     right: 90px;
     width: 222px;
+    top: 10px;
+
+    .inPersonBG {
+      background: #f8f8f8;
+    }
   }
 }
 
@@ -844,6 +849,7 @@
     border: none !important;
     font-size: 14px !important;
     margin-bottom: 0 !important;
+    opacity: 0 !important;
   }
 
   span {

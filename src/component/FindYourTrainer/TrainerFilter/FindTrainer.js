@@ -558,7 +558,7 @@ const FindTrainerFC = ({
                   {virtualMarkup}
                 </div>
               </div>
-              <img src={Between} alt="icon" />
+              <img src={Between} alt="icon" className="ml-2" />
               <div
                 onClick={() => {
                   SetLocation("In Person") && TriggerInPersonDropDown();
