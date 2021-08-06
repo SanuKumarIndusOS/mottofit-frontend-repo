@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { BiSearch } from "react-icons/bi";
+import { history } from "helpers";
+
+import { connect } from "react-redux";
+import { trainerSearchFilters } from "action/trainerAct";
+import { bindActionCreators } from "redux";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -9,7 +14,7 @@ import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 
-function SearchFilter() {
+function SearchFilter({trainerSearchFilters}) {
   // Radio button style
   const CyanRadio = withStyles({
     root: {
@@ -33,16 +38,30 @@ function SearchFilter() {
 
   const handleIPCChange = (event) => {
     setIPCValue(event.target.value);
-
-    setIPCDropdown(false)
- 
+    setIPCDropdown(false);
   };
+
+  const applyFilters = () =>
+  {
+        let payload = 
+        {
+          location : Location,
+          city: IPCvalue,
+          vertical: VerticalVal,
+          date: "",
+          availability: AvailabilityVal,
+        }
+    
+    console.log(payload);
+
+    history.push("trainer/find")
+  }
 
   return (
     <>
       <div className="search_filter">
         <div className="search_cta">
-          <div className="circle">
+          <div className="circle" onClick={applyFilters}>
             <BiSearch />
           </div>
         </div>
@@ -228,7 +247,7 @@ function SearchFilter() {
             </div>
           ) : null}
         </div>
-        <div className="filter_type"  >
+        <div className="filter_type">
           <div className="filter_header">Location</div>
           <div className="filter_options">
             {Location === "virtual" ? (
@@ -237,10 +256,9 @@ function SearchFilter() {
                 <span className="blue_bar">/</span>
                 <p
                   onClick={() => {
-                    setLocation("Inperson");
+                    setLocation("inPerson");
                     setIPCDropdown(true);
                   }}
-                 
                 >
                   In Person
                 </p>
@@ -255,9 +273,9 @@ function SearchFilter() {
                   Virtual
                 </p>{" "}
                 <span className="blue_bar">/</span>{" "}
-                <p className="active_bar"
-                 onClick={()=> setIPCDropdown(!IPCDropdown)}
-               
+                <p
+                  className="active_bar"
+                  onClick={() => setIPCDropdown(!IPCDropdown)}
                 >
                   {IPCvalue === "" ? "In Person" : IPCvalue}{" "}
                 </p>
@@ -307,4 +325,22 @@ function SearchFilter() {
   );
 }
 
-export default SearchFilter;
+
+const mapStateToProps = (state) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      trainerSearchFilters,
+    },
+    dispatch
+  );
+};
+
+const _SearchFilter = connect(null, mapDispatchToProps)(SearchFilter);
+
+
+
+export default _SearchFilter;

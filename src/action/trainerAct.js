@@ -13,6 +13,14 @@ export const updateTrainerDetails = (payload) => (dispatch) => {
   });
 };
 
+export const trainerSearchFilters = (payload) => (dispatch) => {
+  return new Promise((resolve) => {
+    dispatch({ type: TrainerActionType.trainerSearchFilters, payload });
+
+    resolve(true);
+  });
+};
+
 export const getTrainerDetails = () => (dispatch, getState, { api }) => {
   return new Promise((resolve, reject) => {
     const { getTrainerApi } = TrainerApi;
