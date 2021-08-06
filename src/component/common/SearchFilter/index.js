@@ -68,7 +68,7 @@ function SearchFilter({ trainerSearchFilters }) {
   };
 
   return (
-    <>
+    <div className="wrapper">
       <div className="search_filter">
         <div className="search_cta">
           <div className="circle" onClick={applyFilters}>
@@ -348,7 +348,7 @@ function SearchFilter({ trainerSearchFilters }) {
           ) : null}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
