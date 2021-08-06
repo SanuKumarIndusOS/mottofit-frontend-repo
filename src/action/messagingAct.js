@@ -7,6 +7,8 @@ export const updatePersonTyping = (payload) => (dispatch, getState) => {
   let { identity } = participant.state;
   let tempMembers = typingMembers;
 
+  const currentLoggedInUser = localStorage.getItem("user-id");
+
   const currentChatItemOwner =
     currentChannelMembers.filter(
       ({ userIdenity }) => userIdenity === identity
@@ -65,6 +67,8 @@ export const updateGlobalMessagingDetails = (message) => (
     adminMessages,
     invitedSessions,
     requestedSessions,
+    userMessages,
+    trainerMessages,
   } = getState().messagingReducer;
 
   let tempPastSessions = [...pastSessions];
@@ -72,6 +76,8 @@ export const updateGlobalMessagingDetails = (message) => (
   let tempInvitedSessions = [...invitedSessions];
   let tempAdminSession = [...adminMessages];
   let tempRequestedSessions = [...requestedSessions];
+  let tempUserMessages = [...userMessages];
+  let tempTrainerMessages = [...trainerMessages];
   const currentPastSessions = handleChannelMessage(
     tempPastSessions,
     currentMesasgedChannelId,
@@ -103,12 +109,26 @@ export const updateGlobalMessagingDetails = (message) => (
     currentMesasge,
     currentMesasgeAuthor
   );
+  const currentUserMessages = handleChannelMessage(
+    tempUserMessages,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
+  const currentTrainerMessages = handleChannelMessage(
+    tempTrainerMessages,
+    currentMesasgedChannelId,
+    currentMesasge,
+    currentMesasgeAuthor
+  );
 
   let payload = {
     pastSessions: currentPastSessions,
     upcomingSessions: currentUpcomingSessions,
     requestedSessions: currentRequestedSessions,
     adminMessages: currentAdminSessions,
+    userMessages: currentUserMessages,
+    trainerMessages: currentTrainerMessages,
     invitedSessions: currentInvitedSessions,
   };
 
@@ -120,10 +140,13 @@ export const updateGlobalMessagingDetails = (message) => (
   });
 };
 
-export const initClientDispatch = (callback) => (dispatch, getState) => {
+export const initClientDispatch = (channelSID, callback) => (
+  dispatch,
+  getState
+) => {
   dispatch({
     type: MessagingActionType.UPDATE_CLIENT_INSTANCE,
-    payload: new ChatClientInstance(dispatch, getState, callback),
+    payload: new ChatClientInstance(dispatch, getState, channelSID, callback),
   });
 };
 
@@ -149,6 +172,9 @@ const handleChannelMessage = (
     let CurrentChannelData = { ...data };
 
     if (data?.channelId === currentMesasgedChannelId) {
+      if (!Object.keys(CurrentChannelData).includes("message"))
+        CurrentChannelData["message"] = {};
+
       CurrentChannelData["message"]["body"] = currentMesasge;
       CurrentChannelData["message"]["date_updated"] = new Date().toISOString();
       CurrentChannelData["message"]["from"] = author;

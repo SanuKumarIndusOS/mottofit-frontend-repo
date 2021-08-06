@@ -19,7 +19,7 @@ export const SideBarRouteData = [
   },
   {
     title: "Messages",
-    path: "/users/dashboard/message",
+    path: "/users/dashboard/message/upcoming",
     icon: <img src={MessageIcon} alt="icon" />,
   },
   {

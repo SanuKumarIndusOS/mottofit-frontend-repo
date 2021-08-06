@@ -10,6 +10,7 @@ const DatatableClass = ({
   loading,
   changeApproval,
   handleDirectRequest,
+  loadingDatas = [],
 }) => {
   if (loading) {
     return <h2>loading...</h2>;
@@ -66,6 +67,8 @@ const DatatableClass = ({
               </div>
             );
           }
+
+          let isUserDataLoading = loadingDatas.includes(item["id"]);
           return (
             <tr>
               <td> {item.firstName ? item.firstName : "-"}</td>
@@ -88,10 +91,15 @@ const DatatableClass = ({
                   {approve}
                 </button>
                 <button
-                  className="btn btn-outline-primary border-none"
+                  className={`${
+                    isUserDataLoading
+                      ? "btn-transparent btn-disabled btn border-none text-secondary fs-16"
+                      : "btn btn-outline-primary border-none"
+                  } `}
                   onClick={() => handleDirectRequest(item["id"])}
+                  disabled={isUserDataLoading || loadingDatas.length > 0}
                 >
-                  Message
+                  {isUserDataLoading ? "Loading..." : "Message"}
                 </button>
               </div>
             </tr>

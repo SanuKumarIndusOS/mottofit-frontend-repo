@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.css";
+import { history } from "helpers";
+import { Toast } from "service/toast";
 // import "node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
 const Datatable = ({
@@ -12,6 +14,9 @@ const Datatable = ({
   loading,
   noTrainer,
   addOrRemove,
+  createDirectMessageApi,
+  toggleLoading,
+  loadingDatas,
 }) => {
   if (loading) {
     return <h2>loading...</h2>;
@@ -88,9 +93,85 @@ const Datatable = ({
   //     );
   // };
 
-  const ActionField = () => {
+  const handleDirectRequest = (id) => {
+    if (!id) return;
+
+    toggleLoading(id);
+
+    // setTimeout(() => {
+
+    // }, 6000);
+
+    // console.log(id);
+
+    createDirectMessageApi(id)
+      .then((data) => {
+        // console.log(data);
+        const { channelSid } = data || {};
+        Toast({ type: "success", message: data.message || "success" });
+
+        toggleLoading(id, true);
+        history.push(`/admins/message/user?channelId=${channelSid}`);
+      })
+      .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+        toggleLoading(id, true);
+      });
+  };
+
+  const ActionField = (cell, row) => {
+    // console.log(cell);
+
+    let isUserDataLoading = loadingDatas.includes(cell);
+
+    // console.log(isUserDataLoading);
+
+    let actionBtn;
+
+    // if (row.status === "active") {
+    //   actionBtn = (
+    //     <div className="d-flex align-items-center">
+    //       <div
+    //         onClick={() => {
+    //           addOrRemove(cell, "removed");
+    //         }}
+    //         className="mr-3"
+    //       >
+    //         REMOVE
+    //       </div>
+    //     </div>
+    //   );
+    // } else {
+    //   actionBtn = (
+    //     <div className="d-flex align-items-center">
+    //       <div
+    //         onClick={() => {
+    //           addOrRemove(cell, "active");
+    //         }}
+    //         className="mr-3"
+    //       >
+    //         ADD
+    //       </div>
+    //     </div>
+    //   );
+    // }
+
     return (
-      <button className="btn btn-outline-primary border-none">Message</button>
+      <div className="d-flex align-items-center">
+        {/* {actionBtn} */}
+        <button
+          className="btn btn-outline-primary border-none ml-3"
+          onClick={(e) => handleDirectRequest(cell, e)}
+          className={`${
+            isUserDataLoading
+              ? "btn-transparent btn-disabled btn border-none text-secondary fs-16"
+              : "btn btn-outline-primary border-none"
+          } `}
+          disabled={isUserDataLoading || loadingDatas.length > 0}
+        >
+          {isUserDataLoading ? "Loading..." : "Message"}
+        </button>
+      </div>
     );
   };
 
@@ -142,7 +223,7 @@ const Datatable = ({
     },
     { dataField: "status", text: "status", filter: textFilter() },
     { dataField: "id", text: "id", formatter: AddorRemove },
-    { dataField: "action", text: "action", formatter: ActionField },
+    { dataField: "id", text: "action", formatter: ActionField },
     // {
     //     // dataField: "trainerStatus",
     //     text: "Approve",

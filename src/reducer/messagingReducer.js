@@ -12,6 +12,8 @@ const initialState = {
   upcomingSessions: [],
   requestedSessions: [],
   adminMessages: [],
+  userMessages: [],
+  trainerMessages: [],
   invitedSessions: [],
   isLoading: false,
 };

@@ -8,12 +8,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./styles.scss";
 import { Toast } from "service/toast";
+import { history } from "helpers";
 
 const MainClass = ({ fetchTrainersListsApi, createDirectMessageApi }) => {
   const [trainerList, setTrainerList] = useState([]);
   const [pageMetaData, setpageMetaData] = useState({});
   const [loading, setLoading] = useState(false);
   const [q, setQ] = useState("");
+  const [loadingDatas, setLoadingDatas] = useState([]);
   useEffect(() => {
     setLoading(true);
     fetchAllTrainers(1);
@@ -38,13 +40,27 @@ const MainClass = ({ fetchTrainersListsApi, createDirectMessageApi }) => {
   const handleDirectRequest = (id) => {
     if (!id) return;
 
+    if (!loadingDatas.includes(id)) {
+      let tempDatas = [...loadingDatas, id];
+
+      setLoadingDatas(tempDatas);
+    }
+
     createDirectMessageApi(id)
       .then((data) => {
-        console.log(data);
+        const { channelSid } = data || {};
         Toast({ type: "success", message: data.message || "success" });
+        history.push(`/admins/message/trainer?channelId=${channelSid}`);
+
+        let tempDatas = [...loadingDatas].filter((userid) => userid !== id);
+
+        setLoadingDatas(tempDatas);
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
+        let tempDatas = [...loadingDatas].filter((userid) => userid !== id);
+
+        setLoadingDatas(tempDatas);
       });
   };
   return (
@@ -75,6 +91,7 @@ const MainClass = ({ fetchTrainersListsApi, createDirectMessageApi }) => {
             loading={loading}
             fetchAllTrainers={() => fetchAllTrainers()}
             handleDirectRequest={handleDirectRequest}
+            loadingDatas={loadingDatas}
           />
           <CommonPagination
             pageMetaData={pageMetaData}

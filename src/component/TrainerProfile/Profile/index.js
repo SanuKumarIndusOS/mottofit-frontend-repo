@@ -129,7 +129,7 @@ const TrainerProfileClass = ({
     };
 
     let redirectURL = `/mobile/login?${encodeURIComponent(
-      `nextpath=/users/dashboard/message?currentTab=requested`
+      `nextpath=/users/dashboard/message/requested`
     )}`;
 
     if (!userId) {
@@ -156,7 +156,7 @@ const TrainerProfileClass = ({
         .then((data) => {
           setLoading(false);
           Toast({ type: "success", message: "Success" });
-          history.push("/users/dashboard/message?currentTab=requested");
+          history.push("/users/dashboard/message/requested");
           resolve();
         })
         .catch((err) => {

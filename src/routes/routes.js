@@ -175,7 +175,7 @@ const routers = [
         exact: true,
       },
       {
-        path: "/message",
+        path: "/message/:type",
         componentPath: "pages/TrainerDashboard/TrainerMessage",
         name: "AdminMessage",
         auth: false,
@@ -474,7 +474,7 @@ const routers = [
         exact: true,
       },
       {
-        path: "/message",
+        path: "/message/:type",
         componentPath: "pages/TrainerDashboard/TrainerMessage",
         name: "TrainerMessage",
         auth: false,
@@ -505,7 +505,7 @@ const routers = [
         exact: true,
       },
       {
-        path: "/message",
+        path: "/message/:type",
         componentPath: "pages/TrainerDashboard/TrainerMessage",
         name: "UserMessage",
         auth: false,

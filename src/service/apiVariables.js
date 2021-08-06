@@ -270,6 +270,16 @@ export const TrainerApi = {
       return `${this.id}/${this.url}sessionType=${this.sessionType}&offset=${this.pageSize}&limit=${this.limit}`;
     },
   },
+  adminChannel: {
+    url: "admin/channel",
+    method: "get",
+    baseURL: "message",
+    pageSize: 0,
+    limit: 10,
+    get api() {
+      return `${this.url}`;
+    },
+  },
   trainerMyEarning: {
     url: "payment-history/trainer?trainerId=",
     method: "get",
