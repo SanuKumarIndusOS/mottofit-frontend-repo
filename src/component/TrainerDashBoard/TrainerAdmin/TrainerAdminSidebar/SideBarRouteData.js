@@ -27,7 +27,7 @@ export const SideBarRouteData = [
 
   {
     title: "Messages",
-    path: "/trainers/dashboard/message",
+    path: "/trainers/dashboard/message/upcoming",
     icon: <img src={MessageIcon} alt="icon" />,
   },
   {

@@ -34,7 +34,7 @@ const NavBarFC = ({
 
   const [keys, setKey] = useState("");
   useEffect(() => {
-    setKey("")
+    setKey("");
     if (userType === 3) {
       getUserDetail().then((data) => {
         setUserData(data);
@@ -53,8 +53,6 @@ const NavBarFC = ({
   const [showModel, setShowModel] = useState(false);
 
   const [dropdownOpen, setOpen] = useState(false);
-
- 
 
   const toggleDrop = () => setOpen(!dropdownOpen);
 
@@ -133,13 +131,10 @@ const NavBarFC = ({
                 onClick={() => {
                   history.push({
                     pathname: "/trainer/results",
-                    state:{
-
-                      key: keys
-                    }
+                    state: {
+                      key: keys,
+                    },
                   });
-
-                 
                 }}
               />
             </div>
@@ -278,7 +273,7 @@ const NavBarFC = ({
                   <div
                     className="menu_li"
                     onClick={() => {
-                      history.push("/users/dashboard/message");
+                      history.push("/users/dashboard/message/upcoming");
                       setActiveMobMenu(false);
                     }}
                   >

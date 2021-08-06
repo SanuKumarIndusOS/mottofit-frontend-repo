@@ -192,6 +192,22 @@ export const trainerChannel = (sessionType, pageSize) => (
   });
 };
 
+//admin Channel
+export const adminChannel = (pageSize) => (dispatch, getState, { api }) => {
+  return new Promise((resolve, reject) => {
+    const { adminChannel } = TrainerApi;
+
+    // trainerChannel.pageSize = pageSize || 0;
+    api({ ...adminChannel })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 //trainer My Earning
 export const trainerMyEarning = (id, pageSize, isTrainer) => (
   dispatch,
@@ -290,9 +306,9 @@ export const fetchGlobalSearchResults = (payload) => (
   { api }
 ) => {
   return new Promise((resolve, reject) => {
-    TrainerApi.globalSearch.key = payload.key
-    TrainerApi.globalSearch.page = payload.page
-    api({ ...TrainerApi.globalSearch})
+    TrainerApi.globalSearch.key = payload.key;
+    TrainerApi.globalSearch.page = payload.page;
+    api({ ...TrainerApi.globalSearch })
       .then(({ data }) => {
         resolve(data);
       })
@@ -301,4 +317,3 @@ export const fetchGlobalSearchResults = (payload) => (
       });
   });
 };
-

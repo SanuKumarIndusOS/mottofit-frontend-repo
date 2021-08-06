@@ -13,7 +13,7 @@ import {
 const Chat = require("twilio-chat");
 
 export default class TwilioMessaging {
-  constructor(handler, getState, callback) {
+  constructor(handler, getState, cachedChannelId, callback) {
     this.getState = getState;
 
     this.handler = handler;
@@ -22,7 +22,9 @@ export default class TwilioMessaging {
 
     this.client = null;
 
-    this.callbackApi = callback;
+    this.cachedChannelId = cachedChannelId;
+
+    this.callBackFn = callback;
 
     this.initClient();
   }
@@ -84,17 +86,23 @@ export default class TwilioMessaging {
       const token = await this.getToken();
       client.updateToken(token);
     });
+
+    if (this.cachedChannelId)
+      this.joinChannelByID(this.cachedChannelId, true).catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
+        this.callBackFn();
+      });
   };
 
   globalMessage = (message) => {
     updateGlobalMessagingDetails(message)(this.handler, this.getState);
   };
 
-  joinChannelByID = async (uniqueChannelId) => {
+  joinChannelByID = async (uniqueChannelId, isInitial = false) => {
     return new Promise(async (resolve, reject) => {
       try {
-        this.unSubscribeChannel();
-        if (!this.client) return 0;
+        if (!isInitial) this.unSubscribeChannel();
+        if (!this.client) return alert("Twilio loading");
 
         this.handler({
           type: MessagingActionType.UPDATE_MESSAGING_DETAILS,

@@ -8,7 +8,7 @@ import SheduleIcon from "../../../../assets/files/TrainerDashboard/Message/Shedu
 import AvailabilityIcon from "../../../../assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import LocationIcon from "../../../../assets/files/TrainerDashboard/Message/Location Icon.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton/index";
-import { trainerChannel } from "action/trainerAct";
+import { trainerChannel, adminChannel } from "action/trainerAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { twilioApi } from "../../../../service/apiVariables";
@@ -26,9 +26,12 @@ import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import { InfiniteScrollComponent } from "component/common/Scrollbars";
 import { history } from "helpers";
+import { MessageComponent } from "../MessageComponent/MessageComponent";
+import { useParams } from "react-router-dom";
 
 const TrainerMessageClass = ({
   trainerChannel,
+  adminChannel,
   initClientDispatch,
   clientData,
   activeChannel,
@@ -40,11 +43,17 @@ const TrainerMessageClass = ({
   upcomingSessions,
   requestedSessions,
   adminMessages,
+  userMessages,
+  trainerMessages,
   invitedSessions,
   unSubscribeAct,
   unSubscribeClientAct,
 }) => {
   const isUser = parseInt(localStorage.getItem("type")) === 3;
+
+  const isAdmin = parseInt(localStorage.getItem("type")) === 1;
+
+  const { type } = useParams();
 
   const [individual_list, setIndividual] = useState([]);
   const [socialGroup_list, setSocialGroup_list] = useState([]);
@@ -64,7 +73,7 @@ const TrainerMessageClass = ({
   });
 
   const [currentTab, setCurrentTab] = useState(
-    isUser ? "upcoming" : "upcoming"
+    isAdmin ? "trainer" : "upcoming"
   );
 
   // Make Id dynamic
@@ -73,9 +82,17 @@ const TrainerMessageClass = ({
 
     window.scrollTo(0, 0);
 
+    const { search } = history.location;
+
+    const tempCurrentTab = search.split("=")[1];
+
+    const channelID = search.split("channelId=")[1];
+
     let mql = window.matchMedia("(max-width: 700px)");
 
-    initClientDispatch();
+    initClientDispatch(channelID, () => {
+      setMessageListLoading(false);
+    });
 
     // handleTabChange(isUser ? "invited" : "upcoming");
 
@@ -91,11 +108,17 @@ const TrainerMessageClass = ({
 
     const tempCurrentTab = search.split("=")[1];
 
-    // console.log(tempCurrentTab);
+    const channelID = search.split("channelId=")[1];
 
-    tempCurrentTab &&
-      currentTab !== tempCurrentTab &&
-      setCurrentTab(tempCurrentTab);
+    // console.log(type, search);
+
+    type && setCurrentTab(type);
+
+    // console.log(channelID, adminMessages);
+
+    // tempCurrentTab &&
+    //   currentTab !== tempCurrentTab &&
+    //   setCurrentTab(tempCurrentTab);
   }, [history.location]);
 
   useEffect(() => {
@@ -103,13 +126,14 @@ const TrainerMessageClass = ({
   }, [pageData]);
 
   const getChannelDetails = (tab) => {
+    if (isAdmin) return getAdminChannelDetails();
     trainerChannel(tab, pageData[tab])
       .then((data) => {
         let sessionTypeData = {
           invited: "invitedSessions",
           upcoming: "upcomingSessions",
           past: "pastSessions",
-          admin: "adminSessions",
+          admin: "adminMessages",
           requested: "requestedSessions",
         };
 
@@ -129,30 +153,98 @@ const TrainerMessageClass = ({
       });
   };
 
+  const getAdminChannelDetails = () => {
+    adminChannel()
+      .then((data) => {
+        const { trainersArray = [], usersArray = [] } = data || {};
+
+        const { search } = history.location;
+
+        // const tempCurrentTab = search.split("=")[1];
+
+        let reduxData = {
+          userMessages: [...usersArray],
+          trainerMessages: [...trainersArray],
+        };
+
+        setMessageListLoading(false);
+
+        // updateMessagingDetails(reduxData);
+
+        const channelSID = search.split("channelId=")[1];
+
+        if (channelSID) {
+          let currentTabData = {
+            trainer: "trainerMessages",
+            user: "userMessages",
+          };
+
+          let selectedRole = currentTabData[type];
+
+          // console.log(
+          //   reduxData[selectedRole],
+          //   selectedRole,
+          //   currentTabData,
+          //   tempCurrentTab
+          // );
+
+          let selectedUser =
+            reduxData[selectedRole].filter(
+              ({ channelId }) => channelId === channelSID
+            )[0] || {};
+
+          reduxData = {
+            ...reduxData,
+            currentChannelMembers: selectedUser?.members,
+            channelData: selectedUser,
+          };
+          // console.log(reduxData);
+        }
+
+        updateMessagingDetails(reduxData);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        Toast({ type: "error", message: err.message || "Error" });
+      });
+  };
+
   function PopulateContacts(channelID, members, channelData) {
     let mql = window.matchMedia("(max-width: 700px)");
-    chatClientInstance.joinChannelByID(channelID).then(() => {
-      let reduxData = {
-        currentChannelMembers: members,
-        channelData,
-      };
-      console.log(reduxData);
 
-      updateMessagingDetails(reduxData);
+    chatClientInstance
+      .joinChannelByID(channelID)
+      .then(() => {
+        let reduxData = {
+          currentChannelMembers: members,
+          channelData,
+        };
+        // console.log(reduxData);
 
-      if (mql.matches) history.push("/mobiles/chat");
-    });
+        updateMessagingDetails(reduxData);
+
+        if (mql.matches) history.push("/mobiles/chat");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   const handleScrollChange = () => {};
 
-  function handleTabChange(tab) {
-    // console.log(tab);
+  function handleTabChange(tab, initial = false) {
+    const tempType = type;
     const { search } = history.location;
 
-    const tempCurrentTab = search.split("=")[1];
-
-    tempCurrentTab && history.push("/users/dashboard/message");
+    if (isAdmin) {
+      tab !== tempType && history.push(`/admins/message/${tab}`);
+    } else {
+      tab !== tempType &&
+        history.push(
+          `/${isUser ? "user" : "trainers"}/dashboard/message/${tab}`
+        );
+    }
 
     setCurrentTab(tab);
 
@@ -177,430 +269,77 @@ const TrainerMessageClass = ({
                 }}
               >
                 <TabList>
-                  <Tab tabFor="upcoming">Upcoming</Tab>
-                  {isUser && <Tab tabFor="invited">Invited</Tab>}
-                  <Tab tabFor="past">Previous</Tab>
-                  <Tab tabFor="admin">Admin</Tab>
-                  <Tab tabFor="requested">Requests</Tab>
+                  {!isAdmin ? (
+                    <>
+                      <Tab tabFor="upcoming">Upcoming</Tab>
+                      {isUser && <Tab tabFor="invited">Invited</Tab>}
+                      <Tab tabFor="past">Previous</Tab>
+                      <Tab tabFor="admin">Admin</Tab>
+                      <Tab tabFor="requested">Requests</Tab>
+                    </>
+                  ) : (
+                    <>
+                      <Tab tabFor="trainer">Trainers</Tab>
+                      <Tab tabFor="user">Users</Tab>
+                    </>
+                  )}
                 </TabList>
                 <div className="message_inner">
                   <TabPanel tabId="invited">
-                    <div className="message_inner_one">
-                      <div className="message_left">
-                        {/* Todo Change to ALL */}
-                        {!isMessageListLoading ? (
-                          invitedSessions.map((item, index) => {
-                            const { from, body, date_updated } = item.message;
-
-                            let lastUserProfilePic =
-                              item["members"]?.filter(
-                                ({ userId }) => userId === from
-                              )[0] ||
-                              item["members"][0] ||
-                              {};
-
-                            return (
-                              <div
-                                className="contact_item"
-                                key={`${Date.now()}_all_${index}`}
-                              >
-                                <div className="inner_link">
-                                  <UserAvatar
-                                    {...lastUserProfilePic}
-                                    className="img-md-2"
-                                  />
-
-                                  <div
-                                    className="message_link_notify"
-                                    onClick={() =>
-                                      PopulateContacts(
-                                        item["channelUniqueName"],
-                                        item["members"],
-                                        item
-                                      )
-                                    }
-                                  >
-                                    <div style={{ display: "flex" }}>
-                                      <h3>{item["chatTitle"] || ""} </h3>
-                                      <h3>
-                                        &ensp;
-                                        {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 2)
-                                          : null}
-                                      </h3>
-                                    </div>
-                                    <div>
-                                      {body && (
-                                        <p>{`${body?.slice(0, 100)}${
-                                          body?.length > 100 ? "..." : ""
-                                        }`}</p>
-                                      )}
-                                      {date_updated && (
-                                        <span className="msg-timestamp-left">
-                                          {getFormatDate(date_updated, "LT")}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-
-                                  {/* <div
-                                    className="message_link_notify_mobile"
-                                    onClick={() => {
-                                      PopulateContacts(
-                                        item["channelUniqueName"],
-                                        item["members"],
-                                        item
-                                      );
-                                      alert("mob");
-                                      history.push("mobiles/chat")
-                                    }}
-                                  >
-                                    <h3>{item["chatTitle"] || ""}</h3>
-                                    <div>
-                                      {body && (
-                                        <p>{`${body?.slice(0, 100)}${
-                                          body?.length > 100 ? "..." : ""
-                                        }`}</p>
-                                      )}
-                                      {date_updated && (
-                                        <span className="msg-timestamp-left">
-                                          {getFormatDate(date_updated, "LT")}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div> */}
-                                </div>
-                              </div>
-                            );
-                          })
-                        ) : (
-                          <CommonPageLoader />
-                        )}
-                      </div>
-                      <div className="message_right ">
-                        <ChatBox isDataPresent={invitedSessions?.length > 0} />
-                      </div>
-                    </div>
+                    <MessageComponent
+                      isMessageListLoading={isMessageListLoading}
+                      messageData={invitedSessions}
+                      PopulateContacts={PopulateContacts}
+                    />
                   </TabPanel>
 
                   <TabPanel tabId="upcoming">
-                    <div className="message_inner_one">
-                      <div className="message_left">
-                        {/* Todo Change to ALL */}
-                        {!isMessageListLoading ? (
-                          upcomingSessions.map((item, index) => {
-                            const { from, body, date_updated } = item.message;
-
-                            let lastUserProfilePic =
-                              item["members"]?.filter(
-                                ({ userId }) => userId === from
-                              )[0] ||
-                              item["members"][0] ||
-                              {};
-                            return (
-                              <div
-                                className="contact_item"
-                                key={`${Date.now()}_${index}`}
-                              >
-                                <div className="inner_link">
-                                  {/* <img
-                                  src={
-                                    lastUserProfilePic?.profilePicture || Jenny
-                                  }
-                                  alt={`${lastUserProfilePic?.userName} profile`}
-                                  onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = Jenny;
-                                  }}
-                                /> */}
-                                  <UserAvatar
-                                    {...lastUserProfilePic}
-                                    className="img-md-2"
-                                  />
-                                  <div
-                                    className="message_link_notify"
-                                    onClick={() =>
-                                      PopulateContacts(
-                                        item["channelUniqueName"],
-                                        item["members"],
-                                        item
-                                      )
-                                    }
-                                  >
-                                    <div style={{ display: "flex" }}>
-                                      <h3>{item["chatTitle"] || ""}</h3>
-                                      <h3>
-                                        &ensp;
-                                        {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 2)
-                                          : null}
-                                      </h3>
-                                    </div>
-                                    <div>
-                                      {body && (
-                                        <p>{`${body?.slice(0, 100)}${
-                                          body?.length > 100 ? "..." : ""
-                                        }`}</p>
-                                      )}
-                                      {date_updated && (
-                                        <span className="msg-timestamp-left">
-                                          {getFormatDate(date_updated, "LT")}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })
-                        ) : (
-                          <CommonPageLoader />
-                        )}
-                      </div>
-                      <div className="message_right">
-                        <ChatBox isDataPresent={upcomingSessions.length > 0} />
-                      </div>
-                    </div>
+                    <MessageComponent
+                      isMessageListLoading={isMessageListLoading}
+                      messageData={upcomingSessions}
+                      PopulateContacts={PopulateContacts}
+                    />
                   </TabPanel>
                   <TabPanel tabId="past">
-                    <div className="message_inner_one">
-                      <div className="message_left">
-                        {/* Todo Change to ALL */}
-                        {!isMessageListLoading ? (
-                          pastSessions.map((item, index) => {
-                            const { from, body, date_updated } = item.message;
-
-                            let lastUserProfilePic =
-                              item["members"]?.filter(
-                                ({ userId }) => userId === from
-                              )[0] ||
-                              item["members"][0] ||
-                              {};
-                            return (
-                              <div
-                                className="contact_item"
-                                key={`${index}_${Date.now()}`}
-                              >
-                                <div className="inner_link">
-                                  {/* <img
-                                  src={
-                                    lastUserProfilePic?.profilePicture || Jenny
-                                  }
-                                  alt={`${lastUserProfilePic?.userName} profile`}
-                                  onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = Jenny;
-                                  }}
-                                /> */}
-                                  <UserAvatar
-                                    {...lastUserProfilePic}
-                                    className="img-md-2"
-                                  />
-                                  <div
-                                    className="message_link_notify"
-                                    onClick={() =>
-                                      PopulateContacts(
-                                        item["channelUniqueName"],
-                                        item["members"],
-                                        item
-                                      )
-                                    }
-                                  >
-                                    <div style={{ display: "flex" }}>
-                                      <h3>{item["chatTitle"] || ""}</h3>
-                                      <h3>
-                                        &ensp;
-                                        {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 2)
-                                          : null}
-                                      </h3>
-                                    </div>
-                                    <div>
-                                      {body && (
-                                        <p>{`${body?.slice(0, 100)}${
-                                          body?.length > 100 ? "..." : ""
-                                        }`}</p>
-                                      )}
-                                      {date_updated && (
-                                        <span className="msg-timestamp-left">
-                                          {getFormatDate(date_updated, "LT")}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })
-                        ) : (
-                          <CommonPageLoader />
-                        )}
-                      </div>
-                      <div className="message_right">
-                        <ChatBox isDataPresent={pastSessions.length > 0} />
-                      </div>
-                    </div>
+                    <MessageComponent
+                      isMessageListLoading={isMessageListLoading}
+                      messageData={pastSessions}
+                      PopulateContacts={PopulateContacts}
+                    />
                   </TabPanel>
                   <TabPanel tabId="admin">
-                    <div className="message_inner_one">
-                      <div className="message_left">
-                        {/* Todo Change to ALL */}
-                        {/* <InfiniteScrollComponent
-                          totalSize={100}
-                          currentDataSize={adminMessages?.length}
-                          handleApi={}
-                        > */}
-                        {!isMessageListLoading ? (
-                          adminMessages.map((item) => {
-                            const { from, body, date_updated } = item.message;
-
-                            let lastUserProfilePic =
-                              item["members"]?.filter(
-                                ({ userId }) => userId === from
-                              )[0] ||
-                              item["members"][0] ||
-                              {};
-                            return (
-                              <div className="contact_item">
-                                <div className="inner_link">
-                                  {/* <img
-                                  src={
-                                    lastUserProfilePic?.profilePicture || Jenny
-                                  }
-                                  alt={`${lastUserProfilePic?.userName} profile`}
-                                  onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = Jenny;
-                                  }}
-                                /> */}
-                                  <UserAvatar
-                                    {...lastUserProfilePic}
-                                    className="img-md-2"
-                                  />
-                                  <div
-                                    className="message_link_notify"
-                                    onClick={() =>
-                                      PopulateContacts(
-                                        item["channelUniqueName"],
-                                        item["members"],
-                                        item
-                                      )
-                                    }
-                                  >
-                                    <div style={{ display: "flex" }}>
-                                      <h3>{item["chatTitle"] || ""}</h3>
-                                      <h3>
-                                        &ensp;
-                                        {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 2)
-                                          : null}
-                                      </h3>
-                                    </div>
-                                    <div>
-                                      {body && (
-                                        <p>{`${body?.slice(0, 100)}${
-                                          body?.length > 100 ? "..." : ""
-                                        }`}</p>
-                                      )}
-                                      {date_updated && (
-                                        <span className="msg-timestamp-left">
-                                          {getFormatDate(date_updated, "LT")}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })
-                        ) : (
-                          <CommonPageLoader />
-                        )}
-                        {/* </InfiniteScrollComponent> */}
-                      </div>
-                      <div className="message_right">
-                        <ChatBox isDataPresent={adminMessages.length > 0} />
-                      </div>
-                    </div>
+                    <MessageComponent
+                      isMessageListLoading={isMessageListLoading}
+                      messageData={adminMessages}
+                      PopulateContacts={PopulateContacts}
+                    />
                   </TabPanel>
                   <TabPanel tabId="requested">
-                    <div className="message_inner_one">
-                      <div className="message_left">
-                        {/* Todo Change to ALL */}
-                        {!isMessageListLoading ? (
-                          requestedSessions.map((item, index) => {
-                            const { from, body, date_updated } = item.message;
+                    <MessageComponent
+                      isMessageListLoading={isMessageListLoading}
+                      messageData={requestedSessions}
+                      PopulateContacts={PopulateContacts}
+                    />
+                  </TabPanel>
 
-                            let lastUserProfilePic =
-                              item["members"]?.filter(
-                                ({ userId }) => userId === from
-                              )[0] ||
-                              item["members"][0] ||
-                              {};
-                            return (
-                              <div
-                                className="contact_item"
-                                key={`${Date.now()}_${index}`}
-                              >
-                                <div className="inner_link">
-                                  {/* <img
-                                  src={
-                                    lastUserProfilePic?.profilePicture || Jenny
-                                  }
-                                  alt={`${lastUserProfilePic?.userName} profile`}
-                                  onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = Jenny;
-                                  }}
-                                /> */}
-                                  <UserAvatar
-                                    {...lastUserProfilePic}
-                                    className="img-md-2"
-                                  />
-                                  <div
-                                    className="message_link_notify"
-                                    onClick={() =>
-                                      PopulateContacts(
-                                        item["channelUniqueName"],
-                                        item["members"],
-                                        item
-                                      )
-                                    }
-                                  >
-                                    <div style={{ display: "flex" }}>
-                                      <h3>{item["chatTitle"] || ""}</h3>
-                                      <h3>
-                                        &ensp;
-                                        {item["members"].length > 2
-                                          ? "+  " + (item["members"].length - 2)
-                                          : null}
-                                      </h3>
-                                    </div>
-                                    <div>
-                                      {body && (
-                                        <p>{`${body?.slice(0, 100)}${
-                                          body?.length > 100 ? "..." : ""
-                                        }`}</p>
-                                      )}
-                                      {date_updated && (
-                                        <span className="msg-timestamp-left">
-                                          {getFormatDate(date_updated, "LT")}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })
-                        ) : (
-                          <CommonPageLoader />
-                        )}
-                      </div>
-                      <div className="message_right">
-                        <ChatBox isDataPresent={requestedSessions.length > 0} />
-                      </div>
-                    </div>
+                  {/* User Message Tab */}
+
+                  <TabPanel tabId="user">
+                    <MessageComponent
+                      isMessageListLoading={isMessageListLoading}
+                      messageData={userMessages}
+                      PopulateContacts={PopulateContacts}
+                    />
+                  </TabPanel>
+
+                  {/* User Message Tab */}
+
+                  <TabPanel tabId="trainer">
+                    <MessageComponent
+                      isMessageListLoading={isMessageListLoading}
+                      messageData={trainerMessages}
+                      PopulateContacts={PopulateContacts}
+                    />
                   </TabPanel>
                 </div>
               </Tabs>
@@ -649,6 +388,8 @@ const mapStateToProps = (state) => ({
   upcomingSessions: state.messagingReducer.upcomingSessions,
   requestedSessions: state.messagingReducer.requestedSessions,
   adminMessages: state.messagingReducer.adminMessages,
+  userMessages: state.messagingReducer.userMessages,
+  trainerMessages: state.messagingReducer.trainerMessages,
   invitedSessions: state.messagingReducer.invitedSessions,
 });
 
@@ -656,6 +397,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       trainerChannel,
+      adminChannel,
       initClientDispatch,
       updateMessagingDetails,
       unSubscribeAct: unSubscribeFromChannel,
