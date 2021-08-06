@@ -14,6 +14,8 @@ import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 
+import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
+
 function SearchFilter({trainerSearchFilters}) {
   // Radio button style
   const CyanRadio = withStyles({
