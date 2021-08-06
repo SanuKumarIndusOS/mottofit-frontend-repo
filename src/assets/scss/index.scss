@@ -742,3 +742,8 @@ select {
   color: unset !important 
 }
 
+.react-calendar button:enabled:hover
+{
+  border-radius: 100px;
+}
+
