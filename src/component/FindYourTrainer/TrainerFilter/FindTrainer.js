@@ -52,6 +52,8 @@ const FindTrainerFC = ({
   trainerQueryData,
   updateTrainerDetails,
   updateUserDetails,
+  trainerSearchFilterData ,
+
 }) => {
   const CyanRadio = withStyles({
     root: {
@@ -145,6 +147,11 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
+      
+   
+  console.log(trainerSearchFilterData, "ppppppp");
+
+
     window.scrollTo(0, 0);
     //Mobile
 
@@ -751,6 +758,7 @@ function DropDownSVG() {
 
 const mapStateToProps = (state) => ({
   trainerQueryData: state.trainerReducer.query,
+  trainerSearchFilterData: state.trainerReducer.searchFilterParams,
 });
 
 const mapDispatchToProps = (dispatch) => {

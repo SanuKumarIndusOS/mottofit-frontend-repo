@@ -54,6 +54,8 @@ function SearchFilter({trainerSearchFilters}) {
     
     console.log(payload);
 
+    trainerSearchFilters(payload)
+
     history.push("trainer/find")
   }
 
