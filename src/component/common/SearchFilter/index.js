@@ -20,15 +20,22 @@ function SearchFilter() {
     checked: {},
   })((props) => <Radio color="default" {...props} />);
 
-  const [IPCvalue, setIPCValue] = useState("");
-
   const [VerticalDropdown, setVerticalDropdown] = useState(false);
   const [VerticalVal, setVerticalVal] = useState({ label: "", value: "" });
   const [AvailabilityDropdown, setAvailabilityDropdown] = useState(false);
+  const [AvailabilityVal, setAvailabilityVal] = useState({
+    label: "",
+    value: "",
+  });
   const [Location, setLocation] = useState("virtual");
+  const [IPCvalue, setIPCValue] = useState("");
+  const [IPCDropdown, setIPCDropdown] = useState(true);
 
   const handleIPCChange = (event) => {
     setIPCValue(event.target.value);
+
+    setIPCDropdown(false)
+ 
   };
 
   return (
@@ -40,23 +47,105 @@ function SearchFilter() {
           </div>
         </div>
 
-        <div className="filter_type">
+        <div
+          className="filter_type"
+          className="filter_type"
+          onClick={() => {
+            setAvailabilityDropdown(!AvailabilityDropdown);
+          }}
+          tabIndex="0"
+          onBlur={() => {
+            setAvailabilityDropdown(false);
+          }}
+        >
           <div className="filter_header">Availability</div>
           <div className="filter_options">
-            <div className="option_txt">Select a Time</div>
+            <div className="option_txt">
+              {AvailabilityVal?.label !== ""
+                ? AvailabilityVal?.label
+                : "Select a Time"}{" "}
+            </div>
             <div className="option_icon">&#10094;</div>
-         
           </div>
-          <div className="filter_dropdown">
+
+          {AvailabilityDropdown ? (
+            <div className="filter_dropdown">
               <div className="dropdown_grid">
-                <div className="dropdown_item">Early Bird</div>
-                <div className="dropdown_item">Rise & Shine</div>
-                <div className="dropdown_item">Lunchtime</div>
-                <div className="dropdown_item">MID-DAY Break</div>
-                <div className="dropdown_item">Happy Hours</div>
-                <div className="dropdown_item">Never too late</div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setAvailabilityVal({
+                      ...AvailabilityVal,
+                      label: "Early Bird",
+                      value: "",
+                    });
+                  }}
+                >
+                  Early Bird
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setAvailabilityVal({
+                      ...AvailabilityVal,
+                      label: "Rise & Shine",
+                      value: "",
+                    });
+                  }}
+                >
+                  Rise & Shine
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setAvailabilityVal({
+                      ...AvailabilityVal,
+                      label: "Lunchtime",
+                      value: "",
+                    });
+                  }}
+                >
+                  Lunchtime
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setAvailabilityVal({
+                      ...AvailabilityVal,
+                      label: "MID-DAY Break",
+                      value: "",
+                    });
+                  }}
+                >
+                  MID-DAY Break
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setAvailabilityVal({
+                      ...AvailabilityVal,
+                      label: "Happy Hours",
+                      value: "",
+                    });
+                  }}
+                >
+                  Happy Hours
+                </div>
+                <div
+                  className="dropdown_item"
+                  onClick={() => {
+                    setAvailabilityVal({
+                      ...AvailabilityVal,
+                      label: "Never too late",
+                      value: "",
+                    });
+                  }}
+                >
+                  Never too late
+                </div>
               </div>
             </div>
+          ) : null}
         </div>
         <div className="filter_type">
           <div className="filter_header">Schedule</div>
@@ -139,7 +228,7 @@ function SearchFilter() {
             </div>
           ) : null}
         </div>
-        <div className="filter_type">
+        <div className="filter_type"  >
           <div className="filter_header">Location</div>
           <div className="filter_options">
             {Location === "virtual" ? (
@@ -149,7 +238,9 @@ function SearchFilter() {
                 <p
                   onClick={() => {
                     setLocation("Inperson");
+                    setIPCDropdown(true);
                   }}
+                 
                 >
                   In Person
                 </p>
@@ -164,7 +255,10 @@ function SearchFilter() {
                   Virtual
                 </p>{" "}
                 <span className="blue_bar">/</span>{" "}
-                <p className="active_bar">
+                <p className="active_bar"
+                 onClick={()=> setIPCDropdown(!IPCDropdown)}
+               
+                >
                   {IPCvalue === "" ? "In Person" : IPCvalue}{" "}
                 </p>
               </div>
@@ -172,7 +266,7 @@ function SearchFilter() {
 
             <div className="option_icon"></div>
           </div>
-          {Location !== "virtual" ? (
+          {Location !== "virtual" && IPCDropdown === true ? (
             <div className="city_dropdown">
               <div className="city">
                 <FormControl component="fieldset">
