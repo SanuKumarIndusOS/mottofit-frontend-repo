@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { BiSearch } from "react-icons/bi";
 import { history } from "helpers";
+import moment from "moment";
 
 import { connect } from "react-redux";
 import { trainerSearchFilters } from "action/trainerAct";
@@ -45,6 +46,10 @@ function SearchFilter({ trainerSearchFilters }) {
     setIPCValue(event.target.value);
     setIPCDropdown(false);
   };
+
+  useEffect(() => {
+    setCalDropdown(false);
+  }, [Calvalue]);
 
   const applyFilters = () => {
     let payload = {
@@ -171,15 +176,22 @@ function SearchFilter({ trainerSearchFilters }) {
             </div>
           ) : null}
         </div>
-        <div className="filter_type"  onClick={() => {setCalDropdown(!CalDropdown)}}>
+        <div className="filter_type">
           <div className="filter_header">Schedule</div>
-          <div className="filter_options">
-            <div className="option_txt">Select a Date</div>
+          <div
+            className="filter_options"
+            onClick={() => {
+              setCalDropdown(!CalDropdown);
+            }}
+          >
+            <div className="option_txt">
+              {moment(Calvalue).format("YYYY/MM/DD")}
+            </div>
 
             <div className="option_icon">&#10094;</div>
           </div>
           {CalDropdown ? (
-            <div className="calendar_dropdown">
+            <div className="calendar_dropdown" >
               <Calendar
                 onChange={onChangeCal}
                 value={Calvalue}
