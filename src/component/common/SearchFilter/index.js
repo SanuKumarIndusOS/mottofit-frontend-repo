@@ -45,7 +45,18 @@ function SearchFilter() {
           <div className="filter_options">
             <div className="option_txt">Select a Time</div>
             <div className="option_icon">&#10094;</div>
+         
           </div>
+          <div className="filter_dropdown">
+              <div className="dropdown_grid">
+                <div className="dropdown_item">Early Bird</div>
+                <div className="dropdown_item">Rise & Shine</div>
+                <div className="dropdown_item">Lunchtime</div>
+                <div className="dropdown_item">MID-DAY Break</div>
+                <div className="dropdown_item">Happy Hours</div>
+                <div className="dropdown_item">Never too late</div>
+              </div>
+            </div>
         </div>
         <div className="filter_type">
           <div className="filter_header">Schedule</div>
@@ -153,7 +164,9 @@ function SearchFilter() {
                   Virtual
                 </p>{" "}
                 <span className="blue_bar">/</span>{" "}
-                <p className="active_bar">{IPCvalue === "" ?"In Person":IPCvalue} </p>
+                <p className="active_bar">
+                  {IPCvalue === "" ? "In Person" : IPCvalue}{" "}
+                </p>
               </div>
             )}
 
@@ -163,7 +176,6 @@ function SearchFilter() {
             <div className="city_dropdown">
               <div className="city">
                 <FormControl component="fieldset">
-              
                   <RadioGroup
                     aria-label="gender"
                     name="gender1"
@@ -183,7 +195,7 @@ function SearchFilter() {
                     <FormControlLabel
                       value="Hamptons"
                       control={<CyanRadio />}
-                      label={<div className="city">HAMPTONS</div>  }
+                      label={<div className="city">HAMPTONS</div>}
                     />
                     <FormControlLabel
                       value="Palm Beach"
