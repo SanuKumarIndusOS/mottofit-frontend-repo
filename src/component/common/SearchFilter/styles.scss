@@ -74,15 +74,12 @@
       padding-top: 1rem;
       padding-bottom: 1rem;
 
-      
-
       .city {
         font-size: 13px;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.7px;
         font-family: "Montserrat", sans-serif;
-        
       }
     }
 
@@ -123,6 +120,18 @@
         }
       }
     }
+  }
+
+  .calendar_dropdown {
+    background-color: #eaeaea;
+    display: block;
+    position: relative;
+    box-shadow: 0px 3px 12px #1616160d;
+    cursor: pointer;
+    top: 10px;
+
+    right: 18px;
+    width: 350px;
   }
 
   .search_cta {

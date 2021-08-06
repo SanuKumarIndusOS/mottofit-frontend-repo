@@ -14,7 +14,9 @@ import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 
-import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
+import Calendar from "react-calendar";
+
+
 
 function SearchFilter({trainerSearchFilters}) {
   // Radio button style
@@ -38,10 +40,15 @@ function SearchFilter({trainerSearchFilters}) {
   const [IPCvalue, setIPCValue] = useState("");
   const [IPCDropdown, setIPCDropdown] = useState(true);
 
+  const [Calvalue, onChangeCal] = useState(new Date());
+
+ 
+
   const handleIPCChange = (event) => {
     setIPCValue(event.target.value);
     setIPCDropdown(false);
   };
+  
 
   const applyFilters = () =>
   {
@@ -63,6 +70,8 @@ function SearchFilter({trainerSearchFilters}) {
 
   return (
     <>
+    
+    
       <div className="search_filter">
         <div className="search_cta">
           <div className="circle" onClick={applyFilters}>
@@ -173,9 +182,15 @@ function SearchFilter({trainerSearchFilters}) {
         <div className="filter_type">
           <div className="filter_header">Schedule</div>
           <div className="filter_options">
-            <div className="option_txt">Select a Date</div>
+            <div className="option_txt">Select a Date
+       
+            </div>
+           
             <div className="option_icon">&#10094;</div>
           </div>
+          <div className="calendar_dropdown">
+            <Calendar onChange={onChangeCal} value={Calvalue} minDate={new Date()}/>
+            </div>
         </div>
         <div
           className="filter_type"
