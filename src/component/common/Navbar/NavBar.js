@@ -23,12 +23,14 @@ import { connect } from "react-redux";
 import { UserAvatar } from "component/common/UserAvatar";
 import { change_login_status } from "action/NotificationAct";
 import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
-
+ import { getTrainerDetail } from "action/adminAct";
+    
 const NavBarFC = ({
   toggle,
   isModelOpen,
   updateUserDetails,
   getUserDetail,
+  getTrainerDetail,
   change_login_status,
 }) => {
   const [userData, setUserData] = useState();
@@ -40,7 +42,14 @@ const NavBarFC = ({
       getUserDetail().then((data) => {
         setUserData(data);
       });
+    }else
+    {
+      getTrainerDetail(localStorage.getItem("user-id")).then((data) => {
+        setUserData(data);
+      });
     }
+
+  
 
     console.log(userType);
   }, []);
@@ -492,6 +501,7 @@ const mapDispatchToProps = (dispatch) => {
       updateUserDetails,
       getUserDetail,
       change_login_status,
+      getTrainerDetail
     },
     dispatch
   );
