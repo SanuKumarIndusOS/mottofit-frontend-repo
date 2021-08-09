@@ -14,6 +14,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Toast } from "service/toast";
 
+
 function TrainerCardDashboard(props) {
   const [isValidationError, setValidationError] = useState(false);
   // const history = useHistory();
@@ -266,6 +267,7 @@ function TrainerCardDashboard(props) {
       <div className="card_inner">
         <div className="pro_pic_center">
           <div className="item1_card">
+           
             {image ? (
               <div className="combin_profile">
                 <button
@@ -401,9 +403,8 @@ function TrainerCardDashboard(props) {
                     ],
                   });
                 } else {
-                  const index = trainerCardData.verticals.indexOf(
-                    "Strength & HIIT"
-                  );
+                  const index =
+                    trainerCardData.verticals.indexOf("Strength & HIIT");
                   if (index > -1) {
                     trainerCardData.verticals.splice(index, 1);
                   }
