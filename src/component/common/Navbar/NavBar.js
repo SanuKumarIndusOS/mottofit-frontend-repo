@@ -425,7 +425,7 @@ const NavBarFC = ({
                     <div
                       className="set_item"
                       onClick={() => {
-                        history.push("/users/dashboard/settings/profile");
+                        history.push("/trainers/dashboard/settings/profile");
                         setActiveMobMenu(false);
                       }}
                     >
