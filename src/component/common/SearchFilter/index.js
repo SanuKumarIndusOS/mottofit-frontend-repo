@@ -17,7 +17,7 @@ import { cyan } from "@material-ui/core/colors";
 
 import Calendar from "react-calendar";
 
-function SearchFilter({ trainerSearchFilters }) {
+function SearchFilter({ trainerSearchFilters, type }) {
   // Radio button style
   const CyanRadio = withStyles({
     root: {
@@ -47,6 +47,10 @@ function SearchFilter({ trainerSearchFilters }) {
     setIPCDropdown(false);
   };
 
+   useEffect(() => {
+    console.log(type);
+   }, [])
+
   useEffect(() => {
     setCalDropdown(false);
   }, [Calvalue]);
@@ -64,8 +68,13 @@ function SearchFilter({ trainerSearchFilters }) {
 
     trainerSearchFilters(payload);
 
-    history.push("trainer/find");
+   type=== "find"? getFilteredTrainer() : history.push("trainer/find");
   };
+
+  const getFilteredTrainer = () =>
+  {
+    console.log("dsdsds");
+  }
 
   return (
     <div className="wrapper">

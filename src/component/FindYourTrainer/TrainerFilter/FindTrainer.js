@@ -47,6 +47,7 @@ import { useHistory } from "react-router-dom";
 import { updateUserDetails } from "action/userAct";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
+import SearchFilter from "component/common/SearchFilter/index";
 
 const FindTrainerFC = ({
   trainerQueryData,
@@ -702,6 +703,10 @@ const FindTrainerFC = ({
       ) : (
         <div>
           {" "}
+          <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
+          <SearchFilter type="find"/>
+          </div>
+          
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
         </div>
