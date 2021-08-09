@@ -286,7 +286,7 @@ const NavBarFC = ({
                   <div
                     className="menu_li"
                     onClick={() => {
-                      history.push("/users/dashboard/notification");
+                      history.push("/trainers/dashboard/notification");
                       setActiveMobMenu(false);
                     }}
                   >
@@ -345,7 +345,122 @@ const NavBarFC = ({
               </div>
             </div>
           ) : (
-            <div>Trainer Menu</div>
+            <div className="mobile_profile_menu_items">
+              <div
+                className="pro_menu_container_left"
+                onClick={() => {
+                  setActiveMobMenu(false);
+                }}
+              ></div>
+
+              <div className="pro_menu_container_right">
+                <div className="pro_menu_header">
+                  <div className="mob_menu_user">
+                    <div className="mob_menu_user_pic">
+                      <UserAvatar {...userData} {...nameProps} />
+                    </div>
+                    <div className="mob_menu_user_name">
+                      {userData ? userData.firstName : ""}&nbsp;
+                      {userData ? userData.lastName : ""}
+                    </div>
+                  </div>
+                  <div
+                    className="mob_menu_close"
+                    onClick={() => {
+                      setActiveMobMenu(false);
+                    }}
+                  >
+                    x
+                  </div>
+                </div>
+                <div className="pro_menu_content">
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      history.push("/trainers/dashboard/session");
+                      setActiveMobMenu(false);
+                    }}
+                  >
+                    <img
+                      src="/static/media/Session Icon.4a000f79.svg"
+                      alt="icon"
+                    ></img>
+                    <div className="menu_li_text">MY SESSIONS</div>
+                  </div>
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      history.push("/trainers/dashboard/message/upcoming");
+                      setActiveMobMenu(false);
+                    }}
+                  >
+                    <img
+                      src="/static/media/Message Icon.9b7bba91.svg"
+                      alt="icon"
+                    ></img>
+                    <div className="menu_li_text"> MESSAGES </div>
+                  </div>
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      history.push("/trainers/dashboard/notification");
+                      setActiveMobMenu(false);
+                    }}
+                  >
+                    <img
+                      src="/static/media/Notifications Icon.132c5113.svg"
+                      alt="icon"
+                    ></img>
+
+                    <div className="menu_li_text"> NOTIFICATIONS </div>
+                  </div>
+                  <div className="menu_li">
+                    <img
+                      src="/static/media/Settings Icon.5ae0ca78.svg"
+                      alt="icon"
+                    />
+                    <div className="menu_li_text"> SETTINGS</div>
+                  </div>
+                  <div className="seetings_li">
+                    <div
+                      className="set_item"
+                      onClick={() => {
+                        history.push("/users/dashboard/settings/profile");
+                        setActiveMobMenu(false);
+                      }}
+                    >
+                      {" "}
+                      PROFILE{" "}
+                    </div>
+
+                    <div
+                      className="set_item"
+                      onClick={() => {
+                        history.push("/trainers/dashboard/settings/password");
+                        setActiveMobMenu(false);
+                      }}
+                    >
+                      {" "}
+                      CHANGE PASSWORD{" "}
+                    </div>
+                  </div>
+
+                  <div
+                    className="menu_li"
+                    onClick={() => {
+                      change_login_status({ loginStatus: false }).then(logout);
+                      //logout()
+                    }}
+                  >
+                    <img
+                      src="/static/media/Logout Icon.97acadbd.svg"
+                      alt="icon"
+                    />
+                    <div className="menu_li_text"> LOGOUT </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       ) : null}
