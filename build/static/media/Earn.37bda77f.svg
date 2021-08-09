@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="92.906" height="92.7" viewBox="0 0 92.906 92.7">
+  <g id="Group_10287" data-name="Group 10287" transform="translate(-641.132 -398.935)">
+    <text id="_" data-name="$" transform="translate(670 405)" fill="#c1c1c1" font-size="25" font-family="Montserrat-SemiBold, Montserrat" font-weight="600" opacity="0.25" style="mix-blend-mode: multiply;isolation: isolate"><tspan x="0" y="24">$</tspan></text>
+    <g id="Group_3904" data-name="Group 3904" transform="translate(518.238 300.435)" opacity="0.25" style="mix-blend-mode: multiply;isolation: isolate">
+      <g id="Group_2808" data-name="Group 2808" transform="translate(124.762 123.747)">
+        <path id="Path_7537" data-name="Path 7537" d="M143.819,167.662c-7.5,5.036-11.974,12.184-12.733,20.057V190.7c.2,7.841,4.268,14.491,12.308,20.347l-3.97,9.33a2.217,2.217,0,0,0,.2,2.085,2.444,2.444,0,0,0,1.985.992h8.834a2.419,2.419,0,0,0,2.084-1.191L155.7,217.1a42.593,42.593,0,0,0,14.491,2.382c5.856,0,9.132-.993,13.8-2.581l3.176,5.261a2.315,2.315,0,0,0,2.084,1.29h8.833a2.592,2.592,0,0,0,1.985-.992,2.216,2.216,0,0,0,.2-2.085l-4.168-9.628c3.275-2.481,6.154-4.566,8.238-7.94h5.558c1.29,0,2.184-1.291,2.481-1.688a.364.364,0,0,0,.1-.3c1.588-4.963,1.786-9.231.5-13.2a2.627,2.627,0,0,0-2.283-2.184h-3.275c-1.886-7.841-5.658-13.2-12.01-16.873a7.861,7.861,0,0,1,2.481-2.283c1.886-1.29,3.97-2.779,4.169-6.848a1.275,1.275,0,0,0-.4-.993,1.007,1.007,0,0,0-.993-.3,22.377,22.377,0,0,1-4.466,0c-3.97-.3-8.536-.6-13.5,4.169a.307.307,0,0,1-.2.1l-.3-.1c-.6-.2-1.092-.3-1.588-.5M126.421,172.83c-4.661,10.559,1.709,16.012,4.344,17.671l.127.079" transform="translate(-124.762 -157.997)" fill="none" stroke="#c1c1c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      </g>
+      <circle id="Ellipse_20" data-name="Ellipse 20" cx="20.216" cy="20.216" r="20.216" transform="translate(139.616 100.5)" fill="none" stroke="#c1c1c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <path id="Path_7551" data-name="Path 7551" d="M0,0H30.324" transform="translate(144.67 140.932)" fill="none" stroke="#c1c1c1" stroke-linecap="round" stroke-width="4"/>
+      <path id="Path_7539" data-name="Path 7539" d="M286.9,219a5.3,5.3,0,0,1-4.553,2.022,5.611,5.611,0,0,1-4.335-1.708" transform="translate(-91.291 -70.589)" fill="none" stroke="#c1c1c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

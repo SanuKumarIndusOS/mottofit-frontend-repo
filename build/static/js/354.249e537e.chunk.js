@@ -1,0 +1,1 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[354],{498:function(t,i,s){"use strict";s.r(i),i.default=s.p+"static/media/Training_active.ab622bf2.svg"}}]);
