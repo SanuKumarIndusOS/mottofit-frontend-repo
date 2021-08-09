@@ -18,12 +18,23 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { ErrorComponent } from "component/common/ErrorComponent";
 import validate from "service/validation";
+import AvatarEditor from "react-avatar-editor";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
 function TrainerCardNewClass(props) {
   //for Modal Operation
   const [open, setOpen] = useState(false);
   const openModal = () => {
     setOpen((prev) => !prev);
   };
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
+  const editorRef = useRef(null);
+  const [file, setFile] = useState(null);
+
   const [isValidationError, setValidationError] = useState(false);
   const history = useHistory();
   const [trainerCardData, setTrainerCardData] = useState({
@@ -170,6 +181,65 @@ function TrainerCardNewClass(props) {
       }
     });
   }, []);
+
+  const handleFileChange = (e) => {
+    window.URL = window.URL || window.webkitURL;
+    let url = window.URL.createObjectURL(e.target.files[0]);
+    // ReactDom.findDOMNode(this.refs.in).value = "";
+    // let state = this.state;
+    // state.img = url;
+    // state.cropperOpen = true;
+    // this.setState(state);
+
+    setFile(url);
+    toggle();
+  };
+
+  const handleCropSave = () => {
+    // console.log(editorRef);
+
+    let currentEditor = editorRef.current;
+
+    if (currentEditor) {
+      // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
+      // drawn on another canvas, or added to the DOM.
+      // If you want the image resized to the canvas size (also a HTMLCanvasElement)
+      const canvasScaled = currentEditor.getImageScaledToCanvas();
+
+      const tempURL = canvasScaled.toDataURL();
+
+      setImage(tempURL);
+
+      toggle();
+
+      canvasScaled.toBlob((data) => {
+        let profile_pic = new File(
+          [data],
+          `${trainerCardData.firstName || "First"}_${
+            trainerCardData.lastName || "Last"
+          }.jpg`
+        );
+
+        if (profile_pic) {
+          const fd = new FormData();
+
+          fd.append("profilePicture", profile_pic);
+          props.fileUpload(fd).then((data) => {
+            setImage(data.urlPath);
+            // Toast({ type: "success", message: "Profile picture updated." });
+          });
+        }
+      }, `${trainerCardData.firstName || "First"}_${trainerCardData.lastName || "Last"}.jpg`);
+    }
+  };
+
+  const handleCancel = () => {
+    // console.log();
+
+    fileInputRef.current.value = "";
+
+    toggle();
+  };
 
   const covertToValid = (value) => {
     return value === null || value === undefined ? "" : parseInt(value) || "";
@@ -445,7 +515,7 @@ function TrainerCardNewClass(props) {
               ref={fileInputRef}
               accept="image/*"
               style={{ display: "none" }}
-              onChange={(e) => handleProfileUpload(e)}
+              onChange={(e) => handleFileChange(e)}
             />
             <h5>Upload your profile picture, hotshot!</h5>
           </div>
@@ -613,8 +683,8 @@ function TrainerCardNewClass(props) {
             sessions (2-4 people) should provide savings to each client in
             comparison to a 1 on 1 individual session. The pricing for a 5-15
             person group class is a flat rate that will be split evenly amongst
-            each client.As a reminder, Motto takes 15% for each session that you’re booked for.
-
+            each client.As a reminder, Motto takes 15% for each session that
+            you’re booked for.
           </p>
         </div>
         <div>
@@ -963,6 +1033,31 @@ function TrainerCardNewClass(props) {
             </div>
           </Accordion>
         </div>
+        <Modal isOpen={modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>
+            Choose your Trainer Card size
+          </ModalHeader>
+          <ModalBody>
+            <AvatarEditor
+              ref={editorRef}
+              image={file}
+              width={308}
+              height={200}
+              borderRadius={0}
+              color={[255, 255, 255, 0.6]} // RGBA
+              scale={1.2}
+              rotate={0}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={handleCropSave}>
+              Save
+            </Button>{" "}
+            <Button color="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
         <div className="error_span">
           {isValidationError ? (
             <span>Please enter any one individual charge price </span>
