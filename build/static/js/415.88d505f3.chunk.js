@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[415],{702:function(t,s,o){"use strict";o.r(s),s.default=o.p+"static/media/dropdown.css.a0226a1f.map"}}]);
