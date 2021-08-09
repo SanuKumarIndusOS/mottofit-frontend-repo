@@ -703,9 +703,9 @@ const FindTrainerFC = ({
       ) : (
         <div>
           {" "}
-          <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
+          {/* <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
           <SearchFilter type="find"/>
-          </div>
+          </div> */}
           
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
