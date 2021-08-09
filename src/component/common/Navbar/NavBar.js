@@ -22,6 +22,7 @@ import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { UserAvatar } from "component/common/UserAvatar";
 import { change_login_status } from "action/NotificationAct";
+import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
 
 const NavBarFC = ({
   toggle,
@@ -374,6 +375,19 @@ const NavBarFC = ({
                   </div>
                 </div>
                 <div className="pro_menu_content">
+                <div
+                    className="menu_li"
+                    onClick={() => {
+                      history.push("/trainers/dashboard/schedule");
+                      setActiveMobMenu(false);
+                    }}
+                  >
+                    <img
+                      src={SheduleIcon}
+                      alt="icon"
+                    ></img>
+                    <div className="menu_li_text">MY SCHEDULE</div>
+                  </div>
                   <div
                     className="menu_li"
                     onClick={() => {
