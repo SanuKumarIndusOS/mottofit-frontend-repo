@@ -13,9 +13,15 @@ import ProfileAdd from "../../../../assets/files/SVG/Picture Icon.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Toast } from "service/toast";
+import AvatarEditor from "react-avatar-editor";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 function TrainerCardDashboard(props) {
   const [isValidationError, setValidationError] = useState(false);
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
   // const history = useHistory();
   const [trainerCardData, setTrainerCardData] = useState({
     firstName: "",
@@ -53,6 +59,10 @@ function TrainerCardDashboard(props) {
 
   const [image, setImage] = useState();
   const fileInputRef = useRef();
+  const editorRef = useRef(null);
+  const profileImgRef = useRef(null);
+  const [file, setFile] = useState(null);
+  const [tempImg, setTempImg] = useState();
 
   useEffect(() => {
     props.trainerDetail().then((res) => {
@@ -243,14 +253,16 @@ function TrainerCardDashboard(props) {
   };
   const handleProfileUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const fd = new FormData();
 
-      fd.append("profilePicture", file);
-      props.fileUpload(fd).then((data) => {
-        setImage(data.urlPath);
-      });
-    }
+    toggle();
+    // if (file) {
+    //   const fd = new FormData();
+
+    //   fd.append("profilePicture", file);
+    //   props.fileUpload(fd).then((data) => {
+    //     setImage(data.urlPath);
+    //   });
+    // }
   };
 
   const blockWheelBehaviour = (e) => {
@@ -261,10 +273,98 @@ function TrainerCardDashboard(props) {
     return value === null || value === undefined ? "" : parseInt(value) || "";
   };
 
+  const getRoundedCanvas = (sourceCanvas) => {
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
+    var width = sourceCanvas.width;
+    var height = sourceCanvas.height;
+
+    let image = new Image();
+    image.crossOrigin = "anonymous";
+    image.src = sourceCanvas;
+
+    canvas.width = width;
+    canvas.height = height;
+    context.imageSmoothingEnabled = true;
+    context.drawImage(image, 0, 0, width, height);
+    context.globalCompositeOperation = "destination-in";
+    context.beginPath();
+    //  context.arc(
+    //    width / 2,
+    //    height / 2,
+    //    Math.min(width, height) / 2,
+    //    0,
+    //    2 * Math.PI,
+    //    true
+    //  );
+    //  context.fill();
+    return canvas;
+  };
+
+  const handleFileChange = (e) => {
+    window.URL = window.URL || window.webkitURL;
+    let url = window.URL.createObjectURL(e.target.files[0]);
+    // ReactDom.findDOMNode(this.refs.in).value = "";
+    // let state = this.state;
+    // state.img = url;
+    // state.cropperOpen = true;
+    // this.setState(state);
+
+    setFile(url);
+    toggle();
+  };
+
+  const handleCancel = () => {
+    // console.log();
+
+    fileInputRef.current.value = "";
+
+    toggle();
+  };
+
+  const handleCropSave = () => {
+    // console.log(editorRef);
+
+    let currentEditor = editorRef.current;
+
+    if (currentEditor) {
+      // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
+      // drawn on another canvas, or added to the DOM.
+      // If you want the image resized to the canvas size (also a HTMLCanvasElement)
+      const canvasScaled = currentEditor.getImageScaledToCanvas();
+
+      const tempURL = canvasScaled.toDataURL();
+
+      setImage(tempURL);
+
+      toggle();
+
+      canvasScaled.toBlob((data) => {
+        let profile_pic = new File(
+          [data],
+          `${trainerCardData.firstName || "First"}_${
+            trainerCardData.lastName || "Last"
+          }.jpg`
+        );
+
+        if (profile_pic) {
+          const fd = new FormData();
+
+          fd.append("profilePicture", profile_pic);
+          props.fileUpload(fd).then((data) => {
+            setImage(data.urlPath);
+            // Toast({ type: "success", message: "Profile picture updated." });
+          });
+        }
+      }, `${trainerCardData.firstName || "First"}_${trainerCardData.lastName || "Last"}.jpg`);
+    }
+  };
+
   return (
     <div className="container">
       <div className="card_inner">
         <div className="pro_pic_center">
+          <div></div>
           <div className="item1_card">
             {image ? (
               <div className="combin_profile">
@@ -343,7 +443,7 @@ function TrainerCardDashboard(props) {
               ref={fileInputRef}
               accept="image/*"
               style={{ display: "none" }}
-              onChange={(e) => handleProfileUpload(e)}
+              onChange={(e) => handleFileChange(e)}
             />
             <h5>Upload your profile picture, hotshot!</h5>
           </div>
@@ -873,6 +973,32 @@ function TrainerCardDashboard(props) {
             Save Changes <ArrowHoverBlacked />
           </button>
         </div>
+
+        <Modal isOpen={modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>
+            Choose your Trainer Card size
+          </ModalHeader>
+          <ModalBody>
+            <AvatarEditor
+              ref={editorRef}
+              image={file}
+              width={308}
+              height={200}
+              borderRadius={0}
+              color={[255, 255, 255, 0.6]} // RGBA
+              scale={1.2}
+              rotate={0}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={handleCropSave}>
+              Save
+            </Button>{" "}
+            <Button color="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
       </div>
     </div>
   );
