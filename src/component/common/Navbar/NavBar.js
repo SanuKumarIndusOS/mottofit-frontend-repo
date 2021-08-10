@@ -465,6 +465,26 @@ const NavBarFC = ({
                    
                       MY TRAINER CARD
                     </div>
+                    <div
+                      className="set_item"
+                      onClick={() => {
+                        history.push("/trainers/dashboard/settings/payment-history");
+                        setActiveMobMenu(false);
+                      }}
+                    >
+                   
+                     SECURITY AND PAYMENT INFO
+                    </div>
+                    <div
+                      className="set_item"
+                      onClick={() => {
+                        history.push("/trainers/dashboard/earnings");
+                        setActiveMobMenu(false);
+                      }}
+                    >
+                   
+                      EARNING HISTORY
+                    </div>
 
                     <div
                       className="set_item"

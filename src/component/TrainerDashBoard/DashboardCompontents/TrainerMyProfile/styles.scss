@@ -9,6 +9,9 @@
     .tp_wrapper {
       margin: 0 auto;
       width: 100%;
+      @media only screen and (max-width: 900px) {
+        margin-top: 100px;
+       }
 
       .tp_header {
         margin-bottom: 2em;
@@ -244,6 +247,9 @@
             word-wrap: normal;
             grid-column-gap: 40px;
             height: auto;
+            @media only screen and (max-width: 900px) {
+             display: block;
+            }
             .setup_item {
               margin: 1em 0 2em 0;
               .inputs_platform {

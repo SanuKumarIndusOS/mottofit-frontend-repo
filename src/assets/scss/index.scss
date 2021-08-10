@@ -340,10 +340,17 @@ select {
   align-items: center;
   justify-content: center;
   margin: 3em 0 2em 0;
+  @media only screen and (max-width: 900px) {
+    margin-left: 2rem;
+  }
+
   input {
     padding: 1em;
     height: 20px;
     background-color: rgb(83, 191, 210);
+    @media only screen and (max-width: 900px) {
+      width: 50px;
+    }
   }
   label {
     display: flex;
@@ -357,6 +364,9 @@ select {
     font-weight: 500;
     line-height: 42px;
     font-family: "Montserrat", sans-serif;
+    @media only screen and (max-width: 900px) {
+      display: block;
+    }
 
     a {
       color: rgb(83, 191, 210);
@@ -695,13 +705,11 @@ select {
   position: relative;
 }
 
-.react-calendar
-{
+.react-calendar {
   border: none !important;
 }
 
-.react-calendar__tile--now
-{
+.react-calendar__tile--now {
   background: #d3d2d2 !important;
   border-radius: 100px;
 }
@@ -717,7 +725,6 @@ select {
 
 .react-calendar__month-view__weekdays__weekday {
   color: #898989 !important;
- 
 
   abbr {
     text-decoration: none !important;
@@ -730,7 +737,7 @@ select {
 }
 
 .react-calendar__month-view__days {
-    background-color: #fff !important;
+  background-color: #fff !important;
   button {
     border: none !important;
     height: 50px !important;
@@ -739,11 +746,9 @@ select {
 }
 
 .react-calendar__month-view__days__day--weekend {
-  color: unset !important 
+  color: unset !important;
 }
 
-.react-calendar button:enabled:hover
-{
+.react-calendar button:enabled:hover {
   border-radius: 100px;
 }
-
