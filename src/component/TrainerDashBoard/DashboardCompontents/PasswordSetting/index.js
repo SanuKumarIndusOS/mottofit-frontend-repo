@@ -10,6 +10,7 @@ import validate from "service/validation";
 import { ErrorComponent } from "component/common/ErrorComponent";
 import { AuthApi } from "service/apiVariables";
 import { Toast } from "service/toast";
+import { logout } from "service/utilities";
 const PasswordSettingClass = (props) => {
   // Password show or hide
   const [passwordShown, setPasswordShown] = useState(false);
@@ -47,7 +48,15 @@ const PasswordSettingClass = (props) => {
     props
       .changePasswordAct(body, currentApi)
       .then(() => {
-        history.push("/trainers/dashboard/schedule");
+        // history.push("/trainers/dashboard/schedule");
+        Toast({
+          type: "success",
+          message: "Password change success. Please log back in",
+        });
+
+        setTimeout(() => {
+          logout();
+        }, 2000);
       })
       .catch((err) =>
         Toast({ type: "error", message: err.message || "Error" })
