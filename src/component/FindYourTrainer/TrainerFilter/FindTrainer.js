@@ -88,6 +88,13 @@ const FindTrainerFC = ({
 
   const [showMenu, setshowMenu] = useState(false);
 
+  const search_filter_action = () => {
+    searchBestMatch(trainerSearchFilterData).then((data) => {
+      console.log(data.list);
+      setTempBestMatch(data.list);
+    });
+  };
+
   const search_action_mob = () => {
     let payload = {
       query: {
@@ -706,12 +713,12 @@ const FindTrainerFC = ({
         </div>
       ) : (
         <div>
-          {/* <div
+          <div
             style={{ display: "flex", width: "100%", justifyContent: "center" }}
           >
-            <SearchFilter type="find" />
+            <SearchFilter type="find" searchAction={search_filter_action} />
           </div>
-          <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} /> */}
+          <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
         </div>
