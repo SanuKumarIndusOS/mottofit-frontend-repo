@@ -383,9 +383,9 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
             </div>
           </div>
         </div>
-        {/* <div className="filter">
-          <SearchFilter />
-        </div> */}
+        <div className="filter">
+          <SearchFilter activeQuery={{}}/>
+        </div>
 
         <div className="mobile-search">
           <div

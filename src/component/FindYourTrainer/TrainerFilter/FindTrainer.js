@@ -30,7 +30,11 @@ import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateTrainerDetails, searchBestMatch } from "action/trainerAct";
+import {
+  updateTrainerDetails,
+  searchBestMatch,
+  trainerSearchFilters,
+} from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "service/toast";
 
@@ -88,8 +92,9 @@ const FindTrainerFC = ({
 
   const [showMenu, setshowMenu] = useState(false);
 
-  const search_filter_action = () => {
-    searchBestMatch(trainerSearchFilterData).then((data) => {
+  const search_filter_action = (payload) => {
+    console.log("mi2", payload, trainerSearchFilterData);
+    searchBestMatch(payload).then((data) => {
       console.log(data.list);
       setTempBestMatch(data.list);
     });
@@ -157,8 +162,7 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
-    console.log(trainerSearchFilterData, "ppppppp");
-
+   
     searchBestMatch(trainerSearchFilterData).then((data) => {
       console.log(data.list);
       setTempBestMatch(data.list);
@@ -716,9 +720,16 @@ const FindTrainerFC = ({
           <div
             style={{ display: "flex", width: "100%", justifyContent: "center" }}
           >
-            <SearchFilter type="find" searchAction={search_filter_action} />
+            <SearchFilter
+              type="find"
+              searchAction={search_filter_action}
+              activeQuery={trainerSearchFilterData}
+            />
           </div>
+          New
           <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+
+          Old
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
         </div>

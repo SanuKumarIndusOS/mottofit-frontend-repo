@@ -17,7 +17,12 @@ import { cyan } from "@material-ui/core/colors";
 
 import Calendar from "react-calendar";
 
-function SearchFilter({ trainerSearchFilters, searchAction, type }) {
+function SearchFilter({
+  trainerSearchFilters,
+  searchAction,
+  type,
+  activeQuery,
+}) {
   // Radio button style
   const CyanRadio = withStyles({
     root: {
@@ -47,10 +52,23 @@ function SearchFilter({ trainerSearchFilters, searchAction, type }) {
     setIPCDropdown(false);
   };
 
-   useEffect(() => {
-     
+  useEffect(() => {
     console.log(type);
-   }, [])
+
+    console.log(activeQuery);
+
+    if (Object.keys(activeQuery).length !== 0) {
+      onChangeCal(activeQuery.date);
+      setLocation(activeQuery.location);
+      if (activeQuery.city !== undefined) {
+        setIPCValue(activeQuery.city);
+        setIPCDropdown(false);
+      }
+      
+      setVerticalVal(activeQuery.label.trainingType);
+      setAvailabilityVal(activeQuery.label.availability);
+    }
+  }, []);
 
   useEffect(() => {
     setCalDropdown(false);
@@ -59,23 +77,35 @@ function SearchFilter({ trainerSearchFilters, searchAction, type }) {
   const applyFilters = () => {
     let payload = {
       location: Location,
-      city: IPCvalue,
-      trainingType: VerticalVal.value === ""? JSON.stringify([]) : encodeURIComponent(JSON.stringify([VerticalVal.value])),
-      date:  moment(Calvalue).format("YYYY-MM-DD"),
-      availability: AvailabilityVal.value === ""?  JSON.stringify([]):  JSON.stringify([AvailabilityVal.value]),
+      city: IPCvalue || "",
+      trainingType:
+        VerticalVal.value === ""
+          ? JSON.stringify([])
+          : encodeURIComponent(JSON.stringify([VerticalVal.value])),
+      date: moment(Calvalue).format("YYYY-MM-DD"),
+      availability:
+        AvailabilityVal.value === ""
+          ? JSON.stringify([])
+          : JSON.stringify([AvailabilityVal.value]),
+      label: {
+        availability: AvailabilityVal,
+        trainingType: VerticalVal,
+      },
     };
 
     console.log(payload);
 
     trainerSearchFilters(payload);
 
-   type=== "find"? getFilteredTrainer() : history.push("trainer/find");
+    type === "find"
+      ? getFilteredTrainer(payload)
+      : history.push("trainer/find");
   };
 
-  const getFilteredTrainer = () =>
-  {
-     searchAction(); 
-  }
+  const getFilteredTrainer = (payload) => {
+    console.log("mihit");
+    searchAction(payload);
+  };
 
   return (
     <div className="wrapper">
@@ -201,7 +231,7 @@ function SearchFilter({ trainerSearchFilters, searchAction, type }) {
             <div className="option_icon">&#10094;</div>
           </div>
           {CalDropdown ? (
-            <div className="calendar_dropdown" >
+            <div className="calendar_dropdown">
               <Calendar
                 onChange={onChangeCal}
                 value={Calvalue}
@@ -368,7 +398,6 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       trainerSearchFilters,
-      
     },
     dispatch
   );
