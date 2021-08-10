@@ -93,10 +93,16 @@ const FindTrainerFC = ({
   const [showMenu, setshowMenu] = useState(false);
 
   const search_filter_action = (payload) => {
-    console.log("mi2", payload, trainerSearchFilterData);
-    searchBestMatch(payload).then((data) => {
+   // console.log("mi2", payload, trainerSearchFilterData);
+   
+   searchBestMatch(payload, "match").then((data) => {
       console.log(data.list);
       setTempBestMatch(data.list);
+    });
+
+    searchBestMatch(payload, "unmatch").then((data) => {
+      console.log(data.list);
+      setTempOtherMatch(data.list);
     });
   };
 
@@ -126,6 +132,7 @@ const FindTrainerFC = ({
 
   //DESKTOP
   const [tempBestMatch, setTempBestMatch] = useState([]);
+  const [tempOtherMatch, setTempOtherMatch] = useState([]);
 
   const [bestMatchData, setbestMatchData] = useState([]);
   const [bestOthersData, setbestOthersData] = useState([]);
@@ -163,9 +170,14 @@ const FindTrainerFC = ({
 
   useEffect(() => {
    
-    searchBestMatch(trainerSearchFilterData).then((data) => {
+    searchBestMatch(trainerSearchFilterData, "match").then((data) => {
       console.log(data.list);
       setTempBestMatch(data.list);
+    });
+
+    searchBestMatch(trainerSearchFilterData, "unmatch").then((data) => {
+      console.log(data.list);
+      setTempOtherMatch(data.list);
     });
 
     window.scrollTo(0, 0);
@@ -726,10 +738,11 @@ const FindTrainerFC = ({
               activeQuery={trainerSearchFilterData}
             />
           </div>
-          New
+         <h1>New</h1> 
           <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+          <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
 
-          Old
+          <h1>OLD</h1> 
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
         </div>

@@ -21,7 +21,7 @@ export const trainerSearchFilters = (payload) => (dispatch) => {
   });
 };
 
-export const searchBestMatch = (payload) => (
+export const searchBestMatch = (payload, type) => (
   dispatch,
   getState,
   { api }
@@ -29,7 +29,9 @@ export const searchBestMatch = (payload) => (
   
   return new Promise((resolve, reject) => {
   //  console.log(payload);
-     TrainerApi.searchBestMatch.query = payload
+     TrainerApi.searchBestMatch.query = payload;
+     TrainerApi.searchBestMatch.key = type;
+
     api({ ...TrainerApi.searchBestMatch })
       .then(({ data }) => {
         resolve(data);
