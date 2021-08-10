@@ -242,7 +242,7 @@ const TrainerMessageClass = ({
     } else {
       tab !== tempType &&
         history.push(
-          `/${isUser ? "user" : "trainers"}/dashboard/message/${tab}`
+          `/${isUser ? "users" : "trainers"}/dashboard/message/${tab}`
         );
     }
 

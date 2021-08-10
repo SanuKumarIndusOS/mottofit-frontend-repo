@@ -13,6 +13,10 @@
   display: flex;
   justify-content: center;
 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
   .cntr_cotainer {
     display: flex;
     justify-content: center;
@@ -20,9 +24,9 @@
     width: 100%;
     align-items: center;
 
-    .filter{
-      //width: 70%;
-    }
+    // .filter{
+    //   //width: 70%;
+    // }
 
     .mobile-search {
       display: none;

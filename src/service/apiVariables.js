@@ -54,6 +54,29 @@ export const AuthApi = {
 };
 
 export const TrainerApi = {
+  searchBestMatch: {
+    url: "availableTrainer",
+    method: "get",
+    baseURL: "search",
+    page: 1,
+    limit: 9,
+    key: "",
+    query: {
+      location: null,
+      date: null,
+      availability: null,
+      trainingType: null,
+      city: null,
+    },
+    get api() {
+
+      return(this.url
+        +
+         `?location=${this.query.location}&trainingType=["${this.query.trainingType}"]&date=["${this.query.date}","${this.query.date}"]&availability=${this.query.availability}` +
+         `&timeZone=America/New_York&city="${this.query.city || ""}"&page=${this.page}&limit=${this.limit}&listType="match"`)
+      
+    },
+  },
   trainerAvailableApi: {
     url: "availableTrainer",
     method: "get",
@@ -312,17 +335,6 @@ export const TrainerApi = {
     },
   },
 
-  homeSearchBestMatch: {
-    url: "/v2/availableTrainer?",
-    method: "get",
-    baseURL: "baseUrl",
-    page: 1,
-    limit: 9,
-    key: "",
-    get api() {
-      return `${this.url}page=1&limit=10&listType=unmatch`;
-    },
-  },
   createDirectAdminMessage: {
     url: "admin/message",
     method: "post",

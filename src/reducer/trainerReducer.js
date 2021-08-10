@@ -9,7 +9,8 @@ const initialState = {
   },
   details: {},
   data: {},
-  key:{}
+  key:{},
+  searchFilterParams:{}
 };
 
 export default (state = Object.assign({}, initialState), { type, payload }) => {
@@ -19,10 +20,10 @@ export default (state = Object.assign({}, initialState), { type, payload }) => {
         ...state,
         ...payload,
       };
-    case TrainerActionType.searchKey:
+    case TrainerActionType.trainerSearchFilters:
       return {
         ...state,
-         key: payload,
+        searchFilterParams: payload,
       };
 
     default:

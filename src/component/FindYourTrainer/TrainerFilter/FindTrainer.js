@@ -30,7 +30,7 @@ import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateTrainerDetails } from "action/trainerAct";
+import { updateTrainerDetails, searchBestMatch } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "service/toast";
 
@@ -47,11 +47,15 @@ import { useHistory } from "react-router-dom";
 import { updateUserDetails } from "action/userAct";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
+import SearchFilter from "component/common/SearchFilter/index";
 
 const FindTrainerFC = ({
   trainerQueryData,
   updateTrainerDetails,
   updateUserDetails,
+  trainerSearchFilterData ,
+  searchBestMatch
+
 }) => {
   const CyanRadio = withStyles({
     root: {
@@ -145,6 +149,13 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
+      
+   
+  console.log(trainerSearchFilterData, "ppppppp");
+
+  searchBestMatch(trainerSearchFilterData)
+
+
     window.scrollTo(0, 0);
     //Mobile
 
@@ -694,7 +705,12 @@ const FindTrainerFC = ({
         </div>
       ) : (
         <div>
-          {" "}
+         
+          <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
+          <SearchFilter type="find"/>
+          </div>
+
+        
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
         </div>
@@ -751,6 +767,7 @@ function DropDownSVG() {
 
 const mapStateToProps = (state) => ({
   trainerQueryData: state.trainerReducer.query,
+  trainerSearchFilterData: state.trainerReducer.searchFilterParams,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -758,6 +775,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       updateTrainerDetails,
+      searchBestMatch
     },
     dispatch
   );

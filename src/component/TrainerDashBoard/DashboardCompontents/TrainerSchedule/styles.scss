@@ -29,14 +29,14 @@
     }
   }
   .schedule_wrapper {
-    width: 90%;
+    //width: 90%;
     height: auto;
     margin: 3em 4em;
     .eventCalender {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 500px;
+    //  height: 500px;
       h1 {
         text-align: center;
         letter-spacing: 0.2px;
@@ -60,7 +60,7 @@
     width: 100%;
     background-color: #fff;
     border-radius: 20px;
-    margin-top: 5em;
+    margin-bottom: 5em;
 
     .table_inner_trainer {
       display: flex;
@@ -69,9 +69,18 @@
       width: 100%;
       margin: 0.5em 0 2em 0;
       padding: 1.5em 1em 0 1em;
+
+      @media only screen and (max-width: 900px) {
+
+        flex-direction: column;
+      }
       .table_date {
         display: flex;
         align-items: center;
+
+        .dd-wrapper .dd-header{
+          width: unset !important;
+        }
       }
       .date_week {
         width: auto;
@@ -140,7 +149,7 @@
   grid-template-rows: auto;
   grid-column-gap: 20px;
   width: 100%;
-  margin: 2em 0 3em 0;
+  margin: 2em 0 10em 0;
   align-items: center;
   .items_slots {
     display: flex;
@@ -436,3 +445,5 @@ thead {
   cursor: pointer;
   font-size: 18px;
 }
+
+

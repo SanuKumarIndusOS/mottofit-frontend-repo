@@ -886,9 +886,9 @@ function TfcClass({
           {
             //Check if message failed
             editMode ? (
-              <div style={{ height: "100%", width: "960px" }}>{tableData}</div>
+              <div style={{ height: "100%" }}>{tableData}</div>
             ) : (
-              <div style={{ height: "100%", width: "960px" }}>{tableData2}</div>
+              <div style={{ height: "100%" }}>{tableData2}</div>
             )
           }
           <div className={`scheduler_button ${editMode ? "w-auto" : ""}`}>

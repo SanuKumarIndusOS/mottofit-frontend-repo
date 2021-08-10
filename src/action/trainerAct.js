@@ -13,6 +13,33 @@ export const updateTrainerDetails = (payload) => (dispatch) => {
   });
 };
 
+export const trainerSearchFilters = (payload) => (dispatch) => {
+  return new Promise((resolve) => {
+    dispatch({ type: TrainerActionType.trainerSearchFilters, payload });
+
+    resolve(true);
+  });
+};
+
+export const searchBestMatch = (payload) => (
+  dispatch,
+  getState,
+  { api }
+) => {
+  
+  return new Promise((resolve, reject) => {
+  //  console.log(payload);
+     TrainerApi.searchBestMatch.query = payload
+    api({ ...TrainerApi.searchBestMatch })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const getTrainerDetails = () => (dispatch, getState, { api }) => {
   return new Promise((resolve, reject) => {
     const { getTrainerApi } = TrainerApi;

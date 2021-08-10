@@ -584,7 +584,7 @@ const TrainerProfileClass = ({
                     <h6>
                       {trainerProfileData.myMotto
                         ? trainerProfileData.myMotto
-                        : "Not Added"}
+                        : null }
                     </h6>
                   </div>
                   <div className="profile_right_item2">
@@ -592,7 +592,7 @@ const TrainerProfileClass = ({
                     <p>
                       {trainerProfileData.trainingProcess
                         ? trainerProfileData.trainingProcess
-                        : "Not Added"}
+                        : null}
                     </p>
 
                     <div className="profile_images">
@@ -603,7 +603,7 @@ const TrainerProfileClass = ({
                       />
                     </div>
                   </div>
-                  <div className="profile_right_item3 mb-5 pb-5">
+                  {trainerCertificates.length > 0 ?    <div className="profile_right_item3 mb-5 pb-5">
                     <h2>Certifications</h2>
                     <div className="profile_item3_inner">
                       {trainerCertificates.length > 0 ? (
@@ -618,11 +618,11 @@ const TrainerProfileClass = ({
                             </div>
                           ))}
                         </>
-                      ) : (
-                        <p>Not Added</p>
+                      ) : ( null
+                        // <p>Not Added</p>
                       )}
                     </div>
-                  </div>
+                  </div> : null }
                   <div className="profile_right_item4">
                     <h2
                       style={{
@@ -657,7 +657,7 @@ const TrainerProfileClass = ({
                         onClick={handleRequestTrainer}
                         disabled={isLoading}
                       >
-                        {isLoading ? "Loading..." : "Request Slot"}
+                        {isLoading ? "Loading..." : `Dont See a Time you want? Request A Time with ${trainerProfileData.firstName}`}
                       </button>
                     </div>
                   </div>
@@ -853,21 +853,22 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
             </div>
           </div>
 
-          {images.length === 0 && <p>Images Not Added</p>}
+          {/* {images.length === 0 && <p>Images Not Added</p>} */}
+        
           {/* ) : (
                 "Image's Not Added" */}
           {/* )} */}
         </div>
         {/* ); })} */}
       </div>
-      {trainerProfileData &&
+      {/* {trainerProfileData &&
       trainerProfileData.images &&
       trainerProfileData.images[4] ? (
         <div className="image_more" onClick={() => handleViewImages()}>
           <h5>View More Images</h5>
           <img src={ArrowNext} ali="icon" />
         </div>
-      ) : null}
+      ) : null} */}
     </>
   );
 };
