@@ -16,11 +16,13 @@ import { Toast } from "service/toast";
 import AvatarEditor from "react-avatar-editor";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
+import Slider from "@material-ui/core/Slider";
 
 function TrainerCardDashboard(props) {
   const [isValidationError, setValidationError] = useState(false);
 
   const [modal, setModal] = useState(false);
+  const [sliderValue, setSliderValue] = useState(1);
 
   const toggle = () => setModal(!modal);
   // const history = useHistory();
@@ -367,7 +369,6 @@ function TrainerCardDashboard(props) {
         <div className="pro_pic_center">
           <div></div>
           <div className="item1_card">
-           
             {image ? (
               <div className="combin_profile">
                 <button
@@ -987,8 +988,17 @@ function TrainerCardDashboard(props) {
               height={200}
               borderRadius={0}
               color={[255, 255, 255, 0.6]} // RGBA
-              scale={1.2}
+              scale={sliderValue}
               rotate={0}
+            />
+            <Slider
+              value={sliderValue}
+              onChange={(event, newValue)=>{setSliderValue(newValue)}}
+              aria-labelledby="discrete-slider-small-steps"
+              step={0.1}
+              min={0.25}
+              valueLabelDisplay="auto"
+              max={3}
             />
           </ModalBody>
           <ModalFooter>

@@ -21,6 +21,8 @@ import validate from "service/validation";
 import AvatarEditor from "react-avatar-editor";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
+import Slider from "@material-ui/core/Slider";
+
 function TrainerCardNewClass(props) {
   //for Modal Operation
   const [open, setOpen] = useState(false);
@@ -29,6 +31,7 @@ function TrainerCardNewClass(props) {
   };
 
   const [modal, setModal] = useState(false);
+  const [sliderValue, setSliderValue] = useState(1);
 
   const toggle = () => setModal(!modal);
 
@@ -1045,8 +1048,17 @@ function TrainerCardNewClass(props) {
               height={200}
               borderRadius={0}
               color={[255, 255, 255, 0.6]} // RGBA
-              scale={1.2}
+              scale={sliderValue}
               rotate={0}
+            />
+             <Slider
+              value={sliderValue}
+              onChange={(event, newValue)=>{setSliderValue(newValue)}}
+              aria-labelledby="discrete-slider-small-steps"
+              step={0.1}
+              min={0.25}
+              valueLabelDisplay="auto"
+              max={3}
             />
           </ModalBody>
           <ModalFooter>
