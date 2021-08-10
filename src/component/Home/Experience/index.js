@@ -15,7 +15,11 @@ import { Link } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import BlueHoverButton from "../../common/BlueArrowButton";
 
-export default class Experience extends Component {
+import { connect } from "react-redux";
+import { trainerSearchFilters } from "action/trainerAct";
+import { bindActionCreators } from "redux";
+ 
+class Experience extends Component {
   render() {
     return (
       <div className="container">
@@ -166,3 +170,18 @@ const ExperienceParent = (props) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      trainerSearchFilters,
+    },
+    dispatch
+  );
+};
+
+const _Experience = connect(null, mapDispatchToProps)(Experience);
+
+export default _Experience;

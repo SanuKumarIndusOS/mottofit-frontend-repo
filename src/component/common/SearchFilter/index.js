@@ -59,9 +59,9 @@ function SearchFilter({ trainerSearchFilters,  type }) {
     let payload = {
       location: Location,
       city: IPCvalue,
-      trainingType: VerticalVal.value,
+      trainingType: VerticalVal.value === ""? JSON.stringify([]) : encodeURIComponent(JSON.stringify([VerticalVal.value])),
       date:  moment(Calvalue).format("YYYY-MM-DD"),
-      availability: AvailabilityVal.value,
+      availability: AvailabilityVal.value === ""?  JSON.stringify([]):  JSON.stringify([AvailabilityVal.value]),
     };
 
     console.log(payload);

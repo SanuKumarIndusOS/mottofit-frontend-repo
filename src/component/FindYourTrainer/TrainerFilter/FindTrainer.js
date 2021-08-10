@@ -53,9 +53,8 @@ const FindTrainerFC = ({
   trainerQueryData,
   updateTrainerDetails,
   updateUserDetails,
-  trainerSearchFilterData ,
-  searchBestMatch
-
+  trainerSearchFilterData,
+  searchBestMatch,
 }) => {
   const CyanRadio = withStyles({
     root: {
@@ -114,6 +113,8 @@ const FindTrainerFC = ({
   };
 
   //DESKTOP
+  const [tempBestMatch, setTempBestMatch] = useState([]);
+
   const [bestMatchData, setbestMatchData] = useState([]);
   const [bestOthersData, setbestOthersData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -149,12 +150,12 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
-      
-   
-  console.log(trainerSearchFilterData, "ppppppp");
+    console.log(trainerSearchFilterData, "ppppppp");
 
-  searchBestMatch(trainerSearchFilterData)
-
+    searchBestMatch(trainerSearchFilterData).then((data) => {
+      console.log(data.list);
+      setTempBestMatch(data.list);
+    });
 
     window.scrollTo(0, 0);
     //Mobile
@@ -705,12 +706,12 @@ const FindTrainerFC = ({
         </div>
       ) : (
         <div>
-         
-          <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
-          <SearchFilter type="find"/>
+          {/* <div
+            style={{ display: "flex", width: "100%", justifyContent: "center" }}
+          >
+            <SearchFilter type="find" />
           </div>
-
-        
+          <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} /> */}
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
         </div>
@@ -775,7 +776,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       updateTrainerDetails,
-      searchBestMatch
+      searchBestMatch,
     },
     dispatch
   );
