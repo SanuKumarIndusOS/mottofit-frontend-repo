@@ -11,6 +11,7 @@ export const GoogleLoginButton = ({
   return (
     <GoogleLogin
       clientId={clientId}
+      uxMode="redirect"
       render={(renderProps) => (
         <RenderComponent
           onClick={renderProps.onClick}
@@ -22,7 +23,7 @@ export const GoogleLoginButton = ({
       )}
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
-      // cookiePolicy={"single_host_origin"}
+      cookiePolicy={"single_host_origin"}
     />
   );
 };

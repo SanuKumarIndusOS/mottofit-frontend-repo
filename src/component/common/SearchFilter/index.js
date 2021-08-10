@@ -59,8 +59,8 @@ function SearchFilter({ trainerSearchFilters,  type }) {
     let payload = {
       location: Location,
       city: IPCvalue,
-      vertical: VerticalVal,
-      date: "",
+      trainingType: VerticalVal.value,
+      date:  moment(Calvalue).format("YYYY-MM-DD"),
       availability: AvailabilityVal,
     };
 
@@ -238,7 +238,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setVerticalVal({
                       ...VerticalVal,
                       label: "Boxing",
-                      value: "boxing",
+                      value: "Boxing",
                     });
                   }}
                 >
@@ -274,7 +274,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setVerticalVal({
                       ...VerticalVal,
                       label: "Strength",
-                      value: "Strength",
+                      value: "Strength & HIIT",
                     });
                   }}
                 >
@@ -326,8 +326,8 @@ function SearchFilter({ trainerSearchFilters,  type }) {
               <div className="city">
                 <FormControl component="fieldset">
                   <RadioGroup
-                    aria-label="gender"
-                    name="gender1"
+                    aria-label="city"
+                    name="city"
                     value={IPCvalue}
                     onChange={handleIPCChange}
                   >

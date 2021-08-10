@@ -27,7 +27,8 @@ export const searchBestMatch = (payload) => (
   { api }
 ) => {
   return new Promise((resolve, reject) => {
- 
+  //  console.log(payload);
+     TrainerApi.searchBestMatch.query = payload
     api({ ...TrainerApi.searchBestMatch })
       .then(({ data }) => {
         resolve(data);
