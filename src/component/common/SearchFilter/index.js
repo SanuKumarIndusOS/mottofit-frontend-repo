@@ -61,7 +61,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
       city: IPCvalue,
       trainingType: VerticalVal.value,
       date:  moment(Calvalue).format("YYYY-MM-DD"),
-      availability: AvailabilityVal,
+      availability: AvailabilityVal.value,
     };
 
     console.log(payload);
@@ -116,7 +116,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setAvailabilityVal({
                       ...AvailabilityVal,
                       label: "Early Bird",
-                      value: "",
+                      value: "EarlyBird",
                     });
                   }}
                 >
@@ -128,7 +128,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setAvailabilityVal({
                       ...AvailabilityVal,
                       label: "Rise & Shine",
-                      value: "",
+                      value: "RiseAndShine",
                     });
                   }}
                 >
@@ -140,7 +140,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setAvailabilityVal({
                       ...AvailabilityVal,
                       label: "Lunchtime",
-                      value: "",
+                      value: "MidDayBreak1",
                     });
                   }}
                 >
@@ -152,7 +152,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setAvailabilityVal({
                       ...AvailabilityVal,
                       label: "MID-DAY Break",
-                      value: "",
+                      value: "MidDayBreak2",
                     });
                   }}
                 >
@@ -164,7 +164,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setAvailabilityVal({
                       ...AvailabilityVal,
                       label: "Happy Hours",
-                      value: "",
+                      value: "HappyHours",
                     });
                   }}
                 >
@@ -176,7 +176,7 @@ function SearchFilter({ trainerSearchFilters,  type }) {
                     setAvailabilityVal({
                       ...AvailabilityVal,
                       label: "Never too late",
-                      value: "",
+                      value: "NeverTooLate",
                     });
                   }}
                 >
