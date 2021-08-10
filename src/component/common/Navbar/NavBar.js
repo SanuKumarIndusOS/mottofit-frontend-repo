@@ -452,8 +452,18 @@ const NavBarFC = ({
                         setActiveMobMenu(false);
                       }}
                     >
-                      {" "}
-                      PROFILE{" "}
+                   
+                      PROFILE
+                    </div>
+                    <div
+                      className="set_item"
+                      onClick={() => {
+                        history.push("/trainers/dashboard/settings/card");
+                        setActiveMobMenu(false);
+                      }}
+                    >
+                   
+                      MY TRAINER CARD
                     </div>
 
                     <div
