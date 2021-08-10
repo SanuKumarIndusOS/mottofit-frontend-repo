@@ -9,6 +9,7 @@ import AvailabilityIcon from "../../../../assets/files/TrainerDashboard/Message/
 import LocationIcon from "../../../../assets/files/TrainerDashboard/Message/Location Icon.svg";
 import BlueHoverButton from "../../../common/BlueArrowButton/index";
 import { trainerChannel, adminChannel } from "action/trainerAct";
+import { change_login_status } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { twilioApi } from "../../../../service/apiVariables";
@@ -28,6 +29,7 @@ import { InfiniteScrollComponent } from "component/common/Scrollbars";
 import { history } from "helpers";
 import { MessageComponent } from "../MessageComponent/MessageComponent";
 import { useParams } from "react-router-dom";
+import IdleTimer, { useIdleTimer } from "react-idle-timer/dist/modern";
 
 const TrainerMessageClass = ({
   trainerChannel,
@@ -48,6 +50,7 @@ const TrainerMessageClass = ({
   invitedSessions,
   unSubscribeAct,
   unSubscribeClientAct,
+  change_login_status
 }) => {
   const isUser = parseInt(localStorage.getItem("type")) === 3;
 
@@ -254,10 +257,37 @@ const TrainerMessageClass = ({
 
     getChannelDetails(tab);
   }
+  
+  const handleOnActive = (event) => {
+    console.log("user is active");
+    if (localStorage.getItem("token") !== null) {
+      change_login_status({ loginStatus: true });
+    }
+  };
+
+  const handleOnIdle = (event) => {
+    console.log("user is idle");
+
+    if (localStorage.getItem("token") !== null) {
+      change_login_status({ loginStatus: false });
+    }
+  };
+
+  let idleTimer = null;
 
   return (
     <>
       <div className="main_message_container">
+        <IdleTimer
+          ref={(ref) => {
+            idleTimer = ref;
+          }}
+          timeout={10000}
+          onActive={handleOnActive}
+          onIdle={handleOnIdle}
+          //onAction={handleOnAction}
+          debounce={250}
+        />
         <div className="message_outter_container">
           <h2>Messages</h2>
           <div className="message_inner">
@@ -402,6 +432,7 @@ const mapDispatchToProps = (dispatch) => {
       updateMessagingDetails,
       unSubscribeAct: unSubscribeFromChannel,
       unSubscribeClientAct: unSubscribeFromClient,
+      change_login_status
     },
     dispatch
   );
