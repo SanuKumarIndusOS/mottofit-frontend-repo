@@ -657,7 +657,7 @@ const TrainerProfileClass = ({
                         onClick={handleRequestTrainer}
                         disabled={isLoading}
                       >
-                        {isLoading ? "Loading..." : "Request Slot"}
+                        {isLoading ? "Loading..." : `Dont See a Time you want? Request A Time with ${trainerProfileData.firstName}`}
                       </button>
                     </div>
                   </div>

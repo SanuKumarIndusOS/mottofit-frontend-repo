@@ -706,6 +706,8 @@ const FindTrainerFC = ({
           {/* <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
           <SearchFilter type="find"/>
           </div> */}
+
+          {/* adasdasd */}
           
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
