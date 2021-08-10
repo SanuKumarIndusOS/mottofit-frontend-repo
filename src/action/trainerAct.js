@@ -21,6 +21,23 @@ export const trainerSearchFilters = (payload) => (dispatch) => {
   });
 };
 
+export const searchBestMatch = (payload) => (
+  dispatch,
+  getState,
+  { api }
+) => {
+  return new Promise((resolve, reject) => {
+ 
+    api({ ...TrainerApi.searchBestMatch })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const getTrainerDetails = () => (dispatch, getState, { api }) => {
   return new Promise((resolve, reject) => {
     const { getTrainerApi } = TrainerApi;

@@ -30,7 +30,7 @@ import { TrainerApi } from "service/apiVariables";
 import { api } from "service/api";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateTrainerDetails } from "action/trainerAct";
+import { updateTrainerDetails, searchBestMatch } from "action/trainerAct";
 import { getFormatDate } from "service/helperFunctions";
 import { Toast } from "service/toast";
 
@@ -54,6 +54,7 @@ const FindTrainerFC = ({
   updateTrainerDetails,
   updateUserDetails,
   trainerSearchFilterData ,
+  searchBestMatch
 
 }) => {
   const CyanRadio = withStyles({
@@ -151,6 +152,8 @@ const FindTrainerFC = ({
       
    
   console.log(trainerSearchFilterData, "ppppppp");
+
+  searchBestMatch(trainerSearchFilterData)
 
 
     window.scrollTo(0, 0);
@@ -702,13 +705,12 @@ const FindTrainerFC = ({
         </div>
       ) : (
         <div>
-          {" "}
-          {/* <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
+         
+          <div style={{display:"flex", width:"100%", justifyContent:"center"}}>
           <SearchFilter type="find"/>
-          </div> */}
+          </div>
 
-          {/* adasdasd */}
-          
+        
           <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
           <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
         </div>
@@ -773,6 +775,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       updateTrainerDetails,
+      searchBestMatch
     },
     dispatch
   );

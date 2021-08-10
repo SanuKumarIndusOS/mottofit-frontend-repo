@@ -17,7 +17,7 @@ import { cyan } from "@material-ui/core/colors";
 
 import Calendar from "react-calendar";
 
-function SearchFilter({ trainerSearchFilters, type }) {
+function SearchFilter({ trainerSearchFilters,  type }) {
   // Radio button style
   const CyanRadio = withStyles({
     root: {
@@ -74,6 +74,7 @@ function SearchFilter({ trainerSearchFilters, type }) {
   const getFilteredTrainer = () =>
   {
     console.log("dsdsds");
+    
   }
 
   return (
@@ -367,6 +368,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       trainerSearchFilters,
+      
     },
     dispatch
   );
