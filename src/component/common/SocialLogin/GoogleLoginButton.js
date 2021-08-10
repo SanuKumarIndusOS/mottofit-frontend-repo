@@ -11,6 +11,7 @@ export const GoogleLoginButton = ({
   return (
     <GoogleLogin
       clientId={clientId}
+      // uxMode="redirect"
       render={(renderProps) => (
         <RenderComponent
           onClick={renderProps.onClick}

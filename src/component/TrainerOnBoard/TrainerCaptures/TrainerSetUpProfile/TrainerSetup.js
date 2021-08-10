@@ -121,7 +121,10 @@ function TrainerSetupClass(props) {
         neighborhood_list: res.servicableLocation
           ? res.servicableLocation[0]
           : "",
+        terms: res?.terms || false,
       };
+
+      if (res?.terms) setAgreed(true);
 
       // console.log(tempSetupData);
 
@@ -208,6 +211,7 @@ function TrainerSetupClass(props) {
       identity: trainerSetupData.governmentId,
       serviceableNeighbourHood: trainerSetupData.serviceableNeighbourHood,
       preferedTrainingMode: temppreferedTrainingMode,
+      terms: agreed,
     };
     const { updateTrainerAvailabilityApi } = TrainerApi;
     updateTrainerAvailabilityApi.body = payload;
@@ -619,6 +623,8 @@ function TrainerSetupClass(props) {
               id="agree"
               name="agree"
               onChange={handleAgreedCheck}
+              checked={agreed}
+              disabled={trainerSetupData?.terms}
             />
             <label>
               Check here to acknowledge that you have read and agree to the
