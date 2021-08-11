@@ -84,7 +84,7 @@ class Experience extends Component {
                       location: "virtual",
                       city: "",
                       trainingType: encodeURIComponent(
-                        JSON.stringify(["Strength & HIIT"])
+                        JSON.stringify(["Boxing"])
                       ),
                       date: moment(new Date()).format("YYYY-MM-DD"),
                       availability: JSON.stringify([]),
@@ -114,7 +114,7 @@ class Experience extends Component {
                       location: "virtual",
                       city: "",
                       trainingType: encodeURIComponent(
-                        JSON.stringify(["Strength & HIIT"])
+                        JSON.stringify(["Yoga"])
                       ),
                       date: moment(new Date()).format("YYYY-MM-DD"),
                       availability: JSON.stringify([]),
@@ -144,7 +144,7 @@ class Experience extends Component {
                       location: "virtual",
                       city: "",
                       trainingType: encodeURIComponent(
-                        JSON.stringify(["Strength & HIIT"])
+                        JSON.stringify(["Pilates"])
                       ),
                       date: moment(new Date()).format("YYYY-MM-DD"),
                       availability: JSON.stringify([]),
@@ -172,14 +172,60 @@ class Experience extends Component {
 
             <div className="image_container_mobile">
               <div className="row">
-                <div className="vertical">
+                <div
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Strength & HIIT"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Strength",
+                          value: "Strength & HIIT",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="vertical"
+                >
                   <img src={strength_img} alt="image" />
                   <div className="bottom_bar">
                     <div style={{ flex: "5" }}>STRENGTH</div>{" "}
                     <div style={{ flex: "1" }}>&#10141;</div>
                   </div>
                 </div>
-                <div className="vertical">
+                <div
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Boxing"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Boxing",
+                          value: "Boxing",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="vertical"
+                >
                   <img src={boxing_img} alt="image" />
                   <div className="bottom_bar">
                     <div style={{ flex: "5" }}>BOXING</div>{" "}
@@ -188,14 +234,60 @@ class Experience extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="vertical">
+                <div
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Yoga"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Yoga",
+                          value: "Yoga",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="vertical"
+                >
                   <img src={yoga_img} alt="image" />
                   <div className="bottom_bar">
                     <div style={{ flex: "5" }}>YOGA</div>{" "}
                     <div style={{ flex: "1" }}>&#10141;</div>
                   </div>
                 </div>
-                <div className="vertical">
+                <div
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Pilates"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Pilates",
+                          value: "Pilates",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="vertical"
+                >
                   <img src={pilates_img} alt="image" />
 
                   <div className="bottom_bar">
