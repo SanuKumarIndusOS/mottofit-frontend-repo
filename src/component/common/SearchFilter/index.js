@@ -58,7 +58,7 @@ function SearchFilter({
     console.log(activeQuery);
 
     if (Object.keys(activeQuery).length !== 0) {
-      onChangeCal(activeQuery.date);
+      onChangeCal(new Date(activeQuery.date));
       setLocation(activeQuery.location);
       if (activeQuery.city !== undefined) {
         setIPCValue(activeQuery.city);
@@ -77,7 +77,7 @@ function SearchFilter({
   const applyFilters = () => {
     let payload = {
       location: Location,
-      city: IPCvalue || "",
+      city: (Location === "inPerson")? IPCvalue || "" : "",
       trainingType:
         VerticalVal.value === ""
           ? JSON.stringify([])

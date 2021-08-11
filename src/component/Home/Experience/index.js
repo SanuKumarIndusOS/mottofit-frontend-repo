@@ -18,8 +18,19 @@ import BlueHoverButton from "../../common/BlueArrowButton";
 import { connect } from "react-redux";
 import { trainerSearchFilters } from "action/trainerAct";
 import { bindActionCreators } from "redux";
- 
+
 class Experience extends Component {
+  payload = {
+    location: "",
+    city: "",
+    trainingType: "",
+    date: new Date(),
+    availability: "",
+    label: {
+      trainingType: "",
+    },
+  };
+
   render() {
     return (
       <div className="container">
@@ -148,7 +159,10 @@ class Experience extends Component {
                 Find Your Best Match <BlueHoverButton />
               </Link>
 
-              <Link to="/mobiles/filter" className="btn find_your_trainer mobile_">
+              <Link
+                to="/mobiles/filter"
+                className="btn find_your_trainer mobile_"
+              >
                 Find Your Best Match <BlueHoverButton />
               </Link>
             </div>
