@@ -27,6 +27,7 @@ class Experience extends Component {
     date: new Date(),
     availability: "",
     label: {
+      availability:"",
       trainingType: "",
     },
   };

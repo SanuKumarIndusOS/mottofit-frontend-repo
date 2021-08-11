@@ -15,6 +15,8 @@ import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 
+import { Toast } from "service/toast";
+
 import Calendar from "react-calendar";
 
 function SearchFilter({
@@ -64,7 +66,7 @@ function SearchFilter({
         setIPCValue(activeQuery.city);
         setIPCDropdown(false);
       }
-      
+
       setVerticalVal(activeQuery.label.trainingType);
       setAvailabilityVal(activeQuery.label.availability);
     }
@@ -77,7 +79,7 @@ function SearchFilter({
   const applyFilters = () => {
     let payload = {
       location: Location,
-      city: (Location === "inPerson")? IPCvalue || "" : "",
+      city: Location === "inPerson" ? IPCvalue || "" : "",
       trainingType:
         VerticalVal.value === ""
           ? JSON.stringify([])
@@ -95,11 +97,15 @@ function SearchFilter({
 
     console.log(payload);
 
-    trainerSearchFilters(payload);
+    if (Location === "inPerson" && IPCvalue === "") {
+      Toast({ type: "error", message: "City is mandatory" });
+    } else {
+      trainerSearchFilters(payload);
 
-    type === "find"
-      ? getFilteredTrainer(payload)
-      : history.push("trainer/find");
+      type === "find"
+        ? getFilteredTrainer(payload)
+        : history.push("trainer/find");
+    }
   };
 
   const getFilteredTrainer = (payload) => {
@@ -263,7 +269,11 @@ function SearchFilter({
             <div className="filter_dropdown">
               <div className="dropdown_grid">
                 <div
-                  className="dropdown_item"
+                  className={
+                    VerticalVal.label === "Boxing"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setVerticalVal({
                       ...VerticalVal,
@@ -275,7 +285,11 @@ function SearchFilter({
                   Boxing
                 </div>
                 <div
-                  className="dropdown_item"
+                  className={
+                    VerticalVal.label === "Pilates"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setVerticalVal({
                       ...VerticalVal,
@@ -287,7 +301,11 @@ function SearchFilter({
                   Pilates
                 </div>
                 <div
-                  className="dropdown_item"
+                  className={
+                    VerticalVal.label === "Yoga"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setVerticalVal({
                       ...VerticalVal,
@@ -299,7 +317,11 @@ function SearchFilter({
                   Yoga
                 </div>
                 <div
-                  className="dropdown_item"
+                  className={
+                    VerticalVal.label === "Strength"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setVerticalVal({
                       ...VerticalVal,
