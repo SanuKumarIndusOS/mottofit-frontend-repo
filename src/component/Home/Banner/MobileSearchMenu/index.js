@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles.scss";
 
 import { connect } from "react-redux";
-import { updateTrainerDetails } from "action/trainerAct";
+import { updateTrainerDetails,trainerSearchFilters } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { Toast } from "service/toast";
 
@@ -18,7 +18,7 @@ import { cyan } from "@material-ui/core/colors";
 import arrowSign from "assets/files/SVG/Arrow Next.svg";
 import { useHistory } from "react-router-dom";
 
-const MobileSearchMenu = ({ updateTrainerDetails }) => {
+const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
   const CyanRadio = withStyles({
     root: {
       "&$checked": {
@@ -58,21 +58,33 @@ const MobileSearchMenu = ({ updateTrainerDetails }) => {
 
   const search_action_mob = () => {
     let payload = {
-      query: {
+      // query: {
         location: LocationVal,
         date: moment(Calvalue).format("YYYY-MM-DD"),
-        trainingType: { label: VerticalVal, value: VerticalVal },
-        availability: Avalvalue,
+        trainingType:
+        VerticalVal === ""
+          ? JSON.stringify([])
+          : encodeURIComponent(JSON.stringify([VerticalVal])),
+          availability:
+          Avalvalue === ""
+            ? JSON.stringify([])
+            : JSON.stringify([Avalvalue]),
         // inPerson: queryObject.inPerson,
         city: IPCvalue || "",
-      },
+        label: {
+          availability: { label: "", value: "" },
+          trainingType: { label: "", value: "" },
+        },
+        
+      // },
     };
     if (queryObject.location === "inPerson" && !payload.query.city) {
       //  setInPersonDD(true);
       return Toast({ type: "error", message: "City is mandatory" });
     }
     console.log(payload);
-    updateTrainerDetails(payload);
+    trainerSearchFilters(payload)
+    //updateTrainerDetails(payload);
     history.push("/trainer/find");
   };
 
@@ -340,6 +352,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       updateTrainerDetails,
+      trainerSearchFilters
     },
     dispatch
   );

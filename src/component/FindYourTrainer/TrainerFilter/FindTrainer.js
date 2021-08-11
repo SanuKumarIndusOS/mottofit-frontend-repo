@@ -56,7 +56,7 @@ import SearchFilter from "component/common/SearchFilter/index";
 const FindTrainerFC = ({
   trainerQueryData,
   updateTrainerDetails,
-  updateUserDetails,  
+  updateUserDetails,
   trainerSearchFilterData,
   searchBestMatch,
 }) => {
@@ -553,14 +553,7 @@ const FindTrainerFC = ({
   //   Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          justifyContent: "center",
-          marginTop: "100px",
-        }}
-      >
+      <div className="find_trainer">
         <SearchFilter
           type="find"
           searchAction={search_filter_action}
@@ -570,6 +563,7 @@ const FindTrainerFC = ({
 
       <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
       <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+      
     </>
     // <div
     //   id="find-trainer"
@@ -708,39 +702,39 @@ const FindTrainerFC = ({
     //       </div>
     //     </div>
     //   </div>
-    //   <div
-    //     className="mobile-find-wrapper"
-    //     onClick={() => {
-    //       // setshowMenu(!showMenu);
-    //       history.push("/mobiles/filter");
-    //     }}
-    //   >
-    //     <div className="cat">
-    //       {VerticalVal === "" ? (
-    //         queryObject?.vertical?.label === "" ? (
-    //           <div>All Verticals</div>
-    //         ) : (
-    //           queryObject?.vertical?.label
-    //         )
-    //       ) : (
-    //         VerticalVal
-    //       )}
-    //     </div>
-    //     <div className="date">
-    //       {Calvalue === new Date()
-    //         ? queryObject?.date
-    //         : moment(Calvalue).format("YYYY/MM/DD")}
-    //     </div>
-    //     <div
-    //       className="find-filters"
-    //       // onClick={() => {
-    //       //  // setshowMenu(!showMenu);
-    //       //  history.push("/mobiles/filter")
-    //       // }}
-    //     >
-    //       &#9776;
-    //     </div>
-    //   </div>
+      // <div
+      //   className="mobile-find-wrapper"
+      //   onClick={() => {
+      //     // setshowMenu(!showMenu);
+      //     history.push("/mobiles/filter");
+      //   }}
+      // >
+      //   <div className="cat">
+      //     {VerticalVal === "" ? (
+      //       queryObject?.vertical?.label === "" ? (
+      //         <div>All Verticals</div>
+      //       ) : (
+      //         queryObject?.vertical?.label
+      //       )
+      //     ) : (
+      //       VerticalVal
+      //     )}
+      //   </div>
+      //   <div className="date">
+      //     {Calvalue === new Date()
+      //       ? queryObject?.date
+      //       : moment(Calvalue).format("YYYY/MM/DD")}
+      //   </div>
+      //   <div
+      //     className="find-filters"
+      //     // onClick={() => {
+      //     //  // setshowMenu(!showMenu);
+      //     //  history.push("/mobiles/filter")
+      //     // }}
+      //   >
+      //     &#9776;
+      //   </div>
+      // </div>
     //   {matchLoad ? (
     //     <div className="load_parent" style={{ paddingBottom: "500px" }}>
     //       <div className="loaderss"></div>
