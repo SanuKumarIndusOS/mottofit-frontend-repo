@@ -91,7 +91,7 @@ const UserBookSessionFC = ({
 
     if (!tempTrainerData?.id) return history.push("/trainer/find");
 
-    if (tempTrainerData?.preferedTrainingMode.length === 1) {
+    if (tempTrainerData?.preferedTrainingMode?.length === 1) {
       setPreferedTrainingMode(tempTrainerData?.preferedTrainingMode[0]);
     } else {
       setPreferedTrainingMode(queryObject?.location);

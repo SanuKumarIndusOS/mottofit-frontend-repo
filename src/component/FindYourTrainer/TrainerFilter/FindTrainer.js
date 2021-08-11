@@ -93,9 +93,9 @@ const FindTrainerFC = ({
   const [showMenu, setshowMenu] = useState(false);
 
   const search_filter_action = (payload) => {
-   // console.log("mi2", payload, trainerSearchFilterData);
-   
-   searchBestMatch(payload, "match").then((data) => {
+    // console.log("mi2", payload, trainerSearchFilterData);
+
+    searchBestMatch(payload, "match").then((data) => {
       console.log(data.list);
       setTempBestMatch(data.list);
     });
@@ -169,7 +169,6 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
-   
     searchBestMatch(trainerSearchFilterData, "match").then((data) => {
       console.log(data.list);
       setTempBestMatch(data.list);
@@ -553,201 +552,214 @@ const FindTrainerFC = ({
   let selectedValue =
     Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
   return (
-    <div
-      id="find-trainer"
-      className="find-trainer"
-      onClick={() => {
-        //  console.log("findhit");
-
-        //Availability Dropdown
-        if (DropdownTrainerAvailabilityState) {
-          setDropdownTrainerAvailabilityState(
-            !DropdownTrainerAvailabilityState
-          );
-        }
-
-        //TrainingType DropDown
-        if (DropdownState) {
-          setDropdownState(!DropdownState);
-        }
-
-        //Inperson DropDown
-        if (InPersonDD) {
-          setInPersonDD(!InPersonDD);
-        }
-      }}
-    >
-      <div className="card container border-0">
-        <div className="card-wrapper">
-          <div className="item1">
-            <h3>Location</h3>
-            <div className="location">
-              <div className="card-item">
-                <div
-                  onClick={() => {
-                    SetLocation("Virtual");
-                    setInPersonDD(false);
-                  }}
-                  className="card-selection"
-                >
-                  {virtualMarkup}
-                </div>
-              </div>
-              <img src={Between} alt="icon" className="ml-2" />
-              <div
-                onClick={() => {
-                  SetLocation("In Person") && TriggerInPersonDropDown();
-                }}
-                className={`position-relative ${selectedValue ? "pt-2" : ""}`}
-              >
-                <h6
-                  className={`${
-                    selectedValue ? "in-person-option find-trainer" : ""
-                  } `}
-                >
-                  {inPersonMarkup}
-                  <span>{selectedValue}</span>
-                </h6>
-                <div
-                  className="inPerson-dd"
-                  // onClick={TriggerInPersonDropDown}
-                >
-                  {DropdownHomeInPerson}
-                </div>
-              </div>
-            </div>
-          </div>
-          <LineBetween />
-          <div className="item2">
-            <h3>Training Vertical</h3>
-            <div className="card-item" onClick={TriggerVerticalDropDown}>
-              <img src={Weight} alt="icon" />
-              <p>
-                {queryObject?.vertical?.label ||
-                  queryObject?.trainingType?.label ||
-                  "Select a Category"}
-              </p>
-            </div>
-            {Dropdown}
-          </div>
-          <LineBetween />
-
-          <div className="item3">
-            <h3>Schedule</h3>
-            <div className="card-item">
-              <img src={SheduleIcon} alt="icon" />
-              <DatePicker
-                onChange={(datee) => {
-                  setSelectedDate(datee);
-                  var date = new Date(datee);
-                  var year = date.getFullYear();
-                  var month = date.getMonth() + 1;
-                  var dt = date.getDate();
-
-                  if (dt < 10) {
-                    dt = "0" + dt;
-                  }
-                  if (month < 10) {
-                    month = "0" + month;
-                  }
-
-                  setqueryObject({
-                    ...queryObject,
-                    date: year + "-" + month + "-" + dt,
-                  });
-                }}
-                selected={selectedDate}
-                dateFormat="MM/dd/yyyy"
-                minDate={new Date()}
-                showYearDropdown
-                scrollableMonthYearDropdown
-              ></DatePicker>
-
-              <DropDownSVG onClick={onClickHandle} />
-            </div>
-          </div>
-          <LineBetween />
-
-          <div className="item4">
-            <h3>Availability</h3>
-            <div
-              className="card-item"
-              onClick={TriggerDropDownTrainerAvailability}
-            >
-              <img src={AvailabilityIcon} alt="icon" />
-              <p>
-                {queryObject?.availability?.label?.split("(")[0] ||
-                  "Select a Time"}
-              </p>
-            </div>
-            {DropdownAvailability}
-          </div>
-
-          <div className="item5">
-            <div className="circle_search" onClick={search_action}>
-              <BiSearch />
-            </div>
-          </div>
-        </div>
+    <>
+    <div style={{ display: "flex", width: "100%", justifyContent: "center", marginTop:"100px" }}>
+      <SearchFilter
+        type="find"
+        searchAction={search_filter_action}
+        activeQuery={trainerSearchFilterData}
+      />
       </div>
-      <div
-        className="mobile-find-wrapper"
-        onClick={() => {
-          // setshowMenu(!showMenu);
-          history.push("/mobiles/filter");
-        }}
-      >
-        <div className="cat">
-          {VerticalVal === "" ? (
-            queryObject?.vertical?.label === "" ? (
-              <div>All Verticals</div>
-            ) : (
-              queryObject?.vertical?.label
-            )
-          ) : (
-            VerticalVal
-          )}
-        </div>
-        <div className="date">
-          {Calvalue === new Date()
-            ? queryObject?.date
-            : moment(Calvalue).format("YYYY/MM/DD")}
-        </div>
-        <div
-          className="find-filters"
-          // onClick={() => {
-          //  // setshowMenu(!showMenu);
-          //  history.push("/mobiles/filter")
-          // }}
-        >
-          &#9776;
-        </div>
-      </div>
-      {matchLoad ? (
-        <div className="load_parent" style={{ paddingBottom: "500px" }}>
-          <div className="loaderss"></div>
-        </div>
-      ) : (
-        <div>
-          <div
-            style={{ display: "flex", width: "100%", justifyContent: "center" }}
-          >
-            <SearchFilter
-              type="find"
-              searchAction={search_filter_action}
-              activeQuery={trainerSearchFilterData}
-            />
-          </div>
-         <h1>New</h1> 
-          <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
-          <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
 
-          <h1>OLD</h1> 
-          <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
-          <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
-        </div>
-      )}
-    </div>
+      <h1>New</h1>
+      <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+      <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+      </>
+    // <div
+    //   id="find-trainer"
+    //   className="find-trainer"
+    //   onClick={() => {
+    //     //  console.log("findhit");
+
+    //     //Availability Dropdown
+    //     if (DropdownTrainerAvailabilityState) {
+    //       setDropdownTrainerAvailabilityState(
+    //         !DropdownTrainerAvailabilityState
+    //       );
+    //     }
+
+    //     //TrainingType DropDown
+    //     if (DropdownState) {
+    //       setDropdownState(!DropdownState);
+    //     }
+
+    //     //Inperson DropDown
+    //     if (InPersonDD) {
+    //       setInPersonDD(!InPersonDD);
+    //     }
+    //   }}
+    // >
+    //   <div className="card container border-0">
+    //     <div className="card-wrapper">
+    //       <div className="item1">
+    //         <h3>Location</h3>
+    //         <div className="location">
+    //           <div className="card-item">
+    //             <div
+    //               onClick={() => {
+    //                 SetLocation("Virtual");
+    //                 setInPersonDD(false);
+    //               }}
+    //               className="card-selection"
+    //             >
+    //               {virtualMarkup}
+    //             </div>
+    //           </div>
+    //           <img src={Between} alt="icon" className="ml-2" />
+    //           <div
+    //             onClick={() => {
+    //               SetLocation("In Person") && TriggerInPersonDropDown();
+    //             }}
+    //             className={`position-relative ${selectedValue ? "pt-2" : ""}`}
+    //           >
+    //             <h6
+    //               className={`${
+    //                 selectedValue ? "in-person-option find-trainer" : ""
+    //               } `}
+    //             >
+    //               {inPersonMarkup}
+    //               <span>{selectedValue}</span>
+    //             </h6>
+    //             <div
+    //               className="inPerson-dd"
+    //               // onClick={TriggerInPersonDropDown}
+    //             >
+    //               {DropdownHomeInPerson}
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //       <LineBetween />
+    //       <div className="item2">
+    //         <h3>Training Vertical</h3>
+    //         <div className="card-item" onClick={TriggerVerticalDropDown}>
+    //           <img src={Weight} alt="icon" />
+    //           <p>
+    //             {queryObject?.vertical?.label ||
+    //               queryObject?.trainingType?.label ||
+    //               "Select a Category"}
+    //           </p>
+    //         </div>
+    //         {Dropdown}
+    //       </div>
+    //       <LineBetween />
+
+    //       <div className="item3">
+    //         <h3>Schedule</h3>
+    //         <div className="card-item">
+    //           <img src={SheduleIcon} alt="icon" />
+    //           <DatePicker
+    //             onChange={(datee) => {
+    //               setSelectedDate(datee);
+    //               var date = new Date(datee);
+    //               var year = date.getFullYear();
+    //               var month = date.getMonth() + 1;
+    //               var dt = date.getDate();
+
+    //               if (dt < 10) {
+    //                 dt = "0" + dt;
+    //               }
+    //               if (month < 10) {
+    //                 month = "0" + month;
+    //               }
+
+    //               setqueryObject({
+    //                 ...queryObject,
+    //                 date: year + "-" + month + "-" + dt,
+    //               });
+    //             }}
+    //             selected={selectedDate}
+    //             dateFormat="MM/dd/yyyy"
+    //             minDate={new Date()}
+    //             showYearDropdown
+    //             scrollableMonthYearDropdown
+    //           ></DatePicker>
+
+    //           <DropDownSVG onClick={onClickHandle} />
+    //         </div>
+    //       </div>
+    //       <LineBetween />
+
+    //       <div className="item4">
+    //         <h3>Availability</h3>
+    //         <div
+    //           className="card-item"
+    //           onClick={TriggerDropDownTrainerAvailability}
+    //         >
+    //           <img src={AvailabilityIcon} alt="icon" />
+    //           <p>
+    //             {queryObject?.availability?.label?.split("(")[0] ||
+    //               "Select a Time"}
+    //           </p>
+    //         </div>
+    //         {DropdownAvailability}
+    //       </div>
+
+    //       <div className="item5">
+    //         <div className="circle_search" onClick={search_action}>
+    //           <BiSearch />
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div
+    //     className="mobile-find-wrapper"
+    //     onClick={() => {
+    //       // setshowMenu(!showMenu);
+    //       history.push("/mobiles/filter");
+    //     }}
+    //   >
+    //     <div className="cat">
+    //       {VerticalVal === "" ? (
+    //         queryObject?.vertical?.label === "" ? (
+    //           <div>All Verticals</div>
+    //         ) : (
+    //           queryObject?.vertical?.label
+    //         )
+    //       ) : (
+    //         VerticalVal
+    //       )}
+    //     </div>
+    //     <div className="date">
+    //       {Calvalue === new Date()
+    //         ? queryObject?.date
+    //         : moment(Calvalue).format("YYYY/MM/DD")}
+    //     </div>
+    //     <div
+    //       className="find-filters"
+    //       // onClick={() => {
+    //       //  // setshowMenu(!showMenu);
+    //       //  history.push("/mobiles/filter")
+    //       // }}
+    //     >
+    //       &#9776;
+    //     </div>
+    //   </div>
+    //   {matchLoad ? (
+    //     <div className="load_parent" style={{ paddingBottom: "500px" }}>
+    //       <div className="loaderss"></div>
+    //     </div>
+    //   ) : (
+    //     <div>
+    //       <div
+    //         style={{ display: "flex", width: "100%", justifyContent: "center" }}
+    //       >
+    //         <SearchFilter
+    //           type="find"
+    //           searchAction={search_filter_action}
+    //           activeQuery={trainerSearchFilterData}
+    //         />
+    //       </div>
+    //      <h1>New</h1>
+    //       <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+    //       <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+
+    //       <h1>OLD</h1>
+    //       <TrainerCards content={bestMatchData} bestMatchRef={bestMatchRef} />
+    //       <TrainerCardOutside content={bestOthersData} otherRef={otherRef} />
+    //     </div>
+    //   )}
+    // </div>
   );
 };
 
