@@ -150,6 +150,7 @@ const TrainerSessionFC = ({
 
     cancelSession(payload)
       .then(({ message }) => {
+        console.log("resup");
         setisLoading(false);
         Toast({ type: "success", message: message });
         getAllDetails(currentTab);
