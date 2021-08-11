@@ -275,7 +275,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </p>
         </div>
 
-        <div className="card-box ">
+        {/* <div className="card-box ">
           <div className="card-wrapper_home">
             <div className="item1">
               <h3>Location</h3>
@@ -382,7 +382,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="filter">
           <SearchFilter activeQuery={{}}/>
         </div>
