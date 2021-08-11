@@ -150,6 +150,11 @@
     display: flex;
     justify-content: center;
     .cntr_cotainer {
+
+      .filter
+      {
+        display: none;
+      }
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
