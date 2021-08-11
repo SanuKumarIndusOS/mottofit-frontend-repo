@@ -147,7 +147,11 @@ function SearchFilter({
             <div className="filter_dropdown">
               <div className="dropdown_grid">
                 <div
-                  className="dropdown_item"
+                   className={
+                    AvailabilityVal.label === "Early Bird"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -159,7 +163,11 @@ function SearchFilter({
                   Early Bird
                 </div>
                 <div
-                  className="dropdown_item"
+                  className={
+                    AvailabilityVal.label === "Rise & Shine"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -171,7 +179,11 @@ function SearchFilter({
                   Rise & Shine
                 </div>
                 <div
-                  className="dropdown_item"
+                 className={
+                  AvailabilityVal.label === "Lunchtime"
+                    ? "dropdown_item item_active"
+                    : "dropdown_item"
+                }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -183,7 +195,11 @@ function SearchFilter({
                   Lunchtime
                 </div>
                 <div
-                  className="dropdown_item"
+                   className={
+                    AvailabilityVal.label === "MID-DAY Break"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -195,7 +211,11 @@ function SearchFilter({
                   MID-DAY Break
                 </div>
                 <div
-                  className="dropdown_item"
+                 className={
+                  AvailabilityVal.label === "Happy Hours"
+                    ? "dropdown_item item_active"
+                    : "dropdown_item"
+                }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -207,7 +227,11 @@ function SearchFilter({
                   Happy Hours
                 </div>
                 <div
-                  className="dropdown_item"
+                 className={
+                  AvailabilityVal.label === "Never too late"
+                    ? "dropdown_item item_active"
+                    : "dropdown_item"
+                }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
