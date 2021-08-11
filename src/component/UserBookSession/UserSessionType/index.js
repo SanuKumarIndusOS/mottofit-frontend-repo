@@ -87,7 +87,7 @@ const UserBookSessionFC = ({
     const tempTrainerData =
       selectedTrainerData?.trainerData || selectedTrainerData;
 
-     // console.log( selectedTrainerData?.trainerData, "st");
+     console.log( selectedTrainerData?.trainerData, "st");
 
     if (!tempTrainerData?.id) return history.push("/trainer/find");
 

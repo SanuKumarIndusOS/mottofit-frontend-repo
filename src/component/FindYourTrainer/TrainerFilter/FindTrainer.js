@@ -1,33 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "./find.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import { BiSearch } from "react-icons/bi";
-import HoverImage from "react-hover-image";
-import InPersonDropDown from "component/Home/Banner/InPersonDropDown";
-import Between from "../../../assets/files/Home/Banner/SearchBar/between.svg";
+// import { BiSearch } from "react-icons/bi";
+// import HoverImage from "react-hover-image";
+// import InPersonDropDown from "component/Home/Banner/InPersonDropDown";
+// import Between from "../../../assets/files/Home/Banner/SearchBar/between.svg";
 
-//Assets for Inactive
-import BoxingIcon from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Inactive.svg";
-import PilatesIcon from "../../../assets/files/FindTrainer/DropDownAssets/Pilates_Inactive.svg";
-import StrengthIcon from "../../../assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Inactive.svg";
-import YogaIcon from "../../../assets/files/FindTrainer/DropDownAssets/Yoga_Inactive.svg";
+// //Assets for Inactive
+// import BoxingIcon from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Inactive.svg";
+// import PilatesIcon from "../../../assets/files/FindTrainer/DropDownAssets/Pilates_Inactive.svg";
+// import StrengthIcon from "../../../assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Inactive.svg";
+// import YogaIcon from "../../../assets/files/FindTrainer/DropDownAssets/Yoga_Inactive.svg";
 
-// Assets when hoveded
-import BoxingIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Active.svg";
-import PilatesIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Pilates_Active.svg";
-import StrengthIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
-import YogaIconIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Yoga_Active.svg";
+// // Assets when hoveded
+// import BoxingIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Boxing_Active.svg";
+// import PilatesIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Pilates_Active.svg";
+// import StrengthIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+// import YogaIconIconActive from "../../../assets/files/FindTrainer/DropDownAssets/Yoga_Active.svg";
 
 import TrainerCards from "../TrainersDetails/index";
 import TrainerCardOutside from "../TrainerOutsideTime/index";
-import Weight from "../../../assets/files/SVG/findTrainer/weight.svg";
-import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
-import AvailabilityIcon from "../../../assets/files/Home/Banner/SearchBar/Availability Icon.svg";
-import DropdownTrainerAvailability from "../../Home/Banner/DropdownAvailability";
+// import Weight from "../../../assets/files/SVG/findTrainer/weight.svg";
+// import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
+// import AvailabilityIcon from "../../../assets/files/Home/Banner/SearchBar/Availability Icon.svg";
+// import DropdownTrainerAvailability from "../../Home/Banner/DropdownAvailability";
 import "./find.scss";
-import { TrainerApi } from "service/apiVariables";
-import { api } from "service/api";
+// import { TrainerApi } from "service/apiVariables";
+// import { api } from "service/api";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -56,7 +56,7 @@ import SearchFilter from "component/common/SearchFilter/index";
 const FindTrainerFC = ({
   trainerQueryData,
   updateTrainerDetails,
-  updateUserDetails,
+  updateUserDetails,  
   trainerSearchFilterData,
   searchBestMatch,
 }) => {
@@ -90,13 +90,13 @@ const FindTrainerFC = ({
   //   setAvalValue(event.target.value);
   // };
 
-  const [showMenu, setshowMenu] = useState(false);
+  // const [showMenu, setshowMenu] = useState(false);
 
   const search_filter_action = (payload) => {
     // console.log("mi2", payload, trainerSearchFilterData);
 
     searchBestMatch(payload, "match").then((data) => {
-      console.log(data.list);
+      console.log(data);
       setTempBestMatch(data.list);
     });
 
