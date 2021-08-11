@@ -18,8 +18,13 @@ import BlueHoverButton from "../../common/BlueArrowButton";
 import { connect } from "react-redux";
 import { trainerSearchFilters } from "action/trainerAct";
 import { bindActionCreators } from "redux";
+import { history } from "helpers";
+import moment from "moment";
 
 class Experience extends Component {
+  constructor(props) {
+    super(props);
+  }
   payload = {
     location: "",
     city: "",
@@ -27,7 +32,7 @@ class Experience extends Component {
     date: new Date(),
     availability: "",
     label: {
-      availability:"",
+      availability: "",
       trainingType: "",
     },
   };
@@ -43,28 +48,120 @@ class Experience extends Component {
             <div className="image_Container">
               <div className="image_strength_main">
                 <img src={strength_img} alt="image" />
-                <Link to="/" className="link_button">
+                <Link
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Strength & HIIT"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Strength",
+                          value: "Strength & HIIT",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="link_button"
+                >
                   Strength
                   <ArrowHoverBlacked />
                 </Link>
               </div>
               <div className="image_strength_main">
                 <img src={boxing_img} alt="image" />
-                <Link to="/" className="link_button">
+                <Link
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Strength & HIIT"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Boxing",
+                          value: "Boxing",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="link_button"
+                >
                   Boxing
                   <ArrowHoverBlacked />
                 </Link>
               </div>
               <div className="image_strength_main">
                 <img src={yoga_img} alt="image" />
-                <Link to="/" className="link_button">
+                <Link
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Strength & HIIT"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Yoga",
+                          value: "Yoga",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="link_button"
+                >
                   Yoga
                   <ArrowHoverBlacked />
                 </Link>
               </div>
               <div className="image_strength_main">
                 <img src={pilates_img} alt="image" />
-                <Link to="/" className="link_button">
+                <Link
+                  onClick={() => {
+                    let payload = {
+                      location: "virtual",
+                      city: "",
+                      trainingType: encodeURIComponent(
+                        JSON.stringify(["Strength & HIIT"])
+                      ),
+                      date: moment(new Date()).format("YYYY-MM-DD"),
+                      availability: JSON.stringify([]),
+                      label: {
+                        availability: { label: "", value: "" },
+                        trainingType: {
+                          label: "Pilates",
+                          value: "Pilates",
+                        },
+                      },
+                    };
+
+                    this.props.trainerSearchFilters(payload);
+                    history.push("/trainer/find");
+                  }}
+                  className="link_button"
+                >
                   Pilates
                   <ArrowHoverBlacked />
                 </Link>
