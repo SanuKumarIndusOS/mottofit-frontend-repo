@@ -59,7 +59,7 @@ export const TrainerApi = {
     method: "get",
     baseURL: "search",
     page: 1,
-    limit: 50,
+    limit: 6,
     key: "",
     query: {
       location: null,

@@ -95,12 +95,12 @@ const FindTrainerFC = ({
   const search_filter_action = (payload) => {
     // console.log("mi2", payload, trainerSearchFilterData);
 
-    searchBestMatch(payload, "match").then((data) => {
+    searchBestMatch(payload, 1, "match").then((data) => {
       console.log(data);
       setTempBestMatch(data.list);
     });
 
-    searchBestMatch(payload, "unmatch").then((data) => {
+    searchBestMatch(payload, 1, "unmatch").then((data) => {
       console.log(data.list);
       setTempOtherMatch(data.list);
     });
@@ -133,7 +133,12 @@ const FindTrainerFC = ({
   //DESKTOP
   const [tempBestMatch, setTempBestMatch] = useState([]);
   const [tempOtherMatch, setTempOtherMatch] = useState([]);
+  const [loader, setloader] = useState(true);
+  const [loaderUnMatch, setloaderUnMatch] = useState(true);
   const [page, setPage] = useState(1);
+  const [totalPageMatch, settotalPageMatch] = useState(0);
+  const [pageUnmatch, setpageUnmatch] = useState(1);
+  const [totalPageUnMatch, settotalPageUnMatch] = useState(0);
 
   // const [bestMatchData, setbestMatchData] = useState([]);
   // const [bestOthersData, setbestOthersData] = useState([]);
@@ -170,15 +175,21 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
-    searchBestMatch(trainerSearchFilterData, "match").then((data) => {
-      console.log(data.list);
+    searchBestMatch(trainerSearchFilterData, page, "match").then((data) => {
+      console.log(data);
       setTempBestMatch(data.list);
+      settotalPageMatch(Math.ceil(data.totalCount / 6));
+      setloader(false);
     });
 
-    searchBestMatch(trainerSearchFilterData, "unmatch").then((data) => {
-      console.log(data.list);
-      setTempOtherMatch(data.list);
-    });
+    searchBestMatch(trainerSearchFilterData, pageUnmatch, "unmatch").then(
+      (data) => {
+        console.log(data.list);
+        setTempOtherMatch(data.list);
+        settotalPageUnMatch(Math.ceil(data.totalCount / 6));
+        setloaderUnMatch(false);
+      }
+    );
 
     // window.scrollTo(0, 0);
     // //Mobile
@@ -553,10 +564,38 @@ const FindTrainerFC = ({
   // let selectedValue =
   //   Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
 
-  const ViewMoreTrainers = () =>
-  {
-    console.log("vm");
-  }
+  useEffect(() => {
+    console.log(page);
+    if (page !== 1) {
+      searchBestMatch(trainerSearchFilterData, page, "match").then((data) => {
+        console.log(data);
+        setTempBestMatch((tempBestMatch) => [...tempBestMatch, ...data.list]);
+        setloader(false);
+      });
+    }
+  }, [page]);
+
+  useEffect(() => {
+    console.log(pageUnmatch);
+    if (pageUnmatch !== 1) {
+      searchBestMatch(trainerSearchFilterData, pageUnmatch, "unmatch").then(
+        (data) => {
+          console.log(data);
+          setTempOtherMatch((tempOtherMatch) => [
+            ...tempOtherMatch,
+            ...data.list,
+          ]);
+          setloaderUnMatch(false);
+       
+        }
+      );
+    }
+  }, [pageUnmatch]);
+
+  const ViewMoreTrainers = () => {
+    setloader(true);
+    setPage(page + 1);
+  };
   return (
     <>
       <div className="find_trainer">
@@ -567,17 +606,48 @@ const FindTrainerFC = ({
         />
       </div>
 
-      {tempBestMatch.length === 0 ? (
+      {/* {tempBestMatch.length === 0 ? (
         <div className="load_p">
           <div className="loaders"></div>
         </div>
       ) : (
         <>
           <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+          {page >= totalPageMatch || totalPageMatch === 1? null : (
+            <button onClick={ViewMoreTrainers}>View More Trainers</button>
+          )}
+
           <button onClick={ViewMoreTrainers}>View More Trainers</button>
-          <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+          <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} /> 
         </>
+      )} */}
+
+      <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+      {page >= totalPageMatch || totalPageMatch === 1 ? null : (
+        <button onClick={ViewMoreTrainers}>View More Trainers</button>
       )}
+      {loader ? (
+        <div className="load_p">
+          <div className="loaders"></div>
+        </div>
+      ) : null}
+
+      <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+      {pageUnmatch >= totalPageUnMatch || totalPageUnMatch === 1 ? null : (
+        <button
+          onClick={() => {
+            setpageUnmatch(pageUnmatch + 1);
+            setloaderUnMatch(true);
+          }}
+        >
+          View More Trainers
+        </button>
+      )}
+      {loaderUnMatch ? (
+        <div className="load_p">
+          <div className="loaders"></div>
+        </div>
+      ) : null}
     </>
     // <div
     //   id="find-trainer"
