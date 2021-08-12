@@ -128,6 +128,7 @@ function SearchFilter({
 
   return (
     <div className="wrapper">
+      <IconYoga/>
       <div className="search_filter">
         <div className="search_cta">
           <div className="circle" onClick={applyFilters}>

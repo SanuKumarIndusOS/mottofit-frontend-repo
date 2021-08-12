@@ -4,7 +4,7 @@ function Yoga_icon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="94.923"
+      width="60.923"
       height="53.324"
       viewBox="0 0 94.923 53.324"
     >

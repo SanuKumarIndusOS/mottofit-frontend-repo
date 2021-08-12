@@ -4,7 +4,7 @@ function Strength_icon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="65.983"
+      width="50.983"
       height="58.25"
       viewBox="0 0 65.983 58.25"
     >
