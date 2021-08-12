@@ -15,6 +15,11 @@ import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 
+import IconBoxing from "assets/files/FindTrainer/DropDownAssets/Boxing_icon";
+import IconPilates from "assets/files/FindTrainer/DropDownAssets/Pilates_icon";
+import IconStrength from "assets/files/FindTrainer/DropDownAssets/Strength_icon";
+import IconYoga from "assets/files/FindTrainer/DropDownAssets/Yoga_icon";
+
 import { Toast } from "service/toast";
 
 import Calendar from "react-calendar";
@@ -147,7 +152,7 @@ function SearchFilter({
             <div className="filter_dropdown">
               <div className="dropdown_grid">
                 <div
-                   className={
+                  className={
                     AvailabilityVal.label === "Early Bird"
                       ? "dropdown_item item_active"
                       : "dropdown_item"
@@ -179,11 +184,11 @@ function SearchFilter({
                   Rise & Shine
                 </div>
                 <div
-                 className={
-                  AvailabilityVal.label === "Lunchtime"
-                    ? "dropdown_item item_active"
-                    : "dropdown_item"
-                }
+                  className={
+                    AvailabilityVal.label === "Lunchtime"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -195,7 +200,7 @@ function SearchFilter({
                   Lunchtime
                 </div>
                 <div
-                   className={
+                  className={
                     AvailabilityVal.label === "MID-DAY Break"
                       ? "dropdown_item item_active"
                       : "dropdown_item"
@@ -211,11 +216,11 @@ function SearchFilter({
                   MID-DAY Break
                 </div>
                 <div
-                 className={
-                  AvailabilityVal.label === "Happy Hours"
-                    ? "dropdown_item item_active"
-                    : "dropdown_item"
-                }
+                  className={
+                    AvailabilityVal.label === "Happy Hours"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -227,11 +232,11 @@ function SearchFilter({
                   Happy Hours
                 </div>
                 <div
-                 className={
-                  AvailabilityVal.label === "Never too late"
-                    ? "dropdown_item item_active"
-                    : "dropdown_item"
-                }
+                  className={
+                    AvailabilityVal.label === "Never too late"
+                      ? "dropdown_item item_active"
+                      : "dropdown_item"
+                  }
                   onClick={() => {
                     setAvailabilityVal({
                       ...AvailabilityVal,
@@ -306,6 +311,7 @@ function SearchFilter({
                     });
                   }}
                 >
+                  <IconBoxing />
                   Boxing
                 </div>
                 <div
@@ -322,6 +328,7 @@ function SearchFilter({
                     });
                   }}
                 >
+                  <IconPilates />
                   Pilates
                 </div>
                 <div
@@ -338,6 +345,9 @@ function SearchFilter({
                     });
                   }}
                 >
+               
+                    <IconYoga />
+                 
                   Yoga
                 </div>
                 <div
@@ -354,6 +364,7 @@ function SearchFilter({
                     });
                   }}
                 >
+                  <IconStrength />
                   Strength
                 </div>
               </div>

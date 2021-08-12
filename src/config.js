@@ -25,6 +25,7 @@ let config = {
       paymentService: "https://apis.bookmotto.com/payments/v1/",
       messgaeService: "https://apis.bookmotto.com/messaging/v1/",
       notificationService:"https://apis.bookmotto.com/notification/v1/",
+      newSearch:"https://apis.bookmotto.com/user/v2/"
     },
     stripeUrl:
       "pk_live_51IJnd4BqgEC4bFYp4gC7EoInjpEKKjJXZMZGZurak1aK2ft1XN72QU355hRhLry3QmEucSKialeSBOGevqDJqfIJ00sU4zSO7O",
