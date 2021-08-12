@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 // import DatePicker from "react-datepicker";
 import "./find.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
+
+import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
 // import { BiSearch } from "react-icons/bi";
 // import HoverImage from "react-hover-image";
 // import InPersonDropDown from "component/Home/Banner/InPersonDropDown";
@@ -624,7 +627,7 @@ const FindTrainerFC = ({
       <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
       {page >= totalPageMatch || totalPageMatch === 1 ? null : (
         <button className="view_more" onClick={ViewMoreTrainers}>
-          View More Trainers
+          View More Trainers 
         </button>
       )}
       {loader ? (

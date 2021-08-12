@@ -5,6 +5,7 @@
   width: 100%;
   justify-content: center;
   margin-top: 100px;
+  margin-bottom: 150px;
   @media only screen and (max-width: 900px) {
     display: none;
   }
@@ -44,6 +45,13 @@
       transform: rotate(360deg);
     }
   }
+
+  
+@media only screen and (max-width: 900px) {
+  display: none;
+}
+
+
 }}
 .card {
   width: 1400px;

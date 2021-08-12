@@ -110,12 +110,10 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "virtual"
-  );
-  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "inPerson"
-  );
+  const isVirtualPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("virtual");
+  const isInPersonPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("inPerson");
 
   const handleRequestTrainer = () => {
     const userId = localStorage.getItem("user-id");
@@ -584,7 +582,7 @@ const TrainerProfileClass = ({
                     <h6>
                       {trainerProfileData.myMotto
                         ? trainerProfileData.myMotto
-                        : null }
+                        : null}
                     </h6>
                   </div>
                   <div className="profile_right_item2">
@@ -603,26 +601,30 @@ const TrainerProfileClass = ({
                       />
                     </div>
                   </div>
-                  {trainerCertificates.length > 0 ?    <div className="profile_right_item3 mb-5 pb-5">
-                    <h2>Certifications</h2>
-                    <div className="profile_item3_inner">
-                      {trainerCertificates.length > 0 ? (
-                        <>
-                          {trainerCertificates.map(({ certificate }, index) => (
-                            <div
-                              className="inner_items"
-                              key={`${certificate}_${index}`}
-                            >
-                              <img src={Tick} alt="check" />
-                              <h6>{certificate}</h6>
-                            </div>
-                          ))}
-                        </>
-                      ) : ( null
+                  {trainerCertificates.length > 0 ? (
+                    <div className="profile_right_item3 mb-5 pb-5">
+                      <h2>Certifications</h2>
+                      <div className="profile_item3_inner">
+                        {trainerCertificates.length > 0 ? (
+                          <>
+                            {trainerCertificates.map(
+                              ({ certificate }, index) => (
+                                <div
+                                  className="inner_items"
+                                  key={`${certificate}_${index}`}
+                                >
+                                  <img src={Tick} alt="check" />
+                                  <h6>{certificate}</h6>
+                                </div>
+                              )
+                            )}
+                          </>
+                        ) : null
                         // <p>Not Added</p>
-                      )}
+                        }
+                      </div>
                     </div>
-                  </div> : null }
+                  ) : null}
                   <div className="profile_right_item4">
                     <h2
                       style={{
@@ -652,12 +654,22 @@ const TrainerProfileClass = ({
                     <div className="request-trainer-block">
                       <button
                         className={`btn btn-transparent  fw-600 fs-18 ${
-                          isLoading ? "btn-disabled" : "text-underline"
+                          isLoading ? "btn-disabled" : ""
                         }`}
                         onClick={handleRequestTrainer}
                         disabled={isLoading}
                       >
-                        {isLoading ? "Loading..." : `Dont See a Time you want? Request A Time with ${trainerProfileData.firstName}`}
+                        {isLoading ? (
+                          "Loading..."
+                        ) : (
+                          <>
+                            {" "}
+                            <span style={{ color: "black" }}>
+                              Dont See a Time you want&ensp;?&ensp;
+                            </span>
+                            <span style={{textDecoration:"underline"}}>{`Request A Time with ${trainerProfileData.firstName}`}</span>
+                          </>
+                        )}
                       </button>
                     </div>
                   </div>
@@ -854,7 +866,7 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
           </div>
 
           {/* {images.length === 0 && <p>Images Not Added</p>} */}
-        
+
           {/* ) : (
                 "Image's Not Added" */}
           {/* )} */}
