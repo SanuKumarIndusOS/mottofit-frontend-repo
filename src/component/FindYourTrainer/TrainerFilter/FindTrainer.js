@@ -133,6 +133,7 @@ const FindTrainerFC = ({
   //DESKTOP
   const [tempBestMatch, setTempBestMatch] = useState([]);
   const [tempOtherMatch, setTempOtherMatch] = useState([]);
+  const [page, setPage] = useState(1);
 
   // const [bestMatchData, setbestMatchData] = useState([]);
   // const [bestOthersData, setbestOthersData] = useState([]);
@@ -551,6 +552,11 @@ const FindTrainerFC = ({
 
   // let selectedValue =
   //   Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
+
+  const ViewMoreTrainers = () =>
+  {
+    console.log("vm");
+  }
   return (
     <>
       <div className="find_trainer">
@@ -561,9 +567,17 @@ const FindTrainerFC = ({
         />
       </div>
 
-      <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
-      <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
-      
+      {tempBestMatch.length === 0 ? (
+        <div className="load_p">
+          <div className="loaders"></div>
+        </div>
+      ) : (
+        <>
+          <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+          <button onClick={ViewMoreTrainers}>View More Trainers</button>
+          <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+        </>
+      )}
     </>
     // <div
     //   id="find-trainer"
@@ -702,39 +716,39 @@ const FindTrainerFC = ({
     //       </div>
     //     </div>
     //   </div>
-      // <div
-      //   className="mobile-find-wrapper"
-      //   onClick={() => {
-      //     // setshowMenu(!showMenu);
-      //     history.push("/mobiles/filter");
-      //   }}
-      // >
-      //   <div className="cat">
-      //     {VerticalVal === "" ? (
-      //       queryObject?.vertical?.label === "" ? (
-      //         <div>All Verticals</div>
-      //       ) : (
-      //         queryObject?.vertical?.label
-      //       )
-      //     ) : (
-      //       VerticalVal
-      //     )}
-      //   </div>
-      //   <div className="date">
-      //     {Calvalue === new Date()
-      //       ? queryObject?.date
-      //       : moment(Calvalue).format("YYYY/MM/DD")}
-      //   </div>
-      //   <div
-      //     className="find-filters"
-      //     // onClick={() => {
-      //     //  // setshowMenu(!showMenu);
-      //     //  history.push("/mobiles/filter")
-      //     // }}
-      //   >
-      //     &#9776;
-      //   </div>
-      // </div>
+    // <div
+    //   className="mobile-find-wrapper"
+    //   onClick={() => {
+    //     // setshowMenu(!showMenu);
+    //     history.push("/mobiles/filter");
+    //   }}
+    // >
+    //   <div className="cat">
+    //     {VerticalVal === "" ? (
+    //       queryObject?.vertical?.label === "" ? (
+    //         <div>All Verticals</div>
+    //       ) : (
+    //         queryObject?.vertical?.label
+    //       )
+    //     ) : (
+    //       VerticalVal
+    //     )}
+    //   </div>
+    //   <div className="date">
+    //     {Calvalue === new Date()
+    //       ? queryObject?.date
+    //       : moment(Calvalue).format("YYYY/MM/DD")}
+    //   </div>
+    //   <div
+    //     className="find-filters"
+    //     // onClick={() => {
+    //     //  // setshowMenu(!showMenu);
+    //     //  history.push("/mobiles/filter")
+    //     // }}
+    //   >
+    //     &#9776;
+    //   </div>
+    // </div>
     //   {matchLoad ? (
     //     <div className="load_parent" style={{ paddingBottom: "500px" }}>
     //       <div className="loaderss"></div>

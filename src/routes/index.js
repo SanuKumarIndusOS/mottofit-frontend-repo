@@ -117,7 +117,7 @@ class RoutesClass extends Component {
         /> */}
         <Suspense
           fallback={
-            <div className="load_parent">
+            <div  className="load_parent">
               <div className="loaderss"></div>
             </div>
           }

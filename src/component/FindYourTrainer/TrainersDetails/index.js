@@ -135,12 +135,12 @@ const TrainerCardsFC = (props) => {
             );
           })}
         </div>
-        <div className="showmore">
+        {/* <div className="showmore">
           <button className="showmore_btn" onClick={showMoreItems}>
             {visible ? "View More Trainers " : null}
             <img src={Arrow} alt="icon" />
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );

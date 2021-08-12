@@ -25,12 +25,10 @@ import IconMidDay from "assets/files/FindTrainer/AvaliablityDropDownAssets/MidDa
 import IconHappyHour from "assets/files/FindTrainer/AvaliablityDropDownAssets/HappyHour_icon";
 import IconNeverTooLate from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_icon";
 
-
-
 import { Toast } from "service/toast";
 
 import Calendar from "react-calendar";
-import NeverTooLate_icon from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_icon";
+
 
 function SearchFilter({
   trainerSearchFilters,
@@ -128,7 +126,6 @@ function SearchFilter({
 
   return (
     <div className="wrapper">
-      <IconYoga/>
       <div className="search_filter">
         <div className="search_cta">
           <div className="circle" onClick={applyFilters}>
@@ -174,7 +171,7 @@ function SearchFilter({
                     });
                   }}
                 >
-                  <IconEarlyBird/>
+                  <IconEarlyBird />
                   Early Bird
                 </div>
                 <div
@@ -191,7 +188,7 @@ function SearchFilter({
                     });
                   }}
                 >
-                  <IconRiseAndShine/>
+                  <IconRiseAndShine />
                   Rise & Shine
                 </div>
                 <div
@@ -208,7 +205,7 @@ function SearchFilter({
                     });
                   }}
                 >
-                  <IconMidDay/>
+                  <IconMidDay />
                   Lunchtime
                 </div>
                 <div
@@ -225,7 +222,7 @@ function SearchFilter({
                     });
                   }}
                 >
-                  <IconMidDay/>
+                  <IconMidDay />
                   MID-DAY Break
                 </div>
                 <div
@@ -242,7 +239,7 @@ function SearchFilter({
                     });
                   }}
                 >
-                  <IconHappyHour/>
+                  <IconHappyHour />
                   Happy Hours
                 </div>
                 <div
@@ -259,7 +256,7 @@ function SearchFilter({
                     });
                   }}
                 >
-                  <IconNeverTooLate/>
+                  <IconNeverTooLate />
                   Never too late
                 </div>
               </div>
@@ -360,9 +357,7 @@ function SearchFilter({
                     });
                   }}
                 >
-               
-                    <IconYoga />
-                 
+                  <IconYoga />
                   Yoga
                 </div>
                 <div
