@@ -149,10 +149,10 @@ const TrainerSessionFC = ({
     setisLoading(true);
 
     cancelSession(payload)
-      .then(({ message }) => {
+      .then((data) => {
         console.log("resup");
         setisLoading(false);
-        Toast({ type: "success", message: message });
+        Toast({ type: "success", message: data?.message || "Success" });
         getAllDetails(currentTab);
       })
       .catch(() => setisLoading(false));
