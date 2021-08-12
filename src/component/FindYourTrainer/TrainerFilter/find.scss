@@ -1,3 +1,5 @@
+.find_wrapper{
+  margin-bottom: 300px;
 .find_trainer {
   display: flex;
   width: 100%;
@@ -6,6 +8,17 @@
   @media only screen and (max-width: 900px) {
     display: none;
   }
+}
+
+.view_more {
+  background: none;
+  border: none;
+  font-family: "Montserrat";
+  letter-spacing: 0.45px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: 100%;
 }
 
 .load_p {
@@ -31,7 +44,7 @@
       transform: rotate(360deg);
     }
   }
-}
+}}
 .card {
   width: 1400px;
   height: 250px;

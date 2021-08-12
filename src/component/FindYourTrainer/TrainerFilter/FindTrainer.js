@@ -586,7 +586,6 @@ const FindTrainerFC = ({
             ...data.list,
           ]);
           setloaderUnMatch(false);
-       
         }
       );
     }
@@ -597,7 +596,7 @@ const FindTrainerFC = ({
     setPage(page + 1);
   };
   return (
-    <>
+    <div className="find_wrapper">
       <div className="find_trainer">
         <SearchFilter
           type="find"
@@ -624,7 +623,9 @@ const FindTrainerFC = ({
 
       <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
       {page >= totalPageMatch || totalPageMatch === 1 ? null : (
-        <button onClick={ViewMoreTrainers}>View More Trainers</button>
+        <button className="view_more" onClick={ViewMoreTrainers}>
+          View More Trainers
+        </button>
       )}
       {loader ? (
         <div className="load_p">
@@ -633,12 +634,14 @@ const FindTrainerFC = ({
       ) : null}
 
       <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+
       {pageUnmatch >= totalPageUnMatch || totalPageUnMatch === 1 ? null : (
         <button
           onClick={() => {
             setpageUnmatch(pageUnmatch + 1);
             setloaderUnMatch(true);
           }}
+          className="view_more"
         >
           View More Trainers
         </button>
@@ -648,7 +651,7 @@ const FindTrainerFC = ({
           <div className="loaders"></div>
         </div>
       ) : null}
-    </>
+    </div>
     // <div
     //   id="find-trainer"
     //   className="find-trainer"
