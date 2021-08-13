@@ -375,7 +375,7 @@ function SearchFilter({
                   }}
                 >
                   <IconStrength />
-                  Strength
+                  Strength & HIIT
                 </div>
               </div>
             </div>

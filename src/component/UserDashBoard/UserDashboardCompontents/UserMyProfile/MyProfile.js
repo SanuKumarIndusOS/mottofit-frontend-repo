@@ -198,12 +198,12 @@ const MyProfileClass = ({
           message: "^Gender is required",
         },
       },
-      DOB: {
-        presence: {
-          allowEmpty: false,
-          message: "^Date of birth is required",
-        },
-      },
+      // DOB: {
+      //   presence: {
+      //     allowEmpty: true,
+      //     message: "^Date of birth is required",
+      //   },
+      // },
     };
   };
 
@@ -232,7 +232,7 @@ const MyProfileClass = ({
     let payload = {
       firstName: userData.firstName,
       location: userData.location,
-      DOB: userData.DOB,
+      //DOB: userData.DOB,
       gender: userData.gender,
       email: userData.email,
       phoneNo: userData.phoneNo,
@@ -428,7 +428,7 @@ const MyProfileClass = ({
                             </span>
                           )}
                         </div>
-                        <div className="input_profile">
+                        {/* <div className="input_profile">
                           <label>Date of Birth </label>
                           <input
                             type="date"
@@ -446,7 +446,7 @@ const MyProfileClass = ({
                               {errors.DOB[0]}
                             </span>
                           )}
-                        </div>
+                        </div> */}
                         <div className="input_profile">
                           <label>Gender </label>
 

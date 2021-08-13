@@ -645,7 +645,7 @@ const TrainWithFriendsClass = ({
                               </div>
                             );
                           })}
-                          <div className="TF_remember_left">
+                          {/* <div className="TF_remember_left">
                             <input
                               className="TF_check"
                               type="checkbox"
@@ -657,7 +657,7 @@ const TrainWithFriendsClass = ({
                               I will pay for all the people that I will be
                               inviting to my social session or class
                             </label>
-                          </div>
+                          </div> */}
                         </div>
 
                         <div className="TF_button">
