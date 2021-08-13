@@ -45,6 +45,10 @@
       width: 100%;
       height: auto;
       padding: 0 5.5em;
+      @media screen and (max-width: 920px)
+      {
+        padding: 0px;
+      }
 
       .wrapper_inneritems {
         width: 80%;

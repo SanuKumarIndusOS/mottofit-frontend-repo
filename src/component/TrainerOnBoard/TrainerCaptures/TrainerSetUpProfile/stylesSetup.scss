@@ -64,6 +64,7 @@
             font-size: 45px;
             font-weight: bold;
             font-family: "Cormorant Garamond", sans-serif;
+            margin-top: 1rem;
         }
         p {
             text-align: center;
@@ -75,6 +76,11 @@
             font-size: 18px;
             font-weight: normal;
             font-family: "Montserrat", sans-serif;
+            @media screen and (max-width: 920px)
+            {
+                width: 100%;
+                margin-top: 1rem;
+            }
         }
     }
     .certificate_content {

@@ -1,6 +1,10 @@
 .main {
     height: auto;
     padding: 0 5.5em;
+    @media screen and (max-width: 920px)
+    {
+        padding: 0px;
+    }
     .wrapper_about {
         height: auto;
 
@@ -35,9 +39,18 @@
                 align-items: center;
                 justify-content: center;
 
+                @media screen and (max-width: 920px)
+                {
+                    display: block;
+                }
+
                 .wrapper_innerInput {
                     margin: 1em;
                     width: 40%;
+                    @media screen and (max-width: 920px)
+                    {
+                        width: unset;
+                    }
                     span {
                         color: tomato;
                         font-family: "Montserrat", sans-serif;
