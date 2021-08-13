@@ -83,6 +83,8 @@ const TrainerMessageClass = ({
   useEffect(() => {
     // Get Contact_list
 
+    change_login_status({ loginStatus: true });
+
     window.scrollTo(0, 0);
 
     const { search } = history.location;
@@ -101,6 +103,7 @@ const TrainerMessageClass = ({
 
     return () => {
       if (!mql.matches) unSubscribeClientAct();
+      change_login_status({ loginStatus: false });
     };
   }, []);
 
