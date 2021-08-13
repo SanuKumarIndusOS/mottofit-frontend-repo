@@ -1,5 +1,9 @@
 .card_inner {
     padding: 0 9em;
+    @media screen and (max-width: 920px)
+    {
+        padding: 0;
+    }
     .card_prev_link {
         margin: 3em 0 5em 0;
         width: 100%;
@@ -106,6 +110,10 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 2em;
+        @media screen and (max-width: 920px)
+        {
+           flex-direction: column;
+        }
         .item2_card_inner {
             width: 100%;
             justify-content: space-between;
@@ -133,6 +141,11 @@
             display: flex;
             align-items: center;
             margin: 0.7em 0 2em 0;
+            @media screen and (max-width: 920px)
+            {
+               flex-direction: column;
+               align-items: flex-start;
+            }
         }
     }
     .card_accordion {
@@ -144,10 +157,22 @@
         width: 100%;
         margin-bottom: 1em;
 
+        @media screen and (max-width: 920px)
+        {
+           flex-direction: column;
+           
+        }
+
         .card_accordion_input {
             display: flex;
             align-items: center;
             width: 50%;
+
+            @media screen and (max-width: 920px)
+            {
+              width: 100%;
+            }
+    
 
             img {
                 position: relative;

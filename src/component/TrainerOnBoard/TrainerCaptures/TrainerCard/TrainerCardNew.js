@@ -555,6 +555,7 @@ function TrainerCardNewClass(props) {
           </label>
           <br />
           <div className="item3_card_inner">
+            <div style={{display:"flex", alignItems:"center"}}>
             <Checkbox
               checked={checkedHIIT}
               icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
@@ -582,8 +583,9 @@ function TrainerCardNewClass(props) {
               }}
             />
             &ensp;
-            <h6 style={{ marginRight: "1em" }}>Strength & HIIT</h6>
+            <h6 style={{ marginRight: "1em" }}>Strength & HIIT</h6></div>
             &ensp;
+            <div style={{display:"flex", alignItems:"center"}}>
             <Checkbox
               checked={checkedBoxing}
               icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
@@ -607,7 +609,8 @@ function TrainerCardNewClass(props) {
               }}
             />
             &ensp;
-            <h6 style={{ marginRight: "1em" }}>Boxing</h6> &ensp;
+            <h6 style={{ marginRight: "1em" }}>Boxing</h6> </div> &ensp;
+            <div style={{display:"flex", alignItems:"center"}}>
             <Checkbox
               checked={checkedYoga}
               icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
@@ -630,7 +633,8 @@ function TrainerCardNewClass(props) {
               }}
             />
             &ensp;
-            <h6 style={{ marginRight: "1em" }}>Yoga</h6> &ensp;
+            <h6 style={{ marginRight: "1em" }}>Yoga</h6></div> &ensp;
+            <div style={{display:"flex", alignItems:"center"}}>
             <Checkbox
               checked={checkedPilates}
               icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
@@ -653,7 +657,7 @@ function TrainerCardNewClass(props) {
               }}
             />
             &ensp;
-            <h6 style={{ marginRight: "1em" }}>Pilates</h6> &ensp;
+            <h6 style={{ marginRight: "1em" }}>Pilates</h6>  &ensp; </div>
           </div>
         </div>
 

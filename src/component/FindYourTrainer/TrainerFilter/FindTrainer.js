@@ -178,23 +178,51 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
-    searchBestMatch(trainerSearchFilterData, page, "match").then((data) => {
-      console.log(data);
-      setTempBestMatch(data.list);
-      settotalPageMatch(Math.ceil(data.totalCount / 6));
-      setloader(false);
-    });
+    if (Object.keys(trainerSearchFilterData).length === 0) {
+      console.log(
+        JSON.parse(localStorage.getItem("persistFilters")),
+        "persist"
+      );
 
-    searchBestMatch(trainerSearchFilterData, pageUnmatch, "unmatch").then(
-      (data) => {
-        console.log(data.list);
-        setTempOtherMatch(data.list);
-        settotalPageUnMatch(Math.ceil(data.totalCount / 6));
-        setloaderUnMatch(false);
-      }
-    );
+      searchBestMatch(localStorage.getItem("persistFilters"), page, "match").then((data) => {
+        console.log(data);
+        setTempBestMatch(data.list);
+        settotalPageMatch(Math.ceil(data.totalCount / 6));
+        setloader(false);
+      });
 
-     window.scrollTo(0, 0);
+      searchBestMatch(localStorage.getItem("persistFilters"), pageUnmatch, "unmatch").then(
+        (data) => {
+          console.log(data.list);
+          setTempOtherMatch(data.list);
+          settotalPageUnMatch(Math.ceil(data.totalCount / 6));
+          setloaderUnMatch(false);
+        }
+      );
+    } else {
+      localStorage.setItem(
+        "persistFilters",
+        JSON.stringify(trainerSearchFilterData)
+      );
+
+      searchBestMatch(trainerSearchFilterData, page, "match").then((data) => {
+        console.log(data);
+        setTempBestMatch(data.list);
+        settotalPageMatch(Math.ceil(data.totalCount / 6));
+        setloader(false);
+      });
+
+      searchBestMatch(trainerSearchFilterData, pageUnmatch, "unmatch").then(
+        (data) => {
+          console.log(data.list);
+          setTempOtherMatch(data.list);
+          settotalPageUnMatch(Math.ceil(data.totalCount / 6));
+          setloaderUnMatch(false);
+        }
+      );
+    }
+
+    window.scrollTo(0, 0);
     // //Mobile
 
     // //Desktop
@@ -624,10 +652,14 @@ const FindTrainerFC = ({
         </>
       )} */}
 
-      <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} loader={loader} />
+      <TrainerCards
+        content={tempBestMatch}
+        bestMatchRef={bestMatchRef}
+        loader={loader}
+      />
       {page >= totalPageMatch || totalPageMatch === 1 ? null : (
         <button className="view_more" onClick={ViewMoreTrainers}>
-          View More Trainers 
+          View More Trainers
         </button>
       )}
       {loader ? (
