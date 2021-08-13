@@ -1,11 +1,19 @@
 .inner_setup_container {
     padding: 0 4em;
+    @media screen and (max-width: 920px)
+    {
+        padding: 1rem;
+    }
     .setup_link {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
         margin: 2em 0;
+        @media screen and (max-width: 920px)
+        {
+            display: none;
+        }
 
         .inner_link {
             display: flex;
@@ -156,6 +164,10 @@
         grid-template-rows: auto;
         grid-column-gap: 40px;
         margin-bottom: 6em;
+        @media screen and (max-width: 920px)
+        {
+            display: block;
+        }
         .training_options {
             label {
                 margin-top: 1em;
@@ -289,6 +301,10 @@
             font-weight: 500;
             line-height: 42px;
             font-family: "Montserrat", sans-serif;
+            @media screen and (max-width: 920px)
+            {
+                display: block;
+            }
 
             a {
                 color: rgb(83, 191, 210);
