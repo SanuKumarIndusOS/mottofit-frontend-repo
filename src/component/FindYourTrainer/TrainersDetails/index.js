@@ -45,8 +45,8 @@ const TrainerCardsFC = (props) => {
   return (
     <>
       <div className="container">
-        <HeadingTrainer bestMatchRef={props.bestMatchRef} />
-        {no_match}
+       {props.loader?null:  <><HeadingTrainer bestMatchRef={props.bestMatchRef} />{no_match} </>} 
+      
         <div className="row" style={{ alignleft: "auto" }}>
           {Object.keys(bestMatchData).map((data, index) => {
             const areaOfExpertise =

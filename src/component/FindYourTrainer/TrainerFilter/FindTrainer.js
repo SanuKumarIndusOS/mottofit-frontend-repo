@@ -194,7 +194,7 @@ const FindTrainerFC = ({
       }
     );
 
-    // window.scrollTo(0, 0);
+     window.scrollTo(0, 0);
     // //Mobile
 
     // //Desktop
@@ -624,7 +624,7 @@ const FindTrainerFC = ({
         </>
       )} */}
 
-      <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} />
+      <TrainerCards content={tempBestMatch} bestMatchRef={bestMatchRef} loader={loader} />
       {page >= totalPageMatch || totalPageMatch === 1 ? null : (
         <button className="view_more" onClick={ViewMoreTrainers}>
           View More Trainers 
