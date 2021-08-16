@@ -429,7 +429,7 @@
                 // text-transform: capitalize;
               }
               .schedular_slots {
-                display: grid !important;
+                display: grid ;
                 grid-template-columns: 100%;
                 grid-template-rows: auto;
                 grid-column-gap: 20px;
@@ -612,7 +612,20 @@
                 margin-bottom: 100px;
               }
               .profile_right_item4 {
-                display: none;
+                 
+                h2{
+                  display: none;
+                }
+                .outter_table_user
+                {
+                  display: none;
+                }
+
+                .schedular_slots
+                {
+                  display: none;
+                }
+              
               }
               .profile_right_item2 {
                 .profile_images_grid {
