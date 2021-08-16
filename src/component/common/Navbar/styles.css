@@ -178,6 +178,11 @@ input:focus {
     display: none;
   }
 
+  .input
+  {
+    width: 100%;
+  }
+
   .mobile_navbar {
     height: 75px;
     width: 100vw;
