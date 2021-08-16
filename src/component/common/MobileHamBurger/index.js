@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import LogoImage from "../../../assets/files/SVG/Motto Logo.svg";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 function Index() {
+  const [keys, setKey] = useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    setKey("");
+  }, []);
   return (
     <div className="ham_menu">
       <div className="inner">
         <div className="header">
           <img src={LogoImage} alt="logo" style={{ height: "30px" }} />
-          <div className="close" onClick={() => history.goBack()}>x</div>
+          <div className="close" onClick={() => history.goBack()}>
+            x
+          </div>
         </div>
         <div className="menu">
           <div className="menu_item">
@@ -41,9 +48,25 @@ function Index() {
         </div>
         <div className="search">
           Search to Know More
-          <div className="search_bar">
-            <p>Rotating prompts go here</p>
-          </div>
+          <form
+            onSubmit={() => {
+              history.push({
+                pathname: "/trainer/results",
+                state: {
+                  key: keys,
+                },
+              });
+            }}
+          >
+            <input
+              className="input"
+              type="text"
+              placeholder="Search trainers & workouts"
+              onChange={(e) => {
+                setKey(e.target.value);
+              }}
+            ></input>
+          </form>
         </div>
         <div className="footer"></div>
       </div>

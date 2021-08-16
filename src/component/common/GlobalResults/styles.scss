@@ -21,6 +21,10 @@
       margin: 0em 0 8em 0;
       row-gap: 5rem;
       column-gap: 5rem;
+
+      @media only screen and (max-width: 900px) {
+        grid-template-columns: unset;
+      }
     }
 
     .cardd {
