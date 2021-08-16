@@ -74,7 +74,10 @@ class ChatBoxClass extends Component {
 
   handleSendMessage = (e) => {
     e.preventDefault();
+
+   
     const { message } = this.state;
+    console.log(message);
 
     const { activeChannel } = this.props;
 
@@ -82,7 +85,7 @@ class ChatBoxClass extends Component {
       return console.log("Chat Service is not configured.");
     }
 
-    if (activeChannel) {
+    if (activeChannel && message !== "") {
       activeChannel.sendMessage(String(message)).then(() => {
         this.setState({
           message: "",
