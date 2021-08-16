@@ -126,7 +126,7 @@ const NavBarHomeFC = ({
               <input
                 className="input"
                 type="text"
-                placeholder="Rotating prompts go here"
+                placeholder="Search trainers & workouts"
                 onChange={(e) => {
                   setKey(e.target.value);
                 }}

@@ -94,7 +94,8 @@
             padding: 0.3em 0.8em;
           }
           input::placeholder {
-            color: #161616;
+            color: #7e7e7e;
+            font-style: italic;
             font-size: 17px;
             font-family: "Montserrat", sans-serif;
           }
@@ -103,7 +104,7 @@
             height: 18px;
             position: relative;
             right: 30px;
-            color: #3f3f3f;
+            color: #7e7e7e;
             cursor: pointer;
             bottom: 2px;
           }
@@ -221,7 +222,7 @@
             font-size: 17px;
             font-weight: 600;
             font-family: "Montserrat", sans-serif;
-            color: #161616;
+            color: #ac0000;
           }
           .search-icon {
             width: 20px;
