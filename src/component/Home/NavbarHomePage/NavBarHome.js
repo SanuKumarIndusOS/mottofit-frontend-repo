@@ -123,6 +123,17 @@ const NavBarHomeFC = ({
           </div>
           <div className="search-items">
             <div className="input-item">
+            <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  history.push({
+                    pathname: "/trainer/results",
+                    state: {
+                      key: keys,
+                    },
+                  });
+                }}
+              >
               <input
                 className="input"
                 type="text"
@@ -146,7 +157,7 @@ const NavBarHomeFC = ({
 
                 
                 }}
-              />
+              /> </form>
             </div>
             {!isUserLoggedIn ? (
               <div className="login-item1">

@@ -23,8 +23,8 @@ import { connect } from "react-redux";
 import { UserAvatar } from "component/common/UserAvatar";
 import { change_login_status } from "action/NotificationAct";
 import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
- import { getTrainerDetail } from "action/adminAct";
-    
+import { getTrainerDetail } from "action/adminAct";
+
 const NavBarFC = ({
   toggle,
   isModelOpen,
@@ -42,14 +42,11 @@ const NavBarFC = ({
       getUserDetail().then((data) => {
         setUserData(data);
       });
-    }else
-    {
+    } else {
       getTrainerDetail(localStorage.getItem("user-id")).then((data) => {
         setUserData(data);
       });
     }
-
-  
 
     console.log(userType);
   }, []);
@@ -128,17 +125,9 @@ const NavBarFC = ({
           </div>
           <div className="search-items1">
             <div className="input-item1">
-              <input
-                className="input"
-                type="text"
-                placeholder="Search trainers & workouts"
-                onChange={(e) => {
-                  setKey(e.target.value);
-                }}
-              ></input>
-              <BiSearch
-                className="search-icon1"
-                onClick={() => {
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
                   history.push({
                     pathname: "/trainer/results",
                     state: {
@@ -146,7 +135,27 @@ const NavBarFC = ({
                     },
                   });
                 }}
-              />
+              >
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Search trainers & workouts"
+                  onChange={(e) => {
+                    setKey(e.target.value);
+                  }}
+                ></input>
+                <BiSearch
+                  className="search-icon1"
+                  onClick={() => {
+                    history.push({
+                      pathname: "/trainer/results",
+                      state: {
+                        key: keys,
+                      },
+                    });
+                  }}
+                />
+              </form>
             </div>
 
             {!isUserLoggedIn ? (
@@ -384,17 +393,14 @@ const NavBarFC = ({
                   </div>
                 </div>
                 <div className="pro_menu_content">
-                <div
+                  <div
                     className="menu_li"
                     onClick={() => {
                       history.push("/trainers/dashboard/schedule");
                       setActiveMobMenu(false);
                     }}
                   >
-                    <img
-                      src={SheduleIcon}
-                      alt="icon"
-                    ></img>
+                    <img src={SheduleIcon} alt="icon"></img>
                     <div className="menu_li_text">MY SCHEDULE</div>
                   </div>
                   <div
@@ -452,7 +458,6 @@ const NavBarFC = ({
                         setActiveMobMenu(false);
                       }}
                     >
-                   
                       PROFILE
                     </div>
                     <div
@@ -462,18 +467,18 @@ const NavBarFC = ({
                         setActiveMobMenu(false);
                       }}
                     >
-                   
                       MY TRAINER CARD
                     </div>
                     <div
                       className="set_item"
                       onClick={() => {
-                        history.push("/trainers/dashboard/settings/payment-history");
+                        history.push(
+                          "/trainers/dashboard/settings/payment-history"
+                        );
                         setActiveMobMenu(false);
                       }}
                     >
-                   
-                     SECURITY AND PAYMENT INFO
+                      SECURITY AND PAYMENT INFO
                     </div>
                     <div
                       className="set_item"
@@ -482,7 +487,6 @@ const NavBarFC = ({
                         setActiveMobMenu(false);
                       }}
                     >
-                   
                       EARNING HISTORY
                     </div>
 
@@ -531,7 +535,7 @@ const mapDispatchToProps = (dispatch) => {
       updateUserDetails,
       getUserDetail,
       change_login_status,
-      getTrainerDetail
+      getTrainerDetail,
     },
     dispatch
   );
