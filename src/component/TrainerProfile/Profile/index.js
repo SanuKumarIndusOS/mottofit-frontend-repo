@@ -789,7 +789,7 @@ const ButtonSection = ({ selectedTimes, handleSessionType }) => {
 const ImageGrid = ({ trainerProfileData, toggle }) => {
   const [imageView, setImageView] = useState([
     {
-      image: NotFoundImage,
+      image: null,
     },
   ]);
   const handleViewImages = () => {
