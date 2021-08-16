@@ -22,6 +22,10 @@
       height: 100%;
       max-width: 255px;
 
+      .filter_type:focus{
+        outline: none;
+      }
+
       .filter_header {
         font-size: 16px;
         color: #161616;

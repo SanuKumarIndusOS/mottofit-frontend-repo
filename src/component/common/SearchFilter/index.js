@@ -134,7 +134,7 @@ function SearchFilter({
         </div>
 
         <div
-          className="filter_type"
+        
           className="filter_type"
           onClick={() => {
             setAvailabilityDropdown(!AvailabilityDropdown);
