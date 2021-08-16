@@ -87,7 +87,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
         // console.log(nextPathReRouter(nextAction));
 
         if (nextPathReRouter(nextAction)) return;
-        history.push("/trainer/find");
+        history.push("/welcome");
       })
       .catch((error) => {
         // setApiError("Sorry, something went wrong.", error.message);
@@ -147,13 +147,13 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
         },
         ...nameValidation,
       },
-      location: {
-        presence: {
-          allowEmpty: false,
-          message: "^Location is required",
-        },
-        ...nameValidation,
-      },
+      // location: {
+      //   presence: {
+      //     allowEmpty: true,
+      //     message: "^Location is required",
+      //   },
+      //   ...nameValidation,
+      // },
       phoneNo: {
         presence: {
           allowEmpty: false,
@@ -253,7 +253,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                       <img src={Person} alt="icon" />
                       {error.lastName && <span>{error.lastName[0]}</span>}
                     </div>
-
+{/* 
                     <div className="input_items">
                       <input
                         placeholder="Location"
@@ -264,7 +264,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                       />
                       <img src={Person} alt="icon" />
                       {error.location && <span>{error.location[0]}</span>}
-                    </div>
+                    </div> */}
 
                     <div className="input_items">
                       <input

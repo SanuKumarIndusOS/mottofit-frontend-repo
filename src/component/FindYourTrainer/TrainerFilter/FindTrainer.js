@@ -184,21 +184,23 @@ const FindTrainerFC = ({
         "persist"
       );
 
-      searchBestMatch(localStorage.getItem("persistFilters"), page, "match").then((data) => {
+      if( JSON.parse(localStorage.getItem("persistFilters")) !== null){
+
+      searchBestMatch(JSON.parse(localStorage.getItem("persistFilters")), page, "match").then((data) => {
         console.log(data);
         setTempBestMatch(data.list);
         settotalPageMatch(Math.ceil(data.totalCount / 6));
         setloader(false);
       });
 
-      searchBestMatch(localStorage.getItem("persistFilters"), pageUnmatch, "unmatch").then(
+      searchBestMatch(JSON.parse(localStorage.getItem("persistFilters")), pageUnmatch, "unmatch").then(
         (data) => {
           console.log(data.list);
           setTempOtherMatch(data.list);
           settotalPageUnMatch(Math.ceil(data.totalCount / 6));
           setloaderUnMatch(false);
         }
-      );
+      );}
     } else {
       localStorage.setItem(
         "persistFilters",
