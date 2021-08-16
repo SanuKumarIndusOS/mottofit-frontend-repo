@@ -172,7 +172,7 @@ function SearchFilter({
                   }}
                 >
                   <IconEarlyBird />
-                  Early Bird
+                  Early Bird <br></br> 5 AM - 8 AM
                 </div>
                 <div
                   className={
@@ -189,7 +189,7 @@ function SearchFilter({
                   }}
                 >
                   <IconRiseAndShine />
-                  Rise & Shine
+                  Rise & Shine <br></br> 8 AM - 11 AM
                 </div>
                 <div
                   className={
@@ -206,7 +206,7 @@ function SearchFilter({
                   }}
                 >
                   <IconMidDay />
-                  Lunchtime
+                  Lunchtime <br></br> 11 AM - 2 PM
                 </div>
                 <div
                   className={
@@ -223,7 +223,7 @@ function SearchFilter({
                   }}
                 >
                   <IconMidDay />
-                  MID-DAY Break
+                  MID-DAY Break <br></br> 2 PM - 5 PM
                 </div>
                 <div
                   className={
@@ -240,7 +240,7 @@ function SearchFilter({
                   }}
                 >
                   <IconHappyHour />
-                  Happy Hours
+                  Happy Hours <br></br> 5 PM - 8 PM
                 </div>
                 <div
                   className={
@@ -257,7 +257,7 @@ function SearchFilter({
                   }}
                 >
                   <IconNeverTooLate />
-                  Never too late
+                  Never too late <br></br> 8 PM - 11 PM
                 </div>
               </div>
             </div>
