@@ -202,10 +202,10 @@ const FindTrainerFC = ({
         }
       );}
     } else {
-      localStorage.setItem(
-        "persistFilters",
-        JSON.stringify(trainerSearchFilterData)
-      );
+      // localStorage.setItem(
+      //   "persistFilters",
+      //   JSON.stringify(trainerSearchFilterData)
+      // );
 
       searchBestMatch(trainerSearchFilterData, page, "match").then((data) => {
         console.log(data);

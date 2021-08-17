@@ -108,6 +108,11 @@ function SearchFilter({
 
     console.log(payload);
 
+    localStorage.setItem(
+      "persistFilters",
+      JSON.stringify(payload)
+    );
+
     if (Location === "inPerson" && IPCvalue === "") {
       Toast({ type: "error", message: "City is mandatory" });
     } else {
