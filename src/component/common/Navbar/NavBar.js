@@ -25,6 +25,8 @@ import { change_login_status } from "action/NotificationAct";
 import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
 import { getTrainerDetail } from "action/adminAct";
 
+import Drawer from "@material-ui/core/Drawer";
+
 const NavBarFC = ({
   toggle,
   isModelOpen,
@@ -240,20 +242,34 @@ const NavBarFC = ({
             />
           )}
         </div>
+        {/* <Drawer
+          anchor='right'
+          open={true}
+          //onClose={toggleDrawer(anchor, false)}
+        >
+         
+          
+        </Drawer> */}
       </div>
 
       {/* user Menu items */}
 
       {activeMobMenu ? (
-        <div>
+        <Drawer
+          anchor="right"
+          open={activeMobMenu}
+          onClose={() => {
+            setActiveMobMenu(!activeMobMenu);
+          }}
+        >
           {userType === 3 ? (
             <div className="mobile_profile_menu_items">
-              <div
+              {/* <div
                 className="pro_menu_container_left"
                 onClick={() => {
                   setActiveMobMenu(false);
                 }}
-              ></div>
+              ></div> */}
 
               <div className="pro_menu_container_right">
                 <div className="pro_menu_header">
@@ -365,12 +381,12 @@ const NavBarFC = ({
             </div>
           ) : (
             <div className="mobile_profile_menu_items">
-              <div
+              {/* <div
                 className="pro_menu_container_left"
                 onClick={() => {
                   setActiveMobMenu(false);
                 }}
-              ></div>
+              ></div> */}
 
               <div className="pro_menu_container_right">
                 <div className="pro_menu_header">
@@ -519,7 +535,7 @@ const NavBarFC = ({
               </div>
             </div>
           )}
-        </div>
+        </Drawer>
       ) : null}
     </>
   );
