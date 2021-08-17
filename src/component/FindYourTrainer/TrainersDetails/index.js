@@ -11,6 +11,7 @@ const TrainerCardsFC = (props) => {
 
   useEffect(() => {
     setbestMatchData(props.content);
+console.log(props.content);
   });
   const [visible, setVisible] = useState(3);
   const showMoreItems = () => {
@@ -18,7 +19,7 @@ const TrainerCardsFC = (props) => {
   };
 
   let no_match = <div></div>;
-  if (bestMatchData.length === 0) {
+  if (bestMatchData?.length === 0) {
     no_match = <h1 className="no_match">No Matches found</h1>;
   }
 

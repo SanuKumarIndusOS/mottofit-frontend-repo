@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 // import DatePicker from "react-datepicker";
 import "./find.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import BlueHoverButton from "../../common/BlueArrowButton";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
 
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
@@ -661,9 +662,11 @@ const FindTrainerFC = ({
       />
       {page >= totalPageMatch || totalPageMatch === 1 ? null : (
         <button className="view_more" onClick={ViewMoreTrainers}>
-          View More Trainers
+          View More Trainers &ensp; <BlueHoverButton/>
         </button>
       )}
+
+
       {loader ? (
         <div className="load_p">
           <div className="loaders"></div>
@@ -680,7 +683,7 @@ const FindTrainerFC = ({
           }}
           className="view_more"
         >
-          View More Trainers
+          View More Trainers &ensp;<BlueHoverButton/>
         </button>
       )}
       {loaderUnMatch ? (

@@ -501,7 +501,7 @@ const MyProfileFC = ({
                     <div className="row">
                       {imagesList.map((list, index) => {
                         return (
-                          <div className="col-3 w-100 mb-3 px-2" key={index}>
+                          <div className="col-4 w-100 mb-3 px-2" key={index}>
                             <div className="image-upload-card btn-file-input">
                               {list.url !== "" ? (
                                 <button className="uploaded-image">

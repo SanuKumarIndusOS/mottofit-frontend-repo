@@ -4,9 +4,11 @@ import { useLocation } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchGlobalSearchResults } from "action/trainerAct";
+import { fetchGlobalSearchResults, trainerDetail } from "action/trainerAct";
 import Pagination from "react-js-pagination";
 import { history } from "helpers";
+
+import TrainerCards from "component/FindYourTrainer/TrainersDetails/index";
 
 const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   const [searchResults, setSearchResults] = useState();
@@ -61,7 +63,14 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
     <div className="results_container">
       <h1>Results</h1>
 
-      <div className="results_grid">
+      
+      {/* <TrainerCards
+        content={searchResults}
+      
+        // loader={loader}
+      /> */}
+
+      {/* <div className="results_grid">
         <div style={{ marginBottom: "500px" }}>
           {searchResults?.length === 0 ? (
             <h1>No Results Found</h1>
@@ -116,7 +125,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
             />
           ) : null}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
