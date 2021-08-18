@@ -174,25 +174,7 @@ class Experience extends Component {
               <div className="row">
                 <div
                   onClick={() => {
-                    let payload = {
-                      location: "virtual",
-                      city: "",
-                      trainingType: encodeURIComponent(
-                        JSON.stringify(["Strength & HIIT"])
-                      ),
-                      date: moment(new Date()).format("YYYY-MM-DD"),
-                      availability: JSON.stringify([]),
-                      label: {
-                        availability: { label: "", value: "" },
-                        trainingType: {
-                          label: "Strength",
-                          value: "Strength & HIIT",
-                        },
-                      },
-                    };
-
-                    this.props.trainerSearchFilters(payload);
-                    history.push("/trainer/find");
+                    history.push("/mobiles/filter");
                   }}
                   className="vertical"
                 >
@@ -204,25 +186,7 @@ class Experience extends Component {
                 </div>
                 <div
                   onClick={() => {
-                    let payload = {
-                      location: "virtual",
-                      city: "",
-                      trainingType: encodeURIComponent(
-                        JSON.stringify(["Boxing"])
-                      ),
-                      date: moment(new Date()).format("YYYY-MM-DD"),
-                      availability: JSON.stringify([]),
-                      label: {
-                        availability: { label: "", value: "" },
-                        trainingType: {
-                          label: "Boxing",
-                          value: "Boxing",
-                        },
-                      },
-                    };
-
-                    this.props.trainerSearchFilters(payload);
-                    history.push("/trainer/find");
+                    history.push("/mobiles/filter");
                   }}
                   className="vertical"
                 >
@@ -236,25 +200,7 @@ class Experience extends Component {
               <div className="row">
                 <div
                   onClick={() => {
-                    let payload = {
-                      location: "virtual",
-                      city: "",
-                      trainingType: encodeURIComponent(
-                        JSON.stringify(["Yoga"])
-                      ),
-                      date: moment(new Date()).format("YYYY-MM-DD"),
-                      availability: JSON.stringify([]),
-                      label: {
-                        availability: { label: "", value: "" },
-                        trainingType: {
-                          label: "Yoga",
-                          value: "Yoga",
-                        },
-                      },
-                    };
-
-                    this.props.trainerSearchFilters(payload);
-                    history.push("/trainer/find");
+                    history.push("/mobiles/filter");
                   }}
                   className="vertical"
                 >
@@ -266,25 +212,7 @@ class Experience extends Component {
                 </div>
                 <div
                   onClick={() => {
-                    let payload = {
-                      location: "virtual",
-                      city: "",
-                      trainingType: encodeURIComponent(
-                        JSON.stringify(["Pilates"])
-                      ),
-                      date: moment(new Date()).format("YYYY-MM-DD"),
-                      availability: JSON.stringify([]),
-                      label: {
-                        availability: { label: "", value: "" },
-                        trainingType: {
-                          label: "Pilates",
-                          value: "Pilates",
-                        },
-                      },
-                    };
-
-                    this.props.trainerSearchFilters(payload);
-                    history.push("/trainer/find");
+                    history.push("/mobiles/filter");
                   }}
                   className="vertical"
                 >

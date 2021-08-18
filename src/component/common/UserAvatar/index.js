@@ -60,7 +60,8 @@ export const UserAvatar = ({
   if (isError || !profilePicture) {
     StyleComponent = (
       <div
-        className={`user-avatar-pic background-${backgroundColorByName} ${className}`}
+        className={`user-avatar-pic  ${className}`}
+        style={{background:"#53BFD2"}}
       >
         {initialLetters}
       </div>
