@@ -191,7 +191,7 @@ class ChatBoxClass extends Component {
             {!isLoading ? (
               <>
                 <div className="message_right_header">
-                  <h2>{channelData?.chatTitle || "Title"}</h2>
+                  <h2 style={{textTransform:"Capitalize"}}>{channelData?.chatTitle || "Title"}</h2>
                   <div className="message_header_times">
                     <div className="message_header_items">
                       <img src={SheduleIcon} alt="icon" />

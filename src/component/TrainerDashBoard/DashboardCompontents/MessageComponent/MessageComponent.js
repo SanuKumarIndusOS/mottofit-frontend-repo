@@ -36,13 +36,15 @@ export const MessageComponent = ({
                     }
                   >
                     <div style={{ display: "flex", width:"100%", justifyContent:"space-between" }}>
-                      <h3>{item["chatTitle"] || ""}</h3>
+                      <div style={{display:"flex"}}>
+                      <h3 style={{textTransform:"Capitalize"}}>{item["chatTitle"] || ""}</h3>
                       <h3>
                         &ensp;
                         {item["members"].length > 2
                           ? "+  " + (item["members"].length - 2)
                           : null}
                       </h3>
+                      </div>
                       {date_updated && (
                         <span className="msg-timestamp-left">
                           {getFormatDate(date_updated, "LT")}
