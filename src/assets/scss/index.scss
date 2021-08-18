@@ -515,21 +515,24 @@ select {
     height: 85vh;
   }
 
-  .mobile_chat_header{
+  .mobile_chat_header {
 
-    width: 100%;
-    background-color: #2C2C2C;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-
-    h2
-    {
-      font-size: 23px;
+    display: none;
+    @media only screen and (max-width: 900px) {
+      //flex-direction: column;
+      width: 100%;
+      background-color: #2c2c2c;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       color: white;
-      font-family: "Montserrat", sans-serif;
+
+      h2 {
+        font-size: 23px;
+        color: white;
+        font-family: "Montserrat", sans-serif;
+      }
     }
   }
   .message_right_header {
@@ -543,6 +546,7 @@ select {
     -moz-box-shadow: 3px 3px 5px 6px #ccc;
     -webkit-box-shadow: 3px 3px 5px 6px #ccc;
     box-shadow: 0px 10px 0px 0px rgb(238, 173, 173);
+
     h2 {
       text-align: center;
       letter-spacing: 0px;
@@ -554,6 +558,9 @@ select {
       font-size: 22px;
       font-weight: 600;
       line-height: 58px;
+      @media only screen and (max-width: 900px) {
+        display: none;
+      }
     }
     .message_header_times {
       display: flex;
@@ -680,7 +687,7 @@ select {
     height: 50px;
     display: flex;
     align-items: center;
-    border-top: 5px solid #F6F6F6;
+    border-top: 5px solid #f6f6f6;
 
     background-color: rgb(248, 248, 248);
     input {

@@ -180,7 +180,7 @@ class ChatBoxClass extends Component {
                     {channelData?.chatTitle || "Title"}
                     
                   </h2>
-                  <h1>&#8249;</h1>
+                  <h1 onClick={()=>{ }}>&#8249;</h1>
                   
                 </div>
                 <div className="message_right_header">
