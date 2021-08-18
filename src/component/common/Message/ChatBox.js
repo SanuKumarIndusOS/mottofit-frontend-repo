@@ -12,10 +12,12 @@ import { send_unread_notification } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { getFormatDate } from "service/helperFunctions";
 import { TextFormatSharp } from "@material-ui/icons";
+import { withRouter } from 'react-router-dom'   
 
 class ChatBoxClass extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
 
     this.messagesEndRef = React.createRef();
     this.state = {
@@ -23,6 +25,11 @@ class ChatBoxClass extends Component {
       members: [],
     };
   }
+
+  goBack(){
+    this.props.history.goBack();
+}
+
 
   componentDidUpdate(prevProps) {
     // console.log(this.props, prevProps);
@@ -180,7 +187,7 @@ class ChatBoxClass extends Component {
                     {channelData?.chatTitle || "Title"}
                     
                   </h2>
-                  <h1 onClick={()=>{ }}>&#8249;</h1>
+                  <h1 onClick={this.goBack} >&#8249;</h1>
                   
                 </div>
                 <div className="message_right_header">
@@ -298,4 +305,4 @@ const mapDispatchToProps = (dispatch) => {
 
 const ChatBox = connect(mapStateToProps, mapDispatchToProps)(ChatBoxClass);
 
-export default ChatBox;
+export default withRouter(ChatBox);
