@@ -250,7 +250,7 @@ class ChatBoxClass extends Component {
                       placeholder="Type your message here.."
                       value={message}
                       onChange={this.handleChange}
-
+                   
                     />
                     <div className="submit-btn-block" onClick={this.unread}>
                       <button className="transparent-btn">

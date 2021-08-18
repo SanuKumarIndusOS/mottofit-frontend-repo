@@ -35,7 +35,7 @@ export const MessageComponent = ({
                       )
                     }
                   >
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", width:"100%", justifyContent:"space-between" }}>
                       <h3>{item["chatTitle"] || ""}</h3>
                       <h3>
                         &ensp;
@@ -43,6 +43,11 @@ export const MessageComponent = ({
                           ? "+  " + (item["members"].length - 2)
                           : null}
                       </h3>
+                      {date_updated && (
+                        <span className="msg-timestamp-left">
+                          {getFormatDate(date_updated, "LT")}
+                        </span>
+                      )}
                     </div>
                     <div>
                       {body && (
@@ -50,11 +55,11 @@ export const MessageComponent = ({
                           body?.length > 100 ? "..." : ""
                         }`}</p>
                       )}
-                      {date_updated && (
+                      {/* {date_updated && (
                         <span className="msg-timestamp-left">
                           {getFormatDate(date_updated, "LT")}
                         </span>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>
