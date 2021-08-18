@@ -514,6 +514,24 @@ select {
   @media only screen and (max-width: 900px) {
     height: 85vh;
   }
+
+  .mobile_chat_header{
+
+    width: 100%;
+    background-color: #2C2C2C;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+    h2
+    {
+      font-size: 23px;
+      color: white;
+      font-family: "Montserrat", sans-serif;
+    }
+  }
   .message_right_header {
     width: 100%;
     display: flex;

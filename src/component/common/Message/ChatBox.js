@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 import LocationIcon from "../../../assets/files/TrainerDashboard/Message/Location Icon.svg";
 import SheduleIcon from "../../../assets/files/TrainerDashboard/Message/Shedule Icon.svg";
 import AvailabilityIcon from "../../../assets/files/TrainerDashboard/Message/Availability Icon.svg";
@@ -21,8 +20,7 @@ class ChatBoxClass extends Component {
     this.messagesEndRef = React.createRef();
     this.state = {
       message: "",
-      members: []
-
+      members: [],
     };
   }
 
@@ -41,19 +39,12 @@ class ChatBoxClass extends Component {
         // console.log("hrllo", this.props.isLoading, prevProps.isLoading);
       }, 100);
     }
-
-
-
   }
 
   componentDidMount() {
     this.scrollToMessageListBottom();
 
     // temp = [];
-
-
-
-
   }
 
   scrollToMessageListBottom = () => {
@@ -75,7 +66,6 @@ class ChatBoxClass extends Component {
   handleSendMessage = (e) => {
     e.preventDefault();
 
-   
     const { message } = this.state;
     console.log(message);
 
@@ -93,9 +83,6 @@ class ChatBoxClass extends Component {
         this.scrollToMessageListBottom();
       });
     }
-
-
-
   };
 
   formatMessage = (messages = []) => {
@@ -135,31 +122,29 @@ class ChatBoxClass extends Component {
   };
 
   unread = () => {
-    var temp = []
+    var temp = [];
 
     //console.log("hit");
 
-    this.setState({
-      members: this.props.currentChannelMembers
-    }, () => {
+    this.setState(
+      {
+        members: this.props.currentChannelMembers,
+      },
+      () => {
+        let rec = this.state.members.filter((item) => {
+          return item.memberIdenity !== localStorage.getItem("user-id");
+        });
 
+        temp = rec.map((item) => {
+          return item.userId;
+        });
 
-      let rec = this.state.members.filter((item) => {
-        return item.memberIdenity !== localStorage.getItem('user-id')
-      })
-
-      temp = rec.map((item) => { return item.userId })
-
-      this.props.send_unread_notification({
-        "recepients": temp
-      })
-    }
+        this.props.send_unread_notification({
+          recepients: temp,
+        });
+      }
     );
-
-
-
-
-  }
+  };
 
   render() {
     const {
@@ -190,8 +175,18 @@ class ChatBoxClass extends Component {
           <>
             {!isLoading ? (
               <>
+                <div className="mobile_chat_header">
+                  <h2 style={{ textTransform: "Capitalize" }}>
+                    {channelData?.chatTitle || "Title"}
+                    
+                  </h2>
+                  <h1>&#8249;</h1>
+                  
+                </div>
                 <div className="message_right_header">
-                  <h2 style={{textTransform:"Capitalize"}}>{channelData?.chatTitle || "Title"}</h2>
+                  <h2 style={{ textTransform: "Capitalize" }}>
+                    {channelData?.chatTitle || "Title"}
+                  </h2>
                   <div className="message_header_times">
                     <div className="message_header_items">
                       <img src={SheduleIcon} alt="icon" />
@@ -216,8 +211,9 @@ class ChatBoxClass extends Component {
                   </div>
                   <p>
                     {typingMembers.length > 0 && (
-                      <span className="ml-auto text-primary fw-600">{`${typingMembers.toString()} ${typingMembers.length > 1 ? "are" : "is"
-                        } typing...`}</span>
+                      <span className="ml-auto text-primary fw-600">{`${typingMembers.toString()} ${
+                        typingMembers.length > 1 ? "are" : "is"
+                      } typing...`}</span>
                     )}
                   </p>
                 </div>
@@ -250,7 +246,6 @@ class ChatBoxClass extends Component {
                       placeholder="Type your message here.."
                       value={message}
                       onChange={this.handleChange}
-                   
                     />
                     <div className="submit-btn-block" onClick={this.unread}>
                       <button className="transparent-btn">
@@ -262,15 +257,17 @@ class ChatBoxClass extends Component {
               </>
             ) : (
               <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-                <span className="info-badge">{`${isLoading ? "Loading..." : "Connecting..."
-                  }`}</span>
+                <span className="info-badge">{`${
+                  isLoading ? "Loading..." : "Connecting..."
+                }`}</span>
               </div>
             )}
           </>
         ) : (
           <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-            <span className="info-badge">{`${isLoading ? "Loading..." : "Select a chat to start messaging"
-              }`}</span>
+            <span className="info-badge">{`${
+              isLoading ? "Loading..." : "Select a chat to start messaging"
+            }`}</span>
           </div>
         )}
       </div>
@@ -293,7 +290,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       trainerChannel,
-      send_unread_notification
+      send_unread_notification,
     },
     dispatch
   );

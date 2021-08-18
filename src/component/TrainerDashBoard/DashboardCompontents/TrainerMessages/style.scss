@@ -401,7 +401,16 @@
 }
 
 .info-badge {
-  background: #ddd;
-  border-radius: 10px;
+  background: #53BFD2;
+  border-radius: 20px;
   padding: 0px 0.6rem;
+  font-size: 10px;
+  height: 15px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  
+  
 }
