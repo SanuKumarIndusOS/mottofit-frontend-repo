@@ -36,7 +36,7 @@ export const MessageComponent = ({
                     }
                   >
                     <div style={{ display: "flex", width:"100%", justifyContent:"space-between" }}>
-                      <div style={{display:"flex"}}>
+                      <div style={{display:"flex", width:"85%"}}>
                       <h3 style={{textTransform:"Capitalize"}}>{item["chatTitle"] || ""}</h3>
                       <h3>
                         &ensp;

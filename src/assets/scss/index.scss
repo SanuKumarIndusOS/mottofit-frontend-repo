@@ -541,7 +541,7 @@ select {
       display: flex;
       align-items: center;
       @media only screen and (max-width: 900px) {
-        flex-direction: column;
+        //flex-direction: column;
       }
       .message_header_items {
         display: flex;
