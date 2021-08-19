@@ -69,12 +69,13 @@ export const TrainerApi = {
       city: null,
     },
     get api() {
-
-      return(this.url
-        +
-         `?location=${this.query.location}&trainingType=${this.query.trainingType}&date=["${this.query.date}","${this.query.date}"]&availability=${this.query.availability}` +
-         `&timeZone=America/New_York&city="${this.query.city || ""}"&page=${this.page}&limit=${this.limit}&listType=${this.key}`)
-      
+      return (
+        this.url +
+        `?location=${this.query.location}&trainingType=${this.query.trainingType}&date=["${this.query.date}","${this.query.date}"]&availability=${this.query.availability}` +
+        `&timeZone=America/New_York&city="${this.query.city || ""}"&page=${
+          this.page
+        }&limit=${this.limit}&listType=${this.key}`
+      );
     },
   },
   trainerAvailableApi: {
@@ -501,6 +502,19 @@ export const notificationApi = {
     method: "post",
     url: "edit/login-status",
     baseURL: "normal",
+    get api() {
+      return this.url;
+    },
+  },
+};
+
+export const AdminApi = {
+
+  createCoupon:
+  {
+    method: "post",
+    url:"/code", 
+    baseURL: "payment",
     get api() {
       return this.url;
     },

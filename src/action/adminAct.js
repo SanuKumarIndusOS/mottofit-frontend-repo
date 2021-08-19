@@ -1,4 +1,4 @@
-import { TrainerApi } from "service/apiVariables";
+import { TrainerApi , AdminApi } from "service/apiVariables";
 
 //change Approval
 export const changeApproval = (body, id) => (dispatch, getState, { api }) => {
@@ -206,3 +206,26 @@ export const createDirectMessage = (id) => (dispatch, getState, { api }) => {
       });
   });
 };
+
+
+export const CreateCoupon = (payload) => (dispatch, getState, { api }) => {
+  return new Promise((resolve, reject) => {
+    const { CreateCoupon } = AdminApi.createCoupon;
+
+    // let payload = {
+    //   userId: id,
+    //   status: type,
+    // };
+
+    CreateCoupon.body = payload;
+    console.log(payload, CreateCoupon);
+    api({ ...CreateCoupon })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
