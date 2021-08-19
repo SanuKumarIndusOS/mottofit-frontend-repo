@@ -10,7 +10,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 function Marketing() {
   const [open, setOpen] = React.useState(false);
+  
   const [ctype, setCtype] = React.useState("");
+  const [ccode, setCode] = React.useState("");
+  const [cvalue, setCvalue] = React.useState(0);
 
   const handleClose = (value) => {
     setOpen(false);
@@ -37,7 +40,7 @@ function Marketing() {
           <h3>Create Coupon</h3>
           <form>
             <br></br>
-            <TextField label="CODE" variant="filled" />
+            <TextField label="CODE" variant="filled" onChange={(e)=>{ setCode(e.target.value)}} />
             <br></br>
             <FormControl variant="filled">
               <InputLabel id="demo-simple-select-disabled-label">
@@ -51,19 +54,22 @@ function Marketing() {
                   setCtype(event.target.value);
                 }}
               >
-                <MenuItem value={10}>ONE TIME</MenuItem>
-                <MenuItem value={20}>PERMANENT</MenuItem>
+                <MenuItem value={"ONE_TIME"}>ONE TIME</MenuItem>
+                <MenuItem value={"PERMANENT"}>PERMANENT</MenuItem>
               </Select>
             </FormControl>
             <br></br>
-            <TextField label="COUPON VALUE" variant="filled" type="number" />
+            <TextField label="COUPON VALUE (in %)" variant="filled" type="number" onChange={(e)=>{ setCvalue(e.target.value)}} />
             <br></br>
-            <Button variant="contained" color="primary" disableElevation>
+            <Button variant="contained" color="primary" disableElevation >
               <b>CREATE</b>
             </Button>
           </form>
         </div>
       </Dialog>
+
+      {ctype} {cvalue} {ccode}
+      
     </div>
   );
 }
