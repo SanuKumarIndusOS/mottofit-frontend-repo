@@ -45,7 +45,7 @@ export const SideBarRouteDataAdmin = [
   },
   {
     title: "Marketing",
-    // path: "/trainers/dashboard/notification",
+    path: "/admins/marketing",
     icon: <img src={NotificationIcon} alt="icon" />,
   },
   {

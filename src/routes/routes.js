@@ -181,6 +181,13 @@ const routers = [
         auth: false,
         exact: true,
       },
+      {
+        path: "/marketing",
+        componentPath: "pages/AdminDashboard/Marketing/Marketing",
+        name: "Marketing",
+        auth: false,
+        exact: true,
+      },
     ],
     // childrens: [
     //     {
