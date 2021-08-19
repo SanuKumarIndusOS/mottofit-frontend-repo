@@ -519,4 +519,16 @@ export const AdminApi = {
       return this.url;
     },
   },
+
+  GetAllCoupons:
+  {
+    method: "get",
+    url:"codes", 
+    baseURL: "payment",
+    get api() {
+      return this.url;
+    },
+  },
+
+
 };

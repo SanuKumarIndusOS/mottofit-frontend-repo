@@ -13,18 +13,26 @@ import CardActions from "@material-ui/core/CardActions";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CreateCoupon } from "action/adminAct";
+import { CreateCoupon,GetAllCoupon } from "action/adminAct";
 
-function Marketing({ CreateCoupon }) {
+function Marketing({ CreateCoupon, GetAllCoupon }) {
   const [open, setOpen] = React.useState(false);
 
   const [ctype, setCtype] = React.useState("");
   const [ccode, setCode] = React.useState("");
   const [cvalue, setCvalue] = React.useState(0);
 
+  const [couponList, setCouponList] = React.useState([]);
+
   const handleClose = (value) => {
     setOpen(false);
   };
+
+  React.useEffect(() => {
+
+    GetAllCoupon().then(data => {console.log(data)})
+   
+  }, [])
   return (
     <div className="marketing_container">
       <div className="marketing_header">
@@ -44,7 +52,7 @@ function Marketing({ CreateCoupon }) {
             <div className="cval">20% OFF</div>
             <div className="ccode">TEST CODE</div>
 
-            <div className="ctype"> <mark>One Time use</mark></div>
+            <div className="ctype"> <mark >One Time use</mark></div>
           </div>
 
           <CardActions>
@@ -124,7 +132,7 @@ function Marketing({ CreateCoupon }) {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ CreateCoupon }, dispatch);
+  return bindActionCreators({ CreateCoupon, GetAllCoupon }, dispatch);
 };
 
 const MarketingC = connect(null, mapDispatchToProps)(Marketing);
