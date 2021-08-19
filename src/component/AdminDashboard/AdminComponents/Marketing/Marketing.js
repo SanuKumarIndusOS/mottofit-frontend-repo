@@ -3,9 +3,14 @@ import "./styles.scss";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
 
 function Marketing() {
   const [open, setOpen] = React.useState(false);
+  const [ctype, setCtype] = React.useState("");
 
   const handleClose = (value) => {
     setOpen(false);
@@ -34,10 +39,28 @@ function Marketing() {
             <br></br>
             <TextField label="CODE" variant="filled" />
             <br></br>
-            <TextField label="TYPE" variant="filled" />
+            <FormControl variant="filled">
+              <InputLabel id="demo-simple-select-disabled-label">
+                TYPE
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={ctype}
+                onChange={(event) => {
+                  setCtype(event.target.value);
+                }}
+              >
+                <MenuItem value={10}>ONE TIME</MenuItem>
+                <MenuItem value={20}>PERMANENT</MenuItem>
+              </Select>
+            </FormControl>
             <br></br>
-            <TextField label="COUPON VALUE" variant="filled" />
+            <TextField label="COUPON VALUE" variant="filled" type="number" />
             <br></br>
+            <Button variant="contained" color="primary" disableElevation>
+              <b>CREATE</b>
+            </Button>
           </form>
         </div>
       </Dialog>
