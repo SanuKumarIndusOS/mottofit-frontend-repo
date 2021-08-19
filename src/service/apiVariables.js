@@ -510,10 +510,10 @@ export const notificationApi = {
 
 export const AdminApi = {
 
-  createCoupon:
+  CreateCoupon:
   {
     method: "post",
-    url:"/code", 
+    url:"code", 
     baseURL: "payment",
     get api() {
       return this.url;

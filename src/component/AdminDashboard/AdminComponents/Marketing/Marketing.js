@@ -78,7 +78,17 @@ function Marketing({CreateCoupon}) {
               }}
             />
             <br></br>
-            <Button variant="contained" color="primary" disableElevation>
+            <Button variant="contained" color="primary" disableElevation 
+            onClick={()=>
+            {
+               let payload = {
+                "code": ccode,
+                "type":ctype,
+                "couponValue":cvalue
+            }
+
+            CreateCoupon(payload).then(data => {console.log(data)})
+            }}>
               <b>CREATE</b>
             </Button>
           </form>

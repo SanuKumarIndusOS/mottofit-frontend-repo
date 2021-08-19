@@ -210,15 +210,16 @@ export const createDirectMessage = (id) => (dispatch, getState, { api }) => {
 
 export const CreateCoupon = (payload) => (dispatch, getState, { api }) => {
   return new Promise((resolve, reject) => {
-    const { CreateCoupon } = AdminApi.createCoupon;
+    const { CreateCoupon } = AdminApi;
 
     // let payload = {
     //   userId: id,
     //   status: type,
     // };
-
+   
     CreateCoupon.body = payload;
-    console.log(payload, CreateCoupon);
+    console.log( CreateCoupon);
+    
     api({ ...CreateCoupon })
       .then(({ data }) => {
         resolve(data);
