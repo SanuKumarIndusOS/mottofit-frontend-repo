@@ -13,7 +13,7 @@ import CardActions from "@material-ui/core/CardActions";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CreateCoupon,GetAllCoupon } from "action/adminAct";
+import { CreateCoupon, GetAllCoupon } from "action/adminAct";
 
 function Marketing({ CreateCoupon, GetAllCoupon }) {
   const [open, setOpen] = React.useState(false);
@@ -29,10 +29,11 @@ function Marketing({ CreateCoupon, GetAllCoupon }) {
   };
 
   React.useEffect(() => {
-
-    GetAllCoupon().then(data => {console.log(data)})
-   
-  }, [])
+    GetAllCoupon().then((data) => {
+      console.log(data);
+      setCouponList(data);
+    });
+  }, []);
   return (
     <div className="marketing_container">
       <div className="marketing_header">
@@ -47,16 +48,50 @@ function Marketing({ CreateCoupon, GetAllCoupon }) {
         </Button>
       </div>
       <div className="coupon_list">
+        {couponList?.map((item) => {
+          return (
+            <Card className="coupon_card">
+              <div className="coupon_card_body">
+                <div className="cval">{item.couponValue}% OFF</div>
+                <div className="ccode">{item.code}</div>
+
+                <div className="ctype">
+                  
+                  <mark>{item.type} use</mark>
+                </div>
+              </div>
+
+              <CardActions>
+                <Button
+                  size="medium"
+                  variant="contained"
+                  color="primary"
+                  style={{ width: "100%" }}
+                >
+                  Activate
+                </Button>
+              </CardActions>
+            </Card>
+          );
+        })}
         <Card className="coupon_card">
           <div className="coupon_card_body">
             <div className="cval">20% OFF</div>
             <div className="ccode">TEST CODE</div>
 
-            <div className="ctype"> <mark >One Time use</mark></div>
+            <div className="ctype">
+              {" "}
+              <mark>One Time use</mark>
+            </div>
           </div>
 
           <CardActions>
-            <Button size="medium" variant="contained" color="primary" style={{width:"100%"}}>
+            <Button
+              size="medium"
+              variant="contained"
+              color="primary"
+              style={{ width: "100%" }}
+            >
               Activate
             </Button>
           </CardActions>
@@ -118,6 +153,13 @@ function Marketing({ CreateCoupon, GetAllCoupon }) {
 
                 CreateCoupon(payload).then((data) => {
                   console.log(data);
+                  GetAllCoupon().then((data) => {
+                  
+                    setCouponList(data);
+                    setOpen(false);
+                  });
+
+                  
                 });
               }}
             >
