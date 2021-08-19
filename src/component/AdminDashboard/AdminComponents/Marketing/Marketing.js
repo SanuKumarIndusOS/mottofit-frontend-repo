@@ -7,12 +7,15 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CreateCoupon } from "action/adminAct";
 
-function Marketing({CreateCoupon}) {
+function Marketing({ CreateCoupon }) {
   const [open, setOpen] = React.useState(false);
 
   const [ctype, setCtype] = React.useState("");
@@ -34,6 +37,22 @@ function Marketing({CreateCoupon}) {
         >
           <b>CREATE COUPON</b>
         </Button>
+      </div>
+      <div className="coupon_list">
+        <Card className="coupon_card">
+          <div className="coupon_card_body">
+            <div className="cval">20% OFF</div>
+            <div className="ccode">TEST CODE</div>
+
+            <div className="ctype"> <mark>One Time use</mark></div>
+          </div>
+
+          <CardActions>
+            <Button size="medium" variant="contained" color="primary" style={{width:"100%"}}>
+              Activate
+            </Button>
+          </CardActions>
+        </Card>
       </div>
       <Dialog
         onClose={handleClose}
@@ -78,29 +97,34 @@ function Marketing({CreateCoupon}) {
               }}
             />
             <br></br>
-            <Button variant="contained" color="primary" disableElevation 
-            onClick={()=>
-            {
-               let payload = {
-                "code": ccode,
-                "type":ctype,
-                "couponValue":cvalue
-            }
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              onClick={() => {
+                let payload = {
+                  code: ccode,
+                  type: ctype,
+                  couponValue: cvalue,
+                };
 
-            CreateCoupon(payload).then(data => {console.log(data)})
-            }}>
+                CreateCoupon(payload).then((data) => {
+                  console.log(data);
+                });
+              }}
+            >
               <b>CREATE</b>
             </Button>
           </form>
         </div>
       </Dialog>
-      {ctype} {cvalue} {ccode}
+      {/* {ctype} {cvalue} {ccode} */}
     </div>
   );
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({CreateCoupon}, dispatch);
+  return bindActionCreators({ CreateCoupon }, dispatch);
 };
 
 const MarketingC = connect(null, mapDispatchToProps)(Marketing);

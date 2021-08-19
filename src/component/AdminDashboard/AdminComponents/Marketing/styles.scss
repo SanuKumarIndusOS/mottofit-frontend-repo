@@ -1,25 +1,53 @@
 .marketing_container {
-
-    margin-left: 5rem;
-    margin-right: 5rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
   .marketing_header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: "Montserrat", sans-serif;
+  }
 
-  
+  .coupon_list
+  {
+    width: 100%;
+    .coupon_card
+    {
+      margin-top: 2rem;
+      width: 180px;
+      
+      .coupon_card_body
+      {
+        padding: 1rem;
+       
+
+        .cval
+        {
+          font-size: 30px;
+        }
+
+        .ccode{
+          font-size: 20px;
+          font-weight: bold;
+          letter-spacing: 2px;
+        }
+
+        .ctype
+        {
+         
+          margin-top: 8px;
+        }
+      }
+     
+    }
   }
 }
 
-.create_coupon_form
-{
- 
+.create_coupon_form {
   margin: 3rem;
 
-  form
-  {
-      display: flex;
-      flex-direction: column;
+  form {
+    display: flex;
+    flex-direction: column;
   }
 }
