@@ -492,6 +492,7 @@ const UserBookSessionFC = ({
         GetActivePass(userId, trainerId, "virtual")
           .then((data) => {
             console.log(data);
+            mottoPassData({availPass:data?.id});
           })
           .catch((er) => {
             console.log(er);
@@ -504,6 +505,7 @@ const UserBookSessionFC = ({
           GetActivePass(userId, trainerId, "trainerLocation")
             .then((data) => {
               console.log(data);
+              mottoPassData({availPass:data?.id});
             })
             .catch((er) => {
               console.log(er);
@@ -515,8 +517,7 @@ const UserBookSessionFC = ({
           GetActivePass(userId, trainerId, "clientLocation")
             .then((data) => {
               console.log(data);
-              if (data === undefined) {
-              }
+              mottoPassData({availPass:data?.id})
             })
             .catch((er) => {
               console.log(er);
