@@ -39,6 +39,7 @@ const UserPaymentsFC = ({
   queryQbject,
   selectedTimes,
   selectedTrainerData,
+  mottoPassDataVal,
   ...restProps
 }) => {
   //for material ui radio buttom (temp)
@@ -176,7 +177,7 @@ const UserPaymentsFC = ({
   useEffect(() => {
     updatePricing();
     setCheckPayAhead(false);
-    console.log(sessionData);
+    console.log(mottoPassDataVal);
 
     window.scrollTo(0, 0);
     if (Object.keys(sessionData).length === 0)
@@ -636,6 +637,7 @@ const mapStateToProps = (state) => ({
   sessionData: state.userReducer.sessionData,
   trainerData: state.userReducer.selectedTrainerData?.trainerData,
   selectedTrainerData: state.userReducer.selectedTrainerData,
+  mottoPassDataVal: state.userReducer.mottoPass,
 });
 
 const mapDispatchToProps = (dispatch) => {

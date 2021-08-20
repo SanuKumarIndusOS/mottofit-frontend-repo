@@ -8,9 +8,9 @@ import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateUserDetails } from "action/userAct";
+import { updateUserDetails, mottoPassData } from "action/userAct";
 
-const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
+const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
   const [threeSessionRate, setthreeSessionRate] = React.useState();
   const [tensessionRate, settensessionRate] = React.useState();
   const [sessionType, setsessionType] = React.useState("");
@@ -154,6 +154,8 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
                             passType: pass_type,
                           };
 
+                          mottoPassData(newPass);
+
                           console.log(newPass);
                         }}
                       >
@@ -266,7 +268,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({
+    mottoPassData
+  }, dispatch);
 };
 
 const UserMottoPassC = connect(
