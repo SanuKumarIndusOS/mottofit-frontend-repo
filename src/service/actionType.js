@@ -5,6 +5,7 @@ export const HomeActionType = {
 export const UserActionType = {
   updateUserDetails: "UPDATE_USER_DETAILS",
   restUserDetails: "RESET_USER_DETAILS",
+  mottoPassData:"MOTTO_PASS_DATA",
 };
 
 export const TrainerActionType = {

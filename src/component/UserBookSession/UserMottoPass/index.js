@@ -17,11 +17,11 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
 
   React.useEffect(() => {
     //const { oneOnOnePricing } = selectedTrainerData?.trainerData;
-   // console.log(selectedTrainerData?.trainerData);
+    // console.log(selectedTrainerData?.trainerData);
     // console.log(sessionData);
 
     if (sessionData?.preferedTrainingMode === "virtual") {
-      setsessionType("(Virtual)")
+      setsessionType("(Virtual)");
       setthreeSessionRate(
         selectedTrainerData?.trainerData?.oneOnOnePricing
           ?.passRatefor3SessionAtVirtual
@@ -32,8 +32,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
       );
     } else {
       if (sessionData?.trainingVenue?.value === "trainerLocation") {
-
-        setsessionType("(Trainer Location)")
+        setsessionType("(Trainer Location)");
         setthreeSessionRate(
           selectedTrainerData?.trainerData?.oneOnOnePricing
             ?.passRatefor3SessionAtTrainerLocation
@@ -44,8 +43,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
             ?.passRatefor10SessionAtTrainerLocation
         );
       } else {
-
-        setsessionType("(Client Location)")
+        setsessionType("(Client Location)");
         setthreeSessionRate(
           selectedTrainerData?.trainerData?.oneOnOnePricing
             ?.passRatefor3SessionAtClientLocation
@@ -110,7 +108,8 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
                       <div className="session_pass_content">
                         <img src={Tick} alt="icon" />
                         <h5>
-                          It can be used anytime within 30 days of the purchase {sessionType}.
+                          It can be used anytime within 30 days of the purchase{" "}
+                          {sessionType}.
                         </h5>
                       </div>
                       <div className="session_offer">
@@ -119,13 +118,45 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
                           {threeSessionRate}
                           <span className="offer">/ Session </span>
                         </h1>
-
-
                       </div>
-
                     </div>
                     <div className="get_sessionPass">
-                      <button>
+                      <button
+                        onClick={() => {
+                          // console.log(sessionData, "hit");
+
+                          let pass_type;
+                          let _price;
+                          if (sessionData?.preferedTrainingMode === "virtual") {
+                            pass_type = "virtual";
+                            _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                            ?.passRatefor3SessionAtVirtual
+                          }else
+                          {
+                            pass_type = sessionData?.trainingVenue?.value
+
+                            if(sessionData?.trainingVenue?.value === "clientLocation")
+                            {
+                              _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                              ?.passRatefor3SessionAtClientLocation
+                            }else
+                            {
+                              _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                              ?.passRatefor3SessionAtTrainerLocation 
+                            }
+                          }
+                          let newPass = {
+                            price: _price,
+                            purchaseDate: new Date().toISOString().slice(0, 10),
+                            passValidity: 30,
+                            totalPasses: 3,
+                            timeZone: "America/New_York",
+                            passType: pass_type,
+                          };
+
+                          console.log(newPass);
+                        }}
+                      >
                         get this pass now <BlueHoverButton />
                       </button>
                     </div>
@@ -156,7 +187,8 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
                       <div className="session_pass_content">
                         <img src={Tick} alt="icon" />
                         <h5>
-                          It can be used anytime within 90 days of the purchase    {sessionType}.
+                          It can be used anytime within 90 days of the purchase{" "}
+                          {sessionType}.
                         </h5>
                       </div>
                       <div className="session_offer">
@@ -168,7 +200,42 @@ const UserMottoPass = ({ selectedTrainerData, sessionData }) => {
                       </div>
                     </div>
                     <div className="get_sessionPass">
-                      <button>
+                      <button
+                      
+                      onClick={() => {
+                        // console.log(sessionData, "hit");
+
+                        let pass_type;
+                        let _price;
+                        if (sessionData?.preferedTrainingMode === "virtual") {
+                          pass_type = "virtual";
+                          _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtVirtual
+                        }else
+                        {
+                          pass_type = sessionData?.trainingVenue?.value
+
+                          if(sessionData?.trainingVenue?.value === "clientLocation")
+                          {
+                            _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                            ?.passRatefor10SessionAtClientLocation
+                          }else
+                          {
+                            _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                            ?.passRatefor10SessionAtTrainerLocation 
+                          }
+                        }
+                        let newPass = {
+                          price: _price,
+                          purchaseDate: new Date().toISOString().slice(0, 10),
+                          passValidity: 90,
+                          totalPasses: 10,
+                          timeZone: "America/New_York",
+                          passType: pass_type,
+                        };
+
+                        console.log(newPass);
+                      }}>
                         get this pass now <BlueHoverButton />
                       </button>
                     </div>

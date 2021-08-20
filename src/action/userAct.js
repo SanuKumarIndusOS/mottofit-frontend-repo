@@ -139,3 +139,13 @@ export const GetActivePass =
         });
     });
   };
+
+  //save mottoPass data
+
+export const mottoPassData = (payload) => (dispatch) => {
+  return new Promise((resolve) => {
+    dispatch({ type: UserActionType.mottoPassData, payload });
+
+    resolve(true);
+  });
+};

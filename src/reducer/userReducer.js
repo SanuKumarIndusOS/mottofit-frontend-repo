@@ -8,6 +8,7 @@ const initialState = {
   selectedTimes: [],
   defaulCardDetails: {},
   submittedData: {},
+  mottoPass: {},
   currentAcceptedInvitationId: "",
   nextAction: null,
   isModelOpen: false,
@@ -20,12 +21,18 @@ export default (state = Object.assign({}, initialState), { type, payload }) => {
         ...state,
         ...payload,
       };
+    case UserActionType.mottoPassData:
+      return {
+        ...state,
+        mottoPass: payload,
+      };
     case UserActionType.restUserDetails:
       return {
         data: "",
         sessionData: {},
         bookingData: {},
         selectedTrainerData: {},
+        mottoPass: {},
         selectedTimes: [],
         defaulCardDetails: {},
       };
