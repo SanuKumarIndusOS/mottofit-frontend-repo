@@ -123,12 +123,13 @@ export const invitationSession =
 
 // Get Active Motto passes
 export const GetActivePass =
-  (userId, trainerId) =>
+  (userId, trainerId, passType) =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
       const { getActivePass } = userApi;
       getActivePass.trainerId = trainerId;
       getActivePass.userId = userId;
+      getActivePass.passType = passType;
 
       api({ ...getActivePass })
         .then(({ data }) => {

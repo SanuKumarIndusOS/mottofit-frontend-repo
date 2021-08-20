@@ -465,8 +465,9 @@ export const userApi = {
     baseURL: "normal",
     userId: "",
     trainerId: "",
+    passType:"",
     get api() {
-      return `${this.url}?userId=${this.userId}&trainerId=${this.trainerId}`;
+      return `${this.url}?userId=${this.userId}&trainerId=${this.trainerId}&passType=${this.passType}`;
     },
   },
 };

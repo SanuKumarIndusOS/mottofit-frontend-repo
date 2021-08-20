@@ -15,7 +15,11 @@ import "react-responsive-modal/styles.css";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateUserDetails, GetActivePass,  mottoPassData } from "action/userAct";
+import {
+  updateUserDetails,
+  GetActivePass,
+  mottoPassData,
+} from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
@@ -475,18 +479,22 @@ const UserBookSessionFC = ({
     //     });
 
     if (sessionType === "1 ON 1 TRAINING") {
-     
       let trainerId = selectedTrainerData?.trainerId;
       let userId = localStorage.getItem("user-id");
-     
-      GetActivePass(userId, trainerId).then((data) => {
+
+      GetActivePass(userId, trainerId, "trainerLocation").then((data) => {
         console.log(data);
       });
 
+      console.log(trainingVenue.value, preferedTrainingMode);
+      if(preferedTrainingMode === "virtual")
+      {
+
+      }
       //Check for motto pass if available go to checkout
-      history.push({
-        pathname: "/user/motto-pass",
-      });
+      // history.push({
+      //   pathname: "/user/motto-pass",
+      // });
     } else {
       history.push({
         pathname: "/user/payment",
