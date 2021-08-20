@@ -15,7 +15,7 @@ import "react-responsive-modal/styles.css";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateUserDetails } from "action/userAct";
+import { updateUserDetails, GetActivePass } from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
@@ -52,6 +52,7 @@ let trainingVenueOptions = [
 const closeIcon = <img src={CloseIcon} alt="close" />;
 const UserBookSessionFC = ({
   updateUserDetails,
+  GetActivePass,
   sessionData,
   queryObject,
   selectedTrainerData,
@@ -87,7 +88,7 @@ const UserBookSessionFC = ({
     const tempTrainerData =
       selectedTrainerData?.trainerData || selectedTrainerData;
 
-     console.log( selectedTrainerData?.trainerData, "st");
+    console.log(selectedTrainerData?.trainerData, "st");
 
     if (!tempTrainerData?.id) return history.push("/trainer/find");
 
@@ -458,22 +459,27 @@ const UserBookSessionFC = ({
         price,
         sessionType,
         trainingType,
-       
       },
     };
 
     // console.log("called", storeData["sessionData"]);
     updateUserDetails(storeData);
 
-   // console.log(storeData);
+    // console.log(storeData);
 
     // history.push({
     //       pathname: "/user/payment",
     //     });
 
-    
     if (sessionType === "1 ON 1 TRAINING") {
-    
+     
+      let trainerId = selectedTrainerData?.trainerId;
+      let userId = localStorage.getItem("user-id");
+     
+      GetActivePass(userId, trainerId).then((data) => {
+        console.log(data);
+      });
+
       //Check for motto pass if available go to checkout
       history.push({
         pathname: "/user/motto-pass",
@@ -543,7 +549,7 @@ const UserBookSessionFC = ({
                         : "virtual"
                     }`}
                     onChange={(tabId) => {
-                     // console.log(tabId);
+                      // console.log(tabId);
                     }}
                   >
                     <div className="sesstion_tabslist container">
@@ -1235,6 +1241,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       updateUserDetails,
+      GetActivePass,
     },
     dispatch
   );
