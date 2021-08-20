@@ -18,6 +18,7 @@ import {
   scheduleSession,
   resetUserDetails,
   updateUserDetails,
+  mottoPassData,
 } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
@@ -117,6 +118,14 @@ const UserPaymentsFC = ({
       participantsCount: checkPayAhead ? parseInt(friendsCount) : 0,
     };
 
+    if(Object.keys(mottoPassDataVal).length  === 0)
+    {
+      console.log(mottoPassDataVal, "empty");
+    }else
+    {
+      console.log(mottoPassDataVal,"full");
+    }
+
   
 
     // console.log(
@@ -127,35 +136,35 @@ const UserPaymentsFC = ({
 
     // console.log(scheduleBody, "l");
 
-    scheduleSession(scheduleBody)
-      .then((res) => {
-        if (res.session.trainingType === "1on1") {
-          history.push("/users/dashboard/session");
-        } else if (
-          res.session.trainingType === "social" ||
-          res.session.trainingType === "class"
-        ) {
-          let reduxData = {
-            submittedData: {
-              ...res.session,
-            },
-          };
-          // console.log(res);
-          restProps?.updateUserDetails(reduxData);
-          checkPayAhead && res.session.trainingType === "social"
-            ? history.push("/users/dashboard/session")
-            : history.push("/user/with-friends");
-        }
+    // scheduleSession(scheduleBody)
+    //   .then((res) => {
+    //     if (res.session.trainingType === "1on1") {
+    //       history.push("/users/dashboard/session");
+    //     } else if (
+    //       res.session.trainingType === "social" ||
+    //       res.session.trainingType === "class"
+    //     ) {
+    //       let reduxData = {
+    //         submittedData: {
+    //           ...res.session,
+    //         },
+    //       };
+    //       // console.log(res);
+    //       restProps?.updateUserDetails(reduxData);
+    //       checkPayAhead && res.session.trainingType === "social"
+    //         ? history.push("/users/dashboard/session")
+    //         : history.push("/user/with-friends");
+    //     }
 
-        // restProps.resetUserDetails();
-      })
-      .catch((error) => {
-        Toast({
-          type: "error",
-          message: error.message || "Something went wrong",
-        });
-        // console.log(error);
-      });
+    //     // restProps.resetUserDetails();
+    //   })
+    //   .catch((error) => {
+    //     Toast({
+    //       type: "error",
+    //       message: error.message || "Something went wrong",
+    //     });
+    //     // console.log(error);
+    //   });
   };
 
   const tempTrainerData = trainerData || selectedTrainerData;

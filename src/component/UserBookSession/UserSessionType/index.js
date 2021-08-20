@@ -15,7 +15,7 @@ import "react-responsive-modal/styles.css";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateUserDetails, GetActivePass } from "action/userAct";
+import { updateUserDetails, GetActivePass,  mottoPassData } from "action/userAct";
 import { updateTrainerDetails } from "action/trainerAct";
 import { history } from "helpers";
 import { useLocation } from "react-router-dom";
@@ -56,6 +56,7 @@ const UserBookSessionFC = ({
   sessionData,
   queryObject,
   selectedTrainerData,
+  mottoPassData,
 }) => {
   const [selectedOption, setSelectedOption] = useState([]);
   const [trainingType, setTrainingType] = useState("");
@@ -251,6 +252,8 @@ const UserBookSessionFC = ({
     setAvailableLocation(tempAvailableLocation);
     // console.log(location.state["slotDetails"]);
     window.scrollTo(0, 0);
+
+    mottoPassData({});
   }, []);
 
   const getPricingObject = () => {
@@ -1242,6 +1245,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       GetActivePass,
+      mottoPassData,
     },
     dispatch
   );
