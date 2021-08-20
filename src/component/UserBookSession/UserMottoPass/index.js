@@ -9,6 +9,7 @@ import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateUserDetails, mottoPassData } from "action/userAct";
+import { history } from "helpers";
 
 const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
   const [threeSessionRate, setthreeSessionRate] = React.useState();
@@ -19,6 +20,8 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
     //const { oneOnOnePricing } = selectedTrainerData?.trainerData;
     // console.log(selectedTrainerData?.trainerData);
     // console.log(sessionData);
+
+    mottoPassData({});
 
     if (sessionData?.preferedTrainingMode === "virtual") {
       setsessionType("(Virtual)");
@@ -157,6 +160,8 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                           mottoPassData(newPass);
 
                           console.log(newPass);
+                          history.push("/user/payment")
+                          
                         }}
                       >
                         get this pass now <BlueHoverButton />
@@ -237,6 +242,8 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         };
 
                         console.log(newPass);
+
+                        history.push("/user/payment");
                       }}>
                         get this pass now <BlueHoverButton />
                       </button>
