@@ -458,6 +458,17 @@ export const userApi = {
       return this.url;
     },
   },
+
+  getActivePass: {
+    method: "get",
+    url: "pass",
+    baseURL: "normal",
+    userId: "",
+    trainerId: "",
+    get api() {
+      return `${this.url}?userId=${this.userId}&trainerId=${this.trainerId}`;
+    },
+  },
 };
 
 export const twilioApi = {
@@ -509,26 +520,21 @@ export const notificationApi = {
 };
 
 export const AdminApi = {
-
-  CreateCoupon:
-  {
+  CreateCoupon: {
     method: "post",
-    url:"code", 
+    url: "code",
     baseURL: "payment",
     get api() {
       return this.url;
     },
   },
 
-  GetAllCoupons:
-  {
+  GetAllCoupons: {
     method: "get",
-    url:"codes", 
+    url: "codes",
     baseURL: "payment",
     get api() {
       return this.url;
     },
   },
-
-
 };
