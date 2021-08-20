@@ -49,6 +49,7 @@ function CardFormFC({
   handleFriendsCount,
   ScheduleSession,
   sessionData,
+  mottoPassDataVal,
 
   isProfile = false,
 }) {
@@ -198,41 +199,18 @@ function CardFormFC({
   return (
     <div>
       <form onSubmit={handleSubmit} className="Card">
-        <div className="payment_input_inner">
-          <label className="card-detail">Card Number</label>
+        {"availPass" in mottoPassDataVal ? (
+          <div>yes</div>
+        ) : (
+          <div>
+            {" "}
+            <div className="payment_input_inner">
+              <label className="card-detail">Card Number</label>
 
-          {showCardComp ? (
-            <CardNumberElement
-              options={{
-                hidePostalCode: true,
-                style: {
-                  base: {
-                    fontSize: "16px",
-                    color: "#424770",
-                    "::placeholder": {
-                      color: "#898989",
-                      fontFamily: "Montserrat",
-                      fontSize: "16px",
-                    },
-                  },
-                  invalid: {
-                    color: "#9e2146",
-                  },
-                },
-              }}
-            />
-          ) : (
-            <p className="fs-20">{`**** **** **** ${
-              defaulCardDetails?.card?.last4 || "****"
-            }`}</p>
-          )}
-
-          <div className="payment_expire_input">
-            <div className="payment_expire_inner">
-              <label className="card-detail">Expiry Date</label>
               {showCardComp ? (
-                <CardExpiryElement
+                <CardNumberElement
                   options={{
+                    hidePostalCode: true,
                     style: {
                       base: {
                         fontSize: "16px",
@@ -250,91 +228,123 @@ function CardFormFC({
                   }}
                 />
               ) : (
-                <p className="fs-20">{`${
-                  defaulCardDetails?.card?.exp_month || ""
-                }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
+                <p className="fs-20">{`**** **** **** ${
+                  defaulCardDetails?.card?.last4 || "****"
+                }`}</p>
               )}
-            </div>
-            <div className="payment_expire_inner">
-              {showCardComp && (
-                <>
-                  <label className="card-detail">CVC/CVV</label>
-                  <CardCvcElement
-                    options={{
-                      style: {
-                        base: {
-                          fontSize: "16px",
-                          color: "#424770",
-                          "::placeholder": {
-                            color: "#898989",
-                            fontFamily: "Montserrat",
+
+              <div className="payment_expire_input">
+                <div className="payment_expire_inner">
+                  <label className="card-detail">Expiry Date</label>
+                  {showCardComp ? (
+                    <CardExpiryElement
+                      options={{
+                        style: {
+                          base: {
                             fontSize: "16px",
+                            color: "#424770",
+                            "::placeholder": {
+                              color: "#898989",
+                              fontFamily: "Montserrat",
+                              fontSize: "16px",
+                            },
+                          },
+                          invalid: {
+                            color: "#9e2146",
                           },
                         },
-                        invalid: {
-                          color: "#9e2146",
-                        },
-                      },
-                    }}
-                  />
+                      }}
+                    />
+                  ) : (
+                    <p className="fs-20">{`${
+                      defaulCardDetails?.card?.exp_month || ""
+                    }/${defaulCardDetails?.card?.exp_year || ""}`}</p>
+                  )}
+                </div>
+                <div className="payment_expire_inner">
+                  {showCardComp && (
+                    <>
+                      <label className="card-detail">CVC/CVV</label>
+                      <CardCvcElement
+                        options={{
+                          style: {
+                            base: {
+                              fontSize: "16px",
+                              color: "#424770",
+                              "::placeholder": {
+                                color: "#898989",
+                                fontFamily: "Montserrat",
+                                fontSize: "16px",
+                              },
+                            },
+                            invalid: {
+                              color: "#9e2146",
+                            },
+                          },
+                        }}
+                      />
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {defaulCardDetails.default && (
+                <>
+                  {showCardComp ? (
+                    <div className="payment_change d-flex justify-content-end">
+                      <button
+                        className="link-btn"
+                        onClick={(e) => {
+                          setShowCardComp(false);
+                          e.preventDefault();
+                        }}
+                        type="click"
+                      >
+                        Reset Card
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="payment_change d-flex justify-content-end">
+                      <button
+                        className="link-btn"
+                        onClick={(e) => {
+                          setShowCardComp(true);
+                          e.preventDefault();
+                        }}
+                        type="click"
+                      >
+                        Edit Card
+                      </button>
+                    </div>
+                  )}
                 </>
+              )}
+
+              {showCardComp && (
+                <div className="payment_input_check mt-3 d-flex justify-content-between">
+                  {!isProfile && (
+                    <div className="payment_check_inner">
+                      <input
+                        type="checkbox"
+                        checked={isRememberCard}
+                        onChange={() => setRememberCard(!isRememberCard)}
+                        id="remember_card"
+                      />
+                      <label for="remember_card">
+                        Remember My Card Details
+                      </label>
+                    </div>
+                  )}
+                  <div className="payment_check_inner d-flex align-items-center">
+                    <Link to="/" className="fw-600 text-underline">
+                      Session Cancellation Policy
+                    </Link>
+                  </div>
+                </div>
               )}
             </div>
           </div>
-
-          {defaulCardDetails.default && (
-            <>
-              {showCardComp ? (
-                <div className="payment_change d-flex justify-content-end">
-                  <button
-                    className="link-btn"
-                    onClick={(e) => {
-                      setShowCardComp(false);
-                      e.preventDefault();
-                    }}
-                    type="click"
-                  >
-                    Reset Card
-                  </button>
-                </div>
-              ) : (
-                <div className="payment_change d-flex justify-content-end">
-                  <button
-                    className="link-btn"
-                    onClick={(e) => {
-                      setShowCardComp(true);
-                      e.preventDefault();
-                    }}
-                    type="click"
-                  >
-                    Edit Card
-                  </button>
-                </div>
-              )}
-            </>
-          )}
-
-          {showCardComp && (
-            <div className="payment_input_check mt-3 d-flex justify-content-between">
-              {!isProfile && (
-                <div className="payment_check_inner">
-                  <input
-                    type="checkbox"
-                    checked={isRememberCard}
-                    onChange={() => setRememberCard(!isRememberCard)}
-                    id="remember_card"
-                  />
-                  <label for="remember_card">Remember My Card Details</label>
-                </div>
-              )}
-              <div className="payment_check_inner d-flex align-items-center">
-                <Link to="/" className="fw-600 text-underline">
-                  Session Cancellation Policy
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
+        )}
 
         <div className="payment_input_outter_check ">
           <div className="payment_terms">

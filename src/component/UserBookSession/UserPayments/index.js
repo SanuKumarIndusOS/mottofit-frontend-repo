@@ -420,6 +420,7 @@ const UserPaymentsFC = ({
                               handleChangeCPA={handleChangeCPA}
                               ScheduleSession={ScheduleSession}
                               handleFriendsCount={handleFriendsCount}
+                              mottoPassDataVal={mottoPassDataVal}
                             />
                           </Elements>
                           {/* <button
