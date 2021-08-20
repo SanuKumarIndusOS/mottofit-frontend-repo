@@ -486,20 +486,44 @@ const UserBookSessionFC = ({
       //   console.log(data);
       // });
 
-      console.log(trainingVenue.value, preferedTrainingMode);
+      // console.log(trainingVenue.value, preferedTrainingMode);
+
       if (preferedTrainingMode === "virtual") {
-        GetActivePass(userId, trainerId, "virtual").then((data) => {
-          console.log(data);
-        });
+        GetActivePass(userId, trainerId, "virtual")
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((er) => {
+            console.log(er);
+            history.push({
+              pathname: "/user/motto-pass",
+            });
+          });
       } else {
         if (trainingVenue.value === "trainerLocation") {
-          GetActivePass(userId, trainerId, "trainerLocation").then((data) => {
-            console.log(data);
-          });
+          GetActivePass(userId, trainerId, "trainerLocation")
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((er) => {
+              console.log(er);
+              history.push({
+                pathname: "/user/motto-pass",
+              });
+            });
         } else {
-          GetActivePass(userId, trainerId, "clientLocation").then((data) => {
-            console.log(data);
-          });
+          GetActivePass(userId, trainerId, "clientLocation")
+            .then((data) => {
+              console.log(data);
+              if (data === undefined) {
+              }
+            })
+            .catch((er) => {
+              console.log(er);
+              history.push({
+                pathname: "/user/motto-pass",
+              });
+            });
         }
       }
       //Check for motto pass if available go to checkout
