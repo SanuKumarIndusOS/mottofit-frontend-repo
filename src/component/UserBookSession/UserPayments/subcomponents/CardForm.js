@@ -200,7 +200,9 @@ function CardFormFC({
     <div>
       <form onSubmit={handleSubmit} className="Card">
         {"availPass" in mottoPassDataVal ? (
-          <div>yes</div>
+          <div style={{marginTop:"20px", marginBottom:"20px"}}>
+            <h3>Remaing Passes: {mottoPassDataVal.availPass[0].remains}</h3>
+          </div>
         ) : (
           <div>
             {" "}
