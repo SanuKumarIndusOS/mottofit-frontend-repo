@@ -482,14 +482,25 @@ const UserBookSessionFC = ({
       let trainerId = selectedTrainerData?.trainerId;
       let userId = localStorage.getItem("user-id");
 
-      GetActivePass(userId, trainerId, "trainerLocation").then((data) => {
-        console.log(data);
-      });
+      // GetActivePass(userId, trainerId, "trainerLocation").then((data) => {
+      //   console.log(data);
+      // });
 
       console.log(trainingVenue.value, preferedTrainingMode);
-      if(preferedTrainingMode === "virtual")
-      {
-
+      if (preferedTrainingMode === "virtual") {
+        GetActivePass(userId, trainerId, "virtual").then((data) => {
+          console.log(data);
+        });
+      } else {
+        if (trainingVenue.value === "trainerLocation") {
+          GetActivePass(userId, trainerId, "trainerLocation").then((data) => {
+            console.log(data);
+          });
+        } else {
+          GetActivePass(userId, trainerId, "clientLocation").then((data) => {
+            console.log(data);
+          });
+        }
       }
       //Check for motto pass if available go to checkout
       // history.push({
