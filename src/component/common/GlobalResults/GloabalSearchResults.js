@@ -70,7 +70,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
         // loader={loader}
       /> */}
 
-      {/* <div className="results_grid">
+      <div className="results_grid">
         <div style={{ marginBottom: "500px" }}>
           {searchResults?.length === 0 ? (
             <h1>No Results Found</h1>
@@ -125,7 +125,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
             />
           ) : null}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
