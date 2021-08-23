@@ -492,7 +492,7 @@ const UserBookSessionFC = ({
         GetActivePass(userId, trainerId, "virtual")
           .then((data) => {
             console.log(data);
-            mottoPassData({availPass:data});
+            mottoPassData({ availPass: data });
             history.push({
               pathname: "/user/payment",
             });
@@ -508,7 +508,7 @@ const UserBookSessionFC = ({
           GetActivePass(userId, trainerId, "trainerLocation")
             .then((data) => {
               console.log(data);
-              mottoPassData({availPass:data});
+              mottoPassData({ availPass: data });
               history.push({
                 pathname: "/user/payment",
               });
@@ -523,7 +523,7 @@ const UserBookSessionFC = ({
           GetActivePass(userId, trainerId, "clientLocation")
             .then((data) => {
               console.log(data);
-              mottoPassData({availPass:data})
+              mottoPassData({ availPass: data });
               history.push({
                 pathname: "/user/payment",
               });
@@ -810,7 +810,7 @@ const UserBookSessionFC = ({
                               </div>
                               <div className="session_card_inner flex-column mb-4 justify-content-start">
                                 {pricingObject.virtualSessionSocial?.["2people"]
-                                  ?.value && (
+                                  ?.value ? (
                                   <h6 className="mt-3">
                                     {`$${pricingObject.virtualSessionSocial?.["2people"]?.value}`}
                                     <span>
@@ -823,9 +823,11 @@ const UserBookSessionFC = ({
                                       />
                                     </span>
                                   </h6>
+                                ) : (
+                                  ""
                                 )}
                                 {pricingObject.virtualSessionSocial["3people"]
-                                  ?.value && (
+                                  ?.value ? (
                                   <h6 className="mt-0">
                                     {`$${pricingObject.virtualSessionSocial["3people"]?.value}`}
                                     <span>
@@ -838,9 +840,11 @@ const UserBookSessionFC = ({
                                       />
                                     </span>
                                   </h6>
+                                ) : (
+                                  ""
                                 )}
                                 {pricingObject.virtualSessionSocial["4people"]
-                                  ?.value && (
+                                  ?.value ? (
                                   <h6 className="mt-0">
                                     {`$${pricingObject.virtualSessionSocial["4people"]?.value}`}
                                     <span>
@@ -853,6 +857,8 @@ const UserBookSessionFC = ({
                                       />
                                     </span>
                                   </h6>
+                                ) : (
+                                  ""
                                 )}
 
                                 <img src={Social} alt="icon" />

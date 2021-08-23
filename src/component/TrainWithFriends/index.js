@@ -76,6 +76,9 @@ const TrainWithFriendsClass = ({
   const [iWillPay, setIPay] = useState(false);
   const [maxUser, setMaxUser] = useState(0);
 
+  const [couponRate, setCouponRate] = useState(0);
+  const [isCouponApplied, setCouponApplied] = useState(false);
+
   let trainingType = localStorage.getItem("sessionTrainingType");
   const handleChangeFriendInput = (index, event) => {
     const values = [...friendsInput];
@@ -109,11 +112,16 @@ const TrainWithFriendsClass = ({
 
       const trainingLocation = data.venue;
 
-      const isVirtual = data.sessionType ==="virtual";
+      const isVirtual = data.sessionType === "virtual";
 
       const tempTrainerData = data.trainerDetail || {};
 
       const pricingObject = {};
+
+      if (data?.pricingDetail?.couponCode?.couponValue) {
+        setCouponRate(data?.pricingDetail?.couponCode?.couponValue / 100);
+        setCouponApplied(true);
+      }
 
       // console.log(data, isVirtual);
 
@@ -262,8 +270,7 @@ const TrainWithFriendsClass = ({
         selectedTrainerData,
         submittedData: { ...data },
       };
-          
-     
+
       updateUserDetails(reduxData);
     });
   }, []);
@@ -275,8 +282,7 @@ const TrainWithFriendsClass = ({
     const { editSessionData } = userApi;
 
     let tempPhoneData = friendsInput.filter(
-      ({ friendEmail, friendName, id }) =>
-        friendEmail && friendName  && !id
+      ({ friendEmail, friendName, id }) => friendEmail && friendName && !id
     );
 
     let payload = {
@@ -298,8 +304,7 @@ const TrainWithFriendsClass = ({
     if (!validateFields(validateData)) return;
     editSessionData.body = payload;
 
-
- // console.log("hit,", editSessionData);
+    // console.log("hit,", editSessionData);
     api({ ...editSessionData })
       .then((data) => {
         Toast({ type: "success", message: data.message || "Success" });
@@ -415,7 +420,7 @@ const TrainWithFriendsClass = ({
               message: "^Phone number is required",
             },
             length: {
-              minimum: 0 ,
+              minimum: 0,
               tooShort: "^Invalid number",
               maximum: 15,
               tooLong: "^Invalid number",
@@ -710,7 +715,11 @@ const TrainWithFriendsClass = ({
                         <h3>I WANT TO TRAIN AT</h3>
                         <div className="TF_data_inner">
                           <img src={LocationIcon} alt="icon" />
-                          <h4>{ (sessionData.sessionType === "inPerson")? `${sessionData?.trainingVenue?.label}`: "Virtual"}</h4>
+                          <h4>
+                            {sessionData.sessionType === "inPerson"
+                              ? `${sessionData?.trainingVenue?.label}`
+                              : "Virtual"}
+                          </h4>
                         </div>
                       </div>
                       <hr />
@@ -723,7 +732,11 @@ const TrainWithFriendsClass = ({
                                 <h3>Service Details</h3>
                                 <h3>Price / Hour</h3>
                               </div>
-                              <AccordationService data={accordionData} />
+                              <AccordationService
+                                data={accordionData}
+                                couponRateValue={couponRate}
+                                isCouponApplied={isCouponApplied}
+                              />
                             </div>
                           </div>
                         </div>
@@ -745,7 +758,7 @@ const TrainWithFriendsClass = ({
     </>
   );
 };
-const AccordationService = ({ data }) => {
+const AccordationService = ({ data, couponRateValue, isCouponApplied }) => {
   const [selected, setSelected] = useState(0);
 
   const toggle = (index) => {
@@ -762,6 +775,20 @@ const AccordationService = ({ data }) => {
         // console.log(item);
 
         if (!item?.price && !item.price1 && !item.price2) return null;
+
+        // console.log(couponRateValue);
+
+        let tempPrice = item?.price * couponRateValue;
+        let tempPrice1 = item?.price1 * couponRateValue;
+        let tempPrice2 = item?.price2 * couponRateValue;
+
+        let couponAdjustedPrice = item?.price - tempPrice;
+        let couponAdjustedPrice1 = item?.price1 - tempPrice1;
+        let couponAdjustedPrice2 = item?.price2 - tempPrice2;
+
+        let finalPrice = isCouponApplied ? couponAdjustedPrice : item?.price;
+        let finalPrice1 = isCouponApplied ? couponAdjustedPrice1 : item?.price1;
+        let finalPrice2 = isCouponApplied ? couponAdjustedPrice2 : item?.price2;
 
         return (
           <div
@@ -781,11 +808,11 @@ const AccordationService = ({ data }) => {
                   <p>{item.session}</p>
                   <p className="ml-auto">
                     {item.people
-                      ? `$${parseFloat(
-                          (item?.price || 0) / item.people
-                        ).toFixed(1)} / Person`
+                      ? `$${parseFloat((finalPrice || 0) / item.people).toFixed(
+                          1
+                        )} / Person`
                       : item.isPrice
-                      ? `$${item?.price} / Person`
+                      ? `$${finalPrice} / Person`
                       : item?.price}
                   </p>
                 </div>
@@ -799,10 +826,10 @@ const AccordationService = ({ data }) => {
                     {" "}
                     {item.people1
                       ? `$${parseFloat(
-                          (item?.price1 || 0) / item.people1
+                          (finalPrice1 || 0) / item.people1
                         ).toFixed(1)} / Person`
                       : item.isPrice
-                      ? `$${item?.price1} / Person`
+                      ? `$${finalPrice1} / Person`
                       : item?.price1}
                   </p>
                 </div>
@@ -815,10 +842,10 @@ const AccordationService = ({ data }) => {
                   <p className="ml-auto">
                     {item.people2
                       ? `$${parseFloat(
-                          (item?.price2 || 0) / item.people2
+                          (finalPrice2 || 0) / item.people2
                         ).toFixed(1)} / Person`
                       : item.isPrice
-                      ? `$${item?.price2} / Person`
+                      ? `$${finalPrice2} / Person`
                       : item?.price2}
                   </p>
                 </div>

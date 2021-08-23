@@ -465,9 +465,18 @@ export const userApi = {
     baseURL: "normal",
     userId: "",
     trainerId: "",
-    passType:"",
+    passType: "",
     get api() {
       return `${this.url}?userId=${this.userId}&trainerId=${this.trainerId}&passType=${this.passType}`;
+    },
+  },
+  verifyCouponCode: {
+    method: "get",
+    url: "code/verify?code=",
+    baseURL: "payment",
+    code: "",
+    get api() {
+      return `${this.url}${this.code}`;
     },
   },
 };

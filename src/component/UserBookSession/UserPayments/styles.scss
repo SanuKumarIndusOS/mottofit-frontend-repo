@@ -433,11 +433,11 @@
               font-weight: 500;
             }
             button {
-              position: relative;
-              right: 0;
-
-              left: 362px;
-              top: -45px;
+              &.apply-btn {
+                position: absolute;
+                right: 15px;
+                top: calc(0.1rem);
+              }
 
               text-align: left;
               text-decoration: underline;

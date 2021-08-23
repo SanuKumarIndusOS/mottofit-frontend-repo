@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./styles.scss";
 import Radio from "@material-ui/core/Radio";
 import paymentMethodImg from "../../../assets/files/UserOnboard/PaymentAsset/Card Icons.png";
@@ -19,6 +19,7 @@ import {
   resetUserDetails,
   updateUserDetails,
   mottoPassData,
+  verifyCouponCodeAct,
 } from "action/userAct";
 import { useLocation } from "react-router-dom";
 import { history } from "helpers";
@@ -41,6 +42,7 @@ const UserPaymentsFC = ({
   selectedTimes,
   selectedTrainerData,
   mottoPassDataVal,
+  verifyCouponCodeApi,
   ...restProps
 }) => {
   //for material ui radio buttom (temp)
@@ -51,6 +53,8 @@ const UserPaymentsFC = ({
   const [accordionData, setAccordionData] = useState(tempaccordionData);
   const [checkPayAhead, setCheckPayAhead] = useState(false);
   const [friendsCount, setFriendsCount] = useState(1);
+
+  const couponRate = useRef(null);
 
   const [price, setprice] = useState();
 
@@ -71,9 +75,35 @@ const UserPaymentsFC = ({
   };
 
   const checkCouponCode = () => {
-    let isCodeValid = coupondCode === "MOTTO1";
+    // let isCodeValid = coupondCode === "MOTTO1";
+    if (!coupondCode) return;
 
-    setCouponCodeValid(isCodeValid);
+    let payload = coupondCode.toLocaleUpperCase();
+
+    verifyCouponCodeApi(payload)
+      .then((data) => {
+        const { couponValue, code } = data || {};
+
+        couponRate.current = () => {
+          return couponValue;
+        };
+
+        setCouponCodeValid(true);
+        setCouponCode(code);
+        // console.log(couponRate);
+      })
+      .catch((error) => {
+        Toast({
+          type: "error",
+          message: error.message || "Something went wrong",
+        });
+      });
+  };
+
+  const cancelCouponCode = () => {
+    couponRate.current = null;
+    setCouponCode("");
+    setCouponCodeValid(false);
   };
 
   const location = useLocation();
@@ -118,6 +148,10 @@ const UserPaymentsFC = ({
       participantsCount: checkPayAhead ? parseInt(friendsCount) : 0,
     };
 
+    if (isCouponCodeValid) {
+      scheduleBody["code"] = coupondCode;
+    }
+
     if (Object.keys(mottoPassDataVal).length === 0) {
       console.log(mottoPassDataVal, "empty");
     } else {
@@ -125,12 +159,11 @@ const UserPaymentsFC = ({
 
       if ("availPass" in mottoPassDataVal) {
         console.log(mottoPassDataVal.availPass[0].id, "pl");
-        scheduleBody.availPass = mottoPassDataVal.availPass[0].id; 
+        scheduleBody.availPass = mottoPassDataVal.availPass[0].id;
       } else {
         scheduleBody.newPass = mottoPassDataVal;
       }
     }
-
 
     scheduleSession(scheduleBody)
       .then((res) => {
@@ -491,15 +524,38 @@ const UserPaymentsFC = ({
                   <hr />
                   <div className="user_coupon">
                     <h2>Have a discount code? Add it now!</h2>
-                    <input
-                      type="text"
-                      placeholder="Enter the coupon code here"
-                      onChange={handleCouponCode}
-                    />
-                    <button onClick={checkCouponCode}>Apply</button>
-                    {isCouponCodeValid && (
-                      <p className="w-100 text-success fs-12">Code applied!</p>
-                    )}
+                    <div className="position-relative mt-3">
+                      <input
+                        type="text"
+                        placeholder="Enter the coupon code here"
+                        className={`mt-0 ${
+                          isCouponCodeValid ? "btn-disabled" : ""
+                        }`}
+                        onChange={handleCouponCode}
+                        value={coupondCode}
+                        disabled={isCouponCodeValid}
+                      />
+                      <button
+                        onClick={checkCouponCode}
+                        className="apply-btn"
+                        disabled={isCouponCodeValid}
+                      >
+                        Apply
+                      </button>
+                      {isCouponCodeValid && (
+                        <div className="position-relative d-flex align-items-center">
+                          <p className="w-100 text-black fs-12 mb-0">
+                            Coupon Code <b>“{`${coupondCode}`}”</b> applied!
+                          </p>
+                          <button
+                            className="btn btn-transparent cancel-btn"
+                            onClick={cancelCouponCode}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="user_service_details">
                     <div className="d-flex align-items-center justify-content-between">
@@ -512,7 +568,11 @@ const UserPaymentsFC = ({
                         <h3 className="fs-20 text-secondary">Price / Hour</h3>
                       </div>
                     </div>
-                    <AccordationService data={accordionData} />
+                    <AccordationService
+                      data={accordionData}
+                      couponRate={couponRate}
+                      isCouponApplied={isCouponCodeValid}
+                    />
                     <div className="user_service_wrapper">
                       {/* <div className="user_service_left">
                         <div className="service_header">
@@ -556,13 +616,32 @@ const UserPaymentsFC = ({
   );
 };
 
-const AccordationService = ({ data }) => {
+const AccordationService = ({ data, couponRate, isCouponApplied }) => {
+  let couponRateValue = 0;
+
+  if (isCouponApplied && typeof couponRate?.current === "function") {
+    couponRateValue = couponRate.current() / 100;
+  }
   return (
     <div className="d-flex flex-column">
       {data.map((item, index) => {
         // console.log(item);
 
         if (!item?.price && !item.price1 && !item.price2) return null;
+
+        // console.log(item?.price1, couponRateValue);
+
+        let tempPrice = item?.price * couponRateValue;
+        let tempPrice1 = item?.price1 * couponRateValue;
+        let tempPrice2 = item?.price2 * couponRateValue;
+
+        let couponAdjustedPrice = item?.price - tempPrice;
+        let couponAdjustedPrice1 = item?.price1 - tempPrice1;
+        let couponAdjustedPrice2 = item?.price2 - tempPrice2;
+
+        let finalPrice = isCouponApplied ? couponAdjustedPrice : item?.price;
+        let finalPrice1 = isCouponApplied ? couponAdjustedPrice1 : item?.price1;
+        let finalPrice2 = isCouponApplied ? couponAdjustedPrice2 : item?.price2;
 
         return (
           <div
@@ -581,11 +660,11 @@ const AccordationService = ({ data }) => {
                   <p className="fs-20 text-secondary">{item.session}</p>
                   <p className="ml-auto fs-20 text-secondary">
                     {item.people
-                      ? `$${parseFloat(
-                          (item?.price || 0) / item.people
-                        ).toFixed(1)} / Person`
+                      ? `$${parseFloat((finalPrice || 0) / item.people).toFixed(
+                          1
+                        )} / Person`
                       : item.isPrice
-                      ? `$${item?.price} / Person`
+                      ? `$${finalPrice} / Person`
                       : item?.price}
                   </p>
                 </div>
@@ -600,10 +679,10 @@ const AccordationService = ({ data }) => {
                     {" "}
                     {item.people1
                       ? `$${parseFloat(
-                          (item?.price1 || 0) / item.people1
+                          (finalPrice1 || 0) / item.people1
                         ).toFixed(1)} / Person`
                       : item.isPrice
-                      ? `$${item?.price1} / Person`
+                      ? `$${finalPrice1} / Person`
                       : item?.price1}
                   </p>
                 </div>
@@ -617,10 +696,10 @@ const AccordationService = ({ data }) => {
                   <p className="ml-auto fs-20 text-secondary">
                     {item.people2
                       ? `$${parseFloat(
-                          (item?.price2 || 0) / item.people2
-                        ).toFixed(1)} / Person`
+                          (finalPrice2 || 0) / item.people2
+                        ).toFixed(1)} / Person `
                       : item.isPrice
-                      ? `$${item?.price2} / Person`
+                      ? `$${finalPrice2} / Person`
                       : item?.price2}
                   </p>
                 </div>
@@ -652,6 +731,7 @@ const mapDispatchToProps = (dispatch) => {
       scheduleSession,
       resetUserDetails,
       updateUserDetails,
+      verifyCouponCodeApi: verifyCouponCodeAct,
     },
     dispatch
   );

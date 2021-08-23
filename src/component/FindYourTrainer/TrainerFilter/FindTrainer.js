@@ -185,23 +185,29 @@ const FindTrainerFC = ({
         "persist"
       );
 
-      if( JSON.parse(localStorage.getItem("persistFilters")) !== null){
+      if (JSON.parse(localStorage.getItem("persistFilters")) !== null) {
+        searchBestMatch(
+          JSON.parse(localStorage.getItem("persistFilters")),
+          page,
+          "match"
+        ).then((data) => {
+          console.log(data, "unmatch");
+          setTempBestMatch(data.list);
+          settotalPageMatch(data.totalCount);
+          setloader(false);
+        });
 
-      searchBestMatch(JSON.parse(localStorage.getItem("persistFilters")), page, "match").then((data) => {
-        console.log(data);
-        setTempBestMatch(data.list);
-        settotalPageMatch(Math.ceil(data.totalCount / 6));
-        setloader(false);
-      });
-
-      searchBestMatch(JSON.parse(localStorage.getItem("persistFilters")), pageUnmatch, "unmatch").then(
-        (data) => {
+        searchBestMatch(
+          JSON.parse(localStorage.getItem("persistFilters")),
+          pageUnmatch,
+          "unmatch"
+        ).then((data) => {
           console.log(data.list);
           setTempOtherMatch(data.list);
-          settotalPageUnMatch(Math.ceil(data.totalCount / 6));
+          settotalPageUnMatch(data.totalCount);
           setloaderUnMatch(false);
-        }
-      );}
+        });
+      }
     } else {
       // localStorage.setItem(
       //   "persistFilters",
@@ -211,7 +217,7 @@ const FindTrainerFC = ({
       searchBestMatch(trainerSearchFilterData, page, "match").then((data) => {
         console.log(data);
         setTempBestMatch(data.list);
-        settotalPageMatch(Math.ceil(data.totalCount / 6));
+        settotalPageMatch(data.totalCount);
         setloader(false);
       });
 
@@ -219,7 +225,7 @@ const FindTrainerFC = ({
         (data) => {
           console.log(data.list);
           setTempOtherMatch(data.list);
-          settotalPageUnMatch(Math.ceil(data.totalCount / 6));
+          settotalPageUnMatch(data.totalCount);
           setloaderUnMatch(false);
         }
       );
@@ -659,13 +665,15 @@ const FindTrainerFC = ({
         content={tempBestMatch}
         bestMatchRef={bestMatchRef}
         loader={loader}
+        nextApi={ViewMoreTrainers}
+        page={page}
+        totalPageMatch={totalPageMatch}
       />
-      {page >= totalPageMatch || totalPageMatch === 1 ? null : (
+      {/* {page >= totalPageMatch || totalPageMatch === 1 ? null : (
         <button className="view_more" onClick={ViewMoreTrainers}>
-          View More Trainers &ensp; <BlueHoverButton/>
+          View More Trainers &ensp; <BlueHoverButton />
         </button>
-      )}
-
+      )} */}
 
       {loader ? (
         <div className="load_p">
@@ -673,9 +681,18 @@ const FindTrainerFC = ({
         </div>
       ) : null}
 
-      <TrainerCardOutside content={tempOtherMatch} otherRef={otherRef} />
+      <TrainerCardOutside
+        content={tempOtherMatch}
+        otherRef={otherRef}
+        nextApi={() => {
+          setpageUnmatch(pageUnmatch + 1);
+          setloaderUnMatch(true);
+        }}
+        page={pageUnmatch}
+        totalPageMatch={totalPageUnMatch}
+      />
 
-      {pageUnmatch >= totalPageUnMatch || totalPageUnMatch === 1 ? null : (
+      {/* {pageUnmatch >= totalPageUnMatch || totalPageUnMatch === 1 ? null : (
         <button
           onClick={() => {
             setpageUnmatch(pageUnmatch + 1);
@@ -683,9 +700,10 @@ const FindTrainerFC = ({
           }}
           className="view_more"
         >
-          View More Trainers &ensp;<BlueHoverButton/>
+          View More Trainers &ensp;
+          <BlueHoverButton />
         </button>
-      )}
+      )} */}
       {loaderUnMatch ? (
         <div className="load_p">
           <div className="loaders"></div>

@@ -6,13 +6,24 @@ import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked"
 import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
 import { bindActionCreators } from "redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+
 const TrainerCardsFC = (props) => {
   const [bestMatchData, setbestMatchData] = useState([]);
 
+  const { nextApi, totalPageMatch } = props;
+
+  console.log(totalPageMatch);
+
+  const nextApicb = () => {
+    console.log("nextApi called");
+  };
+
   useEffect(() => {
     setbestMatchData(props.content);
-console.log(props.content);
-  });
+    // setbestMatchData([...new Array(3)]);
+    console.log(props.content);
+  }, [props.content]);
   const [visible, setVisible] = useState(3);
   const showMoreItems = () => {
     setVisible((showCard) => showCard + 3);
@@ -43,99 +54,134 @@ console.log(props.content);
     }
   };
 
+  let mql = window.matchMedia("(max-width: 700px)");
+
+  const sectionHeight = mql.matches ? 3170 : 1170;
+
   return (
     <>
       <div className="container">
-       {props.loader?null:  <><HeadingTrainer bestMatchRef={props.bestMatchRef} />{no_match} </>} 
-      
-        <div className="row" style={{ alignleft: "auto" }}>
-          {Object.keys(bestMatchData).map((data, index) => {
-            const areaOfExpertise =
-              bestMatchData[data]?.areaOfExpertise?.toString();
+        {props.loader ? null : (
+          <>
+            <HeadingTrainer bestMatchRef={props.bestMatchRef} />
+            {no_match}{" "}
+          </>
+        )}
 
-            const oneOnOnePricingValues = Object.values(
-              bestMatchData[data]?.oneOnOnePricing || {}
-            );
-
-            const socialSessionPricingValues = Object.values(
-              bestMatchData[data]?.socialSessionPricing || {}
-            );
-            const classSessionPricingValues = Object.values(
-              bestMatchData[data]?.classSessionPricing || {}
-            );
-
-            const allSessionPricing = [
-              ...oneOnOnePricingValues,
-              ...socialSessionPricingValues,
-              ...classSessionPricingValues,
-            ]
-              .map((price) => parseFloat(price))
-              .filter((price) => !isNaN(price) && price > 0);
-
-            const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
-
-            return (
-              <div
-                className="card "
-                key={index}
-                // onClick={() => handleClick(data, true)}
-              >
-               
-                  <img
-                    onClick={() => handleClick(data, true)}
-                    className="card-img-top"
-                    src={
-                      bestMatchData[data].profilePicture ||
-                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
-                    }
-                    style={{ objectFit: "cover", cursor: "pointer" }}
-                    alt="Profile Picture Not Found "
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src =
-                        "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
-                    }}
-                  />
-                  <div className="ocard"   onClick={() => handleClick(data, true)}>
-                    <div className="circlepop">Check <br/> Me Out</div>
-                  </div>
-               
-                <div className="card-body">
-                  <h3 style={{ textTransform: "capitalize" }}>
-                    {bestMatchData[data]?.firstName}&nbsp;
-                    {bestMatchData[data]?.lastName}
-                  </h3>
-                  <h6>{areaOfExpertise}</h6>
-                  <p>
-                    {bestMatchData[data]?.description}
-                    &nbsp;
-                    <button onClick={() => handleClick(data, true)}>
-                      Read More
-                    </button>
-                  </p>
-                </div>
-                <div className="card-button">
-                  <button
-                    style={{
-                      backgroundColor: "#53BFD2",
-                    }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleClick(data);
-                    }}
-                  >
-                    book a session
-                    <BlackCircleButton />
-                    <p>
-                      from <span>${sortedPricingList[0] || ""}</span>
-                    </p>
-                  </button>
-                </div>
+        <div
+          id="scrollableDiv"
+          style={{ height: sectionHeight, overflow: "auto" }}
+        >
+          <InfiniteScroll
+            dataLength={Object.keys(bestMatchData).length}
+            next={nextApicb}
+            hasMore={Object.keys(bestMatchData).length < totalPageMatch}
+            scrollableTarget="scrollableDiv"
+            loader={
+              <div className="load_p">
+                <div className="loaders"></div>
               </div>
-            );
-          })}
+            }
+          >
+            <div className="row mb-0" style={{ alignleft: "auto" }}>
+              {Object.keys(bestMatchData).map((data, index) => {
+                const areaOfExpertise = bestMatchData[
+                  data
+                ]?.areaOfExpertise?.toString();
+
+                const oneOnOnePricingValues = Object.values(
+                  bestMatchData[data]?.oneOnOnePricing || {}
+                );
+
+                const socialSessionPricingValues = Object.values(
+                  bestMatchData[data]?.socialSessionPricing || {}
+                );
+                const classSessionPricingValues = Object.values(
+                  bestMatchData[data]?.classSessionPricing || {}
+                );
+
+                const allSessionPricing = [
+                  ...oneOnOnePricingValues,
+                  ...socialSessionPricingValues,
+                  ...classSessionPricingValues,
+                ]
+                  .map((price) => parseFloat(price))
+                  .filter((price) => !isNaN(price) && price > 0);
+
+                const sortedPricingList = allSessionPricing.sort(
+                  (a, b) => a - b
+                );
+
+                return (
+                  <div
+                    className="card "
+                    key={index}
+                    // onClick={() => handleClick(data, true)}
+                  >
+                    <img
+                      onClick={() => handleClick(data, true)}
+                      className="card-img-top"
+                      src={
+                        bestMatchData[data]?.profilePicture ||
+                        "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                      }
+                      style={{ objectFit: "cover", cursor: "pointer" }}
+                      alt="Profile Picture Not Found "
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                      }}
+                    />
+                    <div
+                      className="ocard"
+                      onClick={() => handleClick(data, true)}
+                    >
+                      <div className="circlepop">
+                        Check <br /> Me Out
+                      </div>
+                    </div>
+
+                    <div className="card-body">
+                      <h3 style={{ textTransform: "capitalize" }}>
+                        {bestMatchData[data]?.firstName}&nbsp;
+                        {bestMatchData[data]?.lastName}
+                      </h3>
+                      <h6>{areaOfExpertise}</h6>
+
+                      <p>
+                        {bestMatchData[data]?.description}
+                        &nbsp;
+                        <button onClick={() => handleClick(data, true)}>
+                          Read More
+                        </button>
+                      </p>
+                    </div>
+                    <div className="card-button">
+                      <button
+                        style={{
+                          backgroundColor: "#53BFD2",
+                        }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleClick(data);
+                        }}
+                      >
+                        book a session
+                        <BlackCircleButton />
+                        <p>
+                          from <span>${sortedPricingList[0] || ""}</span>
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </InfiniteScroll>
         </div>
+
         {/* <div className="showmore">
           <button className="showmore_btn" onClick={showMoreItems}>
             {visible ? "View More Trainers " : null}

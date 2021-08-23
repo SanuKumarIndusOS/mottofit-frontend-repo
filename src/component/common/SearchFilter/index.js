@@ -24,11 +24,11 @@ import IconRiseAndShine from "assets/files/FindTrainer/AvaliablityDropDownAssets
 import IconMidDay from "assets/files/FindTrainer/AvaliablityDropDownAssets/MidDay_icon";
 import IconHappyHour from "assets/files/FindTrainer/AvaliablityDropDownAssets/HappyHour_icon";
 import IconNeverTooLate from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_icon";
+import CROSSICON from "assets/files/FindTrainer/Cross.svg";
 
 import { Toast } from "service/toast";
 
 import Calendar from "react-calendar";
-
 
 function SearchFilter({
   trainerSearchFilters,
@@ -108,10 +108,7 @@ function SearchFilter({
 
     console.log(payload);
 
-    localStorage.setItem(
-      "persistFilters",
-      JSON.stringify(payload)
-    );
+    localStorage.setItem("persistFilters", JSON.stringify(payload));
 
     if (Location === "inPerson" && IPCvalue === "") {
       Toast({ type: "error", message: "City is mandatory" });
@@ -129,6 +126,10 @@ function SearchFilter({
     searchAction(payload);
   };
 
+  const handleClear = () => {
+    setIPCValue("");
+  };
+
   return (
     <div className="wrapper">
       <div className="search_filter">
@@ -139,7 +140,6 @@ function SearchFilter({
         </div>
 
         <div
-        
           className="filter_type"
           onClick={() => {
             setAvailabilityDropdown(!AvailabilityDropdown);
@@ -389,35 +389,49 @@ function SearchFilter({
         <div className="filter_type">
           <div className="filter_header">Location</div>
           <div className="filter_options">
-            {Location === "virtual" ? (
-              <div className="option_txt">
-                <p className="active_bar">Virtual</p>
-                <span className="blue_bar">/</span>
-                <p
-                  onClick={() => {
-                    setLocation("inPerson");
-                    setIPCDropdown(true);
-                  }}
-                >
-                  In Person
-                </p>
-              </div>
+            {IPCvalue === "" ? (
+              <>
+                {Location === "virtual" ? (
+                  <div className="option_txt">
+                    <p className="active_bar">Virtual</p>
+                    <span className="blue_bar">/</span>
+                    <p
+                      onClick={() => {
+                        setLocation("inPerson");
+                        setIPCDropdown(true);
+                      }}
+                    >
+                      In Person
+                    </p>
+                  </div>
+                ) : (
+                  <div className="option_txt">
+                    <p
+                      onClick={() => {
+                        setLocation("virtual");
+                      }}
+                    >
+                      Virtual
+                    </p>{" "}
+                    <span className="blue_bar">/</span>{" "}
+                    <p
+                      className="active_bar"
+                      onClick={() => setIPCDropdown(!IPCDropdown)}
+                    >
+                      {IPCvalue === "" ? "In Person" : IPCvalue}{" "}
+                    </p>
+                  </div>
+                )}
+              </>
             ) : (
-              <div className="option_txt">
-                <p
-                  onClick={() => {
-                    setLocation("virtual");
-                  }}
-                >
-                  Virtual
-                </p>{" "}
-                <span className="blue_bar">/</span>{" "}
-                <p
-                  className="active_bar"
-                  onClick={() => setIPCDropdown(!IPCDropdown)}
-                >
-                  {IPCvalue === "" ? "In Person" : IPCvalue}{" "}
-                </p>
+              <div className="d-flex align-items-center mt-1 w-100">
+                <p className="option_txt fw-600 mr-auto">{IPCvalue}</p>
+                <img
+                  src={CROSSICON}
+                  alt="Cancel Location"
+                  className="mb-3"
+                  onClick={handleClear}
+                />
               </div>
             )}
 

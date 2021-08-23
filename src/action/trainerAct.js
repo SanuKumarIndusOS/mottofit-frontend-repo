@@ -26,12 +26,12 @@ export const searchBestMatch = (payload, page, type) => (
   getState,
   { api }
 ) => {
-  
   return new Promise((resolve, reject) => {
-  //  console.log(payload);
-     TrainerApi.searchBestMatch.query = payload;
-     TrainerApi.searchBestMatch.key = type;
-     TrainerApi.searchBestMatch.page = page;
+    //  console.log(payload);
+    TrainerApi.searchBestMatch.query = payload;
+    TrainerApi.searchBestMatch.key = type;
+    TrainerApi.searchBestMatch.page = page;
+    TrainerApi.searchBestMatch.limit = 6;
 
     api({ ...TrainerApi.searchBestMatch })
       .then(({ data }) => {
