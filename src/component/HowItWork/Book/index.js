@@ -41,7 +41,7 @@ const Book = () => {
                                 <RenderRightCol
                                     image={Icon2}
                                     heading="Create your own fitness experience"
-                                    description="Train 1 on 1, as social sessions for up to 4 people, or group training (do we want this to say “classes”?)  for 5-15 people. Add friends to social sessions and classes after checkout. 
+                                    description="Train 1 on 1, as social sessions for up to 4 people, or in classes for upto 15 people. Add friends to social sessions and classes after checkout. 
                                     "
                                 />
                                 <RenderRightCol
