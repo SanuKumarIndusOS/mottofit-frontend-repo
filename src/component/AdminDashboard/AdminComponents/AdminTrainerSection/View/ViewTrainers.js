@@ -173,8 +173,7 @@ const ViewTrainersClass = (props) => {
                                                         </span>
                                                     </h6>
                                                     <h5>
-                                                        See package rates during
-                                                        checkout
+                                                        See package rates 
                                                     </h5>
                                                 </div>
                                             </div>
