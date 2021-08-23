@@ -1002,7 +1002,7 @@ function TrainerCardDashboard(props) {
               onChange={(event, newValue)=>{setSliderValue(newValue)}}
               aria-labelledby="discrete-slider-small-steps"
               step={0.1}
-              min={0.25}
+              min={1}
               valueLabelDisplay="auto"
               max={3}
             />
