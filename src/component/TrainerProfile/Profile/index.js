@@ -316,13 +316,13 @@ const TrainerProfileClass = ({
                             </div>
                             <hr></hr>
                             <div className="package_body">
-                              <div>3 Session Pass (Virtual) &ensp;${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual}</div>
-                              <div>3 Session Pass (Your Location) &ensp;${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}</div>
-                              <div>3 Session Pass (Trainer's Location) &ensp;${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}</div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Virtual) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Your Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Trainer's Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}</h3></div>
                               <br></br>
-                              <div>10 Session Pass (Virtual) &ensp;${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}</div>
-                              <div>10 Session Pass (Your Location) &ensp;${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}</div>
-                              <div>10 Session Pass (Trainer's Location) &ensp;${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}</div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Virtual) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Your Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Trainer's Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}</h3></div>
                             </div>
                           </div>
                         </Dialog>
