@@ -1,0 +1,1 @@
+(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[437],{682:function(t,s,n){"use strict";n.r(s),s.default=n.p+"static/media/Banner.f65cb550.png"}}]);
