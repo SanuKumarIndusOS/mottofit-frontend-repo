@@ -16,7 +16,7 @@ const TrainerCardsFC = (props) => {
   console.log(totalPageMatch);
 
   const nextApicb = () => {
-    console.log("nextApi called");
+    // console.log("nextApi called");
   };
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const TrainerCardsFC = (props) => {
         >
           <InfiniteScroll
             dataLength={Object.keys(bestMatchData).length}
-            next={nextApicb}
+            next={nextApi}
             hasMore={Object.keys(bestMatchData).length < totalPageMatch}
             scrollableTarget="scrollableDiv"
             loader={
