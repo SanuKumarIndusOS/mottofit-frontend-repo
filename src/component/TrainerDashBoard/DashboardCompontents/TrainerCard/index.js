@@ -22,7 +22,7 @@ function TrainerCardDashboard(props) {
   const [isValidationError, setValidationError] = useState(false);
 
   const [modal, setModal] = useState(false);
-  const [sliderValue, setSliderValue] = useState(1);
+  const [sliderValue, setSliderValue] = useState(1.2);
   const [isLoading, setisLoading] = useState(false);
 
   const toggle = () => setModal(!modal);

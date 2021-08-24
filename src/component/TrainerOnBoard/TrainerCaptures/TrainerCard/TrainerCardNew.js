@@ -31,7 +31,7 @@ function TrainerCardNewClass(props) {
   };
 
   const [modal, setModal] = useState(false);
-  const [sliderValue, setSliderValue] = useState(1);
+  const [sliderValue, setSliderValue] = useState(1.2);
 
   const toggle = () => setModal(!modal);
 
