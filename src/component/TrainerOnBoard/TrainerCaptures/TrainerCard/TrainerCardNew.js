@@ -81,6 +81,7 @@ function TrainerCardNewClass(props) {
   const [image, setImage] = useState(null);
   const fileInputRef = useRef();
   const [isLoading, setisLoading] = useState(false);
+  const [isImgLoading, setisImgLoading] = useState(false);
   const [error, setErrors] = useState({});
   const dispatch = useDispatch();
 
@@ -209,30 +210,63 @@ function TrainerCardNewClass(props) {
       // If you want the image resized to the canvas size (also a HTMLCanvasElement)
       const canvasScaled = currentEditor.getImageScaledToCanvas();
 
-      const tempURL = canvasScaled.toDataURL();
+      const canvas = currentEditor.getImage().toDataURL();
+      let imageURL;
+      // console.log(canvas);
 
-      setImage(tempURL);
+      fetch(canvas)
+        .then((res) => res.blob())
+        .then((blob) => {
+          imageURL = window.URL.createObjectURL(blob);
+
+          //  const tempURL = canvasScaled.toDataURL();
+
+          setImage(canvas);
+          // console.log(imageURL);
+          // console.log(blob);
+
+          let profile_pic = new File(
+            [blob],
+            `${trainerCardData.firstName || "First"}_${
+              trainerCardData.lastName || "Last"
+            }.jpg`
+          );
+
+          if (profile_pic) {
+            const fd = new FormData();
+
+            fd.append("profilePicture", profile_pic);
+
+            setisImgLoading(true);
+            props.fileUpload(fd).then((data) => {
+              setImage(data.urlPath);
+              setisImgLoading(false);
+              // Toast({ type: "success", message: "Profile picture updated." });
+            });
+          }
+        });
 
       toggle();
 
-      canvasScaled.toBlob((data) => {
-        let profile_pic = new File(
-          [data],
-          `${trainerCardData.firstName || "First"}_${
-            trainerCardData.lastName || "Last"
-          }.jpg`
-        );
+      //   canvasScaled.toBlob((data) => {
+      //     let profile_pic = new File(
+      //       [data],
+      //       `${trainerCardData.firstName || "First"}_${
+      //         trainerCardData.lastName || "Last"
+      //       }.jpg`
+      //     );
 
-        if (profile_pic) {
-          const fd = new FormData();
+      //     if (profile_pic) {
+      //       const fd = new FormData();
 
-          fd.append("profilePicture", profile_pic);
-          props.fileUpload(fd).then((data) => {
-            setImage(data.urlPath);
-            // Toast({ type: "success", message: "Profile picture updated." });
-          });
-        }
-      }, `${trainerCardData.firstName || "First"}_${trainerCardData.lastName || "Last"}.jpg`);
+      //       fd.append("profilePicture", profile_pic);
+      //       props.fileUpload(fd).then((data) => {
+      //         setImage(data.urlPath);
+      //         // Toast({ type: "success", message: "Profile picture updated." });
+      //       });
+      //     }
+      //   }, `${trainerCardData.firstName || "First"}_${trainerCardData.lastName || "Last"}.jpg`);
+      // }
     }
   };
 
@@ -440,7 +474,10 @@ function TrainerCardNewClass(props) {
           </p>
         </div>
         <div className="pro_pic_center">
-          <div className="item1_card">
+          <div className="item1_card position-relative">
+            {isImgLoading && (
+              <div className="image-loading-overlay">Loading...</div>
+            )}
             {image ? (
               <div className="combin_profile">
                 <button
@@ -476,6 +513,7 @@ function TrainerCardNewClass(props) {
                     event.preventDefault();
                     fileInputRef.current.click();
                   }}
+                  className={`${isImgLoading ? "d-none" : ""}`}
                 />
               </div>
             ) : (
@@ -509,6 +547,7 @@ function TrainerCardNewClass(props) {
                     event.preventDefault();
                     fileInputRef.current.click();
                   }}
+                  className={`${isImgLoading ? "d-none" : ""}`}
                 />
               </div>
             )}
@@ -555,109 +594,123 @@ function TrainerCardNewClass(props) {
           </label>
           <br />
           <div className="item3_card_inner">
-            <div style={{display:"flex", alignItems:"center"}}>
-            <Checkbox
-              checked={checkedHIIT}
-              icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
-              checkedIcon={
-                <RadioButtonCheckedIcon className="vertical_checkbox" />
-              }
-              onChange={(e) => {
-                setCheckedHIIT(!checkedHIIT);
-                if (e.target.checked) {
-                  setTrainerCardData({
-                    ...trainerCardData,
-                    verticals: [
-                      ...trainerCardData.verticals,
-                      "Strength & HIIT",
-                    ],
-                  });
-                } else {
-                  const index = trainerCardData.verticals.indexOf(
-                    "Strength & HIIT"
-                  );
-                  if (index > -1) {
-                    trainerCardData.verticals.splice(index, 1);
-                  }
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox
+                checked={checkedHIIT}
+                icon={
+                  <RadioButtonUncheckedIcon className="vertical_checkbox" />
                 }
-              }}
-            />
+                checkedIcon={
+                  <RadioButtonCheckedIcon className="vertical_checkbox" />
+                }
+                onChange={(e) => {
+                  setCheckedHIIT(!checkedHIIT);
+                  if (e.target.checked) {
+                    setTrainerCardData({
+                      ...trainerCardData,
+                      verticals: [
+                        ...trainerCardData.verticals,
+                        "Strength & HIIT",
+                      ],
+                    });
+                  } else {
+                    const index = trainerCardData.verticals.indexOf(
+                      "Strength & HIIT"
+                    );
+                    if (index > -1) {
+                      trainerCardData.verticals.splice(index, 1);
+                    }
+                  }
+                }}
+              />
+              &ensp;
+              <h6 style={{ marginRight: "1em" }}>Strength & HIIT</h6>
+            </div>
             &ensp;
-            <h6 style={{ marginRight: "1em" }}>Strength & HIIT</h6></div>
-            &ensp;
-            <div style={{display:"flex", alignItems:"center"}}>
-            <Checkbox
-              checked={checkedBoxing}
-              icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
-              checkedIcon={
-                <RadioButtonCheckedIcon className="vertical_checkbox" />
-              }
-              onChange={(e) => {
-                setCheckedBoxing(!checkedBoxing);
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox
+                checked={checkedBoxing}
+                icon={
+                  <RadioButtonUncheckedIcon className="vertical_checkbox" />
+                }
+                checkedIcon={
+                  <RadioButtonCheckedIcon className="vertical_checkbox" />
+                }
+                onChange={(e) => {
+                  setCheckedBoxing(!checkedBoxing);
 
-                if (e.target.checked) {
-                  setTrainerCardData({
-                    ...trainerCardData,
-                    verticals: [...trainerCardData.verticals, "Boxing"],
-                  });
-                } else {
-                  const index = trainerCardData.verticals.indexOf("Boxing");
-                  if (index > -1) {
-                    trainerCardData.verticals.splice(index, 1);
+                  if (e.target.checked) {
+                    setTrainerCardData({
+                      ...trainerCardData,
+                      verticals: [...trainerCardData.verticals, "Boxing"],
+                    });
+                  } else {
+                    const index = trainerCardData.verticals.indexOf("Boxing");
+                    if (index > -1) {
+                      trainerCardData.verticals.splice(index, 1);
+                    }
                   }
-                }
-              }}
-            />
+                }}
+              />
+              &ensp;
+              <h6 style={{ marginRight: "1em" }}>Boxing</h6>{" "}
+            </div>{" "}
             &ensp;
-            <h6 style={{ marginRight: "1em" }}>Boxing</h6> </div> &ensp;
-            <div style={{display:"flex", alignItems:"center"}}>
-            <Checkbox
-              checked={checkedYoga}
-              icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
-              checkedIcon={
-                <RadioButtonCheckedIcon className="vertical_checkbox" />
-              }
-              onChange={(e) => {
-                setCheckedYoga(!checkedYoga);
-                if (e.target.checked) {
-                  setTrainerCardData({
-                    ...trainerCardData,
-                    verticals: [...trainerCardData.verticals, "Yoga"],
-                  });
-                } else {
-                  const index = trainerCardData.verticals.indexOf("Yoga");
-                  if (index > -1) {
-                    trainerCardData.verticals.splice(index, 1);
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox
+                checked={checkedYoga}
+                icon={
+                  <RadioButtonUncheckedIcon className="vertical_checkbox" />
+                }
+                checkedIcon={
+                  <RadioButtonCheckedIcon className="vertical_checkbox" />
+                }
+                onChange={(e) => {
+                  setCheckedYoga(!checkedYoga);
+                  if (e.target.checked) {
+                    setTrainerCardData({
+                      ...trainerCardData,
+                      verticals: [...trainerCardData.verticals, "Yoga"],
+                    });
+                  } else {
+                    const index = trainerCardData.verticals.indexOf("Yoga");
+                    if (index > -1) {
+                      trainerCardData.verticals.splice(index, 1);
+                    }
                   }
-                }
-              }}
-            />
+                }}
+              />
+              &ensp;
+              <h6 style={{ marginRight: "1em" }}>Yoga</h6>
+            </div>{" "}
             &ensp;
-            <h6 style={{ marginRight: "1em" }}>Yoga</h6></div> &ensp;
-            <div style={{display:"flex", alignItems:"center"}}>
-            <Checkbox
-              checked={checkedPilates}
-              icon={<RadioButtonUncheckedIcon className="vertical_checkbox" />}
-              checkedIcon={
-                <RadioButtonCheckedIcon className="vertical_checkbox" />
-              }
-              onChange={(e) => {
-                setCheckedPilates(!checkedPilates);
-                if (e.target.checked) {
-                  setTrainerCardData({
-                    ...trainerCardData,
-                    verticals: [...trainerCardData.verticals, "Pilates"],
-                  });
-                } else {
-                  const index = trainerCardData.verticals.indexOf("Pilates");
-                  if (index > -1) {
-                    trainerCardData.verticals.splice(index, 1);
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox
+                checked={checkedPilates}
+                icon={
+                  <RadioButtonUncheckedIcon className="vertical_checkbox" />
+                }
+                checkedIcon={
+                  <RadioButtonCheckedIcon className="vertical_checkbox" />
+                }
+                onChange={(e) => {
+                  setCheckedPilates(!checkedPilates);
+                  if (e.target.checked) {
+                    setTrainerCardData({
+                      ...trainerCardData,
+                      verticals: [...trainerCardData.verticals, "Pilates"],
+                    });
+                  } else {
+                    const index = trainerCardData.verticals.indexOf("Pilates");
+                    if (index > -1) {
+                      trainerCardData.verticals.splice(index, 1);
+                    }
                   }
-                }
-              }}
-            />
-            &ensp;
-            <h6 style={{ marginRight: "1em" }}>Pilates</h6>  &ensp; </div>
+                }}
+              />
+              &ensp;
+              <h6 style={{ marginRight: "1em" }}>Pilates</h6> &ensp;{" "}
+            </div>
           </div>
         </div>
 
@@ -1055,9 +1108,11 @@ function TrainerCardNewClass(props) {
               scale={sliderValue}
               rotate={0}
             />
-             <Slider
+            <Slider
               value={sliderValue}
-              onChange={(event, newValue)=>{setSliderValue(newValue)}}
+              onChange={(event, newValue) => {
+                setSliderValue(newValue);
+              }}
               aria-labelledby="discrete-slider-small-steps"
               step={0.1}
               min={1}
@@ -1081,7 +1136,7 @@ function TrainerCardNewClass(props) {
         </div>
         <div className="card_submit">
           <button onClick={() => handleSubmit()} disabled={isLoading}>
-            {isLoading ? (
+            {isLoading || isImgLoading ? (
               "Loading..."
             ) : (
               <>

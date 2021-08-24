@@ -50,7 +50,7 @@ const TrainerMessageClass = ({
   invitedSessions,
   unSubscribeAct,
   unSubscribeClientAct,
-  change_login_status
+  change_login_status,
 }) => {
   const isUser = parseInt(localStorage.getItem("type")) === 3;
 
@@ -133,6 +133,10 @@ const TrainerMessageClass = ({
 
   const getChannelDetails = (tab) => {
     if (isAdmin) return getAdminChannelDetails();
+
+    const { search } = history.location;
+
+    const channelID = search.split("channelId=")[1];
     trainerChannel(tab, pageData[tab])
       .then((data) => {
         let sessionTypeData = {
@@ -150,6 +154,23 @@ const TrainerMessageClass = ({
         let reduxData = {
           [currentSession]: [...data],
         };
+
+        if (type && channelID) {
+          let currentTypeData =
+            [...reduxData[sessionTypeData[type]]].filter(
+              ({ channelId }) => channelId === channelID
+            )[0] || {};
+
+          if (currentTypeData.channelId) {
+            let reduxData = {
+              currentChannelMembers: [...currentTypeData?.members],
+              channelData: currentTypeData,
+            };
+            // console.log(reduxData);
+
+            updateMessagingDetails(reduxData);
+          }
+        }
 
         updateMessagingDetails(reduxData);
       })
@@ -260,7 +281,7 @@ const TrainerMessageClass = ({
 
     getChannelDetails(tab);
   }
-  
+
   const handleOnActive = (event) => {
     console.log("user is active");
     if (localStorage.getItem("token") !== null) {
@@ -435,7 +456,7 @@ const mapDispatchToProps = (dispatch) => {
       updateMessagingDetails,
       unSubscribeAct: unSubscribeFromChannel,
       unSubscribeClientAct: unSubscribeFromClient,
-      change_login_status
+      change_login_status,
     },
     dispatch
   );

@@ -41,6 +41,6 @@ let configBasedOnEnv = {};
 let env = process.env.REACT_APP_ENV;
 
 configBasedOnEnv = config[env] ? config[env] : config["development"];
-configBasedOnEnv = config["production"];
+// configBasedOnEnv = config["production"];
 
 export default configBasedOnEnv;

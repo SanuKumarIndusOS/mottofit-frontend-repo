@@ -12,7 +12,7 @@ import { send_unread_notification } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { getFormatDate } from "service/helperFunctions";
 import { TextFormatSharp } from "@material-ui/icons";
-import { withRouter } from 'react-router-dom'   
+import { withRouter } from "react-router-dom";
 
 class ChatBoxClass extends Component {
   constructor(props) {
@@ -26,10 +26,9 @@ class ChatBoxClass extends Component {
     };
   }
 
-  goBack(){
+  goBack() {
     this.props.history.goBack();
-}
-
+  }
 
   componentDidUpdate(prevProps) {
     // console.log(this.props, prevProps);
@@ -74,7 +73,6 @@ class ChatBoxClass extends Component {
     e.preventDefault();
 
     const { message } = this.state;
-    console.log(message);
 
     const { activeChannel } = this.props;
 
@@ -88,6 +86,7 @@ class ChatBoxClass extends Component {
           message: "",
         });
         this.scrollToMessageListBottom();
+        this.unread();
       });
     }
   };
@@ -153,6 +152,18 @@ class ChatBoxClass extends Component {
     );
   };
 
+  handleKeyUp = (evt) => {
+    // console.log(evt.keyCode, evt.shiftKey);
+
+    if (evt.keyCode == 13 && !evt.shiftKey) {
+      // console.log("Enter pressed");
+
+      this.handleSendMessage(evt);
+
+      // evt.preventDefault();
+    }
+  };
+
   render() {
     const {
       activeChannelMessages = [],
@@ -185,10 +196,8 @@ class ChatBoxClass extends Component {
                 <div className="mobile_chat_header">
                   <h2 style={{ textTransform: "Capitalize" }}>
                     {channelData?.chatTitle || "Title"}
-                    
                   </h2>
-                  <h1 onClick={this.goBack} >&#8249;</h1>
-                  
+                  <h1 onClick={this.goBack}>&#8249;</h1>
                 </div>
                 <div className="message_right_header">
                   <h2 style={{ textTransform: "Capitalize" }}>
@@ -248,13 +257,18 @@ class ChatBoxClass extends Component {
                 </div>
                 <form className="w-100" onSubmit={this.handleSendMessage}>
                   <div className="message_right_input">
-                    <input
+                    <textarea
                       type="text"
                       placeholder="Type your message here.."
                       value={message}
                       onChange={this.handleChange}
+                      onKeyDown={this.handleKeyUp}
+                      onKeyPress={this.handleKeyUp}
                     />
-                    <div className="submit-btn-block" onClick={this.unread}>
+                    <div
+                      className="submit-btn-block"
+                      onClick={this.handleSendMessage}
+                    >
                       <button className="transparent-btn">
                         <BlueHoverButton />
                       </button>

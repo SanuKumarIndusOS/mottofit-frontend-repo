@@ -114,10 +114,12 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent =
-    trainerProfileData?.preferedTrainingMode?.includes("virtual");
-  const isInPersonPresent =
-    trainerProfileData?.preferedTrainingMode?.includes("inPerson");
+  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
+    "virtual"
+  );
+  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
+    "inPerson"
+  );
 
   const handleRequestTrainer = () => {
     const userId = localStorage.getItem("user-id");
@@ -156,10 +158,19 @@ const TrainerProfileClass = ({
       setLoading(true);
       requestTrainerMessageApi(payload)
         .then((data) => {
+          const { channelSid } = data || {};
+
+          let redirectURL = `/users/dashboard/message/requested`;
+
+          if (channelSid)
+            redirectURL = `${redirectURL}?channelId=${channelSid}`;
+
+          console.log(redirectURL);
+
           setLoading(false);
           Toast({ type: "success", message: "Success" });
-          history.push("/users/dashboard/message/requested");
-          resolve();
+          history.push(redirectURL);
+          // resolve();
         })
         .catch((err) => {
           setLoading(false);
@@ -316,13 +327,103 @@ const TrainerProfileClass = ({
                             </div>
                             <hr></hr>
                             <div className="package_body">
-                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Virtual) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual}</h3></div>
-                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Your Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}</h3></div>
-                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Trainer's Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}</h3></div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                3 Session Pass (Virtual) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor3SessionAtVirtual
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                3 Session Pass (Your Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor3SessionAtClientLocation
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                3 Session Pass (Trainer's Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor3SessionAtTrainerLocation
+                                  }
+                                </h3>
+                              </div>
                               <br></br>
-                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Virtual) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}</h3></div>
-                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Your Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}</h3></div>
-                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Trainer's Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}</h3></div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                10 Session Pass (Virtual) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor10SessionAtVirtual
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                10 Session Pass (Your Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor10SessionAtClientLocation
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                10 Session Pass (Trainer's Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor10SessionAtTrainerLocation
+                                  }
+                                </h3>
+                              </div>
                             </div>
                           </div>
                         </Dialog>
@@ -854,6 +955,7 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
                   className="box1"
                   onError={(e) => {
                     e.target.src = imageView[0]?.image;
+                    e.currentTarget.style.display = "none";
                   }}
                 />
               </div>
@@ -868,6 +970,9 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
                     src={images[1] || imageView[0]?.image}
                     alt="picture"
                     className="box2"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
                   />
                 </div>
               )}
@@ -882,6 +987,9 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
                       src={images[2] || imageView[0]?.image}
                       alt="Not Added"
                       className="box3"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
                   </div>
                 )}
@@ -895,6 +1003,9 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
                       src={images[3] || imageView[0]?.image}
                       alt="picture"
                       className="box4"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
                   </div>
                 )}
