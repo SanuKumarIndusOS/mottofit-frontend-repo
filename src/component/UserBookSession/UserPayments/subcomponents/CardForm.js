@@ -196,11 +196,13 @@ function CardFormFC({
       });
   };
 
+  // console.log("mottoPassDataVal", mottoPassDataVal);
+
   return (
     <div>
       <form onSubmit={handleSubmit} className="Card">
-        {"availPass" in mottoPassDataVal ? (
-          <div style={{marginTop:"20px", marginBottom:"20px"}}>
+        {mottoPassDataVal && "availPass" in mottoPassDataVal ? (
+          <div style={{ marginTop: "20px", marginBottom: "20px" }}>
             <h3>Remaing Passes: {mottoPassDataVal.availPass[0].remains}</h3>
           </div>
         ) : (
