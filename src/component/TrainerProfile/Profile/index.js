@@ -25,6 +25,7 @@ import { copyTextToClipboard } from "service/helperFunctions";
 import FullScreenCarousel from "component/common/FullScreenCarousel";
 import { requestTrainerMessageAct } from "action/trainerAct";
 import { Toast } from "service/toast";
+import Dialog from "@material-ui/core/Dialog";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -34,6 +35,7 @@ const TrainerProfileClass = ({
   selectedTimes,
   requestTrainerMessageApi,
 }) => {
+  const [openDialog, setOpenDialog] = React.useState(false);
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
   const [openClassModel, setOpenClassModel] = useState(false);
@@ -66,6 +68,8 @@ const TrainerProfileClass = ({
       setTrainerCertificates(tempCertificate);
 
       setTraierProfileData(data);
+
+      console.log(data);
     });
   }
 
@@ -291,7 +295,37 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
-                        <h5>See package rates during checkout</h5>
+                        <h5
+                          onClick={() => {
+                            setOpenDialog(true);
+                          }}
+                          style={{ cursor: "pointer" }}
+                        >
+                          See package rates
+                        </h5>
+                        <Dialog
+                          onClose={() => {
+                            setOpenDialog(false);
+                          }}
+                          aria-labelledby="simple-dialog-title"
+                          open={openDialog}
+                        >
+                          <div className="packages_dialog">
+                            <div className="package_header">
+                              <h3>Package Rates</h3>
+                            </div>
+                            <hr></hr>
+                            <div className="package_body">
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Virtual) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Your Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>3 Session Pass (Trainer's Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}</h3></div>
+                              <br></br>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Virtual) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Your Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}</h3></div>
+                              <div style={{display:"flex", alignItems:"center", fontSize:"20px"}}>10 Session Pass (Trainer's Location) &ensp;<h3>${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}</h3></div>
+                            </div>
+                          </div>
+                        </Dialog>
                       </div>
                     </div>
                   )}
@@ -605,22 +639,23 @@ const TrainerProfileClass = ({
                     <div className="profile_right_item3 mb-5 pb-5">
                       <h2>Certifications</h2>
                       <div className="profile_item3_inner">
-                        {trainerCertificates.length > 0 ? (
-                          <>
-                            {trainerCertificates.map(
-                              ({ certificate }, index) => (
-                                <div
-                                  className="inner_items"
-                                  key={`${certificate}_${index}`}
-                                >
-                                  <img src={Tick} alt="check" />
-                                  <h6>{certificate}</h6>
-                                </div>
-                              )
-                            )}
-                          </>
-                        ) : null
-                        // <p>Not Added</p>
+                        {
+                          trainerCertificates.length > 0 ? (
+                            <>
+                              {trainerCertificates.map(
+                                ({ certificate }, index) => (
+                                  <div
+                                    className="inner_items"
+                                    key={`${certificate}_${index}`}
+                                  >
+                                    <img src={Tick} alt="check" />
+                                    <h6>{certificate}</h6>
+                                  </div>
+                                )
+                              )}
+                            </>
+                          ) : null
+                          // <p>Not Added</p>
                         }
                       </div>
                     </div>
@@ -667,7 +702,9 @@ const TrainerProfileClass = ({
                             <span style={{ color: "black" }}>
                               Dont See a Time you want&ensp;?&ensp;
                             </span>
-                            <span style={{textDecoration:"underline"}}>{`Request A Time with ${trainerProfileData.firstName}`}</span>
+                            <span
+                              style={{ textDecoration: "underline" }}
+                            >{`Request A Time with ${trainerProfileData.firstName}`}</span>
                           </>
                         )}
                       </button>

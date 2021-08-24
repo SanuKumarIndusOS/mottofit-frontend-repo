@@ -102,6 +102,7 @@ const TrainWithFriendsClass = ({
   };
 
   useEffect(() => {
+    console.log(sessionData);
     const { getSessionData } = userApi;
     let sessionId = submittedData?.id;
 
@@ -716,7 +717,7 @@ const TrainWithFriendsClass = ({
                         <div className="TF_data_inner">
                           <img src={LocationIcon} alt="icon" />
                           <h4>
-                            {sessionData.sessionType === "inPerson"
+                            {sessionData.preferedTrainingMode === "inPerson"
                               ? `${sessionData?.trainingVenue?.label}`
                               : "Virtual"}
                           </h4>
