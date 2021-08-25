@@ -893,7 +893,8 @@ function TfcClass({
           }
           <div className={`scheduler_button ${editMode ? "w-auto" : ""}`}>
             {editMode ? (
-              <>
+              <div>
+                <div style={{display:"flex"}}>
                 <input
                   type="checkbox"
                   id="defualt"
@@ -910,6 +911,7 @@ function TfcClass({
                   {" "}
                   Make default
                 </label>
+                </div>
                 <button
                   onClick={toggleEditMode}
                   className="scheduler_button"
@@ -920,7 +922,7 @@ function TfcClass({
                 >
                   SAVE <ArrowHoverBlacked />
                 </button>
-              </>
+              </div>
             ) : (
               <button
                 onClick={toggleEditMode}
