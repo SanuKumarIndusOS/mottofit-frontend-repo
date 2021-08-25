@@ -91,7 +91,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
               history.push("/trainer/about");
             } else {
               setLoading(false);
-              history.push("/trainers/dashboard/schedule");
+              history.push("/trainers/dashboard/session");
             }
           });
         } else {

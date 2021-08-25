@@ -105,7 +105,7 @@ const SignInFC = ({
             if (response.applicationStatus === null) {
               history.push("/trainer/about");
             } else {
-              history.push("/trainers/dashboard/schedule");
+              history.push("/trainers/dashboard/session");
             }
           });
         } else {
