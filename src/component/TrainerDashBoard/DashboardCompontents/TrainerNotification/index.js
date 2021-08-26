@@ -36,7 +36,7 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
     });
 
     getnotificationList().then((data) => {
-      // console.log(data);
+       console.log(data);
       setAllNotificationData(data);
     });
   }, []);
@@ -104,16 +104,16 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
                                   className="avail_img"
                                 />
                                 {moment(
-                                  item.updatedAt.slice(0, 10),
-                                  "yyyy-mm-dd"
-                                ).format("MMMM") +
+                                  item.createdAt.slice(0, 10),
+                                  "YYYY-MM-DD"
+                                ).format('MMMM') +
                                   " " +
-                                  item.updatedAt.slice(8, 10) +
+                                  item.createdAt.slice(8, 10) +
                                   "th, " +
-                                  item.updatedAt.slice(0, 4) +
+                                  item.createdAt.slice(0, 4) +
                                   " at " +
                                   moment(
-                                    item.updatedAt.slice(11, 16),
+                                    item.createdAt.slice(11, 16),
                                     "HH:mm"
                                   ).format("h:mm A")}
                               </div>
