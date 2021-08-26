@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
 import moment from "moment";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import BackIcon from "../../../../assets/files/SVG/SchedulerAsset/Left Button.svg";
 import NextIcon from "../../../../assets/files/SVG/SchedulerAsset/Right Button.svg";
 import { Dropdown } from "reactjs-dropdown-component";
@@ -150,6 +151,8 @@ function TfcClass({
     [false, false, false, false, false, false, false, false],
   ]);
 
+  const [saveLoader, setsaveLoader] = useState(false)
+
   const [cal, setCal] = useState([]);
   const [startWeek, setstartWeek] = useState(moment().startOf("isoWeek"));
   const [endWeek, setendWeek] = useState(moment().endOf("isoWeek"));
@@ -232,6 +235,8 @@ function TfcClass({
   }, [cells]);
 
   useEffect(() => {
+
+   
     var temp = [];
     var sortDate = [];
 
@@ -254,6 +259,7 @@ function TfcClass({
     //     setCells(tempcells);
     // } else {
     if (sortDate.length !== 0) {
+       setsaveLoader(true);
       var data = {
         startDate: sortDate[sortDate.length - 1].date,
         endDate: sortDate[0].date,
@@ -289,6 +295,7 @@ function TfcClass({
       addTrainerSlotApi(data)
         .then(() => {
           setCells(tempcells);
+          setsaveLoader(false);
           getAvailableSlots(startWeek, endWeek);
         })
         .catch((error) => {
@@ -362,6 +369,7 @@ function TfcClass({
     );
   };
   function editSlot(datee, time) {
+    setsaveLoader(true);
     var editData = {
       date: datee,
       mode: TimeSlot,
@@ -374,6 +382,7 @@ function TfcClass({
 
     trainerSlotApi(editData)
       .then(() => {
+        setsaveLoader(false);
         setCells(tempcells);
         getAvailableSlots(startWeek, endWeek);
       })
@@ -880,7 +889,14 @@ function TfcClass({
                 name="TimeSlot"
               />
             </div>
+         
           </div>
+          {saveLoader?  <div style={{width:"100%", display:"flex", alignItems:"center", justifyContent:"center", height:"50px"}}>
+         <div>Saving Slots Please Wait</div> &ensp; <CircularProgress />
+          </div>:<div style={{width:"100%", height:"50px"}}></div>}
+        
+          <br></br>
+         
           {/* {tableData}
                     {tableData2} */}
           {
@@ -893,7 +909,7 @@ function TfcClass({
           }
           <div className={`scheduler_button ${editMode ? "w-auto" : ""}`}>
             {editMode ? (
-              <div>
+              <>
                 <div style={{display:"flex"}}>
                 <input
                   type="checkbox"
@@ -922,7 +938,7 @@ function TfcClass({
                 >
                   SAVE <ArrowHoverBlacked />
                 </button>
-              </div>
+              </>
             ) : (
               <button
                 onClick={toggleEditMode}
