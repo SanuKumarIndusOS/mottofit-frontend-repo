@@ -269,7 +269,7 @@ const MyProfileClass = ({
               Toast({ type: "error", message: err.message || "Error" });
             });
         } else {
-          Toast({ type: "success", message: data.message || "success" });
+          Toast({ type: "success", message: "Changes Saved"|| "Changes Saved" });
         }
       })
       .catch((err) => {
