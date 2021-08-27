@@ -387,7 +387,7 @@ const routers = [
       },
 
       {
-        path: "/scheduler",
+        path: "/scheduler/:id",
         componentPath: "pages/User/UserSchedule/index",
         name: "UserScheduler",
         auth: false,

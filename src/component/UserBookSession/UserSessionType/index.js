@@ -576,6 +576,8 @@ const UserBookSessionFC = ({
 
   if (!localStorage.getItem("token")) hasDataEntered = false;
 
+  const trainerId = tempTrainerData?.id;
+
   return (
     <>
       <div className="session_outter_container">
@@ -584,7 +586,9 @@ const UserBookSessionFC = ({
             <div className="link_wrapper">
               <img src={ArrowBack} alt="icon" />
               <div className="inner_links">
-                <Link to="/user/scheduler">Change your Slot</Link>
+                <Link to={`/user/scheduler/${trainerId}`}>
+                  Change your Slot
+                </Link>
                 <div></div>
               </div>
             </div>

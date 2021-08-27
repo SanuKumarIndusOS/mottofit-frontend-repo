@@ -45,7 +45,7 @@ const TrainerCardsFC = (props) => {
 
     if (!isReadMore) {
       history.push({
-        pathname: "/user/scheduler",
+        pathname: `/user/scheduler/${bestMatchData[data]["id"]}`,
       });
     } else {
       history.push({

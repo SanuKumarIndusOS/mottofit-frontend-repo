@@ -33,7 +33,7 @@ const TrainerCardOutsideFC = (props) => {
 
     if (!isReadMore) {
       history.push({
-        pathname: "/user/scheduler",
+        pathname: `/user/scheduler/${outSideData[data]["id"]}`,
       });
     } else {
       history.push({

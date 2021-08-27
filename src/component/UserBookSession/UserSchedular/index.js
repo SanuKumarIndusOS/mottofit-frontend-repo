@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 import Profile from "../../../assets/files/FindTrainer/Profile Picture.png";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 // import UserScheduler from "../../UserScheduler/Scheduler";
 import UserScheduler from "component/TrainerProfile/UserScheduler/UserScheduler";
@@ -14,6 +14,7 @@ import { getFormatDate } from "service/helperFunctions";
 import { history } from "helpers/index";
 import { logout } from "service/utilities";
 import { UserAvatar } from "../../common/UserAvatar";
+import { getTrainerDetail } from "action/adminAct";
 
 const UserEventSchedularFC = (props) => {
   const [trainerName, setTrainerName] = React.useState("");
@@ -22,6 +23,8 @@ const UserEventSchedularFC = (props) => {
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [userSelectedData, setUserSelectedData] = React.useState({});
   const [DateSlot, setDateSlot] = React.useState();
+
+  const { id } = useParams();
 
   React.useEffect(() => {
     // if (!localStorage.getItem("token")) {
@@ -36,32 +39,46 @@ const UserEventSchedularFC = (props) => {
 
     // if (!location["trainerId"]) return history.push("/trainer/find");
 
-    setTrainerName(location["trainerData"] || location);
-    // setTrainerName(props.selectedTrainerData);
-
-    props?.query?.trainingType && setActivity(props.query.trainingType);
-
-    if (props.bookingData) {
-      props.bookingData?.start_slot &&
-        settrainerstartSlot(props.bookingData?.start_slot);
-      props.bookingData?.end_slot &&
-        settrainerEndSlot(props.bookingData?.end_slot);
-      props.bookingData?.date && setDateSlot(props.bookingData?.date);
-
-      let tempData = {
-        startDate: getFormatDate(
-          props.bookingData?.start_slot,
-          "hh:mm AYYYY-MM-DD"
-        ),
-        endDate: getFormatDate(
-          props.bookingData?.end_slot,
-          "hh:mm AYYYY-MM-DD"
-        ),
-      };
-
-      setUserSelectedData(tempData);
-    }
+    fetchViewTrainer();
   }, []);
+
+  function fetchViewTrainer() {
+    props.getTrainerDetail(id, false).then((data) => {
+      let reduxData = {
+        selectedTrainerData: {
+          trainerId: id,
+          trainerData: data,
+        },
+      };
+      props.updateUserDetails(reduxData);
+
+      setTrainerName(data);
+      // setTrainerName(props.selectedTrainerData);
+
+      props?.query?.trainingType && setActivity(props.query.trainingType);
+
+      if (props.bookingData) {
+        props.bookingData?.start_slot &&
+          settrainerstartSlot(props.bookingData?.start_slot);
+        props.bookingData?.end_slot &&
+          settrainerEndSlot(props.bookingData?.end_slot);
+        props.bookingData?.date && setDateSlot(props.bookingData?.date);
+
+        let tempData = {
+          startDate: getFormatDate(
+            props.bookingData?.start_slot,
+            "hh:mm AYYYY-MM-DD"
+          ),
+          endDate: getFormatDate(
+            props.bookingData?.end_slot,
+            "hh:mm AYYYY-MM-DD"
+          ),
+        };
+
+        setUserSelectedData(tempData);
+      }
+    });
+  }
 
   const callbackFunction = (ts, tss, date) => {
     // console.log(ts, tss, "Callback");
@@ -156,9 +173,8 @@ const UserEventSchedularFC = (props) => {
                   endTime={userSelectedData?.endDate}
                   updateUserDetails={props.updateUserDetails}
                   selectedTimes={props.selectedTimes}
-                  
                 />
-                <BottomSection  trainerName={trainerName} />
+                <BottomSection trainerName={trainerName} />
                 {/* </div> */}
 
                 <Link
@@ -216,6 +232,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       updateUserDetails,
+      getTrainerDetail,
     },
     dispatch
   );

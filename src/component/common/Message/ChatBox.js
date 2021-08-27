@@ -24,6 +24,8 @@ class ChatBoxClass extends Component {
       message: "",
       members: [],
     };
+
+    this.inputRef = React.createRef();
   }
 
   goBack() {
@@ -42,6 +44,12 @@ class ChatBoxClass extends Component {
     if (this.props.isLoading === false && prevProps.isLoading === true) {
       setTimeout(() => {
         this.scrollToMessageListBottom();
+        // console.log(this.inputRef);
+
+        this.inputRef?.current &&
+          this.inputRef?.current?.focus &&
+          this.inputRef?.current?.focus();
+
         // console.log("hrllo", this.props.isLoading, prevProps.isLoading);
       }, 100);
     }
@@ -264,6 +272,7 @@ class ChatBoxClass extends Component {
                       onChange={this.handleChange}
                       onKeyDown={this.handleKeyUp}
                       onKeyPress={this.handleKeyUp}
+                      ref={this.inputRef}
                     />
                     <div
                       className="submit-btn-block"

@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getFormatDate } from "service/helperFunctions";
 import { updateTrainerDetails } from "../../../action/trainerAct";
+import { useParams } from "react-router-dom";
+import { getTrainerDetail } from "action/adminAct";
 const timeZone = [
   {
     label: "EARLY BIRD (5AM-8AM)",
@@ -370,10 +372,9 @@ function UserSchedulerClass(props) {
 
   // React.useEffect(() => {
   //   console.log(TimeSlot);
-    
+
   //   populate(startWeek, endWeek);
   //  }, [TimeSlot])
-
 
   useEffect(() => {
     let tempValue = props.queryObject?.availability?.value;
@@ -392,31 +393,31 @@ function UserSchedulerClass(props) {
       switch (tempValue) {
         case "EarlyBird":
           setTime(early_bird);
-        
+
           break;
         case "RiseAndShine":
           setTime(rise_shine);
-         
+
           break;
         case "MidDayBreak1":
           setTime(mid_day);
-         
+
           break;
         case "MidDayBreak2":
           setTime(mid_day_2);
-          
+
           break;
         case "HappyHours":
           setTime(happy_hour);
-          
+
           break;
         case "NeverTooLate":
           setTime(never_too_late);
-         
+
           break;
         default:
           setTime(early_bird);
-         
+
           break;
       }
 
@@ -428,7 +429,6 @@ function UserSchedulerClass(props) {
 
       // console.log(selectedTime);
     }
-
 
     let payload = {
       query: {
@@ -774,7 +774,7 @@ function UserSchedulerClass(props) {
                 &ensp;
               </div>
             ) : (
-              <div style={{display:"flex"}}>
+              <div style={{ display: "flex" }}>
                 <img
                   src={BackIcon}
                   disabled={true}
@@ -834,6 +834,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getCalenderDetails,
       updateTrainerDetails,
+      getTrainerDetail,
     },
     dispatch
   );

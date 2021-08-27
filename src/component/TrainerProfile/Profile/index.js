@@ -93,7 +93,7 @@ const TrainerProfileClass = ({
       },
     };
     updateUserDetails(reduxData);
-    history.push("/user/scheduler");
+    history.push(`/user/scheduler/${trainerProfileData["id"]}`);
   };
   const handleSessionType = () => {
     let reduxData = {

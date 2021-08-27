@@ -52,14 +52,11 @@ const UserSessionClass = (props) => {
   let location = useLocation();
 
   useEffect(() => {
-    
     getUserPaymentDetails();
     window.scrollTo(0, 0);
-    if(location.state?.from === "invite")
-    {
+    if (location.state?.from === "invite") {
       _userSession("invited");
     }
-    
   }, []);
   const _userSession = (type, isPagination = false) => {
     props
@@ -142,7 +139,9 @@ const UserSessionClass = (props) => {
           </div>
           <div className="US_tabs_wrapper">
             <Tabs
-              defaultTab={location.state?.from === "invite"?"invited":"upcoming"}
+              defaultTab={
+                location.state?.from === "invite" ? "invited" : "upcoming"
+              }
               onChange={(tab) => {
                 handleChange(tab, userData);
               }}
@@ -299,13 +298,12 @@ const TabOne = ({
     setisLoading(true);
 
     if (!isDefaultCardPresent && action && !paidByUser) {
-      history.push({ pathname: "/users/dashboard/settings/profile" });
-
       let reduxData = {
         currentAcceptedInvitationId: sessionId,
       };
 
       restProps?.updateUserDetails(reduxData);
+      history.push({ pathname: "/users/dashboard/settings/profile" });
       return Toast({
         type: "info",
         message: "User needs to add default card to proceed futher",
