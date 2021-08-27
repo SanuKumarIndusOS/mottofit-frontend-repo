@@ -28,11 +28,11 @@ const timeZone = [
     value: "RiseAndShine",
   },
   {
-    label: "MID-DAY BREAK (11:30AM-2PM)",
+    label: "LUNCHTIME (11:30AM-2PM)",
     value: "MidDayBreak1",
   },
   {
-    label: "MID-DAY LUNCHTIME (2AM-5PM)",
+    label: "MID-DAY BREAK (2AM-5PM)",
     value: "MidDayBreak2",
   },
   {
