@@ -109,8 +109,8 @@ const TrainerCardsFC = (props) => {
                   .filter((price) => !isNaN(price) && price > 0);
 
                 const sortedPricingList = allSessionPricing.sort(
-                  (a, b) => a - b
-                );
+                  (a, b) => a - b 
+                ).filter(function(value){ return value > 0});
 
                 return (
                   <div
@@ -171,7 +171,7 @@ const TrainerCardsFC = (props) => {
                         book a session
                         <BlackCircleButton />
                         <p>
-                          from <span>${sortedPricingList[0] || ""}</span>
+                          from <span>${sortedPricingList[0]  || ""}</span>
                         </p>
                       </button>
                     </div>
