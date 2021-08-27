@@ -411,7 +411,7 @@ const MyProfileClass = ({
                             </span>
                           )}
                         </div>
-                        <div className="input_profile">
+                        {/* <div className="input_profile">
                           <label>Location </label>
                           <NormalMultiSelect
                             placeholder="Select Your City"
@@ -427,7 +427,7 @@ const MyProfileClass = ({
                               {errors.location[0]}
                             </span>
                           )}
-                        </div>
+                        </div> */}
                         {/* <div className="input_profile">
                           <label>Date of Birth </label>
                           <input
