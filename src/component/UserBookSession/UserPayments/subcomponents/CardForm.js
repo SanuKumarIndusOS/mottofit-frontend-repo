@@ -144,8 +144,6 @@ function CardFormFC({
 
     api({ ...addCardDetails })
       .then(({ data }) => {
-        console.log(data);
-
         Toast({ type: "success", message: "Card details added" });
         getUserPaymentInfo();
 
@@ -165,7 +163,7 @@ function CardFormFC({
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });
-        //console.log(err);
+        console.log(err);
       });
   };
 

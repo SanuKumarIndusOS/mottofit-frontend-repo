@@ -622,6 +622,7 @@ select {
         margin: 0.5em;
         width: 325px;
         height: auto;
+        word-break: break-all;
 
         background: #efefef 0% 0% no-repeat padding-box;
         opacity: 1;
@@ -653,6 +654,7 @@ select {
         margin: 0.5em;
         width: 325px;
         height: auto;
+        word-break: break-all;
 
         background: #f8f8f8 0% 0% no-repeat padding-box;
         opacity: 1;

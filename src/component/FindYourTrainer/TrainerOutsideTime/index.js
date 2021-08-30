@@ -128,7 +128,12 @@ const TrainerCardOutsideFC = (props) => {
                     </div>
 
                     <div className="card-body">
-                      <h3 style={{ textTransform: "capitalize" }}>
+                      <h3
+                        style={{
+                          textTransform: "capitalize",
+                          wordBreak: "break-all",
+                        }}
+                      >
                         {outSideData[data]?.firstName}&nbsp;
                         {outSideData[data]?.lastName}
                       </h3>

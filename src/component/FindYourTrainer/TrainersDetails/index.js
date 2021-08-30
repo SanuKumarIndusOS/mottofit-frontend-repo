@@ -108,9 +108,11 @@ const TrainerCardsFC = (props) => {
                   .map((price) => parseFloat(price))
                   .filter((price) => !isNaN(price) && price > 0);
 
-                const sortedPricingList = allSessionPricing.sort(
-                  (a, b) => a - b 
-                ).filter(function(value){ return value > 0});
+                const sortedPricingList = allSessionPricing
+                  .sort((a, b) => a - b)
+                  .filter(function (value) {
+                    return value > 0;
+                  });
 
                 return (
                   <div
@@ -143,7 +145,12 @@ const TrainerCardsFC = (props) => {
                     </div>
 
                     <div className="card-body">
-                      <h3 style={{ textTransform: "capitalize" }}>
+                      <h3
+                        style={{
+                          textTransform: "capitalize",
+                          wordBreak: "break-all",
+                        }}
+                      >
                         {bestMatchData[data]?.firstName}&nbsp;
                         {bestMatchData[data]?.lastName}
                       </h3>
@@ -171,7 +178,7 @@ const TrainerCardsFC = (props) => {
                         book a session
                         <BlackCircleButton />
                         <p>
-                          from <span>${sortedPricingList[0]  || ""}</span>
+                          from <span>${sortedPricingList[0] || ""}</span>
                         </p>
                       </button>
                     </div>

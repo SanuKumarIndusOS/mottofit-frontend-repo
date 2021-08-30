@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { getFormatDate } from "service/helperFunctions";
 import { TextFormatSharp } from "@material-ui/icons";
 import { withRouter } from "react-router-dom";
+import { unSubscribeFromChannel } from "action/messagingAct";
 
 class ChatBoxClass extends Component {
   constructor(props) {
@@ -30,6 +31,8 @@ class ChatBoxClass extends Component {
 
   goBack() {
     this.props.history.goBack();
+
+    this.props.unSubscribeFromChannel();
   }
 
   componentDidUpdate(prevProps) {
@@ -321,6 +324,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       trainerChannel,
       send_unread_notification,
+      unSubscribeFromChannel,
     },
     dispatch
   );

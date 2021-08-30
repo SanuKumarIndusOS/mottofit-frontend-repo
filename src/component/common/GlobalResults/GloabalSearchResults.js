@@ -63,7 +63,6 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
     <div className="results_container">
       <h1>Results</h1>
 
-      
       {/* <TrainerCards
         content={searchResults}
       
@@ -76,7 +75,8 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
             <h1>No Results Found</h1>
           ) : (
             <div className="row">
-              {searchResults?.map((item) => {
+              <TrainerCards content={searchResults || []} />
+              {/* {searchResults?.map((item) => {
                 return (
                   <div className="cardd">
                     {item.profilePicture !== null ? (
@@ -111,7 +111,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
                     </div>
                   </div>
                 );
-              })}{" "}
+              })}{" "} */}
             </div>
           )}
 

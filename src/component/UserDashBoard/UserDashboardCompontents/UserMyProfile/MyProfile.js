@@ -67,8 +67,6 @@ const MyProfileClass = ({
   const [changeCard, setChangeCard] = useState(true);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const fileInputRef = useRef();
-  
- 
 
   const getUserPaymentDetails = () => {
     const { getPaymentMethods } = PaymentApi;
@@ -83,7 +81,6 @@ const MyProfileClass = ({
   };
 
   useEffect(() => {
-
     getUserProfileData();
     getUserPaymentDetails();
   }, []);
@@ -155,13 +152,6 @@ const MyProfileClass = ({
         },
         ...nameValidation,
       },
-      location: {
-        presence: {
-          allowEmpty: false,
-          message: "^Location is required",
-        },
-        ...nameValidation,
-      },
       phoneNo: {
         presence: {
           allowEmpty: false,
@@ -186,12 +176,12 @@ const MyProfileClass = ({
         },
         email: true,
       },
-      location: {
-        presence: {
-          allowEmpty: false,
-          message: "^Location is required",
-        },
-      },
+      // location: {
+      //   presence: {
+      //     allowEmpty: false,
+      //     message: "^Location is required",
+      //   },
+      // },
       gender: {
         presence: {
           allowEmpty: false,
@@ -263,13 +253,19 @@ const MyProfileClass = ({
                 currentAcceptedInvitationId: "",
               };
               restProps?.updateUserDetails(reduxData);
-              history.push({pathname:"/users/dashboard/session",state:{ from:"invite" }})
+              history.push({
+                pathname: "/users/dashboard/session",
+                state: { from: "invite" },
+              });
             })
             .catch((err) => {
               Toast({ type: "error", message: err.message || "Error" });
             });
         } else {
-          Toast({ type: "success", message: "Changes Saved"|| "Changes Saved" });
+          Toast({
+            type: "success",
+            message: "Changes Saved" || "Changes Saved",
+          });
         }
       })
       .catch((err) => {
