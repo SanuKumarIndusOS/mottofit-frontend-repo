@@ -58,6 +58,7 @@ function SearchFilter({
   const [IPCDropdown, setIPCDropdown] = useState(true);
 
   const [Calvalue, onChangeCal] = useState(new Date());
+  const [CalDisplay, setCalDisplay] = useState(false);
   const [CalDropdown, setCalDropdown] = useState(false);
 
   const handleIPCChange = (event) => {
@@ -72,6 +73,7 @@ function SearchFilter({
 
     if (Object.keys(activeQuery).length !== 0) {
       onChangeCal(new Date(activeQuery.date));
+      setCalDisplay(true);
       setLocation(activeQuery.location);
       if (activeQuery.city !== undefined) {
         setIPCValue(activeQuery.city);
@@ -85,6 +87,7 @@ function SearchFilter({
 
   useEffect(() => {
     setCalDropdown(false);
+    setCalDisplay(true);
   }, [Calvalue]);
 
   const applyFilters = () => {
@@ -277,7 +280,7 @@ function SearchFilter({
             }}
           >
             <div className="option_txt">
-              {moment(Calvalue).format("YYYY/MM/DD")}
+              {  moment(Calvalue).format("YYYY/MM/DD")}
             </div>
 
             <div className="option_icon">&#10094;</div>
