@@ -669,11 +669,11 @@ const FindTrainerFC = ({
         page={page}
         totalPageMatch={totalPageMatch}
       />
-      {/* {page >= totalPageMatch || totalPageMatch === 1 ? null : (
+      {Object.keys(tempBestMatch || [])?.length < totalPageMatch && (
         <button className="view_more" onClick={ViewMoreTrainers}>
           View More Trainers &ensp; <BlueHoverButton />
         </button>
-      )} */}
+      )}
 
       {loader ? (
         <div className="load_p">
@@ -692,7 +692,7 @@ const FindTrainerFC = ({
         totalPageMatch={totalPageUnMatch}
       />
 
-      {/* {pageUnmatch >= totalPageUnMatch || totalPageUnMatch === 1 ? null : (
+      {Object.keys(tempOtherMatch || [])?.length < totalPageUnMatch && (
         <button
           onClick={() => {
             setpageUnmatch(pageUnmatch + 1);
@@ -703,7 +703,7 @@ const FindTrainerFC = ({
           View More Trainers &ensp;
           <BlueHoverButton />
         </button>
-      )} */}
+      )}
       {loaderUnMatch ? (
         <div className="load_p">
           <div className="loaders"></div>

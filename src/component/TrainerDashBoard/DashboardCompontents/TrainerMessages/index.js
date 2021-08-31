@@ -21,6 +21,7 @@ import {
   updateMessagingDetails,
   unSubscribeFromChannel,
   unSubscribeFromClient,
+  updateMessageUnReadCount,
 } from "action/messagingAct";
 import { getFormatDate } from "service/helperFunctions";
 import { UserAvatar } from "component/common/UserAvatar";
@@ -51,6 +52,7 @@ const TrainerMessageClass = ({
   unSubscribeAct,
   unSubscribeClientAct,
   change_login_status,
+  updateMessageUnReadCountAct,
 }) => {
   const isUser = parseInt(localStorage.getItem("type")) === 3;
 
@@ -457,6 +459,7 @@ const mapDispatchToProps = (dispatch) => {
       unSubscribeAct: unSubscribeFromChannel,
       unSubscribeClientAct: unSubscribeFromClient,
       change_login_status,
+      updateMessageUnReadCountAct: updateMessageUnReadCount,
     },
     dispatch
   );

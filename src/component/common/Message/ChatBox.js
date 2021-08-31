@@ -13,7 +13,10 @@ import { connect } from "react-redux";
 import { getFormatDate } from "service/helperFunctions";
 import { TextFormatSharp } from "@material-ui/icons";
 import { withRouter } from "react-router-dom";
-import { unSubscribeFromChannel } from "action/messagingAct";
+import {
+  unSubscribeFromChannel,
+  updateMessageUnReadCount,
+} from "action/messagingAct";
 
 class ChatBoxClass extends Component {
   constructor(props) {
@@ -148,17 +151,30 @@ class ChatBoxClass extends Component {
         members: this.props.currentChannelMembers,
       },
       () => {
-        let rec = this.state.members.filter((item) => {
-          return item.memberIdenity !== localStorage.getItem("user-id");
-        });
+        const currentChannelId = this.props.channelData.channelId;
 
-        temp = rec.map((item) => {
-          return item.userId;
-        });
+        let payload = {
+          channelSid: currentChannelId,
+          unRead: 1,
+          userId: localStorage.getItem("user-id"),
+        };
 
-        this.props.send_unread_notification({
-          recepients: temp,
-        });
+        // if (payload.channelSid && payload.userId) {
+        //   console.log(payload);
+        //   this.props.updateMessageUnReadCountAct(payload);
+        // }
+
+        // let rec = this.state.members.filter((item) => {
+        //   return item.memberIdenity !== localStorage.getItem("user-id");
+        // });
+
+        // temp = rec.map((item) => {
+        //   return item.userId;
+        // });
+
+        // this.props.send_unread_notification({
+        //   recepients: temp,
+        // });
       }
     );
   };
@@ -325,6 +341,7 @@ const mapDispatchToProps = (dispatch) => {
       trainerChannel,
       send_unread_notification,
       unSubscribeFromChannel,
+      updateMessageUnReadCountAct: updateMessageUnReadCount,
     },
     dispatch
   );
