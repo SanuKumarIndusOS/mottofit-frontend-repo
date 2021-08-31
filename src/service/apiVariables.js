@@ -345,6 +345,15 @@ export const TrainerApi = {
       return `${this.url}`;
     },
   },
+  updateUnReadCount: {
+    url: "channel/unReadCount",
+    method: "put",
+    baseURL: "message",
+    key: "",
+    get api() {
+      return `${this.url}`;
+    },
+  },
 };
 
 export const PaymentApi = {

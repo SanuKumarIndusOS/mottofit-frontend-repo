@@ -68,11 +68,8 @@ const TrainerCardsFC = (props) => {
           </>
         )}
 
-        <div
-          id="scrollableDiv"
-          style={{ height: sectionHeight, overflow: "auto" }}
-        >
-          <InfiniteScroll
+        {/* <div id="scrollableDiv" style={{ height: sectionHeight }}> */}
+        {/* <InfiniteScroll
             dataLength={Object.keys(bestMatchData).length}
             next={nextApi}
             hasMore={Object.keys(bestMatchData).length < totalPageMatch}
@@ -82,112 +79,109 @@ const TrainerCardsFC = (props) => {
                 <div className="loaders"></div>
               </div>
             }
-          >
-            <div className="row mb-0" style={{ alignleft: "auto" }}>
-              {Object.keys(bestMatchData).map((data, index) => {
-                const areaOfExpertise = bestMatchData[
-                  data
-                ]?.areaOfExpertise?.toString();
+          > */}
+        <div className="row mb-0" style={{ alignleft: "auto" }}>
+          {Object.keys(bestMatchData).map((data, index) => {
+            const areaOfExpertise = bestMatchData[
+              data
+            ]?.areaOfExpertise?.toString();
 
-                const oneOnOnePricingValues = Object.values(
-                  bestMatchData[data]?.oneOnOnePricing || {}
-                );
+            const oneOnOnePricingValues = Object.values(
+              bestMatchData[data]?.oneOnOnePricing || {}
+            );
 
-                const socialSessionPricingValues = Object.values(
-                  bestMatchData[data]?.socialSessionPricing || {}
-                );
-                const classSessionPricingValues = Object.values(
-                  bestMatchData[data]?.classSessionPricing || {}
-                );
+            const socialSessionPricingValues = Object.values(
+              bestMatchData[data]?.socialSessionPricing || {}
+            );
+            const classSessionPricingValues = Object.values(
+              bestMatchData[data]?.classSessionPricing || {}
+            );
 
-                const allSessionPricing = [
-                  ...oneOnOnePricingValues,
-                  ...socialSessionPricingValues,
-                  ...classSessionPricingValues,
-                ]
-                  .map((price) => parseFloat(price))
-                  .filter((price) => !isNaN(price) && price > 0);
+            const allSessionPricing = [
+              ...oneOnOnePricingValues,
+              ...socialSessionPricingValues,
+              ...classSessionPricingValues,
+            ]
+              .map((price) => parseFloat(price))
+              .filter((price) => !isNaN(price) && price > 0);
 
-                const sortedPricingList = allSessionPricing
-                  .sort((a, b) => a - b)
-                  .filter(function (value) {
-                    return value > 0;
-                  });
+            const sortedPricingList = allSessionPricing
+              .sort((a, b) => a - b)
+              .filter(function (value) {
+                return value > 0;
+              });
 
-                return (
-                  <div
-                    className="card "
-                    key={index}
-                    // onClick={() => handleClick(data, true)}
-                  >
-                    <img
-                      onClick={() => handleClick(data, true)}
-                      className="card-img-top"
-                      src={
-                        bestMatchData[data]?.profilePicture ||
-                        "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
-                      }
-                      style={{ objectFit: "cover", cursor: "pointer" }}
-                      alt="Profile Picture Not Found "
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
-                      }}
-                    />
-                    <div
-                      className="ocard"
-                      onClick={() => handleClick(data, true)}
-                    >
-                      <div className="circlepop">
-                        Check <br /> Me Out
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <h3
-                        style={{
-                          textTransform: "capitalize",
-                          wordBreak: "break-all",
-                        }}
-                      >
-                        {bestMatchData[data]?.firstName}&nbsp;
-                        {bestMatchData[data]?.lastName}
-                      </h3>
-                      <h6>{areaOfExpertise}</h6>
-
-                      <p>
-                        {bestMatchData[data]?.description}
-                        &nbsp;
-                        <button onClick={() => handleClick(data, true)}>
-                          Read More
-                        </button>
-                      </p>
-                    </div>
-                    <div className="card-button">
-                      <button
-                        style={{
-                          backgroundColor: "#53BFD2",
-                        }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleClick(data);
-                        }}
-                      >
-                        book a session
-                        <BlackCircleButton />
-                        <p>
-                          from <span>${sortedPricingList[0] || ""}</span>
-                        </p>
-                      </button>
-                    </div>
+            return (
+              <div
+                className="card "
+                key={index}
+                // onClick={() => handleClick(data, true)}
+              >
+                <img
+                  onClick={() => handleClick(data, true)}
+                  className="card-img-top"
+                  src={
+                    bestMatchData[data]?.profilePicture ||
+                    "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                  }
+                  style={{ objectFit: "cover", cursor: "pointer" }}
+                  alt="Profile Picture Not Found "
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                  }}
+                />
+                <div className="ocard" onClick={() => handleClick(data, true)}>
+                  <div className="circlepop">
+                    Check <br /> Me Out
                   </div>
-                );
-              })}
-            </div>
-          </InfiniteScroll>
+                </div>
+
+                <div className="card-body">
+                  <h3
+                    style={{
+                      textTransform: "capitalize",
+                      wordBreak: "break-all",
+                    }}
+                  >
+                    {bestMatchData[data]?.firstName}&nbsp;
+                    {bestMatchData[data]?.lastName}
+                  </h3>
+                  <h6>{areaOfExpertise}</h6>
+
+                  <p>
+                    {bestMatchData[data]?.description}
+                    &nbsp;
+                    <button onClick={() => handleClick(data, true)}>
+                      Read More
+                    </button>
+                  </p>
+                </div>
+                <div className="card-button">
+                  <button
+                    style={{
+                      backgroundColor: "#53BFD2",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleClick(data);
+                    }}
+                  >
+                    book a session
+                    <BlackCircleButton />
+                    <p>
+                      from <span>${sortedPricingList[0] || ""}</span>
+                    </p>
+                  </button>
+                </div>
+              </div>
+            );
+          })}
         </div>
+        {/* </InfiniteScroll> */}
+        {/* </div> */}
 
         {/* <div className="showmore">
           <button className="showmore_btn" onClick={showMoreItems}>

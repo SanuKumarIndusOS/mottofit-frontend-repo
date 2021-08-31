@@ -124,6 +124,28 @@
                     position: relative;
                     width: 100%;
 
+                    &.message-unread {
+                      h3 {
+                        font-weight: bold;
+                      }
+                      p {
+                        font-weight: 600;
+                      }
+
+                      .unread-badge {
+                        position: absolute;
+                        background: #53bfd2;
+                        color: #fff;
+                        border-radius: 50%;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 5px;
+                      }
+                    }
+
                     h3 {
                       text-align: left;
                       letter-spacing: 0px;

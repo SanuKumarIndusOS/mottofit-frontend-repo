@@ -26,7 +26,8 @@ export const MessageComponent = ({
                 <div className="inner_link">
                   <UserAvatar {...lastUserProfilePic} className="img-md-2" />
                   <div
-                    className="message_link_notify"
+                    // className={`message_link_notify message-unread`}
+                    className={`message_link_notify`}
                     onClick={() =>
                       PopulateContacts(
                         item["channelUniqueName"],
@@ -35,15 +36,23 @@ export const MessageComponent = ({
                       )
                     }
                   >
-                    <div style={{ display: "flex", width:"100%", justifyContent:"space-between" }}>
-                      <div style={{display:"flex", width:"85%"}}>
-                      <h3 style={{textTransform:"Capitalize"}}>{item["chatTitle"] || ""}</h3>
-                      <h3>
-                        &ensp;
-                        {item["members"].length > 2
-                          ? "+  " + (item["members"].length - 2)
-                          : null}
-                      </h3>
+                    <div
+                      style={{
+                        display: "flex",
+                        width: "100%",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div style={{ display: "flex", width: "85%" }}>
+                        <h3 style={{ textTransform: "Capitalize" }}>
+                          {item["chatTitle"] || ""}
+                        </h3>
+                        <h3>
+                          &ensp;
+                          {item["members"].length > 2
+                            ? "+  " + (item["members"].length - 2)
+                            : null}
+                        </h3>
                       </div>
                       {date_updated && (
                         <span className="msg-timestamp-left">
@@ -51,7 +60,7 @@ export const MessageComponent = ({
                         </span>
                       )}
                     </div>
-                    <div>
+                    <div className="position-relative w-100">
                       {body && (
                         <p>{`${body?.slice(0, 100)}${
                           body?.length > 100 ? "..." : ""
@@ -62,6 +71,7 @@ export const MessageComponent = ({
                           {getFormatDate(date_updated, "LT")}
                         </span>
                       )} */}
+                      {/* <span className="unread-badge">9+</span> */}
                     </div>
                   </div>
                 </div>

@@ -51,11 +51,8 @@ const TrainerCardOutsideFC = (props) => {
       <div className="container">
         <HeadingTrainer otherRef={props.otherRef} />
 
-        <div
-          id="scrollableDiv2"
-          style={{ height: sectionHeight, overflow: "auto" }}
-        >
-          <InfiniteScroll
+        {/* <div id="scrollableDiv2" style={{ height: sectionHeight }}> */}
+        {/* <InfiniteScroll
             dataLength={Object.keys(outSideData).length}
             next={nextApi}
             hasMore={Object.keys(outSideData).length < totalPageMatch}
@@ -65,112 +62,110 @@ const TrainerCardOutsideFC = (props) => {
                 <div className="loaders"></div>
               </div>
             }
-          >
-            <div className="row mb-0">
-              {Object.keys(outSideData).map((data, index) => {
-                const areaOfExpertise = outSideData[
-                  data
-                ]?.areaOfExpertise?.toString();
+          > */}
+        <div className="row mb-0">
+          {Object.keys(outSideData).map((data, index) => {
+            const areaOfExpertise = outSideData[
+              data
+            ]?.areaOfExpertise?.toString();
 
-                const oneOnOnePricingValues = Object.values(
-                  outSideData[data]?.oneOnOnePricing || {}
-                );
+            const oneOnOnePricingValues = Object.values(
+              outSideData[data]?.oneOnOnePricing || {}
+            );
 
-                const socialSessionPricingValues = Object.values(
-                  outSideData[data]?.socialSessionPricing || {}
-                );
-                const classSessionPricingValues = Object.values(
-                  outSideData[data]?.classSessionPricing || {}
-                );
+            const socialSessionPricingValues = Object.values(
+              outSideData[data]?.socialSessionPricing || {}
+            );
+            const classSessionPricingValues = Object.values(
+              outSideData[data]?.classSessionPricing || {}
+            );
 
-                const allSessionPricing = [
-                  ...oneOnOnePricingValues,
-                  ...socialSessionPricingValues,
-                  ...classSessionPricingValues,
-                ]
-                  .map((price) => parseFloat(price))
-                  .filter((price) => !isNaN(price) && price > 0);
+            const allSessionPricing = [
+              ...oneOnOnePricingValues,
+              ...socialSessionPricingValues,
+              ...classSessionPricingValues,
+            ]
+              .map((price) => parseFloat(price))
+              .filter((price) => !isNaN(price) && price > 0);
 
-                const sortedPricingList = allSessionPricing.sort(
-                  (a, b) => a - b
-                );
-                return (
+            const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
+            return (
+              <div
+                className="card"
+                key={index}
+                // onClick={() => handleClick(data, true)}
+              >
+                <div className="inner_card">
+                  <img
+                    className="card-img-top card-img"
+                    src={
+                      outSideData[data].profilePicture ||
+                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                    }
+                    style={{ objectFit: "cover" }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                    }}
+                  />
+
                   <div
-                    className="card"
-                    key={index}
-                    // onClick={() => handleClick(data, true)}
+                    className="overlay_card"
+                    onClick={() => handleClick(data, true)}
                   >
-                    <div className="inner_card">
-                      <img
-                        className="card-img-top card-img"
-                        src={
-                          outSideData[data].profilePicture ||
-                          "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
-                        }
-                        style={{ objectFit: "cover" }}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src =
-                            "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
-                        }}
-                      />
-
-                      <div
-                        className="overlay_card"
-                        onClick={() => handleClick(data, true)}
-                      >
-                        <div className="content_card">
-                          <div className="circle_hover_card">
-                            <p>check me out</p>
-                          </div>
-                        </div>
+                    <div className="content_card">
+                      <div className="circle_hover_card">
+                        <p>check me out</p>
                       </div>
                     </div>
-
-                    <div className="card-body">
-                      <h3
-                        style={{
-                          textTransform: "capitalize",
-                          wordBreak: "break-all",
-                        }}
-                      >
-                        {outSideData[data]?.firstName}&nbsp;
-                        {outSideData[data]?.lastName}
-                      </h3>
-                      <h6>{areaOfExpertise}</h6>
-                      <p>
-                        {outSideData[data]?.description}
-
-                        <button onClick={() => handleClick(data, true)}>
-                          Read More
-                        </button>
-                      </p>
-                    </div>
-                    <div className="card-button">
-                      <button
-                        style={{
-                          backgroundColor: "#53BFD2",
-                        }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleClick(data);
-                        }}
-                      >
-                        book a session
-                        <BlackCircleButton />
-                        <p>
-                          from <span>${sortedPricingList[0] || ""}</span>
-                        </p>
-                      </button>
-                    </div>
                   </div>
-                );
-              })}
-            </div>
-          </InfiniteScroll>
+                </div>
+
+                <div className="card-body">
+                  <h3
+                    style={{
+                      textTransform: "capitalize",
+                      wordBreak: "break-all",
+                    }}
+                  >
+                    {outSideData[data]?.firstName}&nbsp;
+                    {outSideData[data]?.lastName}
+                  </h3>
+                  <h6>{areaOfExpertise}</h6>
+                  <p>
+                    {outSideData[data]?.description}
+
+                    <button onClick={() => handleClick(data, true)}>
+                      Read More
+                    </button>
+                  </p>
+                </div>
+                <div className="card-button">
+                  <button
+                    style={{
+                      backgroundColor: "#53BFD2",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleClick(data);
+                    }}
+                  >
+                    book a session
+                    <BlackCircleButton />
+                    <p>
+                      from <span>${sortedPricingList[0] || ""}</span>
+                    </p>
+                  </button>
+                </div>
+              </div>
+            );
+          })}
         </div>
+        {/* </InfiniteScroll> */}
       </div>
+      {/* </div> */}
     </>
   );
 };

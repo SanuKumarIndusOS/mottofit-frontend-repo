@@ -1,5 +1,6 @@
 import { MessagingActionType } from "../service/actionType";
 import ChatClientInstance from "../helpers/Messaging";
+import { TrainerApi } from "service/apiVariables";
 
 export const updatePersonTyping = (payload) => (dispatch, getState) => {
   const { typingMembers, currentChannelMembers } = getState().messagingReducer;
@@ -193,4 +194,25 @@ const handleChannelMessage = (
   });
 
   return [...tempChannelData];
+};
+
+export const updateMessageUnReadCount = (payload) => (
+  dispatch,
+  getState,
+  { api }
+) => {
+  return new Promise((resolve, reject) => {
+    // api()
+    const { updateUnReadCount } = TrainerApi;
+
+    updateUnReadCount.body = payload;
+
+    api({ ...updateUnReadCount })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 };
