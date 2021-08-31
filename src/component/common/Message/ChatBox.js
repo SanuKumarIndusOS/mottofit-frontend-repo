@@ -159,10 +159,10 @@ class ChatBoxClass extends Component {
           userId: localStorage.getItem("user-id"),
         };
 
-        if (payload.channelSid && payload.userId) {
-          console.log(payload);
-          this.props.updateMessageUnReadCountAct(payload);
-        }
+        // if (payload.channelSid && payload.userId) {
+        //   console.log(payload);
+        //   this.props.updateMessageUnReadCountAct(payload);
+        // }
 
         // let rec = this.state.members.filter((item) => {
         //   return item.memberIdenity !== localStorage.getItem("user-id");
