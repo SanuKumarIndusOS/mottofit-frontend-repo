@@ -95,7 +95,10 @@ export default class TwilioMessaging {
   };
 
   globalMessage = (message) => {
-    updateGlobalMessagingDetails(message)(this.handler, this.getState);
+    updateGlobalMessagingDetails(message)(this.handler, this.getState, {
+      api,
+      Toast,
+    });
   };
 
   joinChannelByID = async (uniqueChannelId, isInitial = false) => {

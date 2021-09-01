@@ -124,6 +124,12 @@
                     position: relative;
                     width: 100%;
 
+                    .message-read-icon {
+                      font-size: 17px;
+                      margin: 12px 5px 0 0;
+                      color: #50a2e9;
+                    }
+
                     &.message-unread {
                       h3 {
                         font-weight: bold;

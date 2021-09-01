@@ -63,7 +63,7 @@ class ChatBoxClass extends Component {
 
   componentDidMount() {
     this.scrollToMessageListBottom();
-
+    // this.handleUnreadCount(0);
     // temp = [];
   }
 
@@ -102,6 +102,31 @@ class ChatBoxClass extends Component {
         this.scrollToMessageListBottom();
         this.unread();
       });
+    }
+  };
+
+  handleUnreadCount = (unReadCount) => {
+    const currentChannelId = this.props.channelData.channelId;
+
+    let payload = {
+      channelSid: currentChannelId,
+      unRead: unReadCount,
+      userId: localStorage.getItem("user-id"),
+    };
+
+    let currentPathname = window.location.pathname;
+
+    let currentTabTitle = "";
+
+    if (currentPathname.includes("admins")) {
+      currentTabTitle = currentPathname.split("/")[3] || "";
+    } else {
+      currentTabTitle = currentPathname.split("/")[4] || "";
+    }
+
+    if (payload.channelSid && payload.userId) {
+      // console.log(payload);
+      this.props.updateMessageUnReadCountAct(payload, currentTabTitle);
     }
   };
 
@@ -151,18 +176,7 @@ class ChatBoxClass extends Component {
         members: this.props.currentChannelMembers,
       },
       () => {
-        const currentChannelId = this.props.channelData.channelId;
-
-        let payload = {
-          channelSid: currentChannelId,
-          unRead: 1,
-          userId: localStorage.getItem("user-id"),
-        };
-
-        // if (payload.channelSid && payload.userId) {
-        //   console.log(payload);
-        //   this.props.updateMessageUnReadCountAct(payload);
-        // }
+        this.handleUnreadCount(1);
 
         // let rec = this.state.members.filter((item) => {
         //   return item.memberIdenity !== localStorage.getItem("user-id");
