@@ -153,8 +153,21 @@ const TrainerMessageClass = ({
 
         setMessageListLoading(false);
 
+        let updatedData = [...data].map((channelData) => {
+          let currentMember = channelData.members.filter(
+            ({ userId }) => userId === localStorage.getItem("user-id")
+          )[0];
+
+          let tempChannelData = {
+            ...channelData,
+            unReadCount: currentMember?.readCount || 0,
+          };
+
+          return tempChannelData;
+        });
+
         let reduxData = {
-          [currentSession]: [...data],
+          [currentSession]: [...updatedData],
         };
 
         if (type && channelID) {
@@ -239,6 +252,23 @@ const TrainerMessageClass = ({
       });
   };
 
+  const handleUnreadCount = (unReadCount, channelData) => {
+    // console.log(channelData);
+
+    const currentChannelId = channelData.channelId;
+
+    let payload = {
+      channelSid: currentChannelId,
+      unRead: unReadCount,
+      userId: localStorage.getItem("user-id"),
+    };
+
+    if (payload.channelSid && payload.userId) {
+      console.log(payload);
+      updateMessageUnReadCountAct(payload, currentTab);
+    }
+  };
+
   function PopulateContacts(channelID, members, channelData) {
     let mql = window.matchMedia("(max-width: 700px)");
 
@@ -249,6 +279,8 @@ const TrainerMessageClass = ({
           currentChannelMembers: members,
           channelData,
         };
+
+        if (channelData.unReadCount > 0) handleUnreadCount(0, channelData);
         // console.log(reduxData);
 
         updateMessagingDetails(reduxData);
@@ -266,10 +298,21 @@ const TrainerMessageClass = ({
     const tempType = type;
     const { search } = history.location;
 
-    if (isAdmin) {
-      tab !== tempType && history.push(`/admins/message/${tab}`);
+    // console.log(tab, tempType);
+    let currentPathname = window.location.pathname;
+
+    let currentTabTitle = "";
+
+    if (currentPathname.includes("admins")) {
+      currentTabTitle = currentPathname.split("/")[3] || "";
     } else {
-      tab !== tempType &&
+      currentTabTitle = currentPathname.split("/")[4] || "";
+    }
+
+    if (isAdmin) {
+      tab !== currentTabTitle && history.push(`/admins/message/${tab}`);
+    } else {
+      tab !== currentTabTitle &&
         history.push(
           `/${isUser ? "users" : "trainers"}/dashboard/message/${tab}`
         );
@@ -321,6 +364,8 @@ const TrainerMessageClass = ({
               <Tabs
                 defaultTab={currentTab}
                 onChange={(tab) => {
+                  console.log(tab);
+
                   handleTabChange(tab);
                 }}
               >
