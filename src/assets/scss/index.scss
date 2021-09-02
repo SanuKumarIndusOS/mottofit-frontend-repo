@@ -860,3 +860,45 @@ select {
   justify-content: center;
   font-size: 23px;
 }
+
+.blue-arrow-btn {
+  max-width: 40px;
+  max-height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  // overflow: hidden;
+
+  .arrow_anim_blue {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+  }
+  .circle_blue {
+    position: absolute;
+    top: 3px;
+    left: 0%;
+  }
+  .line_blue {
+    right: 11px;
+  }
+  .arrow_blue {
+    right: 24px;
+  }
+
+  .arrow2_blue {
+    position: absolute;
+    top: 14px;
+    left: 8px;
+  }
+
+  &:hover #cube {
+    opacity: 1;
+  }
+
+  &:hover #arrow_anim {
+    transform: translate(10px);
+    transition: ease-out;
+    transition-duration: 0.2s;
+    opacity: 0;
+  }
+}

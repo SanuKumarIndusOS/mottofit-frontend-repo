@@ -42,8 +42,7 @@ const NavBarHomeFC = ({
   };
 
   useEffect(() => {
-
-    setKey("")
+    setKey("");
     console.log(history);
     const { search } = history.location;
 
@@ -56,6 +55,13 @@ const NavBarHomeFC = ({
 
       updateUserDetails(reduxData);
     }
+
+    document.onkeydown = function (evt) {
+      if (evt.keyCode == 27) {
+        console.log("esc hitted");
+        evt.preventDefault();
+      }
+    };
   }, []);
 
   const changeBackground = () => {
@@ -123,7 +129,7 @@ const NavBarHomeFC = ({
           </div>
           <div className="search-items">
             <div className="input-item">
-            <form
+              <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   history.push({
@@ -134,30 +140,26 @@ const NavBarHomeFC = ({
                   });
                 }}
               >
-              <input
-                className="input"
-                type="text"
-                placeholder="Search trainers & workouts"
-                onChange={(e) => {
-                  setKey(e.target.value);
-                }}
-              />
-              <BiSearch
-                className="search-icon"
-                onClick={() => {
-                  history.push({
-                    pathname: "/trainer/results",
-                    state:{
-
-                      key: keys
-                    }
-                  });
-
-               
-
-                
-                }}
-              /> </form>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Search trainers & workouts"
+                  onChange={(e) => {
+                    setKey(e.target.value);
+                  }}
+                />
+                <BiSearch
+                  className="search-icon"
+                  onClick={() => {
+                    history.push({
+                      pathname: "/trainer/results",
+                      state: {
+                        key: keys,
+                      },
+                    });
+                  }}
+                />{" "}
+              </form>
             </div>
             {!isUserLoggedIn ? (
               <div className="login-item1">
