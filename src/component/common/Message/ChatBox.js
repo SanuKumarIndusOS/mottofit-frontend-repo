@@ -4,6 +4,7 @@ import LocationIcon from "../../../assets/files/TrainerDashboard/Message/Locatio
 import SheduleIcon from "../../../assets/files/TrainerDashboard/Message/Shedule Icon.svg";
 import AvailabilityIcon from "../../../assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import BlueHoverButton from "../BlueArrowButton";
+import BlueHoverBtn from "../BlueArrowButton/BlueArrowBtn";
 
 import { ChatItem } from "./ChatItem";
 import { bindActionCreators } from "redux";
@@ -95,10 +96,10 @@ class ChatBoxClass extends Component {
     }
 
     if (activeChannel && message !== "") {
+      this.setState({
+        message: "",
+      });
       activeChannel.sendMessage(String(message)).then(() => {
-        this.setState({
-          message: "",
-        });
         this.scrollToMessageListBottom();
         this.unread();
       });
@@ -312,7 +313,8 @@ class ChatBoxClass extends Component {
                       onClick={this.handleSendMessage}
                     >
                       <button className="transparent-btn">
-                        <BlueHoverButton />
+                        {/* <BlueHoverButton /> */}
+                        <BlueHoverBtn />
                       </button>
                     </div>
                   </div>

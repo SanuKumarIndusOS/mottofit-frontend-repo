@@ -3,12 +3,24 @@ import moment from "moment";
 
 import Jonn from "../../../assets/files/TrainerDashboard/Message/Image 1.png";
 import { UserAvatar } from "../UserAvatar";
+import Linkify from "react-linkify";
 
 export const ChatItem = ({
   currentChannelMembers = [],
   currMsg: { type, state, date },
 }) => {
   let CurrentMessageComponent;
+
+  const linkDecorator = (decoratedHref, decoratedText, key) => (
+    <a
+      href={decoratedHref}
+      key={key}
+      target="_blank"
+      role="noopener noreferrer"
+    >
+      {decoratedText}
+    </a>
+  );
 
   if (type === "message") {
     let msgCreatedDate = moment(state.timestamp);
@@ -25,7 +37,9 @@ export const ChatItem = ({
     CurrentMessageComponent = (
       <div className={`message_chat_${isMyMsg ? "right" : "left"}`}>
         <div className="message_text">
-          <h5>{state?.body || ""}</h5>
+          <Linkify componentDecorator={linkDecorator}>
+            <h5>{state?.body || ""}</h5>
+          </Linkify>
           <span className="msg-time">{msgTime}</span>
         </div>
 
