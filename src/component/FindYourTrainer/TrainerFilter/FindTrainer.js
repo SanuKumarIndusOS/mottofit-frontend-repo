@@ -179,6 +179,8 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
+
+    console.log( trainerSearchFilterData.availability);
     if (Object.keys(trainerSearchFilterData).length === 0) {
       console.log(
         JSON.parse(localStorage.getItem("persistFilters")),
