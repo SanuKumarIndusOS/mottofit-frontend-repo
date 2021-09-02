@@ -179,8 +179,7 @@ const FindTrainerFC = ({
   const otherRef = useRef(null);
 
   useEffect(() => {
-
-    console.log( trainerSearchFilterData.availability);
+    console.log(trainerSearchFilterData);
     if (Object.keys(trainerSearchFilterData).length === 0) {
       console.log(
         JSON.parse(localStorage.getItem("persistFilters")),
@@ -683,6 +682,42 @@ const FindTrainerFC = ({
         </div>
       ) : null}
 
+      {trainerSearchFilterData.availability === "[]" &&
+      trainerSearchFilterData.trainingType === "[]" ? (
+        null
+      ) : (
+        <div>
+          <TrainerCardOutside
+            content={tempOtherMatch}
+            otherRef={otherRef}
+            nextApi={() => {
+              setpageUnmatch(pageUnmatch + 1);
+              setloaderUnMatch(true);
+            }}
+            page={pageUnmatch}
+            totalPageMatch={totalPageUnMatch}
+          />
+
+          {Object.keys(tempOtherMatch || [])?.length < totalPageUnMatch && (
+            <button
+              onClick={() => {
+                setpageUnmatch(pageUnmatch + 1);
+                setloaderUnMatch(true);
+              }}
+              className="view_more"
+            >
+              View More Trainers &ensp;
+              <BlueHoverButton />
+            </button>
+          )}
+          {loaderUnMatch ? (
+            <div className="load_p">
+              <div className="loaders"></div>
+            </div>
+          ) : null}
+        </div>
+      )}
+      {/* <div>
       <TrainerCardOutside
         content={tempOtherMatch}
         otherRef={otherRef}
@@ -711,6 +746,7 @@ const FindTrainerFC = ({
           <div className="loaders"></div>
         </div>
       ) : null}
+      </div> */}
     </div>
     // <div
     //   id="find-trainer"
