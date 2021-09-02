@@ -683,7 +683,7 @@ const FindTrainerFC = ({
       ) : null}
 
       {trainerSearchFilterData.availability === "[]" &&
-      trainerSearchFilterData.trainingType === "[]" ? (
+      trainerSearchFilterData.trainingType === "[]" && trainerSearchFilterData.date === ""? (
         null
       ) : (
         <div>

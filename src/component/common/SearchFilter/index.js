@@ -58,6 +58,7 @@ function SearchFilter({
   const [IPCDropdown, setIPCDropdown] = useState(true);
 
   const [Calvalue, onChangeCal] = useState(new Date());
+ 
   const [CalDisplay, setCalDisplay] = useState(false);
   const [CalDropdown, setCalDropdown] = useState(false);
 
@@ -72,8 +73,16 @@ function SearchFilter({
     console.log(activeQuery);
 
     if (Object.keys(activeQuery).length !== 0) {
-      onChangeCal(new Date(activeQuery.date));
-      setCalDisplay(true);
+      
+      if(activeQuery.date === "")
+      {
+        setCalDisplay(false)
+      }else
+      {
+        onChangeCal(new Date(activeQuery.date));
+      }
+     
+      //setCalDisplay(true);
       setLocation(activeQuery.location);
       if (activeQuery.city !== undefined) {
         setIPCValue(activeQuery.city);
@@ -83,11 +92,14 @@ function SearchFilter({
       setVerticalVal(activeQuery.label.trainingType);
       setAvailabilityVal(activeQuery.label.availability);
     }
+
+    
   }, []);
 
   useEffect(() => {
     setCalDropdown(false);
-    setCalDisplay(true);
+    
+  
   }, [Calvalue]);
 
   const applyFilters = () => {
@@ -98,7 +110,7 @@ function SearchFilter({
         VerticalVal.value === ""
           ? JSON.stringify([])
           : encodeURIComponent(JSON.stringify([VerticalVal.value])),
-      date: moment(Calvalue).format("YYYY-MM-DD"),
+      date: (CalDisplay)? moment(Calvalue).format("YYYY-MM-DD"): "" ,
       availability:
         AvailabilityVal.value === ""
           ? JSON.stringify([])
@@ -139,6 +151,7 @@ function SearchFilter({
         <div className="search_cta">
           <div className="circle" onClick={applyFilters}>
             <BiSearch />
+          
           </div>
         </div>
 
@@ -277,10 +290,11 @@ function SearchFilter({
             className="filter_options"
             onClick={() => {
               setCalDropdown(!CalDropdown);
+              setCalDisplay(true)
             }}
           >
-            <div className="option_txt">
-              {  moment(Calvalue).format("YYYY/MM/DD")}
+            <div className="option_txt" >
+              {CalDisplay? moment(Calvalue).format("YYYY/MM/DD"): "Select a Date" }
             </div>
 
             <div className="option_icon">&#10094;</div>
