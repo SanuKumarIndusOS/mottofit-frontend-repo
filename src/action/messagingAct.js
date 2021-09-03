@@ -271,7 +271,14 @@ const handleChannelMessage = (
     );
   });
 
-  return [...tempChannelData];
+  // remove duplicate channel id's
+
+  let uniqueChannels = tempChannelData.filter(
+    (thing, index, self) =>
+      index === self.findIndex((t) => t.channelId === thing.channelId)
+  );
+
+  return [...uniqueChannels];
 };
 
 export const updateMessageUnReadCount = (payload, currentTab) => (
