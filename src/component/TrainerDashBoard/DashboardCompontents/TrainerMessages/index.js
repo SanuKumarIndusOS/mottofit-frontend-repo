@@ -288,6 +288,7 @@ const TrainerMessageClass = ({
         if (mql.matches) history.push("/mobiles/chat");
       })
       .catch((err) => {
+        Toast({ type: "error", message: err.message || "Error" });
         console.log(err);
       });
   }

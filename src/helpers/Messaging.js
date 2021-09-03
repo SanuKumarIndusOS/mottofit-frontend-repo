@@ -58,6 +58,8 @@ export default class TwilioMessaging {
     // LISTEN FOR GLOBAL MESSAGES
 
     client.on("messageAdded", async (message) => {
+      console.log("global");
+
       this.globalMessage(message);
     });
 
@@ -101,6 +103,11 @@ export default class TwilioMessaging {
     });
   };
 
+  handleCurrentChannelMessage = async (message) => {
+    console.log("global 2");
+    await this.onMessagedAdded(message);
+  };
+
   joinChannelByID = async (uniqueChannelId, isInitial = false) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -127,9 +134,7 @@ export default class TwilioMessaging {
 
         // LISTEN ON CHANNEL MESSAGE ADDED
 
-        channel.on("messageAdded", async (message) => {
-          await this.onMessagedAdded(message);
-        });
+        channel.on("messageAdded", this.handleCurrentChannelMessage);
 
         // LISTEN FOR PERSON WHOSE ARE TYPING
         channel.on("typingStarted", (participant) => {
@@ -188,15 +193,23 @@ export default class TwilioMessaging {
 
   // FUNC FIRES WHEN USER RECIVES MESSAGE
 
-  onMessagedAdded = (message) => {
+  onMessagedAdded = async (message) => {
     const { channel } = message;
-    if (channel.sid !== this.activeChannel.sid) {
+    if (channel.sid !== this.activeChannel?.sid) {
       console.log(message, "msg", "diff channel");
       return {};
     } else {
+      const channelMessages = await this.activeChannel.getMessages();
+
+      const { items = [] } = channelMessages;
+      console.log(channelMessages, "channelMessages");
+
       return this.handler({
-        type: MessagingActionType.UPDATE_MESSAGE_DETAILS,
-        payload: message,
+        type: MessagingActionType.UPDATE_MESSAGING_DETAILS,
+        payload: {
+          activeChannelMessages: [...items],
+          isLoading: false,
+        },
       });
     }
   };
@@ -204,6 +217,16 @@ export default class TwilioMessaging {
   // WHEN PERSON STARTS TYPING THIS FUNC FIRES
 
   onParticipantStartTyping = (participant) => {
+    // console.log(participant);
+
+    const { identity } = participant.state || {};
+
+    let currentlyLoggedInuser = localStorage.getItem("user-id");
+
+    // console.log(currentlyLoggedInuser, identity);
+
+    if (identity === currentlyLoggedInuser) return;
+
     let payload = {
       type: "typingStarted",
       participant,
@@ -214,6 +237,11 @@ export default class TwilioMessaging {
   // WHEN PERSON STOPS TYPING THIS FUNC FIRES
 
   onParticipantEndedTyping = (participant) => {
+    const { identity } = participant.state || {};
+
+    let currentlyLoggedInuser = localStorage.getItem("user-id");
+
+    if (identity === currentlyLoggedInuser) return;
     let payload = {
       type: "typingEnded",
       participant,
@@ -277,9 +305,16 @@ export default class TwilioMessaging {
 
   unSubscribeChannel = () => {
     if (this.activeChannel) {
-      this.activeChannel.removeAllListeners();
-      this.activeChannel = null;
-      this.log("Un subscribed from the channel");
+      // this.activeChannel.removeAllListeners();
+
+      this.activeChannel.leave().then((tempChannel) => {
+        // this.activeChannel.off(
+        //   "messageAdded",
+        //   this.handleCurrentChannelMessage
+        // );
+        this.activeChannel = null;
+        this.log("Un subscribed from the channel");
+      });
     }
     resetChannelDetails()(this.handler);
   };

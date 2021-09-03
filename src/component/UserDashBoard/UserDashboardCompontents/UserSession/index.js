@@ -681,13 +681,13 @@ const TabOne = ({
                                 textTransform: "capitalize",
                               }}
                             >
-                              {data.trainerDetail.firstName}
+                              {data?.trainerDetail?.firstName}
                             </h2>
                           </h2>
 
-                          <p>{`${data.sessionDate.substr(8, 2)} ${
-                            datamonth[data.sessionDate.substr(5, 2)]
-                          } ${data.sessionDate.substr(0, 4)}`}</p>
+                          <p>{`${data?.sessionDate?.substr(8, 2)} ${
+                            datamonth[data?.sessionDate?.substr(5, 2)]
+                          } ${data?.sessionDate?.substr(0, 4)}`}</p>
                         </div>
                       </div>
                       <hr />
