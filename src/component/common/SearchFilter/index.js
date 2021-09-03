@@ -294,7 +294,7 @@ function SearchFilter({
             }}
           >
             <div className="option_txt" >
-              {CalDisplay? moment(Calvalue).format("YYYY/MM/DD"): "Select a Date" }
+              {CalDisplay? moment(Calvalue).format("MM/DD/YYYY"): "Select a Date" }
             </div>
 
             <div className="option_icon">&#10094;</div>
