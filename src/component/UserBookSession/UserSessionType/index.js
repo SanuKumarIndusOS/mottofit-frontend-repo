@@ -474,77 +474,78 @@ const UserBookSessionFC = ({
 
     // console.log(storeData);
 
-    // history.push({
-    //       pathname: "/user/payment",
-    //     });
+    history.push({
+          pathname: "/user/payment",
+        });
 
-    if (sessionType === "1 ON 1 TRAINING") {
-      let trainerId = selectedTrainerData?.trainerId;
-      let userId = localStorage.getItem("user-id");
+    //MottoPass
+    // if (sessionType === "1 ON 1 TRAINING") {
+    //   let trainerId = selectedTrainerData?.trainerId;
+    //   let userId = localStorage.getItem("user-id");
 
-      // GetActivePass(userId, trainerId, "trainerLocation").then((data) => {
-      //   console.log(data);
-      // });
+    //   // GetActivePass(userId, trainerId, "trainerLocation").then((data) => {
+    //   //   console.log(data);
+    //   // });
 
-      // console.log(trainingVenue.value, preferedTrainingMode);
+    //   // console.log(trainingVenue.value, preferedTrainingMode);
 
-      if (preferedTrainingMode === "virtual") {
-        GetActivePass(userId, trainerId, "virtual")
-          .then((data) => {
-            console.log(data);
-            mottoPassData({ availPass: data });
-            history.push({
-              pathname: "/user/payment",
-            });
-          })
-          .catch((er) => {
-            console.log(er);
-            history.push({
-              pathname: "/user/motto-pass",
-            });
-          });
-      } else {
-        if (trainingVenue.value === "trainerLocation") {
-          GetActivePass(userId, trainerId, "trainerLocation")
-            .then((data) => {
-              console.log(data);
-              mottoPassData({ availPass: data });
-              history.push({
-                pathname: "/user/payment",
-              });
-            })
-            .catch((er) => {
-              console.log(er);
-              history.push({
-                pathname: "/user/motto-pass",
-              });
-            });
-        } else {
-          GetActivePass(userId, trainerId, "clientLocation")
-            .then((data) => {
-              console.log(data);
-              mottoPassData({ availPass: data });
-              history.push({
-                pathname: "/user/payment",
-              });
-            })
-            .catch((er) => {
-              console.log(er);
-              history.push({
-                pathname: "/user/motto-pass",
-              });
-            });
-        }
-      }
-      //Check for motto pass if available go to checkout
-      // history.push({
-      //   pathname: "/user/motto-pass",
-      // });
-    } else {
-      history.push({
-        pathname: "/user/payment",
-      });
-    }
+    //   if (preferedTrainingMode === "virtual") {
+    //     GetActivePass(userId, trainerId, "virtual")
+    //       .then((data) => {
+    //         console.log(data);
+    //         mottoPassData({ availPass: data });
+    //         history.push({
+    //           pathname: "/user/payment",
+    //         });
+    //       })
+    //       .catch((er) => {
+    //         console.log(er);
+    //         history.push({
+    //           pathname: "/user/motto-pass",
+    //         });
+    //       });
+    //   } else {
+    //     if (trainingVenue.value === "trainerLocation") {
+    //       GetActivePass(userId, trainerId, "trainerLocation")
+    //         .then((data) => {
+    //           console.log(data);
+    //           mottoPassData({ availPass: data });
+    //           history.push({
+    //             pathname: "/user/payment",
+    //           });
+    //         })
+    //         .catch((er) => {
+    //           console.log(er);
+    //           history.push({
+    //             pathname: "/user/motto-pass",
+    //           });
+    //         });
+    //     } else {
+    //       GetActivePass(userId, trainerId, "clientLocation")
+    //         .then((data) => {
+    //           console.log(data);
+    //           mottoPassData({ availPass: data });
+    //           history.push({
+    //             pathname: "/user/payment",
+    //           });
+    //         })
+    //         .catch((er) => {
+    //           console.log(er);
+    //           history.push({
+    //             pathname: "/user/motto-pass",
+    //           });
+    //         });
+    //     }
+    //   }
+    //   //Check for motto pass if available go to checkout
+    //   // history.push({
+    //   //   pathname: "/user/motto-pass",
+    //   // });
+    // } else {
+    //   history.push({
+    //     pathname: "/user/payment",
+    //   });
+    // }
 
     // if(price === 20)
     // {
