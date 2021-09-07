@@ -7,6 +7,7 @@ import { updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
 const TrainerCardOutsideFC = (props) => {
   const [outSideData, setOutSideData] = useState([]);
@@ -31,15 +32,15 @@ const TrainerCardOutsideFC = (props) => {
     };
     props.updateUserDetails(reduxData);
 
-    if (!isReadMore) {
-      history.push({
-        pathname: `/user/scheduler/${outSideData[data]["id"]}`,
-      });
-    } else {
-      history.push({
-        pathname: `/trainer/profile/${outSideData[data]["id"]}`,
-      });
-    }
+    history.push({
+      pathname: `/trainer/profile/${outSideData[data]["id"]}`,
+    });
+    // if (!isReadMore) {
+    //   history.push({
+    //     pathname: `/user/scheduler/${outSideData[data]["id"]}`,
+    //   });
+    // } else {
+    // }
   };
 
   let mql = window.matchMedia("(max-width: 700px)");
@@ -90,12 +91,17 @@ const TrainerCardOutsideFC = (props) => {
 
             const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
             return (
-              <div
+              <Link
+                to={`/trainer/profile/${outSideData[data]["id"]}`}
+                className="card-link card"
+                key={`trainer_outside_matche_${index}`}
+              >
+                {/* <div
                 className="card"
                 key={index}
                 // onClick={() => handleClick(data, true)}
-              >
-                <div className="inner_card">
+              > */}
+                <div className="inner_card position-relative w-100">
                   <img
                     className="card-img-top card-img"
                     src={
@@ -159,7 +165,8 @@ const TrainerCardOutsideFC = (props) => {
                     </p>
                   </button>
                 </div>
-              </div>
+                {/* </div> */}
+              </Link>
             );
           })}
         </div>

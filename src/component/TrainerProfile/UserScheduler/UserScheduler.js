@@ -571,13 +571,19 @@ function UserSchedulerClass(props) {
                       ></td>
                     );
                   } else {
-                    return <td></td>;
+                    return (
+                      <td title="You can request this time through link/button below"></td>
+                    );
                   }
                 } else {
-                  return <td></td>;
+                  return (
+                    <td title="You can request this time through link/button below"></td>
+                  );
                 }
               } else {
-                return <td></td>;
+                return (
+                  <td title="You can request this time through link/button below"></td>
+                );
               }
             })}
           </tr>
@@ -606,13 +612,19 @@ function UserSchedulerClass(props) {
                       ></td>
                     );
                   } else {
-                    return <td></td>;
+                    return (
+                      <td title="You can request this time through link/button below"></td>
+                    );
                   }
                 } else {
-                  return <td></td>;
+                  return (
+                    <td title="You can request this time through link/button below"></td>
+                  );
                 }
               } else {
-                return <td></td>;
+                return (
+                  <td title="You can request this time through link/button below"></td>
+                );
               }
             })}
           </tr>
@@ -640,13 +652,19 @@ function UserSchedulerClass(props) {
                       ></td>
                     );
                   } else {
-                    return <td></td>;
+                    return (
+                      <td title="You can request this time through link/button below"></td>
+                    );
                   }
                 } else {
-                  return <td></td>;
+                  return (
+                    <td title="You can request this time through link/button below"></td>
+                  );
                 }
               } else {
-                return <td></td>;
+                return (
+                  <td title="You can request this time through link/button below"></td>
+                );
               }
             })}
           </tr>
@@ -674,13 +692,19 @@ function UserSchedulerClass(props) {
                       ></td>
                     );
                   } else {
-                    return <td></td>;
+                    return (
+                      <td title="You can request this time through link/button below"></td>
+                    );
                   }
                 } else {
-                  return <td></td>;
+                  return (
+                    <td title="You can request this time through link/button below"></td>
+                  );
                 }
               } else {
-                return <td></td>;
+                return (
+                  <td title="You can request this time through link/button below"></td>
+                );
               }
             })}
           </tr>
@@ -708,13 +732,19 @@ function UserSchedulerClass(props) {
                       ></td>
                     );
                   } else {
-                    return <td></td>;
+                    return (
+                      <td title="You can request this time through link/button below"></td>
+                    );
                   }
                 } else {
-                  return <td></td>;
+                  return (
+                    <td title="You can request this time through link/button below"></td>
+                  );
                 }
               } else {
-                return <td></td>;
+                return (
+                  <td title="You can request this time through link/button below"></td>
+                );
               }
             })}
           </tr>
@@ -742,13 +772,19 @@ function UserSchedulerClass(props) {
                       ></td>
                     );
                   } else {
-                    return <td></td>;
+                    return (
+                      <td title="You can request this time through link/button below"></td>
+                    );
                   }
                 } else {
-                  return <td></td>;
+                  return (
+                    <td title="You can request this time through link/button below"></td>
+                  );
                 }
               } else {
-                return <td></td>;
+                return (
+                  <td title="You can request this time through link/button below"></td>
+                );
               }
             })}
           </tr>

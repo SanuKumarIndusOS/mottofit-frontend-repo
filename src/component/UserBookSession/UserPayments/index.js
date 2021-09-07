@@ -108,14 +108,14 @@ const UserPaymentsFC = ({
 
   const location = useLocation();
 
-  const ScheduleSession = () => {
+  const ScheduleSession = (errCb) => {
     // console.log(location, "locationlocation");
 
-    if (!defaulCardDetails?.default)
-      return Toast({
-        type: "info",
-        message: "Need atleast one default card details",
-      });
+    // if (!defaulCardDetails?.default)
+    //   return Toast({
+    //     type: "info",
+    //     message: "Need atleast one default card details",
+    //   });
 
     let trainingtype = sessionData?.sessionType;
     if (trainingtype.includes("1 ON 1")) {
@@ -131,10 +131,10 @@ const UserPaymentsFC = ({
 
     const scheduleBody = {
       trainerId: trainerData?.id || selectedTrainerData?.id,
-      title: tempTrainingActivity,
+      title: tempTrainingActivity || "Motto Session",
       trainingType: trainingtype,
       sessionType: sessionData?.preferedTrainingMode,
-      activity: tempTrainingActivity,
+      activity: tempTrainingActivity || "",
       sessionStatus: "created",
       sessionDate:
         bookingData?.date || getFormatDate(selectedTimes[0], "YYYY-MM-DD"),
@@ -188,6 +188,7 @@ const UserPaymentsFC = ({
         // restProps.resetUserDetails();
       })
       .catch((error) => {
+        errCb();
         Toast({
           type: "error",
           message: error.message || "Something went wrong",
@@ -487,7 +488,8 @@ const UserPaymentsFC = ({
                       <img src={StrengthIcon} alt="icon" />
                       <h4>
                         {bookingData?.activity?.label ||
-                          sessionData?.trainingType?.label}
+                          sessionData?.trainingType?.label ||
+                          "Motto session"}
                       </h4>
                     </div>
                   </div>

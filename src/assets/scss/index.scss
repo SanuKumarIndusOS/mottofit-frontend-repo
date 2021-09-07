@@ -473,7 +473,7 @@ select {
 .ocard {
   position: absolute;
   height: 200px;
-  width: 93%;
+  width: 100%;
   border-radius: 20px 20px 0px 0px;
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
@@ -902,3 +902,17 @@ select {
     opacity: 0;
   }
 }
+
+// .Card {
+//   .StripeElement {
+//     border: 2px solid #bcbcbc !important;
+//     border-radius: 30px !important;
+//     opacity: 1 !important;
+//     max-height: 45px !important;
+//     height: 100% !important;
+//     min-height: 45px !important;
+//     display: flex !important;
+//     align-items: center !important;
+//     padding: 0 20px !important;
+//   }
+// }

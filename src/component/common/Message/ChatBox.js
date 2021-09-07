@@ -13,7 +13,7 @@ import { send_unread_notification } from "action/NotificationAct";
 import { connect } from "react-redux";
 import { getFormatDate } from "service/helperFunctions";
 import { TextFormatSharp } from "@material-ui/icons";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
   unSubscribeFromChannel,
   updateMessageUnReadCount,
@@ -223,12 +223,35 @@ class ChatBoxClass extends Component {
 
     const messages = activeChannelMessages;
 
+    const currentLoggedInUser = localStorage.getItem("user-id");
+
+    const trainerId = channelData?.trainerId;
+
+    // check whether currently logged in user is trainer
+    const isTrainer = trainerId === currentLoggedInUser;
+
+    const trainerName =
+      currentChannelMembers.filter(({ userId }) => userId === trainerId)[0]
+        ?.userName || {};
+
+    const userName =
+      currentChannelMembers.filter(({ userId }) => userId !== trainerId)[0]
+        ?.userName || {};
+
     if (!isDataPresent)
       return (
         <div className="w-100 h-100 d-flex align-items-center justify-content-center">
           {!isLoading ? <h3>No New Messages</h3> : ""}
         </div>
       );
+
+    let redirectURL = "";
+
+    if (!isTrainer) {
+      redirectURL = `/trainer/profile/${trainerId}`;
+    } else {
+      redirectURL = `/trainers/dashboard/schedule`;
+    }
     return (
       <div className="message_right_chatarea">
         {activeChannel?.sid ? (
@@ -266,6 +289,20 @@ class ChatBoxClass extends Component {
                       <img src={LocationIcon} alt="icon" />
                       <h5>{channelData?.venue}</h5>
                     </div>
+                  </div>
+                  <div className="requested-session-block">
+                    <p className="text-secondary fs-14">
+                      <Link to={redirectURL}>
+                        <span className="text-primary text-underline cursor-pointer">
+                          Click here
+                        </span>
+                      </Link>
+                      <span>{` to book your session with `}</span>
+                      <span className="text-capitalize">{`${
+                        isTrainer ? userName : trainerName
+                      }`}</span>
+                      <span>{` once you both have agreed on a day & time.`}</span>
+                    </p>
                   </div>
                   <p>
                     {typingMembers.length > 0 && (

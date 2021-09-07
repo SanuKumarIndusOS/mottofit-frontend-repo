@@ -232,7 +232,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                   <form onSubmit={signUp}>
                     <div className="input_items">
                       <input
-                        placeholder="Name"
+                        placeholder="First name"
                         type="text"
                         value={data.firstName}
                         name="firstName"
@@ -244,7 +244,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                     </div>
                     <div className="input_items">
                       <input
-                        placeholder="LastName"
+                        placeholder="Last name"
                         type="text"
                         value={data.lastName}
                         name="lastName"
@@ -253,7 +253,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                       <img src={Person} alt="icon" />
                       {error.lastName && <span>{error.lastName[0]}</span>}
                     </div>
-{/* 
+                    {/* 
                     <div className="input_items">
                       <input
                         placeholder="Location"
@@ -340,6 +340,13 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                       <span className="errorMessage">{apiError}</span>
                     )}
 
+                    <div className="submit_button">
+                      <button type="submit" onClick={signUp}>
+                        {" "}
+                        <ArrowHoverBlacked />
+                      </button>
+                    </div>
+
                     <div className="or_items">
                       <div className="hr_line"></div>
                       <div>
@@ -348,22 +355,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                       <div className="hr_line"></div>
                     </div>
                     <div className="social_buttons">
-                      {/* <button className="facebook-auth">
-                      <img src={Facebook} alt="icon" />
-                      Sign Up with Facebook
-                    </button>
-
-                    <button className="google-auth">
-                      <img src={Google} alt="icon" />
-                      Sign up with Google
-                    </button> */}
                       <SocialLogin type="user" loginType="singup" />
-                    </div>
-                    <div className="submit_button">
-                      <button type="submit" onClick={signUp}>
-                        {" "}
-                        <ArrowHoverBlacked />
-                      </button>
                     </div>
                   </form>
                 </div>

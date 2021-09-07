@@ -7,6 +7,7 @@ export const GoogleLoginButton = ({
   responseGoogle,
   clientId,
   RenderComponent,
+  label,
 }) => {
   return (
     <GoogleLogin
@@ -17,7 +18,7 @@ export const GoogleLoginButton = ({
           onClick={renderProps.onClick}
           disabled={renderProps.disabled}
           Icon={Google}
-          label=" Sign In with Google"
+          label={label}
           className="google-auth"
         />
       )}

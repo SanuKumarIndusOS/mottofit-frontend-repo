@@ -698,7 +698,8 @@ const TrainWithFriendsClass = ({
                           <img src={StrengthIcon} alt="icon" />
                           <h4>
                             {bookingData?.activity?.label ||
-                              sessionData?.trainingType?.label}
+                              sessionData?.trainingType?.label ||
+                              "Motto session"}
                           </h4>
                         </div>
                       </div>

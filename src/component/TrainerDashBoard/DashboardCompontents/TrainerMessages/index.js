@@ -75,6 +75,16 @@ const TrainerMessageClass = ({
     upcoming: 0,
     past: 0,
     admin: 0,
+    user: 0,
+    trainer: 0,
+  });
+  const [totalData, setTotalData] = useState({
+    invited: 0,
+    upcoming: 0,
+    past: 0,
+    admin: 0,
+    user: 0,
+    trainer: 0,
   });
 
   const [currentTab, setCurrentTab] = useState(
@@ -140,7 +150,7 @@ const TrainerMessageClass = ({
 
     const channelID = search.split("channelId=")[1];
     trainerChannel(tab, pageData[tab])
-      .then((data) => {
+      .then(({ data, documentCount }) => {
         let sessionTypeData = {
           invited: "invitedSessions",
           upcoming: "upcomingSessions",
@@ -148,8 +158,21 @@ const TrainerMessageClass = ({
           admin: "adminMessages",
           requested: "requestedSessions",
         };
+        let prevReduxData = {
+          invited: invitedSessions,
+          upcoming: upcomingSessions,
+          past: pastSessions,
+          admin: adminMessages,
+          requested: requestedSessions,
+        };
 
         let currentSession = sessionTypeData[tab];
+
+        let totalCountData = { ...totalData };
+
+        totalCountData[tab] = documentCount;
+
+        setTotalData(totalCountData);
 
         setMessageListLoading(false);
 
@@ -166,8 +189,10 @@ const TrainerMessageClass = ({
           return tempChannelData;
         });
 
+        let prevData = [...(prevReduxData[tab] || [])];
+
         let reduxData = {
-          [currentSession]: [...updatedData],
+          [currentSession]: [...prevData, ...updatedData],
         };
 
         if (type && channelID) {
@@ -204,9 +229,19 @@ const TrainerMessageClass = ({
 
         // const tempCurrentTab = search.split("=")[1];
 
+        let currentTabData = {
+          trainer: "trainerMessages",
+          user: "userMessages",
+        };
+
+        let prevReduxData = {
+          trainer: trainerMessages,
+          user: userMessages,
+        };
+
         let reduxData = {
-          userMessages: [...usersArray],
-          trainerMessages: [...trainersArray],
+          userMessages: [...userMessages, ...usersArray],
+          trainerMessages: [...trainerMessages, ...trainersArray],
         };
 
         setMessageListLoading(false);
@@ -216,11 +251,6 @@ const TrainerMessageClass = ({
         const channelSID = search.split("channelId=")[1];
 
         if (channelSID) {
-          let currentTabData = {
-            trainer: "trainerMessages",
-            user: "userMessages",
-          };
-
           let selectedRole = currentTabData[type];
 
           // console.log(
@@ -293,7 +323,32 @@ const TrainerMessageClass = ({
       });
   }
 
-  const handleScrollChange = () => {};
+  const nextApi = (tab) => {
+    let sessionTypeData = {
+      invited: invitedSessions,
+      upcoming: upcomingSessions,
+      past: pastSessions,
+      admin: adminMessages,
+      requested: requestedSessions,
+      trainer: trainerMessages,
+      user: userMessages,
+    };
+
+    let currentTabData = sessionTypeData[tab];
+
+    console.log(currentTabData, totalData[tab]);
+
+    if (currentTabData?.length <= 0 || totalData[tab] <= 0) return;
+
+    let tempPageData = {
+      ...pageData,
+    };
+
+    tempPageData[tab] += 1;
+
+    // console.log(tempPageData);
+    setPageData(tempPageData);
+  };
 
   function handleTabChange(tab, initial = false) {
     const tempType = type;
@@ -392,6 +447,9 @@ const TrainerMessageClass = ({
                       isMessageListLoading={isMessageListLoading}
                       messageData={invitedSessions}
                       PopulateContacts={PopulateContacts}
+                      scrollId="scrollableInvitedDiv"
+                      nextApi={() => nextApi("invited")}
+                      totalCount={totalData["invited"]}
                     />
                   </TabPanel>
 
@@ -400,6 +458,9 @@ const TrainerMessageClass = ({
                       isMessageListLoading={isMessageListLoading}
                       messageData={upcomingSessions}
                       PopulateContacts={PopulateContacts}
+                      scrollId="scrollableUpcomingDiv"
+                      nextApi={() => nextApi("upcoming")}
+                      totalCount={totalData["upcoming"]}
                     />
                   </TabPanel>
                   <TabPanel tabId="past">
@@ -407,6 +468,9 @@ const TrainerMessageClass = ({
                       isMessageListLoading={isMessageListLoading}
                       messageData={pastSessions}
                       PopulateContacts={PopulateContacts}
+                      scrollId="scrollablePastDiv"
+                      nextApi={() => nextApi("past")}
+                      totalCount={totalData["past"]}
                     />
                   </TabPanel>
                   <TabPanel tabId="admin">
@@ -414,6 +478,9 @@ const TrainerMessageClass = ({
                       isMessageListLoading={isMessageListLoading}
                       messageData={adminMessages}
                       PopulateContacts={PopulateContacts}
+                      scrollId="scrollableAdminDiv"
+                      nextApi={() => nextApi("admin")}
+                      totalCount={totalData["admin"]}
                     />
                   </TabPanel>
                   <TabPanel tabId="requested">
@@ -421,6 +488,9 @@ const TrainerMessageClass = ({
                       isMessageListLoading={isMessageListLoading}
                       messageData={requestedSessions}
                       PopulateContacts={PopulateContacts}
+                      scrollId="scrollableRequestedDiv"
+                      nextApi={() => nextApi("requested")}
+                      totalCount={totalData["requested"]}
                     />
                   </TabPanel>
 
@@ -431,6 +501,9 @@ const TrainerMessageClass = ({
                       isMessageListLoading={isMessageListLoading}
                       messageData={userMessages}
                       PopulateContacts={PopulateContacts}
+                      scrollId="scrollableUserDiv"
+                      nextApi={() => nextApi("user")}
+                      totalCount={totalData["user"]}
                     />
                   </TabPanel>
 
@@ -441,6 +514,9 @@ const TrainerMessageClass = ({
                       isMessageListLoading={isMessageListLoading}
                       messageData={trainerMessages}
                       PopulateContacts={PopulateContacts}
+                      scrollId="scrollableTrainerDiv"
+                      nextApi={() => nextApi("trainer")}
+                      totalCount={totalData["trainer"]}
                     />
                   </TabPanel>
                 </div>

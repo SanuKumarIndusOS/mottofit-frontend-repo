@@ -9,12 +9,13 @@ export const FacebookLoginButton = ({
   responseFacebook,
   appId,
   RenderComponent,
+  label = "",
 }) => {
   return (
     <FacebookLogin
       appId={appId}
       autoLoad={false}
-      textButton="Sign In with Facebook"
+      textButton={label}
       icon={<img src={FaceBook} alt="icon" />}
       cssClass="facebook-auth"
       fields="name,email,picture"

@@ -64,12 +64,20 @@ const SocialLoginFC = ({ socialLoginApi, type, loginType, nextAction }) => {
         appId={config.facebookAppId}
         RenderComponent={CustomButton}
         responseFacebook={responseFacebook}
+        label={`${
+          loginType === "login"
+            ? "Sign in with Facebook"
+            : "Sign up with Facebook"
+        }`}
       />
 
       <GoogleLoginButton
         clientId={config.googleClientId}
         RenderComponent={CustomButton}
         responseGoogle={responseGoogle}
+        label={`${
+          loginType === "login" ? "Sign in with Google" : "Sign up with Google"
+        }`}
       />
     </div>
   );

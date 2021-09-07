@@ -705,9 +705,6 @@ const TrainerProfileClass = ({
                       </div>
                     </div>
                   </div>
-                  <button className="w-100" onClick={handleBookSession}>
-                    Book a session <ArrowHoverBlacked />
-                  </button>
                 </div>
               </div>
               <div className="profile_trainer_data">
