@@ -215,6 +215,7 @@ class ChatBoxClass extends Component {
       activeChannel = {},
       channelData = {},
       isDataPresent = false,
+      type: currentTab,
     } = this.props;
 
     const { message } = this.state;
@@ -290,20 +291,22 @@ class ChatBoxClass extends Component {
                       <h5>{channelData?.venue}</h5>
                     </div>
                   </div>
-                  <div className="requested-session-block">
-                    <p className="text-secondary fs-14">
-                      <Link to={redirectURL}>
-                        <span className="text-primary text-underline cursor-pointer">
-                          Click here
-                        </span>
-                      </Link>
-                      <span>{` to book your session with `}</span>
-                      <span className="text-capitalize">{`${
-                        isTrainer ? userName : trainerName
-                      }`}</span>
-                      <span>{` once you both have agreed on a day & time.`}</span>
-                    </p>
-                  </div>
+                  {currentTab === "requested" && (
+                    <div className="requested-session-block">
+                      <p className="text-secondary fs-14">
+                        <Link to={redirectURL}>
+                          <span className="text-primary text-underline cursor-pointer">
+                            Click here
+                          </span>
+                        </Link>
+                        <span>{` to book your session with `}</span>
+                        <span className="text-capitalize">{`${
+                          isTrainer ? userName : trainerName
+                        }`}</span>
+                        <span>{` once you both have agreed on a day & time.`}</span>
+                      </p>
+                    </div>
+                  )}
                   <p>
                     {typingMembers.length > 0 && (
                       <span className="ml-auto text-primary fw-600">{`${typingMembers.toString()} ${

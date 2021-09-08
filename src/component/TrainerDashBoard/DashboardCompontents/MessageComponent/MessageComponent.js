@@ -14,6 +14,7 @@ export const MessageComponent = ({
   nextApi = () => {},
   scrollId = "scrollableInfiniteDiv",
   totalCount,
+  type,
 }) => {
   let mql = window.matchMedia("(max-width: 700px)");
 
@@ -143,7 +144,7 @@ export const MessageComponent = ({
         </div>
       </div>
       <div className="message_right">
-        <ChatBox isDataPresent={messageData.length > 0} />
+        <ChatBox isDataPresent={messageData.length > 0} type={type} />
       </div>
     </div>
   );

@@ -450,6 +450,7 @@ const TrainerMessageClass = ({
                       scrollId="scrollableInvitedDiv"
                       nextApi={() => nextApi("invited")}
                       totalCount={totalData["invited"]}
+                      type={type}
                     />
                   </TabPanel>
 
@@ -461,6 +462,7 @@ const TrainerMessageClass = ({
                       scrollId="scrollableUpcomingDiv"
                       nextApi={() => nextApi("upcoming")}
                       totalCount={totalData["upcoming"]}
+                      type={type}
                     />
                   </TabPanel>
                   <TabPanel tabId="past">
@@ -471,6 +473,7 @@ const TrainerMessageClass = ({
                       scrollId="scrollablePastDiv"
                       nextApi={() => nextApi("past")}
                       totalCount={totalData["past"]}
+                      type={type}
                     />
                   </TabPanel>
                   <TabPanel tabId="admin">
@@ -481,6 +484,7 @@ const TrainerMessageClass = ({
                       scrollId="scrollableAdminDiv"
                       nextApi={() => nextApi("admin")}
                       totalCount={totalData["admin"]}
+                      type={type}
                     />
                   </TabPanel>
                   <TabPanel tabId="requested">
@@ -491,6 +495,7 @@ const TrainerMessageClass = ({
                       scrollId="scrollableRequestedDiv"
                       nextApi={() => nextApi("requested")}
                       totalCount={totalData["requested"]}
+                      type={type}
                     />
                   </TabPanel>
 
@@ -504,6 +509,7 @@ const TrainerMessageClass = ({
                       scrollId="scrollableUserDiv"
                       nextApi={() => nextApi("user")}
                       totalCount={totalData["user"]}
+                      type={type}
                     />
                   </TabPanel>
 
@@ -517,6 +523,7 @@ const TrainerMessageClass = ({
                       scrollId="scrollableTrainerDiv"
                       nextApi={() => nextApi("trainer")}
                       totalCount={totalData["trainer"]}
+                      type={type}
                     />
                   </TabPanel>
                 </div>
