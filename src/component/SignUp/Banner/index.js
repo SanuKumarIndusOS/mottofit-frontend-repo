@@ -342,7 +342,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
 
                     <div className="submit_button">
                       <button type="submit" onClick={signUp}>
-                        {" "}
+                        Create Account
                         <ArrowHoverBlacked />
                       </button>
                     </div>

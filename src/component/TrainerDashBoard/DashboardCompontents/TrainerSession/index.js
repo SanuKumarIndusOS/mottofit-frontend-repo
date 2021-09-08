@@ -710,11 +710,13 @@ const TabPast = ({
 
                                   {data.sessionStatus !== "cancelled" ? (
                                     <>
-                                      <button
-                                        onClick={() => handleCancel(data.id)}
-                                      >
-                                        Cancel
-                                      </button>
+                                      {tabname === "upcoming" && (
+                                        <button
+                                          onClick={() => handleCancel(data.id)}
+                                        >
+                                          Cancel
+                                        </button>
+                                      )}
                                       <button
                                         className="text-primary"
                                         onClick={() =>
