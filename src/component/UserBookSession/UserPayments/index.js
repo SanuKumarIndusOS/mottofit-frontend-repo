@@ -53,6 +53,7 @@ const UserPaymentsFC = ({
   const [accordionData, setAccordionData] = useState(tempaccordionData);
   const [checkPayAhead, setCheckPayAhead] = useState(false);
   const [friendsCount, setFriendsCount] = useState(1);
+  const [trainingAcivityType, setTrainigType] = useState("");
 
   const couponRate = useRef(null);
 
@@ -126,15 +127,15 @@ const UserPaymentsFC = ({
       trainingtype = "class";
     }
 
-    const tempTrainingActivity =
-      sessionData?.trainingType?.value || bookingData?.activity?.value;
+    // const tempTrainingActivity =
+    //   sessionData?.trainingType?.value || bookingData?.activity?.value;
 
     const scheduleBody = {
       trainerId: trainerData?.id || selectedTrainerData?.id,
-      title: tempTrainingActivity || "Motto Session",
+      title: trainingAcivityType,
       trainingType: trainingtype,
       sessionType: sessionData?.preferedTrainingMode,
-      activity: tempTrainingActivity || "",
+      activity: trainingAcivityType,
       sessionStatus: "created",
       sessionDate:
         bookingData?.date || getFormatDate(selectedTimes[0], "YYYY-MM-DD"),
@@ -217,6 +218,22 @@ const UserPaymentsFC = ({
     updatePricing();
     setCheckPayAhead(false);
     console.log(mottoPassDataVal);
+
+    let tempTrainingActivity = "";
+
+    let selectedFilterData = localStorage.getItem("persistFilters");
+
+    if (selectedFilterData) {
+      let tempData = JSON.parse(selectedFilterData);
+
+      const { trainingType = {} } = tempData?.label || {};
+
+      //  console.log(tempData);
+
+      tempTrainingActivity = trainingType?.label || "Motto Session";
+
+      setTrainigType(tempTrainingActivity);
+    }
 
     window.scrollTo(0, 0);
     if (Object.keys(sessionData).length === 0)
@@ -486,11 +503,7 @@ const UserPaymentsFC = ({
                     <h3>I WANT TO TRAIN IN</h3>
                     <div className="user_data_inner">
                       <img src={StrengthIcon} alt="icon" />
-                      <h4>
-                        {bookingData?.activity?.label ||
-                          sessionData?.trainingType?.label ||
-                          "Motto session"}
-                      </h4>
+                      <h4>{trainingAcivityType || "Motto session"}</h4>
                     </div>
                   </div>
                   <div className="user_payment_details">
