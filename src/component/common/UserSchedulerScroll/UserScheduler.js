@@ -80,28 +80,46 @@ function UserScheduler() {
     <div className="">
       <button
         onClick={() =>
-          EarlyBirdRef.current.scrollIntoView({ behavior: "smooth" })
+          EarlyBirdRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          })
         }
       >
         Scroll to Early Bird
       </button>
       <button
         onClick={() =>
-          RiseAndShineRef.current.scrollIntoView({ behavior: "smooth" })
+          RiseAndShineRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          })
         }
       >
         Scroll to Rise and Shine{" "}
       </button>
 
       <button
-        onClick={() => MidDayRef.current.scrollIntoView({ behavior: "smooth" })}
+        onClick={() =>
+          MidDayRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          })
+        }
       >
         Scroll to Miday
       </button>
 
       <button
         onClick={() =>
-          LunchTimeRef.current.scrollIntoView({ behavior: "smooth" })
+          LunchTimeRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          })
         }
       >
         Scroll to Lunchtime
@@ -109,7 +127,11 @@ function UserScheduler() {
 
       <button
         onClick={() =>
-          HappyHourRef.current.scrollIntoView({ behavior: "smooth" })
+          HappyHourRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          })
         }
       >
         Scroll to Happy Hours
@@ -117,7 +139,11 @@ function UserScheduler() {
 
       <button
         onClick={() =>
-          NeverTooLateRef.current.scrollIntoView({ behavior: "smooth" })
+          NeverTooLateRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          })
         }
       >
         Scroll to Never too Late
@@ -200,13 +226,13 @@ function UserScheduler() {
                           ? "selected_cell"
                           : datekey === 6
                           ? "border_right_none"
-                          : Object.keys(blockCell).find(
-                              (ele) => ele === dateItem
-                            )
-                          ? blockCell[dateItem].find((ele) => ele === item.time)
-                            ? "block_cell"
-                            : null
-                          : null
+                          : // : Object.keys(blockCell).find(
+                            //     (ele) => ele === dateItem
+                            //   )
+                            // ? blockCell[dateItem].find((ele) => ele === item.time)
+                            //   ? "block_cell"
+                            //   : null
+                            null
                       }
                       ref={
                         keys === 0

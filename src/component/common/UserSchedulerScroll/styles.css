@@ -91,7 +91,7 @@ td {
 }
 
 .selected_cell {
-  background-color: #53bfd2;
+  background-color: #53bfd2 !important;
   border: none;
 
   opacity: 1;
