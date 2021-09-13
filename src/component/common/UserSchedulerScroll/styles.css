@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap");
+
+.table.sticky th {
+  position: sticky;
+  top: 0;
+  width: 98px;
+  height: 100px;
+  border-right: 2px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+table {
+  border-collapse: collapse;
+  background-color: #f8f8f8;
+  box-shadow: 0px 3px 12px #1616160d;
+  border-radius: 10px;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+thead {
+  display: block;
+}
+
+tbody {
+  height: 320px;
+  display: block;
+  overflow-y: scroll;
+  cursor: pointer;
+}
+
+td {
+  width: 100px;
+  border: 2px solid #e6e6e6;
+  padding: 0px;
+  height: 50px;
+  color: #161616;
+  font-size: 15px;
+}
+
+.time_title {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Montserrat", sans-serif;
+  padding-left: 10px;
+  letter-spacing: 0.6px;
+  cursor: default;
+}
+
+.date_title {
+  height: 100%;
+  width: 100%;
+  font-size: 28px;
+  letter-spacing: 1.2px;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.date_title_two {
+  color: #898989;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.border_top_none {
+  border-top: none;
+  border-left: none;
+  color: transparent;
+}
+
+.border_bottom_none {
+  border-bottom: none;
+  border-left: none;
+}
+
+.border_right_none {
+  border-right: none !important;
+}
+
+.selected_cell {
+  background-color: #53bfd2;
+  border: none;
+
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.25s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.block_cell
+{
+  background-color: #DEDEDE;
+  border: none;
+}
+
+.calendar_controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar_buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background-color: #fff;
+  border: 1.5px solid #bcbcbc;
+  font-size: large;
+  color: #53bfd2;
+  cursor: pointer;
+}
+
+.calendar_txt {
+  color: #898989;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  width: 250px;
+  text-align: center;
+}
+
+.dropd {
+  background-color: #b6b3b3;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f8f8;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+
+  background-color: #b6b3b3;
+}
+
+/* Trainer Card */
+
+.trainer_card {
+  height: 500px;
+  max-width: 330px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0px 3px 12px #1616160d;
+  display: flex;
+  flex-direction: column;
+}
+
+.trainer_img {
+  height: 40%;
+  /* border-radius: 20px 20px 0 0; */
+  /* background-color: #898989; */
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.trainer_img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  object-fit: cover;
+}
+
+.trainer_info {
+  height: 50%;
+  background-color: #fff;
+}
+
+.book_button {
+  height: 15%;
+  background-color: #53bfd2;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.book_cta {
+  color: #fff;
+  margin-left: 1rem;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.45px;
+  font-family: "Montserrat", sans-serif;
+  flex: 2;
+}
+
+.trainer_price {
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  flex: 1;
+  font-size: 14px;
+}
+
+.trainer_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.trainer_name {
+  font-family: "Cormorant Garamond";
+  font-size: 35px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+  margin-bottom: 0.5rem;
+}
+
+.trainer_vertical {
+  font-family: "Montserrat", sans-serif;
+  color: #898989;
+  letter-spacing: 0.9px;
+  font-size: 18px;
+  font-weight: 100;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.trainer_details {
+  text-align: center;
+  font-family: "Montserrat";
+  color: #898989;
+
+  font-size: 14px;
+  font-weight: 100;
+  margin-bottom: 1rem;
+  line-height: 25px;
+  letter-spacing: 0.24px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.trainer_details_read_more {
+  color: #161616;
+  text-decoration-line: underline;
+  cursor: pointer;
+  font-weight: bold;
+}
