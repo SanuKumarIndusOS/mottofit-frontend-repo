@@ -403,6 +403,14 @@ const TabOne = ({
                 tabData?.map((data, index) => {
                   //  console.log(data, "datadata");
 
+                  const isSessionExpired = moment(
+                    moment.tz("America/New_York").format("YYYY MM DD HH:MM")
+                  ).isAfter(
+                    moment
+                      .tz(data.sessionStartTime, "America/New_York")
+                      .format("YYYY MM DD HH:MM")
+                  );
+
                   return (
                     <React.Fragment key={index}>
                       <div className="TP_upcomeSession_overview">
@@ -456,67 +464,77 @@ const TabOne = ({
                             <div className="TP_USession_data_buttons">
                               {tabname === "Invited" ? (
                                 <>
-                                  {data.acceptance ? (
-                                    <>
-                                      <span className="text-black mr-4">
-                                        {/* {data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>} */}
-                                        {data.sessionStatus === "completed" ? (
-                                          <div style={{ color: "red" }}>
-                                            <u>Completed</u>
-                                          </div>
-                                        ) : data.sessionStatus ===
-                                          "cancelled" ? (
-                                          <div style={{ color: "red" }}>
-                                            <u>Cancelled</u>
-                                          </div>
-                                        ) : (
-                                          <div> Invited session</div>
-                                        )}
-                                      </span>
-                                    </>
+                                  {isSessionExpired ? (
+                                    <div>Expired Session</div>
                                   ) : (
                                     <>
-                                      {data.sessionStatus !== "cancelled" ? (
+                                      {data.acceptance ? (
                                         <>
-                                          {tabname !== "Previous" ? (
-                                            <>
-                                              <button
-                                                disabled={isLoading}
-                                                onClick={() =>
-                                                  handleInvitation(
-                                                    data.id,
-                                                    false
-                                                  )
-                                                }
-                                              >
-                                                Decline
-                                              </button>
-                                              <button
-                                                disabled={isLoading}
-                                                onClick={() =>
-                                                  handleInvitation(
-                                                    data.id,
-                                                    true,
-                                                    data.paidByUser
-                                                  )
-                                                }
-                                                className="text-success"
-                                              >
-                                                Accept
-                                              </button>
-                                            </>
-                                          ) : null}
+                                          <span className="text-black mr-4">
+                                            {/* {data.sessionStatus === "cancelled" ? (<div style={{color:"red"}}><u>Cancelled</u></div>):<div> Invited session</div>} */}
+                                            {data.sessionStatus ===
+                                            "completed" ? (
+                                              <div style={{ color: "red" }}>
+                                                <u>Completed</u>
+                                              </div>
+                                            ) : data.sessionStatus ===
+                                              "cancelled" ? (
+                                              <div style={{ color: "red" }}>
+                                                <u>Cancelled</u>
+                                              </div>
+                                            ) : (
+                                              <div> Invited session</div>
+                                            )}
+                                          </span>
                                         </>
-                                      ) : data.sessionStatus === "completed" ? (
-                                        <div style={{ color: "red" }}>
-                                          <u>Completed</u>
-                                        </div>
-                                      ) : data.sessionStatus === "cancelled" ? (
-                                        <div style={{ color: "red" }}>
-                                          <u>Cancelled</u>
-                                        </div>
                                       ) : (
-                                        <div> Invited session</div>
+                                        <>
+                                          {data.sessionStatus !==
+                                          "cancelled" ? (
+                                            <>
+                                              {tabname !== "Previous" ? (
+                                                <>
+                                                  <button
+                                                    disabled={isLoading}
+                                                    onClick={() =>
+                                                      handleInvitation(
+                                                        data.id,
+                                                        false
+                                                      )
+                                                    }
+                                                  >
+                                                    Decline
+                                                  </button>
+                                                  <button
+                                                    disabled={isLoading}
+                                                    onClick={() =>
+                                                      handleInvitation(
+                                                        data.id,
+                                                        true,
+                                                        data.paidByUser
+                                                      )
+                                                    }
+                                                    className="text-success"
+                                                  >
+                                                    Accept
+                                                  </button>
+                                                </>
+                                              ) : null}
+                                            </>
+                                          ) : data.sessionStatus ===
+                                            "completed" ? (
+                                            <div style={{ color: "red" }}>
+                                              <u>Completed</u>
+                                            </div>
+                                          ) : data.sessionStatus ===
+                                            "cancelled" ? (
+                                            <div style={{ color: "red" }}>
+                                              <u>Cancelled</u>
+                                            </div>
+                                          ) : (
+                                            <div> Invited session</div>
+                                          )}
+                                        </>
                                       )}
                                     </>
                                   )}

@@ -45,8 +45,8 @@ class Experience extends Component {
             <div className="heading">
               Experience the Best Training in <br /> these Categories
             </div>
-            <div className="image_Container">
-              <div className="image_strength_main">
+            <div className="image_Container row">
+              <div className="image_strength_main col-lg-3 col-md-6 m-0">
                 <img src={strength_img} alt="image" />
                 <Link
                   onClick={() => {
@@ -76,7 +76,7 @@ class Experience extends Component {
                   <ArrowHoverBlacked />
                 </Link>
               </div>
-              <div className="image_strength_main">
+              <div className="image_strength_main col-lg-3 col-md-6 m-0">
                 <img src={boxing_img} alt="image" />
                 <Link
                   onClick={() => {
@@ -106,7 +106,7 @@ class Experience extends Component {
                   <ArrowHoverBlacked />
                 </Link>
               </div>
-              <div className="image_strength_main">
+              <div className="image_strength_main col-lg-3 col-md-6 m-0">
                 <img src={yoga_img} alt="image" />
                 <Link
                   onClick={() => {
@@ -136,7 +136,7 @@ class Experience extends Component {
                   <ArrowHoverBlacked />
                 </Link>
               </div>
-              <div className="image_strength_main">
+              <div className="image_strength_main col-lg-3 col-md-6 m-0">
                 <img src={pilates_img} alt="image" />
                 <Link
                   onClick={() => {

@@ -181,7 +181,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
         ...fieldInvalidList,
       };
 
-     // console.log(errors);
+      // console.log(errors);
       setErrors({ ...errors, ...fieldInvalidList });
     }
 
@@ -290,6 +290,13 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                         <span className="errorMessage">{apiError}</span>
                       )}
 
+                      <div className="submit_button">
+                        <button type="submit" onClick={handleSubmit}>
+                          Continue to Account
+                          <ArrowHoverBlacked />
+                        </button>
+                      </div>
+
                       <div className="or_items">
                         <div className="hr_line"></div>
                         <div>
@@ -299,12 +306,6 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                       </div>
                       <div className="social_buttons">
                         <SocialLogin type="trainer" loginType="singup" />
-                      </div>
-                      <div className="submit_button">
-                        <button type="submit" onClick={handleSubmit}>
-                          Continue to Account
-                          <ArrowHoverBlacked />
-                        </button>
                       </div>
                     </form>
                   </div>

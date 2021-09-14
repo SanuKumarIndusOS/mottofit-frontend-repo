@@ -205,8 +205,8 @@ export const trainerChannel = (sessionType, pageSize) => (
 
     trainerChannel.pageSize = pageSize || 0;
     api({ ...trainerChannel })
-      .then(({ data }) => {
-        resolve(data);
+      .then(({ data, documentCount }) => {
+        resolve({ data, documentCount });
       })
       .catch((err) => {
         reject(err);

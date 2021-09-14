@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { updateUserDetails } from "action/userAct";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
 const TrainerCardsFC = (props) => {
   const [bestMatchData, setbestMatchData] = useState([]);
@@ -43,15 +44,17 @@ const TrainerCardsFC = (props) => {
     };
     props.updateUserDetails(reduxData);
 
-    if (!isReadMore) {
-      history.push({
-        pathname: `/user/scheduler/${bestMatchData[data]["id"]}`,
-      });
-    } else {
-      history.push({
-        pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
-      });
-    }
+    history.push({
+      pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
+    });
+
+    // if (!isReadMore) {
+    //   history.push({
+    //     pathname: `/user/scheduler/${bestMatchData[data]["id"]}`,
+    //   });
+    // } else {
+
+    // }
   };
 
   let mql = window.matchMedia("(max-width: 700px)");
@@ -112,29 +115,39 @@ const TrainerCardsFC = (props) => {
               });
 
             return (
-              <div
-                className="card "
-                key={index}
-                // onClick={() => handleClick(data, true)}
+              // <div
+              //   className="card "
+              //   key={index}
+              //   // onClick={() => handleClick(data, true)}
+              // >
+              <Link
+                to={`/trainer/profile/${bestMatchData[data]["id"]}`}
+                className="card-link card"
+                key={`trainer_best_matches_${index}`}
               >
-                <img
-                  onClick={() => handleClick(data, true)}
-                  className="card-img-top"
-                  src={
-                    bestMatchData[data]?.profilePicture ||
-                    "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
-                  }
-                  style={{ objectFit: "cover", cursor: "pointer" }}
-                  alt="Profile Picture Not Found "
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
-                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
-                  }}
-                />
-                <div className="ocard" onClick={() => handleClick(data, true)}>
-                  <div className="circlepop">
-                    Check <br /> Me Out
+                <div className="position-relative w-100">
+                  <img
+                    onClick={() => handleClick(data, true)}
+                    className="card-img-top"
+                    src={
+                      bestMatchData[data]?.profilePicture ||
+                      "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd"
+                    }
+                    style={{ objectFit: "cover", cursor: "pointer" }}
+                    alt="Profile Picture Not Found "
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://qphs.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd";
+                    }}
+                  />
+                  <div
+                    className="ocard"
+                    onClick={() => handleClick(data, true)}
+                  >
+                    <div className="circlepop">
+                      Check <br /> Me Out
+                    </div>
                   </div>
                 </div>
 
@@ -176,7 +189,7 @@ const TrainerCardsFC = (props) => {
                     </p>
                   </button>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

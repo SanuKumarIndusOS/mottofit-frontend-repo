@@ -19,6 +19,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import { AiFillAlert, AiOutlineAlert } from "react-icons/ai";
 import { history } from "helpers";
 import BlueHoverButton from "component/common/BlueArrowButton";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useOptions = () => {
   const options = useMemo(() => ({
@@ -50,7 +51,7 @@ function CardFormFC({
   ScheduleSession,
   sessionData,
   mottoPassDataVal,
-
+  isValidationPassed = () => {},
   isProfile = false,
 }) {
   const stripe = useStripe();
@@ -59,6 +60,7 @@ function CardFormFC({
   const [isRememberCard, setRememberCard] = useState(false);
   const [defaulCardDetails, setDefaultCardDetails] = useState({});
   const [showCardComp, setShowCardComp] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   // const [checkPayAhead, setCheckPayAhead] = useState(false);
   // const [agreedToTerms, setAgreedToTerms] = useState(false);
 
@@ -69,6 +71,8 @@ function CardFormFC({
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
+
+    if (isProfile && !isValidationPassed()) return;
 
     if (!showCardComp) return ScheduleSession();
 
@@ -85,6 +89,7 @@ function CardFormFC({
 
     // console.log(cardElement);
 
+    setLoading(true);
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -93,6 +98,7 @@ function CardFormFC({
 
     if (error) {
       // console.log("[error]", error);
+      setLoading(false);
 
       return Toast({ type: "error", message: error.message || "Error" });
     } else {
@@ -111,6 +117,7 @@ function CardFormFC({
         //   console.log(result, "token");
       })
       .catch((err) => {
+        setLoading(false);
         Toast({ type: "error", message: err.message || "Error" });
       });
 
@@ -146,8 +153,9 @@ function CardFormFC({
       .then(({ data }) => {
         Toast({ type: "success", message: "Card details added" });
         getUserPaymentInfo();
+        // setLoading(false);
 
-        if (isProfile) return ScheduleSession();
+        if (isProfile) return ScheduleSession(() => setLoading(false));
 
         let sessionTypeRoute = {
           ["1 ON 1 TRAINING"]: () => ScheduleSession(),
@@ -157,11 +165,14 @@ function CardFormFC({
 
         let sessionType = sessionData?.sessionType;
 
-        if (sessionType && sessionTypeRoute[sessionType])
-          console.log(sessionTypeRoute[sessionType]);
-        //   sessionTypeRoute[sessionType]();
+        if (sessionType && sessionTypeRoute[sessionType]) {
+          // setShowCardComp(false);
+          ScheduleSession(() => setLoading(false));
+        }
+        // console.log(sessionTypeRoute[sessionType]);
       })
       .catch((err) => {
+        setLoading(false);
         Toast({ type: "error", message: err.message || "Error" });
         console.log(err);
       });
@@ -222,6 +233,12 @@ function CardFormFC({
                           fontFamily: "Montserrat",
                           fontSize: "16px",
                         },
+                        border: "2px solid #BCBCBC !important",
+                        borderRadius: "30px",
+                        opacity: "1",
+                        maxHeight: "45px",
+                        height: "100%",
+                        minHeight: "45px",
                       },
                       invalid: {
                         color: "#9e2146",
@@ -414,10 +431,24 @@ function CardFormFC({
             className={`${!agreedToTerms ? "disable-btn" : ""} ${
               isProfile ? "w-auto" : ""
             }`}
-            disabled={!agreedToTerms}
+            disabled={!agreedToTerms || isLoading}
             onClick={handleSubmit}
           >
-            {`${isProfile ? "Save Changes" : "Continue"}`} <ArrowHoverBlacked />
+            {isLoading ? (
+              <>
+                <span className="d-flex align-items-center justify-content-around w-100">
+                  Loading{" "}
+                  <CircularProgress
+                    style={{ fontSize: "14px", height: "28px", width: "28px" }}
+                  />
+                </span>
+              </>
+            ) : (
+              <>
+                {`${isProfile ? "Save Changes" : "Continue"}`}{" "}
+                <ArrowHoverBlacked />
+              </>
+            )}
           </button>
         </div>
         {/* ) : (

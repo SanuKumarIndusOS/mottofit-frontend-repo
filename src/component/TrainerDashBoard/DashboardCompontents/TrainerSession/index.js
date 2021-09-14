@@ -482,9 +482,6 @@ const TabTwo = ({
                           </div>
                           {data.sessionStatus !== "completed" ? (
                             <div className="TP_USession_data_buttons">
-                              <button onClick={() => handleCancel(data.id)}>
-                                Cancel
-                              </button>
                               {
                                 moment(
                                   moment
@@ -506,7 +503,11 @@ const TabTwo = ({
                                   >
                                     Complete
                                   </button>
-                                ) : null
+                                ) : (
+                                  <button onClick={() => handleCancel(data.id)}>
+                                    Cancel
+                                  </button>
+                                )
 
                                 //   <button
                                 //   className="text-primary"
@@ -709,11 +710,13 @@ const TabPast = ({
 
                                   {data.sessionStatus !== "cancelled" ? (
                                     <>
-                                      <button
-                                        onClick={() => handleCancel(data.id)}
-                                      >
-                                        Cancel
-                                      </button>
+                                      {tabname === "upcoming" && (
+                                        <button
+                                          onClick={() => handleCancel(data.id)}
+                                        >
+                                          Cancel
+                                        </button>
+                                      )}
                                       <button
                                         className="text-primary"
                                         onClick={() =>

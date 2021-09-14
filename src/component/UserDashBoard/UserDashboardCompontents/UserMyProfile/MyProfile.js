@@ -72,7 +72,13 @@ const MyProfileClass = ({
     const { getPaymentMethods } = PaymentApi;
 
     api({ ...getPaymentMethods }).then(({ data }) => {
-      const { type } = data[0] || {};
+      let currentDefaultCard = [...data].filter(
+        ({ default: defaultCard }) => defaultCard
+      )[0];
+
+      const { type } = currentDefaultCard || {};
+
+      console.log(currentDefaultCard);
 
       if (type) setChangeCard(false);
 
@@ -216,6 +222,22 @@ const MyProfileClass = ({
     }
 
     return !fieldInvalidList;
+  };
+
+  const isValidationPassed = () => {
+    let payload = {
+      firstName: userData.firstName,
+      location: userData.location,
+      //DOB: userData.DOB,
+      gender: userData.gender,
+      email: userData.email,
+      phoneNo: userData.phoneNo,
+      profilePicture: image,
+    };
+
+    if (!validateFields(payload)) return false;
+
+    return true;
   };
 
   const handleSubmit = () => {
@@ -534,6 +556,7 @@ const MyProfileClass = ({
                                   setAgreedToTerms(!agreedToTerms)
                                 }
                                 ScheduleSession={handleSubmit}
+                                isValidationPassed={isValidationPassed}
                               />
                             </Elements>
                           </div>

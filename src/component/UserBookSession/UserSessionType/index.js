@@ -475,8 +475,8 @@ const UserBookSessionFC = ({
     // console.log(storeData);
 
     history.push({
-          pathname: "/user/payment",
-        });
+      pathname: "/user/payment",
+    });
 
     //MottoPass
     // if (sessionType === "1 ON 1 TRAINING") {
@@ -559,12 +559,11 @@ const UserBookSessionFC = ({
   let hasDataEntered = false;
 
   if (preferedTrainingMode === "virtual") {
-    hasDataEntered = trainingType?.value;
+    hasDataEntered = true;
   }
 
   if (preferedTrainingMode === "inPerson") {
-    hasDataEntered =
-      trainingType?.value && selectedOption?.value && trainingVenue?.value;
+    hasDataEntered = selectedOption?.value && trainingVenue?.value;
   }
 
   const tempTrainerData =
@@ -578,6 +577,10 @@ const UserBookSessionFC = ({
   if (!localStorage.getItem("token")) hasDataEntered = false;
 
   const trainerId = tempTrainerData?.id;
+
+  let mql = window.matchMedia("(max-width: 700px)");
+
+  const isMobile = mql.matches ? "" : "w-50";
 
   return (
     <>
@@ -656,44 +659,26 @@ const UserBookSessionFC = ({
                       </TabList>
 
                       {isInPersonPresent &&
-                      preferedTrainingMode === "inPerson" ? (
-                        <div className="session_location_dd">
-                          <div className="session_venue">
-                            <div className="session_location">
-                              <Select
-                                value={selectedOption}
-                                onChange={setSelectedOption}
-                                options={options}
-                                className="session_location_select"
-                              />
+                        preferedTrainingMode === "inPerson" && (
+                          <div className="session_location_dd">
+                            <div
+                              className={`session_venue ${isMobile} pointer-none`}
+                            >
+                              <div className="session_location">
+                                <Select
+                                  value={selectedOption}
+                                  onChange={setSelectedOption}
+                                  options={options}
+                                  className="session_location_select btn-transparent"
+                                  // isDisabled={true}
+                                  menuIsOpen={false}
+                                  components={{
+                                    DropdownIndicator: () => <> </>,
+                                  }}
+                                />
+                              </div>
                             </div>
-                          </div>
-                          <div className="session_venue">
-                            <div className="session_location">
-                              <Select
-                                value={trainingType}
-                                onChange={setTrainingType}
-                                options={trainingTypeOption}
-                                placeholder="Select Training Type"
-                                className="session_location_select"
-                              />
-                            </div>
-                          </div>
-                          <div className="session_venue">
-                            <div className="session_location">
-                              <Select
-                                value={trainingVenue}
-                                onChange={setTrainingVenue}
-                                options={trainingVenueOptions}
-                                placeholder="Select Training Venue"
-                                className="session_location_select"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="w-100 single-session">
-                          <div className="session_venue">
+                            {/* <div className="session_venue">
                             <div className="session_location">
                               <Select
                                 value={trainingType}
@@ -703,9 +688,22 @@ const UserBookSessionFC = ({
                                 className="session_location_select"
                               />
                             </div>
+                          </div> */}
+                            <div
+                              className={`session_venue ${isMobile} mr-lg-4`}
+                            >
+                              <div className="session_location">
+                                <Select
+                                  value={trainingVenue}
+                                  onChange={setTrainingVenue}
+                                  options={trainingVenueOptions}
+                                  placeholder="Select Training Venue"
+                                  className="session_location_select"
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
                     </div>
                     <div className="text-right pt-4">
                       {trainingVenue?.label && (
