@@ -222,8 +222,17 @@ function CardFormFC({
 
               {showCardComp ? (
                 <CardNumberElement
+                  // className="custom-card-element"
                   options={{
                     hidePostalCode: true,
+                    placeholder: "XXXX-XXXX-XXXX",
+                    // showIcon: true,
+                    // iconStyle: "solid",
+                    classes: {
+                      base: "custom-card-element credit-card-element",
+                      complete: "custom-card-element",
+                      invalid: "custom-card-invalid-element",
+                    },
                     style: {
                       base: {
                         fontSize: "16px",
@@ -258,6 +267,12 @@ function CardFormFC({
                   {showCardComp ? (
                     <CardExpiryElement
                       options={{
+                        placeholder: "MM/YY",
+                        classes: {
+                          base: "custom-card-element",
+                          complete: "custom-card-element",
+                          invalid: "custom-card-invalid-element",
+                        },
                         style: {
                           base: {
                             fontSize: "16px",
@@ -286,6 +301,12 @@ function CardFormFC({
                       <label className="card-detail">CVC/CVV</label>
                       <CardCvcElement
                         options={{
+                          placeholder: "XXX",
+                          classes: {
+                            base: "custom-card-element",
+                            complete: "custom-card-element",
+                            invalid: "custom-card-invalid-element",
+                          },
                           style: {
                             base: {
                               fontSize: "16px",
