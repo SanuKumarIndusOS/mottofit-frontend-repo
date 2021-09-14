@@ -573,6 +573,8 @@ const UserPaymentsFC = ({
                     </div>
                   </div>
                   <div className="user_service_details">
+                    {/* 
+                    //issue no 415 - invalid date and price/hour needs to be removed
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="service_header">
                         <h3 className="fs-20 text-secondary">
@@ -582,7 +584,7 @@ const UserPaymentsFC = ({
                       <div className="service_header">
                         <h3 className="fs-20 text-secondary">Price / Hour</h3>
                       </div>
-                    </div>
+                    </div> */}
                     <AccordationService
                       data={accordionData}
                       couponRate={couponRate}
