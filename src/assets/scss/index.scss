@@ -916,3 +916,17 @@ select {
 //     padding: 0 20px !important;
 //   }
 // }
+
+.custom-card-element {
+  padding: 10px 20px;
+  border: 2px solid #bcbcbc;
+  border-radius: 30px;
+
+  .CardBrandIcon-container {
+    right: 0;
+  }
+
+  &.custom-card-invalid-element {
+    border: 2px solid #9e2146;
+  }
+}
