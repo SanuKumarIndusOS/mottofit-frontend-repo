@@ -206,35 +206,39 @@ function UserScheduler({id}) {
                 {date.map((dateItem, datekey) => {
                   return (
                     <td
-                      onClick={() => {
+                      onClick={(e) => {
+
+                        
                         if (
                           Object.keys(blockCell).find((ele) => ele === dateItem)
                         ) {
                           if (
-                            !blockCell[dateItem].find(
+                            blockCell[dateItem].find(
                               (ele) => ele === item.time
                             )
                           ) {
                             setSelectedSlots(keys, dateItem);
                           }
-                        } else {
-                          setSelectedSlots(keys, dateItem);
-                        }
+                        } 
+                        // else {
+                        //   setSelectedSlots(keys, dateItem);
+                        // }
                       }}
                          className={
                         (selectedCell.timeKey === keys ||
                           selectedCell.timeKeyTwo === keys) &&
                         date.indexOf(selectedCell.datekey) === datekey
                           ? "selected_cell"
-                          : datekey === 6
-                          ? "border_right_none"
+                          // :
+                          //  datekey === 6
+                          // ? "border_right_none block_cell"
                           : Object.keys(blockCell).find(
                               (ele) => ele === dateItem
                             )
                           ? blockCell[dateItem].find((ele) => ele === item.time)
-                            ? "block_cell"
-                            : null
-                          : null
+                            ? null
+                            : "block_cell"
+                          : "block_cell"
                       }
                       ref={
                         keys === 0

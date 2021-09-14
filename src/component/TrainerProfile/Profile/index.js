@@ -14,7 +14,7 @@ import Quote from "../../../assets/files/FindTrainer/Quote Icon.svg";
 import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import NotFoundImage from "../../../assets/files/FindTrainer/NoImageFound.png";
-//import UserScheduler from "../UserScheduler/UserScheduler";
+import UserScheduler from "../UserScheduler/UserScheduler";
 import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler"
 import BlueArrowButton from "../../common/BlueArrowButton";
 import { history } from "helpers";
@@ -776,11 +776,11 @@ const TrainerProfileClass = ({
                       Schedule{" "}
                     </h2>
 
-                    {/* <UserScheduler
+                    <UserScheduler
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
-                    />  */}
+                    /> 
                     <UserSchedulerScroll id={id}/>
                     <ButtonSection
                       selectedTimes={selectedTimes}
