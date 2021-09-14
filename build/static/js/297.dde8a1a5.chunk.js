@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[297],{623:function(o,t,p){}}]);

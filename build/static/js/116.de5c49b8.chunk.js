@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[116],{224:function(t,e,s){"use strict";s.r(e);s(2);var n=s(335),c=s(1);e.default=function(){return Object(c.jsx)("div",{children:Object(c.jsx)(n.default,{isDataPresent:!0})})}}}]);

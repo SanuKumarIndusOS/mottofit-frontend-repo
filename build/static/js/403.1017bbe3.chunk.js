@@ -1,1 +1,0 @@
-(this.webpackJsonpmotto=this.webpackJsonpmotto||[]).push([[403],{484:function(t,s,a){"use strict";a.r(s),s.default=a.p+"static/media/Rectangle.5312514a.svg"}}]);

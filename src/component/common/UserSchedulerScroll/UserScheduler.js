@@ -226,13 +226,13 @@ function UserScheduler() {
                           ? "selected_cell"
                           : datekey === 6
                           ? "border_right_none"
-                          : // : Object.keys(blockCell).find(
-                            //     (ele) => ele === dateItem
-                            //   )
-                            // ? blockCell[dateItem].find((ele) => ele === item.time)
-                            //   ? "block_cell"
-                            //   : null
-                            null
+                          : Object.keys(blockCell).find(
+                              (ele) => ele === dateItem
+                            )
+                          ? blockCell[dateItem].find((ele) => ele === item.time)
+                            ? "block_cell"
+                            : null
+                          : null
                       }
                       ref={
                         keys === 0
