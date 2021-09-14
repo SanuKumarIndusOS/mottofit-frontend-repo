@@ -112,7 +112,7 @@ td {
 
 .block_cell
 {
-  background-color: #DEDEDE;
+  background-color: #DEDEDE !important;
   border: none;
 }
 

@@ -4,7 +4,7 @@ import "./styles.css";
 import moment from "moment";
 import { time } from "./timeArray";
 
-function UserScheduler() {
+function UserScheduler({id}) {
   const EarlyBirdRef = useRef(null);
   const RiseAndShineRef = useRef(null);
   const MidDayRef = useRef(null);
@@ -25,12 +25,14 @@ function UserScheduler() {
 
   useEffect(() => {
     populate(startWeek, endWeek);
+    console.log(startWeek.format("YYYY-MM-DD"));
     fetch(
-      "http://15.206.37.182:2307/v2/trainer/calenderView?startDate=2021-08-30&endDate=2021-09-05&timeBlock=EarlyBird&timeZone=America/New_York&trainerId=f3fc69bf-913c-454f-b573-e4d0b27d402d"
+      `http://15.206.37.182:2307/v2/trainer/calenderView?startDate=${startWeek.format("YYYY-MM-DD")}&endDate=${endWeek.format("YYYY-MM-DD")}&timeZone=America/New_York&trainerId=${id}`
     )
       .then((response) => response.json())
       .then((data) => {
         setBlockCell(data.data);
+        console.log(data.data,"hello");
       });
   }, []);
 
@@ -219,7 +221,7 @@ function UserScheduler() {
                           setSelectedSlots(keys, dateItem);
                         }
                       }}
-                      className={
+                         className={
                         (selectedCell.timeKey === keys ||
                           selectedCell.timeKeyTwo === keys) &&
                         date.indexOf(selectedCell.datekey) === datekey
