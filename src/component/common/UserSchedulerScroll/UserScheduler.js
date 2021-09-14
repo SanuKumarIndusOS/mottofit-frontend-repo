@@ -4,7 +4,7 @@ import "./styles.css";
 import moment from "moment";
 import { time } from "./timeArray";
 
-function UserScheduler({id}) {
+function UserScheduler({ id }) {
   const EarlyBirdRef = useRef(null);
   const RiseAndShineRef = useRef(null);
   const MidDayRef = useRef(null);
@@ -25,15 +25,16 @@ function UserScheduler({id}) {
 
   useEffect(() => {
     populate(startWeek, endWeek);
-    console.log(startWeek.format("YYYY-MM-DD"));
-    fetch(
-      `http://15.206.37.182:2307/v2/trainer/calenderView?startDate=${startWeek.format("YYYY-MM-DD")}&endDate=${endWeek.format("YYYY-MM-DD")}&timeZone=America/New_York&trainerId=${id}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setBlockCell(data.data);
-        console.log(data.data,"hello");
-      });
+    //console.log(startWeek.format("YYYY-MM-DD"));
+    getTrainerSlots();
+    // fetch(
+    //   `http://15.206.37.182:2307/v2/trainer/calenderView?startDate=${startWeek.format("YYYY-MM-DD")}&endDate=${endWeek.format("YYYY-MM-DD")}&timeZone=America/New_York&trainerId=${id}`
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setBlockCell(data.data);
+    //     console.log(data.data,"hello");
+    //   });
   }, []);
 
   // useEffect(() => {
@@ -48,12 +49,14 @@ function UserScheduler({id}) {
     setstartWeek(startWeek.subtract(7, "days"));
     setendWeek(endWeek.subtract(7, "days"));
     populate(startWeek, endWeek);
+    getTrainerSlots();
   };
 
   const NextWeek = () => {
     setstartWeek(startWeek.add(7, "days"));
     setendWeek(endWeek.add(7, "days"));
     populate(startWeek, endWeek);
+    getTrainerSlots();
   };
 
   const populate = (start, end) => {
@@ -76,6 +79,21 @@ function UserScheduler({id}) {
       datekey: datekey,
       timeKeyTwo: timeKey + 1,
     });
+  };
+
+  const getTrainerSlots = () => {
+    fetch(
+      `http://15.206.37.182:2307/v2/trainer/calenderView?startDate=${startWeek.format(
+        "YYYY-MM-DD"
+      )}&endDate=${endWeek.format(
+        "YYYY-MM-DD"
+      )}&timeZone=America/New_York&trainerId=${id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setBlockCell(data.data);
+        console.log(data.data, "hello");
+      });
   };
 
   return (
@@ -207,34 +225,28 @@ function UserScheduler({id}) {
                   return (
                     <td
                       onClick={(e) => {
-
-                        
                         if (
                           Object.keys(blockCell).find((ele) => ele === dateItem)
                         ) {
                           if (
-                            blockCell[dateItem].find(
-                              (ele) => ele === item.time
-                            )
+                            blockCell[dateItem].find((ele) => ele === item.time)
                           ) {
                             setSelectedSlots(keys, dateItem);
                           }
-                        } 
+                        }
                         // else {
                         //   setSelectedSlots(keys, dateItem);
                         // }
                       }}
-                         className={
+                      className={
                         (selectedCell.timeKey === keys ||
                           selectedCell.timeKeyTwo === keys) &&
                         date.indexOf(selectedCell.datekey) === datekey
                           ? "selected_cell"
-                          // :
+                          : // :
                           //  datekey === 6
                           // ? "border_right_none block_cell"
-                          : Object.keys(blockCell).find(
-                              (ele) => ele === dateItem
-                            )
+                          Object.keys(blockCell).find((ele) => ele === dateItem)
                           ? blockCell[dateItem].find((ele) => ele === item.time)
                             ? null
                             : "block_cell"
