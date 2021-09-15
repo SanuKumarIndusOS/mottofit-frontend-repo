@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import config from "config";
+import Linkify from "react-linkify";
 
 const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
   const [allNotificationData, setAllNotificationData] = useState([]);
@@ -36,10 +37,21 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
     });
 
     getnotificationList().then((data) => {
-       console.log(data);
+      console.log(data);
       setAllNotificationData(data);
     });
   }, []);
+
+  const linkDecorator = (decoratedHref, decoratedText, key) => (
+    <a
+      href={decoratedHref}
+      key={key}
+      target="_blank"
+      role="noopener noreferrer"
+    >
+      {decoratedText}
+    </a>
+  );
 
   return (
     <>
@@ -95,7 +107,11 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
                             )}
 
                             <div className="noti_content">
-                              <div className="noti_msg">{item.message}</div>
+                              <div className="noti_msg">
+                                <Linkify componentDecorator={linkDecorator}>
+                                  {item.message}
+                                </Linkify>
+                              </div>
 
                               <div className="noti_time">
                                 <img
@@ -106,7 +122,7 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
                                 {moment(
                                   item.createdAt.slice(0, 10),
                                   "YYYY-MM-DD"
-                                ).format('MMMM') +
+                                ).format("MMMM") +
                                   " " +
                                   item.createdAt.slice(8, 10) +
                                   "th, " +
@@ -134,7 +150,11 @@ const TrainerNotification = ({ getnotificationList, mark_as_read }) => {
                             <img className="noti_img" src={item.picture}></img>
 
                             <div className="noti_content">
-                              <div className="noti_msg">{item.message}</div>
+                              <div className="noti_msg">
+                                <Linkify componentDecorator={linkDecorator}>
+                                  {item.message}
+                                </Linkify>
+                              </div>
 
                               <div className="noti_time">
                                 <img
