@@ -75,6 +75,7 @@ const TrainerProfileClass = ({
   }
 
   const callbackFunction = (ts, tss, date) => {
+    console.log(ts, tss, date, "oop");
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
@@ -781,7 +782,12 @@ const TrainerProfileClass = ({
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
                     /> 
-                    <UserSchedulerScroll id={id}/>
+                    <UserSchedulerScroll 
+                    id={id}
+                    parentCallback={callbackFunction}
+                    updateUserDetails={updateUserDetails}
+                    
+                    />
                     <ButtonSection
                       selectedTimes={selectedTimes}
                       handleSessionType={handleSessionType}

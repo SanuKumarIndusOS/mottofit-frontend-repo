@@ -4,7 +4,7 @@ import "./styles.css";
 import moment from "moment";
 import { time } from "./timeArray";
 
-function UserScheduler({ id }) {
+function UserScheduler({ id, parentCallback, updateUserDetails }) {
   const EarlyBirdRef = useRef(null);
   const RiseAndShineRef = useRef(null);
   const MidDayRef = useRef(null);
@@ -71,8 +71,24 @@ function UserScheduler({ id }) {
     setDate(dates);
   };
 
-  const setSelectedSlots = (timeKey, datekey) => {
-    console.log(timeKey, datekey);
+  const setSelectedSlots = (timeKey, datekey, timeVal) => {
+    // console.log(
+    //   timeKey,
+    //   datekey,
+    //   time[timeKey].time,
+    //   time[timeKey + 1].time,
+    //   "pooo"
+    // );
+    var ts = moment(
+      `${datekey} ${time[timeKey].time}`,
+      "YYYY-MM-DD hh:mm A"
+    ).valueOf();
+    var tss = moment(
+      `${datekey} ${time[timeKey + 1].time}`,
+      "YYYY-MM-DD hh:mm A"
+    ).valueOf();
+    console.log(ts, tss);
+    parentCallback(ts, tss, datekey);
 
     setSelectedCell({
       timeKey: timeKey,
@@ -231,7 +247,7 @@ function UserScheduler({ id }) {
                           if (
                             blockCell[dateItem].find((ele) => ele === item.time)
                           ) {
-                            setSelectedSlots(keys, dateItem);
+                            setSelectedSlots(keys, dateItem, item);
                           }
                         }
                         // else {
