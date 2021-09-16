@@ -132,7 +132,7 @@ const UserPaymentsFC = ({
 
     const scheduleBody = {
       trainerId: trainerData?.id || selectedTrainerData?.id,
-      title: trainingAcivityType,
+      title: trainingAcivityType || "Motto Session",
       trainingType: trainingtype,
       sessionType: sessionData?.preferedTrainingMode,
       activity: trainingAcivityType,
