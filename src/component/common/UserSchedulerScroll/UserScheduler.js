@@ -23,6 +23,9 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
     datekey: null,
   });
 
+  const [mottoBlock , setMottoBlock] = useState("Early Bird");
+  const mottoTimeBlock = ["Early Bird", "Rise and Shine", "Miday", "Lunchtime", "Happy Hours", "Never too Late"]
+
   useEffect(() => {
     populate(startWeek, endWeek);
     //console.log(startWeek.format("YYYY-MM-DD"));
@@ -83,9 +86,9 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
       `${datekey} ${time[timeKey].time}`,
       "YYYY-MM-DD hh:mm A"
     ).valueOf();
-    var tss =  moment(`${datekey} ${time[timeKey].time}`, "YYYY-MM-DD hh:mm A")
-    .add(60, "minutes")
-    .valueOf();
+    var tss = moment(`${datekey} ${time[timeKey].time}`, "YYYY-MM-DD hh:mm A")
+      .add(60, "minutes")
+      .valueOf();
     console.log(ts, tss);
     parentCallback(ts, tss, datekey);
 
@@ -110,6 +113,11 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         console.log(data.data, "hello");
       });
   };
+
+  const cycleMottoSlots = (key) => 
+  {
+    console.log(key);
+  }
 
   return (
     <div className="">
@@ -186,23 +194,35 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
 
       <br></br>
       <br></br>
-      <div className="calendar_controls">
-        <button onClick={PreviousWeek} className="calendar_buttons">
-          &#10094;
-        </button>
-        <div className="calendar_txt">
-          {date[0]?.slice(8) +
-            "-" +
-            date[6]?.slice(8) +
-            " " +
-            moment(date[0], "'DD-MM-YYYY'").format("MMMM") +
-            "," +
-            " " +
-            date[0]?.slice(0, 4)}
+      <div style={{display:"flex", justifyContent:"space-between"}}>
+        <div className="calendar_controls">
+          <button onClick={PreviousWeek} className="calendar_buttons">
+            &#10094;
+          </button>
+          <div className="calendar_txt">
+            {date[0]?.slice(8) +
+              "-" +
+              date[6]?.slice(8) +
+              " " +
+              moment(date[0], "'DD-MM-YYYY'").format("MMMM") +
+              "," +
+              " " +
+              date[0]?.slice(0, 4)}
+          </div>
+          <button onClick={NextWeek} className="calendar_buttons">
+            &#10095;
+          </button>
         </div>
-        <button onClick={NextWeek} className="calendar_buttons">
-          &#10095;
-        </button>
+
+        <div className="calendar_controls">
+          <button  className="calendar_buttons" onClick={cycleMottoSlots()}>
+            &#10094;
+          </button>
+          <div className="calendar_txt">{mottoBlock}</div> 
+          <button  className="calendar_buttons">
+            &#10095;
+          </button>
+        </div>
       </div>
       <br></br>
       <table className="table sticky">
