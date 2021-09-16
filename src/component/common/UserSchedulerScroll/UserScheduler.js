@@ -83,10 +83,9 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
       `${datekey} ${time[timeKey].time}`,
       "YYYY-MM-DD hh:mm A"
     ).valueOf();
-    var tss = moment(
-      `${datekey} ${time[timeKey + 1].time}`,
-      "YYYY-MM-DD hh:mm A"
-    ).valueOf();
+    var tss =  moment(`${datekey} ${time[timeKey].time}`, "YYYY-MM-DD hh:mm A")
+    .add(60, "minutes")
+    .valueOf();
     console.log(ts, tss);
     parentCallback(ts, tss, datekey);
 

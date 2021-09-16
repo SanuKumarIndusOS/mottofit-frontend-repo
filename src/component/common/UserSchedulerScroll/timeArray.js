@@ -56,7 +56,7 @@ export const time = [
     isHalfHour: true,
   },
   {
-    time: "12:00 AM",
+    time: "12:00 PM",
     isHalfHour: false,
   },
   {

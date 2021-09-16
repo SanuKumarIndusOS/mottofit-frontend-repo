@@ -189,7 +189,8 @@ const UserPaymentsFC = ({
         // restProps.resetUserDetails();
       })
       .catch((error) => {
-        errCb();
+
+       errCb && errCb() ;
         Toast({
           type: "error",
           message: error.message || "Something went wrong",
