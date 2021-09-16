@@ -218,6 +218,7 @@ function UserScheduler({
               onClick={PreviousWeek}
               className="calendar_buttons"
               disabled="true"
+              style={{opacity:"0.5"}}
             >
               &#10094;
             </button>
