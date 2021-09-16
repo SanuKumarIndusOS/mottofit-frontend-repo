@@ -23,8 +23,15 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
     datekey: null,
   });
 
-  const [mottoBlock , setMottoBlock] = useState("Early Bird");
-  const mottoTimeBlock = ["Early Bird", "Rise and Shine", "Miday", "Lunchtime", "Happy Hours", "Never too Late"]
+  const [mottoBlock, setMottoBlock] = useState("Early Bird");
+  const mottoTimeBlock = [
+    "Early Bird",
+    "Rise and Shine",
+    "Miday",
+    "Lunchtime",
+    "Happy Hours",
+    "Never too Late",
+  ];
 
   useEffect(() => {
     populate(startWeek, endWeek);
@@ -114,14 +121,82 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
       });
   };
 
-  const cycleMottoSlots = (key) => 
-  {
-    console.log(key);
-  }
+  const cycleMottoSlots = (key, type) => {
+    // mottoTimeBlock.findIndex(mottoBlock)
+
+    if (type === "forward") {
+      mottoBlock !== "Never too Late"
+        ? setMottoBlock(
+            mottoTimeBlock[
+              mottoTimeBlock.findIndex((el) => el === mottoBlock) + 1
+            ]
+          )
+        : setMottoBlock(mottoTimeBlock[0]);
+    } else {
+      mottoBlock !== "Early Bird"
+        ? setMottoBlock(
+            mottoTimeBlock[
+              mottoTimeBlock.findIndex((el) => el === mottoBlock) - 1
+            ]
+          )
+        : setMottoBlock(mottoTimeBlock[5]);
+    }
+  };
+
+  useEffect(() => {
+    if (mottoBlock === "Early Bird") {
+     
+      EarlyBirdRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      })
+    }
+
+    if (mottoBlock === "Rise and Shine") {
+      RiseAndShineRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      })
+    }
+
+    if (mottoBlock === "Miday") {
+      MidDayRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      })
+    }
+
+    if (mottoBlock === "Lunchtime") {
+      LunchTimeRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      })
+    }
+
+    if (mottoBlock === "Happy Hours") {
+      HappyHourRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      })
+    }
+
+    if (mottoBlock === "Never too Late") {
+      NeverTooLateRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      })
+    }
+  }, [mottoBlock]);
 
   return (
     <div className="">
-      <button
+      {/* <button
         onClick={() =>
           EarlyBirdRef.current.scrollIntoView({
             behavior: "smooth",
@@ -190,11 +265,11 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         }
       >
         Scroll to Never too Late
-      </button>
+      </button> */}
 
       <br></br>
       <br></br>
-      <div style={{display:"flex", justifyContent:"space-between"}}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div className="calendar_controls">
           <button onClick={PreviousWeek} className="calendar_buttons">
             &#10094;
@@ -215,11 +290,21 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         </div>
 
         <div className="calendar_controls">
-          <button  className="calendar_buttons" onClick={cycleMottoSlots()}>
+          <button
+            className="calendar_buttons"
+            onClick={() => {
+              cycleMottoSlots(mottoBlock, "reverse");
+            }}
+          >
             &#10094;
           </button>
-          <div className="calendar_txt">{mottoBlock}</div> 
-          <button  className="calendar_buttons">
+          <div className="calendar_txt">{mottoBlock}</div>
+          <button
+            className="calendar_buttons"
+            onClick={() => {
+              cycleMottoSlots(mottoBlock, "forward");
+            }}
+          >
             &#10095;
           </button>
         </div>

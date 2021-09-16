@@ -777,11 +777,11 @@ const TrainerProfileClass = ({
                       Schedule{" "}
                     </h2>
 
-                    <UserScheduler
+                    {/* <UserScheduler
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
-                    /> 
+                    />  */}
                     <UserSchedulerScroll 
                     id={id}
                     parentCallback={callbackFunction}
