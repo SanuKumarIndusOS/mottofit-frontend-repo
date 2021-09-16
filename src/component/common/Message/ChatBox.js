@@ -299,11 +299,14 @@ class ChatBoxClass extends Component {
                             Click here
                           </span>
                         </Link>
-                        <span>{` to book your session with `}</span>
-                        <span className="text-capitalize">{`${
-                          isTrainer ? userName : trainerName
-                        }`}</span>
-                        <span>{` once you both have agreed on a day & time.`}</span>
+                        {!isTrainer ? (
+                          <>
+                            <span>{` to book your session with `}</span>
+                            <span>{`${trainerName} once you both have agreed on a day & time.`}</span>
+                          </>
+                        ) : (
+                          <span>{`, to open up the time slot when you have confirmed a day & time with ${userName}`}</span>
+                        )}
                       </p>
                     </div>
                   )}
