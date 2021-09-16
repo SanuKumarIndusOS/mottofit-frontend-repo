@@ -112,7 +112,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         "YYYY-MM-DD"
       )}&endDate=${endWeek.format(
         "YYYY-MM-DD"
-      )}&timeZone=America/New_York&trainerId=${id}`
+      )}&timeBlock=EarlyBird&timeZone=America/New_York&trainerId=${id}`
     )
       .then((response) => response.json())
       .then((data) => {

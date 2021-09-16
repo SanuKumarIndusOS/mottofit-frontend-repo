@@ -78,6 +78,12 @@ export const TrainerApi = {
       );
     },
   },
+  getAvailableTrainerSlot: 
+  {
+    url: "trainer/calenderView",
+    method: "get",
+    baseURL: "normal",
+  },
   trainerAvailableApi: {
     url: "availableTrainer",
     method: "get",

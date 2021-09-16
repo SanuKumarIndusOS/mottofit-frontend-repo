@@ -144,7 +144,8 @@ const UserPaymentsFC = ({
       city: sessionData?.location?.value,
       venue: sessionData?.trainingVenue?.value,
       price: sessionData?.price,
-      sessionMode: queryQbject?.availability?.value,
+      // sessionMode: queryQbject?.availability?.value,
+      sessionMode: "EarlyBird",
       paidByUser: checkPayAhead ? checkPayAhead : trainingtype === "1on1",
       participantsCount: checkPayAhead ? parseInt(friendsCount) : 0,
     };
