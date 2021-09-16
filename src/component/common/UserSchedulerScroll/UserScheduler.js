@@ -145,12 +145,11 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
 
   useEffect(() => {
     if (mottoBlock === "Early Bird") {
-     
       EarlyBirdRef?.current?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
         inline: "start",
-      })
+      });
     }
 
     if (mottoBlock === "Rise and Shine") {
@@ -158,7 +157,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         behavior: "smooth",
         block: "nearest",
         inline: "start",
-      })
+      });
     }
 
     if (mottoBlock === "Miday") {
@@ -166,7 +165,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         behavior: "smooth",
         block: "nearest",
         inline: "start",
-      })
+      });
     }
 
     if (mottoBlock === "Lunchtime") {
@@ -174,7 +173,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         behavior: "smooth",
         block: "nearest",
         inline: "start",
-      })
+      });
     }
 
     if (mottoBlock === "Happy Hours") {
@@ -182,7 +181,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         behavior: "smooth",
         block: "nearest",
         inline: "start",
-      })
+      });
     }
 
     if (mottoBlock === "Never too Late") {
@@ -190,83 +189,12 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
         behavior: "smooth",
         block: "nearest",
         inline: "start",
-      })
+      });
     }
   }, [mottoBlock]);
 
   return (
     <div className="">
-      {/* <button
-        onClick={() =>
-          EarlyBirdRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-          })
-        }
-      >
-        Scroll to Early Bird
-      </button>
-      <button
-        onClick={() =>
-          RiseAndShineRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-          })
-        }
-      >
-        Scroll to Rise and Shine{" "}
-      </button>
-
-      <button
-        onClick={() =>
-          MidDayRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-          })
-        }
-      >
-        Scroll to Miday
-      </button>
-
-      <button
-        onClick={() =>
-          LunchTimeRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-          })
-        }
-      >
-        Scroll to Lunchtime
-      </button>
-
-      <button
-        onClick={() =>
-          HappyHourRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-          })
-        }
-      >
-        Scroll to Happy Hours
-      </button>
-
-      <button
-        onClick={() =>
-          NeverTooLateRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-          })
-        }
-      >
-        Scroll to Never too Late
-      </button> */}
-
       <br></br>
       <br></br>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -317,7 +245,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
             {date.map((item, keys) => {
               return (
                 <th className={keys === 6 ? "border_right_none" : null}>
-                  <div>
+                  <div className="center_date_title" >
                     <div className="date_title">{item?.slice(8)}</div>
                     <div className="date_title_two">
                       {keys === 1 || keys === 3
