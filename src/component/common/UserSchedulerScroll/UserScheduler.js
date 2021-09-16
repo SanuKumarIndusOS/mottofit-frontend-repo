@@ -4,7 +4,16 @@ import "./styles.css";
 import moment from "moment";
 import { time } from "./timeArray";
 
-function UserScheduler({ id, parentCallback, updateUserDetails }) {
+import { getCalenderDetails } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+function UserScheduler({
+  id,
+  parentCallback,
+  updateUserDetails,
+  getCalenderDetails,
+}) {
   const EarlyBirdRef = useRef(null);
   const RiseAndShineRef = useRef(null);
   const MidDayRef = useRef(null);
@@ -37,14 +46,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
     populate(startWeek, endWeek);
     //console.log(startWeek.format("YYYY-MM-DD"));
     getTrainerSlots();
-    // fetch(
-    //   `http://15.206.37.182:2307/v2/trainer/calenderView?startDate=${startWeek.format("YYYY-MM-DD")}&endDate=${endWeek.format("YYYY-MM-DD")}&timeZone=America/New_York&trainerId=${id}`
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setBlockCell(data.data);
-    //     console.log(data.data,"hello");
-    //   });
+ 
   }, []);
 
   // useEffect(() => {
@@ -107,18 +109,23 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
   };
 
   const getTrainerSlots = () => {
-    fetch(
-      `http://15.206.37.182:2307/v2/trainer/calenderView?startDate=${startWeek.format(
-        "YYYY-MM-DD"
-      )}&endDate=${endWeek.format(
-        "YYYY-MM-DD"
-      )}&timeBlock=EarlyBird&timeZone=America/New_York&trainerId=${id}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setBlockCell(data.data);
-        console.log(data.data, "hello");
-      });
+    // fetch(
+    //   `http://15.206.37.182:2307/v2/trainer/calenderView?startDate=${startWeek.format(
+    //     "YYYY-MM-DD"
+    //   )}&endDate=${endWeek.format(
+    //     "YYYY-MM-DD"
+    //   )}&timeBlock=EarlyBird&timeZone=America/New_York&trainerId=${id}`
+    // )
+
+    getCalenderDetails(
+      id,
+      startWeek.format("YYYY-MM-DD"),
+      endWeek.format("YYYY-MM-DD"),
+      "EarlyBird"
+    ).then((data) => {
+      setBlockCell(data.data);
+      console.log(data.data, "hello");
+    });
   };
 
   const cycleMottoSlots = (key, type) => {
@@ -199,9 +206,23 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
       <br></br>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div className="calendar_controls">
-          <button onClick={PreviousWeek} className="calendar_buttons">
-            &#10094;
-          </button>
+          {moment(startWeek.format("YYYY-MM-DD")).isAfter(
+            moment().startOf("isoWeek").format("YYYY-MM-DD"),
+            "day"
+          ) ? (
+            <button onClick={PreviousWeek} className="calendar_buttons">
+              &#10094;
+            </button>
+          ) : (
+            <button
+              onClick={PreviousWeek}
+              className="calendar_buttons"
+              disabled="true"
+            >
+              &#10094;
+            </button>
+          )}
+         
           <div className="calendar_txt">
             {date[0]?.slice(8) +
               "-" +
@@ -245,7 +266,7 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
             {date.map((item, keys) => {
               return (
                 <th className={keys === 6 ? "border_right_none" : null}>
-                  <div className="center_date_title" >
+                  <div className="center_date_title">
                     <div className="date_title">{item?.slice(8)}</div>
                     <div className="date_title_two">
                       {keys === 1 || keys === 3
@@ -329,4 +350,15 @@ function UserScheduler({ id, parentCallback, updateUserDetails }) {
   );
 }
 
-export default UserScheduler;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getCalenderDetails,
+    },
+    dispatch
+  );
+};
+
+const UserSchedulerC = connect(null, mapDispatchToProps)(UserScheduler);
+
+export default UserSchedulerC;

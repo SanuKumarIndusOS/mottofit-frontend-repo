@@ -78,12 +78,7 @@ export const TrainerApi = {
       );
     },
   },
-  getAvailableTrainerSlot: 
-  {
-    url: "trainer/calenderView",
-    method: "get",
-    baseURL: "normal",
-  },
+
   trainerAvailableApi: {
     url: "availableTrainer",
     method: "get",
@@ -412,7 +407,7 @@ export const userApi = {
   getCalenderDetails: {
     url: "trainer/calenderView?trainerId=",
     method: "get",
-    baseURL: "normal",
+    baseURL: "search",
     trainerId: null,
     startDate: null,
     endDate: null,
@@ -426,7 +421,7 @@ export const userApi = {
         "&endDate=" +
         this.endDate +
         "&timeBlock=" +
-        this.timeSlot +
+       "EarlyBird"+
         `&timeZone=America/New_York`
       );
     },
