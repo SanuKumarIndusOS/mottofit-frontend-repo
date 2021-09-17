@@ -436,14 +436,26 @@
                 width: 807px;
                 margin: 2em 0 3em 0;
                 align-items: center;
+                @media only screen and (max-width: 900px) {
+                  display: unset;
+                  width: unset;
+                }
                 .items_slots {
                   display: flex;
                   align-items: center;
                   justify-content: space-between;
                   width: 100%;
+                  @media only screen and (max-width: 900px) {
+                   // display: unset;
+                   display: flex;
+                    flex-direction: column-reverse;
+                    margin-top: 2rem;
+                    align-items: flex-start;
+                  }
                   .item_slot1 {
                     display: flex;
                     align-items: center;
+                    margin-bottom: 1rem;
                     .indicator {
                       width: 60px;
                       height: 15px;
@@ -463,6 +475,7 @@
                   .item_slot2 {
                     display: flex;
                     align-items: center;
+                    margin-bottom: 1rem;
                     .indicator2 {
                       width: 60px;
                       height: 15px;
@@ -482,6 +495,7 @@
                   .item_slot3 {
                     display: flex;
                     align-items: center;
+                    margin-bottom: 1rem;
                     .indicator3 {
                       width: 60px;
                       height: 15px;
@@ -501,6 +515,7 @@
                   .item_slot4 {
                     display: flex;
                     align-items: center;
+                    margin-bottom: 1rem;
 
                     button {
                       display: flex;
@@ -515,6 +530,15 @@
                       font-weight: 700;
                       font-family: Montserrat;
                       background-color: transparent;
+                    }
+                    @media only screen and (max-width: 900px) {
+                     
+                      //margin-top: 3rem;
+                      button
+                      {
+                        margin: unset;
+                      }
+                      
                     }
                   }
                 }
