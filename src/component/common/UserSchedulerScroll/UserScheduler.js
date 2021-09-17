@@ -241,7 +241,7 @@ function UserScheduler({
           </button>
         </div>
 
-        <div className="calendar_controls">
+        <div className="calendar_controls mottoBlock">
           <button
             className="calendar_buttons"
             onClick={() => {
@@ -262,7 +262,7 @@ function UserScheduler({
         </div>
       </div>
       <br></br>
-      <table className="table sticky">
+      <table className="table sticky d_table">
         <thead>
           <tr>
             <th className="date_title_two">Early Bird</th>
@@ -355,7 +355,7 @@ function UserScheduler({
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {date.map((dateItem, keys) => {
             return (
-              <div style={{ cursor: "pointer" }}>
+              <div style={{ cursor: "pointer", marginBottom:"1rem" }}>
                 {mobileDate === dateItem ? (
                   <div style={{ color: "#53BFD2" }} className="mc_day_title">
                     <div className="mc_day_number"> {dateItem?.slice(8)}</div>

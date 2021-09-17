@@ -10,6 +10,10 @@
   border-bottom: 1px solid #e6e6e6 !important;
 }
 
+.d_table {
+  display: block;
+}
+
 table {
   border-collapse: collapse;
   background-color: #f8f8f8;
@@ -282,15 +286,16 @@ td {
 /* Mobile Styles */
 
 .mobile_calendar_card {
-  width: 300px;
+  width: 100%;
+  display: none;
 }
 
 .mc_time {
-  width: 20%;
+  width: 25%;
 }
 
 .mc_time_slot {
-  width: 200px;
+  width: 70%;
 }
 
 .mc_day_title {
@@ -310,7 +315,21 @@ td {
   font-size: 12px;
 }
 
-.mc_gray
-{
+.mc_gray {
   color: #b6b3b3;
+}
+
+@media only screen and (max-width: 900px) {
+  .mobile_calendar_card {
+    display: block;
+  }
+
+  .d_table {
+    display: none;
+  }
+
+  .mottoBlock
+  {
+    display: none;
+  }
 }
