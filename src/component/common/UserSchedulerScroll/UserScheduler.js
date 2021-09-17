@@ -425,7 +425,7 @@ function UserScheduler({
                           : "mc_time_slot block_cell"
                         : "mc_time_slot block_cell"
                     }
-                  ></td>
+                  >{selectedCell.timeKeyTwo === keys ? <div className="mc_selectedCellVal">{time[keys-1].time} - {time[keys].time}</div>  :null}</td>
                 </tr>
               );
             })}
