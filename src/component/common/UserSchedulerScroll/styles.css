@@ -72,8 +72,7 @@ td {
   flex-direction: column;
 }
 
-.center_date_title
-{
+.center_date_title {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,9 +119,8 @@ td {
   }
 }
 
-.block_cell
-{
-  background-color: #DEDEDE !important;
+.block_cell {
+  background-color: #dedede !important;
   border: none;
 }
 
@@ -283,18 +281,36 @@ td {
 
 /* Mobile Styles */
 
-.mobile_calendar_card
-{
+.mobile_calendar_card {
   width: 300px;
-  
 }
 
-.mc_time
-{
+.mc_time {
   width: 20%;
 }
 
-.mc_time_slot
-{
+.mc_time_slot {
   width: 200px;
+}
+
+.mc_day_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mc_day_number {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.mc_day_txt {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.mc_gray
+{
+  color: #b6b3b3;
 }

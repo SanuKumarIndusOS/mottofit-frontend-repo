@@ -355,21 +355,33 @@ function UserScheduler({
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {date.map((dateItem, keys) => {
             return (
-              <b style={{ cursor: "pointer" }}>
-              
+              <div style={{ cursor: "pointer" }}>
                 {mobileDate === dateItem ? (
-                  <div style={{ color: "#53BFD2" }}>{dateItem?.slice(8)}</div>
+                  <div style={{ color: "#53BFD2" }} className="mc_day_title">
+                    <div className="mc_day_number"> {dateItem?.slice(8)}</div>
+                    <div className="mc_day_txt">
+                      {moment(dateItem, "YYYY MM DD")
+                        .format("dddd")
+                        .slice(0, 3)}
+                    </div>
+                  </div>
                 ) : (
                   <div
                     onClick={() => {
                       setMobileDate(dateItem);
-                      setSelectedCell([])
+                      setSelectedCell([]);
                     }}
+                    className="mc_day_title"
                   >
-                    {dateItem?.slice(8)}
+                   <div className="mc_day_number"> {dateItem?.slice(8)}</div>
+                    <div className="mc_day_txt mc_gray">
+                      {moment(dateItem, "YYYY MM DD")
+                        .format("dddd")
+                        .slice(0, 3)}
+                    </div>
                   </div>
                 )}{" "}
-              </b>
+              </div>
             );
           })}
         </div>
