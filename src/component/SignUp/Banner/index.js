@@ -106,7 +106,8 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
   const validationRules = () => {
     let passwordValidation = {
       format: {
-        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+        pattern:
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
         flags: "i",
         message:
           "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
@@ -126,8 +127,8 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
         message: "must be alphabets and spaces",
       },
       length: {
-        minimum: 3,
-        tooShort: "must contain alteast 3 character",
+        minimum: 2,
+        tooShort: "must contain alteast 2 character",
         maximum: 35,
         tooLong: "must contain less than 35 character",
       },

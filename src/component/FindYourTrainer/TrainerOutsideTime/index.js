@@ -66,9 +66,8 @@ const TrainerCardOutsideFC = (props) => {
           > */}
         <div className="row mb-0">
           {Object.keys(outSideData).map((data, index) => {
-            const areaOfExpertise = outSideData[
-              data
-            ]?.areaOfExpertise?.toString();
+            const areaOfExpertise =
+              outSideData[data]?.areaOfExpertise?.toString();
 
             const oneOnOnePricingValues = Object.values(
               outSideData[data]?.oneOnOnePricing || {}

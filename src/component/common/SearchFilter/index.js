@@ -58,7 +58,7 @@ function SearchFilter({
   const [IPCDropdown, setIPCDropdown] = useState(true);
 
   const [Calvalue, onChangeCal] = useState(new Date());
- 
+
   const [CalDisplay, setCalDisplay] = useState(false);
   const [CalDropdown, setCalDropdown] = useState(false);
 
@@ -73,15 +73,12 @@ function SearchFilter({
     console.log(activeQuery);
 
     if (Object.keys(activeQuery).length !== 0) {
-      
-      if(activeQuery.date === "")
-      {
-        setCalDisplay(false)
-      }else
-      {
+      if (activeQuery.date === "") {
+        setCalDisplay(false);
+      } else {
         onChangeCal(new Date(activeQuery.date));
       }
-     
+
       //setCalDisplay(true);
       setLocation(activeQuery.location);
       if (activeQuery.city !== undefined) {
@@ -92,14 +89,10 @@ function SearchFilter({
       setVerticalVal(activeQuery.label.trainingType);
       setAvailabilityVal(activeQuery.label.availability);
     }
-
-    
   }, []);
 
   useEffect(() => {
     setCalDropdown(false);
-    
-  
   }, [Calvalue]);
 
   const applyFilters = () => {
@@ -110,7 +103,7 @@ function SearchFilter({
         VerticalVal.value === ""
           ? JSON.stringify([])
           : encodeURIComponent(JSON.stringify([VerticalVal.value])),
-      date: (CalDisplay)? moment(Calvalue).format("YYYY-MM-DD"): "" ,
+      date: CalDisplay ? moment(Calvalue).format("YYYY-MM-DD") : "",
       availability:
         AvailabilityVal.value === ""
           ? JSON.stringify([])
@@ -151,7 +144,6 @@ function SearchFilter({
         <div className="search_cta">
           <div className="circle" onClick={applyFilters}>
             <BiSearch />
-          
           </div>
         </div>
 
@@ -167,12 +159,22 @@ function SearchFilter({
         >
           <div className="filter_header">Availability</div>
           <div className="filter_options">
-            <div className="option_txt">
+            <div
+              className={`option_txt ${
+                AvailabilityVal?.label !== "" && "fw-600"
+              }`}
+            >
               {AvailabilityVal?.label !== ""
                 ? AvailabilityVal?.label
                 : "Select a Time"}{" "}
             </div>
-            <div className="option_icon">&#10094;</div>
+            <div
+              className={`option_icon ${
+                AvailabilityDropdown && "option_icon_rotate"
+              }`}
+            >
+              &#10094;
+            </div>
           </div>
 
           {AvailabilityDropdown ? (
@@ -290,14 +292,20 @@ function SearchFilter({
             className="filter_options"
             onClick={() => {
               setCalDropdown(!CalDropdown);
-              setCalDisplay(true)
+              setCalDisplay(true);
             }}
           >
-            <div className="option_txt" >
-              {CalDisplay? moment(Calvalue).format("MM/DD/YYYY"): "Select a Date" }
+            <div className={`option_txt ${CalDisplay && "fw-600"}`}>
+              {CalDisplay
+                ? moment(Calvalue).format("MM/DD/YYYY")
+                : "Select a Date"}
             </div>
 
-            <div className="option_icon">&#10094;</div>
+            <div
+              className={`option_icon ${CalDropdown && "option_icon_rotate"}`}
+            >
+              &#10094;
+            </div>
           </div>
           {CalDropdown ? (
             <div className="calendar_dropdown">
@@ -324,9 +332,15 @@ function SearchFilter({
             {VerticalVal?.label === "" ? (
               <div className="option_txt"> Select a Category</div>
             ) : (
-              <div className="option_txt">{VerticalVal.label}</div>
+              <div className="option_txt fw-600">{VerticalVal.label}</div>
             )}
-            <div className="option_icon">&#10094;</div>
+            <div
+              className={`option_icon ${
+                VerticalDropdown && "option_icon_rotate"
+              }`}
+            >
+              &#10094;
+            </div>
           </div>
           {VerticalDropdown ? (
             <div className="filter_dropdown">
@@ -451,8 +465,13 @@ function SearchFilter({
                 />
               </div>
             )}
-
-            <div className="option_icon"></div>
+            <div
+              className={`option_icon ${
+                Location !== "virtual" && IPCDropdown && "option_icon_rotate"
+              }`}
+            >
+              &#10094;
+            </div>
           </div>
           {Location !== "virtual" && IPCDropdown === true ? (
             <div className="city_dropdown">

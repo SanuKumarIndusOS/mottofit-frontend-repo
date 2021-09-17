@@ -141,8 +141,8 @@ const MyProfileClass = ({
         message: "must be alphabets and spaces",
       },
       length: {
-        minimum: 3,
-        tooShort: "must contain alteast 3 character",
+        minimum: 2,
+        tooShort: "must contain alteast 2 character",
         maximum: 35,
         tooLong: "must contain less than 35 character",
       },
@@ -155,6 +155,13 @@ const MyProfileClass = ({
         presence: {
           allowEmpty: false,
           message: "^First name is required",
+        },
+        ...nameValidation,
+      },
+      lastName: {
+        presence: {
+          allowEmpty: false,
+          message: "^Last name is required",
         },
         ...nameValidation,
       },
@@ -228,6 +235,7 @@ const MyProfileClass = ({
     let payload = {
       firstName: userData.firstName,
       location: userData.location,
+      lastName: userData.lastName,
       //DOB: userData.DOB,
       gender: userData.gender,
       email: userData.email,
@@ -243,6 +251,7 @@ const MyProfileClass = ({
   const handleSubmit = () => {
     let payload = {
       firstName: userData.firstName,
+      lastName: userData.lastName,
       location: userData.location,
       //DOB: userData.DOB,
       gender: userData.gender,
@@ -415,7 +424,7 @@ const MyProfileClass = ({
                     <form onSubmit={(e) => e.preventDefault()}>
                       <div className="inner_profile_form">
                         <div className="input_profile">
-                          <label>Name </label>
+                          <label>First Name </label>
                           <input
                             type="text"
                             value={userData.firstName}
@@ -424,8 +433,23 @@ const MyProfileClass = ({
                           />
 
                           {errors.firstName && (
-                            <span className="d-block w-100 text-danger fs-14">
+                            <span className="profile_err_msg">
                               {errors.firstName[0]}
+                            </span>
+                          )}
+                        </div>
+                        <div className="input_profile">
+                          <label>Last Name</label>
+                          <input
+                            type="text"
+                            value={userData.lastName}
+                            onChange={handleInput}
+                            name="lastName"
+                          />
+
+                          {errors.lastName && (
+                            <span className="profile_err_msg">
+                              {errors.lastName[0]}
                             </span>
                           )}
                         </div>
@@ -478,7 +502,7 @@ const MyProfileClass = ({
                           />
 
                           {errors.gender && (
-                            <span className="d-block w-100 text-danger fs-14">
+                            <span className="profile_err_msg">
                               {errors.gender[0]}
                             </span>
                           )}
@@ -493,7 +517,7 @@ const MyProfileClass = ({
                           />
 
                           {errors.email && (
-                            <span className="d-block w-100 text-danger fs-14">
+                            <span className="profile_err_msg">
                               {errors.email[0]}
                             </span>
                           )}
@@ -521,7 +545,7 @@ const MyProfileClass = ({
                           />
 
                           {errors.phoneNo && (
-                            <span className="d-block w-100 text-danger fs-14">
+                            <span className="profile_err_msg">
                               {errors.phoneNo[0]}
                             </span>
                           )}
