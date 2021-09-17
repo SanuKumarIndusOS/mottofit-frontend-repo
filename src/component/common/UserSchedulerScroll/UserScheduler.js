@@ -375,17 +375,17 @@ function UserScheduler({
                     onClick={() => {
                      // setSelectedSlots(keys, "2021-08-31");
                       if (
-                        Object.keys(blockCell).find((ele) => ele === "2021-08-31")
+                        Object.keys(blockCell).find((ele) => ele === mobileDate)
                       ) {
                         if (
-                          !blockCell["2021-08-31"].find(
+                          blockCell[mobileDate].find(
                             (ele) => ele === item.time
                           )
                         ) {
-                          setSelectedSlots(keys, "2021-08-31");
+                          setSelectedSlots(keys, mobileDate);
                         }
                       } else {
-                        setSelectedSlots(keys, "2021-08-31");
+                        setSelectedSlots(keys, mobileDate);
                       }
                     }}
                     className={
@@ -393,12 +393,26 @@ function UserScheduler({
                       selectedCell.timeKeyTwo === keys
                         ? //date.indexOf(selectedCell.datekey) === datekey
                           "selected_cell mc_time_slot"
-                        : Object.keys(blockCell).find((ele) => ele === "2021-08-31")
-                        ? blockCell["2021-08-31"].find((ele) => ele === item.time)
-                          ? "block_cell"
-                          : "mc_time_slot"
-                        : "mc_time_slot"
+                        : Object.keys(blockCell).find((ele) => ele === mobileDate)
+                        ? blockCell[mobileDate].find((ele) => ele === item.time)
+                          ? null
+                          : "mc_time_slot block_cell"
+                        : "mc_time_slot block_cell"
                     }
+                    // className={
+                    //   (selectedCell.timeKey === keys ||
+                    //     selectedCell.timeKeyTwo === keys) &&
+                    //   date.indexOf(selectedCell.datekey) === datekey
+                    //     ? "selected_cell"
+                    //     : // :
+                    //     //  datekey === 6
+                    //     // ? "border_right_none block_cell"
+                    //     Object.keys(blockCell).find((ele) => ele === mobileDate)
+                    //     ? blockCell[mobileDate].find((ele) => ele === item.time)
+                    //       ? null
+                    //       : "block_cell"
+                    //     : "block_cell"
+                    // }
                   >
                     <div
                     // className="mc_time_slot"
