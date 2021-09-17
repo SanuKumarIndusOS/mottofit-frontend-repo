@@ -1,0 +1,31 @@
+.card {
+  .card-button {
+    .book_session_btn {
+      background: #53bfd2;
+      color: #ffffff;
+      p {
+        color: #161616;
+      }
+    }
+  }
+}
+.card:hover .card-button .book_session_btn {
+  background: #e9797c;
+  color: #161616;
+  p {
+    color: #f8f8f8;
+  }
+}
+.card:hover {
+  transition: 0.2s ease-out;
+  //   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  top: -10px;
+  border: 1px solid #cccccc;
+}
+.check_me_out_icon {
+  color: #161616;
+  font-weight: 300;
+  transform: rotate(-90deg);
+  position: absolute;
+  bottom: -2px;
+}

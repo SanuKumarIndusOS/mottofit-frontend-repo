@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./trainer.sass";
+import "./trainerDetails.scss";
 import Arrow from "../../../assets/files/SignUp/ArrowSecondary.svg";
 import { history } from "helpers";
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
@@ -146,6 +147,7 @@ const TrainerCardsFC = (props) => {
                   >
                     <div className="circlepop">
                       Check <br /> Me Out
+                      <div className={`check_me_out_icon`}>&#10094;</div>
                     </div>
                   </div>
                 </div>
@@ -172,9 +174,7 @@ const TrainerCardsFC = (props) => {
                 </div>
                 <div className="card-button">
                   <button
-                    style={{
-                      backgroundColor: "#53BFD2",
-                    }}
+                    className="book_session_btn"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
