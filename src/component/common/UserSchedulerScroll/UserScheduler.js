@@ -42,6 +42,8 @@ function UserScheduler({
     "Never too Late",
   ];
 
+  const [mobileDate, setMobileDate] = useState();
+
   useEffect(() => {
     populate(startWeek, endWeek);
     //console.log(startWeek.format("YYYY-MM-DD"));
@@ -81,6 +83,7 @@ function UserScheduler({
     }
 
     setDate(dates);
+    setMobileDate(dates[0]);
   };
 
   const setSelectedSlots = (timeKey, datekey, timeVal) => {
@@ -347,6 +350,66 @@ function UserScheduler({
           })}
         </tbody>
       </table>
+
+      <div className="mobile_calendar_card">
+        {" "}
+        <div style={{ display:"flex", justifyContent:"space-between"}}>
+        {date.map((dateItem, keys) =>
+          {
+            return <b style={{cursor:"pointer"}}>  {mobileDate === dateItem? <div style={{color:'#53BFD2'}}>{dateItem?.slice(8)}</div>  : <div onClick={()=>{ setMobileDate(dateItem)}}>{dateItem?.slice(8)}</div>} </b>
+          })}
+          </div>
+        <table style={{ width: "100%" }}>
+          <tbody>
+            {time.map((item, keys) => {
+              return (
+                <tr className="mc_time">
+                  <td
+                    className={
+                      item.isHalfHour ? "border_top_none" : "border_bottom_none"
+                    }
+                  >
+                    <div className="time_title">{item.time}</div>
+                  </td>
+                  <td
+                    onClick={() => {
+                     // setSelectedSlots(keys, "2021-08-31");
+                      if (
+                        Object.keys(blockCell).find((ele) => ele === "2021-08-31")
+                      ) {
+                        if (
+                          !blockCell["2021-08-31"].find(
+                            (ele) => ele === item.time
+                          )
+                        ) {
+                          setSelectedSlots(keys, "2021-08-31");
+                        }
+                      } else {
+                        setSelectedSlots(keys, "2021-08-31");
+                      }
+                    }}
+                    className={
+                      selectedCell.timeKey === keys ||
+                      selectedCell.timeKeyTwo === keys
+                        ? //date.indexOf(selectedCell.datekey) === datekey
+                          "selected_cell mc_time_slot"
+                        : Object.keys(blockCell).find((ele) => ele === "2021-08-31")
+                        ? blockCell["2021-08-31"].find((ele) => ele === item.time)
+                          ? "block_cell"
+                          : "mc_time_slot"
+                        : "mc_time_slot"
+                    }
+                  >
+                    <div
+                    // className="mc_time_slot"
+                    ></div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

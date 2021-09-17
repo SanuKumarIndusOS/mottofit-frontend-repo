@@ -280,3 +280,21 @@ td {
   cursor: pointer;
   font-weight: bold;
 }
+
+/* Mobile Styles */
+
+.mobile_calendar_card
+{
+  width: 300px;
+  
+}
+
+.mc_time
+{
+  width: 20%;
+}
+
+.mc_time_slot
+{
+  width: 200px;
+}
