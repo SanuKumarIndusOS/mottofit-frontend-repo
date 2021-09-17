@@ -115,7 +115,7 @@ const TrainerMessageClass = ({
 
     return () => {
       if (!mql.matches) unSubscribeClientAct();
-      change_login_status({ loginStatus: false });
+      change_login_status({ loginStatus: true });
     };
   }, []);
 
@@ -394,7 +394,7 @@ const TrainerMessageClass = ({
     console.log("user is idle");
 
     if (localStorage.getItem("token") !== null) {
-      change_login_status({ loginStatus: false });
+      change_login_status({ loginStatus: true });
     }
   };
 

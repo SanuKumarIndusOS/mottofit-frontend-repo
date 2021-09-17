@@ -301,9 +301,17 @@ function UserScheduler({
                           Object.keys(blockCell).find((ele) => ele === dateItem)
                         ) {
                           if (
-                            blockCell[dateItem].find((ele) => ele === item.time)
+                            blockCell[dateItem].find(
+                              (ele) => ele === time[keys + 1].time
+                            )
                           ) {
-                            setSelectedSlots(keys, dateItem, item);
+                            if (
+                              blockCell[dateItem].find(
+                                (ele) => ele === time[keys].time
+                              )
+                            ) {
+                              setSelectedSlots(keys, dateItem, item);
+                            }
                           }
                         }
                         // else {
@@ -355,7 +363,7 @@ function UserScheduler({
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {date.map((dateItem, keys) => {
             return (
-              <div style={{ cursor: "pointer", marginBottom:"1rem" }}>
+              <div style={{ cursor: "pointer", marginBottom: "1rem" }}>
                 {mobileDate === dateItem ? (
                   <div style={{ color: "#53BFD2" }} className="mc_day_title">
                     <div className="mc_day_number"> {dateItem?.slice(8)}</div>
@@ -373,7 +381,7 @@ function UserScheduler({
                     }}
                     className="mc_day_title"
                   >
-                   <div className="mc_day_number"> {dateItem?.slice(8)}</div>
+                    <div className="mc_day_number"> {dateItem?.slice(8)}</div>
                     <div className="mc_day_txt mc_gray">
                       {moment(dateItem, "YYYY MM DD")
                         .format("dddd")
@@ -404,12 +412,14 @@ function UserScheduler({
                         Object.keys(blockCell).find((ele) => ele === mobileDate)
                       ) {
                         if (
-                          blockCell[mobileDate].find((ele) => ele === item.time)
+                          blockCell[mobileDate].find(
+                            (ele) => ele === time[keys + 1].time
+                          )
                         ) {
                           setSelectedSlots(keys, mobileDate);
                         }
                       } else {
-                        setSelectedSlots(keys, mobileDate);
+                        // setSelectedSlots(keys, mobileDate);
                       }
                     }}
                     className={
@@ -425,7 +435,13 @@ function UserScheduler({
                           : "mc_time_slot block_cell"
                         : "mc_time_slot block_cell"
                     }
-                  >{selectedCell.timeKeyTwo === keys ? <div className="mc_selectedCellVal">{time[keys-1].time} - {time[keys].time}</div>  :null}</td>
+                  >
+                    {selectedCell.timeKeyTwo === keys ? (
+                      <div className="mc_selectedCellVal">
+                        {time[keys - 1].time} - {time[keys].time}
+                      </div>
+                    ) : null}
+                  </td>
                 </tr>
               );
             })}
