@@ -80,7 +80,7 @@ nav {
   color: #161616;
 }
 input::placeholder {
-  color: #7e7e7e;
+  color: #bcbcbc;
   font-size: 17px;
   font-weight: 600;
   font-style: italic;
@@ -93,7 +93,7 @@ input:focus {
   margin: 0 1em 0 -1.5em;
   padding: 0;
   font-size: 1.3em;
-  color: #7e7e7e;
+  color: #bcbcbc;
 }
 .login-item1 {
   display: flex;
@@ -178,8 +178,7 @@ input:focus {
     display: none;
   }
 
-  .input
-  {
+  .input {
     width: 100%;
   }
 
@@ -219,11 +218,9 @@ input:focus {
     align-items: center;
   }
 
-  .MuiDrawer-paper
-  {
+  .MuiDrawer-paper {
     width: 75%;
   }
-
 
   .mobile_profile_menu_items {
     display: flex;
@@ -254,14 +251,12 @@ input:focus {
     display: flex;
   }
 
-  .pro_menu_header img 
-  {
+  .pro_menu_header img {
     height: 50px;
     width: 50px;
     object-fit: cover;
     border-radius: 300px;
   }
-
 
   .mob_menu_user {
     flex: 2;
@@ -311,15 +306,13 @@ input:focus {
     margin-left: 65px;
   }
 
-  .set_item
-  {
+  .set_item {
     margin-bottom: 10px;
   }
 
   .menu_li_text {
     margin-left: 2rem;
   }
-
 
   .menu_li:hover {
     background-color: #53bfd2;

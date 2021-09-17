@@ -85,9 +85,8 @@ const TrainerCardsFC = (props) => {
           > */}
         <div className="row mb-0" style={{ alignleft: "auto" }}>
           {Object.keys(bestMatchData).map((data, index) => {
-            const areaOfExpertise = bestMatchData[
-              data
-            ]?.areaOfExpertise?.toString();
+            const areaOfExpertise =
+              bestMatchData[data]?.areaOfExpertise?.toString();
 
             const oneOnOnePricingValues = Object.values(
               bestMatchData[data]?.oneOnOnePricing || {}

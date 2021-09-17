@@ -46,7 +46,7 @@ class Experience extends Component {
               Experience the Best Training in <br /> these Categories
             </div>
             <div className="image_Container row">
-              <div className="image_strength_main col-lg-3 col-md-6 m-0">
+              <div className="col-lg-3 col-md-6 image_strength_main m-0">
                 <img src={strength_img} alt="image" />
                 <Link
                   onClick={() => {
@@ -72,7 +72,7 @@ class Experience extends Component {
                   }}
                   className="link_button"
                 >
-                  Strength
+                  Strength & HIIT
                   <ArrowHoverBlacked />
                 </Link>
               </div>
@@ -180,7 +180,7 @@ class Experience extends Component {
                 >
                   <img src={strength_img} alt="image" />
                   <div className="bottom_bar">
-                    <div style={{ flex: "5" }}>STRENGTH</div>{" "}
+                    <div style={{ flex: "5" }}>STRENGTH & HIIT</div>{" "}
                     <div style={{ flex: "1" }}>&#10141;</div>
                   </div>
                 </div>

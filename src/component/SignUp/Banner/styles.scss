@@ -1,5 +1,5 @@
 .main_container {
-  background: url("../../../assets/files/SignUp/BG Image.png") 0% 0% no-repeat;
+  background: url("../../../assets/files/SignUp/BG Image.png") 50% 0% no-repeat;
   height: auto;
   width: 100%;
   background-size: cover;
@@ -60,7 +60,7 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      padding: 0.6em 0;
+      padding-bottom: 20px;
       width: 80%;
       color: #898989;
       font-size: 15px;
@@ -254,19 +254,19 @@
     }
 
     .form_items form {
+      .submit_button {
+        width: 80%;
+      }
 
-        .submit_button{ width: 80%;}
+      .social_buttons {
+        .facebook-auth {
+          width: 90%;
+        }
 
-        .social_buttons{
-            .facebook-auth{
-                width: 90%;
-              
-            }
-
-            .google-auth{
-                width: 90%;
-            }
-        } 
+        .google-auth {
+          width: 90%;
+        }
+      }
       .or_items {
         .hr_line {
           width: 90px;

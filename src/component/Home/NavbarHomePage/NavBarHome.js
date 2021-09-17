@@ -143,7 +143,7 @@ const NavBarHomeFC = ({
                 <input
                   className="input"
                   type="text"
-                  placeholder="Search trainers & workouts"
+                  placeholder="Search to know more..."
                   onChange={(e) => {
                     setKey(e.target.value);
                   }}

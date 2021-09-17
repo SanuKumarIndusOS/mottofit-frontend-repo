@@ -57,8 +57,8 @@
       .logo-content_home img {
         width: 150px;
         height: 90px;
-        position: relative;
-        left: 3.5pc;
+        // position: relative;
+        // left: 3.5pc;
 
         .defaultLogo {
           padding: 1em;
@@ -94,7 +94,7 @@
             padding: 0.3em 0.8em;
           }
           input::placeholder {
-            color: #7e7e7e;
+            color: #898989;
             font-style: italic;
             font-size: 17px;
             font-family: "Montserrat", sans-serif;
@@ -104,7 +104,7 @@
             height: 18px;
             position: relative;
             right: 30px;
-            color: #7e7e7e;
+            color: #898989;
             cursor: pointer;
             bottom: 2px;
           }

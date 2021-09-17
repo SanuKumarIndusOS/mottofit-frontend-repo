@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles.scss";
 
 import { connect } from "react-redux";
-import { updateTrainerDetails,trainerSearchFilters } from "action/trainerAct";
+import { updateTrainerDetails, trainerSearchFilters } from "action/trainerAct";
 import { bindActionCreators } from "redux";
 import { Toast } from "service/toast";
 
@@ -43,7 +43,9 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
     setAvalValue(event.target.value);
   };
 
-  useEffect(() => {window.scrollTo(0, 0)}, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   console.log("aswd");
 
   const [queryObject, setqueryObject] = useState({
@@ -59,23 +61,21 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
   const search_action_mob = () => {
     let payload = {
       // query: {
-        location: LocationVal,
-        date: moment(Calvalue).format("YYYY-MM-DD"),
-        trainingType:
+      location: LocationVal,
+      date: moment(Calvalue).format("YYYY-MM-DD"),
+      trainingType:
         VerticalVal === ""
           ? JSON.stringify([])
           : encodeURIComponent(JSON.stringify([VerticalVal])),
-          availability:
-          Avalvalue === ""
-            ? JSON.stringify([])
-            : JSON.stringify([Avalvalue]),
-        // inPerson: queryObject.inPerson,
-        city: IPCvalue || "",
-        label: {
-          availability: { label: "", value: "" },
-          trainingType: { label: "", value: "" },
-        },
-        
+      availability:
+        Avalvalue === "" ? JSON.stringify([]) : JSON.stringify([Avalvalue]),
+      // inPerson: queryObject.inPerson,
+      city: IPCvalue || "",
+      label: {
+        availability: { label: "", value: "" },
+        trainingType: { label: "", value: "" },
+      },
+
       // },
     };
     if (queryObject.location === "inPerson" && !payload.query.city) {
@@ -83,7 +83,7 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
       return Toast({ type: "error", message: "City is mandatory" });
     }
     console.log(payload);
-    trainerSearchFilters(payload)
+    trainerSearchFilters(payload);
     //updateTrainerDetails(payload);
     history.push("/trainer/find");
   };
@@ -286,12 +286,16 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
         </div>
         <div className="schedule">
           Schedule <br></br> {moment(Calvalue).format("YYYY/MM/DD")}
-          <Calendar onChange={onChangeCal} value={Calvalue} minDate={new Date()} />
+          <Calendar
+            onChange={onChangeCal}
+            value={Calvalue}
+            minDate={new Date()}
+          />
           <hr></hr>
         </div>
         <div className="availability">
           <div>Availability</div>
-           <br></br>
+          <br></br>
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="gender"
@@ -352,7 +356,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       updateTrainerDetails,
-      trainerSearchFilters
+      trainerSearchFilters,
     },
     dispatch
   );
