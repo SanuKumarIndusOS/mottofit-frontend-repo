@@ -48,7 +48,6 @@ function UserScheduler({
     populate(startWeek, endWeek);
     //console.log(startWeek.format("YYYY-MM-DD"));
     getTrainerSlots();
- 
   }, []);
 
   // useEffect(() => {
@@ -221,12 +220,12 @@ function UserScheduler({
               onClick={PreviousWeek}
               className="calendar_buttons"
               disabled="true"
-              style={{opacity:"0.5"}}
+              style={{ opacity: "0.5" }}
             >
               &#10094;
             </button>
           )}
-         
+
           <div className="calendar_txt">
             {date[0]?.slice(8) +
               "-" +
@@ -353,12 +352,27 @@ function UserScheduler({
 
       <div className="mobile_calendar_card">
         {" "}
-        <div style={{ display:"flex", justifyContent:"space-between"}}>
-        {date.map((dateItem, keys) =>
-          {
-            return <b style={{cursor:"pointer"}}>  {mobileDate === dateItem? <div style={{color:'#53BFD2'}}>{dateItem?.slice(8)}</div>  : <div onClick={()=>{ setMobileDate(dateItem)}}>{dateItem?.slice(8)}</div>} </b>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          {date.map((dateItem, keys) => {
+            return (
+              <b style={{ cursor: "pointer" }}>
+              
+                {mobileDate === dateItem ? (
+                  <div style={{ color: "#53BFD2" }}>{dateItem?.slice(8)}</div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      setMobileDate(dateItem);
+                      setSelectedCell([])
+                    }}
+                  >
+                    {dateItem?.slice(8)}
+                  </div>
+                )}{" "}
+              </b>
+            );
           })}
-          </div>
+        </div>
         <table style={{ width: "100%" }}>
           <tbody>
             {time.map((item, keys) => {
@@ -373,14 +387,12 @@ function UserScheduler({
                   </td>
                   <td
                     onClick={() => {
-                     // setSelectedSlots(keys, "2021-08-31");
+                      // setSelectedSlots(keys, "2021-08-31");
                       if (
                         Object.keys(blockCell).find((ele) => ele === mobileDate)
                       ) {
                         if (
-                          blockCell[mobileDate].find(
-                            (ele) => ele === item.time
-                          )
+                          blockCell[mobileDate].find((ele) => ele === item.time)
                         ) {
                           setSelectedSlots(keys, mobileDate);
                         }
@@ -393,31 +405,15 @@ function UserScheduler({
                       selectedCell.timeKeyTwo === keys
                         ? //date.indexOf(selectedCell.datekey) === datekey
                           "selected_cell mc_time_slot"
-                        : Object.keys(blockCell).find((ele) => ele === mobileDate)
+                        : Object.keys(blockCell).find(
+                            (ele) => ele === mobileDate
+                          )
                         ? blockCell[mobileDate].find((ele) => ele === item.time)
                           ? null
                           : "mc_time_slot block_cell"
                         : "mc_time_slot block_cell"
                     }
-                    // className={
-                    //   (selectedCell.timeKey === keys ||
-                    //     selectedCell.timeKeyTwo === keys) &&
-                    //   date.indexOf(selectedCell.datekey) === datekey
-                    //     ? "selected_cell"
-                    //     : // :
-                    //     //  datekey === 6
-                    //     // ? "border_right_none block_cell"
-                    //     Object.keys(blockCell).find((ele) => ele === mobileDate)
-                    //     ? blockCell[mobileDate].find((ele) => ele === item.time)
-                    //       ? null
-                    //       : "block_cell"
-                    //     : "block_cell"
-                    // }
-                  >
-                    <div
-                    // className="mc_time_slot"
-                    ></div>
-                  </td>
+                  ></td>
                 </tr>
               );
             })}
