@@ -285,7 +285,7 @@ function UserScheduler({
       <table className="table sticky d_table">
         <thead>
           <tr>
-            <th className="date_title_two">Early Bird</th>
+            <th className="date_title_two">{mottoBlock}</th>
             {date.map((item, keys) => {
               return (
                 <th className={keys === 6 ? "border_right_none" : null}>
@@ -382,7 +382,7 @@ function UserScheduler({
       {alignment === "week"?<table className="table sticky mobile_calendar_card">
         <thead>
           <tr>
-            <th className="date_title_two">Early Bird</th>
+            <th className="date_title_two">{mottoBlock}</th>
             {date.map((item, keys) => {
               return (
                 <th className={keys === 6 ? "border_right_none" : null}>
@@ -449,21 +449,21 @@ function UserScheduler({
                             : "block_cell"
                           : "block_cell"
                       }
-                      ref={
-                        keys === 0
-                          ? EarlyBirdRef
-                          : keys === 6
-                          ? RiseAndShineRef
-                          : keys === 12
-                          ? MidDayRef
-                          : keys === 18
-                          ? LunchTimeRef
-                          : keys === 24
-                          ? HappyHourRef
-                          : keys === 30
-                          ? NeverTooLateRef
-                          : null
-                      }
+                      // ref={
+                      //   keys === 0
+                      //     ? EarlyBirdRef
+                      //     : keys === 6
+                      //     ? RiseAndShineRef
+                      //     : keys === 12
+                      //     ? MidDayRef
+                      //     : keys === 18
+                      //     ? LunchTimeRef
+                      //     : keys === 24
+                      //     ? HappyHourRef
+                      //     : keys === 30
+                      //     ? NeverTooLateRef
+                      //     : null
+                      // }
                     >
                       {}
                     </td>
