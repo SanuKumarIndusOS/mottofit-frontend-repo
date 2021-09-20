@@ -119,7 +119,7 @@ function SearchFilter({
     localStorage.setItem("persistFilters", JSON.stringify(payload));
 
     if (Location === "inPerson" && IPCvalue === "") {
-      Toast({ type: "error", message: "City is mandatory" });
+      Toast({ type: "error", message: "Choose a city from the 'in person' dropdown" });
     } else {
       trainerSearchFilters(payload);
 
