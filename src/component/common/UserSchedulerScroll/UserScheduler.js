@@ -7,6 +7,8 @@ import { time } from "./timeArray";
 import { getCalenderDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 function UserScheduler({
   id,
@@ -43,6 +45,11 @@ function UserScheduler({
   ];
 
   const [mobileDate, setMobileDate] = useState();
+  const [alignment, setAlignment] = React.useState("week");
+
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   useEffect(() => {
     populate(startWeek, endWeek);
@@ -204,6 +211,19 @@ function UserScheduler({
 
   return (
     <div className="">
+      <div className="toggle_week">
+      <ToggleButtonGroup
+        color="primary"
+        value={alignment}
+        exclusive
+        onChange={handleChange}
+        
+      >
+        <ToggleButton value="day">Day</ToggleButton>
+        <ToggleButton value="week">Week</ToggleButton>
+      </ToggleButtonGroup>
+      </div>
+     
       <br></br>
       <br></br>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -358,7 +378,104 @@ function UserScheduler({
         </tbody>
       </table>
 
-      <div className="mobile_calendar_card">
+      <br></br>
+      {alignment === "week"?<table className="table sticky mobile_calendar_card">
+        <thead>
+          <tr>
+            <th className="date_title_two">Early Bird</th>
+            {date.map((item, keys) => {
+              return (
+                <th className={keys === 6 ? "border_right_none" : null}>
+                  <div className="center_date_title">
+                    <div className="date_title">{item?.slice(8)}</div>
+                    <div className="date_title_two">
+                      {keys === 1 || keys === 3
+                        ? moment(item, "YYYY MM DD").format("dddd").slice(0, 3)
+                        : moment(item, "YYYY MM DD").format("dddd").slice(0, 3)}
+                    </div>
+                  </div>
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {time.map((item, keys) => {
+            return (
+              <tr>
+                <td
+                  className={
+                    item.isHalfHour ? "border_top_none" : "border_bottom_none"
+                  }
+                >
+                  <div className="time_title">{item.time}</div>
+                </td>
+                {date.map((dateItem, datekey) => {
+                  return (
+                    <td
+                      onClick={(e) => {
+                        if (
+                          Object.keys(blockCell).find((ele) => ele === dateItem)
+                        ) {
+                          if (
+                            blockCell[dateItem].find(
+                              (ele) => ele === time[keys + 1].time
+                            )
+                          ) {
+                            if (
+                              blockCell[dateItem].find(
+                                (ele) => ele === time[keys].time
+                              )
+                            ) {
+                              setSelectedSlots(keys, dateItem, item);
+                            }
+                          }
+                        }
+                        // else {
+                        //   setSelectedSlots(keys, dateItem);
+                        // }
+                      }}
+                      className={
+                        (selectedCell.timeKey === keys ||
+                          selectedCell.timeKeyTwo === keys) &&
+                        date.indexOf(selectedCell.datekey) === datekey
+                          ? "selected_cell"
+                          : // :
+                          //  datekey === 6
+                          // ? "border_right_none block_cell"
+                          Object.keys(blockCell).find((ele) => ele === dateItem)
+                          ? blockCell[dateItem].find((ele) => ele === item.time)
+                            ? null
+                            : "block_cell"
+                          : "block_cell"
+                      }
+                      ref={
+                        keys === 0
+                          ? EarlyBirdRef
+                          : keys === 6
+                          ? RiseAndShineRef
+                          : keys === 12
+                          ? MidDayRef
+                          : keys === 18
+                          ? LunchTimeRef
+                          : keys === 24
+                          ? HappyHourRef
+                          : keys === 30
+                          ? NeverTooLateRef
+                          : null
+                      }
+                    >
+                      {}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>:null}
+      
+{alignment === "day"? <div className="mobile_calendar_card">
         {" "}
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {date.map((dateItem, keys) => {
@@ -447,7 +564,8 @@ function UserScheduler({
             })}
           </tbody>
         </table>
-      </div>
+      </div>: null}
+     
     </div>
   );
 }

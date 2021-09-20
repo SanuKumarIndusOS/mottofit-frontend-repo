@@ -29,6 +29,11 @@ table {
                                 supported by Chrome, Edge, Opera and Firefox */
 }
 
+.toggle_week
+{
+  display: none;
+}
+
 thead {
   display: block;
 }
@@ -342,6 +347,7 @@ td {
   }
 
   .d_table {
+    display: none;
   }
   .time_title {
     font-size: 10px;
@@ -364,5 +370,10 @@ td {
 
   .mottoBlock {
     display: none;
+  }
+
+  .toggle_week
+  {
+    display: block;
   }
 }
