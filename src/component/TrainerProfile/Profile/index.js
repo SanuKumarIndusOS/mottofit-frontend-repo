@@ -15,7 +15,7 @@ import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import NotFoundImage from "../../../assets/files/FindTrainer/NoImageFound.png";
 import UserScheduler from "../UserScheduler/UserScheduler";
-import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler"
+import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler";
 import BlueArrowButton from "../../common/BlueArrowButton";
 import { history } from "helpers";
 import { getTrainerDetail } from "action/adminAct";
@@ -116,12 +116,10 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "virtual"
-  );
-  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "inPerson"
-  );
+  const isVirtualPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("virtual");
+  const isInPersonPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("inPerson");
 
   const handleRequestTrainer = () => {
     const userId = localStorage.getItem("user-id");
@@ -294,7 +292,7 @@ const TrainerProfileClass = ({
                         )}
                         {inPersonAtClientLocation && isInPersonPresent ? (
                           <h6>
-                            {`$${inPersonAtClientLocation} `}
+                            {`$${inPersonAtClientLocation}`}
                             <span>(at your location)</span>
                           </h6>
                         ) : (
@@ -302,7 +300,7 @@ const TrainerProfileClass = ({
                         )}
                         {inPersonAtTrainerLocation && isInPersonPresent ? (
                           <h6>
-                            {`$${inPersonAtTrainerLocation} `}
+                            {`$${inPersonAtTrainerLocation}`}
                             <span>(at trainer location)</span>
                           </h6>
                         ) : (
@@ -489,7 +487,7 @@ const TrainerProfileClass = ({
                         {inPeronAtClientLocationfor2People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPeronAtClientLocationfor2People} `}
+                            {`$${inPeronAtClientLocationfor2People}`}
                             <span>at your location for 2 people</span>
                           </h6>
                         ) : (
@@ -498,7 +496,7 @@ const TrainerProfileClass = ({
                         {inPeronAtTrainerLocationfor2People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPeronAtTrainerLocationfor2People} `}
+                            {`$${inPeronAtTrainerLocationfor2People}`}
                             <span>at trainer location for 2 people</span>
                           </h6>
                         ) : (
@@ -515,7 +513,7 @@ const TrainerProfileClass = ({
                         {inPeronAtClientLocationfor3People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPeronAtClientLocationfor3People} `}
+                            {`$${inPeronAtClientLocationfor3People}`}
                             <span>at your location for 3 people</span>
                           </h6>
                         ) : (
@@ -524,7 +522,7 @@ const TrainerProfileClass = ({
                         {inPeronAtTrainerLocationfor3People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPeronAtTrainerLocationfor3People} `}
+                            {`$${inPeronAtTrainerLocationfor3People}`}
                             <span>at trainer location for 3 people</span>
                           </h6>
                         ) : (
@@ -541,7 +539,7 @@ const TrainerProfileClass = ({
                         {inPeronAtClientLocationfor4People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPeronAtClientLocationfor4People} `}
+                            {`$${inPeronAtClientLocationfor4People}`}
                             <span>at your location for 4 people</span>
                           </h6>
                         ) : (
@@ -550,7 +548,7 @@ const TrainerProfileClass = ({
                         {inPeronAtTrainerLocationfor4People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPeronAtTrainerLocationfor4People} `}
+                            {`$${inPeronAtTrainerLocationfor4People}`}
                             <span>at trainer location for 4 people</span>
                           </h6>
                         ) : (
@@ -617,7 +615,7 @@ const TrainerProfileClass = ({
                         {inPersonAtclientLocationfor15People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPersonAtclientLocationfor15People} `}
+                            {`$${inPersonAtclientLocationfor15People}`}
                             <span>at your location for 5-15 people</span>
                           </h6>
                         ) : (
@@ -626,7 +624,7 @@ const TrainerProfileClass = ({
                         {inPersonAttrainerLocationfor15People &&
                         isInPersonPresent ? (
                           <h6>
-                            {`$${inPersonAttrainerLocationfor15People} `}
+                            {`$${inPersonAttrainerLocationfor15People}`}
                             <span>at trainer location for 5-15 people</span>
                           </h6>
                         ) : (
@@ -776,17 +774,16 @@ const TrainerProfileClass = ({
                       </span>{" "}
                       Schedule{" "}
                     </h2>
-{/* 
+                    {/* 
                     <UserScheduler
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
                     />  */}
-                    <UserSchedulerScroll 
-                    id={id}
-                    parentCallback={callbackFunction}
-                    updateUserDetails={updateUserDetails}
-                    
+                    <UserSchedulerScroll
+                      id={id}
+                      parentCallback={callbackFunction}
+                      updateUserDetails={updateUserDetails}
                     />
                     <ButtonSection
                       selectedTimes={selectedTimes}

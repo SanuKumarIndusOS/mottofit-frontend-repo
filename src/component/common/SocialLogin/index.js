@@ -67,7 +67,7 @@ const SocialLoginFC = ({ socialLoginApi, type, loginType, nextAction }) => {
         label={`${
           loginType === "login"
             ? "Sign in with Facebook"
-            : "Sign up with Facebook"
+            : "Sign in with Google"
         }`}
       />
 
@@ -76,7 +76,9 @@ const SocialLoginFC = ({ socialLoginApi, type, loginType, nextAction }) => {
         RenderComponent={CustomButton}
         responseGoogle={responseGoogle}
         label={`${
-          loginType === "login" ? "Sign in with Google" : "Sign up with Google"
+          loginType === "login"
+            ? "Sign in with Facebook"
+            : "Sign in with Google"
         }`}
       />
     </div>

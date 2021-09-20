@@ -30,6 +30,13 @@ import { Toast } from "service/toast";
 
 import Calendar from "react-calendar";
 
+const trainingTypeIcons = [
+  <IconBoxing />,
+  <IconPilates />,
+  <IconStrength />,
+  <IconYoga />,
+];
+
 function SearchFilter({
   trainerSearchFilters,
   searchAction,
@@ -332,7 +339,10 @@ function SearchFilter({
             {VerticalVal?.label === "" ? (
               <div className="option_txt"> Select a Category</div>
             ) : (
-              <div className="option_txt fw-600">{VerticalVal.label}</div>
+              <div className="option_txt fw-600">
+                {trainingTypeIcons[0]}
+                {VerticalVal.label}
+              </div>
             )}
             <div
               className={`option_icon ${
@@ -424,13 +434,14 @@ function SearchFilter({
               <>
                 {Location === "virtual" ? (
                   <div className="option_txt">
-                    <p className="active_bar">Virtual</p>
+                    <p className="active_bar mb-0">Virtual</p>
                     <span className="blue_bar">/</span>
                     <p
                       onClick={() => {
                         setLocation("inPerson");
                         setIPCDropdown(true);
                       }}
+                      className="mb-0"
                     >
                       In Person
                     </p>
@@ -441,12 +452,13 @@ function SearchFilter({
                       onClick={() => {
                         setLocation("virtual");
                       }}
+                      className="mb-0"
                     >
                       Virtual
                     </p>{" "}
                     <span className="blue_bar">/</span>{" "}
                     <p
-                      className="active_bar"
+                      className="active_bar mb-0"
                       onClick={() => setIPCDropdown(!IPCDropdown)}
                     >
                       {IPCvalue === "" ? "In Person" : IPCvalue}{" "}
@@ -465,13 +477,15 @@ function SearchFilter({
                 />
               </div>
             )}
-            <div
-              className={`option_icon ${
-                Location !== "virtual" && IPCDropdown && "option_icon_rotate"
-              }`}
-            >
-              &#10094;
-            </div>
+            {IPCvalue === "" && (
+              <div
+                className={`option_icon ${
+                  Location !== "virtual" && IPCDropdown && "option_icon_rotate"
+                }`}
+              >
+                &#10094;
+              </div>
+            )}
           </div>
           {Location !== "virtual" && IPCDropdown === true ? (
             <div className="city_dropdown">
