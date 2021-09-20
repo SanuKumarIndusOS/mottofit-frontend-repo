@@ -273,7 +273,7 @@ function UserScheduler({
                     <div className="date_title">{item?.slice(8)}</div>
                     <div className="date_title_two">
                       {keys === 1 || keys === 3
-                        ? moment(item, "YYYY MM DD").format("dddd").slice(0, 4)
+                        ? moment(item, "YYYY MM DD").format("dddd").slice(0, 3)
                         : moment(item, "YYYY MM DD").format("dddd").slice(0, 3)}
                     </div>
                   </div>
