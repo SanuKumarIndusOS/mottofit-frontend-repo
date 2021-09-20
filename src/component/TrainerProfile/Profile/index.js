@@ -50,6 +50,7 @@ const TrainerProfileClass = ({
   const [isLoading, setLoading] = useState(false);
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
+  const [disableBooking, setDisableBooking] = useState(true)
 
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
@@ -79,6 +80,7 @@ const TrainerProfileClass = ({
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
+    setDisableBooking(false)
   };
 
   const toggleCarouselModel = (itemIndex) => {
@@ -784,9 +786,11 @@ const TrainerProfileClass = ({
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
+                      
                     />
                     <ButtonSection
                       selectedTimes={selectedTimes}
+                      disableBooking={disableBooking}
                       handleSessionType={handleSessionType}
                     />
                     <div className="request-trainer-block">
@@ -894,7 +898,7 @@ const TrainerProfileClass = ({
   );
 };
 
-const ButtonSection = ({ selectedTimes, handleSessionType }) => {
+const ButtonSection = ({ selectedTimes, handleSessionType, disableBooking }) => {
   const disableBtn = selectedTimes?.length > 0;
 
   return (
@@ -915,8 +919,8 @@ const ButtonSection = ({ selectedTimes, handleSessionType }) => {
         <div className="item_slot4">
           <button
             onClick={handleSessionType}
-            // disabled={!disableBtn}
-            // className={`${!disableBtn ? "disable-btn" : ""}`}
+            disabled={disableBooking}
+            className={`${disableBooking ? "disable-btn" : ""}`}
           >
             BOOK a session <BlueArrowButton />{" "}
           </button>{" "}
