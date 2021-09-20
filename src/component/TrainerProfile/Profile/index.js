@@ -272,10 +272,10 @@ const TrainerProfileClass = ({
             </div>
             <div className="profile_main_contents container">
               <div className="profile_aside">
-                <div className="profile_aside_link">
+                {/* <div className="profile_aside_link">
                   <Link onClick={handleBookSession}>View Calender</Link>
                   <img src={ArrowNext} alt="icon" />
-                </div>
+                </div> */}
                 <div className="profile_aside_items">
                   {isAnyOneonOnePriceAvailable && (
                     <div className="profile_aside_item">
