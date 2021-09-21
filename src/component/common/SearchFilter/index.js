@@ -30,6 +30,8 @@ import IconMidDay from "assets/files/FindTrainer/AvaliablityDropDownAssets/MidDa
 import IconHappyHour from "assets/files/FindTrainer/AvaliablityDropDownAssets/HappyHour_icon";
 import IconNeverTooLate from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_icon";
 import CROSSICON from "assets/files/FindTrainer/Cross.svg";
+import { ReactComponent as SheduleIcon } from "assets/files/TrainerDashboard/MyEarning/Shedule Icon.svg";
+import { ReactComponent as IconEarlyBirdActive } from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_Active.svg";
 
 import { Toast } from "service/toast";
 
@@ -38,19 +40,47 @@ import Calendar from "react-calendar";
 const trainingTypeIcons = [
   {
     label: "Boxing",
-    icon: <IconBoxingActive />,
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
   },
   {
     label: "Pilates",
-    icon: <IconPilatesActive />,
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
   },
   {
-    id: 3,
-    icon: <IconStrengthActive />,
+    label: "Strength",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
   },
   {
-    id: 4,
-    icon: <IconYogaActive />,
+    label: "Yoga",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+];
+
+const availabilityIconsList = [
+  {
+    label: "Early Bird",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Rise & Shine",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Lunchtime",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+
+  {
+    label: "MID-DAY Break",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Happy Hours",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Never too late",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
   },
 ];
 
@@ -143,7 +173,10 @@ function SearchFilter({
     localStorage.setItem("persistFilters", JSON.stringify(payload));
 
     if (Location === "inPerson" && IPCvalue === "") {
-      Toast({ type: "error", message: "Choose a city from the 'in person' dropdown" });
+      Toast({
+        type: "error",
+        message: "Choose a city from the 'in person' dropdown",
+      });
     } else {
       trainerSearchFilters(payload);
 
@@ -188,17 +221,33 @@ function SearchFilter({
                 AvailabilityVal?.label !== "" && "fw-600"
               }`}
             >
-              {AvailabilityVal?.label !== ""
-                ? AvailabilityVal?.label
-                : "Select a Time"}{" "}
+              {AvailabilityVal?.label !== "" ? (
+                <>
+                  {
+                    availabilityIconsList.find(
+                      (val) => val.label === AvailabilityVal?.label
+                    ).icon
+                  }
+                  {AvailabilityVal?.label}
+                </>
+              ) : (
+                "Select a Time"
+              )}{" "}
             </div>
-            <div
-              className={`option_icon ${
-                AvailabilityDropdown && "option_icon_rotate"
-              }`}
-            >
-              &#10094;
-            </div>
+
+            <>
+              {AvailabilityDropdown || AvailabilityVal?.label !== "" ? (
+                <div
+                  className={`option_icon ${
+                    AvailabilityDropdown && "option_icon_rotate"
+                  }`}
+                >
+                  &#10094;
+                </div>
+              ) : (
+                <SheduleIcon className="mr-2" />
+              )}
+            </>
           </div>
 
           {AvailabilityDropdown ? (
@@ -320,16 +369,28 @@ function SearchFilter({
             }}
           >
             <div className={`option_txt ${CalDisplay && "fw-600"}`}>
-              {CalDisplay
-                ? moment(Calvalue).format("MM/DD/YYYY")
-                : "Select a Date"}
+              {CalDisplay ? (
+                <>
+                  <SheduleIcon className="mr-2" />
+                  {moment(Calvalue).format("MM/DD/YYYY")}
+                </>
+              ) : (
+                "Select a Date"
+              )}
             </div>
-
-            <div
-              className={`option_icon ${CalDropdown && "option_icon_rotate"}`}
-            >
-              &#10094;
-            </div>
+            <>
+              {CalDisplay ? (
+                <div
+                  className={`option_icon ${
+                    CalDropdown && "option_icon_rotate"
+                  }`}
+                >
+                  &#10094;
+                </div>
+              ) : (
+                <SheduleIcon className="mr-2" />
+              )}
+            </>
           </div>
           {CalDropdown ? (
             <div className="calendar_dropdown">
@@ -357,11 +418,11 @@ function SearchFilter({
               <div className="option_txt"> Select a Category</div>
             ) : (
               <div className="option_txt fw-600">
-                {/* {
+                {
                   trainingTypeIcons.find(
                     (val) => val.label === VerticalVal.label
                   ).icon
-                } */}
+                }
                 {VerticalVal.label}
               </div>
             )}

@@ -196,7 +196,7 @@ const TrainerProfileClass = ({
 
   //scroll to calendar part
   const scrollToCalendar = () => {
-    window.scrollTo(0, window.innerWidth < 890 ? 2000 : 1400);
+    window.scrollTo(0, window.screen.width > 890 ? 1200 : 8000);
   };
 
   const {
