@@ -29,8 +29,7 @@ table {
                                 supported by Chrome, Edge, Opera and Firefox */
 }
 
-.toggle_week
-{
+.toggle_week {
   display: none;
 }
 
@@ -95,10 +94,9 @@ td {
 }
 
 .date_title_two {
-  color: #898989;
+  color: white;
   font-weight: 500;
   text-transform: uppercase;
-  /* font-size: 10px; */
 }
 
 .border_top_none {
@@ -372,8 +370,7 @@ td {
     display: none;
   }
 
-  .toggle_week
-  {
+  .toggle_week {
     display: block;
   }
 }
