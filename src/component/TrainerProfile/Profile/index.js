@@ -36,7 +36,12 @@ const TrainerProfileClass = ({
   selectedTimes,
   requestTrainerMessageApi,
 }) => {
-  const [collapseTitle, setCollapseTitle] = useState([true, true, true, true]);
+  const [collapseTitle, setCollapseTitle] = useState([
+    false,
+    false,
+    false,
+    true,
+  ]);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
