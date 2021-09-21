@@ -916,14 +916,17 @@ const ButtonSection = ({ selectedTimes, handleSessionType, disableBooking }) => 
           <div className="indicator3"></div>
           <h5>BOOKED SLOT</h5>{" "}
         </div>
+
+        
         <div className="item_slot4">
-          <button
+        {!disableBooking? <button
             onClick={handleSessionType}
-            disabled={disableBooking}
-            className={`${disableBooking ? "disable-btn" : ""}`}
+            // disabled={disableBooking}
+            // className={`${disableBooking ? "hidedisable-btn" : ""}`}
           >
             BOOK a session <BlueArrowButton />{" "}
-          </button>{" "}
+          </button>:null}
+         {" "}
         </div>
       </div>
     </div>
