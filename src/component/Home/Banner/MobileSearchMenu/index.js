@@ -78,14 +78,20 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
 
       // },
     };
-    if (queryObject.location === "inPerson" && !payload.query.city) {
+    if (payload.location === "inPerson" && payload.city === "") {
       //  setInPersonDD(true);
-      return Toast({ type: "error", message: "City is mandatory" });
+      console.log("sds");
+      return Toast({ type: "error", message: "Choose a city from the 'in person' dropdown" });
+    }else
+    {
+      trainerSearchFilters(payload);
+      updateTrainerDetails(payload);
+     history.push("/trainer/find");
     }
     console.log(payload);
-    trainerSearchFilters(payload);
-    //updateTrainerDetails(payload);
-    history.push("/trainer/find");
+    // trainerSearchFilters(payload);
+    // //updateTrainerDetails(payload);
+    // history.push("/trainer/find");
   };
 
   return (
