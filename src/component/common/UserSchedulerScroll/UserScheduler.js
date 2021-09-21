@@ -13,6 +13,7 @@ function UserScheduler({
   parentCallback,
   updateUserDetails,
   getCalenderDetails,
+  tableId = "",
 }) {
   const EarlyBirdRef = useRef(null);
   const RiseAndShineRef = useRef(null);
@@ -262,7 +263,7 @@ function UserScheduler({
         </div>
       </div>
       <br></br>
-      <table className="table sticky d_table">
+      <table className="table sticky d_table" id={`${tableId}`}>
         <thead>
           <tr>
             <th className="date_title_two">Early Bird</th>
@@ -358,7 +359,10 @@ function UserScheduler({
         </tbody>
       </table>
 
-      <div className="mobile_calendar_card">
+      <div
+        className="mobile_calendar_card"
+        id="trainer_profile_mobile_calendar"
+      >
         {" "}
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {date.map((dateItem, keys) => {

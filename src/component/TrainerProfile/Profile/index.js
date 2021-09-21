@@ -15,7 +15,7 @@ import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
 import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import NotFoundImage from "../../../assets/files/FindTrainer/NoImageFound.png";
 import UserScheduler from "../UserScheduler/UserScheduler";
-import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler"
+import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler";
 import BlueArrowButton from "../../common/BlueArrowButton";
 import { history } from "helpers";
 import { getTrainerDetail } from "action/adminAct";
@@ -88,14 +88,41 @@ const TrainerProfileClass = ({
   };
 
   const handleBookSession = () => {
-    let reduxData = {
-      selectedTrainerData: {
-        trainerId: trainerProfileData["id"],
-        trainerData: { ...trainerProfileData },
-      },
-    };
-    updateUserDetails(reduxData);
-    history.push(`/user/scheduler/${trainerProfileData["id"]}`);
+    // let reduxData = {
+    //   selectedTrainerData: {
+    //     trainerId: trainerProfileData["id"],
+    //     trainerData: { ...trainerProfileData },
+    //   },
+    // };
+    // updateUserDetails(reduxData);
+    // history.push(`/user/scheduler/${trainerProfileData["id"]}`);
+
+    const trainerProfileCalendar = document.getElementById(
+      "trainer-profile-table"
+    );
+    const trainerProfileMobileCalendar = document.getElementById(
+      "trainer_profile_mobile_calendar"
+    );
+
+    let mql = window.matchMedia("(max-width: 700px)");
+
+    if (mql.matches) {
+      if (trainerProfileMobileCalendar) {
+        trainerProfileMobileCalendar.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+    } else {
+      if (trainerProfileCalendar) {
+        trainerProfileCalendar.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+    }
   };
   const handleSessionType = () => {
     let reduxData = {
@@ -776,17 +803,17 @@ const TrainerProfileClass = ({
                       </span>{" "}
                       Schedule{" "}
                     </h2>
-{/* 
+                    {/* 
                     <UserScheduler
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
                     />  */}
-                    <UserSchedulerScroll 
-                    id={id}
-                    parentCallback={callbackFunction}
-                    updateUserDetails={updateUserDetails}
-                    
+                    <UserSchedulerScroll
+                      id={id}
+                      tableId={"trainer-profile-table"}
+                      parentCallback={callbackFunction}
+                      updateUserDetails={updateUserDetails}
                     />
                     <ButtonSection
                       selectedTimes={selectedTimes}

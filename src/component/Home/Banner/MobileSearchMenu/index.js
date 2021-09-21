@@ -80,7 +80,10 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
     };
     if (queryObject.location === "inPerson" && !payload.query.city) {
       //  setInPersonDD(true);
-      return Toast({ type: "error", message: "City is mandatory" });
+      return Toast({
+        type: "error",
+        message: "choose a city fom the 'in person' dropdown",
+      });
     }
     console.log(payload);
     trainerSearchFilters(payload);

@@ -27,6 +27,7 @@ import { PaymentApi } from "service/apiVariables";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import { useLocation } from "react-router-dom";
+import { MottoPassSection } from "component/MottoPass";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -150,7 +151,7 @@ const UserSessionClass = (props) => {
                 <Tab tabFor="upcoming">Upcoming</Tab>
                 <Tab tabFor="invited">Invited</Tab>
 
-                {/* <Tab tabFor="pass">Motto pass</Tab> */}
+                <Tab tabFor="pass">Motto pass</Tab>
                 <Tab tabFor="past">Previous</Tab>
                 {/* <Tab tabFor="ongoing">Ongoing</Tab> */}
               </TabList>
@@ -196,14 +197,15 @@ const UserSessionClass = (props) => {
               </div>
               <div className="tabPanel_outter">
                 <TabPanel tabId="pass">
-                  <TabOne
+                  <MottoPassSection handlePagination={handlePagination} />
+                  {/* <TabOne
                     tabname={"Moto Pass"}
                     tabData={userData.pastSessions}
                     prevData={userData.pastSessions}
                     cancelSessionApi={props.cancelSession}
                     handleChange={() => _userSession()}
                     {...props}
-                  />
+                  /> */}
                 </TabPanel>
               </div>
               <div className="tabPanel_outter">
@@ -627,6 +629,34 @@ const TabOne = ({
                                 : null}
                             </div>
                           )}
+                        </div>
+                      </div>
+
+                      <div className="motto-pass-section d-flex">
+                        <span className="motto-pass-ribbon mr-3">
+                          Motto Pass
+                        </span>
+                        <div className="motto-pass-details d-flex align-items-center w-100">
+                          <div className="session-count">Session 1 of 3</div>
+
+                          <div className="session-location-details d-flex align-items-center ml-3 mr-3">
+                            <div className="session-location mr-3 d-flex align-items-center">
+                              <img
+                                src={LocationIcon}
+                                alt="icon"
+                                className="mr-1"
+                              />
+                              Virtual
+                            </div>
+                            <div className="motto-pass-valid-duration d-flex align-items-center">
+                              <img
+                                src={AvailabilityIcon}
+                                alt="icon"
+                                className="mr-1"
+                              />
+                              Valid until March 12th, 2021
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <hr />

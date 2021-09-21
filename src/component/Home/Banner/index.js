@@ -209,7 +209,10 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     if (queryObject.location === "inPerson" && !payload.query.city) {
       setInPersonDD(true);
 
-      return Toast({ type: "error", message: "City is mandatory" });
+      return Toast({
+        type: "error",
+        message: "choose a city fom the 'in person' dropdown",
+      });
     }
 
     console.log(payload, "payload");
@@ -233,7 +236,10 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
     if (queryObject.location === "inPerson" && !payload.query.city) {
       setInPersonDD(true);
 
-      return Toast({ type: "error", message: "City is mandatory" });
+      return Toast({
+        type: "error",
+        message: "choose a city fom the 'in person' dropdown",
+      });
     }
 
     updateTrainerDetails(payload);
@@ -384,7 +390,7 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
           </div>
         </div> */}
         <div className="filter">
-          <SearchFilter activeQuery={{}}/>
+          <SearchFilter activeQuery={{}} />
         </div>
 
         <div className="mobile-search">
