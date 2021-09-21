@@ -179,17 +179,17 @@ class ChatBoxClass extends Component {
       () => {
         this.handleUnreadCount(1);
 
-        // let rec = this.state.members.filter((item) => {
-        //   return item.memberIdenity !== localStorage.getItem("user-id");
-        // });
+        let rec = this.state.members.filter((item) => {
+          return item.memberIdenity !== localStorage.getItem("user-id");
+        });
 
-        // temp = rec.map((item) => {
-        //   return item.userId;
-        // });
+        temp = rec.map((item) => {
+          return item.userId;
+        });
 
-        // this.props.send_unread_notification({
-        //   recepients: temp,
-        // });
+        this.props.send_unread_notification({
+          recepients: temp,
+        });
       }
     );
   };
