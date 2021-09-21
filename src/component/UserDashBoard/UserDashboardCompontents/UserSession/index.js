@@ -40,11 +40,13 @@ const UserSessionClass = (props) => {
     upcoming: 0,
     past: 0,
     invited: 0,
+    pass: 0,
   });
   const [totalData, setTotalData] = useState({
     upcoming: 0,
     past: 0,
     invited: 0,
+    pass: 0,
   });
 
   const [isDefaultCardPresent, setDefaultCard] = useState(false);
