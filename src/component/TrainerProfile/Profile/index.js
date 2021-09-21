@@ -281,6 +281,10 @@ const TrainerProfileClass = ({
                     <div className="profile_aside_item">
                       <h2>1 ON 1 INDIVIDUAL TRAINING</h2>
                       <hr />
+                      <h6>
+                        All the rates displayed below are the total amounts for
+                        each session.
+                      </h6>
                       <div className="profile_aside_inner_item">
                         {virtualSession && isVirtualPresent ? (
                           <h6>

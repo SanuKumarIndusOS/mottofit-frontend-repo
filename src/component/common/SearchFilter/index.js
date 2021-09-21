@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import "./styles.scss";
 import { BiSearch } from "react-icons/bi";
 import { history } from "helpers";
@@ -19,6 +19,11 @@ import IconBoxing from "assets/files/FindTrainer/DropDownAssets/Boxing_icon";
 import IconPilates from "assets/files/FindTrainer/DropDownAssets/Pilates_icon";
 import IconStrength from "assets/files/FindTrainer/DropDownAssets/Strength_icon";
 import IconYoga from "assets/files/FindTrainer/DropDownAssets/Yoga_icon";
+import { ReactComponent as IconBoxingActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+import { ReactComponent as IconPilatesActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+import { ReactComponent as IconStrengthActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+import { ReactComponent as IconYogaActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+
 import IconEarlyBird from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_icon";
 import IconRiseAndShine from "assets/files/FindTrainer/AvaliablityDropDownAssets/RiseShine_icon";
 import IconMidDay from "assets/files/FindTrainer/AvaliablityDropDownAssets/MidDay_icon";
@@ -31,10 +36,22 @@ import { Toast } from "service/toast";
 import Calendar from "react-calendar";
 
 const trainingTypeIcons = [
-  <IconBoxing />,
-  <IconPilates />,
-  <IconStrength />,
-  <IconYoga />,
+  {
+    label: "Boxing",
+    icon: <IconBoxingActive />,
+  },
+  {
+    label: "Pilates",
+    icon: <IconPilatesActive />,
+  },
+  {
+    id: 3,
+    icon: <IconStrengthActive />,
+  },
+  {
+    id: 4,
+    icon: <IconYogaActive />,
+  },
 ];
 
 function SearchFilter({
@@ -340,7 +357,11 @@ function SearchFilter({
               <div className="option_txt"> Select a Category</div>
             ) : (
               <div className="option_txt fw-600">
-                {trainingTypeIcons[0]}
+                {/* {
+                  trainingTypeIcons.find(
+                    (val) => val.label === VerticalVal.label
+                  ).icon
+                } */}
                 {VerticalVal.label}
               </div>
             )}
