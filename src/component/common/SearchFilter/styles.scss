@@ -44,7 +44,7 @@
           font-family: "Montserrat", sans-serif;
           display: flex;
           justify-content: center;
-
+          align-items: center;
           .blue_bar {
             color: #53bfd2;
             font-weight: 600;
@@ -171,4 +171,9 @@
       }
     }
   }
+}
+.filterActiveIcon {
+  width: 27px;
+  height: 25px;
+  margin-right: 10px;
 }

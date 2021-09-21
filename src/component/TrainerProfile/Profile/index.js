@@ -36,7 +36,12 @@ const TrainerProfileClass = ({
   selectedTimes,
   requestTrainerMessageApi,
 }) => {
-  const [collapseTitle, setCollapseTitle] = useState([true, true, true, true]);
+  const [collapseTitle, setCollapseTitle] = useState([
+    false,
+    false,
+    false,
+    true,
+  ]);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [open, setOpen] = useState(false);
   const myRef = useRef(null);
@@ -198,7 +203,7 @@ const TrainerProfileClass = ({
 
   //scroll to calendar part
   const scrollToCalendar = () => {
-    window.scrollTo(0, window.innerWidth < 890 ? 2000 : 1400);
+    window.scrollTo(0, window.screen.width > 890 ? 1200 : 8000);
   };
 
   const {
