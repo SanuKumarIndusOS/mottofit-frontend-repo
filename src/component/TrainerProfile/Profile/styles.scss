@@ -146,6 +146,7 @@
                 font-size: 19px;
                 display: flex;
                 position: relative;
+                cursor: pointer;
               }
               .trainer_title_collapse {
                 color: #898989;
@@ -322,6 +323,7 @@
                 line-height: 22px;
                 font-weight: 600;
                 font-family: "Montserrat", sans-serif;
+                margin-bottom: 25px;
               }
               p {
                 text-align: left;
@@ -331,6 +333,7 @@
                 line-height: 32px;
                 font-weight: normal;
                 font-family: "Montserrat", sans-serif;
+                margin-bottom: 47px;
               }
               .profile_images_grid {
                 display: flex;
@@ -420,7 +423,7 @@
                 font-weight: 600;
                 line-height: 58px;
                 font-family: "Montserrat", sans-serif;
-                margin-bottom: 1em;
+                margin-bottom: 50px;
               }
               .profile_item3_inner {
                 display: grid;
@@ -432,8 +435,8 @@
                   align-items: center;
                   margin: 0.5em 0;
                   img {
-                    width: 20px;
-                    height: 20px;
+                    width: 25px;
+                    height: 25px;
                   }
                   h6 {
                     text-align: left;
@@ -441,11 +444,10 @@
                     color: #898989;
                     text-transform: uppercase;
                     opacity: 1;
-                    margin: 0 0 0 0.5em;
+                    margin: 0 0 0 17px;
                     display: flex;
                     align-items: center;
-                    font-size: 18px;
-                    line-height: 22px;
+                    font-size: 20px;
                     font-weight: 600;
                     font-family: "Montserrat", sans-serif;
                   }
