@@ -426,13 +426,19 @@ function SearchFilter({
                 {VerticalVal.label}
               </div>
             )}
-            <div
-              className={`option_icon ${
-                VerticalDropdown && "option_icon_rotate"
-              }`}
-            >
-              &#10094;
-            </div>
+            <>
+              {VerticalDropdown || VerticalVal?.label !== "" ? (
+                <div
+                  className={`option_icon ${
+                    VerticalDropdown && "option_icon_rotate"
+                  }`}
+                >
+                  &#10094;
+                </div>
+              ) : (
+                <SheduleIcon className="mr-2" />
+              )}
+            </>
           </div>
           {VerticalDropdown ? (
             <div className="filter_dropdown">
