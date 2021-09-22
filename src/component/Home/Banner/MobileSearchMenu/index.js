@@ -78,7 +78,7 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
 
       // },
     };
-    if (queryObject.location === "inPerson" && !payload.query.city) {
+    if (payload.location === "inPerson" && payload.city === "") {
       //  setInPersonDD(true);
       return Toast({
         type: "error",
@@ -86,9 +86,9 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
       });
     }
     console.log(payload);
-    trainerSearchFilters(payload);
-    //updateTrainerDetails(payload);
-    history.push("/trainer/find");
+    // trainerSearchFilters(payload);
+    // //updateTrainerDetails(payload);
+    // history.push("/trainer/find");
   };
 
   return (

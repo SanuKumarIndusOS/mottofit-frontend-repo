@@ -421,7 +421,7 @@ export const userApi = {
         "&endDate=" +
         this.endDate +
         "&timeBlock=" +
-       "EarlyBird"+
+        "EarlyBird" +
         `&timeZone=America/New_York`
       );
     },
@@ -478,6 +478,14 @@ export const userApi = {
     passType: "",
     get api() {
       return `${this.url}?userId=${this.userId}&trainerId=${this.trainerId}&passType=${this.passType}`;
+    },
+  },
+  getAllPasses: {
+    method: "get",
+    url: "getAllPasses",
+    baseURL: "normal",
+    get api() {
+      return `${this.url}`;
     },
   },
   verifyCouponCode: {

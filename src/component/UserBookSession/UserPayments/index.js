@@ -27,6 +27,8 @@ import config from "config";
 import { getFormatDate, convertToESTMs } from "service/helperFunctions";
 import { Toast } from "service/toast";
 import { UserAvatar } from "component/common/UserAvatar";
+import moment from "moment";
+import momentTZ from "moment-timezone";
 
 const stripePromise = loadStripe(config.stripeUrl);
 
@@ -517,12 +519,18 @@ const UserPaymentsFC = ({
                           selectedTimes[0],
                           "MMMM Do, YYYY hh:mm A."
                         )
-                      )} */}
+                      )} */
+                     
+                    
+                      }
                       <h4>
-                        {getFormatDate(
+                        {/* {getFormatDate(
                           selectedTimes[0],
                           "MMMM Do, YYYY hh:mm A."
-                        )}
+                        )} */
+                        moment( bookingData?.start_slot).format("MMMM DD YYYY hh:mm A")
+                        
+                        }
                       </h4>
                     </div>
                   </div>

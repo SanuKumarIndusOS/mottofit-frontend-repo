@@ -30,6 +30,7 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
     location: "",
     signUpType: "email",
   });
+  const [phoneCountry, setPhoneCountry] = useState(false);
 
   const [error, setErrors] = useState({});
 
@@ -290,14 +291,15 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                       <ReactPhoneInput
                         disableDropdown
                         countryCodeEditable={false}
-                        country="us"
-                        placeholder="Phone"
+                        country={phoneCountry ? "us" : ""}
+                        placeholder="Phone number"
                         inputProps={{
                           name: "phone",
                         }}
                         specialLabel=""
                         value={data.phoneNo}
                         name="phoneNo"
+                        onKeyDown={() => setPhoneCountry(true)}
                         onChange={(e) => {
                           onChangeValue({
                             target: {

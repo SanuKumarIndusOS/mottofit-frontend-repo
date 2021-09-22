@@ -981,6 +981,12 @@ select {
     .session-location-details {
       border-left: 2px solid #e6e6e6;
       padding-left: 18px;
+
+      p {
+        color: #898989;
+        font-size: 15px;
+        font-family: "Montserrat", sans-serif;
+      }
     }
   }
 }

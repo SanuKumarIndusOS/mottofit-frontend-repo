@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import "./styles.scss";
 import { BiSearch } from "react-icons/bi";
 import { history } from "helpers";
@@ -19,16 +19,70 @@ import IconBoxing from "assets/files/FindTrainer/DropDownAssets/Boxing_icon";
 import IconPilates from "assets/files/FindTrainer/DropDownAssets/Pilates_icon";
 import IconStrength from "assets/files/FindTrainer/DropDownAssets/Strength_icon";
 import IconYoga from "assets/files/FindTrainer/DropDownAssets/Yoga_icon";
+import { ReactComponent as IconBoxingActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+import { ReactComponent as IconPilatesActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+import { ReactComponent as IconStrengthActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+import { ReactComponent as IconYogaActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
+
 import IconEarlyBird from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_icon";
 import IconRiseAndShine from "assets/files/FindTrainer/AvaliablityDropDownAssets/RiseShine_icon";
 import IconMidDay from "assets/files/FindTrainer/AvaliablityDropDownAssets/MidDay_icon";
 import IconHappyHour from "assets/files/FindTrainer/AvaliablityDropDownAssets/HappyHour_icon";
 import IconNeverTooLate from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_icon";
 import CROSSICON from "assets/files/FindTrainer/Cross.svg";
+import { ReactComponent as SheduleIcon } from "assets/files/TrainerDashboard/MyEarning/Shedule Icon.svg";
+import { ReactComponent as IconEarlyBirdActive } from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_Active.svg";
 
 import { Toast } from "service/toast";
 
 import Calendar from "react-calendar";
+
+const trainingTypeIcons = [
+  {
+    label: "Boxing",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Pilates",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Strength",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Yoga",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+];
+
+const availabilityIconsList = [
+  {
+    label: "Early Bird",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Rise & Shine",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Lunchtime",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+
+  {
+    label: "MID-DAY Break",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Happy Hours",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+  {
+    label: "Never too late",
+    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+  },
+];
 
 function SearchFilter({
   trainerSearchFilters,
@@ -167,17 +221,33 @@ function SearchFilter({
                 AvailabilityVal?.label !== "" && "fw-600"
               }`}
             >
-              {AvailabilityVal?.label !== ""
-                ? AvailabilityVal?.label
-                : "Select a Time"}{" "}
+              {AvailabilityVal?.label !== "" ? (
+                <>
+                  {
+                    availabilityIconsList.find(
+                      (val) => val.label === AvailabilityVal?.label
+                    ).icon
+                  }
+                  {AvailabilityVal?.label}
+                </>
+              ) : (
+                "Select a Time"
+              )}{" "}
             </div>
-            <div
-              className={`option_icon ${
-                AvailabilityDropdown && "option_icon_rotate"
-              }`}
-            >
-              &#10094;
-            </div>
+
+            <>
+              {AvailabilityDropdown || AvailabilityVal?.label !== "" ? (
+                <div
+                  className={`option_icon ${
+                    AvailabilityDropdown && "option_icon_rotate"
+                  }`}
+                >
+                  &#10094;
+                </div>
+              ) : (
+                <SheduleIcon className="mr-2" />
+              )}
+            </>
           </div>
 
           {AvailabilityDropdown ? (
@@ -299,16 +369,28 @@ function SearchFilter({
             }}
           >
             <div className={`option_txt ${CalDisplay && "fw-600"}`}>
-              {CalDisplay
-                ? moment(Calvalue).format("MM/DD/YYYY")
-                : "Select a Date"}
+              {CalDisplay ? (
+                <>
+                  <SheduleIcon className="mr-2" />
+                  {moment(Calvalue).format("MM/DD/YYYY")}
+                </>
+              ) : (
+                "Select a Date"
+              )}
             </div>
-
-            <div
-              className={`option_icon ${CalDropdown && "option_icon_rotate"}`}
-            >
-              &#10094;
-            </div>
+            <>
+              {CalDisplay ? (
+                <div
+                  className={`option_icon ${
+                    CalDropdown && "option_icon_rotate"
+                  }`}
+                >
+                  &#10094;
+                </div>
+              ) : (
+                <SheduleIcon className="mr-2" />
+              )}
+            </>
           </div>
           {CalDropdown ? (
             <div className="calendar_dropdown">
@@ -335,15 +417,28 @@ function SearchFilter({
             {VerticalVal?.label === "" ? (
               <div className="option_txt"> Select a Category</div>
             ) : (
-              <div className="option_txt fw-600">{VerticalVal.label}</div>
+              <div className="option_txt fw-600">
+                {
+                  trainingTypeIcons.find(
+                    (val) => val.label === VerticalVal.label
+                  ).icon
+                }
+                {VerticalVal.label}
+              </div>
             )}
-            <div
-              className={`option_icon ${
-                VerticalDropdown && "option_icon_rotate"
-              }`}
-            >
-              &#10094;
-            </div>
+            <>
+              {VerticalDropdown || VerticalVal?.label !== "" ? (
+                <div
+                  className={`option_icon ${
+                    VerticalDropdown && "option_icon_rotate"
+                  }`}
+                >
+                  &#10094;
+                </div>
+              ) : (
+                <SheduleIcon className="mr-2" />
+              )}
+            </>
           </div>
           {VerticalDropdown ? (
             <div className="filter_dropdown">
@@ -427,13 +522,14 @@ function SearchFilter({
               <>
                 {Location === "virtual" ? (
                   <div className="option_txt">
-                    <p className="active_bar">Virtual</p>
+                    <p className="active_bar mb-0">Virtual</p>
                     <span className="blue_bar">/</span>
                     <p
                       onClick={() => {
                         setLocation("inPerson");
                         setIPCDropdown(true);
                       }}
+                      className="mb-0"
                     >
                       In Person
                     </p>
@@ -444,12 +540,13 @@ function SearchFilter({
                       onClick={() => {
                         setLocation("virtual");
                       }}
+                      className="mb-0"
                     >
                       Virtual
                     </p>{" "}
                     <span className="blue_bar">/</span>{" "}
                     <p
-                      className="active_bar"
+                      className="active_bar mb-0"
                       onClick={() => setIPCDropdown(!IPCDropdown)}
                     >
                       {IPCvalue === "" ? "In Person" : IPCvalue}{" "}
@@ -468,13 +565,15 @@ function SearchFilter({
                 />
               </div>
             )}
-            <div
-              className={`option_icon ${
-                Location !== "virtual" && IPCDropdown && "option_icon_rotate"
-              }`}
-            >
-              &#10094;
-            </div>
+            {IPCvalue === "" && (
+              <div
+                className={`option_icon ${
+                  Location !== "virtual" && IPCDropdown && "option_icon_rotate"
+                }`}
+              >
+                &#10094;
+              </div>
+            )}
           </div>
           {Location !== "virtual" && IPCDropdown === true ? (
             <div className="city_dropdown">

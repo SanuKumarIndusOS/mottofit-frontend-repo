@@ -30,6 +30,7 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
     cpassword: "",
     signUpType: "email",
   });
+  const [phoneCountry, setPhoneCountry] = useState(false);
 
   const [error, setErrors] = useState({});
 
@@ -95,7 +96,8 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
   const validationRules = () => {
     let passwordValidation = {
       format: {
-        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+        pattern:
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
         flags: "i",
         message:
           "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
@@ -236,13 +238,14 @@ const BannerTrainerFC = ({ loginOrSignupAct, submitForm }) => {
                         <ReactPhoneInput
                           disableDropdown
                           countryCodeEditable={false}
-                          country="us"
+                          country={phoneCountry ? "us" : ""}
                           placeholder="Phone Number"
                           inputProps={{
                             name: "phoneNumber",
                           }}
                           value={data.phoneNumber}
                           name="phoneNumber"
+                          onKeyDown={() => setPhoneCountry(true)}
                           onChange={(e) => {
                             onChangeValue({
                               target: {

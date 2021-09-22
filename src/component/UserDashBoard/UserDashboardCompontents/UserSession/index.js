@@ -17,6 +17,7 @@ import {
   cancelSession,
   updateUserDetails,
   invitationSession,
+  getAllMottoPassesAct,
 } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -35,6 +36,8 @@ const UserSessionClass = (props) => {
     onGoingSessions: [],
     invitedSessions: [],
   });
+
+  const [mottoPassData, setMottoPassData] = useState([]);
 
   const [pageData, setPageData] = useState({
     upcoming: 0,
@@ -62,6 +65,8 @@ const UserSessionClass = (props) => {
     }
   }, []);
   const _userSession = (type, isPagination = false) => {
+    if (type === "pass") return getAllPasses();
+
     props
       .userSession(type, pageData[currentTab])
       .then(({ data: tempData, documentCount: tempDocumentCount }) => {
@@ -126,6 +131,14 @@ const UserSessionClass = (props) => {
       ...prevPageData,
       [currentTab]: prevPageData[currentTab] + 1 || 0,
     }));
+  };
+
+  const getAllPasses = async () => {
+    const passData = await props.getAllMottoPassesAct();
+
+    // console.log(passData);
+
+    setMottoPassData(passData);
   };
 
   useEffect(() => {
@@ -199,7 +212,10 @@ const UserSessionClass = (props) => {
               </div>
               <div className="tabPanel_outter">
                 <TabPanel tabId="pass">
-                  <MottoPassSection handlePagination={handlePagination} />
+                  <MottoPassSection
+                    handlePagination={handlePagination}
+                    mottoPassData={mottoPassData}
+                  />
                   {/* <TabOne
                     tabname={"Moto Pass"}
                     tabData={userData.pastSessions}
@@ -414,6 +430,42 @@ const TabOne = ({
                       .tz(data.sessionStartTime, "America/New_York")
                       .format("YYYY MM DD HH:MM")
                   );
+
+                  const isMottoPassAvailed =
+                    tabname === "Upcoming" &&
+                    parseInt(data.mottoPassAvailed) === 1;
+
+                  let mottoPassData = {};
+
+                  let mottoPassExpiryDate = "";
+
+                  let isMottoPassExpired = false;
+
+                  let totalMottoPass = "";
+
+                  let noOfMottoPassesUsed = "";
+
+                  if (isMottoPassAvailed && data.mottoPass) {
+                    mottoPassData = data.mottoPass;
+
+                    isMottoPassExpired = moment(
+                      moment.tz("America/New_York").format("YYYY MM DD")
+                    ).isAfter(
+                      moment
+                        .tz(data?.mottoPass?.expiresIn, "America/New_York")
+                        .format("YYYY MM DD")
+                    );
+
+                    mottoPassExpiryDate = moment(
+                      data?.mottoPass?.expiresIn
+                    ).format("MMMM Do, YYYY");
+
+                    totalMottoPass = parseInt(mottoPassData?.totalPassCount);
+
+                    noOfMottoPassesUsed = Math.abs(
+                      totalMottoPass - parseInt(mottoPassData?.remains)
+                    );
+                  }
 
                   return (
                     <React.Fragment key={index}>
@@ -634,33 +686,49 @@ const TabOne = ({
                         </div>
                       </div>
 
-                      <div className="motto-pass-section d-flex">
-                        <span className="motto-pass-ribbon mr-3">
-                          Motto Pass
-                        </span>
-                        <div className="motto-pass-details d-flex align-items-center w-100">
-                          <div className="session-count">Session 1 of 3</div>
+                      {isMottoPassAvailed && (
+                        <div className="motto-pass-section d-flex">
+                          <span className="motto-pass-ribbon mr-3">
+                            Motto Pass
+                          </span>
+                          <div className="motto-pass-details d-flex align-items-center w-100">
+                            {totalMottoPass && noOfMottoPassesUsed && (
+                              <div className="session-count">{`Session ${noOfMottoPassesUsed} of ${totalMottoPass}`}</div>
+                            )}
 
-                          <div className="session-location-details d-flex align-items-center ml-3 mr-3">
-                            <div className="session-location mr-3 d-flex align-items-center">
-                              <img
-                                src={LocationIcon}
-                                alt="icon"
-                                className="mr-1"
-                              />
-                              Virtual
-                            </div>
-                            <div className="motto-pass-valid-duration d-flex align-items-center">
-                              <img
-                                src={AvailabilityIcon}
-                                alt="icon"
-                                className="mr-1"
-                              />
-                              Valid until March 12th, 2021
+                            <div className="session-location-details d-flex align-items-center ml-3 mr-3">
+                              {mottoPassData?.passType && (
+                                <div className="session-location mr-3 d-flex align-items-center text-capitalize">
+                                  <img
+                                    src={LocationIcon}
+                                    alt="icon"
+                                    className="mr-1"
+                                  />
+                                  <p className="mb-0">
+                                    {mottoPassData?.passType}
+                                  </p>
+                                </div>
+                              )}
+                              {mottoPassExpiryDate && (
+                                <div className="motto-pass-valid-duration d-flex align-items-center">
+                                  <img
+                                    src={AvailabilityIcon}
+                                    alt="icon"
+                                    className="mr-1"
+                                  />
+                                  <p className="mb-0">
+                                    {`${
+                                      !isMottoPassExpired
+                                        ? `Valid until ${mottoPassExpiryDate}`
+                                        : `Expired on ${mottoPassExpiryDate}`
+                                    }`}
+                                  </p>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
-                      </div>
+                      )}
                       <hr />
                     </React.Fragment>
                   );
@@ -837,6 +905,7 @@ const mapDispatchToProps = (dispatch) => {
       cancelSession,
       invitationSession,
       updateUserDetails,
+      getAllMottoPassesAct,
     },
     dispatch
   );

@@ -18,47 +18,49 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
 
   React.useEffect(() => {
     //const { oneOnOnePricing } = selectedTrainerData?.trainerData;
-    // console.log(selectedTrainerData?.trainerData);
-    // console.log(sessionData);
+    // console.log(selectedTrainerData?.trainerData, "sd");
+   // console.log(selectedTrainerData );
 
     mottoPassData({});
 
     if (sessionData?.preferedTrainingMode === "virtual") {
       setsessionType("(Virtual)");
       setthreeSessionRate(
-        selectedTrainerData?.trainerData?.oneOnOnePricing
+        selectedTrainerData?.oneOnOnePricing
           ?.passRatefor3SessionAtVirtual
       );
       settensessionRate(
-        selectedTrainerData?.trainerData?.oneOnOnePricing
+        selectedTrainerData?.oneOnOnePricing
           ?.passRatefor10SessionAtVirtual
       );
     } else {
       if (sessionData?.trainingVenue?.value === "trainerLocation") {
         setsessionType("(Trainer Location)");
         setthreeSessionRate(
-          selectedTrainerData?.trainerData?.oneOnOnePricing
+          selectedTrainerData?.oneOnOnePricing
             ?.passRatefor3SessionAtTrainerLocation
         );
 
         settensessionRate(
-          selectedTrainerData?.trainerData?.oneOnOnePricing
+          selectedTrainerData?.oneOnOnePricing
             ?.passRatefor10SessionAtTrainerLocation
         );
       } else {
         setsessionType("(Client Location)");
         setthreeSessionRate(
-          selectedTrainerData?.trainerData?.oneOnOnePricing
+          selectedTrainerData?.oneOnOnePricing
             ?.passRatefor3SessionAtClientLocation
         );
 
         settensessionRate(
-          selectedTrainerData?.trainerData?.oneOnOnePricing
+          selectedTrainerData?.oneOnOnePricing
             ?.passRatefor10SessionAtClientLocation
         );
       }
     }
   }, []);
+
+
 
   return (
     <>
@@ -97,9 +99,9 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         <h5>
                           Valid for{" "}
                           <span>
-                            {selectedTrainerData?.trainerData?.firstName +
+                            {selectedTrainerData?.firstName +
                               " " +
-                              selectedTrainerData?.trainerData?.lastName}
+                              selectedTrainerData?.lastName}
                           </span>{" "}
                           only
                         </h5>
@@ -132,7 +134,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                           let _price;
                           if (sessionData?.preferedTrainingMode === "virtual") {
                             pass_type = "virtual";
-                            _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                            _price = selectedTrainerData?.oneOnOnePricing
                             ?.passRatefor3SessionAtVirtual
                           }else
                           {
@@ -140,11 +142,11 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
 
                             if(sessionData?.trainingVenue?.value === "clientLocation")
                             {
-                              _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                              _price = selectedTrainerData?.oneOnOnePricing
                               ?.passRatefor3SessionAtClientLocation
                             }else
                             {
-                              _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                              _price = selectedTrainerData?.oneOnOnePricing
                               ?.passRatefor3SessionAtTrainerLocation 
                             }
                           }
@@ -180,9 +182,9 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         <h5>
                           Valid for{" "}
                           <span>
-                            {selectedTrainerData?.trainerData?.firstName +
+                            {selectedTrainerData?.firstName +
                               " " +
-                              selectedTrainerData?.trainerData?.lastName}
+                              selectedTrainerData?.lastName}
                           </span>{" "}
                           only
                         </h5>
@@ -216,7 +218,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         let _price;
                         if (sessionData?.preferedTrainingMode === "virtual") {
                           pass_type = "virtual";
-                          _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                          _price = selectedTrainerData?.oneOnOnePricing
                           ?.passRatefor10SessionAtVirtual
                         }else
                         {
@@ -224,11 +226,11 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
 
                           if(sessionData?.trainingVenue?.value === "clientLocation")
                           {
-                            _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                            _price = selectedTrainerData?.oneOnOnePricing
                             ?.passRatefor10SessionAtClientLocation
                           }else
                           {
-                            _price = selectedTrainerData?.trainerData?.oneOnOnePricing
+                            _price = selectedTrainerData?.oneOnOnePricing
                             ?.passRatefor10SessionAtTrainerLocation 
                           }
                         }

@@ -9,39 +9,81 @@ import { UserAvatar } from "../UserAvatar";
 import Tick from "assets/files/FindTrainer/Tick 1.svg";
 import AvailabilityIcon from "assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import LocationIcon from "assets/files/TrainerDashboard/Message/Location Icon.svg";
-import DollarIcon from "assets/files/SVG/dollar Icon.svg";
+import DollarIcon from "assets/files/SVG/green_dollar_sign.svg";
 
-export const MottoPassCard = () => {
+//additonal packages
+import moment from "moment";
+
+export const MottoPassCard = ({ data }) => {
+  const { remains, price, expiresIn, passType, trainer } = data || {};
+
+  let mottoPassType = "";
+
+  let isExpired = moment(
+    moment.tz("America/New_York").format("YYYY MM DD")
+  ).isAfter(moment.tz(expiresIn, "America/New_York").format("YYYY MM DD"));
+
+  let expirationDate = moment
+    .tz(expiresIn, "America/New_York")
+    .format("MMMM Do, YYYY");
+
+  if (passType === "trainerLocation") {
+    mottoPassType = "only Trainer's Location";
+  } else if (passType === "virtual") {
+    mottoPassType = "only Virtual";
+  } else {
+    mottoPassType = "All";
+  }
+
+  let userData = {
+    userName: `${trainer?.firstName || ""} ${trainer?.lastName || ""}`,
+    profilePicture: trainer?.profilePicture,
+  };
+
   return (
     <div className="mottopass-card">
       <div className="pass-user-detail d-flex align-items-center flex-column position-relative">
         <div className="pass-user-profilepic position-absolute">
-          <UserAvatar className="img-md" />
+          <UserAvatar className="img-md" {...userData} />
         </div>
         <span className="mottopass-double-ribbon text-uppercase d-flex align-items-center justify-content-center position-relative">
-          3 Session Pass
+          {`${remains} Session Pass`}
         </span>
       </div>
       <div className="pass-user-name text-center">
-        <h1 className="fs-35 mb-4 mt-3">John Doe</h1>
+        <h1 className="fs-35 mb-4 mt-3 text-capitalize">{`${
+          trainer?.firstName || ""
+        } ${trainer?.lastName || ""}`}</h1>
       </div>
       <div className="mottopass-details d-flex flex-column align-items-start">
-        <div className="mottopass-restriction d-flex align-items-center">
-          <img src={Tick} alt="session icon" />
-          <p className="fs-15">Valid for sessions with John Doe only</p>
+        <div className="mottopass-restriction d-flex align-items-start">
+          <span>
+            <img src={Tick} alt="session icon" />
+          </span>
+          <p className="fs-15">{`Valid for sessions with ${
+            trainer?.firstName || ""
+          } ${trainer?.lastName || ""} only`}</p>
         </div>
-        <div className="mottopass-type-restriction d-flex align-items-center">
-          <img src={LocationIcon} alt="location icon" />
-          <p className="fs-15">Valid for only Virtual Training Sessions</p>
+        <div className="mottopass-type-restriction d-flex align-items-start">
+          <span>
+            <img src={LocationIcon} alt="location icon" />
+          </span>
+          <p className="fs-15">{`Valid for ${mottoPassType} Training Sessions`}</p>
         </div>
-        <div className="mottopass-expiration d-flex align-items-center">
-          <img src={AvailabilityIcon} alt="time icon" />
-          <p className="fs-15">Valid until March 12th, 2021</p>
+        <div className="mottopass-expiration d-flex align-items-start">
+          <span>
+            <img src={AvailabilityIcon} alt="time icon" />
+          </span>
+          <p className="fs-15">{`${
+            !isExpired ? "Valid until " : "Expired on "
+          } ${expirationDate}`}</p>
         </div>
         <div className="mottopass-discount-rate d-flex align-items-start">
-          <img src={DollarIcon} alt="dollar icon" />
+          <span>
+            <img src={DollarIcon} alt="dollar icon" />
+          </span>
           <p className="fs-15">
-            Each session is priced at a discounted rate of $90/-
+            {` Each session is priced at a discounted rate of $${price}/-`}
           </p>
         </div>
       </div>
