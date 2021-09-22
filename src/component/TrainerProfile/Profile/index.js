@@ -325,50 +325,6 @@ const TrainerProfileClass = ({
                           All the rates displayed below are the total amounts
                           for each session.
                         </p>
-                        <h6 className="for_people_title">For 3 Session Pass</h6>
-                        {trainerProfileData?.oneOnOnePricing && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual}`}
-                            <span>(Virtual)</span>
-                          </h6>
-                        )}
-                        {trainerProfileData?.oneOnOnePricing && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}`}
-                            <span>(In Person - At Your Location)</span>
-                          </h6>
-                        )}
-                        {trainerProfileData?.oneOnOnePricing && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}`}
-                            <span>(In Person - At Trainer's Location)</span>
-                          </h6>
-                        )}
-                        <h6 className="for_people_title">For 4 Session Pass</h6>
-                        {trainerProfileData?.oneOnOnePricing && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}`}
-                            <span>(Virtual)</span>
-                          </h6>
-                        )}
-                        {trainerProfileData?.oneOnOnePricing && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}`}
-                            <span>
-                              <span>(In Person - At Your Location)</span>
-                            </span>
-                          </h6>
-                        )}
-
-                        {trainerProfileData?.oneOnOnePricing && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}`}
-                            <span>
-                              <span>(In Person - At Trainer's Location)</span>
-                            </span>
-                          </h6>
-                        )}
-
                         {virtualSession && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSession} `}
@@ -393,6 +349,67 @@ const TrainerProfileClass = ({
                         ) : (
                           ""
                         )}
+
+                        <h6 className="for_people_title">For 3 Session Pass</h6>
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtVirtual !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual}`}
+                            <span>Session / (Virtual)</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtClientLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}`}
+                            <span>
+                              Session / (In Person - At Your Location)
+                            </span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtTrainerLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}`}
+                            <span>
+                              Session / (In Person - At Trainer's Location)
+                            </span>
+                          </h6>
+                        )}
+                        <h6 className="for_people_title">
+                          For 10 Session Pass
+                        </h6>
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtVirtual !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}`}
+                            <span>Session / (Virtual)</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtClientLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}`}
+                            <span>
+                              <span>
+                                Session / (In Person - At Your Location)
+                              </span>
+                            </span>
+                          </h6>
+                        )}
+
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtTrainerLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}`}
+                            <span>
+                              <span>
+                                Session / (In Person - At Trainer's Location)
+                              </span>
+                            </span>
+                          </h6>
+                        )}
+
                         {/* <h5
                           onClick={() => {
                             setOpenDialog(true);
