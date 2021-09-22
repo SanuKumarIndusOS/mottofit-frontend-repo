@@ -56,7 +56,7 @@ const TrainerProfileClass = ({
   const [isLoading, setLoading] = useState(false);
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
-  const [disableBooking, setDisableBooking] = useState(true)
+  const [disableBooking, setDisableBooking] = useState(true);
 
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
@@ -86,7 +86,7 @@ const TrainerProfileClass = ({
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
-    setDisableBooking(false)
+    setDisableBooking(false);
   };
 
   const toggleCarouselModel = (itemIndex) => {
@@ -937,6 +937,27 @@ const TrainerProfileClass = ({
                       </span>{" "}
                       Schedule{" "}
                     </h2>
+                    <div className="request-trainer-block">
+                      {isLoading ? (
+                        "Loading..."
+                      ) : (
+                        <div
+                          className={
+                            isLoading ? "d-none" : "request_a_time_part"
+                          }
+                          onClick={handleRequestTrainer}
+                        >
+                          <span style={{ color: "#2C2C2C", fontSize: "20px" }}>
+                            Dont See a Time you want&ensp;?&ensp;
+                          </span>
+                          <button className="book_session_btn d-flex align-items-center">
+                            {`Request A Time with ${trainerProfileData.firstName}`}
+                            <ArrowHoverBlacked />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
                     {/* 
                     <UserScheduler
                       id={id}
@@ -947,41 +968,12 @@ const TrainerProfileClass = ({
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
-                      
                     />
                     <ButtonSection
                       selectedTimes={selectedTimes}
                       disableBooking={disableBooking}
                       handleSessionType={handleSessionType}
                     />
-                    <div className="request-trainer-block">
-                      <button
-                        className={`btn btn-transparent  fw-600 ${
-                          isLoading ? "btn-disabled" : ""
-                        }`}
-                        onClick={handleRequestTrainer}
-                        disabled={isLoading}
-                      >
-                        {isLoading ? (
-                          "Loading..."
-                        ) : (
-                          <>
-                            {" "}
-                            <span
-                              style={{ color: "#2C2C2C", fontSize: "20px" }}
-                            >
-                              Dont See a Time you want&ensp;?&ensp;
-                            </span>
-                            <span
-                              style={{
-                                textDecoration: "underline",
-                                fontSize: "18px",
-                              }}
-                            >{`Request A Time with ${trainerProfileData.firstName}`}</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
                   </div>
                   {/* </div> */}
                 </div>
@@ -1064,7 +1056,11 @@ const TrainerProfileClass = ({
   );
 };
 
-const ButtonSection = ({ selectedTimes, handleSessionType, disableBooking }) => {
+const ButtonSection = ({
+  selectedTimes,
+  handleSessionType,
+  disableBooking,
+}) => {
   const disableBtn = selectedTimes?.length > 0;
 
   return (
@@ -1083,16 +1079,17 @@ const ButtonSection = ({ selectedTimes, handleSessionType, disableBooking }) => 
           <h5>BOOKED SLOT</h5>{" "}
         </div>
 
-        
         <div className="item_slot4">
-        {!disableBooking? <button
-            onClick={handleSessionType}
-            // disabled={disableBooking}
-            // className={`${disableBooking ? "hidedisable-btn" : ""}`}
-          >
-            BOOK a session <BlueArrowButton />{" "}
-          </button>:null}
-         {" "}
+          {!disableBooking ? (
+            <button
+              onClick={handleSessionType}
+              // disabled={disableBooking}
+              className="book_session_btn"
+            >
+              BOOK selected time
+              <ArrowHoverBlacked />{" "}
+            </button>
+          ) : null}{" "}
         </div>
       </div>
     </div>

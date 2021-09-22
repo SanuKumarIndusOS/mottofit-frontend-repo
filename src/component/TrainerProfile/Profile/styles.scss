@@ -463,7 +463,7 @@
                 font-weight: 600;
                 line-height: 58px;
                 font-family: "Montserrat", sans-serif;
-                margin-bottom: 1em;
+                // margin-bottom: 1em;
                 // text-transform: capitalize;
               }
               .schedular_slots {
@@ -559,6 +559,7 @@
                       display: flex;
                       align-items: center;
                       letter-spacing: 0.54px;
+                      padding: 0.5em 0 0.5em 0.8em !important;
                       border: none;
                       outline: none;
                       color: #2c2c2c;
@@ -567,7 +568,7 @@
                       font-size: 14px;
                       font-weight: 700;
                       font-family: Montserrat;
-                      background-color: transparent;
+                      background: #53bfd2;
                     }
                     @media only screen and (max-width: 900px) {
                       //margin-top: 3rem;
@@ -826,15 +827,49 @@
 }
 
 .request-trainer-block {
+  font-family: "Montserrat";
+  .request_a_time_part {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+  }
   button {
-    color: #53bfd2;
+    // color: #53bfd2;
 
     &:hover {
-      color: #53bfd2;
+      // color: #53bfd2;
     }
 
     &:focus {
       box-shadow: 0 0;
+    }
+  }
+
+  .book_session_btn {
+    align-items: center;
+    background: #53bfd2;
+    color: #fff;
+    padding: 0.5em 0 0.5em 0.8em !important;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    text-align: right;
+    text-decoration: none;
+    line-height: 22px;
+    border: none;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .request-trainer-block {
+    .request_a_time_part {
+      display: block;
+      .book_session_btn {
+        margin: 10px 0px 40px 0px;
+      }
+      span {
+        margin-bottom: 2rem;
+      }
     }
   }
 }
@@ -842,4 +877,3 @@
 .packages_dialog {
   padding: 1rem;
 }
-
