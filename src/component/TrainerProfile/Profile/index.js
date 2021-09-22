@@ -27,6 +27,7 @@ import FullScreenCarousel from "component/common/FullScreenCarousel";
 import { requestTrainerMessageAct } from "action/trainerAct";
 import { Toast } from "service/toast";
 import Dialog from "@material-ui/core/Dialog";
+import moment from "moment";
 
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
@@ -993,6 +994,8 @@ const TrainerProfileClass = ({
                       selectedTimes={selectedTimes}
                       disableBooking={disableBooking}
                       handleSessionType={handleSessionType}
+                      trainerstartSlot={trainerstartSlot}
+                      trainerEndSlot={trainerEndSlot}
                     />
                   </div>
                   {/* </div> */}
@@ -1080,6 +1083,8 @@ const ButtonSection = ({
   selectedTimes,
   handleSessionType,
   disableBooking,
+  trainerstartSlot,
+  trainerEndSlot
 }) => {
   const disableBtn = selectedTimes?.length > 0;
 
@@ -1094,10 +1099,15 @@ const ButtonSection = ({
           <div className="indicator2"></div>
           <h5>UNAVAILABLE</h5>{" "}
         </div>
-        <div className="item_slot3">
-          <div className="indicator3"></div>
-          <h5>BOOKED SLOT</h5>{" "}
-        </div>
+
+        {!disableBooking ? (
+          <div className="item_slot3">
+            <div className="indicator3"></div>
+            <h5> {moment(trainerstartSlot).format("hh:mm A")} to <br></br> {moment(trainerEndSlot).format("hh:mm A")}</h5>
+          </div>
+        ) : null}
+
+       
 
         <div className="item_slot4">
           {!disableBooking ? (
