@@ -280,7 +280,7 @@ const TabOne = ({
         setisLoading(false);
         // console.log(message);
 
-        Toast({ type: "success", message: data?.message || "success" });
+        Toast({ type: "success", message: "Session cancelled" || "Session cancelled" });
         handleChange();
       })
       .catch((err) => {
