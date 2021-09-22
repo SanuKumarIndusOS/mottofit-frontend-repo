@@ -56,6 +56,7 @@ const TrainerProfileClass = ({
   const [isLoading, setLoading] = useState(false);
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
+  const [disableBooking, setDisableBooking] = useState(true)
 
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
@@ -85,6 +86,7 @@ const TrainerProfileClass = ({
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
+    setDisableBooking(false)
   };
 
   const toggleCarouselModel = (itemIndex) => {
@@ -945,9 +947,11 @@ const TrainerProfileClass = ({
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
+                      
                     />
                     <ButtonSection
                       selectedTimes={selectedTimes}
+                      disableBooking={disableBooking}
                       handleSessionType={handleSessionType}
                     />
                     <div className="request-trainer-block">
@@ -1060,7 +1064,7 @@ const TrainerProfileClass = ({
   );
 };
 
-const ButtonSection = ({ selectedTimes, handleSessionType }) => {
+const ButtonSection = ({ selectedTimes, handleSessionType, disableBooking }) => {
   const disableBtn = selectedTimes?.length > 0;
 
   return (
@@ -1078,14 +1082,17 @@ const ButtonSection = ({ selectedTimes, handleSessionType }) => {
           <div className="indicator3"></div>
           <h5>BOOKED SLOT</h5>{" "}
         </div>
+
+        
         <div className="item_slot4">
-          <button
+        {!disableBooking? <button
             onClick={handleSessionType}
-            // disabled={!disableBtn}
-            // className={`${!disableBtn ? "disable-btn" : ""}`}
+            // disabled={disableBooking}
+            // className={`${disableBooking ? "hidedisable-btn" : ""}`}
           >
             BOOK a session <BlueArrowButton />{" "}
-          </button>{" "}
+          </button>:null}
+         {" "}
         </div>
       </div>
     </div>
