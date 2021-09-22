@@ -350,20 +350,24 @@ const TrainerProfileClass = ({
                         {trainerProfileData?.oneOnOnePricing && (
                           <h6>
                             {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual} `}
-                            <span>Session / (10 Session Pass)</span>
+                            <span>Session / (10 Session Pass Virtual</span>
                           </h6>
                         )}
                         {trainerProfileData?.oneOnOnePricing && (
                           <h6>
                             {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation} `}
-                            <span>Session / (10 Session Pass)</span>
+                            <span>
+                              Session / (10 Session Pass At Your Location)
+                            </span>
                           </h6>
                         )}
 
                         {trainerProfileData?.oneOnOnePricing && (
                           <h6>
                             {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation} `}
-                            <span>Session / (10 Session Pass)</span>
+                            <span>
+                              Session / (10 Session Pass At Trainer's Location)
+                            </span>
                           </h6>
                         )}
 
