@@ -80,13 +80,10 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
     };
     if (payload.location === "inPerson" && payload.city === "") {
       //  setInPersonDD(true);
-      console.log("sds");
-      return Toast({ type: "error", message: "Choose a city from the 'in person' dropdown" });
-    }else
-    {
-      trainerSearchFilters(payload);
-      updateTrainerDetails(payload);
-     history.push("/trainer/find");
+      return Toast({
+        type: "error",
+        message: "choose a city fom the 'in person' dropdown",
+      });
     }
     console.log(payload);
     // trainerSearchFilters(payload);

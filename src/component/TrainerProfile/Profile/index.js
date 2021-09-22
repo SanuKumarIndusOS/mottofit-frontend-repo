@@ -97,14 +97,41 @@ const TrainerProfileClass = ({
   };
 
   const handleBookSession = () => {
-    let reduxData = {
-      selectedTrainerData: {
-        trainerId: trainerProfileData["id"],
-        trainerData: { ...trainerProfileData },
-      },
-    };
-    updateUserDetails(reduxData);
-    history.push(`/user/scheduler/${trainerProfileData["id"]}`);
+    // let reduxData = {
+    //   selectedTrainerData: {
+    //     trainerId: trainerProfileData["id"],
+    //     trainerData: { ...trainerProfileData },
+    //   },
+    // };
+    // updateUserDetails(reduxData);
+    // history.push(`/user/scheduler/${trainerProfileData["id"]}`);
+
+    const trainerProfileCalendar = document.getElementById(
+      "trainer-profile-table"
+    );
+    const trainerProfileMobileCalendar = document.getElementById(
+      "trainer_profile_mobile_calendar"
+    );
+
+    let mql = window.matchMedia("(max-width: 700px)");
+
+    if (mql.matches) {
+      if (trainerProfileMobileCalendar) {
+        trainerProfileMobileCalendar.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+    } else {
+      if (trainerProfileCalendar) {
+        trainerProfileCalendar.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+    }
   };
   const handleSessionType = () => {
     let reduxData = {
@@ -125,10 +152,12 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent =
-    trainerProfileData?.preferedTrainingMode?.includes("virtual");
-  const isInPersonPresent =
-    trainerProfileData?.preferedTrainingMode?.includes("inPerson");
+  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
+    "virtual"
+  );
+  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
+    "inPerson"
+  );
 
   const handleRequestTrainer = () => {
     const userId = localStorage.getItem("user-id");
@@ -295,14 +324,14 @@ const TrainerProfileClass = ({
             </div>
             <div className="profile_main_contents container">
               <div className="profile_aside">
-                {/* <div className="profile_aside_link">
+                <div className="profile_aside_link">
                   <Link onClick={handleBookSession}>View Calender</Link>
                   <img src={ArrowNext} alt="icon" />
-                </div> */}
-                <div className="profile_aside_link">
+                </div>
+                {/* <div className="profile_aside_link">
                   <Link onClick={() => scrollToCalendar()}>View Calender</Link>
                   <img src={ArrowNext} alt="icon" />
-                </div>
+                </div> */}
                 <div className="profile_aside_items">
                   {isAnyOneonOnePriceAvailable && (
                     <div className="profile_aside_item">
@@ -987,6 +1016,7 @@ const TrainerProfileClass = ({
                     />  */}
                     <UserSchedulerScroll
                       id={id}
+                      tableId={"trainer-profile-table"}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
                     />

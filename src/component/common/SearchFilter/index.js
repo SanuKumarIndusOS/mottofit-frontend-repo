@@ -179,7 +179,7 @@ function SearchFilter({
     if (Location === "inPerson" && IPCvalue === "") {
       Toast({
         type: "error",
-        message: "Choose a city from the 'in person' dropdown",
+        message: "choose a city fom the 'in person' dropdown",
       });
     } else {
       trainerSearchFilters(payload);

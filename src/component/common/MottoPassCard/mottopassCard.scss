@@ -1,0 +1,65 @@
+.mottopass-card {
+  max-width: 475px;
+  width: 100%;
+  box-shadow: 0px 3px 12px #16161608;
+  background: #2c2c2c;
+  border-radius: 20px;
+  margin-top: 45px;
+  height: 90%;
+
+  .pass-user-detail {
+    .pass-user-profilepic {
+      top: -25px;
+      z-index: 2;
+    }
+    .mottopass-double-ribbon {
+      margin-top: 45px;
+      padding-left: 20px;
+      z-index: 3;
+    }
+  }
+
+  .pass-user-name {
+    h1 {
+      font-family: "Cormorant Garamond";
+      color: #ffffff;
+      line-height: 45px;
+    }
+  }
+
+  p,
+  h1,
+  span {
+    color: #ffffff;
+  }
+}
+.mottopass-details {
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+
+  img {
+    margin-right: 10px;
+  }
+
+  p {
+    color: #bcbcbc;
+    font-size: 15px;
+    letter-spacing: 0.23px;
+    line-height: 30px;
+    margin-bottom: 0;
+  }
+  span {
+    line-height: 30px;
+  }
+  .mottopass-discount-rate {
+    p {
+      line-height: 22px;
+      margin-bottom: 36px;
+    }
+
+    span {
+      line-height: 22px;
+    }
+  }
+}

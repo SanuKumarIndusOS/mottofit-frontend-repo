@@ -15,6 +15,7 @@ function UserScheduler({
   parentCallback,
   updateUserDetails,
   getCalenderDetails,
+  tableId = "",
 }) {
   const EarlyBirdRef = useRef(null);
   const RiseAndShineRef = useRef(null);
@@ -281,7 +282,7 @@ function UserScheduler({
         </div> */}
       </div>
       <br></br>
-      <table className="table sticky d_table">
+      <table className="table sticky d_table" id={`${tableId}`}>
         <thead>
           <tr>
             <th className="date_title_two text-white">{mottoBlock}</th>

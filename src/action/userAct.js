@@ -171,3 +171,24 @@ export const verifyCouponCodeAct = (code) => (
     // resolve(true);
   });
 };
+
+// get all motto passes
+
+export const getAllMottoPassesAct = () => (
+  dispatch,
+  getState,
+  { api, Toast }
+) => {
+  return new Promise((resolve, reject) => {
+    const { getAllPasses } = userApi;
+
+    api({ ...getAllPasses })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+    // resolve(true);
+  });
+};
