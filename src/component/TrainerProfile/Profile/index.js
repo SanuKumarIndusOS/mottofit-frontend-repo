@@ -56,7 +56,7 @@ const TrainerProfileClass = ({
   const [isLoading, setLoading] = useState(false);
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
-  const [disableBooking, setDisableBooking] = useState(true)
+  const [disableBooking, setDisableBooking] = useState(true);
 
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
@@ -86,7 +86,7 @@ const TrainerProfileClass = ({
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
-    setDisableBooking(false)
+    setDisableBooking(false);
   };
 
   const toggleCarouselModel = (itemIndex) => {
@@ -325,6 +325,52 @@ const TrainerProfileClass = ({
                           All the rates displayed below are the total amounts
                           for each session.
                         </p>
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual} `}
+                            <span>Session / (3 Session Pass Virtual)</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation} `}
+                            <span>
+                              Session / (3 Session Pass At Your Location)
+                            </span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation} `}
+                            <span>
+                              Session / (3 Session Pass At Trainer's Location)
+                            </span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual} `}
+                            <span>Session / (10 Session Pass Virtual</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation} `}
+                            <span>
+                              Session / (10 Session Pass At Your Location)
+                            </span>
+                          </h6>
+                        )}
+
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation} `}
+                            <span>
+                              Session / (10 Session Pass At Trainer's Location)
+                            </span>
+                          </h6>
+                        )}
+
                         {virtualSession && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSession} `}
@@ -336,7 +382,7 @@ const TrainerProfileClass = ({
                         {inPersonAtClientLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtClientLocation}`}
-                            <span>(at your location)</span>
+                            <span>(In Person - At Your Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -344,20 +390,20 @@ const TrainerProfileClass = ({
                         {inPersonAtTrainerLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtTrainerLocation}`}
-                            <span>(at trainer location)</span>
+                            <span>(In Person - At Trainer's Location)</span>
                           </h6>
                         ) : (
                           ""
                         )}
-                        <h5
+                        {/* <h5
                           onClick={() => {
                             setOpenDialog(true);
                           }}
                           style={{ cursor: "pointer" }}
                         >
                           See package rates
-                        </h5>
-                        <Dialog
+                        </h5> */}
+                        {/* <Dialog
                           onClose={() => {
                             setOpenDialog(false);
                           }}
@@ -469,7 +515,7 @@ const TrainerProfileClass = ({
                               </div>
                             </div>
                           </div>
-                        </Dialog>
+                        </Dialog> */}
                       </div>
                     </div>
                   )}
@@ -544,7 +590,7 @@ const TrainerProfileClass = ({
                             isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor2People} `}
-                                <span>virtual for 2 people</span>
+                                <span>(Virtual Session)</span>
                               </h6>
                             ) : (
                               ""
@@ -553,7 +599,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor2People}`}
-                                <span>at your location for 2 people</span>
+                                <span>(In Person - At Your Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -562,7 +608,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor2People}`}
-                                <span>at trainer location for 2 people</span>
+                                <span>(In Person - At Trainer's Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -581,7 +627,7 @@ const TrainerProfileClass = ({
                             {virtualSessionfor3People && isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor3People} `}
-                                <span>virtual for 3 people</span>
+                                <span>(Virtual Session)</span>
                               </h6>
                             ) : (
                               ""
@@ -590,7 +636,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor3People}`}
-                                <span>at your location for 3 people</span>
+                                <span>(In Person - At Your Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -599,7 +645,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor3People}`}
-                                <span>at trainer location for 3 people</span>
+                                <span>(In Person - At Trainer's Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -619,7 +665,7 @@ const TrainerProfileClass = ({
                             isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor4People} `}
-                                <span>virtual for 4 people</span>
+                                <span>(Virtual Session)</span>
                               </h6>
                             ) : (
                               ""
@@ -628,7 +674,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor4People}`}
-                                <span>at your location for 4 people</span>
+                                <span>(In Person - At Your Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -637,7 +683,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor4People}`}
-                                <span>at trainer location for 4 people</span>
+                                <span>(In Person - At Trainer's Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -715,7 +761,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor15People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor15People} `}
-                            <span>virtually for 5-15 people</span>
+                            <span>(Virtual Session)</span>
                           </h6>
                         ) : (
                           ""
@@ -724,7 +770,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtclientLocationfor15People}`}
-                            <span>at your location for 5-15 people</span>
+                            <span>(In Person - At Your Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -733,7 +779,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAttrainerLocationfor15People}`}
-                            <span>at trainer location for 5-15 people</span>
+                            <span>(In Person - At Trainer's Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -895,6 +941,27 @@ const TrainerProfileClass = ({
                       </span>{" "}
                       Schedule{" "}
                     </h2>
+                    <div className="request-trainer-block">
+                      {isLoading ? (
+                        "Loading..."
+                      ) : (
+                        <div
+                          className={
+                            isLoading ? "d-none" : "request_a_time_part"
+                          }
+                          onClick={handleRequestTrainer}
+                        >
+                          <span style={{ color: "#2C2C2C", fontSize: "20px" }}>
+                            Dont See a Time you want&ensp;?&ensp;
+                          </span>
+                          <button className="book_session_btn d-flex align-items-center">
+                            {`Request A Time with ${trainerProfileData.firstName}`}
+                            <ArrowHoverBlacked />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
                     {/* 
                     <UserScheduler
                       id={id}
@@ -905,36 +972,12 @@ const TrainerProfileClass = ({
                       id={id}
                       parentCallback={callbackFunction}
                       updateUserDetails={updateUserDetails}
-                      
                     />
                     <ButtonSection
                       selectedTimes={selectedTimes}
                       disableBooking={disableBooking}
                       handleSessionType={handleSessionType}
                     />
-                    <div className="request-trainer-block">
-                      <button
-                        className={`btn btn-transparent  fw-600 fs-18 ${
-                          isLoading ? "btn-disabled" : ""
-                        }`}
-                        onClick={handleRequestTrainer}
-                        disabled={isLoading}
-                      >
-                        {isLoading ? (
-                          "Loading..."
-                        ) : (
-                          <>
-                            {" "}
-                            <span style={{ color: "black" }}>
-                              Dont See a Time you want&ensp;?&ensp;
-                            </span>
-                            <span
-                              style={{ textDecoration: "underline" }}
-                            >{`Request A Time with ${trainerProfileData.firstName}`}</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
                   </div>
                   {/* </div> */}
                 </div>
@@ -1017,7 +1060,11 @@ const TrainerProfileClass = ({
   );
 };
 
-const ButtonSection = ({ selectedTimes, handleSessionType, disableBooking }) => {
+const ButtonSection = ({
+  selectedTimes,
+  handleSessionType,
+  disableBooking,
+}) => {
   const disableBtn = selectedTimes?.length > 0;
 
   return (
@@ -1036,16 +1083,17 @@ const ButtonSection = ({ selectedTimes, handleSessionType, disableBooking }) => 
           <h5>BOOKED SLOT</h5>{" "}
         </div>
 
-        
         <div className="item_slot4">
-        {!disableBooking? <button
-            onClick={handleSessionType}
-            // disabled={disableBooking}
-            // className={`${disableBooking ? "hidedisable-btn" : ""}`}
-          >
-            BOOK a session <BlueArrowButton />{" "}
-          </button>:null}
-         {" "}
+          {!disableBooking ? (
+            <button
+              onClick={handleSessionType}
+              // disabled={disableBooking}
+              className="book_session_btn"
+            >
+              BOOK selected time
+              <ArrowHoverBlacked />{" "}
+            </button>
+          ) : null}{" "}
         </div>
       </div>
     </div>

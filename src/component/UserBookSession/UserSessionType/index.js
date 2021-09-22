@@ -480,7 +480,7 @@ const UserBookSessionFC = ({
 
     //MottoPass
     if (sessionType === "1 ON 1 TRAINING") {
-      console.log(selectedTrainerData?.id,"test");
+      console.log(selectedTrainerData?.id, "test");
       let trainerId = selectedTrainerData?.id;
       let userId = localStorage.getItem("user-id");
 
@@ -548,11 +548,9 @@ const UserBookSessionFC = ({
       });
     }
 
-    if(price === 20)
-    {
+    if (price === 20) {
       history.push("/user/moto-pass");
-    }else
-    {
+    } else {
       history.push("/user/payment");
     }
   };
@@ -591,7 +589,7 @@ const UserBookSessionFC = ({
             <div className="link_wrapper">
               <img src={ArrowBack} alt="icon" />
               <div className="inner_links">
-                <Link to={`/user/scheduler/${trainerId}`}>
+                <Link to={`/trainer/profile/${trainerId}`}>
                   Change your Slot
                 </Link>
                 <div></div>
