@@ -113,7 +113,7 @@ const UserPaymentsFC = ({
 
   const ScheduleSession = (errCb) => {
     // console.log(location, "locationlocation");
-
+    console.log("hit");
     // if (!defaulCardDetails?.default)
     //   return Toast({
     //     type: "info",
@@ -133,7 +133,7 @@ const UserPaymentsFC = ({
     //   sessionData?.trainingType?.value || bookingData?.activity?.value;
 
     const scheduleBody = {
-      trainerId: trainerData?.id || selectedTrainerData?.id,
+      trainerId: selectedTrainerData?.id || selectedTrainerData?.id,
       title: trainingAcivityType || "Motto Session",
       trainingType: trainingtype,
       sessionType: sessionData?.preferedTrainingMode,
@@ -519,17 +519,16 @@ const UserPaymentsFC = ({
                           selectedTimes[0],
                           "MMMM Do, YYYY hh:mm A."
                         )
-                      )} */
-                     
-                    
-                      }
+                      )} */}
                       <h4>
-                        {/* {getFormatDate(
+                        {
+                          /* {getFormatDate(
                           selectedTimes[0],
                           "MMMM Do, YYYY hh:mm A."
                         )} */
-                        moment( bookingData?.start_slot).format("MMMM DD YYYY hh:mm A")
-                        
+                          moment(bookingData?.start_slot).format(
+                            "MMMM DD YYYY hh:mm A"
+                          )
                         }
                       </h4>
                     </div>

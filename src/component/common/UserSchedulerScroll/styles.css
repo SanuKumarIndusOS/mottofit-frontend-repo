@@ -134,7 +134,8 @@ td {
 }
 
 .block_cell {
-  background-color: #dedede !important;
+  /* background-color: #dedede !important; */
+  background-color: #626262 !important ;
   /* border: none; */
   /* border-bottom: red; */
 }
