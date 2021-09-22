@@ -323,6 +323,48 @@ const TrainerProfileClass = ({
                           All the rates displayed below are the total amounts
                           for each session.
                         </p>
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual} `}
+                            <span>Session / (3 Session Pass Virtual)</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation} `}
+                            <span>
+                              Session / (3 Session Pass At Your Location)
+                            </span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation} `}
+                            <span>
+                              Session / (3 Session Pass At Trainer's Location)
+                            </span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual} `}
+                            <span>Session / (10 Session Pass)</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation} `}
+                            <span>Session / (10 Session Pass)</span>
+                          </h6>
+                        )}
+
+                        {trainerProfileData?.oneOnOnePricing && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation} `}
+                            <span>Session / (10 Session Pass)</span>
+                          </h6>
+                        )}
+
                         {virtualSession && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSession} `}
@@ -334,7 +376,7 @@ const TrainerProfileClass = ({
                         {inPersonAtClientLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtClientLocation}`}
-                            <span>(at your location)</span>
+                            <span>(In Person - At Your Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -342,20 +384,20 @@ const TrainerProfileClass = ({
                         {inPersonAtTrainerLocation && isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtTrainerLocation}`}
-                            <span>(at trainer location)</span>
+                            <span>(In Person - At Trainer's Location)</span>
                           </h6>
                         ) : (
                           ""
                         )}
-                        <h5
+                        {/* <h5
                           onClick={() => {
                             setOpenDialog(true);
                           }}
                           style={{ cursor: "pointer" }}
                         >
                           See package rates
-                        </h5>
-                        <Dialog
+                        </h5> */}
+                        {/* <Dialog
                           onClose={() => {
                             setOpenDialog(false);
                           }}
@@ -467,7 +509,7 @@ const TrainerProfileClass = ({
                               </div>
                             </div>
                           </div>
-                        </Dialog>
+                        </Dialog> */}
                       </div>
                     </div>
                   )}
@@ -542,7 +584,7 @@ const TrainerProfileClass = ({
                             isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor2People} `}
-                                <span>virtual for 2 people</span>
+                                <span>(Virtual Session)</span>
                               </h6>
                             ) : (
                               ""
@@ -551,7 +593,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor2People}`}
-                                <span>at your location for 2 people</span>
+                                <span>(In Person - At Your Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -560,7 +602,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor2People}`}
-                                <span>at trainer location for 2 people</span>
+                                <span>(In Person - At Trainer's Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -579,7 +621,7 @@ const TrainerProfileClass = ({
                             {virtualSessionfor3People && isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor3People} `}
-                                <span>virtual for 3 people</span>
+                                <span>(Virtual Session)</span>
                               </h6>
                             ) : (
                               ""
@@ -588,7 +630,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor3People}`}
-                                <span>at your location for 3 people</span>
+                                <span>(In Person - At Your Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -597,7 +639,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor3People}`}
-                                <span>at trainer location for 3 people</span>
+                                <span>(In Person - At Trainer's Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -617,7 +659,7 @@ const TrainerProfileClass = ({
                             isVirtualPresent ? (
                               <h6>
                                 {`$${virtualSessionfor4People} `}
-                                <span>virtual for 4 people</span>
+                                <span>(Virtual Session)</span>
                               </h6>
                             ) : (
                               ""
@@ -626,7 +668,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtClientLocationfor4People}`}
-                                <span>at your location for 4 people</span>
+                                <span>(In Person - At Your Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -635,7 +677,7 @@ const TrainerProfileClass = ({
                             isInPersonPresent ? (
                               <h6>
                                 {`$${inPeronAtTrainerLocationfor4People}`}
-                                <span>at trainer location for 4 people</span>
+                                <span>(In Person - At Trainer's Location)</span>
                               </h6>
                             ) : (
                               ""
@@ -713,7 +755,7 @@ const TrainerProfileClass = ({
                         {virtualSessionfor15People && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSessionfor15People} `}
-                            <span>virtually for 5-15 people</span>
+                            <span>(Virtual Session)</span>
                           </h6>
                         ) : (
                           ""
@@ -722,7 +764,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAtclientLocationfor15People}`}
-                            <span>at your location for 5-15 people</span>
+                            <span>(In Person - At Your Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -731,7 +773,7 @@ const TrainerProfileClass = ({
                         isInPersonPresent ? (
                           <h6>
                             {`$${inPersonAttrainerLocationfor15People}`}
-                            <span>at trainer location for 5-15 people</span>
+                            <span>(In Person - At Trainer's Location)</span>
                           </h6>
                         ) : (
                           ""
@@ -910,7 +952,7 @@ const TrainerProfileClass = ({
                     />
                     <div className="request-trainer-block">
                       <button
-                        className={`btn btn-transparent  fw-600 fs-18 ${
+                        className={`btn btn-transparent  fw-600 ${
                           isLoading ? "btn-disabled" : ""
                         }`}
                         onClick={handleRequestTrainer}
@@ -921,11 +963,16 @@ const TrainerProfileClass = ({
                         ) : (
                           <>
                             {" "}
-                            <span style={{ color: "black" }}>
+                            <span
+                              style={{ color: "#2C2C2C", fontSize: "20px" }}
+                            >
                               Dont See a Time you want&ensp;?&ensp;
                             </span>
                             <span
-                              style={{ textDecoration: "underline" }}
+                              style={{
+                                textDecoration: "underline",
+                                fontSize: "18px",
+                              }}
                             >{`Request A Time with ${trainerProfileData.firstName}`}</span>
                           </>
                         )}

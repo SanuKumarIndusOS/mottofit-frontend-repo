@@ -64,14 +64,14 @@ td {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   font-family: "Montserrat", sans-serif;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   letter-spacing: 0.6px;
   cursor: default;
   font-weight: 600;
   text-align: justify;
-  /* font-size: 10px; */
+  font-size: 12px;
 }
 
 .date_title {
@@ -94,7 +94,6 @@ td {
 }
 
 .date_title_two {
-  color: white;
   font-weight: 500;
   text-transform: uppercase;
 }
