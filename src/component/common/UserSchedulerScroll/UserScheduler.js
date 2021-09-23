@@ -260,7 +260,7 @@ function UserScheduler({
             &#10095;
           </button>
         </div>
-
+        {/* 
         <div className="calendar_controls mottoBlock">
           <button
             className="calendar_buttons"
@@ -279,13 +279,13 @@ function UserScheduler({
           >
             &#10095;
           </button>
-        </div>
+        </div> */}
       </div>
       <br></br>
       <table className="table sticky d_table" id={`${tableId}`}>
         <thead>
           <tr>
-            <th className="date_title_two">{mottoBlock}</th>
+            <th className="date_title_two text-white">{mottoBlock}</th>
             {date.map((item, keys) => {
               return (
                 <th className={keys === 6 ? "border_right_none" : null}>
@@ -380,10 +380,7 @@ function UserScheduler({
 
       <br></br>
       {alignment === "week" ? (
-        <table
-          className="table sticky mobile_calendar_card"
-          id="trainer_profile_mobile_calendar"
-        >
+        <table className="table sticky mobile_calendar_card">
           <thead>
             <tr>
               <th className="date_title_two">{mottoBlock}</th>

@@ -120,7 +120,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                       <div className="session_offer">
                         <h1>
                           <span style={{ display: "none" }}>$100</span> $
-                          {threeSessionRate}
+                          { Math.round((threeSessionRate/3) * 100) / 100 }
                           <span className="offer">/ Session </span>
                         </h1>
                       </div>
@@ -203,7 +203,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                       <div className="session_offer">
                         <h1>
                           <span style={{ display: "none" }}>$100</span>$
-                          {tensessionRate}
+                          { Math.round((tensessionRate/10) * 100) / 100 }
                           <span className="offer">/ Session</span>
                         </h1>
                       </div>

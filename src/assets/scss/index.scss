@@ -969,6 +969,11 @@ select {
 
 .motto-pass-section {
   margin-top: 15px;
+
+  @media only screen and (max-width: 900px) {
+    margin-left: 2rem;
+  }
+
   .motto-pass-details {
     .session-count {
       font-size: 18px;
@@ -981,6 +986,10 @@ select {
     .session-location-details {
       border-left: 2px solid #e6e6e6;
       padding-left: 18px;
+      @media only screen and (max-width: 900px) {
+        display: none !important;
+      }
+
 
       p {
         color: #898989;

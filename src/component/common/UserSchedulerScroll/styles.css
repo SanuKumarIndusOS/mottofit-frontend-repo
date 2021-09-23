@@ -29,8 +29,7 @@ table {
                                 supported by Chrome, Edge, Opera and Firefox */
 }
 
-.toggle_week
-{
+.toggle_week {
   display: none;
 }
 
@@ -65,14 +64,14 @@ td {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   font-family: "Montserrat", sans-serif;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   letter-spacing: 0.6px;
   cursor: default;
   font-weight: 600;
   text-align: justify;
-  /* font-size: 10px; */
+  font-size: 12px;
 }
 
 .date_title {
@@ -95,10 +94,8 @@ td {
 }
 
 .date_title_two {
-  color: #898989;
   font-weight: 500;
   text-transform: uppercase;
-  /* font-size: 10px; */
 }
 
 .border_top_none {
@@ -137,7 +134,8 @@ td {
 }
 
 .block_cell {
-  background-color: #dedede !important;
+  /* background-color: #dedede !important; */
+  background-color: #626262 !important ;
   /* border: none; */
   /* border-bottom: red; */
 }
@@ -372,8 +370,7 @@ td {
     display: none;
   }
 
-  .toggle_week
-  {
+  .toggle_week {
     display: block;
   }
 }

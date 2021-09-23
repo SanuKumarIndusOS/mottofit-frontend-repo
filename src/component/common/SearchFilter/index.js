@@ -30,7 +30,11 @@ import IconMidDay from "assets/files/FindTrainer/AvaliablityDropDownAssets/MidDa
 import IconHappyHour from "assets/files/FindTrainer/AvaliablityDropDownAssets/HappyHour_icon";
 import IconNeverTooLate from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_icon";
 import CROSSICON from "assets/files/FindTrainer/Cross.svg";
+import { ReactComponent as BlueBoxing } from "assets/files/FindTrainer/DropDownAssets/boxing_blue.svg"
+import { ReactComponent as BluePilates } from "assets/files/FindTrainer/DropDownAssets/blue_pilates.svg"
+import { ReactComponent as BlueStrength } from "assets/files/FindTrainer/DropDownAssets/blue_strength.svg"
 import { ReactComponent as SheduleIcon } from "assets/files/TrainerDashboard/MyEarning/Shedule Icon.svg";
+import { ReactComponent as BlueYoga } from "assets/files/FindTrainer/DropDownAssets/blue_yoga.svg";
 import { ReactComponent as IconEarlyBirdActive } from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_Active.svg";
 
 import { Toast } from "service/toast";
@@ -40,19 +44,19 @@ import Calendar from "react-calendar";
 const trainingTypeIcons = [
   {
     label: "Boxing",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueBoxing className="filterActiveIcon" />,
   },
   {
     label: "Pilates",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BluePilates className="filterActiveIcon" />,
   },
   {
     label: "Strength",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueStrength className="filterActiveIcon" />,
   },
   {
     label: "Yoga",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueYoga className="filterActiveIcon" />,
   },
 ];
 
