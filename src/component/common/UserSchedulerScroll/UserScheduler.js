@@ -339,6 +339,7 @@ function UserScheduler({
                         // }
                       }}
                       className={
+                        
                         (selectedCell.timeKey === keys ||
                           selectedCell.timeKeyTwo === keys) &&
                         date.indexOf(selectedCell.datekey) === datekey

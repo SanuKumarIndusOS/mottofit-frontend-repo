@@ -35,6 +35,7 @@ import { ReactComponent as BluePilates } from "assets/files/FindTrainer/DropDown
 import { ReactComponent as BlueStrength } from "assets/files/FindTrainer/DropDownAssets/blue_strength.svg"
 import { ReactComponent as SheduleIcon } from "assets/files/TrainerDashboard/MyEarning/Shedule Icon.svg";
 import { ReactComponent as BlueYoga } from "assets/files/FindTrainer/DropDownAssets/blue_yoga.svg";
+import { ReactComponent as BlueHappyHour } from "assets/files/FindTrainer/AvaliablityDropDownAssets/blue_happyHour.svg";
 import { ReactComponent as IconEarlyBirdActive } from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_Active.svg";
 
 import { Toast } from "service/toast";
@@ -80,7 +81,7 @@ const availabilityIconsList = [
   },
   {
     label: "Happy Hours",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueHappyHour className="filterActiveIcon" />,
   },
   {
     label: "Never too late",
