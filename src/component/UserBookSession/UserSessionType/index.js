@@ -79,6 +79,7 @@ const UserBookSessionFC = ({
   const location = useLocation();
 
   React.useEffect(() => {
+    console.log(selectedTrainerData, "selectedTrainerData");
     if (!localStorage.getItem("token")) {
       // let reduxData = {
       //   isModelOpen: true,
@@ -258,6 +259,8 @@ const UserBookSessionFC = ({
     window.scrollTo(0, 0);
 
     mottoPassData({});
+
+    console.log(sessionData, "lp");
   }, []);
 
   const getPricingObject = () => {
@@ -766,6 +769,44 @@ const UserBookSessionFC = ({
                                   </div>
                                 </Modal>
                               ) : null}
+
+                              <div className="oneOnOnep">
+                                <h6> {`$${pricingObject.sessionOneonOne}`} </h6>
+                                <span className="spann">/ session </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {" "}
+                                  {`$${
+                                    Math.round(
+                                      (selectedTrainerData?.oneOnOnePricing
+                                        ?.passRatefor3SessionAtVirtual /
+                                        3) *
+                                        100
+                                    ) / 100
+                                  }`}{" "}
+                                </h6>
+                                <span className="spann">
+                                  / session (3 Session Pass){" "}
+                                </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {" "}
+                                  {`$${
+                                    Math.round(
+                                      (selectedTrainerData?.oneOnOnePricing
+                                        ?.passRatefor10SessionAtVirtual /
+                                        10) *
+                                        100
+                                    ) / 100
+                                  }`}{" "}
+                                </h6>
+                                <span className="spann">
+                                  / session (10 Sessions Pass)
+                                </span>
+                              </div>
+                              {/*                              
                               <div className="session_card_inner">
                                 <h6 className="mt-3">
                                   {`$${pricingObject.sessionOneonOne}`}
@@ -773,7 +814,9 @@ const UserBookSessionFC = ({
                                 </h6>
 
                                 <img src={TrainerIcon} alt="icon" />
-                              </div>
+                                
+                              </div> */}
+
                               <button
                                 onClick={() =>
                                   handleBookSession(
@@ -965,7 +1008,7 @@ const UserBookSessionFC = ({
                                   </div>
                                 </Modal>
                               ) : null}
-                              <div className="session_card_inner">
+                              {/* <div className="session_card_inner">
                                 <h6 className="mt-3">
                                   {`$${
                                     pricingObject?.inPersonOneOneOne[
@@ -983,6 +1026,60 @@ const UserBookSessionFC = ({
                                 </h6>
 
                                 <img src={TrainerIcon} alt="icon" />
+                              </div> */}
+
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {" "}
+                                  {`$${
+                                    pricingObject?.inPersonOneOneOne[
+                                      trainingVenue?.value
+                                    ]?.value
+                                  }`}{" "}
+                                </h6>
+                                <span className="spann">/ session </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {`$${
+                                 
+                                    trainingVenue?.label === "Trainer's Location"?Math.round(
+                                        (selectedTrainerData?.oneOnOnePricing
+                                          ?.passRatefor3SessionAtTrainerLocation /
+                                          3) *
+                                          100
+                                      ) / 100: Math.round(
+                                        (selectedTrainerData?.oneOnOnePricing
+                                          ?.passRatefor3SessionAtClientLocation /
+                                          3) *
+                                          100
+                                      ) / 100
+                                  }`}
+                                </h6>
+                                <span className="spann">
+                                  / session (3 Session Pass){" "}
+                                </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                {`$${
+                                 
+                                 trainingVenue?.label === "Trainer's Location"?Math.round(
+                                     (selectedTrainerData?.oneOnOnePricing
+                                       ?.passRatefor10SessionAtTrainerLocation /
+                                       10) *
+                                       100
+                                   ) / 100: Math.round(
+                                    (selectedTrainerData?.oneOnOnePricing
+                                      ?.passRatefor10SessionAtClientLocation /
+                                      10) *
+                                      100
+                                  ) / 100
+                               }`}
+                                </h6>
+                                <span className="spann">
+                                  / session (10 Sessions Pass)
+                                </span>
                               </div>
 
                               <button

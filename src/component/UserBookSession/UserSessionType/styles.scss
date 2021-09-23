@@ -237,6 +237,28 @@
                   font-family: "Montserrat", sans-serif;
                 }
               }
+
+              .oneOnOnep {
+                padding-left: 2rem;
+                display: flex;
+
+                align-items: center;
+
+                h6 {
+                  font-size: 28px;
+                 
+                }
+
+                .spann {
+                  letter-spacing: 0.27px;
+                  color: #696969;
+                  font-size: 18px;
+                  font-weight: 500;
+                  font-family: "Montserrat", sans-serif;
+                  margin-left: 0.5em;
+                }
+              }
+
               .session_card_inner {
                 display: flex;
                 justify-content: space-between;
