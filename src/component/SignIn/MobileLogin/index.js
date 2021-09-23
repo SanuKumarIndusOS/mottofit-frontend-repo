@@ -3,7 +3,7 @@ import "./styles.scss";
 
 import Mail from "../../../assets/files/SignUp/Email Icon.svg";
 import Password from "../../../assets/files/SignUp/Password Icon.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import CloseIcon from "../../../assets/files/FindTrainer/Cross.svg";
 import BlueHoverButton from "../../common/BlueArrowButton";
@@ -21,6 +21,8 @@ import { SocialLogin } from "component/common/SocialLogin";
 
 const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
   const myRef = useRef(null);
+
+  const historyData = useHistory();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -33,6 +35,15 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [apiError, setApiError] = useState("");
   const [isLoading, setLoading] = useState(false);
+
+  const searchUrl = historyData.location.search;
+
+  const urlData = new URLSearchParams(decodeURIComponent(searchUrl));
+
+  console.log(urlData.get("requestSession"));
+  console.log(urlData.get("nextpath"));
+
+  console.log(searchUrl);
 
   const onChangeValue = (e) => {
     e.persist();
@@ -53,6 +64,18 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
 
   async function logIn(e) {
     e.preventDefault();
+
+    const nextPathUrl = urlData.get("nextpath");
+    const isRequestSession = urlData.get("requestSession");
+
+    console.log(
+      isRequestSession,
+      nextPathUrl,
+      nextPathUrl.includes("/message/requested"),
+      !isRequestSession,
+      !nextPathUrl.includes("/message/requested")
+    );
+
     const payload = {
       email: data.email,
       password: data.password,
@@ -80,7 +103,18 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
 
         console.log("log1");
 
-        if (nextPathReRouter(nextAction)) return;
+        if (!isRequestSession && !nextPathUrl.includes("/message/requested")) {
+          console.log("Hi");
+
+          let reduxData = {
+            nextAction: null,
+          };
+          updateUserDetails(reduxData);
+
+          if (nextPathReRouter(null)) return;
+        } else {
+          if (nextPathReRouter(nextAction)) return;
+        }
 
         console.log("log1");
 

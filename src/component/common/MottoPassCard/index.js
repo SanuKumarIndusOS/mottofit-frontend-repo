@@ -15,7 +15,7 @@ import DollarIcon from "assets/files/SVG/green_dollar_sign.svg";
 import moment from "moment";
 
 export const MottoPassCard = ({ data }) => {
-  const { remains, price, expiresIn, passType, trainer } = data || {};
+  const { totalPassCount, price, expiresIn, passType, trainer } = data || {};
 
   let mottoPassType = "";
 
@@ -40,6 +40,8 @@ export const MottoPassCard = ({ data }) => {
     profilePicture: trainer?.profilePicture,
   };
 
+  let discountedPrice = Math.abs(price / totalPassCount).toFixed(2);
+
   return (
     <div className="mottopass-card">
       <div className="pass-user-detail d-flex align-items-center flex-column position-relative">
@@ -47,7 +49,7 @@ export const MottoPassCard = ({ data }) => {
           <UserAvatar className="img-md" {...userData} />
         </div>
         <span className="mottopass-double-ribbon text-uppercase d-flex align-items-center justify-content-center position-relative">
-          {`${remains} Session Pass`}
+          {`${totalPassCount} Session Pass`}
         </span>
       </div>
       <div className="pass-user-name text-center">
@@ -83,7 +85,7 @@ export const MottoPassCard = ({ data }) => {
             <img src={DollarIcon} alt="dollar icon" />
           </span>
           <p className="fs-15">
-            {` Each session is priced at a discounted rate of $${price}/-`}
+            {` Each session is priced at a discounted rate of $${discountedPrice}/-`}
           </p>
         </div>
       </div>

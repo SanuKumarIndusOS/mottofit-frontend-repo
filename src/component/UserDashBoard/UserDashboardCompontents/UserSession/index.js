@@ -115,11 +115,22 @@ const UserSessionClass = (props) => {
 
     let currentSession = sessionTypeData[tab];
 
+    // console.log(tab);
+
     setCurrentTab(tab);
 
     setUserData((prevData) => {
-      if (prevData[currentSession]?.length > 0) return prevData;
+      // console.log();
+
+      if (prevData[currentSession]?.length > 0) {
+        setLoading(false);
+        // console.log("Hii");
+
+        return prevData;
+      }
       setLoading(true);
+      console.log(tab);
+
       _userSession(tab);
 
       return prevData;

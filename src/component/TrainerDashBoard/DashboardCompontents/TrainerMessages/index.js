@@ -77,6 +77,7 @@ const TrainerMessageClass = ({
     admin: 0,
     user: 0,
     trainer: 0,
+    requested: 0,
   });
   const [totalData, setTotalData] = useState({
     invited: 0,
@@ -85,6 +86,7 @@ const TrainerMessageClass = ({
     admin: 0,
     user: 0,
     trainer: 0,
+    requested: 0,
   });
 
   const [currentTab, setCurrentTab] = useState(
@@ -189,7 +191,11 @@ const TrainerMessageClass = ({
           return tempChannelData;
         });
 
-        let prevData = [...(prevReduxData[tab] || [])];
+        let prevData = [];
+
+        if (pageData[tab] !== 0) {
+          prevData = [...(prevReduxData[tab] || [])];
+        }
 
         let reduxData = {
           [currentSession]: [...prevData, ...updatedData],

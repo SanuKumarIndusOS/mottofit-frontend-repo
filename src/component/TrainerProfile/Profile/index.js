@@ -171,7 +171,7 @@ const TrainerProfileClass = ({
 
     let redirectURL = `/mobile/login?${encodeURIComponent(
       `nextpath=/users/dashboard/message/requested`
-    )}`;
+    )}&requestSession=true`;
 
     if (!userId) {
       window.scrollTo(0, 0);

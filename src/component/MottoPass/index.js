@@ -20,11 +20,11 @@ export const MottoPassSection = ({ handlePagination, mottoPassData }) => {
         <h1 className="fs-25 font-weight-normal">Valid Motto Passes</h1>
       </div>
 
-      <div className="mottopass-cards-section row">
+      <div className="mottopass-cards-section row w-100 justify-content-between">
         {validMottoPassData.map((data) => (
-          <div className="col-xl-6 col-12" key={data.id}>
-            <MottoPassCard data={data} />
-          </div>
+          //   <div className="col-xl-6 col-12" key={data.id}>
+          <MottoPassCard data={data} key={data.id} />
+          //   </div>
         ))}
       </div>
 
