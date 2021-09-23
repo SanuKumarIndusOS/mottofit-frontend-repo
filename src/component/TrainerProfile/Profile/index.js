@@ -152,12 +152,10 @@ const TrainerProfileClass = ({
   };
 
   const areaOfExpertise = trainerProfileData?.areaOfExpertise?.toString();
-  const isVirtualPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "virtual"
-  );
-  const isInPersonPresent = trainerProfileData?.preferedTrainingMode?.includes(
-    "inPerson"
-  );
+  const isVirtualPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("virtual");
+  const isInPersonPresent =
+    trainerProfileData?.preferedTrainingMode?.includes("inPerson");
 
   const handleRequestTrainer = () => {
     const userId = localStorage.getItem("user-id");
@@ -240,6 +238,12 @@ const TrainerProfileClass = ({
     virtualSession = "",
     inPersonAtClientLocation = "",
     inPersonAtTrainerLocation = "",
+    passRatefor3SessionAtVirtual,
+    passRatefor3SessionAtTrainerLocation,
+    passRatefor3SessionAtClientLocation,
+    passRatefor10SessionAtVirtual,
+    passRatefor10SessionAtClientLocation,
+    passRatefor10SessionAtTrainerLocation,
   } = trainerProfileData?.oneOnOnePricing || {};
 
   const {
@@ -284,6 +288,40 @@ const TrainerProfileClass = ({
     inPersonAttrainerLocationfor15People,
   ].some((price) => price !== "" && parseFloat(price) > 0);
 
+  const findMinThreePass = [
+    {
+      label: "Session / (3 Session Pass Virtual)",
+      value: passRatefor3SessionAtVirtual,
+    },
+    {
+      label: "Session / (3 Session Pass At Your Location)",
+      value: passRatefor3SessionAtClientLocation,
+    },
+    {
+      label: "Session / (3 Session Pass At Trainer's Location)",
+      value: passRatefor3SessionAtTrainerLocation,
+    },
+  ].reduce((prev, curr) =>
+    prev.value > 0 && prev.value < curr.value ? prev : curr
+  );
+
+  const findMinTenPass = [
+    {
+      label: "Session / (10 Session Pass Virtual)",
+      value: passRatefor10SessionAtVirtual,
+    },
+    {
+      label: "Session / (10 Session Pass At Your Location)",
+      value: passRatefor10SessionAtClientLocation,
+    },
+    {
+      label: "Session / (10 Session Pass At Trainer's Location)",
+      value: passRatefor10SessionAtTrainerLocation,
+    },
+  ].reduce((prev, curr) =>
+    prev.value > 0 && prev.value < curr.value ? prev : curr
+  );
+
   return (
     <>
       {console.log(collapseTitle, "asdsdfdsfdsf")}
@@ -325,7 +363,10 @@ const TrainerProfileClass = ({
             <div className="profile_main_contents container">
               <div className="profile_aside">
                 <div className="profile_aside_link">
-                  <Link onClick={handleBookSession}>View Calender</Link>
+                  <Link onClick={handleBookSession}>{`Book Trainer ${
+                    trainerProfileData.firstName[0].toUpperCase() +
+                    trainerProfileData.firstName.slice(1)
+                  } ${trainerProfileData.lastName}`}</Link>
                   <img src={ArrowNext} alt="icon" />
                 </div>
                 {/* <div className="profile_aside_link">
@@ -355,6 +396,17 @@ const TrainerProfileClass = ({
                           All the rates displayed below are the total amounts
                           for each session.
                         </p>
+
+                        <h6>
+                          ${findMinThreePass.value}
+                          <span>{findMinThreePass.label}</span>
+                        </h6>
+
+                        <h6>
+                          ${findMinTenPass.value}
+                          <span>{findMinTenPass.label}</span>
+                        </h6>
+
                         {virtualSession && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSession} `}
@@ -378,66 +430,6 @@ const TrainerProfileClass = ({
                           </h6>
                         ) : (
                           ""
-                        )}
-
-                        <h6 className="for_people_title">For 3 Session Pass</h6>
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor3SessionAtVirtual !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtVirtual}`}
-                            <span>Session / (Virtual)</span>
-                          </h6>
-                        )}
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor3SessionAtClientLocation !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}`}
-                            <span>
-                              Session / (In Person - At Your Location)
-                            </span>
-                          </h6>
-                        )}
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor3SessionAtTrainerLocation !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}`}
-                            <span>
-                              Session / (In Person - At Trainer's Location)
-                            </span>
-                          </h6>
-                        )}
-                        <h6 className="for_people_title">
-                          For 10 Session Pass
-                        </h6>
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor10SessionAtVirtual !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}`}
-                            <span>Session / (Virtual)</span>
-                          </h6>
-                        )}
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor10SessionAtClientLocation !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}`}
-                            <span>
-                              <span>
-                                Session / (In Person - At Your Location)
-                              </span>
-                            </span>
-                          </h6>
-                        )}
-
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor10SessionAtTrainerLocation !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}`}
-                            <span>
-                              <span>
-                                Session / (In Person - At Trainer's Location)
-                              </span>
-                            </span>
-                          </h6>
                         )}
 
                         {/* <h5
@@ -1114,7 +1106,7 @@ const ButtonSection = ({
   handleSessionType,
   disableBooking,
   trainerstartSlot,
-  trainerEndSlot
+  trainerEndSlot,
 }) => {
   const disableBtn = selectedTimes?.length > 0;
 
@@ -1133,11 +1125,13 @@ const ButtonSection = ({
         {!disableBooking ? (
           <div className="item_slot3">
             <div className="indicator3"></div>
-            <h5> {moment(trainerstartSlot).format("hh:mm A")} to <br></br> {moment(trainerEndSlot).format("hh:mm A")}</h5>
+            <h5>
+              {" "}
+              {moment(trainerstartSlot).format("hh:mm A")} to <br></br>{" "}
+              {moment(trainerEndSlot).format("hh:mm A")}
+            </h5>
           </div>
         ) : null}
-
-       
 
         <div className="item_slot4">
           {!disableBooking ? (
