@@ -1031,7 +1031,7 @@ const TrainerProfileClass = ({
                       style={{
                         textTransform: "capitalize",
                       }}
-                    >
+                    >Book a session on&ensp;
                       {trainerProfileData.firstName}
                       <span
                         style={{
@@ -1040,7 +1040,7 @@ const TrainerProfileClass = ({
                       >
                         's
                       </span>{" "}
-                      Schedule{" "}
+                      Calendar{" "}
                     </h2>
 
                     {/* 
