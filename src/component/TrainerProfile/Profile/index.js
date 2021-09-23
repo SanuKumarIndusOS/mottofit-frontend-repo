@@ -1073,7 +1073,7 @@ const TrainerProfileClass = ({
                           </span>
                           <button className="book_session_btn d-flex align-items-center">
                             {`Request A Time with ${trainerProfileData.firstName}`}
-                            <ArrowHoverBlacked />
+                            <BlueHoverButton />
                           </button>
                         </div>
                       )}
@@ -1199,7 +1199,7 @@ const ButtonSection = ({
               // disabled={disableBooking}
             >
               BOOK selected time
-              <BlueHoverButton />{" "}
+              <ArrowHoverBlacked />{" "}
             </button>
           ) : null}{" "}
         </div>
