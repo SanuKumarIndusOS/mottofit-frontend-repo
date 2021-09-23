@@ -118,14 +118,17 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         </h5>
                       </div>
                       <div className="session_offer">
+                      { threeSessionRate  !== 0 ? 
                         <h1>
                           <span style={{ display: "none" }}>$100</span> $
-                          { Math.round((threeSessionRate/3) * 100) / 100 }
+                           {Math.round((threeSessionRate/3) * 100) / 100}
                           <span className="offer">/ Session </span>
                         </h1>
+                         :  <h1>Not Available</h1>}
                       </div>
                     </div>
                     <div className="get_sessionPass">
+                      {threeSessionRate !== 0 ?
                       <button
                         onClick={() => {
                           // console.log(sessionData, "hit");
@@ -167,7 +170,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         }}
                       >
                         get this pass now <BlueHoverButton />
-                      </button>
+                      </button>: null }
                     </div>
                     <div className="button_line"></div>
                   </div>
@@ -201,18 +204,23 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         </h5>
                       </div>
                       <div className="session_offer">
+                      { tensessionRate  !== 0 ? 
                         <h1>
                           <span style={{ display: "none" }}>$100</span>$
                           { Math.round((tensessionRate/10) * 100) / 100 }
                           <span className="offer">/ Session</span>
                         </h1>
+                        : <h1>Not Available</h1>}
                       </div>
                     </div>
                     <div className="get_sessionPass">
+                      {tensessionRate !== 0?
                       <button
-                      
+                     
                       onClick={() => {
                         // console.log(sessionData, "hit");
+
+                       
 
                         let pass_type;
                         let _price;
@@ -248,7 +256,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         history.push("/user/payment");
                       }}>
                         get this pass now <BlueHoverButton />
-                      </button>
+                      </button> : null }
                     </div>
                     <div className="button_line"></div>
                   </div>
