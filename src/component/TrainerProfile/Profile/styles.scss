@@ -482,7 +482,7 @@
                 .items_slots {
                   display: flex;
                   align-items: center;
-                  justify-content: space-between;
+                  justify-content: flex-end;
                   width: 100%;
                   @media only screen and (max-width: 900px) {
                     // display: unset;
@@ -554,8 +554,8 @@
                   .item_slot4 {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     margin-bottom: 1rem;
-
                     button {
                       display: flex;
                       align-items: center;
@@ -563,16 +563,14 @@
                       padding: 0.5em 0 0.5em 0.8em !important;
                       border: none;
                       outline: none;
-                      color: #fff;
+                      color: #161616;
                       text-transform: uppercase;
-                      margin: 0 0 0 1em;
                       font-size: 14px;
                       font-weight: 700;
                       font-family: Montserrat;
-                      background: #53bfd2;
                     }
                     @media only screen and (max-width: 900px) {
-                      //margin-top: 3rem;
+                      margin-top: 0rem;
                       button {
                         margin: unset;
                       }
@@ -832,6 +830,8 @@
   .request_a_time_part {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
     font-size: 18px;
     font-weight: 600;
   }
@@ -865,6 +865,7 @@
   .request-trainer-block {
     .request_a_time_part {
       display: block;
+      margin-right: 0px;
       .book_session_btn {
         margin: 10px 0px 40px 0px;
       }

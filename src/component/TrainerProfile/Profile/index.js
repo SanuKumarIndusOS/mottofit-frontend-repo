@@ -5,6 +5,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import Tick from "../../../assets/files/FindTrainer/Tick 1.svg";
 import Share from "../../../assets/files/FindTrainer/share.svg";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
+import BlueHoverButton from "../../common/BlueArrowButton";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import "./model.scss";
@@ -288,39 +289,40 @@ const TrainerProfileClass = ({
     inPersonAttrainerLocationfor15People,
   ].some((price) => price !== "" && parseFloat(price) > 0);
 
-  const findMinThreePass = [
-    {
-      label: "Session / (3 Session Pass Virtual)",
-      value: passRatefor3SessionAtVirtual,
-    },
-    {
-      label: "Session / (3 Session Pass At Your Location)",
-      value: passRatefor3SessionAtClientLocation,
-    },
-    {
-      label: "Session / (3 Session Pass At Trainer's Location)",
-      value: passRatefor3SessionAtTrainerLocation,
-    },
-  ].reduce((prev, curr) =>
-    prev.value > 0 && prev.value < curr.value ? prev : curr
-  );
+  //Minimum values finding
+  // const findMinThreePass = [
+  //   {
+  //     label: "Session / (3 Session Pass Virtual)",
+  //     value: passRatefor3SessionAtVirtual,
+  //   },
+  //   {
+  //     label: "Session / (3 Session Pass At Your Location)",
+  //     value: passRatefor3SessionAtClientLocation,
+  //   },
+  //   {
+  //     label: "Session / (3 Session Pass At Trainer's Location)",
+  //     value: passRatefor3SessionAtTrainerLocation,
+  //   },
+  // ].reduce((prev, curr) =>
+  //   prev.value > 0 && prev.value < curr.value ? prev : curr
+  // );
 
-  const findMinTenPass = [
-    {
-      label: "Session / (10 Session Pass Virtual)",
-      value: passRatefor10SessionAtVirtual,
-    },
-    {
-      label: "Session / (10 Session Pass At Your Location)",
-      value: passRatefor10SessionAtClientLocation,
-    },
-    {
-      label: "Session / (10 Session Pass At Trainer's Location)",
-      value: passRatefor10SessionAtTrainerLocation,
-    },
-  ].reduce((prev, curr) =>
-    prev.value > 0 && prev.value < curr.value ? prev : curr
-  );
+  // const findMinTenPass = [
+  //   {
+  //     label: "Session / (10 Session Pass Virtual)",
+  //     value: passRatefor10SessionAtVirtual,
+  //   },
+  //   {
+  //     label: "Session / (10 Session Pass At Your Location)",
+  //     value: passRatefor10SessionAtClientLocation,
+  //   },
+  //   {
+  //     label: "Session / (10 Session Pass At Trainer's Location)",
+  //     value: passRatefor10SessionAtTrainerLocation,
+  //   },
+  // ].reduce((prev, curr) =>
+  //   prev.value > 0 && prev.value < curr.value ? prev : curr
+  // );
 
   return (
     <>
@@ -395,7 +397,7 @@ const TrainerProfileClass = ({
                           All the rates displayed below are the total amounts
                           for each session.
                         </p>
-                        {findMinThreePass.value !== 0 && (
+                        {/* {findMinThreePass.value !== 0 && (
                           <h6>
                             ${findMinThreePass.value}
                             <span>{findMinThreePass.label}</span>
@@ -407,8 +409,10 @@ const TrainerProfileClass = ({
                             ${findMinTenPass.value}
                             <span>{findMinTenPass.label}</span>
                           </h6>
-                        )}
-
+                        )} */}
+                        <h2 className="for_people_title">
+                          FOR INDIVIDUAL SESSION
+                        </h2>
                         {virtualSession && isVirtualPresent ? (
                           <h6>
                             {`$${virtualSession} `}
@@ -432,6 +436,59 @@ const TrainerProfileClass = ({
                           </h6>
                         ) : (
                           ""
+                        )}
+
+                        <h2 className="for_people_title">For 3 Session Pass</h2>
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtClientLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}`}
+                            <span>
+                              Session / (In Person - At Your Location)
+                            </span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtTrainerLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}`}
+                            <span>
+                              Session / (In Person - At Trainer's Location)
+                            </span>
+                          </h6>
+                        )}
+                        <h2 className="for_people_title">
+                          For 10 Session Pass
+                        </h2>
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtVirtual !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}`}
+                            <span>Session / (Virtual)</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtClientLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}`}
+                            <span>
+                              <span>
+                                Session / (In Person - At Your Location)
+                              </span>
+                            </span>
+                          </h6>
+                        )}
+
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtTrainerLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}`}
+                            <span>
+                              <span>
+                                Session / (In Person - At Trainer's Location)
+                              </span>
+                            </span>
+                          </h6>
                         )}
 
                         {/* <h5
@@ -981,26 +1038,6 @@ const TrainerProfileClass = ({
                       </span>{" "}
                       Schedule{" "}
                     </h2>
-                    <div className="request-trainer-block">
-                      {isLoading ? (
-                        "Loading..."
-                      ) : (
-                        <div
-                          className={
-                            isLoading ? "d-none" : "request_a_time_part"
-                          }
-                          onClick={handleRequestTrainer}
-                        >
-                          <span style={{ color: "#2C2C2C", fontSize: "20px" }}>
-                            Dont See a Time you want&ensp;?&ensp;
-                          </span>
-                          <button className="book_session_btn d-flex align-items-center">
-                            {`Request A Time with ${trainerProfileData.firstName}`}
-                            <ArrowHoverBlacked />
-                          </button>
-                        </div>
-                      )}
-                    </div>
 
                     {/* 
                     <UserScheduler
@@ -1021,6 +1058,26 @@ const TrainerProfileClass = ({
                       trainerstartSlot={trainerstartSlot}
                       trainerEndSlot={trainerEndSlot}
                     />
+                    <div className="request-trainer-block">
+                      {isLoading ? (
+                        "Loading..."
+                      ) : (
+                        <div
+                          className={
+                            isLoading ? "d-none" : "request_a_time_part"
+                          }
+                          onClick={handleRequestTrainer}
+                        >
+                          <span style={{ color: "#2C2C2C", fontSize: "20px" }}>
+                            Dont See a Time you want&ensp;?&ensp;
+                          </span>
+                          <button className="book_session_btn d-flex align-items-center">
+                            {`Request A Time with ${trainerProfileData.firstName}`}
+                            <ArrowHoverBlacked />
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   {/* </div> */}
                 </div>
@@ -1114,11 +1171,13 @@ const ButtonSection = ({
 
   return (
     <div className="schedular_slots">
-      <div className="items_slots">
-        <div className="item_slot1">
+      <div
+        className={`items_slots ${disableBooking && "justify-content-center"}`}
+      >
+        {/* <div className="item_slot1">
           <div className="indicator"></div>
-          <h5>AVAILABLE</h5>
-        </div>
+          <h5></h5>
+        </div> */}
         <div className="item_slot2">
           <div className="indicator2"></div>
           <h5>UNAVAILABLE</h5>{" "}
@@ -1128,13 +1187,11 @@ const ButtonSection = ({
           <div className="item_slot3">
             <div className="indicator3"></div>
             <h5>
-              {" "}
-              {moment(trainerstartSlot).format("hh:mm A")} to <br></br>{" "}
+              {moment(trainerstartSlot).format("hh:mm A")} to{" "}
               {moment(trainerEndSlot).format("hh:mm A")}
             </h5>
           </div>
         ) : null}
-
         <div className="item_slot4">
           {!disableBooking ? (
             <button
@@ -1142,7 +1199,7 @@ const ButtonSection = ({
               // disabled={disableBooking}
             >
               BOOK selected time
-              <ArrowHoverBlacked />{" "}
+              <BlueHoverButton />{" "}
             </button>
           ) : null}{" "}
         </div>

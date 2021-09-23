@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 import Tick from "../../../assets/files/FindTrainer/Tick 1.svg";
 import BlueHoverButton from "../../common/BlueArrowButton";
-import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
-import ArrowNext from "../../../assets/files/SVG/Arrow Next.svg";
+import ArrowBackWhite from "../../../assets/files/SVG/Arrow_Back_White.svg";
+import ArrowNextWhite from "../../../assets/files/SVG/Arrow_Next_White.svg";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -19,19 +19,17 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
   React.useEffect(() => {
     //const { oneOnOnePricing } = selectedTrainerData?.trainerData;
     // console.log(selectedTrainerData?.trainerData, "sd");
-   // console.log(selectedTrainerData );
+    // console.log(selectedTrainerData );
 
     mottoPassData({});
 
     if (sessionData?.preferedTrainingMode === "virtual") {
       setsessionType("(Virtual)");
       setthreeSessionRate(
-        selectedTrainerData?.oneOnOnePricing
-          ?.passRatefor3SessionAtVirtual
+        selectedTrainerData?.oneOnOnePricing?.passRatefor3SessionAtVirtual
       );
       settensessionRate(
-        selectedTrainerData?.oneOnOnePricing
-          ?.passRatefor10SessionAtVirtual
+        selectedTrainerData?.oneOnOnePricing?.passRatefor10SessionAtVirtual
       );
     } else {
       if (sessionData?.trainingVenue?.value === "trainerLocation") {
@@ -60,8 +58,6 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
     }
   }, []);
 
-
-
   return (
     <>
       <div className="motto_outter_container">
@@ -70,7 +66,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
             <div className="motto_links">
               <div className="links_wrapper">
                 <div className="outter_links">
-                  <img src={ArrowBack} alt="icon" />
+                  <img src={ArrowBackWhite} alt="icon" className="mr-2" />
                   <div className="inner_links">
                     <Link to="/user/session-type"> Change your Booking</Link>
                     <div></div>
@@ -81,7 +77,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                     <Link to="/user/payment">Skip to Payment</Link>
                     <div></div>
                   </div>
-                  <img src={ArrowNext} alt="icon" />
+                  <img src={ArrowNextWhite} alt="icon" className="ml-2" />
                 </div>
               </div>
             </div>
@@ -137,20 +133,23 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                           let _price;
                           if (sessionData?.preferedTrainingMode === "virtual") {
                             pass_type = "virtual";
-                            _price = selectedTrainerData?.oneOnOnePricing
-                            ?.passRatefor3SessionAtVirtual
-                          }else
-                          {
-                            pass_type = sessionData?.trainingVenue?.value
+                            _price =
+                              selectedTrainerData?.oneOnOnePricing
+                                ?.passRatefor3SessionAtVirtual;
+                          } else {
+                            pass_type = sessionData?.trainingVenue?.value;
 
-                            if(sessionData?.trainingVenue?.value === "clientLocation")
-                            {
-                              _price = selectedTrainerData?.oneOnOnePricing
-                              ?.passRatefor3SessionAtClientLocation
-                            }else
-                            {
-                              _price = selectedTrainerData?.oneOnOnePricing
-                              ?.passRatefor3SessionAtTrainerLocation 
+                            if (
+                              sessionData?.trainingVenue?.value ===
+                              "clientLocation"
+                            ) {
+                              _price =
+                                selectedTrainerData?.oneOnOnePricing
+                                  ?.passRatefor3SessionAtClientLocation;
+                            } else {
+                              _price =
+                                selectedTrainerData?.oneOnOnePricing
+                                  ?.passRatefor3SessionAtTrainerLocation;
                             }
                           }
                           let newPass = {
@@ -165,8 +164,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                           mottoPassData(newPass);
 
                           console.log(newPass);
-                          history.push("/user/payment")
-                          
+                          history.push("/user/payment");
                         }}
                       >
                         get this pass now <BlueHoverButton />
@@ -207,7 +205,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                       { tensessionRate  !== 0 ? 
                         <h1>
                           <span style={{ display: "none" }}>$100</span>$
-                          { Math.round((tensessionRate/10) * 100) / 100 }
+                          {Math.round((tensessionRate / 10) * 100) / 100}
                           <span className="offer">/ Session</span>
                         </h1>
                         : <h1>Not Available</h1>}
@@ -232,29 +230,33 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                         {
                           pass_type = sessionData?.trainingVenue?.value
 
-                          if(sessionData?.trainingVenue?.value === "clientLocation")
-                          {
-                            _price = selectedTrainerData?.oneOnOnePricing
-                            ?.passRatefor10SessionAtClientLocation
-                          }else
-                          {
-                            _price = selectedTrainerData?.oneOnOnePricing
-                            ?.passRatefor10SessionAtTrainerLocation 
+                            if (
+                              sessionData?.trainingVenue?.value ===
+                              "clientLocation"
+                            ) {
+                              _price =
+                                selectedTrainerData?.oneOnOnePricing
+                                  ?.passRatefor10SessionAtClientLocation;
+                            } else {
+                              _price =
+                                selectedTrainerData?.oneOnOnePricing
+                                  ?.passRatefor10SessionAtTrainerLocation;
+                            }
                           }
-                        }
-                        let newPass = {
-                          price: _price,
-                          purchaseDate: new Date().toISOString().slice(0, 10),
-                          passValidity: 90,
-                          totalPasses: 10,
-                          timeZone: "America/New_York",
-                          passType: pass_type,
-                        };
+                          let newPass = {
+                            price: _price,
+                            purchaseDate: new Date().toISOString().slice(0, 10),
+                            passValidity: 90,
+                            totalPasses: 10,
+                            timeZone: "America/New_York",
+                            passType: pass_type,
+                          };
 
-                        console.log(newPass);
+                          console.log(newPass);
 
-                        history.push("/user/payment");
-                      }}>
+                          history.push("/user/payment");
+                        }}
+                      >
                         get this pass now <BlueHoverButton />
                       </button> : null }
                     </div>
@@ -285,9 +287,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    mottoPassData
-  }, dispatch);
+  return bindActionCreators(
+    {
+      mottoPassData,
+    },
+    dispatch
+  );
 };
 
 const UserMottoPassC = connect(
