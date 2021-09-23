@@ -544,7 +544,7 @@
 .payment_container {
   width: 100%;
   height: auto;
-  
+
   .payment_wrapper {
     .payment_heading {
       display: flex;
@@ -560,8 +560,7 @@
         font-family: "Cormorant Garamond", sans-serif;
       }
       p {
-        @media screen and (max-width: 920px)
-        {
+        @media screen and (max-width: 920px) {
           width: 100%;
           margin-top: 20px;
         }
@@ -595,8 +594,7 @@
           align-items: center;
           width: 1100px;
           grid-column-gap: 23px;
-          @media screen and (max-width: 920px)
-          {
+          @media screen and (max-width: 920px) {
             display: block;
             width: unset;
             margin-top: 1rem;

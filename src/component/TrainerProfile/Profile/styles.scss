@@ -120,6 +120,7 @@
               font-weight: normal;
               font-family: "Montserrat", sans-serif;
               padding-bottom: 2px;
+              text-transform: capitalize;
             }
             a:hover {
               text-decoration: none;
@@ -517,7 +518,7 @@
                     .indicator2 {
                       width: 60px;
                       height: 15px;
-                      background: #dedede;
+                      background: #626262 !important;
                       opacity: 1;
                     }
                     h5 {
