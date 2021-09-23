@@ -19,23 +19,27 @@ import IconBoxing from "assets/files/FindTrainer/DropDownAssets/Boxing_icon";
 import IconPilates from "assets/files/FindTrainer/DropDownAssets/Pilates_icon";
 import IconStrength from "assets/files/FindTrainer/DropDownAssets/Strength_icon";
 import IconYoga from "assets/files/FindTrainer/DropDownAssets/Yoga_icon";
-import { ReactComponent as IconBoxingActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
-import { ReactComponent as IconPilatesActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
-import { ReactComponent as IconStrengthActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
-import { ReactComponent as IconYogaActive } from "assets/files/FindTrainer/DropDownAssets/Strength_HIIT_Active.svg";
 
 import IconEarlyBird from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_icon";
 import IconRiseAndShine from "assets/files/FindTrainer/AvaliablityDropDownAssets/RiseShine_icon";
 import IconMidDay from "assets/files/FindTrainer/AvaliablityDropDownAssets/MidDay_icon";
 import IconHappyHour from "assets/files/FindTrainer/AvaliablityDropDownAssets/HappyHour_icon";
 import IconNeverTooLate from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_icon";
+import { ReactComponent as AvailabilityIcon } from "assets/files/SVG/SearchBar/Availability Icon.svg";
+import { ReactComponent as TrainingVerticalIcon } from "assets/files/SVG/SearchBar/Training Vertical Icon.svg";
+
 import CROSSICON from "assets/files/FindTrainer/Cross.svg";
-import { ReactComponent as BlueBoxing } from "assets/files/FindTrainer/DropDownAssets/boxing_blue.svg"
-import { ReactComponent as BluePilates } from "assets/files/FindTrainer/DropDownAssets/blue_pilates.svg"
-import { ReactComponent as BlueStrength } from "assets/files/FindTrainer/DropDownAssets/blue_strength.svg"
+import { ReactComponent as BlueBoxing } from "assets/files/FindTrainer/DropDownAssets/boxing_blue.svg";
+import { ReactComponent as BluePilates } from "assets/files/FindTrainer/DropDownAssets/blue_pilates.svg";
+import { ReactComponent as BlueStrength } from "assets/files/FindTrainer/DropDownAssets/blue_strength.svg";
 import { ReactComponent as SheduleIcon } from "assets/files/TrainerDashboard/MyEarning/Shedule Icon.svg";
 import { ReactComponent as BlueYoga } from "assets/files/FindTrainer/DropDownAssets/blue_yoga.svg";
 import { ReactComponent as BlueHappyHour } from "assets/files/FindTrainer/AvaliablityDropDownAssets/blue_happyHour.svg";
+import { ReactComponent as BlueRiseAndShine } from "assets/files/FindTrainer/AvaliablityDropDownAssets/Rise_Shine_Active.svg";
+import { ReactComponent as BlueMidDayBreak } from "assets/files/FindTrainer/AvaliablityDropDownAssets/Mid_DayBreak_Active.svg";
+
+import { ReactComponent as BlueNeverTooLate } from "assets/files/FindTrainer/AvaliablityDropDownAssets/NeverTooLate_Active.svg";
+
 import { ReactComponent as IconEarlyBirdActive } from "assets/files/FindTrainer/AvaliablityDropDownAssets/EarlyBird_Active.svg";
 
 import { Toast } from "service/toast";
@@ -68,16 +72,16 @@ const availabilityIconsList = [
   },
   {
     label: "Rise & Shine",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueRiseAndShine className="filterActiveIcon" />,
   },
   {
     label: "Lunchtime",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueMidDayBreak className="filterActiveIcon" />,
   },
 
   {
     label: "MID-DAY Break",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueMidDayBreak className="filterActiveIcon" />,
   },
   {
     label: "Happy Hours",
@@ -85,7 +89,7 @@ const availabilityIconsList = [
   },
   {
     label: "Never too late",
-    icon: <IconEarlyBirdActive className="filterActiveIcon" />,
+    icon: <BlueNeverTooLate className="filterActiveIcon" />,
   },
 ];
 
@@ -250,7 +254,7 @@ function SearchFilter({
                   &#10094;
                 </div>
               ) : (
-                <SheduleIcon className="mr-2" />
+                <AvailabilityIcon className="mr-2" />
               )}
             </>
           </div>
@@ -441,7 +445,7 @@ function SearchFilter({
                   &#10094;
                 </div>
               ) : (
-                <SheduleIcon className="mr-2" />
+                <TrainingVerticalIcon className="mr-2" />
               )}
             </>
           </div>
