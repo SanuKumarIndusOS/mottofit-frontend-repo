@@ -79,7 +79,7 @@ const UserBookSessionFC = ({
   const location = useLocation();
 
   React.useEffect(() => {
-    console.log(selectedTrainerData, "selectedTrainerData");
+    console.log(sessionData, "sessionData");
     if (!localStorage.getItem("token")) {
       // let reduxData = {
       //   isModelOpen: true,
@@ -1042,18 +1042,20 @@ const UserBookSessionFC = ({
                               <div className="oneOnOnep">
                                 <h6>
                                   {`$${
-                                 
-                                    trainingVenue?.label === "Trainer's Location"?Math.round(
-                                        (selectedTrainerData?.oneOnOnePricing
-                                          ?.passRatefor3SessionAtTrainerLocation /
-                                          3) *
-                                          100
-                                      ) / 100: Math.round(
-                                        (selectedTrainerData?.oneOnOnePricing
-                                          ?.passRatefor3SessionAtClientLocation /
-                                          3) *
-                                          100
-                                      ) / 100
+                                    trainingVenue?.label ===
+                                    "Trainer's Location"
+                                      ? Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor3SessionAtTrainerLocation /
+                                            3) *
+                                            100
+                                        ) / 100
+                                      : Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor3SessionAtClientLocation /
+                                            3) *
+                                            100
+                                        ) / 100
                                   }`}
                                 </h6>
                                 <span className="spann">
@@ -1062,20 +1064,22 @@ const UserBookSessionFC = ({
                               </div>
                               <div className="oneOnOnep">
                                 <h6>
-                                {`$${
-                                 
-                                 trainingVenue?.label === "Trainer's Location"?Math.round(
-                                     (selectedTrainerData?.oneOnOnePricing
-                                       ?.passRatefor10SessionAtTrainerLocation /
-                                       10) *
-                                       100
-                                   ) / 100: Math.round(
-                                    (selectedTrainerData?.oneOnOnePricing
-                                      ?.passRatefor10SessionAtClientLocation /
-                                      10) *
-                                      100
-                                  ) / 100
-                               }`}
+                                  {`$${
+                                    trainingVenue?.label ===
+                                    "Trainer's Location"
+                                      ? Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor10SessionAtTrainerLocation /
+                                            10) *
+                                            100
+                                        ) / 100
+                                      : Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor10SessionAtClientLocation /
+                                            10) *
+                                            100
+                                        ) / 100
+                                  }`}
                                 </h6>
                                 <span className="spann">
                                   / session (10 Sessions Pass)

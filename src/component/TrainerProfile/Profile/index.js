@@ -410,55 +410,9 @@ const TrainerProfileClass = ({
                             <span>{findMinTenPass.label}</span>
                           </h6>
                         )} */}
-                        <h2 className="for_people_title">
-                          FOR INDIVIDUAL SESSION
-                        </h2>
-                        {virtualSession && isVirtualPresent ? (
-                          <h6>
-                            {`$${virtualSession} `}
-                            <span>(Virtual Session)</span>
-                          </h6>
-                        ) : (
-                          ""
-                        )}
-                        {inPersonAtClientLocation && isInPersonPresent ? (
-                          <h6>
-                            {`$${inPersonAtClientLocation}`}
-                            <span>(In Person - At Your Location)</span>
-                          </h6>
-                        ) : (
-                          ""
-                        )}
-                        {inPersonAtTrainerLocation && isInPersonPresent ? (
-                          <h6>
-                            {`$${inPersonAtTrainerLocation}`}
-                            <span>(In Person - At Trainer's Location)</span>
-                          </h6>
-                        ) : (
-                          ""
-                        )}
 
-                        <h2 className="for_people_title">For 3 Session Pass</h2>
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor3SessionAtClientLocation !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}`}
-                            <span>
-                              Session / (In Person - At Your Location)
-                            </span>
-                          </h6>
-                        )}
-                        {trainerProfileData?.oneOnOnePricing
-                          ?.passRatefor3SessionAtTrainerLocation !== 0 && (
-                          <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}`}
-                            <span>
-                              Session / (In Person - At Trainer's Location)
-                            </span>
-                          </h6>
-                        )}
                         <h2 className="for_people_title">
-                          For 10 Session Pass
+                          10 sessions Motto Pass
                         </h2>
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor10SessionAtVirtual !== 0 && (
@@ -489,6 +443,56 @@ const TrainerProfileClass = ({
                               </span>
                             </span>
                           </h6>
+                        )}
+
+                        <h2 className="for_people_title">
+                          3 sessions Motto Pass
+                        </h2>
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtClientLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}`}
+                            <span>
+                              Session / (In Person - At Your Location)
+                            </span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtTrainerLocation !== 0 && (
+                          <h6>
+                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}`}
+                            <span>
+                              Session / (In Person - At Trainer's Location)
+                            </span>
+                          </h6>
+                        )}
+
+                        <h2 className="for_people_title">
+                          Single session booking
+                        </h2>
+                        {virtualSession && isVirtualPresent ? (
+                          <h6>
+                            {`$${virtualSession} `}
+                            <span>(Virtual Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtClientLocation && isInPersonPresent ? (
+                          <h6>
+                            {`$${inPersonAtClientLocation}`}
+                            <span>(In Person - At Your Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtTrainerLocation && isInPersonPresent ? (
+                          <h6>
+                            {`$${inPersonAtTrainerLocation}`}
+                            <span>(In Person - At Trainer's Location)</span>
+                          </h6>
+                        ) : (
+                          ""
                         )}
 
                         {/* <h5
