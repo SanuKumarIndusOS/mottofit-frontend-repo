@@ -363,10 +363,9 @@ const TrainerProfileClass = ({
             <div className="profile_main_contents container">
               <div className="profile_aside">
                 <div className="profile_aside_link">
-                  <Link onClick={handleBookSession}>{`Book Trainer ${
-                    trainerProfileData.firstName[0].toUpperCase() +
-                    trainerProfileData.firstName.slice(1)
-                  } ${trainerProfileData.lastName}`}</Link>
+                  <Link
+                    onClick={handleBookSession}
+                  >{`Book Trainer ${trainerProfileData.firstName} ${trainerProfileData?.lastName}`}</Link>
                   <img src={ArrowNext} alt="icon" />
                 </div>
                 {/* <div className="profile_aside_link">
@@ -396,16 +395,19 @@ const TrainerProfileClass = ({
                           All the rates displayed below are the total amounts
                           for each session.
                         </p>
+                        {findMinThreePass.value !== 0 && (
+                          <h6>
+                            ${findMinThreePass.value}
+                            <span>{findMinThreePass.label}</span>
+                          </h6>
+                        )}
 
-                        <h6>
-                          ${findMinThreePass.value}
-                          <span>{findMinThreePass.label}</span>
-                        </h6>
-
-                        <h6>
-                          ${findMinTenPass.value}
-                          <span>{findMinTenPass.label}</span>
-                        </h6>
+                        {findMinTenPass.value !== 0 && (
+                          <h6>
+                            ${findMinTenPass.value}
+                            <span>{findMinTenPass.label}</span>
+                          </h6>
+                        )}
 
                         {virtualSession && isVirtualPresent ? (
                           <h6>
