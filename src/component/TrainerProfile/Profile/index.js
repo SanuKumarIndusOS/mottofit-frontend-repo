@@ -170,6 +170,9 @@ const TrainerProfileClass = ({
     trainerProfileData?.preferedTrainingMode?.includes("inPerson");
 
   const handleRequestTrainer = () => {
+
+    Toast({ type: "success", message: "Login or create an account to message trainer requesting time and date of your choice" });
+
     const userId = localStorage.getItem("user-id");
 
     // CHECK WHETHER USER IS LOGGED IN,IF NOT REDURECT TO LOGIN PAGE
