@@ -370,7 +370,10 @@
         position: relative;
         top: -65px;
         @media only screen and (max-width: 900px) {
-          width: unset;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          position: initial;
         }
         h4 {
           margin-top: 30%;
@@ -391,6 +394,9 @@
 
           @media only screen and (max-width: 900px) {
             width: unset;
+            margin-top: 15%;
+            margin-bottom: 15%;
+            display: inline;
           }
 
           a {
@@ -409,6 +415,8 @@
             font-family: "Montserrat", sans-serif;
             @media only screen and (max-width: 900px) {
               font-family: unset;
+              margin-left: 30px;
+              margin-top: 20px;
             }
           }
         }
