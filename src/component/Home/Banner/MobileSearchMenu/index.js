@@ -86,9 +86,9 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
       });
     }
     console.log(payload);
-    // trainerSearchFilters(payload);
-    // //updateTrainerDetails(payload);
-    // history.push("/trainer/find");
+    trainerSearchFilters(payload);
+    //updateTrainerDetails(payload);
+    history.push("/trainer/find");
   };
 
   return (
