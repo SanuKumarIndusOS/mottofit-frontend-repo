@@ -79,6 +79,7 @@ const UserBookSessionFC = ({
   const location = useLocation();
 
   React.useEffect(() => {
+    console.log(sessionData, "sessionData");
     if (!localStorage.getItem("token")) {
       // let reduxData = {
       //   isModelOpen: true,
@@ -258,6 +259,8 @@ const UserBookSessionFC = ({
     window.scrollTo(0, 0);
 
     mottoPassData({});
+
+    console.log(sessionData, "lp");
   }, []);
 
   const getPricingObject = () => {
@@ -600,7 +603,7 @@ const UserBookSessionFC = ({
                 <h2>Choose Your Session Type</h2>
                 <p>
                   Please select a preferable training location along with the
-                  class size in order to book your training session.
+                  class size in<br></br>order to book your training session.
                 </p>
               </div>
               <div className="session_tabs">
@@ -616,7 +619,7 @@ const UserBookSessionFC = ({
                     }}
                   >
                     <div className="sesstion_tabslist container">
-                      <TabList className="w-50">
+                      <TabList className="">
                         {/* {JSON.stringify(isVirtualPresent)} */}
                         {/* {isVirtualPresent && ( */}
                         <Tab tabFor="virtual" disabled={!isVirtualPresent}>
@@ -766,21 +769,54 @@ const UserBookSessionFC = ({
                                   </div>
                                 </Modal>
                               ) : null}
+
+                              <div className="oneOnOnep">
+                                <h6> {`$${pricingObject.sessionOneonOne}`} </h6>
+                                <span className="spann">/ session </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {" "}
+                                  {`$${
+                                    Math.round(
+                                      (selectedTrainerData?.oneOnOnePricing
+                                        ?.passRatefor3SessionAtVirtual /
+                                        3) *
+                                        100
+                                    ) / 100
+                                  }`}{" "}
+                                </h6>
+                                <span className="spann">
+                                  / session (3 Session Pass){" "}
+                                </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {" "}
+                                  {`$${
+                                    Math.round(
+                                      (selectedTrainerData?.oneOnOnePricing
+                                        ?.passRatefor10SessionAtVirtual /
+                                        10) *
+                                        100
+                                    ) / 100
+                                  }`}{" "}
+                                </h6>
+                                <span className="spann">
+                                  / session (10 Sessions Pass)
+                                </span>
+                              </div>
+                              {/*                              
                               <div className="session_card_inner">
                                 <h6 className="mt-3">
                                   {`$${pricingObject.sessionOneonOne}`}
-                                  <span>
-                                    / session{" "}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
+                                  <span>/ session </span>
                                 </h6>
 
                                 <img src={TrainerIcon} alt="icon" />
-                              </div>
+                                
+                              </div> */}
+
                               <button
                                 onClick={() =>
                                   handleBookSession(
@@ -803,7 +839,15 @@ const UserBookSessionFC = ({
                             ?.length > 0 ? (
                             <div className="session_cards">
                               <div className="session_card_content">
-                                <h2>SOCIAL SESSION</h2>
+                                <h2>
+                                  SOCIAL SESSION
+                                  <img
+                                    src={QMark}
+                                    alt="icon"
+                                    onClick={() => setOpen(true)}
+                                  />
+                                </h2>
+
                                 <p>
                                   Add up to 3 friends to your session. Get
                                   personal attention, while you enjoy a social
@@ -818,11 +862,6 @@ const UserBookSessionFC = ({
                                     <span>
                                       /{" "}
                                       {`${pricingObject.virtualSessionSocial?.["2people"]?.label}`}
-                                      <img
-                                        src={QMark}
-                                        alt="icon"
-                                        onClick={() => setOpen(true)}
-                                      />
                                     </span>
                                   </h6>
                                 ) : (
@@ -835,11 +874,6 @@ const UserBookSessionFC = ({
                                     <span>
                                       /{" "}
                                       {`${pricingObject.virtualSessionSocial["3people"]?.label}`}
-                                      <img
-                                        src={QMark}
-                                        alt="icon"
-                                        onClick={() => setOpen(true)}
-                                      />
                                     </span>
                                   </h6>
                                 ) : (
@@ -852,11 +886,6 @@ const UserBookSessionFC = ({
                                     <span>
                                       /{" "}
                                       {`${pricingObject.virtualSessionSocial["4people"]?.label}`}
-                                      <img
-                                        src={QMark}
-                                        alt="icon"
-                                        onClick={() => setOpen(true)}
-                                      />
                                     </span>
                                   </h6>
                                 ) : (
@@ -890,7 +919,14 @@ const UserBookSessionFC = ({
                           {pricingObject?.virtualSessionClass ? (
                             <div className="session_cards">
                               <div className="session_card_content">
-                                <h2>CREATE A CLASS</h2>
+                                <h2>
+                                  CREATE A CLASS
+                                  <img
+                                    src={QMark}
+                                    alt="icon"
+                                    onClick={() => setOpen(true)}
+                                  />
+                                </h2>
                                 <p>
                                   Design your very own workout party. Choose a
                                   top trainer, and add up to 14 more friends to
@@ -900,14 +936,7 @@ const UserBookSessionFC = ({
                               <div className="session_card_inner">
                                 <h6 className="mt-3">
                                   {`$${pricingObject?.virtualSessionClass}`}
-                                  <span>
-                                    / session (5-15 people){" "}
-                                    <img
-                                      src={QMark}
-                                      alt="icon"
-                                      onClick={() => setOpen(true)}
-                                    />
-                                  </span>
+                                  <span>/ session (5-15 people) </span>
                                 </h6>
                                 <img src={ClassIcon} alt="icon" />
                               </div>
@@ -979,7 +1008,7 @@ const UserBookSessionFC = ({
                                   </div>
                                 </Modal>
                               ) : null}
-                              <div className="session_card_inner">
+                              {/* <div className="session_card_inner">
                                 <h6 className="mt-3">
                                   {`$${
                                     pricingObject?.inPersonOneOneOne[
@@ -997,6 +1026,64 @@ const UserBookSessionFC = ({
                                 </h6>
 
                                 <img src={TrainerIcon} alt="icon" />
+                              </div> */}
+
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {" "}
+                                  {`$${
+                                    pricingObject?.inPersonOneOneOne[
+                                      trainingVenue?.value
+                                    ]?.value
+                                  }`}{" "}
+                                </h6>
+                                <span className="spann">/ session </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {`$${
+                                    trainingVenue?.label ===
+                                    "Trainer's Location"
+                                      ? Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor3SessionAtTrainerLocation /
+                                            3) *
+                                            100
+                                        ) / 100
+                                      : Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor3SessionAtClientLocation /
+                                            3) *
+                                            100
+                                        ) / 100
+                                  }`}
+                                </h6>
+                                <span className="spann">
+                                  / session (3 Session Pass){" "}
+                                </span>
+                              </div>
+                              <div className="oneOnOnep">
+                                <h6>
+                                  {`$${
+                                    trainingVenue?.label ===
+                                    "Trainer's Location"
+                                      ? Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor10SessionAtTrainerLocation /
+                                            10) *
+                                            100
+                                        ) / 100
+                                      : Math.round(
+                                          (selectedTrainerData?.oneOnOnePricing
+                                            ?.passRatefor10SessionAtClientLocation /
+                                            10) *
+                                            100
+                                        ) / 100
+                                  }`}
+                                </h6>
+                                <span className="spann">
+                                  / session (10 Sessions Pass)
+                                </span>
                               </div>
 
                               <button

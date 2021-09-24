@@ -339,6 +339,10 @@ function UserScheduler({
                         // }
                       }}
                       className={
+                        
+                        moment().isAfter(dateItem) && moment().format("YYYY-MM-DD") !== dateItem?
+                        "block_cell_inactive"
+                        :
                         (selectedCell.timeKey === keys ||
                           selectedCell.timeKeyTwo === keys) &&
                         date.indexOf(selectedCell.datekey) === datekey
@@ -443,6 +447,9 @@ function UserScheduler({
                           // }
                         }}
                         className={
+                          moment().isAfter(dateItem) && moment().format("YYYY-MM-DD") !== dateItem?
+                          "block_cell_inactive"
+                          :
                           (selectedCell.timeKey === keys ||
                             selectedCell.timeKeyTwo === keys) &&
                           date.indexOf(selectedCell.datekey) === datekey

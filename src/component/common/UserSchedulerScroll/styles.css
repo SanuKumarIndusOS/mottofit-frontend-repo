@@ -140,6 +140,10 @@ td {
   /* border-bottom: red; */
 }
 
+.block_cell_inactive{
+  background-color: rgb(139, 139, 139) !important;
+}
+
 .calendar_controls {
   display: flex;
   align-items: center;
@@ -185,7 +189,7 @@ td {
   -webkit-border-radius: 10px;
   border-radius: 10px;
 
-  background-color: #b6b3b3;
+  background-color: #53bfd2;
 }
 
 /* Trainer Card */
