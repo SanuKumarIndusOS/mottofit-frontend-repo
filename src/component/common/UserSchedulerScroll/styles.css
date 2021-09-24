@@ -141,7 +141,7 @@ td {
 }
 
 .block_cell_inactive{
-  background-color: red !important;
+  background-color: rgb(139, 139, 139) !important;
 }
 
 .calendar_controls {
