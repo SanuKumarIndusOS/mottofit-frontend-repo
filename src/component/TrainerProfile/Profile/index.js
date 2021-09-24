@@ -63,12 +63,13 @@ const TrainerProfileClass = ({
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
     fetchViewTrainer();
-    if (
-      history.location.state !== undefined &&
-      history.location.state.autoScroll
-    ) {
-      handleBookSession();
-    }
+    //Auto scroll for book a session button
+    // if (
+    //   history.location.state !== undefined &&
+    //   history.location.state.autoScroll
+    // ) {
+    //   handleBookSession();
+    // }
   }, []);
 
   const { id } = useParams();
@@ -139,11 +140,12 @@ const TrainerProfileClass = ({
         });
       }
     }
-    history.replace({
-      state: {
-        autoScroll: false,
-      },
-    });
+    //Auto scroll for book a session button
+    // history.replace({
+    //   state: {
+    //     autoScroll: false,
+    //   },
+    // });
   };
   const handleSessionType = () => {
     let reduxData = {

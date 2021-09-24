@@ -47,7 +47,7 @@ const TrainerCardsFC = (props) => {
 
     history.push({
       pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
-      state: { autoScroll: true },
+      // state: { autoScroll: true },
     });
 
     // if (!isReadMore) {
