@@ -417,17 +417,31 @@ const TrainerProfileClass = ({
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor10SessionAtVirtual !== 0 && (
                           <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtVirtual}`}
-                            <span>Session / (Virtual)</span>
+                            {`$${
+                              Math.round(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor10SessionAtVirtual /
+                                  10) *
+                                  100
+                              ) / 100
+                            }`}
+                            <span>/ Session (Virtual Session)</span>
                           </h6>
                         )}
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor10SessionAtClientLocation !== 0 && (
                           <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtClientLocation}`}
+                            {`$${
+                              Math.round(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor10SessionAtClientLocation /
+                                  10) *
+                                  100
+                              ) / 100
+                            }`}
                             <span>
                               <span>
-                                Session / (In Person - At Your Location)
+                                / Session (In Person - At Your Location)
                               </span>
                             </span>
                           </h6>
@@ -436,10 +450,17 @@ const TrainerProfileClass = ({
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor10SessionAtTrainerLocation !== 0 && (
                           <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor10SessionAtTrainerLocation}`}
+                            {`$${
+                              Math.round(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor10SessionAtTrainerLocation /
+                                  10) *
+                                  100
+                              ) / 100
+                            }`}
                             <span>
                               <span>
-                                Session / (In Person - At Trainer's Location)
+                                / Session (In Person - At Trainer's Location)
                               </span>
                             </span>
                           </h6>
@@ -449,20 +470,48 @@ const TrainerProfileClass = ({
                           3 sessions Motto Pass
                         </h2>
                         {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtVirtual !== 0 && (
+                          <h6>
+                            {`$${
+                              Math.round(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor3SessionAtVirtual /
+                                  3) *
+                                  100
+                              ) / 100
+                            }`}
+                            <span>/ Session (Virtual Session)</span>
+                          </h6>
+                        )}
+                        {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor3SessionAtClientLocation !== 0 && (
                           <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtClientLocation}`}
+                            {`$${
+                              Math.round(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor3SessionAtClientLocation /
+                                  3) *
+                                  100
+                              ) / 100
+                            }`}
                             <span>
-                              Session / (In Person - At Your Location)
+                              / Session (In Person - At Your Location)
                             </span>
                           </h6>
                         )}
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor3SessionAtTrainerLocation !== 0 && (
                           <h6>
-                            {`$${trainerProfileData?.oneOnOnePricing.passRatefor3SessionAtTrainerLocation}`}
+                            {`$${
+                              Math.round(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor3SessionAtTrainerLocation /
+                                  3) *
+                                  100
+                              ) / 100
+                            }`}
                             <span>
-                              Session / (In Person - At Trainer's Location)
+                              / Session (In Person - At Trainer's Location)
                             </span>
                           </h6>
                         )}
@@ -1027,14 +1076,15 @@ const TrainerProfileClass = ({
                     </div>
                   ) : null}
                   <div className="profile_right_item4">
-                    <h2
-                      style={{
-                       
-                      }}
-                    >Book a session on&ensp;
-                   <span style={{
-                        textTransform: "capitalize",
-                      }}>{trainerProfileData.firstName} </span>
+                    <h2 style={{}}>
+                      Book a session on&ensp;
+                      <span
+                        style={{
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        {trainerProfileData.firstName}{" "}
+                      </span>
                       <span
                         style={{
                           textTransform: "none",
