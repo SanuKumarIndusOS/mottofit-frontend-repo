@@ -19,6 +19,7 @@ import { Toast } from "../../../../service/toast";
 import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import moment from "moment";
+import { history } from "helpers";
 
 const TrainerSessionFC = ({
   sessionData,
@@ -76,6 +77,7 @@ const TrainerSessionFC = ({
             id,
             sessionStatus,
             userDetail,
+            channelId,
           }) => ({
             date: getFormatDate(sessionDate, "D"),
             month: getFormatDate(sessionDate, "MMM"),
@@ -92,6 +94,7 @@ const TrainerSessionFC = ({
             sessionDate,
             sessionStartTime,
             id,
+            channelId,
           })
         );
 
@@ -139,7 +142,7 @@ const TrainerSessionFC = ({
       });
   };
 
-  const handleCancel = (sessionId) => {
+  const handleCancel = (sessionId, channelId) => {
     let payload = {
       sessionId,
       sessionStatus: "cancelled",
@@ -152,8 +155,13 @@ const TrainerSessionFC = ({
       .then((data) => {
         console.log("resup");
         setisLoading(false);
-        Toast({ type: "success", message: data?.message || "Success" });
-        getAllDetails(currentTab);
+        Toast({
+          type: "success",
+          message:
+            "Session cancelled. Message the user on reason for cancelling and if you would like to reschedule",
+        });
+        history.push(`/trainers/dashboard/message/past?channelId=${channelId}`);
+        // getAllDetails(currentTab);
       })
       .catch(() => setisLoading(false));
   };
@@ -339,7 +347,9 @@ const TabOne = ({
                             {data.sessionStatus !== "cancelled" ? (
                               <button
                                 // disabled={true}
-                                onClick={() => handleCancel(data.id)}
+                                onClick={() =>
+                                  handleCancel(data.id, data.channelId)
+                                }
                                 className={`mr-2`}
                               >
                                 Cancel
@@ -504,7 +514,11 @@ const TabTwo = ({
                                     Complete
                                   </button>
                                 ) : (
-                                  <button onClick={() => handleCancel(data.id)}>
+                                  <button
+                                    onClick={() =>
+                                      handleCancel(data.id, data.channelId)
+                                    }
+                                  >
                                     Cancel
                                   </button>
                                 )
@@ -645,18 +659,26 @@ const TabPast = ({
     setVisible((prevValue) => prevValue + 1);
   };
 
-  const handleCancel = (sessionId) => {
+  const handleCancel = (sessionId, channelId) => {
     let payload = {
       sessionId,
       sessionStatus: "cancelled",
     };
 
     setisLoading(true);
+
+    console.log(payload);
+
     cancelSessionApi(payload)
       .then(({ message }) => {
         setisLoading(false);
-        Toast({ type: "success", message: message });
-        handleChange(currentTab);
+        Toast({
+          type: "success",
+          message:
+            "Session cancelled. Message the user on reason for cancelling and if you would like to reschedule",
+        });
+        history.push(`/trainers/dashboard/message/past?channelId=${channelId}`);
+        // handleChange(currentTab);
       })
       .catch(() => setisLoading(false));
   };
@@ -712,7 +734,12 @@ const TabPast = ({
                                     <>
                                       {tabname === "upcoming" && (
                                         <button
-                                          onClick={() => handleCancel(data.id)}
+                                          onClick={() =>
+                                            handleCancel(
+                                              data.id,
+                                              data.channelId
+                                            )
+                                          }
                                         >
                                           Cancel
                                         </button>
