@@ -63,6 +63,12 @@ const TrainerProfileClass = ({
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
     fetchViewTrainer();
+    if (
+      history.location.state !== undefined &&
+      history.location.state.autoScroll
+    ) {
+      handleBookSession();
+    }
   }, []);
 
   const { id } = useParams();
@@ -133,6 +139,11 @@ const TrainerProfileClass = ({
         });
       }
     }
+    history.replace({
+      state: {
+        autoScroll: false,
+      },
+    });
   };
   const handleSessionType = () => {
     let reduxData = {
@@ -326,7 +337,6 @@ const TrainerProfileClass = ({
 
   return (
     <>
-      {console.log(collapseTitle, "asdsdfdsfdsf")}
       <div className="profile_main">
         <div className="profile_outter_container">
           <div className="profile_wrapper_container ">
@@ -1027,6 +1037,7 @@ const TrainerProfileClass = ({
                       style={{
                         textTransform: "capitalize",
                       }}
+                      id="table_auto_scroll"
                     >
                       {trainerProfileData.firstName}
                       <span
