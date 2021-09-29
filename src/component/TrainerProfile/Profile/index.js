@@ -380,7 +380,7 @@ const TrainerProfileClass = ({
                 <div className="profile_aside_link">
                   <Link
                     onClick={handleBookSession}
-                  >{`Book Trainer ${trainerProfileData.firstName} ${trainerProfileData?.lastName}`}</Link>
+                  >{`Book  ${trainerProfileData.firstName} ${trainerProfileData?.lastName}`}</Link>
                   <img src={ArrowNext} alt="icon" />
                 </div>
                 {/* <div className="profile_aside_link">
@@ -424,8 +424,8 @@ const TrainerProfileClass = ({
                           </h6>
                         )} */}
 
-                        <h2 className="for_people_title">
-                          10 sessions Motto Pass
+                        <h2 className="for_people_title" >
+                          10 sessions Motto Package
                         </h2>
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor10SessionAtVirtual !== 0 && (
@@ -480,7 +480,7 @@ const TrainerProfileClass = ({
                         )}
 
                         <h2 className="for_people_title">
-                          3 sessions Motto Pass
+                          3 sessions Motto Package
                         </h2>
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor3SessionAtVirtual !== 0 && (

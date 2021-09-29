@@ -177,7 +177,7 @@ const UserSessionClass = (props) => {
                 <Tab tabFor="upcoming">Upcoming</Tab>
                 <Tab tabFor="invited">Invited</Tab>
 
-                <Tab tabFor="pass">Motto pass</Tab>
+                <Tab tabFor="pass">Motto package</Tab>
                 <Tab tabFor="past">Previous</Tab>
                 {/* <Tab tabFor="ongoing">Ongoing</Tab> */}
               </TabList>

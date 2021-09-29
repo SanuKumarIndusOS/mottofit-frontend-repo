@@ -19,7 +19,7 @@ export const MottoPassSection = ({ handlePagination, mottoPassData }) => {
   return (
     <div className="mottopass-session-section">
       <div className="mottopass-heading">
-        <h1 className="fs-25 font-weight-normal">Valid Motto Passes</h1>
+        <h1 className="fs-25 font-weight-normal">Valid Motto Packages</h1>
       </div>
 
       <div className="mottopass-cards-section row w-100 justify-content-between">
