@@ -422,9 +422,14 @@ const TrainerProfileClass = ({
                           </h6>
                         )} */}
 
-                        <h2 className="for_people_title" >
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtVirtual !== 0 || trainerProfileData?.oneOnOnePricing
+                            ?.passRatefor10SessionAtClientLocation !== 0 || trainerProfileData?.oneOnOnePricing
+                              ?.passRatefor10SessionAtTrainerLocation !== 0 ? <h2 className="for_people_title" >
                           10 sessions Motto Package
-                        </h2>
+                        </h2> : null}
+
+
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor10SessionAtVirtual !== 0 && (
                             <h6>
@@ -444,8 +449,8 @@ const TrainerProfileClass = ({
                                 (trainerProfileData?.oneOnOnePricing
                                   .passRatefor10SessionAtClientLocation /
                                   10)
-                             
-                              ) 
+
+                              )
                                 }`}
                               <span>
                                 <span>
@@ -462,7 +467,7 @@ const TrainerProfileClass = ({
                                 (trainerProfileData?.oneOnOnePricing
                                   .passRatefor10SessionAtTrainerLocation /
                                   10)
-                              ) 
+                              )
                                 }`}
                               <span>
                                 <span>
@@ -471,17 +476,20 @@ const TrainerProfileClass = ({
                               </span>
                             </h6>
                           )}
-
-                        <h2 className="for_people_title">
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtVirtual !== 0 || trainerProfileData?.oneOnOnePricing
+                            ?.passRatefor3SessionAtClientLocation !== 0 || trainerProfileData?.oneOnOnePricing
+                              ?.passRatefor3SessionAtTrainerLocation !== 0 ? <h2 className="for_people_title">
                           3 sessions Motto Package
-                        </h2>
+                        </h2> : null}
+
                         {trainerProfileData?.oneOnOnePricing
                           ?.passRatefor3SessionAtVirtual !== 0 && (
                             <h6>
                               {`$${Math.ceil(
                                 (trainerProfileData?.oneOnOnePricing
                                   .passRatefor3SessionAtVirtual /
-                                  3) )
+                                  3))
                                 }`}
                               <span>/ Session (Virtual Session)</span>
                             </h6>
@@ -505,7 +513,7 @@ const TrainerProfileClass = ({
                               {`$${Math.ceil(
                                 (trainerProfileData?.oneOnOnePricing
                                   .passRatefor3SessionAtTrainerLocation /
-                                  3) )
+                                  3))
                                 }`}
                               <span>
                                 / Session (In Person - At Trainer's Location)
