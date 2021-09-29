@@ -700,7 +700,7 @@ const TabOne = ({
                       {isMottoPassAvailed && (
                         <div className="motto-pass-section d-flex">
                           <span className="motto-pass-ribbon mr-3">
-                            Motto Pass
+                            Motto Package
                           </span>
                           <div className="motto-pass-details d-flex align-items-center w-100">
                             {totalMottoPass && noOfMottoPassesUsed && (

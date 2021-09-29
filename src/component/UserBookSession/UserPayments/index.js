@@ -400,7 +400,7 @@ const UserPaymentsFC = ({
               <div className="outter_links">
                 <img src={ArrowBack} alt="icon" />
                 <div className="inner_links">
-                  <Link to="/user/motto-pass"> Get a Motto Pass</Link>
+                  <Link to="/user/motto-pass"> Get a Motto Package</Link>
                   <div></div>
                 </div>
               </div>
@@ -595,7 +595,7 @@ const UserPaymentsFC = ({
                       </div>
                     </div> */}
                     <br></br>
-                    {"passType" in mottoPassDataVal ? <h4>Availed Motto Pass: ${mottoPassDataVal?.price}</h4
+                    {"passType" in mottoPassDataVal ? <h4>Availed Motto Package: ${mottoPassDataVal?.price}</h4
                     > : <AccordationService
                       data={accordionData}
                       couponRate={couponRate}

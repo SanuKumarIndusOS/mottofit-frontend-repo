@@ -932,16 +932,17 @@ select {
 }
 
 .motto-pass-ribbon {
-  max-width: 120px;
+  max-width: fit-content;
   display: inline-block;
   max-height: 28px;
+  //padding-right: 10px;
   height: 100%;
   width: 100%;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   // letter-spacing: 0.65px;
   background: #53bfd2;
-  padding: 6px 17px 6px 8px;
+  padding: 6px 25px 6px 8px;
   font-size: 13px;
   color: #fff;
   text-transform: uppercase;

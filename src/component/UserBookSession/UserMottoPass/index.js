@@ -83,7 +83,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
             </div>
             <div className="motto_wrapper">
               <div className="motto_pass_wrapper">
-                <h2>Get a Motto Pass to Do More for Less</h2>
+                <h2>Get a Motto Package to Do More for Less</h2>
                 <div className="motto_pass_items">
                   <div className="motto_pass_left">
                     <div class="session_pass">
