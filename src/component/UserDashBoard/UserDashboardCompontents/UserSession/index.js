@@ -177,7 +177,7 @@ const UserSessionClass = (props) => {
                 <Tab tabFor="upcoming">Upcoming</Tab>
                 <Tab tabFor="invited">Invited</Tab>
 
-                <Tab tabFor="pass">Motto pass</Tab>
+                <Tab tabFor="pass">Motto package</Tab>
                 <Tab tabFor="past">Previous</Tab>
                 {/* <Tab tabFor="ongoing">Ongoing</Tab> */}
               </TabList>
@@ -707,7 +707,7 @@ const TabOne = ({
                       {isMottoPassAvailed && (
                         <div className="motto-pass-section d-flex">
                           <span className="motto-pass-ribbon mr-3">
-                            Motto Pass
+                            Motto Package
                           </span>
                           <div className="motto-pass-details d-flex align-items-center w-100">
                             {totalMottoPass && noOfMottoPassesUsed && (

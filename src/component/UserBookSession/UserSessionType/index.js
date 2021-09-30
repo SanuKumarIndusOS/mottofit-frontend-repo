@@ -778,12 +778,10 @@ const UserBookSessionFC = ({
                                 <h6>
                                   {" "}
                                   {`$${
-                                    Math.round(
+                                    Math.ceil(
                                       (selectedTrainerData?.oneOnOnePricing
                                         ?.passRatefor3SessionAtVirtual /
-                                        3) *
-                                        100
-                                    ) / 100
+                                        3))
                                   }`}{" "}
                                 </h6>
                                 <span className="spann">
@@ -794,12 +792,10 @@ const UserBookSessionFC = ({
                                 <h6>
                                   {" "}
                                   {`$${
-                                    Math.round(
+                                    Math.ceil(
                                       (selectedTrainerData?.oneOnOnePricing
                                         ?.passRatefor10SessionAtVirtual /
-                                        10) *
-                                        100
-                                    ) / 100
+                                        10) )
                                   }`}{" "}
                                 </h6>
                                 <span className="spann">
@@ -1044,18 +1040,14 @@ const UserBookSessionFC = ({
                                   {`$${
                                     trainingVenue?.label ===
                                     "Trainer's Location"
-                                      ? Math.round(
+                                      ? Math.ceil(
                                           (selectedTrainerData?.oneOnOnePricing
                                             ?.passRatefor3SessionAtTrainerLocation /
-                                            3) *
-                                            100
-                                        ) / 100
-                                      : Math.round(
+                                            3) )
+                                      : Math.ceil(
                                           (selectedTrainerData?.oneOnOnePricing
                                             ?.passRatefor3SessionAtClientLocation /
-                                            3) *
-                                            100
-                                        ) / 100
+                                            3) )
                                   }`}
                                 </h6>
                                 <span className="spann">
@@ -1067,18 +1059,14 @@ const UserBookSessionFC = ({
                                   {`$${
                                     trainingVenue?.label ===
                                     "Trainer's Location"
-                                      ? Math.round(
+                                      ? Math.ceil(
                                           (selectedTrainerData?.oneOnOnePricing
                                             ?.passRatefor10SessionAtTrainerLocation /
-                                            10) *
-                                            100
-                                        ) / 100
-                                      : Math.round(
+                                            10) )
+                                      : Math.ceil(
                                           (selectedTrainerData?.oneOnOnePricing
                                             ?.passRatefor10SessionAtClientLocation /
-                                            10) *
-                                            100
-                                        ) / 100
+                                            10) )
                                   }`}
                                 </h6>
                                 <span className="spann">

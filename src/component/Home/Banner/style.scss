@@ -4,7 +4,7 @@
 
 .background {
   background: transparent
-    url("../../../../src/assets/files/Home/Banner/Banner.png") 0% 0% no-repeat
+    url("https://mottofit-frontend.s3.amazonaws.com/Banner.png") 0% 0% no-repeat
     padding-box;
   opacity: 1;
 
@@ -144,7 +144,7 @@
 @media only screen and (max-width: 900px) {
   .background {
     background: transparent
-      url("../../../../src/assets/files/Home/Banner/Mobile_Homepage_Banner_Image.jpg")
+      url("https://mottofit-frontend.s3.amazonaws.com/Banner+Image.png")
       0% 0% no-repeat padding-box;
     background-size: 100%;
     display: flex;

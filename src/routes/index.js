@@ -75,17 +75,19 @@ class RoutesClass extends Component {
 
   componentDidMount() {
     this.routerGuard();
+    if (window.screen.availWidth > 900) { (document.body.style.zoom = "90%") }
+
     window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault();
       if (localStorage.getItem("token") !== null) {
         this.props.change_login_status({ loginStatus: false });
       }
       // return (ev.returnValue = "Are you sure you want to close?");
-      
+
     });
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   handleOnActive = (event) => {
     console.log("user is active");
@@ -117,7 +119,7 @@ class RoutesClass extends Component {
         /> */}
         <Suspense
           fallback={
-            <div  className="load_parent">
+            <div className="load_parent">
               <div className="loaderss"></div>
             </div>
           }
