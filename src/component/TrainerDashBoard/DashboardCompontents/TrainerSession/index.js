@@ -33,6 +33,8 @@ const TrainerSessionFC = ({
     invitedSessions: [],
   });
 
+  const [mottoPassData, setMottoPassData] = useState([]);
+
   const [pageData, setPageData] = useState({
     upcoming: 0,
     past: 0,
@@ -51,77 +53,80 @@ const TrainerSessionFC = ({
   // }, []);
 
   const getAllDetails = (currentTab, isPaginaion = false) => {
-   
-   if(currentTab !== "pass"){
-    getTrainerSessionDetailsApi(currentTab, pageData[currentTab])
-      .then(({ data: tData, documentCount: tempDocumentCount }) => {
-        let data = tData || [];
-        let documentCount = tempDocumentCount || 0;
-        const tempSessionData = {};
-        let sessionTypeData = {
-          upcoming: "upcomingSessions",
-          past: "pastSessions",
-        };
-        console.log(data);
 
-        setTotalData((prevData) => ({
-          ...prevData,
-          [currentTab]: documentCount,
-        }));
-
-        // Object.keys(data).forEach((sessionKey) => {
-        let tempData = data?.map(
-          ({
-            title,
-            venue,
-            sessionDate,
-            sessionStartTime,
-            id,
-            sessionStatus,
-            userDetail,
-          }) => ({
-            date: getFormatDate(sessionDate, "D"),
-            month: getFormatDate(sessionDate, "MMM"),
-            heading: title,
-            imgAva: AvailabilityIcon,
-            avaTime: `${getFormatDate(sessionStartTime, "LT", true)} EST`,
-            imgLoc: LocationIcon,
-            loc: venue,
-            previousImg: Jenny,
-            prevHeading: "Yoga with Kane",
-            prevDate: getFormatDate(sessionStartTime, "DD MMMM YYYY", true),
-            sessionStatus,
-            userDetail,
-            sessionDate,
-            sessionStartTime,
-            id,
-          })
-        );
-
-        // console.log(tempData [sessionTypeData[currentTab]]);
-
-        setTrainerSessionData((prevData) => {
-          let replaceData = [
-            ...(prevData[sessionTypeData[currentTab]] || []),
-            ...tempData,
-          ];
-
-          return {
-            ...prevData,
-            [sessionTypeData[currentTab]]: isPaginaion ? replaceData : tempData,
+    if (currentTab !== "pass") {
+      getTrainerSessionDetailsApi(currentTab, pageData[currentTab])
+        .then(({ data: tData, documentCount: tempDocumentCount }) => {
+          let data = tData || [];
+          let documentCount = tempDocumentCount || 0;
+          const tempSessionData = {};
+          let sessionTypeData = {
+            upcoming: "upcomingSessions",
+            past: "pastSessions",
           };
+          console.log(data);
+
+          setTotalData((prevData) => ({
+            ...prevData,
+            [currentTab]: documentCount,
+          }));
+
+          // Object.keys(data).forEach((sessionKey) => {
+          let tempData = data?.map(
+            ({
+              title,
+              venue,
+              sessionDate,
+              sessionStartTime,
+              id,
+              sessionStatus,
+              userDetail,
+            }) => ({
+              date: getFormatDate(sessionDate, "D"),
+              month: getFormatDate(sessionDate, "MMM"),
+              heading: title,
+              imgAva: AvailabilityIcon,
+              avaTime: `${getFormatDate(sessionStartTime, "LT", true)} EST`,
+              imgLoc: LocationIcon,
+              loc: venue,
+              previousImg: Jenny,
+              prevHeading: "Yoga with Kane",
+              prevDate: getFormatDate(sessionStartTime, "DD MMMM YYYY", true),
+              sessionStatus,
+              userDetail,
+              sessionDate,
+              sessionStartTime,
+              id,
+            })
+          );
+
+          // console.log(tempData [sessionTypeData[currentTab]]);
+
+          setTrainerSessionData((prevData) => {
+            let replaceData = [
+              ...(prevData[sessionTypeData[currentTab]] || []),
+              ...tempData,
+            ];
+
+            return {
+              ...prevData,
+              [sessionTypeData[currentTab]]: isPaginaion ? replaceData : tempData,
+            };
+          });
+
+          setDataLoading(false);
+          // });
+        })
+        .catch((err) => {
+          setDataLoading(false);
+          Toast({ type: "error", message: err.message || "Error" });
         });
+    } else {
 
-        setDataLoading(false);
-        // });
+      getActiveUsersPass().then(data => {
+        setMottoPassData(data)
+        console.log(data);
       })
-      .catch((err) => {
-        setDataLoading(false);
-        Toast({ type: "error", message: err.message || "Error" });
-      });
-    }else{
-
-      getActiveUsersPass().then(data =>{console.log(data);})
     }
   };
 
@@ -253,15 +258,24 @@ const TrainerSessionFC = ({
 
                     <div className="trainer_pass_container">
 
-                      <div className="pass_card">
-                        <div className="pass_ribbon">3 Session Package</div>
-                        <div className="pass_header">Praveen Nat</div>
+                      {mottoPassData.length !== 0 ?
+                        <>
+                          {mottoPassData.map(item => {
 
-                        <div className="pass_content"> 2 out of 3 passes remaining</div>
-                        <div className="pass_content">
-                          Valid for only Virtual Sessions</div>
-                        <div className="pass_content">Valid until October 29th, 2021</div>
-                      </div>
+                            return <div className="pass_card">
+                              <div className="pass_ribbon">{item?.totalPassCount} Session Package</div>
+                              <div className="pass_header">{item?.user?.firstName} {item?.user?.lastName}</div>
+
+                              <div className="pass_content"> {item?.remains} out of {item?.totalPassCount} passes remaining</div>
+                              <div className="pass_content">
+                                Valid for only {item?.passType === "virtual"?"Virtual Sessions": item?.passType === "trainerLocation" ?"Trainer's Location": "Client's Location" } </div>
+                              <div className="pass_content">Valid until {moment.tz(item?.expiresIn, "America/New_York").format("MMMM Do, YYYY")}</div>
+                            </div>
+                          })}
+
+                        </>
+                        : null}
+
 
                     </div>
                   </TabPanel>
