@@ -24,6 +24,11 @@ import { UserAvatar } from "component/common/UserAvatar";
 import { change_login_status } from "action/NotificationAct";
 import SheduleIcon from "../../../assets/files/Home/Banner/SearchBar/Shedule Icon.svg";
 import { getTrainerDetail } from "action/adminAct";
+import SessionIcon from "../../../assets/files/TrainerDashboard/SideBarAssets/Session Icon.svg";
+import MessageIcon from "../../../assets/files/TrainerDashboard/SideBarAssets/Message Icon.svg";
+import NotificationIcon from "../../../assets/files/TrainerDashboard/SideBarAssets/Notifications Icon.svg";
+import SettingsIcon from "../../../assets/files/TrainerDashboard/SideBarAssets/Settings Icon.svg";
+import LogoutIcon from "../../../assets/files/TrainerDashboard/SideBarAssets/Logout Icon.svg";
 
 import Drawer from "@material-ui/core/Drawer";
 
@@ -299,10 +304,7 @@ const NavBarFC = ({
                       setActiveMobMenu(false);
                     }}
                   >
-                    <img
-                      src="/static/media/Session Icon.4a000f79.svg"
-                      alt="icon"
-                    ></img>
+                    <img src={SessionIcon} alt="icon"></img>
                     <div className="menu_li_text">MY SESSIONS</div>
                   </div>
                   <div
@@ -312,10 +314,7 @@ const NavBarFC = ({
                       setActiveMobMenu(false);
                     }}
                   >
-                    <img
-                      src="/static/media/Message Icon.9b7bba91.svg"
-                      alt="icon"
-                    ></img>
+                    <img src={MessageIcon} alt="icon"></img>
                     <div className="menu_li_text"> MESSAGES </div>
                   </div>
                   <div
@@ -325,18 +324,12 @@ const NavBarFC = ({
                       setActiveMobMenu(false);
                     }}
                   >
-                    <img
-                      src="/static/media/Notifications Icon.132c5113.svg"
-                      alt="icon"
-                    ></img>
+                    <img src={NotificationIcon} alt="icon"></img>
 
                     <div className="menu_li_text"> NOTIFICATIONS </div>
                   </div>
                   <div className="menu_li">
-                    <img
-                      src="/static/media/Settings Icon.5ae0ca78.svg"
-                      alt="icon"
-                    />
+                    <img src={SettingsIcon} alt="icon" />
                     <div className="menu_li_text"> SETTINGS</div>
                   </div>
                   <div className="seetings_li">
@@ -370,10 +363,7 @@ const NavBarFC = ({
                       //logout()
                     }}
                   >
-                    <img
-                      src="/static/media/Logout Icon.97acadbd.svg"
-                      alt="icon"
-                    />
+                    <img src={LogoutIcon} alt="icon" />
                     <div className="menu_li_text"> LOGOUT </div>
                   </div>
                 </div>
@@ -426,10 +416,7 @@ const NavBarFC = ({
                       setActiveMobMenu(false);
                     }}
                   >
-                    <img
-                      src="/static/media/Session Icon.4a000f79.svg"
-                      alt="icon"
-                    ></img>
+                    <img src="" alt="icon"></img>
                     <div className="menu_li_text">MY SESSIONS</div>
                   </div>
                   <div
