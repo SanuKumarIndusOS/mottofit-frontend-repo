@@ -79,6 +79,9 @@ const UserBookSessionFC = ({
   const location = useLocation();
 
   React.useEffect(() => {
+
+    setPreferedTrainingMode(JSON.parse(localStorage.getItem("persistFilters"))?.location)
+    console.log(JSON.parse(localStorage.getItem("persistFilters"))?.location, preferedTrainingMode);
     console.log(sessionData, "sessionData");
     if (!localStorage.getItem("token")) {
       // let reduxData = {
@@ -98,11 +101,11 @@ const UserBookSessionFC = ({
 
     if (!tempTrainerData?.id) return history.push("/trainer/find");
 
-    if (tempTrainerData?.preferedTrainingMode?.length === 1) {
-      setPreferedTrainingMode(tempTrainerData?.preferedTrainingMode[0]);
-    } else {
-      setPreferedTrainingMode(queryObject?.location);
-    }
+    // if (tempTrainerData?.preferedTrainingMode?.length === 1) {
+    //   setPreferedTrainingMode(tempTrainerData?.preferedTrainingMode[0]);
+    // } else {
+    //   setPreferedTrainingMode(queryObject?.location);
+    // }
 
     let tempValue = options.filter(
       ({ value }) => value === queryObject?.city
@@ -238,9 +241,9 @@ const UserBookSessionFC = ({
 
     // console.log(isVirtualSessionAvailable);
 
-    if (!isVirtualSessionAvailable) {
-      setPreferedTrainingMode("inPerson");
-    }
+    // if (!isVirtualSessionAvailable) {
+    //   setPreferedTrainingMode("inPerson");
+    // }
 
     let tempAvailableLocation = [];
 
@@ -558,20 +561,20 @@ const UserBookSessionFC = ({
     }
   };
 
-  let hasDataEntered = false;
+  let hasDataEntered = true;
 
-  if (preferedTrainingMode === "virtual") {
-    hasDataEntered = true;
-  }
+  // if (preferedTrainingMode === "virtual") {
+  //   hasDataEntered = true;
+  // }
 
-  if (preferedTrainingMode === "inPerson") {
-    hasDataEntered = selectedOption?.value && trainingVenue?.value;
-  }
+  // if (preferedTrainingMode === "inPerson") {
+  //   hasDataEntered = selectedOption?.value && trainingVenue?.value;
+  // }
 
   const tempTrainerData =
     selectedTrainerData?.trainerData || selectedTrainerData;
 
-  let isVirtualPresent = availableLocation?.includes("virtual");
+  let isVirtualPresent =   availableLocation?.includes("virtual");
   let isInPersonPresent = availableLocation?.includes("inPerson");
 
   const pricingObject = getPricingObject();
@@ -609,11 +612,11 @@ const UserBookSessionFC = ({
               <div className="session_tabs">
                 <div className="session_tabs_inner">
                   <Tabs
-                    defaultTab={`${
-                      preferedTrainingMode === "inPerson"
-                        ? "inPerson"
-                        : "virtual"
-                    }`}
+                    // defaultTab={`${
+                    //   JSON.parse(localStorage.getItem("persistFilters"))?.location === "inPerson"
+                    //     ? "inPerson"
+                    //     : "virtual"
+                    // }`}
                     onChange={(tabId) => {
                       // console.log(tabId);
                     }}
@@ -622,7 +625,9 @@ const UserBookSessionFC = ({
                       <TabList className="">
                         {/* {JSON.stringify(isVirtualPresent)} */}
                         {/* {isVirtualPresent && ( */}
+                          {/* {preferedTrainingMode} */}
                         <Tab tabFor="virtual" disabled={!isVirtualPresent}>
+                         
                           <button
                             onClick={() => setPreferedTrainingMode("virtual")}
                             className={`${
