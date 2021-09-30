@@ -380,6 +380,7 @@ const TrainerProfileClass = ({
                 <div className="profile_aside_link">
                   <Link
                     onClick={handleBookSession}
+                    onTouch={handleBookSession}
                   >{`Book  ${trainerProfileData.firstName} ${trainerProfileData?.lastName}`}</Link>
                   <img src={ArrowNext} alt="icon" />
                 </div>
