@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import BlueArrowButton from "../../../common/BlueArrowButton";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import BlueHoverButton from "../../../common/BlueArrowButton";
-import { getTrainerSessionDetails } from "action/trainerAct";
+import { getTrainerSessionDetails, getActiveUsersPass } from "action/trainerAct";
 import { cancelSession, updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -25,6 +25,7 @@ const TrainerSessionFC = ({
   getTrainerSessionDetailsApi,
   cancelSession,
   updateUserDetails,
+  getActiveUsersPass
 }) => {
   const [trainerSessionData, setTrainerSessionData] = useState({
     upcomingSessions: [],
@@ -50,6 +51,8 @@ const TrainerSessionFC = ({
   // }, []);
 
   const getAllDetails = (currentTab, isPaginaion = false) => {
+   
+   if(currentTab !== "pass"){
     getTrainerSessionDetailsApi(currentTab, pageData[currentTab])
       .then(({ data: tData, documentCount: tempDocumentCount }) => {
         let data = tData || [];
@@ -116,6 +119,10 @@ const TrainerSessionFC = ({
         setDataLoading(false);
         Toast({ type: "error", message: err.message || "Error" });
       });
+    }else{
+
+      getActiveUsersPass().then(data =>{console.log(data);})
+    }
   };
 
   const handleSessionStatus = (trainerId, sessionStatus) => {
@@ -247,17 +254,15 @@ const TrainerSessionFC = ({
                     <div className="trainer_pass_container">
 
                       <div className="pass_card">
-                      <div className="pass_ribbon">3 Session Package</div>
+                        <div className="pass_ribbon">3 Session Package</div>
                         <div className="pass_header">Praveen Nat</div>
-                       
+
                         <div className="pass_content"> 2 out of 3 passes remaining</div>
                         <div className="pass_content">
                           Valid for only Virtual Sessions</div>
                         <div className="pass_content">Valid until October 29th, 2021</div>
                       </div>
-                      <div className="pass_card"></div>
-                      <div className="pass_card"></div>
-                      <div className="pass_card"></div>
+
                     </div>
                   </TabPanel>
                 </div>
@@ -846,6 +851,7 @@ const mapDispatchToProps = (dispatch) => {
       getTrainerSessionDetailsApi: getTrainerSessionDetails,
       cancelSession,
       updateUserDetails,
+      getActiveUsersPass
     },
     dispatch
   );

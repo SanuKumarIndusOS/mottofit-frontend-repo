@@ -54,6 +54,16 @@ export const AuthApi = {
 };
 
 export const TrainerApi = {
+
+  getAllUsersPasses: {
+    method: "get",
+    url: "getUsersPasses",
+    baseURL: "normal",
+    get api() {
+     
+      return `${this.url}`;
+    },
+  },
   searchBestMatch: {
     url: "availableTrainer",
     method: "get",
@@ -488,6 +498,7 @@ export const userApi = {
       return `${this.url}`;
     },
   },
+
   verifyCouponCode: {
     method: "get",
     url: "code/verify?code=",

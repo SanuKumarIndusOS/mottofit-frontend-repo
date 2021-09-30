@@ -21,6 +21,8 @@ export const trainerSearchFilters = (payload) => (dispatch) => {
   });
 };
 
+
+
 export const searchBestMatch = (payload, page, type) => (
   dispatch,
   getState,
@@ -331,6 +333,22 @@ export const fetchGlobalSearchResults = (payload) => (
     TrainerApi.globalSearch.key = payload.key;
     TrainerApi.globalSearch.page = payload.page;
     api({ ...TrainerApi.globalSearch })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+
+
+export const getActiveUsersPass = () => (dispatch, getState, { api }) => {
+  return new Promise((resolve, reject) => {
+    const { getAllUsersPasses } = TrainerApi;
+ //console.log(getAllUsersPasses,"pp");
+    api({ ...getAllUsersPasses })
       .then(({ data }) => {
         resolve(data);
       })
