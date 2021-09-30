@@ -122,7 +122,11 @@ const TrainerCardOutsideFC = (props) => {
                   >
                     <div className="content_card">
                       <div className="circle_hover_card">
-                        <p>check me out</p>
+                        {/* <p>check me out</p> */}
+                        <p>
+                          Check <br /> Me Out
+                        </p>
+                        <div className={`check_me_out_icon`}>&#10094;</div>
                       </div>
                     </div>
                   </div>
@@ -149,9 +153,10 @@ const TrainerCardOutsideFC = (props) => {
                 </div>
                 <div className="card-button">
                   <button
-                    style={{
-                      backgroundColor: "#53BFD2",
-                    }}
+                    // style={{
+                    //   backgroundColor: "#53BFD2",
+                    // }}
+                    className="book_session_btn"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -182,7 +187,7 @@ const HeadingTrainer = ({ otherRef }) => {
     <>
       <div className="container">
         <div className="wrapper_headings" ref={otherRef}>
-          <h2>Just Outside Your Time</h2>
+          <h2>just outside your time</h2>
           <p>
             These trainers are in your area. Browse their profiles to message
             them to find a time that works for you.

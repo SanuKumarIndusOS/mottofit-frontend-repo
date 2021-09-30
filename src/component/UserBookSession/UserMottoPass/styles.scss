@@ -193,9 +193,9 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              width: 85%;
-              padding: 0 0em;
-              margin: 0 0 0 2em;
+              width: 100%;
+              // padding: 0 0em;
+              margin: 0 0 0 1em;
               button {
                 background-color: transparent;
                 display: flex;
@@ -217,12 +217,11 @@
               display: flex;
               align-items: center;
               justify-content: center;
-              margin: 1.8em 2em 0 2em;
+              // margin: 0 2em 0 2em;
+              margin: 15px 31px 0 31px;
               background-color: #53bfd2;
               width: 80%;
               height: 5px;
-              position: relative;
-              top: -17px;
             }
           }
           .motto_pass_right {
@@ -326,9 +325,9 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              width: 85%;
-              padding: 0 0em;
-              margin: 0 0 0 2em;
+              width: 100%;
+              // padding: 0 0em;
+              margin: 0 0 0 1em;
               button {
                 background-color: transparent;
                 display: flex;
@@ -352,13 +351,11 @@
               display: flex;
               align-items: center;
               justify-content: center;
-              margin: 1.8em 2em 0 2em;
-
+              // margin: 0 2em 0 2em;
+              margin: 15px 31px 0 31px;
               background-color: #53bfd2;
-              width: 80%;
               height: 5px;
-              position: relative;
-              top: -17px;
+              width: 80%;
             }
           }
         }
