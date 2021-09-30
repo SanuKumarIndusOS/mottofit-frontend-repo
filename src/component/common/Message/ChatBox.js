@@ -264,8 +264,32 @@ class ChatBoxClass extends Component {
                     {channelData?.chatTitle || "Title"}
                   </h2>
                   <h1 onClick={this.goBack}>&#8249;</h1>
+                
                 </div>
+                   
                 <div className="message_right_header">
+                  
+                {window.location.search === "?requested" && (
+                    <div className="requested-session-block">
+                      <p className="text-secondary fs-14">
+                        <Link to={redirectURL}>
+                          <span className="text-primary text-underline cursor-pointer">
+                            Click here
+                          </span>
+                        </Link>
+                        {!isTrainer ? (
+                          <>
+                            <span>{` to book your session with `}</span>
+                            <span>{`${trainerName} once you both have agreed on a day & time.`}</span>
+                          </>
+                        ) : (
+                          <span>{`, to open up the time slot when you have confirmed a day & time with ${userName}`}</span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+  
+              
                   <h2 style={{ textTransform: "Capitalize" }}>
                     {channelData?.chatTitle || "Title"}
                   </h2>
@@ -322,6 +346,7 @@ class ChatBoxClass extends Component {
                   className="message_right_textarea"
                   ref={this.messagesEndRef}
                 >
+                  
                   {tempMsg?.length > 0 ? (
                     tempMsg.map((item, index) => {
                       return (

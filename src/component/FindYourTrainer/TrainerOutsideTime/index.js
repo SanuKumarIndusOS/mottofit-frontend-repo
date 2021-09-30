@@ -94,6 +94,7 @@ const TrainerCardOutsideFC = (props) => {
                 to={`/trainer/profile/${outSideData[data]["id"]}`}
                 className="card-link card"
                 key={`trainer_outside_matche_${index}`}
+                style={{paddingBottom:"0px"}}
               >
                 {/* <div
                 className="card"

@@ -40,7 +40,7 @@ const UserTracker = () => {
     ArrowThree = <img src={ArrowInActive} alt="icon" />;
     ScheduleText = <p className="active">Schedule your slot</p>;
     SessionText = <p className="inactive">Book Your Slot</p>;
-    MottoText = <p className="inactive">Get a motto pass</p>;
+    MottoText = <p className="inactive">Get a motto package</p>;
     PaymentText = <p className="inactive">Make a Payment</p>;
 
     Icon_mobile = <img src={ScheduleIcon} alt="icon" />;
@@ -63,7 +63,7 @@ const UserTracker = () => {
 
     ScheduleText = <p className="active">Schedule your slot</p>;
     SessionText = <p className="active">Book Your Slot</p>;
-    MottoText = <p className="inactive">Get a motto pass</p>;
+    MottoText = <p className="inactive">Get a motto package</p>;
     PaymentText = <p className="inactive">Make a Payment</p>;
 
     Icon_mobile = <img src={SessionActive} alt="icon" />;
@@ -83,11 +83,11 @@ const UserTracker = () => {
     ArrowThree = <img src={ArrowInActive} alt="icon" />;
     ScheduleText = <p className="active">Schedule your slot</p>;
     SessionText = <p className="active">Book Your Slot</p>;
-    MottoText = <p className="active">Get a motto pass</p>;
+    MottoText = <p className="active">Get a motto package</p>;
     PaymentText = <p className="inactive">Make a Payment</p>;
 
     Icon_mobile = <img src={MottoIconBar} alt="icon" />;
-    Icon_text = <p className="active">Get a motto pass</p>;
+    Icon_text = <p className="active">Get a motto package</p>;
 
     // Prev_mobile = <div className="tracker_prev_mobile" onClick={()=>{history.push("/user/session-type")}}>&lt;</div>;
     // Next_mobile = <div className="tracker_next_mobile">&gt;</div>;
@@ -103,7 +103,7 @@ const UserTracker = () => {
     ArrowThree = <img src={ArrowActive} alt="icon" />;
     ScheduleText = <p className="active">Schedule your slot</p>;
     SessionText = <p className="active">Book Your Slot</p>;
-    MottoText = <p className="active">Get a motto pass</p>;
+    MottoText = <p className="active">Get a motto package</p>;
     PaymentText = <p className="active">Make a Payment</p>;
 
     Icon_mobile = <img src={PaymentActive} alt="icon" />;

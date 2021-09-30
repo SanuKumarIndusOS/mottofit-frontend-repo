@@ -40,8 +40,8 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
 
   const urlData = new URLSearchParams(decodeURIComponent(searchUrl));
 
-  console.log(urlData.get("requestSession"));
-  console.log(urlData.get("nextpath"));
+  // console.log(urlData.get("requestSession"));
+  // console.log(urlData.get("nextpath"));
 
   console.log(searchUrl);
 
@@ -65,16 +65,16 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
   async function logIn(e) {
     e.preventDefault();
 
-    const nextPathUrl = urlData.get("nextpath");
-    const isRequestSession = urlData.get("requestSession");
+    const nextPathUrl = urlData?.get("nextpath");
+    const isRequestSession = urlData?.get("requestSession");
 
-    console.log(
-      isRequestSession,
-      nextPathUrl,
-      nextPathUrl.includes("/message/requested"),
-      !isRequestSession,
-      !nextPathUrl.includes("/message/requested")
-    );
+    // console.log(
+    //   isRequestSession,
+    //   nextPathUrl,
+    //   nextPathUrl.includes("/message/requested"),
+    //   !isRequestSession,
+    //   !nextPathUrl.includes("/message/requested")
+    // );
 
     const payload = {
       email: data.email,
@@ -103,7 +103,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
 
         console.log("log1");
 
-        if (!isRequestSession && !nextPathUrl.includes("/message/requested")) {
+        if (!isRequestSession && !nextPathUrl?.includes("/message/requested")) {
           console.log("Hi");
 
           let reduxData = {
@@ -241,6 +241,17 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
                   </div>
                   {apiError && <span className="errorMessage">{apiError}</span>}
 
+                  <div className="submit_button">
+                    <button
+                      className="login_button"
+                      type="submit"
+                      onClick={logIn}
+                    >
+                      Signin
+                      <ArrowHoverBlacked />
+                    </button>
+                  </div>
+
                   <div className="or_items">
                     <div className="hr_line"></div>
                     <div>
@@ -264,7 +275,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
                         Sign In with Google
                       </button> */}
                   </div>
-                  <div className="submit_button">
+                  {/* <div className="submit_button">
                     <button
                       className="login_button"
                       type="submit"
@@ -273,7 +284,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
                       Signin
                       <ArrowHoverBlacked />
                     </button>
-                  </div>
+                  </div> */}
                 </form>
               </div>
               <div className="login_items">

@@ -147,7 +147,6 @@ const TrainerMessageClass = ({
 
   const getChannelDetails = (tab) => {
     if (isAdmin) return getAdminChannelDetails();
-
     const { search } = history.location;
 
     const channelID = search.split("channelId=")[1];
@@ -321,7 +320,9 @@ const TrainerMessageClass = ({
 
         updateMessagingDetails(reduxData);
 
-        if (mql.matches) history.push("/mobiles/chat");
+        if (mql.matches) {
+          console.log("opl", type);
+          history.push(type === "requested"? "/mobiles/chat?requested":"/mobiles/chat");}
       })
       .catch((err) => {
         Toast({ type: "error", message: err.message || "Error" });

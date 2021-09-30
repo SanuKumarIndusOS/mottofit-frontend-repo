@@ -83,7 +83,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
             </div>
             <div className="motto_wrapper">
               <div className="motto_pass_wrapper">
-                <h2>Get a Motto Pass to Do More for Less</h2>
+                <h2>Get a Motto Package to Do More for Less</h2>
                 <div className="motto_pass_items">
                   <div className="motto_pass_left">
                     <div class="session_pass">
@@ -117,7 +117,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                       { threeSessionRate  !== 0 ? 
                         <h1>
                           <span style={{ display: "none" }}>$100</span> $
-                           {Math.round((threeSessionRate/3) * 100) / 100}
+                           {Math.ceil((threeSessionRate/3)) }
                           <span className="offer">/ Session </span>
                         </h1>
                          :  <h1>Not Available</h1>}
@@ -205,7 +205,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                       { tensessionRate  !== 0 ? 
                         <h1>
                           <span style={{ display: "none" }}>$100</span>$
-                          {Math.round((tensessionRate / 10) * 100) / 100}
+                          {Math.ceil((tensessionRate / 10)) }
                           <span className="offer">/ Session</span>
                         </h1>
                         : <h1>Not Available</h1>}

@@ -166,6 +166,7 @@ const UserPaymentsFC = ({
         scheduleBody.availPass = mottoPassDataVal.availPass[0].id;
       } else {
         scheduleBody.newPass = mottoPassDataVal;
+        console.log(mottoPassDataVal);
       }
     }
 
@@ -399,7 +400,7 @@ const UserPaymentsFC = ({
               <div className="outter_links">
                 <img src={ArrowBack} alt="icon" />
                 <div className="inner_links">
-                  <Link to="/user/motto-pass"> Get a Motto Pass</Link>
+                  <Link to="/user/motto-pass"> Get a Motto Package</Link>
                   <div></div>
                 </div>
               </div>
@@ -593,11 +594,22 @@ const UserPaymentsFC = ({
                         <h3 className="fs-20 text-secondary">Price / Hour</h3>
                       </div>
                     </div> */}
-                    <AccordationService
+                    <br></br>
+                    {"passType" in mottoPassDataVal ? <h4>Availed Motto Package: ${mottoPassDataVal?.price}</h4
+                    > : <AccordationService
                       data={accordionData}
                       couponRate={couponRate}
                       isCouponApplied={isCouponCodeValid}
                     />
+                    
+                    }
+
+                    {/* <AccordationService
+                      data={accordionData}
+                      couponRate={couponRate}
+                      isCouponApplied={isCouponCodeValid}
+                    /> */}
+
                     <div className="user_service_wrapper">
                       {/* <div className="user_service_left">
                         <div className="service_header">

@@ -201,6 +201,7 @@
                   }
                 }
                 .for_people_title {
+                  cursor: default;
                   border-bottom: 2px solid #e3e3e3;
                   opacity: 1;
                   margin-top: 15px;
@@ -842,9 +843,9 @@
   button {
     // color: #53bfd2;
 
-    &:hover {
-      // color: #53bfd2;
-    }
+    // &:hover {
+    //   // color: #53bfd2;
+    // }
 
     &:focus {
       box-shadow: 0 0;
@@ -873,6 +874,7 @@
       margin-right: 0px;
       .book_session_btn {
         margin: 10px 0px 40px 0px;
+        font-size: 15px;
       }
       span {
         margin-bottom: 2rem;

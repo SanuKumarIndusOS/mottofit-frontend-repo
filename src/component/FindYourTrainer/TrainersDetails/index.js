@@ -125,6 +125,7 @@ const TrainerCardsFC = (props) => {
                 to={`/trainer/profile/${bestMatchData[data]["id"]}`}
                 className="card-link card"
                 key={`trainer_best_matches_${index}`}
+                style={{paddingBottom:"0px"}}
               >
                 <div className="position-relative w-100">
                   <img
