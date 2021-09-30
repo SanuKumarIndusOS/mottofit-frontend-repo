@@ -202,7 +202,7 @@ const TrainerSessionFC = ({
                 <TabList>
                   {/* <Tab tabFor="overview">Overview</Tab> */}
                   <Tab tabFor="upcoming">Upcoming</Tab>
-                  {/* <Tab tabFor="pass">Motto pass</Tab> */}
+                  <Tab tabFor="pass">Motto package</Tab>
                   <Tab tabFor="past">Previous</Tab>
                   {/* <Tab tabFor="ongoing">OnGoing</Tab> */}
                 </TabList>
@@ -242,7 +242,23 @@ const TrainerSessionFC = ({
                 </div>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="pass">
-                    <TabThree />
+
+
+                    <div className="trainer_pass_container">
+
+                      <div className="pass_card">
+                      <div className="pass_ribbon">3 Session Package</div>
+                        <div className="pass_header">Praveen Nat</div>
+                       
+                        <div className="pass_content"> 2 out of 3 passes remaining</div>
+                        <div className="pass_content">
+                          Valid for only Virtual Sessions</div>
+                        <div className="pass_content">Valid until October 29th, 2021</div>
+                      </div>
+                      <div className="pass_card"></div>
+                      <div className="pass_card"></div>
+                      <div className="pass_card"></div>
+                    </div>
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
@@ -775,9 +791,8 @@ const TabPast = ({
                   prevData.map((data, index) => {
                     let userProps = {
                       profilePicture: data?.userDetail?.profilePicture,
-                      userName: `${data?.userDetail?.firstName || ""} ${
-                        data?.userDetail?.lastName || ""
-                      }`,
+                      userName: `${data?.userDetail?.firstName || ""} ${data?.userDetail?.lastName || ""
+                        }`,
                     };
                     return (
                       <>
