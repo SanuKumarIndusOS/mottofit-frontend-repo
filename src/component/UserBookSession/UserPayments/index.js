@@ -29,6 +29,9 @@ import { Toast } from "service/toast";
 import { UserAvatar } from "component/common/UserAvatar";
 import moment from "moment";
 import momentTZ from "moment-timezone";
+import Dialog from '@mui/material/Dialog';
+import { CircularProgress } from '@material-ui/core';
+
 
 const stripePromise = loadStripe(config.stripeUrl);
 
@@ -71,6 +74,14 @@ const UserPaymentsFC = ({
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+ 
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleCouponCode = ({ target: { value } }) => {
@@ -119,6 +130,8 @@ const UserPaymentsFC = ({
     //     type: "info",
     //     message: "Need atleast one default card details",
     //   });
+
+    setOpen(true)
 
     let trainingtype = sessionData?.sessionType;
     if (trainingtype.includes("1 ON 1")) {
@@ -172,6 +185,7 @@ const UserPaymentsFC = ({
 
     scheduleSession(scheduleBody)
       .then((res) => {
+        setOpen(false)
         if (res.session.trainingType === "1on1") {
           history.push("/users/dashboard/session");
         } else if (
@@ -649,6 +663,15 @@ const UserPaymentsFC = ({
           </div>
         </div>
       </div>
+
+      <Dialog open={open} onClose={handleClose}>
+        <div style={{margin:"1rem", display:"flex", flexDirection:"column", alignItems:"center"}}>
+        
+        <div>Please wait your Session is being booked </div>
+        <br></br>
+        <CircularProgress style={{'color': '#53bfd2'}}/>
+        </div>
+      </Dialog>
     </>
   );
 };
