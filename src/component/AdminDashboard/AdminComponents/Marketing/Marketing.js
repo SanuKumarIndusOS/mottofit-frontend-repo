@@ -13,9 +13,9 @@ import CardActions from "@material-ui/core/CardActions";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CreateCoupon, GetAllCoupon } from "action/adminAct";
+import { CreateCoupon, GetAllCoupon, ActivateCoupon } from "action/adminAct";
 
-function Marketing({ CreateCoupon, GetAllCoupon }) {
+function Marketing({ CreateCoupon, GetAllCoupon, ActivateCoupon }) {
   const [open, setOpen] = React.useState(false);
 
   const [ctype, setCtype] = React.useState("");
@@ -27,6 +27,14 @@ function Marketing({ CreateCoupon, GetAllCoupon }) {
   const handleClose = (value) => {
     setOpen(false);
   };
+
+  const activateIncentive = (id) => {
+
+    ActivateCoupon(id);
+    GetAllCoupon().then((data) => {
+      setCouponList(data);
+    });
+  }
 
   React.useEffect(() => {
     GetAllCoupon().then((data) => {
@@ -56,20 +64,23 @@ function Marketing({ CreateCoupon, GetAllCoupon }) {
                 <div className="ccode">{item.code}</div>
 
                 <div className="ctype">
-                  
+
                   <mark>{item.type} use</mark>
                 </div>
               </div>
 
               <CardActions>
-                <Button
+
+                {item?.status === "inactive" ? <Button
                   size="medium"
                   variant="contained"
                   color="primary"
                   style={{ width: "100%" }}
+                  onClick={() => { activateIncentive(item?.id) }}
                 >
                   Activate
-                </Button>
+                </Button> : "Active"}
+
               </CardActions>
             </Card>
           );
@@ -154,12 +165,12 @@ function Marketing({ CreateCoupon, GetAllCoupon }) {
                 CreateCoupon(payload).then((data) => {
                   console.log(data);
                   GetAllCoupon().then((data) => {
-                  
+
                     setCouponList(data);
                     setOpen(false);
                   });
 
-                  
+
                 });
               }}
             >
@@ -174,7 +185,7 @@ function Marketing({ CreateCoupon, GetAllCoupon }) {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ CreateCoupon, GetAllCoupon }, dispatch);
+  return bindActionCreators({ CreateCoupon, GetAllCoupon, ActivateCoupon }, dispatch);
 };
 
 const MarketingC = connect(null, mapDispatchToProps)(Marketing);

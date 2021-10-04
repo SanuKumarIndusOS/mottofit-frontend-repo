@@ -253,7 +253,7 @@ const UserMottoPass = ({ selectedTrainerData, sessionData, mottoPassData }) => {
                           };
 
                           console.log(newPass);
-
+                          mottoPassData(newPass);
                           history.push("/user/payment");
                         }}
                       >

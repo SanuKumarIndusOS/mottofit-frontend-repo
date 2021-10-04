@@ -576,4 +576,13 @@ export const AdminApi = {
       return this.url;
     },
   },
+  ActivateCoupon: {
+    method: "put",
+    url: "code/",
+    baseURL: "payment",
+    id: "",
+    get api() {
+      return this.url + this.id + "/update/active";
+    },
+  },
 };
