@@ -32,7 +32,7 @@ const TrainerCardsFC = (props) => {
   };
 
   let no_match = <div></div>;
-  if (bestMatchData?.length === 0) {
+  if (bestMatchData?.length === 0 && props.type !=="globalSearch") {
     no_match = <h1 className="no_match">No Matches found</h1>;
   }
 

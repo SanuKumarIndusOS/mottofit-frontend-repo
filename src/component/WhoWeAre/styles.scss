@@ -1,9 +1,133 @@
+.watermark{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  background-color: #F6F6F6;
+}
 .outter_we_container {
-  background-color: #53bfd2;
+  
 
   width: 100%;
   height: auto;
+ 
 
+ .title_container
+ {
+   background-color: #2C2C2C;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 400px;
+   letter-spacing: -0.6px;
+   color: white;
+   font-weight: 600;
+   font-size: 60px;
+   font-family: "Montserrat", sans-serif;
+   @media only screen and (max-width: 900px) {
+
+    font-size: 30px;
+    height: 250px;
+
+    margin-top: 4rem;
+  }
+
+ }
+
+ .iconItem{
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-top: 2rem;
+img{
+  @media only screen and (max-width: 900px) {
+
+    width: 80%;
+  }
+}
+
+  
+ }
+
+ .heading1{
+
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  font: normal normal bold 45px/55px Cormorant Garamond;
+letter-spacing: -0.45px;
+@media only screen and (max-width: 900px) {
+
+  font-size: 28px;
+}
+ }
+
+ .content1{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: normal normal normal 18px/30px Montserrat;
+letter-spacing: 0.27px;
+color: #696969;
+margin-top: 1rem;
+text-align: center;
+@media only screen and (max-width: 900px) {
+
+  padding: 2rem;
+  text-align: left;
+  margin-top: unset;
+}
+}
+
+.motto_story{
+  padding-top: 4rem;
+  display: flex;
+background-color: #F6F6F6;
+margin-top: 5rem;
+
+@media only screen and (max-width: 900px) {
+
+  flex-direction: column;
+}
+  .pictureL{
+    flex: 1;
+    padding-left: 2rem;
+    img{
+    width: 80%;}
+  
+  }
+
+  .content2{
+
+    b{
+      font-size: 30px;
+      font-weight: 500;
+      color: #000;
+     
+    }
+    flex: 1;
+    padding-right: 8rem;
+    font: normal normal normal 18px/30px Montserrat;
+    letter-spacing: 0.27px;
+    color: #696969;
+    margin-top: 1rem;
+    padding-top: 2rem;
+    @media only screen and (max-width: 900px) {
+
+      padding: 1rem;
+    }
+  }
+}
+
+
+ 
+ 
+ 
   .inner_we_container {
     padding: 0 10em;
     @media screen and (max-width: 1024px) {
