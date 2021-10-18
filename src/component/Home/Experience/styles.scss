@@ -355,6 +355,23 @@
   }
 }
 
+// new css
+
+.xp_container {
+  
+  .xp_header {
+  }
+  .xp_card_container {
+    display: flex;
+
+    .xp_card {
+      max-width: 350px;
+      height: 520px;
+      background-color: #53bfd2;
+    }
+  }
+}
+
 .marketplace_container {
   display: flex;
   margin-top: 10rem;
@@ -381,7 +398,7 @@
       color: #2c2c2c;
       margin-bottom: 3rem;
       font-size: 18px;
-      opacity: 0.75 ;
+      opacity: 0.75;
     }
 
     .marketplace_cta {
@@ -406,12 +423,12 @@
         margin-bottom: unset;
         margin-left: unset;
       }
-      
+
       .perks_item {
         flex: 1;
         display: flex;
         align-items: center;
-        opacity: 0.75 ;
+        opacity: 0.75;
         text-align: left;
         letter-spacing: 0.3px;
         color: #2c2c2c;
@@ -432,7 +449,7 @@
           margin-right: 1rem;
         }
 
-        .right_item{
+        .right_item {
           margin-left: 3rem;
         }
       }
