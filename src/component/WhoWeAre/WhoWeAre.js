@@ -51,7 +51,7 @@ export const WhoWeAre = () => {
                both client services and operational/administrative management in the
                public relations, advertising & marketing industries. Now between New York City 
                & Miami, she’s been able to gain on-ground experience and grow her 
-               network in two cities where wellness & fitness industry are prioritized, and
+               networks in two cities where wellness & fitness industry are prioritized, and
                adapt these findings to Motto.
             </p>
           </div>

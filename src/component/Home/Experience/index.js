@@ -231,7 +231,7 @@ class Experience extends Component {
           </div>
           {/* ------------------------------------personal--------------- */}
 
-          <div className="personal_container">
+          {/* <div className="personal_container">
             <div className="personal_trainer_description">
               <h2 className="heading">The Top Personal Trainer Marketplace</h2>
               <p className="discription">
@@ -283,6 +283,42 @@ class Experience extends Component {
               >
                 Find Your Best Match <BlueHoverButton />
               </Link>
+            </div>
+          </div> */}
+         
+          {/* Reworked Stuff */}
+
+          <div className="marketplace_container">
+            <div className="marketplace_left">
+              <div className="marketplace_header">The Top Personal Trainer Marketplace</div>
+              <div className="marketplace_body">Your personal trainer marketplace for Strength & HIIT, Boxing, Yoga & Pilates. Train virtually from anywhere or locally in Motto markets.</div>
+              <div className="marketplace_cta">FIND YOUR BEST MATCH &ensp;<BlueHoverButton /></div>
+            </div>
+            <div className="marketplace_right">
+              <div className="perks_container">
+                <div className="perks_item">
+                  <img src={Icon1}/>  <div>Discover only the top training talent</div>
+                </div>
+                <div className="perks_item ">
+                <img src={Icon4}/>  <div>A community of vetted personal trainers</div>
+                </div>
+              </div>
+              <div className="perks_container">
+                <div className="perks_item">
+                <img src={Icon2}/>  <div>Personalized sessions to meet specific goals</div>
+                </div>
+                <div className="perks_item">
+                <img src={Icon5}/>  <div>Save with cost-efficient social & group sessions</div>
+                </div>
+              </div>
+              <div className="perks_container">
+                <div className="perks_item">
+                <img src={Icon3}/>  <div>Easy booking method & secure transactions</div>
+                </div>
+                <div className="perks_item">
+                <img src={Icon6}/>  <div>Contactless & virtual training available</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
