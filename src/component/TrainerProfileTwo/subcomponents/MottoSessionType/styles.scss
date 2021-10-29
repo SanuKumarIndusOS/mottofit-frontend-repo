@@ -1,5 +1,6 @@
 .motto_session_type_container {
-  margin: 10rem;
+  margin: 2rem;
+  max-width: 900px;
   .session_type_header {
     display: flex;
     justify-content: space-between;
@@ -18,27 +19,75 @@
     }
 
     .left_border {
-      border-radius: 10px 0px 0px 0px;
+      border-radius: 20px 0px 0px 0px;
     }
 
     .right_border {
-      border-radius: 0px 10px 0px 0px;
+      border-radius: 0px 20px 0px 0px;
     }
 
     .active_header {
       background-color: #53bfd2;
+      font-weight: 600;
     }
   }
 
   .session_type_body {
-    padding: 4rem;
+    padding: 2rem;
     background-color: #f0f0f0;
-    // height: 500px;
-    border-radius: 0px 0px 10px 10px;
+    max-height: 550px;
+
+    border-radius: 0px 0px 20px 20px;
     width: 100%;
 
-    .body_header{
+    .body_header {
+      font-weight: 600;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .line {
+      height: 5px;
+      border-bottom: 0.5px solid rgb(199, 199, 199);
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .session_type_item2 {
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      align-items: center;
+
+      .session_type_item2_left {
+        font-size: 16px;
         font-weight: 700;
+        font-family: "Montserrat", sans-serif;
+
+        span {
+          font-weight: normal;
+          color: gray;
+        }
+      }
+
+      .session_type_item2_right {
+        font-size: 16px;
+        font-weight: 700;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        align-items: center;
+      }
     }
   }
+}
+
+.MuiFormControlLabel-root {
+  margin-bottom: 0px !important;
+  font-family: "Montserrat", sans-serif;
+}
+
+.radio_label{
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  
 }
