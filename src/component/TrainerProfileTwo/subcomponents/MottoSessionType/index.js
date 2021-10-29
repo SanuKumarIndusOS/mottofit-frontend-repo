@@ -8,9 +8,9 @@ import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import { cyan } from "@material-ui/core/colors";
 import BlueHoverButton from "component/common/BlueArrowButton";
+import { tr } from "date-fns/locale";
 
-
-function MottoSessionType() {
+function MottoSessionType({oneOnone, social, classPricing }) {
   const CyanRadio = withStyles({
     root: {
       "&$checked": {
@@ -27,7 +27,7 @@ function MottoSessionType() {
       "10 Session Package": "10 Session Package",
     },
 
-    "SOCIAL SESSIONS": {
+    "SOCIAL, classPricing SESSIONS": {
       "For 2 People": "For 2 People",
       "For 3 People": "For 3 People",
       "For 4 People": "For 4 People",
@@ -40,12 +40,21 @@ function MottoSessionType() {
 
   const [activeHeader, setactiveHeader] = React.useState("virtual");
   const [selectedSessionType, setselectedSessionType] = React.useState("");
+  const [price, setPrice] = React.useState("");
 
   const setHeader = (value) => {
     setactiveHeader(value);
   };
 
-  console.log(pricingItem);
+
+  React.useEffect(() => {
+    console.log(oneOnone, social, classPricing);
+
+  }, [oneOnone])
+
+  
+
+  
 
   return (
     <div className="motto_session_type_container">
@@ -116,13 +125,22 @@ function MottoSessionType() {
                             />
                           }
                           label={<div className="radio_label"> {type} </div>}
-                          style={{width:"40%"}}
+                          style={{ width: "40%" }}
                         />
 
                         <div className="session_type_item2">
-                          <div className="session_type_item2_left">$125 <span>/ Session</span></div>
+                          <div className="session_type_item2_left">
+
+                           
+                           
+                            $125 <span>/ Session</span>
+                          </div>
                           <div className="session_type_item2_right">
-                           {selectedSessionType === type ?<>BOOK MY SLOT <BlueHoverButton/></>: null} 
+                            {selectedSessionType === type ? (
+                              <>
+                                BOOK NOW <BlueHoverButton />
+                              </>
+                            ) : null}
                           </div>
                         </div>
                       </div>
