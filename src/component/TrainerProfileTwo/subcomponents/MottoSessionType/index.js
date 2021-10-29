@@ -77,130 +77,38 @@ function MottoSessionType() {
         </div>
       </div>
       <div className="session_type_body">
-      <RadioGroup aria-label="sessionTypeRadio" name="sessionTypeRadio" >
-        {Object.keys(pricingItem)?.map((item) => {
-          return (
-            <div>
-              <div className="body_header">{item}</div>
-              <hr></hr>
+        <RadioGroup aria-label="sessionTypeRadio" name="sessionTypeRadio">
+          {Object.keys(pricingItem)?.map((item) => {
+            return (
               <div>
-             
-                {Object.keys(pricingItem[item]).map((type,key) => {
-                  return (
-                
+                <div className="body_header">{item}</div>
+                <hr></hr>
+                <div>
+                  {Object.keys(pricingItem[item]).map((type, key) => {
+                    return (
                       <div
                         style={{
                           display: "flex",
                           alignItems: "center ",
-                          
                         }}
                       >
                         <FormControlLabel
                           value={type}
                           control={<Radio />}
                           label={type}
-                          style={{flex:"1"}}
+                          style={{ flex: "1" }}
                         />
-                        <div  style={{flex:"1"}}>125$/Session</div>
-                        <div  style={{flex:"1"}}>bookmyslsot</div>
+                        <div style={{ flex: "1" }}>125$/Session</div>
+                        <div style={{ flex: "1" }}>bookmyslsot</div>
                       </div>
-                   
-                  
-                  );
-                })}
-                 
-                {/* <RadioGroup
-                  aria-label={item}
-                  
-                  name={item}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center ",
-                      justifyContent: "space-between ",
-                    }}
-                  >
-                   
-                    <FormControlLabel
-                      value="female"
-                      control={<Radio />}
-                      label="Individual Session"
-                    />
-                    <div>125$/Session</div>
-                    <div>bookmyslsot</div>
-                  </div>
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="30 Session Package"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="10 Session Package"
-                  />
-                </RadioGroup> */}
+                    );
+                  })}
+                </div>
+                <br></br>
               </div>
-              <br></br>
-            </div>
-          );
-        })}
-
-        {/* <div>
-          <div className="body_header">1 ON 1 INDIVIDUAL TRAININIG</div>
-          <hr></hr>
-          <div>
-            <RadioGroup
-              aria-label="gender"
-              defaultValue="female"
-              name="radio-buttons-group"
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center ",
-                  justifyContent: "space-between ",
-                }}
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Individual Session"
-                />
-                <div>125$/Session</div>
-                <div>bookmyslsot</div>
-              </div>
-              <FormControlLabel
-                value="male"
-                control={<Radio />}
-                label="30 Session Package"
-              />
-              <FormControlLabel
-                value="other"
-                control={<Radio />}
-                label="10 Session Package"
-              />
-            </RadioGroup>
-          </div>
-          <br></br>
-        </div>
-
-        <div>
-          <div className="body_header">SOCIAL SESSIONS</div>
-          <hr></hr>
-          <div></div>
-          <br></br>
-        </div>
-
-        <div>
-          <div className="body_header">CREATE A CLASS</div>
-          <hr></hr>
-          <div></div>
-          <br></br>
-        </div> */}
-
-         </RadioGroup>
+            );
+          })}
+        </RadioGroup>
       </div>
     </div>
   );
