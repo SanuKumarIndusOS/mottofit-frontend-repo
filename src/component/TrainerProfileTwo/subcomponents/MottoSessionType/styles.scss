@@ -1,0 +1,44 @@
+.motto_session_type_container {
+  margin: 10rem;
+  .session_type_header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .session_type_header_item {
+      width: 100%;
+      padding: 1rem;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+      color: white;
+      letter-spacing: 0.5px;
+      font-size: 15px;
+      background-color: #161616;
+      padding-left: 2rem;
+    }
+
+    .left_border {
+      border-radius: 10px 0px 0px 0px;
+    }
+
+    .right_border {
+      border-radius: 0px 10px 0px 0px;
+    }
+
+    .active_header {
+      background-color: #53bfd2;
+    }
+  }
+
+  .session_type_body {
+    padding: 4rem;
+    background-color: #f0f0f0;
+    // height: 500px;
+    border-radius: 0px 0px 10px 10px;
+    width: 100%;
+
+    .body_header{
+        font-weight: 700;
+    }
+  }
+}
