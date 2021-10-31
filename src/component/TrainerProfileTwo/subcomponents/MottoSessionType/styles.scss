@@ -1,0 +1,94 @@
+.motto_session_type_container {
+  margin: 2rem;
+  max-width: 900px;
+  .session_type_header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .session_type_header_item {
+      width: 100%;
+      padding: 1rem;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+      color: white;
+      letter-spacing: 0.5px;
+      font-size: 15px;
+      background-color: #161616;
+      padding-left: 2rem;
+    }
+
+    .left_border {
+      border-radius: 20px 0px 0px 0px;
+    }
+
+    .right_border {
+      border-radius: 0px 20px 0px 0px;
+    }
+
+    .active_header {
+      background-color: #53bfd2;
+      font-weight: 600;
+    }
+  }
+
+  .session_type_body {
+    padding: 2rem;
+    background-color: #f0f0f0;
+    max-height: 550px;
+
+    border-radius: 0px 0px 20px 20px;
+    width: 100%;
+
+    .body_header {
+      font-weight: 600;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .line {
+      height: 5px;
+      border-bottom: 0.5px solid rgb(199, 199, 199);
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .session_type_item2 {
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      align-items: center;
+
+      .session_type_item2_left {
+        font-size: 16px;
+        font-weight: 700;
+        font-family: "Montserrat", sans-serif;
+
+        span {
+          font-weight: normal;
+          color: gray;
+        }
+      }
+
+      .session_type_item2_right {
+        font-size: 16px;
+        font-weight: 700;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.MuiFormControlLabel-root {
+  margin-bottom: 0px !important;
+  font-family: "Montserrat", sans-serif;
+}
+
+.radio_label{
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  
+}
