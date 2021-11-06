@@ -125,6 +125,12 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
     }
   }, [activeHeader, oneOnone]);
 
+
+  const handleBookNow = () =>
+  {
+       console.log("hit");
+  }
+
   return (
     <div className="motto_session_type_container">
       <div className="session_type_header">
@@ -208,9 +214,9 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
                           </div>
                           <div className="session_type_item2_right">
                             {selectedSessionType === type ? (
-                              <>
+                              <div onClick={handleBookNow} style={{display:"flex",alignItems:"center"}}>
                                 BOOK NOW <BlueHoverButton />
-                              </>
+                              </div>
                             ) : null}
                           </div>
                         </div>
