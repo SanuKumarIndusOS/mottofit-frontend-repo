@@ -39,7 +39,7 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
   });
 
   const [activeHeader, setactiveHeader] = React.useState("virtual");
-  const [selectedSessionType, setselectedSessionType] = React.useState("");
+  const [selectedSessionType, setselectedSessionType] = React.useState("Individual Session");
   const [price, setPrice] = React.useState("");
 
   const setHeader = (value) => {
@@ -66,14 +66,62 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
           "For 3 People": { price: social?.virtualSessionfor3People },
           "For 4 People": { price: social?.virtualSessionfor4People },
         },
-        "CREATE A CLASS": { price: classPricing?.virtualSessionfor15People },
+        "CREATE A CLASS": {
+          "For 5-15 People": {
+            price: classPricing?.virtualSessionfor15People,
+          },
+        },
       });
     }
 
     if (activeHeader === "client_location") {
+      setPricingItem({
+        ...pricingItem,
+        "1 ON 1 INDIVIDUAL TRAINING": {
+          "Individual Session": { price: oneOnone?.inPersonAtClientLocation },
+          "3 Session Package": {
+            price: oneOnone?.passRatefor3SessionAtClientLocation,
+          },
+          "10 Session Package": {
+            price: oneOnone?.passRatefor10SessionAtClientLocation,
+          },
+        },
+        "SOCIAL SESSIONS": {
+          "For 2 People": { price: social?.inPeronAtClientLocationfor2People },
+          "For 3 People": { price: social?.inPeronAtClientLocationfor3People },
+          "For 4 People": { price: social?.inPeronAtClientLocationfor4People },
+        },
+        "CREATE A CLASS": {
+          "For 5-15 People": {
+            price: classPricing?.inPersonAtclientLocationfor15People,
+          },
+        },
+      });
     }
 
     if (activeHeader === "trainer_locaton") {
+      setPricingItem({
+        ...pricingItem,
+        "1 ON 1 INDIVIDUAL TRAINING": {
+          "Individual Session": { price: oneOnone?.inPersonAtTrainerLocation },
+          "3 Session Package": {
+            price: oneOnone?.passRatefor3SessionAtTrainerLocation,
+          },
+          "10 Session Package": {
+            price: oneOnone?.passRatefor10SessionAtTrainerLocation,
+          },
+        },
+        "SOCIAL SESSIONS": {
+          "For 2 People": { price: social?.inPeronAtTrainerLocationfor2People },
+          "For 3 People": { price: social?.inPeronAtTrainerLocationfor3People },
+          "For 4 People": { price: social?.inPeronAtTrainerLocationfor4People },
+        },
+        "CREATE A CLASS": {
+          "For 5-15 People": {
+            price: classPricing?.inPersonAttrainerLocationfor15People,
+          },
+        },
+      });
     }
   }, [activeHeader, oneOnone]);
 
@@ -155,7 +203,7 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
 
                         <div className="session_type_item2">
                           <div className="session_type_item2_left">
-                            $125 {pricingItem[item][type]?.price}{" "}
+                            ${pricingItem[item][type]?.price}{" "}
                             <span>/ Session</span>
                           </div>
                           <div className="session_type_item2_right">
