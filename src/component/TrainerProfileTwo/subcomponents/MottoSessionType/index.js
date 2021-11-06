@@ -10,7 +10,7 @@ import { cyan } from "@material-ui/core/colors";
 import BlueHoverButton from "component/common/BlueArrowButton";
 import { tr } from "date-fns/locale";
 
-function MottoSessionType({oneOnone, social, classPricing }) {
+function MottoSessionType({ oneOnone, social, classPricing }) {
   const CyanRadio = withStyles({
     root: {
       "&$checked": {
@@ -20,14 +20,14 @@ function MottoSessionType({oneOnone, social, classPricing }) {
     checked: {},
   })((props) => <Radio color="default" {...props} />);
 
-  const pricingItem = {
+  const [pricingItem, setPricingItem] = React.useState({
     "1 ON 1 INDIVIDUAL TRAINING": {
       "Individual Session": "Individual Session",
       "3 Session Package": "3 Session Package",
       "10 Session Package": "10 Session Package",
     },
 
-    "SOCIAL, classPricing SESSIONS": {
+    "SOCIAL SESSIONS": {
       "For 2 People": "For 2 People",
       "For 3 People": "For 3 People",
       "For 4 People": "For 4 People",
@@ -36,7 +36,7 @@ function MottoSessionType({oneOnone, social, classPricing }) {
     "CREATE A CLASS": {
       "For 5-15 People": "For 5-15 People",
     },
-  };
+  });
 
   const [activeHeader, setactiveHeader] = React.useState("virtual");
   const [selectedSessionType, setselectedSessionType] = React.useState("");
@@ -46,15 +46,36 @@ function MottoSessionType({oneOnone, social, classPricing }) {
     setactiveHeader(value);
   };
 
-
   React.useEffect(() => {
-    console.log(oneOnone, social, classPricing);
+    // console.log(oneOnone, social, classPricing);
 
-  }, [oneOnone])
+    if (activeHeader === "virtual") {
+      setPricingItem({
+        ...pricingItem,
+        "1 ON 1 INDIVIDUAL TRAINING": {
+          "Individual Session": { price: oneOnone?.virtualSession },
+          "3 Session Package": {
+            price: oneOnone?.passRatefor3SessionAtVirtual,
+          },
+          "10 Session Package": {
+            price: oneOnone?.passRatefor10SessionAtVirtual,
+          },
+        },
+        "SOCIAL SESSIONS": {
+          "For 2 People": { price: social?.virtualSessionfor2People },
+          "For 3 People": { price: social?.virtualSessionfor3People },
+          "For 4 People": { price: social?.virtualSessionfor4People },
+        },
+        "CREATE A CLASS": { price: classPricing?.virtualSessionfor15People },
+      });
+    }
 
-  
+    if (activeHeader === "client_location") {
+    }
 
-  
+    if (activeHeader === "trainer_locaton") {
+    }
+  }, [activeHeader, oneOnone]);
 
   return (
     <div className="motto_session_type_container">
@@ -96,14 +117,18 @@ function MottoSessionType({oneOnone, social, classPricing }) {
             setactiveHeader("trainer_locaton");
           }}
         >
-          IN-PERSON (TRAINER'S FACILITY)
+          IN-PERSON (TRAINER'S LOCATION)
         </div>
       </div>
       <div className="session_type_body">
-        <RadioGroup aria-label="sessionTypeRadio" name="sessionTypeRadio">
+        <RadioGroup
+          aria-label="sessionTypeRadio"
+          name="sessionTypeRadio"
+          defaultValue="Individual Session"
+        >
           {Object.keys(pricingItem)?.map((item) => {
             return (
-              <div style={{ maxHeight: "200px" }}>
+              <div style={{ maxHeight: "20 0px", marginBottom: "1rem" }}>
                 <div className="body_header">{item}</div>
                 <div className="line"></div>
                 <div>
@@ -130,10 +155,8 @@ function MottoSessionType({oneOnone, social, classPricing }) {
 
                         <div className="session_type_item2">
                           <div className="session_type_item2_left">
-
-                           
-                           
-                            $125 <span>/ Session</span>
+                            $125 {pricingItem[item][type]?.price}{" "}
+                            <span>/ Session</span>
                           </div>
                           <div className="session_type_item2_right">
                             {selectedSessionType === type ? (

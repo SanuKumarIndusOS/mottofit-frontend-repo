@@ -62,9 +62,9 @@ function UserScheduler({
   //   //  console.log(blockCell["2021-08-30"], "block");
   // }, [blockCell]);
 
-  // useEffect(() => {
-  //   console.log(selectedCell);
-  // }, [selectedCell]);
+  useEffect(() => {
+    console.log(selectedCell);
+  }, [selectedCell]);
 
   const PreviousWeek = () => {
     setstartWeek(startWeek.subtract(7, "days"));
@@ -108,7 +108,7 @@ function UserScheduler({
     var tss = moment(`${datekey} ${time[timeKey].time}`, "YYYY-MM-DD hh:mm A")
       .add(60, "minutes")
       .valueOf();
-    console.log(ts, tss);
+    console.log(ts, tss, time[timeKey].time);
     parentCallback(ts, tss, datekey);
 
     setSelectedCell({
