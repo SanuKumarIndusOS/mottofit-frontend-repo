@@ -9,6 +9,7 @@ import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 
 import { history } from "helpers";
+import { Link, useParams, useHistory } from "react-router-dom";
 
 function TrainerProfileTwo({
   getTrainerDetail,
@@ -16,9 +17,11 @@ function TrainerProfileTwo({
   sessionData,
 }) {
   const [trainerData, setTrainerData] = React.useState("");
+  const { id } = useParams();
 
   React.useEffect(() => {
-    getTrainerDetail("ce82d301-f648-445f-864d-e80e628f82b9", false).then(
+    
+    getTrainerDetail(id, false).then(
       (data) => {
         setTrainerData(data);
         console.log(data);
@@ -29,7 +32,7 @@ function TrainerProfileTwo({
   const handleBooking = (price, type, venue) => {
     var storedata = {
       sessionData: {
-        trainerId: "ce82d301-f648-445f-864d-e80e628f82b9",
+        trainerId: id,
         city: trainerData?.servicableLocation,
         sessionType: venue === "virtual" ? "virtual" : "inPerson",
         venue: venue !== "virtual" ? venue : "clientLocation",
@@ -39,7 +42,7 @@ function TrainerProfileTwo({
     };
 
     updateUserDetails(storedata);
-    history.push("/user/scheduler/ce82d301-f648-445f-864d-e80e628f82b9")
+    history.push(`/user/scheduler/${id}`)
     //console.log("neinPersonwBook", price, type, venue);
   };
 
