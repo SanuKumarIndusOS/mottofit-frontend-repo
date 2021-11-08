@@ -20,30 +20,31 @@ function TrainerProfileTwo({
   const { id } = useParams();
 
   React.useEffect(() => {
-    
-    getTrainerDetail(id, false).then(
-      (data) => {
-        setTrainerData(data);
-        console.log(data);
-      }
-    );
+    getTrainerDetail(id, false).then((data) => {
+      setTrainerData(data);
+      console.log(data);
+    });
   }, []);
 
   const handleBooking = (price, type, venue) => {
-    var storedata = {
-      sessionData: {
-        trainerId: id,
-        city: trainerData?.servicableLocation,
-        sessionType: venue === "virtual" ? "virtual" : "inPerson",
-        venue: venue !== "virtual" ? venue : "clientLocation",
-        trainingType: type,
-        price: price,
-      },
-    };
+    if (!localStorage.getItem("token")) {
+      history.push("/mobile/login");
+      history.push(`?${encodeURIComponent("nextpath=/trainer/profile/"+id)}`);
+    } else {
+      var storedata = {
+        sessionData: {
+          trainerId: id,
+          city: trainerData?.servicableLocation,
+          sessionType: venue === "virtual" ? "virtual" : "inPerson",
+          venue: venue !== "virtual" ? venue : "clientLocation",
+          trainingType: type,
+          price: price,
+        },
+      };
 
-    updateUserDetails(storedata);
-    history.push(`/user/scheduler/${id}`)
-    //console.log("neinPersonwBook", price, type, venue);
+      updateUserDetails(storedata);
+      history.push(`/user/scheduler/${id}`);
+    }
   };
 
   return (

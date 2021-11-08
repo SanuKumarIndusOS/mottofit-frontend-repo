@@ -553,8 +553,8 @@ const UserPaymentsFC = ({
                     <div className="user_data_inner">
                       <img src={LocationIcon} alt="icon" />
                       <h4>
-                        {sessionData?.preferedTrainingMode === "inPerson"
-                          ? `${sessionData?.trainingVenue?.label}`
+                        {sessionData?.sessionType === "inPerson"
+                          ? `${sessionData?.venue === "clientLocation"? "Client's Location":"Trainer's Location"}`
                           : "Virtual"}
                       </h4>
                     </div>
