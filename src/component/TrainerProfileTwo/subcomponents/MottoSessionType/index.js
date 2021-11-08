@@ -10,7 +10,8 @@ import { cyan } from "@material-ui/core/colors";
 import BlueHoverButton from "component/common/BlueArrowButton";
 import { tr } from "date-fns/locale";
 
-function MottoSessionType({ oneOnone, social, classPricing }) {
+
+function MottoSessionType({ oneOnone, social, classPricing, handleBooking}) {
   const CyanRadio = withStyles({
     root: {
       "&$checked": {
@@ -103,22 +104,22 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
       setPricingItem({
         ...pricingItem,
         "1 ON 1 INDIVIDUAL TRAINING": {
-          "Individual Session": { price: oneOnone?.inPersonAtTrainerLocation },
+          "Individual Session": { price: oneOnone?.inPersonAtTrainerLocation, type: "oneOnOne" },
           "3 Session Package": {
-            price: oneOnone?.passRatefor3SessionAtTrainerLocation,
+            price: oneOnone?.passRatefor3SessionAtTrainerLocation, type: "oneOnOne"
           },
           "10 Session Package": {
-            price: oneOnone?.passRatefor10SessionAtTrainerLocation,
+            price: oneOnone?.passRatefor10SessionAtTrainerLocation, type: "oneOnOne"
           },
         },
         "SOCIAL SESSIONS": {
-          "For 2 People": { price: social?.inPeronAtTrainerLocationfor2People },
-          "For 3 People": { price: social?.inPeronAtTrainerLocationfor3People },
-          "For 4 People": { price: social?.inPeronAtTrainerLocationfor4People },
+          "For 2 People": { price: social?.inPeronAtTrainerLocationfor2People, type: "social" },
+          "For 3 People": { price: social?.inPeronAtTrainerLocationfor3People, type: "social" },
+          "For 4 People": { price: social?.inPeronAtTrainerLocationfor4People, type: "social" },
         },
         "CREATE A CLASS": {
           "For 5-15 People": {
-            price: classPricing?.inPersonAttrainerLocationfor15People,
+            price: classPricing?.inPersonAttrainerLocationfor15People, type: "class"
           },
         },
       });
@@ -126,10 +127,7 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
   }, [activeHeader, oneOnone]);
 
 
-  const handleBookNow = () =>
-  {
-       console.log("hit");
-  }
+ 
 
   return (
     <div className="motto_session_type_container">
@@ -214,7 +212,7 @@ function MottoSessionType({ oneOnone, social, classPricing }) {
                           </div>
                           <div className="session_type_item2_right">
                             {selectedSessionType === type ? (
-                              <div onClick={handleBookNow} style={{display:"flex",alignItems:"center"}}>
+                              <div onClick={() => { handleBooking()}} style={{display:"flex",alignItems:"center"}}>
                                 BOOK NOW <BlueHoverButton />
                               </div>
                             ) : null}
