@@ -23,7 +23,7 @@ const UserEventSchedularFC = (props) => {
   const [trainerstartSlot, settrainerstartSlot] = React.useState();
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [userSelectedData, setUserSelectedData] = React.useState({});
-  const [DateSlot, setDateSlot] = React.useState();
+  const [DateSlot, setDateSlot] = React.useState("");
 
   const { id } = useParams();
 
@@ -110,7 +110,7 @@ const UserEventSchedularFC = (props) => {
 
     props.updateUserDetails(reduxData);
 
-    history.push("/user/session-type");
+    history.push("/user/payment");
   };
 
   let userData = {
@@ -197,7 +197,7 @@ const UserEventSchedularFC = (props) => {
 
                 <Link
                   className={`submit_user ${
-                    props.selectedTimes.length > 0 ? "" : "disable-btn"
+                    DateSlot !== "" ? "" : "disable-btn"
                   }`}
                   onClick={handleContinue}
                   style={{ marginBottom: "500px" }}

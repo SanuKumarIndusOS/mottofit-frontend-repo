@@ -26,17 +26,21 @@ function TrainerProfileTwo({
     );
   }, []);
 
-  const handleBooking = () => {
+  const handleBooking = (price, type, venue) => {
     var storedata = {
       sessionData: {
         trainerId: "ce82d301-f648-445f-864d-e80e628f82b9",
         city: trainerData?.servicableLocation,
-        
+        sessionType: venue === "virtual" ? "virtual" : "inPerson",
+        venue: venue !== "virtual" ? venue : "clientLocation",
+        trainingType: type,
+        price: price,
       },
     };
 
     updateUserDetails(storedata);
-    console.log("newBook");
+    history.push("/user/scheduler/ce82d301-f648-445f-864d-e80e628f82b9")
+    //console.log("neinPersonwBook", price, type, venue);
   };
 
   return (

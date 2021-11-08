@@ -146,10 +146,10 @@ const UserPaymentsFC = ({
     //   sessionData?.trainingType?.value || bookingData?.activity?.value;
 
     const scheduleBody = {
-      trainerId: selectedTrainerData?.id || selectedTrainerData?.id,
+      trainerId: sessionData?.trainerId,
       title: trainingAcivityType || "Motto Session",
-      trainingType: trainingtype,
-      sessionType: sessionData?.preferedTrainingMode,
+      trainingType: sessionData?.trainingType,
+      sessionType: sessionData?.sessionType,
       activity: trainingAcivityType,
       sessionStatus: "created",
       sessionDate:
@@ -157,7 +157,7 @@ const UserPaymentsFC = ({
       sessionStartTime: convertToESTMs(bookingData?.start_slot),
       sessionEndTime: convertToESTMs(bookingData?.end_slot),
       city: sessionData?.location?.value,
-      venue: sessionData?.trainingVenue?.value,
+      venue: sessionData?.venue,
       price: sessionData?.price,
       // sessionMode: queryQbject?.availability?.value,
       sessionMode: "EarlyBird",
