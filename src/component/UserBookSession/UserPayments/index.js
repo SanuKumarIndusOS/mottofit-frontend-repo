@@ -174,6 +174,11 @@ const UserPaymentsFC = ({
       scheduleBody.newPass = sessionData?.newPass;
     }
 
+    if(sessionData?.availPass !== null)
+    {
+      scheduleBody.availPass = sessionData?.availPass;
+    }
+
     // if (Object.keys(mottoPassDataVal).length === 0) {
     //   console.log(mottoPassDataVal, "empty");
     // } else {

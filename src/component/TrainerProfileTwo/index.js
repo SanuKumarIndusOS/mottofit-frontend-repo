@@ -26,12 +26,12 @@ function TrainerProfileTwo({
     });
   }, []);
 
-  const handleBooking = (price, type, venue, passData=null) => {
+  const handleBooking = (price, type, venue, passData=null, availPass) => {
     if (!localStorage.getItem("token")) {
       history.push("/mobile/login");
       history.push(`?${encodeURIComponent("nextpath=/trainer/profile/"+id)}`);
     } else {
-      console.log(passData,"ll");
+      console.log(availPass,"ll");
       var storedata = {
         sessionData: {
           trainerId: id,
@@ -40,12 +40,13 @@ function TrainerProfileTwo({
           venue: venue !== "virtual" ? venue : "clientLocation",
           trainingType: type,
           price: price,
-          newPass: passData
+          newPass: passData,
+          availPass: availPass
         },
       };
 
       updateUserDetails(storedata);
-     history.push(`/user/scheduler/${id}`);
+      history.push(`/user/scheduler/${id}`);
     }
   };
 

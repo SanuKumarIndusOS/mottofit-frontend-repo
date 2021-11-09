@@ -55,10 +55,11 @@ function MottoSessionType({
   const [price, setPrice] = React.useState("");
 
   const [activePackage, setActivePackage] = React.useState("");
+  const [activePacakageId, setActivePackageId] = React.useState(null);
 
-  // const setHeader = (value) => {
-  //   setactiveHeader(value);
-  // };
+ React.useEffect(() => {
+  checkActivePass();
+ }, [])
 
   React.useEffect(() => {
     if (activeHeader === "virtual") {
@@ -68,6 +69,7 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.virtualSession,
             type: "1on1",
+            availPass: { availPass: activePacakageId },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtVirtual,
@@ -124,6 +126,7 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.inPersonAtClientLocation,
             type: "1on1",
+            availPass: { availPass: activePacakageId },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtClientLocation,
@@ -180,6 +183,7 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.inPersonAtTrainerLocation,
             type: "1on1",
+            availPass: { availPass: activePacakageId },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtTrainerLocation,
@@ -230,6 +234,10 @@ function MottoSessionType({
     }
 
     // Check for active MottoPass if user is logged in
+    checkActivePass();
+  }, [activeHeader, oneOnone, activePacakageId]);
+
+  const checkActivePass = () => {
     if (localStorage.getItem("token")) {
       let userId = localStorage.getItem("user-id");
       if (activeHeader === "virtual") {
@@ -237,16 +245,11 @@ function MottoSessionType({
           .then((data) => {
             console.log(data);
             setActivePackage("virtual");
-            // mottoPassData({ availPass: data });
-            // history.push({
-            //   pathname: "/user/payment",
-            // });
+            setActivePackageId(data[0]?.id);
           })
           .catch((er) => {
             console.log(er);
-            // history.push({
-            //   pathname: "/user/motto-pass",
-            // });
+            setActivePackageId(null);
           });
       } else {
         if (activeHeader === "trainerLocation") {
@@ -254,37 +257,27 @@ function MottoSessionType({
             .then((data) => {
               console.log(data);
               setActivePackage("trainerLocation");
-              // mottoPassData({ availPass: data });
-              // history.push({
-              //   pathname: "/user/payment",
-              // });
+              setActivePackageId(data[0]?.id);
             })
             .catch((er) => {
               console.log(er);
-              // history.push({
-              //   pathname: "/user/motto-pass",
-              // });
+              setActivePackageId(null);
             });
         } else {
           GetActivePass(userId, trainerId, "clientLocation")
             .then((data) => {
               console.log(data);
               setActivePackage("clientLocation");
-              // mottoPassData({ availPass: data });
-              // history.push({
-              //   pathname: "/user/payment",
-              // });
+              setActivePackageId(data[0]?.id);
             })
             .catch((er) => {
               console.log(er);
-              // history.push({
-              //   pathname: "/user/motto-pass",
-              // });
+              setActivePackageId(null);
             });
         }
       }
     }
-  }, [activeHeader, oneOnone]);
+  };
 
   return (
     <div className="motto_session_type_container">
@@ -342,8 +335,9 @@ function MottoSessionType({
                 <div className="line"></div>
                 <div>
                   {Object.keys(pricingItem[item]).map((type, key) => {
-                    return (
-                     ( activePackage === activeHeader && (type === "10 Session Package" || type === "30 Session Package" ))? null :
+                    return activePackage === activeHeader &&
+                      (type === "10 Session Package" ||
+                        type === "30 Session Package") ? null : (
                       <div
                         style={{
                           display: "flex",
@@ -383,7 +377,8 @@ function MottoSessionType({
                                       pricingItem[item][type]?.price,
                                       pricingItem[item][type]?.type,
                                       activeHeader,
-                                      pricingItem[item][type]?.newPass
+                                      pricingItem[item][type]?.newPass,
+                                      pricingItem[item][type]?.availPass
                                     );
                                   }}
                                   style={{
