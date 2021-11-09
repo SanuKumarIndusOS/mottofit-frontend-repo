@@ -339,10 +339,8 @@ function MottoSessionType({
                       (type === "10 Session Package" ||
                         type === "30 Session Package") ? null : (
                       <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center ",
-                        }}
+                        
+                        className="session_item_bar"
                       >
                         <FormControlLabel
                           value={type}
@@ -354,7 +352,8 @@ function MottoSessionType({
                             />
                           }
                           label={<div className="radio_label"> {type} </div>}
-                          style={{ width: "40%" }}
+                         
+                          className="radio_bar_width"
                         />
 
                         <div className="session_type_item2">

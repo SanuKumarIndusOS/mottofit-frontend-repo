@@ -1,13 +1,17 @@
 .motto_session_type_container {
   margin: 2rem;
   max-width: 900px;
+
+  @media only screen and (max-width: 900px) {
+    max-width: unset;
+  }
   .session_type_header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     cursor: pointer;
 
     .session_type_header_item {
@@ -43,6 +47,10 @@
 
     border-radius: 0px 0px 20px 20px;
     width: 100%;
+    @media only screen and (max-width: 900px) {
+      padding: unset;
+      max-height: unset;
+    }
 
     .body_header {
       font-weight: 600;
@@ -56,17 +64,42 @@
       margin-bottom: 1rem;
     }
 
+    .session_item_bar {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      @media only screen and (max-width: 900px) {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+      }
+    }
+
     .session_type_item2 {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-pack: justify;
-          -ms-flex-pack: justify;
-              justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
       width: 70%;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      @media only screen and (max-width: 900px) {
+        display: unset;
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+      }
 
       .session_type_item2_left {
         font-size: 16px;
@@ -87,8 +120,8 @@
         display: -ms-flexbox;
         display: flex;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         cursor: pointer;
       }
     }
@@ -100,9 +133,15 @@
   font-family: "Montserrat", sans-serif;
 }
 
-.radio_label{
+.radio_label {
   font-size: 16px;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
-  
+}
+
+.radio_bar_width {
+  width: 40%;
+  @media only screen and (max-width: 900px) {
+    width: unset;
+  }
 }

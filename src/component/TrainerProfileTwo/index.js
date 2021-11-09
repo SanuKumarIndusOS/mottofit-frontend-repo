@@ -52,8 +52,8 @@ function TrainerProfileTwo({
 
   return (
     <div className="trainer_profile_container">
-      <div style={{ width: "30%" }}></div>
-      <div style={{ width: "70%" }}>
+      <div className="left_pane"></div>
+      <div className="right_pane">
         {" "}
         <MottoSessionType
           oneOnone={trainerData?.oneOnOnePricing}
