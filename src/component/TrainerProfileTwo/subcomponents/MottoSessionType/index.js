@@ -10,7 +10,18 @@ import { cyan } from "@material-ui/core/colors";
 import BlueHoverButton from "component/common/BlueArrowButton";
 import { tr } from "date-fns/locale";
 
-function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
+import { GetActivePass } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+function MottoSessionType({
+  oneOnone,
+  social,
+  classPricing,
+  handleBooking,
+  trainerId,
+  GetActivePass,
+}) {
   const CyanRadio = withStyles({
     root: {
       "&$checked": {
@@ -47,9 +58,9 @@ function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
     setactiveHeader(value);
   };
 
-  React.useEffect(() => {
-    // console.log(oneOnone, social, classPricing);
 
+
+  React.useEffect(() => {
     if (activeHeader === "virtual") {
       setPricingItem({
         ...pricingItem,
@@ -58,13 +69,29 @@ function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
             price: oneOnone?.virtualSession,
             type: "1on1",
           },
-          "3 Session Package": {
+          "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtVirtual,
             type: "1on1",
+            newPass:{
+              price: oneOnone?.passRatefor3SessionAtVirtual,
+              purchaseDate: new Date().toISOString().slice(0, 10),
+              passValidity: 120,
+              totalPasses: 30,
+              timeZone: "America/New_York",
+              passType: "virtual",
+            }
           },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtVirtual,
             type: "1on1",
+            newPass:{
+              price: oneOnone?.passRatefor10SessionAtVirtual,
+              purchaseDate: new Date().toISOString().slice(0, 10),
+              passValidity: 30,
+              totalPasses: 10,
+              timeZone: "America/New_York",
+              passType: "virtual",
+            }
           },
         },
         "SOCIAL SESSIONS": {
@@ -98,13 +125,29 @@ function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
             price: oneOnone?.inPersonAtClientLocation,
             type: "1on1",
           },
-          "3 Session Package": {
+          "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtClientLocation,
             type: "1on1",
+            newPass:{
+              price: oneOnone?.passRatefor3SessionAtClientLocation,
+              purchaseDate: new Date().toISOString().slice(0, 10),
+              passValidity: 120,
+              totalPasses: 30,
+              timeZone: "America/New_York",
+              passType: "clientLocation",
+            }
           },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtClientLocation,
             type: "1on1",
+            newPass:{
+              price: oneOnone?.passRatefor10SessionAtVirtual,
+              purchaseDate: new Date().toISOString().slice(0, 10),
+              passValidity: 30,
+              totalPasses: 10,
+              timeZone: "America/New_York",
+              passType: "clientLocation",
+            }
           },
         },
         "SOCIAL SESSIONS": {
@@ -138,13 +181,29 @@ function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
             price: oneOnone?.inPersonAtTrainerLocation,
             type: "1on1",
           },
-          "3 Session Package": {
+          "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtTrainerLocation,
             type: "1on1",
+            newPass:{
+              price: oneOnone?.passRatefor3SessionAtTrainerLocation,
+              purchaseDate: new Date().toISOString().slice(0, 10),
+              passValidity: 120,
+              totalPasses: 30,
+              timeZone: "America/New_York",
+              passType: "trainerLocation",
+            }
           },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtTrainerLocation,
             type: "1on1",
+            newPass:{
+              price: oneOnone?.passRatefor10SessionAtVirtual,
+              purchaseDate: new Date().toISOString().slice(0, 10),
+              passValidity: 30,
+              totalPasses: 10,
+              timeZone: "America/New_York",
+              passType: "trainerLocation",
+            }
           },
         },
         "SOCIAL SESSIONS": {
@@ -168,6 +227,59 @@ function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
           },
         },
       });
+    }
+
+    // Check for active MottoPass if user is logged in
+    if (localStorage.getItem("token")) {
+      let userId = localStorage.getItem("user-id");
+      if (activeHeader === "virtual") {
+        GetActivePass(userId, trainerId, "virtual")
+          .then((data) => {
+            console.log(data);
+            // mottoPassData({ availPass: data });
+            // history.push({
+            //   pathname: "/user/payment",
+            // });
+          })
+          .catch((er) => {
+            console.log(er);
+            // history.push({
+            //   pathname: "/user/motto-pass",
+            // });
+          });
+      } else {
+        if (activeHeader === "trainerLocation") {
+          GetActivePass(userId, trainerId, "trainerLocation")
+            .then((data) => {
+              console.log(data);
+             // mottoPassData({ availPass: data });
+              // history.push({
+              //   pathname: "/user/payment",
+              // });
+            })
+            .catch((er) => {
+              console.log(er);
+              // history.push({
+              //   pathname: "/user/motto-pass",
+              // });
+            });
+        } else {
+          GetActivePass(userId, trainerId, "clientLocation")
+            .then((data) => {
+              console.log(data);
+             // mottoPassData({ availPass: data });
+              // history.push({
+              //   pathname: "/user/payment",
+              // });
+            })
+            .catch((er) => {
+              console.log(er);
+              // history.push({
+              //   pathname: "/user/motto-pass",
+              // });
+            });
+        }
+      }
     }
   }, [activeHeader, oneOnone]);
 
@@ -256,11 +368,11 @@ function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
                             {selectedSessionType === type ? (
                               <div
                                 onClick={() => {
-                                  
                                   handleBooking(
                                     pricingItem[item][type]?.price,
                                     pricingItem[item][type]?.type,
-                                    activeHeader
+                                    activeHeader,
+                                    pricingItem[item][type]?.newPass
                                   );
                                 }}
                                 style={{
@@ -287,4 +399,15 @@ function MottoSessionType({ oneOnone, social, classPricing, handleBooking }) {
   );
 }
 
-export default MottoSessionType;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      GetActivePass,
+    },
+    dispatch
+  );
+};
+
+const MottoSessionType2 = connect(null, mapDispatchToProps)(MottoSessionType);
+
+export default MottoSessionType2;

@@ -6,7 +6,7 @@ import MottoSessionType from "./subcomponents/MottoSessionType";
 import { getTrainerDetail } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateUserDetails } from "action/userAct";
+import { updateUserDetails, } from "action/userAct";
 
 import { history } from "helpers";
 import { Link, useParams, useHistory } from "react-router-dom";
@@ -26,11 +26,12 @@ function TrainerProfileTwo({
     });
   }, []);
 
-  const handleBooking = (price, type, venue) => {
+  const handleBooking = (price, type, venue, passData=null) => {
     if (!localStorage.getItem("token")) {
       history.push("/mobile/login");
       history.push(`?${encodeURIComponent("nextpath=/trainer/profile/"+id)}`);
     } else {
+      console.log(passData,"ll");
       var storedata = {
         sessionData: {
           trainerId: id,
@@ -43,7 +44,7 @@ function TrainerProfileTwo({
       };
 
       updateUserDetails(storedata);
-      history.push(`/user/scheduler/${id}`);
+     // history.push(`/user/scheduler/${id}`);
     }
   };
 
@@ -57,6 +58,7 @@ function TrainerProfileTwo({
           social={trainerData?.socialSessionPricing}
           classPricing={trainerData?.classSessionPricing}
           handleBooking={handleBooking}
+          trainerId={id}
         />
       </div>
     </div>
