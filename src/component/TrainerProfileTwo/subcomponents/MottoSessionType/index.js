@@ -283,11 +283,11 @@ function MottoSessionType({
     <div className="motto_session_type_container">
       <div className="session_type_header">
         <div
-          style={{ width: "15%" }}
+         
           className={
             activeHeader === "virtual"
-              ? "session_type_header_item left_border active_header "
-              : "session_type_header_item left_border"
+              ? "session_type_header_item left_border active_header header_width1"
+              : "session_type_header_item left_border header_width1"
           }
           onClick={() => {
             setactiveHeader("virtual");
@@ -296,11 +296,11 @@ function MottoSessionType({
           VIRTUAL
         </div>
         <div
-          style={{ width: "35%" }}
+          
           className={
             activeHeader === "clientLocation"
-              ? "session_type_header_item  active_header"
-              : "session_type_header_item "
+              ? "session_type_header_item  active_header header_width2"
+              : "session_type_header_item header_width2"
           }
           onClick={() => {
             setactiveHeader("clientLocation");
@@ -309,11 +309,11 @@ function MottoSessionType({
           IN-PERSON (YOUR LOCATION)
         </div>
         <div
-          style={{ width: "50%" }}
+          
           className={
             activeHeader === "trainerLocation"
-              ? "session_type_header_item  right_border active_header"
-              : "session_type_header_item right_border"
+              ? "session_type_header_item  right_border active_header header_width3"
+              : "session_type_header_item right_border header_width3"
           }
           onClick={() => {
             setactiveHeader("trainerLocation");

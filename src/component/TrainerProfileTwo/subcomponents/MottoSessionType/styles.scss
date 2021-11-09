@@ -1,9 +1,11 @@
 .motto_session_type_container {
   margin: 2rem;
   max-width: 900px;
+  padding-top: 20rem;
 
   @media only screen and (max-width: 900px) {
     max-width: unset;
+    margin: 1rem;
   }
   .session_type_header {
     display: -webkit-box;
@@ -24,6 +26,19 @@
       font-size: 15px;
       background-color: #161616;
       padding-left: 2rem;
+
+      @media only screen and (max-width: 900px) {
+         padding-left: unset;
+         padding: 1rem;
+         font-size: 12px;
+        text-align: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+      }
     }
 
     .left_border {
@@ -37,6 +52,27 @@
     .active_header {
       background-color: #53bfd2;
       font-weight: 600;
+    }
+
+    .header_width1 {
+      width: 15%;
+      @media only screen and (max-width: 900px) {
+        width: unset;
+      }
+    }
+
+    .header_width2 {
+      width: 35%;
+      @media only screen and (max-width: 900px) {
+        width: unset;
+      }
+    }
+
+    .header_width3 {
+      width: 50%;
+      @media only screen and (max-width: 900px) {
+        width: unset;
+      }
     }
   }
 
@@ -55,6 +91,11 @@
     .body_header {
       font-weight: 600;
       font-family: "Montserrat", sans-serif;
+
+      @media only screen and (max-width: 900px) {
+        padding-left: 2rem;
+        padding-top: 1rem;
+      }
     }
 
     .line {
@@ -80,6 +121,8 @@
         -webkit-box-align: start;
         -ms-flex-align: start;
         align-items: flex-start;
+        padding-left: 2rem;
+        padding-top: 1rem;
       }
     }
 
