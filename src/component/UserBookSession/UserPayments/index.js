@@ -169,19 +169,24 @@ const UserPaymentsFC = ({
       scheduleBody["code"] = coupondCode;
     }
 
-    if (Object.keys(mottoPassDataVal).length === 0) {
-      console.log(mottoPassDataVal, "empty");
-    } else {
-      console.log(mottoPassDataVal, "full");
+    if(sessionData?.newPass !== null){
 
-      if ("availPass" in mottoPassDataVal) {
-        console.log(mottoPassDataVal.availPass[0].id, "pl");
-        scheduleBody.availPass = mottoPassDataVal.availPass[0].id;
-      } else {
-        scheduleBody.newPass = mottoPassDataVal;
-        console.log(mottoPassDataVal);
-      }
+      scheduleBody.newPass = sessionData?.newPass;
     }
+
+    // if (Object.keys(mottoPassDataVal).length === 0) {
+    //   console.log(mottoPassDataVal, "empty");
+    // } else {
+    //   console.log(mottoPassDataVal, "full");
+
+    //   if ("availPass" in mottoPassDataVal) {
+    //     console.log(mottoPassDataVal.availPass[0].id, "pl");
+    //     scheduleBody.availPass = mottoPassDataVal.availPass[0].id;
+    //   } else {
+    //     scheduleBody.newPass = mottoPassDataVal;
+    //     console.log(mottoPassDataVal);
+    //   }
+    // }
 
     scheduleSession(scheduleBody)
       .then((res) => {

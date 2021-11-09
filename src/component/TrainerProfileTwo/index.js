@@ -40,11 +40,12 @@ function TrainerProfileTwo({
           venue: venue !== "virtual" ? venue : "clientLocation",
           trainingType: type,
           price: price,
+          newPass: passData
         },
       };
 
       updateUserDetails(storedata);
-     // history.push(`/user/scheduler/${id}`);
+     history.push(`/user/scheduler/${id}`);
     }
   };
 
