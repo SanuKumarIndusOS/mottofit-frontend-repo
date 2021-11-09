@@ -54,11 +54,11 @@ function MottoSessionType({
     React.useState("Individual Session");
   const [price, setPrice] = React.useState("");
 
-  const setHeader = (value) => {
-    setactiveHeader(value);
-  };
+  const [activePackage, setActivePackage] = React.useState("");
 
-
+  // const setHeader = (value) => {
+  //   setactiveHeader(value);
+  // };
 
   React.useEffect(() => {
     if (activeHeader === "virtual") {
@@ -72,26 +72,26 @@ function MottoSessionType({
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtVirtual,
             type: "1on1",
-            newPass:{
+            newPass: {
               price: oneOnone?.passRatefor3SessionAtVirtual,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 120,
               totalPasses: 30,
               timeZone: "America/New_York",
               passType: "virtual",
-            }
+            },
           },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtVirtual,
             type: "1on1",
-            newPass:{
+            newPass: {
               price: oneOnone?.passRatefor10SessionAtVirtual,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 30,
               totalPasses: 10,
               timeZone: "America/New_York",
               passType: "virtual",
-            }
+            },
           },
         },
         "SOCIAL SESSIONS": {
@@ -128,26 +128,26 @@ function MottoSessionType({
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtClientLocation,
             type: "1on1",
-            newPass:{
+            newPass: {
               price: oneOnone?.passRatefor3SessionAtClientLocation,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 120,
               totalPasses: 30,
               timeZone: "America/New_York",
               passType: "clientLocation",
-            }
+            },
           },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtClientLocation,
             type: "1on1",
-            newPass:{
+            newPass: {
               price: oneOnone?.passRatefor10SessionAtVirtual,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 30,
               totalPasses: 10,
               timeZone: "America/New_York",
               passType: "clientLocation",
-            }
+            },
           },
         },
         "SOCIAL SESSIONS": {
@@ -184,26 +184,26 @@ function MottoSessionType({
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtTrainerLocation,
             type: "1on1",
-            newPass:{
+            newPass: {
               price: oneOnone?.passRatefor3SessionAtTrainerLocation,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 120,
               totalPasses: 30,
               timeZone: "America/New_York",
               passType: "trainerLocation",
-            }
+            },
           },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtTrainerLocation,
             type: "1on1",
-            newPass:{
+            newPass: {
               price: oneOnone?.passRatefor10SessionAtVirtual,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 30,
               totalPasses: 10,
               timeZone: "America/New_York",
               passType: "trainerLocation",
-            }
+            },
           },
         },
         "SOCIAL SESSIONS": {
@@ -236,6 +236,7 @@ function MottoSessionType({
         GetActivePass(userId, trainerId, "virtual")
           .then((data) => {
             console.log(data);
+            setActivePackage("virtual");
             // mottoPassData({ availPass: data });
             // history.push({
             //   pathname: "/user/payment",
@@ -252,7 +253,8 @@ function MottoSessionType({
           GetActivePass(userId, trainerId, "trainerLocation")
             .then((data) => {
               console.log(data);
-             // mottoPassData({ availPass: data });
+              setActivePackage("trainerLocation");
+              // mottoPassData({ availPass: data });
               // history.push({
               //   pathname: "/user/payment",
               // });
@@ -267,7 +269,8 @@ function MottoSessionType({
           GetActivePass(userId, trainerId, "clientLocation")
             .then((data) => {
               console.log(data);
-             // mottoPassData({ availPass: data });
+              setActivePackage("clientLocation");
+              // mottoPassData({ availPass: data });
               // history.push({
               //   pathname: "/user/payment",
               // });
@@ -340,6 +343,7 @@ function MottoSessionType({
                 <div>
                   {Object.keys(pricingItem[item]).map((type, key) => {
                     return (
+                     ( activePackage === activeHeader && (type === "10 Session Package" || type === "30 Session Package" ))? null :
                       <div
                         style={{
                           display: "flex",
@@ -361,27 +365,35 @@ function MottoSessionType({
 
                         <div className="session_type_item2">
                           <div className="session_type_item2_left">
-                            ${pricingItem[item][type]?.price}{" "}
-                            <span>/ Session</span>
+                            {pricingItem[item][type]?.price !== 0 ? (
+                              <>
+                                ${pricingItem[item][type]?.price}
+                                <span>/ Session</span>
+                              </>
+                            ) : (
+                              "N/A"
+                            )}
                           </div>
                           <div className="session_type_item2_right">
                             {selectedSessionType === type ? (
-                              <div
-                                onClick={() => {
-                                  handleBooking(
-                                    pricingItem[item][type]?.price,
-                                    pricingItem[item][type]?.type,
-                                    activeHeader,
-                                    pricingItem[item][type]?.newPass
-                                  );
-                                }}
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                }}
-                              >
-                                BOOK NOW <BlueHoverButton />
-                              </div>
+                              pricingItem[item][type]?.price !== 0 ? (
+                                <div
+                                  onClick={() => {
+                                    handleBooking(
+                                      pricingItem[item][type]?.price,
+                                      pricingItem[item][type]?.type,
+                                      activeHeader,
+                                      pricingItem[item][type]?.newPass
+                                    );
+                                  }}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  BOOK NOW <BlueHoverButton />
+                                </div>
+                              ) : null
                             ) : null}
                           </div>
                         </div>
