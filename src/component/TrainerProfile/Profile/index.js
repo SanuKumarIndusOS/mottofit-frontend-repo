@@ -30,6 +30,8 @@ import { Toast } from "service/toast";
 import Dialog from "@material-ui/core/Dialog";
 import moment from "moment";
 
+import MottoSessionType from "component/TrainerProfileTwo/subcomponents/MottoSessionType/index";
+
 const closeIcon = <img src={CloseIcon} alt="close" />;
 
 const TrainerProfileClass = ({
@@ -172,8 +174,11 @@ const TrainerProfileClass = ({
     trainerProfileData?.preferedTrainingMode?.includes("inPerson");
 
   const handleRequestTrainer = () => {
-
-    Toast({ type: "success", message: "Login or create an account to message trainer requesting time and date of your choice" });
+    Toast({
+      type: "success",
+      message:
+        "Login or create an account to message trainer requesting time and date of your choice",
+    });
 
     const userId = localStorage.getItem("user-id");
 
@@ -340,6 +345,30 @@ const TrainerProfileClass = ({
   //   prev.value > 0 && prev.value < curr.value ? prev : curr
   // );
 
+  const handleBooking = (price, type, venue, passData=null, availPass) => {
+    if (!localStorage.getItem("token")) {
+      history.push("/mobile/login");
+      history.push(`?${encodeURIComponent("nextpath=/trainer/profile/"+id)}`);
+    } else {
+      console.log(availPass,"ll");
+      var storedata = {
+        sessionData: {
+          trainerId: id,
+          city: trainerProfileData?.servicableLocation,
+          sessionType: venue === "virtual" ? "virtual" : "inPerson",
+          venue: venue !== "virtual" ? venue : "clientLocation",
+          trainingType: type,
+          price: price,
+          newPass: passData,
+          availPass: availPass
+        },
+      };
+
+      updateUserDetails(storedata);
+      history.push(`/user/scheduler/${id}`);
+    }
+  };
+
   return (
     <>
       <div className="profile_main">
@@ -390,7 +419,6 @@ const TrainerProfileClass = ({
                   <Link onClick={() => scrollToCalendar()}>View Calender</Link>
                   <img src={ArrowNext} alt="icon" />
                 </div> */}
-          
               </div>
               <div className="profile_trainer_data">
                 <div className="profile_right_data">
@@ -409,6 +437,16 @@ const TrainerProfileClass = ({
                         ? trainerProfileData.trainingProcess
                         : null}
                     </p>
+
+                    <MottoSessionType
+                      oneOnone={trainerProfileData?.oneOnOnePricing}
+                      social={trainerProfileData?.socialSessionPricing}
+                      classPricing={trainerProfileData?.classSessionPricing}
+                      handleBooking={handleBooking}
+                      trainerId={id}
+                    />
+
+                    <br></br>
 
                     <div className="profile_images">
                       <ImageGrid
@@ -512,7 +550,7 @@ const TrainerProfileClass = ({
             images={trainerProfileData?.images}
             toggle={toggleCarouselModel}
             currItemIndex={currItemIndex}
-          // index={currItemIndex}
+            // index={currItemIndex}
           />
         )}
 
@@ -530,8 +568,9 @@ const TrainerProfileClass = ({
             }}
           >
             <div className="model_styles modal-heading">
-              <h2>{`${viewLocationType === "trainer" ? "Trainer's" : "Servicable"
-                } Locations`}</h2>
+              <h2>{`${
+                viewLocationType === "trainer" ? "Trainer's" : "Servicable"
+              } Locations`}</h2>
               {viewLocationType === "trainer" ? (
                 <p>
                   {trainerProfileData?.trainingFacilityLocation ||
@@ -547,8 +586,6 @@ const TrainerProfileClass = ({
           </Modal>
         ) : null}
       </div>
-
-     
     </>
   );
 };
@@ -589,7 +626,7 @@ const ButtonSection = ({
           {!disableBooking ? (
             <button
               onClick={handleSessionType}
-            // disabled={disableBooking}
+              // disabled={disableBooking}
             >
               BOOK selected time
               <ArrowHoverBlacked />{" "}
