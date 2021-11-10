@@ -43,6 +43,14 @@ const UserEventSchedularFC = (props) => {
     console.log(props.sessionData,"up");
 
     fetchViewTrainer();
+
+    let reduxData = {
+      bookingData: {
+        
+      },
+    };
+
+    props.updateUserDetails(reduxData);
   }, []);
 
   function fetchViewTrainer() {

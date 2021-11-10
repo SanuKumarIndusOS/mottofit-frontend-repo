@@ -238,9 +238,11 @@ const UserPaymentsFC = ({
   );
 
   useEffect(() => {
+
+
     updatePricing();
     setCheckPayAhead(false);
-    console.log(mottoPassDataVal);
+    console.log(sessionData);
 
     let tempTrainingActivity = "";
 
@@ -467,7 +469,11 @@ const UserPaymentsFC = ({
                     {sessionData?.availPass?.availPass !== null ? (
                       <>
                         {" "}
-                        <h1>Motto Pass Availed</h1>{" "}
+                        <br></br>
+                        <h4>Use Motto Package</h4>{" "}
+                        <br></br> 
+                        <p>Remaining Passes : {sessionData?.availPass?.availPassData[0]?.remains}</p>
+                        <p>Expires on : {sessionData?.availPass?.availPassData[0]?.expiresIn}</p>
                         <button className={`ud_but`} onClick={ScheduleSession}>
                           Continue
                         </button>

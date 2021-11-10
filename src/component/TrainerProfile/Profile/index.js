@@ -361,6 +361,7 @@ const TrainerProfileClass = ({
           price: price,
           newPass: passData,
           availPass: availPass,
+          
         },
       };
 
@@ -416,6 +417,25 @@ const TrainerProfileClass = ({
                   <img src={ArrowNext} alt="icon" />
                 </div> */}
 
+                <div className="request-trainer-block">
+                  {isLoading ? (
+                    "Loading..."
+                  ) : (
+                    <div
+                      className={isLoading ? "d-none" : "request_a_time_part"}
+                    >
+                      <button
+                        className="book_session_btn d-flex align-items-center"
+                        onClick={handleRequestTrainer}
+                        style={{width:"100%"}}
+                      >
+                        {`Message ${trainerProfileData.firstName} `}
+                        <BlueHoverButton />
+                      </button>
+                    </div>
+                  )}
+                </div>
+<br></br>
                 <div className="profile_share">
                   <img src={Share} alt="icon" /> &ensp;
                   <Link onClick={handleCopy}>
@@ -439,11 +459,12 @@ const TrainerProfileClass = ({
                   </div>
                   <br></br>
                   <div className="profile_right_item2">
-                     <h4>TRAIN WITH {trainerProfileData.firstName}</h4>
-                     <p>Browse & choose your session type to continue. You can then choose an available time or message your trainer
-                       for more availability & question.
-                       
-                     </p>
+                    <h4>TRAIN WITH {trainerProfileData.firstName}</h4>
+                    <p>
+                      Browse & choose your session type to continue. You can
+                      then choose an available time or message your trainer for
+                      more availability & question.
+                    </p>
                     <MottoSessionType
                       oneOnone={trainerProfileData?.oneOnOnePricing}
                       social={trainerProfileData?.socialSessionPricing}
@@ -531,7 +552,7 @@ const TrainerProfileClass = ({
                       trainerstartSlot={trainerstartSlot}
                       trainerEndSlot={trainerEndSlot}
                     /> */}
-                    <div className="request-trainer-block">
+                    {/* <div className="request-trainer-block">
                       {isLoading ? (
                         "Loading..."
                       ) : (
@@ -539,18 +560,18 @@ const TrainerProfileClass = ({
                           className={
                             isLoading ? "d-none" : "request_a_time_part"
                           }
-                          onClick={handleRequestTrainer}
+                          
                         >
                           <span style={{ color: "#2C2C2C", fontSize: "20px" }}>
                             Dont See a Time you want&ensp;?&ensp;
                           </span>
-                          <button className="book_session_btn d-flex align-items-center">
+                          <button className="book_session_btn d-flex align-items-center" onClick={handleRequestTrainer}>
                             {`Request A Time with ${trainerProfileData.firstName}`}
                             <BlueHoverButton />
                           </button>
                         </div>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                   {/* </div> */}
                 </div>

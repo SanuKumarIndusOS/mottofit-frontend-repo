@@ -56,6 +56,7 @@ function MottoSessionType({
 
   const [activePackage, setActivePackage] = React.useState("");
   const [activePacakageId, setActivePackageId] = React.useState(null);
+  const [activePacakageData, setActivePackageData] = React.useState({});
 
  React.useEffect(() => {
   checkActivePass();
@@ -69,7 +70,7 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.virtualSession,
             type: "1on1",
-            availPass: { availPass: activePacakageId },
+            availPass: { availPass: activePacakageId, availPassData : activePacakageData },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtVirtual,
@@ -126,7 +127,7 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.inPersonAtClientLocation,
             type: "1on1",
-            availPass: { availPass: activePacakageId },
+            availPass: { availPass: activePacakageId,  availPassData : activePacakageData },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtClientLocation,
@@ -183,7 +184,7 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.inPersonAtTrainerLocation,
             type: "1on1",
-            availPass: { availPass: activePacakageId },
+            availPass: { availPass: activePacakageId,  availPassData : activePacakageData },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtTrainerLocation,
@@ -246,10 +247,12 @@ function MottoSessionType({
             console.log(data);
             setActivePackage("virtual");
             setActivePackageId(data[0]?.id);
+            setActivePackageData(data)
           })
           .catch((er) => {
             console.log(er);
             setActivePackageId(null);
+            setActivePackageData({})
           });
       } else {
         if (activeHeader === "trainerLocation") {
@@ -258,21 +261,26 @@ function MottoSessionType({
               console.log(data);
               setActivePackage("trainerLocation");
               setActivePackageId(data[0]?.id);
+              setActivePackageData(data)
             })
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
+              setActivePackageData({})
             });
         } else {
           GetActivePass(userId, trainerId, "clientLocation")
             .then((data) => {
               console.log(data);
               setActivePackage("clientLocation");
-              setActivePackageId(data[0]?.id);
+              setActivePackageId(data[0]?.id); 
+              setActivePackageData(data)
+
             })
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
+              setActivePackageData({})
             });
         }
       }

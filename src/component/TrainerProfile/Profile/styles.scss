@@ -134,7 +134,7 @@
       }
       .profile_main_contents {
         display: grid;
-        grid-template-columns: 20% 80%;
+        grid-template-columns: 24% 80%;
         grid-template-rows: auto;
         margin-top: 10em;
         grid-column-gap: 50px;
@@ -1010,7 +1010,7 @@
     -webkit-box-pack: end;
         -ms-flex-pack: end;
             justify-content: flex-end;
-    margin-right: 2rem;
+    // margin-right: 2rem;
     font-size: 18px;
     font-weight: 600;
   }
