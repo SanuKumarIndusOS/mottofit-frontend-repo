@@ -91,6 +91,26 @@
     .body_header {
       font-weight: 600;
       font-family: "Montserrat", sans-serif;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+              width: 100%;
+
+       .serviceable_location{
+
+        font-size: 15px;
+        color: #53bfd2;
+        font-weight: 500;
+        text-decoration: underline;
+        cursor: pointer;
+
+        @media only screen and (max-width: 900px) {
+          display: none;
+        }
+       }       
 
       @media only screen and (max-width: 900px) {
         padding-left: 2rem;

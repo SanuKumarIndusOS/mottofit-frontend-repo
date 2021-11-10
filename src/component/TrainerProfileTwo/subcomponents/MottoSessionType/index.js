@@ -13,6 +13,7 @@ import { tr } from "date-fns/locale";
 import { GetActivePass } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Dialog from "@material-ui/core/Dialog";
 
 function MottoSessionType({
   oneOnone,
@@ -21,6 +22,7 @@ function MottoSessionType({
   handleBooking,
   trainerId,
   GetActivePass,
+  servicableLocation
 }) {
   const CyanRadio = withStyles({
     root: {
@@ -52,15 +54,19 @@ function MottoSessionType({
   const [activeHeader, setactiveHeader] = React.useState("virtual");
   const [selectedSessionType, setselectedSessionType] =
     React.useState("Individual Session");
-  const [price, setPrice] = React.useState("");
+  const [open, setOpen] = React.useState(false);
 
   const [activePackage, setActivePackage] = React.useState("");
   const [activePacakageId, setActivePackageId] = React.useState(null);
   const [activePacakageData, setActivePackageData] = React.useState({});
 
- React.useEffect(() => {
-  checkActivePass();
- }, [])
+  const handleClose = (value) => {
+    setOpen(false);
+  };
+
+  React.useEffect(() => {
+    checkActivePass();
+  }, []);
 
   React.useEffect(() => {
     if (activeHeader === "virtual") {
@@ -70,7 +76,10 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.virtualSession,
             type: "1on1",
-            availPass: { availPass: activePacakageId, availPassData : activePacakageData },
+            availPass: {
+              availPass: activePacakageId,
+              availPassData: activePacakageData,
+            },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtVirtual,
@@ -127,7 +136,10 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.inPersonAtClientLocation,
             type: "1on1",
-            availPass: { availPass: activePacakageId,  availPassData : activePacakageData },
+            availPass: {
+              availPass: activePacakageId,
+              availPassData: activePacakageData,
+            },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtClientLocation,
@@ -184,7 +196,10 @@ function MottoSessionType({
           "Individual Session": {
             price: oneOnone?.inPersonAtTrainerLocation,
             type: "1on1",
-            availPass: { availPass: activePacakageId,  availPassData : activePacakageData },
+            availPass: {
+              availPass: activePacakageId,
+              availPassData: activePacakageData,
+            },
           },
           "30 Session Package": {
             price: oneOnone?.passRatefor3SessionAtTrainerLocation,
@@ -247,12 +262,12 @@ function MottoSessionType({
             console.log(data);
             setActivePackage("virtual");
             setActivePackageId(data[0]?.id);
-            setActivePackageData(data)
+            setActivePackageData(data);
           })
           .catch((er) => {
             console.log(er);
             setActivePackageId(null);
-            setActivePackageData({})
+            setActivePackageData({});
           });
       } else {
         if (activeHeader === "trainerLocation") {
@@ -261,26 +276,25 @@ function MottoSessionType({
               console.log(data);
               setActivePackage("trainerLocation");
               setActivePackageId(data[0]?.id);
-              setActivePackageData(data)
+              setActivePackageData(data);
             })
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
-              setActivePackageData({})
+              setActivePackageData({});
             });
         } else {
           GetActivePass(userId, trainerId, "clientLocation")
             .then((data) => {
               console.log(data);
               setActivePackage("clientLocation");
-              setActivePackageId(data[0]?.id); 
-              setActivePackageData(data)
-
+              setActivePackageId(data[0]?.id);
+              setActivePackageData(data);
             })
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
-              setActivePackageData({})
+              setActivePackageData({});
             });
         }
       }
@@ -291,7 +305,6 @@ function MottoSessionType({
     <div className="motto_session_type_container">
       <div className="session_type_header">
         <div
-         
           className={
             activeHeader === "virtual"
               ? "session_type_header_item left_border active_header header_width1"
@@ -304,7 +317,6 @@ function MottoSessionType({
           VIRTUAL
         </div>
         <div
-          
           className={
             activeHeader === "clientLocation"
               ? "session_type_header_item  active_header header_width2"
@@ -317,7 +329,6 @@ function MottoSessionType({
           IN-PERSON (YOUR LOCATION)
         </div>
         <div
-          
           className={
             activeHeader === "trainerLocation"
               ? "session_type_header_item  right_border active_header header_width3"
@@ -339,17 +350,36 @@ function MottoSessionType({
           {Object.keys(pricingItem)?.map((item) => {
             return (
               <div style={{ maxHeight: "20 0px", marginBottom: "1rem" }}>
-                <div className="body_header">{item}</div>
+                <div className="body_header">
+                  {item}{" "}
+                  {item === "1 ON 1 INDIVIDUAL TRAINING" ? (
+                    <div
+                      className="serviceable_location"
+                      onClick={() => setOpen(true)}
+                    >
+                      Trainer's serviceable location
+                    </div>
+                  ) : null}{" "}
+                  <Dialog
+                    onClose={handleClose}
+                    aria-labelledby="simple-dialog-title"
+                    open={open}
+                  >
+                    <div style={{padding:"1rem"}}>
+                      <h5>Trainer Serviceable location</h5>
+                      <hr></hr>
+                      
+                      {servicableLocation}
+                    </div>
+                  </Dialog>
+                </div>
                 <div className="line"></div>
                 <div>
                   {Object.keys(pricingItem[item]).map((type, key) => {
                     return activePackage === activeHeader &&
                       (type === "10 Session Package" ||
                         type === "30 Session Package") ? null : (
-                      <div
-                        
-                        className="session_item_bar"
-                      >
+                      <div className="session_item_bar">
                         <FormControlLabel
                           value={type}
                           control={
@@ -360,7 +390,6 @@ function MottoSessionType({
                             />
                           }
                           label={<div className="radio_label"> {type} </div>}
-                         
                           className="radio_bar_width"
                         />
 

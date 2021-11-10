@@ -471,6 +471,7 @@ const TrainerProfileClass = ({
                       classPricing={trainerProfileData?.classSessionPricing}
                       handleBooking={handleBooking}
                       trainerId={id}
+                      servicableLocation={trainerProfileData?.servicableLocation}
                     />
                   </div>
 
