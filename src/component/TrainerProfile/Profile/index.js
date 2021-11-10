@@ -345,12 +345,12 @@ const TrainerProfileClass = ({
   //   prev.value > 0 && prev.value < curr.value ? prev : curr
   // );
 
-  const handleBooking = (price, type, venue, passData=null, availPass) => {
+  const handleBooking = (price, type, venue, passData = null, availPass) => {
     if (!localStorage.getItem("token")) {
       history.push("/mobile/login");
-      history.push(`?${encodeURIComponent("nextpath=/trainer/profile/"+id)}`);
+      history.push(`?${encodeURIComponent("nextpath=/trainer/profile/" + id)}`);
     } else {
-      console.log(availPass,"ll");
+      console.log(availPass, "ll");
       var storedata = {
         sessionData: {
           trainerId: id,
@@ -360,7 +360,7 @@ const TrainerProfileClass = ({
           trainingType: type,
           price: price,
           newPass: passData,
-          availPass: availPass
+          availPass: availPass,
         },
       };
 
@@ -408,12 +408,19 @@ const TrainerProfileClass = ({
             </div>
             <div className="profile_main_contents container">
               <div className="profile_aside">
-                <div className="profile_aside_link">
+                {/* <div className="profile_aside_link">
                   <Link
                     onClick={handleBookSession}
                     onTouch={handleBookSession}
                   >{`Book  ${trainerProfileData.firstName} ${trainerProfileData?.lastName}`}</Link>
                   <img src={ArrowNext} alt="icon" />
+                </div> */}
+
+                <div className="profile_share">
+                  <img src={Share} alt="icon" /> &ensp;
+                  <Link onClick={handleCopy}>
+                    <u style={{ fontSize: "18px" }}>Share Profile</u>
+                  </Link>
                 </div>
                 {/* <div className="profile_aside_link">
                   <Link onClick={() => scrollToCalendar()}>View Calender</Link>
@@ -430,14 +437,13 @@ const TrainerProfileClass = ({
                         : null}
                     </h6>
                   </div>
+                  <br></br>
                   <div className="profile_right_item2">
-                    <h4>About {trainerProfileData.firstName}</h4>
-                    <p>
-                      {trainerProfileData.trainingProcess
-                        ? trainerProfileData.trainingProcess
-                        : null}
-                    </p>
-
+                     <h4>TRAIN WITH {trainerProfileData.firstName}</h4>
+                     <p>Browse & choose your session type to continue. You can then choose an available time or message your trainer
+                       for more availability & question.
+                       
+                     </p>
                     <MottoSessionType
                       oneOnone={trainerProfileData?.oneOnOnePricing}
                       social={trainerProfileData?.socialSessionPricing}
@@ -445,8 +451,15 @@ const TrainerProfileClass = ({
                       handleBooking={handleBooking}
                       trainerId={id}
                     />
+                  </div>
 
-                    <br></br>
+                  <div className="profile_right_item2">
+                    <h4>About {trainerProfileData.firstName}</h4>
+                    <p>
+                      {trainerProfileData.trainingProcess
+                        ? trainerProfileData.trainingProcess
+                        : null}
+                    </p>
 
                     <div className="profile_images">
                       <ImageGrid
