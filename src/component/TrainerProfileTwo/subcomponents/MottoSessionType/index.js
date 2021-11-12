@@ -84,18 +84,18 @@ function MottoSessionType({
               availPassData: activePacakageData,
             },
           },
-          "30 Session Package": {
-            price: oneOnone?.passRatefor3SessionAtVirtual,
-            type: "1on1",
-            newPass: {
-              price: oneOnone?.passRatefor3SessionAtVirtual,
-              purchaseDate: new Date().toISOString().slice(0, 10),
-              passValidity: 120,
-              totalPasses: 30,
-              timeZone: "America/New_York",
-              passType: "virtual",
-            },
-          },
+          // "30 Session Package": {
+          //   price: oneOnone?.passRatefor3SessionAtVirtual,
+          //   type: "1on1",
+          //   newPass: {
+          //     price: oneOnone?.passRatefor3SessionAtVirtual,
+          //     purchaseDate: new Date().toISOString().slice(0, 10),
+          //     passValidity: 120,
+          //     totalPasses: 30,
+          //     timeZone: "America/New_York",
+          //     passType: "virtual",
+          //   },
+          // },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtVirtual,
             type: "1on1",
@@ -144,18 +144,18 @@ function MottoSessionType({
               availPassData: activePacakageData,
             },
           },
-          "30 Session Package": {
-            price: oneOnone?.passRatefor3SessionAtClientLocation,
-            type: "1on1",
-            newPass: {
-              price: oneOnone?.passRatefor3SessionAtClientLocation,
-              purchaseDate: new Date().toISOString().slice(0, 10),
-              passValidity: 120,
-              totalPasses: 30,
-              timeZone: "America/New_York",
-              passType: "clientLocation",
-            },
-          },
+          // "30 Session Package": {
+          //   price: oneOnone?.passRatefor3SessionAtClientLocation,
+          //   type: "1on1",
+          //   newPass: {
+          //     price: oneOnone?.passRatefor3SessionAtClientLocation,
+          //     purchaseDate: new Date().toISOString().slice(0, 10),
+          //     passValidity: 120,
+          //     totalPasses: 30,
+          //     timeZone: "America/New_York",
+          //     passType: "clientLocation",
+          //   },
+          // },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtClientLocation,
             type: "1on1",
@@ -204,18 +204,18 @@ function MottoSessionType({
               availPassData: activePacakageData,
             },
           },
-          "30 Session Package": {
-            price: oneOnone?.passRatefor3SessionAtTrainerLocation,
-            type: "1on1",
-            newPass: {
-              price: oneOnone?.passRatefor3SessionAtTrainerLocation,
-              purchaseDate: new Date().toISOString().slice(0, 10),
-              passValidity: 120,
-              totalPasses: 30,
-              timeZone: "America/New_York",
-              passType: "trainerLocation",
-            },
-          },
+          // "30 Session Package": {
+          //   price: oneOnone?.passRatefor3SessionAtTrainerLocation,
+          //   type: "1on1",
+          //   newPass: {
+          //     price: oneOnone?.passRatefor3SessionAtTrainerLocation,
+          //     purchaseDate: new Date().toISOString().slice(0, 10),
+          //     passValidity: 120,
+          //     totalPasses: 30,
+          //     timeZone: "America/New_York",
+          //     passType: "trainerLocation",
+          //   },
+          // },
           "10 Session Package": {
             price: oneOnone?.passRatefor10SessionAtTrainerLocation,
             type: "1on1",
@@ -396,7 +396,11 @@ function MottoSessionType({
                           <div className="session_type_item2_left">
                             {pricingItem[item][type]?.price !== 0 ? (
                               <>
-                                ${pricingItem[item][type]?.price}
+                                {type === "10 Session Package"
+                                  ? "$" + pricingItem[item][type]?.price / 10
+                                  : type === "30 Session Package"
+                                  ? "$" + pricingItem[item][type]?.price/30
+                                  : "$" + pricingItem[item][type]?.price}
                                 <span>/ Session</span>
                               </>
                             ) : (
