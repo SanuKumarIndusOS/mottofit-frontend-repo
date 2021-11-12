@@ -65,10 +65,17 @@ function MottoSessionType({
   };
 
   React.useEffect(() => {
+  
     checkActivePass();
+   
   }, []);
 
   React.useEffect(() => {
+    
+     // Check for active MottoPass if user is logged in
+     checkActivePass();
+
+
     if (activeHeader === "virtual") {
       setPricingItem({
         ...pricingItem,
@@ -249,9 +256,8 @@ function MottoSessionType({
       });
     }
 
-    // Check for active MottoPass if user is logged in
-    checkActivePass();
-  }, [activeHeader, oneOnone, activePacakageId]);
+   
+  }, [activeHeader, oneOnone, activePacakageId, activePacakageData]);
 
   const checkActivePass = () => {
     if (localStorage.getItem("token")) {
@@ -267,7 +273,7 @@ function MottoSessionType({
           .catch((er) => {
             console.log(er);
             setActivePackageId(null);
-            setActivePackageData({});
+            
           });
       } else {
         if (activeHeader === "trainerLocation") {
@@ -281,7 +287,7 @@ function MottoSessionType({
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
-              setActivePackageData({});
+             
             });
         } else {
           GetActivePass(userId, trainerId, "clientLocation")
@@ -294,7 +300,7 @@ function MottoSessionType({
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
-              setActivePackageData({});
+              
             });
         }
       }
