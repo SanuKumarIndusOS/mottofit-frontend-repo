@@ -23,6 +23,7 @@ function MottoSessionType({
   trainerId,
   GetActivePass,
   servicableLocation,
+  trainingFacilityLocation
 }) {
   const CyanRadio = withStyles({
     root: {
@@ -251,7 +252,7 @@ function MottoSessionType({
         },
       });
     }
-  }, [activeHeader, oneOnone, activePacakageId, activePacakageData]);
+  }, [activeHeader, oneOnone, activePacakageId]);
 
   const checkActivePass = () => {
     if (localStorage.getItem("token")) {
@@ -262,7 +263,7 @@ function MottoSessionType({
             console.log(data);
             setActivePackage("virtual");
             setActivePackageId(data[0]?.id);
-            setActivePackageData(data);
+           // setActivePackageData(data);
           })
           .catch((er) => {
             console.log(er);
@@ -275,7 +276,7 @@ function MottoSessionType({
               console.log(data);
               setActivePackage("trainerLocation");
               setActivePackageId(data[0]?.id);
-              setActivePackageData(data);
+           //   setActivePackageData(data);
             })
             .catch((er) => {
               console.log(er);
@@ -287,7 +288,7 @@ function MottoSessionType({
               console.log(data);
               setActivePackage("clientLocation");
               setActivePackageId(data[0]?.id);
-              setActivePackageData(data);
+             // setActivePackageData(data);
             })
             .catch((er) => {
               console.log(er);
@@ -355,7 +356,7 @@ function MottoSessionType({
                       className="serviceable_location"
                       onClick={() => setOpen(true)}
                     >
-                      Trainer's location
+                      Trainer's  location
                     </div>
                   ) : null}{" "}
                   <Dialog
@@ -366,8 +367,8 @@ function MottoSessionType({
                     <div style={{ padding: "1rem" }}>
                       <h5>Trainer's location</h5>
                       <hr></hr>
-
-                      {servicableLocation}
+           
+                      {activeHeader === "clientLocation"? servicableLocation : trainingFacilityLocation}
                     </div>
                   </Dialog>
                 </div>

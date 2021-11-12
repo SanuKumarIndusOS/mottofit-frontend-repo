@@ -146,7 +146,7 @@ const NavBarFC = ({
                 <input
                   className="input"
                   type="text"
-                  placeholder="Search to know more..."
+                  placeholder="Search by Trainer name"
                   onChange={(e) => {
                     setKey(e.target.value);
                   }}

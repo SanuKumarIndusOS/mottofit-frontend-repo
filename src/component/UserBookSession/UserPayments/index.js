@@ -466,14 +466,14 @@ const UserPaymentsFC = ({
                         Motto are protected.
                       </p>
                     </div>
-                    {sessionData?.availPass?.availPass !== null ? (
+                    {sessionData?.availPass?.availPass !== null && sessionData?.availPass?.availPass !== undefined ? (
                       <>
                         {" "}
                         <br></br>
                         <h4>Use Motto Package</h4>{" "}
                         <br></br> 
-                        <p>Remaining Passes : {sessionData?.availPass?.availPassData[0]?.remains}</p>
-                        <p>Expires on : {sessionData?.availPass?.availPassData[0]?.expiresIn}</p>
+                        {/* <p>Remaining Passes : {sessionData?.availPass?.availPassData[0]?.remains}</p>
+                        <p>Expires on : {sessionData?.availPass?.availPassData[0]?.expiresIn}</p> */}
                         <button className={`ud_but`} onClick={ScheduleSession}>
                           Continue
                         </button>
