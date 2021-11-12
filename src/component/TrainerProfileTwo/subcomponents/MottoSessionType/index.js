@@ -22,7 +22,7 @@ function MottoSessionType({
   handleBooking,
   trainerId,
   GetActivePass,
-  servicableLocation
+  servicableLocation,
 }) {
   const CyanRadio = withStyles({
     root: {
@@ -65,16 +65,12 @@ function MottoSessionType({
   };
 
   React.useEffect(() => {
-  
     checkActivePass();
-   
   }, []);
 
   React.useEffect(() => {
-    
-     // Check for active MottoPass if user is logged in
-     checkActivePass();
-
+    // Check for active MottoPass if user is logged in
+    checkActivePass();
 
     if (activeHeader === "virtual") {
       setPricingItem({
@@ -255,8 +251,6 @@ function MottoSessionType({
         },
       });
     }
-
-   
   }, [activeHeader, oneOnone, activePacakageId, activePacakageData]);
 
   const checkActivePass = () => {
@@ -273,7 +267,6 @@ function MottoSessionType({
           .catch((er) => {
             console.log(er);
             setActivePackageId(null);
-            
           });
       } else {
         if (activeHeader === "trainerLocation") {
@@ -287,7 +280,6 @@ function MottoSessionType({
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
-             
             });
         } else {
           GetActivePass(userId, trainerId, "clientLocation")
@@ -300,7 +292,6 @@ function MottoSessionType({
             .catch((er) => {
               console.log(er);
               setActivePackageId(null);
-              
             });
         }
       }
@@ -358,12 +349,13 @@ function MottoSessionType({
               <div style={{ maxHeight: "20 0px", marginBottom: "1rem" }}>
                 <div className="body_header">
                   {item}{" "}
-                  {item === "1 ON 1 INDIVIDUAL TRAINING" ? (
+                  {item === "1 ON 1 INDIVIDUAL TRAINING" &&
+                  activeHeader !== "virtual" ? (
                     <div
                       className="serviceable_location"
                       onClick={() => setOpen(true)}
                     >
-                      Trainer's serviceable location
+                      Trainer's location
                     </div>
                   ) : null}{" "}
                   <Dialog
@@ -371,10 +363,10 @@ function MottoSessionType({
                     aria-labelledby="simple-dialog-title"
                     open={open}
                   >
-                    <div style={{padding:"1rem"}}>
-                      <h5>Trainer Serviceable location</h5>
+                    <div style={{ padding: "1rem" }}>
+                      <h5>Trainer's location</h5>
                       <hr></hr>
-                      
+
                       {servicableLocation}
                     </div>
                   </Dialog>
@@ -382,9 +374,10 @@ function MottoSessionType({
                 <div className="line"></div>
                 <div>
                   {Object.keys(pricingItem[item]).map((type, key) => {
-                    return activePackage === activeHeader &&
+                    return (activePackage === activeHeader &&
                       (type === "10 Session Package" ||
-                        type === "30 Session Package") ? null : (
+                        type === "30 Session Package")) ||
+                      pricingItem[item][type]?.price === 0 ? null : (
                       <div className="session_item_bar">
                         <FormControlLabel
                           value={type}
