@@ -466,7 +466,7 @@ const UserPaymentsFC = ({
                         Motto are protected.
                       </p>
                     </div>
-                    {sessionData?.availPass?.availPass !== undefined ? (
+                    {sessionData?.availPass?.availPass !== null ? (
                       <>
                         {" "}
                         <br></br>
