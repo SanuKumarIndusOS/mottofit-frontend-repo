@@ -47,7 +47,7 @@ function Index() {
           <hr></hr>
         </div>
         <div className="search">
-          Search to Know More
+        {/* Search by Trainer name */}
           <form
             onSubmit={() => {
               history.push({
@@ -61,7 +61,7 @@ function Index() {
             <input
               className="input"
               type="text"
-              placeholder="Search to know more..."
+              placeholder=" Search by Trainer name "
               onChange={(e) => {
                 setKey(e.target.value);
               }}

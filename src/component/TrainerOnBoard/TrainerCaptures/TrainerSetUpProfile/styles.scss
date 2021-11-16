@@ -37,7 +37,8 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            margin: 4em 0 0 2em;
+            // margin: 4em 0 0 2em;
+            margin: 5em 0 0 6.25em;
             width: 410px;
             h2 {
               text-align: left;
@@ -48,6 +49,7 @@
               font-weight: bold;
               text-transform: capitalize;
               font-family: "Cormorant Garamond", sans-serif;
+              margin-bottom: 10px;
             }
             p {
               text-align: left;

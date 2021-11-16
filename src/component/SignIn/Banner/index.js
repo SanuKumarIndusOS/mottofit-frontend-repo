@@ -210,13 +210,13 @@ const SignInFC = ({
                     </div>
                     <div className="remember_container">
                       <div className="remember_left">
-                        <input
+                        {/* <input
                           className="check"
                           type="checkbox"
                           value="lsRememberMe"
                           id="rememberMe"
                         />{" "}
-                        <label>Remember me</label>
+                        <label>Remember me</label> */}
                       </div>
                       <div className="forgotpass_right">
                         <Link
@@ -233,6 +233,17 @@ const SignInFC = ({
                     {apiError && (
                       <span className="errorMessage">{apiError}</span>
                     )}
+
+                    <div className="submit_button">
+                      <button
+                        className="login_button"
+                        type="submit"
+                        onClick={logIn}
+                      >
+                        Sign In
+                        <ArrowHoverBlacked />
+                      </button>
+                    </div>
 
                     <div className="or_items">
                       <div className="hr_line"></div>
@@ -257,7 +268,7 @@ const SignInFC = ({
                         Sign In with Google
                       </button> */}
                     </div>
-                    <div className="submit_button">
+                    {/* <div className="submit_button">
                       <button
                         className="login_button"
                         type="submit"
@@ -266,7 +277,7 @@ const SignInFC = ({
                         Sign In
                         <ArrowHoverBlacked />
                       </button>
-                    </div>
+                    </div> */}
                   </form>
                 </div>
                 <div className="login_items">

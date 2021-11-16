@@ -9,11 +9,13 @@ import Pagination from "react-js-pagination";
 import { history } from "helpers";
 
 import TrainerCards from "component/FindYourTrainer/TrainersDetails/index";
+import { load } from "dotenv";
 
 const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   const [searchResults, setSearchResults] = useState();
   const [activePage, setactivePage] = useState(1);
   const [totalPage, setTotalPage] = useState();
+  const [loader, setLoader] = useState(true);
   let location = useLocation();
 
   useEffect(() => {
@@ -35,9 +37,11 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       page: activePage,
     };
     fetchGlobalSearchResults(payload).then((data) => {
-      console.log(data.list);
+
       setTotalPage(data.totalCount);
       setSearchResults(data.list);
+      console.log(data.list);
+      setLoader(false);
     });
   }, [location.state?.key]);
 
@@ -52,7 +56,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       setSearchResults(data.list);
     });
 
-    window.addEventListener("storage", () => {});
+    window.addEventListener("storage", () => { });
   }, [activePage]);
 
   const handlePageChange = (pageNumber) => {
@@ -68,64 +72,70 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       
         // loader={loader}
       /> */}
+      {
 
-      <div className="results_grid">
-        <div style={{ marginBottom: "500px" }}>
-          {searchResults?.length === 0 ? (
-            <h1>No Results Found</h1>
-          ) : (
-            <div className="row">
-              <TrainerCards content={searchResults || []} />
-              {/* {searchResults?.map((item) => {
-                return (
-                  <div className="cardd">
-                    {item.profilePicture !== null ? (
-                      <img
-                        className="card_image"
-                        src={item.profilePicture}
-                      ></img>
-                    ) : (
-                      <div className="card_image">{item.firstName[0]}</div>
-                    )}
+        loader ? <div className="load_parent">
+          <div className="loaderss"></div>
+        </div> :
+          <div className="results_grid">
+            <div style={{ marginBottom: "500px" }}>
+              {searchResults?.length === 0 ? (
+                <h1>No Results Found</h1>
+              ) : (
+                <div className="row">
+                  <TrainerCards content={searchResults || []} type="globalSearch" />
+                  {/* {searchResults?.map((item) => {
+                  return (
+                    <div className="cardd">
+                      {item.profilePicture !== null ? (
+                        <img
+                          className="card_image"
+                          src={item.profilePicture}
+                        ></img>
+                      ) : (
+                        <div className="card_image">{item.firstName[0]}</div>
+                      )}
+  
+                      <div className="card_content">
+                        <div className="name">
+                          {item.firstName}&ensp;{item.lastName}
+                        </div>
+                        <div className="vertical">
+                          {item.areaOfExpertise?.map((vertical) => {
+                            return `${vertical}, `;
+                          })}
+                        </div>
+                        <div className="_content">{item.description}</div>
+                      </div>
+                      <div
+                        className="card_view_profile"
+                        onClick={() => {
+                          history.push({
+                            pathname: `/trainer/profile/${item.id}`,
+                          });
+                        }}
+                      >
+                        VIEW PROFILE
+                      </div>
+                    </div>
+                  );
+                })}{" "} */}
+                </div>
+              )}
 
-                    <div className="card_content">
-                      <div className="name">
-                        {item.firstName}&ensp;{item.lastName}
-                      </div>
-                      <div className="vertical">
-                        {item.areaOfExpertise?.map((vertical) => {
-                          return `${vertical}, `;
-                        })}
-                      </div>
-                      <div className="_content">{item.description}</div>
-                    </div>
-                    <div
-                      className="card_view_profile"
-                      onClick={() => {
-                        history.push({
-                          pathname: `/trainer/profile/${item.id}`,
-                        });
-                      }}
-                    >
-                      VIEW PROFILE
-                    </div>
-                  </div>
-                );
-              })}{" "} */}
+              {searchResults?.length !== 0 ? (
+                <Pagination
+                  activePage={activePage}
+                  itemsCountPerPage={10}
+                  totalItemsCount={totalPage}
+                  pageRangeDisplayed={5}
+                  onChange={handlePageChange}
+                />
+              ) : null}
             </div>
-          )}
+          </div>
+      }
 
-          {searchResults?.length !== 0 ? (
-            <Pagination
-              activePage={activePage}
-              itemsCountPerPage={10}
-              totalItemsCount={totalPage}
-              pageRangeDisplayed={5}
-              onChange={handlePageChange}
-            />
-          ) : null}
-        </div>
-      </div>
     </div>
   );
 };

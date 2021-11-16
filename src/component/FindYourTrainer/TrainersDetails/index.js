@@ -32,7 +32,7 @@ const TrainerCardsFC = (props) => {
   };
 
   let no_match = <div></div>;
-  if (bestMatchData?.length === 0) {
+  if (bestMatchData?.length === 0 && props.type !=="globalSearch") {
     no_match = <h1 className="no_match">No Matches found</h1>;
   }
 
@@ -47,7 +47,7 @@ const TrainerCardsFC = (props) => {
 
     history.push({
       pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
-      state: { autoScroll: true },
+      // state: { autoScroll: true },
     });
 
     // if (!isReadMore) {
@@ -125,6 +125,7 @@ const TrainerCardsFC = (props) => {
                 to={`/trainer/profile/${bestMatchData[data]["id"]}`}
                 className="card-link card"
                 key={`trainer_best_matches_${index}`}
+                style={{paddingBottom:"0px"}}
               >
                 <div className="position-relative w-100">
                   <img

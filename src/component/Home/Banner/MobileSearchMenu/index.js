@@ -340,12 +340,14 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
           </FormControl>
         </div>
       </div>
-      <div
+      <div className="search_container">
+      <button
         className="search"
         onClick={search_action_mob}
         onTouchStart={search_action_mob}
       >
         APPLY ALL FILTERS{" "}
+      </button>
       </div>
     </div>
   );

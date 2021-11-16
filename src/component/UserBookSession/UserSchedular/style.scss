@@ -1,18 +1,39 @@
 .event_outter_container {
   width: 100%;
+
+  .container{
+
+    max-width: 960px;
+  }
  
   .event_inner_container {
     .link_wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
       margin-top: 2em;
 
       .inner_links {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         a {
           margin-left: 1em;
           text-align: left;
@@ -36,10 +57,19 @@
       .event_wrapper_inner {
         margin: 0 3em;
         .event_header {
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: column;
+                  flex-direction: column;
           margin-top: 2em;
           h2 {
             text-align: center;
@@ -63,9 +93,15 @@
           }
         }
         .user_profile_details {
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
-          align-items: center;
-          justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
           margin: 5em 0 2em 1em;
           img {
             width: 125px;
@@ -74,7 +110,9 @@
             border-radius: 100px;
           }
           .user_content {
-            align-items: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
             margin: 0em 0 0em 1em;
             h2 {
               text-align: left;
@@ -102,9 +140,15 @@
         }
 
         .submit_user {
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
-          justify-content: center;
-          align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
           margin: 0 auto;
           padding-left: 1em;
           width: 230px;
@@ -134,15 +178,27 @@
   grid-column-gap: 20px;
   width: 100%;
   margin: 2em 0 3em 0;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   .items_slots_user {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     width: 100%;
     .item_slot1_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       .indicator {
         width: 60px;
         height: 15px;
@@ -160,8 +216,12 @@
       }
     }
     .item_slot2_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       .indicator2 {
         width: 60px;
         height: 15px;
@@ -179,8 +239,12 @@
       }
     }
     .item_slot3_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       .indicator3 {
         width: 60px;
         height: 15px;
@@ -199,12 +263,20 @@
     }
 
     .item_slot5_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
 
       a {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         letter-spacing: 0.54px;
         border: none;
         outline: none;
@@ -226,8 +298,13 @@
 @media only screen and (max-width: 900px) {
   .schedular_slots_user {
     .items_slots_user {
-     flex-direction: column;
-     align-items: flex-start;
+     -webkit-box-orient: vertical;
+     -webkit-box-direction: normal;
+         -ms-flex-direction: column;
+             flex-direction: column;
+     -webkit-box-align: start;
+         -ms-flex-align: start;
+             align-items: flex-start;
 
      .item_slot5_user
      {

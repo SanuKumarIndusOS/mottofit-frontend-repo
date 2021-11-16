@@ -241,6 +241,17 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
                   </div>
                   {apiError && <span className="errorMessage">{apiError}</span>}
 
+                  <div className="submit_button">
+                    <button
+                      className="login_button"
+                      type="submit"
+                      onClick={logIn}
+                    >
+                      Signin
+                      <ArrowHoverBlacked />
+                    </button>
+                  </div>
+
                   <div className="or_items">
                     <div className="hr_line"></div>
                     <div>
@@ -264,7 +275,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
                         Sign In with Google
                       </button> */}
                   </div>
-                  <div className="submit_button">
+                  {/* <div className="submit_button">
                     <button
                       className="login_button"
                       type="submit"
@@ -273,7 +284,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
                       Signin
                       <ArrowHoverBlacked />
                     </button>
-                  </div>
+                  </div> */}
                 </form>
               </div>
               <div className="login_items">

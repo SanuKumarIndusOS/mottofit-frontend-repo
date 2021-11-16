@@ -62,9 +62,9 @@ function UserScheduler({
   //   //  console.log(blockCell["2021-08-30"], "block");
   // }, [blockCell]);
 
-  // useEffect(() => {
-  //   console.log(selectedCell);
-  // }, [selectedCell]);
+  useEffect(() => {
+    console.log(selectedCell);
+  }, [selectedCell]);
 
   const PreviousWeek = () => {
     setstartWeek(startWeek.subtract(7, "days"));
@@ -108,7 +108,7 @@ function UserScheduler({
     var tss = moment(`${datekey} ${time[timeKey].time}`, "YYYY-MM-DD hh:mm A")
       .add(60, "minutes")
       .valueOf();
-    console.log(ts, tss);
+    console.log(ts, tss, time[timeKey].time);
     parentCallback(ts, tss, datekey);
 
     setSelectedCell({
@@ -226,7 +226,7 @@ function UserScheduler({
 
       <br></br>
       <br></br>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div >
         <div className="calendar_controls">
           {moment(startWeek.format("YYYY-MM-DD")).isAfter(
             moment().startOf("isoWeek").format("YYYY-MM-DD"),
@@ -289,12 +289,12 @@ function UserScheduler({
             {date.map((item, keys) => {
               return (
                 <th className={keys === 6 ? "border_right_none" : null}>
-                  <div className="center_date_title">
+                  <div className={moment().isAfter(item) && moment().format("YYYY-MM-DD") !== item?"center_date_title_inactive":"center_date_title"}>
                     <div className="date_title">{item?.slice(8)}</div>
                     <div className="date_title_two">
-                      {keys === 1 || keys === 3
-                        ? moment(item, "YYYY MM DD").format("dddd").slice(0, 3)
-                        : moment(item, "YYYY MM DD").format("dddd").slice(0, 3)}
+                      {
+                         moment(item, "YYYY MM DD").format("dddd").slice(0, 3)}
+                        
                     </div>
                   </div>
                 </th>

@@ -49,7 +49,7 @@ export const MottoPassCard = ({ data }) => {
           <UserAvatar className="img-md" {...userData} />
         </div>
         <span className="mottopass-double-ribbon text-uppercase d-flex align-items-center justify-content-center position-relative">
-          {`${totalPassCount} Session Pass`}
+          {`${totalPassCount} Session Package`}
         </span>
       </div>
       <div className="pass-user-name text-center">
@@ -81,7 +81,7 @@ export const MottoPassCard = ({ data }) => {
             !isExpired ? "Valid until " : "Expired on "
           } ${expirationDate}`}</p>
         </div>
-        <div className="mottopass-discount-rate d-flex align-items-start">
+        {/* <div className="mottopass-discount-rate d-flex align-items-start">
           <span>
             <img src={DollarIcon} alt="dollar icon" />
           </span>
@@ -90,7 +90,7 @@ export const MottoPassCard = ({ data }) => {
           </p>
           <br></br>
         
-        </div>
+        </div> */}
         {/* <div className="mottopass-discount-rate d-flex align-items-start">
         <p >2 out of 3 passes remaining</p>
         </div> */}

@@ -366,3 +366,62 @@
     margin-top: 100px;
   }
 }
+
+
+.trainer_pass_container
+{
+
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  column-gap: 2rem;
+  row-gap: 2rem;
+  .pass_card
+  {
+    background-color: #212529;
+    width: 100%;
+    height: fit-content;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    
+    .pass_header{
+
+     
+      margin: 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .pass_ribbon
+    {
+      
+       background-color: #53bfd2;
+       padding: 6px 20px 6px 20px;
+       font-weight: 600;
+      // border-radius: 200px;
+       font-size: 16px;
+       clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
+       
+       
+    }
+
+    .pass_content{
+
+      font-size: 16px;
+      letter-spacing: 0.23px;
+      color:#bcbcbc;
+      line-height: 30px;
+    }
+    
+  }
+}

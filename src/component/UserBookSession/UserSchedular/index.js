@@ -5,7 +5,8 @@ import ArrowBack from "../../../assets/files/SVG/Arrow Back.svg";
 import { Link, useParams } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 // import UserScheduler from "../../UserScheduler/Scheduler";
-import UserScheduler from "component/TrainerProfile/UserScheduler/UserScheduler";
+//import UserScheduler from "component/TrainerProfile/UserScheduler/UserScheduler";
+import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler"
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -22,7 +23,7 @@ const UserEventSchedularFC = (props) => {
   const [trainerstartSlot, settrainerstartSlot] = React.useState();
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [userSelectedData, setUserSelectedData] = React.useState({});
-  const [DateSlot, setDateSlot] = React.useState();
+  const [DateSlot, setDateSlot] = React.useState("");
 
   const { id } = useParams();
 
@@ -39,7 +40,17 @@ const UserEventSchedularFC = (props) => {
 
     // if (!location["trainerId"]) return history.push("/trainer/find");
 
+    console.log(props.sessionData,"up");
+
     fetchViewTrainer();
+
+    let reduxData = {
+      bookingData: {
+        
+      },
+    };
+
+    props.updateUserDetails(reduxData);
   }, []);
 
   function fetchViewTrainer() {
@@ -81,7 +92,7 @@ const UserEventSchedularFC = (props) => {
   }
 
   const callbackFunction = (ts, tss, date) => {
-    // console.log(ts, tss, "Callback");
+    console.log(ts, tss, date, "Callback");
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
@@ -107,7 +118,7 @@ const UserEventSchedularFC = (props) => {
 
     props.updateUserDetails(reduxData);
 
-    history.push("/user/session-type");
+    history.push("/user/payment");
   };
 
   let userData = {
@@ -115,6 +126,15 @@ const UserEventSchedularFC = (props) => {
       location?.trainerData?.profilePicture || location?.profilePicture,
     userName: `${trainerName?.firstName || ""}${trainerName?.lastName || ""}`,
   };
+
+
+  // const callbackFunction = (ts, tss, date) => {
+  //   console.log(ts, tss, date, "oop");
+  //   settrainerstartSlot(ts);
+  //   settrainerEndSlot(tss);
+  //   setDateSlot(date);
+  //   setDisableBooking(false);
+  // };
 
   return (
     <>
@@ -162,7 +182,7 @@ const UserEventSchedularFC = (props) => {
                   </div>
                 </div>
                 {/* <div className="container"> */}
-                <UserScheduler
+                {/* <UserScheduler
                   id={
                     !location["trainerId"]
                       ? props.selectedTrainerData["id"]
@@ -173,13 +193,19 @@ const UserEventSchedularFC = (props) => {
                   endTime={userSelectedData?.endDate}
                   updateUserDetails={props.updateUserDetails}
                   selectedTimes={props.selectedTimes}
-                />
+                /> */}
+                    <UserSchedulerScroll
+                      id={id}
+                      tableId={"trainer-profile-table"}
+                      parentCallback={callbackFunction}
+                      updateUserDetails={updateUserDetails}
+                    />
                 <BottomSection trainerName={trainerName} />
                 {/* </div> */}
 
                 <Link
                   className={`submit_user ${
-                    props.selectedTimes.length > 0 ? "" : "disable-btn"
+                    DateSlot !== "" ? "" : "disable-btn"
                   }`}
                   onClick={handleContinue}
                   style={{ marginBottom: "500px" }}
@@ -222,6 +248,7 @@ const BottomSection = ({ trainerName }) => {
 };
 
 const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
   selectedTrainerData: state.userReducer.selectedTrainerData,
   bookingData: state.userReducer.bookingData,
   selectedTimes: state.userReducer.selectedTimes,

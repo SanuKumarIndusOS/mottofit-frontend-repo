@@ -1,0 +1,25 @@
+.trainer_profile_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10rem;
+
+  @media only screen and (max-width: 900px) {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+  }
+
+  .left_pane{
+      width: 30%;
+  }
+
+  .right_pane{
+    width: 70%;
+
+    @media only screen and (max-width: 900px) {
+        width: unset;
+    }
+}
+}

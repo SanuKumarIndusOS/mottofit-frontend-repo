@@ -29,6 +29,8 @@ import { Toast } from "service/toast";
 import { UserAvatar } from "component/common/UserAvatar";
 import moment from "moment";
 import momentTZ from "moment-timezone";
+import Dialog from "@mui/material/Dialog";
+import { CircularProgress } from "@material-ui/core";
 
 const stripePromise = loadStripe(config.stripeUrl);
 
@@ -71,6 +73,12 @@ const UserPaymentsFC = ({
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleCouponCode = ({ target: { value } }) => {
@@ -120,6 +128,8 @@ const UserPaymentsFC = ({
     //     message: "Need atleast one default card details",
     //   });
 
+    setOpen(true);
+
     let trainingtype = sessionData?.sessionType;
     if (trainingtype.includes("1 ON 1")) {
       trainingtype = "1on1";
@@ -133,10 +143,10 @@ const UserPaymentsFC = ({
     //   sessionData?.trainingType?.value || bookingData?.activity?.value;
 
     const scheduleBody = {
-      trainerId: selectedTrainerData?.id || selectedTrainerData?.id,
-      title: trainingAcivityType || "Motto Session",
-      trainingType: trainingtype,
-      sessionType: sessionData?.preferedTrainingMode,
+      trainerId: sessionData?.trainerId,
+      title: "Motto Session",
+      trainingType: sessionData?.trainingType,
+      sessionType: sessionData?.sessionType,
       activity: trainingAcivityType,
       sessionStatus: "created",
       sessionDate:
@@ -144,7 +154,7 @@ const UserPaymentsFC = ({
       sessionStartTime: convertToESTMs(bookingData?.start_slot),
       sessionEndTime: convertToESTMs(bookingData?.end_slot),
       city: sessionData?.location?.value,
-      venue: sessionData?.trainingVenue?.value,
+      venue: sessionData?.venue,
       price: sessionData?.price,
       // sessionMode: queryQbject?.availability?.value,
       sessionMode: "EarlyBird",
@@ -156,22 +166,31 @@ const UserPaymentsFC = ({
       scheduleBody["code"] = coupondCode;
     }
 
-    if (Object.keys(mottoPassDataVal).length === 0) {
-      console.log(mottoPassDataVal, "empty");
-    } else {
-      console.log(mottoPassDataVal, "full");
-
-      if ("availPass" in mottoPassDataVal) {
-        console.log(mottoPassDataVal.availPass[0].id, "pl");
-        scheduleBody.availPass = mottoPassDataVal.availPass[0].id;
-      } else {
-        scheduleBody.newPass = mottoPassDataVal;
-        console.log(mottoPassDataVal);
-      }
+    if (sessionData?.newPass !== null) {
+      scheduleBody.newPass = sessionData?.newPass;
     }
+
+    if (sessionData?.availPass !== null) {
+      scheduleBody.availPass = sessionData?.availPass?.availPass;
+    }
+
+    // if (Object.keys(mottoPassDataVal).length === 0) {
+    //   console.log(mottoPassDataVal, "empty");
+    // } else {
+    //   console.log(mottoPassDataVal, "full");
+
+    //   if ("availPass" in mottoPassDataVal) {
+    //     console.log(mottoPassDataVal.availPass[0].id, "pl");
+    //     scheduleBody.availPass = mottoPassDataVal.availPass[0].id;
+    //   } else {
+    //     scheduleBody.newPass = mottoPassDataVal;
+    //     console.log(mottoPassDataVal);
+    //   }
+    // }
 
     scheduleSession(scheduleBody)
       .then((res) => {
+        setOpen(false);
         if (res.session.trainingType === "1on1") {
           history.push("/users/dashboard/session");
         } else if (
@@ -219,9 +238,11 @@ const UserPaymentsFC = ({
   );
 
   useEffect(() => {
+
+
     updatePricing();
     setCheckPayAhead(false);
-    console.log(mottoPassDataVal);
+    console.log(sessionData);
 
     let tempTrainingActivity = "";
 
@@ -445,7 +466,66 @@ const UserPaymentsFC = ({
                         Motto are protected.
                       </p>
                     </div>
-                    <div className="user_payment_section">
+                    {sessionData?.availPass?.availPass !== null && sessionData?.availPass?.availPass !== undefined ? (
+                      <>
+                        {" "}
+                        <br></br>
+                        <h4>Use Motto Package</h4>{" "}
+                        <br></br> 
+                        {/* <p>Remaining Passes : {sessionData?.availPass?.availPassData[0]?.remains}</p>
+                        <p>Expires on : {sessionData?.availPass?.availPassData[0]?.expiresIn}</p> */}
+                        <button className={`ud_but`} onClick={ScheduleSession}>
+                          Continue
+                        </button>
+                      </>
+                    ) : (
+                      <div className="user_payment_section">
+                        <div className="inner_payment_form">
+                          <div className="payment_form_radio">
+                            <div className="inner_payment_radio">
+                              <Radio
+                                checked={selectedValue === "a"}
+                                onChange={handleChange}
+                                value="a"
+                                name="radio-button-demo"
+                                inputProps={{
+                                  "aria-label": "A",
+                                }}
+                                label="Credit or Debit Card"
+                              />
+                              <label>Credit or Debit Card</label>
+                            </div>
+                            <img src={paymentMethodImg} alt="icon" />
+                          </div>
+
+                          <div className="payment_input">
+                            <Elements stripe={stripePromise}>
+                              <CardForm
+                                agreedToTerms={agreedToTerms}
+                                checkPayAhead={checkPayAhead}
+                                handleChange={() =>
+                                  setAgreedToTerms(!agreedToTerms)
+                                }
+                                handleChangeCPA={handleChangeCPA}
+                                ScheduleSession={ScheduleSession}
+                                handleFriendsCount={handleFriendsCount}
+                                mottoPassDataVal={mottoPassDataVal}
+                              />
+                            </Elements>
+                            {/* <button
+                          className={`ud_but ${
+                            !agreedToTerms ? "disable-btn" : ""
+                          }`}
+                          onClick={ScheduleSession}
+                          disabled={!agreedToTerms}
+                        >
+                          Continue <ArrowHoverBlacked />
+                        </button> */}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {/* <div className="user_payment_section">
                       <div className="inner_payment_form">
                         <div className="payment_form_radio">
                           <div className="inner_payment_radio">
@@ -487,9 +567,9 @@ const UserPaymentsFC = ({
                           >
                             Continue <ArrowHoverBlacked />
                           </button> */}
-                        </div>
+                    {/* </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -539,8 +619,12 @@ const UserPaymentsFC = ({
                     <div className="user_data_inner">
                       <img src={LocationIcon} alt="icon" />
                       <h4>
-                        {sessionData?.preferedTrainingMode === "inPerson"
-                          ? `${sessionData?.trainingVenue?.label}`
+                        {sessionData?.sessionType === "inPerson"
+                          ? `${
+                              sessionData?.venue === "clientLocation"
+                                ? "Client's Location"
+                                : "Trainer's Location"
+                            }`
                           : "Virtual"}
                       </h4>
                     </div>
@@ -595,14 +679,15 @@ const UserPaymentsFC = ({
                       </div>
                     </div> */}
                     <br></br>
-                    {"passType" in mottoPassDataVal ? <h4>Availed Motto Package: ${mottoPassDataVal?.price}</h4
-                    > : <AccordationService
-                      data={accordionData}
-                      couponRate={couponRate}
-                      isCouponApplied={isCouponCodeValid}
-                    />
-                    
-                    }
+                    {"passType" in mottoPassDataVal ? (
+                      <h4>Availed Motto Package: ${mottoPassDataVal?.price}</h4>
+                    ) : (
+                      <AccordationService
+                        data={accordionData}
+                        couponRate={couponRate}
+                        isCouponApplied={isCouponCodeValid}
+                      />
+                    )}
 
                     {/* <AccordationService
                       data={accordionData}
@@ -649,6 +734,21 @@ const UserPaymentsFC = ({
           </div>
         </div>
       </div>
+
+      <Dialog open={open} onClose={handleClose}>
+        <div
+          style={{
+            margin: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div>Please wait your Session is being booked </div>
+          <br></br>
+          <CircularProgress style={{ color: "#53bfd2" }} />
+        </div>
+      </Dialog>
     </>
   );
 };
