@@ -489,7 +489,7 @@ const MyProfileClass = ({
                             </span>
                           )}
                         </div> */}
-                        <div className="input_profile">
+                        {/* <div className="input_profile">
                           <label>Gender </label>
 
                           <NormalMultiSelect
@@ -506,7 +506,7 @@ const MyProfileClass = ({
                               {errors.gender[0]}
                             </span>
                           )}
-                        </div>
+                        </div> */}
                         <div className="input_profile">
                           <label>Email </label>
                           <input

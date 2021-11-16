@@ -30,7 +30,7 @@ const UserEventSchedularFC = (props) => {
   const [DateSlot, setDateSlot] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
 
-  const history = useHistory()
+  const history = useHistory();
 
   const { id } = useParams();
 
@@ -97,8 +97,7 @@ const UserEventSchedularFC = (props) => {
   }
 
   const handleRequestTrainer = () => {
-   
- Toast({
+    Toast({
       type: "success",
       message:
         "Login or create an account to message trainer requesting time and date of your choice",
@@ -127,7 +126,6 @@ const UserEventSchedularFC = (props) => {
     requestTrainerAct();
   };
 
-
   const requestTrainerAct = () => {
     const userId = localStorage.getItem("user-id");
     return new Promise((resolve, reject) => {
@@ -135,10 +133,11 @@ const UserEventSchedularFC = (props) => {
         channelType: "directMessageTrainer",
         trainerId: id,
         userId: [userId],
-      };      
+      };
 
       setLoading(true);
-      props.requestTrainerMessageApi(payload)
+      props
+        .requestTrainerMessageApi(payload)
         .then((data) => {
           const { channelSid } = data || {};
 
@@ -192,19 +191,17 @@ const UserEventSchedularFC = (props) => {
       // history.push(`/mobile/login`);
       // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
       // history.push(`?nextpath=/user/payment`);
-          history.push({
-          pathname: '/mobile/login',
-          search: '?nextpath=/user/payment'
-        })
-        setTimeout(() => {
-          console.log("called history");
-          history.goBack();
-        },100)
-    }else{
+      history.push({
+        pathname: "/mobile/login",
+        search: "?nextpath=/user/payment",
+      });
+      setTimeout(() => {
+        console.log("called history");
+        history.goBack();
+      }, 100);
+    } else {
       history.push("/user/payment");
-    }  
-
-
+    }
   };
 
   let userData = {
@@ -266,7 +263,17 @@ const UserEventSchedularFC = (props) => {
                     </p>
                   </div>
                 </div>
-                   <div className="request-trainer-block ml-auto user-schedular">
+                <p style={{color:"#696969"}}>
+                  Calender is not fully representative of [trainers first
+                  names] availability, don't be discouraged if a day & time
+                  isn't open to book below. Just request and the [trainer first
+                  name] will be able to make a day and time that you want work.
+                  Super Easy, click below!
+                </p> 
+
+                <br></br>
+
+                <div className="request-trainer-block ml-auto user-schedular">
                   {isLoading ? (
                     "Loading..."
                   ) : (
@@ -276,7 +283,8 @@ const UserEventSchedularFC = (props) => {
                       <button
                         className="book_session_btn d-flex align-items-center"
                         onClick={handleRequestTrainer}
-                        style={{width:"100%"}}
+                        style={{ width: "100%" }}
+                        style={{border:"none", background:"none"}}
                       >
                         {`Message ${trainerName.firstName} `}
                         <BlueHoverButton />

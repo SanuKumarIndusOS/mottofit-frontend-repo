@@ -31,6 +31,7 @@ import moment from "moment";
 import momentTZ from "moment-timezone";
 import Dialog from "@mui/material/Dialog";
 import { CircularProgress } from "@material-ui/core";
+import { GetActivePass } from "action/userAct";
 
 const stripePromise = loadStripe(config.stripeUrl);
 
@@ -47,6 +48,7 @@ const UserPaymentsFC = ({
   selectedTrainerData,
   mottoPassDataVal,
   verifyCouponCodeApi,
+  GetActivePass,
   ...restProps
 }) => {
   //for material ui radio buttom (temp)
@@ -166,13 +168,16 @@ const UserPaymentsFC = ({
       scheduleBody["code"] = coupondCode;
     }
 
-    if (sessionData?.newPass !== null) {
+    if (sessionData?.newPass !== null && passId === null) {
       scheduleBody.newPass = sessionData?.newPass;
+    }else
+    {
+      scheduleBody.availPass = passId;
     }
 
-    if (sessionData?.availPass !== null) {
-      scheduleBody.availPass = sessionData?.availPass?.availPass;
-    }
+    // if (sessionData?.availPass !== null) {
+    //   scheduleBody.availPass = passId;
+    // }
 
     // if (Object.keys(mottoPassDataVal).length === 0) {
     //   console.log(mottoPassDataVal, "empty");
@@ -237,12 +242,39 @@ const UserPaymentsFC = ({
     (sessionData?.price || 0) - discountPrice + trxFee + tax + cancellationFee
   );
 
+  const [passId, setpassId] = useState(null)
+
+
+
+  const CheckMottoPass = () => {
+
+   
+    console.log(sessionData?.trainerId, sessionData?.sessionType);
+      let userId = localStorage.getItem("user-id");
+
+       let type = sessionData?.sessionType === "virtual"? "virtual": sessionData?.venue
+      // if (sessionData?.preferedTrainingMode === "virtual") {
+        GetActivePass(userId, sessionData?.trainerId, type)
+          .then((data) => {
+            console.log(data);
+            // setActivePackage("virtual");
+            setpassId(data[0]?.id);
+           // setActivePackageData(data);
+          })
+          .catch((er) => {
+            console.log(er);
+            // setActivePackageId(null);
+          });
+      }
+
   useEffect(() => {
 
 
     updatePricing();
     setCheckPayAhead(false);
     console.log(sessionData);
+
+    CheckMottoPass();
 
     let tempTrainingActivity = "";
 
@@ -390,7 +422,7 @@ const UserPaymentsFC = ({
       tempData = [
         {
           title: "One on One Session",
-          session: "1 sesson / 1 person",
+          session: "Price to be paid",
           price: "$15.00 / Person",
           isPrice: true,
         },
@@ -467,7 +499,7 @@ const UserPaymentsFC = ({
                         Motto are protected.
                       </p>
                     </div>
-                    {sessionData?.availPass?.availPass !== null && sessionData?.availPass?.availPass !== undefined ? (
+                    {( passId !== null && sessionData?.trainingType === "1on1" ) ? (
                       <>
                         {" "}
                         <br></br>
@@ -687,6 +719,8 @@ const UserPaymentsFC = ({
                         data={accordionData}
                         couponRate={couponRate}
                         isCouponApplied={isCouponCodeValid}
+                        passId={passId}
+                        trainingType={sessionData?.trainingType}
                       />
                     )}
 
@@ -754,7 +788,7 @@ const UserPaymentsFC = ({
   );
 };
 
-const AccordationService = ({ data, couponRate, isCouponApplied }) => {
+const AccordationService = ({ data, couponRate, isCouponApplied, passId, trainingType }) => {
   let couponRateValue = 0;
 
   if (isCouponApplied && typeof couponRate?.current === "function") {
@@ -789,15 +823,22 @@ const AccordationService = ({ data, couponRate, isCouponApplied }) => {
             key={index}
           >
             <div className="TF_data_title">
-              <h3 className="fs-20 my-3">{item.title}</h3>
+              {(passId === null || trainingType !== "1on1") ?  <h3 className="fs-20 my-3">{item.title === "1on1" ? "One on One" : item.title === "social"? "Social" : "Class"}</h3> : null}
+             
             </div>
 
             <div className="session-block">
               {item?.price ? (
+
+              (  passId === null || trainingType !== "1on1" )?
                 <div className="session-item d-flex aling-items-center">
                   <p className="fs-20 text-secondary">{item.session}</p>
                   <p className="ml-auto fs-20 text-secondary">
-                    {item.people
+                    {
+                      
+                    
+                    
+                     item.people
                       ? `$${parseFloat((finalPrice || 0) / item.people).toFixed(
                           1
                         )} / Person`
@@ -805,7 +846,7 @@ const AccordationService = ({ data, couponRate, isCouponApplied }) => {
                       ? `$${finalPrice} / Person`
                       : item?.price}
                   </p>
-                </div>
+                </div> : null
               ) : (
                 ""
               )}
@@ -870,6 +911,7 @@ const mapDispatchToProps = (dispatch) => {
       resetUserDetails,
       updateUserDetails,
       verifyCouponCodeApi: verifyCouponCodeAct,
+      GetActivePass
     },
     dispatch
   );

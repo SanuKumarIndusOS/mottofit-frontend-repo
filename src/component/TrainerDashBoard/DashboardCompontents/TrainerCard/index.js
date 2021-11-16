@@ -25,6 +25,8 @@ function TrainerCardDashboard(props) {
   const [sliderValue, setSliderValue] = useState(1.2);
   const [isLoading, setisLoading] = useState(false);
 
+   const [saveChangesLoader, setsaveChangesLoader] = useState(false)
+
   const toggle = () => setModal(!modal);
   // const history = useHistory();
   const [trainerCardData, setTrainerCardData] = useState({
@@ -168,6 +170,8 @@ function TrainerCardDashboard(props) {
   }, []);
 
   const handleSubmit = () => {
+
+    setsaveChangesLoader(true);
     if (
       trainerCardData.inPersonAtClient_individualCharge ||
       trainerCardData.inPersonAtTrainer_individualCharge
@@ -230,7 +234,11 @@ function TrainerCardDashboard(props) {
           type: "success",
           message: "Successfully, Updated the changes",
         });
+
+        setsaveChangesLoader(false);
       });
+
+      
     } else {
       setValidationError(true);
     }
@@ -763,7 +771,7 @@ function TrainerCardDashboard(props) {
 
                 <br />
               </div>
-              <div className="card_accordion_input">
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="3 Session Rate"
                   value={trainerCardData.inPersonAtClient_threeSessionRate}
@@ -777,7 +785,7 @@ function TrainerCardDashboard(props) {
                   onWheel={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
-              </div>
+              </div> */}
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -876,7 +884,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-              <div className="card_accordion_input">
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="3 Session Rate"
                   value={trainerCardData.inPersonAtTrainer_threeSessionRate}
@@ -889,7 +897,7 @@ function TrainerCardDashboard(props) {
                   type="text"
                   onWheel={blockWheelBehaviour}
                 />
-              </div>
+              </div> */}
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -988,7 +996,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-              <div className="card_accordion_input">
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="3 Session Rate"
                   value={trainerCardData.virtual_threeSessionRate}
@@ -1002,7 +1010,7 @@ function TrainerCardDashboard(props) {
                   onWheel={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
-              </div>
+              </div> */}
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -1031,7 +1039,7 @@ function TrainerCardDashboard(props) {
         </div>
         <div className="card_submit">
           <button onClick={() => handleSubmit()}>
-            {isLoading ? (
+            {saveChangesLoader ? (
               "Loading..."
             ) : (
               <>
@@ -1093,7 +1101,7 @@ function Accordion({ title, children }) {
           className={`accordion-title ${isOpenAccodion ? "open" : ""}`}
           onClick={() => setAccordion(!isOpenAccodion)}
         >
-          {title}
+          {title} 
         </label>
       </div>
       <div className={`accordion-item ${!isOpenAccodion ? "collapsed" : ""}`}>
