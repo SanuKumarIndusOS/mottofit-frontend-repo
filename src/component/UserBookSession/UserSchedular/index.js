@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import ArrowHoverBlacked from "../../common/BlackCircleButton/ArrowHoverBlacked";
 // import UserScheduler from "../../UserScheduler/Scheduler";
 //import UserScheduler from "component/TrainerProfile/UserScheduler/UserScheduler";
-import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler"
+import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserScheduler";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -40,14 +40,12 @@ const UserEventSchedularFC = (props) => {
 
     // if (!location["trainerId"]) return history.push("/trainer/find");
 
-    console.log(props.sessionData,"up");
+    console.log(props.sessionData, "up");
 
     fetchViewTrainer();
 
     let reduxData = {
-      bookingData: {
-        
-      },
+      bookingData: {},
     };
 
     props.updateUserDetails(reduxData);
@@ -117,8 +115,15 @@ const UserEventSchedularFC = (props) => {
     };
 
     props.updateUserDetails(reduxData);
-
-    history.push("/user/payment");
+    
+    
+    // if (!localStorage.getItem("token")) {
+    //   history.push("/mobile/login");
+    //   // history.push(`?${encodeURIComponent("nextpath=/user/payment")}`);
+      
+    // } else {
+      history.push("/user/payment");
+    // }
   };
 
   let userData = {
@@ -126,7 +131,6 @@ const UserEventSchedularFC = (props) => {
       location?.trainerData?.profilePicture || location?.profilePicture,
     userName: `${trainerName?.firstName || ""}${trainerName?.lastName || ""}`,
   };
-
 
   // const callbackFunction = (ts, tss, date) => {
   //   console.log(ts, tss, date, "oop");
@@ -194,12 +198,12 @@ const UserEventSchedularFC = (props) => {
                   updateUserDetails={props.updateUserDetails}
                   selectedTimes={props.selectedTimes}
                 /> */}
-                    <UserSchedulerScroll
-                      id={id}
-                      tableId={"trainer-profile-table"}
-                      parentCallback={callbackFunction}
-                      updateUserDetails={updateUserDetails}
-                    />
+                <UserSchedulerScroll
+                  id={id}
+                  tableId={"trainer-profile-table"}
+                  parentCallback={callbackFunction}
+                  updateUserDetails={updateUserDetails}
+                />
                 <BottomSection trainerName={trainerName} />
                 {/* </div> */}
 

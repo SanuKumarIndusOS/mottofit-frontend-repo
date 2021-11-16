@@ -32,7 +32,7 @@ export const MottoPassCard = ({ data }) => {
   } else if (passType === "virtual") {
     mottoPassType = "only Virtual";
   } else {
-    mottoPassType = "All";
+    mottoPassType = "only Client's Location";
   }
 
   let userData = {

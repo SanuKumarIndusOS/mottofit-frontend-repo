@@ -142,6 +142,9 @@ function CardFormFC({
   const addCard = (token) => {
     const { addCardDetails } = PaymentApi;
 
+
+    console.log(isProfile, "isP");
+
     let payload = {
       cardToken: token,
       setDefault: isProfile ? true : isRememberCard,
@@ -155,20 +158,22 @@ function CardFormFC({
         getUserPaymentInfo();
         // setLoading(false);
 
-        if (isProfile) return ScheduleSession(() => setLoading(false));
+        ScheduleSession(() => setLoading(false));
 
-        let sessionTypeRoute = {
-          ["1 ON 1 TRAINING"]: () => ScheduleSession(),
-          ["SOCIAL SESSION"]: () => history.push("/user/with-friends"),
-          ["CREATE A CLASS"]: () => history.push("/user/with-friends"),
-        };
+      //  if (isProfile) return ScheduleSession(() => setLoading(false));
 
-        let sessionType = sessionData?.sessionType;
+      //   let sessionTypeRoute = {
+      //     ["1 ON 1 TRAINING"]: () => ScheduleSession(),
+      //     ["SOCIAL SESSION"]: () => history.push("/user/with-friends"),
+      //     ["CREATE A CLASS"]: () => history.push("/user/with-friends"),
+      //   };
 
-        if (sessionType && sessionTypeRoute[sessionType]) {
-          // setShowCardComp(false);
-          ScheduleSession(() => setLoading(false));
-        }
+      //   let sessionType = sessionData?.sessionType;
+
+      //   if (sessionType && sessionTypeRoute[sessionType]) {
+      //     // setShowCardComp(false);
+      //     ScheduleSession(() => setLoading(false));
+      //   }
         // console.log(sessionTypeRoute[sessionType]);
       })
       .catch((err) => {

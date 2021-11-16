@@ -121,7 +121,7 @@ const UserPaymentsFC = ({
 
   const ScheduleSession = (errCb) => {
     // console.log(location, "locationlocation");
-    console.log("hit");
+    console.log("hit scheduleSession");
     // if (!defaulCardDetails?.default)
     //   return Toast({
     //     type: "info",
@@ -406,6 +406,7 @@ const UserPaymentsFC = ({
         price: !isNaN(sessionData?.price)
           ? parseFloat(sessionData?.price)
           : null,
+          title:  sessionData?.trainingType 
       };
     }
 

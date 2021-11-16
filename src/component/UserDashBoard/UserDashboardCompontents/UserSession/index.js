@@ -147,7 +147,7 @@ const UserSessionClass = (props) => {
   const getAllPasses = async () => {
     const passData = await props.getAllMottoPassesAct();
 
-    // console.log(passData);
+     console.log(passData);
 
     setMottoPassData(passData);
   };

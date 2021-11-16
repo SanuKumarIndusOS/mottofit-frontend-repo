@@ -361,7 +361,6 @@ const TrainerProfileClass = ({
           price: price,
           newPass: passData,
           availPass: availPass,
-          
         },
       };
 
@@ -417,6 +416,8 @@ const TrainerProfileClass = ({
                   <img src={ArrowNext} alt="icon" />
                 </div> */}
 
+                <h6>Have a question?</h6>
+
                 <div className="request-trainer-block">
                   {isLoading ? (
                     "Loading..."
@@ -427,7 +428,7 @@ const TrainerProfileClass = ({
                       <button
                         className="book_session_btn d-flex align-items-center"
                         onClick={handleRequestTrainer}
-                        style={{width:"100%"}}
+                        style={{ width: "100%" }}
                       >
                         {`Message ${trainerProfileData.firstName} `}
                         <BlueHoverButton />
@@ -435,13 +436,13 @@ const TrainerProfileClass = ({
                     </div>
                   )}
                 </div>
-<br></br>
-                <div className="profile_share">
+                <br></br>
+                {/* <div className="profile_share">
                   <img src={Share} alt="icon" /> &ensp;
                   <Link onClick={handleCopy}>
                     <u style={{ fontSize: "18px" }}>Share Profile</u>
                   </Link>
-                </div>
+                </div> */}
                 {/* <div className="profile_aside_link">
                   <Link onClick={() => scrollToCalendar()}>View Calender</Link>
                   <img src={ArrowNext} alt="icon" />
@@ -463,7 +464,7 @@ const TrainerProfileClass = ({
                     <p>
                       Browse & choose your session type to continue. You can
                       then choose an available time or message your trainer for
-                      more availability & question.
+                      more availability & questions.
                     </p>
                     <MottoSessionType
                       oneOnone={trainerProfileData?.oneOnOnePricing}
@@ -471,8 +472,12 @@ const TrainerProfileClass = ({
                       classPricing={trainerProfileData?.classSessionPricing}
                       handleBooking={handleBooking}
                       trainerId={id}
-                      servicableLocation={trainerProfileData?.servicableLocation}
-                      trainingFacilityLocation={trainerProfileData?.trainingFacilityLocation}
+                      servicableLocation={
+                        trainerProfileData?.servicableLocation
+                      }
+                      trainingFacilityLocation={
+                        trainerProfileData?.trainingFacilityLocation
+                      }
                     />
                   </div>
 

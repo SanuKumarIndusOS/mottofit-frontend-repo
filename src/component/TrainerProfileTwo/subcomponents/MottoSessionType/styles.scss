@@ -13,7 +13,7 @@
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    // justify-content: space-between;
     cursor: pointer;
 
     .session_type_header_item {
@@ -76,6 +76,12 @@
       }
     }
   }
+
+  // .session_type_header_item:first-child{
+
+  //   background-color: #53bfd2;
+  //   border-radius: 30px;
+  // }
 
   .session_type_body {
     padding: 2rem;

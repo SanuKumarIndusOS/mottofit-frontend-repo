@@ -41,7 +41,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
   const urlData = new URLSearchParams(decodeURIComponent(searchUrl));
 
   // console.log(urlData.get("requestSession"));
-  // console.log(urlData.get("nextpath"));
+   console.log(urlData.get("nextpath"),"ne");
 
   console.log(searchUrl);
 
