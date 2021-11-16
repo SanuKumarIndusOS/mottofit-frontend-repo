@@ -46,6 +46,9 @@ class ChatBoxClass extends Component {
       prevProps.activeChannelMessages.length
     ) {
       this.scrollToMessageListBottom();
+      this.inputRef?.current &&
+        this.inputRef?.current?.focus &&
+        this.inputRef?.current?.focus();
       // console.log("hrllo");
     }
     if (this.props.isLoading === false && prevProps.isLoading === true) {
@@ -73,6 +76,10 @@ class ChatBoxClass extends Component {
       0,
       this.messagesEndRef.current?.scrollHeight
     );
+
+    this.inputRef?.current &&
+      this.inputRef?.current?.focus &&
+      this.inputRef?.current?.focus();
   };
 
   handleChange = ({ target: { value } }) => {

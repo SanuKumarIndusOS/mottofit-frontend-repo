@@ -200,11 +200,19 @@ const TrainerMessageClass = ({
           [currentSession]: [...prevData, ...updatedData],
         };
 
+        console.log(type, channelID);
+
         if (type && channelID) {
           let currentTypeData =
             [...reduxData[sessionTypeData[type]]].filter(
               ({ channelId }) => channelId === channelID
             )[0] || {};
+
+          console.log(
+            currentTypeData.channelId,
+            currentTypeData,
+            reduxData[sessionTypeData[type]]
+          );
 
           if (currentTypeData.channelId) {
             let reduxData = {

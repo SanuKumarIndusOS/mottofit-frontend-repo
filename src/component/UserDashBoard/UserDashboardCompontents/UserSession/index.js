@@ -296,13 +296,13 @@ const TabOne = ({
     // setVisible((prevValue) => prevValue + 1);
   };
 
-  const handleCancel = (sessionId) => {
+  const handleCancel = (sessionId, channelId) => {
     let payload = {
       sessionId,
       sessionStatus: "cancelled",
     };
     setisLoading(true);
-    console.log(sessionId);
+    console.log(channelId);
 
     // Toast({ type: "success", message: "success" });
 
@@ -311,8 +311,12 @@ const TabOne = ({
         setisLoading(false);
         // console.log(message);
 
-        Toast({ type: "success", message: "Session cancelled" || "Session cancelled" });
-        handleChange();
+        Toast({
+          type: "success",
+          message: "Session cancelled" || "Session cancelled",
+        });
+        history.push(`/users/dashboard/message/past?channelId=${channelId}`);
+        // handleChange();
       })
       .catch((err) => {
         setisLoading(false);
@@ -636,7 +640,10 @@ const TabOne = ({
                                                 <button
                                                   disabled={isLoading}
                                                   onClick={() =>
-                                                    handleCancel(data.id)
+                                                    handleCancel(
+                                                      data.id,
+                                                      data.channelId
+                                                    )
                                                   }
                                                 >
                                                   Cancel
