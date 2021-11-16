@@ -147,7 +147,7 @@ const UserSessionClass = (props) => {
   const getAllPasses = async () => {
     const passData = await props.getAllMottoPassesAct();
 
-     console.log(passData);
+    console.log(passData);
 
     setMottoPassData(passData);
   };
@@ -296,33 +296,74 @@ const TabOne = ({
     // setVisible((prevValue) => prevValue + 1);
   };
 
-  const handleCancel = (sessionId, channelId) => {
-    let payload = {
-      sessionId,
-      sessionStatus: "cancelled",
-    };
-    setisLoading(true);
-    console.log(channelId);
+  // useEffect(() => {
+  //   console.log(tabData);
+  // }, [])
 
-    // Toast({ type: "success", message: "success" });
+  const handleCancel = (sessionId, channelId, sessionStartTime) => {
+    var tempStartTime = moment();
+    var tempEndTime = moment(
+      getFormatDate(sessionStartTime, "LT", true),
+      "h:mm A"
+    );
+    var hourDiff = parseInt(
+      moment.duration(moment(tempEndTime).diff(moment(tempStartTime))).asHours()
+    );
+    var dayDiff = parseInt(
+      moment
+        .duration(
+          moment(
+            moment
+              .tz(sessionStartTime, "America/New_York")
+              .format("YYYY MM DD HH:MM")
+          ).diff(
+            moment(
+              moment(moment.tz("America/New_York").format("YYYY MM DD HH:MM"))
+            )
+          )
+        )
+        .asDays()
+    );
 
-    cancelSessionApi(payload)
-      .then((data) => {
-        setisLoading(false);
-        // console.log(message);
+    // console.log(hourDiff, dayDiff);
 
-        Toast({
-          type: "success",
-          message: "Session cancelled" || "Session cancelled",
+    const cancelAction = () => {
+      let payload = {
+        sessionId,
+        sessionStatus: "cancelled",
+      };
+      setisLoading(true);
+      console.log(channelId);
+
+      Toast({ type: "success", message: "success" });
+
+      cancelSessionApi(payload)
+        .then((data) => {
+          setisLoading(false);
+          // console.log(message);
+
+          Toast({
+            type: "success",
+            message: "Session cancelled" || "Session cancelled",
+          });
+          // history.push(`/users/dashboard/message/past?channelId=${channelId}`);
+           handleChange();
+        })
+        .catch((err) => {
+          setisLoading(false);
+
+          console.log(err);
         });
-        history.push(`/users/dashboard/message/past?channelId=${channelId}`);
-        // handleChange();
-      })
-      .catch((err) => {
-        setisLoading(false);
+      }
 
-        console.log(err);
-      });
+    if (hourDiff < 12 && dayDiff < 1) {
+      console.log("less than 12");
+      cancelAction();
+    } else {
+         cancelAction();
+    }
+
+
   };
 
   const handleInvitation = (sessionId, action, paidByUser) => {
@@ -642,11 +683,12 @@ const TabOne = ({
                                                   onClick={() =>
                                                     handleCancel(
                                                       data.id,
-                                                      data.channelId
+                                                      data.channelId,
+                                                      data.sessionStartTime
                                                     )
                                                   }
                                                 >
-                                                  Cancel
+                                                  Cancel {}
                                                 </button>
                                               ) : (
                                                 ""
