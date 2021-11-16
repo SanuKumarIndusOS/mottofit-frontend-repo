@@ -1000,6 +1000,11 @@
 .request-trainer-block {
   font-family: "Montserrat";
   text-align: center;
+
+  &.user-schedular{
+  max-width: 230px;    
+  }
+
   .request_a_time_part {
     display: -webkit-box;
     display: -ms-flexbox;

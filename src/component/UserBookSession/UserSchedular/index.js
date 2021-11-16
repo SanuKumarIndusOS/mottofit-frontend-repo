@@ -12,10 +12,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateUserDetails } from "action/userAct";
 import { getFormatDate } from "service/helperFunctions";
-import { history } from "helpers/index";
+// import { history } from "helpers/index";
 import { logout } from "service/utilities";
 import { UserAvatar } from "../../common/UserAvatar";
 import { getTrainerDetail } from "action/adminAct";
+import { useHistory } from "react-router-dom";
+import { Toast } from "service/toast";
+import { requestTrainerMessageAct } from "action/trainerAct";
+import BlueHoverButton from "component/common/BlueArrowButton";
 
 const UserEventSchedularFC = (props) => {
   const [trainerName, setTrainerName] = React.useState("");
@@ -24,6 +28,9 @@ const UserEventSchedularFC = (props) => {
   const [trainerEndSlot, settrainerEndSlot] = React.useState();
   const [userSelectedData, setUserSelectedData] = React.useState({});
   const [DateSlot, setDateSlot] = React.useState("");
+  const [isLoading, setLoading] = React.useState(false);
+
+  const history = useHistory()
 
   const { id } = useParams();
 
@@ -91,6 +98,71 @@ const UserEventSchedularFC = (props) => {
     });
   }
 
+  const handleRequestTrainer = () => {
+   
+ Toast({
+      type: "success",
+      message:
+        "Login or create an account to message trainer requesting time and date of your choice",
+    });
+    const userId = localStorage.getItem("user-id");
+
+    // CHECK WHETHER USER IS LOGGED IN,IF NOT REDURECT TO LOGIN PAGE
+
+    // let callbackFunction = handleRequestTrainer;
+
+    let reduxData = {
+      nextAction: requestTrainerAct,
+    };
+
+    let redirectURL = `/mobile/login?${encodeURIComponent(
+      `nextpath=/users/dashboard/message/requested`
+    )}&requestSession=true`;
+
+    if (!userId) {
+      window.scrollTo(0, 0);
+      updateUserDetails(reduxData);
+
+      return history.push(redirectURL);
+    }
+
+    requestTrainerAct();
+  };
+
+
+  const requestTrainerAct = () => {
+    const userId = localStorage.getItem("user-id");
+    return new Promise((resolve, reject) => {
+      let payload = {
+        channelType: "directMessageTrainer",
+        trainerId: id,
+        userId: [userId],
+      };      
+
+      setLoading(true);
+      props.requestTrainerMessageApi(payload)
+        .then((data) => {
+          const { channelSid } = data || {};
+
+          let redirectURL = `/users/dashboard/message/requested`;
+
+          if (channelSid)
+            redirectURL = `${redirectURL}?channelId=${channelSid}`;
+
+          console.log(redirectURL);
+
+          setLoading(false);
+          Toast({ type: "success", message: "Success" });
+          history.push(redirectURL);
+          // resolve();
+        })
+        .catch((err) => {
+          setLoading(false);
+          Toast({ type: "error", message: err.message || "Error" });
+          reject(err);
+        });
+    });
+  };
   const callbackFunction = (ts, tss, date) => {
     console.log(ts, tss, date, "Callback");
     settrainerstartSlot(ts);
@@ -118,7 +190,23 @@ const UserEventSchedularFC = (props) => {
 
     props.updateUserDetails(reduxData);
 
-    history.push("/user/payment");
+    if (!localStorage.getItem("token")) {
+      // history.push(`/mobile/login`);
+      // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
+      // history.push(`?nextpath=/user/payment`);
+          history.push({
+          pathname: '/mobile/login',
+          search: '?nextpath=/user/payment'
+        })
+        setTimeout(() => {
+          console.log("called history");
+          history.goBack();
+        },100)
+    }else{
+      history.push("/user/payment");
+    }  
+
+
   };
 
   let userData = {
@@ -180,6 +268,24 @@ const UserEventSchedularFC = (props) => {
                       {activity?.value}
                     </p>
                   </div>
+                </div>
+                   <div className="request-trainer-block ml-auto user-schedular">
+                  {isLoading ? (
+                    "Loading..."
+                  ) : (
+                    <div
+                      className={isLoading ? "d-none" : "request_a_time_part"}
+                    >
+                      <button
+                        className="book_session_btn d-flex align-items-center"
+                        onClick={handleRequestTrainer}
+                        style={{width:"100%"}}
+                      >
+                        {`Message ${trainerName.firstName} `}
+                        <BlueHoverButton />
+                      </button>
+                    </div>
+                  )}
                 </div>
                 {/* <div className="container"> */}
                 {/* <UserScheduler
@@ -260,6 +366,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       getTrainerDetail,
+      requestTrainerMessageApi: requestTrainerMessageAct,
     },
     dispatch
   );

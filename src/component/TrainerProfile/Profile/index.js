@@ -346,11 +346,6 @@ const TrainerProfileClass = ({
   // );
 
   const handleBooking = (price, type, venue, passData = null, availPass) => {
-    if (!localStorage.getItem("token")) {
-      history.push(`/mobile/login?${encodeURIComponent("nextpath=/user/scheduler/" + id)}`);
-      // history.push(``);
-    } else {
-      console.log(availPass, "ll");
       var storedata = {
         sessionData: {
           trainerId: id,
@@ -366,6 +361,12 @@ const TrainerProfileClass = ({
       };
 
       updateUserDetails(storedata);
+    if (!localStorage.getItem("token")) {
+      // history.push(`/mobile/login?${encodeURIComponent("nextpath=/user/scheduler/" + id)}`);
+      history.push(`/user/scheduler/${id}`);
+    } else {
+      console.log(availPass, "ll");
+    
       history.push(`/user/scheduler/${id}`);
     }
   };
