@@ -283,7 +283,7 @@ const UserPaymentsFC = ({
     if (selectedFilterData) {
       let tempData = JSON.parse(selectedFilterData);
 
-      const { trainingType = {} } = tempData?.label || {};
+      const { trainingType = {} } = tempData?.value || {};
 
       //  console.log(tempData);
 

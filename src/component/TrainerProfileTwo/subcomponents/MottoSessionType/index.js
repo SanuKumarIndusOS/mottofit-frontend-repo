@@ -161,7 +161,7 @@ function MottoSessionType({
             price: oneOnone?.passRatefor10SessionAtClientLocation,
             type: "1on1",
             newPass: {
-              price: oneOnone?.passRatefor10SessionAtVirtual,
+              price: oneOnone?.passRatefor10SessionAtClientLocation,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 30,
               totalPasses: 10,
@@ -221,7 +221,7 @@ function MottoSessionType({
             price: oneOnone?.passRatefor10SessionAtTrainerLocation,
             type: "1on1",
             newPass: {
-              price: oneOnone?.passRatefor10SessionAtVirtual,
+              price: oneOnone?.passRatefor10SessionAtTrainerLocation,
               purchaseDate: new Date().toISOString().slice(0, 10),
               passValidity: 30,
               totalPasses: 10,
@@ -365,7 +365,7 @@ function MottoSessionType({
                     open={open}
                   >
                     <div style={{ padding: "1rem" }}>
-                      <h5>Trainer's location</h5>
+                      <h5> {activeHeader === "clientLocation"? "Areas Trainer Services" : "Trainer's location"}</h5>
                       <hr></hr>
            
                       {activeHeader === "clientLocation"? servicableLocation : trainingFacilityLocation}
