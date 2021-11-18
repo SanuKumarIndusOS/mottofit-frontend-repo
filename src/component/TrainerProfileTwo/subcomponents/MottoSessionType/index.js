@@ -23,7 +23,7 @@ function MottoSessionType({
   trainerId,
   GetActivePass,
   servicableLocation,
-  trainingFacilityLocation
+  trainingFacilityLocation,
 }) {
   const CyanRadio = withStyles({
     root: {
@@ -60,6 +60,7 @@ function MottoSessionType({
   const [activePackage, setActivePackage] = React.useState("");
   const [activePacakageId, setActivePackageId] = React.useState(null);
   const [activePacakageData, setActivePackageData] = React.useState({});
+  const [activePassType, setactivePassType] = React.useState([]);
 
   const handleClose = (value) => {
     setOpen(false);
@@ -71,7 +72,9 @@ function MottoSessionType({
 
   React.useEffect(() => {
     // Check for active MottoPass if user is logged in
-    checkActivePass();
+    // checkActivePass();
+
+    // console.log(activePassType);
 
     if (activeHeader === "virtual") {
       setPricingItem({
@@ -255,89 +258,89 @@ function MottoSessionType({
   }, [activeHeader, oneOnone, activePacakageId]);
 
   const checkActivePass = () => {
-    if (localStorage.getItem("token")) {
-      let userId = localStorage.getItem("user-id");
-      if (activeHeader === "virtual") {
-        GetActivePass(userId, trainerId, "virtual")
-          .then((data) => {
-            console.log(data);
-            setActivePackage("virtual");
-            setActivePackageId(data[0]?.id);
-           // setActivePackageData(data);
-          })
-          .catch((er) => {
-            console.log(er);
-            setActivePackageId(null);
-          });
-      } else {
-        if (activeHeader === "trainerLocation") {
-          GetActivePass(userId, trainerId, "trainerLocation")
-            .then((data) => {
-              console.log(data);
-              setActivePackage("trainerLocation");
-              setActivePackageId(data[0]?.id);
-           //   setActivePackageData(data);
-            })
-            .catch((er) => {
-              console.log(er);
-              setActivePackageId(null);
-            });
-        } else {
-          GetActivePass(userId, trainerId, "clientLocation")
-            .then((data) => {
-              console.log(data);
-              setActivePackage("clientLocation");
-              setActivePackageId(data[0]?.id);
-             // setActivePackageData(data);
-            })
-            .catch((er) => {
-              console.log(er);
-              setActivePackageId(null);
-            });
-        }
-      }
-    }
+    let userId = localStorage.getItem("user-id");
+
+    GetActivePass(userId, trainerId, "")
+      .then((data) => {
+        console.log(data);
+
+        var temp = [];
+        data.map((item) => {
+          console.log(item?.passType);
+          temp.push(item?.passType);
+        });
+
+        setactivePassType(temp);
+        // setActivePackage("virtual");
+        // setActivePackageId(data[0]?.id);
+        // setActivePackageData(data);
+      })
+      .catch((er) => {
+        console.log(er);
+        setActivePackageId(null);
+      });
   };
 
   return (
     <div className="motto_session_type_container">
       <div className="session_type_header">
-        <div
-          className={
-            activeHeader === "virtual"
-              ? "session_type_header_item left_border active_header header_width1"
-              : "session_type_header_item left_border header_width1"
-          }
-          onClick={() => {
-            setactiveHeader("virtual");
-          }}
-        >
-          VIRTUAL
-        </div>
-        <div
-          className={
-            activeHeader === "clientLocation"
-              ? "session_type_header_item  active_header header_width2"
-              : "session_type_header_item header_width2"
-          }
-          onClick={() => {
-            setactiveHeader("clientLocation");
-          }}
-        >
-          IN-PERSON (YOUR LOCATION)
-        </div>
-        <div
-          className={
-            activeHeader === "trainerLocation"
-              ? "session_type_header_item  right_border active_header header_width3"
-              : "session_type_header_item right_border header_width3"
-          }
-          onClick={() => {
-            setactiveHeader("trainerLocation");
-          }}
-        >
-          IN-PERSON (TRAINER'S LOCATION)
-        </div>
+        {oneOnone?.virtualSession === "0" &&
+        social?.virtualSessionfor2People === "0" &&
+        social?.virtualSessionfor3People === "0" &&
+        social?.virtualSessionfor4People === "0" &&
+        classPricing?.virtualSessionfor15People === "0" ? null : (
+          <div
+            className={
+              activeHeader === "virtual"
+                ? "session_type_header_item left_border active_header header_width1"
+                : "session_type_header_item left_border header_width1"
+            }
+            onClick={() => {
+              setactiveHeader("virtual");
+            }}
+          >
+            VIRTUAL
+          </div>
+        )}
+     
+
+        {oneOnone?.inPersonAtClientLocation === "0" &&
+        social?.inPeronAtClientLocationfor2People === "0" &&
+        social?.inPeronAtClientLocationfor3People === "0" &&
+        social?.inPeronAtClientLocationfor4People === "0" &&
+        classPricing?.inPersonAtClientLocation === "0" ? null : (
+          <div
+            className={
+              activeHeader === "clientLocation"
+                ? "session_type_header_item  active_header header_width2"
+                : "session_type_header_item header_width2"
+            }
+            onClick={() => {
+              setactiveHeader("clientLocation");
+            }}
+          >
+            IN-PERSON (YOUR LOCATION)
+          </div>
+        )}
+
+        {oneOnone?.inPersonAtTrainerLocation === "0" &&
+        social?.inPeronAtTrainerLocationfor2People === "0" &&
+        social?.inPeronAtTrainerLocationfor3People === "0" &&
+        social?.inPeronAtTrainerLocationfor4People === "0" &&
+        classPricing?.inPersonAttrainerLocationfor15People === "0" ? null : (
+          <div
+            className={
+              activeHeader === "trainerLocation"
+                ? "session_type_header_item  right_border active_header header_width3"
+                : "session_type_header_item right_border header_width3"
+            }
+            onClick={() => {
+              setactiveHeader("trainerLocation");
+            }}
+          >
+            IN-PERSON (TRAINER'S LOCATION)
+          </div>
+        )}
       </div>
       <div className="session_type_body">
         <RadioGroup
@@ -356,7 +359,9 @@ function MottoSessionType({
                       className="serviceable_location"
                       onClick={() => setOpen(true)}
                     >
-                      Trainer's  location
+                      {activeHeader === "clientLocation"
+                          ? "Areas Trainer Services"
+                          : "Trainer's location"}
                     </div>
                   ) : null}{" "}
                   <Dialog
@@ -365,17 +370,24 @@ function MottoSessionType({
                     open={open}
                   >
                     <div style={{ padding: "1rem" }}>
-                      <h5> {activeHeader === "clientLocation"? "Areas Trainer Services" : "Trainer's location"}</h5>
+                      <h5>
+                        {" "}
+                        {activeHeader === "clientLocation"
+                          ? "Areas Trainer Services"
+                          : "Trainer's location"}
+                      </h5>
                       <hr></hr>
-           
-                      {activeHeader === "clientLocation"? servicableLocation : trainingFacilityLocation}
+
+                      {activeHeader === "clientLocation"
+                        ? servicableLocation
+                        : trainingFacilityLocation}
                     </div>
                   </Dialog>
                 </div>
                 <div className="line"></div>
                 <div>
                   {Object.keys(pricingItem[item]).map((type, key) => {
-                    return (activePackage === activeHeader &&
+                    return (activePassType.includes(activeHeader) &&
                       (type === "10 Session Package" ||
                         type === "30 Session Package")) ||
                       pricingItem[item][type]?.price === 0 ? null : (
@@ -400,7 +412,7 @@ function MottoSessionType({
                                 {type === "10 Session Package"
                                   ? "$" + pricingItem[item][type]?.price / 10
                                   : type === "30 Session Package"
-                                  ? "$" + pricingItem[item][type]?.price/30
+                                  ? "$" + pricingItem[item][type]?.price / 30
                                   : "$" + pricingItem[item][type]?.price}
                                 <span>/ Session</span>
                               </>

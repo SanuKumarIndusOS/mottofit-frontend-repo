@@ -61,6 +61,8 @@ const TrainerProfileClass = ({
 
   const [trainerCertificates, setTrainerCertificates] = useState([]);
   const [disableBooking, setDisableBooking] = useState(true);
+  const aboutRef = React.useRef(null);
+  const priceRef = React.useRef(null);
 
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
@@ -450,6 +452,10 @@ const TrainerProfileClass = ({
                 </div> */}
               </div>
               <div className="profile_trainer_data">
+                <div className="scrollToCTA">
+                  <div className="about"  onClick={()=>{ aboutRef.current.scrollIntoView()}}>About {trainerProfileData?.firstName}</div>
+                  <div className="view_price" onClick={()=>{ priceRef.current.scrollIntoView()}}>View {trainerProfileData?.firstName}'s training options and rates</div>
+                </div>
                 <div className="profile_right_data">
                   <div className="profile_right_item1">
                     <img src={Quote} alt="qoute" />
@@ -460,7 +466,7 @@ const TrainerProfileClass = ({
                     </h6>
                   </div>
                   <br></br>
-                  <div className="profile_right_item2">
+                  <div className="profile_right_item2" ref={priceRef}>
                     <h4>TRAIN WITH {trainerProfileData.firstName}</h4>
                     <p>
                       Browse & choose your session type to continue. You can
@@ -482,7 +488,9 @@ const TrainerProfileClass = ({
                     />
                   </div>
 
-                  <div className="profile_right_item2">
+                  <div style={{marginBottom:"7rem"}} ref={aboutRef}></div>
+
+                  <div className="profile_right_item2" >
                     <h4>About {trainerProfileData.firstName}</h4>
                     <p>
                       {trainerProfileData.trainingProcess

@@ -353,6 +353,30 @@
           }
         }
         .profile_trainer_data {
+          .scrollToCTA{
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+                -webkit-box-pack: justify;
+                    justify-content: space-between;
+                    margin-bottom: 3rem;
+                    text-transform: uppercase;
+
+                    .about{
+                      color: #53bfd2;
+                      font-weight: 500;
+                      font-family: "Montserrat", sans-serif;
+                      cursor: pointer;
+                      -webkit-text-decoration-line: underline;
+                              text-decoration-line: underline;
+                    }
+
+                    .view_price{
+
+                      cursor: pointer;
+                    }
+          }
           .profile_right_data {
             .profile_right_item1 {
               display: -webkit-box;

@@ -18,17 +18,17 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   const [loader, setLoader] = useState(true);
   let location = useLocation();
 
-  useEffect(() => {
-    let payload = {
-      key: location.state?.key,
-      page: activePage,
-    };
-    fetchGlobalSearchResults(payload).then((data) => {
-      console.log(data.list);
-      setTotalPage(data.totalCount);
-      setSearchResults(data.list);
-    });
-  }, []);
+  // useEffect(() => {
+  //   let payload = {
+  //     key: location.state?.key,
+  //     page: activePage,
+  //   };
+  //   fetchGlobalSearchResults(payload).then((data) => {
+  //     console.log(data.list);
+  //     setTotalPage(data.totalCount);
+  //     setSearchResults(data.list);
+  //   });
+  // }, []);
 
   useEffect(() => {
     console.log("change");
@@ -43,21 +43,21 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       console.log(data.list);
       setLoader(false);
     });
-  }, [location.state?.key]);
+  }, [location.state?.key, activePage]);
 
-  useEffect(() => {
-    let payload = {
-      key: localStorage.getItem("searchKey"),
-      page: activePage,
-    };
-    fetchGlobalSearchResults(payload).then((data) => {
-      console.log(data.totalCount);
-      setTotalPage(data.totalCount);
-      setSearchResults(data.list);
-    });
+  // useEffect(() => {
+  //   let payload = {
+  //     key: localStorage.getItem("searchKey"),
+  //     page: activePage,
+  //   };
+  //   fetchGlobalSearchResults(payload).then((data) => {
+  //     console.log(data.totalCount);
+  //     setTotalPage(data.totalCount);
+  //     setSearchResults(data.list);
+  //   });
 
-    window.addEventListener("storage", () => { });
-  }, [activePage]);
+  //   window.addEventListener("storage", () => { });
+  // }, [activePage]);
 
   const handlePageChange = (pageNumber) => {
     console.log(`active page is ${pageNumber}`);
