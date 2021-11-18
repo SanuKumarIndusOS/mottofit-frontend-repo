@@ -15,6 +15,7 @@ let config = {
     googleClientId:
       "667288998529-mltflfijefc7u5r8eaon8j8e1cmcfsot.apps.googleusercontent.com",
     facebookAppId: "310220110776502",
+    googleAnalyticsId: "",
     socketURL: "http://doodlebluelive.com:2355",
   },
   production: {
@@ -23,7 +24,7 @@ let config = {
       normalService: "https://apis.bookmotto.com/user/v1/",
       sessionService: "https://apis.bookmotto.com/session/v1/",
       paymentService: "https://apis.bookmotto.com/payments/v1/",
-      messgaeService: "https://apis.bookmotto.com/messaging/v1/",
+      messgaeService: "https://apis.bookmotto.com/messaging/v1/",      
       notificationService: "https://apis.bookmotto.com/notification/v1/",
       newSearch: "https://apis.bookmotto.com/user/v2/",
     },
@@ -32,6 +33,7 @@ let config = {
     googleClientId:
       "667288998529-mltflfijefc7u5r8eaon8j8e1cmcfsot.apps.googleusercontent.com",
     facebookAppId: "310220110776502",
+    googleAnalyticsId: "UA-211752012-1",
     socketURL: "https://apis.bookmotto.com/notification",
   },
 };

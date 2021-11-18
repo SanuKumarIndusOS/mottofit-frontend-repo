@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import IdleTimer, { useIdleTimer } from "react-idle-timer/dist/modern";
+import { initializeGA } from "helpers/InitializeGA";
 
 class RoutesClass extends Component {
   constructor(props) {
@@ -75,6 +76,9 @@ class RoutesClass extends Component {
 
   componentDidMount() {
     this.routerGuard();
+    
+    initializeGA();
+
     if (window.screen.availWidth > 900) { (document.body.style.zoom = "90%") }
 
     window.addEventListener("beforeunload", (ev) => {

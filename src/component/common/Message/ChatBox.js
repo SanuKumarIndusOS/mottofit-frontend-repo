@@ -255,8 +255,13 @@ class ChatBoxClass extends Component {
 
     let redirectURL = "";
 
+    
+                let trainerFullname = `${trainerName}`.replace(" ","-");
+
+    let encodedName = trainerFullname.toLocaleLowerCase();
+
     if (!isTrainer) {
-      redirectURL = `/trainer/profile/${trainerId}`;
+      redirectURL = `/trainer/profile/${trainerId}/${encodedName}`;
     } else {
       redirectURL = `/trainers/dashboard/schedule`;
     }

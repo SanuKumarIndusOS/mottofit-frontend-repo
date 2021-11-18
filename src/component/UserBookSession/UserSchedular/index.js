@@ -333,6 +333,11 @@ const UserEventSchedularFC = (props) => {
 };
 
 const BottomSection = ({ trainerName }) => {
+
+  
+                let trainerFullname = `${trainerName["firstName"] || ""}-${trainerName["lastName"] || ""}`
+
+    let encodedName = trainerFullname.toLocaleLowerCase();
   return (
     <div className="schedular_slots_user">
       <div className="items_slots_user">
@@ -349,7 +354,7 @@ const BottomSection = ({ trainerName }) => {
           <h5>BOOKED SLOT</h5>{" "}
         </div>
         <div className="item_slot5_user">
-          <Link to={`/trainer/profile/${trainerName?.id}`}>
+          <Link to={`/trainer/profile/${trainerName?.id}/${encodedName}`}>
             Learn more about {trainerName?.firstName}
           </Link>
         </div>

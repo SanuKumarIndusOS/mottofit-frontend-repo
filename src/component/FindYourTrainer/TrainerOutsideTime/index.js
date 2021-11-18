@@ -32,8 +32,12 @@ const TrainerCardOutsideFC = (props) => {
     };
     props.updateUserDetails(reduxData);
 
+    let trainerFullname = `${outSideData[data]["firstName"] || ""}-${outSideData[data]["lastName"] || ""}`
+
+    let encodedName = trainerFullname.toLocaleLowerCase()
+
     history.push({
-      pathname: `/trainer/profile/${outSideData[data]["id"]}`,
+      pathname: `/trainer/profile/${outSideData[data]["id"]}/${encodedName}`,
     });
     // if (!isReadMore) {
     //   history.push({
@@ -89,9 +93,13 @@ const TrainerCardOutsideFC = (props) => {
               .filter((price) => !isNaN(price) && price > 0);
 
             const sortedPricingList = allSessionPricing.sort((a, b) => a - b);
+
+              let trainerFullname = `${outSideData[data]["firstName"] || ""}-${outSideData[data]["lastName"] || ""}`
+
+    let encodedName = trainerFullname.toLocaleLowerCase()
             return (
               <Link
-                to={`/trainer/profile/${outSideData[data]["id"]}`}
+                to={`/trainer/profile/${outSideData[data]["id"]}/${encodedName}`}
                 className="card-link card"
                 key={`trainer_outside_matche_${index}`}
                 style={{paddingBottom:"0px"}}

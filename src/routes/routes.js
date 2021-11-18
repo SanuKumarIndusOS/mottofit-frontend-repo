@@ -222,7 +222,7 @@ const routers = [
         exact: false,
       },
       {
-        path: "/profile/:id",
+        path: "/profile/:id/:trainername",
         componentPath: "pages/Trainer/Profile/index",
         name: "TrainerProfile",
         auth: false,
