@@ -45,10 +45,20 @@ const TrainerCardsFC = (props) => {
     };
     props.updateUserDetails(reduxData);
 
+      let trainerFullname = `${bestMatchData[data]["firstName"] || ""}-${bestMatchData[data]["lastName"] || ""}`
+
+    let encodedName = trainerFullname.toLocaleLowerCase();
+
+    console.log(trainerFullname);
+
     history.push({
-      pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
-      // state: { autoScroll: true },
+      pathname: `/trainer/profile/${bestMatchData[data]["id"]}/${encodedName}`,
     });
+
+    // history.push({
+    //   pathname: `/trainer/profile/${bestMatchData[data]["id"]}`,
+    //   // state: { autoScroll: true },
+    // });
 
     // if (!isReadMore) {
     //   history.push({
@@ -115,6 +125,10 @@ const TrainerCardsFC = (props) => {
                 return value > 0;
               });
 
+                let trainerFullname = `${bestMatchData[data]["firstName"] || ""}-${bestMatchData[data]["lastName"] || ""}`
+
+    let encodedName = trainerFullname.toLocaleLowerCase();
+
             return (
               // <div
               //   className="card "
@@ -122,7 +136,7 @@ const TrainerCardsFC = (props) => {
               //   // onClick={() => handleClick(data, true)}
               // >
               <Link
-                to={`/trainer/profile/${bestMatchData[data]["id"]}`}
+                to={`/trainer/profile/${bestMatchData[data]["id"]}/${encodedName}`}
                 className="card-link card"
                 key={`trainer_best_matches_${index}`}
                 style={{paddingBottom:"0px"}}

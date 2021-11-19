@@ -583,6 +583,10 @@ const UserBookSessionFC = ({
 
   const trainerId = tempTrainerData?.id;
 
+           let trainerFullname = `${tempTrainerData["firstName"] || ""}-${tempTrainerData["lastName"] || ""}`
+
+    let encodedName = trainerFullname.toLocaleLowerCase();
+
   let mql = window.matchMedia("(max-width: 700px)");
 
   const isMobile = mql.matches ? "" : "w-50";
@@ -595,7 +599,7 @@ const UserBookSessionFC = ({
             <div className="link_wrapper">
               <img src={ArrowBack} alt="icon" />
               <div className="inner_links">
-                <Link to={`/trainer/profile/${trainerId}`}>
+                <Link to={`/trainer/profile/${trainerId}/${encodedName}`}>
                   Change your Slot
                 </Link>
                 <div></div>

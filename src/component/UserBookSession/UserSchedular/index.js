@@ -341,6 +341,11 @@ const UserEventSchedularFC = (props) => {
 };
 
 const BottomSection = ({ trainerName }) => {
+
+  
+                let trainerFullname = `${trainerName["firstName"] || ""}-${trainerName["lastName"] || ""}`
+
+    let encodedName = trainerFullname.toLocaleLowerCase();
   return (
     <div className="schedular_slots_user">
       <div className="items_slots_user">
