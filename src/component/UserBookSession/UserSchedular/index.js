@@ -234,11 +234,11 @@ const UserEventSchedularFC = (props) => {
               <div className="event_wrapper_inner">
                 <div className="event_header">
                   <h2>Schedule your Training Time</h2>
-                  <p>
+                  {/* <p>
                     Please select a preferable date and time slot to schedule
                     your training session. All the listed timings are in your
                     local timezone (GMT + 5:30)
-                  </p>
+                  </p> */}
                 </div>
                 <div className="user_profile_details">
                   <UserAvatar {...userData} className="img-lg" />
@@ -263,34 +263,42 @@ const UserEventSchedularFC = (props) => {
                     </p>
                   </div>
                 </div>
-                <p style={{color:"#696969"}}>
-                  Calender is not fully representative of [trainers first
-                  names] availability, don't be discouraged if a day & time
-                  isn't open to book below. Just request and the [trainer first
-                  name] will be able to make a day and time that you want work.
-                  Super Easy, click below!
-                </p> 
 
-                <br></br>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#696969", textAlign: "center" }}>
 
-                <div className="request-trainer-block ml-auto user-schedular">
-                  {isLoading ? (
-                    "Loading..."
-                  ) : (
-                    <div
-                      className={isLoading ? "d-none" : "request_a_time_part"}
-                    >
-                      <button
-                        className="book_session_btn d-flex align-items-center"
-                        onClick={handleRequestTrainer}
-                        style={{ width: "100%" }}
-                        style={{border:"none", background:"none"}}
+                    Please select a date and training time in the calendar below.
+
+                    If you don't see an available time, message your trainer to request a time
+                    that works for you!
+                    {/* Calender is not fully representative of{" "}
+                    {trainerName?.firstName} availability, don't be discouraged
+                    if a day & time isn't open to book below. Just request and
+                    the [trainer first name] will be able to make a day and time
+                    that you want work. Super Easy, click below! */}
+                  </p>
+
+                  <br></br>
+
+                  <div style={{display:"flex", justifyContent:"center"}}>
+                    {isLoading ? (
+                      "Loading..."
+                    ) : (
+                      <div
+                        className={isLoading ? "d-none" : "request_a_time_part"}
                       >
-                        {`Message ${trainerName.firstName} `}
-                        <BlueHoverButton />
-                      </button>
-                    </div>
-                  )}
+                        <button
+                          className="book_session_btn d-flex align-items-center"
+                          onClick={handleRequestTrainer}
+                          style={{ width: "100%" }}
+                          style={{ border: "none", background: "none" }}
+                        >
+                          {`Message ${trainerName.firstName} `}
+                          <BlueHoverButton />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 {/* <div className="container"> */}
                 {/* <UserScheduler
@@ -350,7 +358,8 @@ const BottomSection = ({ trainerName }) => {
         </div>
         <div className="item_slot5_user">
           <Link to={`/trainer/profile/${trainerName?.id}`}>
-            Learn more about {trainerName?.firstName}
+            {/* Learn more about {trainerName?.firstName} */}\
+            Trainer's Profile
           </Link>
         </div>
       </div>

@@ -348,26 +348,26 @@ const TrainerProfileClass = ({
   // );
 
   const handleBooking = (price, type, venue, passData = null, availPass) => {
-      var storedata = {
-        sessionData: {
-          trainerId: id,
-          city: trainerProfileData?.servicableLocation,
-          sessionType: venue === "virtual" ? "virtual" : "inPerson",
-          venue: venue !== "virtual" ? venue : "clientLocation",
-          trainingType: type,
-          price: price,
-          newPass: passData,
-          availPass: availPass,
-        },
-      };
+    var storedata = {
+      sessionData: {
+        trainerId: id,
+        city: trainerProfileData?.servicableLocation,
+        sessionType: venue === "virtual" ? "virtual" : "inPerson",
+        venue: venue !== "virtual" ? venue : "clientLocation",
+        trainingType: type,
+        price: price,
+        newPass: passData,
+        availPass: availPass,
+      },
+    };
 
-      updateUserDetails(storedata);
+    updateUserDetails(storedata);
     if (!localStorage.getItem("token")) {
       // history.push(`/mobile/login?${encodeURIComponent("nextpath=/user/scheduler/" + id)}`);
       history.push(`/user/scheduler/${id}`);
     } else {
       console.log(availPass, "ll");
-    
+
       history.push(`/user/scheduler/${id}`);
     }
   };
@@ -419,6 +419,27 @@ const TrainerProfileClass = ({
                   <img src={ArrowNext} alt="icon" />
                 </div> */}
 
+                <div className="scrollToCTA">
+                  <div
+                    className="about"
+                    onClick={() => {
+                      aboutRef.current.scrollIntoView();
+                    }}
+                  >
+                    About {trainerProfileData?.firstName}
+                  </div> <br></br>
+                  <div
+                    className="view_price"
+                    onClick={() => {
+                      priceRef.current.scrollIntoView();
+                    }}
+                  >
+                    View {trainerProfileData?.firstName}'s training options and
+                    rates
+                  </div>
+                </div>
+                {/* <br></br> */}
+
                 <h6>Have a question?</h6>
 
                 <div className="request-trainer-block">
@@ -452,10 +473,6 @@ const TrainerProfileClass = ({
                 </div> */}
               </div>
               <div className="profile_trainer_data">
-                <div className="scrollToCTA">
-                  <div className="about"  onClick={()=>{ aboutRef.current.scrollIntoView()}}>About {trainerProfileData?.firstName}</div>
-                  <div className="view_price" onClick={()=>{ priceRef.current.scrollIntoView()}}>View {trainerProfileData?.firstName}'s training options and rates</div>
-                </div>
                 <div className="profile_right_data">
                   <div className="profile_right_item1">
                     <img src={Quote} alt="qoute" />
@@ -488,9 +505,9 @@ const TrainerProfileClass = ({
                     />
                   </div>
 
-                  <div style={{marginBottom:"7rem"}} ref={aboutRef}></div>
+                  <div style={{ marginBottom: "7rem" }} ref={aboutRef}></div>
 
-                  <div className="profile_right_item2" >
+                  <div className="profile_right_item2">
                     <h4>About {trainerProfileData.firstName}</h4>
                     <p>
                       {trainerProfileData.trainingProcess
@@ -707,7 +724,7 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
           return ( */}
         <div>
           {/* {images?.length > 0 ? ( */}
-          <div className="profile_images_container">
+          {/* <div className="profile_images_container">
             {images[0] && (
               <div
                 className="profile_images_card box1"
@@ -775,7 +792,7 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* {images.length === 0 && <p>Images Not Added</p>} */}
 

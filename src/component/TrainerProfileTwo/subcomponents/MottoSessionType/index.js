@@ -258,6 +258,7 @@ function MottoSessionType({
   }, [activeHeader, oneOnone, activePacakageId]);
 
   const checkActivePass = () => {
+    if (localStorage.getItem("token") !== null) {
     let userId = localStorage.getItem("user-id");
 
     GetActivePass(userId, trainerId, "")
@@ -279,6 +280,7 @@ function MottoSessionType({
         console.log(er);
         setActivePackageId(null);
       });
+    }
   };
 
   return (
