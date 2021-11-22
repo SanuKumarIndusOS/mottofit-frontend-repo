@@ -34,6 +34,7 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
   const [Avalvalue, setAvalValue] = useState("");
   const [VerticalVal, setVerticalVal] = useState("");
   const [LocationVal, setLocationVal] = useState("virtual");
+  const [calOpen, setcalOpen] = useState(false);
 
   const handleIPCChange = (event) => {
     setIPCValue(event.target.value);
@@ -62,7 +63,7 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
     let payload = {
       // query: {
       location: LocationVal,
-      date: moment(Calvalue).format("YYYY-MM-DD"),
+      date: calOpen? moment(Calvalue).format("YYYY-MM-DD"): "" ,
       trainingType:
         VerticalVal === ""
           ? JSON.stringify([])
@@ -113,6 +114,7 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
             setVerticalVal("");
             setAvalValue("");
             onChangeCal(new Date());
+            setcalOpen(false)
           }}
         >
           Clear All Filters
@@ -201,7 +203,7 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
         </div>
 
         <div className="vertical">
-          <div> Training Vertical</div>
+          <div> Training Vertical (optional)</div>
           {/* {VerticalVal} */}
           <div className="listv">
             {VerticalVal !== "Strength & HIIT" || VerticalVal === "" ? (
@@ -287,17 +289,26 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
 
           <hr></hr>
         </div>
-        <div className="schedule">
-          Schedule <br></br> {moment(Calvalue).format("YYYY/MM/DD")}
-          <Calendar
-            onChange={onChangeCal}
-            value={Calvalue}
-            minDate={new Date()}
-          />
+        <div className="schedule" >
+          <div onClick={()=>{setcalOpen(true)}}> Pick a Date (optional) <br></br>
+
+          </div>
+         
+        
+          {!calOpen ? null : (
+            <>
+           { moment(Calvalue).format("YYYY/MM/DD")}
+            <Calendar
+              onChange={onChangeCal}
+              value={Calvalue}
+              minDate={new Date()}
+            />
+            </>
+          )}
           <hr></hr>
         </div>
         <div className="availability">
-          <div>Availability</div>
+          <div>Availability (optional)</div>
           <br></br>
           <FormControl component="fieldset">
             <RadioGroup
@@ -341,13 +352,13 @@ const MobileSearchMenu = ({ updateTrainerDetails, trainerSearchFilters }) => {
         </div>
       </div>
       <div className="search_container">
-      <button
-        className="search"
-        onClick={search_action_mob}
-        onTouchStart={search_action_mob}
-      >
-        APPLY ALL FILTERS{" "}
-      </button>
+        <button
+          className="search"
+          onClick={search_action_mob}
+          onTouchStart={search_action_mob}
+        >
+          APPLY ALL FILTERS{" "}
+        </button>
       </div>
     </div>
   );

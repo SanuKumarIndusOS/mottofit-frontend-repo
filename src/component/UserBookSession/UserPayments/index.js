@@ -441,6 +441,7 @@ const UserPaymentsFC = ({
           title:  sessionData?.trainingType 
       };
     }
+    // console.log("trrrmp", tempData);
 
     setAccordionData(tempData);
   };
@@ -655,7 +656,7 @@ const UserPaymentsFC = ({
                         {sessionData?.sessionType === "inPerson"
                           ? `${
                               sessionData?.venue === "clientLocation"
-                                ? "Client's Location"
+                                ? "My Location"
                                 : "Trainer's Location"
                             }`
                           : "Virtual"}

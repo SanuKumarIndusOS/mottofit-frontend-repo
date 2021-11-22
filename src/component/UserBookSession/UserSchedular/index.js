@@ -233,7 +233,7 @@ const UserEventSchedularFC = (props) => {
             <div className="event_wrapper">
               <div className="event_wrapper_inner">
                 <div className="event_header">
-                  <h2>Schedule your Training Time</h2>
+                  <h2>Pick an available time on calender or Request a different time</h2>
                   {/* <p>
                     Please select a preferable date and time slot to schedule
                     your training session. All the listed timings are in your
@@ -267,7 +267,7 @@ const UserEventSchedularFC = (props) => {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <p style={{ color: "#696969", textAlign: "center" }}>
 
-                    Please select a date and training time in the calendar below.
+                    Please select a date and training time in the calendar below. <br></br> <br></br>
 
                     If you don't see an available time, message your trainer to request a time
                     that works for you!
@@ -363,8 +363,8 @@ const BottomSection = ({ trainerName }) => {
         </div>
         <div className="item_slot5_user">
           <Link to={`/trainer/profile/${trainerName?.id}`}>
-            {/* Learn more about {trainerName?.firstName} */}\
-            Trainer's Profile
+            {/* Learn more about {trainerName?.firstName} */}
+            Back to  {trainerName?.firstName}'s Profile
           </Link>
         </div>
       </div>

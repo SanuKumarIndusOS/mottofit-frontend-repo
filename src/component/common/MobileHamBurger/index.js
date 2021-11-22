@@ -47,7 +47,7 @@ function Index() {
           <hr></hr>
         </div>
         <div className="search">
-        {/* Search by Trainer name */}
+          {/* Search by Trainer name */}
           <form
             onSubmit={() => {
               history.push({
@@ -66,6 +66,23 @@ function Index() {
                 setKey(e.target.value);
               }}
             ></input>
+            <br></br>
+
+            <br></br>
+            <button
+              style={{
+                backgroundColor: "#53bfd2",
+                border: "none",
+                color: "white",
+                fontWeight: "bold",
+                width: "100%",
+                padding: "10px",
+              }}
+
+              type="submit"
+            >
+              Find
+            </button>
           </form>
         </div>
         <div className="footer"></div>
