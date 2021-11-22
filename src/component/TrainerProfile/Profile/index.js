@@ -723,8 +723,8 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
         {/* {images.map((img, index) => {
           return ( */}
         <div>
-          {/* {images?.length > 0 ? ( */}
-          {/* <div className="profile_images_container">
+          {images?.length > 0 ? (
+           <div className="profile_images_container">
             {images[0] && (
               <div
                 className="profile_images_card box1"
@@ -792,7 +792,7 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
                 )}
               </div>
             </div>
-          </div> */}
+          </div>) : null}
 
           {/* {images.length === 0 && <p>Images Not Added</p>} */}
 
