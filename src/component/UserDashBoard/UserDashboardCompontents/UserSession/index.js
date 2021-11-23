@@ -29,6 +29,7 @@ import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import { useLocation } from "react-router-dom";
 import { MottoPassSection } from "component/MottoPass";
+import Dialog from "@material-ui/core/Dialog";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -292,6 +293,7 @@ const TabOne = ({
 }) => {
   const [visible, setVisible] = useState([10]);
   const [isLoading, setisLoading] = useState(false);
+  const [cancelAlert, setcancelAlert] = useState(false);
   const setViewMore = () => {
     // setVisible((prevValue) => prevValue + 1);
   };
@@ -333,6 +335,7 @@ const TabOne = ({
         sessionStatus: "cancelled",
       };
       setisLoading(true);
+      setcancelAlert(false);
       console.log(channelId);
 
       Toast({ type: "success", message: "success" });
@@ -347,23 +350,22 @@ const TabOne = ({
             message: "Session cancelled" || "Session cancelled",
           });
           // history.push(`/users/dashboard/message/past?channelId=${channelId}`);
-           handleChange();
+          handleChange();
         })
         .catch((err) => {
           setisLoading(false);
 
           console.log(err);
         });
-      }
+    };
 
     if (hourDiff < 12 && dayDiff < 1) {
       console.log("less than 12");
-      cancelAction();
+      // cancelAction();
+      cancelAlert ? cancelAction() :setcancelAlert(true);
     } else {
-         cancelAction();
+      cancelAction();
     }
-
-
   };
 
   const handleInvitation = (sessionId, action, paidByUser) => {
@@ -672,6 +674,54 @@ const TabOne = ({
                                     </button>
                                   ) : (
                                     <>
+                                      <Dialog
+                                        onClose={() => {
+                                          setcancelAlert(false);
+                                        }}
+                                        aria-labelledby="simple-dialog-title"
+                                        open={cancelAlert}
+                                      >
+                                        <div style={{ padding: "1rem" }}>
+                                          <h3>Alert!</h3>
+                                          Your trainer has already set aside
+                                          this time for you, so you will be
+                                          charged fully for cancellations less
+                                          than 12 hrs before a session. Proceed
+                                          with cancelling?
+                                        </div>
+                                        <div>
+                                          <button
+                                            style={{
+                                              margin: "1rem",
+                                              padding: "10px",
+                                              border: "none",
+                                              color:"white",
+                                              backgroundColor:"red"
+                                            }}
+
+                                            onClick={() =>
+                                              handleCancel(
+                                                data.id,
+                                                data.channelId,
+                                                data.sessionStartTime
+                                              )
+                                            }
+                                          >
+                                            CANCEL
+                                          </button>
+                                          <button
+                                            style={{
+                                              margin: "1rem",
+                                              padding: "10px",
+                                              border: "none",
+                                            }}
+
+                                            onClick={() =>{setcancelAlert(false)}}
+                                          >
+                                            CLOSE
+                                          </button>
+                                        </div>
+                                      </Dialog>
                                       {!data.asFriend ? (
                                         <>
                                           {data.sessionStatus !==
