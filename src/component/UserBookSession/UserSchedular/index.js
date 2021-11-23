@@ -216,6 +216,7 @@ const UserEventSchedularFC = (props) => {
     props.updateUserDetails(reduxData);
 
     const handleBooking = () => {
+      setcancelAlert(false)
       if (!localStorage.getItem("token")) {
         // history.push(`/mobile/login`);
         // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
@@ -224,10 +225,10 @@ const UserEventSchedularFC = (props) => {
           pathname: "/mobile/login",
           search: "?nextpath=/user/payment",
         });
-        setTimeout(() => {
-          console.log("called history");
-          history.goBack();
-        }, 100);
+        // setTimeout(() => {
+        //   console.log("called history");
+        //   history.goBack();
+        // }, 100);
       } else {
         history.push("/user/payment");
       }
