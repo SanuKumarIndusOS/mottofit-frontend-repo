@@ -683,11 +683,13 @@ const TabOne = ({
                                       >
                                         <div style={{ padding: "1rem" }}>
                                           <h3>Alert!</h3>
+                                          <hr></hr>
                                           Your trainer has already set aside
                                           this time for you, so you will be
                                           charged fully for cancellations less
                                           than 12 hrs before a session. Proceed
                                           with cancelling?
+                                          <hr></hr>
                                         </div>
                                         <div>
                                           <button

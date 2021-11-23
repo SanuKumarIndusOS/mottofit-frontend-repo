@@ -21,6 +21,9 @@ import { Toast } from "service/toast";
 import { requestTrainerMessageAct } from "action/trainerAct";
 import BlueHoverButton from "component/common/BlueArrowButton";
 
+import moment from "moment";
+import Dialog from "@material-ui/core/Dialog";
+
 const UserEventSchedularFC = (props) => {
   const [trainerName, setTrainerName] = React.useState("");
   const [activity, setActivity] = React.useState("");
@@ -29,6 +32,7 @@ const UserEventSchedularFC = (props) => {
   const [userSelectedData, setUserSelectedData] = React.useState({});
   const [DateSlot, setDateSlot] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
+  const [cancelAlert, setcancelAlert] = React.useState(false);
 
   const history = useHistory();
 
@@ -174,6 +178,30 @@ const UserEventSchedularFC = (props) => {
 
     // };
 
+    var tempStartTime = moment();
+    var tempEndTime = moment(
+      getFormatDate(trainerstartSlot, "LT", true),
+      "h:mm A"
+    );
+    var hourDiff = parseInt(
+      moment.duration(moment(tempEndTime).diff(moment(tempStartTime))).asHours()
+    );
+    var dayDiff = parseInt(
+      moment
+        .duration(
+          moment(
+            moment
+              .tz(trainerstartSlot, "America/New_York")
+              .format("YYYY MM DD HH:MM")
+          ).diff(
+            moment(
+              moment(moment.tz("America/New_York").format("YYYY MM DD HH:MM"))
+            )
+          )
+        )
+        .asDays()
+    );
+
     let reduxData = {
       bookingData: {
         Name: trainerName,
@@ -187,20 +215,32 @@ const UserEventSchedularFC = (props) => {
 
     props.updateUserDetails(reduxData);
 
-    if (!localStorage.getItem("token")) {
-      // history.push(`/mobile/login`);
-      // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
-      // history.push(`?nextpath=/user/payment`);
-      history.push({
-        pathname: "/mobile/login",
-        search: "?nextpath=/user/payment",
-      });
-      setTimeout(() => {
-        console.log("called history");
-        history.goBack();
-      }, 100);
+    const handleBooking = () => {
+      if (!localStorage.getItem("token")) {
+        // history.push(`/mobile/login`);
+        // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
+        // history.push(`?nextpath=/user/payment`);
+        history.push({
+          pathname: "/mobile/login",
+          search: "?nextpath=/user/payment",
+        });
+        setTimeout(() => {
+          console.log("called history");
+          history.goBack();
+        }, 100);
+      } else {
+        history.push("/user/payment");
+      }
+    };
+
+    if (hourDiff < 12 && dayDiff < 1) {
+      console.log("less than 12");
+      // cancelAction();
+      cancelAlert ? handleBooking() : setcancelAlert(true);
+      // handleBooking();
     } else {
-      history.push("/user/payment");
+      // cancelAction();
+      handleBooking();
     }
   };
 
@@ -233,7 +273,10 @@ const UserEventSchedularFC = (props) => {
             <div className="event_wrapper">
               <div className="event_wrapper_inner">
                 <div className="event_header">
-                  <h2>Pick an available time on calender or Request a different time</h2>
+                  <h2>
+                    Pick an available time on calender or Request a different
+                    time
+                  </h2>
                   {/* <p>
                     Please select a preferable date and time slot to schedule
                     your training session. All the listed timings are in your
@@ -266,11 +309,10 @@ const UserEventSchedularFC = (props) => {
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <p style={{ color: "#696969", textAlign: "center" }}>
-
-                    Please select a date and training time in the calendar below. <br></br> <br></br>
-
-                    If you don't see an available time, message your trainer to request a time
-                    that works for you!
+                    Please select a date and training time in the calendar
+                    below. <br></br> <br></br>
+                    If you don't see an available time, message your trainer to
+                    request a time that works for you!
                     {/* Calender is not fully representative of{" "}
                     {trainerName?.firstName} availability, don't be discouraged
                     if a day & time isn't open to book below. Just request and
@@ -280,7 +322,52 @@ const UserEventSchedularFC = (props) => {
 
                   <br></br>
 
-                  <div style={{display:"flex", justifyContent:"center"}}>
+                  <Dialog
+                    onClose={() => {
+                      setcancelAlert(false);
+                    }}
+                    aria-labelledby="simple-dialog-title"
+                    open={cancelAlert}
+                  >
+                    <div style={{ padding: "1rem" }}>
+                      <h3>Alert!</h3>
+                      <hr></hr>
+                      Session is leads than 12 hours away. Please note that
+                      cancellations will result in full charge for the session.
+                      Proceed booking?
+                      <hr></hr>
+                    </div>
+                    <div>
+                      <button
+                        style={{
+                          margin: "1rem",
+                          padding: "10px",
+                          border: "none",
+                          color: "white",
+                          backgroundColor: "#53bfd2",
+                          fontWeight: "bold",
+                        }}
+
+                        onClick={handleContinue}
+                      >
+                        CONTINUE
+                      </button>
+                      <button
+                        style={{
+                          margin: "1rem",
+                          padding: "10px",
+                          border: "none",
+                        }}
+                        onClick={() => {
+                          setcancelAlert(false);
+                        }}
+                      >
+                        CLOSE
+                      </button>
+                    </div>
+                  </Dialog>
+
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     {isLoading ? (
                       "Loading..."
                     ) : (
@@ -341,11 +428,11 @@ const UserEventSchedularFC = (props) => {
 };
 
 const BottomSection = ({ trainerName }) => {
+  let trainerFullname = `${trainerName["firstName"] || ""}-${
+    trainerName["lastName"] || ""
+  }`;
 
-  
-                let trainerFullname = `${trainerName["firstName"] || ""}-${trainerName["lastName"] || ""}`
-
-    let encodedName = trainerFullname.toLocaleLowerCase();
+  let encodedName = trainerFullname.toLocaleLowerCase();
   return (
     <div className="schedular_slots_user">
       <div className="items_slots_user">
@@ -364,7 +451,7 @@ const BottomSection = ({ trainerName }) => {
         <div className="item_slot5_user">
           <Link to={`/trainer/profile/${trainerName?.id}`}>
             {/* Learn more about {trainerName?.firstName} */}
-            Back to  {trainerName?.firstName}'s Profile
+            Back to {trainerName?.firstName}'s Profile
           </Link>
         </div>
       </div>
