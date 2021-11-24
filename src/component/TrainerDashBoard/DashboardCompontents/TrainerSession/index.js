@@ -35,6 +35,7 @@ const TrainerSessionFC = ({
   });
 
   const [mottoPassData, setMottoPassData] = useState([]);
+  const [inactiveMottoPassData, setInactiveMottoPassData] = useState([]);
 
   const [pageData, setPageData] = useState({
     upcoming: 0,
@@ -125,8 +126,14 @@ const TrainerSessionFC = ({
     } else {
 
       getActiveUsersPass().then(data => {
-        setMottoPassData(data)
-        console.log(data);
+        const {list} = data; 
+        setMottoPassData(list)
+        // console.log(data);
+      })
+      getActiveUsersPass("inactive").then(data => {
+        const {list} = data; 
+        setInactiveMottoPassData(list)
+        // console.log(data);
       })
     }
   };
@@ -203,6 +210,10 @@ const TrainerSessionFC = ({
     }));
   };
 
+  const handleMottoPagination = () => {
+
+  }
+
   useEffect(() => {
     getAllDetails(currentTab, true);
   }, [pageData]);
@@ -262,11 +273,14 @@ const TrainerSessionFC = ({
                   <TabPanel tabId="pass">
 
 
+                    <div className="mottopass-heading w-100">
+                      <h1 className="fs-25 font-weight-normal">Valid Motto Packages</h1>
+                    </div>
                     <div className="trainer_pass_container">
 
                       {mottoPassData.length !== 0 ?
                         <>
-                          {mottoPassData.map(item => {
+                          {mottoPassData?.map(item => {
 
                             return <div className="pass_card">
                               <div className="pass_ribbon">{item?.totalPassCount} Session Package</div>
@@ -281,9 +295,40 @@ const TrainerSessionFC = ({
 
                         </>
                         : null}
-
-
+                        
+                   
+                  
                     </div>
+                    <div className="mottopass-heading mt-4 pt-4">
+                      <h1 className="fs-25 font-weight-normal">In-Valid Motto Packages</h1>
+                    </div>
+                    <div className="trainer_pass_container">
+
+                      {inactiveMottoPassData.length > 0 ?
+                        <>
+                          {inactiveMottoPassData?.map(item => {
+
+                            return <div className="pass_card">
+                              <div className="pass_ribbon">{item?.totalPassCount} Session Package</div>
+                              <div className="pass_header">{item?.user?.firstName} {item?.user?.lastName}</div>
+
+                              <div className="pass_content"> {item?.remains} out of {item?.totalPassCount} passes remaining</div>
+                              <div className="pass_content">
+                                Valid for only {item?.passType === "virtual"?"Virtual Sessions": item?.passType === "trainerLocation" ?"Trainer's Location": "Client's Location" } </div>
+                              <div className="pass_content">Valid until {moment.tz(item?.expiresIn, "America/New_York").format("MMMM Do, YYYY")}</div>
+                            </div>
+                          })}
+
+                        </>
+                        : null}
+                        
+                   
+                  
+                    </div>
+
+                    <button onClick={handleMottoPagination} className="viewMoreButton">
+                        View all Session <BlueHoverButton />
+                      </button>
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">

@@ -344,9 +344,10 @@ export const fetchGlobalSearchResults = (payload) => (
 
 
 
-export const getActiveUsersPass = () => (dispatch, getState, { api }) => {
+export const getActiveUsersPass = (passStatus = "") => (dispatch, getState, { api }) => {
   return new Promise((resolve, reject) => {
     const { getAllUsersPasses } = TrainerApi;
+    getAllUsersPasses.passStatus = passStatus;
  //console.log(getAllUsersPasses,"pp");
     api({ ...getAllUsersPasses })
       .then(({ data }) => {

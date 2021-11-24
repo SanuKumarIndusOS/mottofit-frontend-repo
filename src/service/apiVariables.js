@@ -59,9 +59,13 @@ export const TrainerApi = {
     method: "get",
     url: "getUsersPasses",
     baseURL: "normal",
+    passStatus:"",
+    page: 1,
     get api() {
-     
-      return `${this.url}`;
+        let fullURL = `${this.url}?page=${this.page}&limit=10`;
+
+      if(this.passStatus) fullURL = `${fullURL}&passStatus=${this.passStatus}`
+      return  fullURL;          
     },
   },
   searchBestMatch: {
@@ -494,8 +498,13 @@ export const userApi = {
     method: "get",
     url: "getAllPasses",
     baseURL: "normal",
+    passStatus: "",
+    page: 0,
     get api() {
-      return `${this.url}`;
+      let fullURL = `${this.url}?page=${this.page}`;
+
+      if(this.passStatus) fullURL = `${fullURL}&passStatus=${this.passStatus}`
+      return  fullURL;
     },
   },
 
