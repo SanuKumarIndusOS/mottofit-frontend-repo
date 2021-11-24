@@ -39,6 +39,7 @@ const UserSessionClass = (props) => {
   });
 
   const [mottoPassData, setMottoPassData] = useState([]);
+  const [inValidMottoPassData, setInvalidMottoPassData] = useState([]);
 
   const [pageData, setPageData] = useState({
     upcoming: 0,
@@ -148,9 +149,13 @@ const UserSessionClass = (props) => {
   const getAllPasses = async () => {
     const passData = await props.getAllMottoPassesAct();
 
-    console.log(passData);
+    const inactivePassData = await props.getAllMottoPassesAct("inactive");
 
-    setMottoPassData(passData);
+    // console.log(inactivePassData);
+
+    setMottoPassData(passData.list);
+
+    setInvalidMottoPassData(inactivePassData.list);
   };
 
   useEffect(() => {
@@ -227,6 +232,7 @@ const UserSessionClass = (props) => {
                   <MottoPassSection
                     handlePagination={handlePagination}
                     mottoPassData={mottoPassData}
+                    inValidMottoPassData={inValidMottoPassData}
                   />
                   {/* <TabOne
                     tabname={"Moto Pass"}

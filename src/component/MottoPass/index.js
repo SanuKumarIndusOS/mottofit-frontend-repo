@@ -6,7 +6,7 @@ import BlueHoverButton from "component/common/BlueArrowButton";
 
 import moment from "moment";
 
-export const MottoPassSection = ({ handlePagination, mottoPassData }) => {
+export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMottoPassData }) => {
 
  // console.log(mottoPassData,"mm");
   const validMottoPassData = [...mottoPassData].filter(({ expiresIn }) => {
@@ -16,13 +16,17 @@ export const MottoPassSection = ({ handlePagination, mottoPassData }) => {
     return isExpired === false;
   });
 
+  const handleMottoPagination = () => {
+
+  }
+
   return (
     <div className="mottopass-session-section">
       <div className="mottopass-heading">
         <h1 className="fs-25 font-weight-normal">Valid Motto Packages</h1>
       </div>
 
-      <div className="mottopass-cards-section row w-100 justify-content-between">
+      <div className="mottopass-cards-section row w-100 justify-content-between mb-4">
         {validMottoPassData.map((data) => (
           
           //   <div className="col-xl-6 col-12" key={data.id}>
@@ -30,6 +34,22 @@ export const MottoPassSection = ({ handlePagination, mottoPassData }) => {
           //   </div>
         ))}
       </div>
+      <div className="mottopass-heading">
+        <h1 className="fs-25 font-weight-normal">In-valid Motto Packages</h1>
+      </div>
+
+      <div className="mottopass-cards-section row w-100 justify-content-between">
+        {inValidMottoPassData.map((data) => (
+          
+          //   <div className="col-xl-6 col-12" key={data.id}>
+          <MottoPassCard data={data} key={data.id} />
+          //   </div>
+        ))}
+      </div>
+
+         <button onClick={handleMottoPagination} className="viewMoreButton">
+            View all Session <BlueHoverButton />
+         </button>
 
       {/* <hr /> */}
 

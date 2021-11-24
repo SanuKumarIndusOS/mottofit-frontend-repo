@@ -174,13 +174,17 @@ export const verifyCouponCodeAct = (code) => (
 
 // get all motto passes
 
-export const getAllMottoPassesAct = () => (
+export const getAllMottoPassesAct = (status = "") => (
   dispatch,
   getState,
   { api, Toast }
 ) => {
   return new Promise((resolve, reject) => {
     const { getAllPasses } = userApi;
+
+    console.log(getAllPasses);
+
+    getAllPasses.passStatus = status
 
     api({ ...getAllPasses })
       .then(({ data }) => {
