@@ -242,6 +242,7 @@ td {
   border: 1.5px solid #bcbcbc;
   font-size: large;
   color: #53bfd2;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -252,6 +253,7 @@ td {
   text-transform: uppercase;
   width: 250px;
   text-align: center;
+  font-weight: 600;
 }
 
 .dropd {

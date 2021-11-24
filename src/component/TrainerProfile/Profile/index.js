@@ -361,6 +361,7 @@ const TrainerProfileClass = ({
         price: price,
         newPass: passData,
         availPass: availPass,
+        areaOfExpertise: trainerProfileData?.areaOfExpertise?.toString(),
       },
     };
 

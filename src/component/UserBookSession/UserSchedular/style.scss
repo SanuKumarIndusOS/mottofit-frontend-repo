@@ -108,6 +108,8 @@
             height: 125px;
             opacity: 1;
             border-radius: 100px;
+            -o-object-fit: cover;
+               object-fit: cover;
           }
           .user_content {
             -webkit-box-align: center;
@@ -191,7 +193,7 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    width: 100%;
+    width: 130%;
     .item_slot1_user {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -341,4 +343,9 @@
 .book_session_btn{
 
   text-transform: uppercase;
+  font-weight: bold;
+  font-family: Montserrat;
+  font-size: 18px;
+  letter-spacing: 0.45px;
+  
 }

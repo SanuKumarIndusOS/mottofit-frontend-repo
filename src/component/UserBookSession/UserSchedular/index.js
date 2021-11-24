@@ -39,6 +39,8 @@ const UserEventSchedularFC = (props) => {
 
   const { id } = useParams();
 
+  let encodedName = "";
+
   React.useEffect(() => {
     // if (!localStorage.getItem("token")) {
     //   let reduxData = {
@@ -51,7 +53,7 @@ const UserEventSchedularFC = (props) => {
     // }
 
     // if (!location["trainerId"]) return history.push("/trainer/find");
-
+    window.scrollTo(0, 0);
     console.log(props.sessionData, "up");
 
     fetchViewTrainer();
@@ -61,6 +63,12 @@ const UserEventSchedularFC = (props) => {
     };
 
     props.updateUserDetails(reduxData);
+
+    let trainerFullname = `${props.sessionData["firstName"] || ""}-${
+      props.sessionData["lastName"] || ""
+    }`;
+
+     encodedName = trainerFullname.toLocaleLowerCase();
   }, []);
 
   function fetchViewTrainer() {
@@ -266,13 +274,13 @@ const UserEventSchedularFC = (props) => {
       <div className="event_outter_container">
         <div className="container">
           <div className="event_inner_container">
-            <div className="link_wrapper">
+            {/* <div className="link_wrapper">
               <img src={ArrowBack} alt="icon" />
               <div className="inner_links">
                 <Link to="/trainer/find">Choose another Trainer</Link>
                 <div></div>
               </div>
-            </div>
+            </div> */}
             <div className="event_wrapper">
               <div className="event_wrapper_inner">
                 <div className="event_header">
@@ -288,7 +296,7 @@ const UserEventSchedularFC = (props) => {
                 </div>
                 <div className="user_profile_details">
                   <UserAvatar {...userData} className="img-lg" />
-                  <div className="user_content d-flex">
+                  <div className="user_content">
                     <h2
                       style={{
                         textTransform: "capitalize",
@@ -298,6 +306,7 @@ const UserEventSchedularFC = (props) => {
                     >
                       {trainerName?.firstName}
                     </h2>
+
                     <p
                       style={{
                         color: "#898989",
@@ -305,13 +314,19 @@ const UserEventSchedularFC = (props) => {
                         textTransform: "uppercase",
                       }}
                     >
-                      {activity?.value}
+                      {props.sessionData?.areaOfExpertise}
                     </p>
                   </div>
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#696969", textAlign: "center" }}>
+                  <p
+                    style={{
+                      color: "#696969",
+                      textAlign: "center",
+                      fontSize: "25px",
+                    }}
+                  >
                     Please select a date and training time in the calendar
                     below. <br></br> <br></br>
                     If you don't see an available time, message your trainer to
@@ -410,7 +425,9 @@ const UserEventSchedularFC = (props) => {
                       >
                         <button
                           className="book_session_btn d-flex align-items-center"
-                          onClick={() => {setReqAlert(true)}}
+                          onClick={() => {
+                            setReqAlert(true);
+                          }}
                           style={{ width: "100%" }}
                           style={{ border: "none", background: "none" }}
                         >
@@ -483,9 +500,9 @@ const BottomSection = ({ trainerName }) => {
           <h5>BOOKED SLOT</h5>{" "}
         </div>
         <div className="item_slot5_user">
-          <Link to={`/trainer/profile/${trainerName?.id}`}>
+          <Link to={`/trainer/profile/${trainerName?.id}/${encodedName}`}>
             {/* Learn more about {trainerName?.firstName} */}
-            Back to {trainerName?.firstName}'s Profile
+            Back to {trainerName?.firstName}'s Profile 
           </Link>
         </div>
       </div>
