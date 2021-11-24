@@ -64,6 +64,8 @@ const TrainerProfileClass = ({
   const aboutRef = React.useRef(null);
   const priceRef = React.useRef(null);
 
+  const [reqAlert, setReqAlert] = React.useState(false);
+
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
     fetchViewTrainer();
@@ -176,6 +178,7 @@ const TrainerProfileClass = ({
     trainerProfileData?.preferedTrainingMode?.includes("inPerson");
 
   const handleRequestTrainer = () => {
+    setReqAlert(true);
     Toast({
       type: "success",
       message:
@@ -374,6 +377,36 @@ const TrainerProfileClass = ({
 
   return (
     <>
+      <Dialog
+        onClose={() => {
+          setReqAlert(false);
+        }}
+        aria-labelledby="simple-dialog-title"
+        open={reqAlert}
+      >
+        <div style={{ padding: "1rem" }}>
+          <h3>Alert!</h3>
+          <hr></hr>
+          Login to message the trainer. You will be automatically be taken to
+          the messages part of your dashboard. Message the trainer under the
+          Requested Messages tab to find a date & time that works for you both,
+          so the trainer can open the slot up for you!
+          <hr></hr>
+          <button
+            style={{
+              margin: "1rem",
+              padding: "10px",
+              border: "none",
+              color: "white",
+              backgroundColor: "#53bfd2",
+              fontWeight: "bold",
+            }}
+            onClick={handleRequestTrainer}
+          >
+            CONTINUE
+          </button>
+        </div>
+      </Dialog>
       <div className="profile_main">
         <div className="profile_outter_container">
           <div className="profile_wrapper_container ">
@@ -427,7 +460,8 @@ const TrainerProfileClass = ({
                     }}
                   >
                     About {trainerProfileData?.firstName}
-                  </div> <br></br>
+                  </div>{" "}
+                  <br></br>
                   <div
                     className="view_price"
                     onClick={() => {
@@ -451,7 +485,7 @@ const TrainerProfileClass = ({
                     >
                       <button
                         className="book_session_btn d-flex align-items-center"
-                        onClick={handleRequestTrainer}
+                        onClick={()=>{setReqAlert(true)}}
                         style={{ width: "100%" }}
                       >
                         {`Message ${trainerProfileData.firstName} `}
@@ -724,75 +758,76 @@ const ImageGrid = ({ trainerProfileData, toggle }) => {
           return ( */}
         <div>
           {images?.length > 0 ? (
-           <div className="profile_images_container">
-            {images[0] && (
-              <div
-                className="profile_images_card box1"
-                onClick={() => toggle(0)}
-              >
-                <img
-                  src={images[0] || imageView[0]?.image}
-                  alt="picture"
-                  className="box1"
-                  onError={(e) => {
-                    e.target.src = imageView[0]?.image;
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-              </div>
-            )}
-            <div className="flex-try-2">
-              {images[1] && (
+            <div className="profile_images_container">
+              {images[0] && (
                 <div
-                  className="profile_images_card box2"
-                  onClick={() => toggle(1)}
+                  className="profile_images_card box1"
+                  onClick={() => toggle(0)}
                 >
                   <img
-                    src={images[1] || imageView[0]?.image}
+                    src={images[0] || imageView[0]?.image}
                     alt="picture"
-                    className="box2"
+                    className="box1"
                     onError={(e) => {
+                      e.target.src = imageView[0]?.image;
                       e.currentTarget.style.display = "none";
                     }}
                   />
                 </div>
               )}
-
-              <div className="flex-try-3">
-                {images[2] && (
+              <div className="flex-try-2">
+                {images[1] && (
                   <div
-                    className="profile_images_card box3"
-                    onClick={() => toggle(2)}
+                    className="profile_images_card box2"
+                    onClick={() => toggle(1)}
                   >
                     <img
-                      src={images[2] || imageView[0]?.image}
-                      alt="Not Added"
-                      className="box3"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                  </div>
-                )}
-
-                {images[3] && (
-                  <div
-                    className="profile_images_card box4"
-                    onClick={() => toggle(3)}
-                  >
-                    <img
-                      src={images[3] || imageView[0]?.image}
+                      src={images[1] || imageView[0]?.image}
                       alt="picture"
-                      className="box4"
+                      className="box2"
                       onError={(e) => {
                         e.currentTarget.style.display = "none";
                       }}
                     />
                   </div>
                 )}
+
+                <div className="flex-try-3">
+                  {images[2] && (
+                    <div
+                      className="profile_images_card box3"
+                      onClick={() => toggle(2)}
+                    >
+                      <img
+                        src={images[2] || imageView[0]?.image}
+                        alt="Not Added"
+                        className="box3"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {images[3] && (
+                    <div
+                      className="profile_images_card box4"
+                      onClick={() => toggle(3)}
+                    >
+                      <img
+                        src={images[3] || imageView[0]?.image}
+                        alt="picture"
+                        className="box4"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>) : null}
+          ) : null}
 
           {/* {images.length === 0 && <p>Images Not Added</p>} */}
 

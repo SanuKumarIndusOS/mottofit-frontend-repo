@@ -33,6 +33,7 @@ const UserEventSchedularFC = (props) => {
   const [DateSlot, setDateSlot] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
   const [cancelAlert, setcancelAlert] = React.useState(false);
+  const [reqAlert, setReqAlert] = React.useState(false);
 
   const history = useHistory();
 
@@ -101,6 +102,7 @@ const UserEventSchedularFC = (props) => {
   }
 
   const handleRequestTrainer = () => {
+    setReqAlert(true);
     Toast({
       type: "success",
       message:
@@ -216,7 +218,7 @@ const UserEventSchedularFC = (props) => {
     props.updateUserDetails(reduxData);
 
     const handleBooking = () => {
-      setcancelAlert(false)
+      setcancelAlert(false);
       if (!localStorage.getItem("token")) {
         // history.push(`/mobile/login`);
         // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
@@ -325,6 +327,38 @@ const UserEventSchedularFC = (props) => {
 
                   <Dialog
                     onClose={() => {
+                      setReqAlert(false);
+                    }}
+                    aria-labelledby="simple-dialog-title"
+                    open={reqAlert}
+                  >
+                    <div style={{ padding: "1rem" }}>
+                      <h3>Alert!</h3>
+                      <hr></hr>
+                      Login to message the trainer. You will be automatically be
+                      taken to the messages part of your dashboard. Message the
+                      trainer under the Requested Messages tab to find a date &
+                      time that works for you both, so the trainer can open the
+                      slot up for you!
+                      <hr></hr>
+                      <button
+                        style={{
+                          margin: "1rem",
+                          padding: "10px",
+                          border: "none",
+                          color: "white",
+                          backgroundColor: "#53bfd2",
+                          fontWeight: "bold",
+                        }}
+                        onClick={handleRequestTrainer}
+                      >
+                        CONTINUE
+                      </button>
+                    </div>
+                  </Dialog>
+
+                  <Dialog
+                    onClose={() => {
                       setcancelAlert(false);
                     }}
                     aria-labelledby="simple-dialog-title"
@@ -333,7 +367,7 @@ const UserEventSchedularFC = (props) => {
                     <div style={{ padding: "1rem" }}>
                       <h3>Alert!</h3>
                       <hr></hr>
-                      Session is leads than 12 hours away. Please note that
+                      Session is less than 12 hours away. Please note that
                       cancellations will result in full charge for the session.
                       Proceed booking?
                       <hr></hr>
@@ -348,7 +382,6 @@ const UserEventSchedularFC = (props) => {
                           backgroundColor: "#53bfd2",
                           fontWeight: "bold",
                         }}
-
                         onClick={handleContinue}
                       >
                         CONTINUE
@@ -377,7 +410,7 @@ const UserEventSchedularFC = (props) => {
                       >
                         <button
                           className="book_session_btn d-flex align-items-center"
-                          onClick={handleRequestTrainer}
+                          onClick={() => {setReqAlert(true)}}
                           style={{ width: "100%" }}
                           style={{ border: "none", background: "none" }}
                         >
