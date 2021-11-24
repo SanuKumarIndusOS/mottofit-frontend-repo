@@ -486,7 +486,7 @@ const TrainerProfileClass = ({
                       <button
                         className="book_session_btn d-flex align-items-center"
                         onClick={()=>{setReqAlert(true)}}
-                        style={{ width: "100%" }}
+                        style={{ width: "100%" }}   
                       >
                         {`Message ${trainerProfileData.firstName} `}
                         <BlueHoverButton />
