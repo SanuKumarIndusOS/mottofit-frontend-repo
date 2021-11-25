@@ -69,6 +69,7 @@ const TrainerProfileClass = ({
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
     fetchViewTrainer();
+    window.scrollTo(0, 0)
     //Auto scroll for book a session button
     // if (
     //   history.location.state !== undefined &&

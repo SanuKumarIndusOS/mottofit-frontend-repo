@@ -452,13 +452,13 @@ const UserPaymentsFC = ({
         <div className="container">
           <div className="user_payment_inner_container">
             <div className="user_payment_link">
-              <div className="outter_links">
+              {/* <div className="outter_links">
                 <img src={ArrowBack} alt="icon" />
                 <div className="inner_links">
                   <Link to="/user/motto-pass"> Get a Motto Package</Link>
                   <div></div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="user_payment_grid">
               <div className="user_payment_left_outter">
