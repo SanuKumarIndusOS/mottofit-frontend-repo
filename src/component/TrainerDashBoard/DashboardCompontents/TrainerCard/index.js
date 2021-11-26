@@ -771,21 +771,7 @@ function TrainerCardDashboard(props) {
 
                 <br />
               </div>
-              <div className="card_accordion_input">
-                <input
-                  placeholder="30 Session Rate"
-                  value={trainerCardData.inPersonAtClient_thirtySessionRate}
-                  onChange={(e) => {
-                    setTrainerCardData({
-                      ...trainerCardData,
-                      inPersonAtClient_thirtySessionRate: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  onWheel={blockWheelBehaviour}
-                />
-                <img src={DollarIcon} alt="icon" />
-              </div>
+             
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -802,6 +788,22 @@ function TrainerCardDashboard(props) {
                 <img src={DollarIcon} alt="icon" />
 
                 <br />
+              </div>
+
+              <div className="card_accordion_input">
+                <input
+                  placeholder="30 Session Rate"
+                  value={trainerCardData.inPersonAtClient_thirtySessionRate}
+                  onChange={(e) => {
+                    setTrainerCardData({
+                      ...trainerCardData,
+                      inPersonAtClient_thirtySessionRate: e.target.value,
+                    });
+                  }}
+                  type="text"
+                  onWheel={blockWheelBehaviour}
+                />
+                <img src={DollarIcon} alt="icon" />
               </div>
             </div>
           </Accordion>
@@ -884,20 +886,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-              <div className="card_accordion_input">
-                <input
-                  placeholder="30 Session Rate"
-                  value={trainerCardData.inPersonAtTrainer_threeSessionRate}
-                  onChange={(e) => {
-                    setTrainerCardData({
-                      ...trainerCardData,
-                      inPersonAtTrainer_threeSessionRate: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  onWheel={blockWheelBehaviour}
-                />
-              </div>
+             
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -912,6 +901,21 @@ function TrainerCardDashboard(props) {
                   onWheel={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
+              </div>
+
+              <div className="card_accordion_input">
+                <input
+                  placeholder="30 Session Rate"
+                  value={trainerCardData.inPersonAtTrainer_threeSessionRate}
+                  onChange={(e) => {
+                    setTrainerCardData({
+                      ...trainerCardData,
+                      inPersonAtTrainer_threeSessionRate: e.target.value,
+                    });
+                  }}
+                  type="text"
+                  onWheel={blockWheelBehaviour}
+                />
               </div>
             </div>
           </Accordion>
@@ -996,21 +1000,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-              <div className="card_accordion_input">
-                <input
-                  placeholder="30 Session Rate"
-                  value={trainerCardData.virtual_threeSessionRate}
-                  onChange={(e) => {
-                    setTrainerCardData({
-                      ...trainerCardData,
-                      virtual_threeSessionRate: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  onWheel={blockWheelBehaviour}
-                />
-                <img src={DollarIcon} alt="icon" />
-              </div>
+          
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -1027,6 +1017,22 @@ function TrainerCardDashboard(props) {
                 <img src={DollarIcon} alt="icon" />
 
                 <br />
+              </div>
+
+              <div className="card_accordion_input">
+                <input
+                  placeholder="30 Session Rate"
+                  value={trainerCardData.virtual_threeSessionRate}
+                  onChange={(e) => {
+                    setTrainerCardData({
+                      ...trainerCardData,
+                      virtual_threeSessionRate: e.target.value,
+                    });
+                  }}
+                  type="text"
+                  onWheel={blockWheelBehaviour}
+                />
+                <img src={DollarIcon} alt="icon" />
               </div>
             </div>
           </Accordion>
