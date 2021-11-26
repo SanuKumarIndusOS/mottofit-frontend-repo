@@ -189,14 +189,19 @@ const TrainerSessionFC = ({
       past: "pastSessions",
     };
 
-    let currentSession = sessionTypeData[tab];
+    let currentSession = sessionTypeData[tab];    
 
-    setCurrentTab(tab);
 
+    // console.log("change",tab);
     setTrainerSessionData((prevData) => {
-      // console.log(prevData);
-      if (prevData[currentSession]?.length > 0) return prevData;
-      setDataLoading(true);
+      // console.log("prevData");
+      if (prevData[currentSession]?.length > 0) {
+        setDataLoading(false);
+        
+        return prevData;}
+      // console.log("prevData-2");
+
+        setDataLoading(true);
       getAllDetails(tab);
 
       return prevData;
