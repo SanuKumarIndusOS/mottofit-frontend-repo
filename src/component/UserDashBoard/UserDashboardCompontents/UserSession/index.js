@@ -526,9 +526,7 @@ const TabOne = ({
 
                     totalMottoPass = parseInt(mottoPassData?.totalPassCount);
 
-                    noOfMottoPassesUsed = Math.abs(
-                      totalMottoPass - parseInt(mottoPassData?.remains)
-                    );
+                    noOfMottoPassesUsed = data?.mottoPassCount;
                   }
 
                   return (
@@ -810,7 +808,7 @@ const TabOne = ({
                             Motto Package
                           </span>
                           <div className="motto-pass-details d-flex align-items-center w-100">
-                            {totalMottoPass && noOfMottoPassesUsed && (
+                            {totalMottoPass  && (
                               <div className="session-count">{`Session ${noOfMottoPassesUsed} of ${totalMottoPass}`}</div>
                             )}
 

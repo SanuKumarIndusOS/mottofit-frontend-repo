@@ -405,7 +405,7 @@ function MottoSessionType({
         >
           {Object.keys(pricingItem)?.map((item) => {
             return (
-              <div style={{ maxHeight: "20 0px", marginBottom: "1rem" }}>
+              <div style={{ maxHeight: "20 0px" }}>
                 <div className="body_header">
                   {item === "CREATE A CLASS" && !hideClass
                     ? null

@@ -7,7 +7,8 @@ button,
 .form-control {
   &:focus {
     outline: 0;
-    box-shadow: 0 0;
+    -webkit-box-shadow: 0 0;
+            box-shadow: 0 0;
   }
 }
 
@@ -24,15 +25,25 @@ button,
     border-radius: 20px;
 
     .table_inner_trainer {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
       width: 100%;
       margin: 0.5em 0 1em 0 !important;
       padding: 1.5em 1em 0 1em;
       .table_date {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         margin-bottom: 2rem;
         margin-left: 1rem;
       }
@@ -78,7 +89,8 @@ button,
       tr {
         th {
           text-align: center !important;
-          text-overflow: ellipsis !important;
+          -o-text-overflow: ellipsis !important;
+             text-overflow: ellipsis !important;
           overflow: hidden !important;
           border: 2px solid #e6e6e6 !important;
           background-clip: padding-box;
@@ -136,15 +148,27 @@ button,
   grid-column-gap: 20px;
   width: 100%;
   margin: 2em 0 3em 0;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   .items_slots_user {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     width: 100%;
     .item_slot1_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       .indicator {
         width: 60px;
         height: 15px;
@@ -162,8 +186,12 @@ button,
       }
     }
     .item_slot2_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       .indicator2 {
         width: 60px;
         height: 15px;
@@ -181,8 +209,12 @@ button,
       }
     }
     .item_slot3_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       .indicator3 {
         width: 60px;
         height: 15px;
@@ -201,12 +233,20 @@ button,
     }
 
     .item_slot5_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
 
       a {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         letter-spacing: 0.54px;
         border: none;
         outline: none;
@@ -226,9 +266,15 @@ button,
 }
 .event_wrapper_inner {
   .submit_user {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin: 0 auto;
     padding-left: 1em;
     width: 230px;
@@ -262,8 +308,12 @@ button,
   font-weight: bold;
 
   a {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 
@@ -295,7 +345,8 @@ button,
 select {
   border-radius: 50px;
   border: 2px solid #bcbcbc;
-  box-shadow: 0 0;
+  -webkit-box-shadow: 0 0;
+          box-shadow: 0 0;
   outline: 0;
   background: white;
   max-height: 45px;
@@ -315,6 +366,34 @@ select {
     border: 2px solid #bcbcbc;
   }
 
+  &::-webkit-input-placeholder {
+    color: #bcbcbc;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &::-moz-placeholder {
+    color: #bcbcbc;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &:-ms-input-placeholder {
+    color: #bcbcbc;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &::-ms-input-placeholder {
+    color: #bcbcbc;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
   &::placeholder {
     color: #bcbcbc;
     font-family: Montserrat;
@@ -332,13 +411,20 @@ select {
   &:active {
     background: transparent;
     border: 0;
-    box-shadow: 0 0;
+    -webkit-box-shadow: 0 0;
+            box-shadow: 0 0;
   }
 }
 .card_agree {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin: 3em 0 2em 0;
   @media only screen and (max-width: 900px) {
     margin-left: 2rem;
@@ -353,8 +439,12 @@ select {
     }
   }
   label {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     font-size: 18px;
     padding: 0 0 0 0.5em;
     color: #898989;
@@ -439,8 +529,13 @@ select {
 
   .schedular_slots_user {
     .items_slots_user {
-      flex-direction: column;
-      align-items: flex-start;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: start;
+          -ms-flex-align: start;
+              align-items: flex-start;
 
       .item_slot5_user {
         a {
@@ -455,12 +550,20 @@ select {
 .overlay_card {
   position: absolute;
   top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
   left: 0;
   height: 100%;
   width: 100%;
+  -webkit-transition: ease 0.5s;
+  -o-transition: ease 0.5s;
   transition: ease 0.5s;
   background: rgba(7, 7, 7, 0.301) !important;
   opacity: 0;
@@ -490,9 +593,15 @@ select {
     border-radius: 100px;
     background-color: #53bfd2;
     color: white;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     font-size: 16px;
     font-weight: 500;
     text-align: center;
@@ -506,10 +615,19 @@ select {
 // blue arrow
 
 .message_right_chatarea {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 550px;
   @media only screen and (max-width: 900px) {
     height: 85vh;
@@ -522,9 +640,15 @@ select {
       width: 100%;
       background-color: #2c2c2c;
       padding: 1.5rem;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       color: white;
 
       h2 {
@@ -536,13 +660,21 @@ select {
   }
   .message_right_header {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 0.5em;
     background-color: #ffffff;
-    -moz-box-shadow: 3px 3px 5px 6px #ccc;
     -webkit-box-shadow: 3px 3px 5px 6px #ccc;
     box-shadow: 0px 10px 0px 0px rgb(238, 173, 173);
 
@@ -562,14 +694,22 @@ select {
       }
     }
     .message_header_times {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       @media only screen and (max-width: 900px) {
         //flex-direction: column;
       }
       .message_header_items {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         h5 {
           text-align: left;
           letter-spacing: 0px;
@@ -607,10 +747,19 @@ select {
     padding: 1em;
     overflow: auto;
     .message_chat_right {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: flex-end;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: end;
+          -ms-flex-align: end;
+              align-items: flex-end;
+      -webkit-box-pack: end;
+          -ms-flex-pack: end;
+              justify-content: flex-end;
       img {
         width: 40px;
         height: 40px;
@@ -639,10 +788,19 @@ select {
       }
     }
     .message_chat_left {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: start;
+          -ms-flex-align: start;
+              align-items: flex-start;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
       img {
         width: 40px;
         height: 40px;
@@ -680,14 +838,22 @@ select {
     }
     background: #fff;
     height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   .message_right_input {
     width: 100%;
     height: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     border-top: 5px solid #f6f6f6;
 
     background-color: rgb(248, 248, 248);
@@ -700,6 +866,46 @@ select {
       &:focus-visible {
         outline: none;
       }
+    }
+    textarea::-webkit-input-placeholder {
+      text-align: left;
+      letter-spacing: 0px;
+      color: #898989;
+      font-style: italic;
+      font-family: "Montserrat", sans-serif;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 30px;
+    }
+    textarea::-moz-placeholder {
+      text-align: left;
+      letter-spacing: 0px;
+      color: #898989;
+      font-style: italic;
+      font-family: "Montserrat", sans-serif;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 30px;
+    }
+    textarea:-ms-input-placeholder {
+      text-align: left;
+      letter-spacing: 0px;
+      color: #898989;
+      font-style: italic;
+      font-family: "Montserrat", sans-serif;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 30px;
+    }
+    textarea::-ms-input-placeholder {
+      text-align: left;
+      letter-spacing: 0px;
+      color: #898989;
+      font-style: italic;
+      font-family: "Montserrat", sans-serif;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 30px;
     }
     textarea::placeholder {
       text-align: left;
@@ -717,7 +923,8 @@ select {
 .react-bootstrap-table {
   table {
     td {
-      text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+         text-overflow: ellipsis;
       overflow: hidden;
     }
   }
@@ -802,24 +1009,44 @@ select {
 .load_p {
   height: 400px;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   .loaders {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #53bfd2; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    animation: spin 2s linear infinite;
+    -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
   }
 
   @keyframes spin {
     0% {
-      transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
     }
   }
 
@@ -855,9 +1082,15 @@ select {
   height: 200px;
   cursor: none;
   border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: 23px;
 }
 
@@ -896,9 +1129,15 @@ select {
   }
 
   &:hover #arrow_anim {
-    transform: translate(10px);
+    -webkit-transform: translate(10px);
+        -ms-transform: translate(10px);
+            transform: translate(10px);
+    -webkit-transition: ease-out;
+    -o-transition: ease-out;
     transition: ease-out;
-    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+         -o-transition-duration: 0.2s;
+            transition-duration: 0.2s;
     opacity: 0;
   }
 }
@@ -932,6 +1171,8 @@ select {
 }
 
 .motto-pass-ribbon {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   display: inline-block;
   max-height: 28px;
@@ -946,12 +1187,13 @@ select {
   font-size: 13px;
   color: #fff;
   text-transform: uppercase;
-  clip-path: polygon(100% 0, 87% 51%, 100% 100%, 0 100%, 0 0);
+  -webkit-clip-path: polygon(100% 0, 87% 51%, 100% 100%, 0 100%, 0 0);
+          clip-path: polygon(100% 0, 87% 51%, 100% 100%, 0 100%, 0 0);
 }
 
 .mottopass-double-ribbon {
   min-width: 175px;
-  max-width: 195px;
+  max-width: 250px;
   display: inline-block;
   max-height: 28px;
   height: 100%;
@@ -965,7 +1207,8 @@ select {
   letter-spacing: 0.75px;
   color: #fff;
   text-transform: uppercase;
-  clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
+          clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
 }
 
 .motto-pass-section {
