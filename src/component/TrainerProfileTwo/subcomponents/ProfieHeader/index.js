@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.scss";
+import { history } from "helpers";
 
 function ProfileHeader({ trainerFirstName, profilePicture, trainerExpertise }) {
   React.useEffect(() => {
@@ -17,7 +18,7 @@ function ProfileHeader({ trainerFirstName, profilePicture, trainerExpertise }) {
         </div>
         <div className="back-button">
           <div className="back-button--symbol">&#8249;</div>
-          <div className="back-button--txt">Back to Results</div>
+          <div className="back-button--txt" onClick={()=>{history.push("/trainer/find")}}>Back to Results</div>
         </div>
       </div>
     </div>
