@@ -551,7 +551,7 @@
   -ms-grid-columns: 50% 47%;
       grid-template-columns: 50% 47%;
   grid-column-gap: 12px;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
 }
 
 .profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .personal_data_inner1 h3 {
@@ -570,4 +570,3 @@
   font-weight: 700;
   color: #696969;
 }
-/*# sourceMappingURL=styles.css.map */

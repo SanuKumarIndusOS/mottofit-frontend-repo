@@ -68,8 +68,12 @@ const TrainerProfileClass = ({
 
   const [trainerProfileData, setTraierProfileData] = useState([]);
   useEffect(() => {
+
+    
     fetchViewTrainer();
     window.scrollTo(0, 0)
+
+
     //Auto scroll for book a session button
     // if (
     //   history.location.state !== undefined &&
@@ -78,6 +82,19 @@ const TrainerProfileClass = ({
     //   handleBookSession();
     // }
   }, []);
+
+
+  useEffect(() => {
+
+    let name =( trainerProfileData?.firstName?.toUpperCase() || "Motto" )+ " " +   (trainerProfileData?.lastName?.toUpperCase() || "Trainer");
+    
+    document.title = name;
+    return () => {
+      document.title = "Motto | Book Elite Personal Trainers"
+    }
+  }, [trainerProfileData])
+
+
 
   const { id } = useParams();
 
@@ -436,11 +453,11 @@ const TrainerProfileClass = ({
                     {trainerProfileData.firstName}&nbsp;
                     {trainerProfileData.lastName}
                   </h2>
-                  <p>{areaOfExpertise}</p>
+                  <p>{String(areaOfExpertise).replace(/,/g, ', ') }</p>
                 </div>
                 <div className="profile_header_link">
-                  <img src={ArrowBack} alt="icon" />
-                  <Link to="/trainer/find">Back to Search</Link>
+                  {/* <img src={ArrowBack} alt="icon" /> */}
+                <span style={{color:"#53bfd2", fontSize:"10px"}}>  &#10094; </span>&ensp;<Link to="/trainer/find"> Back to Search</Link>
                 </div>
               </div>
             </div>
@@ -461,7 +478,7 @@ const TrainerProfileClass = ({
                       aboutRef.current.scrollIntoView();
                     }}
                   >
-                    About {trainerProfileData?.firstName}
+                    Want to know more? About {trainerProfileData?.firstName}
                   </div>{" "}
                   <br></br>
                   <div
@@ -476,7 +493,7 @@ const TrainerProfileClass = ({
                 </div>
                 {/* <br></br> */}
 
-                <h6>Have a question?</h6>
+                <h6>Have questions?</h6>
 
                 <div className="request-trainer-block">
                   {isLoading ? (
@@ -541,7 +558,7 @@ const TrainerProfileClass = ({
                     />
                   </div>
 
-                  <div style={{ marginBottom: "7rem" }} ref={aboutRef}></div>
+                  <div  ref={aboutRef}></div>
 
                   <div className="profile_right_item2">
                     <h4>About {trainerProfileData.firstName}</h4>

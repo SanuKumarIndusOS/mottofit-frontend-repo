@@ -144,7 +144,7 @@ const TrainerCardOutsideFC = (props) => {
                   <h3
                     style={{
                       textTransform: "capitalize",
-                      wordBreak: "break-all",
+                     
                     }}
                   >
                     {outSideData[data]?.firstName}&nbsp;

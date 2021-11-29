@@ -498,7 +498,7 @@ function UserSchedulerClass(props) {
               <img src={time[7]} style={{ width: "30px", height: "30px" }} />
               <h6
                 style={{
-                  wordWrap: "break-word",
+                  // wordWrap: "break-word",
                   lineHeight: "18px",
                   paddingLeft: "0.5em",
                   paddingRight: "0.5em",

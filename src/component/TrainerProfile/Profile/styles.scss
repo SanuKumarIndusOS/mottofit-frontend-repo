@@ -8,17 +8,33 @@
     .profile_wrapper_container {
       .profile_header {
         width: 100%;
-        height: 400px;
+        height: 350px;
         background: #141414;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
 
         .inner_profile {
-          position: relative;
-          top: 150px;
-          display: grid;
-          grid-template-columns: auto 30% 35%;
-          -webkit-box-align: start;
-          -ms-flex-align: start;
-          align-items: flex-start;
+          // position: relative;
+          // top: 150px;
+          // display: grid;
+          // grid-template-columns: auto 30% 35%;
+          // -webkit-box-align: start;
+          // -ms-flex-align: start;
+          // align-items: flex-start;
+
+          display: -webkit-box;
+          margin: 0px;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+
+          display: -ms-flexbox;
+
+          display: flex;
 
           .not_found {
             background-color: #53bfd2;
@@ -39,13 +55,22 @@
             font-weight: bold;
           }
           img {
-            width: 350px;
-            height: 400px;
+            width: 300px;
+            height: 350px;
+            // margin-top: 7rem;
+            position: relative;
+            right: 50px;
+            top:120px;
             opacity: 1;
             -o-object-position: center;
             object-position: center;
             -o-object-fit: cover;
             object-fit: cover;
+             // height: 900px;
+        @media only screen and (max-width: 900px) {
+          position: relative;
+         left: 10px;
+        }
           }
           .profile_header_inner {
             display: -webkit-box;
@@ -62,7 +87,7 @@
             -ms-flex-align: start;
             align-items: flex-start;
             margin: 4em 0 0 2em;
-            width: 410px;
+            // width: 410px;
             h2 {
               text-align: left;
               letter-spacing: -0.45px;
@@ -80,7 +105,7 @@
               text-transform: uppercase;
               opacity: 1;
               text-decoration: none;
-              // font-size: 22px;
+              font-size: 20px;
               line-height: 22px;
               font-weight: 500;
               display: -webkit-box;
@@ -100,7 +125,10 @@
             -ms-flex-pack: end;
             justify-content: flex-end;
             text-align: right;
-            margin: 4em 0 0 4em;
+            // margin: 4em 0 0 4em;
+            margin-top: 1rem;
+            position: relative;
+            left:170px;
 
             a {
               display: -webkit-box;
@@ -114,12 +142,13 @@
               justify-content: flex-end;
               text-align: left;
               letter-spacing: 0.18px;
-              color: #bcbcbc;
+              color: white;
               opacity: 1;
               border-bottom: 2px solid #53bfd2;
-              font-size: 18px;
-              font-weight: normal;
+              font-size: 15px;
+              font-weight: 500;
               font-family: "Montserrat", sans-serif;
+              
             }
             a:hover {
               text-decoration: none;
@@ -136,9 +165,14 @@
         display: grid;
         grid-template-columns: 30% 80%;
         grid-template-rows: auto;
-        margin-top: 10em;
+        // margin-top: em;
+        margin: 10rem;
         grid-column-gap: 50px;
         // height: 900px;
+        @media only screen and (max-width: 900px) {
+          margin: unset;
+          margin-top: 8rem;
+        }
         .profile_aside {
           // background: chocolate;
           .scrollToCTA {
@@ -158,6 +192,7 @@
             .about {
               color: #53bfd2;
               font-weight: 500;
+              font-size: 15px;
               font-family: "Montserrat", sans-serif;
               cursor: pointer;
               -webkit-text-decoration-line: underline;
@@ -167,6 +202,7 @@
             .view_price {
               cursor: pointer;
               color: #53bfd2;
+              font-size: 15px;
               -webkit-text-decoration-line: underline;
                       text-decoration-line: underline;
             }
@@ -384,6 +420,7 @@
         }
         .profile_trainer_data {
           .profile_right_data {
+            margin-top: -3rem;
             .profile_right_item1 {
               display: -webkit-box;
               display: -ms-flexbox;
@@ -1068,8 +1105,8 @@
     align-items: center;
     // background: #53bfd2;
     color: #161616;
-    padding: 0.5em 0 0.5em 0.8em !important;
-    font-size: 16px;
+    // padding: 0.5em 0 0.5em 0.8em !important;
+    font-size: 20px;
     font-weight: 600;
     font-family: "Montserrat", sans-serif;
     text-align: right;
@@ -1077,6 +1114,8 @@
     line-height: 22px;
     border: none;
     text-transform: uppercase;
+    background: none !important;
+   
   }
 }
 @media only screen and (max-width: 900px) {

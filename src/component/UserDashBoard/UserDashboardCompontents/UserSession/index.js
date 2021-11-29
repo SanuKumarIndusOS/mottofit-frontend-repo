@@ -808,7 +808,7 @@ const TabOne = ({
                             Motto Package
                           </span>
                           <div className="motto-pass-details d-flex align-items-center w-100">
-                            {totalMottoPass  && (
+                            {totalMottoPass && noOfMottoPassesUsed !== 0 && (
                               <div className="session-count">{`Session ${noOfMottoPassesUsed} of ${totalMottoPass}`}</div>
                             )}
 

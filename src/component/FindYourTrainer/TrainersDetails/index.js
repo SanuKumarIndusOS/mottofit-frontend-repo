@@ -172,7 +172,7 @@ const TrainerCardsFC = (props) => {
                   <h3
                     style={{
                       textTransform: "capitalize",
-                      wordBreak: "break-all",
+                      // wordBreak: "break-all",
                     }}
                   >
                     {bestMatchData[data]?.firstName}&nbsp;

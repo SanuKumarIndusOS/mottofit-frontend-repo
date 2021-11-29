@@ -6,7 +6,7 @@ import MottoSessionType from "./subcomponents/MottoSessionType";
 import { getTrainerDetail } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateUserDetails, } from "action/userAct";
+import { updateUserDetails } from "action/userAct";
 
 import { history } from "helpers";
 import { Link, useParams, useHistory } from "react-router-dom";
@@ -26,12 +26,12 @@ function TrainerProfileTwo({
     });
   }, []);
 
-  const handleBooking = (price, type, venue, passData=null, availPass) => {
+  const handleBooking = (price, type, venue, passData = null, availPass) => {
     if (!localStorage.getItem("token")) {
       history.push("/mobile/login");
-      history.push(`?${encodeURIComponent("nextpath=/trainer/profile/"+id)}`);
+      history.push(`?${encodeURIComponent("nextpath=/trainer/profile/" + id)}`);
     } else {
-      console.log(availPass,"ll");
+      console.log(availPass, "ll");
       var storedata = {
         sessionData: {
           trainerId: id,
@@ -41,7 +41,7 @@ function TrainerProfileTwo({
           trainingType: type,
           price: price,
           newPass: passData,
-          availPass: availPass
+          availPass: availPass,
         },
       };
 
@@ -51,18 +51,22 @@ function TrainerProfileTwo({
   };
 
   return (
-    <div className="trainer_profile_container">
-      <div className="left_pane"></div>
-      <div className="right_pane">
-        {" "}
-        <MottoSessionType
-          oneOnone={trainerData?.oneOnOnePricing}
-          social={trainerData?.socialSessionPricing}
-          classPricing={trainerData?.classSessionPricing}
-          handleBooking={handleBooking}
-          trainerId={id}
-        />
-      </div>
+    // <div className="trainer_profile_container">
+    //   <div className="left_pane"></div>
+    //   <div className="right_pane">
+    //     {" "}
+    //     <MottoSessionType
+    //       oneOnone={trainerData?.oneOnOnePricing}
+    //       social={trainerData?.socialSessionPricing}
+    //       classPricing={trainerData?.classSessionPricing}
+    //       handleBooking={handleBooking}
+    //       trainerId={id}
+    //     />
+    //   </div>
+    // </div>
+
+    <div className="trainer-profile-container">
+      <div className=""></div>
     </div>
   );
 }
