@@ -94,11 +94,11 @@ function TrainerProfileTwo({
 
     <div className="trainer-profile-container">
       {/* {trainerData === ""?"Loading":  <ProfileHeader/>} */}
-      <ProfileHeader />
-      
-
-      
-      
+      <ProfileHeader
+        trainerFirstName={trainerData?.firstName}
+        profilePicture={trainerData?.profilePicture}
+        trainerExpertise={trainerData?.areaOfExpertise}
+      />
     </div>
   );
 }

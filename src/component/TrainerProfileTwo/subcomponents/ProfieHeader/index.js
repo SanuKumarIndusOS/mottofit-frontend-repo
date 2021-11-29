@@ -1,15 +1,18 @@
 import React from "react";
 import "./styles.scss";
 
-function index() {
+function ProfileHeader({ trainerFirstName, profilePicture, trainerExpertise }) {
+  React.useEffect(() => {
+    console.log(trainerExpertise);
+  }, []);
   return (
     <div className="trainer-profile-header-container">
       <div className="profile__black-area">
-        <div className="profile-picture"></div>
+        <img className="profile-picture" src={profilePicture}></img>
         <div className="profile-info">
-          <div className="trainer-name">Leanna Brittis</div>
+          <div className="trainer-name">{trainerFirstName}</div>
           <div className="trainer-expertise">
-            PILATES, STRENGTH & HIIT, YOGA, BOXING
+            {String(trainerExpertise).replace(/,/g, ", ")}
           </div>
         </div>
         <div className="back-button">
@@ -21,4 +24,4 @@ function index() {
   );
 }
 
-export default index;
+export default ProfileHeader;

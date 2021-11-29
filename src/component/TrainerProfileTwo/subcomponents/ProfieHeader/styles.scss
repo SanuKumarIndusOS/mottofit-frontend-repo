@@ -26,6 +26,8 @@
         background-color: #53bfd2;
         margin-top: 12rem;
         margin-left: 7rem;
+        -o-object-fit: cover;
+           object-fit: cover;
       }
 
       .back-button {
@@ -61,6 +63,7 @@
         margin-left: 5rem;
 
         .trainer-name {
+          text-transform: capitalize;
           font-size: 42px;
           letter-spacing: -0.45px;
           font-family: "Cormorant Garamond", sans-serif;
