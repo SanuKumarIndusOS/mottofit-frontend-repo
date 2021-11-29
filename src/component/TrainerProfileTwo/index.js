@@ -3,6 +3,7 @@ import "./styles.scss";
 
 import MottoSessionType from "./subcomponents/MottoSessionType";
 import ProfileHeader from "./subcomponents/ProfieHeader/index";
+import ProfileBody from "./subcomponents/ProfileBody";
 
 import { getTrainerDetail } from "action/adminAct";
 import { connect } from "react-redux";
@@ -117,7 +118,9 @@ function TrainerProfileTwo({
         trainerExpertise={trainerData?.areaOfExpertise}
       />
 
-      <div className="trainer-profile-body">
+      <ProfileBody trainerData={trainerData} handleBooking={handleBooking} />
+
+      {/* <div className="trainer-profile-body">
         <div className="profile-body--left-pane">
           <div className="trainer-about__scroll">
             Want to know more? About Leanna
@@ -187,7 +190,7 @@ function TrainerProfileTwo({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
