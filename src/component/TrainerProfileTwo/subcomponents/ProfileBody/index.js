@@ -14,6 +14,12 @@ function ProfileBody({ trainerData, handleBooking, imageGrid }) {
 
   return (
     <div className="trainer-profile-body">
+       <div className="mobile-profile-info">
+          <div className="trainer-name">{trainerData?.firstName}</div>
+          <div className="trainer-expertise">
+            {String(trainerData?.areaOfExpertise).replace(/,/g, ", ")}
+          </div>
+        </div>
       <div className="profile-body--left-pane">
         <div
           className="trainer-about__scroll"
