@@ -12,6 +12,9 @@ import { updateUserDetails } from "action/userAct";
 import { history } from "helpers";
 import { Link, useParams, useHistory } from "react-router-dom";
 
+import Quote from "assets/files/FindTrainer/Quote Icon.svg";
+import Gallery from "react-grid-gallery";
+
 function TrainerProfileTwo({
   getTrainerDetail,
   updateUserDetails,
@@ -20,9 +23,25 @@ function TrainerProfileTwo({
   const [trainerData, setTrainerData] = React.useState("");
   const { id } = useParams();
 
+  const [imageGrid, setImageGrid] = React.useState([]);
+
+
+
   React.useEffect(() => {
     getTrainerDetail(id, false).then((data) => {
       setTrainerData(data);
+
+      data?.images?.map((item) => {
+        setImageGrid((oldArray) => [
+          ...oldArray,
+          {
+            src: item ,
+            thumbnail: item,
+            thumbnailWidth: 320,
+            
+          },
+        ]);
+      });
       console.log(data);
     });
   }, []);
@@ -99,6 +118,56 @@ function TrainerProfileTwo({
         profilePicture={trainerData?.profilePicture}
         trainerExpertise={trainerData?.areaOfExpertise}
       />
+
+      <div className="trainer-profile-body">
+        <div className="profile-body--left-pane">
+          <div className="trainer-about__scroll">
+            Want to know more? About Leanna
+          </div>
+          <div className="trainer-pricing__scroll">
+            View Leanna's Training options and rates
+          </div>
+          <div className="trainer-request-message">
+            <div className="trainer-request-txt">Have a Question</div>
+            <div className="trainer-request-but">message Leanna</div>
+          </div>
+        </div>
+        <div className="profile-body--right-pane">
+          <div className="my-motto">
+            <img src={Quote} alt="qoute" />
+            <p>{trainerData?.myMotto}</p>
+          </div>
+          <div className="session-pricing">
+            <div className="right-pane--header">Train with Leanna</div>
+            <div className="right-pane--content">
+              Browse & choose your session type to continue. You can then choose
+              an available time or message your trainer for more availability &
+              questions.
+            </div>
+
+            <MottoSessionType
+              oneOnone={trainerData?.oneOnOnePricing}
+              social={trainerData?.socialSessionPricing}
+              classPricing={trainerData?.classSessionPricing}
+              handleBooking={handleBooking}
+              trainerId={id}
+              servicableLocation={trainerData?.servicableLocation}
+              trainingFacilityLocation={trainerData?.trainingFacilityLocation}
+            />
+          </div>
+          <div className="trainer-about">
+            <div className="right-pane--header">About Jane</div>
+            <div className="right-pane--content">
+              {trainerData?.trainingProcess}
+            </div>
+          </div>
+          <div className="trainer-gallery">
+            {" "}
+            <Gallery images={imageGrid} enableImageSelection={false} maxRows={5} />
+          </div>
+          <div className="certifications"></div>
+        </div>
+      </div>
     </div>
   );
 }
