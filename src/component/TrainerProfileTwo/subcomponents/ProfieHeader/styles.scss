@@ -27,7 +27,14 @@
         margin-top: 12rem;
         margin-left: 7rem;
         -o-object-fit: cover;
-           object-fit: cover;
+        object-fit: cover;
+
+          @media only screen and (max-width: 900px) {
+            height: 250px;
+            width: 200px;
+            margin-left: 1rem;
+            margin-top: 18rem;
+          }
       }
 
       .back-button {
@@ -43,6 +50,12 @@
         -ms-flex-align: center;
         align-items: center;
 
+        @media only screen and (max-width: 900px) {
+         width: unset;
+         margin-top: unset;
+         margin-bottom:2rem ;
+        }
+
         .back-button--symbol {
           color: #53bfd2;
           font-size: 30px;
@@ -56,6 +69,9 @@
           text-align: left;
           font-size: 18px;
           font-family: "Montserrat", sans-serif;
+          @media only screen and (max-width: 900px) {
+           font-size: 16px;
+           }
         }
       }
 
@@ -78,6 +94,10 @@
           letter-spacing: 1.1px;
           text-transform: uppercase;
           font-weight: 500;
+        }
+
+        @media only screen and (max-width: 900px) {
+          display: none;
         }
       }
     }

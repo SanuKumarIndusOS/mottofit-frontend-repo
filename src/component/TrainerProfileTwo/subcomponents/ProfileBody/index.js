@@ -12,14 +12,13 @@ function ProfileBody({ trainerData, handleBooking, imageGrid }) {
   const aboutRef = React.useRef(null);
   const priceRef = React.useRef(null);
 
- 
   return (
     <div className="trainer-profile-body">
       <div className="profile-body--left-pane">
         <div
           className="trainer-about__scroll"
           onClick={() => {
-            aboutRef.current.scrollIntoView({block:"center"});
+            aboutRef.current.scrollIntoView({ block: "center" });
           }}
         >
           Want to know more? About {trainerData?.firstName}
