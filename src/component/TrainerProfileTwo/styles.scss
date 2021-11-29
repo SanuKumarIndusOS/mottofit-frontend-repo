@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap");
+
 
 .trainer_profile_container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 10rem;
+  margin-bottom: 20rem;
 
   @media only screen and (max-width: 900px) {
     -webkit-box-orient: vertical;
@@ -26,82 +26,3 @@
   }
 }
 
-.trainer-profile-container {
-  width: 100%;
-  margin-bottom: 5rem;
-  .trainer-profile-header-container {
-    width: 100%;
-
-    .profile__black-area {
-      height: 350px;
-      width: 100%;
-      background-color: #161616;
-      color: white;
-
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-
-      .profile-picture {
-        height: 350px;
-        width: 300px;
-        background-color: #53bfd2;
-        margin-top: 12rem;
-        margin-left: 7rem;
-      }
-
-      .back-button {
-        cursor: pointer;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-
-        width: 20%;
-
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-
-        .back-button--symbol {
-          color: #53bfd2;
-          font-size: 30px;
-          margin-right: 5px;
-          margin-bottom: 7px;
-        }
-
-        .back-button--txt {
-          border-bottom: 2px solid #53bfd2;
-          letter-spacing: 0.18px;
-          text-align: left;
-          font-size: 18px;
-          font-family: "Montserrat", sans-serif;
-        }
-      }
-
-      .profile-info {
-        width: 50%;
-        margin-left: 5rem;
-
-
-        .trainer-name {
-          font-size: 42px;
-          letter-spacing: -0.45px;
-          font-family: "Cormorant Garamond", sans-serif;
-          font-weight: bold;
-         }
-
-         .trainer-expertise{
-           color: #898989;
-           font-family: "Montserrat", sans-serif;
-           letter-spacing: 1.1px;
-           text-transform: uppercase;
-           font-weight: 500;
-         }
-      }
-    }
-  }
-}

@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.scss";
 
 import MottoSessionType from "./subcomponents/MottoSessionType";
+import ProfileHeader from "./subcomponents/ProfieHeader/index";
 
 import { getTrainerDetail } from "action/adminAct";
 import { connect } from "react-redux";
@@ -27,28 +28,54 @@ function TrainerProfileTwo({
   }, []);
 
   const handleBooking = (price, type, venue, passData = null, availPass) => {
+    var storedata = {
+      sessionData: {
+        trainerId: id,
+        city: trainerData?.servicableLocation,
+        sessionType: venue === "virtual" ? "virtual" : "inPerson",
+        venue: venue !== "virtual" ? venue : "clientLocation",
+        trainingType: type,
+        price: price,
+        newPass: passData,
+        availPass: availPass,
+        areaOfExpertise: trainerData?.areaOfExpertise?.toString(),
+      },
+    };
+
+    updateUserDetails(storedata);
     if (!localStorage.getItem("token")) {
-      history.push("/mobile/login");
-      history.push(`?${encodeURIComponent("nextpath=/trainer/profile/" + id)}`);
+      // history.push(`/mobile/login?${encodeURIComponent("nextpath=/user/scheduler/" + id)}`);
+      history.push(`/user/scheduler/${id}`);
     } else {
       console.log(availPass, "ll");
-      var storedata = {
-        sessionData: {
-          trainerId: id,
-          city: trainerData?.servicableLocation,
-          sessionType: venue === "virtual" ? "virtual" : "inPerson",
-          venue: venue !== "virtual" ? venue : "clientLocation",
-          trainingType: type,
-          price: price,
-          newPass: passData,
-          availPass: availPass,
-        },
-      };
 
-      updateUserDetails(storedata);
       history.push(`/user/scheduler/${id}`);
     }
   };
+
+  // const handleBooking = (price, type, venue, passData = null, availPass) => {
+  //   if (!localStorage.getItem("token")) {
+  //     history.push("/mobile/login");
+  //     history.push(`?${encodeURIComponent("nextpath=/trainer/profile/" + id)}`);
+  //   } else {
+  //     console.log(availPass, "ll");
+  //     var storedata = {
+  //       sessionData: {
+  //         trainerId: id,
+  //         city: trainerData?.servicableLocation,
+  //         sessionType: venue === "virtual" ? "virtual" : "inPerson",
+  //         venue: venue !== "virtual" ? venue : "clientLocation",
+  //         trainingType: type,
+  //         price: price,
+  //         newPass: passData,
+  //         availPass: availPass,
+  //       },
+  //     };
+
+  //     updateUserDetails(storedata);
+  //     history.push(`/user/scheduler/${id}`);
+  //   }
+  // };
 
   return (
     // <div className="trainer_profile_container">
@@ -66,20 +93,12 @@ function TrainerProfileTwo({
     // </div>
 
     <div className="trainer-profile-container">
-      <div className="trainer-profile-header-container">
-        <div className="profile__black-area">
-        <div className="profile-picture"></div>
-          <div className="profile-info">
-            <div className="trainer-name">Leanna Brittis</div>
-            <div className="trainer-expertise">PILATES, STRENGTH & HIIT, YOGA, BOXING</div>
-          </div>
-          <div className="back-button">
-            <div className="back-button--symbol">&#8249;</div>
-            <div className="back-button--txt">Back to Results</div>
-          </div>
-        </div>
-       
-      </div>
+      {/* {trainerData === ""?"Loading":  <ProfileHeader/>} */}
+      <ProfileHeader />
+      
+
+      
+      
     </div>
   );
 }
