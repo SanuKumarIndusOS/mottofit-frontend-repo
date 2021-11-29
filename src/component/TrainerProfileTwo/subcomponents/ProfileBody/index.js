@@ -8,16 +8,29 @@ import Tick from "assets/files/FindTrainer/Tick 1.svg";
 import Gallery from "react-grid-gallery";
 import BlueArrowButton from "component/common/BlueArrowButton";
 
-function ProfileBody({ trainerData, handleBooking }) {
-  const [imageGrid, setImageGrid] = React.useState([]);
+function ProfileBody({ trainerData, handleBooking, imageGrid }) {
+  const aboutRef = React.useRef(null);
+  const priceRef = React.useRef(null);
+
+ 
   return (
     <div className="trainer-profile-body">
       <div className="profile-body--left-pane">
-        <div className="trainer-about__scroll">
-          Want to know more? About Leanna
+        <div
+          className="trainer-about__scroll"
+          onClick={() => {
+            aboutRef.current.scrollIntoView({block:"center"});
+          }}
+        >
+          Want to know more? About {trainerData?.firstName}
         </div>
-        <div className="trainer-pricing__scroll">
-          View Leanna's Training options and rates
+        <div
+          className="trainer-pricing__scroll"
+          onClick={() => {
+            priceRef.current.scrollIntoView();
+          }}
+        >
+          View {trainerData?.firstName}'s Training options and rates
         </div>
         <br></br>
         <div className="trainer-request-message">
@@ -32,7 +45,7 @@ function ProfileBody({ trainerData, handleBooking }) {
           <img src={Quote} alt="qoute" />
           <p>{trainerData?.myMotto}</p>
         </div>
-        <div className="session-pricing">
+        <div className="session-pricing" ref={priceRef}>
           <div className="right-pane--header">
             Train with {trainerData?.firstName}
           </div>
@@ -52,7 +65,7 @@ function ProfileBody({ trainerData, handleBooking }) {
             trainingFacilityLocation={trainerData?.trainingFacilityLocation}
           />
         </div>
-        <div className="trainer-about">
+        <div className="trainer-about" ref={aboutRef}>
           <div className="right-pane--header">
             About {trainerData?.firstName}
           </div>

@@ -4,7 +4,7 @@ import { history } from "helpers";
 
 function ProfileHeader({ trainerFirstName, profilePicture, trainerExpertise }) {
   React.useEffect(() => {
-    console.log(trainerExpertise);
+    // console.log(trainerExpertise);
   }, []);
   return (
     <div className="trainer-profile-header-container">
