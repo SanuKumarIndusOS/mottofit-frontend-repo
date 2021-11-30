@@ -8,7 +8,7 @@ import Tick from "assets/files/FindTrainer/Tick 1.svg";
 import Gallery from "react-grid-gallery";
 import BlueArrowButton from "component/common/BlueArrowButton";
 
-function ProfileBody({ trainerData, handleBooking, imageGrid }) {
+function ProfileBody({ trainerData, handleBooking, imageGrid, handleRequestTrainer }) {
   const aboutRef = React.useRef(null);
   const priceRef = React.useRef(null);
 
@@ -42,7 +42,7 @@ function ProfileBody({ trainerData, handleBooking, imageGrid }) {
         <br></br>
         <div className="trainer-request-message">
           <div className="trainer-request-txt">Have a Question</div>
-          <div className="trainer-request-but">
+          <div className="trainer-request-but" onClick={handleRequestTrainer}>
             message {trainerData?.firstName} <BlueArrowButton />
           </div>
         </div>
