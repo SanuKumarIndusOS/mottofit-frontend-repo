@@ -9,7 +9,9 @@ import Pagination from "react-js-pagination";
 import { history } from "helpers";
 
 import TrainerCards from "component/FindYourTrainer/TrainersDetails/index";
+import TrainerCard from "../TrainerCard";
 import { load } from "dotenv";
+import Trainer from "component/Home/trainer";
 
 const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   const [searchResults, setSearchResults] = useState();
@@ -66,6 +68,8 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   return (
     <div className="results_container">
       <h1>Results</h1>
+
+      <TrainerCard/>
 
       {/* <TrainerCards
         content={searchResults}

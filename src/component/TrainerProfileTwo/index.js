@@ -1,6 +1,8 @@
 import React from "react";
 import "./styles.scss";
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import ProfileHeader from "./subcomponents/ProfieHeader/index";
 import ProfileBody from "./subcomponents/ProfileBody";
 
@@ -21,7 +23,7 @@ function TrainerProfileTwo({ getTrainerDetail, updateUserDetails }) {
   React.useEffect(() => {
     getTrainerDetail(id, false).then((data) => {
       setTrainerData(data);
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
 
       data?.images?.map((item) => {
         setImageGrid((oldArray) => [
@@ -64,17 +66,27 @@ function TrainerProfileTwo({ getTrainerDetail, updateUserDetails }) {
 
   return (
     <div className="trainer-profile-container">
-      {/* {trainerData === ""?"Loading":  <ProfileHeader/>} */}
-      <ProfileHeader
-        trainerFirstName={trainerData?.firstName}
-        profilePicture={trainerData?.profilePicture}
-        trainerExpertise={trainerData?.areaOfExpertise}
-      />
-      <ProfileBody
-        trainerData={trainerData}
-        handleBooking={handleBooking}
-        imageGrid={imageGrid}
-      />
+      {trainerData === "" ? (
+        <div className="loader-parent">
+          <CircularProgress/>
+        </div>
+       
+      ) : (
+        <>
+         
+          <ProfileHeader
+            trainerFirstName={trainerData?.firstName}
+            trainerLastName={trainerData?.lastName}
+            profilePicture={trainerData?.profilePicture}
+            trainerExpertise={trainerData?.areaOfExpertise}
+          />
+          <ProfileBody
+            trainerData={trainerData}
+            handleBooking={handleBooking}
+            imageGrid={imageGrid}
+          />
+        </>
+      )}
     </div>
   );
 }

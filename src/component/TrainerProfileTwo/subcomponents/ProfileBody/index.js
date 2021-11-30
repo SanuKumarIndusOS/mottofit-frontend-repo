@@ -14,12 +14,14 @@ function ProfileBody({ trainerData, handleBooking, imageGrid }) {
 
   return (
     <div className="trainer-profile-body">
-       <div className="mobile-profile-info">
-          <div className="trainer-name">{trainerData?.firstName}</div>
-          <div className="trainer-expertise">
-            {String(trainerData?.areaOfExpertise).replace(/,/g, ", ")}
-          </div>
+      <div className="mobile-profile-info">
+        <div className="trainer-name">
+          {trainerData?.firstName + " " + trainerData?.lastName}
         </div>
+        <div className="trainer-expertise">
+          {String(trainerData?.areaOfExpertise).replace(/,/g, ", ")}
+        </div>
+      </div>
       <div className="profile-body--left-pane">
         <div
           className="trainer-about__scroll"
@@ -27,7 +29,7 @@ function ProfileBody({ trainerData, handleBooking, imageGrid }) {
             aboutRef.current.scrollIntoView({ block: "center" });
           }}
         >
-          Want to know more? About {trainerData?.firstName}
+          About {trainerData?.firstName}
         </div>
         <div
           className="trainer-pricing__scroll"
@@ -35,7 +37,7 @@ function ProfileBody({ trainerData, handleBooking, imageGrid }) {
             priceRef.current.scrollIntoView();
           }}
         >
-          View {trainerData?.firstName}'s Training options and rates
+          View {trainerData?.firstName}'s Training options <span> & </span> rates
         </div>
         <br></br>
         <div className="trainer-request-message">

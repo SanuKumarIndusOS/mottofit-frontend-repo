@@ -39,7 +39,7 @@
 
   .profile-body--left-pane {
     width: 30%;
-    margin-left: 7rem;
+    margin-left: 9rem;
     max-width: 300px;
 
     @media only screen and (max-width: 900px) {
@@ -59,6 +59,7 @@
       margin-top: 2rem;
       cursor: pointer;
       // margin-top: 20px;
+      text-transform: capitalize;
 
       font-size: 18px;
       color: #696969;
@@ -75,16 +76,18 @@
       // font-size: 16px;
       cursor: pointer;
       margin-top: 20px;
-
+      text-transform: capitalize;
       font-size: 18px;
       color: #696969;
       font-weight: 500;
       text-decoration: underline;
       cursor: pointer;
+
+      color: #53bfd2;
     }
 
     .trainer-request-message {
-      margin-top: 20px;
+      margin-top: 10px;
 
       .trainer-request-txt {
         color: #2c2c2c;
@@ -92,11 +95,12 @@
         font-family: "Montserrat", sans-serif;
         // text-transform: uppercase;
         font-size: 18px;
+        margin-right: 8px;
       }
 
       .trainer-request-but {
         cursor: pointer;
-        margin-top: 10px;
+        // margin-top: 10px;
         text-transform: uppercase;
         font-size: 18px;
         font-weight: 600;
@@ -113,7 +117,7 @@
 
         -ms-flex-pack: justify;
 
-        justify-content: space-between;
+        //  justify-content: space-between;
 
         @media only screen and (max-width: 900px) {
           margin-bottom: 4rem;

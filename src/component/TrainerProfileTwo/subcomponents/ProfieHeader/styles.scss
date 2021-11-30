@@ -23,18 +23,28 @@
       .profile-picture {
         height: 350px;
         width: 300px;
-        background-color: #53bfd2;
+        background-color: #fff;
         margin-top: 12rem;
-        margin-left: 7rem;
+        margin-left: 9rem;
         -o-object-fit: cover;
         object-fit: cover;
 
-          @media only screen and (max-width: 900px) {
-            height: 250px;
-            width: 200px;
-            margin-left: 1rem;
-            margin-top: 18rem;
-          }
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        @media only screen and (max-width: 900px) {
+          height: 250px;
+          width: 200px;
+          margin-left: 1rem;
+          margin-top: 18rem;
+        }
       }
 
       .back-button {
@@ -51,9 +61,9 @@
         align-items: center;
 
         @media only screen and (max-width: 900px) {
-         width: unset;
-         margin-top: unset;
-         margin-bottom:2rem ;
+          width: unset;
+          margin-top: unset;
+          margin-bottom: 2rem;
         }
 
         .back-button--symbol {
@@ -70,8 +80,8 @@
           font-size: 18px;
           font-family: "Montserrat", sans-serif;
           @media only screen and (max-width: 900px) {
-           font-size: 16px;
-           }
+            font-size: 16px;
+          }
         }
       }
 
