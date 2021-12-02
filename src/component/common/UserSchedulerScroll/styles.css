@@ -51,6 +51,18 @@ tbody {
   cursor: pointer;
 }
 
+.table-loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 320px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
 td {
   width: 100px;
   border: 2px solid #e6e6e6;
@@ -116,8 +128,7 @@ td {
   align-items: center;
 }
 
-.center_date_title_inactive
-{
+.center_date_title_inactive {
   color: #adadad;
   display: -webkit-box;
   display: -ms-flexbox;

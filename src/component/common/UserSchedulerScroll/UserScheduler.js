@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { height } from "@mui/system";
 
 function UserScheduler({
   id,
@@ -47,6 +49,8 @@ function UserScheduler({
 
   const [mobileDate, setMobileDate] = useState();
   const [alignment, setAlignment] = React.useState("week");
+
+  const [cellLoadder, setcellLoadder] = useState(true);
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -127,6 +131,8 @@ function UserScheduler({
     //   )}&timeBlock=EarlyBird&timeZone=America/New_York&trainerId=${id}`
     // )
 
+    setcellLoadder(true);
+
     getCalenderDetails(
       id,
       startWeek.format("YYYY-MM-DD"),
@@ -134,6 +140,7 @@ function UserScheduler({
       "EarlyBird"
     ).then((data) => {
       setBlockCell(data.data);
+      setcellLoadder(false);
       console.log(data.data, "hello");
     });
   };
@@ -226,7 +233,7 @@ function UserScheduler({
 
       <br></br>
       <br></br>
-      <div >
+      <div>
         <div className="calendar_controls">
           {moment(startWeek.format("YYYY-MM-DD")).isAfter(
             moment().startOf("isoWeek").format("YYYY-MM-DD"),
@@ -289,12 +296,17 @@ function UserScheduler({
             {date.map((item, keys) => {
               return (
                 <th className={keys === 6 ? "border_right_none" : null}>
-                  <div className={moment().isAfter(item) && moment().format("YYYY-MM-DD") !== item?"center_date_title_inactive":"center_date_title"}>
+                  <div
+                    className={
+                      moment().isAfter(item) &&
+                      moment().format("YYYY-MM-DD") !== item
+                        ? "center_date_title_inactive"
+                        : "center_date_title"
+                    }
+                  >
                     <div className="date_title">{item?.slice(8)}</div>
                     <div className="date_title_two">
-                      {
-                         moment(item, "YYYY MM DD").format("dddd").slice(0, 3)}
-                        
+                      {moment(item, "YYYY MM DD").format("dddd").slice(0, 3)}
                     </div>
                   </div>
                 </th>
@@ -303,82 +315,93 @@ function UserScheduler({
           </tr>
         </thead>
         <tbody>
-          {time.map((item, keys) => {
-            return (
-              <tr>
-                <td
-                  className={
-                    item.isHalfHour ? "border_top_none" : "border_bottom_none"
-                  }
-                >
-                  <div className="time_title">{item.time}</div>
-                </td>
-                {date.map((dateItem, datekey) => {
-                  return (
-                    <td
-                      onClick={(e) => {
-                        if (
-                          Object.keys(blockCell).find((ele) => ele === dateItem)
-                        ) {
+          {cellLoadder ? (
+            <div className="table-loader">
+              <CircularProgress size={60} />
+            </div>
+          ) : (
+            time.map((item, keys) => {
+              return (
+                <tr>
+                  <td
+                    className={
+                      item.isHalfHour ? "border_top_none" : "border_bottom_none"
+                    }
+                  >
+                    <div className="time_title">{item.time}</div>
+                  </td>
+                  {date.map((dateItem, datekey) => {
+                    return (
+                      <td
+                        onClick={(e) => {
                           if (
-                            blockCell[dateItem].find(
-                              (ele) => ele === time[keys + 1].time
+                            Object.keys(blockCell).find(
+                              (ele) => ele === dateItem
                             )
                           ) {
                             if (
                               blockCell[dateItem].find(
-                                (ele) => ele === time[keys].time
+                                (ele) => ele === time[keys + 1].time
                               )
                             ) {
-                              setSelectedSlots(keys, dateItem, item);
+                              if (
+                                blockCell[dateItem].find(
+                                  (ele) => ele === time[keys].time
+                                )
+                              ) {
+                                setSelectedSlots(keys, dateItem, item);
+                              }
                             }
                           }
-                        }
-                        // else {
-                        //   setSelectedSlots(keys, dateItem);
-                        // }
-                      }}
-                      className={
-                        
-                        moment().isAfter(dateItem) && moment().format("YYYY-MM-DD") !== dateItem?
-                        "block_cell_inactive"
-                        :
-                        (selectedCell.timeKey === keys ||
-                          selectedCell.timeKeyTwo === keys) &&
-                        date.indexOf(selectedCell.datekey) === datekey
-                          ? "selected_cell"
-                          : // :
-                          //  datekey === 6
-                          // ? "border_right_none block_cell"
-                          Object.keys(blockCell).find((ele) => ele === dateItem)
-                          ? blockCell[dateItem].find((ele) => ele === item.time)
-                            ? null
+                          // else {
+                          //   setSelectedSlots(keys, dateItem);
+                          // }
+                        }}
+                        className={
+                          moment().isAfter(dateItem) &&
+                          moment().format("YYYY-MM-DD") !== dateItem
+                            ? "block_cell_inactive"
+                            : (selectedCell.timeKey === keys ||
+                                selectedCell.timeKeyTwo === keys) &&
+                              date.indexOf(selectedCell.datekey) === datekey
+                            ? "selected_cell"
+                            : // :
+                            //  datekey === 6
+                            // ? "border_right_none block_cell"
+                            Object.keys(blockCell).find(
+                                (ele) => ele === dateItem
+                              )
+                            ? blockCell[dateItem].find(
+                                (ele) => ele === item.time
+                              )
+                              ? null
+                              : "block_cell"
                             : "block_cell"
-                          : "block_cell"
-                      }
-                      ref={
-                        keys === 0
-                          ? EarlyBirdRef
-                          : keys === 6
-                          ? RiseAndShineRef
-                          : keys === 12
-                          ? MidDayRef
-                          : keys === 18
-                          ? LunchTimeRef
-                          : keys === 24
-                          ? HappyHourRef
-                          : keys === 30
-                          ? NeverTooLateRef
-                          : null
-                      }
-                    >
-                      {}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+                        }
+                        ref={
+                          keys === 0
+                            ? EarlyBirdRef
+                            : keys === 6
+                            ? RiseAndShineRef
+                            : keys === 12
+                            ? MidDayRef
+                            : keys === 18
+                            ? LunchTimeRef
+                            : keys === 24
+                            ? HappyHourRef
+                            : keys === 30
+                            ? NeverTooLateRef
+                            : null
+                        }
+                      >
+                        {}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
 
@@ -447,12 +470,12 @@ function UserScheduler({
                           // }
                         }}
                         className={
-                          moment().isAfter(dateItem) && moment().format("YYYY-MM-DD") !== dateItem?
-                          "block_cell_inactive"
-                          :
-                          (selectedCell.timeKey === keys ||
-                            selectedCell.timeKeyTwo === keys) &&
-                          date.indexOf(selectedCell.datekey) === datekey
+                          moment().isAfter(dateItem) &&
+                          moment().format("YYYY-MM-DD") !== dateItem
+                            ? "block_cell_inactive"
+                            : (selectedCell.timeKey === keys ||
+                                selectedCell.timeKeyTwo === keys) &&
+                              date.indexOf(selectedCell.datekey) === datekey
                             ? "selected_cell"
                             : // :
                             //  datekey === 6
