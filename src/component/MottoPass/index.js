@@ -23,7 +23,7 @@ export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMott
   return (
     <div className="mottopass-session-section">
       <div className="mottopass-heading">
-        <h1 className="fs-25 font-weight-normal">Valid Motto Packages</h1>
+        <h1 className="fs-25 font-weight-normal">Current Packages</h1>
       </div>
 
       <div className="mottopass-cards-section row w-100 justify-content-between mb-4">
@@ -35,7 +35,7 @@ export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMott
         ))}
       </div>
       <div className="mottopass-heading">
-        <h1 className="fs-25 font-weight-normal">In-valid Motto Packages</h1>
+        <h1 className="fs-25 font-weight-normal">Expired Packages</h1>
       </div>
 
       <div className="mottopass-cards-section row w-100 justify-content-between">

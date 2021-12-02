@@ -279,7 +279,7 @@ const TrainerSessionFC = ({
 
 
                     <div className="mottopass-heading w-100">
-                      <h1 className="fs-25 font-weight-normal">Valid Motto Packages</h1>
+                      <h1 className="fs-25 font-weight-normal">Current Packages</h1>
                     </div>
                     <div className="trainer_pass_container">
 
@@ -305,7 +305,7 @@ const TrainerSessionFC = ({
                   
                     </div>
                     <div className="mottopass-heading mt-4 pt-4">
-                      <h1 className="fs-25 font-weight-normal">In-Valid Motto Packages</h1>
+                      <h1 className="fs-25 font-weight-normal">Expired Packages</h1>
                     </div>
                     <div className="trainer_pass_container">
 
