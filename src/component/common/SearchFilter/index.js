@@ -525,7 +525,7 @@ function SearchFilter({
           ) : null}
         </div>
         <div className="filter_type">
-          <div className="filter_header">Location</div>
+          <div className="filter_header">Location *</div>
           <div className="filter_options">
             {IPCvalue === "" ? (
               <>

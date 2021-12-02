@@ -474,9 +474,9 @@ function MottoSessionType({
                             {pricingItem[item][type]?.price !== 0 ? (
                               <>
                                 {type === "10 Session Package"
-                                  ? "$" + pricingItem[item][type]?.price / 10
+                                  ? "$" + Math.ceil(pricingItem[item][type]?.price / 10)
                                   : type === "30 Session Package"
-                                  ? "$" + pricingItem[item][type]?.price / 30
+                                  ? "$" + Math.ceil(pricingItem[item][type]?.price / 30)
                                   : "$" + pricingItem[item][type]?.price}
                                 <span>/ Session</span>
                               </>
