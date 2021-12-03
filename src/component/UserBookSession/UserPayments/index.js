@@ -170,8 +170,7 @@ const UserPaymentsFC = ({
 
     if (sessionData?.newPass !== null && passId === null) {
       scheduleBody.newPass = sessionData?.newPass;
-    }else
-    {
+    } else {
       scheduleBody.availPass = passId;
     }
 
@@ -242,34 +241,29 @@ const UserPaymentsFC = ({
     (sessionData?.price || 0) - discountPrice + trxFee + tax + cancellationFee
   );
 
-  const [passId, setpassId] = useState(null)
-
-
+  const [passId, setpassId] = useState(null);
 
   const CheckMottoPass = () => {
-
-   
     console.log(sessionData?.trainerId, sessionData?.sessionType);
-      let userId = localStorage.getItem("user-id");
+    let userId = localStorage.getItem("user-id");
 
-       let type = sessionData?.sessionType === "virtual"? "virtual": sessionData?.venue
-      // if (sessionData?.preferedTrainingMode === "virtual") {
-        GetActivePass(userId, sessionData?.trainerId, type)
-          .then((data) => {
-            console.log(data);
-            // setActivePackage("virtual");
-            setpassId(data[0]?.id);
-           // setActivePackageData(data);
-          })
-          .catch((er) => {
-            console.log(er);
-            // setActivePackageId(null);
-          });
-      }
+    let type =
+      sessionData?.sessionType === "virtual" ? "virtual" : sessionData?.venue;
+    // if (sessionData?.preferedTrainingMode === "virtual") {
+    GetActivePass(userId, sessionData?.trainerId, type)
+      .then((data) => {
+        console.log(data);
+        // setActivePackage("virtual");
+        setpassId(data[0]?.id);
+        // setActivePackageData(data);
+      })
+      .catch((er) => {
+        console.log(er);
+        // setActivePackageId(null);
+      });
+  };
 
   useEffect(() => {
-
-
     updatePricing();
     setCheckPayAhead(false);
     console.log(sessionData);
@@ -438,7 +432,7 @@ const UserPaymentsFC = ({
         price: !isNaN(sessionData?.price)
           ? parseFloat(sessionData?.price)
           : null,
-          title:  sessionData?.trainingType 
+        title: sessionData?.trainingType,
       };
     }
     // console.log("trrrmp", tempData);
@@ -493,19 +487,23 @@ const UserPaymentsFC = ({
                         </div>
                       ) : null}
 
-                      <h4>Choose your Payment Method</h4>
-                      <p>
-                        This is a hold on your card & payment won’t be complete
-                        until after the session is complete. All transactions on
-                        Motto are protected.
-                      </p>
+                      {passId !== null &&
+                      sessionData?.trainingType === "1on1" ? null : (
+                        <>
+                          <h4>Choose your Payment Method</h4>
+                          <p>
+                            This is a hold on your card & payment won’t be
+                            complete until after the session is complete. All
+                            transactions on Motto are protected.
+                          </p>
+                        </>
+                      )}
                     </div>
-                    {( passId !== null && sessionData?.trainingType === "1on1" ) ? (
+                    {passId !== null && sessionData?.trainingType === "1on1" ? (
                       <>
                         {" "}
                         <br></br>
-                        <h4>Use Motto Package</h4>{" "}
-                        <br></br> 
+                        <h4>Use Motto Package</h4> <br></br>
                         {/* <p>Remaining Passes : {sessionData?.availPass?.availPassData[0]?.remains}</p>
                         <p>Expires on : {sessionData?.availPass?.availPassData[0]?.expiresIn}</p> */}
                         <button className={`ud_but`} onClick={ScheduleSession}>
@@ -664,41 +662,44 @@ const UserPaymentsFC = ({
                     </div>
                   </div>
                   <hr />
-                  <div className="user_coupon">
-                    <h2>Have a discount code? Add it now!</h2>
-                    <div className="position-relative mt-3">
-                      <input
-                        type="text"
-                        placeholder="Enter the coupon code here"
-                        className={`mt-0 ${
-                          isCouponCodeValid ? "btn-disabled" : ""
-                        }`}
-                        onChange={handleCouponCode}
-                        value={coupondCode}
-                        disabled={isCouponCodeValid}
-                      />
-                      <button
-                        onClick={checkCouponCode}
-                        className="apply-btn"
-                        disabled={isCouponCodeValid}
-                      >
-                        Apply
-                      </button>
-                      {isCouponCodeValid && (
-                        <div className="position-relative d-flex align-items-center">
-                          <p className="w-100 text-black fs-12 mb-0">
-                            Coupon Code <b>“{`${coupondCode}`}”</b> applied!
-                          </p>
-                          <button
-                            className="btn btn-transparent cancel-btn"
-                            onClick={cancelCouponCode}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      )}
+
+                  {passId !== null && sessionData?.trainingType === "1on1"? null : (
+                    <div className="user_coupon">
+                      <h2>Have a discount code? Add it now!</h2>
+                      <div className="position-relative mt-3">
+                        <input
+                          type="text"
+                          placeholder="Enter the coupon code here"
+                          className={`mt-0 ${
+                            isCouponCodeValid ? "btn-disabled" : ""
+                          }`}
+                          onChange={handleCouponCode}
+                          value={coupondCode}
+                          disabled={isCouponCodeValid}
+                        />
+                        <button
+                          onClick={checkCouponCode}
+                          className="apply-btn"
+                          disabled={isCouponCodeValid}
+                        >
+                          Apply
+                        </button>
+                        {isCouponCodeValid && (
+                          <div className="position-relative d-flex align-items-center">
+                            <p className="w-100 text-black fs-12 mb-0">
+                              Coupon Code <b>“{`${coupondCode}`}”</b> applied!
+                            </p>
+                            <button
+                              className="btn btn-transparent cancel-btn"
+                              onClick={cancelCouponCode}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                   <div className="user_service_details">
                     {/* 
                     //issue no 415 - invalid date and price/hour needs to be removed
@@ -789,7 +790,13 @@ const UserPaymentsFC = ({
   );
 };
 
-const AccordationService = ({ data, couponRate, isCouponApplied, passId, trainingType }) => {
+const AccordationService = ({
+  data,
+  couponRate,
+  isCouponApplied,
+  passId,
+  trainingType,
+}) => {
   let couponRateValue = 0;
 
   if (isCouponApplied && typeof couponRate?.current === "function") {
@@ -824,30 +831,33 @@ const AccordationService = ({ data, couponRate, isCouponApplied, passId, trainin
             key={index}
           >
             <div className="TF_data_title">
-              {(passId === null || trainingType !== "1on1") ?  <h3 className="fs-20 my-3">{item.title === "1on1" ? "One on One" : item.title === "social"? "Social" : "Class"}</h3> : null}
-             
+              {passId === null || trainingType !== "1on1" ? (
+                <h3 className="fs-20 my-3">
+                  {item.title === "1on1"
+                    ? "One on One"
+                    : item.title === "social"
+                    ? "Social"
+                    : "Class"}
+                </h3>
+              ) : null}
             </div>
 
             <div className="session-block">
               {item?.price ? (
-
-              (  passId === null || trainingType !== "1on1" )?
-                <div className="session-item d-flex aling-items-center">
-                  <p className="fs-20 text-secondary">{item.session}</p>
-                  <p className="ml-auto fs-20 text-secondary">
-                    {
-                      
-                    
-                    
-                     item.people
-                      ? `$${parseFloat((finalPrice || 0) / item.people).toFixed(
-                          1
-                        )} / Person`
-                      : item.isPrice
-                      ? `$${finalPrice} / Person`
-                      : item?.price}
-                  </p>
-                </div> : null
+                passId === null || trainingType !== "1on1" ? (
+                  <div className="session-item d-flex aling-items-center">
+                    <p className="fs-20 text-secondary">{item.session}</p>
+                    <p className="ml-auto fs-20 text-secondary">
+                      {item.people
+                        ? `$${parseFloat(
+                            (finalPrice || 0) / item.people
+                          ).toFixed(1)} / Person`
+                        : item.isPrice
+                        ? `$${finalPrice} / Person`
+                        : item?.price}
+                    </p>
+                  </div>
+                ) : null
               ) : (
                 ""
               )}
@@ -912,7 +922,7 @@ const mapDispatchToProps = (dispatch) => {
       resetUserDetails,
       updateUserDetails,
       verifyCouponCodeApi: verifyCouponCodeAct,
-      GetActivePass
+      GetActivePass,
     },
     dispatch
   );

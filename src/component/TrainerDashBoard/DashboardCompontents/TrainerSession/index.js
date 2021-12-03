@@ -8,7 +8,10 @@ import { Link } from "react-router-dom";
 import BlueArrowButton from "../../../common/BlueArrowButton";
 import Jenny from "../../../../assets/files/TrainerDashboard/Message/Jenny.png";
 import BlueHoverButton from "../../../common/BlueArrowButton";
-import { getTrainerSessionDetails, getActiveUsersPass } from "action/trainerAct";
+import {
+  getTrainerSessionDetails,
+  getActiveUsersPass,
+} from "action/trainerAct";
 import { cancelSession, updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -20,13 +23,14 @@ import { UserAvatar } from "component/common/UserAvatar";
 import { CommonPageLoader } from "component/common/CommonPageLoader";
 import moment from "moment";
 import { history } from "helpers";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const TrainerSessionFC = ({
   sessionData,
   getTrainerSessionDetailsApi,
   cancelSession,
   updateUserDetails,
-  getActiveUsersPass
+  getActiveUsersPass,
 }) => {
   const [trainerSessionData, setTrainerSessionData] = useState({
     upcomingSessions: [],
@@ -36,6 +40,7 @@ const TrainerSessionFC = ({
 
   const [mottoPassData, setMottoPassData] = useState([]);
   const [inactiveMottoPassData, setInactiveMottoPassData] = useState([]);
+  const [mottoPassLoader, setmottoPassLoader] = useState(false);
 
   const [pageData, setPageData] = useState({
     upcoming: 0,
@@ -55,7 +60,6 @@ const TrainerSessionFC = ({
   // }, []);
 
   const getAllDetails = (currentTab, isPaginaion = false) => {
-
     if (currentTab !== "pass") {
       getTrainerSessionDetailsApi(currentTab, pageData[currentTab])
         .then(({ data: tData, documentCount: tempDocumentCount }) => {
@@ -112,7 +116,9 @@ const TrainerSessionFC = ({
 
             return {
               ...prevData,
-              [sessionTypeData[currentTab]]: isPaginaion ? replaceData : tempData,
+              [sessionTypeData[currentTab]]: isPaginaion
+                ? replaceData
+                : tempData,
             };
           });
 
@@ -124,17 +130,18 @@ const TrainerSessionFC = ({
           Toast({ type: "error", message: err.message || "Error" });
         });
     } else {
-
-      getActiveUsersPass().then(data => {
-        const {list} = data; 
-        setMottoPassData(list)
+      setmottoPassLoader(true);
+      getActiveUsersPass().then((data) => {
+        const { list } = data;
+        setMottoPassData(list);
         // console.log(data);
-      })
-      getActiveUsersPass("inactive").then(data => {
-        const {list} = data; 
-        setInactiveMottoPassData(list)
+        setmottoPassLoader(false);
+      });
+      getActiveUsersPass("inactive").then((data) => {
+        const { list } = data;
+        setInactiveMottoPassData(list);
         // console.log(data);
-      })
+      });
     }
   };
 
@@ -189,19 +196,19 @@ const TrainerSessionFC = ({
       past: "pastSessions",
     };
 
-    let currentSession = sessionTypeData[tab];    
-
+    let currentSession = sessionTypeData[tab];
 
     // console.log("change",tab);
     setTrainerSessionData((prevData) => {
       // console.log("prevData");
       if (prevData[currentSession]?.length > 0) {
         setDataLoading(false);
-        
-        return prevData;}
+
+        return prevData;
+      }
       // console.log("prevData-2");
 
-        setDataLoading(true);
+      setDataLoading(true);
       getAllDetails(tab);
 
       return prevData;
@@ -215,9 +222,7 @@ const TrainerSessionFC = ({
     }));
   };
 
-  const handleMottoPagination = () => {
-
-  }
+  const handleMottoPagination = () => {};
 
   useEffect(() => {
     getAllDetails(currentTab, true);
@@ -276,64 +281,105 @@ const TrainerSessionFC = ({
                 </div>
                 <div className="tabPanel_outter">
                   <TabPanel tabId="pass">
+                    {mottoPassLoader ? (
+                      <CircularProgress />
+                    ) : (
+                      <>
+                        <div className="mottopass-heading w-100">
+                          <h1 className="fs-25 font-weight-normal">
+                            Current Packages
+                          </h1>
+                        </div>
+                        <div className="trainer_pass_container">
+                          {mottoPassData.length !== 0 ? (
+                            <>
+                              {mottoPassData?.map((item) => {
+                                return (
+                                  <div className="pass_card">
+                                    <div className="pass_ribbon">
+                                      {item?.totalPassCount} Session Package
+                                    </div>
+                                    <div className="pass_header">
+                                      {item?.user?.firstName}{" "}
+                                      {item?.user?.lastName}
+                                    </div>
 
+                                    <div className="pass_content">
+                                      {" "}
+                                      {item?.remains} out of{" "}
+                                      {item?.totalPassCount} passes remaining
+                                    </div>
+                                    <div className="pass_content">
+                                      Valid for only{" "}
+                                      {item?.passType === "virtual"
+                                        ? "Virtual Sessions"
+                                        : item?.passType === "trainerLocation"
+                                        ? "Trainer's Location"
+                                        : "Client's Location"}{" "}
+                                    </div>
+                                    <div className="pass_content">
+                                      Valid until{" "}
+                                      {moment
+                                        .tz(item?.expiresIn, "America/New_York")
+                                        .format("MMMM Do, YYYY")}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </>
+                          ) : null}
+                        </div>
 
-                    <div className="mottopass-heading w-100">
-                      <h1 className="fs-25 font-weight-normal">Current Packages</h1>
-                    </div>
-                    <div className="trainer_pass_container">
+                        <div className="mottopass-heading mt-4 pt-4">
+                          <h1 className="fs-25 font-weight-normal">
+                            Expired Packages
+                          </h1>
+                        </div>
+                        <div className="trainer_pass_container">
+                          {inactiveMottoPassData.length > 0 ? (
+                            <>
+                              {inactiveMottoPassData?.map((item) => {
+                                return (
+                                  <div className="pass_card">
+                                    <div className="pass_ribbon">
+                                      {item?.totalPassCount} Session Package
+                                    </div>
+                                    <div className="pass_header">
+                                      {item?.user?.firstName}{" "}
+                                      {item?.user?.lastName}
+                                    </div>
 
-                      {mottoPassData.length !== 0 ?
-                        <>
-                          {mottoPassData?.map(item => {
+                                    <div className="pass_content">
+                                      {" "}
+                                      {item?.remains} out of{" "}
+                                      {item?.totalPassCount} passes remaining
+                                    </div>
+                                    <div className="pass_content">
+                                      Valid for only{" "}
+                                      {item?.passType === "virtual"
+                                        ? "Virtual Sessions"
+                                        : item?.passType === "trainerLocation"
+                                        ? "Trainer's Location"
+                                        : "Client's Location"}{" "}
+                                    </div>
+                                    <div className="pass_content">
+                                      Valid until{" "}
+                                      {moment
+                                        .tz(item?.expiresIn, "America/New_York")
+                                        .format("MMMM Do, YYYY")}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </>
+                          ) : null}
+                        </div>
+                      </>
+                    )}
 
-                            return <div className="pass_card">
-                              <div className="pass_ribbon">{item?.totalPassCount} Session Package</div>
-                              <div className="pass_header">{item?.user?.firstName} {item?.user?.lastName}</div>
-
-                              <div className="pass_content"> {item?.remains} out of {item?.totalPassCount} passes remaining</div>
-                              <div className="pass_content">
-                                Valid for only {item?.passType === "virtual"?"Virtual Sessions": item?.passType === "trainerLocation" ?"Trainer's Location": "Client's Location" } </div>
-                              <div className="pass_content">Valid until {moment.tz(item?.expiresIn, "America/New_York").format("MMMM Do, YYYY")}</div>
-                            </div>
-                          })}
-
-                        </>
-                        : null}
-                        
-                   
-                  
-                    </div>
-                    <div className="mottopass-heading mt-4 pt-4">
-                      <h1 className="fs-25 font-weight-normal">Expired Packages</h1>
-                    </div>
-                    <div className="trainer_pass_container">
-
-                      {inactiveMottoPassData.length > 0 ?
-                        <>
-                          {inactiveMottoPassData?.map(item => {
-
-                            return <div className="pass_card">
-                              <div className="pass_ribbon">{item?.totalPassCount} Session Package</div>
-                              <div className="pass_header">{item?.user?.firstName} {item?.user?.lastName}</div>
-
-                              <div className="pass_content"> {item?.remains} out of {item?.totalPassCount} passes remaining</div>
-                              <div className="pass_content">
-                                Valid for only {item?.passType === "virtual"?"Virtual Sessions": item?.passType === "trainerLocation" ?"Trainer's Location": "Client's Location" } </div>
-                              <div className="pass_content">Valid until {moment.tz(item?.expiresIn, "America/New_York").format("MMMM Do, YYYY")}</div>
-                            </div>
-                          })}
-
-                        </>
-                        : null}
-                        
-                   
-                  
-                    </div>
-
-                    <button onClick={handleMottoPagination} className="viewMoreButton">
+                    {/* <button onClick={handleMottoPagination} className="viewMoreButton">
                         View all Session <BlueHoverButton />
-                      </button>
+                      </button> */}
                   </TabPanel>
                 </div>
                 <div className="tabPanel_outter">
@@ -885,8 +931,9 @@ const TabPast = ({
                   prevData.map((data, index) => {
                     let userProps = {
                       profilePicture: data?.userDetail?.profilePicture,
-                      userName: `${data?.userDetail?.firstName || ""} ${data?.userDetail?.lastName || ""
-                        }`,
+                      userName: `${data?.userDetail?.firstName || ""} ${
+                        data?.userDetail?.lastName || ""
+                      }`,
                     };
                     return (
                       <>
@@ -940,7 +987,7 @@ const mapDispatchToProps = (dispatch) => {
       getTrainerSessionDetailsApi: getTrainerSessionDetails,
       cancelSession,
       updateUserDetails,
-      getActiveUsersPass
+      getActiveUsersPass,
     },
     dispatch
   );

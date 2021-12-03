@@ -59,7 +59,7 @@ function Index() {
             }}
           >
             <input
-              className="input"
+              className="globalIp"
               type="text"
               placeholder=" Search by Trainer name "
               onChange={(e) => {

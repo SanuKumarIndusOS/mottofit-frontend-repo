@@ -25,6 +25,8 @@ import { GoogleLoginButton } from "../../common/SocialLogin/GoogleLoginButton";
 import { SocialLogin } from "component/common/SocialLogin";
 import { nextPathPusher } from "../../../helpers";
 
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import { change_login_status } from "action/NotificationAct";
 
 const closeIcon = <img src={CloseIcon} alt="close" className="close_login" />;
@@ -37,6 +39,7 @@ const SignInFC = ({
   updateUserDetails,
   nextAction,
 }) => {
+  const [loginLoader, setloginLoader] = useState(false);
   const myRef = useRef(null);
   const [data, setData] = useState({
     email: "",
@@ -68,6 +71,8 @@ const SignInFC = ({
   };
 
   async function logIn(e) {
+
+    setloginLoader(true);
     e.preventDefault();
     const payload = {
       email: data.email,
@@ -76,7 +81,15 @@ const SignInFC = ({
       deviceName: data.deviceName,
     };
 
+    if (!validateFields(payload)){
+      console.log("err");
+      setloginLoader(false);
+    };
+
     if (!validateFields(payload)) return;
+    
+
+   
 
     const { loginApi } = AuthApi;
 
@@ -182,6 +195,13 @@ const SignInFC = ({
               <div className="wrapper_inner">
                 <h2>Welcome to Motto!</h2>
                 <p>Sign into your account by filling in the details below</p>
+                {loginLoader ? (
+                  <div className="loader">
+                    Loging in, Please Wait!&ensp;
+                    <CircularProgress />
+                  </div>
+                ) : null}
+
                 <div className="form_item_login">
                   <form onSubmit={logIn}>
                     <div className="input_item1_signin">

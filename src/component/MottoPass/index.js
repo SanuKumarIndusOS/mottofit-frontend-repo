@@ -4,9 +4,14 @@ import { MottoPassCard } from "component/common/MottoPassCard";
 import { PreviousPassItem } from "./previousPassItem";
 import BlueHoverButton from "component/common/BlueArrowButton";
 
+
+
+
 import moment from "moment";
 
 export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMottoPassData }) => {
+
+
 
  // console.log(mottoPassData,"mm");
   const validMottoPassData = [...mottoPassData].filter(({ expiresIn }) => {
@@ -47,9 +52,9 @@ export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMott
         ))}
       </div>
 
-         <button onClick={handleMottoPagination} className="viewMoreButton">
+         {/* <button onClick={handleMottoPagination} className="viewMoreButton">
             View all Session <BlueHoverButton />
-         </button>
+         </button> */}
 
       {/* <hr /> */}
 

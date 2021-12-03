@@ -30,6 +30,7 @@ import { CommonPageLoader } from "component/common/CommonPageLoader";
 import { useLocation } from "react-router-dom";
 import { MottoPassSection } from "component/MottoPass";
 import Dialog from "@material-ui/core/Dialog";
+import CircularProgress from "@material-ui/core/CircularProgress";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -146,7 +147,11 @@ const UserSessionClass = (props) => {
     }));
   };
 
+  const [mottoPassLoader, setmottoPassLoader] = useState(false);
+
   const getAllPasses = async () => {
+    setmottoPassLoader(true);
+
     const passData = await props.getAllMottoPassesAct();
 
     const inactivePassData = await props.getAllMottoPassesAct("inactive");
@@ -156,6 +161,8 @@ const UserSessionClass = (props) => {
     setMottoPassData(passData.list);
 
     setInvalidMottoPassData(inactivePassData.list);
+
+    setmottoPassLoader(false);
   };
 
   useEffect(() => {
@@ -229,11 +236,26 @@ const UserSessionClass = (props) => {
               </div>
               <div className="tabPanel_outter">
                 <TabPanel tabId="pass">
-                  <MottoPassSection
-                    handlePagination={handlePagination}
-                    mottoPassData={mottoPassData}
-                    inValidMottoPassData={inValidMottoPassData}
-                  />
+                  {mottoPassLoader ? (
+                    <div
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <CircularProgress />
+                    </div>
+                  ) : (
+                    <MottoPassSection
+                      handlePagination={handlePagination}
+                      mottoPassData={mottoPassData}
+                      inValidMottoPassData={inValidMottoPassData}
+                    />
+                  )}
+
                   {/* <TabOne
                     tabname={"Moto Pass"}
                     tabData={userData.pastSessions}
@@ -368,7 +390,7 @@ const TabOne = ({
     if (hourDiff < 12 && dayDiff < 1) {
       console.log("less than 12");
       // cancelAction();
-      cancelAlert ? cancelAction() :setcancelAlert(true);
+      cancelAlert ? cancelAction() : setcancelAlert(true);
     } else {
       cancelAction();
     }
@@ -701,10 +723,9 @@ const TabOne = ({
                                               margin: "1rem",
                                               padding: "10px",
                                               border: "none",
-                                              color:"white",
-                                              backgroundColor:"red"
+                                              color: "white",
+                                              backgroundColor: "red",
                                             }}
-
                                             onClick={() =>
                                               handleCancel(
                                                 data.id,
@@ -721,8 +742,9 @@ const TabOne = ({
                                               padding: "10px",
                                               border: "none",
                                             }}
-
-                                            onClick={() =>{setcancelAlert(false)}}
+                                            onClick={() => {
+                                              setcancelAlert(false);
+                                            }}
                                           >
                                             CLOSE
                                           </button>
