@@ -18,16 +18,17 @@ function ProfileHeader({
   return (
     <div className="trainer-profile-header-container">
       <div className="profile__black-area">
-        <div
+        {/* <div
           className="profile-picture"
-          style={{ display: !profilePicLoader ? "none" : "flex" }}
+          style={{ display: !profilePicLoader ? "none" : "block" }}
+         
         >
-          <CircularProgress />
-        </div>
+          <CircularProgress   />
+        </div> */}
 
         <img
           className="profile-picture"
-          style={{ display: profilePicLoader ? "none" : "block" }}
+          // style={{ display: profilePicLoader ? "none" : "block" }}
           src={profilePicture}
           onLoad={imageLoader}
         ></img>

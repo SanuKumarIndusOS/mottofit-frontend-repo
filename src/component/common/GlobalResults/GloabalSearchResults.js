@@ -69,7 +69,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
     <div className="results_container">
       <h1>Results</h1>
 
-      <TrainerCard/>
+      {/* <TrainerCard/> */}
 
       {/* <TrainerCards
         content={searchResults}

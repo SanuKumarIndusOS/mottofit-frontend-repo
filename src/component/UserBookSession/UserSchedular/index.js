@@ -228,9 +228,14 @@ const UserEventSchedularFC = (props) => {
     const handleBooking = () => {
       setcancelAlert(false);
       if (!localStorage.getItem("token")) {
+
+        console.log("go to login");
         // history.push(`/mobile/login`);
         // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
         // history.push(`?nextpath=/user/payment`);
+        // console.log("go to login");
+
+        localStorage.setItem("paymentred", "paymentred")
         history.push({
           pathname: "/mobile/login",
           search: "?nextpath=/user/payment",

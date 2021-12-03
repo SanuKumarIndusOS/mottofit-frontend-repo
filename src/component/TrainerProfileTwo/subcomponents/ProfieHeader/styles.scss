@@ -39,6 +39,17 @@
         -ms-flex-align: center;
         align-items: center;
 
+        .hide{
+          display: none;
+        }
+
+        .show{
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          
+        }
+
         @media only screen and (max-width: 900px) {
           height: 250px;
           width: 200px;

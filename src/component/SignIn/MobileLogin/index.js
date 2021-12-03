@@ -18,9 +18,12 @@ import { updateUserDetails } from "action/userAct";
 import { Toast } from "../../../service/toast";
 import { GoogleLoginButton } from "../../common/SocialLogin/GoogleLoginButton";
 import { SocialLogin } from "component/common/SocialLogin";
+import { useLocation } from "react-router-dom";
 
-const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
+const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
   const myRef = useRef(null);
+
+  let location = useLocation();
 
   const historyData = useHistory();
   const [data, setData] = useState({
@@ -44,6 +47,10 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
    console.log(urlData.get("nextpath"),"ne");
 
   console.log(searchUrl);
+
+  React.useEffect(() => {
+    console.log(localStorage.getItem("paymentred"));
+  }, [])
 
   const onChangeValue = (e) => {
     e.persist();
@@ -130,7 +137,14 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
           });
         } else {
           setLoading(false);
-          history.push("/users/dashboard/session");
+
+          if(localStorage.getItem("paymentred")===null){
+            history.push("/users/dashboard/session");
+          }
+          else{
+            history.push("/user/payment")
+          }
+        
         }
       })
       .catch((err) => {
