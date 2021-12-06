@@ -73,6 +73,7 @@ function MottoSessionType({
 
   React.useEffect(() => {
     checkActivePass();
+   
   }, []);
 
   React.useEffect(() => {
@@ -160,7 +161,6 @@ function MottoSessionType({
     }
 
     if (activeHeader === "clientLocation") {
-      
       if (Number(classPricing?.inPersonAtclientLocationfor15People) === 0) {
         sethideClass(false);
       }
@@ -235,7 +235,6 @@ function MottoSessionType({
     }
 
     if (activeHeader === "trainerLocation") {
-
       if (Number(classPricing?.inPersonAttrainerLocationfor15People) === 0) {
         sethideClass(false);
       }
@@ -247,7 +246,6 @@ function MottoSessionType({
       ) {
         sethideSocial(false);
       }
-
 
       setPricingItem({
         ...pricingItem,
@@ -340,11 +338,11 @@ function MottoSessionType({
   return (
     <div className="motto_session_type_container">
       <div className="session_type_header">
-        {oneOnone?.virtualSession === "0" &&
-        social?.virtualSessionfor2People === "0" &&
-        social?.virtualSessionfor3People === "0" &&
-        social?.virtualSessionfor4People === "0" &&
-        classPricing?.virtualSessionfor15People === "0" ? null : (
+        {parseInt(oneOnone?.virtualSession) === 0 &&
+        parseInt(social?.virtualSessionfor2People) === 0 &&
+        parseInt(social?.virtualSessionfor3People) === 0 &&
+        parseInt(social?.virtualSessionfor4People) === 0 &&
+        parseInt(classPricing?.virtualSessionfor15People) === 0? null : (
           <div
             className={
               activeHeader === "virtual"
@@ -359,11 +357,11 @@ function MottoSessionType({
           </div>
         )}
 
-        {oneOnone?.inPersonAtClientLocation === "0" &&
-        social?.inPeronAtClientLocationfor2People === "0" &&
-        social?.inPeronAtClientLocationfor3People === "0" &&
-        social?.inPeronAtClientLocationfor4People === "0" &&
-        classPricing?.inPersonAtClientLocation === "0" ? null : (
+        {parseInt(oneOnone?.inPersonAtClientLocation) === 0 &&
+        parseInt(social?.inPeronAtClientLocationfor2People) === 0 &&
+        parseInt(social?.inPeronAtClientLocationfor3People) === 0 &&
+        parseInt(social?.inPeronAtClientLocationfor4People) === 0 &&
+        parseInt(classPricing?.inPersonAtclientLocationfor15People) === 0 ? null : (
           <div
             className={
               activeHeader === "clientLocation"
@@ -378,11 +376,11 @@ function MottoSessionType({
           </div>
         )}
 
-        {oneOnone?.inPersonAtTrainerLocation === "0" &&
-        social?.inPeronAtTrainerLocationfor2People === "0" &&
-        social?.inPeronAtTrainerLocationfor3People === "0" &&
-        social?.inPeronAtTrainerLocationfor4People === "0" &&
-        classPricing?.inPersonAttrainerLocationfor15People === "0" ? null : (
+        {parseInt(oneOnone?.inPersonAtTrainerLocation) === 0 &&
+        parseInt(social?.inPeronAtTrainerLocationfor2People) === 0 &&
+        parseInt(social?.inPeronAtTrainerLocationfor3People) === 0 &&
+        parseInt(social?.inPeronAtTrainerLocationfor4People) === 0 &&
+        parseInt(classPricing?.inPersonAttrainerLocationfor15People) === 0 ? null : (
           <div
             className={
               activeHeader === "trainerLocation"
@@ -443,12 +441,11 @@ function MottoSessionType({
                     </div>
                   </Dialog>
                 </div>
-                {item === "CREATE A CLASS" && !hideClass
-                    ? null
-                    : item === "SOCIAL SESSIONS" && !hideSocial
-                    ? null
-                    :  <div className="line"></div>}
-               
+                {item === "CREATE A CLASS" && !hideClass ? null : item ===
+                    "SOCIAL SESSIONS" && !hideSocial ? null : (
+                  <div className="line"></div>
+                )}
+
                 <div>
                   {Object.keys(pricingItem[item]).map((type, key) => {
                     return (activePassType.includes(activeHeader) &&
@@ -474,9 +471,15 @@ function MottoSessionType({
                             {pricingItem[item][type]?.price !== 0 ? (
                               <>
                                 {type === "10 Session Package"
-                                  ? "$" + Math.ceil(pricingItem[item][type]?.price / 10)
+                                  ? "$" +
+                                    Math.ceil(
+                                      pricingItem[item][type]?.price / 10
+                                    )
                                   : type === "30 Session Package"
-                                  ? "$" + Math.ceil(pricingItem[item][type]?.price / 30)
+                                  ? "$" +
+                                    Math.ceil(
+                                      pricingItem[item][type]?.price / 30
+                                    )
                                   : "$" + pricingItem[item][type]?.price}
                                 <span>/ Session</span>
                               </>
