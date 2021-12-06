@@ -446,13 +446,13 @@ const UserPaymentsFC = ({
         <div className="container">
           <div className="user_payment_inner_container">
             <div className="user_payment_link">
-              {/* <div className="outter_links">
+              <div className="outter_links">
                 <img src={ArrowBack} alt="icon" />
                 <div className="inner_links">
-                  <Link to="/user/motto-pass"> Get a Motto Package</Link>
+                  <Link to={`/user/scheduler/${sessionData?.trainerId}`}>Back to Scheduler</Link>
                   <div></div>
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="user_payment_grid">
               <div className="user_payment_left_outter">
@@ -663,43 +663,42 @@ const UserPaymentsFC = ({
                   </div>
                   <hr />
 
-                  {passId !== null && sessionData?.trainingType === "1on1"? null : (
-                    <div className="user_coupon">
-                      <h2>Have a discount code? Add it now!</h2>
-                      <div className="position-relative mt-3">
-                        <input
-                          type="text"
-                          placeholder="Enter the coupon code here"
-                          className={`mt-0 ${
-                            isCouponCodeValid ? "btn-disabled" : ""
-                          }`}
-                          onChange={handleCouponCode}
-                          value={coupondCode}
-                          disabled={isCouponCodeValid}
-                        />
-                        <button
-                          onClick={checkCouponCode}
-                          className="apply-btn"
-                          disabled={isCouponCodeValid}
-                        >
-                          Apply
-                        </button>
-                        {isCouponCodeValid && (
-                          <div className="position-relative d-flex align-items-center">
-                            <p className="w-100 text-black fs-12 mb-0">
-                              Coupon Code <b>“{`${coupondCode}`}”</b> applied!
-                            </p>
-                            <button
-                              className="btn btn-transparent cancel-btn"
-                              onClick={cancelCouponCode}
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        )}
-                      </div>
+                  { passId !==null ? null :
+                  <div className="user_coupon">
+                    <h2>Have a discount code? Add it now!</h2>
+                    <div className="position-relative mt-3">
+                      <input
+                        type="text"
+                        placeholder="Enter the coupon code here"
+                        className={`mt-0 ${
+                          isCouponCodeValid ? "btn-disabled" : ""
+                        }`}
+                        onChange={handleCouponCode}
+                        value={coupondCode}
+                        disabled={isCouponCodeValid}
+                      />
+                      <button
+                        onClick={checkCouponCode}
+                        className="apply-btn"
+                        disabled={isCouponCodeValid}
+                      >
+                        Apply
+                      </button>
+                      {isCouponCodeValid && (
+                        <div className="position-relative d-flex align-items-center">
+                          <p className="w-100 text-black fs-12 mb-0">
+                            Coupon Code <b>“{`${coupondCode}`}”</b> applied!
+                          </p>
+                          <button
+                            className="btn btn-transparent cancel-btn"
+                            onClick={cancelCouponCode}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>}
                   <div className="user_service_details">
                     {/* 
                     //issue no 415 - invalid date and price/hour needs to be removed

@@ -231,12 +231,12 @@ const HeadingTrainer = ({ bestMatchRef }) => {
     <>
       <div className="container">
         <div className="wrapper_heading" ref={bestMatchRef}>
-          <h2>Your Motto Matches</h2>
+          {/* <h2>Your Motto Matches</h2>
           <p>
             These matches are the perfect fit based on your filters. The prices
             shown are for 1:1 sessions. Click on the trainer profile for group
             rates!
-          </p>
+          </p> */}
         </div>
       </div>
     </>
