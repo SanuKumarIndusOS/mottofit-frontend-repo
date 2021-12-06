@@ -121,7 +121,7 @@ const UserTracker = () => {
             {ScheduleIconBar}
             {ScheduleText}
           </div>
-          {ArrowOne}
+          {/* {ArrowOne}
           <div className="items">
             {SessionIconBar} {SessionText}
           </div>
@@ -129,7 +129,7 @@ const UserTracker = () => {
 
           <div className="items">
             {MottoIconBar} {MottoText}
-          </div>
+          </div> */}
           {ArrowThree}
 
           <div className="items">
