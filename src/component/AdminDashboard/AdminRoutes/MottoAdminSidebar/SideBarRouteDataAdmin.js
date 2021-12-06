@@ -39,6 +39,11 @@ export const SideBarRouteDataAdmin = [
     icon: <img src={MessageIcon} alt="icon" />,
   },
   {
+    title: "Packages",
+    path: "/admins/motto-packages",
+    icon: <img src={MessageIcon} alt="icon" />,
+  },
+  {
     title: "Payments",
     // path: "/trainers/dashboard/notification",
     icon: <img src={NotificationIcon} alt="icon" />,

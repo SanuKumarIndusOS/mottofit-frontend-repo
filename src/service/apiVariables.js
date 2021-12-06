@@ -55,6 +55,7 @@ export const AuthApi = {
 
 export const TrainerApi = {
 
+
   getAllUsersPasses: {
     method: "get",
     url: "getUsersPasses",
@@ -66,6 +67,16 @@ export const TrainerApi = {
 
       if(this.passStatus) fullURL = `${fullURL}&passStatus=${this.passStatus}`
       return  fullURL;          
+    },
+  },
+  getBookingSearch: {
+    url: "getSearch",
+    method: "get",
+    baseURL: "normal",
+    userType:"",
+    search: "",
+    get api() {
+       return `${this.url}?userType=${this.userType}&search=${this.search}&limit=5`;          
     },
   },
   searchBestMatch: {
@@ -209,10 +220,23 @@ export const TrainerApi = {
     method: "get",
     baseURL: "session",
     isAdmin: true,
-    page: 1,
+    page: 1,    
+    userId:"",
     get api() {
-      return this.url + this.type + this.page;
+      return `${this.url}${this.type}${this.page}&id=${this.userId}`;
     },
+  },  
+  getAllAdminPasses:{
+  url: "admin/getAllMottoPass",
+      method: "get",
+      baseURL: "normal",
+      isAdmin: true,
+      page: 1,    
+      userId:"",
+      status:"active",      
+      get api() {
+        return `${this.url}?status=${this.status}&limit=10&page=${this.page}`;
+      },
   },
   getStatsData: {
     api: "get/stats",

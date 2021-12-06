@@ -14,7 +14,7 @@ import DollarIcon from "assets/files/SVG/green_dollar_sign.svg";
 //additonal packages
 import moment from "moment";
 
-export const MottoPassCard = ({ data }) => {
+export const MottoPassCard = ({ data , className = ""}) => {
   const { totalPassCount, price, expiresIn, passType, trainer, remains } = data || {};
 
   let mottoPassType = "";
@@ -43,7 +43,7 @@ export const MottoPassCard = ({ data }) => {
   let discountedPrice = Math.abs(price / totalPassCount).toFixed(2);
 
   return (
-    <div className="mottopass-card">
+    <div className={`mottopass-card ${className}`}>
       <div className="pass-user-detail d-flex align-items-center flex-column position-relative">
         <div className="pass-user-profilepic position-absolute">
           <UserAvatar className="img-md" {...userData} />
