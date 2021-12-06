@@ -322,15 +322,28 @@ const TabOne = ({
   const [visible, setVisible] = useState([10]);
   const [isLoading, setisLoading] = useState(false);
   const [cancelAlert, setcancelAlert] = useState(false);
+  const [rescheduleAction, setrescheduleAction] = useState(false);
   const setViewMore = () => {
     // setVisible((prevValue) => prevValue + 1);
   };
 
   useEffect(() => {
-    console.log(tabData,"ll");
-  }, [])
+    console.log(tabData, "ll");
+  }, []);
 
-  const handleCancel = (sessionId, channelId, sessionStartTime) => {
+  const handleCancel = (
+    sessionId,
+    channelId,
+    sessionStartTime,
+    isReschedule,
+    encodedURL
+  ) => {
+    if (isReschedule) {
+      setrescheduleAction(true);
+    } else {
+      setrescheduleAction(false);
+    }
+
     var tempStartTime = moment();
     var tempEndTime = moment(
       getFormatDate(sessionStartTime, "LT", true),
@@ -357,14 +370,16 @@ const TabOne = ({
 
     // console.log(hourDiff, dayDiff);
 
-    const cancelAction = () => {
+    const cancelAction = (isReschedule, encodedURL) => {
+      // console.log(isReschedule, encodedURL);
+
       let payload = {
         sessionId,
         sessionStatus: "cancelled",
       };
       setisLoading(true);
       setcancelAlert(false);
-      console.log(channelId);
+      // console.log(channelId);
 
       Toast({ type: "success", message: "success" });
 
@@ -377,6 +392,12 @@ const TabOne = ({
             type: "success",
             message: "Session cancelled" || "Session cancelled",
           });
+
+          if(isReschedule)
+          {
+            // console.log("jit");
+            history.push(encodedURL)
+          }
           // history.push(`/users/dashboard/message/past?channelId=${channelId}`);
           handleChange();
         })
@@ -390,9 +411,11 @@ const TabOne = ({
     if (hourDiff < 12 && dayDiff < 1) {
       console.log("less than 12");
       // cancelAction();
-      cancelAlert ? cancelAction() : setcancelAlert(true);
+      cancelAlert
+        ? cancelAction(isReschedule, encodedURL)
+        : setcancelAlert(true);
     } else {
-      cancelAction();
+      cancelAction(isReschedule, encodedURL);
     }
   };
 
@@ -727,11 +750,24 @@ const TabOne = ({
                                               backgroundColor: "red",
                                             }}
                                             onClick={() =>
-                                              handleCancel(
+                                           {   
+                                            let encodedName = "";
+                                            let trainerFullname = `${
+                                              data?.trainerDetail?.firstName || ""
+                                            }-${data?.trainerDetail?.lastName || ""}`;
+      
+                                            encodedName =
+                                              trainerFullname.toLocaleLowerCase();
+                                            
+                                            handleCancel(
                                                 data.id,
                                                 data.channelId,
-                                                data.sessionStartTime
-                                              )
+                                                data.sessionStartTime,
+                                                rescheduleAction ? true : false,
+                                                `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+
+                                                
+                                              )}
                                             }
                                           >
                                             CANCEL
@@ -800,7 +836,34 @@ const TabOne = ({
                                     </>
                                   )}
 
-                                  <button >Reschedule</button>
+                                  <button
+                                    onClick={() => {
+                                      let encodedName = "";
+                                      let trainerFullname = `${
+                                        data?.trainerDetail?.firstName || ""
+                                      }-${data?.trainerDetail?.lastName || ""}`;
+
+                                      encodedName =
+                                        trainerFullname.toLocaleLowerCase();
+                                      if (tabname === "Upcoming") {
+                                        handleCancel(
+                                          data.id,
+                                          data.channelId,
+                                          data.sessionStartTime,
+                                          true,
+                                          `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                        );
+                                      } else {
+                                        history.push(
+                                          `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                        );
+                                      }
+                                    }}
+                                  >
+                                    {tabname === "Upcoming"
+                                      ? "Reschedule"
+                                      : "Rebook"}
+                                  </button>
                                 </>
                               )}
 
