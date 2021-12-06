@@ -37,7 +37,7 @@ function TrainerProfileTwo({ getTrainerDetail, updateUserDetails, requestTrainer
           },
         ]);
       });
-      // console.log(data);
+      console.log(data);
     });
   }, []);
 

@@ -326,9 +326,9 @@ const TabOne = ({
     // setVisible((prevValue) => prevValue + 1);
   };
 
-  // useEffect(() => {
-  //   console.log(tabData);
-  // }, [])
+  useEffect(() => {
+    console.log(tabData,"ll");
+  }, [])
 
   const handleCancel = (sessionId, channelId, sessionStartTime) => {
     var tempStartTime = moment();
@@ -799,6 +799,8 @@ const TabOne = ({
                                       )}
                                     </>
                                   )}
+
+                                  <button >Reschedule</button>
                                 </>
                               )}
 

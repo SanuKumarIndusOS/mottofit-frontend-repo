@@ -32,7 +32,7 @@ const TrainerCardsFC = (props) => {
   };
 
   let no_match = <div></div>;
-  if (bestMatchData?.length === 0 && props.type !=="globalSearch") {
+  if (bestMatchData?.length === 0 && props.type !== "globalSearch") {
     no_match = <h1 className="no_match">No Matches found</h1>;
   }
 
@@ -45,7 +45,9 @@ const TrainerCardsFC = (props) => {
     };
     props.updateUserDetails(reduxData);
 
-      let trainerFullname = `${bestMatchData[data]["firstName"] || ""}-${bestMatchData[data]["lastName"] || ""}`
+    let trainerFullname = `${bestMatchData[data]["firstName"] || ""}-${
+      bestMatchData[data]["lastName"] || ""
+    }`;
 
     let encodedName = trainerFullname.toLocaleLowerCase();
 
@@ -76,7 +78,7 @@ const TrainerCardsFC = (props) => {
   return (
     <>
       <div className="container">
-        {props.loader ? null : (
+        {props.loader ? null : props.type === "globalSearch" ? null : (
           <>
             <HeadingTrainer bestMatchRef={props.bestMatchRef} />
             {no_match}{" "}
@@ -125,9 +127,11 @@ const TrainerCardsFC = (props) => {
                 return value > 0;
               });
 
-                let trainerFullname = `${bestMatchData[data]["firstName"] || ""}-${bestMatchData[data]["lastName"] || ""}`
+            let trainerFullname = `${bestMatchData[data]["firstName"] || ""}-${
+              bestMatchData[data]["lastName"] || ""
+            }`;
 
-    let encodedName = trainerFullname.toLocaleLowerCase();
+            let encodedName = trainerFullname.toLocaleLowerCase();
 
             return (
               // <div
@@ -139,7 +143,7 @@ const TrainerCardsFC = (props) => {
                 to={`/trainer/profile/${bestMatchData[data]["id"]}/${encodedName}`}
                 className="card-link card"
                 key={`trainer_best_matches_${index}`}
-                style={{paddingBottom:"0px"}}
+                style={{ paddingBottom: "0px" }}
               >
                 <div className="position-relative w-100">
                   <img

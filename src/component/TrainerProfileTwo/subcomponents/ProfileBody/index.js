@@ -68,7 +68,7 @@ function ProfileBody({ trainerData, handleBooking, imageGrid, handleRequestTrain
             classPricing={trainerData?.classSessionPricing}
             handleBooking={handleBooking}
             trainerId={trainerData?.id}
-            servicableLocation={trainerData?.servicableLocation}
+            servicableLocation={trainerData?.serviceableNeighbourHood}
             trainingFacilityLocation={trainerData?.trainingFacilityLocation}
           />
         </div>

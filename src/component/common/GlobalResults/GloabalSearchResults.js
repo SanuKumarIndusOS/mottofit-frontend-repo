@@ -12,7 +12,7 @@ import TrainerCards from "component/FindYourTrainer/TrainersDetails/index";
 import TrainerCard from "../TrainerCard";
 import { load } from "dotenv";
 import Trainer from "component/Home/trainer";
-
+import CircularProgress from "@material-ui/core/CircularProgress";
 const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   const [searchResults, setSearchResults] = useState();
   const [activePage, setactivePage] = useState(1);
@@ -39,7 +39,6 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       page: activePage,
     };
     fetchGlobalSearchResults(payload).then((data) => {
-
       setTotalPage(data.totalCount);
       setSearchResults(data.list);
       console.log(data.list);
@@ -76,70 +75,34 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       
         // loader={loader}
       /> */}
-      {
-
-        loader ? <div className="load_parent">
-          <div className="loaderss"></div>
-        </div> :
-          <div className="results_grid">
-            <div style={{ marginBottom: "500px" }}>
-              {searchResults?.length === 0 ? (
-                <h1>No Results Found</h1>
-              ) : (
-                <div className="row">
-                  <TrainerCards content={searchResults || []} type="globalSearch" />
-                  {/* {searchResults?.map((item) => {
-                  return (
-                    <div className="cardd">
-                      {item.profilePicture !== null ? (
-                        <img
-                          className="card_image"
-                          src={item.profilePicture}
-                        ></img>
-                      ) : (
-                        <div className="card_image">{item.firstName[0]}</div>
-                      )}
-  
-                      <div className="card_content">
-                        <div className="name">
-                          {item.firstName}&ensp;{item.lastName}
-                        </div>
-                        <div className="vertical">
-                          {item.areaOfExpertise?.map((vertical) => {
-                            return `${vertical}, `;
-                          })}
-                        </div>
-                        <div className="_content">{item.description}</div>
-                      </div>
-                      <div
-                        className="card_view_profile"
-                        onClick={() => {
-                          history.push({
-                            pathname: `/trainer/profile/${item.id}`,
-                          });
-                        }}
-                      >
-                        VIEW PROFILE
-                      </div>
-                    </div>
-                  );
-                })}{" "} */}
-                </div>
-              )}
-
-              {searchResults?.length !== 0 ? (
-                <Pagination
-                  activePage={activePage}
-                  itemsCountPerPage={10}
-                  totalItemsCount={totalPage}
-                  pageRangeDisplayed={5}
-                  onChange={handlePageChange}
+      {loader ? (
+       <div style={{height:"80vh", width:"100vw", display:"flex", justifyContent:"center", alignItems:"center"}}> <CircularProgress size={60} /> </div>
+      ) : (
+        <div className="results_grid">
+          <div style={{ marginBottom: "500px" }}>
+            {searchResults?.length === 0 ? (
+              <h1>No Results Found</h1>
+            ) : (
+              <div className="row">
+                <TrainerCards
+                  content={searchResults || []}
+                  type="globalSearch"
                 />
-              ) : null}
-            </div>
-          </div>
-      }
+              </div>
+            )}
 
+            {searchResults?.length !== 0 ? (
+              <Pagination
+                activePage={activePage}
+                itemsCountPerPage={10}
+                totalItemsCount={totalPage}
+                pageRangeDisplayed={5}
+                onChange={handlePageChange}
+              />
+            ) : null}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
