@@ -268,7 +268,9 @@ const UserPaymentsFC = ({
     setCheckPayAhead(false);
     console.log(sessionData);
 
-    CheckMottoPass();
+    if (sessionData?.trainingType === "1on1") {
+      CheckMottoPass();
+    }
 
     let tempTrainingActivity = "";
 
@@ -449,7 +451,9 @@ const UserPaymentsFC = ({
               <div className="outter_links">
                 <img src={ArrowBack} alt="icon" />
                 <div className="inner_links">
-                  <Link to={`/user/scheduler/${sessionData?.trainerId}`}>Back to Scheduler</Link>
+                  <Link to={`/user/scheduler/${sessionData?.trainerId}`}>
+                    Back to Scheduler
+                  </Link>
                   <div></div>
                 </div>
               </div>
@@ -663,44 +667,69 @@ const UserPaymentsFC = ({
                   </div>
                   <hr />
 
-                  { passId !==null ? null :
-                  <div className="user_coupon">
-                    <h2>Have a discount code? Add it now!</h2>
-                    <div className="position-relative mt-3">
-                      <input
-                        type="text"
-                        placeholder="Enter the coupon code here"
-                        className={`mt-0 ${
-                          isCouponCodeValid ? "btn-disabled" : ""
-                        }`}
-                        onChange={handleCouponCode}
-                        value={coupondCode}
-                        disabled={isCouponCodeValid}
-                      />
-                      <button
-                        onClick={checkCouponCode}
-                        className="apply-btn"
-                        disabled={isCouponCodeValid}
-                      >
-                        Apply
-                      </button>
-                      {isCouponCodeValid && (
-                        <div className="position-relative d-flex align-items-center">
-                          <p className="w-100 text-black fs-12 mb-0">
-                            Coupon Code <b>“{`${coupondCode}`}”</b> applied!
-                          </p>
-                          <button
-                            className="btn btn-transparent cancel-btn"
-                            onClick={cancelCouponCode}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      )}
+                  {passId !== null ? null : (
+                    <div className="user_coupon">
+                      <h2>Have a discount code? Add it now!</h2>
+                      <div className="position-relative mt-3">
+                        <input
+                          type="text"
+                          placeholder="Enter the coupon code here"
+                          className={`mt-0 ${
+                            isCouponCodeValid ? "btn-disabled" : ""
+                          }`}
+                          onChange={handleCouponCode}
+                          value={coupondCode}
+                          disabled={isCouponCodeValid}
+                        />
+                        <button
+                          onClick={checkCouponCode}
+                          className="apply-btn"
+                          disabled={isCouponCodeValid}
+                        >
+                          Apply
+                        </button>
+                        {isCouponCodeValid && (
+                          <div className="position-relative d-flex align-items-center">
+                            <p className="w-100 text-black fs-12 mb-0">
+                              Coupon Code <b>“{`${coupondCode}`}”</b> applied!
+                            </p>
+                            <button
+                              className="btn btn-transparent cancel-btn"
+                              onClick={cancelCouponCode}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>}
+                  )}
+
                   <div className="user_service_details">
-                    {/* 
+                    {passId !== null ? null : (
+                      <>
+                      <div className="cancel-style flex-addon">
+                        <div className="cancel-style__header">
+                          Price To Be Paid
+                        </div>
+                        <div className="cancel-style__body">${sessionData?.price} / session</div>
+                      </div>
+                       <br />
+                       </>
+                    )}
+
+                   
+                    <div className="cancel-style">
+                      <div className="cancel-style__header">
+                        Cancellation Fee
+                      </div>
+                      <div className="cancel-style__body">
+                        No charge upto 12 hours from session time. Full charge
+                        after.
+                      </div>
+                    </div>
+                  </div>
+                  {/* 
                     //issue no 415 - invalid date and price/hour needs to be removed
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="service_header">
@@ -712,7 +741,7 @@ const UserPaymentsFC = ({
                         <h3 className="fs-20 text-secondary">Price / Hour</h3>
                       </div>
                     </div> */}
-                    <br></br>
+                  {/* <br></br>
                     {"passType" in mottoPassDataVal ? (
                       <h4>Availed Motto Package: ${mottoPassDataVal?.price}</h4>
                     ) : (
@@ -723,16 +752,16 @@ const UserPaymentsFC = ({
                         passId={passId}
                         trainingType={sessionData?.trainingType}
                       />
-                    )}
+                    )} */}
 
-                    {/* <AccordationService
+                  {/* <AccordationService
                       data={accordionData}
                       couponRate={couponRate}
                       isCouponApplied={isCouponCodeValid}
                     /> */}
 
-                    <div className="user_service_wrapper">
-                      {/* <div className="user_service_left">
+                  {/* <div className="user_service_wrapper"> */}
+                  {/* <div className="user_service_left">
                         <div className="service_header">
                           <div className="user_data_table_left">
                             {sessionData?.sessionType === "1 ON 1 TRAINING" && (
@@ -747,7 +776,7 @@ const UserPaymentsFC = ({
                           </div>
                         </div>
                       </div> */}
-                      {/* <div className="user_service_right">
+                  {/* <div className="user_service_right">
                         <div className="service_header">
                           <div className="user_data_table_right">
                             {sessionData?.sessionType === "1 ON 1 TRAINING" && (
@@ -762,8 +791,8 @@ const UserPaymentsFC = ({
                           </div>
                         </div>
                       </div> */}
-                    </div>
-                  </div>
+                  {/* </div>
+                  </div> */}
                 </div>
               </div>
             </div>
