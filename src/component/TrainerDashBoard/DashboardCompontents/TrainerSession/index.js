@@ -493,14 +493,14 @@ const TabOne = ({
                             {data.sessionStatus !== "completed" ? (
                               <div className="TP_USession_data_buttons mt-0">
                                 {/* <button>Reschedule</button> */}
-                                <button
+                                {/* <button
                                   className="text-primary"
                                   onClick={() =>
                                     handleSessionStatus(data.id, "completed")
                                   }
                                 >
                                   Complete
-                                </button>
+                                </button> */}
                               </div>
                             ) : (
                               <div>
@@ -633,15 +633,15 @@ const TabTwo = ({
                                       "America/New_York"
                                     )
                                     .format("YYYY MM DD HH:MM")
-                                ) ? (
-                                  <button
-                                    className="text-primary"
-                                    onClick={() =>
-                                      handleSessionStatus(data.id, "completed")
-                                    }
-                                  >
-                                    Complete
-                                  </button>
+                                ) ? ( null
+                                  // <button
+                                  //   className="text-primary"
+                                  //   onClick={() =>
+                                  //     handleSessionStatus(data.id, "completed")
+                                  //   }
+                                  // >
+                                  //   Complete
+                                  // </button>
                                 ) : (
                                   <button
                                     onClick={() =>
@@ -873,7 +873,7 @@ const TabPast = ({
                                           Cancel
                                         </button>
                                       )}
-                                      <button
+                                      {/* <button
                                         className="text-primary"
                                         onClick={() =>
                                           handleSessionStatus(
@@ -883,7 +883,7 @@ const TabPast = ({
                                         }
                                       >
                                         Complete
-                                      </button>
+                                      </button> */}
                                     </>
                                   ) : (
                                     <div>

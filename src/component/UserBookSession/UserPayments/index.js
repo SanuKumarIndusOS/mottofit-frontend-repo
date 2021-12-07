@@ -623,7 +623,14 @@ const UserPaymentsFC = ({
                     <h3>I WANT TO TRAIN IN</h3>
                     <div className="user_data_inner">
                       <img src={StrengthIcon} alt="icon" />
-                      <h4>{trainingAcivityType || "Motto session"}</h4>
+                      <h4 style={{ textTransform: "capitalize" }}>
+                        {/* { sessionData?.newPass?.} */}
+                          
+                        
+                        {sessionData?.trainingType === "1on1"
+                          ? "1 on 1 session"
+                          : sessionData?.trainingType}
+                      </h4>
                     </div>
                   </div>
                   <div className="user_payment_details">
@@ -708,17 +715,18 @@ const UserPaymentsFC = ({
                   <div className="user_service_details">
                     {passId !== null ? null : (
                       <>
-                      <div className="cancel-style flex-addon">
-                        <div className="cancel-style__header">
-                          Price To Be Paid
+                        <div className="cancel-style flex-addon">
+                          <div className="cancel-style__header">
+                            Price To Be Paid
+                          </div>
+                          <div className="cancel-style__body">
+                            ${sessionData?.price} / session
+                          </div>
                         </div>
-                        <div className="cancel-style__body">${sessionData?.price} / session</div>
-                      </div>
-                       <br />
-                       </>
+                        <br />
+                      </>
                     )}
 
-                   
                     <div className="cancel-style">
                       <div className="cancel-style__header">
                         Cancellation Fee

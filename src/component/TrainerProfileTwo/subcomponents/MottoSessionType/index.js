@@ -505,7 +505,7 @@ function MottoSessionType({
                                     alignItems: "center",
                                   }}
                                 >
-                                  BOOK NOW <BlueHoverButton />
+                                 {activePassType.includes(activeHeader) && item === "1 ON 1 INDIVIDUAL TRAINING"? "USE PACKAGE":"BOOK NOW"}  <BlueHoverButton />
                                 </div>
                               ) : null
                             ) : null}
