@@ -87,12 +87,13 @@ export const getAllTrainerLists =
 
 // Get Admin SessionData list
 export const getAdminSession =
-  (page, type, isAdmin = true) =>
+  (page, type, isAdmin = true,userId) =>
     (dispatch, getState, { api }) => {
       return new Promise((resolve, reject) => {
         const { getAdminSession } = TrainerApi;
         getAdminSession.page = "?limit=10&offset=" + page;
         getAdminSession.type = type + "/";
+        getAdminSession.userId = userId || "";
         console.log(getAdminSession.type + getAdminSession.page, "action");
         api({ ...getAdminSession, isAdmin })
           .then(({ data }) => {
@@ -249,4 +250,26 @@ export const ActivateCoupon =
           });
       });
     };
+
+
+    
+export const getAllMottoPackage =
+  (status,page) =>
+    (dispatch, getState, { api }) => {
+      return new Promise((resolve, reject) => {
+        const { getAllAdminPasses } = TrainerApi;
+
+        getAllAdminPasses.status = status;
+        getAllAdminPasses.page = page;
+                
+        api({ ...getAllAdminPasses })
+          .then(({ data , totalCount }) => {
+            resolve({data,totalCount});
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    };
+
 

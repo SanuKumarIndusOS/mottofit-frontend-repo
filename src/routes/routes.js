@@ -175,6 +175,13 @@ const routers = [
         exact: true,
       },
       {
+        path: "/motto-packages",
+        componentPath: "pages/AdminDashboard/AdminPackages/AdminPackages",
+        name: "AdminMottoPckages",
+        auth: false,
+        exact: true,
+      },
+      {
         path: "/message/:type",
         componentPath: "pages/TrainerDashboard/TrainerMessage",
         name: "AdminMessage",

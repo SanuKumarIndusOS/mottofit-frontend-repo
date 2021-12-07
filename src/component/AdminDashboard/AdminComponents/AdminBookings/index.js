@@ -4,12 +4,20 @@ import { getAdminSession, adminCancelSession } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./styles.scss";
+import { api } from "service/api";
+import { TrainerApi } from "service/apiVariables";
+import AsyncSelect from 'react-select/async';
+import { debounceFunction } from "helpers/debounce";
 
 function AdminBookings(props) {
   const [pastData, setPastData] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [type, setType] = React.useState("all");
   const [pageLimit, setPageLimit] = React.useState();
+  const [trainerSearch,setTrainerSearch] = useState();
+  const [trainerSelectedValue,setTrainerSelectedValue] = useState();
+  const [userSearch,setUserSearch] = useState();
+  const [userSelectedValue,setUserSelectedValue] = useState();  
 
 
   React.useEffect(() => {
@@ -36,6 +44,58 @@ function AdminBookings(props) {
       setPastData(data.list);
     });
   }, []);
+
+  // React.useEffect(() => {
+  //   props.getAdminSession(page, type,true,trainerSelectedValue?.value).then((data) => {   
+  //     setPastData(data.list);
+  //     setPage(1)
+  //   });
+  // }, [trainerSelectedValue?.value]);
+
+ const handleOptionChange = (userType) => (value) => {
+
+    if(userType === "trainer"){
+      setTrainerSelectedValue(value);
+       props.getAdminSession(1, type,true,value?.value).then((data) => {   
+      setPastData(data.list);
+      setPage(1)
+    });
+    }
+    if(userType === "user"){
+      setUserSelectedValue(value);
+       props.getAdminSession(1, type,true,value?.value).then((data) => {   
+      setPastData(data.list);
+      setPage(1)
+    });
+    }
+
+  }
+
+  const loadOptions =  (userType) => (inputValue, callback) => {
+
+    const {getBookingSearch} = TrainerApi;
+
+    getBookingSearch.userType = userType;
+
+    let currentSearch = userType === "trainer" ? trainerSearch : userSearch;
+
+    getBookingSearch.search = currentSearch || "";
+
+    console.log(currentSearch);
+    if(currentSearch === undefined) return callback(null);
+
+    return new Promise((resolve,reject) => {
+      debounceFunction(async () => {
+      api({...getBookingSearch}).then(({data}) => {
+        let optionLists = data.slice(0,5);
+        const modifiedOptionList = optionLists.map(({id,firstName,lastName}) => ({label: `${firstName} ${lastName}`, value: id, id}))
+        resolve(modifiedOptionList)
+      })
+    },200)
+   }) ;   
+  }
+
+ 
 
   function AdminCancelSession(id) {
     props
@@ -79,6 +139,35 @@ function AdminBookings(props) {
             }}
           >
             Past
+          </div>
+          <div
+            className={type === "cancelled" ? "cancelled active" : "cancelled"}
+            onClick={() => {
+              setType("cancelled");
+            }}
+          >
+            Cancelled
+          </div>
+          <div className="d-flex w-100">
+            <AsyncSelect                
+                defaultOptions
+                value={trainerSelectedValue}               
+                loadOptions={ loadOptions("trainer")}
+                placeholder="Search By Trainer Name"
+                onInputChange={(value) => setTrainerSearch(value)}
+                onChange={handleOptionChange("trainer")}     
+                className="w-25 mx-2 ml-auto"           
+              />
+            <AsyncSelect                
+                defaultOptions
+                cacheOptions
+                value={userSelectedValue}               
+                loadOptions={loadOptions("user")}
+                placeholder="Search By User Name"
+                onInputChange={(value) => setUserSearch(value)}
+                onChange={handleOptionChange("user")}     
+                className="w-25 ml-2"           
+              />
           </div>
         </div>
       </div>
