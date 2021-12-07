@@ -263,8 +263,8 @@ export const getAllMottoPackage =
         getAllAdminPasses.page = page;
                 
         api({ ...getAllAdminPasses })
-          .then(({ data }) => {
-            resolve(data);
+          .then(({ data , totalCount }) => {
+            resolve({data,totalCount});
           })
           .catch((err) => {
             reject(err);

@@ -23,10 +23,10 @@ function AdminMottoPassesFC(props) {
 
   React.useEffect(() => {
 
-      props.getAllMottoPackage(type, page).then((data) => {
+      props.getAllMottoPackage(type, page).then(({data , totalCount}) => {
       console.log(data, "session");
       setPassData(data);
-      setPageLimit(data.totalCount/10)
+      setPageLimit(totalCount/10)
     });         
   }, [page]);
 
@@ -36,20 +36,20 @@ function AdminMottoPassesFC(props) {
         return;
       };
 
-      props.getAllMottoPackage(type, 1).then((data) => {
+      props.getAllMottoPackage(type, 1).then(({data,totalCount}) => {
       console.log(data, "session");
       setPassData(data);
-      setPageLimit(data.totalCount/10)
+      setPageLimit(totalCount/10)
     });   
 
   }, [type]);
 
-  React.useEffect(() => {
-    props.getAllMottoPackage(type, page).then((data) => {
-      console.log(data, "session");
-      setPassData(data);
-    });
-  }, []);
+//   React.useEffect(() => {
+//     props.getAllMottoPackage(type, page).then(({data}) => {
+//       console.log(data, "session");
+//       setPassData(data);
+//     });
+//   }, []);
 
   
 
