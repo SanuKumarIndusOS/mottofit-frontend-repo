@@ -323,12 +323,15 @@ const TabOne = ({
   const [isLoading, setisLoading] = useState(false);
   const [cancelAlert, setcancelAlert] = useState(false);
   const [rescheduleAction, setrescheduleAction] = useState(false);
+  const [rescheduleAlert, setRescheduleAlert] = useState(false);
   const setViewMore = () => {
     // setVisible((prevValue) => prevValue + 1);
   };
 
   useEffect(() => {
-    console.log(tabData, "ll");
+    return () => {
+      setrescheduleAction(false);
+    };
   }, []);
 
   const handleCancel = (
@@ -393,10 +396,10 @@ const TabOne = ({
             message: "Session cancelled" || "Session cancelled",
           });
 
-          if(isReschedule)
-          {
+          if (isReschedule) {
             // console.log("jit");
-            history.push(encodedURL)
+
+            history.push(encodedURL);
           }
           // history.push(`/users/dashboard/message/past?channelId=${channelId}`);
           handleChange();
@@ -415,7 +418,11 @@ const TabOne = ({
         ? cancelAction(isReschedule, encodedURL)
         : setcancelAlert(true);
     } else {
-      cancelAction(isReschedule, encodedURL);
+      isReschedule
+        ? rescheduleAlert
+          ? cancelAction(isReschedule, encodedURL)
+          : setRescheduleAlert(true)
+        : cancelAction(isReschedule, encodedURL);
     }
   };
 
@@ -733,45 +740,99 @@ const TabOne = ({
                                         <div style={{ padding: "1rem" }}>
                                           <h3>Alert!</h3>
                                           <hr></hr>
-                                          Your trainer has already set aside
-                                          this time for you, so you will be
-                                          charged fully for cancellations less
-                                          than 12 hrs before a session. Proceed
-                                          with cancelling?
+                                          {rescheduleAction ? (
+                                            <>
+                                              Rescheduling now will cancel your
+                                              current booking and you will incur
+                                              full cost of that booking as its
+                                              less than 12 hrs away. Would you
+                                              like to continue?
+                                            </>
+                                          ) : (
+                                            <>
+                                              Your trainer has already set aside
+                                              this time for you, so you will be
+                                              charged fully for cancellations
+                                              less than 12 hrs before a session.
+                                              Proceed with cancelling?
+                                            </>
+                                          )}
+
                                           <hr></hr>
                                         </div>
                                         <div>
-                                          <button
-                                            style={{
-                                              margin: "1rem",
-                                              padding: "10px",
-                                              border: "none",
-                                              color: "white",
-                                              backgroundColor: "red",
-                                            }}
-                                            onClick={() =>
-                                           {   
-                                            let encodedName = "";
-                                            let trainerFullname = `${
-                                              data?.trainerDetail?.firstName || ""
-                                            }-${data?.trainerDetail?.lastName || ""}`;
-      
-                                            encodedName =
-                                              trainerFullname.toLocaleLowerCase();
-                                            
-                                            handleCancel(
-                                                data.id,
-                                                data.channelId,
-                                                data.sessionStartTime,
-                                                rescheduleAction ? true : false,
-                                                `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                          {rescheduleAction ? (
+                                            <button
+                                              style={{
+                                                margin: "1rem",
+                                                padding: "10px",
+                                                border: "none",
+                                                color: "white",
+                                                backgroundColor: "#53bfd2",
+                                              }}
+                                              onClick={() => {
+                                                let encodedName = "";
+                                                let trainerFullname = `${
+                                                  data?.trainerDetail
+                                                    ?.firstName || ""
+                                                }-${
+                                                  data?.trainerDetail
+                                                    ?.lastName || ""
+                                                }`;
 
-                                                
-                                              )}
-                                            }
-                                          >
-                                            CANCEL
-                                          </button>
+                                                encodedName =
+                                                  trainerFullname.toLocaleLowerCase();
+
+                                                handleCancel(
+                                                  data.id,
+                                                  data.channelId,
+                                                  data.sessionStartTime,
+                                                  rescheduleAction
+                                                    ? true
+                                                    : false,
+                                                  `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                                );
+                                              }}
+                                            >
+                                              CONTINUE
+                                            </button>
+                                          ) : (
+                                            <button
+                                              style={{
+                                                margin: "1rem",
+                                                padding: "10px",
+                                                border: "none",
+                                                color: "white",
+                                                backgroundColor: "red",
+                                              }}
+                                              onClick={() => {
+                                                let encodedName = "";
+                                                let trainerFullname = `${
+                                                  data?.trainerDetail
+                                                    ?.firstName || ""
+                                                }-${
+                                                  data?.trainerDetail
+                                                    ?.lastName || ""
+                                                }`;
+
+                                                encodedName =
+                                                  trainerFullname.toLocaleLowerCase();
+
+                                                handleCancel(
+                                                  data.id,
+                                                  data.channelId,
+                                                  data.sessionStartTime,
+                                                  rescheduleAction
+                                                    ? true
+                                                    : false,
+                                                  `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                                );
+                                              }}
+                                            >
+                                              CANCEL
+                                            </button>
+                                          )}
+
                                           <button
                                             style={{
                                               margin: "1rem",
@@ -780,6 +841,71 @@ const TabOne = ({
                                             }}
                                             onClick={() => {
                                               setcancelAlert(false);
+                                            }}
+                                          >
+                                            CLOSE
+                                          </button>
+                                        </div>
+                                      </Dialog>
+
+                                      <Dialog
+                                        onClose={() => {
+                                          setRescheduleAlert(false);
+                                        }}
+                                        aria-labelledby="simple-dialog-title"
+                                        open={rescheduleAlert}
+                                      >
+                                        <div style={{ padding: "1rem" }}>
+                                          <h3>Alert</h3>
+                                          <hr />
+                                          <p>
+                                            Your booking will be cancelled. You
+                                            can pick a new time. Would you like
+                                            to continue
+                                          </p>
+                                          <hr />
+
+                                          <button
+                                            style={{
+                                              margin: "1rem",
+                                              padding: "10px",
+                                              border: "none",
+                                              color: "white",
+                                              backgroundColor: "#53bfd2",
+                                            }}
+                                            onClick={() => {
+                                              let encodedName = "";
+                                              let trainerFullname = `${
+                                                data?.trainerDetail
+                                                  ?.firstName || ""
+                                              }-${
+                                                data?.trainerDetail?.lastName ||
+                                                ""
+                                              }`;
+
+                                              encodedName =
+                                                trainerFullname.toLocaleLowerCase();
+
+                                              handleCancel(
+                                                data.id,
+                                                data.channelId,
+                                                data.sessionStartTime,
+                                                rescheduleAction ? true : false,
+                                                `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                              );
+                                            }}
+                                          >
+                                            CONTINUE
+                                          </button>
+
+                                          <button
+                                            style={{
+                                              margin: "1rem",
+                                              padding: "10px",
+                                              border: "none",
+                                            }}
+                                            onClick={() => {
+                                              setRescheduleAlert(false);
                                             }}
                                           >
                                             CLOSE
@@ -862,7 +988,7 @@ const TabOne = ({
                                   >
                                     {tabname === "Upcoming"
                                       ? "Reschedule"
-                                      : "Rebook"}
+                                      : "Book Again"}
                                   </button>
                                 </>
                               )}
