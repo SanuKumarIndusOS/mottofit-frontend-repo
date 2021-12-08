@@ -264,6 +264,16 @@ export const TrainerApi = {
       return `${this.url}/${this.trainerId}`;
     },
   },
+  updateCouponStatus: {
+    url: "code/467087e6-88fd-45f6-9f14-d15489800170/update/active",
+    method: "put",
+    baseURL: "payment",
+    isAdmin: true,
+    couponId: "",
+    get api() {
+      return `${this.url}/${this.couponId}/update/active`;
+    },
+  },
   getStatsData: {
     api: "get/stats",
     method: "get",
@@ -640,8 +650,9 @@ export const AdminApi = {
     url: "code/",
     baseURL: "payment",
     id: "",
+    status: "active",
     get api() {
-      return this.url + this.id + "/update/active";
+      return this.url + this.id + `/update/${this.status}`;
     },
   },
 };
