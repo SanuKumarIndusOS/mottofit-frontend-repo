@@ -54,29 +54,27 @@ export const AuthApi = {
 };
 
 export const TrainerApi = {
-
-
   getAllUsersPasses: {
     method: "get",
     url: "getUsersPasses",
     baseURL: "normal",
-    passStatus:"",
+    passStatus: "",
     page: 1,
     get api() {
-        let fullURL = `${this.url}?page=${this.page}&limit=10`;
+      let fullURL = `${this.url}?page=${this.page}&limit=10`;
 
-      if(this.passStatus) fullURL = `${fullURL}&passStatus=${this.passStatus}`
-      return  fullURL;          
+      if (this.passStatus) fullURL = `${fullURL}&passStatus=${this.passStatus}`;
+      return fullURL;
     },
   },
   getBookingSearch: {
     url: "getSearch",
     method: "get",
     baseURL: "normal",
-    userType:"",
+    userType: "",
     search: "",
     get api() {
-       return `${this.url}?userType=${this.userType}&search=${this.search}&limit=5`;          
+      return `${this.url}?userType=${this.userType}&search=${this.search}&limit=5`;
     },
   },
   searchBestMatch: {
@@ -220,23 +218,51 @@ export const TrainerApi = {
     method: "get",
     baseURL: "session",
     isAdmin: true,
-    page: 1,    
-    userId:"",
+    page: 1,
+    userId: "",
     get api() {
       return `${this.url}${this.type}${this.page}&id=${this.userId}`;
     },
-  },  
-  getAllAdminPasses:{
-  url: "admin/getAllMottoPass",
-      method: "get",
-      baseURL: "normal",
-      isAdmin: true,
-      page: 1,    
-      userId:"",
-      status:"active",      
-      get api() {
-        return `${this.url}?status=${this.status}&limit=10&page=${this.page}`;
-      },
+  },
+  getAllAdminPasses: {
+    url: "admin/getAllMottoPass",
+    method: "get",
+    baseURL: "normal",
+    isAdmin: true,
+    page: 1,
+    userId: "",
+    status: "active",
+    get api() {
+      return `${this.url}?status=${this.status}&limit=10&page=${this.page}`;
+    },
+  },
+  cancelMottoPass: {
+    url: "cancel/mottoPass",
+    method: "post",
+    baseURL: "normal",
+    isAdmin: true,
+    get api() {
+      return `${this.url}`;
+    },
+  },
+  updateMottoPassCount: {
+    url: "change/remain/mottoPass",
+    method: "post",
+    baseURL: "normal",
+    isAdmin: true,
+    get api() {
+      return `${this.url}`;
+    },
+  },
+  updateMottoCommissionRate: {
+    url: "admin/payment",
+    method: "put",
+    baseURL: "payment",
+    isAdmin: true,
+    trainerId: "",
+    get api() {
+      return `${this.url}/${this.trainerId}`;
+    },
   },
   getStatsData: {
     api: "get/stats",
@@ -527,8 +553,8 @@ export const userApi = {
     get api() {
       let fullURL = `${this.url}?page=${this.page}`;
 
-      if(this.passStatus) fullURL = `${fullURL}&passStatus=${this.passStatus}`
-      return  fullURL;
+      if (this.passStatus) fullURL = `${fullURL}&passStatus=${this.passStatus}`;
+      return fullURL;
     },
   },
 

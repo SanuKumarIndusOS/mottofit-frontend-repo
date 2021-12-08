@@ -14,8 +14,9 @@ import DollarIcon from "assets/files/SVG/green_dollar_sign.svg";
 //additonal packages
 import moment from "moment";
 
-export const MottoPassCard = ({ data , className = ""}) => {
-  const { totalPassCount, price, expiresIn, passType, trainer, remains } = data || {};
+
+export const MottoPassCard = ({ data , className = "", isAdminView = false , handleClick = () => {} }) => {
+  const { totalPassCount, price, expiresIn, passType, trainer, remains , user } = data || {};
 
   let mottoPassType = "";
 
@@ -42,8 +43,16 @@ export const MottoPassCard = ({ data , className = ""}) => {
 
   let discountedPrice = Math.abs(price / totalPassCount).toFixed(2);
 
+  let userFullName = isAdminView ? `with ${user?.firstName || ""} ${user?.lastName || ""}` : "";
+
+  let adminPropValue = {};
+
+  if(isAdminView){
+    adminPropValue["onClick"] = handleClick;
+  }
+
   return (
-    <div className={`mottopass-card ${className}`}>
+    <div className={`mottopass-card ${className}`} {...adminPropValue}>
       <div className="pass-user-detail d-flex align-items-center flex-column position-relative">
         <div className="pass-user-profilepic position-absolute">
           <UserAvatar className="img-md" {...userData} />
@@ -55,7 +64,7 @@ export const MottoPassCard = ({ data , className = ""}) => {
       <div className="pass-user-name text-center">
         <h1 className="fs-35 mb-4 mt-3 text-capitalize">{`${
           trainer?.firstName || ""
-        } ${trainer?.lastName || ""}`}</h1> <br></br>
+        } ${trainer?.lastName || ""} ${userFullName}`}</h1> <br></br>
          <p >{remains} out of {totalPassCount} passes remaining</p>
       </div>
       <div className="mottopass-details d-flex flex-column align-items-start">
@@ -80,21 +89,7 @@ export const MottoPassCard = ({ data , className = ""}) => {
           <p className="fs-15">{`${
             !isExpired ? "Valid until " : "Expired on "
           } ${expirationDate}`}</p>
-        </div>
-        {/* <div className="mottopass-discount-rate d-flex align-items-start">
-          <span>
-            <img src={DollarIcon} alt="dollar icon" />
-          </span>
-          <p className="fs-15">
-            {` Each session is priced at a discounted rate of $${discountedPrice}/-`}
-          </p>
-          <br></br>
-        
-        </div> */}
-        {/* <div className="mottopass-discount-rate d-flex align-items-start">
-        <p >2 out of 3 passes remaining</p>
-        </div> */}
-        
+        </div>      
       </div>
     </div>
   );
