@@ -286,6 +286,7 @@ const Datatable = ({
     <>
       <BootstrapTable
         bootstrap4
+        classes="custom-table"
         keyField="id"
         columns={columns}
         data={userList}

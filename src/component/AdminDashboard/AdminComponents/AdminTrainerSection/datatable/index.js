@@ -34,6 +34,7 @@ const DatatableClass = ({
       <thead>
         <tr>
           <th scope="row">First Name</th>
+          <th scope="row">Last Name</th>
           <th scope="row">Email</th>
           <th scope="row">Phone Number</th>
           <th scope="row">Location</th>
@@ -72,6 +73,7 @@ const DatatableClass = ({
           return (
             <tr>
               <td> {item.firstName ? item.firstName : "-"}</td>
+              <td> {item.lastName ? item.lastName : "-"}</td>
               <td> {item.email ? item.email : "-"}</td>
               <td> {item.phoneNumber ? item.phoneNumber : "-"}</td>
               <td> {item.location ? item.location : "-"}</td>
