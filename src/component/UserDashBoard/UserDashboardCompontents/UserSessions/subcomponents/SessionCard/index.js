@@ -13,6 +13,7 @@ import Dialog from "@material-ui/core/Dialog";
 
 function SessionCard({ data, activeTab, cancelAction }) {
   const [cancelAlert, setcancelAlert] = useState(false);
+  const [isReschedule, setIsReschedule] = useState(false);
   const encodedName = useNameEncoder(
     data?.trainerDetail?.firstName,
     data?.trainerDetail?.lastName
@@ -30,7 +31,30 @@ function SessionCard({ data, activeTab, cancelAction }) {
     isWithinTwelveHours ? setcancelAlert(true) : cancelAction(data?.id);
   };
 
-  const handleCancelAlert = () => setcancelAlert(false);
+  const handleReschedule = () => {
+    setcancelAlert(true);
+    setIsReschedule(true);
+  };
+
+  const handleCancelAlert = () => {
+    setcancelAlert(false);
+    setTimeout(() => {
+      if (isReschedule) {
+        setIsReschedule(false);
+      }
+    }, 100);
+  };
+
+  const handleDialogCancel = () => {
+    if (isReschedule) {
+      cancelAction(data?.id);
+      return history.push(
+        `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+      );
+    } else {
+      return data?.id;
+    }
+  };
 
   // Render functions
   const renderVenueText = () => {
@@ -45,7 +69,12 @@ function SessionCard({ data, activeTab, cancelAction }) {
     if (activeTab === "upcoming") {
       return (
         <>
-          <div className="control--sm border-right--grey">Reschedule</div>
+          <div
+            className="control--sm border-right--grey"
+            onClick={handleReschedule}
+          >
+            Reschedule
+          </div>
           <div className="control--sm" onClick={handleCancel}>
             Cancel
           </div>
@@ -126,19 +155,45 @@ function SessionCard({ data, activeTab, cancelAction }) {
         <div className="cancel-dialog">
           <h3>Alert!</h3>
           <hr />
-          <div>
-            Your trainer has already set aside this time for you, so you will be
-            charged fully for cancellations less than 12 hrs before a session.
-            Proceed with cancelling?
-          </div>
+          {isReschedule ? (
+            isWithinTwelveHours ? (
+              <div>
+                Rescheduling now will cancel your current booking and you will
+                incur full cost of that booking as its less than 12 hrs away.
+                Would you like to continue?
+              </div>
+            ) : (
+              <div>
+                Your booking will be cancelled. You can pick a new time. Would
+                you like to continue?
+              </div>
+            )
+          ) : (
+            <div>
+              Your trainer has already set aside this time for you, so you will
+              be charged fully for cancellations less than 12 hrs before a
+              session. Proceed with cancelling?
+            </div>
+          )}
+
           <hr />
           <div>
-            <button
-              className="cancel-dialog__button button--red"
-              onClick={()=>cancelAction(data?.id)}
-            >
-              Cancel
-            </button>
+            {isReschedule ? (
+              <button
+                className="cancel-dialog__button button--blue"
+                onClick={handleDialogCancel}
+              >
+                Continue
+              </button>
+            ) : (
+              <button
+                className="cancel-dialog__button button--red"
+                onClick={handleDialogCancel}
+              >
+                Cancel
+              </button>
+            )}
+
             <button
               className="cancel-dialog__button"
               onClick={handleCancelAlert}

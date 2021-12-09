@@ -10,17 +10,15 @@ import { bindActionCreators } from "redux";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-
-// TODO 
-// 1. No Session Available 
-// 2. Pagination 
+// TODO
+// 1. No Session Available
+// 2. Pagination
 // 3. Safari Testing
 
 function UserSessions({ userSession, cancelSession }) {
   const [activeTab, setactiveTab] = useState("upcoming");
   const [tabData, settabData] = useState([]);
   const [dataLoader, setdataLoader] = useState(true);
- 
 
   const getSessionData = () => {
     userSession(activeTab === "previous" ? "past" : activeTab, 0).then(
@@ -40,26 +38,17 @@ function UserSessions({ userSession, cancelSession }) {
       sessionId,
       sessionStatus: "cancelled",
     };
-
-    console.log("chit");
-
-    // cancelSession(payload)
-    //   .then((data) => {
-    //     getSessionData();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    cancelSession(payload)
+      .then((data) => {
+        getSessionData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // Change functions
   const handleChangeTab = (tabHeader) => setactiveTab(tabHeader);
-
-  // const handleCancelSession = (sessionId, isWithinTwelveHours) => {
-  //   isWithinTwelveHours ? setcancelAlert(true) : cancelAction(sessionId);
-  // };
-
-  
 
   // Effects
   useEffect(() => {
@@ -92,7 +81,6 @@ function UserSessions({ userSession, cancelSession }) {
                     data={item}
                     activeTab={activeTab}
                     cancelAction={cancelAction}
-                    // handleCancelSession={handleCancelSession}
                   />
                 );
               })
