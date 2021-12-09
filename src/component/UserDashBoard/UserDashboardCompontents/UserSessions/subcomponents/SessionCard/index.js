@@ -9,17 +9,21 @@ import LocationIcon from "assets/files/TrainerDashboard/Message/Location Icon.sv
 
 import { history } from "helpers";
 
-function SessionCard({ data, activeTab }) {
+function SessionCard({ data, activeTab, cancelAction }) {
   const encodedName = useNameEncoder(
     data?.trainerDetail?.firstName,
     data?.trainerDetail?.lastName
   );
+
   // Change functions
   const handleBookAgain = () => {
-    console.log(encodedName);
     return history.push(
       `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
     );
+  };
+
+  const handleCancel = () => {
+        cancelAction(data?.id);
   };
 
   // Render functions
@@ -36,7 +40,9 @@ function SessionCard({ data, activeTab }) {
       return (
         <>
           <div className="control--sm border-right--grey">Reschedule</div>
-          <div className="control--sm">Cancel</div>
+          <div className="control--sm" onClick={handleCancel}>
+            Cancel
+          </div>
         </>
       );
     }
