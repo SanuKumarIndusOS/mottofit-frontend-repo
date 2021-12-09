@@ -77,6 +77,31 @@
           }
         }
       }
+
+      .session__controls {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-top: 1rem;
+
+        .control--sm {
+          cursor: pointer;
+          margin-right: 1rem;
+
+          text-align: left;
+          text-decoration: underline;
+          font-size: 16px;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          letter-spacing: 0px;
+          color: #898989;
+        }
+
+        .border-right--grey {
+          padding-right: 1rem;
+          border-right: 3px solid #e6e6e6;
+        }
+      }
     }
   }
 }

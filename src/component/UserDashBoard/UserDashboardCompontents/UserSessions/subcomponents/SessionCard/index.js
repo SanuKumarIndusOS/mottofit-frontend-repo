@@ -14,19 +14,25 @@ function SessionCard() {
             <div className="month--bg">FEB</div>
           </div>
         </div>
+
         <div className="session-info-content">
           <div className="session__title">Motto Session with Heena</div>
+
           <div className="session__secondary-info">
             <div className="info--sm">
               <img src={AvailabilityIcon} alt="icon" />
-               <div>4:00 AM EST</div>
+              <div>4:00 AM EST</div>
             </div>
             <div className="info--sm">
-            <img src={LocationIcon} alt="icon" />
-            <div>Virtual</div>
+              <img src={LocationIcon} alt="icon" />
+              <div>Virtual</div>
             </div>
           </div>
-          <div className="session__controls"></div>
+
+          <div className="session__controls">
+            <div className="control--sm border-right--grey">Reschedule</div>
+            <div className="control--sm">Cancel</div>
+          </div>
         </div>
       </div>
 
