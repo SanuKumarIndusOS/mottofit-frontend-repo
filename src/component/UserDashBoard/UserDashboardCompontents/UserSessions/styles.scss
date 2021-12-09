@@ -1,3 +1,13 @@
-.user-sessions-container{
-    
+.user-sessions-container {
+  margin-left: 4rem;
+
+  .session-tab-data {
+    margin-top: 4rem;  
+    background-color: white;
+    width: 85%;
+    height: 700px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 3px 12px #16161608;
+            box-shadow: 0px 3px 12px #16161608;
+  }
 }
