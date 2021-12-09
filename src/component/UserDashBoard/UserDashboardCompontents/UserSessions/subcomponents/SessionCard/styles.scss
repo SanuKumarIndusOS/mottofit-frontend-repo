@@ -2,7 +2,7 @@
   padding-top: 25px;
   padding-bottom: 25px;
   width: 100%;
-  border-bottom: 2px solid #E6E6E6 ;
+  border-bottom: 2px solid #e6e6e6;
 
   .session-info-container {
     display: -webkit-box;
@@ -55,6 +55,27 @@
         font-family: "Montserrat", sans-serif;
         letter-spacing: 0px;
         color: #161616;
+      }
+
+      .session__secondary-info {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        .info--sm {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          margin-right: 1rem;
+          color: #898989;
+          font-size: 17px;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          letter-spacing: 0px;
+
+          img {
+            margin-right: 7px;
+          }
+        }
       }
     }
   }
