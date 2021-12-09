@@ -27,15 +27,18 @@ function SessionCard({ data, activeTab, cancelAction }) {
     );
   };
 
+  // Cancel button control
   const handleCancel = () => {
     isWithinTwelveHours ? setcancelAlert(true) : cancelAction(data?.id);
   };
 
+  // Reschedule button control
   const handleReschedule = () => {
     setcancelAlert(true);
     setIsReschedule(true);
   };
 
+  // Dialog open/close control
   const handleCancelAlert = () => {
     setcancelAlert(false);
     setTimeout(() => {
@@ -45,6 +48,7 @@ function SessionCard({ data, activeTab, cancelAction }) {
     }, 100);
   };
 
+  // Dialog CONTINUE/CANCEL CTA control
   const handleDialogCancel = () => {
     if (isReschedule) {
       cancelAction(data?.id);
@@ -52,7 +56,7 @@ function SessionCard({ data, activeTab, cancelAction }) {
         `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
       );
     } else {
-      return data?.id;
+      return cancelAction(data?.id);
     }
   };
 
