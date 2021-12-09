@@ -324,22 +324,35 @@ const TabOne = ({
   const [cancelAlert, setcancelAlert] = useState(false);
   const [rescheduleAction, setrescheduleAction] = useState(false);
   const [rescheduleAlert, setRescheduleAlert] = useState(false);
+
   const setViewMore = () => {
     // setVisible((prevValue) => prevValue + 1);
   };
 
   useEffect(() => {
+    console.log(tabData);
     return () => {
       setrescheduleAction(false);
+      setRescheduleAlert(false);
     };
   }, []);
+
+  const checkWithin12Hours = (startTime) => {
+    let now = moment().valueOf();
+    let end = moment().add(12, "hours").valueOf();
+
+    if (startTime >= now && startTime <= end) {
+      return true;
+    } else return false;
+  };
 
   const handleCancel = (
     sessionId,
     channelId,
     sessionStartTime,
     isReschedule,
-    encodedURL
+    encodedURL,
+    data
   ) => {
     if (isReschedule) {
       setrescheduleAction(true);
@@ -347,33 +360,35 @@ const TabOne = ({
       setrescheduleAction(false);
     }
 
-    var tempStartTime = moment();
-    var tempEndTime = moment(
-      getFormatDate(sessionStartTime, "LT", true),
-      "h:mm A"
-    );
-    var hourDiff = parseInt(
-      moment.duration(moment(tempEndTime).diff(moment(tempStartTime))).asHours()
-    );
-    var dayDiff = parseInt(
-      moment
-        .duration(
-          moment(
-            moment
-              .tz(sessionStartTime, "America/New_York")
-              .format("YYYY MM DD HH:MM")
-          ).diff(
-            moment(
-              moment(moment.tz("America/New_York").format("YYYY MM DD HH:MM"))
-            )
-          )
-        )
-        .asDays()
-    );
+    // var tempStartTime = moment();
+    // var tempEndTime = moment(
+    //   getFormatDate(sessionStartTime, "LT", true),
+    //   "h:mm A"
+    // );
+    // var hourDiff = parseInt(
+    //   moment.duration(moment(tempEndTime).diff(moment(tempStartTime))).asHours()
+    // );
+    // var dayDiff = parseInt(
+    //   moment
+    //     .duration(
+    //       moment(
+    //         moment
+    //           .tz(sessionStartTime, "America/New_York")
+    //           .format("YYYY MM DD HH:MM")
+    //       ).diff(
+    //         moment(
+    //           moment(moment.tz("America/New_York").format("YYYY MM DD HH:MM"))
+    //         )
+    //       )
+    //     )
+    //     .asDays()
+    // );
+
+  
 
     // console.log(hourDiff, dayDiff);
 
-    const cancelAction = (isReschedule, encodedURL) => {
+    const cancelAction = (isReschedule, encodedURL, trainerData) => {
       // console.log(isReschedule, encodedURL);
 
       let payload = {
@@ -399,7 +414,23 @@ const TabOne = ({
           if (isReschedule) {
             // console.log("jit");
 
-            history.push(encodedURL);
+            var storedata = {
+              sessionData: {
+                trainerId: trainerData?.trainerDetail?.id,
+                city: null,
+                sessionType: trainerData?.sessionType,
+                venue: trainerData?.venue,
+                trainingType: trainerData?.trainingType,
+                price: trainerData?.price,
+                areaOfExpertise: trainerData?.activity,
+              },
+            };
+
+            restProps?.updateUserDetails(storedata);
+
+            history.push(`/user/scheduler/${trainerData?.trainerDetail?.id}`);
+
+            // history.push(encodedURL)
           }
           // history.push(`/users/dashboard/message/past?channelId=${channelId}`);
           handleChange();
@@ -411,18 +442,19 @@ const TabOne = ({
         });
     };
 
-    if (hourDiff < 12 && dayDiff < 1) {
+    if (checkWithin12Hours(sessionStartTime)) {
       console.log("less than 12");
       // cancelAction();
       cancelAlert
-        ? cancelAction(isReschedule, encodedURL)
+        ? cancelAction(isReschedule, encodedURL, data)
         : setcancelAlert(true);
     } else {
+      console.log("else");
       isReschedule
         ? rescheduleAlert
-          ? cancelAction(isReschedule, encodedURL)
+          ? cancelAction(isReschedule, encodedURL, data)
           : setRescheduleAlert(true)
-        : cancelAction(isReschedule, encodedURL);
+        : cancelAction(isReschedule, encodedURL, data);
     }
   };
 
@@ -730,6 +762,7 @@ const TabOne = ({
                                     </button>
                                   ) : (
                                     <>
+                                    {!rescheduleAlert?
                                       <Dialog
                                         onClose={() => {
                                           setcancelAlert(false);
@@ -787,10 +820,9 @@ const TabOne = ({
                                                   data.id,
                                                   data.channelId,
                                                   data.sessionStartTime,
-                                                  rescheduleAction
-                                                    ? true
-                                                    : false,
-                                                  `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                                  true,
+                                                  `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`,
+                                                  data
                                                 );
                                               }}
                                             >
@@ -822,10 +854,11 @@ const TabOne = ({
                                                   data.id,
                                                   data.channelId,
                                                   data.sessionStartTime,
-                                                  rescheduleAction
-                                                    ? true
-                                                    : false,
-                                                  `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                                  // rescheduleAction
+                                                  //   ? true
+                                                  //   : false,
+                                                  // `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`,
+                                                  // data
                                                 );
                                               }}
                                             >
@@ -847,7 +880,7 @@ const TabOne = ({
                                           </button>
                                         </div>
                                       </Dialog>
-
+:
                                       <Dialog
                                         onClose={() => {
                                           setRescheduleAlert(false);
@@ -890,8 +923,9 @@ const TabOne = ({
                                                 data.id,
                                                 data.channelId,
                                                 data.sessionStartTime,
-                                                rescheduleAction ? true : false,
-                                                `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+                                                true,
+                                                `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`,
+                                                data
                                               );
                                             }}
                                           >
@@ -911,7 +945,7 @@ const TabOne = ({
                                             CLOSE
                                           </button>
                                         </div>
-                                      </Dialog>
+                                      </Dialog>}
                                       {!data.asFriend ? (
                                         <>
                                           {data.sessionStatus !==
@@ -1227,6 +1261,11 @@ const datamonth = {
   11: "Nov",
   12: "Dec",
 };
+
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
@@ -1240,6 +1279,9 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-const UserSession = connect(null, mapDispatchToProps)(UserSessionClass);
+const UserSession = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserSessionClass);
 
 export default UserSession;

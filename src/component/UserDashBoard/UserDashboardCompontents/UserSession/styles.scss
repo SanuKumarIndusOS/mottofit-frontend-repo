@@ -51,7 +51,8 @@
           .tabPanel_overview_left {
             height: 700px;
             background: #ffffff;
-            box-shadow: 0px 3px 12px #16161608;
+            -webkit-box-shadow: 0px 3px 12px #16161608;
+                    box-shadow: 0px 3px 12px #16161608;
             border-radius: 20px;
             .TP_overview_wrapper {
               padding: 2em;
@@ -71,23 +72,41 @@
                   height: 500px;
                   overflow: auto;
                   .TP_upcomeSession_overview {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
                     display: flex;
                     height: 120px;
-                    align-items: center;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
                     .TP_USession_dates {
                       width: 100px;
                       height: 100px;
                       background: #f6f6f6;
                       border-radius: 10px;
                       opacity: 1;
+                      display: -webkit-box;
+                      display: -ms-flexbox;
                       display: flex;
-                      flex-direction: column;
-                      align-items: center;
-                      justify-content: center;
+                      -webkit-box-orient: vertical;
+                      -webkit-box-direction: normal;
+                          -ms-flex-direction: column;
+                              flex-direction: column;
+                      -webkit-box-align: center;
+                          -ms-flex-align: center;
+                              align-items: center;
+                      -webkit-box-pack: center;
+                          -ms-flex-pack: center;
+                              justify-content: center;
 
                       h4 {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
                         display: flex;
-                        flex-direction: column;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                            -ms-flex-direction: column;
+                                flex-direction: column;
                         height: 34px;
                         text-align: center;
                         letter-spacing: 1.05px;
@@ -113,6 +132,8 @@
                     .TP_USession_data {
                       margin-left: 2em;
                       h2 {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
                         display: flex;
                         text-align: left;
                         letter-spacing: 0px;
@@ -127,11 +148,19 @@
                         font-family: "Montserrat", sans-serif;
                       }
                       .TP_USession_data_icons {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
                         display: flex;
-                        align-items: center;
+                        -webkit-box-align: center;
+                            -ms-flex-align: center;
+                                align-items: center;
                         h5 {
+                          display: -webkit-box;
+                          display: -ms-flexbox;
                           display: flex;
-                          align-items: center;
+                          -webkit-box-align: center;
+                              -ms-flex-align: center;
+                                  align-items: center;
 
                           text-align: left;
 
@@ -149,16 +178,24 @@
                         }
                       }
                       .TP_USession_data_buttons {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
                         display: flex;
-                        align-items: center;
+                        -webkit-box-align: center;
+                            -ms-flex-align: center;
+                                align-items: center;
                         width: 100%;
                         // margin-top: 0.7em;
-                        justify-content: space-between;
+                        -webkit-box-pack: justify;
+                            -ms-flex-pack: justify;
+                                justify-content: space-between;
 
                         button {
                           background: transparent;
                           border: none;
                           margin-right: 1em;
+                          display: -webkit-box;
+                          display: -ms-flexbox;
                           display: flex;
                           color: #898989;
                           opacity: 1;
@@ -169,16 +206,24 @@
                           font-weight: 500;
                         }
                         .button_boarder {
+                          display: -webkit-box;
+                          display: -ms-flexbox;
                           display: flex;
-                          align-items: center;
+                          -webkit-box-align: center;
+                              -ms-flex-align: center;
+                                  align-items: center;
                           button {
                             border: none;
                             margin-right: 1em;
                             text-align: right;
                             position: relative;
                             left: 40px;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
                             display: flex;
-                            align-items: center;
+                            -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                    align-items: center;
                             height: 30px;
                             text-align: left;
                             letter-spacing: 0.18px;
@@ -202,8 +247,12 @@
                   }
                 }
                 .viewMoreButton {
+                  display: -webkit-box;
+                  display: -ms-flexbox;
                   display: flex;
-                  align-items: center;
+                  -webkit-box-align: center;
+                      -ms-flex-align: center;
+                          align-items: center;
                   margin-top: 2em;
                   background: transparent;
 
@@ -235,14 +284,24 @@
                 height: 250px;
 
                 background: #2c2c2c;
-                box-shadow: 0px 3px 12px #16161608;
+                -webkit-box-shadow: 0px 3px 12px #16161608;
+                        box-shadow: 0px 3px 12px #16161608;
                 border-radius: 20px;
                 opacity: 1;
                 .row_one_data {
+                  display: -webkit-box;
+                  display: -ms-flexbox;
                   display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  flex-direction: column;
+                  -webkit-box-align: center;
+                      -ms-flex-align: center;
+                          align-items: center;
+                  -webkit-box-pack: center;
+                      -ms-flex-pack: center;
+                          justify-content: center;
+                  -webkit-box-orient: vertical;
+                  -webkit-box-direction: normal;
+                      -ms-flex-direction: column;
+                          flex-direction: column;
                   padding: 1em;
                   height: 250px;
 
@@ -266,8 +325,12 @@
                     font-family: "Montserrat", sans-serif;
                   }
                   a {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
                     display: flex;
-                    align-items: center;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
                     text-align: right;
                     letter-spacing: 0.45px;
                     color: #ffffff;
@@ -284,7 +347,8 @@
                 height: 400px;
 
                 background: #ffffff;
-                box-shadow: 0px 3px 12px #16161608;
+                -webkit-box-shadow: 0px 3px 12px #16161608;
+                        box-shadow: 0px 3px 12px #16161608;
                 border-radius: 20px;
 
                 .row_two_data {
@@ -303,8 +367,12 @@
                     overflow: auto;
                     height: 300px;
                     .row_previous_data {
+                      display: -webkit-box;
+                      display: -ms-flexbox;
                       display: flex;
-                      align-items: center;
+                      -webkit-box-align: center;
+                          -ms-flex-align: center;
+                              align-items: center;
                       margin-top: 1em;
                       .row_previous_avater {
                         img {
@@ -313,9 +381,16 @@
                         }
                       }
                       .row_previous_header {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
                         display: flex;
-                        flex-direction: column;
-                        justify-content: center;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                            -ms-flex-direction: column;
+                                flex-direction: column;
+                        -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                                justify-content: center;
                         margin-left: 1em;
                         h2 {
                           text-align: left;
@@ -360,6 +435,8 @@
           font-size: 15px;
         }
         .rwt__tablist {
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
           overflow-x: auto;
         }
@@ -382,7 +459,9 @@
                       display: unset;
                       .TP_USession_dates {
                         background-color: unset;
-                        align-items: center;
+                        -webkit-box-align: center;
+                            -ms-flex-align: center;
+                                align-items: center;
                         h4 {
                           font-size: 30px;
                         }

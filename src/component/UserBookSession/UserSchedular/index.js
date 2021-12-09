@@ -68,8 +68,17 @@ const UserEventSchedularFC = (props) => {
       props.sessionData["lastName"] || ""
     }`;
 
-     encodedName = trainerFullname.toLocaleLowerCase();
+    encodedName = trainerFullname.toLocaleLowerCase();
   }, []);
+
+  const checkWithin12Hours = (startTime) => {
+    let now = moment().valueOf();
+    let end = moment().add(12, "hours").valueOf();
+
+    if (startTime >= now && startTime <= end) {
+      return true;
+    } else return false;
+  };
 
   function fetchViewTrainer() {
     props.getTrainerDetail(id, false).then((data) => {
@@ -176,6 +185,7 @@ const UserEventSchedularFC = (props) => {
   };
   const callbackFunction = (ts, tss, date) => {
     console.log(ts, tss, date, "Callback");
+
     settrainerstartSlot(ts);
     settrainerEndSlot(tss);
     setDateSlot(date);
@@ -187,30 +197,6 @@ const UserEventSchedularFC = (props) => {
     // let slotDetails = {
 
     // };
-
-    var tempStartTime = moment();
-    var tempEndTime = moment(
-      getFormatDate(trainerstartSlot, "LT", true),
-      "h:mm A"
-    );
-    var hourDiff = parseInt(
-      moment.duration(moment(tempEndTime).diff(moment(tempStartTime))).asHours()
-    );
-    var dayDiff = parseInt(
-      moment
-        .duration(
-          moment(
-            moment
-              .tz(trainerstartSlot, "America/New_York")
-              .format("YYYY MM DD HH:MM")
-          ).diff(
-            moment(
-              moment(moment.tz("America/New_York").format("YYYY MM DD HH:MM"))
-            )
-          )
-        )
-        .asDays()
-    );
 
     let reduxData = {
       bookingData: {
@@ -228,14 +214,13 @@ const UserEventSchedularFC = (props) => {
     const handleBooking = () => {
       setcancelAlert(false);
       if (!localStorage.getItem("token")) {
-
         console.log("go to login");
         // history.push(`/mobile/login`);
         // console.log(`?${encodeURIComponent("nextpath=/user/payment")}`);
         // history.push(`?nextpath=/user/payment`);
         // console.log("go to login");
 
-        localStorage.setItem("paymentred", "paymentred")
+        localStorage.setItem("paymentred", "paymentred");
         history.push({
           pathname: "/mobile/login",
           search: "?nextpath=/user/payment",
@@ -249,13 +234,9 @@ const UserEventSchedularFC = (props) => {
       }
     };
 
-    if (hourDiff < 12 && dayDiff < 1) {
-      console.log("less than 12");
-      // cancelAction();
+    if (checkWithin12Hours(trainerstartSlot)) {
       cancelAlert ? handleBooking() : setcancelAlert(true);
-      // handleBooking();
     } else {
-      // cancelAction();
       handleBooking();
     }
   };
@@ -507,7 +488,7 @@ const BottomSection = ({ trainerName }) => {
         <div className="item_slot5_user">
           <Link to={`/trainer/profile/${trainerName?.id}/${encodedName}`}>
             {/* Learn more about {trainerName?.firstName} */}
-            Back to {trainerName?.firstName}'s Profile 
+            Back to {trainerName?.firstName}'s Profile
           </Link>
         </div>
       </div>

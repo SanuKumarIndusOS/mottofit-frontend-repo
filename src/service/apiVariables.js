@@ -281,13 +281,16 @@ export const TrainerApi = {
     },
   },
   fetchTrainersLists: {
-    url: "admin/trainers?limit=20&page=",
+    url: "admin/trainers?",
     method: "get",
     baseURL: "normal",
+    limit: "limit=20&page=",
     isAdmin: true,
     page: 1,
+    isSearch: false,
+    searchKey: "ashok",
     get api() {
-      return this.url + this.page;
+      return  !this.isSearch? ( this.url + this.limit + this.page) : (this.url + "search="+ this.searchKey);
     },
   },
   getTrainerDetail: {
