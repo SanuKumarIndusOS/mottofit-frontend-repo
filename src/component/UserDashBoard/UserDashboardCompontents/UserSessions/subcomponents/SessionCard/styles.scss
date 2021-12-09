@@ -1,8 +1,61 @@
-.session-card-container{
-    height: 100px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    width: 100%;
+.session-card-container {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  border-bottom: 2px solid #E6E6E6 ;
 
-   
+  .session-info-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    .session-date-box-container {
+      width: 100px;
+      height: 100px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      .session-date-box {
+        .date--bg {
+          font-size: 30px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+
+          letter-spacing: 1.05px;
+          color: #161616;
+        }
+
+        .month--bg {
+          font-size: 15px;
+          letter-spacing: 0.45px;
+          color: #898989;
+          text-transform: uppercase;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          line-height: 1px;
+        }
+      }
+    }
+
+    .session-info-content {
+      margin-left: 1.5rem;
+      .session__title {
+        text-align: left;
+        font-weight: 600;
+        font-size: 21px;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0px;
+        color: #161616;
+      }
+    }
+  }
 }
