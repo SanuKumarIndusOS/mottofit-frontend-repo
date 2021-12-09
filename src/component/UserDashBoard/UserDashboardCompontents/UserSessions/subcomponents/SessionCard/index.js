@@ -2,11 +2,27 @@ import React from "react";
 import "./styles.scss";
 
 import { getFormatDate } from "service/helperFunctions";
+import useNameEncoder from "component/common/Hooks/useNameEncoder";
 
 import AvailabilityIcon from "assets/files/TrainerDashboard/Message/Availability Icon.svg";
 import LocationIcon from "assets/files/TrainerDashboard/Message/Location Icon.svg";
 
+import { history } from "helpers";
+
 function SessionCard({ data, activeTab }) {
+  const encodedName = useNameEncoder(
+    data?.trainerDetail?.firstName,
+    data?.trainerDetail?.lastName
+  );
+  // Change functions
+  const handleBookAgain = () => {
+    console.log(encodedName);
+    return history.push(
+      `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
+    );
+  };
+
+  // Render functions
   const renderVenueText = () => {
     return data?.sessionType === "virtual"
       ? "Virtual"
@@ -28,12 +44,16 @@ function SessionCard({ data, activeTab }) {
     if (activeTab === "previous") {
       return (
         <>
-          <div className="control--sm border-right--grey">Book Again</div>
-          <div className="control--sm">Cancelled</div>
+          <div
+            className="control--sm border-right--grey"
+            onClick={handleBookAgain}
+          >
+            Book Again
+          </div>
+          <div className="control--sm txt--red">{data?.sessionStatus}</div>
         </>
       );
     }
-    
 
     if (activeTab === "invited") {
       return (
@@ -43,9 +63,6 @@ function SessionCard({ data, activeTab }) {
         </>
       );
     }
-
-
-    
   };
 
   return (
@@ -60,7 +77,8 @@ function SessionCard({ data, activeTab }) {
 
         <div className="session-info-content">
           <div className="session__title">
-            {data?.title} with {data?.trainerDetail?.firstName}
+            <span> {data?.title} </span>with{" "}
+            <span> {data?.trainerDetail?.firstName}</span>
           </div>
 
           <div className="session__secondary-info">
