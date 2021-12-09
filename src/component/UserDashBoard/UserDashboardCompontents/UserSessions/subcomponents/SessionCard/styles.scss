@@ -114,3 +114,29 @@
     }
   }
 }
+
+
+.cancel-dialog{
+  padding: 1rem;
+  
+  .cancel-dialog__button{
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 10px;
+    border: none;
+    margin-right: 1rem;
+  }
+  
+  .button--blue{
+    background-color: #53bfd2;
+    color: white;
+  }
+
+  .button--red{
+    background-color: #d25353;
+    color: white;
+  }
+
+
+}
+
