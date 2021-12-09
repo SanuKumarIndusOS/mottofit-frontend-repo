@@ -138,18 +138,18 @@ function MottoSessionType({
           },
         },
         "SOCIAL SESSIONS": {
-          "For 2 People": {
+          "For 2-4 People": {
             price: social?.virtualSessionfor2People,
             type: "social",
           },
-          "For 3 People": {
-            price: social?.virtualSessionfor3People,
-            type: "social",
-          },
-          "For 4 People": {
-            price: social?.virtualSessionfor4People,
-            type: "social",
-          },
+          // "For 3 People": {
+          //   price: social?.virtualSessionfor3People,
+          //   type: "social",
+          // },
+          // "For 4 People": {
+          //   price: social?.virtualSessionfor4People,
+          //   type: "social",
+          // },
         },
         "CREATE A CLASS": {
           "For 5-15 People": {
@@ -212,18 +212,18 @@ function MottoSessionType({
           },
         },
         "SOCIAL SESSIONS": {
-          "For 2 People": {
+          "For 2-4 People": {
             price: social?.inPeronAtClientLocationfor2People,
             type: "social",
           },
-          "For 3 People": {
-            price: social?.inPeronAtClientLocationfor3People,
-            type: "social",
-          },
-          "For 4 People": {
-            price: social?.inPeronAtClientLocationfor4People,
-            type: "social",
-          },
+          // "For 3 People": {
+          //   price: social?.inPeronAtClientLocationfor3People,
+          //   type: "social",
+          // },
+          // "For 4 People": {
+          //   price: social?.inPeronAtClientLocationfor4People,
+          //   type: "social",
+          // },
         },
         "CREATE A CLASS": {
           "For 5-15 People": {
@@ -286,18 +286,18 @@ function MottoSessionType({
           },
         },
         "SOCIAL SESSIONS": {
-          "For 2 People": {
+          "For 2-4 People": {
             price: social?.inPeronAtTrainerLocationfor2People,
             type: "social",
           },
-          "For 3 People": {
-            price: social?.inPeronAtTrainerLocationfor3People,
-            type: "social",
-          },
-          "For 4 People": {
-            price: social?.inPeronAtTrainerLocationfor4People,
-            type: "social",
-          },
+          // "For 3 People": {
+          //   price: social?.inPeronAtTrainerLocationfor3People,
+          //   type: "social",
+          // },
+          // "For 4 People": {
+          //   price: social?.inPeronAtTrainerLocationfor4People,
+          //   type: "social",
+          // },
         },
         "CREATE A CLASS": {
           "For 5-15 People": {
