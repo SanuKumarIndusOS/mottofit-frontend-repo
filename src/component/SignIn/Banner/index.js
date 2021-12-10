@@ -71,7 +71,6 @@ const SignInFC = ({
   };
 
   async function logIn(e) {
-
     setloginLoader(true);
     e.preventDefault();
     const payload = {
@@ -81,15 +80,12 @@ const SignInFC = ({
       deviceName: data.deviceName,
     };
 
-    if (!validateFields(payload)){
+    if (!validateFields(payload)) {
       console.log("err");
       setloginLoader(false);
-    };
+    }
 
     if (!validateFields(payload)) return;
-    
-
-   
 
     const { loginApi } = AuthApi;
 
@@ -260,8 +256,17 @@ const SignInFC = ({
                         type="submit"
                         onClick={logIn}
                       >
-                        Sign In
-                        <ArrowHoverBlacked />
+                        {loginLoader ? (
+                          <div className="loader">
+                            Loging in, Please Wait!&ensp;
+                            {/* <CircularProgress /> */}
+                          </div>
+                        ) : (
+                          <>
+                            Sign In
+                            <ArrowHoverBlacked />
+                          </>
+                        )}
                       </button>
                     </div>
 

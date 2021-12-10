@@ -242,6 +242,7 @@ const UserPaymentsFC = ({
   );
 
   const [passId, setpassId] = useState(null);
+  const [passData, setpassData] = useState("");
 
   const CheckMottoPass = () => {
     console.log(sessionData?.trainerId, sessionData?.sessionType);
@@ -255,6 +256,7 @@ const UserPaymentsFC = ({
         console.log(data);
         // setActivePackage("virtual");
         setpassId(data[0]?.id);
+        setpassData(data[0]);
         // setActivePackageData(data);
       })
       .catch((er) => {
@@ -625,10 +627,13 @@ const UserPaymentsFC = ({
                       <img src={StrengthIcon} alt="icon" />
                       <h4 style={{ textTransform: "capitalize" }}>
                         {/* { sessionData?.newPass?.} */}
-                          
-                        
+
                         {sessionData?.trainingType === "1on1"
-                          ? "1 on 1 session"
+                          ? passId
+                            ? passData?.totalPassCount === 10
+                              ? "10 Session Package"
+                              : "30 Session Package"
+                            : "1 on 1 session"
                           : sessionData?.trainingType}
                       </h4>
                     </div>
@@ -729,11 +734,12 @@ const UserPaymentsFC = ({
 
                     <div className="cancel-style">
                       <div className="cancel-style__header">
-                        Cancellation Fee
+                        Session Cancellation Policy
                       </div>
                       <div className="cancel-style__body">
-                        No charge upto 12 hours from session time. Full charge
-                        after.
+                        {passId
+                          ? "Sessions you schedule from package can be cancelled/rescheduled upto 12 hours prior to session."
+                          : "No charge upto 12 hours from session time. Full charge after."}
                       </div>
                     </div>
                   </div>

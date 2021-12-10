@@ -57,10 +57,12 @@ function Index() {
                 },
               });
             }}
+
+            action="."
           >
             <input
               className="globalIp"
-              type="text"
+              type="search"
               placeholder=" Search by Trainer name "
               onChange={(e) => {
                 setKey(e.target.value);
