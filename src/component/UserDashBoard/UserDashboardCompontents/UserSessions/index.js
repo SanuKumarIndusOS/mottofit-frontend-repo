@@ -3,10 +3,16 @@ import "./styles.scss";
 
 import TabControl from "./subcomponents/TabControl";
 import SessionCard from "./subcomponents/SessionCard";
+import { MottoPassSection } from "component/MottoPass";
 
 import { history } from "helpers";
 
-import { userSession, cancelSession, updateUserDetails } from "action/userAct";
+import {
+  userSession,
+  cancelSession,
+  updateUserDetails,
+  getAllMottoPassesAct,
+} from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -18,27 +24,45 @@ import BlueHoverButton from "component/common/BlueArrowButton";
 // 2. Pagination
 // 3. Safari Testing
 
-function UserSessions({ userSession, cancelSession, updateUserDetails }) {
+function UserSessions({
+  userSession,
+  cancelSession,
+  updateUserDetails,
+  getAllMottoPassesAct,
+}) {
   const [activeTab, setactiveTab] = useState("upcoming");
   const [tabData, settabData] = useState([]);
   const [dataLoader, setdataLoader] = useState(true);
   const [empty, setEmpty] = useState(false);
+  const [mottoPassData, setMottoPassData] = useState([]);
+  const [inValidMottoPassData, setInvalidMottoPassData] = useState([]);
 
   const getSessionData = () => {
-    userSession(activeTab === "previous" ? "past" : activeTab, 0).then(
-      (data) => {
-        console.log(data);
+    if (activeTab === "motto package") {
+      getAllPasses();
+    } else {
+      userSession(activeTab === "previous" ? "past" : activeTab, 0).then(
+        (data) => {
+          console.log(data);
 
-        if (data["data"]?.length === 0) return setEmpty(true);
-        settabData(data["data"]);
+          if (data["data"]?.length === 0) return setEmpty(true);
+          settabData(data["data"]);
 
-      
           setTimeout(() => {
             setdataLoader(false);
           }, 500);
-        
-      }
-    );
+        }
+      );
+    }
+  };
+
+  const getAllPasses = async () => {
+    console.log("poi");
+    const mottopackageData = await getAllMottoPassesAct();
+    const inactivePassData = await getAllMottoPassesAct("inactive");
+    setMottoPassData(mottopackageData.list);
+    setInvalidMottoPassData(inactivePassData.list);
+    setdataLoader(false);
   };
 
   // Action functions
@@ -97,8 +121,15 @@ function UserSessions({ userSession, cancelSession, updateUserDetails }) {
         </div>
         <div className="session-tab-data">
           <div className="session-tab__header">{activeTab} sessions</div>
+
           <div className="session-tab__content">
-            {dataLoader ? (
+            {activeTab === "motto package" ? (
+              <MottoPassSection
+                handlePagination={0}
+                mottoPassData={mottoPassData}
+                inValidMottoPassData={inValidMottoPassData}
+              />
+            ) : dataLoader ? (
               <div className="loader-container">
                 {empty ? `No ${activeTab} Session` : <CircularProgress />}
               </div>
@@ -115,7 +146,11 @@ function UserSessions({ userSession, cancelSession, updateUserDetails }) {
               })
             )}
           </div>
-          <div className="view-more-container">View more trainers <BlueHoverButton/></div>
+          {activeTab === "motto package" ? null : (
+            <div className="view-more-container">
+              View more trainers <BlueHoverButton />
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -132,6 +167,7 @@ const mapDispatchToProps = (dispatch) => {
       userSession,
       cancelSession,
       updateUserDetails,
+      getAllMottoPassesAct,
     },
     dispatch
   );

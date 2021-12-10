@@ -6,7 +6,7 @@ export default function Main() {
     <div>
       {/* Banner  */}
       <UserSessions />
-      <UserSession />
+      {/* <UserSession /> */}
     </div>
   );
 }
