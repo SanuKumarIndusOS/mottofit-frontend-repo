@@ -25,7 +25,7 @@ function TrainerCardDashboard(props) {
   const [sliderValue, setSliderValue] = useState(1.2);
   const [isLoading, setisLoading] = useState(false);
 
-   const [saveChangesLoader, setsaveChangesLoader] = useState(false)
+  const [saveChangesLoader, setsaveChangesLoader] = useState(false);
 
   const toggle = () => setModal(!modal);
   // const history = useHistory();
@@ -170,7 +170,6 @@ function TrainerCardDashboard(props) {
   }, []);
 
   const handleSubmit = () => {
-
     setsaveChangesLoader(true);
     if (
       trainerCardData.inPersonAtClient_individualCharge ||
@@ -237,8 +236,6 @@ function TrainerCardDashboard(props) {
 
         setsaveChangesLoader(false);
       });
-
-      
     } else {
       setValidationError(true);
     }
@@ -554,9 +551,8 @@ function TrainerCardDashboard(props) {
                       ],
                     });
                   } else {
-                    const index = trainerCardData.verticals.indexOf(
-                      "Strength & HIIT"
-                    );
+                    const index =
+                      trainerCardData.verticals.indexOf("Strength & HIIT");
                     if (index > -1) {
                       trainerCardData.verticals.splice(index, 1);
                     }
@@ -707,7 +703,7 @@ function TrainerCardDashboard(props) {
               <br />
               <div className="card_accordion_input">
                 <input
-                  placeholder="Social Session (Total for 2 People)"
+                  placeholder="Social Session (Total for 2-4 People)"
                   value={trainerCardData.inPersonAtClient_twoPPL}
                   onChange={(e) => {
                     setTrainerCardData({
@@ -722,7 +718,7 @@ function TrainerCardDashboard(props) {
 
                 <br />
               </div>
-              <div className="card_accordion_input">
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="Social Session (Total for 3 People)"
                   value={trainerCardData.inPersonAtClient_threePPL}
@@ -737,8 +733,8 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
                 <br />
-              </div>
-              <div className="card_accordion_input">
+              </div> */}
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="Social Session (Total for 4 People)"
                   value={trainerCardData.inPersonAtClient_fourPPL}
@@ -753,7 +749,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
                 <br />
-              </div>
+              </div> */}
               <div className="card_accordion_input">
                 <input
                   placeholder="Class Flat Rate (5-15 People)"
@@ -771,7 +767,7 @@ function TrainerCardDashboard(props) {
 
                 <br />
               </div>
-             
+
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -828,7 +824,7 @@ function TrainerCardDashboard(props) {
               </div>
               <div className="card_accordion_input">
                 <input
-                  placeholder="Social Session (Total for 2 People)"
+                  placeholder="Social Session (Total for 2-4 People)"
                   value={trainerCardData.inPersonAtTrainer_twoPPL}
                   onChange={(e) => {
                     setTrainerCardData({
@@ -841,7 +837,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-              <div className="card_accordion_input">
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="Social Session (Total for 3 People)"
                   value={trainerCardData.inPersonAtTrainer_threePPL}
@@ -855,8 +851,8 @@ function TrainerCardDashboard(props) {
                   onWheel={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
-              </div>
-              <div className="card_accordion_input">
+              </div> */}
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="Social Session (Total for 4 People)"
                   value={trainerCardData.inPersonAtTrainer_fourPPL}
@@ -870,7 +866,7 @@ function TrainerCardDashboard(props) {
                   onWheel={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
-              </div>
+              </div> */}
               <div className="card_accordion_input">
                 <input
                   placeholder="Class Flat Rate (5-15 People)"
@@ -886,7 +882,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-             
+
               <div className="card_accordion_input">
                 <input
                   placeholder="10 Session Pass Rate"
@@ -942,7 +938,7 @@ function TrainerCardDashboard(props) {
 
               <div className="card_accordion_input">
                 <input
-                  placeholder="Social Session (Total for 2 People)"
+                  placeholder="Social Session (Total for 2-4 People)"
                   value={trainerCardData.virtual_twoPPL}
                   onChange={(e) => {
                     setTrainerCardData({
@@ -955,7 +951,7 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-              <div className="card_accordion_input">
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="Social Session (Total for 3 People)"
                   value={trainerCardData.virtual_threePPL}
@@ -969,8 +965,8 @@ function TrainerCardDashboard(props) {
                   onWheel={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
-              </div>
-              <div className="card_accordion_input">
+              </div> */}
+              {/* <div className="card_accordion_input">
                 <input
                   placeholder="Social Session (Total for 4 People)"
                   value={trainerCardData.virtual_fourPPL}
@@ -984,7 +980,7 @@ function TrainerCardDashboard(props) {
                   onWheel={blockWheelBehaviour}
                 />
                 <img src={DollarIcon} alt="icon" />
-              </div>
+              </div> */}
               <div className="card_accordion_input">
                 <input
                   placeholder="Class Flat Rate (5-15 People)"
@@ -1000,40 +996,44 @@ function TrainerCardDashboard(props) {
                 />
                 <img src={DollarIcon} alt="icon" />
               </div>
-          
-              <div className="card_accordion_input">
-                <input
-                  placeholder="10 Session Pass Rate"
-                  value={trainerCardData.virtual_tenSessionRate}
-                  onChange={(e) => {
-                    setTrainerCardData({
-                      ...trainerCardData,
-                      virtual_tenSessionRate: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  onWheel={blockWheelBehaviour}
-                />
-                <img src={DollarIcon} alt="icon" />
 
-                <br />
-              </div>
+              {trainerCardData.virtual_individualCharge ? (
+                <>
+                  {" "}
+                  <div className="card_accordion_input">
+                    <input
+                      placeholder="10 Session Pass Rate"
+                      value={trainerCardData.virtual_tenSessionRate}
+                      onChange={(e) => {
+                        setTrainerCardData({
+                          ...trainerCardData,
+                          virtual_tenSessionRate: e.target.value,
+                        });
+                      }}
+                      type="text"
+                      onWheel={blockWheelBehaviour}
+                    />
+                    <img src={DollarIcon} alt="icon" />
 
-              <div className="card_accordion_input">
-                <input
-                  placeholder="30 Session Rate"
-                  value={trainerCardData.virtual_threeSessionRate}
-                  onChange={(e) => {
-                    setTrainerCardData({
-                      ...trainerCardData,
-                      virtual_threeSessionRate: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  onWheel={blockWheelBehaviour}
-                />
-                <img src={DollarIcon} alt="icon" />
-              </div>
+                    <br />
+                  </div>
+                  <div className="card_accordion_input">
+                    <input
+                      placeholder="30 Session Rate"
+                      value={trainerCardData.virtual_threeSessionRate}
+                      onChange={(e) => {
+                        setTrainerCardData({
+                          ...trainerCardData,
+                          virtual_threeSessionRate: e.target.value,
+                        });
+                      }}
+                      type="text"
+                      onWheel={blockWheelBehaviour}
+                    />
+                    <img src={DollarIcon} alt="icon" />
+                  </div>
+                </>
+              ) : null}
             </div>
           </Accordion>
         </div>
@@ -1107,7 +1107,7 @@ function Accordion({ title, children }) {
           className={`accordion-title ${isOpenAccodion ? "open" : ""}`}
           onClick={() => setAccordion(!isOpenAccodion)}
         >
-          {title} 
+          {title}
         </label>
       </div>
       <div className={`accordion-item ${!isOpenAccodion ? "collapsed" : ""}`}>

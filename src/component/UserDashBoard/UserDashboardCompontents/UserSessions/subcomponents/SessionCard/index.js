@@ -10,6 +10,7 @@ import AvailabilityIcon from "assets/files/TrainerDashboard/Message/Availability
 import LocationIcon from "assets/files/TrainerDashboard/Message/Location Icon.svg";
 
 import Dialog from "@material-ui/core/Dialog";
+import moment from "moment";
 
 function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
   const [cancelAlert, setcancelAlert] = useState(false);
@@ -146,9 +147,10 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
         {data?.mottoPass ? (
           <div className="package-info">
             <div className="package-ribbon">Motto Package</div>
-            <div className="package-remaining">3 Sessions Remaining</div>
+            <div className="package-remaining">{data?.mottoPass?.remains} Sessions Remaining</div>
             <div className="package-validity">
-              <img src={AvailabilityIcon} alt="icon" /> Valid until March 12 2021
+              <img src={AvailabilityIcon} alt="icon" /> Valid until{" "}
+              {moment(data?.mottoPass?.expiresIn).format("MMMM Do, YYYY")}
             </div>
           </div>
         ) : null}

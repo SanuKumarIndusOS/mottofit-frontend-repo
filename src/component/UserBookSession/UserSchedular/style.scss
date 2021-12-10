@@ -1,11 +1,10 @@
 .event_outter_container {
   width: 100%;
 
-  .container{
-
+  .container {
     max-width: 960px;
   }
- 
+
   .event_inner_container {
     .link_wrapper {
       display: -webkit-box;
@@ -13,14 +12,14 @@
       display: flex;
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
-          -ms-flex-direction: row;
-              flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
       -webkit-box-pack: start;
-          -ms-flex-pack: start;
-              justify-content: flex-start;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
       margin-top: 2em;
 
       .inner_links {
@@ -29,11 +28,11 @@
         display: flex;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         a {
           margin-left: 1em;
           text-align: left;
@@ -61,16 +60,19 @@
           display: -ms-flexbox;
           display: flex;
           -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center;
+          -ms-flex-align: center;
+          align-items: center;
           -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
+          -ms-flex-pack: center;
+          justify-content: center;
           -webkit-box-orient: vertical;
           -webkit-box-direction: normal;
-              -ms-flex-direction: column;
-                  flex-direction: column;
+          -ms-flex-direction: column;
+          flex-direction: column;
           margin-top: 2em;
+          @media only screen and (max-width: 900px) {
+            display: none;
+          }
           h2 {
             text-align: center;
             letter-spacing: 0px;
@@ -82,7 +84,7 @@
           }
           p {
             //width: 900px;
-           // height: 54px;
+            // height: 54px;
             text-align: center;
             letter-spacing: 0.27px;
             color: #696969;
@@ -97,11 +99,11 @@
           display: -ms-flexbox;
           display: flex;
           -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center;
+          -ms-flex-align: center;
+          align-items: center;
           -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
+          -ms-flex-pack: center;
+          justify-content: center;
           margin: 5em 0 2em 1em;
           img {
             width: 125px;
@@ -109,13 +111,23 @@
             opacity: 1;
             border-radius: 100px;
             -o-object-fit: cover;
-               object-fit: cover;
+            object-fit: cover;
           }
+          
           .user_content {
             -webkit-box-align: center;
-                -ms-flex-align: center;
-                    align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
             margin: 0em 0 0em 1em;
+            @media only screen and (max-width: 900px) {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-orient: vertical;
+              -webkit-box-direction: normal;
+                  -ms-flex-direction: column;
+                      flex-direction: column;
+            }
             h2 {
               text-align: left;
               letter-spacing: -0.45px;
@@ -137,6 +149,9 @@
               font-size: 22px;
               font-family: "Montserrat", sans-serif;
               font-weight: 500;
+              @media only screen and (max-width: 900px) {
+                text-align: center;
+              }
             }
           }
         }
@@ -146,11 +161,11 @@
           display: -ms-flexbox;
           display: flex;
           -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
+          -ms-flex-pack: center;
+          justify-content: center;
           -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center;
+          -ms-flex-align: center;
+          align-items: center;
           margin: 0 auto;
           padding-left: 1em;
           width: 230px;
@@ -181,26 +196,26 @@
   width: 100%;
   margin: 2em 0 3em 0;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   .items_slots_user {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     width: 130%;
     .item_slot1_user {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
       .indicator {
         width: 60px;
         height: 15px;
@@ -222,8 +237,8 @@
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
       .indicator2 {
         width: 60px;
         height: 15px;
@@ -245,8 +260,8 @@
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
       .indicator3 {
         width: 60px;
         height: 15px;
@@ -269,16 +284,16 @@
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
 
       a {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         letter-spacing: 0.54px;
         border: none;
         outline: none;
@@ -300,21 +315,20 @@
 @media only screen and (max-width: 900px) {
   .schedular_slots_user {
     .items_slots_user {
-     -webkit-box-orient: vertical;
-     -webkit-box-direction: normal;
-         -ms-flex-direction: column;
-             flex-direction: column;
-     -webkit-box-align: start;
-         -ms-flex-align: start;
-             align-items: flex-start;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: start;
+      -ms-flex-align: start;
+      align-items: flex-start;
 
-     .item_slot5_user
-     {
-       a{
-         margin-top: 30px;
-         width: 300px !important;
-       }
-     }
+      .item_slot5_user {
+        a {
+          margin-top: 30px;
+          width: 300px !important;
+        }
+      }
     }
   }
 
@@ -331,7 +345,11 @@
             }
           }
           .user_profile_details {
-            margin: 10em 0 2em 1em;
+            margin: 2em 0 2em 1em;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
           }
         }
       }
@@ -339,13 +357,10 @@
   }
 }
 
-
-.book_session_btn{
-
+.book_session_btn {
   text-transform: uppercase;
   font-weight: bold;
   font-family: Montserrat;
   font-size: 18px;
   letter-spacing: 0.45px;
-  
 }

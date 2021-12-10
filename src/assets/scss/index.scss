@@ -1248,3 +1248,18 @@ select {
 .MuiCircularProgress-colorPrimary {
   color: #53bfd2 !important;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f8f8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+
+  background-color: #afafaf;
+}
