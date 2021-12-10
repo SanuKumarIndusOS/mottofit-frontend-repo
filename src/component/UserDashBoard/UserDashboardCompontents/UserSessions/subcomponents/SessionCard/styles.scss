@@ -9,6 +9,10 @@
     display: -ms-flexbox;
     display: flex;
 
+    @media only screen and (max-width: 900px) {
+      display: unset;
+    }
+
     .session-date-box-container {
       width: 100px;
       height: 100px;
@@ -49,6 +53,12 @@
 
     .session-info-content {
       margin-left: 1.5rem;
+
+      @media only screen and (max-width: 900px) {
+        margin-left: unset;
+        margin-top: 1rem;
+      }
+
       .session__title {
         text-align: left;
         font-weight: 600;
@@ -57,8 +67,13 @@
         letter-spacing: 0px;
         color: #161616;
 
-        span{
+        span {
           text-transform: capitalize;
+        }
+
+        @media only screen and (max-width: 900px) {
+          margin-bottom: 1rem;
+          
         }
       }
 
@@ -66,6 +81,12 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+
+        @media only screen and (max-width: 900px) {
+          display: unset;
+          
+        }
+
         .info--sm {
           display: -webkit-box;
           display: -ms-flexbox;
@@ -102,7 +123,7 @@
           color: #898989;
         }
 
-        .txt--red{
+        .txt--red {
           color: rgb(216, 83, 83);
         }
 
@@ -115,28 +136,24 @@
   }
 }
 
-
-.cancel-dialog{
+.cancel-dialog {
   padding: 1rem;
-  
-  .cancel-dialog__button{
+
+  .cancel-dialog__button {
     text-transform: uppercase;
     font-weight: 500;
     padding: 10px;
     border: none;
     margin-right: 1rem;
   }
-  
-  .button--blue{
+
+  .button--blue {
     background-color: #53bfd2;
     color: white;
   }
 
-  .button--red{
+  .button--red {
     background-color: #d25353;
     color: white;
   }
-
-
 }
-

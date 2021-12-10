@@ -2,6 +2,11 @@
   margin-left: 4rem;
   margin-bottom: 10rem;
 
+  @media only screen and (max-width: 900px) {
+   margin-left: 1rem;
+   margin-top: 5rem;
+  }
+
   .user-sessions__title {
     text-align: left;
     font-family: "Montserrat", sans-serif;
@@ -24,6 +29,10 @@
     padding-bottom: 3rem;
     padding-left: 2rem;
     padding-right: 2rem;
+
+    @media only screen and (max-width: 900px) {
+     width: 95%;
+     }
 
     .session-tab__header {
       text-align: left;
@@ -57,7 +66,7 @@
 
     .view-more-container {
       margin-top: 20px;
-     
+
       font-family: "Montserrat", sans-serif;
       font-size: 18px;
       font-weight: 600;
