@@ -61,6 +61,9 @@ export const MottoPassCard = ({ data , className = "", isAdminView = false , han
           {`${totalPassCount} Session Package`}
         </span>
       </div>
+      {/* <div className="book-again-container">
+      <button className="book-again-cta">Book again</button>
+      </div> */}
       <div className="pass-user-name text-center">
         <h1 className="fs-35 mb-4 mt-3 text-capitalize">{`${
           trainer?.firstName || ""

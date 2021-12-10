@@ -143,11 +143,15 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
           </div>
         </div>
 
-        <div className="package-info">
-          <div className="package-ribbon"></div>
-          <div className="package-remaining"></div>
-          <div className="package-validity"></div>
-        </div>
+        {data?.mottoPass ? (
+          <div className="package-info">
+            <div className="package-ribbon">Motto Package</div>
+            <div className="package-remaining">3 Sessions Remaining</div>
+            <div className="package-validity">
+              <img src={AvailabilityIcon} alt="icon" /> Valid until March 12 2021
+            </div>
+          </div>
+        ) : null}
       </div>
 
       <Dialog
