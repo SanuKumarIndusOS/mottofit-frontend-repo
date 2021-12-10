@@ -11,7 +11,7 @@ import LocationIcon from "assets/files/TrainerDashboard/Message/Location Icon.sv
 
 import Dialog from "@material-ui/core/Dialog";
 
-function SessionCard({ data, activeTab, cancelAction }) {
+function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
   const [cancelAlert, setcancelAlert] = useState(false);
   const [isReschedule, setIsReschedule] = useState(false);
   const encodedName = useNameEncoder(
@@ -52,11 +52,10 @@ function SessionCard({ data, activeTab, cancelAction }) {
   const handleDialogCancel = () => {
     if (isReschedule) {
       cancelAction(data?.id);
-      return history.push(
-        `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`
-      );
+      return rescheduleAction(data);
     } else {
-      return cancelAction(data?.id);
+      cancelAction(data?.id);
+      return setcancelAlert(false);
     }
   };
 

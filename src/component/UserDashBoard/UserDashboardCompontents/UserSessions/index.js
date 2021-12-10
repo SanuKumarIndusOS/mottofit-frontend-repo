@@ -4,6 +4,8 @@ import "./styles.scss";
 import TabControl from "./subcomponents/TabControl";
 import SessionCard from "./subcomponents/SessionCard";
 
+import { history } from "helpers";
+
 import { userSession, cancelSession, updateUserDetails } from "action/userAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -15,19 +17,25 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // 2. Pagination
 // 3. Safari Testing
 
-function UserSessions({ userSession, cancelSession }) {
+function UserSessions({ userSession, cancelSession, updateUserDetails }) {
   const [activeTab, setactiveTab] = useState("upcoming");
   const [tabData, settabData] = useState([]);
   const [dataLoader, setdataLoader] = useState(true);
+  const [empty, setEmpty] = useState(false);
 
   const getSessionData = () => {
     userSession(activeTab === "previous" ? "past" : activeTab, 0).then(
       (data) => {
         console.log(data);
+
+        if (data["data"]?.length === 0) return setEmpty(true);
         settabData(data["data"]);
-        setTimeout(() => {
-          setdataLoader(false);
-        }, 500);
+
+      
+          setTimeout(() => {
+            setdataLoader(false);
+          }, 500);
+        
       }
     );
   };
@@ -47,6 +55,24 @@ function UserSessions({ userSession, cancelSession }) {
       });
   };
 
+  const rescheduleAction = (trainerData) => {
+    var storedata = {
+      sessionData: {
+        trainerId: trainerData?.trainerDetail?.id,
+        city: null,
+        sessionType: trainerData?.sessionType,
+        venue: trainerData?.venue,
+        trainingType: trainerData?.trainingType,
+        price: trainerData?.price,
+        areaOfExpertise: trainerData?.activity,
+      },
+    };
+
+    updateUserDetails(storedata);
+
+    history.push(`/user/scheduler/${trainerData?.trainerDetail?.id}`);
+  };
+
   // Change functions
   const handleChangeTab = (tabHeader) => setactiveTab(tabHeader);
 
@@ -58,6 +84,7 @@ function UserSessions({ userSession, cancelSession }) {
   useEffect(() => {
     setdataLoader(true);
     getSessionData();
+    setEmpty(false);
   }, [activeTab]);
 
   return (
@@ -72,7 +99,7 @@ function UserSessions({ userSession, cancelSession }) {
           <div className="session-tab__content">
             {dataLoader ? (
               <div className="loader-container">
-                <CircularProgress />
+                {empty ? `No ${activeTab} Session` : <CircularProgress />}
               </div>
             ) : (
               tabData?.map((item) => {
@@ -81,6 +108,7 @@ function UserSessions({ userSession, cancelSession }) {
                     data={item}
                     activeTab={activeTab}
                     cancelAction={cancelAction}
+                    rescheduleAction={rescheduleAction}
                   />
                 );
               })
