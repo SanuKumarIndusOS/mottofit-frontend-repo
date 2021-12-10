@@ -191,12 +191,12 @@ const SignInFC = ({
               <div className="wrapper_inner">
                 <h2>Welcome to Motto!</h2>
                 <p>Sign into your account by filling in the details below</p>
-                {loginLoader ? (
+                {/* {loginLoader ? (
                   <div className="loader">
                     Loging in, Please Wait!&ensp;
                     <CircularProgress />
                   </div>
-                ) : null}
+                ) : null} */}
 
                 <div className="form_item_login">
                   <form onSubmit={logIn}>

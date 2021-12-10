@@ -52,6 +52,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
     console.log(localStorage.getItem("paymentred"));
   }, [])
 
+  const [loginLoader, setloginLoader] = useState(false);
   const onChangeValue = (e) => {
     e.persist();
 
@@ -70,6 +71,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
   };
 
   async function logIn(e) {
+    setloginLoader(true);
     e.preventDefault();
 
     const nextPathUrl = urlData?.get("nextpath");
@@ -89,6 +91,11 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
       signUpType: data.signUpType,
       deviceName: data.deviceName,
     };
+
+    if (!validateFields(payload)) {
+      console.log("err");
+      setloginLoader(false);
+    }
 
     if (!validateFields(payload)) return;
 
@@ -261,8 +268,17 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
                       type="submit"
                       onClick={logIn}
                     >
-                      Signin
-                      <ArrowHoverBlacked />
+                      {loginLoader ? (
+                          <div className="loader">
+                            Loging in, Please Wait!&ensp;
+                            {/* <CircularProgress /> */}
+                          </div>
+                        ) : (
+                          <>
+                            Sign In
+                            <ArrowHoverBlacked />
+                          </>
+                        )}
                     </button>
                   </div>
 

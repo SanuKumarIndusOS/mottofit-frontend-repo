@@ -629,8 +629,9 @@ const UserPaymentsFC = ({
                         {/* { sessionData?.newPass?.} */}
 
                         {sessionData?.trainingType === "1on1"
-                          ? passId
-                            ? passData?.totalPassCount === 10
+                          ? passId || sessionData?.newPass?.totalPasses
+                            ? passData?.totalPassCount === 10 ||
+                              sessionData?.newPass?.totalPasses === 10
                               ? "10 Session Package"
                               : "30 Session Package"
                             : "1 on 1 session"
@@ -737,7 +738,7 @@ const UserPaymentsFC = ({
                         Session Cancellation Policy
                       </div>
                       <div className="cancel-style__body">
-                        {passId
+                        {passId || sessionData?.newPass?.totalPasses
                           ? "Sessions you schedule from package can be cancelled/rescheduled upto 12 hours prior to session."
                           : "No charge upto 12 hours from session time. Full charge after."}
                       </div>
