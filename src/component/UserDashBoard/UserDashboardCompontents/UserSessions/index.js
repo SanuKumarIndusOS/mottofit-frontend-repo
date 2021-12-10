@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
+import BlueHoverButton from "component/common/BlueArrowButton";
 
 // TODO
 // 1. No Session Available
@@ -114,6 +115,7 @@ function UserSessions({ userSession, cancelSession, updateUserDetails }) {
               })
             )}
           </div>
+          <div className="view-more-container">View more trainers <BlueHoverButton/></div>
         </div>
       </div>
     </>

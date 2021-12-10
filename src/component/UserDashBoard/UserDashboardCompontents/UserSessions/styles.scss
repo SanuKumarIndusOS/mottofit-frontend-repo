@@ -24,8 +24,6 @@
     padding-left: 2rem;
     padding-right: 2rem;
 
-    
-
     .session-tab__header {
       text-align: left;
       font-family: "Montserrat", sans-serif;
@@ -36,26 +34,43 @@
       text-transform: capitalize;
     }
 
-    .session-tab__content{
-        margin-top: 1rem;
-        height: 500px;
-        overflow-y: auto;
+    .session-tab__content {
+      margin-top: 1rem;
+      height: 500px;
+      overflow-y: auto;
 
-        .loader-container{
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
-          -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center;
-          margin-top: 6rem;
-          width: 100%;
-        }
-       
+      .loader-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 6rem;
+        width: 100%;
+      }
+    }
+
+    .view-more-container {
+      margin-top: 20px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
     }
   }
 }
-
