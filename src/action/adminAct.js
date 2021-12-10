@@ -236,11 +236,12 @@ export const GetAllCoupon =
   };
 
 export const ActivateCoupon =
-  (id) =>
+  (id, status) =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
       const { ActivateCoupon } = AdminApi;
       ActivateCoupon.id = id;
+      ActivateCoupon.status = status;
       api({ ...ActivateCoupon })
         .then(({ data }) => {
           resolve(data);
