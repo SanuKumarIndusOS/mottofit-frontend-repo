@@ -5,6 +5,8 @@ import TabControl from "./subcomponents/TabControl";
 import SessionCard from "./subcomponents/SessionCard";
 import { MottoPassSection } from "component/MottoPass";
 
+import useLoadMore from "component/common/Hooks/useLoadMore";
+
 import { history } from "helpers";
 
 import {
@@ -18,6 +20,7 @@ import { bindActionCreators } from "redux";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import BlueHoverButton from "component/common/BlueArrowButton";
+
 
 // TODO
 // 1. No Session Available
@@ -36,25 +39,35 @@ function UserSessions({
   const [empty, setEmpty] = useState(false);
   const [mottoPassData, setMottoPassData] = useState([]);
   const [inValidMottoPassData, setInvalidMottoPassData] = useState([]);
+  // const [apiParams, setapiParams] = useState([activeTab,"0"])
+  
+  // let apiParams = [activeTab === "previous" ? "past" : activeTab, "0"];
+
+  const [renderData, setrenderData, activePage, setActivePage, setapiParams] = useLoadMore(
+    userSession,
+    10
+  );
 
   const getSessionData = () => {
     if (activeTab === "motto package") {
       getAllPasses();
     } else {
-      userSession(activeTab === "previous" ? "past" : activeTab, 0).then(
-        (data) => {
-          console.log(data);
+      // userSession(activeTab === "previous" ? "past" : activeTab, 2).then(
+      //   ({ data: data, documentCount: totalItem }) => {
+      //     console.log(data, totalItem);
 
-          if (data["data"]?.length === 0) return setEmpty(true);
-          settabData(data["data"]);
+      //     if (data?.length === 0) return setEmpty(true);
+      //     settabData(data);
 
-          setTimeout(() => {
-            setdataLoader(false);
-          }, 500);
-        }
-      );
+      //     setTimeout(() => {
+      //       setdataLoader(false);
+      //     }, 500);
+      //   }
+      // );
     }
   };
+
+
 
   const getAllPasses = async () => {
     console.log("poi");
@@ -110,6 +123,11 @@ function UserSessions({
     setdataLoader(true);
     getSessionData();
     setEmpty(false);
+
+    setapiParams([activeTab === "previous" ? "past" : activeTab]);
+    setActivePage(0);
+    
+    
   }, [activeTab]);
 
   return (
@@ -129,12 +147,12 @@ function UserSessions({
                 mottoPassData={mottoPassData}
                 inValidMottoPassData={inValidMottoPassData}
               />
-            ) : dataLoader ? (
+            ) : false ? (
               <div className="loader-container">
                 {empty ? `No ${activeTab} Session` : <CircularProgress />}
               </div>
             ) : (
-              tabData?.map((item) => {
+              renderData?.map((item) => {
                 return (
                   <SessionCard
                     data={item}
@@ -147,8 +165,8 @@ function UserSessions({
             )}
           </div>
           {activeTab === "motto package" ? null : (
-            <div className="view-more-container">
-              View more trainers <BlueHoverButton />
+            <div className="view-more-container" onClick={()=>{ setActivePage(activePage+1) }}>
+              View more Sessions <BlueHoverButton />
             </div>
           )}
         </div>

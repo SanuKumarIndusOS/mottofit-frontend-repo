@@ -116,7 +116,7 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
         <div className="session-info-container">
           <div className="session-date-box-container">
             <div className="session-date-box">
-              <div className="date--bg">{data?.sessionDate.substr(8, 2)}</div>
+              <div className="date--bg">{data?.sessionDate?.substr(8, 2)}</div>
               <div className="month--bg">FEB</div>
             </div>
           </div>
