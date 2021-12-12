@@ -24,8 +24,10 @@ import BlueHoverButton from "component/common/BlueArrowButton";
 
 // TODO
 // 1. No Session Available
-// 2. Pagination
-// 3. Safari Testing
+// 2. Loader
+// 3. Hide View More
+// 4. Check Dialogs
+// 5. After Cancellation update render
 
 function UserSessions({
   userSession,
@@ -39,14 +41,9 @@ function UserSessions({
   const [empty, setEmpty] = useState(false);
   const [mottoPassData, setMottoPassData] = useState([]);
   const [inValidMottoPassData, setInvalidMottoPassData] = useState([]);
-  // const [apiParams, setapiParams] = useState([activeTab,"0"])
   
-  // let apiParams = [activeTab === "previous" ? "past" : activeTab, "0"];
 
-  const [renderData, setrenderData, activePage, setActivePage, setapiParams] = useLoadMore(
-    userSession,
-    10
-  );
+  const [renderData, activePage, setActivePage, setapiParams] = useLoadMore(userSession,10);
 
   const getSessionData = () => {
     if (activeTab === "motto package") {
@@ -87,6 +84,7 @@ function UserSessions({
     cancelSession(payload)
       .then((data) => {
         getSessionData();
+        
       })
       .catch((err) => {
         console.log(err);
