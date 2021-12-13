@@ -30,6 +30,7 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
 
   // Cancel button control
   const handleCancel = () => {
+    console.log("12", isWithinTwelveHours);
     isWithinTwelveHours ? setcancelAlert(true) : cancelAction(data?.id);
   };
 
