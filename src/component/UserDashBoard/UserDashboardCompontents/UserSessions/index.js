@@ -20,7 +20,7 @@ import { bindActionCreators } from "redux";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import BlueHoverButton from "component/common/BlueArrowButton";
-
+import { requestTrainerMessageAct } from "action/trainerAct";
 
 // TODO
 // 1. No Session Available
@@ -33,6 +33,7 @@ function UserSessions({
   userSession,
   cancelSession,
   updateUserDetails,
+  requestTrainerMessageApi,
   getAllMottoPassesAct,
 }) {
   const [activeTab, setactiveTab] = useState("upcoming");
@@ -41,9 +42,11 @@ function UserSessions({
   const [empty, setEmpty] = useState(false);
   const [mottoPassData, setMottoPassData] = useState([]);
   const [inValidMottoPassData, setInvalidMottoPassData] = useState([]);
-  
 
-  const [renderData, activePage, setActivePage, setapiParams] = useLoadMore(userSession,10);
+  const [renderData, activePage, setActivePage, setapiParams] = useLoadMore(
+    userSession,
+    10
+  );
 
   const getSessionData = () => {
     if (activeTab === "motto package") {
@@ -52,10 +55,8 @@ function UserSessions({
       // userSession(activeTab === "previous" ? "past" : activeTab, 2).then(
       //   ({ data: data, documentCount: totalItem }) => {
       //     console.log(data, totalItem);
-
       //     if (data?.length === 0) return setEmpty(true);
       //     settabData(data);
-
       //     setTimeout(() => {
       //       setdataLoader(false);
       //     }, 500);
@@ -63,8 +64,6 @@ function UserSessions({
       // );
     }
   };
-
-
 
   const getAllPasses = async () => {
     console.log("poi");
@@ -84,7 +83,6 @@ function UserSessions({
     cancelSession(payload)
       .then((data) => {
         getSessionData();
-        
       })
       .catch((err) => {
         console.log(err);
@@ -124,8 +122,6 @@ function UserSessions({
 
     setapiParams([activeTab === "previous" ? "past" : activeTab]);
     setActivePage(0);
-    
-    
   }, [activeTab]);
 
   return (
@@ -144,6 +140,7 @@ function UserSessions({
                 handlePagination={0}
                 mottoPassData={mottoPassData}
                 inValidMottoPassData={inValidMottoPassData}
+                requestTrainerMessageApi={requestTrainerMessageApi}
               />
             ) : false ? (
               <div className="loader-container">
@@ -163,7 +160,12 @@ function UserSessions({
             )}
           </div>
           {activeTab === "motto package" ? null : (
-            <div className="view-more-container" onClick={()=>{ setActivePage(activePage+1) }}>
+            <div
+              className="view-more-container"
+              onClick={() => {
+                setActivePage(activePage + 1);
+              }}
+            >
               View more Sessions <BlueHoverButton />
             </div>
           )}
@@ -184,6 +186,7 @@ const mapDispatchToProps = (dispatch) => {
       cancelSession,
       updateUserDetails,
       getAllMottoPassesAct,
+      requestTrainerMessageApi: requestTrainerMessageAct,
     },
     dispatch
   );

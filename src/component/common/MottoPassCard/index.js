@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Styles
 import "./mottopassCard.scss";
@@ -13,10 +13,30 @@ import DollarIcon from "assets/files/SVG/green_dollar_sign.svg";
 
 //additonal packages
 import moment from "moment";
+import ArrowHoverBlacked from "../BlackCircleButton/ArrowHoverBlacked";
+import { Button } from "reactstrap";
+import { history } from "helpers";
 
+export const MottoPassCard = ({
+  data,
+  className = "",
+  isAdminView = false,
+  isUserView = false,
+  handleClick = () => {},
+  requestTrainerAct = () => {},
+}) => {
+  const {
+    totalPassCount,
+    price,
+    expiresIn,
+    passType,
+    trainer,
+    remains,
+    user,
+    trainerId,
+  } = data || {};
 
-export const MottoPassCard = ({ data , className = "", isAdminView = false , handleClick = () => {} }) => {
-  const { totalPassCount, price, expiresIn, passType, trainer, remains , user } = data || {};
+  const [isLoading, setLoading] = useState(false);
 
   let mottoPassType = "";
 
@@ -43,13 +63,27 @@ export const MottoPassCard = ({ data , className = "", isAdminView = false , han
 
   let discountedPrice = Math.abs(price / totalPassCount).toFixed(2);
 
-  let userFullName = isAdminView ? `with ${user?.firstName || ""} ${user?.lastName || ""}` : "";
+  let userFullName = isAdminView
+    ? `with ${user?.firstName || ""} ${user?.lastName || ""}`
+    : "";
 
   let adminPropValue = {};
 
-  if(isAdminView){
+  if (isAdminView) {
     adminPropValue["onClick"] = handleClick;
   }
+
+  const handleUserViewRoute = (type) => {
+    if (type === "session") {
+      return history.push(`/user/scheduler/${trainerId}`);
+    } else if (type === "message") {
+      return handleRequestTrainer();
+    }
+  };
+
+  const handleRequestTrainer = () => {
+    requestTrainerAct(trainerId, (data) => setLoading(data));
+  };
 
   return (
     <div className={`mottopass-card ${className}`} {...adminPropValue}>
@@ -67,8 +101,11 @@ export const MottoPassCard = ({ data , className = "", isAdminView = false , han
       <div className="pass-user-name text-center">
         <h1 className="fs-35 mb-4 mt-3 text-capitalize">{`${
           trainer?.firstName || ""
-        } ${trainer?.lastName || ""} ${userFullName}`}</h1> <br></br>
-         <p >{remains} out of {totalPassCount} passes remaining</p>
+        } ${trainer?.lastName || ""} ${userFullName}`}</h1>{" "}
+        <br></br>
+        <p>
+          {remains} out of {totalPassCount} passes remaining
+        </p>
       </div>
       <div className="mottopass-details d-flex flex-column align-items-start">
         <div className="mottopass-restriction d-flex align-items-start">
@@ -92,8 +129,31 @@ export const MottoPassCard = ({ data , className = "", isAdminView = false , han
           <p className="fs-15">{`${
             !isExpired ? "Valid until " : "Expired on "
           } ${expirationDate}`}</p>
-        </div>      
+        </div>
       </div>
+      {isUserView && (
+        <div className="user-view-content d-flex align-items-center justify-content-between px-3 pb-4 flex-wrap">
+          <Button
+            color="primary"
+            onClick={() => handleUserViewRoute("session")}
+          >
+            Book Session
+          </Button>
+          <Button
+            color="primary"
+            outline
+            className="text-capitalize"
+            onClick={() => handleUserViewRoute("message")}
+            disabled={isLoading}
+          >
+            {!isLoading ? (
+              <>{`Message ${trainer?.firstName || ""}`}</>
+            ) : (
+              "Loading..."
+            )}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

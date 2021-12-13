@@ -31,6 +31,7 @@ import { useLocation } from "react-router-dom";
 import { MottoPassSection } from "component/MottoPass";
 import Dialog from "@material-ui/core/Dialog";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { requestTrainerMessageAct } from "action/trainerAct";
 const UserSessionClass = (props) => {
   const [userData, setUserData] = React.useState({
     upcomingSessions: [],
@@ -253,6 +254,7 @@ const UserSessionClass = (props) => {
                       handlePagination={handlePagination}
                       mottoPassData={mottoPassData}
                       inValidMottoPassData={inValidMottoPassData}
+                      requestTrainerMessageApi={props.requestTrainerMessageApi}
                     />
                   )}
 
@@ -383,8 +385,6 @@ const TabOne = ({
     //     )
     //     .asDays()
     // );
-
-  
 
     // console.log(hourDiff, dayDiff);
 
@@ -762,39 +762,144 @@ const TabOne = ({
                                     </button>
                                   ) : (
                                     <>
-                                    {!rescheduleAlert?
-                                      <Dialog
-                                        onClose={() => {
-                                          setcancelAlert(false);
-                                        }}
-                                        aria-labelledby="simple-dialog-title"
-                                        open={cancelAlert}
-                                      >
-                                        <div style={{ padding: "1rem" }}>
-                                          <h3>Alert!</h3>
-                                          <hr></hr>
-                                          {rescheduleAction ? (
-                                            <>
-                                              Rescheduling now will cancel your
-                                              current booking and you will incur
-                                              full cost of that booking as its
-                                              less than 12 hrs away. Would you
-                                              like to continue?
-                                            </>
-                                          ) : (
-                                            <>
-                                              Your trainer has already set aside
-                                              this time for you, so you will be
-                                              charged fully for cancellations
-                                              less than 12 hrs before a session.
-                                              Proceed with cancelling?
-                                            </>
-                                          )}
+                                      {!rescheduleAlert ? (
+                                        <Dialog
+                                          onClose={() => {
+                                            setcancelAlert(false);
+                                          }}
+                                          aria-labelledby="simple-dialog-title"
+                                          open={cancelAlert}
+                                        >
+                                          <div style={{ padding: "1rem" }}>
+                                            <h3>Alert!</h3>
+                                            <hr></hr>
+                                            {rescheduleAction ? (
+                                              <>
+                                                Rescheduling now will cancel
+                                                your current booking and you
+                                                will incur full cost of that
+                                                booking as its less than 12 hrs
+                                                away. Would you like to
+                                                continue?
+                                              </>
+                                            ) : (
+                                              <>
+                                                Your trainer has already set
+                                                aside this time for you, so you
+                                                will be charged fully for
+                                                cancellations less than 12 hrs
+                                                before a session. Proceed with
+                                                cancelling?
+                                              </>
+                                            )}
 
-                                          <hr></hr>
-                                        </div>
-                                        <div>
-                                          {rescheduleAction ? (
+                                            <hr></hr>
+                                          </div>
+                                          <div>
+                                            {rescheduleAction ? (
+                                              <button
+                                                style={{
+                                                  margin: "1rem",
+                                                  padding: "10px",
+                                                  border: "none",
+                                                  color: "white",
+                                                  backgroundColor: "#53bfd2",
+                                                }}
+                                                onClick={() => {
+                                                  let encodedName = "";
+                                                  let trainerFullname = `${
+                                                    data?.trainerDetail
+                                                      ?.firstName || ""
+                                                  }-${
+                                                    data?.trainerDetail
+                                                      ?.lastName || ""
+                                                  }`;
+
+                                                  encodedName =
+                                                    trainerFullname.toLocaleLowerCase();
+
+                                                  handleCancel(
+                                                    data.id,
+                                                    data.channelId,
+                                                    data.sessionStartTime,
+                                                    true,
+                                                    `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`,
+                                                    data
+                                                  );
+                                                }}
+                                              >
+                                                CONTINUE
+                                              </button>
+                                            ) : (
+                                              <button
+                                                style={{
+                                                  margin: "1rem",
+                                                  padding: "10px",
+                                                  border: "none",
+                                                  color: "white",
+                                                  backgroundColor: "red",
+                                                }}
+                                                onClick={() => {
+                                                  let encodedName = "";
+                                                  let trainerFullname = `${
+                                                    data?.trainerDetail
+                                                      ?.firstName || ""
+                                                  }-${
+                                                    data?.trainerDetail
+                                                      ?.lastName || ""
+                                                  }`;
+
+                                                  encodedName =
+                                                    trainerFullname.toLocaleLowerCase();
+
+                                                  handleCancel(
+                                                    data.id,
+                                                    data.channelId,
+                                                    data.sessionStartTime
+                                                    // rescheduleAction
+                                                    //   ? true
+                                                    //   : false,
+                                                    // `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`,
+                                                    // data
+                                                  );
+                                                }}
+                                              >
+                                                CANCEL
+                                              </button>
+                                            )}
+
+                                            <button
+                                              style={{
+                                                margin: "1rem",
+                                                padding: "10px",
+                                                border: "none",
+                                              }}
+                                              onClick={() => {
+                                                setcancelAlert(false);
+                                              }}
+                                            >
+                                              CLOSE
+                                            </button>
+                                          </div>
+                                        </Dialog>
+                                      ) : (
+                                        <Dialog
+                                          onClose={() => {
+                                            setRescheduleAlert(false);
+                                          }}
+                                          aria-labelledby="simple-dialog-title"
+                                          open={rescheduleAlert}
+                                        >
+                                          <div style={{ padding: "1rem" }}>
+                                            <h3>Alert</h3>
+                                            <hr />
+                                            <p>
+                                              Your booking will be cancelled.
+                                              You can pick a new time. Would you
+                                              like to continue
+                                            </p>
+                                            <hr />
+
                                             <button
                                               style={{
                                                 margin: "1rem",
@@ -828,124 +933,22 @@ const TabOne = ({
                                             >
                                               CONTINUE
                                             </button>
-                                          ) : (
+
                                             <button
                                               style={{
                                                 margin: "1rem",
                                                 padding: "10px",
                                                 border: "none",
-                                                color: "white",
-                                                backgroundColor: "red",
                                               }}
                                               onClick={() => {
-                                                let encodedName = "";
-                                                let trainerFullname = `${
-                                                  data?.trainerDetail
-                                                    ?.firstName || ""
-                                                }-${
-                                                  data?.trainerDetail
-                                                    ?.lastName || ""
-                                                }`;
-
-                                                encodedName =
-                                                  trainerFullname.toLocaleLowerCase();
-
-                                                handleCancel(
-                                                  data.id,
-                                                  data.channelId,
-                                                  data.sessionStartTime,
-                                                  // rescheduleAction
-                                                  //   ? true
-                                                  //   : false,
-                                                  // `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`,
-                                                  // data
-                                                );
+                                                setRescheduleAlert(false);
                                               }}
                                             >
-                                              CANCEL
+                                              CLOSE
                                             </button>
-                                          )}
-
-                                          <button
-                                            style={{
-                                              margin: "1rem",
-                                              padding: "10px",
-                                              border: "none",
-                                            }}
-                                            onClick={() => {
-                                              setcancelAlert(false);
-                                            }}
-                                          >
-                                            CLOSE
-                                          </button>
-                                        </div>
-                                      </Dialog>
-:
-                                      <Dialog
-                                        onClose={() => {
-                                          setRescheduleAlert(false);
-                                        }}
-                                        aria-labelledby="simple-dialog-title"
-                                        open={rescheduleAlert}
-                                      >
-                                        <div style={{ padding: "1rem" }}>
-                                          <h3>Alert</h3>
-                                          <hr />
-                                          <p>
-                                            Your booking will be cancelled. You
-                                            can pick a new time. Would you like
-                                            to continue
-                                          </p>
-                                          <hr />
-
-                                          <button
-                                            style={{
-                                              margin: "1rem",
-                                              padding: "10px",
-                                              border: "none",
-                                              color: "white",
-                                              backgroundColor: "#53bfd2",
-                                            }}
-                                            onClick={() => {
-                                              let encodedName = "";
-                                              let trainerFullname = `${
-                                                data?.trainerDetail
-                                                  ?.firstName || ""
-                                              }-${
-                                                data?.trainerDetail?.lastName ||
-                                                ""
-                                              }`;
-
-                                              encodedName =
-                                                trainerFullname.toLocaleLowerCase();
-
-                                              handleCancel(
-                                                data.id,
-                                                data.channelId,
-                                                data.sessionStartTime,
-                                                true,
-                                                `/trainer/profile/${data?.trainerDetail?.id}/${encodedName}`,
-                                                data
-                                              );
-                                            }}
-                                          >
-                                            CONTINUE
-                                          </button>
-
-                                          <button
-                                            style={{
-                                              margin: "1rem",
-                                              padding: "10px",
-                                              border: "none",
-                                            }}
-                                            onClick={() => {
-                                              setRescheduleAlert(false);
-                                            }}
-                                          >
-                                            CLOSE
-                                          </button>
-                                        </div>
-                                      </Dialog>}
+                                          </div>
+                                        </Dialog>
+                                      )}
                                       {!data.asFriend ? (
                                         <>
                                           {data.sessionStatus !==
@@ -1274,6 +1277,7 @@ const mapDispatchToProps = (dispatch) => {
       invitationSession,
       updateUserDetails,
       getAllMottoPassesAct,
+      requestTrainerMessageApi: requestTrainerMessageAct,
     },
     dispatch
   );
