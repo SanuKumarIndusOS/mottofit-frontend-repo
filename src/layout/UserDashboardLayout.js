@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavBar } from "component/common/Navbar/NavBar";
+import NavBar  from "component/common/NavBarTwo/index";
 import Footer from "component/common/Footer";
 import Sidebar from "component/UserDashBoard/UserAdmin/UserAdminSidebar/Sidebar";
 import UserDashboard from "component/UserDashBoard/UserAdmin";
@@ -21,10 +21,11 @@ export class UserDashboardLayout extends Component {
     const { isOpen } = this.state;
     return (
       <>
-        <NavBar
+        {/* <NavBar
           toggle={() => this.toggle("isOpen")}
           modalToggle={() => this.toggle("modalIsOpen")}
-        />
+        /> */}
+        <NavBar/>
         <Sidebar isOpen={isOpen} toggle={this.toggle} />
         <UserDashboard>{children}</UserDashboard>
         {/* <div className="main-layout"></div> */}
