@@ -37,7 +37,7 @@ class RoutesClass extends Component {
 
     const noTokenPaths = [
       "/",
-      "/t",
+      "/t/",
       "/welcome",
       "/forgot",
       "/trainer/signup",
@@ -56,8 +56,11 @@ class RoutesClass extends Component {
     ];
 
     const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];
+    // console.log(noTokenPaths.includes(pathname), pathname);
 
-    let emptyTokenPath = noTokenPaths.includes(pathname);
+    let emptyTokenPath = noTokenPaths.some((openPath) =>
+      pathname.includes(openPath)
+    );
 
     if (pathname.includes("/trainer/profile/")) emptyTokenPath = true;
 
@@ -68,7 +71,7 @@ class RoutesClass extends Component {
 
     if (!isUserLoggedIn && !emptyTokenPath) {
       // console.log(pathname);
-      // logout();
+      logout();
       // console.log(path);
     }
   };
