@@ -88,7 +88,13 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
         // console.log(nextPathReRouter(nextAction));
 
         if (nextPathReRouter(nextAction)) return;
-        history.push("/welcome");
+
+        if (localStorage.getItem("paymentred") === null) {
+          history.push("/welcome");
+        } else {
+          history.push("/user/payment");
+        }
+      
       })
       .catch((error) => {
         // setApiError("Sorry, something went wrong.", error.message);
