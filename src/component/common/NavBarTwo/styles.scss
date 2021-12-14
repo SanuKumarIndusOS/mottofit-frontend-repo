@@ -79,11 +79,17 @@
 
       //   margin-left: 3rem;
 
-      .navbar-icon__button {
-        cursor: pointer;
-        border-left: 2px solid#53bfd2;
-        padding-left: 1rem;
-      }
+      // .navbar-icon__button {
+      //   cursor: pointer;
+      //   border-left: 2px solid#53bfd2;
+      //   padding-left: 1rem;
+      // }
     }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .navbar-container {
+    display: none;
   }
 }
