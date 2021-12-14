@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import SideBar from "component/common/SideBar";
 import Footer from "component/common/Footer";
-import { NavBar } from "component/common/Navbar/NavBar";
+// import { NavBar } from "component/common/Navbar/NavBar";
+import NavBar from "component/common/NavBarTwo/index"
 import NavBarHome from "component/Home/NavbarHomePage/NavBarHome";
 import NavBarHomeMob from "component/Home/NavbarHomePage/NavBarHomeMob";
 import "assets/css/homeLayout.scss";

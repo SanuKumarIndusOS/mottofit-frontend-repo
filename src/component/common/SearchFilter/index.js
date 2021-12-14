@@ -139,6 +139,8 @@ function SearchFilter({
       if (activeQuery.date === "") {
         setCalDisplay(false);
       } else {
+         
+        setCalDisplay(true);
         onChangeCal(new Date(activeQuery.date));
       }
 

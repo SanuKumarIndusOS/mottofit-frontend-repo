@@ -10,13 +10,18 @@ import {
   DropdownItem,
 } from "reactstrap";
 
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { change_login_status } from "action/NotificationAct";
+import { logout } from "service/utilities";
+
 import Person from "assets/files/SignUp/Person Icon.svg";
 
-function AccountIcon() {
+function AccountIcon({change_login_status}) {
   const [dropdownOpen, setOpen] = useState(false);
   const toggleDrop = () => setOpen(!dropdownOpen);
   const isUserLoggedIn =
-  localStorage.getItem("token") || localStorage.getItem("admin-token");
+    localStorage.getItem("token") || localStorage.getItem("admin-token");
 
   const handleDashboard = () => {
     let userType = parseInt(localStorage.getItem("type"));
@@ -49,8 +54,8 @@ function AccountIcon() {
             <DropdownItem onClick={handleDashboard}>Dashboard</DropdownItem>
             <DropdownItem
               onClick={() => {
-                // change_login_status({ loginStatus: false }).then(logout);
-                // logout()
+                change_login_status({ loginStatus: false }).then(logout);
+                
               }}
             >
               Logout
@@ -62,4 +67,17 @@ function AccountIcon() {
   );
 }
 
-export default AccountIcon;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+     
+      change_login_status,
+      
+    },
+    dispatch
+  );
+};
+
+export default AccountIcon = connect(null, mapDispatchToProps)(AccountIcon);
+
+
