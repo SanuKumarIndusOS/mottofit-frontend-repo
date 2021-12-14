@@ -16,8 +16,9 @@ import { change_login_status } from "action/NotificationAct";
 import { logout } from "service/utilities";
 
 import Person from "assets/files/SignUp/Person Icon.svg";
+import PersonB from "assets/files/SignUp/personBlack.svg";
 
-function AccountIcon({change_login_status}) {
+function AccountIcon({change_login_status, home}) {
   const [dropdownOpen, setOpen] = useState(false);
   const toggleDrop = () => setOpen(!dropdownOpen);
   const isUserLoggedIn =
@@ -42,12 +43,12 @@ function AccountIcon({change_login_status}) {
   return (
     <div className="account-icon-container">
       {!isUserLoggedIn ? (
-        <img src={Person} onClick={() => history.push("/mobile/login")}></img>
+        <img src={home?PersonB:Person} onClick={() => history.push("/mobile/login")}></img>
       ) : (
         <ButtonDropdown isOpen={dropdownOpen} toggle={toggleDrop}>
           <DropdownToggle className="custom-dropdown">
             <div>
-              <img src={Person} alt="icon" />
+              <img src={home?PersonB:Person} alt="icon" />
             </div>
           </DropdownToggle>
           <DropdownMenu>

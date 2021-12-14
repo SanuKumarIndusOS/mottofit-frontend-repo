@@ -250,6 +250,8 @@ const BannerFC = ({ trainerQueryData, updateTrainerDetails }) => {
   let selectedValue =
     Object.values(inPerson).filter(({ selected }) => selected)[0]?.value || "";
 
+ 
+
   return (
     <div
       className="background"

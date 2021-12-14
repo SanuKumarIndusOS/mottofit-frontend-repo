@@ -45,14 +45,15 @@ export class HomeLayout extends Component {
         {stickyNav ? (
           <NavBar />
         ) : (
-          <div className="desk_nav">
-            <NavBarHome toggle={() => this.toggle("isOpen")} />
-          </div>
+          // <div className="desk_nav">
+          //   <NavBarHome toggle={() => this.toggle("isOpen")} />
+          // </div>
+          <NavBar home={true} />
         )}
 
-        <div className="mobile_nav">
+        {/* <div className="mobile_nav">
           <NavBar />
-        </div>
+        </div> */}
 
         <SideBar isOpen={isOpen} toggle={this.toggle} />
         <div className="main-layout">{children}</div>
