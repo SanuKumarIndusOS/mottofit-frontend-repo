@@ -13,6 +13,21 @@ import Dialog from "@material-ui/core/Dialog";
 import moment from "moment";
 
 function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
+  const datamonth = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec",
+  };
+
   const [cancelAlert, setcancelAlert] = useState(false);
   const [isReschedule, setIsReschedule] = useState(false);
   const encodedName = useNameEncoder(
@@ -118,7 +133,7 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
           <div className="session-date-box-container">
             <div className="session-date-box">
               <div className="date--bg">{data?.sessionDate?.substr(8, 2)}</div>
-              <div className="month--bg">FEB</div>
+              <div className="month--bg"> {datamonth[data?.sessionDate.substr(5, 2)]}</div>
             </div>
           </div>
 
@@ -148,7 +163,9 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
         {data?.mottoPass ? (
           <div className="package-info">
             <div className="package-ribbon">Motto Package</div>
-            <div className="package-remaining">{data?.mottoPass?.remains} Sessions Remaining</div>
+            <div className="package-remaining">
+              {data?.mottoPass?.remains} Sessions Remaining
+            </div>
             <div className="package-validity">
               <img src={AvailabilityIcon} alt="icon" /> Valid until{" "}
               {moment(data?.mottoPass?.expiresIn).format("MMMM Do, YYYY")}

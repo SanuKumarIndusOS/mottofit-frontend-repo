@@ -37,6 +37,8 @@ function UserSessions({
   requestTrainerMessageApi,
   getAllMottoPassesAct,
 }) {
+
+
   const [activeTab, setactiveTab] = useState("upcoming");
   const [tabData, settabData] = useState([]);
 
@@ -79,6 +81,7 @@ function UserSessions({
     };
     cancelSession(payload)
       .then((data) => {
+        setapiParams([activeTab === "previous" ? "past" : activeTab]);
         // getSessionData();
       })
       .catch((err) => {
@@ -109,9 +112,8 @@ function UserSessions({
 
   // Effects
   useEffect(() => {
-    getSessionData();
-
     setapiParams("upcoming");
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

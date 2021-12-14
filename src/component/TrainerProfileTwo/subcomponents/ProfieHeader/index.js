@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useRef, useEffect} from "react";
 import "./styles.scss";
 import { history } from "helpers";
 
@@ -11,22 +11,36 @@ function ProfileHeader({
   trainerLastName,
 }) {
   const [profilePicLoader, setprofilePicLoader] = React.useState(true);
+  const imgRef = useRef();
   const imageLoader = () => {
     setprofilePicLoader(false);
   };
 
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      imageLoader();
+     }
+  }, [])
+
   return (
     <div className="trainer-profile-header-container">
       <div className="profile__black-area">
-        <div
+        {profilePicLoader ? (
+          <>
+            <div className="profile-picture">
+              <CircularProgress />
+            </div>
+          </>
+        ) : null}
+        {/* <div
           className="profile-picture"
-          style={{ display: !profilePicLoader ? "none" : "content" }}
-         
+          style={{ display: !profilePicLoader ? "none" : "block" }}
         >
-          <CircularProgress   />
-        </div>
+          <CircularProgress />
+        </div> */}
 
         <img
+          ref={imgRef}
           className="profile-picture"
           style={{ display: profilePicLoader ? "none" : "block" }}
           src={profilePicture}

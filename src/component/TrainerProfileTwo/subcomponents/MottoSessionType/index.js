@@ -453,6 +453,8 @@ function MottoSessionType({
                         type === "30 Session Package")) ||
                       pricingItem[item][type]?.price === 0 ? null : (
                       <div className="session_item_bar">
+
+                        
                         <FormControlLabel
                           value={type}
                           control={
@@ -462,13 +464,13 @@ function MottoSessionType({
                               }}
                             />
                           }
-                          label={<div className="radio_label"> {type} </div>}
+                          label={<div className="radio_label"> {type}</div>}
                           className="radio_bar_width"
                         />
 
                         <div className="session_type_item2">
                           <div className="session_type_item2_left">
-                            {pricingItem[item][type]?.price !== 0 ? (
+                            {pricingItem[item][type]?.price !== 0  ? (
                               <>
                                 {type === "10 Session Package"
                                   ? "$" +
