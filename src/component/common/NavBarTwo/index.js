@@ -8,6 +8,8 @@ import LogoImage from "assets/files/SVG/Motto Logo.svg";
 import { BiSearch } from "react-icons/bi";
 import Person from "assets/files/SignUp/Person Icon.svg";
 
+import NavSearchBar from "./subcomponents/SearchBar";
+
 import {
   ButtonDropdown,
   DropdownToggle,
@@ -60,14 +62,16 @@ function NavBar() {
       </div>
       <div className="navbar-section">
         <div className="navbar-account">
-          <div className="search-ip-container">
-            <input placeholder="Search by Trainer Name"></input>
-            <BiSearch className="icon-search" />
-          </div>
+          
+            <NavSearchBar />
+          
 
           <div className="navbar-icon__button">
             {!isUserLoggedIn ? (
-              <img src={Person} onClick={() => history.push('/mobile/login')}></img> 
+              <img
+                src={Person}
+                onClick={() => history.push("/mobile/login")}
+              ></img>
             ) : (
               <ButtonDropdown isOpen={dropdownOpen} toggle={toggleDrop}>
                 <DropdownToggle className="custom-dropdown">

@@ -32,8 +32,8 @@
       -ms-flex-align: center;
       align-items: center;
 
-      img{
-          cursor: pointer;
+      img {
+        cursor: pointer;
       }
     }
 
@@ -77,34 +77,13 @@
       -ms-flex-align: center;
       align-items: center;
 
-    //   margin-left: 3rem;
+      //   margin-left: 3rem;
 
-      .search-ip-container {
-        input {
-          border-radius: 30px;
-          text-indent: 10px;
-          border-color: #53bfd2;
-          border-style: solid;
-          width: 300px;
-          padding:1px;
-       
-        }
-
-        .icon-search{
-            color: #898989;
-            position: relative;
-            right: 35px;
-        }
-      }
-
-      .navbar-icon__button{
-
+      .navbar-icon__button {
         cursor: pointer;
         border-left: 2px solid#53bfd2;
         padding-left: 1rem;
       }
-
-      
     }
   }
 }
