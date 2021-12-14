@@ -4,16 +4,17 @@ import { MottoPassCard } from "component/common/MottoPassCard";
 import { PreviousPassItem } from "./previousPassItem";
 import BlueHoverButton from "component/common/BlueArrowButton";
 
-
-
-
 import moment from "moment";
+import { Toast } from "service/toast";
+import { history } from "helpers";
 
-export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMottoPassData }) => {
-
-
-
- // console.log(mottoPassData,"mm");
+export const MottoPassSection = ({
+  handlePagination,
+  mottoPassData,
+  inValidMottoPassData,
+  requestTrainerMessageApi,
+}) => {
+  // console.log(mottoPassData,"mm");
   const validMottoPassData = [...mottoPassData].filter(({ expiresIn }) => {
     let isExpired = moment(
       moment.tz("America/New_York").format("YYYY MM DD")
@@ -21,9 +22,43 @@ export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMott
     return isExpired === false;
   });
 
-  const handleMottoPagination = () => {
+  const handleMottoPagination = () => {};
 
-  }
+  const requestTrainerAct = (id, cb = () => {}) => {
+    const userId = localStorage.getItem("user-id");
+    return new Promise((resolve, reject) => {
+      let payload = {
+        channelType: "directMessageTrainer",
+        trainerId: id,
+        userId: [userId],
+      };
+
+      cb(true);
+
+      // setLoading(true);
+      requestTrainerMessageApi(payload)
+        .then((data) => {
+          const { channelSid } = data || {};
+
+          let redirectURL = `/users/dashboard/message/requested`;
+
+          if (channelSid)
+            redirectURL = `${redirectURL}?channelId=${channelSid}`;
+
+          console.log(redirectURL);
+
+          cb(false);
+          Toast({ type: "success", message: "Success" });
+          history.push(redirectURL);
+          // resolve();
+        })
+        .catch((err) => {
+          cb(false);
+          Toast({ type: "error", message: err.message || "Error" });
+          reject(err);
+        });
+    });
+  };
 
   return (
     <div className="mottopass-session-section">
@@ -33,9 +68,13 @@ export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMott
 
       <div className="mottopass-cards-section row w-100 justify-content-between mb-4">
         {validMottoPassData.map((data) => (
-          
           //   <div className="col-xl-6 col-12" key={data.id}>
-          <MottoPassCard data={data} key={data.id} />
+          <MottoPassCard
+            data={data}
+            key={data.id}
+            isUserView
+            requestTrainerAct={requestTrainerAct}
+          />
           //   </div>
         ))}
       </div>
@@ -45,14 +84,13 @@ export const MottoPassSection = ({ handlePagination, mottoPassData , inValidMott
 
       <div className="mottopass-cards-section row w-100 justify-content-between">
         {inValidMottoPassData.map((data) => (
-          
           //   <div className="col-xl-6 col-12" key={data.id}>
           <MottoPassCard data={data} key={data.id} />
           //   </div>
         ))}
       </div>
 
-         {/* <button onClick={handleMottoPagination} className="viewMoreButton">
+      {/* <button onClick={handleMottoPagination} className="viewMoreButton">
             View all Session <BlueHoverButton />
          </button> */}
 

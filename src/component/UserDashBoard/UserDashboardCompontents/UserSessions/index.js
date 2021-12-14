@@ -20,6 +20,7 @@ import { bindActionCreators } from "redux";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import BlueHoverButton from "component/common/BlueArrowButton";
+import { requestTrainerMessageAct } from "action/trainerAct";
 
 // TODO
 // 1. No Session Available
@@ -33,6 +34,7 @@ function UserSessions({
   userSession,
   cancelSession,
   updateUserDetails,
+  requestTrainerMessageApi,
   getAllMottoPassesAct,
 }) {
   const [activeTab, setactiveTab] = useState("upcoming");
@@ -137,6 +139,7 @@ function UserSessions({
                 handlePagination={0}
                 mottoPassData={mottoPassData}
                 inValidMottoPassData={inValidMottoPassData}
+                requestTrainerMessageApi={requestTrainerMessageApi}
               />
             ) : dataLoader ? (
               <div className="loader-container">
@@ -184,6 +187,7 @@ const mapDispatchToProps = (dispatch) => {
       cancelSession,
       updateUserDetails,
       getAllMottoPassesAct,
+      requestTrainerMessageApi: requestTrainerMessageAct,
     },
     dispatch
   );

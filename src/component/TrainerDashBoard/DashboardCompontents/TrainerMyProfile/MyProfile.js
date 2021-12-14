@@ -252,6 +252,8 @@ const MyProfileFC = ({
           trainingFacility = {},
           DOB,
           phoneNumber,
+          firstName,
+          lastName,
           email,
           serviceableNeighbourHood,
         } = data || {};
@@ -260,6 +262,8 @@ const MyProfileFC = ({
         const storeData = {
           details: {
             ...details,
+            firstName,
+            lastName,
             trainerId: data.id,
             motto: myMotto,
             trainingProcessDescription: trainingProcess,
@@ -436,11 +440,17 @@ const MyProfileFC = ({
   const handleCopy = () => {
     let trainerId = details?.trainerId;
 
-    let urlPath = "trainer/profile/";
+    let trainerFullname = `${details["firstName"] || ""}-${
+      details["lastName"] || ""
+    }`;
+
+    let encodedName = trainerFullname.toLocaleLowerCase();
+
+    let urlPath = "t/";
 
     let host = `${window.location.host}`;
 
-    let fullURLPath = `${host}/${urlPath}${trainerId}`;
+    let fullURLPath = `${host}/${urlPath}${encodedName}/${trainerId}`;
 
     fullURLPath && copyTextToClipboard(fullURLPath, "Link copied");
   };

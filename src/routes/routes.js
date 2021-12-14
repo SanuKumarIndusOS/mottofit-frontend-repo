@@ -4,24 +4,22 @@ const routers = [
     redirect: "/welcome",
     auth: false,
   },
-  // {
-  //   component: "AuthLayout",
-  //   path: "/auth",
-  //   auth: false,
-  //   name: "Auth",
-  //   exact: false,
-  //   redirect: "/auth/login",
-  //   childrens: [
-  //     {
-  //       component: "Login",
-  //       path: "/login/:id",
-  //       componentPath: "pages/Auth/Login",
-  //       name: "Login",
-  //       auth: false,
-  //       exact: true,
-  //     },
-  //   ],
-  // },
+  {
+    component: "MainLayout",
+    path: "/t/:trainername",
+    auth: false,
+    name: "Auth",
+    exact: false,
+    childrens: [
+      {
+        path: "/:id",
+        componentPath: "pages/Trainer/Profile/index",
+        name: "TempTrainerProfile",
+        auth: false,
+        exact: true,
+      },
+    ],
+  },
 
   {
     component: "MainLayout",

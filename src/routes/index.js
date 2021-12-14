@@ -37,6 +37,7 @@ class RoutesClass extends Component {
 
     const noTokenPaths = [
       "/",
+      "/t/",
       "/welcome",
       "/forgot",
       "/trainer/signup",
@@ -51,12 +52,15 @@ class RoutesClass extends Component {
       "/mobiles/chat",
       "/terms",
       "/faq",
-      "/privacy"
+      "/privacy",
     ];
 
     const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];
+    // console.log(noTokenPaths.includes(pathname), pathname);
 
-    let emptyTokenPath = noTokenPaths.includes(pathname);
+    let emptyTokenPath = noTokenPaths.some((openPath) =>
+      pathname.includes(openPath)
+    );
 
     if (pathname.includes("/trainer/profile/")) emptyTokenPath = true;
 
@@ -67,19 +71,19 @@ class RoutesClass extends Component {
 
     if (!isUserLoggedIn && !emptyTokenPath) {
       // console.log(pathname);
-
       logout();
-
       // console.log(path);
     }
   };
 
   componentDidMount() {
     this.routerGuard();
-    
+
     initializeGA();
 
-    if (window.screen.availWidth > 900) { (document.body.style.zoom = "90%") }
+    if (window.screen.availWidth > 900) {
+      document.body.style.zoom = "90%";
+    }
 
     window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault();
@@ -87,11 +91,10 @@ class RoutesClass extends Component {
         this.props.change_login_status({ loginStatus: false });
       }
       // return (ev.returnValue = "Are you sure you want to close?");
-
     });
   }
 
-  componentWillUnmount() { }
+  componentWillUnmount() {}
 
   handleOnActive = (event) => {
     console.log("user is active");
@@ -180,9 +183,8 @@ class RoutesClass extends Component {
                                   exact={exact}
                                   key={path + childrenPath}
                                   render={(props) => {
-                                    let PageComponent = CodeSplitter.getComponent(
-                                      name
-                                    );
+                                    let PageComponent =
+                                      CodeSplitter.getComponent(name);
 
                                     return <PageComponent {...props} />;
                                   }}
