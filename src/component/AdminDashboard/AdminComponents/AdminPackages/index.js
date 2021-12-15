@@ -13,7 +13,7 @@ import { api } from "service/api";
 import { TrainerApi } from "service/apiVariables";
 import AsyncSelect from "react-select/async";
 import { debounceFunction } from "helpers/debounce";
-import { MottoPassCard } from "component/common/MottoPassCard";
+import MottoPassCard  from "component/common/MottoPassCard";
 import {
   Button,
   FormGroup,

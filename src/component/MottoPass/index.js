@@ -1,6 +1,6 @@
 import React from "react";
 import "./mottopass.scss";
-import { MottoPassCard } from "component/common/MottoPassCard";
+import MottoPassCard from "component/common/MottoPassCard";
 import { PreviousPassItem } from "./previousPassItem";
 import BlueHoverButton from "component/common/BlueArrowButton";
 

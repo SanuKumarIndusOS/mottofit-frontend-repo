@@ -17,7 +17,12 @@ import ArrowHoverBlacked from "../BlackCircleButton/ArrowHoverBlacked";
 import { Button } from "reactstrap";
 import { history } from "helpers";
 
-export const MottoPassCard = ({
+import { updateUserDetails } from "action/userAct";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+const MottoPassCard = ({
+  updateUserDetails,
   data,
   className = "",
   isAdminView = false,
@@ -75,7 +80,22 @@ export const MottoPassCard = ({
 
   const handleUserViewRoute = (type) => {
     if (type === "session") {
+      var storedata = {
+        sessionData: {
+          trainerId: trainerId,
+          city: null,
+          sessionType: passType === "virtual" ? "virtual" : "inPerson",
+          venue: passType === "virtual" ? "clientLocation" : passType,
+          trainingType: '1on1',
+          price: null,
+          areaOfExpertise: 'Motto Session',
+        },
+      };
+  
+      updateUserDetails(storedata);
       return history.push(`/user/scheduler/${trainerId}`);
+
+      console.log(data);
     } else if (type === "message") {
       return handleRequestTrainer();
     }
@@ -157,3 +177,28 @@ export const MottoPassCard = ({
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  sessionData: state.userReducer.sessionData,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      
+      updateUserDetails,
+     
+    },
+    dispatch
+  );
+};
+
+const MottoPassCardT = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MottoPassCard);
+
+export default MottoPassCardT;
+
+
+// export { MottoPassCard };

@@ -37,8 +37,6 @@ function UserSessions({
   requestTrainerMessageApi,
   getAllMottoPassesAct,
 }) {
-
-
   const [activeTab, setactiveTab] = useState("upcoming");
   const [tabData, settabData] = useState([]);
 
@@ -133,7 +131,12 @@ function UserSessions({
           <TabControl activeTab={activeTab} handleChangeTab={handleChangeTab} />
         </div>
         <div className="session-tab-data">
-          <div className="session-tab__header">{activeTab} sessions</div>
+          <div className="session-tab__header">
+            {" "}
+            {activeTab === "motto package"
+              ? null
+              : activeTab + " sessions"}{" "}
+          </div>
 
           <div className="session-tab__content">
             {activeTab === "motto package" ? (
