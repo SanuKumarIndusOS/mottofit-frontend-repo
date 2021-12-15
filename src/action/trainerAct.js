@@ -23,14 +23,14 @@ export const trainerSearchFilters = (payload) => (dispatch) => {
 
 
 
-export const searchBestMatch = (payload, page, type) => (
+export const searchBestMatch = (payload,type, page) => (
   dispatch,
   getState,
   { api }
 ) => {
   return new Promise((resolve, reject) => {
     //  console.log(payload);
-    TrainerApi.searchBestMatch.query = payload;
+    TrainerApi.searchBestMatch.query = JSON.parse(payload);
     TrainerApi.searchBestMatch.key = type;
     TrainerApi.searchBestMatch.page = page;
     TrainerApi.searchBestMatch.limit = 6;
