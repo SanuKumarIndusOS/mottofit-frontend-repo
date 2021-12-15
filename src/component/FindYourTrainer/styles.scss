@@ -17,5 +17,9 @@
 
      padding-top: 3rem;
      padding-bottom: 5rem;
+
+     @media only screen and (max-width: 900px) {
+       display: none;
+      }
   }
 }
