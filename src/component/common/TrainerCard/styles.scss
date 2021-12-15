@@ -1,22 +1,77 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap");
 .trainer-card-container {
-  height: 450px;
+  height: 530px;
   width: 400px;
   background-color: #fff;
   border-radius: 20px;
   -webkit-box-shadow: 0px 3px 12px #1616160d;
   box-shadow: 0px 3px 12px #1616160d;
+  cursor: pointer;
 
   .trainer-card--profile-picture {
-    height: 45%;
+    height: 38%;
     width: 100%;
-
+    -o-object-fit: cover;
+    object-fit: cover;
     border-radius: 20px 20px 0px 0px;
   }
 
   .trainer-card--profile-brief {
-    height: 42%;
+    height: 49%;
     width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    .trainer-card__desc {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      text-align: center;
+      font: normal normal normal 16px/29px Montserrat;
+      letter-spacing: 0.24px;
+      color: #898989;
+    }
+
+    .trainer-card__name {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      margin-bottom: 2px;
+      padding-top: 1rem;
+
+      text-align: center;
+      font-size: 28px;
+      font-family: Cormorant Garamond;
+      text-transform: capitalize;
+
+      letter-spacing: -0.35px;
+      color: #161616;
+      opacity: 1;
+    }
+
+    .trainer-card__activity {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.9px;
+      color: #898989;
+      text-transform: uppercase;
+      opacity: 1;
+    }
   }
 
   .trainer-card--cta {
@@ -67,8 +122,8 @@
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: end;
-          -ms-flex-align: end;
-              align-items: flex-end;
+      -ms-flex-align: end;
+      align-items: flex-end;
 
       span {
         font-size: 16px;

@@ -36,7 +36,7 @@ export class HomeLayout extends Component {
   render() {
     let { children } = this.props;
 
-    console.log(this.props);
+    // console.log(this.props);
 
     const { isOpen, stickyNav } = this.state;
     this.scrollListener();

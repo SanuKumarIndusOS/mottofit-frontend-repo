@@ -1,4 +1,4 @@
-import React,{useRef, useEffect} from "react";
+import React, { useRef, useEffect } from "react";
 import "./styles.scss";
 import { history } from "helpers";
 
@@ -19,8 +19,8 @@ function ProfileHeader({
   useEffect(() => {
     if (imgRef.current?.complete) {
       imageLoader();
-     }
-  }, [])
+    }
+  }, []);
 
   return (
     <div className="trainer-profile-header-container">
@@ -32,12 +32,6 @@ function ProfileHeader({
             </div>
           </>
         ) : null}
-        {/* <div
-          className="profile-picture"
-          style={{ display: !profilePicLoader ? "none" : "block" }}
-        >
-          <CircularProgress />
-        </div> */}
 
         <img
           ref={imgRef}

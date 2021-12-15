@@ -22,26 +22,24 @@ const useLoadMore = (api, needParams, offset) => {
 
   useEffect(() => {
     // Test for the condition
-  
+
     if (apiParams.length !== 0) {
       if (activePage === 0) {
         console.log("hir");
 
         api(...apiParams, activePage).then(
           ({ data: data, documentCount: totalItems }) => {
-
-
             setrenderData(data);
             let temp = maxPageCount(totalItems);
             setmaxCount(temp);
             console.log(temp, data?.length);
-          
+
             temp !== 1 ? setIsbuttonVisible(true) : setIsbuttonVisible(false);
             setTimeout(() => {
               setdataLoader(false);
             }, 500);
 
-            if(data?.length === 0) return setisEmpty(true);
+            if (data?.length === 0) return setisEmpty(true);
           }
         );
       } else {
@@ -72,7 +70,7 @@ const useLoadMore = (api, needParams, offset) => {
     setdataLoader,
     isbuttonVisible,
     isEmpty,
-    setisEmpty
+    setisEmpty,
   ];
 };
 

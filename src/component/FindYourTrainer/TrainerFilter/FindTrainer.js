@@ -9,6 +9,7 @@ import TrainerCardOutside from "../TrainerOutsideTime/index";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateTrainerDetails, searchBestMatch } from "action/trainerAct";
+
 import { updateUserDetails } from "action/userAct";
 
 import SearchFilter from "component/common/SearchFilter/index";
@@ -18,8 +19,8 @@ const FindTrainerFC = ({ trainerSearchFilterData, searchBestMatch }) => {
     // console.log("mi2", payload, trainerSearchFilterData);
 
     searchBestMatch(payload, 1, "match").then((data) => {
-      console.log(data);
-      setTempBestMatch(data.list);
+      console.log(data.list);
+      setTempBestMatch(data);
     });
 
     searchBestMatch(payload, 1, "unmatch").then((data) => {

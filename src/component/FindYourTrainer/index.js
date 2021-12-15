@@ -17,33 +17,15 @@ import { BiSearch } from "react-icons/bi";
 
 function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
 
-
+  //Handle Change functions
   const handleMobileFilter = () =>{
     history.push("/mobiles/filter");
   }
+ 
   //Action functions
   const search_filter_action = (payload) => {};
 
-  const [
-    renderData,
-    activePage,
-    setActivePage,
-    setapiParams,
-    dataLoader,
-    setdataLoader,
-    isbuttonVisible,
-    isEmpty,
-    setisEmpty,
-  ] = useLoadMore(searchBestMatch, true, 6);
 
-  React.useEffect(() => {
-    // setActivePage(1);
-    setapiParams([JSON.stringify(trainerSearchFilterData), "match"]);
-  }, []);
-
-  React.useEffect(() => {
-    console.log(renderData);
-  }, [renderData]);
 
   return (
     <div className="trainer-filter-container">
@@ -64,7 +46,7 @@ function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
         </div>
       </div>
 
-      {/* <BestMatch searchBestMatch={searchBestMatch} trainerSearchFilterData={trainerSearchFilterData} /> */}
+      <BestMatch searchBestMatch={searchBestMatch} trainerSearchFilterData={trainerSearchFilterData} /> 
     </div>
   );
 }

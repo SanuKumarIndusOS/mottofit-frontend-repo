@@ -156,7 +156,7 @@ class RoutesClass extends Component {
                       }
 
                       const LayoutComponent = Layout[component];
-                      console.log(component);
+                      // console.log(component);
 
                       return (
                         <LayoutComponent {...props}>
