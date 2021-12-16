@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
 
 import { history } from "helpers";
@@ -16,16 +16,31 @@ import useLoadMore from "component/common/Hooks/useLoadMore";
 import { BiSearch } from "react-icons/bi";
 
 function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
+  const [trainerDataParams, settrainerDataParams] = useState(null);
+ 
 
   //Handle Change functions
-  const handleMobileFilter = () =>{
+  const handleMobileFilter = () => {
     history.push("/mobiles/filter");
-  }
- 
+  };
+
   //Action functions
-  const search_filter_action = (payload) => {};
+  const search_filter_action = (payload) => {
+    settrainerDataParams(payload);
+  };
 
-
+  //Effect functions
+  useEffect(() => {
+    if (Object.keys(trainerSearchFilterData).length === 0) {
+      if (JSON.parse(localStorage.getItem("persistFilters")) !== null) {
+        settrainerDataParams(
+          JSON.parse(localStorage.getItem("persistFilters"))
+        );
+      }
+    } else {
+      settrainerDataParams(trainerSearchFilterData);
+    }
+  }, []);
 
   return (
     <div className="trainer-filter-container">
@@ -46,7 +61,23 @@ function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
         </div>
       </div>
 
-      <BestMatch searchBestMatch={searchBestMatch} trainerSearchFilterData={trainerSearchFilterData} /> 
+      {trainerDataParams !== null ? (
+
+        
+        <>
+          <BestMatch
+            type="bestMatch"
+            searchBestMatch={searchBestMatch}
+            trainerSearchFilterData={trainerDataParams}
+          />
+          <div className="">Just Outside Your Time</div>
+          <BestMatch
+            type="otherMatch"
+            searchBestMatch={searchBestMatch}
+            trainerSearchFilterData={trainerDataParams}
+          />
+        </>
+      ) : null}
     </div>
   );
 }
