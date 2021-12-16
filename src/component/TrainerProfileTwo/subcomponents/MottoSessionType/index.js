@@ -73,7 +73,6 @@ function MottoSessionType({
 
   React.useEffect(() => {
     checkActivePass();
-   
   }, []);
 
   React.useEffect(() => {
@@ -333,40 +332,56 @@ function MottoSessionType({
           setActivePackageId(null);
         });
     }
+
+    const isInPersonClientLocationAvailable = [
+      oneOnone?.inPersonAtClientLocation,
+      social?.inPeronAtClientLocationfor2People,
+      social?.inPeronAtClientLocationfor3People,
+      social?.inPeronAtClientLocationfor4People,
+      classPricing?.inPersonAtclientLocationfor15People,
+    ].some((price) => parseInt(price) > 0);
+
+    const isInPersonTrainerLocationAvailable = [
+      oneOnone?.inPersonAtTrainerLocation,
+      social?.inPeronAtTrainerLocationfor2People,
+      social?.inPeronAtTrainerLocationfor3People,
+      social?.inPeronAtTrainerLocationfor4People,
+      classPricing?.inPersonAttrainerLocationfor15People,
+    ].some((price) => parseInt(price) > 0);
+
+    const isVirtualAvailable = [
+      oneOnone?.virtualSession,
+      social?.virtualSessionfor2People,
+      social?.virtualSessionfor3People,
+      social?.virtualSessionfor4People,
+      classPricing?.virtualSessionfor15People,
+    ].some((price) => parseInt(price) > 0);
+
+    if (isInPersonClientLocationAvailable) {
+      setactiveHeader("clientLocation");
+    } else if (isInPersonTrainerLocationAvailable) {
+      setactiveHeader("trainerLocation");
+    } else if (isVirtualAvailable) {
+      setactiveHeader("virtual");
+    } else {
+      setactiveHeader("");
+    }
   };
 
   return (
     <div className="motto_session_type_container">
       <div className="session_type_header">
-        {parseInt(oneOnone?.virtualSession) === 0 &&
-        parseInt(social?.virtualSessionfor2People) === 0 &&
-        parseInt(social?.virtualSessionfor3People) === 0 &&
-        parseInt(social?.virtualSessionfor4People) === 0 &&
-        parseInt(classPricing?.virtualSessionfor15People) === 0? null : (
-          <div
-            className={
-              activeHeader === "virtual"
-                ? "session_type_header_item left_border active_header header_width1"
-                : "session_type_header_item left_border header_width1"
-            }
-            onClick={() => {
-              setactiveHeader("virtual");
-            }}
-          >
-            VIRTUAL
-          </div>
-        )}
-
         {parseInt(oneOnone?.inPersonAtClientLocation) === 0 &&
         parseInt(social?.inPeronAtClientLocationfor2People) === 0 &&
         parseInt(social?.inPeronAtClientLocationfor3People) === 0 &&
         parseInt(social?.inPeronAtClientLocationfor4People) === 0 &&
-        parseInt(classPricing?.inPersonAtclientLocationfor15People) === 0 ? null : (
+        parseInt(classPricing?.inPersonAtclientLocationfor15People) ===
+          0 ? null : (
           <div
             className={
               activeHeader === "clientLocation"
-                ? "session_type_header_item  active_header header_width2"
-                : "session_type_header_item header_width2"
+                ? "session_type_header_item left_border active_header header_width2"
+                : "session_type_header_item left_border header_width2"
             }
             onClick={() => {
               setactiveHeader("clientLocation");
@@ -380,18 +395,38 @@ function MottoSessionType({
         parseInt(social?.inPeronAtTrainerLocationfor2People) === 0 &&
         parseInt(social?.inPeronAtTrainerLocationfor3People) === 0 &&
         parseInt(social?.inPeronAtTrainerLocationfor4People) === 0 &&
-        parseInt(classPricing?.inPersonAttrainerLocationfor15People) === 0 ? null : (
+        parseInt(classPricing?.inPersonAttrainerLocationfor15People) ===
+          0 ? null : (
           <div
             className={
               activeHeader === "trainerLocation"
-                ? "session_type_header_item  right_border active_header header_width3"
-                : "session_type_header_item right_border header_width3"
+                ? "session_type_header_item   active_header header_width3"
+                : "session_type_header_item  header_width3"
             }
             onClick={() => {
               setactiveHeader("trainerLocation");
             }}
           >
             IN-PERSON (TRAINER'S LOCATION)
+          </div>
+        )}
+
+        {parseInt(oneOnone?.virtualSession) === 0 &&
+        parseInt(social?.virtualSessionfor2People) === 0 &&
+        parseInt(social?.virtualSessionfor3People) === 0 &&
+        parseInt(social?.virtualSessionfor4People) === 0 &&
+        parseInt(classPricing?.virtualSessionfor15People) === 0 ? null : (
+          <div
+            className={
+              activeHeader === "virtual"
+                ? "session_type_header_item right_border  active_header header_width1"
+                : "session_type_header_item right_border  header_width1"
+            }
+            onClick={() => {
+              setactiveHeader("virtual");
+            }}
+          >
+            VIRTUAL
           </div>
         )}
       </div>
@@ -448,13 +483,13 @@ function MottoSessionType({
 
                 <div>
                   {Object.keys(pricingItem[item]).map((type, key) => {
+                    if (!pricingItem[item][type]?.price) return null;
+
                     return (activePassType.includes(activeHeader) &&
                       (type === "10 Session Package" ||
                         type === "30 Session Package")) ||
                       pricingItem[item][type]?.price === 0 ? null : (
                       <div className="session_item_bar">
-
-                        
                         <FormControlLabel
                           value={type}
                           control={
@@ -470,7 +505,7 @@ function MottoSessionType({
 
                         <div className="session_type_item2">
                           <div className="session_type_item2_left">
-                            {pricingItem[item][type]?.price !== 0  ? (
+                            {pricingItem[item][type]?.price !== 0 ? (
                               <>
                                 {type === "10 Session Package"
                                   ? "$" +
@@ -507,7 +542,11 @@ function MottoSessionType({
                                     alignItems: "center",
                                   }}
                                 >
-                                 {activePassType.includes(activeHeader) && item === "1 ON 1 INDIVIDUAL TRAINING"? "USE PACKAGE":"BOOK NOW"}  <BlueHoverButton />
+                                  {activePassType.includes(activeHeader) &&
+                                  item === "1 ON 1 INDIVIDUAL TRAINING"
+                                    ? "USE PACKAGE"
+                                    : "BOOK NOW"}{" "}
+                                  <BlueHoverButton />
                                 </div>
                               ) : null
                             ) : null}
