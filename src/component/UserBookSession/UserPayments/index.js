@@ -208,9 +208,11 @@ const UserPaymentsFC = ({
           };
           // console.log(res);
           restProps?.updateUserDetails(reduxData);
-          checkPayAhead && res.session.trainingType === "social"
-            ? history.push("/users/dashboard/session")
-            : history.push("/user/with-friends");
+          history.push("/users/dashboard/session");
+
+          // checkPayAhead && res.session.trainingType === "social"
+          //   ? history.push("/users/dashboard/session")
+          //   : history.push("/user/with-friends");
         }
 
         // restProps.resetUserDetails();
@@ -443,6 +445,18 @@ const UserPaymentsFC = ({
 
     setAccordionData(tempData);
   };
+
+  let couponRateValue = 0;
+
+  if (isCouponCodeValid && typeof couponRate?.current === "function") {
+    couponRateValue = couponRate.current() / 100;
+  }
+
+  let tempPrice = sessionData?.price * couponRateValue;
+
+  let couponAdjustedPrice = sessionData?.price - tempPrice;
+
+  let finalPrice = isCouponCodeValid ? couponAdjustedPrice : sessionData?.price;
 
   return (
     <>
@@ -726,7 +740,7 @@ const UserPaymentsFC = ({
                             Price To Be Paid
                           </div>
                           <div className="cancel-style__body">
-                            ${sessionData?.price} / session
+                            ${finalPrice} / session
                           </div>
                         </div>
                         <br />
