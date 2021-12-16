@@ -864,7 +864,7 @@ const TabOne = ({
                                                   );
                                                 }}
                                               >
-                                                CANCEL
+                                                Cancel Session
                                               </button>
                                             )}
 
@@ -878,7 +878,7 @@ const TabOne = ({
                                                 setcancelAlert(false);
                                               }}
                                             >
-                                              CLOSE
+                                              Keep Session
                                             </button>
                                           </div>
                                         </Dialog>
@@ -1260,9 +1260,9 @@ const datamonth = {
   "07": "Jul",
   "08": "Aug",
   "09": "Sep",
-  "10": "Oct",
-  "11": "Nov",
-  "12": "Dec",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec",
 };
 
 const mapStateToProps = (state) => ({

@@ -23,9 +23,9 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
     "07": "Jul",
     "08": "Aug",
     "09": "Sep",
-    "10": "Oct",
-    "11": "Nov",
-    "12": "Dec",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
   };
 
   const [cancelAlert, setcancelAlert] = useState(false);
@@ -133,7 +133,10 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
           <div className="session-date-box-container">
             <div className="session-date-box">
               <div className="date--bg">{data?.sessionDate?.substr(8, 2)}</div>
-              <div className="month--bg"> {datamonth[data?.sessionDate.substr(5, 2)]}</div>
+              <div className="month--bg">
+                {" "}
+                {datamonth[data?.sessionDate.substr(5, 2)]}
+              </div>
             </div>
           </div>
 
@@ -217,7 +220,7 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
                 className="cancel-dialog__button button--red"
                 onClick={handleDialogCancel}
               >
-                Cancel
+                Cancel Session
               </button>
             )}
 
@@ -225,7 +228,7 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
               className="cancel-dialog__button"
               onClick={handleCancelAlert}
             >
-              Close
+              Keep Session
             </button>
           </div>
         </div>
