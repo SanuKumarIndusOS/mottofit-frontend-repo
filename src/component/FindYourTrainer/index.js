@@ -17,7 +17,6 @@ import { BiSearch } from "react-icons/bi";
 
 function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
   const [trainerDataParams, settrainerDataParams] = useState(null);
- 
 
   //Handle Change functions
   const handleMobileFilter = () => {
@@ -62,15 +61,15 @@ function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
       </div>
 
       {trainerDataParams !== null ? (
-
-        
         <>
           <BestMatch
             type="bestMatch"
             searchBestMatch={searchBestMatch}
             trainerSearchFilterData={trainerDataParams}
           />
-          <div className="">Just Outside Your Time</div>
+          <div className="outside-results">
+            <p>Just Outside Your Time</p>
+          </div>
           <BestMatch
             type="otherMatch"
             searchBestMatch={searchBestMatch}
