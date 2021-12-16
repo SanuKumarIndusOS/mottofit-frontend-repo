@@ -246,6 +246,8 @@ function MottoSessionType({
         sethideSocial(false);
       }
 
+      console.log(oneOnone);
+
       setPricingItem({
         ...pricingItem,
         "1 ON 1 INDIVIDUAL TRAINING": {
@@ -336,16 +338,12 @@ function MottoSessionType({
     const isInPersonClientLocationAvailable = [
       oneOnone?.inPersonAtClientLocation,
       social?.inPeronAtClientLocationfor2People,
-      social?.inPeronAtClientLocationfor3People,
-      social?.inPeronAtClientLocationfor4People,
       classPricing?.inPersonAtclientLocationfor15People,
     ].some((price) => parseInt(price) > 0);
 
     const isInPersonTrainerLocationAvailable = [
       oneOnone?.inPersonAtTrainerLocation,
       social?.inPeronAtTrainerLocationfor2People,
-      social?.inPeronAtTrainerLocationfor3People,
-      social?.inPeronAtTrainerLocationfor4People,
       classPricing?.inPersonAttrainerLocationfor15People,
     ].some((price) => parseInt(price) > 0);
 
@@ -373,8 +371,6 @@ function MottoSessionType({
       <div className="session_type_header">
         {parseInt(oneOnone?.inPersonAtClientLocation) === 0 &&
         parseInt(social?.inPeronAtClientLocationfor2People) === 0 &&
-        parseInt(social?.inPeronAtClientLocationfor3People) === 0 &&
-        parseInt(social?.inPeronAtClientLocationfor4People) === 0 &&
         parseInt(classPricing?.inPersonAtclientLocationfor15People) ===
           0 ? null : (
           <div
@@ -393,8 +389,6 @@ function MottoSessionType({
 
         {parseInt(oneOnone?.inPersonAtTrainerLocation) === 0 &&
         parseInt(social?.inPeronAtTrainerLocationfor2People) === 0 &&
-        parseInt(social?.inPeronAtTrainerLocationfor3People) === 0 &&
-        parseInt(social?.inPeronAtTrainerLocationfor4People) === 0 &&
         parseInt(classPricing?.inPersonAttrainerLocationfor15People) ===
           0 ? null : (
           <div
