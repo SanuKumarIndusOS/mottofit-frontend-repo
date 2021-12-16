@@ -5,6 +5,7 @@ import "./find.scss";
 import BlueHoverButton from "../../common/BlueArrowButton";
 import TrainerCards from "../TrainersDetails/index";
 import TrainerCardOutside from "../TrainerOutsideTime/index";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

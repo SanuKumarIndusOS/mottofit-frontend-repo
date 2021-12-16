@@ -12,11 +12,13 @@ import { updateUserDetails } from "action/userAct";
 //Component imports
 import SearchFilter from "component/common/SearchFilter/index";
 import BestMatch from "./subcomponents/BestMatch";
-import useLoadMore from "component/common/Hooks/useLoadMore";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import { BiSearch } from "react-icons/bi";
 
 function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
   const [trainerDataParams, settrainerDataParams] = useState(null);
+  const [loader, setloader] = useState(true);
 
   //Handle Change functions
   const handleMobileFilter = () => {
@@ -26,6 +28,7 @@ function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
   //Action functions
   const search_filter_action = (payload) => {
     settrainerDataParams(payload);
+    setloader(true);
   };
 
   //Effect functions
