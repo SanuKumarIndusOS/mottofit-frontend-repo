@@ -16,6 +16,8 @@
     border-radius: 20px 20px 0px 0px;
   }
 
+  
+
   .trainer-card--profile-brief {
     height: 49%;
     width: 100%;
@@ -133,5 +135,17 @@
         font-style: italic;
       }
     }
+  }
+}
+
+.trainer-card-container:hover .trainer-card--cta {
+  background-color: #e9797c;
+
+  .trainer-card--cta-action {
+    color: black;
+  }
+
+  .trainer-card--cta-price{
+    color: white;
   }
 }

@@ -8,12 +8,16 @@ import TrainerCard from "component/common/TrainerCard/index";
 import BlueHoverButton from "component/common/BlueArrowButton";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { load } from "dotenv";
 
 // TODO
 // 1. Seperate component for view more trainers/sessions button
 
-function BestMatch({ searchBestMatch, trainerSearchFilterData, type }) {
+function BestMatch({
+  searchBestMatch,
+  trainerSearchFilterData,
+  type,
+  sectionHeading,
+}) {
   const [
     renderData,
     activePage,
@@ -41,22 +45,35 @@ function BestMatch({ searchBestMatch, trainerSearchFilterData, type }) {
   return (
     <div className="best-match-container">
       <div className="main-loader">
-        {activePage === 0 && dataLoader ? <CircularProgress /> : null}
-      </div>
+        {activePage === 0 && dataLoader && type === "bestMatch" ? (
+          <CircularProgress />
+        ) : (
+          <div>
+            {renderData?.length === 0 && type === "otherMatch" ? null: (
+              <div className="outside-results">
+                <p>{sectionHeading}</p>
+              </div>
+            )}
 
-      <div className="trainer-card__grid">
-        {renderData?.map((item) => {
-          return <TrainerCard data={item} />;
-        })}
-      </div>
-      {isbuttonVisible ? (
-        <div className="view-more-trainer-container">
-          <div className="view-more-trainer__cta" onClick={handlePageChange}>
-            View More Trainers <BlueHoverButton />
+            <div className="trainer-card__grid">
+              {renderData?.map((item) => {
+                return <TrainerCard data={item} />;
+              })}
+            </div>
+            {isbuttonVisible ? (
+              <div className="view-more-trainer-container">
+                <div
+                  className="view-more-trainer__cta"
+                  onClick={handlePageChange}
+                >
+                  View More Trainers <BlueHoverButton />
+                </div>
+                {dataLoader ? <CircularProgress /> : null}
+              </div>
+            ) : null}
           </div>
-          {dataLoader ? <CircularProgress /> : null}
-        </div>
-      ) : null}
+        )}
+      </div>
     </div>
   );
 }

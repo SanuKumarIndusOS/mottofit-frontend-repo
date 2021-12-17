@@ -3,13 +3,13 @@
   margin-right: 8rem;
   margin-bottom: 3rem;
 
-  .main-loader{
+  .main-loader {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     margin-top: 3rem;
     margin-bottom: 3rem;
   }
@@ -20,18 +20,25 @@
   }
 
   .trainer-card__grid {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    // display: -webkit-box;
+    // display: -ms-flexbox;
+    // display: flex;
+    // -ms-flex-wrap: wrap;
+    // flex-wrap: wrap;
+    // -webkit-box-pack: justify;
+    // -ms-flex-pack: justify;
+    // justify-content: space-between;
+   
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    // align-self: center;
+
   }
 
   .trainer-card__grid > * {
     margin-bottom: 4rem;
+    justify-self: center;
   }
 
   .view-more-trainer-container {
@@ -59,8 +66,8 @@
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
     }
   }
 }

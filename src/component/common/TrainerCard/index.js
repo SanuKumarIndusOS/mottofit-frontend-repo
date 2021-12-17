@@ -5,10 +5,19 @@ import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked"
 import useNameEncoder from "../Hooks/useNameEncoder";
 
 import { history } from "helpers";
+import useCalcCardPrice from "../Hooks/useCalcCardPrice";
 
 function TrainerCard({ data }) {
   const encodedName = useNameEncoder(data?.firstName, data?.lastName);
-  const handleBooking = () => { history.push(`/trainer/profile/${data?.id}/${encodedName}`)};
+  const handleBooking = () => {
+    history.push(`/trainer/profile/${data?.id}/${encodedName}`);
+  };
+
+  const cardPrice = useCalcCardPrice(
+    data?.oneOnOnePricing,
+    data?.socialSessionPricing,
+    data?.classSessionPricing
+  );
 
   return (
     <div className="trainer-card-container" onClick={handleBooking}>
@@ -32,7 +41,7 @@ function TrainerCard({ data }) {
           BOOK A SESSION <BlackCircleButton />
         </div>
         <div className="trainer-card--cta-price">
-          <span>from </span>$125
+          <span>from </span>${cardPrice}
         </div>
       </div>
     </div>

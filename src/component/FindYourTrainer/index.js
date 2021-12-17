@@ -16,6 +16,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { BiSearch } from "react-icons/bi";
 
+// TODO
+// Trainer Card Check me out overlay 
+// No Matches Found
+
 function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
   const [trainerDataParams, settrainerDataParams] = useState(null);
   const [loader, setloader] = useState(true);
@@ -69,14 +73,14 @@ function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
             type="bestMatch"
             searchBestMatch={searchBestMatch}
             trainerSearchFilterData={trainerDataParams}
+            sectionHeading={null}
           />
-          <div className="outside-results">
-            <p>Just Outside Your Time</p>
-          </div>
+        
           <BestMatch
             type="otherMatch"
             searchBestMatch={searchBestMatch}
             trainerSearchFilterData={trainerDataParams}
+            sectionHeading="just outside your time"
           />
         </>
       ) : null}
