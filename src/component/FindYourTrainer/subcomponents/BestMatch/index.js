@@ -49,11 +49,17 @@ function BestMatch({
           <CircularProgress />
         ) : (
           <div>
-            {renderData?.length === 0 && type === "otherMatch" ? null: (
+            {renderData?.length === 0 && type === "otherMatch" ? null : (
               <div className="outside-results">
                 <p>{sectionHeading}</p>
               </div>
             )}
+
+            {renderData?.length === 0 && type === "bestMatch" ?  (
+              <div className="no-match">
+                <p>No Matches Found</p>
+              </div>
+            ):null}
 
             <div className="trainer-card__grid">
               {renderData?.map((item) => {

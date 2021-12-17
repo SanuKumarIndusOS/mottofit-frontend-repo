@@ -8,6 +8,8 @@ import Tick from "assets/files/FindTrainer/Tick 1.svg";
 import Gallery from "react-grid-gallery";
 import BlueArrowButton from "component/common/BlueArrowButton";
 
+import { HiOutlineLocationMarker } from "react-icons/hi";
+
 function ProfileBody({ trainerData, handleBooking, imageGrid, handleRequestTrainer }) {
   const aboutRef = React.useRef(null);
   const priceRef = React.useRef(null);
@@ -38,6 +40,10 @@ function ProfileBody({ trainerData, handleBooking, imageGrid, handleRequestTrain
           }}
         >
           View {trainerData?.firstName}'s Training options <span> & </span> rates
+        </div>
+        <br></br>
+        <div className="trainer-location">
+         <HiOutlineLocationMarker/> {trainerData?.location}
         </div>
         <br></br>
         <div className="trainer-request-message">

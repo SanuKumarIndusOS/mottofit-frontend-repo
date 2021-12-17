@@ -153,16 +153,17 @@ const MottoPassCard = ({
       </div>
       {isUserView && (
         <div className="user-view-content d-flex align-items-center justify-content-between px-3 pb-4 flex-wrap">
-          <Button
+          <button
             color="primary"
+            className="pass-button"
             onClick={() => handleUserViewRoute("session")}
           >
             Book Session
-          </Button>
-          <Button
+          </button>
+          <button
             color="primary"
             outline
-            className="text-capitalize"
+            className="text-capitalize pass-button"
             onClick={() => handleUserViewRoute("message")}
             disabled={isLoading}
           >
@@ -171,7 +172,7 @@ const MottoPassCard = ({
             ) : (
               "Loading..."
             )}
-          </Button>
+          </button>
         </div>
       )}
     </div>

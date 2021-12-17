@@ -23,9 +23,9 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
     "07": "Jul",
     "08": "Aug",
     "09": "Sep",
-    "10": "Oct",
-    "11": "Nov",
-    "12": "Dec",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
   };
 
   const [cancelAlert, setcancelAlert] = useState(false);
@@ -142,8 +142,13 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
 
           <div className="session-info-content">
             <div className="session__title">
-              <span> {data?.title} </span>with{" "}
-              <span> {data?.trainerDetail?.firstName}</span>
+              <span>
+                {data?.trainingType === "1on1"
+                  ? "Individual Session "
+                  : data?.trainingType+" Session "}
+               
+              </span>
+              with <span> {data?.trainerDetail?.firstName}</span>
             </div>
 
             <div className="session__secondary-info">
