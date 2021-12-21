@@ -380,11 +380,11 @@ function CardFormFC({
                       </label>
                     </div>
                   )}
-                  <div className="payment_check_inner d-flex align-items-center">
+                  {/* <div className="payment_check_inner d-flex align-items-center">
                     <Link to="/" className="fw-600 text-underline">
                       Session Cancellation Policy
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               )}
             </div>

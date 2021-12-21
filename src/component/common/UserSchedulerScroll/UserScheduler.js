@@ -359,7 +359,7 @@ function UserScheduler({
                         }}
                         className={
                           moment().isAfter(dateItem) &&
-                          moment().format("YYYY-MM-DD") !== dateItem
+                          moment().format("YYYY-MM-DD") !== dateItem 
                             ? "block_cell_inactive"
                             : (selectedCell.timeKey === keys ||
                                 selectedCell.timeKeyTwo === keys) &&

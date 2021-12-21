@@ -3,15 +3,13 @@ import "./styles.scss";
 
 import BlackCircleButton from "../../common/BlackCircleButton/ArrowHoverBlacked";
 import useNameEncoder from "../Hooks/useNameEncoder";
+import { Link } from "react-router-dom";
 
 import { history } from "helpers";
 import useCalcCardPrice from "../Hooks/useCalcCardPrice";
 
 function TrainerCard({ data }) {
   const encodedName = useNameEncoder(data?.firstName, data?.lastName);
-  const handleBooking = () => {
-    history.push(`/trainer/profile/${data?.id}/${encodedName}`);
-  };
 
   const cardPrice = useCalcCardPrice(
     data?.oneOnOnePricing,
@@ -20,11 +18,16 @@ function TrainerCard({ data }) {
   );
 
   return (
-    <div className="trainer-card-container" onClick={handleBooking}>
-      <img
-        src={data?.profilePicture}
-        className="trainer-card--profile-picture"
-      ></img>
+    <Link
+      className="trainer-card-container"
+      style={{ textDecoration: "none" }}
+      to={`/trainer/profile/${data?.id}/${encodedName}`}
+    >
+      
+      <div className="trainer-card--profile-picture">
+      <div className="check-me-out">Check <br/> Me Out</div>
+        <img src={data?.profilePicture}></img>
+      </div>
 
       <div className="trainer-card--profile-brief">
         <div className="trainer-card__name">
@@ -33,7 +36,7 @@ function TrainerCard({ data }) {
         <div className="trainer-card__activity">
           {String(data?.areaOfExpertise).replace(/,/g, ", ")}
         </div>
-        <div className="trainer-card__desc">{data?.description}</div>
+        <div className="trainer-card__desc">{data?.description?.substring(0,100)}</div>
       </div>
 
       <div className="trainer-card--cta">
@@ -44,7 +47,7 @@ function TrainerCard({ data }) {
           <span>from </span>${cardPrice}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

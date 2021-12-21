@@ -4,7 +4,7 @@
 
 
   .search_filter {
-    height: 100px;
+    height: 80px;
     border-radius: 100px;
     background-color: #f8f8f8;
     -webkit-box-shadow: 0px 3px 12px #1616161a;
@@ -17,7 +17,7 @@
         -ms-flex-direction: row-reverse;
             flex-direction: row-reverse;
     width: 1140px;
-    padding: 20px;
+    padding: 15px;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -38,7 +38,7 @@
       }
 
       .filter_header {
-        font-size: 18px;
+        font-size: 15px;
         color: #161616;
         font-weight: 500;
         font-family: "Montserrat", sans-serif;
@@ -57,7 +57,7 @@
                 justify-content: space-between;
         .option_txt {
           color: #898989;
-          font-size: 20px;
+          font-size: 16px;
           font-family: "Montserrat", sans-serif;
           display: -webkit-box;
           display: -ms-flexbox;
@@ -208,8 +208,8 @@
           -ms-flex-align: center;
               align-items: center;
       .circle {
-        height: 80px;
-        width: 80px;
+        height: 70px;
+        width: 70px;
         border-radius: 80px;
         background-color: #53bfd2;
         display: -webkit-box;

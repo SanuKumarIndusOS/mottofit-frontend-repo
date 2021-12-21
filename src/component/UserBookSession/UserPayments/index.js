@@ -740,7 +740,10 @@ const UserPaymentsFC = ({
                             Price To Be Paid
                           </div>
                           <div className="cancel-style__body">
-                            ${finalPrice} / session
+                            ${finalPrice} /
+                            {sessionData?.newPass?.totalPasses
+                              ? " " + sessionData?.newPass?.totalPasses + " session package"
+                              : " session"}
                           </div>
                         </div>
                         <br />
@@ -748,7 +751,7 @@ const UserPaymentsFC = ({
                     )}
 
                     <div className="cancel-style">
-                      <div className="cancel-style__header">
+                      <div className="cancel-style__header" style={{color:"#53bfd2"}}>
                         Session Cancellation Policy
                       </div>
                       <div className="cancel-style__body">

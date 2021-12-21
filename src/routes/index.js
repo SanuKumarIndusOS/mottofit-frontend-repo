@@ -81,9 +81,9 @@ class RoutesClass extends Component {
 
     initializeGA();
 
-    if (window.screen.availWidth > 900) {
-      document.body.style.zoom = "90%";
-    }
+    // if (window.screen.availWidth > 900) {
+    //   document.body.style.zoom = "90%";
+    // }
 
     window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault();

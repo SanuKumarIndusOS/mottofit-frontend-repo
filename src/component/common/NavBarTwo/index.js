@@ -38,7 +38,7 @@ function NavBar({ home }) {
               {home ? (
                 <img src={Logo} height="80" alt="logo" />
               ) : (
-                <img src={LogoImage} height="45" alt="logo" />
+                <img src={LogoImage} height="40" alt="logo" />
               )}
             </Link>
           </div>
