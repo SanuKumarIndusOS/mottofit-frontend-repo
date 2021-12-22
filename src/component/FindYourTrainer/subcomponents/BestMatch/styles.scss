@@ -45,6 +45,11 @@
     padding-left: 6rem;
     padding-right: 6rem;
 
+    @media only screen and (max-width: 1500px) {
+      padding-left: unset;
+      padding-right: unset;
+    }
+
     @media only screen and (max-width: 900px) {
       padding-left: 10px;
       padding-right: unset;

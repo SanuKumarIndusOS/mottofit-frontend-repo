@@ -363,9 +363,9 @@ const SignUpFC = ({ loginOrSignupAct, nextAction }) => {
                       </div>
                       <div className="hr_line"></div>
                     </div>
-                    <div className="social_buttons">
+                    {/* <div className="social_buttons">
                       <SocialLogin type="user" loginType="singup" />
-                    </div>
+                    </div> */}
                   </form>
                 </div>
                 <div className="login_content_signup">

@@ -36,11 +36,21 @@ function BestMatch({
   //Effects
   useEffect(() => {
     if (type === "bestMatch")
+    {
+      setdataLoader(true);
       return setapiParams([JSON.stringify(trainerSearchFilterData), "match"]);
+    }
+      
 
     if (type === "otherMatch")
       return setapiParams([JSON.stringify(trainerSearchFilterData), "unmatch"]);
+
+    
   }, [trainerSearchFilterData]);
+
+  useEffect(() => {
+  console.log(dataLoader);
+  }, [dataLoader])
 
   return (
     <div className="best-match-container">

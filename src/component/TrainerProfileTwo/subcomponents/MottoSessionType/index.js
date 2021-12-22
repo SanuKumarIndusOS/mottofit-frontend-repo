@@ -407,8 +407,7 @@ function MottoSessionType({
 
         {parseInt(oneOnone?.virtualSession) === 0 &&
         parseInt(social?.virtualSessionfor2People) === 0 &&
-        parseInt(social?.virtualSessionfor3People) === 0 &&
-        parseInt(social?.virtualSessionfor4People) === 0 &&
+    
         parseInt(classPricing?.virtualSessionfor15People) === 0 ? null : (
           <div
             className={
