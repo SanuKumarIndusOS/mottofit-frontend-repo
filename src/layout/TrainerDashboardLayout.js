@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import NavBarHome from "component/Home/NavbarHomePage/NavBarHome";
-import { NavBar } from "component/common/Navbar/NavBar";
+import NavBar from "component/common/NavBarTwo/index";
 import SideBar from "component/common/SideBar";
 import Footer from "component/common/Footer";
 import TrainerDashboardTemp from "component/TrainerDashBoard/TrainerAdmin";

@@ -296,7 +296,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
                         Sign In with Facebook
                       </button> */}
 
-                    {/* <SocialLogin loginType="login" nextAction={nextAction} /> */}
+                    <SocialLogin loginType="login" nextAction={nextAction} />
 
                     {/* <GoogleLoginButton /> */}
 

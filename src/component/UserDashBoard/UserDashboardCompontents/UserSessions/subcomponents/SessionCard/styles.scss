@@ -121,8 +121,12 @@
           color: #898989;
         }
 
-        .txt--red {
-          color: rgb(216, 83, 83);
+        .no-txt-underline {
+          text-decoration: none;
+        }
+
+        .primary-txt-color{
+          color: #53bfd2;
         }
 
         .border-right--grey {
@@ -168,8 +172,6 @@
       font-weight: 500;
       font-style: italic;
 
-     
-
       @media only screen and (max-width: 900px) {
         border-right: none;
       }
@@ -185,8 +187,6 @@
       @media only screen and (max-width: 900px) {
         font-size: 15px;
       }
-
-      
     }
   }
 }

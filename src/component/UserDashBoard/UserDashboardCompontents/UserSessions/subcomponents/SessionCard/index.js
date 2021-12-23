@@ -86,6 +86,8 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
   };
 
   const renderCardControls = () => {
+    //TODO use switch case 
+   
     if (activeTab === "upcoming") {
       return (
         <>
@@ -106,12 +108,12 @@ function SessionCard({ data, activeTab, cancelAction, rescheduleAction }) {
       return (
         <>
           <div
-            className="control--sm border-right--grey"
+            className="control--sm border-right--grey primary-txt-color"
             onClick={handleBookAgain}
           >
             Book Again
           </div>
-          <div className="control--sm txt--red">{data?.sessionStatus}</div>
+          <div className="control--sm no-txt-underline">{data?.sessionStatus}</div>
         </>
       );
     }
