@@ -3,12 +3,14 @@ import "./styles.scss";
 import { history } from "helpers";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 function ProfileHeader({
   trainerFirstName,
   profilePicture,
   trainerExpertise,
   trainerLastName,
+  location
 }) {
   const [profilePicLoader, setprofilePicLoader] = React.useState(true);
   const imgRef = useRef();
@@ -47,6 +49,9 @@ function ProfileHeader({
           <div className="trainer-expertise">
             {String(trainerExpertise).replace(/,/g, ", ")}
           </div>
+          <div className="trainer-expertise">
+         <HiOutlineLocationMarker/> {location}
+        </div>
         </div>
         <div className="back-button">
           <div className="back-button--symbol">&#8249;</div>

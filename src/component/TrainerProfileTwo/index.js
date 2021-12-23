@@ -148,6 +148,7 @@ function TrainerProfileTwo({ getTrainerDetail, updateUserDetails, requestTrainer
             trainerLastName={trainerData?.lastName}
             profilePicture={trainerData?.profilePicture}
             trainerExpertise={trainerData?.areaOfExpertise}
+            location={trainerData?.location}
           />
           <ProfileBody
             trainerData={trainerData}
