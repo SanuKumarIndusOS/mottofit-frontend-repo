@@ -10,7 +10,7 @@ import UserSchedulerScroll from "component/common/UserSchedulerScroll/UserSchedu
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateUserDetails } from "action/userAct";
+import { updateUserDetails, getUserTokenStatus } from "action/userAct";
 import { getFormatDate } from "service/helperFunctions";
 // import { history } from "helpers/index";
 import { logout } from "service/utilities";
@@ -53,6 +53,8 @@ const UserEventSchedularFC = (props) => {
     // }
 
     // if (!location["trainerId"]) return history.push("/trainer/find");
+
+    
     window.scrollTo(0, 0);
     console.log(props.sessionData, "up");
 
@@ -230,6 +232,7 @@ const UserEventSchedularFC = (props) => {
         //   history.goBack();
         // }, 100);
       } else {
+        // TODO verify token if expired localStorage.setItem("paymentred", "paymentred");
         history.push("/user/payment");
       }
     };
@@ -448,7 +451,7 @@ const UserEventSchedularFC = (props) => {
 
                 <Link
                   className={`submit_user ${
-                    DateSlot !== "" ? "" : "disable-btn"
+                    (trainerstartSlot > moment().valueOf()) ? "" : "disable-btn"
                   }`}
                   onClick={handleContinue}
                   style={{ marginBottom: "500px" }}
@@ -509,6 +512,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       updateUserDetails,
       getTrainerDetail,
+      getUserTokenStatus,
       requestTrainerMessageApi: requestTrainerMessageAct,
     },
     dispatch

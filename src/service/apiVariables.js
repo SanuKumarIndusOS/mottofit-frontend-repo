@@ -300,7 +300,9 @@ export const TrainerApi = {
     isSearch: false,
     searchKey: "ashok",
     get api() {
-      return  !this.isSearch? ( this.url + this.limit + this.page) : (this.url + "search="+ this.searchKey);
+      return !this.isSearch
+        ? this.url + this.limit + this.page
+        : this.url + "search=" + this.searchKey;
     },
   },
   getTrainerDetail: {
@@ -453,6 +455,15 @@ export const PaymentApi = {
 };
 
 export const userApi = {
+  verifyToken: {
+    url: "verifyAuth",
+    method: "get",
+    baseURL: "normal",
+
+    get api() {
+      return `${this.url}`;
+    },
+  },
   getUserDetail: {
     api: "user",
     method: "get",

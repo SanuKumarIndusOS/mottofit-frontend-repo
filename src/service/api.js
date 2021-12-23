@@ -1,6 +1,7 @@
 import { logout, cancelTokenSource, axiosInstance } from "./utilities";
 import { Toast } from "./toast";
 import config from "config";
+import { history } from "helpers/index";
 
 export var api = async function ({
   method = "get",
@@ -51,9 +52,17 @@ export var api = async function ({
 var statusHelper = (status, data) => {
   if (data.status === 401 || data.status === 403) {
     // console.log(status, data);
-    Toast({ type: "error", message: data.statusText });
+    // Toast({ type: "error", message: data.statusText });
 
-    setTimeout(() => logout(), 1000);
+    if (window.location.pathname.includes("user/scheduler/")) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user-id');
+      localStorage.removeItem('type');
+      localStorage.setItem("paymentred", "paymentred");
+    } else {
+      Toast({ type: "error", message: data.statusText });
+      setTimeout(() => logout(), 1000);
+    }
   }
   if (status) {
     return {
@@ -70,7 +79,6 @@ let getServiceUrl = (baseURL) => {
   // console.log(baseURL);
 
   switch (baseURL) {
-   
     case "search":
       finalURL = config.api.newSearch;
       break;

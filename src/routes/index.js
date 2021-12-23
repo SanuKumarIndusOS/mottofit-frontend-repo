@@ -53,6 +53,7 @@ class RoutesClass extends Component {
       "/terms",
       "/faq",
       "/privacy",
+      
     ];
 
     const blockSignUpPath = ["/trainer/signup", "/user/signup", "/admin/login"];
@@ -70,7 +71,7 @@ class RoutesClass extends Component {
       return history.push("/");
 
     if (!isUserLoggedIn && !emptyTokenPath) {
-      // console.log(pathname);
+     
       logout();
       // console.log(path);
     }

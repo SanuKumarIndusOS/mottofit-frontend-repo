@@ -30,6 +30,19 @@ export const getUserDetail = () => (dispatch, getState, { api }) => {
   });
 };
 
+//get User Detail
+export const getUserTokenStatus = () => (dispatch, getState, { api }) => {
+  return new Promise((resolve, reject) => {
+    api({ ...userApi.verifyToken })
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 //user Session
 export const userSession = (type, pageSize = 0) => (
   dispatch,
