@@ -649,7 +649,9 @@ const UserPaymentsFC = ({
                               ? "10 Session Package"
                               : "30 Session Package"
                             : "1 on 1 session"
-                          : sessionData?.trainingType}
+                          : sessionData?.trainingType === "social"
+                          ? "Social Session (2-4 people)"
+                          : "Class Session (5-15 people)"}
                       </h4>
                     </div>
                   </div>
@@ -742,7 +744,9 @@ const UserPaymentsFC = ({
                           <div className="cancel-style__body">
                             ${finalPrice} /
                             {sessionData?.newPass?.totalPasses
-                              ? " " + sessionData?.newPass?.totalPasses + " session package"
+                              ? " " +
+                                sessionData?.newPass?.totalPasses +
+                                " session package"
                               : " session"}
                           </div>
                         </div>
@@ -751,7 +755,10 @@ const UserPaymentsFC = ({
                     )}
 
                     <div className="cancel-style">
-                      <div className="cancel-style__header" style={{color:"#53bfd2"}}>
+                      <div
+                        className="cancel-style__header"
+                        style={{ color: "#53bfd2" }}
+                      >
                         Session Cancellation Policy
                       </div>
                       <div className="cancel-style__body">

@@ -23,9 +23,10 @@ function TrainerCard({ data }) {
       style={{ textDecoration: "none" }}
       to={`/trainer/profile/${data?.id}/${encodedName}`}
     >
-      
       <div className="trainer-card--profile-picture">
-      <div className="check-me-out">Check <br/> Me Out</div>
+        <div className="check-me-out">
+         <p> Check <br /> Me Out <br /> <span>&#10094; </span> </p>
+        </div>
         <img src={data?.profilePicture}></img>
       </div>
 
@@ -36,7 +37,9 @@ function TrainerCard({ data }) {
         <div className="trainer-card__activity">
           {String(data?.areaOfExpertise).replace(/,/g, ", ")}
         </div>
-        <div className="trainer-card__desc">{data?.description?.substring(0,100)}</div>
+        <div className="trainer-card__desc">
+          {data?.description?.substring(0, 100)}
+        </div>
       </div>
 
       <div className="trainer-card--cta">

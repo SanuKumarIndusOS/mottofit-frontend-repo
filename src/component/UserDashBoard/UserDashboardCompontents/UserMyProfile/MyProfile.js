@@ -195,12 +195,12 @@ const MyProfileClass = ({
       //     message: "^Location is required",
       //   },
       // },
-      gender: {
-        presence: {
-          allowEmpty: false,
-          message: "^Gender is required",
-        },
-      },
+      // gender: {
+      //   presence: {
+      //     allowEmpty: false,
+      //     message: "^Gender is required",
+      //   },
+      // },
       // DOB: {
       //   presence: {
       //     allowEmpty: true,
@@ -218,7 +218,11 @@ const MyProfileClass = ({
         ...fieldInvalidList,
       };
 
+   
+
       setErrors({ ...errors, ...fieldInvalidList });
+
+      console.log(errors);
     }
     // console.log(findDatesValid(data.DOB));
 
@@ -234,14 +238,16 @@ const MyProfileClass = ({
   const isValidationPassed = () => {
     let payload = {
       firstName: userData.firstName,
-      location: userData.location,
+      // location: userData.location,
       lastName: userData.lastName,
       //DOB: userData.DOB,
-      gender: userData.gender,
+      // gender: userData.gender,
       email: userData.email,
       phoneNo: userData.phoneNo,
-      profilePicture: image,
+      // profilePicture: image,
     };
+
+    // console.log(!validateFields(payload), "pad");
 
     if (!validateFields(payload)) return false;
 
@@ -252,9 +258,9 @@ const MyProfileClass = ({
     let payload = {
       firstName: userData.firstName,
       lastName: userData.lastName,
-      location: userData.location,
+      // location: userData.location,
       //DOB: userData.DOB,
-      gender: userData.gender,
+      // gender: userData.gender,
       email: userData.email,
       phoneNo: userData.phoneNo,
       profilePicture: image,

@@ -68,7 +68,7 @@
       cursor: pointer;
     }
 
-    .trainer-location{
+    .trainer-location {
       font-size: 20px;
       color: #53bfd2;
       font-weight: 500;
@@ -85,7 +85,7 @@
       margin-top: 20px;
       text-transform: capitalize;
       font-size: 18px;
-     
+
       font-weight: 500;
       text-decoration: underline;
       cursor: pointer;
@@ -210,14 +210,17 @@
       margin-top: 3rem;
 
       .certification-main {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
+        // display: -webkit-box;
+        // display: -ms-flexbox;
+        // display: flex;
+        // -ms-flex-wrap: wrap;
+        // flex-wrap: wrap;
+        // -webkit-box-pack: justify;
+        // -ms-flex-pack: justify;
+        // justify-content: space-between;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         .certification-container {
           margin-top: 1rem;
           margin-right: 10rem;

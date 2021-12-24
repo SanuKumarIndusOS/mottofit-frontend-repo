@@ -33,6 +33,7 @@
     }
 
     .check-me-out {
+      padding-top: 15px;
       height: 60px;
       width: 60px;
       border-radius: 80px;
@@ -59,7 +60,23 @@
       margin-top: 1rem;
       margin-left: 260px;
       line-height: 11px;
+
+      span{
+       
+          color: #161616;
+          font-weight: 300;
+          -webkit-transform: rotate(-90deg);
+              -ms-transform: rotate(-90deg);
+                  transform: rotate(-90deg);
+          position:absolute;
+          right: 25px;
+       
+        
+      }
     }
+
+  
+    
   }
 
   .trainer-card--profile-brief {
