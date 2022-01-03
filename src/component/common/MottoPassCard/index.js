@@ -86,12 +86,12 @@ const MottoPassCard = ({
           city: null,
           sessionType: passType === "virtual" ? "virtual" : "inPerson",
           venue: passType === "virtual" ? "clientLocation" : passType,
-          trainingType: '1on1',
+          trainingType: "1on1",
           price: null,
-          areaOfExpertise: 'Motto Session',
+          areaOfExpertise: "Motto Session",
         },
       };
-  
+
       updateUserDetails(storedata);
       return history.push(`/user/scheduler/${trainerId}`);
 
@@ -124,7 +124,8 @@ const MottoPassCard = ({
         } ${trainer?.lastName || ""} ${userFullName}`}</h1>{" "}
         <br></br>
         <p>
-          {remains} out of {totalPassCount} passes remaining
+          {parseInt(totalPassCount - remains)} out of {totalPassCount} passes
+          remaining
         </p>
       </div>
       <div className="mottopass-details d-flex flex-column align-items-start">
@@ -186,9 +187,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      
       updateUserDetails,
-     
     },
     dispatch
   );
@@ -200,6 +199,5 @@ const MottoPassCardT = connect(
 )(MottoPassCard);
 
 export default MottoPassCardT;
-
 
 // export { MottoPassCard };

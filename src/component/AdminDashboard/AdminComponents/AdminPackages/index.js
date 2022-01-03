@@ -13,7 +13,7 @@ import { api } from "service/api";
 import { TrainerApi } from "service/apiVariables";
 import AsyncSelect from "react-select/async";
 import { debounceFunction } from "helpers/debounce";
-import MottoPassCard  from "component/common/MottoPassCard";
+import MottoPassCard from "component/common/MottoPassCard";
 import {
   Button,
   FormGroup,
@@ -75,6 +75,7 @@ function AdminMottoPassesFC(props) {
   const handleClick = (data) => {
     setOpen(true);
     setActiveMottoPackageData(data);
+    setRemainingCount(String(data.remains || ""));
   };
 
   const handleRemainingCount = () => {
@@ -124,8 +125,7 @@ function AdminMottoPassesFC(props) {
       });
   };
 
-  let remainingValue =
-    activeMottoPackageData.totalPassCount - activeMottoPackageData.remains;
+  let remainingValue = activeMottoPackageData.totalPassCount;
 
   return (
     <div className="admin_booking">
@@ -146,6 +146,14 @@ function AdminMottoPassesFC(props) {
             }}
           >
             Expired
+          </div>
+          <div
+            className={`${type === "completed" ? "active" : ""} upcoming`}
+            onClick={() => {
+              setType("completed");
+            }}
+          >
+            Completed
           </div>
         </div>
       </div>
@@ -210,10 +218,10 @@ function AdminMottoPassesFC(props) {
         <ModalBody>
           <div className="pl-4 mb-4">
             <form onSubmit={(e) => e.preventDefault()}>
-              <p>
+              {/* <p>
                 {activeMottoPackageData.remains} out of{" "}
                 {activeMottoPackageData.totalPassCount} passes remaining
-              </p>
+              </p> */}
               <FormGroup className="mb-4">
                 <Label for="remainingCount">
                   {`Update remaining count (Max: ${remainingValue})`}
