@@ -29,13 +29,17 @@ const MainClass = ({ fetchTrainersListsApi, createDirectMessageApi }) => {
     });
   }
 
-  function search(rows) {
-    return rows.filter(
-      (row) =>
-        row.email.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
-        row.firstName.toLowerCase().indexOf(q.toLowerCase()) > -1
-    );
-  }
+  function search(rows) {}
+
+  useEffect(() => {
+    if (q !== "") {
+      fetchTrainersListsApi(1, true, q).then((data) => {
+        setTrainerList(data.list);
+        setpageMetaData(data.pageMetaData);
+        setLoading(false);
+      });
+    }
+  }, [q]);
 
   const handleDirectRequest = (id) => {
     if (!id) return;
@@ -87,7 +91,7 @@ const MainClass = ({ fetchTrainersListsApi, createDirectMessageApi }) => {
           </div>
 
           <Datatable
-            trainerList={search(trainerList)}
+            trainerList={trainerList}
             loading={loading}
             fetchAllTrainers={() => fetchAllTrainers()}
             handleDirectRequest={handleDirectRequest}

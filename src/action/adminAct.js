@@ -164,21 +164,28 @@ export const AddorRemoveUser =
 
 //fetct Trainers Lists
 export const fetchTrainersLists =
-  (page, isAdmin = true) =>
+  (page, isAdmin = true, searchKey) =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
       const { fetchTrainersLists } = TrainerApi;
       fetchTrainersLists.page = page;
+
+      if (searchKey !== "" && searchKey !== undefined) {
+        fetchTrainersLists.isSearch = true;
+        fetchTrainersLists.searchKey = searchKey;
+        console.log(searchKey, "in");
+      }
       api({ ...fetchTrainersLists, isAdmin })
         .then(({ data }) => {
           resolve(data);
-          
         })
         .catch((err) => {
           reject(err);
         });
     });
   };
+
+
 
 export const createDirectMessage =
   (id) =>

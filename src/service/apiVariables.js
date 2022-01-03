@@ -305,6 +305,7 @@ export const TrainerApi = {
         : this.url + "search=" + this.searchKey;
     },
   },
+
   getTrainerDetail: {
     url: "trainer/id?trainerId=",
     method: "get",
