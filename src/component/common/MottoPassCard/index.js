@@ -124,8 +124,7 @@ const MottoPassCard = ({
         } ${trainer?.lastName || ""} ${userFullName}`}</h1>{" "}
         <br></br>
         <p>
-          {parseInt(totalPassCount - remains)} out of {totalPassCount} passes
-          remaining
+          {parseInt(remains)} out of {totalPassCount} passes remaining
         </p>
       </div>
       <div className="mottopass-details d-flex flex-column align-items-start">
