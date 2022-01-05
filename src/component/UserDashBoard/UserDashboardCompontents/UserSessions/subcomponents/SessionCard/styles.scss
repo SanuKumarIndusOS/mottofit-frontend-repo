@@ -1,0 +1,214 @@
+.session-card-container {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  border-bottom: 2px solid #e6e6e6;
+
+  .session-info-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    @media only screen and (max-width: 900px) {
+      display: unset;
+    }
+
+    .session-date-box-container {
+      width: 100px;
+      height: 100px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      .session-date-box {
+        .date--bg {
+          font-size: 30px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+          text-align: center;
+          letter-spacing: 1.05px;
+          color: #161616;
+        }
+
+        .month--bg {
+          font-size: 15px;
+          letter-spacing: 0.45px;
+          color: #898989;
+          text-transform: uppercase;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          line-height: 2px;
+          text-align: center;
+        }
+      }
+    }
+
+    .session-info-content {
+      margin-left: 1.5rem;
+
+      @media only screen and (max-width: 900px) {
+        margin-left: unset;
+        margin-top: 1rem;
+      }
+
+      .session__title {
+        text-align: left;
+        font-weight: 600;
+        font-size: 21px;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0px;
+        color: #161616;
+
+        span {
+          text-transform: capitalize;
+        }
+
+        @media only screen and (max-width: 900px) {
+          margin-bottom: 1rem;
+        }
+      }
+
+      .session__secondary-info {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        @media only screen and (max-width: 900px) {
+          display: unset;
+        }
+
+        .info--sm {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          margin-right: 1rem;
+          color: #898989;
+          font-size: 17px;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          letter-spacing: 0px;
+
+          img {
+            margin-right: 7px;
+          }
+        }
+      }
+
+      .session__controls {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-top: 1rem;
+
+        .control--sm {
+          cursor: pointer;
+          margin-right: 1rem;
+          text-transform: capitalize;
+          text-align: left;
+          text-decoration: underline;
+          font-size: 16px;
+          font-weight: 500;
+          font-family: "Montserrat", sans-serif;
+          letter-spacing: 0px;
+          color: #898989;
+        }
+
+        .no-txt-underline {
+          text-decoration: none;
+        }
+
+        .primary-txt-color{
+          color: #53bfd2;
+        }
+
+        .border-right--grey {
+          padding-right: 1rem;
+          border-right: 3px solid #e6e6e6;
+        }
+      }
+    }
+  }
+
+  .package-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 15px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    .package-ribbon {
+      margin-right: 1rem;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 600;
+      background-color: #53bfd2;
+      padding: 5px;
+      color: white;
+      font-family: "Montserrat", sans-serif;
+
+      @media only screen and (max-width: 900px) {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .package-remaining {
+      margin-right: 1rem;
+      padding-right: 1rem;
+      font-size: 17px;
+      border-right: 3px solid #e6e6e6;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-style: italic;
+
+      @media only screen and (max-width: 900px) {
+        border-right: none;
+      }
+    }
+
+    .package-validity {
+      color: #898989;
+      font-size: 17px;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+      letter-spacing: 0px;
+
+      @media only screen and (max-width: 900px) {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.cancel-dialog {
+  padding: 1rem;
+
+  .cancel-dialog__button {
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 10px;
+    border: none;
+    margin-right: 1rem;
+  }
+
+  .button--blue {
+    background-color: #53bfd2;
+    color: white;
+  }
+
+  .button--red {
+    background-color: #d25353;
+    color: white;
+  }
+}

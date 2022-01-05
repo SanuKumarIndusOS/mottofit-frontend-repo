@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap");
+
+.trainer-card-container {
+  height: 450px;
+  width: 350px;
+  background-color: #fff;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 3px 12px #1616160d;
+  box-shadow: 0px 3px 12px #1616160d;
+  cursor: pointer;
+
+  .trainer-card--profile-picture {
+    height: 38%;
+    width: 100%;
+
+    .check-me-out {
+      display: none;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      border-radius: 20px 20px 0px 0px;
+    }
+  }
+
+  .trainer-card--profile-picture:hover {
+    img {
+      -webkit-filter: saturate(100%) brightness(70%);
+      filter: saturate(100%) brightness(70%);
+    }
+
+    .check-me-out {
+      padding-top: 15px;
+      height: 60px;
+      width: 60px;
+      border-radius: 80px;
+      background-color: #53bfd2;
+      display: block;
+      text-align: center;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      font-size: 12px;
+      letter-spacing: 0px;
+      color: #ffffff;
+      opacity: 1;
+      z-index: 1;
+      position: absolute;
+      margin-top: 1rem;
+      margin-left: 260px;
+      line-height: 11px;
+
+      span{
+       
+          color: #161616;
+          font-weight: 300;
+          -webkit-transform: rotate(-90deg);
+              -ms-transform: rotate(-90deg);
+                  transform: rotate(-90deg);
+          position:absolute;
+          right: 25px;
+       
+        
+      }
+    }
+
+  
+    
+  }
+
+  .trainer-card--profile-brief {
+    height: 49%;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    .trainer-card__desc {
+      font-family: "Montserrat", sans-serif;
+      // font-weight: 500;
+      font-size: 14px;
+      text-align: center;
+      // font: normal normal normal 16px/29px Montserrat;
+      letter-spacing: 0.24px;
+      color: #898989;
+    }
+
+    .trainer-card__name {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      margin-bottom: 2px;
+      padding-top: 1rem;
+
+      text-align: center;
+      font-size: 28px;
+      font-family: Cormorant Garamond;
+      text-transform: capitalize;
+
+      letter-spacing: -0.35px;
+      color: #161616;
+      opacity: 1;
+    }
+
+    .trainer-card__activity {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.9px;
+      color: #898989;
+      text-transform: uppercase;
+      opacity: 1;
+    }
+  }
+
+  .trainer-card--cta {
+    font-family: "Montserrat", sans-serif;
+    height: 13%;
+    width: 100%;
+    background-color: #53bfd2;
+    border-radius: 0px 0px 20px 20px;
+    cursor: pointer;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 20px;
+
+    .trainer-card--cta-action {
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+      font-weight: 700;
+      font-size: 14px;
+
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .trainer-card--cta-price {
+      color: rgb(0, 0, 0);
+      text-transform: uppercase;
+
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: end;
+      -ms-flex-align: end;
+      align-items: flex-end;
+
+      span {
+        font-size: 16px;
+        text-transform: lowercase;
+        font-family: "Cormorant Garamond", sans-serif;
+        margin-right: 5px;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+.trainer-card-container:hover .trainer-card--cta {
+  background-color: #e9797c;
+
+  .trainer-card--cta-action {
+    color: black;
+  }
+
+  .trainer-card--cta-price {
+    color: white;
+  }
+}

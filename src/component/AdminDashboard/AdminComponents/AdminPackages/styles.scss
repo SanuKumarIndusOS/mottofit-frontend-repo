@@ -1,0 +1,96 @@
+.admin_booking {
+  margin-left: 5rem;
+  margin-right: 5rem;
+  .filters
+  {
+    .type
+    {
+      display: flex;
+      .all
+      {
+          padding: 1rem;
+          border: solid 1px grey;
+          cursor: pointer;
+      }
+
+      .upcoming
+      {
+        padding: 1rem;
+        border: solid 1px grey;
+        cursor: pointer;
+      }
+
+      .cancelled
+      {
+        padding: 1rem;
+        border: solid 1px grey;
+        cursor: pointer;
+      }
+
+      .active{
+
+        background-color: lightseagreen;
+        color: white;
+        font-weight: bolder;
+      }
+    }
+  }
+  .session_card_outer {
+    .session_card {
+      padding: 2rem;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+      .header {
+        display: flex;
+        height: 10%;
+        justify-content: space-between;
+
+        .title {
+          .txt {
+            font-size: 20px;
+            font-weight: bold;
+          }
+
+          .date {
+            font-size: 16px;
+            font-weight: normal;
+            color: rgb(34, 34, 34);
+          }
+        }
+
+        .status {
+          font-weight: bold;
+          font-size: 20px;
+
+          .completed {
+            color: green;
+          }
+          .cancelled {
+            color: rgb(189, 26, 26);
+          }
+
+          .created {
+            color: rgb(126, 126, 17);
+          }
+        }
+      }
+
+      .content {
+          margin-top: 1%;
+        display: flex;
+        align-items: center;
+        .left_content {
+          flex: 1;
+        }
+
+        .right_content {
+          flex: 1;
+        }
+      }
+    }
+  }
+  .modal-backdrop{
+    width: 100%;
+    height: 100%;
+  }
+}

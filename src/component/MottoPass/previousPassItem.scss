@@ -1,0 +1,63 @@
+@import "../../assets/scss/abstracts/abstracts";
+
+.previous-pass-item {
+    margin-top: 25px;
+    .user-pic {
+        margin-right: 30px;
+
+        @include media-breakpoint-mobile-land {
+            margin: 0 auto;
+        }
+    }
+
+    .previous-pass-block {
+        margin-bottom: 25px;
+        @include media-breakpoint-mobile-land {
+            flex-wrap: wrap;
+        }
+    }
+
+    .pass-description {
+        color: #2c2c2c;
+        line-height: 32px;
+        font-family: "Montserrat";
+    }
+
+    .pass-indetail {
+        img {
+            margin-right: 10px;
+        }
+
+        p {
+            font-family: "Montserrat";
+            color: #898989;
+        }
+
+        div {
+            margin-right: 15px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .pass-action-btn {
+        button {
+            font-size: 20px;
+            a {
+                font-family: "Montserrat";
+                color: #2c2c2c;
+                border-bottom: 2px solid #53bfd2;
+                &:focus,
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            img {
+                margin-left: 8px;
+            }
+        }
+    }
+}

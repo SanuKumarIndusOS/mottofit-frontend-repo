@@ -1,0 +1,491 @@
+.outter_user_container {
+  width: 100%;
+  height: auto;
+  background: #f6f6f6;
+  padding: 1em 3em 8em 2em;
+  .inner_user_container {
+    .userSession_heading {
+      h2 {
+        text-align: left;
+        letter-spacing: 0px;
+        color: #161616;
+        line-height: 58px;
+        font-size: 40px;
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+      }
+    }
+    .US_tabs_wrapper {
+      .rwt__tab {
+        padding: 1em 1em 0.4em 0;
+        margin: 0 1em 1em 0;
+        text-align: center;
+        letter-spacing: 0.9px;
+        color: #161616;
+        text-transform: uppercase;
+        line-height: 18px;
+        font-size: 22px;
+        font-weight: 600;
+        background-color: transparent;
+
+        font-family: "Montserrat", sans-serif;
+      }
+      .rwt__tab[aria-selected="true"]:after {
+        width: 85%;
+        background-color: transparent;
+        border-bottom: 3px solid #53bfd2;
+      }
+      .rwt__tablist:not([aria-orientation="vertical"]) {
+        border-bottom: none;
+      }
+      .tabPanel_outter {
+        .tabPanel_overview {
+          display: grid;
+          // grid-template-columns: 62% 35%;
+          grid-template-rows: auto;
+          grid-column-gap: 3%;
+          margin-top: 4em;
+          @media screen and (max-width: 1023px) {
+            grid-template-columns: auto;
+          }
+          .tabPanel_overview_left {
+            height: 700px;
+            background: #ffffff;
+            -webkit-box-shadow: 0px 3px 12px #16161608;
+                    box-shadow: 0px 3px 12px #16161608;
+            border-radius: 20px;
+            .TP_overview_wrapper {
+              padding: 2em;
+              h3 {
+                letter-spacing: 0px;
+                color: #161616;
+                opacity: 1;
+                font-family: "Montserrat", sans-serif;
+                font-size: 25px;
+                font-weight: 500;
+              }
+              .TP_US_overview {
+                margin-top: 2em;
+                height: 600px;
+
+                .TP_US_overview_inner {
+                  height: 500px;
+                  overflow: auto;
+                  .TP_upcomeSession_overview {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    height: 120px;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
+                    .TP_USession_dates {
+                      width: 100px;
+                      height: 100px;
+                      background: #f6f6f6;
+                      border-radius: 10px;
+                      opacity: 1;
+                      display: -webkit-box;
+                      display: -ms-flexbox;
+                      display: flex;
+                      -webkit-box-orient: vertical;
+                      -webkit-box-direction: normal;
+                          -ms-flex-direction: column;
+                              flex-direction: column;
+                      -webkit-box-align: center;
+                          -ms-flex-align: center;
+                              align-items: center;
+                      -webkit-box-pack: center;
+                          -ms-flex-pack: center;
+                              justify-content: center;
+
+                      h4 {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                            -ms-flex-direction: column;
+                                flex-direction: column;
+                        height: 34px;
+                        text-align: center;
+                        letter-spacing: 1.05px;
+                        color: #161616;
+                        text-transform: uppercase;
+                        line-height: 22px;
+                        font-size: 35px;
+                        font-weight: 600;
+                        font-family: "Montserrat", sans-serif;
+                        span {
+                          text-align: center;
+                          margin-top: 0.5em;
+                          letter-spacing: 0.45px;
+                          color: #898989;
+                          text-transform: uppercase;
+                          opacity: 1;
+                          font-family: "Montserrat", sans-serif;
+                          font-size: 15px;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                    .TP_USession_data {
+                      margin-left: 2em;
+                      h2 {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        text-align: left;
+                        letter-spacing: 0px;
+                        line-height: 35px;
+                        color: #161616;
+
+                        margin: 0;
+                        padding: 0;
+                        line-height: 22px;
+                        font-size: 22px;
+                        font-weight: 600;
+                        font-family: "Montserrat", sans-serif;
+                      }
+                      .TP_USession_data_icons {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-align: center;
+                            -ms-flex-align: center;
+                                align-items: center;
+                        h5 {
+                          display: -webkit-box;
+                          display: -ms-flexbox;
+                          display: flex;
+                          -webkit-box-align: center;
+                              -ms-flex-align: center;
+                                  align-items: center;
+
+                          text-align: left;
+
+                          letter-spacing: 0px;
+                          color: #898989;
+                          line-height: 30px;
+                          font-size: 15px;
+                          font-weight: 500;
+                          font-family: "Montserrat", sans-serif;
+                          margin: 0 1em 0 0;
+
+                          img {
+                            margin-right: 0.5em;
+                          }
+                        }
+                      }
+                      .TP_USession_data_buttons {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-align: center;
+                            -ms-flex-align: center;
+                                align-items: center;
+                        width: 100%;
+                        // margin-top: 0.7em;
+                        -webkit-box-pack: justify;
+                            -ms-flex-pack: justify;
+                                justify-content: space-between;
+
+                        button {
+                          background: transparent;
+                          border: none;
+                          margin-right: 1em;
+                          display: -webkit-box;
+                          display: -ms-flexbox;
+                          display: flex;
+                          color: #898989;
+                          opacity: 1;
+                          text-decoration: underline;
+                          text-transform: none;
+                          font-family: "Montserrat", sans-serif;
+                          font-size: 15px;
+                          font-weight: 500;
+                        }
+                        .button_boarder {
+                          display: -webkit-box;
+                          display: -ms-flexbox;
+                          display: flex;
+                          -webkit-box-align: center;
+                              -ms-flex-align: center;
+                                  align-items: center;
+                          button {
+                            border: none;
+                            margin-right: 1em;
+                            text-align: right;
+                            position: relative;
+                            left: 40px;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                    align-items: center;
+                            height: 30px;
+                            text-align: left;
+                            letter-spacing: 0.18px;
+                            color: #161616;
+                            opacity: 1;
+                            text-decoration: none;
+                            border-bottom: 2px solid #53bfd2;
+                            border-right-width: 100px;
+                            line-height: 42px;
+                            font-size: 18px;
+                            font-weight: normal;
+                            font-family: "Montserrat", sans-serif;
+                          }
+                          img {
+                            position: relative;
+                            left: 27px;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .viewMoreButton {
+                  display: -webkit-box;
+                  display: -ms-flexbox;
+                  display: flex;
+                  -webkit-box-align: center;
+                      -ms-flex-align: center;
+                          align-items: center;
+                  margin-top: 2em;
+                  background: transparent;
+
+                  text-align: right;
+
+                  letter-spacing: 0.45px;
+                  color: #161616;
+                  text-transform: uppercase;
+                  border: none;
+                  line-height: 22px;
+                  font-size: 18px;
+                  font-weight: bold;
+                  font-family: "Montserrat", sans-serif;
+                }
+              }
+            }
+          }
+          .tabPanel_overview_right {
+            height: 700px;
+            display: none;
+
+            .TB_overview_right {
+              display: grid;
+              grid-template-columns: auto;
+              grid-template-rows: 40% 60%;
+              grid-row-gap: 60px;
+              height: 600px;
+              .TB_overview_row_one {
+                height: 250px;
+
+                background: #2c2c2c;
+                -webkit-box-shadow: 0px 3px 12px #16161608;
+                        box-shadow: 0px 3px 12px #16161608;
+                border-radius: 20px;
+                opacity: 1;
+                .row_one_data {
+                  display: -webkit-box;
+                  display: -ms-flexbox;
+                  display: flex;
+                  -webkit-box-align: center;
+                      -ms-flex-align: center;
+                          align-items: center;
+                  -webkit-box-pack: center;
+                      -ms-flex-pack: center;
+                          justify-content: center;
+                  -webkit-box-orient: vertical;
+                  -webkit-box-direction: normal;
+                      -ms-flex-direction: column;
+                          flex-direction: column;
+                  padding: 1em;
+                  height: 250px;
+
+                  h2 {
+                    text-align: center;
+                    letter-spacing: -0.28px;
+                    color: #ffffff;
+                    line-height: 40px;
+                    font-size: 28px;
+                    font-weight: bold;
+                    font-family: Cormorant Garamond;
+                  }
+                  p {
+                    text-align: center;
+
+                    letter-spacing: 0.23px;
+                    color: #bcbcbc;
+                    // line-height: 25px;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-family: "Montserrat", sans-serif;
+                  }
+                  a {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
+                    text-align: right;
+                    letter-spacing: 0.45px;
+                    color: #ffffff;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    line-height: 22px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    font-family: "Montserrat", sans-serif;
+                  }
+                }
+              }
+              .TB_overview_row_two {
+                height: 400px;
+
+                background: #ffffff;
+                -webkit-box-shadow: 0px 3px 12px #16161608;
+                        box-shadow: 0px 3px 12px #16161608;
+                border-radius: 20px;
+
+                .row_two_data {
+                  padding: 2em 1em 1em 1em;
+                  h2 {
+                    text-align: center;
+                    letter-spacing: 0.9px;
+                    color: #2c2c2c;
+                    text-transform: uppercase;
+                    line-height: 22px;
+                    font-size: 18px;
+                    font-weight: 600;
+                    font-family: "Montserrat", sans-serif;
+                  }
+                  .row_two_scroll {
+                    overflow: auto;
+                    height: 300px;
+                    .row_previous_data {
+                      display: -webkit-box;
+                      display: -ms-flexbox;
+                      display: flex;
+                      -webkit-box-align: center;
+                          -ms-flex-align: center;
+                              align-items: center;
+                      margin-top: 1em;
+                      .row_previous_avater {
+                        img {
+                          width: 66px;
+                          height: 66px;
+                        }
+                      }
+                      .row_previous_header {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                            -ms-flex-direction: column;
+                                flex-direction: column;
+                        -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                                justify-content: center;
+                        margin-left: 1em;
+                        h2 {
+                          text-align: left;
+                          letter-spacing: 0px;
+                          color: #161616;
+                          margin: 0;
+                          line-height: 20px;
+                          font-size: 16px;
+                          font-weight: 600;
+                          font-family: "Montserrat", sans-serif;
+                        }
+                        p {
+                          margin: 0;
+                          text-align: left;
+                          letter-spacing: 0px;
+                          color: #898989;
+                          line-height: 20px;
+                          font-size: 14px;
+                          font-weight: 500;
+                          font-family: "Montserrat", sans-serif;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .outter_user_container {
+    margin-top: 5rem;
+    padding: unset;
+    .inner_user_container {
+      .US_tabs_wrapper {
+        .rwt__tab {
+          font-size: 15px;
+        }
+        .rwt__tablist {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          overflow-x: auto;
+        }
+
+        .tabPanel_outter {
+          .tabPanel_overview {
+            .tabPanel_overview_right {
+              .TB_overview_right {
+                margin-top: 20px;
+              }
+            }
+
+            .tabPanel_overview_left {
+              width: 95vw;
+              .TP_overview_wrapper {
+                .TP_US_overview {
+                  .TP_US_overview_inner {
+                    .TP_upcomeSession_overview {
+                      height: unset;
+                      display: unset;
+                      .TP_USession_dates {
+                        background-color: unset;
+                        -webkit-box-align: center;
+                            -ms-flex-align: center;
+                                align-items: center;
+                        h4 {
+                          font-size: 30px;
+                        }
+                      }
+                      .TP_USession_data {
+                        h2 {
+                          font-size: 18px;
+                        }
+                        .TP_USession_data_icons {
+                          h5 {
+                            font-size: 11px;
+                            margin-top: 5px;
+                            margin-bottom: 5px;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

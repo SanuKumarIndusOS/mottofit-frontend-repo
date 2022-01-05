@@ -1,0 +1,125 @@
+.wrapper_headings
+    margin: 2em 0 1em 0
+    padding: 1em
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    h2
+        color: #bcbcbc
+        font-size: 40px
+        text-align: center
+    
+    p
+        text-align: center
+        letter-spacing: 0.27px
+        color: #696969
+        width: 80%
+        line-height: 30px
+        font-size: 18px
+        font-weight: normal
+        font-family: "Montserrat", sans-serif
+        @media screen and (max-width: 600px)
+           width: 100%
+           text-align: justify
+.row
+    display: grid
+    grid-template-columns: auto auto auto
+    grid-template-rows: auto
+    grid-column-gap: 20px
+    justify-items: center
+    align-items: center
+    margin: 0em 0 8em 0
+
+    @media screen and (max-width: 920px)
+        grid-template-columns: auto
+
+    .card
+        display: flex
+        align-items: center
+        flex-direction: column
+        justify-content: center
+        margin: 1em 0
+        height: auto
+        width: 332px
+        border-radius: 50px
+        height: 100%
+        background: #ffffff
+        padding-bottom: 40px;
+        border: 0
+
+        .card-img            
+            height: 200px
+            border-radius: 20px 20px 0 0
+
+        .card-body            
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            border-left: 1px solid rgba(0,0,0,.125)
+            border-right: 1px solid rgba(0,0,0,.125)
+
+            h3
+                text-align: center
+                letter-spacing: -0.35px
+                color: #161616
+                line-height: 28px
+                font-size: 32px
+                font-weight: bold
+                font-family: "Cormorant Garamond"
+            h6
+                text-align: center
+                letter-spacing: 0.9px
+                color: #898989
+                text-transform: uppercase
+                margin-bottom: 1em
+                font-family: 'Montserrat'
+                font-size: 14px !important
+                font-weight: 600
+                line-height: 20px
+
+            p
+                font-size: 16px
+                line-height: 20px
+                font-family: Montserrat
+        .card-button
+            button
+                display: flex
+                align-items: center
+                justify-content: space-between
+                padding: 0 0.8em
+                margin: 0 auto
+                width: 314px
+                height: 62px
+                outline: none
+                border: 0
+                //cursor: pointer
+                border-radius: 0 0 20px 20px
+                // background: #53BFD2
+                text-transform: uppercase
+                font-weight: bold
+                color: #fff
+                p
+                    margin: 0
+                    text-transform: lowercase
+                    display: flex
+                    align-items: center
+                    transition: .2s ease-in-out
+
+                    font-style: italic
+                    font-size: 15px
+                    font-weight: 300
+                    font-family: "Montserrat", sans-serif
+
+                img
+                    position: absolute
+                    left: 50%
+                    width: 40px
+                span
+                    margin-left: 0.3em
+                    font-size: 16px
+                    font-weight: 300
+                    font-family: "Montserrat", sans-serif
+                    // display: flex
+                    // line-height: 20px

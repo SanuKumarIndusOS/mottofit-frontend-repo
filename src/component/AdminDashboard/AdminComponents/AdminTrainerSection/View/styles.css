@@ -1,0 +1,572 @@
+.profile_main_admin {
+  height: 100%;
+  width: 1060px !important;
+}
+
+.profile_main_admin .profile_outter_container {
+  width: 100%;
+  height: 100%;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header {
+  width: 100%;
+  height: 400px;
+  background: #141414;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile {
+  position: relative;
+  top: 150px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 30% 35%;
+      grid-template-columns: auto 30% 35%;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile img {
+  width: 350px;
+  height: 400px;
+  opacity: 1;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile .profile_header_inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 4em 0 0 2em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile .profile_header_inner h2 {
+  text-align: left;
+  letter-spacing: -0.45px;
+  color: #ffffff;
+  font-family: Cormorant Garamond;
+  font-size: 45px;
+  line-height: 55px;
+  font-weight: bold;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile .profile_header_inner p {
+  text-align: left;
+  letter-spacing: 1.1px;
+  color: #898989;
+  text-transform: uppercase;
+  font-family: Montserrat;
+  font-size: 22px;
+  line-height: 22px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile .profile_header_link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-align: right;
+  margin: 4em 0 0 4em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile .profile_header_link a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-align: right;
+  letter-spacing: 0.18px;
+  color: #bcbcbc;
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: 500;
+  border-bottom: 2px solid #53bfd2;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile .profile_header_link a:hover {
+  text-decoration: none;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_header .inner_profile .profile_header_link img {
+  margin-right: 0.5em;
+  width: 10px;
+  height: 15px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 30% 64%;
+      grid-template-columns: 30% 64%;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  margin-top: 10em;
+  grid-column-gap: 62px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_link a {
+  text-align: left;
+  letter-spacing: 0.18px;
+  color: #161616;
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 45px;
+  font-weight: normal;
+  border-bottom: 2px solid #53bfd2;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_link a:hover {
+  text-decoration: none;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_link img {
+  margin-left: 0.5em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items {
+  height: auto;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item {
+  margin-top: 3em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item h2 {
+  text-align: left;
+  letter-spacing: 1px;
+  color: #2c2c2c;
+  text-transform: uppercase;
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item hr {
+  width: 350px;
+  height: 0px;
+  border: 2px solid #e3e3e3;
+  opacity: 1;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .model_Qmark {
+  position: relative;
+  bottom: 10px;
+  margin-left: 0.2em;
+  cursor: pointer;
+  border: none;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item h6 {
+  text-align: left;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: Montserrat;
+  letter-spacing: 0.63px;
+  color: #2c2c2c;
+  opacity: 1;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item h6 span {
+  text-align: left;
+  letter-spacing: 0.24px;
+  color: #696969;
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: normal;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item h5 {
+  text-align: left;
+  font-style: italic;
+  font-size: 18px;
+  font-weight: medium;
+  font-family: Cormorant Garamond;
+  letter-spacing: 0.27px;
+  color: #696969;
+  opacity: 1;
+  width: 350px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item .profile_location {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item .profile_location img {
+  width: 20px;
+  height: 20px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item .profile_location h4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: left;
+  letter-spacing: 0.24px;
+  color: #696969;
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: normal;
+  margin: 0 0 0 0em;
+  padding: 0 0 0 0.5em;
+  width: 100%;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item .profile_location h4 a {
+  text-align: left;
+  text-decoration: underline;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Montserrat;
+  letter-spacing: 0px;
+  color: #53bfd2;
+  opacity: 1;
+  padding: 0 0 0 0.5em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item .profile_share {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 3em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items .profile_aside_item .profile_aside_inner_item .profile_share a {
+  text-align: left;
+  text-decoration: underline;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Montserrat;
+  letter-spacing: 0px;
+  color: #53bfd2;
+  opacity: 1;
+  padding: 0 0 0 1em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_aside .profile_aside_items button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 3em;
+  width: 350px;
+  height: 52px;
+  background: #53bfd2 0% 0% no-repeat padding-box;
+  opacity: 1;
+  text-transform: uppercase;
+  text-align: right;
+  letter-spacing: 0.45px;
+  color: #ffffff;
+  text-transform: uppercase;
+  outline: none;
+  border: none;
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bold;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item1 h6 {
+  text-align: left;
+  font: normal normal normal 22px/38px Montserrat;
+  letter-spacing: 0.33px;
+  color: #696969;
+  font-family: Montserrat;
+  font-size: 22px;
+  line-height: 38px;
+  font-weight: normal;
+  margin-left: 1em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 {
+  margin-top: 3em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 h4 {
+  text-align: left;
+  letter-spacing: 1px;
+  color: #2c2c2c;
+  text-transform: uppercase;
+  font-family: Montserrat;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 p {
+  text-align: left;
+  letter-spacing: 0.27px;
+  color: #696969;
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: normal;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  margin: 0.5em 0;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0.5em 0;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container .profile_images_card {
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  height: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: white;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container .box1 {
+  width: 260px !important;
+  height: 360px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container .box2 {
+  width: 340px !important;
+  height: 175px;
+  margin-left: 10px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container .box3 {
+  width: 170px !important;
+  height: 165px;
+  margin: 0 0 0 10px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container .box4 {
+  width: 170px !important;
+  height: 165px;
+  margin-left: 10px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container .flex-try-2 {
+  width: 408px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .profile_images_grid .profile_images_container .flex-try-3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .image_more {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .image_more h5 {
+  margin: 0;
+  text-align: left;
+  letter-spacing: 0.18px;
+  color: #161616;
+  border-bottom: 2px solid #53bfd2;
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: normal;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item2 .image_more img {
+  margin-left: 0.5em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item3 {
+  margin-top: 3em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item3 h2 {
+  letter-spacing: 0px;
+  color: #161616;
+  opacity: 1;
+  font-size: 28px;
+  font-weight: 800;
+  font-family: Montserrat;
+  margin-bottom: 1em;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item3 .profile_item3_inner {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item3 .profile_item3_inner .inner_items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0.5em 0;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item3 .profile_item3_inner .inner_items img {
+  width: 20px;
+  height: 20px;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_right_item3 .profile_item3_inner .inner_items h6 {
+  text-align: left;
+  letter-spacing: 0.6px;
+  color: #898989;
+  text-transform: uppercase;
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 600;
+  margin: 0 0 0 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data {
+  margin: -2em 0 0 0;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data h2 {
+  letter-spacing: 0px;
+  color: #161616;
+  opacity: 1;
+  font-size: 28px;
+  font-weight: 800;
+  font-family: Montserrat;
+  margin: 2em 0 0.8em 0;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .profile_personal_data_inner {
+  font-family: Montserrat;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .profile_personal_data_inner .previousExperience {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 2em 0 0.5em 0;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .profile_personal_data_inner .previousExperience h6 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #898989;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .personal_data_inner1 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 50% 47%;
+      grid-template-columns: 50% 47%;
+  grid-column-gap: 12px;
+  /* word-wrap: break-word; */
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .personal_data_inner1 h3 {
+  color: #53bfd2;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .personal_data_inner1 h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #898989;
+}
+
+.profile_main_admin .profile_outter_container .profile_wrapper_container .profile_main_contents .profile_trainer_data .profile_right_data .profile_personal_data .personal_data_inner1 h4 span {
+  font-weight: 700;
+  color: #696969;
+}

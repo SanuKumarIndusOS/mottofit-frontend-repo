@@ -1,0 +1,200 @@
+@media only screen and (max-width: 900px) {
+    .navbar1 {
+      display: none;
+    }
+  
+    .input {
+      width: 100%;
+    }
+  
+    .mobile_navbar {
+      height: 75px;
+      width: 100vw;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      position: fixed;
+      top: 0;
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      padding: 2rem;
+      background-color: white;
+      z-index: 1000;
+    }
+  
+    .mobile_hamburger_menu {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      font-size: 24px;
+      color: #dbdbdb;
+    }
+  
+    .mobile_nav_logo {
+      -webkit-box-flex: 3;
+          -ms-flex: 3;
+              flex: 3;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+    }
+  
+    .mobile_profile_menu {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: end;
+          -ms-flex-pack: end;
+              justify-content: flex-end;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+    }
+  
+    .MuiDrawer-paper {
+      width: 75%;
+    }
+  
+    .mobile_profile_menu_items {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      /* position: fixed; */
+      /* justify-content: flex-end;
+      z-index: 40000;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 100vh;
+      width: 100%; */
+    }
+  
+    .pro_menu_container_right {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+    }
+  
+    .pro_menu_container_left {
+      width: 20%;
+      height: 100vh;
+    }
+  
+    .pro_menu_header {
+      height: 75px;
+      width: 100%;
+      background-color: #161616;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+  
+    .pro_menu_header img {
+      height: 50px;
+      width: 50px;
+      -o-object-fit: cover;
+         object-fit: cover;
+      border-radius: 300px;
+    }
+  
+    .mob_menu_user {
+      -webkit-box-flex: 2;
+          -ms-flex: 2;
+              flex: 2;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      color: white;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+      padding-left: 1rem;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-family: "Cormorant Garamond", sans-serif;
+      font-weight: bold;
+    }
+  
+    .mob_menu_user_name {
+      padding-left: 1rem;
+    }
+  
+    .mob_menu_close {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+  
+      color: #6e6e6e;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  
+    .pro_menu_content {
+      margin-top: 60px;
+    }
+  
+    .menu_li {
+      height: 65px;
+      width: 100%;
+      color: #161616;
+      font-size: 15px;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      padding-left: 1rem;
+    }
+  
+    .seetings_li {
+      margin-left: 65px;
+    }
+  
+    .set_item {
+      margin-bottom: 10px;
+    }
+  
+    .menu_li_text {
+      margin-left: 2rem;
+    }
+  
+    .menu_li:hover {
+      background-color: #53bfd2;
+    }
+  }
+  

@@ -1,0 +1,423 @@
+.motto_outter_container {
+  width: 100%;
+  height: auto;
+  background: url("../../../assets/files/UserOnboard/UserMottoPassAsset/Motto Pass.png")
+    47% 0% no-repeat padding-box;
+  opacity: 1;
+  background-size: cover;
+
+  @media only screen and (max-width: 900px) {
+    background: none;
+  }
+
+  .motto_inner_container {
+    .motto_links {
+      @media only screen and (max-width: 900px) {
+        display: none;
+      }
+      .links_wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 2em;
+        .outter_links {
+          display: flex;
+          align-items: center;
+          img {
+            width: 14px;
+          }
+          .inner_links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            a {
+              text-align: left;
+              letter-spacing: 0.18px;
+              color: #161616;
+              font-size: 18px;
+              line-height: 22px;
+              font-weight: normal;
+              font-family: "Montserrat", sans-serif;
+              text-decoration: none;
+              padding-bottom: 2px;
+            }
+
+            div {
+              width: 100%;
+              height: 2px;
+              background-color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+    .motto_wrapper {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      // height: 800px;
+      margin-top: 2rem;
+
+      .motto_pass_wrapper {
+        z-index: 100;
+        width: 60%;
+        // height: 500px;
+        @media only screen and (max-width: 900px) {
+          width: 100%;
+        }
+        h2 {
+          text-align: center;
+          letter-spacing: -0.45px;
+          color: #161616;
+          font-size: 45px;
+          line-height: 55px;
+          font-weight: bold;
+          font-family: "Cormorant Garamond", sans-serif;
+          @media only screen and (max-width: 900px) {
+            font-size: 35px;
+          }
+        }
+        .motto_pass_items {
+          display: grid;
+          grid-template-columns: 47.55% 47.55%;
+          grid-template-rows: auto;
+          grid-column-gap: 30px;
+          // height: 440px;
+          width: 100%;
+          margin-top: 2em;
+
+          @media only screen and (max-width: 900px) {
+            display: grid;
+            grid-template-columns: unset;
+            grid-row-gap: 20px;
+          }
+          .motto_pass_left {
+            //  height: 440px;
+
+            background: #f8f8f8;
+            box-shadow: 0px 3px 12px #16161626;
+            opacity: 1;
+            border-radius: 20px;
+            .session_pass {
+              border-radius: 20px;
+              height: 100px;
+
+              background: #53bfd2;
+              border-radius: 20px 20px 0px 0px;
+              opacity: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              h3 {
+                text-align: center;
+                letter-spacing: 0px;
+                color: #ffffff;
+                font-size: 28px;
+                line-height: 54px;
+                font-weight: bold;
+                font-family: "Montserrat", sans-serif;
+              }
+            }
+            .session_pass_inner {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding: 2em 2em 0 2em;
+              .session_pass_content {
+                margin: 0.7em 0;
+                display: flex;
+                align-items: flex-start;
+                width: 100%;
+                height: auto;
+                img {
+                  width: 16px;
+                  height: 16px;
+                }
+                h5 {
+                  margin: 0 0 0 0.7em;
+                  text-align: left;
+                  letter-spacing: 0.27px;
+                  color: #696969;
+                  opacity: 1;
+                  font-family: Montserrat;
+                  font-weight: normal !important;
+                  font-size: 18px;
+                  span {
+                    font-style: italic;
+                    font-weight: 800;
+                  }
+                }
+              }
+              .session_offer {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                h1 {
+                  width: 100%;
+                  text-align: right;
+                  letter-spacing: 0px;
+                  font-size: 28px;
+                  font-family: Montserrat;
+                  font-weight: 600;
+                  color: #161616;
+                  opacity: 1;
+                  margin: 0.8em 0 1em 0;
+                  padding: 0 0.5em;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  span {
+                    text-align: left;
+
+                    letter-spacing: 0.27px;
+                    color: #696969;
+                    opacity: 1;
+                    font-size: 18px;
+                    font-family: Montserrat;
+                    font-weight: 500;
+                    margin-right: 0.7em;
+                    text-decoration: line-through #53bfd2;
+                  }
+                  span:nth-child(2) {
+                    text-decoration: none;
+                    text-align: right;
+                    margin-left: 0.2em;
+                  }
+                }
+              }
+            }
+            .get_sessionPass {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 100%;
+              // padding: 0 0em;
+              margin: 0 0 0 1em;
+              button {
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.45px;
+                color: #161616;
+                text-transform: uppercase;
+                border: none;
+                padding: 0;
+                margin: 0;
+                justify-content: space-between;
+                font-size: 15px;
+                line-height: 22px;
+                font-weight: 800;
+                font-family: "Montserrat", sans-serif;
+              }
+            }
+            .button_line {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              // margin: 0 2em 0 2em;
+              margin: 15px 31px 0 31px;
+              background-color: #53bfd2;
+              width: 80%;
+              height: 5px;
+            }
+          }
+          .motto_pass_right {
+            // height: 440px;
+
+            background: #f8f8f8;
+            box-shadow: 0px 3px 12px #16161626;
+            opacity: 1;
+
+            border-radius: 20px;
+            .session_pass {
+              border-radius: 20px;
+              height: 100px;
+
+              background: #53bfd2;
+              border-radius: 20px 20px 0px 0px;
+              opacity: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              h3 {
+                text-align: center;
+                letter-spacing: 0px;
+                color: #ffffff;
+                font-size: 28px;
+                line-height: 54px;
+                font-weight: bold;
+                font-family: "Montserrat", sans-serif;
+              }
+            }
+            .session_pass_inner {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding: 2em 2em 0 2em;
+
+              .session_pass_content {
+                margin: 0.7em 0;
+                display: flex;
+                align-items: flex-start;
+                width: 100%;
+                height: auto;
+                img {
+                  width: 16px;
+                  height: 16px;
+                }
+                h5 {
+                  margin: 0 0 0 0.7em;
+                  text-align: left;
+                  letter-spacing: 0.27px;
+                  color: #696969;
+                  opacity: 1;
+                  font-family: "Montserrat", sans-serif;
+                  font-weight: normal !important;
+                  font-size: 18px;
+                  span {
+                    font-style: italic;
+                    font-weight: 800;
+                  }
+                }
+              }
+              .session_offer {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                h1 {
+                  width: 100%;
+                  text-align: right;
+                  letter-spacing: 0px;
+                  font-size: 28px;
+                  font-family: Montserrat;
+                  font-weight: 600;
+                  color: #161616;
+                  opacity: 1;
+                  margin: 0.8em 0 1em 0;
+                  padding: 0 0.5em;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  span {
+                    text-align: left;
+
+                    letter-spacing: 0.27px;
+                    color: #696969;
+                    opacity: 1;
+                    font-size: 18px;
+                    font-family: "Montserrat", sans-serif;
+                    font-weight: 500;
+                    margin-right: 0.7em;
+                    text-decoration: line-through #53bfd2;
+                  }
+                  span:nth-child(2) {
+                    text-decoration: none;
+                    text-align: right;
+                    margin-left: 0.2em;
+                  }
+                }
+              }
+            }
+            .get_sessionPass {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 100%;
+              // padding: 0 0em;
+              margin: 0 0 0 1em;
+              button {
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.45px;
+                color: #161616;
+                text-transform: uppercase;
+                opacity: 1;
+                font-weight: 800 !important;
+                border: none;
+                padding: 0;
+                margin: 0;
+                justify-content: space-between;
+                font-size: 15px;
+                line-height: 22px;
+                font-weight: 800;
+                font-family: "Montserrat", sans-serif;
+              }
+            }
+            .button_line {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              // margin: 0 2em 0 2em;
+              margin: 15px 31px 0 31px;
+              background-color: #53bfd2;
+              height: 5px;
+              width: 80%;
+            }
+          }
+        }
+      }
+      .session_skip {
+        width: 60%;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        top: -65px;
+        @media only screen and (max-width: 900px) {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          position: initial;
+        }
+        h4 {
+          margin-top: 30%;
+          margin-bottom: 20%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 100%;
+          text-align: center;
+          font: normal normal medium 22px/34px Montserrat;
+          letter-spacing: 0px;
+          color: #222222;
+          opacity: 1;
+          font-size: 22px;
+          font-family: Montserrat;
+          font-weight: 500;
+
+          @media only screen and (max-width: 900px) {
+            width: unset;
+            margin-top: 15%;
+            margin-bottom: 15%;
+            display: inline;
+          }
+
+          a {
+            text-align: right;
+            letter-spacing: 0.45px;
+            color: #161616;
+            text-transform: uppercase;
+            opacity: 1;
+            margin-left: 10px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: bold;
+            font-family: "Montserrat", sans-serif;
+            @media only screen and (max-width: 900px) {
+              font-family: unset;
+              margin-left: 30px;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,366 @@
+.event_outter_container {
+  width: 100%;
+
+  .container {
+    max-width: 960px;
+  }
+
+  .event_inner_container {
+    .link_wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: start;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+      margin-top: 2em;
+
+      .inner_links {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        a {
+          margin-left: 1em;
+          text-align: left;
+          letter-spacing: 0.18px;
+          color: #161616;
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: normal;
+          font-family: "Montserrat", sans-serif;
+          text-decoration: none;
+        }
+        div {
+          width: 95%;
+          height: 2px;
+          margin-left: 1.5em;
+          background-color: #53bfd2;
+        }
+      }
+    }
+    .event_wrapper {
+      .event_wrapper_inner {
+        margin: 0 3em;
+        .event_header {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          margin-top: 2em;
+          @media only screen and (max-width: 900px) {
+            display: none;
+          }
+          h2 {
+            text-align: center;
+            letter-spacing: 0px;
+            color: #161616;
+            font-size: 35px;
+            line-height: 58px;
+            font-weight: 600;
+            font-family: "Montserrat", sans-serif;
+          }
+          p {
+            //width: 900px;
+            // height: 54px;
+            text-align: center;
+            letter-spacing: 0.27px;
+            color: #696969;
+            font-size: 18px;
+            line-height: 30px;
+            font-weight: normal;
+            font-family: "Montserrat", sans-serif;
+          }
+        }
+        .user_profile_details {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          margin: 5em 0 2em 1em;
+          img {
+            width: 125px;
+            height: 125px;
+            opacity: 1;
+            border-radius: 100px;
+            -o-object-fit: cover;
+            object-fit: cover;
+          }
+          
+          .user_content {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin: 0em 0 0em 1em;
+            @media only screen and (max-width: 900px) {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-orient: vertical;
+              -webkit-box-direction: normal;
+                  -ms-flex-direction: column;
+                      flex-direction: column;
+            }
+            h2 {
+              text-align: left;
+              letter-spacing: -0.45px;
+              color: #161616;
+              font-size: 45px;
+              line-height: 55px;
+              font-weight: bold;
+              font-family: "Cormorant
+                            Garamond",
+                sans-serif !important;
+              font-size: Cormorant Garamond;
+            }
+            p {
+              text-align: left;
+              letter-spacing: 1.1px;
+              color: #898989;
+              text-transform: uppercase;
+              opacity: 1;
+              font-size: 22px;
+              font-family: "Montserrat", sans-serif;
+              font-weight: 500;
+              @media only screen and (max-width: 900px) {
+                text-align: center;
+              }
+            }
+          }
+        }
+
+        .submit_user {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          margin: 0 auto;
+          padding-left: 1em;
+          width: 230px;
+          text-decoration: none;
+          height: 52px;
+          background: #53bfd2;
+          text-align: right;
+          letter-spacing: 0.45px;
+          color: #ffffff;
+          text-transform: uppercase;
+          border: none;
+          outline: none;
+          font-size: 18px;
+          line-height: 22px;
+          font-weight: bold;
+          font-family: "Montserrat", sans-serif;
+        }
+      }
+    }
+  }
+}
+
+.schedular_slots_user {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  grid-column-gap: 20px;
+  width: 100%;
+  margin: 2em 0 3em 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  .items_slots_user {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 130%;
+    .item_slot1_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      .indicator {
+        width: 60px;
+        height: 15px;
+        background: #f2f2f2 0% 0% no-repeat padding-box;
+        opacity: 1;
+      }
+      h5 {
+        letter-spacing: 0.54px;
+        color: #2c2c2c;
+        text-transform: uppercase;
+        margin: 0 1em;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: Montserrat;
+      }
+    }
+    .item_slot2_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      .indicator2 {
+        width: 60px;
+        height: 15px;
+        background: #dedede;
+        opacity: 1;
+      }
+      h5 {
+        letter-spacing: 0.54px;
+        color: #2c2c2c;
+        text-transform: uppercase;
+        margin: 0 1em;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: Montserrat;
+      }
+    }
+    .item_slot3_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      .indicator3 {
+        width: 60px;
+        height: 15px;
+        background: #53bfd2;
+        opacity: 1;
+      }
+      h5 {
+        letter-spacing: 0.54px;
+        color: #2c2c2c;
+        text-transform: uppercase;
+        margin: 0 0 0 1em;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: Montserrat;
+      }
+    }
+
+    .item_slot5_user {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      a {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        letter-spacing: 0.54px;
+        border: none;
+        outline: none;
+        text-transform: uppercase;
+        margin: 0 0 0 1em;
+        font-size: 15px !important;
+        background-color: transparent !important;
+        font-weight: 600 !important;
+        font-family: Montserrat;
+        font-style: italic !important;
+        width: 350px !important;
+        text-decoration: underline !important;
+        color: #53bfd2 !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .schedular_slots_user {
+    .items_slots_user {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: start;
+      -ms-flex-align: start;
+      align-items: flex-start;
+
+      .item_slot5_user {
+        a {
+          margin-top: 30px;
+          width: 300px !important;
+        }
+      }
+    }
+  }
+
+  .event_outter_container {
+    height: unset;
+    .event_inner_container {
+      .event_wrapper {
+        .event_wrapper_inner {
+          margin: 0px;
+          .event_header {
+            p {
+              width: unset;
+              text-align: center;
+            }
+          }
+          .user_profile_details {
+            margin: 2em 0 2em 1em;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+}
+
+.book_session_btn {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Montserrat;
+  font-size: 18px;
+  letter-spacing: 0.45px;
+}
