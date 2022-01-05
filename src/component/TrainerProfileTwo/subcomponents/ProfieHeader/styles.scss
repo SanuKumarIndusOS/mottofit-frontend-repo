@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap");
+
+.trainer-profile-container {
+  width: 100%;
+
+  .trainer-profile-header-container {
+    width: 100%;
+
+    .profile__black-area {
+      height: 350px;
+      width: 100%;
+      background-color: #161616;
+      color: white;
+
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      .profile-picture {
+        height: 350px;
+        width: 300px;
+        background-color: #fff;
+        margin-top: 12rem;
+        margin-left: 9rem;
+        -o-object-fit: cover;
+        object-fit: cover;
+
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        .hide{
+          display: none;
+        }
+
+        .show{
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          
+        }
+
+        @media only screen and (max-width: 900px) {
+          height: 250px;
+          width: 200px;
+          margin-left: 1rem;
+          margin-top: 18rem;
+        }
+      }
+
+      .back-button {
+        cursor: pointer;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-top: 2rem;
+
+        width: 20%;
+
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        @media only screen and (max-width: 900px) {
+          width: unset;
+          margin-top: unset;
+          margin-bottom: 2rem;
+        }
+
+        .back-button--symbol {
+          color: #53bfd2;
+          font-size: 30px;
+          margin-right: 5px;
+          margin-bottom: 7px;
+        }
+
+        .back-button--txt {
+          border-bottom: 2px solid #53bfd2;
+          letter-spacing: 0.18px;
+          text-align: left;
+          font-size: 18px;
+          font-family: "Montserrat", sans-serif;
+          @media only screen and (max-width: 900px) {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .profile-info {
+        width: 50%;
+        margin-left: 5rem;
+        margin-top: 4rem;
+
+        .trainer-name {
+          text-transform: capitalize;
+          font-size: 42px;
+          letter-spacing: -0.45px;
+          font-family: "Cormorant Garamond", sans-serif;
+          font-weight: bold;
+        }
+
+        .trainer-expertise {
+          color: #898989;
+          font-family: "Montserrat", sans-serif;
+          letter-spacing: 1.1px;
+          text-transform: uppercase;
+          font-weight: 500;
+        }
+
+        @media only screen and (max-width: 900px) {
+          display: none;
+        }
+      }
+    }
+  }
+}

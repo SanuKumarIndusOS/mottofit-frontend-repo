@@ -1,0 +1,244 @@
+.trainer-profile-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  margin-top: 6rem;
+
+  .mobile-profile-info {
+    display: none;
+    @media only screen and (max-width: 900px) {
+      display: block;
+
+      width: 100%;
+      margin-left: 1rem;
+      margin-top: 8rem;
+
+      .trainer-name {
+        text-transform: capitalize;
+        font-size: 40px;
+        letter-spacing: -0.45px;
+        font-family: "Cormorant Garamond", sans-serif;
+        font-weight: bold;
+      }
+
+      .trainer-expertise {
+        color: #898989;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    display: unset;
+  }
+
+  .profile-body--left-pane {
+    width: 30%;
+    margin-left: 9rem;
+    max-width: 300px;
+
+    @media only screen and (max-width: 900px) {
+      width: unset;
+      margin-left: 1rem;
+      // margin-top: 10rem;
+      max-width: 90%;
+    }
+
+    .trainer-about__scroll {
+      // color: #2c2c2c;
+      // font-weight: 600;
+      // font-family: "Montserrat", sans-serif;
+      // text-transform: uppercase;
+      // font-size: 16px;
+      cursor: pointer;
+      margin-top: 2rem;
+      cursor: pointer;
+      // margin-top: 20px;
+      text-transform: capitalize;
+
+      font-size: 18px;
+      color: #53bfd2;
+      font-weight: 500;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .trainer-location {
+      font-size: 20px;
+      color: #53bfd2;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .trainer-pricing__scroll {
+      // color: #2c2c2c;
+      // font-weight: 600;
+      // font-family: "Montserrat", sans-serif;
+      // text-transform: uppercase;
+      // font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      text-transform: capitalize;
+      font-size: 18px;
+
+      font-weight: 500;
+      text-decoration: underline;
+      cursor: pointer;
+
+      color: #53bfd2;
+    }
+
+    .trainer-request-message {
+      margin-top: 10px;
+
+      .trainer-request-txt {
+        color: #2c2c2c;
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+        // text-transform: uppercase;
+        font-size: 18px;
+        margin-right: 8px;
+      }
+
+      .trainer-request-but {
+        cursor: pointer;
+        // margin-top: 10px;
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0.45px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        -webkit-box-pack: justify;
+
+        -ms-flex-pack: justify;
+
+        //  justify-content: space-between;
+
+        @media only screen and (max-width: 900px) {
+          margin-bottom: 4rem;
+        }
+      }
+    }
+  }
+
+  .profile-body--right-pane {
+    width: 70%;
+    margin-left: 1rem;
+    margin-right: 6rem;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    @media only screen and (max-width: 900px) {
+      margin-left: 1rem;
+      // margin-right: 1rem;
+      width: 90%;
+    }
+
+    .my-motto {
+      color: #696969;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: start;
+      -ms-flex-align: start;
+      align-items: flex-start;
+      font-size: 20px;
+      font-family: "Montserrat", sans-serif;
+      letter-spacing: 0.33px;
+
+      @media only screen and (max-width: 900px) {
+        display: unset;
+      }
+
+      p {
+        margin-left: 2rem;
+
+        @media only screen and (max-width: 900px) {
+          margin-top: 2rem;
+          margin-left: unset;
+          text-align: left;
+        }
+      }
+    }
+
+    .session-pricing {
+      margin-top: 4rem;
+    }
+
+    .right-pane--header {
+      color: #2c2c2c;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .right-pane--content {
+      margin-top: 1rem;
+      color: #696969;
+      font-family: 16px;
+      letter-spacing: 0.27px;
+      font-family: "Montserrat", sans-serif;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .trainer-about {
+      margin-top: 3rem;
+    }
+
+    .certifications {
+      margin-top: 3rem;
+
+      .certification-main {
+        // display: -webkit-box;
+        // display: -ms-flexbox;
+        // display: flex;
+        // -ms-flex-wrap: wrap;
+        // flex-wrap: wrap;
+        // -webkit-box-pack: justify;
+        // -ms-flex-pack: justify;
+        // justify-content: space-between;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        .certification-container {
+          margin-top: 1rem;
+          margin-right: 10rem;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+
+          .certification-name {
+            margin-left: 1rem;
+            color: #898989;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-family: "Montserrat", sans-serif;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}

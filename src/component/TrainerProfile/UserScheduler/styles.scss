@@ -1,0 +1,112 @@
+.outter_table_user {
+  height: auto;
+  .table_user {
+    height: auto;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+
+    .table_inner_trainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0.5em 0 1em 0 !important;
+      padding: 1.5em 1em 0 1em;
+      .table_date {
+        display: flex;
+        align-items: center;
+      }
+      .date_week {
+        width: 230px;
+        text-align: center;
+        letter-spacing: 0.6px;
+        color: #898989;
+        text-transform: uppercase;
+        font-family: "Montserrat", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 22px;
+      }
+      select {
+        width: 270px;
+        padding: 0.5em 1em;
+        border: 2px solid #898989;
+        border-radius: 50px;
+        height: 45px;
+        font-family: Montserrat;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+      }
+      select:active {
+        outline: none;
+      }
+      select:focus {
+        outline: none;
+      }
+    }
+  }
+}
+.table_header_txt {
+  color: #898989;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 22px;
+}
+table {
+  margin: 0 auto !important;
+  thead {
+    tr {
+      th {
+        text-align: center !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        border: 2px solid #e6e6e6 !important;
+        background-clip: padding-box;
+        padding-left: 0rem !important;
+        padding-right: 0rem !important;
+        width: 100px;
+        height: 100px !important;
+        .table_header_number {
+          color: #161616;
+          letter-spacing: 1.2px;
+          font-family: "Montserrat", sans-serif !important;
+          font-size: 28px !important;
+          font-weight: 600 !important;
+          margin-bottom: 0.2em !important;
+          position: relative;
+          top: 10px;
+        }
+        .table_header_txt {
+          color: #898989;
+          font-family: "Montserrat", sans-serif !important;
+          font-size: 18px !important;
+          font-weight: 500 !important;
+          line-height: 22px !important;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      .user_time_slot {
+        background: #fff;
+        text-align: center;
+        font-family: "Montserrat", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 22px;
+        width: 130px !important;
+        height: 70px !important;
+        border: 2px solid #e6e6e6;
+      }
+      td {
+        width: 120px !important;
+        height: 70px !important;
+        font-family: "Montserrat", sans-serif !important;
+        background: #dedede;
+      }
+    }
+  }
+}

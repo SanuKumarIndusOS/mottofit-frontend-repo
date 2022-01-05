@@ -1,0 +1,72 @@
+.user-avatar-pic {
+  min-height: 40px;
+  min-width: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  //   padding-bottom: 4px;
+  text-transform: uppercase;
+
+  &.background-blue {
+    background: #2196f3;
+  }
+  &.background-red {
+    background: #f44336;
+  }
+  &.background-green {
+    background: #4caf50;
+  }
+  &.background-brown {
+    background: #795548;
+  }
+  &.background-orange {
+    background: #ff9800;
+  }
+
+  &.img-lg {
+    max-width: 125px;
+    max-height: 125px;
+    min-width: 125px;
+    min-height: 125px;
+    font-size: 3rem;
+  }
+  &.img-md {
+    max-width: 90px;
+    max-height: 90px;
+    min-width: 90px;
+    min-height: 90px;
+    font-size: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    img {
+      max-width: 90px;
+      max-height: 90px;
+      min-width: 90px;
+      min-height: 90px;
+      font-size: 2rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  &.img-md-2 {
+    max-width: 65px;
+    max-height: 65px;
+    min-width: 65px;
+    min-height: 65px;
+    font-size: 1.25rem;
+
+    img {
+      border-radius: 50%;
+      max-width: 65px;
+      max-height: 65px;
+      min-width: 65px;
+      min-height: 65px;
+      object-fit: cover;
+    }
+  }
+}

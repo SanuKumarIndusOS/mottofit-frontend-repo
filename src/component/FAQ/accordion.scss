@@ -1,0 +1,70 @@
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.accordion-wrapper {
+    width: 100%;
+    & + * {
+        margin-top: 0.5em;
+    }
+    .cyanRadio_wrapper {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.accordion-item {
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    height: auto;
+    max-height: 9999px;
+    .accordion-content {
+        p {
+            text-align: left;
+            letter-spacing: 0.27px;
+            color: #696969;
+            line-height: 30px;
+            font-size: 18px;
+            font-weight: normal;
+            font-family: "Montserrat", sans-serif;
+        }
+    }
+}
+
+.accordion-item.collapsed {
+    max-height: 0;
+    transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+}
+
+.accordion-title {
+    font-weight: 500;
+    cursor: pointer;
+    color: black;
+    margin: 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Montserrat";
+
+    font-size: 22px;
+    @media only screen and (max-width: 900px) {
+        font-size: 18px;
+    }
+    width: 100%;
+
+    &::after {
+        content: url("../../assets/files/SVG/Cross 2.svg");
+    }
+
+    &:hover,
+    &.open {
+        color: #666;
+    }
+
+    &.open {
+        &::after {
+            content: url("../../assets/files/SVG/Negative.svg");
+        }
+    }
+}

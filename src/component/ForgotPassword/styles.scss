@@ -1,0 +1,91 @@
+.forgot_main {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    width: 100%;
+    height: 80vh;
+    h2 {
+        font-size: 45px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        margin: 0 0 0.5em 0;
+    }
+    form {
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        input {
+            margin: 0.5em 0.2em;
+            border: 1px solid #bcbcbc;
+            font-family: "Montserrat", sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            height: 45px;
+            border-radius: 50px;
+            width: 100%;
+            padding: 0.5em 1em;
+            &::placeholder {
+                font-size: 18px;
+                color: #bcbcbc;
+                font-family: "Montserrat", sans-serif;
+                font-weight: 500;
+            }
+        }
+        .forgot_submit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            background: rgb(83, 191, 210);
+            border: 0;
+            margin: 1em 1em 2em 1em;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: bold;
+            padding: 1em 0 1em 2em;
+            width: 40%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+        }
+    }
+}
+//success
+
+.success {
+    width: 100%;
+    height: 70vh;
+    h2 {
+        margin: 2em 0 0.3em 0;
+        letter-spacing: 0.27px;
+        color: rgb(83, 191, 210);
+        line-height: 45px;
+        font-size: 45px;
+        font-weight: normal;
+        font-family: "Montserrat", sans-serif;
+    }
+    p {
+        margin: 2em 0 1em 0;
+        letter-spacing: 0.27px;
+        color: #2c2c2c;
+        line-height: 30px;
+        font-size: 22px;
+        font-weight: normal;
+        font-family: "Montserrat", sans-serif;
+    }
+    a {
+        color: #2c2c2c;
+        line-height: 30px;
+        font-size: 18px;
+        font-weight: normal;
+        font-family: "Montserrat", sans-serif;
+        text-decoration: underline;
+    }
+}

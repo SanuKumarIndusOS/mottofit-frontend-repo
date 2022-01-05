@@ -1,0 +1,117 @@
+.navbar-container {
+  height: 90px;
+  width: 100%;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: 0px 3px 12px #1616160d;
+  box-shadow: 0px 3px 12px #1616160d;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  opacity: 1;
+  z-index: 10;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+ 
+
+  .navbar-section {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 100%;
+
+    .navbar-logo {
+      height: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      img {
+        cursor: pointer;
+      }
+    }
+
+    .navbar-page {
+      height: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-left: 20px;
+
+      span {
+        color: #53bfd2;
+      }
+
+      .navbar-page__txt {
+        font-family: "Montserrat", sans-serif;
+        text-transform: capitalize;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #898989;
+        margin-right: 10px;
+        margin-left: 10px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .home-navbar-page__txt{
+        font-family: "Montserrat", sans-serif;
+        text-transform: capitalize;
+        font-size: 15px;
+        letter-spacing: 0px;
+        color: black;
+        margin-right: 10px;
+        margin-left: 10px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+
+    .navbar-account {
+      height: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      //   margin-left: 3rem;
+
+      // .navbar-icon__button {
+      //   cursor: pointer;
+      //   border-left: 2px solid#53bfd2;
+      //   padding-left: 1rem;
+      // }
+    }
+  }
+}
+
+.home-nav{
+  background-color: rgba(255, 255, 255, 0) ;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+    margin-bottom: -100px;
+}
+
+
+@media only screen and (max-width: 900px) {
+  .navbar-container {
+    display: none;
+  }
+}

@@ -1,0 +1,508 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap");
+
+.table.sticky th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  border-right: 2px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6 !important;
+}
+
+.d_table {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  background-color: #f8f8f8;
+  -webkit-box-shadow: 0px 3px 12px #1616160d;
+  box-shadow: 0px 3px 12px #1616160d;
+  border-radius: 10px;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */ /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+.toggle_week {
+  display: none;
+}
+
+thead {
+  display: block;
+}
+
+.table th,
+.table td {
+  padding: 0px;
+}
+
+tbody {
+  height: 320px;
+  display: block;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  cursor: pointer;
+}
+
+.table-loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 320px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+td {
+  width: 100px;
+  border: 2px solid #e6e6e6;
+  padding: 0px;
+  height: 50px;
+  color: #161616;
+  font-size: 15px;
+}
+
+.time_title {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  /* padding-left: 10px; */
+  letter-spacing: 0.6px;
+  cursor: default;
+  font-weight: 600;
+  text-align: justify;
+  font-size: 12px;
+}
+
+.date_title {
+  height: 100%;
+  width: 100%;
+  font-size: 28px;
+  letter-spacing: 1.2px;
+  font-family: "Montserrat", sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  /* font-size: 10px; */
+}
+
+.center_date_title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.center_date_title_inactive {
+  color: #adadad;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.date_title_two {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.border_top_none {
+  border-top: none;
+  border-left: none;
+  color: transparent;
+}
+
+.border_bottom_none {
+  border-bottom: none;
+  border-left: none;
+}
+
+.border_right_none {
+  border-right: none !important;
+}
+
+.selected_cell {
+  background-color: #53bfd2 !important;
+  border: none !important;
+
+  opacity: 1;
+  -webkit-animation-name: fadeInOpacity;
+  animation-name: fadeInOpacity;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
+}
+
+@-webkit-keyframes fadeInOpacity {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.block_cell {
+  /* background-color: #dedede !important; */
+  /* background-color: #d42727 !important ; */
+  
+  border: none;
+
+  background-color: #8a8a8a;
+  opacity: 0.6;
+  background-size: 9px 9px;
+  background-image: -o-repeating-linear-gradient(
+    135deg,
+    #4d4d4d 0,
+    #4d4d4d 0.9px,
+    #8a8a8a 0,
+    #8a8a8a 50%
+  );
+
+  background-image: -o-repeating-linear-gradient(
+    315deg,
+    #a2a2a2 0,
+    #a2a2a2 0.9px,
+    #8a8a8a 0,
+    #8a8a8a 50%
+  );
+
+  background-image: repeating-linear-gradient(
+    135deg,
+    #a2a2a2 0,
+    #a2a2a2 0.9px,
+    #8a8a8a 0,
+    #8a8a8a 50%
+  );
+}
+
+.block_cell_inactive {
+  /* background-color: rgb(139, 139, 139) !important; */
+  background-color: #e4e4e4 !important;
+}
+
+.calendar_controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.calendar_buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background-color: #fff;
+  border: 1.5px solid #bcbcbc;
+  font-size: large;
+  color: #53bfd2;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.calendar_txt {
+  color: #898989;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  width: 250px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.dropd {
+  background-color: #b6b3b3;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f8f8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+
+  background-color: #afafaf;
+}
+
+/* Trainer Card */
+
+.trainer_card {
+  height: 500px;
+  max-width: 330px;
+  width: 100%;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 3px 12px #1616160d;
+  box-shadow: 0px 3px 12px #1616160d;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.trainer_img {
+  height: 40%;
+  /* border-radius: 20px 20px 0 0; */
+  /* background-color: #898989; */
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.trainer_img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.trainer_info {
+  height: 50%;
+  background-color: #fff;
+}
+
+.book_button {
+  height: 15%;
+  background-color: #53bfd2;
+  border-radius: 0 0 20px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.book_cta {
+  color: #fff;
+  margin-left: 1rem;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.45px;
+  font-family: "Montserrat", sans-serif;
+  -webkit-box-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+}
+
+.trainer_price {
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: 14px;
+}
+
+.trainer_info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.trainer_name {
+  font-family: "Cormorant Garamond";
+  font-size: 35px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+  margin-bottom: 0.5rem;
+}
+
+.trainer_vertical {
+  font-family: "Montserrat", sans-serif;
+  color: #898989;
+  letter-spacing: 0.9px;
+  font-size: 18px;
+  font-weight: 100;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.trainer_details {
+  text-align: center;
+  font-family: "Montserrat";
+  color: #898989;
+
+  font-size: 14px;
+  font-weight: 100;
+  margin-bottom: 1rem;
+  line-height: 25px;
+  letter-spacing: 0.24px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.trainer_details_read_more {
+  color: #161616;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Mobile Styles */
+
+.mobile_calendar_card {
+  width: 100%;
+  display: none;
+}
+
+.mc_time {
+  width: 25%;
+}
+
+.mc_time_slot {
+  width: 70%;
+}
+
+.mc_day_title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.mc_day_number {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.mc_day_txt {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.mc_gray {
+  color: #b6b3b3;
+}
+
+.mc_selectedCellVal {
+  color: white;
+  font-weight: normal;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  margin-left: 1rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .mobile_calendar_card {
+    display: block;
+  }
+
+  .d_table {
+    display: none;
+  }
+  .time_title {
+    font-size: 10px;
+    padding-left: 0px;
+  }
+  .date_title {
+    font-size: 10px;
+  }
+
+  .date_title_two {
+    font-size: 10px;
+  }
+
+  .table.sticky th {
+    width: unset;
+    height: unset;
+    height: 50px;
+    width: 100px;
+  }
+
+  .mottoBlock {
+    display: none;
+  }
+
+  .toggle_week {
+    display: block;
+  }
+}

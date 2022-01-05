@@ -1,0 +1,138 @@
+.mottopass-card {
+  max-width: 400px;
+  width: 100%;
+  -webkit-box-shadow: 0px 3px 12px #16161608;
+  box-shadow: 0px 3px 12px #16161608;
+  background: #2c2c2c;
+  border-radius: 20px;
+  margin-top: 45px;
+  //   height: 90%;
+
+  .book-again-container {
+    margin-top: 2rem;
+    width: 100;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    .book-again-cta {
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 5px;
+      padding-right: 7px;
+      padding-left: 7px;
+      border: none;
+      background-color: #53bfd2;
+      color: white;
+    
+    }
+  }
+
+  .pass-user-detail {
+    .pass-user-profilepic {
+      top: -25px;
+      z-index: 2;
+    }
+    .mottopass-double-ribbon {
+      margin-top: 45px;
+      padding-left: 20px;
+      z-index: 3;
+    }
+  }
+
+  .pass-user-name {
+    h1 {
+      font-family: "Cormorant Garamond";
+      color: #ffffff;
+      line-height: 45px;
+    }
+  }
+
+  p,
+  h1,
+  span {
+    color: #ffffff;
+  }
+}
+.mottopass-details {
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+
+  img {
+    margin-right: 10px;
+  }
+
+  p {
+    color: #bcbcbc;
+    font-size: 15px;
+    letter-spacing: 0.23px;
+    line-height: 30px;
+    margin-bottom: 0;
+  }
+  span {
+    line-height: 30px;
+  }
+  .mottopass-discount-rate {
+    p {
+      line-height: 22px;
+      margin-bottom: 36px;
+    }
+
+    span {
+      line-height: 22px;
+    }
+  }
+}
+
+ .submit_button {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        margin-top: 1em;
+        .login_button {
+          margin-top: 1em;
+          outline: none;
+          background: rgb(83, 191, 210);
+          border: 0;
+          width: 425px;
+          padding: 0.8em;
+          text-align: center;
+          text-decoration: none;
+          text-transform: uppercase;
+          color: #fff;
+          font-weight: bold;
+          height: 52px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          img {
+            width: auto;
+            margin-left: 1em;
+          }
+        }
+      }
+
+
+      .pass-button{
+        color: #53bfd2;
+        text-decoration: underline;
+        background-color: #2c2c2c;
+        border-style: none;
+      }

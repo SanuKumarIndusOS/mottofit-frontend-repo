@@ -1,0 +1,285 @@
+.mobile-search-menu {
+  width: 100%;
+  background-color: #f6f6f6;
+
+  .header {
+    height: 55px;
+    background-color: #53bfd2;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 2rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    .title {
+      font-size: 16px;
+      color: #ffffff;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      -webkit-box-flex: 2;
+      -ms-flex: 2;
+      flex: 2;
+    }
+
+    .close {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: end;
+      -ms-flex-pack: end;
+      justify-content: flex-end;
+      color: black;
+      font-size: 24px;
+    }
+  }
+
+  .content {
+    padding: 1.5rem;
+
+    .clear-filters {
+      text-decoration: underline;
+      color: #53bfd2;
+      font-size: 17px;
+      font-weight: 400;
+      font-family: "Montserrat", sans-serif;
+      margin-bottom: 2rem;
+    }
+
+    .location {
+      font-size: 17px;
+      color: #161616;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+
+      .accheader {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        img {
+          margin-left: 200px;
+          -webkit-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+        }
+      }
+
+      .element {
+        font-size: 20px;
+        color: #898989;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        .sel {
+          border-bottom: 5px solid #53bfd2;
+        }
+
+        .slash {
+          color: #53bfd2;
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+
+      hr {
+        width: 85%;
+      }
+    }
+
+    .vertical {
+      font-size: 17px;
+      color: #161616;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+
+      .listv {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .litem {
+        height: 80px;
+        width: 85px;
+        border: 1px solid #eaeaea;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #2c2c2c;
+        font-weight: 500;
+        font-family: "Montserrat", sans-serif;
+        background-color: white;
+      }
+
+      .litem_active {
+        height: 80px;
+        width: 85px;
+        border: 1px solid #eaeaea;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #2c2c2c;
+        font-weight: 500;
+        font-family: "Montserrat", sans-serif;
+        background-color: #53bfd2;
+      }
+
+      hr {
+        width: 85%;
+      }
+    }
+
+    .schedule {
+      font-size: 17px;
+      color: #161616;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+      cursor: pointer;
+
+      hr {
+        width: 85%;
+      }
+    }
+
+    .availability {
+      font-size: 17px;
+      color: #161616;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .header-title {
+      display: -webkit-box;
+
+      display: -ms-flexbox;
+
+      display: flex;
+      -ms-flex-pack: distribute;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+
+      // img {
+      //   // padding-right: 1rem;
+      // }
+
+      .rot-down {
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+
+      .rot-up {
+        -webkit-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        transform: rotate(270deg);
+      }
+    }
+  }
+
+  .search_container {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    .search {
+      // margin: 2rem;
+      // margin-right: 1rem;
+      background-color: #53bfd2;
+      color: white;
+      height: 45px;
+      font-weight: bold;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      font-family: "Montserrat", sans-serif;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      width: 90%;
+    }
+  }
+}
+
+// .react-calendar__navigation {
+//   button {
+//     font-family: "Montserrat", sans-serif !important;
+//     font-weight: bold !important;
+//     color: #161616 !important;
+//     border: none !important;
+//   }
+// }
+
+// .react-calendar__month-view__weekdays__weekday {
+//   color: #898989 !important;
+
+//   abbr {
+//     text-decoration: none !important;
+//   }
+// }
+
+// .react-calendar__tile--active {
+//   background: #53bfd2 !important;
+//   border-radius: 200px;
+// }
+
+// .react-calendar__month-view__days {
+//     background-color: #EFEFEF;
+//   button {
+//     border: none !important;
+//     height: 50px !important;
+//     width: 50px !important;
+//   }
+// }
+
+// .react-calendar__month-view__days__day--weekend {
+//   color: unset !important
+// }

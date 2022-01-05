@@ -1,0 +1,103 @@
+.outter_terms_container {
+    padding: 3em 3em;
+    width: 100%;
+    height: auto;
+    @media only screen and (max-width: 900px) {
+        padding: 0px;
+        margin-top: 100px;
+    }
+    .div_outer {
+        padding: 3em 3em;
+
+        .box1 {
+            h2 {
+                text-align: left;
+                letter-spacing: 0px;
+                color: #161616;
+                font-family: "Montserrat", sans-serif;
+                font-size: 40px;
+                font-weight: 600;
+                line-height: 58px;
+            }
+
+            p {
+                text-align: left;
+                font: normal normal normal 18px/33px Montserrat;
+                letter-spacing: 0px;
+                color: #696969;
+                font-family: "Montserrat", sans-serif;
+                font-size: 18px;
+                font-weight: normal;
+                line-height: 33px;
+            }
+        }
+
+        .box2 {
+            h5 {
+                text-align: left;
+                letter-spacing: 0px;
+                color: #161616;
+                opacity: 1;
+                font-family: "Montserrat", sans-serif;
+                font-size: 25px;
+                font-weight: 600;
+                line-height: 58px;
+            }
+
+            ul {
+                li {
+                    color: #53bfd2;
+                }
+                li span {
+                    text-align: left;
+                    letter-spacing: 0px;
+                    color: #696969;
+                    list-style-type: none;
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 18px;
+                    font-weight: normal;
+                    line-height: 33px;
+                }
+            }
+
+            p {
+                text-align: left;
+                letter-spacing: 0px;
+                color: #696969;
+                font-family: "Montserrat", sans-serif;
+                font-size: 18px;
+                font-weight: normal;
+                line-height: 33px;
+            }
+        }
+    }
+    .readmore_button {
+        margin-bottom: 8em;
+        button {
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.45px;
+            color: #161616;
+            text-transform: uppercase;
+            opacity: 1;
+            text-decoration: none;
+            margin-bottom: 1em;
+            border: none;
+            width: 100%;
+            font-family: "Montserrat", sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 22px;
+        }
+    }
+
+    .common_margin {
+        margin-top: 24px;
+    }
+
+    .common_margin_li {
+        margin-top: 9px;
+    }
+}

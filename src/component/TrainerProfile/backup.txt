@@ -1,0 +1,635 @@
+      <div className="profile_aside_items">
+                  {isAnyOneonOnePriceAvailable && (
+                    <div className="profile_aside_item">
+                      <h2 onClick={() => collapseToggle(0)}>
+                        1 ON 1 INDIVIDUAL TRAINING
+                        <span
+                          className={`trainer_title_collapse ${!collapseTitle[0] && "trainer_title_rotate"
+                            }`}
+                        >
+                          &#10094;
+                        </span>
+                      </h2>
+                      <hr />
+                      <div
+                        className={`profile_aside_inner_item ${!collapseTitle[0] && "d-none"
+                          }`}
+                      >
+                        <p>
+                          All the rates displayed below are the total amounts
+                          for each session.
+                        </p>
+                        {/* {findMinThreePass.value !== 0 && (
+                          <h6>
+                            ${findMinThreePass.value}
+                            <span>{findMinThreePass.label}</span>
+                          </h6>
+                        )}
+
+                        {findMinTenPass.value !== 0 && (
+                          <h6>
+                            ${findMinTenPass.value}
+                            <span>{findMinTenPass.label}</span>
+                          </h6>
+                        )} */}
+
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtVirtual !== 0 || trainerProfileData?.oneOnOnePricing
+                            ?.passRatefor10SessionAtClientLocation !== 0 || trainerProfileData?.oneOnOnePricing
+                              ?.passRatefor10SessionAtTrainerLocation !== 0 ? <h2 className="for_people_title" >
+                          10 sessions Motto Package
+                        </h2> : null}
+
+
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtVirtual !== 0 && (
+                            <h6>
+                              {`$${Math.ceil(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor10SessionAtVirtual / 10)
+
+                              )
+                                }`}
+                              <span>/ Session (Virtual Session)</span>
+                            </h6>
+                          )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtClientLocation !== 0 && (
+                            <h6>
+                              {`$${Math.ceil(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor10SessionAtClientLocation /
+                                  10)
+
+                              )
+                                }`}
+                              <span>
+                                <span>
+                                  / Session (In Person - At Your Location)
+                                </span>
+                              </span>
+                            </h6>
+                          )}
+
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor10SessionAtTrainerLocation !== 0 && (
+                            <h6>
+                              {`$${Math.ceil(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor10SessionAtTrainerLocation /
+                                  10)
+                              )
+                                }`}
+                              <span>
+                                <span>
+                                  / Session (In Person - At Trainer's Location)
+                                </span>
+                              </span>
+                            </h6>
+                          )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtVirtual !== 0 || trainerProfileData?.oneOnOnePricing
+                            ?.passRatefor3SessionAtClientLocation !== 0 || trainerProfileData?.oneOnOnePricing
+                              ?.passRatefor3SessionAtTrainerLocation !== 0 ? <h2 className="for_people_title">
+                          3 sessions Motto Package
+                        </h2> : null}
+
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtVirtual !== 0 && (
+                            <h6>
+                              {`$${Math.ceil(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor3SessionAtVirtual /
+                                  3))
+                                }`}
+                              <span>/ Session (Virtual Session)</span>
+                            </h6>
+                          )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtClientLocation !== 0 && (
+                            <h6>
+                              {`$${Math.ceil(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor3SessionAtClientLocation /
+                                  3))
+                                }`}
+                              <span>
+                                / Session (In Person - At Your Location)
+                              </span>
+                            </h6>
+                          )}
+                        {trainerProfileData?.oneOnOnePricing
+                          ?.passRatefor3SessionAtTrainerLocation !== 0 && (
+                            <h6>
+                              {`$${Math.ceil(
+                                (trainerProfileData?.oneOnOnePricing
+                                  .passRatefor3SessionAtTrainerLocation /
+                                  3))
+                                }`}
+                              <span>
+                                / Session (In Person - At Trainer's Location)
+                              </span>
+                            </h6>
+                          )}
+
+                        <h2 className="for_people_title">
+                          Single session booking
+                        </h2>
+                        {virtualSession && isVirtualPresent ? (
+                          <h6>
+                            {`$${virtualSession} `}
+                            <span>(Virtual Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtClientLocation && isInPersonPresent ? (
+                          <h6>
+                            {`$${inPersonAtClientLocation}`}
+                            <span>(In Person - At Your Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtTrainerLocation && isInPersonPresent ? (
+                          <h6>
+                            {`$${inPersonAtTrainerLocation}`}
+                            <span>(In Person - At Trainer's Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+
+                        {/* <h5
+                          onClick={() => {
+                            setOpenDialog(true);
+                          }}
+                          style={{ cursor: "pointer" }}
+                        >
+                          See package rates
+                        </h5> */}
+                        {/* <Dialog
+                          onClose={() => {
+                            setOpenDialog(false);
+                          }}
+                          aria-labelledby="simple-dialog-title"
+                          open={openDialog}
+                        >
+                          <div className="packages_dialog">
+                            <div className="package_header">
+                              <h3>Package Rates</h3>
+                            </div>
+                            <hr></hr>
+                            <div className="package_body">
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                3 Session Pass (Virtual) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor3SessionAtVirtual
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                3 Session Pass (Your Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor3SessionAtClientLocation
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                3 Session Pass (Trainer's Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor3SessionAtTrainerLocation
+                                  }
+                                </h3>
+                              </div>
+                              <br></br>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                10 Session Pass (Virtual) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor10SessionAtVirtual
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                10 Session Pass (Your Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor10SessionAtClientLocation
+                                  }
+                                </h3>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                10 Session Pass (Trainer's Location) &ensp;
+                                <h3>
+                                  $
+                                  {
+                                    trainerProfileData?.oneOnOnePricing
+                                      .passRatefor10SessionAtTrainerLocation
+                                  }
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                        </Dialog> */}
+                      </div>
+                    </div>
+                  )}
+                  {isAnySocialPriceAvailable ? (
+                    <div className="profile_aside_item">
+                      <h2 onClick={() => collapseToggle(1)}>
+                        SOCIAL SESSIONS{" "}
+                        <img
+                          src={QMark}
+                          alt="icon"
+                          onClick={() => setOpen(true)}
+                          className="model_Qmark"
+                        />
+                        <span
+                          className={`trainer_title_collapse ${!collapseTitle[1] && "trainer_title_rotate"
+                            }`}
+                        >
+                          &#10094;
+                        </span>
+                      </h2>
+                      <hr />
+
+                      {/* model */}
+                      {open ? (
+                        <Modal
+                          open={open}
+                          onClose={() => setOpen(false)}
+                          center
+                          closeIcon={closeIcon}
+                          container={myRef.current}
+                          styles={{
+                            boaderRadius: "10px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              textAlign: "center",
+                              height: "300px",
+                              width: "600px",
+                              padding: "2em",
+                            }}
+                            className="model_styles"
+                          >
+                            <h2>Want to Train with Friends?</h2>
+                            <p>
+                              Make your workout social & fun, while saving
+                              money! Complete your payment and add friends to
+                              your session simply by sending them an invite.
+                              Once they accept your invite, your session rate
+                              will automatically be adjusted.
+                            </p>
+                          </div>
+                        </Modal>
+                      ) : null}
+
+                      <div
+                        className={`profile_aside_inner_item ${!collapseTitle[1] && "d-none"
+                          }`}
+                      >
+                        <p>
+                          All the rates displayed below are the total amounts
+                          for each session to be split between participants.
+                        </p>
+                        {virtualSessionfor2People !== 0 ||
+                          inPeronAtClientLocationfor2People !== 0 ||
+                          inPeronAtTrainerLocationfor2People !== 0 ? (
+                          <>
+                            <h6 className="for_people_title">For 2 People</h6>
+                            {virtualSessionfor2People > 0 &&
+                              isVirtualPresent ? (
+                              <h6>
+                                {`$${virtualSessionfor2People} `}
+                                <span>(Virtual Session)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtClientLocationfor2People > 0 &&
+                              isInPersonPresent ? (
+                              <h6>
+                                {`$${inPeronAtClientLocationfor2People}`}
+                                <span>(In Person - At Your Location)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtTrainerLocationfor2People > 0 &&
+                              isInPersonPresent ? (
+                              <h6>
+                                {`$${inPeronAtTrainerLocationfor2People}`}
+                                <span>(In Person - At Trainer's Location)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        ) : (
+                          ""
+                        )}
+
+                        {/* 3 People */}
+                        {virtualSessionfor3People !== 0 ||
+                          inPeronAtClientLocationfor3People !== 0 ||
+                          inPeronAtTrainerLocationfor3People !== 0 ? (
+                          <>
+                            <h6 className="for_people_title">For 3 People</h6>
+                            {virtualSessionfor3People > 0 &&
+                              isVirtualPresent ? (
+                              <h6>
+                                {`$${virtualSessionfor3People} `}
+                                <span>(Virtual Session)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtClientLocationfor3People > 0 &&
+                              isInPersonPresent ? (
+                              <h6>
+                                {`$${inPeronAtClientLocationfor3People}`}
+                                <span>(In Person - At Your Location)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtTrainerLocationfor3People > 0 &&
+                              isInPersonPresent ? (
+                              <h6>
+                                {`$${inPeronAtTrainerLocationfor3People}`}
+                                <span>(In Person - At Trainer's Location)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        ) : (
+                          ""
+                        )}
+
+                        {/* 4 People */}
+                        {virtualSessionfor4People !== 0 ||
+                          inPeronAtClientLocationfor4People !== 0 ||
+                          inPeronAtTrainerLocationfor4People !== 0 ? (
+                          <>
+                            <h6 className="for_people_title">For 4 People</h6>
+                            {virtualSessionfor4People > 0 &&
+                              isVirtualPresent ? (
+                              <h6>
+                                {`$${virtualSessionfor4People} `}
+                                <span>(Virtual Session)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtClientLocationfor4People > 0 &&
+                              isInPersonPresent ? (
+                              <h6>
+                                {`$${inPeronAtClientLocationfor4People}`}
+                                <span>(In Person - At Your Location)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                            {inPeronAtTrainerLocationfor4People > 0 &&
+                              isInPersonPresent ? (
+                              <h6>
+                                {`$${inPeronAtTrainerLocationfor4People}`}
+                                <span>(In Person - At Trainer's Location)</span>
+                              </h6>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {isAnyClassPriceAvailable ? (
+                    <div className="profile_aside_item">
+                      <h2 onClick={() => collapseToggle(2)}>
+                        CREATE A CLASS
+                        <img
+                          src={QMark}
+                          alt="icon"
+                          onClick={() => setOpenClassModel(true)}
+                          className="model_Qmark"
+                        />
+                        <span
+                          className={`trainer_title_collapse ${!collapseTitle[2] && "trainer_title_rotate"
+                            }`}
+                        >
+                          &#10094;
+                        </span>
+                      </h2>
+                      <hr />
+
+                      {/* model */}
+                      {openClassModel ? (
+                        <Modal
+                          open={openClassModel}
+                          onClose={() => setOpenClassModel(false)}
+                          center
+                          closeIcon={closeIcon}
+                          container={myRef.current}
+                          styles={{
+                            boaderRadius: "10px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              textAlign: "center",
+                              height: "300px",
+                              width: "600px",
+                              padding: "2em",
+                            }}
+                            className="model_styles"
+                          >
+                            <h2>Want to Create a Class?</h2>
+                            <p>
+                              Design your very own workout party with the
+                              vertical & location of your choice. Create a class
+                              by paying a flat rate and adding up to 19 friends.
+                              You will be notified once they accept your invite.
+                            </p>
+                          </div>
+                        </Modal>
+                      ) : null}
+                      <div
+                        className={`profile_aside_inner_item ${!collapseTitle[2] && "d-none"
+                          }`}
+                      >
+                        <p>
+                          All the rates displayed below are the total amounts
+                          for each session to be split between participants.
+                        </p>
+                        {virtualSessionfor15People && isVirtualPresent ? (
+                          <h6>
+                            {`$${virtualSessionfor15People} `}
+                            <span>(Virtual Session)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAtclientLocationfor15People &&
+                          isInPersonPresent ? (
+                          <h6>
+                            {`$${inPersonAtclientLocationfor15People}`}
+                            <span>(In Person - At Your Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        {inPersonAttrainerLocationfor15People &&
+                          isInPersonPresent ? (
+                          <h6>
+                            {`$${inPersonAttrainerLocationfor15People}`}
+                            <span>(In Person - At Trainer's Location)</span>
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                        <h5>
+                          {/* If trainer offers Virtual Social Sessions and Classes
+                          they will be at a discount to in person rates above.
+                          You will see these prior to checkout. */}
+                        </h5>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <div className="profile_aside_item">
+                    <h2 onClick={() => collapseToggle(3)}>
+                      TRAINING LOCATIONS
+                      <span
+                        className={`trainer_title_collapse ${!collapseTitle[3] && "trainer_title_rotate"
+                          }`}
+                      >
+                        &#10094;
+                      </span>
+                    </h2>
+
+                    <hr />
+                    <div
+                      className={`profile_aside_inner_item ${!collapseTitle[3] && "d-none"
+                        }`}
+                    >
+                      {trainerProfileData?.preferedTrainingMode &&
+                        trainerProfileData?.preferedTrainingMode?.includes(
+                          "virtual"
+                        ) && (
+                          <div className="profile_location">
+                            <img src={Tick} alt="icon" />
+                            <h4>Virtual</h4>
+                          </div>
+                        )}
+
+                      {trainerProfileData &&
+                        trainerProfileData.servicableLocation?.length > 0 &&
+                        trainerProfileData?.trainingFacility ? (
+                        <div className="profile_location flex-column mt-2">
+                          <div className="d-flex align-items-center w-100">
+                            <img src={Tick} alt="icon" />
+                            <h4>
+                              {`${trainerProfileData?.servicableLocation[0]}(Training Facility)`}
+                              <Link
+                                onClick={() => {
+                                  setTrainerLocationModal(true);
+                                  setViewLocationType("trainer");
+                                }}
+                              >
+                                location details
+                              </Link>
+                            </h4>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      {trainerProfileData &&
+                        trainerProfileData.servicableLocation?.length > 0 &&
+                        trainerProfileData?.willingToTravel ? (
+                        <div className="profile_location flex-column mt-2">
+                          <div className="d-flex align-items-center w-100">
+                            <img src={Tick} alt="icon" />
+                            <h4>
+                              {`${trainerProfileData?.servicableLocation[0]}(Your Location)`}
+                              <Link
+                                onClick={() => {
+                                  setTrainerLocationModal(true);
+                                  setViewLocationType("servicable");
+                                }}
+                              >
+                                areas serviced
+                              </Link>
+                            </h4>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      <div className="profile_share">
+                        <img src={Share} alt="icon" />
+                        <Link onClick={handleCopy}>Share Profile</Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>

@@ -1,0 +1,45 @@
+@import "../../assets/scss/abstracts/abstracts";
+
+.mottopass-session-section {
+    padding: 50px 52px 55px 56px;
+    box-shadow: 0px 3px 12px #16161608;
+    border-radius: 20px;
+    background: #fff;
+
+    .mottopass-heading {
+        color: #161616;
+        font-family: "Montserrat", sans-serif;
+        margin-bottom: 40px;
+    }
+
+    .mottopass-cards-section {
+        padding-bottom: 60px;
+        // border-bottom: 2px solid #e6e6e6;
+    }
+
+    @include media-breakpoint-mobile-land {
+        padding: 30px 20px;
+    }
+
+    .previous-pass-actionbtn {
+        margin-top: 25px;
+    }
+
+    .viewMoreButton {
+        display: flex;
+        align-items: center;
+        margin-top: 2em;
+        background: transparent;
+
+        text-align: right;
+
+        letter-spacing: 0.45px;
+        color: #161616;
+        text-transform: uppercase;
+        border: none;
+        line-height: 22px;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: "Montserrat", sans-serif;
+    }
+}

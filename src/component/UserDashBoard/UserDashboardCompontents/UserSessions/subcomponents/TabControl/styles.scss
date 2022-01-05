@@ -1,0 +1,38 @@
+.tab-control-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  @media only screen and (max-width: 900px) {
+     
+    overflow-x: auto;
+    margin-right: 1rem;
+  }
+
+  .tab-control {
+    margin-right: 3rem;
+    @media only screen and (max-width: 900px) {
+      margin-right: 1rem;
+      margin-top: 1rem;
+    }
+  
+
+    .tab-control__txt {
+      text-transform: uppercase;
+      color: #161616;
+      letter-spacing: 0.9px;
+      font-size: 17px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+      cursor: pointer;
+    }
+
+    .active__header {
+      border-bottom: 3px solid #53bfd2;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+.user-sessions-container {
+  margin-left: 4rem;
+  margin-bottom: 10rem;
+
+  @media only screen and (max-width: 900px) {
+   margin-left: 1rem;
+   margin-top: 5rem;
+  }
+
+  .user-sessions__title {
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    color: #161616;
+    margin-bottom: 1rem;
+  }
+
+  .session-tab-data {
+    margin-top: 3rem;
+    background-color: white;
+    width: 85%;
+    height: 700px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 3px 12px #16161608;
+    box-shadow: 0px 3px 12px #16161608;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    @media only screen and (max-width: 900px) {
+     width: 95%;
+     }
+
+    .session-tab__header {
+      text-align: left;
+      font-family: "Montserrat", sans-serif;
+      font-size: 25px;
+      letter-spacing: 0px;
+      color: #161616;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .session-tab__content {
+      margin-top: 1rem;
+      height: 500px;
+      overflow-y: auto;
+
+      .loader-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 6rem;
+        width: 100%;
+      }
+
+  
+    }
+
+    .view-more-container {
+      margin-top: 20px;
+
+      font-family: "Montserrat", sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+  }
+}
