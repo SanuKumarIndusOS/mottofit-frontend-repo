@@ -220,8 +220,10 @@ export const TrainerApi = {
     isAdmin: true,
     page: 1,
     userId: "",
+    sortBy: "",
+    sortByValue: "asc",
     get api() {
-      return `${this.url}${this.type}${this.page}&id=${this.userId}`;
+      return `${this.url}${this.type}${this.page}&id=${this.userId}&sortBy=${this.sortBy}&sortValue=${this.sortByValue}`;
     },
   },
   getAllAdminPasses: {
