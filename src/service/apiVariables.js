@@ -276,6 +276,16 @@ export const TrainerApi = {
       return `${this.url}/${this.couponId}/update/active`;
     },
   },
+  deleteCouponCode: {
+    url: "code",
+    method: "delete",
+    baseURL: "payment",
+    isAdmin: true,
+    couponId: "",
+    get api() {
+      return `${this.url}/${this.couponId}`;
+    },
+  },
   getStatsData: {
     api: "get/stats",
     method: "get",

@@ -335,3 +335,21 @@ export const updateCommissionRate =
         });
     });
   };
+
+export const deleteCouponAct =
+  (id) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { deleteCouponCode } = TrainerApi;
+
+      deleteCouponCode.couponId = id;
+
+      api({ ...deleteCouponCode })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
