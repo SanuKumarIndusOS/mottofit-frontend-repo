@@ -30,38 +30,43 @@ function TrainerCard({ data }) {
 
   return (
     <Link
-      className="trainer-card-container"
       style={{ textDecoration: "none" }}
-      onClick={loadTrainer}
+      to={
+        !localStorage.getItem("token")
+          ? null
+          : `/trainer/profile/${data?.id}/${encodedName}`
+      }
     >
-      <div className="trainer-card--profile-picture">
-        <div className="check-me-out">
-          <p>
-            {" "}
-            Check <br /> Me Out <br /> <span>&#10094; </span>{" "}
-          </p>
+      <div className="trainer-card-container" onClick={loadTrainer}>
+        <div className="trainer-card--profile-picture">
+          <div className="check-me-out">
+            <p>
+              {" "}
+              Check <br /> Me Out <br /> <span>&#10094; </span>{" "}
+            </p>
+          </div>
+          <img src={data?.profilePicture}></img>
         </div>
-        <img src={data?.profilePicture}></img>
-      </div>
 
-      <div className="trainer-card--profile-brief">
-        <div className="trainer-card__name">
-          {data?.firstName + " " + data?.lastName[0]}
+        <div className="trainer-card--profile-brief">
+          <div className="trainer-card__name">
+            {data?.firstName + " " + data?.lastName[0]}
+          </div>
+          <div className="trainer-card__activity">
+            {String(data?.areaOfExpertise).replace(/,/g, ", ")}
+          </div>
+          <div className="trainer-card__desc">
+            {data?.description?.substring(0, 100)}
+          </div>
         </div>
-        <div className="trainer-card__activity">
-          {String(data?.areaOfExpertise).replace(/,/g, ", ")}
-        </div>
-        <div className="trainer-card__desc">
-          {data?.description?.substring(0, 100)}
-        </div>
-      </div>
 
-      <div className="trainer-card--cta">
-        <div className="trainer-card--cta-action">
-          BOOK A SESSION <BlackCircleButton />
-        </div>
-        <div className="trainer-card--cta-price">
-          <span>from </span>${cardPrice}
+        <div className="trainer-card--cta">
+          <div className="trainer-card--cta-action">
+            BOOK A SESSION <BlackCircleButton />
+          </div>
+          <div className="trainer-card--cta-price">
+            <span>from </span>${cardPrice}
+          </div>
         </div>
       </div>
     </Link>
