@@ -10,13 +10,25 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { Toast } from "service/toast";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CreateCoupon, GetAllCoupon, ActivateCoupon } from "action/adminAct";
+import {
+  CreateCoupon,
+  GetAllCoupon,
+  ActivateCoupon,
+  deleteCouponAct,
+} from "action/adminAct";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
-function Marketing({ CreateCoupon, GetAllCoupon, ActivateCoupon }) {
+function Marketing({
+  CreateCoupon,
+  GetAllCoupon,
+  ActivateCoupon,
+  deleteCouponApi,
+}) {
   const [open, setOpen] = React.useState(false);
   const [isUserOpen, setUserOpen] = React.useState(false);
   const [couponData, setCouponData] = useState({});
@@ -56,6 +68,16 @@ function Marketing({ CreateCoupon, GetAllCoupon, ActivateCoupon }) {
     setUserOpen(!isUserOpen);
   };
 
+  const handleDelete = (id) => {
+    deleteCouponApi(id).then((data) => {
+      console.log(data);
+      Toast({ type: "success", message: data.message || "Success" });
+      GetAllCoupon().then((couponData) => {
+        setCouponList(couponData);
+      });
+    });
+  };
+
   return (
     <div className="marketing_container">
       <div className="marketing_header">
@@ -74,7 +96,15 @@ function Marketing({ CreateCoupon, GetAllCoupon, ActivateCoupon }) {
           return (
             <Card className="coupon_card">
               <div className="coupon_card_body">
-                <div className="cval">{item.couponValue}% OFF</div>
+                <div className="cval d-flex">
+                  {item.couponValue}% OFF
+                  <button
+                    className="p-0 border-0 ml-auto btn btn-transparent"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    <DeleteIcon />
+                  </button>
+                </div>
                 <div className="ccode">{item.code}</div>
 
                 <div className="ctype">
@@ -258,7 +288,12 @@ function Marketing({ CreateCoupon, GetAllCoupon, ActivateCoupon }) {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { CreateCoupon, GetAllCoupon, ActivateCoupon },
+    {
+      CreateCoupon,
+      GetAllCoupon,
+      ActivateCoupon,
+      deleteCouponApi: deleteCouponAct,
+    },
     dispatch
   );
 };

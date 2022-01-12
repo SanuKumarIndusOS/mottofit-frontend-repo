@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/abstracts/mixins.scss";
+
 .admin_booking {
   margin-left: 5rem;
   margin-right: 5rem;
@@ -7,6 +9,12 @@
     {
       display: flex;
       .all
+      {
+          padding: 1rem;
+          border: solid 1px grey;
+          cursor: pointer;
+      }
+      .type-item
       {
           padding: 1rem;
           border: solid 1px grey;
@@ -89,4 +97,14 @@
       }
     }
   }
+
+}
+.sort-by-container{
+  max-width: 400px;
+  margin-left: auto;
+  margin-top: 20px;
+
+ @include media-breakpoint-mobile-port{
+   max-width: 100%;
+ }
 }

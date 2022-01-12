@@ -87,14 +87,18 @@ export const getAllTrainerLists =
 
 // Get Admin SessionData list
 export const getAdminSession =
-  (page, type, isAdmin = true, userId) =>
+  (page, { type, sortBy, sortByValue }, isAdmin = true, userId) =>
   (dispatch, getState, { api }) => {
     return new Promise((resolve, reject) => {
       const { getAdminSession } = TrainerApi;
       getAdminSession.page = "?limit=10&offset=" + page;
       getAdminSession.type = type + "/";
       getAdminSession.userId = userId || "";
-      console.log(getAdminSession.type + getAdminSession.page, "action");
+      getAdminSession.sortByValue = sortByValue?.value || "asc";
+      getAdminSession.sortBy = sortBy?.value || "";
+
+      console.log({ type, sortBy, sortByValue });
+
       api({ ...getAdminSession, isAdmin })
         .then(({ data }) => {
           resolve(data);
@@ -184,8 +188,6 @@ export const fetchTrainersLists =
         });
     });
   };
-
-
 
 export const createDirectMessage =
   (id) =>
@@ -325,6 +327,24 @@ export const updateCommissionRate =
       updateMottoCommissionRate.body = payload;
 
       api({ ...updateMottoCommissionRate })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
+export const deleteCouponAct =
+  (id) =>
+  (dispatch, getState, { api }) => {
+    return new Promise((resolve, reject) => {
+      const { deleteCouponCode } = TrainerApi;
+
+      deleteCouponCode.couponId = id;
+
+      api({ ...deleteCouponCode })
         .then((data) => {
           resolve(data);
         })
