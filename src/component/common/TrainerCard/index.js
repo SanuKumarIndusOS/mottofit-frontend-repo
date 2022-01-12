@@ -29,7 +29,7 @@ function TrainerCard({ data }) {
   };
 
   return (
-    <div
+    <Link
       className="trainer-card-container"
       style={{ textDecoration: "none" }}
       onClick={loadTrainer}
@@ -64,7 +64,7 @@ function TrainerCard({ data }) {
           <span>from </span>${cardPrice}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
