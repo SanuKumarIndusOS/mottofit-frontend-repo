@@ -19,9 +19,10 @@ function TrainerCard({ data }) {
 
   const loadTrainer = () => {
     if (!localStorage.getItem("token")) {
+      localStorage.setItem("paymentred", `/trainer/profile/${data?.id}/${encodedName}` )
       history.push({
         pathname: "/mobile/login",
-        search: `?nextpath=/trainer/profile/${data?.id}/${encodedName}`,
+        // search: `?nextpath=/trainer/profile/${data?.id}/${encodedName}`,
       });
     } else {
       history.push(`/trainer/profile/${data?.id}/${encodedName}`);
@@ -50,7 +51,7 @@ function TrainerCard({ data }) {
 
         <div className="trainer-card--profile-brief">
           <div className="trainer-card__name">
-            {data?.firstName + " " + data?.lastName[0]}
+            {data?.firstName + " " + data?.lastName[0]} .
           </div>
           <div className="trainer-card__activity">
             {String(data?.areaOfExpertise).replace(/,/g, ", ")}

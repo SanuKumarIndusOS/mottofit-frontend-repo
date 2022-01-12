@@ -149,7 +149,7 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
             history.push("/users/dashboard/session");
           }
           else{
-            history.push("/user/payment")
+            history.push(localStorage.getItem("paymentred"));
           }
         
         }
