@@ -145,7 +145,7 @@ function TrainerProfileTwo({ getTrainerDetail, updateUserDetails, requestTrainer
         <>
           <ProfileHeader
             trainerFirstName={trainerData?.firstName}
-            trainerLastName={trainerData?.lastName}
+            trainerLastName={trainerData?.lastName?.[0]}
             profilePicture={trainerData?.profilePicture}
             trainerExpertise={trainerData?.areaOfExpertise}
             location={trainerData?.location}

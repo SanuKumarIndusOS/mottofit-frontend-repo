@@ -17,22 +17,36 @@ function TrainerCard({ data }) {
     data?.classSessionPricing
   );
 
+  const loadTrainer = () => {
+    if (!localStorage.getItem("token")) {
+      history.push({
+        pathname: "/mobile/login",
+        search: `?nextpath=/trainer/profile/${data?.id}/${encodedName}`,
+      });
+    } else {
+      history.push(`/trainer/profile/${data?.id}/${encodedName}`);
+    }
+  };
+
   return (
-    <Link
+    <div
       className="trainer-card-container"
       style={{ textDecoration: "none" }}
-      to={`/trainer/profile/${data?.id}/${encodedName}`}
+      onClick={loadTrainer}
     >
       <div className="trainer-card--profile-picture">
         <div className="check-me-out">
-         <p> Check <br /> Me Out <br /> <span>&#10094; </span> </p>
+          <p>
+            {" "}
+            Check <br /> Me Out <br /> <span>&#10094; </span>{" "}
+          </p>
         </div>
         <img src={data?.profilePicture}></img>
       </div>
 
       <div className="trainer-card--profile-brief">
         <div className="trainer-card__name">
-          {data?.firstName + " " + data?.lastName}
+          {data?.firstName + " " + data?.lastName[0]}
         </div>
         <div className="trainer-card__activity">
           {String(data?.areaOfExpertise).replace(/,/g, ", ")}
@@ -50,7 +64,7 @@ function TrainerCard({ data }) {
           <span>from </span>${cardPrice}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

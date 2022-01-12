@@ -9,7 +9,7 @@ import Pagination from "react-js-pagination";
 import { history } from "helpers";
 
 import TrainerCards from "component/FindYourTrainer/TrainersDetails/index";
-import TrainerCard from "../TrainerCard";
+import TrainerCard from "component/common/TrainerCard";
 import { load } from "dotenv";
 import Trainer from "component/Home/trainer";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -76,19 +76,36 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
         // loader={loader}
       /> */}
       {loader ? (
-       <div style={{height:"80vh", width:"100vw", display:"flex", justifyContent:"center", alignItems:"center"}}> <CircularProgress size={60} /> </div>
+        <div
+          style={{
+            height: "80vh",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {" "}
+          <CircularProgress size={60} />{" "}
+        </div>
       ) : (
         <div className="results_grid">
           <div style={{ marginBottom: "500px" }}>
             {searchResults?.length === 0 ? (
               <h1>No Results Found</h1>
             ) : (
-              <div className="row">
-                <TrainerCards
-                  content={searchResults || []}
-                  type="globalSearch"
-                />
+              <div className="trainer-card__grid">
+                {searchResults.map((item) => {
+                  return <TrainerCard data={item} />;
+                })}
               </div>
+
+              // <div className="row">
+              //   <TrainerCards
+              //     content={searchResults || []}
+              //     type="globalSearch"
+              //   />
+              // </div>
             )}
 
             {searchResults?.length !== 0 ? (

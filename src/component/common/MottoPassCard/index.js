@@ -121,7 +121,7 @@ const MottoPassCard = ({
       <div className="pass-user-name text-center">
         <h1 className="fs-35 mb-4 mt-3 text-capitalize">{`${
           trainer?.firstName || ""
-        } ${trainer?.lastName || ""} ${userFullName}`}</h1>{" "}
+        } ${trainer?.lastName[0] || ""} ${userFullName}`}</h1>{" "}
         <br></br>
         <p>
           {parseInt(remains)} out of {totalPassCount} passes remaining
