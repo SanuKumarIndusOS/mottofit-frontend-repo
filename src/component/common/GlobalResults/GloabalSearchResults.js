@@ -33,9 +33,14 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   // }, []);
 
   useEffect(() => {
-    console.log("change");
+
+    console.log( String( window.location.search.slice(8)));
+  
     let payload = {
-      key: location.state?.key,
+      key:
+        window.location.search === ""
+          ? location.state?.key
+          : String( window.location.search.slice(8)),
       page: activePage,
     };
     fetchGlobalSearchResults(payload).then((data) => {
