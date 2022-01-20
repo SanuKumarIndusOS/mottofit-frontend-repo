@@ -29,7 +29,7 @@ export const searchBestMatch = (payload,type, page) => (
   { api }
 ) => {
   return new Promise((resolve, reject) => {
-    //  console.log(payload);
+    console.log(JSON.parse(payload));
     TrainerApi.searchBestMatch.query = JSON.parse(payload);
     TrainerApi.searchBestMatch.key = type;
     TrainerApi.searchBestMatch.page = page;

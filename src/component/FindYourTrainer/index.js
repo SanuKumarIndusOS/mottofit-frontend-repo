@@ -17,7 +17,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { BiSearch } from "react-icons/bi";
 
 // TODO
-// Trainer Card Check me out overlay 
+// Trainer Card Check me out overlay
 // No Matches Found
 
 function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
@@ -42,6 +42,63 @@ function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
         settrainerDataParams(
           JSON.parse(localStorage.getItem("persistFilters"))
         );
+      } else {
+        let searchQuery = window.location.search.slice(1);
+        let queryStrings = searchQuery.split("&");
+        let _location, _city, _trainingType, _date, _availability;
+
+        queryStrings.map((item) => {
+          if (item.includes("location")) {
+            if (item.split("=")[1] !== null) {
+              _location = item.split("=")[1];
+            } else {
+              _location = "";
+            }
+          }
+
+          if (item.includes("city")) {
+            if (item.split("=")[1] !== null) {
+              _city = item.split("=")[1];
+            } else {
+              _city = "";
+            }
+          }
+
+          if (item.includes("training")) {
+            if (item.split("=")[1] !== null) {
+              _trainingType = item.split("=")[1];
+            } else {
+              _trainingType = "";
+            }
+          }
+
+          if (item.includes("schedule")) {
+            if (item.split("=")[1] !== null) {
+              _date = item.split("=")[1];
+            } else {
+              _date = "";
+            }
+          }
+
+          if (item.includes("availability")) {
+            if (item.split("=")[1] !== null) {
+              _availability = item.split("=")[1];
+            } else {
+              _availability = "";
+            }
+          }
+        });
+        console.log(queryStrings);
+        let payload = {
+          location: _location,
+          city: _city,
+          trainingType: _trainingType,
+          date: _date,
+          availability: _availability,
+        };
+
+        // console.log(payload);
+        settrainerDataParams(payload);
       }
     } else {
       settrainerDataParams(trainerSearchFilterData);
@@ -75,7 +132,7 @@ function TrainerFilter({ trainerSearchFilterData, searchBestMatch }) {
             trainerSearchFilterData={trainerDataParams}
             sectionHeading={null}
           />
-        
+
           <BestMatch
             type="otherMatch"
             searchBestMatch={searchBestMatch}
