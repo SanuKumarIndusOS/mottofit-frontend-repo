@@ -518,7 +518,8 @@ const routers = [
       },
       {
         path: "/message/:type",
-        componentPath: "pages/TrainerDashboard/TrainerMessage",
+        // componentPath: "pages/TrainerDashboard/TrainerMessage",
+        componentPath: "pages/UserDashboard/Message/index",
         name: "UserMessage",
         auth: false,
         exact: true,
