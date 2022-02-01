@@ -1,0 +1,32 @@
+.chat_list_item_container {
+  height: 120px;
+  width: 100%;
+  border-bottom: 2px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+
+  padding: 2rem;
+
+  .list_item_content {
+    width: 100%;
+    display: flex;
+
+    .avatar {
+      height: 60px;
+      width: 60px;
+      border-radius: 60px;
+      background-color: aquamarine;
+    }
+
+    .name {
+      padding-left: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: 0px;
+      color: #161616;
+      opacity: 1;
+      font-family: "Montserrat", sans-serif;
+    }
+  }
+}

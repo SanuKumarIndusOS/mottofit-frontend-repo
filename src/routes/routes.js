@@ -92,6 +92,26 @@ const routers = [
   },
 
   {
+    component: "EmptyLayout",
+    path: "/conversation",
+    auth: false,
+    name: "Converstaion",
+    exact: false,
+    childrens: [
+      {
+        path: "/",
+        componentPath: "pages/UserDashboard/Chat/index",
+        name: "chatBox",
+        auth: false,
+        exact: true,
+      },
+       
+    ],
+  },
+
+
+
+  {
     component: "HomeLayout",
     path: "/welcome",
     auth: false,
@@ -487,7 +507,8 @@ const routers = [
       },
       {
         path: "/message/:type",
-        componentPath: "pages/TrainerDashboard/TrainerMessage",
+        // componentPath: "pages/TrainerDashboard/TrainerMessage",
+        componentPath: "pages/UserDashboard/Message/index",
         name: "TrainerMessage",
         auth: false,
         exact: true,

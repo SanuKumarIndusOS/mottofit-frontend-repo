@@ -1,5 +1,7 @@
 import React from "react";
+import ChatListItem from "../ChatListItem";
 import "./styles.scss";
+
 
 function ChatList({ channelListData }) {
   React.useEffect(() => {
@@ -10,8 +12,8 @@ function ChatList({ channelListData }) {
     <div className="chat_list_container">
       {channelListData?.length !== 0 ? (
         <div>
-          {channelListData?.map((item, id) => {
-            return <p>User {id}</p>;
+          {channelListData?.map((item, key) => {
+            return <ChatListItem />;
           })}
         </div>
       ) : (

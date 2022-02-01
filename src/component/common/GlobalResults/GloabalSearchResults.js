@@ -8,10 +8,8 @@ import { fetchGlobalSearchResults, trainerDetail } from "action/trainerAct";
 import Pagination from "react-js-pagination";
 import { history } from "helpers";
 
-import TrainerCards from "component/FindYourTrainer/TrainersDetails/index";
 import TrainerCard from "component/common/TrainerCard";
-import { load } from "dotenv";
-import Trainer from "component/Home/trainer";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
   const [searchResults, setSearchResults] = useState();

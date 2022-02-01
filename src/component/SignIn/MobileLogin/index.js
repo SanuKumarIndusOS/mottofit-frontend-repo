@@ -107,6 +107,11 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
 
     loginAct(loginApi, payload)
       .then(async (res) => {
+         
+       
+
+
+        //sssssssssssssssssssssssssssssss
         localStorage.setItem("user-id", res.id);
 
         let reduxData = {
