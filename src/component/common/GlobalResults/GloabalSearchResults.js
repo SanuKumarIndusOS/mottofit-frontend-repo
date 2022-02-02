@@ -47,7 +47,7 @@ const GloabalSearchResults = ({ fetchGlobalSearchResults }) => {
       console.log(data.list);
       setLoader(false);
     });
-  }, [location.state?.key, activePage]);
+  }, [location.state?.key, activePage, window.location.search]);
 
   // useEffect(() => {
   //   let payload = {

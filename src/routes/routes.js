@@ -105,11 +105,8 @@ const routers = [
         auth: false,
         exact: true,
       },
-       
     ],
   },
-
-
 
   {
     component: "HomeLayout",
@@ -507,8 +504,8 @@ const routers = [
       },
       {
         path: "/message/:type",
-        // componentPath: "pages/TrainerDashboard/TrainerMessage",
-        componentPath: "pages/UserDashboard/Message/index",
+        componentPath: "pages/TrainerDashboard/TrainerMessage",
+        // componentPath: "pages/UserDashboard/Message/index",
         name: "TrainerMessage",
         auth: false,
         exact: true,
@@ -539,8 +536,8 @@ const routers = [
       },
       {
         path: "/message/:type",
-        // componentPath: "pages/TrainerDashboard/TrainerMessage",
-        componentPath: "pages/UserDashboard/Message/index",
+        componentPath: "pages/TrainerDashboard/TrainerMessage",
+        //  componentPath: "pages/UserDashboard/Message/index",
         name: "UserMessage",
         auth: false,
         exact: true,

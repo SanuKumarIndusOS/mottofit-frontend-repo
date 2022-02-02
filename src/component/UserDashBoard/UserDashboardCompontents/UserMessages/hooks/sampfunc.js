@@ -12,8 +12,13 @@ export default function chatConv(token) {
     }
   }
 
+ 
+
   client.on("connectionStateChanged", (val) => {
     console.log(val);
-    getConversation();
+    client.on("conversationJoined", vall => console.log(vall, "conversation test"))
+   
+    // getConversation();
+
   });
 }
