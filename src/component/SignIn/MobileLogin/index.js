@@ -20,7 +20,7 @@ import { GoogleLoginButton } from "../../common/SocialLogin/GoogleLoginButton";
 import { SocialLogin } from "component/common/SocialLogin";
 import { useLocation } from "react-router-dom";
 
-const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
+const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction }) => {
   const myRef = useRef(null);
 
   let location = useLocation();
@@ -44,13 +44,18 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
   const urlData = new URLSearchParams(decodeURIComponent(searchUrl));
 
   // console.log(urlData.get("requestSession"));
-   console.log(urlData.get("nextpath"),"ne");
+  console.log(urlData.get("nextpath"), "ne");
 
   console.log(searchUrl);
 
   React.useEffect(() => {
-    console.log(localStorage.getItem("paymentred"));
-  }, [])
+    console.log(localStorage.getItem("token"));
+
+    if(localStorage.getItem("token")&& localStorage.getItem("type") === "3" )
+    {
+      history.push("/users/dashboard/session");
+    }
+  }, []);
 
   const [loginLoader, setloginLoader] = useState(false);
   const onChangeValue = (e) => {
@@ -107,10 +112,6 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
 
     loginAct(loginApi, payload)
       .then(async (res) => {
-         
-       
-
-
         //sssssssssssssssssssssssssssssss
         localStorage.setItem("user-id", res.id);
 
@@ -150,13 +151,11 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
         } else {
           setLoading(false);
 
-          if(localStorage.getItem("paymentred")===null){
+          if (localStorage.getItem("paymentred") === null) {
             history.push("/users/dashboard/session");
-          }
-          else{
+          } else {
             history.push(localStorage.getItem("paymentred"));
           }
-        
         }
       })
       .catch((err) => {
@@ -181,7 +180,8 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
           message: "^Password is required",
         },
         format: {
-          pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
+          pattern:
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_#%*?&])[A-Za-z\d@_#$!%*?&]*$/,
           flags: "i",
           message:
             "^Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
@@ -274,16 +274,16 @@ const Login = ({ loginAct, trainerDetail, updateUserDetails, nextAction, }) => {
                       onClick={logIn}
                     >
                       {loginLoader ? (
-                          <div className="loader">
-                            Loging in, Please Wait!&ensp;
-                            {/* <CircularProgress /> */}
-                          </div>
-                        ) : (
-                          <>
-                            Sign In
-                            <ArrowHoverBlacked />
-                          </>
-                        )}
+                        <div className="loader">
+                          Loging in, Please Wait!&ensp;
+                          {/* <CircularProgress /> */}
+                        </div>
+                      ) : (
+                        <>
+                          Sign In
+                          <ArrowHoverBlacked />
+                        </>
+                      )}
                     </button>
                   </div>
 
