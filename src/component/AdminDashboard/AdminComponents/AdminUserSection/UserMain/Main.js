@@ -11,6 +11,7 @@ import {
 } from "action/adminAct";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const MainClass = ({
   getAllUsersListsApi,
@@ -77,7 +78,8 @@ const MainClass = ({
   function fetchAllTrainers(page) {
     console.log(currentPage);
     getAllUsersListsApi(page).then((data) => {
-      setUserList(data.list);
+      console.log([...userList, ...data.list]);
+      setUserList([...userList, ...data.list]);
       setpageMetaData(data.pageMetaData);
       setLoading(false);
     });
@@ -86,8 +88,8 @@ const MainClass = ({
   function search(rows) {
     return rows.filter(
       (row) =>
-        row.email.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
-        row.firstName.toLowerCase().indexOf(q.toLowerCase()) > -1
+        row?.email?.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
+        row?.firstName?.toLowerCase().indexOf(q.toLowerCase()) > -1
     );
   }
   return (
@@ -114,19 +116,27 @@ const MainClass = ({
             className="mb-1"
           />
 
-          <Datatable
-            userList={search(userList)}
-            loading={loading}
-            addOrRemove={addOrRemove}
-            createDirectMessageApi={createDirectMessageApi}
-            loadingDatas={loadingDatas}
-            toggleLoading={toggleLoading}
-          />
-          <CommonPagination
+          <InfiniteScroll
+            dataLength={search(userList).length}
+            next={(e) => fetchAllTrainers(currentPage + 1)}
+            hasMore={currentPage < pageMetaData.totalPages}
+            loader={<h4>Loading more 2 itens...</h4>}
+          >
+            <Datatable
+              userList={search(userList)}
+              loading={loading}
+              addOrRemove={addOrRemove}
+              createDirectMessageApi={createDirectMessageApi}
+              loadingDatas={loadingDatas}
+              toggleLoading={toggleLoading}
+            />
+          </InfiniteScroll>
+
+          {/* <CommonPagination
             pageMetaData={pageMetaData}
             totalPosts={userList.length}
             pageChange={(e) => fetchAllTrainers(e)}
-          />
+          /> */}
         </>
       )}
     </div>

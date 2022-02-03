@@ -9,6 +9,7 @@ import { TrainerApi } from "service/apiVariables";
 import AsyncSelect from "react-select/async";
 import Select from "react-select";
 import { debounceFunction } from "helpers/debounce";
+import { getFormatDate } from "service/helperFunctions";
 
 function AdminBookings(props) {
   const [pastData, setPastData] = React.useState([]);
@@ -131,6 +132,7 @@ function AdminBookings(props) {
       id: "sessionStartTime",
     },
     { label: "Session EndTime", value: "sessionEndTime", id: "sessionEndTime" },
+    { label: "Booking Time", value: "createdAt", id: "createdAt" },
   ];
 
   const sortByValueOptions = [
@@ -239,7 +241,14 @@ function AdminBookings(props) {
               <div className="header">
                 <div className="title">
                   <div className="txt">{item?.title}</div>
-                  <div className="date">{item?.sessionDate}</div>
+                  <div className="date">
+                    <b>Session Timing :</b>&ensp;
+                    {`${item.sessionDate} ${getFormatDate(
+                      item?.sessionStartTime,
+                      "LT",
+                      true
+                    )} EST`}
+                  </div>
                 </div>
                 <div className="status">
                   {item?.sessionStatus === "completed" ? (
